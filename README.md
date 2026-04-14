@@ -1,4 +1,4 @@
-# SVT – Superfluid Vacuum Theory
+# SVT – Saturated Superfluid Vacuum
 
 Code repository for the **Resonant Cosmos** framework.
 
