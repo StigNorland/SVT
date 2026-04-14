@@ -1,4 +1,4 @@
-# SVT – Saturated Superfluid Vacuum
+# SSV – Saturated Superfluid Vacuum
 
 Code repository for the **Resonant Cosmos** framework.
 
