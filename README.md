@@ -1,46 +1,55 @@
-# SSV – Saturated Superfluid Vacuum
+# SSV - Saturated Superfluid Vacuum
 
-Code repository for the **Resonant Cosmos** framework.
+Working repository for the SSV paper series.
 
-## Overview
+This repo now supports both:
 
-This project develops a cosmological model where:
+- code and numerical checks for the galactic / black-hole parts of the framework
+- structured manuscript planning for the broader SSV program
 
-- The quantum vacuum is treated as a **superfluid**.
-- Newtonian gravity is unchanged for baryonic matter.
-- Galaxy rotation curves are explained by **standing gravity waves** — resonance modes driven by the spinning central black hole, analogous to a laser cavity.
-- The BH eigenfrequency scales as `f_BH = f_proton × (m_proton / M_BH)`.
-- Node spacing scales as `Δr = C / M_BH`, with `C ≈ 1.8×10⁹ kpc·M☉`.
-- Within the disc plane, time runs slower — this produces the flat rotation curve without dark matter.
+## Repository Layout
 
-## Files
+- `src/` - analysis and calculation code
+- `papers/` - manuscript outlines and paper-specific material
+- `notes/` - working notes, objections, reading notes
+- `docs/` - roadmap, restructuring plan, and workflow docs
+- `.github/ISSUE_TEMPLATE/` - issue templates for paper tasks, derivations, numerics, and objections
+
+## Current Code
 
 | File | Description |
 |------|-------------|
-| `bh_eigenfrequency.py` | BH eigenfrequency and node spacing (Δr) calculator for any galaxy. Anchored to the proton Compton frequency. |
-| `calculate_velocity_profile.py` | Galaxy rotation curve model combining Newtonian, disc, and superfluid-vortex components. |
-| `calibration_analysis.py` | Derivation and verification of the calibration constant C across multiple galaxies. Includes dimensional analysis for the standing-wave amplitude A. |
-| `0224.dat` | NGC 224 (M31 / Andromeda) high-resolution rotation curve data. 625 points at 0.05 kpc steps. |
+| `src/bh_eigenfrequency.py` | BH eigenfrequency and node spacing calculator |
+| `src/calculate_velocity_profile.py` | Rotation curve model |
+| `src/calibration_analysis.py` | Calibration constant analysis |
 
-## Key Relations
+## Roadmap
 
-```
-f_BH = f_p × (m_p / M_BH)       # BH eigenfrequency
-Δr   = C / M_BH                  # node spacing (kpc), M_BH in M☉
-C    = v_f / (f_p × m_p) × M☉   # calibration constant (derived)
-Δr × r_s = A²                    # Schwarzschild invariant
-```
+The working paper plan is described in:
 
-where `f_p ≈ 2.27×10²³ Hz` is the proton Compton frequency and `r_s` is the BH Schwarzschild radius.
+- [docs/roadmap.md](docs/roadmap.md)
+- [docs/paper-mapping.md](docs/paper-mapping.md)
+- [docs/issue-workflow.md](docs/issue-workflow.md)
+
+The main restructuring idea is simple: one main claim per paper.
+
+## Issue-Driven Workflow
+
+Use the GitHub issue tracker as the primary progress system.
+
+Recommended issue types:
+
+- paper task
+- derivation task
+- computation task
+- objection / critique
+
+When a draft says "deferred", "open problem", or "needs derivation", open an issue for it.
 
 ## Quick Start
 
 ```bash
-python bh_eigenfrequency.py        # eigenfrequency table for a range of BH masses
-python calculate_velocity_profile.py  # plot rotation curve for Milky Way parameters
-python calibration_analysis.py     # verify C and search for A from first principles
+python src/bh_eigenfrequency.py
+python src/calculate_velocity_profile.py
+python src/calibration_analysis.py
 ```
-
-## Status
-
-The theory is internally consistent. One remaining step is the disc-soliton BdG (Bogoliubov–de Gennes) calculation to derive `A ≈ 1.35 ly` from `{c, G, ħ, Λ, m_e}` alone — which would close the theory with zero free parameters.

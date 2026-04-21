@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: SSV Roadmap
+    url: https://github.com/StigNorland/SVT/blob/main/docs/roadmap.md
+    about: Read the roadmap before opening broad planning issues.

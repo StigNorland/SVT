@@ -1,0 +1,44 @@
+name: Paper Task
+description: Track a paper-level task, scope decision, or restructuring step.
+title: "[paper] "
+labels:
+  - paper
+body:
+  - type: input
+    id: paper
+    attributes:
+      label: Paper
+      placeholder: "SSV III, SSV IV, SSV V, ..."
+    validations:
+      required: true
+  - type: textarea
+    id: thesis
+    attributes:
+      label: Main thesis
+      description: State the one main claim this paper should carry.
+      placeholder: "Time is local change in Psi, and entropy is persistent wake-complexity."
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: What belongs in this paper, and what should be kept out?
+    validations:
+      required: true
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Tasks
+      description: Concrete next steps for the paper.
+      placeholder: |
+        - [ ] Rewrite abstract
+        - [ ] Remove black-hole section
+        - [ ] Add wake-entropy section
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Done when
+      description: What would count as complete for this issue?

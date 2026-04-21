@@ -1,0 +1,35 @@
+name: Derivation Task
+description: Track a missing derivation, dimensional check, or formal gap.
+title: "[derivation] "
+labels:
+  - derivation
+body:
+  - type: input
+    id: claim
+    attributes:
+      label: Claim or equation
+      placeholder: "Entropy density scaling in SSV III section 3"
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Describe the gap, inconsistency, or derivation target.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Existing material
+      description: Point to current notes, code, or draft passages.
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Tasks
+      placeholder: |
+        - [ ] Check dimensions
+        - [ ] Re-derive from governing equation
+        - [ ] Decide whether to keep, soften, or drop the claim
+    validations:
+      required: true

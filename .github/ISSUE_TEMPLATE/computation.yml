@@ -1,0 +1,36 @@
+name: Computation Task
+description: Track a code-backed calculation, fit, scan, or numerical check.
+title: "[numerics] "
+labels:
+  - numerics
+body:
+  - type: input
+    id: target
+    attributes:
+      label: Target
+      placeholder: "Andromeda fit", "BH eigenfrequency scan", "BdG mode check"
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: What exactly should the computation answer?
+    validations:
+      required: true
+  - type: textarea
+    id: inputs
+    attributes:
+      label: Inputs / scripts
+      description: Relevant files in `src/`, datasets, or parameters.
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Tasks
+      placeholder: |
+        - [ ] Define parameters
+        - [ ] Run calculation
+        - [ ] Save outputs
+        - [ ] Summarize consequences for the paper
+    validations:
+      required: true

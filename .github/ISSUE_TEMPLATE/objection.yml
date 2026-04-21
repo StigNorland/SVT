@@ -1,0 +1,30 @@
+name: Objection / Critique
+description: Track a serious objection that needs a clear answer or revision.
+title: "[objection] "
+labels:
+  - objection
+body:
+  - type: input
+    id: topic
+    attributes:
+      label: Topic
+      placeholder: "Formal time reversal vs physical reversibility"
+    validations:
+      required: true
+  - type: textarea
+    id: objection
+    attributes:
+      label: Objection
+      description: State the objection as strongly and fairly as possible.
+    validations:
+      required: true
+  - type: textarea
+    id: current_answer
+    attributes:
+      label: Current answer
+      description: How does the current framework respond, if at all?
+  - type: textarea
+    id: resolution
+    attributes:
+      label: Needed resolution
+      description: What would settle or narrow this issue?
