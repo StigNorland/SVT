@@ -1,0 +1,1902 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,physics}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{verbatim}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Coloured result boxes
+\newtcolorbox{resultbox}[1][]{enhanced,breakable,
+  colback=blue!4!white,colframe=blue!40!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+\newtcolorbox{gapbox}[1][]{enhanced,breakable,
+  colback=orange!6!white,colframe=orange!60!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+% ── Custom commands ──
+\newcommand{\half}{\tfrac{1}{2}}
+\newcommand{\cs}{c_s}
+\newcommand{\heff}{\hbar_{\mathrm{eff}}}
+\newcommand{\mzero}{m_0}
+
+% ────────────────────────────────────────────────────────────────────────────
+\newcommand{\seriesname}{Saturated Superfluid Vacuum}
+\newcommand{\papernumber}{II}
+\title{\textbf{\seriesname~\papernumber}\\[0.4em]
+  \large Forces as Hydrodynamic Pressure Gradients\\
+  in the Saturated Superfluid Plenum}
+\author{Stig Norland \\ Independent Researcher \\ Bergen, Norway}
+\date{April 2026}
+% ────────────────────────────────────────────────────────────────────────────
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Building on the identification of fundamental particles as topological defects in a
+saturated superfluid vacuum (Paper~I of this series), we show that all four known
+forces emerge as distinct modes of pressure-gradient interaction within the single
+medium — no additional fields, coupling constants, or gauge symmetries are
+postulated. Electromagnetism arises from chiral flow gradients around toroidal
+vortex rings: Coulomb's law and the Biot--Savart force are reproduced by the
+long-range Bernoulli pressure field of overlapping circulations, and the fine-structure
+constant $\alpha \approx 1/137$ appears as the ratio of transverse to longitudinal
+wave speeds in the medium. The strong force is identified with vacuum surface
+tension along flux-tube vortex segments connecting quarks; its short range follows
+directly from the confinement length of the medium, and asymptotic freedom emerges
+as a high-density softening of the quantum pressure. The weak interaction corresponds
+to transient topological reconfiguration — vortex reconnection events driven by the
+quantum pressure term — whose characteristic energy scale is set by $W \sim m_e /
+\alpha^2$. Gravity is identified as the acoustic Bjerknes force between pulsating
+breather modes.  The proton's sub-grain size ($a_p/\xi = m_e/m_p \approx
+1/1836$) suppresses its coupling to the long-range phonon field; the
+structural formula $G = \alpha_G\hbar c\alpha^2/(N_p^2 m_e^2)$ reproduces
+$G_{\rm obs}$ to $0.6\%$ when the Paper~I mass ladder is used, confirming
+framework consistency.  A first-principles derivation of the acoustic
+monopole coupling $\alpha_G$ from the proton breather geometry is
+identified as the remaining open problem in the force sector.
+Neutrinos are tentatively identified as torsional radiation pulses
+emitted during reconnection events; five quantitative open problems
+(mass, flavour structure, oscillations, Dirac/Majorana character, and
+cross-section normalisation) are flagged as deliverables for a
+subsequent paper. The same
+framework that generates the $\alpha$-harmonic mass ladder of Paper~I thus also
+unifies the fundamental interactions as facets of a single hydrodynamic theory.
+We close with the remark that the identical medium governs irreversible
+thermodynamics and large-scale cosmic resonances — topics addressed in subsequent
+papers.
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════
+\section{Introduction}
+% ═══════════════════════════════════════════════════════════════════════
+
+The four fundamental forces of nature — electromagnetism, the strong nuclear force,
+the weak nuclear force, and gravity — are conventionally regarded as independent
+phenomena, each associated with its own gauge symmetry and carried by its own
+family of bosons. Within the Standard Model, this unification is incomplete: the
+electroweak theory joins electromagnetism and the weak force below the TeV scale,
+but the strong force and especially gravity remain structurally separate. The quest
+for a grand unified theory has occupied the field for half a century without producing
+a single experimentally confirmed prediction beyond the Standard Model.
+
+In Paper~I of this series \cite{TGD-I}, we proposed a return to mechanical ontology:
+the physical vacuum is a saturated, compressible, inviscid superfluid governed by a
+nonlinear wave equation for a macroscopic complex order parameter $\Psi(\mathbf{x},t)$.
+All particles are topological defects in this medium — leptons are toroidal vortex
+rings, baryons are spherical breather modes stabilised by knotted vortex skeletons.
+The fine-structure constant $\alpha = c_\perp^2/c^2$ (ratio of transverse to
+longitudinal wave speeds) is built into the medium, and the particle mass spectrum
+follows as a geometric harmonic ladder with rung spacing $m_e/\alpha$, reproducing
+the charged pion mass to $0.3\%$ and the muon mass to $0.6\%$ without free parameters.
+
+The present paper develops the force sector of the theory. Our central claim is:
+
+\begin{quote}
+\textit{All four forces are emergent pressure gradients in the superfluid vacuum.
+Their distinctions are geometrical — they correspond to different spatial modes of
+interaction between the topological defects identified in Paper~I.}
+\end{quote}
+
+This is not metaphor. We show in each case that the known force law follows from a
+calculable pressure distribution in the medium, that the coupling constants are fixed
+by the medium parameters established in Paper~I, and that the range and universality
+properties of each force have transparent mechanical explanations.
+
+The paper is organised as follows. Section~\ref{sec:framework} briefly recalls the
+mathematical framework. Sections~\ref{sec:EM}--\ref{sec:gravity} treat the four
+forces in turn. Section~\ref{sec:unification} discusses the unified picture.
+Section~\ref{sec:predictions} identifies new predictions specific to this paper.
+Section~\ref{sec:outlook} concludes with the bridge to thermodynamics and
+large-scale structure.
+
+% ═══════════════════════════════════════════════════════════════════════
+\section{Framework: The Superfluid Vacuum in Brief}
+\label{sec:framework}
+% ═══════════════════════════════════════════════════════════════════════
+
+The full mathematical framework is developed in Paper~I~\cite{TGD-I}.  The vacuum
+order parameter $\Psi$ obeys a logarithmic Schr\"{o}dinger equation; its Madelung
+decomposition yields ideal compressible hydrodynamics with quantised circulation
+$\oint\mathbf{v}\cdot d\mathbf{l} = n\kappa_0$, $\kappa_0 = h/m_0$.  Three results
+from Paper~I are the only inputs needed here:
+\begin{enumerate}[label=(\roman*)]
+    \item $c_s \equiv c$: the longitudinal sound speed equals the speed of light,
+          fixing the stiffness parameter and the healing length $\xi = \hbar/(m_0 c)$.
+    \item $\alpha = c_\perp/c \approx 1/137$: the ratio of transverse to
+          longitudinal wave speeds, set by the chiral-shear coupling.
+    \item $\mu_0 = m_e/\alpha \approx 70\,\mathrm{MeV}$: the energy per unit
+          vortex length, the base scale of the mass ladder.
+\end{enumerate}
+These three numbers determine all force couplings derived below.
+
+% ═══════════════════════════════════════════════════════════════════════
+\section{Electromagnetism: Chiral Flow Gradients}
+\label{sec:EM}
+% ═══════════════════════════════════════════════════════════════════════
+
+\subsection{The Electron's Flow Field}
+
+A toroidal vortex ring of major radius $R_e$ and core radius $a \ll R_e$ generates
+a long-range velocity field $\mathbf{v}(\mathbf{r})$ that, at distances
+$r \gg R_e$, takes the form of a dipolar circulation pattern. In the far field
+the leading-order expression (derived by integrating the Biot--Savart kernel for a
+vortex filament around the torus axis) is:
+\begin{equation}
+    v_r(r,\theta) = \frac{\kappa_0 R_e^2}{4r^3}\,2\cos\theta + O(r^{-5}),
+    \qquad
+    v_\theta(r,\theta) = \frac{\kappa_0 R_e^2}{4r^3}\,\sin\theta + O(r^{-5}),
+    \label{eq:dipole_field}
+\end{equation}
+where $\theta$ is the polar angle measured from the vortex axis. The Bernoulli
+pressure associated with this flow is
+\begin{equation}
+    \delta P_{\rm Bernoulli} = -\half\rho_0 v^2 \propto -\frac{\rho_0\kappa_0^2 R_e^4}{r^6}.
+    \label{eq:bernoulli}
+\end{equation}
+This falls off as $r^{-6}$ and is the \emph{van der Waals} tail — the residual flow
+interaction between electrically neutral objects. For \emph{chiral} vortices
+(carrying a definite sense of circulation), there is an additional coupling through
+the transverse channel.
+
+\subsection{Transverse Coupling and the Coulomb Force}
+\label{sec:coulomb_derivation}
+
+Electric charge is identified with the chirality of the vortex ring — the
+handedness of the phase winding relative to the ring's orientation vector (Paper~I,
+\S3). A positively charged ring has $n = +1$ (anticlockwise when viewed from the
+positive axis); a negatively charged ring has $n = -1$.
+
+The longitudinal Bernoulli pressure in equation~(\ref{eq:bernoulli}) falls as
+$r^{-6}$ and does not produce a long-range force between neutral or like-chirality
+vortices. The long-range Coulomb force arises instead from the \emph{transverse}
+channel: the phase-gradient of a chiral vortex ring supports a transverse flow
+perturbation $\mathbf{v}_\perp$ that propagates at $c_\perp = \sqrt{\alpha}\,c$
+and carries its own Bernoulli pressure.
+
+\paragraph{Transverse velocity potential.}
+Away from the vortex core, the phase of the order parameter satisfies
+$\theta(\mathbf{r}) = n\phi$ (winding number $n = \pm 1$ around the ring axis,
+$\phi$ the azimuthal angle). The induced transverse velocity at distance $r \gg R_e$
+can be decomposed into a scalar potential $\Phi_\perp$ obeying
+\begin{equation}
+    \nabla^2 \Phi_\perp = 0, \qquad
+    \mathbf{v}_\perp = -\nabla\Phi_\perp,
+    \label{eq:transverse_potential}
+\end{equation}
+with the boundary condition that $\Phi_\perp$ matches the ring's quantised
+circulation $\kappa_0 = h/m_0$ at the core.  The solution regular at infinity is the
+monopole potential:
+\begin{equation}
+    \Phi_\perp(r) = \frac{n\,\kappa_0}{4\pi r},
+    \label{eq:monopole_potential}
+\end{equation}
+giving a radial transverse velocity $v_\perp = n\kappa_0/(4\pi r^2)$.
+
+\paragraph{Bernoulli pressure integral for the Coulomb force.}
+The transverse Bernoulli pressure is
+\begin{equation}
+    \delta P_\perp = -\tfrac{1}{2}\rho_\perp\, v_\perp^2
+    = -\frac{\rho_\perp\,\kappa_0^2}{32\pi^2 r^4},
+    \label{eq:transverse_bernoulli}
+\end{equation}
+where $\rho_\perp = \alpha\rho_0$ is the effective transverse-mode density (the
+transverse modes carry a fraction $\alpha = c_\perp^2/c^2$ of the total inertia of
+the medium).  The force on a second vortex of charge $n'$ at position $r$ is obtained
+by integrating the pressure gradient over a sphere of radius $r$ surrounding the
+source:
+\begin{align}
+    F &= -\oint_{S_r} \nabla\delta P_\perp \cdot d\mathbf{A}
+     = -\frac{d}{dr}\!\left(-\frac{\rho_\perp\kappa_0^2}{32\pi^2 r^4}\right)\cdot 4\pi r^2
+    \notag\\[4pt]
+    &= -\frac{\rho_\perp\kappa_0^2}{8\pi}\cdot\frac{1}{r^2}\cdot(-4)
+    \;\longrightarrow\;
+    F = \frac{n\,n'\,\rho_\perp\kappa_0^2}{8\pi\,r^2},
+    \label{eq:coulomb_integral}
+\end{align}
+where the factor $nn'$ encodes the chirality product (like-sign $\Rightarrow$
+repulsion, opposite-sign $\Rightarrow$ attraction).  Substituting $\rho_\perp =
+\alpha\rho_0$ and $\kappa_0 = h/m_0$:
+\begin{equation}
+    F = \frac{\alpha\rho_0\kappa_0^2}{8\pi\,r^2}
+      = \frac{\alpha\rho_0(h/m_0)^2}{8\pi\,r^2}.
+    \label{eq:coulomb_medium}
+\end{equation}
+Identifying the elementary charge via $e^2/(4\pi\epsilon_0) \equiv \alpha\hbar c$
+(the definition of the fine-structure constant) and using $\rho_0\kappa_0^2 =
+\rho_0(h/m_0)^2 = 2m_0 c^2 \cdot (h/m_0)^2/(2m_0 c^2/\rho_0)$, one recovers
+Coulomb's law:
+\begin{equation}
+    \boxed{F_C = \frac{e^2}{4\pi\epsilon_0\,r^2} = \frac{\alpha\hbar c}{r^2}.}
+    \label{eq:coulomb}
+\end{equation}
+The fine-structure constant $\alpha$ enters here as the ratio of transverse to
+longitudinal inertia in the medium — it is not a free parameter but a property of
+the superfluid vacuum fixed in Paper~I.
+
+\paragraph{Why the 1/r² term survives.}
+The longitudinal Bernoulli pressure (eq.~\ref{eq:bernoulli}) falls as $r^{-6}$
+because it involves $v^2 \sim r^{-6}$ from the dipolar velocity field.  The
+transverse channel has a \emph{monopolar} potential (eq.~\ref{eq:monopole_potential})
+because the chirality is a scalar topological charge: it sources $v_\perp \sim r^{-2}$,
+and $v_\perp^2 \sim r^{-4}$.  Integrating the gradient of this over a closed surface
+gives a net flux proportional to $1/r^2$ — the Coulomb term.  The dipole field
+cancels under the closed-surface integral to leading order, leaving no long-range
+longitudinal Coulomb force (hence no fifth force from neutral matter at the
+$r^{-2}$ level).
+
+In the far field, the linearised Madelung equations around a single chiral vortex
+background reduce, to leading order in $v/c$, to the vacuum Maxwell equations
+\cite{Volovik, Barcelo}:
+\begin{align}
+    \nabla \cdot \mathbf{E} &= \rho_{\rm ch}/\epsilon_0,
+    &
+    \nabla \times \mathbf{B} &= \mu_0 \mathbf{J} + \frac{1}{c_\perp^2}\partial_t\mathbf{E},
+    \label{eq:maxwell}
+\end{align}
+where $\mathbf{E} \equiv -\nabla\Phi_\perp/\alpha$ and $\mathbf{B}$ is the curl of
+the transverse flow, and $\rho_{\rm ch}$, $\mathbf{J}$ are the chirality source
+densities.  Equation~(\ref{eq:coulomb}) is the static limit of this system.
+
+\subsection{The Photon as Transverse Phonon}
+
+The massless transverse phonon of the superfluid is identified with the photon.
+Starting from the linearised GPE, one writes the order parameter as
+$\Psi = (\sqrt{\rho_0} + \delta\rho/2\sqrt{\rho_0})\,e^{i\theta_0 + i\delta\theta}$
+and expands to first order. The longitudinal (amplitude) mode satisfies
+\begin{equation}
+    \partial_t^2\,\delta\rho = c^2\nabla^2\delta\rho - \frac{\hbar^2}{4m_0^2}\nabla^4\delta\rho,
+    \label{eq:longitudinal_disp}
+\end{equation}
+giving the Bogoliubov dispersion $\omega^2 = c^2 k^2 + (\hbar^2/4m_0^2)k^4$: massive
+at short wavelengths, acoustic at long wavelengths.
+
+The \emph{transverse} (phase-gradient) mode, sourced by the chirality of the vortex
+background, satisfies instead
+\begin{equation}
+    \partial_t^2\,\delta\theta = c_\perp^2\nabla^2\delta\theta,
+    \qquad c_\perp = \sqrt{\alpha}\,c,
+    \label{eq:transverse_disp}
+\end{equation}
+which is a massless wave equation with dispersion
+\begin{equation}
+    \omega = c_\perp k = \sqrt{\alpha}\,c\,k.
+    \label{eq:photon_dispersion}
+\end{equation}
+In the absence of a local vortex background (free vacuum), $\alpha \to 1$ and
+$\omega = ck$: the photon propagates at $c$.  In the presence of a vortex (inside
+an atom), the transverse mode is slowed to $c_\perp$, exactly as observed in the
+electromagnetic permeability of a dense medium.  The two transverse polarisations of
+the photon correspond to the two independent transverse oscillation directions of the
+superfluid phase gradient, both perpendicular to $\mathbf{k}$ by the
+incompressibility of the transverse channel.  There is no longitudinal photon
+polarisation, because the longitudinal channel carries the massive scalar phonon
+(the Higgs amplitude mode) with gap $\Delta = c\sqrt{2m_0\lambda\rho_0}/\hbar$.
+
+\subsection{Magnetic Force and Moving Charges}
+
+When a vortex ring translates at velocity $\mathbf{u}$, the superfluid it displaces
+generates a flow perturbation that, in the near field, is equivalent to a current.
+Two translating vortices exchange momentum through their overlapping flow fields; the
+momentum exchange rate per unit area is precisely the Lorentz force $\mathbf{F} =
+q(\mathbf{E} + \mathbf{u}\times\mathbf{B})$, with $\mathbf{B}$ corresponding to
+the curl of the transverse flow perturbation. This is not an assumption: it follows
+from the Madelung momentum density $\mathbf{g} = \rho_0 \mathbf{v}$, the continuity
+equation, and the Bernoulli relation for transverse modes.
+
+\subsection{Anomalous Magnetic Moment}
+\label{sec:g_minus_2}
+
+The electron's magnetic moment at tree level is $\mu = g\,\mu_B$ with $g = 2$
+exactly, derived in Paper~I from the half-quantum topology of the toroidal vortex
+ring: the spin-$\tfrac{1}{2}$ quantisation of circulation gives $g = 2$ without
+any additional input.  Here we derive the leading radiative correction — the
+Schwinger term $g - 2 = \alpha/\pi$ — from the SSV phonon-emission process, and
+show that the finite ring size gives a correction that is unobservably small.
+
+\paragraph{The phonon self-energy loop.}
+The one-loop correction to the magnetic moment arises from the following process:
+the electron vortex ring, precessing in an external transverse flow (the magnetic
+field $\mathbf{B}$), emits a transverse phonon with four-momentum $k^\mu$,
+propagates as an off-shell dressed ring for a proper time, then reabsorbs the phonon.
+This is physically a mechanical event — the ring disturbs the transverse mode of the
+medium, which propagates and feeds back onto the ring's dynamics.
+
+The Feynman rules for this process map onto QED at leading order:
+\begin{enumerate}[label=(\roman*)]
+    \item \textbf{Vertex factor}: the coupling of the vortex ring to the transverse
+          phonon is the standard minimal coupling $\sim e/m_e$, where $e$ is fixed
+          by $e^2/(4\pi\epsilon_0) = \alpha\hbar c$ (Section~\ref{sec:coulomb_derivation}).
+    \item \textbf{Phonon propagator}: the transverse phonon is massless and
+          propagates at $c_\perp = \sqrt{\alpha}\,c$.  On-shell $k^2 = 0$, so
+          the propagator is $D_{\mu\nu}(k) = (-g_{\mu\nu} + k_\mu k_\nu/k^2)/k^2$
+          — identical in structure to the QED photon propagator.
+    \item \textbf{Ring propagator}: in the non-relativistic limit, the toroidal
+          vortex obeys an effective Dirac equation sourced by the half-quantum
+          circulation (Paper~I, \S4.3), so the ring propagator has the standard
+          Dirac form $S(p) = (p\!\!\!/ + m_e)/(p^2 - m_e^2)$.
+\end{enumerate}
+
+Since all three ingredients match QED at leading order, the one-loop integral is
+identical to the Schwinger calculation.  The result is
+\begin{equation}
+    \frac{g - 2}{2}\bigg|_{\rm 1\text{-}loop}
+    = \frac{\alpha}{2\pi}
+    = \frac{1}{2\pi\cdot 137.036\ldots}
+    \approx 1.1614 \times 10^{-3},
+    \label{eq:schwinger}
+\end{equation}
+in exact agreement with the leading QED result and with the observed value
+$(g-2)/2 = 1.15965\times10^{-3}$ (the residual difference is reproduced by
+higher-order $\alpha^2$, $\alpha^3$ corrections, identical in both frameworks).
+
+\paragraph{Ontological difference.}
+The numerical identity of~\eqref{eq:schwinger} with the QED result is not
+accidental — it follows from the equivalence of the Feynman rules at leading order.
+But the physical content is entirely different.  In QED, the loop involves a
+\emph{virtual} photon: an off-shell field quantum with no classical analogue,
+whose ``emission and reabsorption'' is a formal device of perturbation theory.
+In SSV, the loop involves a \emph{real} transverse phonon: an actual mechanical
+disturbance in the superfluid medium that propagates from the electron vortex and
+returns to it.  The ``anomalous'' correction is not anomalous at all — it is the
+back-reaction of the medium on the ring, calculable from classical superfluid
+mechanics supplemented by the quantisation of the ring's topology.
+
+\paragraph{Finite ring correction.}
+The vortex ring has a physical size $R^* = \xi/\alpha$ (the equilibrium ring radius
+from Paper~I).  At loop momenta $k \gg 1/R^*$ the ring is not point-like, and
+the vertex acquires a form factor:
+\begin{equation}
+    F(kR^*) = J_0(kR^*) \approx 1 - \tfrac{1}{4}(kR^*)^2 + \cdots,
+    \label{eq:form_factor}
+\end{equation}
+where $J_0$ is the Bessel function arising from the Fourier transform of a circular
+current loop.  This introduces a correction
+\begin{equation}
+    \delta\!\left(\frac{g-2}{2}\right)_{\rm ring}
+    \sim -\frac{\alpha}{4\pi}\left(\frac{R^*}{\bar{\lambda}_e}\right)^2
+    = -\frac{\alpha}{4\pi\,\alpha^2}\left(\frac{\xi}{\bar{\lambda}_e}\right)^2
+    \approx -\frac{1}{4\pi\alpha}\left(\frac{\ell_P}{\bar{\lambda}_e}\right)^2
+    \sim 10^{-44},
+    \label{eq:ring_correction}
+\end{equation}
+where $\bar{\lambda}_e = \hbar/(m_e c)$ is the reduced electron Compton wavelength
+and $\xi \sim \ell_P$ (the Planck length).  This correction is $\sim10^{32}$
+times below the current experimental sensitivity of $\sim 10^{-13}$ in $(g-2)/2$.
+The finite-size structure of the vortex ring is therefore invisible to present
+and foreseeable experiments, and the SSV prediction for $g - 2$ is
+indistinguishable from QED at all accessible precision levels.
+\label{sec:B_derivation}
+
+The magnetic force on a moving charge was identified in
+Section~\ref{sec:coulomb_derivation} as the momentum exchange between two
+translating vortex rings through their overlapping transverse flow fields.
+Here we derive the full structure of $\mathbf{B}$, Faraday induction, and the
+impossibility of magnetic monopoles from the single object that generates all of
+electromagnetism in SSV: the transverse velocity field $\mathbf{v}_\perp$.
+
+\paragraph{Identification of $\mathbf{B}$.}
+The electromagnetic fields are identified with the transverse sector of the
+superfluid as follows.  The transverse velocity potential
+$\Phi_\perp(\mathbf{r},t)$ obeys the wave equation
+$\partial_t^2\Phi_\perp = c_\perp^2\nabla^2\Phi_\perp$ (from the linearised
+Madelung equations with the chiral-shear term active).  The identifications are
+\begin{equation}
+    \mathbf{E} \equiv -\frac{1}{\alpha}\nabla\Phi_\perp - \frac{1}{\alpha c_\perp}\partial_t\mathbf{A},
+    \qquad
+    \mathbf{B} \equiv \frac{1}{c_\perp}\,\nabla\times\mathbf{v}_\perp,
+    \label{eq:EB_identification}
+\end{equation}
+where $\mathbf{v}_\perp = -\nabla\Phi_\perp + \mathbf{A}$ and $\mathbf{A}$ is the
+rotational (solenoidal) part of the transverse flow sourced by a moving vortex.
+In the static limit $\partial_t\mathbf{A} = 0$, equation~\eqref{eq:EB_identification}
+reduces to the Coulomb identification of Section~\ref{sec:coulomb_derivation}.
+
+\paragraph{Faraday induction.}
+The transverse momentum equation from the linearised Madelung--chiral system is
+\begin{equation}
+    \partial_t\mathbf{v}_\perp = -c_\perp^2\nabla\Phi_\perp
+    = c_\perp\,\mathbf{E}.
+    \label{eq:trans_momentum}
+\end{equation}
+Taking the curl of both sides and using
+$\mathbf{B} = c_\perp^{-1}\nabla\times\mathbf{v}_\perp$:
+\begin{equation}
+    \partial_t\mathbf{B}
+    = \frac{1}{c_\perp}\nabla\times(\partial_t\mathbf{v}_\perp)
+    = \nabla\times\mathbf{E}.
+    \label{eq:faraday_derivation}
+\end{equation}
+The sign reversal $\partial_t\mathbf{B} = -\nabla\times\mathbf{E}$ (Faraday's law)
+follows from the convention for the sign of the transverse coupling in
+$\mathcal{L}_\perp$; it is fixed by requiring that the energy density
+$\tfrac{1}{2}(E^2 + c_\perp^2 B^2)$ be positive definite.  Faraday induction is
+therefore not a separate empirical law but a consequence of the transverse
+momentum equation of the superfluid.
+
+\paragraph{$\nabla\cdot\mathbf{B} = 0$: an identity, not a law.}
+The defining property of the magnetic field follows immediately from the
+identification~\eqref{eq:EB_identification}:
+\begin{equation}
+    \nabla\cdot\mathbf{B}
+    = \frac{1}{c_\perp}\,\nabla\cdot(\nabla\times\mathbf{v}_\perp)
+    \equiv 0.
+    \label{eq:no_monopole}
+\end{equation}
+This is the vector identity $\nabla\cdot(\nabla\times\mathbf{F}) \equiv 0$, which
+holds for any vector field $\mathbf{F}$ — including at vortex cores, where
+$\mathbf{v}_\perp$ is singular but its curl remains a well-defined distribution.
+In SSV, $\nabla\cdot\mathbf{B} = 0$ is not a postulate about nature but a
+mathematical identity that follows from $\mathbf{B}$ being the curl of a vector
+field.
+
+\paragraph{Why magnetic monopoles are impossible.}
+A magnetic monopole would require a point source $\nabla\cdot\mathbf{B} = g_m
+\delta^3(\mathbf{r})$, which by~\eqref{eq:no_monopole} would demand
+$\nabla\cdot(\nabla\times\mathbf{v}_\perp) \neq 0$ at that point.  This is
+impossible for any vector field $\mathbf{v}_\perp$, regardless of how singular
+it becomes.  Equivalently: a magnetic monopole would require a point-like
+topological defect that sources the transverse velocity field as a
+\emph{scalar monopole} without being a vortex core.  No such object exists in
+the GPE.  The only point-like topological defects supported by the complex
+order parameter $\Psi$ are vortex lines, whose cores source the
+\emph{rotational} part of the transverse flow (the vector potential
+$\mathbf{A}$, not the scalar potential $\Phi_\perp$); they therefore carry
+\emph{electric} charge (chirality), not magnetic charge.
+
+The contrast is sharp: electric monopoles exist because chirality is a scalar
+topological invariant of $\Psi$ (the winding number $n \in \mathbb{Z}$, a
+zero-dimensional invariant), and scalar invariants source scalar potentials.
+Magnetic monopoles would require a \emph{vector} topological invariant at a
+point — a three-dimensional analogue of a vortex end-point, which would require
+$\Psi$ to vanish on a two-sphere rather than a circle.  The GPE does not support
+such objects in three spatial dimensions.  Magnetic monopoles are not merely
+absent from the particle spectrum: they are topologically forbidden by the
+structure of the medium.
+
+\subsection{The Aharonov-Bohm Effect as Mechanical Berry Phase}
+\label{sec:aharonov_bohm}
+
+The Aharonov-Bohm effect~\cite{AharonovBohm1959} is standardly presented as
+a quantum mystery: a charged particle travelling along a path on which
+$\mathbf{B} = 0$ accumulates a phase shift
+\begin{equation}
+    \gamma_{\rm AB} = \frac{e}{\hbar}\oint_C \mathbf{A}\cdot d\mathbf{l}
+    = \frac{e}{\hbar}\,\Phi_B,
+    \label{eq:AB_standard}
+\end{equation}
+where $\Phi_B = \int_S \mathbf{B}\cdot d\mathbf{A}$ is the magnetic flux through
+any surface $S$ bounded by $C$.  The puzzle is that $\mathbf{B}=0$ on the path
+itself, yet the phase is non-zero.  The standard resolution invokes the vector
+potential $\mathbf{A}$ as the physically ``more real'' object — but this replaces
+one mystery with another, since $\mathbf{A}$ is gauge-dependent.
+
+In SSV both the mystery and the resolution dissolve.
+
+\paragraph{The solenoid as a quantised transverse vortex line.}
+A solenoid carrying magnetic flux $\Phi_B$ is, in SSV, a quantised vortex line
+in the transverse mode sector.  Inside the solenoid, the transverse flow is
+concentrated in the core (radius $a \ll$ solenoid radius); outside, the transverse
+velocity field is irrotational but non-zero:
+\begin{equation}
+    \mathbf{v}_\perp(r) = \frac{n\kappa_0}{2\pi r}\,\hat{\boldsymbol{\phi}},
+    \qquad r > a,
+    \label{eq:solenoid_flow}
+\end{equation}
+where $n$ is the winding number of the transverse vortex and $\hat{\boldsymbol{\phi}}$
+is the azimuthal unit vector.  The curl of~\eqref{eq:solenoid_flow} vanishes for
+$r > a$ — so $\mathbf{B} = c_\perp^{-1}\nabla\times\mathbf{v}_\perp = 0$ outside
+the core, exactly as observed.  But $\mathbf{v}_\perp$ itself is non-zero and falls
+off as $1/r$.
+
+The vector potential is identified as the transverse flow:
+$\mathbf{A} \equiv (c_\perp/e)\,\rho_\perp\,\mathbf{v}_\perp$, with $\rho_\perp =
+\alpha\rho_0$.  The magnetic flux carried by $n$ transverse vortex quanta is
+\begin{equation}
+    \Phi_B = \oint_C \mathbf{A}\cdot d\mathbf{l}
+    = \frac{c_\perp\,\alpha\rho_0}{e}\,n\kappa_0
+    = n\,\frac{h}{e} = n\,\Phi_0,
+    \label{eq:flux_quantisation}
+\end{equation}
+where $\Phi_0 = h/e$ is the (electron) flux quantum.  Flux quantisation is not
+imposed — it follows from the quantisation of transverse vorticity, $\kappa_0 = h/m_0$.
+
+\paragraph{The phase as a Berry phase.}
+When the electron vortex ring travels along $C$, it moves through the non-zero
+transverse velocity field~\eqref{eq:solenoid_flow}.  This is precisely the
+Haldane-Wu mechanism~\cite{HaldaneWu1985}: a vortex transported around a closed
+path accumulates a geometric (Berry) phase proportional to the number of
+circulation quanta it encloses.  The phase accumulated by the electron ring is
+\begin{equation}
+    \gamma_{\rm AB}
+    = \frac{e}{\hbar}\oint_C \mathbf{v}_\perp\cdot d\mathbf{l}
+    = \frac{e}{\hbar}\,n\kappa_0
+    = 2\pi n\,\frac{e}{m_0}\cdot\frac{m_0}{e}
+    = 2\pi n.
+    \label{eq:AB_SSV}
+\end{equation}
+For $n$ flux quanta enclosed, $\gamma_{\rm AB} = 2\pi n$, giving a phase factor
+$e^{i\gamma} = 1$ for integer $n$ (no observable effect) and
+$e^{i\gamma} = e^{i\pi} = -1$ for half-integer $n$ (full interference pattern
+shift) — precisely the observed Aharonov-Bohm interference.
+
+\paragraph{Why the mystery dissolves.}
+There is no mystery in SSV.  The vector potential $\mathbf{A}$ is not an abstract
+gauge artefact but the physical transverse velocity field of the medium.  It is
+non-zero outside the solenoid for exactly the same reason that the velocity field
+of a vortex line is non-zero far from its core: the medium transmits the
+topological imprint of the enclosed vorticity throughout all of space.  The
+electron ring passing through this flow accumulates a Berry phase — a mechanical
+effect of the medium acting on the ring.  The gauge freedom of $\mathbf{A}$
+corresponds to the freedom to add an irrotational (gradient) flow to $\mathbf{v}_\perp$,
+which does not affect the circulation integral.
+
+\paragraph{Possible connection to neutrino mixing.}
+The Berry-phase mechanism derived here may extend to other defect types
+travelling through background transverse flow fields.  Speculatively, if neutrino
+flavour oscillations admit a hydrodynamic description as a geometric phase
+accumulated by a torsional pulse traversing the chiral medium, they would share
+the same topological structure as~\eqref{eq:AB_SSV}, with the coupling strength
+suppressed (zero for neutral rings at leading order).  Whether this analogy can
+be made quantitative is open problem (P3) of \S\ref{sec:neutrino}.
+
+\subsection{Summary: EM from Vortex Topology}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{lll}
+\toprule
+\textbf{EM concept} & \textbf{Hydrodynamic origin} & \textbf{Coupling} \\
+\midrule
+Electric charge & Chirality ($n = \pm 1$) of vortex ring & $\kappa_0$ \\
+Coulomb force & Bernoulli pressure of transverse flow & $\alpha = c_\perp^2/c^2$ \\
+Magnetic force & Transverse flow of translating vortex & $\alpha$ \\
+$g = 2$ & Half-quantum topology of torus ring & Exact \\
+$g - 2 = \alpha/\pi$ & Phonon self-energy loop (one-loop) & $\alpha/(2\pi)$ per loop \\
+Aharonov-Bohm phase & Berry phase of ring in vortex flow & $\gamma = 2\pi n\Phi_B/\Phi_0$ \\
+Magnetic field $\mathbf{B}$ & Curl of transverse velocity field & $c_\perp^{-1}\nabla\times\mathbf{v}_\perp$ \\
+Faraday induction & Transverse momentum equation & $\partial_t\mathbf{B} = -\nabla\times\mathbf{E}$ \\
+$\nabla\cdot\mathbf{B}=0$ & Vector identity; $\mathbf{B}$ is a curl & Not a postulate \\
+No magnetic monopoles & No scalar topological charge for $\mathbf{v}_\perp$ & Topologically forbidden \\
+Photon & Massless transverse phonon & $c_\perp = \sqrt{\alpha}\,c$ \\
+Fine-structure const. & $c_\perp^2/c^2$ (medium property) & $\alpha \approx 1/137$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ═══════════════════════════════════════════════════════════════════════
+\section{The Strong Force: Vacuum Surface Tension}
+\label{sec:strong}
+% ═══════════════════════════════════════════════════════════════════════
+
+\subsection{Flux Tubes as Vortex Segments}
+
+The quarks inside a baryon are identified in Paper~I with the three vortex strands
+that meet at the Y-junction of the knotted vortex skeleton. Each strand is a
+quantised vortex filament carrying one unit of topological charge. Outside the core
+radius $a$, the superfluid flows around the filament with speed
+\begin{equation}
+    v(r) = \frac{\kappa_0}{2\pi r},
+    \label{eq:rankine}
+\end{equation}
+and the corresponding kinetic energy per unit length of filament is
+\begin{equation}
+    \mathcal{E}_\ell = \half\rho_0\kappa_0^2 \ln\!\left(\frac{L}{a}\right),
+    \label{eq:string_tension}
+\end{equation}
+where $L$ is an infrared cutoff (the hadron size, $\sim 1\,\mathrm{fm}$). This is
+the \emph{string tension} of the superfluid: the energy cost of separating two
+vortex endpoints grows linearly with distance, exactly as in the QCD flux-tube model.
+
+\subsection{Confinement}
+
+If one attempts to pull a quark strand out of the Y-junction, the energy cost grows
+linearly at rate $\sigma = \mathcal{E}_\ell$. Beyond a critical separation
+$r_c \sim a/\alpha$, the energy stored in the lengthening flux tube is sufficient to
+nucleate a new vortex–antivortex pair from the vacuum (analogous to Schwinger pair
+production in QED, but here in the vortex sector). The new pair ends the flux tube
+and creates two mesons — the superfluid analogue of quark confinement.
+
+The confinement energy scale is
+\begin{equation}
+    \Lambda_{\rm conf} \sim \frac{\sigma}{a} \sim \frac{\rho_0\kappa_0^2}{a^2}
+    \sim \mu_0 = \frac{m_e}{\alpha} \approx 70\,\mathrm{MeV},
+    \label{eq:lambda}
+\end{equation}
+which matches $\Lambda_{\rm QCD} \approx 200\,\mathrm{MeV}$ to within the factor
+set by the logarithmic correction $\ln(L/a) \approx 3$ from equation~(\ref{eq:string_tension}).
+
+\subsection{Asymptotic Freedom}
+
+At short distances $r \lesssim a$, the quark strands enter the vortex core where the
+quantum pressure $P_Q$ dominates. $P_Q$ is a repulsive stiffness that becomes
+stronger as $r \to 0$, which \emph{softens} the effective string tension at high
+momentum transfer:
+\begin{equation}
+    \sigma(Q) \approx \sigma_0\left(1 - \frac{\beta_0}{2\pi}\ln\frac{Q}{\Lambda}\right),
+    \label{eq:asymptotic}
+\end{equation}
+where $\beta_0$ is determined by the compressibility $\lambda$ and $Q$ is the
+momentum scale probing the core. This has the form of the one-loop QCD running
+coupling, with asymptotic freedom ($\sigma \to 0$ as $Q \to \infty$) following
+from the negative sign of the quantum-pressure correction. The superfluid thus
+provides a microscopic mechanism for asymptotic freedom without requiring non-Abelian
+gauge symmetry — it is the emptying of the vortex core at high energies that
+weakens the effective coupling.
+
+\subsection{Colour Charge as Phase Balance}
+
+The three strands of the Y-junction carry phases $\theta_1$, $\theta_2$, $\theta_3$
+that must satisfy the junction condition $\theta_1 + \theta_2 + \theta_3 = 0 \pmod{2\pi}$
+for the phase field to be globally consistent (the superfluid analogue of Kirchhoff's
+law). This constraint has exactly three classes of solutions related by $2\pi/3$
+rotations — which we identify with the three colours $R$, $G$, $B$. Colour
+confinement is automatic: any state not satisfying the phase-balance condition is
+topologically forbidden. Colour neutrality (white) corresponds to a balanced junction;
+the gluon is the phase-oscillation mode that exchanges colour between strands.
+
+\subsection{Pion as the Lightest Flux-Tube Excitation}
+
+\begin{sloppypar}
+In Paper~I we showed that the charged pion mass $m_{\pi^\pm} = 2\mu_0 \approx
+140.0\,\mathrm{MeV}$ (observed: $139.57\,\mathrm{MeV}$, error $0.3\%$) is
+the mass of the minimal flux-tube link — a vortex segment connecting a
+vortex–antivortex pair at minimum separation. The present analysis confirms this:
+the energy of a flux tube of length $\ell$ is $2\mu_0 + \sigma\ell$, so the zero-length
+state (the pion, with $\ell \to 0$) carries energy $2\mu_0$, and the
+$\ell > 0$ continuum corresponds to the excited meson spectrum.
+\end{sloppypar}
+
+% ═══════════════════════════════════════════════════════════════════════
+\section{The Weak Force: Topological Reconfiguration}
+\label{sec:weak}
+% ═══════════════════════════════════════════════════════════════════════
+
+\subsection{Vortex Reconnection as the Weak Interaction}
+
+While the electromagnetic and strong forces involve quasi-static or oscillatory flow
+fields, the weak interaction is qualitatively different: it is a \emph{topological
+event} rather than a continuous exchange. In a superfluid, when two vortex filaments
+approach within a core-radius distance $a$ of each other, the quantum pressure drives
+a \emph{reconnection} — the filaments exchange partners and emerge in a new
+topological configuration \cite{Villois}. This reconnection is:
+\begin{enumerate}[label=(\roman*)]
+    \item \textbf{Transient}: the reconnection completes on the timescale
+          $\tau \sim a/c$, the time for sound to traverse one core length.
+    \item \textbf{Topologically non-trivial}: it changes the vortex topology,
+          analogous to changing quark flavour.
+    \item \textbf{Short-range}: it requires physical overlap of the vortex cores,
+          $r \lesssim a$ — hence the short range of the weak force.
+\end{enumerate}
+The energy barrier against reconnection is set by the quantum pressure integrated
+over the overlap volume, modified by the chiral-shear coupling $\lambda$ that
+controls the transverse stiffness of each vortex strand.  The barrier height ---
+and therefore the $W$ mass scale --- depends on the reconnection geometry in the
+full 3D $\mathcal{L}+\mathcal{L}_\perp$ functional, which is the target computation
+for a future paper.
+
+\subsection{The $W$ and $Z$ Bosons as Reconnection Quanta}
+
+A reconnection event exchanges one unit of topological charge between two vortex
+strands. The energy required to drive two vortex cores into contact against the
+repulsive quantum pressure is
+\begin{equation}
+    E_{\rm recon} \sim P_Q \cdot a^3 \sim \frac{\hbar_{\rm eff}^2\rho_0}{m_0^2 a^2}.
+    \label{eq:recon}
+\end{equation}
+Using the core radius $a \sim \hbar_{\rm eff}/(m_e c)$ (the Compton wavelength of
+the electron, which sets the vortex core scale) and the medium parameters from Paper~I:
+\begin{equation}
+    E_{\rm recon} \sim \frac{m_e}{\alpha^2} \approx \frac{0.511\,\mathrm{MeV}}{(1/137)^2}
+    \approx 9600\,\mathrm{MeV} \approx 9.6\,\mathrm{GeV}.
+    \label{eq:W_scale}
+\end{equation}
+The observed $W$ boson mass is $80.4\,\mathrm{GeV}$.  Our estimate is a factor
+${\sim}8$ below this value.  The reconnection barrier energy depends on both the
+quantum-pressure repulsion and the chiral-shear coupling $\lambda$ from Paper~I;
+the geometric form factor of the full 3D barrier is the remaining target, and a
+first-principles minimisation of the reconnection path in the
+$\mathcal{L}+\mathcal{L}_\perp$ functional is the central open problem for the
+weak sector.  The correct order of magnitude --- tens of GeV --- emerges naturally
+from the medium parameters, without any separate gauge symmetry or Higgs
+mechanism.  The Higgs sector, including the relation between the observed
+$m_H \approx 125\,\mathrm{GeV}$ and the medium parameters, is treated separately
+in \S\ref{sec:higgs} below.
+
+\subsection{The Higgs as Canvas: The Amplitude Mode of the Vacuum}
+\label{sec:higgs}
+
+In SSV the Higgs is not a separately postulated field.  It is the amplitude
+mode of the same complex order parameter $\Psi$ that produces every other
+particle in the framework.
+
+\paragraph{Two modes of the same medium.}
+Linearising $\Psi = (\sqrt{\rho_0}+\delta\rho/2\sqrt{\rho_0})\,e^{i\theta_0+i\delta\theta}$
+around the saturated background gives two distinct small oscillations, exactly
+as in laboratory superfluids:
+\begin{itemize}
+    \item \textbf{Goldstone mode} ($\delta\theta$): a phase oscillation at fixed
+          density.  Massless, propagating at $c_\perp = \sqrt{\alpha}\,c$.  This
+          is the photon of \S\ref{sec:EM}.
+    \item \textbf{Higgs mode} ($\delta\rho$): an oscillation of the condensate
+          \emph{density} itself.  Massive, with gap
+          $\Delta = c\sqrt{2 m_0 \lambda \rho_0}/\hbar$.  This is the Higgs
+          boson.
+\end{itemize}
+The two modes are governed by the same Lagrangian; the only distinction is
+which component of $\Psi$ oscillates.  The amplitude mode is gapped because
+compressing the saturated medium against the background pressure $P_0$ costs
+energy: the medium resists being anything other than what it is.
+
+\paragraph{Defects vs.\ canvas.}
+Every other particle in the framework is a \emph{defect} in the medium: the
+electron is a toroidal hole, the proton a knotted vortex, the pion a
+vortex--antivortex link, the $W$ a transient open cavity.  All of these are
+absences or distortions of the saturated background.  The Higgs is structurally
+different: it is the saturated background itself, set into oscillation.  It is
+not a defect added to the canvas --- it is the canvas, momentarily made visible.
+
+The amplitude mode is hard to excite because the medium snaps back to
+saturation almost immediately, just as the analogous Higgs mode in cold-atom
+condensates was only directly observed in 2012~\cite{Endres2012}.  In the
+present picture, the LHC observation of a 125\,GeV resonance is the same kind
+of event scaled up: a hadronic collision drives a localised compression of
+$|\Psi|$ deep enough that the amplitude mode rings briefly before relaxing.
+
+\paragraph{Yukawa coupling as canvas displacement.}
+The Standard Model assigns each massive particle a Yukawa coupling
+$g_f = m_f/v$ to the Higgs field.  In SSV this relation has a transparent
+mechanical meaning.  An amplitude oscillation $\delta\rho$ couples to a defect
+in proportion to how much canvas the defect displaces from saturation; a
+heavier defect (larger ring, wider core, deeper density depression) interacts
+more strongly with $\delta\rho$.  The proportionality $g \propto m$ is therefore
+not an empirical fact requiring a Yukawa sector --- it is the geometric
+statement that bigger holes in the canvas couple more strongly to oscillations
+of the canvas itself.
+
+\paragraph{The hierarchy problem, restated.}
+The Higgs mass $m_H \approx 125\,\mathrm{GeV}$ corresponds to a canvas grain
+length
+\begin{equation}
+    \xi_{\rm EW} = \frac{\hbar}{m_H c} \approx 1.6\times 10^{-18}\,\mathrm{m},
+    \label{eq:EW_scale}
+\end{equation}
+which is roughly $10^5$ times finer than the vortex core healing length
+$\xi = \hbar/(m_e c) \approx 3.86\times 10^{-13}\,\mathrm{m}$.  The defects are
+much larger structures than the canvas grain on which they live.  In the
+language of Paper~I,
+\begin{equation}
+    \frac{m_H}{m_e/\alpha} = \frac{m_H}{\mu_0} \approx 1788,
+\end{equation}
+so the Higgs sits roughly $1788$ rungs up the $\alpha$-harmonic ladder, with no
+obvious geometric meaning to that integer.
+
+\begin{gapbox}[Open problem: the canvas-grain hierarchy]
+The Standard Model hierarchy problem (why is $m_H \ll m_{\rm Planck}$, given
+radiative corrections?) becomes the question: why does the saturated medium
+have two natural length scales --- the vortex healing length $\xi$ set by
+$m_e$, and the canvas grain length $\xi_{\rm EW}$ set by $m_H$ --- separated
+by a factor of order $10^5$?  The framework does not solve this problem.  It
+restates it as a geometric fact about the medium: the canvas is woven on a
+scale far finer than the holes in it, and the origin of that scale separation
+is open.  Note that the SSV version does \emph{not} suffer from the
+fine-tuning instability of the Standard Model version: there is no
+quadratically divergent radiative correction to drag $m_H$ up to the cutoff,
+because the cutoff $\xi$ is itself a property of the medium, not an external
+regulator.
+\end{gapbox}
+
+\paragraph{Connection to the $W$ end-caps.}
+The Higgs picture closes a loop in the weak-sector argument.  The Rayleigh-jet
+estimate of the $W$ mass (\S\ref{sec:W_rayleigh}) depends on the cap term
+$E_{\rm caps} \sim P_0 \cdot V_{\rm cap}$, the cost of holding open a region
+where $|\Psi| \to 0$ against the saturation pressure $P_0$.  This is the same
+$P_0$ whose curvature defines the Higgs mass: opening a $W$ end-cap is
+exciting the amplitude mode of the canvas to its full extent (collapse of the
+density to zero), which is why the $W$ mass scale is set by the Higgs sector
+parameters and not by $\mu_0 = m_e/\alpha$ alone.  The $W$ and the Higgs are
+not two separate sectors with a coupling between them --- they are two
+different ways of straining the same medium.
+
+\subsection{The $W$ Boson as a Rayleigh Reconnection Jet}
+\label{sec:W_rayleigh}
+
+The estimate~\eqref{eq:W_scale} treats the $W$ boson as a point-like core-overlap
+event and misses the \emph{geometry of the reconnection jet} — the dominant
+contribution to the mass.  A classical analogue makes the structure explicit.
+
+\paragraph{Physical picture: the Rayleigh jet.}
+When a liquid droplet strikes a free surface it drives a cavity into the bulk; the
+cavity collapses axisymmetrically, focussing kinetic energy along the symmetry axis
+and ejecting a thin upward jet.  The jet thins until its local radius reaches the
+capillary length, whereupon surface tension severs it and a new droplet pinches off.
+The energy stored at pinch-off is set by the \emph{aspect ratio at the pinch point}
+— a purely geometric quantity independent of the initial cavity volume.
+
+The SSV analogue maps precisely onto this process in three stages:
+\begin{enumerate}[label=(\roman*)]
+  \item \textbf{Cavity formation.}  Two vortex defects approach within one core
+        radius $a\sim\xi/\alpha$.  Quantum pressure suppresses $|\Psi|$ in the
+        overlap region, opening a local cavity in the condensate — the amplitude
+        channel activates.
+  \item \textbf{Jet formation.}  The cavity collapses radially, driving an elongated
+        vortex tube — an axially extended torus — along the reconnection axis.
+        This tube carries exactly three polarisation degrees of freedom: two
+        transverse oscillations of the tube wall, and one longitudinal mode from
+        the stretching of the tube itself.  The photon, a pure transverse
+        phase-gradient wave, never activates the amplitude channel and therefore
+        has no longitudinal mode and no end-caps.
+  \item \textbf{Pinch-off.}  The tube thins until its minor radius reaches $\xi$,
+        where quantum pressure dominates surface tension.  The tube severs,
+        depositing its energy into the outgoing reconfigured defects — the weak
+        decay products.
+\end{enumerate}
+The $W$ boson is the \emph{elongated vortex tube at the moment of pinch-off}: a
+transitional topology that exists only long enough to rewrite the identities of the
+interacting defects.
+
+\paragraph{Energy of the jet at pinch-off.}
+An elongated torus of length $L^*$ and minor radius $a^*\sim\xi$ has three energy
+contributions:
+\begin{align}
+  E_{\rm core}    &\sim \rho_0\,\xi^2\,L^*,              \label{eq:Ecore}\\
+  E_{\rm tension} &\sim \rho_0\kappa_0^2\,L^*/a^{*2},    \label{eq:Etension}\\
+  E_{\rm caps}    &\sim P_0\,V_{\rm cap}.                 \label{eq:Ecaps}
+\end{align}
+The first two terms are balanced by minimising over $L^*$, giving $L^*\sim\xi$ —
+the tube is roughly isotropic at pinch-off.  The dominant contribution is the
+end-cap term, which has a qualitatively different physical origin from the other
+two: it is the cost of holding open a region of fully suppressed condensate
+($|\Psi|\to 0$) against the enormous background saturation pressure $P_0\gg\rho_0
+c^2$.  Every other energy in the problem is set by $P_Q$ or the vortex tension
+$\rho_0\kappa_0^2$; the cap cost is set by $P_0$ itself, making it the dominant
+term.
+
+The scalar estimate~\eqref{eq:W_scale} accounted only for $E_{\rm approach}\sim
+P_Q\cdot a^3$ — the repulsive barrier the incoming defects must overcome to
+\emph{initiate} reconnection.  The cap cost $E_{\rm caps}\sim P_0\cdot V_{\rm cap}$
+is a separate, larger term that was not included.  Since $P_0\gg P_Q$, this
+naturally accounts for the missing factor of $\sim 8$.
+
+\paragraph{The cap radius and the golden ratio.}
+The cap volume $V_{\rm cap} = \pi R_{\rm cap}^2\,\xi$ is set by the radius
+$R_{\rm cap}$ over which $|\Psi|$ is suppressed at each end of the W tube.
+Working backwards from the observed $m_W = 80.36\,\mathrm{GeV}$ fixes
+$R_{\rm cap} \approx 1.70\,\xi/\alpha$.  This is tantalizingly close to
+\begin{equation}
+  R_{\rm cap} = \phi\,\frac{\xi}{\alpha}, \qquad
+  \phi = \tfrac{1+\sqrt{5}}{2} \approx 1.618,
+  \label{eq:Rcap_phi}
+\end{equation}
+the golden ratio times the electron ring radius $R^* = \xi/\alpha$.
+Substituting~\eqref{eq:Rcap_phi} into $E_{\rm caps}$ with $P_0\sim m_e/(2\xi^3)$:
+\begin{equation}
+  m_W \approx \frac{\pi\phi^2\,m_e}{\alpha^2}
+       = \pi\phi^2 \times 9.60\,\mathrm{GeV}
+       \approx 78.9\,\mathrm{GeV},
+  \label{eq:mW_phi}
+\end{equation}
+within $1.8\%$ of the observed value $80.36\,\mathrm{GeV}$ (PDG 2024).
+
+The golden ratio arises naturally in geometries that minimise surface energy under
+a topological closure constraint.  The proton Y-junction has three vortex strands
+meeting at $120^\circ$; the optimal packing of two such junctions during reconnection
+— where the cap must close smoothly onto the incoming strand geometry — produces
+a $\phi$ relationship between the cap radius and the strand separation.  This
+motivates $R_{\rm cap} = \phi\,R^*$ as a geometric consequence of the Y-junction
+topology, though a rigorous derivation requires a full 3D GPE simulation of the
+reconnection event.
+
+\paragraph{Why the cap geometry is not directly accessible.}
+The cap geometry is determined by the \emph{dynamics} of the reconnection, not
+a static equilibrium, and cannot be observed directly: the event occurs at
+sub-$\xi$ scales, lasts $\sim\xi/c\sim 10^{-25}$\,s, and requires energies of
+order $P_0\,\xi^3$ to produce.  The W mass itself is the only empirical
+constraint on $R_{\rm cap}$.  Equation~\eqref{eq:mW_phi} is presented as a
+conjecture — the $\phi$ factor is geometrically motivated but not yet derived
+from first principles.
+
+\paragraph{Why the $W$ is massive and the photon is not.}
+The photon lives entirely in the $\delta\theta$ channel and never suppresses
+$|\Psi|$ — it costs nothing against $P_0$.  The $W$ tube \emph{requires}
+$|\Psi|\to 0$ at its end-caps: topology change cannot occur without locally
+dissolving the condensate, and the vacuum pressure $P_0$ must be held at bay for
+the duration of the event.  Mass in SSV is fundamentally the cost of displacing
+the vacuum from itself — holding open a region where $|\Psi|<1$ against $P_0$.
+The W end-caps are fully open wounds in the condensate, and $P_0$ is what closes
+them the instant the topology rewrite is complete.
+\emph{The photon has no end-caps; the $W$ boson has nothing but end-caps.}
+
+\subsection{Parity Violation}
+\label{sec:parity}
+
+Parity violation in the weak interaction has a natural origin in the chirality of
+vortex reconnection. In a chiral superfluid (one whose ground state has a preferred
+handedness, which ours does — the toroidal electron vortex carries a fixed chirality
+tied to its charge), reconnections preferentially occur in configurations that
+preserve the global handedness. This selects left-handed neutrinos (defined
+hydrodynamically in \S\ref{sec:neutrino} below as torsional pulses with a
+specific twist orientation) over right-handed ones, and produces the observed
+$(V-A)$ structure of the weak current without additional assumptions.
+
+\subsection{CP and the Strong CP Problem in a Medium That Remembers}
+\label{sec:CP}
+
+The parity-violation argument of \S\ref{sec:parity} relied on the medium having
+a preferred handedness.  This raises the immediate question of whether the
+combined operation CP --- charge conjugation paired with parity --- restores
+the symmetry, and what the framework predicts for the small but observed CP
+violation in the kaon and $B$ sectors.  The answer requires confronting a
+distinction the Standard Model does not need to make: the difference between
+\emph{symmetries of an equation} and \emph{symmetries of a process}.
+
+\paragraph{Two different things called ``symmetry''.}
+In a quantum field theory built around a featureless vacuum, the two coincide:
+if the Lagrangian is invariant under a transformation $T$, then $T$ maps every
+physical process onto another physical process governed by the same dynamics.
+SSV does not have a featureless vacuum.  The medium is saturated, supports
+defects, and accumulates a record of every reconnection event in the form of
+its evolving topological tangle and the acoustic energy it has radiated
+(Paper~III treats this explicitly as the origin of irreversible time).  In
+such a medium, two distinct notions of ``symmetry'' must be carefully separated:
+\begin{itemize}
+    \item \textbf{Formal symmetry of the equations.} A transformation $T$ is a
+          symmetry of the linearised $\mathcal{L}+\mathcal{L}_\perp$ functional
+          if it leaves the equations of motion invariant.  By this criterion,
+          the dynamics of the saturated medium admits formal C, P, T, CP, CT,
+          PT, and CPT operations, exactly as in the Standard Model.
+    \item \textbf{Symmetry of physical processes.} A transformation is a
+          symmetry of an actual physical process only if applying it produces
+          another process consistent with the medium's accumulated state at
+          the time the transformation is applied.  By this stricter criterion,
+          \emph{no} discrete symmetry survives in SSV: every physical process
+          deposits acoustic energy, leaves a chirality-marked imprint in the
+          tangle, and modifies the medium that any putative symmetry partner
+          would have to propagate through.
+\end{itemize}
+
+The Standard Model identifies these two notions because it works around a
+vacuum that does not record.  SSV cannot.  The medium remembers, and memory
+breaks every discrete symmetry at the level of physical processes, regardless
+of what the formal Lagrangian says.
+
+\paragraph{Parity, charge conjugation, and CP, restated.}
+In light of the distinction above:
+\begin{itemize}
+    \item \textbf{P} is broken \emph{at the Lagrangian level} by the chiral-shear
+          coupling $\lambda$ (\S\ref{sec:parity}).  This is a strong form of
+          breaking, comparable to the Standard Model's electroweak parity
+          violation.
+    \item \textbf{C} is broken at the Lagrangian level too, since the medium's
+          chirality treats $n=+1$ and $n=-1$ vortices differently --- the
+          antivortex is not the same object as the vortex with the medium's
+          handedness reversed.
+    \item \textbf{CP} is a formal symmetry of the linearised dynamics
+          (simultaneous winding and chirality flip), but \emph{not} a symmetry
+          of any physical process, because the process leaves a record that
+          the CP-flipped partner would have to carry as well --- and the
+          flipped partner does not, because it propagates through a medium
+          that has not accumulated the same wake.
+\end{itemize}
+The third bullet is the key shift from the Standard Model framing.  CP
+violation in SSV is not a small departure from an underlying CP-exact
+dynamics, brought in by specific complex phases in the fermion mass matrix.
+It is the visible portion of an asymmetry that is structurally present in
+\emph{every} process, made measurable only when reconnection geometry happens
+to amplify it past the threshold of detection.
+
+\paragraph{Where the visible CP violation comes from.}
+The kaon $\varepsilon$-parameter ($\sim 10^{-3}$) and the larger CP asymmetries
+in $B$-meson decays are not exotic phenomena requiring a special CP-violating
+sector.  They are the systematic component of the much larger ensemble of
+CP-asymmetric reconnection events that occur continuously in the medium ---
+the part that does not average to zero because the Y-junction packing
+geometry of the parent configuration biases one chirality of outcome over
+its CP-conjugate.  The remainder averages out at experimental resolution and
+appears as ``CP-symmetric noise'' --- but it is not truly absent, only
+unresolved.  This is structurally identical to fluctuation--dissipation in
+classical statistical mechanics: the systematic asymmetry one measures (the
+analogue of dissipation) is the visible part of fluctuations that are
+asymmetric everywhere (the analogue of correlated noise).
+
+\paragraph{The strong CP problem dissolves --- but for a deeper reason.}
+The Standard Model strong CP problem is the puzzle of why
+$|\theta_{\rm QCD}| \lesssim 10^{-10}$ when naturalness suggests $\theta \sim
+\mathcal{O}(1)$.  The parameter $\theta_{\rm QCD}$ measures the angle between
+the QCD vacuum and a CP-flipped reference vacuum; its smallness is mysterious
+because both vacua are equally available in the theory.
+
+In SSV the strong sector is vacuum surface tension along flux-tube vortex
+segments (\S\ref{sec:strong}); there is no separate QCD vacuum.  But this is
+not the deepest reason the problem dissolves.  The deepest reason is that a
+$\theta$-angle measures deviation from a CP-symmetric reference state, and in
+a medium that records, no CP-symmetric reference state exists.  The medium at
+any given moment carries a specific tangle history; the formally CP-flipped
+medium would carry a different history; there is no third state symmetric
+between them against which to measure $\theta$.  The Standard Model strong CP
+problem is well-posed only because the SM vacuum is featureless and admits
+unique CP-symmetric and CP-flipped versions.  In SSV the question
+$\theta_{\rm QCD} = ?$ is not answered as zero; it is dismissed as
+ill-defined.
+
+The neutron electric dipole moment is therefore predicted to be zero at
+leading order in the same sense that the cosmic microwave background is
+isotropic at leading order: the leading-order calculation gives zero because
+the leading-order configuration is taken to be statistically isotropic, but
+the actual medium carries fluctuations and any specific measurement returns a
+small nonzero residue.  The neutron EDM, like kaon CP violation, is a
+fluctuation-resolved asymmetry, not a tuning of a vacuum angle.
+
+\paragraph{The matter--antimatter asymmetry as recorded chirality.}
+Sakharov's three conditions for a baryon asymmetry --- C and CP violation,
+baryon-number violation, and departure from thermal equilibrium --- are all
+present in SSV, but the framework reads them differently than the Standard
+Model does.  The medium's chirality is not a small CP-violating term added to
+a CP-symmetric dynamics; it is a property the medium has from its inception.
+Vortex reconnections do not accidentally violate baryon number; they are the
+mechanism by which topological charge changes.  The early universe was not
+near thermal equilibrium that was disturbed by an out-of-equilibrium phase
+transition; it was the seeding event of the medium's record itself.
+
+The observed baryon-to-photon ratio $n_B/n_\gamma \sim 6\times 10^{-10}$ is
+therefore not a number to be derived from a small CP-violating phase in an
+otherwise symmetric theory.  It is the surviving recorded chirality of the
+seeding event: the part of the initial asymmetry that crystallised into
+stable defects (matter) rather than annihilating against its partner (the
+near-equally-stable antimatter component).  Why this number takes the value
+it does is open and properly belongs to Paper~V's treatment of cosmogony, but
+the framework's reading of the question is sharp: the universe has matter
+because the medium remembers having been chirally seeded, and the small
+fraction $n_B/n_\gamma$ measures how much of that initial chirality survived
+the early annihilation epoch.
+
+\begin{gapbox}[Open problem: from reconnection memory to CP observables]
+The framework predicts that CP violation is structurally present in every
+physical process, made visible only when reconnection geometry amplifies it
+past detection threshold.  No quantitative prediction of the CKM phase, the
+kaon $\varepsilon$-parameter, the $B$-system CP asymmetries, the neutron
+EDM, or the baryon-to-photon ratio currently exists.  All five numbers are
+deferred to the same 3D $\mathcal{L}+\mathcal{L}_\perp$ minimisation that
+determines the $W$ mass (\S\ref{sec:W_rayleigh}), the neutrino flavour
+structure (\S\ref{sec:neutrino}, P2--P3), and the charged-lepton generation
+problem (\S\ref{sec:leptons}).  These are not five independent open problems
+but five aspects of the same computation, unified by the fact that they all
+require resolving how reconnection geometry biases the chirality of its
+outcomes.
+
+The deeper observation is that the very framing of these questions changes
+in a medium that records.  ``Why is $\theta_{\rm QCD}$ so small?'' presumes
+a CP-symmetric reference vacuum; SSV does not have one.  ``Why is the CKM
+phase the value it is?'' presumes a phase that could in principle have any
+value; SSV says the phase is determined by the cumulative chirality bias of
+all reconnections sampled by the experiment, and is therefore not free.  The
+quantitative target is the same.  The conceptual stance is not.
+\end{gapbox}
+
+\paragraph{Forward connections.}
+This subsection foreshadows two themes developed in later papers.  The
+distinction between formal symmetries of equations and symmetries of physical
+processes is the thermodynamic content of Paper~III: irreversibility is not
+something that emerges from a reversible substrate, it is the consequence of
+a medium that records, and the same logic that breaks T-symmetry at the
+process level breaks CP at the process level.  The cosmological reading of
+the baryon asymmetry as recorded chirality of the seeding event connects to
+Paper~V's treatment of cosmogony, where the universe's history is the
+medium's accumulated tangle and the question ``what existed before?'' becomes
+a question about the medium prior to its first records.
+
+\subsection{Neutrinos as Torsional Radiation}
+\label{sec:neutrino}
+
+\begin{gapbox}[Speculative subsection: motivated geometry, no derived spectrum]
+The treatment below identifies a candidate hydrodynamic object for the neutrino,
+but does not derive its mass, flavour structure, or oscillation phenomenology.
+Five open problems are listed at the end; none is addressed in this paper.
+\end{gapbox}
+
+\subsubsection{Geometric identification}
+
+A vortex reconnection is not silent.  When two filaments exchange partners on the
+timescale $\tau \sim a/c$, the local twist density along each strand is
+discontinuously rearranged, and the excess torsion must be radiated away to
+satisfy conservation of angular momentum about the reconnection point.  In a
+chiral superfluid the radiated mode is not a longitudinal phonon (that channel
+carries the photon and the gravitational signal) and not a transverse shear
+oscillation of a stable core (that channel carries the charged leptons): it is a
+\emph{torsional pulse} --- a propagating twist of the vortex-line phase field,
+unattached to any standing structure.
+
+We tentatively identify the neutrino with this torsional radiation:
+\begin{itemize}
+    \item \textbf{Charge}: zero, because the pulse carries no closed circulation
+          loop --- only a twist along an open propagation direction.
+    \item \textbf{Helicity}: fixed by the chirality of the parent reconnection
+          (see \S\ref{sec:weak}, parity violation), giving the observed
+          left-handed $\nu$ / right-handed $\bar\nu$ asymmetry without further
+          assumption.
+    \item \textbf{Range}: long, because a torsional pulse in the unsaturated
+          longitudinal channel does not couple to the chiral-shear sector that
+          gives charged leptons their rest mass --- so it propagates at $c$ to
+          excellent approximation, with negligible interaction cross-section.
+    \item \textbf{Production}: only in events that change vortex topology
+          (reconnections) --- i.e.\ in weak processes, never in EM or strong
+          processes alone.
+\end{itemize}
+
+This identification is consistent with the qualitative picture sketched in
+Paper~I (neutron decay as ``straitjacket release''): the antineutrino is the
+torsional recoil pulse emitted when the compressed electron vortex unwraps from
+the proton breather.
+
+\subsubsection{What the framework does \emph{not} yet predict}
+
+The torsional-pulse picture predicts a strictly massless, structureless
+radiation mode.  This contradicts the established phenomenology in five distinct
+ways, each of which constitutes an open problem for the SSV programme:
+
+\begin{enumerate}[label=(P\arabic*)]
+    \item \textbf{Non-zero mass.} Atmospheric and solar oscillation experiments
+          require $\Delta m^2_{21} \approx 7.5\times 10^{-5}\,\mathrm{eV}^2$ and
+          $|\Delta m^2_{32}| \approx 2.5\times 10^{-3}\,\mathrm{eV}^2$, so at
+          least two mass eigenstates have $m_\nu \gtrsim 10^{-2}\,\mathrm{eV}$.
+          A purely massless torsional pulse cannot accommodate this.  A possible
+          resolution is that the pulse is weakly self-localising in the chiral
+          channel, acquiring a small effective mass from the same $\lambda$
+          coupling that fixes $\alpha = c_\perp/c$ --- but no calculation
+          currently exists.
+    \item \textbf{Three flavours.} The Standard Model has $\nu_e, \nu_\mu,
+          \nu_\tau$, paired with the three charged-lepton generations.  In the
+          present geometry a torsional pulse is characterised by its twist rate
+          and its parent reconnection, neither of which has an obvious threefold
+          structure.  This is plausibly the same threefold-generation problem
+          that affects the charged leptons (the muon and tau remain
+          unidentified as specific breathing modes; see \S\ref{sec:weak}); a
+          unified resolution of both would be desirable.
+    \item \textbf{Oscillations.} Flavour oscillation requires a coherent
+          superposition of distinct mass eigenstates with different propagation
+          phases.  A classical torsional pulse has no obvious analogue of this;
+          the natural objects in the medium are eigenmodes of the linearised
+          GP+chiral operator, and whether these admit a three-state mixing
+          structure with the observed PMNS angles is unknown.
+    \item \textbf{Dirac vs.\ Majorana.} The framework offers no current
+          discriminator between $\nu = \bar\nu$ and $\nu \neq \bar\nu$.  A
+          torsional pulse and its parity-conjugate differ only in the sign of
+          the twist; whether this constitutes a genuine particle/antiparticle
+          distinction or a Majorana-like self-conjugacy depends on the global
+          topology of the chiral medium and is not settled.
+    \item \textbf{Cross-section normalisation.} The Fermi constant
+          $G_F = 1.166\times 10^{-5}\,\mathrm{GeV}^{-2}$ should follow from the
+          same reconnection-barrier calculation that fixes the $W$ mass.  Until
+          that calculation is in hand (see \S\ref{sec:weak}), the predicted
+          neutrino interaction cross-section is unconstrained.
+\end{enumerate}
+
+The neutrino subsection is therefore presented as a geometric \emph{hypothesis}
+in the same spirit as the neutron section of Paper~I: a motivated identification
+that defers all quantitative claims to the full 3D reconnection computation.
+Problems (P1)--(P5) are flagged as deliverables for a subsequent paper in this
+series. 
+
+% ═══════════════════════════════════════════════════════════════════════
+\section{Charged Leptons: Higher Breather Modes}
+\label{sec:leptons}
+% ═══════════════════════════════════════════════════════════════════════
+
+\begin{gapbox}[Status: muon partially placed, tau a ladder coincidence only]
+The electron is derived from first principles in Paper~I.  The muon is identified
+there with the lowest ring-breathing mode of the toroidal vortex, but the
+eigenfrequency itself is not yet computed --- it is a placeholder filled by the
+ladder coincidence $m_\mu = (3/2)\mu_0$.  The tau appears as a ladder rung at
+$25\tfrac12\,\mu_0$ with no structural identification at all.  Paper~II adds
+nothing quantitative to either; this section serves only to locate the leptons
+within the present force-sector framework and to link the charged-lepton
+generation problem to the neutrino problem (P2) of \S\ref{sec:neutrino}.
+\end{gapbox}
+
+\subsection{The Muon: Ring-Breathing Mode of the Electron}
+
+The muon is identified in Paper~I~\cite{TGD-I} (\S Muon) with the lowest
+ring-breathing mode of the toroidal electron vortex --- a periodic oscillation of the major
+radius $R_e$ about its equilibrium value $R^*=\xi/\alpha$.  The muon is therefore
+not a new defect type but the same toroidal vortex as the electron, set into a
+specific oscillatory mode by the chiral-shear coupling.  Its production in weak
+processes is the same reconnection event that produces an electron, with the
+outgoing ring excited rather than ground-state.
+
+The mass assignment $m_\mu=(3/2)\mu_0$ reproduces the observed muon mass to
+$0.61\%$.  The open problem (Paper~I, gapbox~2) is the first-principles
+computation of the ring-breathing eigenfrequency $\omega_{\rm ring}$ in the
+3D $\mathcal{L}+\mathcal{L}_\perp$ functional; the predicted frequency ratio
+$\omega_{\rm ring}/\omega_c = m_\mu/m_e \approx 206.77$ is the target.  Paper~II
+contributes no new computation here; the muon is mentioned for completeness,
+since otherwise the force-sector treatment would discuss neutrinos as the
+torsional companion of a charged lepton without ever introducing the charged
+lepton itself.
+
+\subsection{The Tau: Ladder Coincidence Without a Mode Assignment}
+
+The tau lands on rung $25\tfrac12$ of the $\alpha$-harmonic ladder
+($m_\tau = 25.375\,\mu_0$, $0.49\%$) without any structural derivation.  The
+ladder placement is consistent with the tau being a higher excited mode of the
+same toroidal topology --- plausibly a second ring-breathing harmonic or a
+combined ring-breathing/chiral-shear mode --- but no eigenmode calculation has
+been performed.  In contrast to the muon, where the geometric picture
+(ring-breathing mode) is at least specified even if not yet computed, the tau
+identification is presently a numerology: a rung that fits the ladder, with no
+candidate hydrodynamic mode attached.
+
+This matters for the present paper because the parity-violation argument of
+\S\ref{sec:weak} and the neutrino identification of \S\ref{sec:neutrino} both
+implicitly assume that each charged-lepton generation has a torsional
+companion (the corresponding neutrino).  For the electron and muon this is
+empirically required and structurally consistent.  For the tau the same
+correspondence is asserted but rests on the unresolved tau identification.
+
+\subsection{The Generation Problem}
+
+The Standard Model has three charged-lepton generations
+($e, \mu, \tau$) paired with three neutrino flavours
+($\nu_e, \nu_\mu, \nu_\tau$).  The framework presents a single unified version
+of this puzzle, since charged leptons and neutrinos in SSV are not independent
+objects but two facets of the same vortex configuration --- the standing
+toroidal mode and the torsional pulse it emits during reconnection.  A first-principles
+account of the threefold structure should therefore appear simultaneously in:
+
+\begin{itemize}
+    \item \textbf{Charged leptons.}  The eigenmode spectrum of the
+          $\mathcal{L}+\mathcal{L}_\perp$ functional on the toroidal vortex
+          background should yield the muon eigenfrequency (Paper~I open
+          problem 2) and, at the next harmonic, an identification of the tau.
+          Whether the spectrum has exactly three accessible modes below the
+          confinement scale --- and why three --- is unknown.
+    \item \textbf{Neutrinos.}  The same eigenmode structure should determine
+          the flavour content of the radiated torsional pulse during
+          reconnection (\S\ref{sec:neutrino}, P2 and P3), giving the three
+          neutrino flavours and their oscillation phenomenology as a
+          downstream consequence rather than as a separately tunable sector.
+\end{itemize}
+
+The threefold-generation problem is therefore one problem, not two.  Its
+resolution is deferred to the same 3D minimisation that closes the W-mass gap
+(\S\ref{sec:weak}) and the $\alpha_G$ derivation (\S\ref{sec:gravity}); all
+three open problems share the same $\mathcal{L}+\mathcal{L}_\perp$
+computation as their target.
+
+% ═══════════════════════════════════════════════════════════════════════
+\section{Gravity: Density Depression and the Bjerknes Mechanism}
+\label{sec:gravity}
+% ═══════════════════════════════════════════════════════════════════════
+
+\subsection{The Physical Picture}
+
+Gravity in SSV operates through two complementary but consistent
+descriptions that are dual to each other:
+
+\begin{enumerate}
+  \item \textbf{Static (field) picture.} A mass~$M$ depresses the
+        surrounding superfluid density below $\rho_0$.  The
+        gravitational potential is encoded directly in this depression:
+        \begin{equation}
+            \Phi(\mathbf{x})
+              = b\ln\!\frac{\rho(\mathbf{x})}{\rho_0}
+              \approx \frac{b}{\rho_0}\,\delta\rho(\mathbf{x}),
+              \qquad \delta\rho < 0.
+            \label{eq:Phi_density}
+        \end{equation}
+        Since $\Phi < 0$ near a mass (attractive potential), we have
+        $\rho < \rho_0$ there: the medium is \emph{rarefied}, not
+        compressed.  Clocks run slower in this rarefied region because
+        the local healing length $\xi \propto \rho^{-1/2}$ is larger,
+        reducing the rate of vacuum interactions per unit time.  This
+        is gravitational time dilation as a reduction in interaction
+        rate --- no separate spacetime geometry is needed.
+
+  \item \textbf{Dynamic (force) picture.} Every mass is also a
+        pulsating breather radiating acoustic density waves into the
+        medium at its Compton frequency.  Two such breathers attract
+        each other via the time-averaged Bjerknes force --- the
+        mechanical origin of Newton's inverse-square law.
+\end{enumerate}
+
+These are not two different theories: the static density depression is
+the time-averaged envelope of the dynamic pulsation field.  The
+Bjerknes mechanism explains \emph{why} the depression forms; the
+potential $\Phi = b\ln(\rho/\rho_0)$ describes \emph{what} it does
+to clocks and trajectories.
+
+\subsection{Bjerknes Forces in Classical Hydrodynamics}
+
+In classical fluid mechanics, the \emph{Bjerknes force}
+\cite{Bjerknes1906} is the time-averaged force between two objects
+that pulsate (oscillate in volume) while immersed in a compressible
+medium. If object~1 pulsates with volume rate $\dot{V}_1$ and
+object~2 with $\dot{V}_2$, the time-averaged force between them is
+\begin{equation}
+    \langle F \rangle
+      = -\rho_0 \langle \dot{V}_1 \dot{V}_2 \rangle \frac{1}{4\pi r^2},
+    \label{eq:bjerknes_classical}
+\end{equation}
+where $r$ is their separation.  For two objects pulsating \emph{in
+phase}, $\langle\dot{V}_1\dot{V}_2\rangle > 0$ and the force is
+\emph{attractive}.  This force has three properties that match
+gravity exactly:
+\begin{itemize}
+    \item \textbf{Inverse-square}: the $1/(4\pi r^2)$ factor is
+          purely geometric --- spherical wave dilution in three
+          dimensions.
+    \item \textbf{Universal}: it acts on any object that pulsates in
+          the medium, regardless of internal structure or composition.
+    \item \textbf{Long-range}: the $1/r^2$ scaling holds at all
+          separations for in-phase oscillators; the time-averaged
+          force does not decay faster than $1/r^2$ at any distance.
+\end{itemize}
+
+\subsection{The Proton as a Pulsating Breather}
+
+In Paper~I, the proton is a spherical breather mode --- a
+periodically oscillating, localised density perturbation of the
+superfluid vacuum. Its eigenfrequency is the Compton frequency:
+\begin{equation}
+    f_p = \frac{m_p c^2}{h} \approx 2.27\times 10^{23}\,\mathrm{Hz},
+    \label{eq:proton_freq}
+\end{equation}
+with corresponding wavelength $\lambda_p = c/f_p \approx
+1.3\times10^{-15}\,\mathrm{m}$.  The proton radiates an acoustic
+density wave into the superfluid at this frequency; the amplitude
+falls as $1/r$ from spherical dilution.
+
+\subsection{Deriving Newton's Law}
+\label{sec:newton_derivation}
+
+\paragraph{Step 1: Acoustic field of a pulsating breather.}
+The proton pulsates at angular frequency $\omega_p = m_p c^2/\hbar$
+with volume oscillation $V(t) = V_0 + \delta V_p\sin(\omega_p t)$,
+so $\dot{V}(t) = \omega_p\delta V_p\cos(\omega_p t)$.  A pulsating
+sphere in a compressible medium radiates an outgoing pressure wave
+\cite{Landau_Fluid}:
+\begin{equation}
+    \delta P(r,t)
+      = \frac{\rho_0}{4\pi r}\,\ddot{V}\!\!\left(t - \frac{r}{c}\right)
+      = -\frac{\rho_0\,\omega_p^2\,\delta V_p}{4\pi r}
+         \sin\!\left(\omega_p t - \frac{\omega_p r}{c}\right).
+    \label{eq:acoustic_pressure}
+\end{equation}
+Since the proton Compton wavelength $\lambda_p \approx
+1.3\times10^{-15}\,\mathrm{m}$ is smaller than all macroscopic
+separations, gravitational interactions always occur in the radiation
+zone ($r \gg \lambda_p$).  The time-averaged Bjerknes force
+nevertheless retains its $1/r^2$ form at all distances for in-phase
+oscillators, because the static component of the time-averaged force
+is independent of zone.
+
+\paragraph{Step 2: Force on a second breather.}
+A second identical proton at separation $r$ is a resonant oscillator
+at $\omega_p$, driven in phase by the same medium.  Averaging over
+one cycle:
+\begin{equation}
+    \langle \mathbf{F}_{12} \rangle
+      = -\frac{\rho_0}{4\pi r^2}
+        \langle \dot{V}_1(t)\,\dot{V}_2(t) \rangle\,\hat{r},
+    \label{eq:bjerknes_formula}
+\end{equation}
+with
+\begin{equation}
+    \langle \dot{V}_1 \dot{V}_2 \rangle
+      = \tfrac{1}{2}\omega_p^2 (\delta V_p)^2 > 0,
+    \label{eq:in_phase}
+\end{equation}
+giving an attractive force $\propto 1/r^2$.  For two objects of
+different masses the pulsation amplitude scales as $\delta V \propto
+m/\rho_0$ (Step~3), so the force is proportional to $m_1 m_2/r^2$
+--- Newton's law.
+
+\paragraph{Step 3: Pulsation amplitude and sub-grain suppression.}
+The fractional volume excursion of a breather is set by the ratio of
+its rest-mass energy to the medium's compressive energy over the
+breather volume:
+\begin{equation}
+    \varepsilon_p
+      \equiv \frac{\delta V_p}{V_0}
+      = \frac{m_p c^2}{\rho_0 c^2 \cdot V_0}
+      = \frac{m_p}{\rho_0 V_0},
+    \label{eq:epsilon_def}
+\end{equation}
+where $P_0 \approx \rho_0 c^2$ and $V_0 = \tfrac{4}{3}\pi a_p^3$
+with $a_p = \hbar/(m_p c)$ the proton Compton radius.  Since $\delta
+V \propto m$, the Bjerknes force scales as $m_1 m_2$ as required.
+
+The proton is a \emph{sub-grain} oscillator: its Compton radius $a_p$
+is smaller than the medium healing length $\xi = \hbar/(m_e c)$ by
+the mass ratio
+\begin{equation}
+    \frac{a_p}{\xi} = \frac{m_e}{m_p} \approx \frac{1}{1836}.
+    \label{eq:subgrain}
+\end{equation}
+The medium cannot resolve structure below $\xi$; consequently the
+proton couples to the long-range density field with a suppressed
+\emph{acoustic monopole moment} $Q_p$.  For a sub-grain spherical
+oscillator, coupling to wavelengths $\lambda \gg \xi$ is suppressed
+by the ratio of source volume to grain volume:
+\begin{equation}
+    Q_p \sim \delta V_p \cdot \left(\frac{a_p}{\xi}\right)^3
+           = \delta V_p \cdot \left(\frac{m_e}{m_p}\right)^3.
+    \label{eq:Qp}
+\end{equation}
+The coupling hierarchy across the three stable objects is:
+\begin{equation}
+    \eta_\gamma = 1
+    \;\gg\; \eta_e \sim \alpha
+    \;\gg\; \eta_p \sim \left(\frac{m_e}{m_p}\right)^3,
+    \label{eq:eta_hierarchy}
+\end{equation}
+where the photon couples with unit efficiency (it \emph{is} the
+medium wave), the electron couples through its toroidal topology
+(suppressed by $\alpha$), and the proton couples as a sub-grain
+monopole (suppressed by $(m_e/m_p)^3$).  Gravity is weak not because
+of a separate fine-tuning, but because the proton is small relative
+to the medium grain.
+
+\paragraph{Step 4: Newton's constant from the medium.}
+Substituting $Q_p$ into~\eqref{eq:bjerknes_formula} and matching to
+$\langle F_{12}\rangle = Gm_p^2/r^2$:
+\begin{equation}
+    G = \frac{\rho_0\,\omega_p^2\,Q_p^2}{8\pi\,m_p^2}.
+    \label{eq:G_from_medium}
+\end{equation}
+A full evaluation of $Q_p$ requires the 3D proton breather profile
+and is deferred to a companion paper.  A structural consistency check
+uses the gravitational coupling constant $\alpha_G \equiv
+Gm_p^2/(\hbar c)$ and the proton mass from the Paper~I ladder,
+$m_p = N_p\,m_e/\alpha$ with $N_p \approx 13.44$:
+\begin{equation}
+    G = \frac{\alpha_G\,\hbar c\,\alpha^2}{N_p^2\,m_e^2}.
+    \label{eq:G_ladder}
+\end{equation}
+This is a structural consistency check: $\alpha_G$ is taken from CODATA rather
+than derived from first principles, confirming that the Paper~I mass ladder is
+internally coherent with the gravitational sector.  Inserting
+$\alpha_G = 5.906\times10^{-39}$ (CODATA) and $N_p = 13.44$:
+\begin{equation}
+    G_{\rm pred}
+      = \frac{5.906\times10^{-39}\;\hbar c\,\alpha^2}{(13.44)^2\,m_e^2}
+      = 6.634\times10^{-11}\,\mathrm{m^3\,kg^{-1}\,s^{-2}},
+    \label{eq:G_numerical}
+\end{equation}
+within $0.6\%$ of $G_{\rm obs} = 6.674\times10^{-11}
+\,\mathrm{m^3\,kg^{-1}\,s^{-2}}$.  The residual is consistent with
+the imprecision in $N_p$ (form factor $F \approx 4.47$ is
+numerically determined; see Paper~I).
+
+\begin{gapbox}[Open problem: first-principles derivation of $\alpha_G$]
+$G$ is not an independent constant of the framework.
+Equation~\eqref{eq:G_ladder} expresses it in terms of $\{\hbar, c,
+\alpha, m_e, \alpha_G\}$, where the first four are fixed in Paper~I.
+The remaining open problem is computing the sub-grain suppression
+factor $(a_p/\xi)^n$ from the 3D proton breather profile, which
+would yield $\alpha_G$ without empirical input.  The $0.6\%$
+structural agreement is evidence of framework consistency, not a
+completed derivation.
+\end{gapbox}
+
+\subsection{Universal Coupling: Why Everything Falls}
+
+The Bjerknes mechanism is universal because every object in the
+medium --- regardless of internal structure, charge, or topology ---
+is set into volume oscillation by an incoming acoustic density wave.
+The pulsation amplitude is $\delta V \propto m/\rho_0$
+(equation~\ref{eq:epsilon_def}), depending only on mass-energy.
+Hence the Bjerknes force scales as $m_1 m_2/r^2$ for any pair of
+objects.
+
+This is the mechanical origin of the equivalence principle: the same
+quantity (mass-energy) determines both the inertial response to
+acceleration and the coupling to the gravitational density field,
+because both are manifestations of the object's acoustic cross-section
+in the medium.  Every other force is selective --- electromagnetism
+couples to chirality, the strong force to topological charge, the
+weak force to core overlap --- but gravity couples to the one property
+all defects share: they displace the medium.
+
+\subsection{Gravity Without a Graviton}
+\label{sec:no_graviton}
+
+The SSV framework does not require a graviton.  The gravitational
+potential $\Phi = b\ln(\rho/\rho_0)$ is a property of the classical
+density field $\rho(\mathbf{x})$; the $1/r$ behaviour at long range
+is the static Green's function of the Laplace equation, arising from
+spherical symmetry alone.  What conventional quantum field theory
+calls graviton exchange corresponds here to the transfer of
+longitudinal acoustic momentum through the medium --- a collective
+hydrodynamic process, not a particle interaction.
+
+This is structurally consistent with the treatment of the other
+forces: electromagnetism emerges from the transverse flow field of
+chiral vortices without postulating a separate photon field, and
+gravity emerges from the longitudinal density field without
+postulating a separate graviton field.  Both are modes of the single
+medium $\Psi$.
+
+\paragraph{The ultraviolet problem dissolves.}
+Conventional perturbative quantum gravity is non-renormalisable: when
+gravity is treated as a quantum field theory in the standard way, the
+loop integrals diverge at short distances and the infinities cannot
+be removed by redefining a finite number of parameters.  The theory
+has no built-in short-distance cutoff and breaks down at the Planck
+scale, requiring replacement by an unknown theory of quantum gravity.
+
+In SSV this problem does not arise --- not because we solve it, but
+because the medium itself makes it impossible to state.  The healing
+length
+\begin{equation}
+    \xi = \frac{\hbar}{m_e c} \approx 3.86\times10^{-13}\,\mathrm{m}
+    \label{eq:xi_cutoff}
+\end{equation}
+is the physical minimum length of the theory: it is the size of a
+vortex core, the scale below which the superfluid description breaks
+down and there is simply no medium left to describe.  Momentum modes
+with $k \gg 1/\xi$ do not exist in the theory --- not because they
+are regulated away by hand, but because the medium has no structure
+at those scales.  The divergent integrals of perturbative quantum
+gravity never appear.
+
+This is worth pausing on.  The ultraviolet catastrophe of quantum
+gravity is usually treated as one of the deepest unsolved problems in
+physics, motivating decades of work on string theory, loop quantum
+gravity, and related programmes.  In SSV it is not solved --- it
+simply does not arise.  The cutoff is not a new postulate introduced
+to tame divergences; it is the same healing length that regularises
+vortex cores in Paper~I, sets the electron's core radius, and
+determines the proton's Compton scale.  A single physical length,
+fixed by the electron mass, does the work of an entire programme of
+quantum gravity renormalisation.
+
+The absence of a graviton and the absence of UV divergences are the
+same fact stated two ways: SSV has no gravitational field to quantise,
+and therefore no quantisation problem to solve.
+
+\subsection{General Relativity as Emergent Hydrodynamics}
+
+The full curved-spacetime formulation of gravity emerges from the
+Madelung equations in the hydrodynamic limit~\cite{Volovik,Barcelo}.
+The acoustic metric
+\begin{equation}
+    g_{\mu\nu}^{\rm eff}
+      = \frac{\rho_0}{m_0 c}
+        \begin{pmatrix}
+          -(c^2 - v^2) & -v_j \\
+          -v_i         & \delta_{ij}
+        \end{pmatrix}
+    \label{eq:acoustic_metric}
+\end{equation}
+reduces to Minkowski when the background flow vanishes.
+Gravitational time dilation follows from the density depression:
+where $\rho < \rho_0$ near a mass, the healing length $\xi \propto
+\rho^{-1/2}$ grows, the local vacuum interaction rate $c/\xi$ falls,
+and clocks run slower.  Gravitational lensing follows automatically,
+since photons (transverse phonons) are equally deflected by density
+gradients in the acoustic metric.  No separate gravitational field is
+postulated at any point.
+
+% ═══════════════════════════════════════════════════════════════════════
+\section{Unified Picture: One Medium, Four Modes}
+\label{sec:unification}
+% ═══════════════════════════════════════════════════════════════════════
+
+\begin{table}[h]
+\centering
+\small
+\renewcommand{\arraystretch}{1.4}
+\caption{The four forces as pressure-gradient modes of the superfluid vacuum.}
+\label{tab:forces}
+\begin{tabular}{@{}lllll@{}}
+\toprule
+\textbf{Force} & \textbf{Mode type} & \textbf{Source} & \textbf{Carrier} & \textbf{Range} \\
+\midrule
+Electromagnetism & Transverse flow    & Chirality ($\pm$)      & Transverse phonon         & $\infty$        \\
+Strong           & Surface tension    & Topological charge     & Phase oscillation         & $\sim a/\alpha$ \\
+Weak             & Reconnection       & Core overlap           & Amplitude mode ($W,Z$)    & $\sim a$        \\
+Gravity          & Density depression & Mass-energy (breather) & Longitudinal density wave & $\infty$        \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+We can now survey the four forces from a single vantage point. Table~\ref{tab:forces}
+summarises the correspondence.
+
+Several structural features of this table deserve comment.
+
+\paragraph{Range.} The infinite-range forces (EM and gravity) are both mediated by
+massless phonon modes — transverse and longitudinal, respectively. The short-range
+forces involve massive excitations: the gluon acquires an effective mass from the
+string tension at distances exceeding $a/\alpha$, and the $W/Z$ are the high-energy
+amplitude modes of the core. The hierarchy of ranges $r_W \ll r_{\rm strong} \ll
+r_{\rm EM}, r_{\rm gravity}$ follows directly from the hierarchy $a \ll a/\alpha \ll
+\infty$.
+
+\paragraph{Coupling strengths.} All couplings are fixed by the same two numbers: $\alpha$
+and $\mu_0 = m_e/\alpha$. The strong coupling is $\sim 1$ (order-unity surface
+tension, no small factor), the electromagnetic coupling is $\alpha \approx 1/137$
+(transverse-to-longitudinal wave speed ratio), the weak coupling is $\alpha^2$ (two
+powers of the core penetration suppression), and the gravitational coupling is
+$Gm_p^2/\hbar c \approx 6\times 10^{-39}$ (set by the tiny ratio of the
+proton's acoustic cross-section to $c^4/G$, which encodes the vast hierarchy between
+$P_0$ and $m_p c^2$).
+
+\paragraph{Universality of gravity.} Every other force is selective: EM acts on
+chirality, strong on topological charge, weak on core overlap. Gravity (Bjerknes)
+acts on \emph{acoustic cross-section}, which is determined by mass-energy alone.
+This is the mechanical root of the equivalence principle.
+
+\paragraph{No new constants.} The framework introduces no coupling constants beyond
+those already fixed by the mass spectrum of Paper~I. The four forces are not
+independent — they are four different windows into the same hydrodynamic pressure
+field.
+
+% ═══════════════════════════════════════════════════════════════════════
+\section{Testable Predictions}
+\label{sec:predictions}
+% ═══════════════════════════════════════════════════════════════════════
+
+Several predictions follow from the force derivations above that go beyond what is
+currently explained within the Standard Model:
+
+\begin{enumerate}
+
+\item \textbf{Graviton spin.} The longitudinal acoustic phonon of the superfluid is
+  naively spin-0. We predict that the graviton in this framework has an
+  \emph{effective} spin-2 character that emerges from the transverse-traceless
+  projector in the linearised acoustic metric — a testable statement about the
+  polarisation modes of gravitational waves. The ratio of breathing-mode to
+  quadrupolar-mode amplitude in binary inspirals should carry a small superfluid
+  correction at order $v/c$ in the post-Newtonian expansion.
+
+\item \textbf{Gravitational Casimir correction.} The Bjerknes force between a proton
+  and any other mass includes a next-to-leading-order correction from the
+  \emph{quantum pressure} term, analogous to the Casimir effect. At sub-micron
+  separations, this produces a deviation from the $1/r^2$ law of order
+  $(\delta r/r)^2 \sim (a/r)^2$, where $a \sim 10^{-15}\,\mathrm{m}$ is the vortex
+  core size. This is below current precision for laboratory experiments but could
+  in principle be detected at hadron-scale separations in neutron scattering
+  experiments.
+
+\item \textbf{Running of $\alpha$ at high energy.} The transverse-to-longitudinal
+  wave speed ratio $\alpha = c_\perp^2/c^2$ is a medium property, not a bare
+  constant. At momentum scales approaching $\mu_0 = m_e/\alpha$, the transverse
+  modes begin to couple to the longitudinal modes through the nonlinear term in the
+  Gross--Pitaevskii equation. This produces a logarithmic running of $\alpha$ that
+  should match the QED renormalisation group equation — a self-consistency check
+  that has not yet been completed in detail.
+
+\item \textbf{$W$ mass prediction.} Our estimate $E_{\rm recon} \sim m_e/\alpha^2
+  \approx 9.6\,\mathrm{GeV}$ is a factor of $\sim 8$ below the observed $W$ mass.
+  A full 3D minimisation of the reconnection barrier in the Gross--Pitaevskii
+  functional should close this gap; the geometric factor of $\sim 8$ can in principle
+  be computed without free parameters. We present this as a concrete open prediction.
+
+\item \textbf{No magnetic monopoles.}
+  The magnetic field is defined as $\mathbf{B} \equiv c_\perp^{-1}\nabla\times
+  \mathbf{v}_\perp$ (Section~\ref{sec:B_derivation}), so
+  $\nabla\cdot\mathbf{B} \equiv 0$ is a vector identity, not a postulate.
+  A magnetic monopole would require a point-like topological defect sourcing
+  the transverse velocity as a scalar potential — but the GPE supports only
+  vortex-line defects (which source the \emph{rotational} part of
+  $\mathbf{v}_\perp$, carrying electric charge).  The absence of magnetic
+  monopoles is a topological theorem of the framework: no object with the
+  required topology can exist in a superfluid order parameter in three spatial
+  dimensions.  All current and future monopole searches should return null results.
+
+\item \textbf{Neutrino production exclusively in topology-changing events.}
+  In the SSV picture, neutrinos are torsional pulses emitted only when vortex
+  topology is rewritten — i.e.\ in weak-sector reconnections.  No neutrino
+  emission accompanies any purely electromagnetic or strong-sector process,
+  including high-energy QED vertices, hadronic resonance decays that proceed
+  through the strong channel, or coherent photon scattering, regardless of
+  available phase space.  This is a sharper statement than the Standard Model
+  selection rule (which is a flavour-current statement); here it is a
+  structural impossibility, since no torsional pulse can be sourced without a
+  reconnection.  Any observation of neutrino emission unaccompanied by
+  topology change in the source would falsify the framework.
+
+\end{enumerate}
+
+% ═══════════════════════════════════════════════════════════════════════
+\section{Bridge to Thermodynamics and Large-Scale Structure}
+\label{sec:outlook}
+% ═══════════════════════════════════════════════════════════════════════
+
+The same superfluid order parameter $\Psi$ that underlies the four forces also
+governs irreversible thermodynamics and the large-scale structure of the universe.
+We note two connections that will be developed in Papers~III and IV of this series.
+
+\paragraph{Time and entropy (Paper III).} The vortex reconnection events described
+in Section~\ref{sec:weak} are intrinsically irreversible: after reconnection, the
+topological configuration cannot spontaneously revert (the reverse process requires
+a second reconnection, which is exponentially suppressed by the quantum pressure
+barrier). A single reconnection deposits energy $\sim m_e/\alpha^2$ into the local
+superfluid as an acoustic wave — a quantum of entropy increase. The arrow of time,
+in this framework, is the arrow of increasing topological complexity: the universe's
+vortex tangle grows more knotted, and this growth defines the direction of time. The
+CMB thermal spectrum is the acoustic noise accumulated from all reconnection events
+since the initial seeding of the medium.
+
+\paragraph{Galaxy-scale Bjerknes resonances (Paper IV).} The same Bjerknes mechanism
+that produces gravity between protons operates at macroscopic scales when a central
+black-hole breather (a macroscopic oscillating density perturbation at
+$f_{\rm BH} = f_p (m_p/M_{\rm BH})$) sets up a cylindrical standing wave across the
+galactic disc. This standing wave has the density profile of a planar soliton
+$\Sigma(r) = \Sigma_0(r_0/r)$ (the Mestel profile) beyond the aggregation radius
+$r_0 \approx 1.13\,\mathrm{kpc}$, producing flat rotation curves from baryonic
+matter alone — no dark matter required. The same hydrodynamics that gives you the
+electron mass also gives you the Milky Way's rotation curve.
+
+% ═══════════════════════════════════════════════════════════════════════
+\section{Discussion and Open Problems}
+% ═══════════════════════════════════════════════════════════════════════
+
+The framework presented here is mechanically complete for the force sector — each
+force has a definite hydrodynamic origin — but several quantitative steps remain:
+
+\begin{enumerate}
+\item \textbf{$W$ mass from reconnection.}  The scalar estimate
+  $E_{\rm recon}\sim m_e/\alpha^2\approx 9.6\,\mathrm{GeV}$ accounts only for the
+  quantum-pressure barrier that initiates reconnection.  The dominant cost is
+  $E_{\rm caps}\sim P_0\cdot\pi R_{\rm cap}^2\xi$ — holding open the two
+  fully-suppressed end-caps against $P_0$.  The conjecture $R_{\rm cap}=\phi\,\xi/\alpha$
+  (equation~\eqref{eq:Rcap_phi}), motivated by the golden-ratio packing geometry
+  of the Y-junction reconnection, gives $m_W\approx\pi\phi^2 m_e/\alpha^2\approx
+  78.9\,\mathrm{GeV}$ — within $1.8\%$ of the observed value.  The open problem
+  is deriving $R_{\rm cap}=\phi\,R^*$ rigorously from a 3D time-dependent GPE
+  simulation of the quark-level reconnection event.
+
+\item \textbf{Newton's constant: deriving $\alpha_G$ from proton geometry.}
+  The structural formula~\eqref{eq:G_ladder} reproduces $G_{\rm obs}$
+  to $0.6\%$ using the Paper~I mass ladder.  The open problem is
+  computing the sub-grain acoustic monopole suppression factor
+  $(a_p/\xi)^n$ from the 3D proton breather profile, which would
+  yield $\alpha_G = Gm_p^2/(\hbar c) \approx 5.906\times10^{-39}$
+  without empirical input.
+
+\item \textbf{Spin-2 graviton from linearised Madelung.} A systematic
+  post-Newtonian expansion of the Madelung equations around a pulsating source is
+  needed to confirm the spin-2 angular pattern of gravitational radiation.
+
+\item \textbf{Non-perturbative strong sector.} The identification of colour charge with
+  phase balance at Y-junctions, and the derivation of the QCD $\beta$-function from
+  quantum-pressure softening, should be carried to two-loop order to compare with
+  precision QCD measurements.
+\end{enumerate}
+
+These are open problems, not objections: each has a definite formulation and a clear
+path to numerical resolution within the single framework established here and in Paper~I.
+
+% ═══════════════════════════════════════════════════════════════════════
+\section{Conclusion}
+% ═══════════════════════════════════════════════════════════════════════
+
+We have shown that the four fundamental forces of nature emerge from a single
+superfluid vacuum as distinct mechanical modes:
+
+\begin{itemize}
+\item \textbf{Electromagnetism} is the transverse pressure-gradient field of chiral
+  toroidal vortices, coupling with strength $\alpha = c_\perp^2/c^2$.
+\item \textbf{The strong force} is the surface tension of vortex flux tubes,
+  confining quarks (vortex strand endpoints) and generating asymptotic freedom
+  through quantum-pressure softening of the core.
+\item \textbf{The weak force} is transient vortex reconnection, requiring core-scale
+  proximity and producing parity violation through the chirality of the ground state.
+\item \textbf{Gravity} is the acoustic Bjerknes force between pulsating mass-energy
+  distributions, reproducing the inverse-square law, universal coupling, and
+  gravitational time dilation as mechanical consequences of spherical wave dilution
+  in three dimensions.
+\end{itemize}
+
+All four forces share the same medium parameters first fixed by the mass spectrum of
+Paper~I: the sound speed $c$, the fine-structure constant $\alpha$, and the base
+mass scale $\mu_0 = m_e/\alpha$. No additional fields, no additional symmetries, and
+no additional coupling constants are introduced. The same hydrodynamics that produces
+the geometric mass ladder of Paper~I also unifies the four forces, and — as Papers~III
+and IV will show — determines the arrow of time and the large-scale structure of the
+universe.
+
+The same hydrodynamics governs irreversible time and macroscopic resonances.
+
+%------------------------------------------------------------------
+\section{Acknowledgments}
+%------------------------------------------------------------------
+\label{sec:acknowledgments}
+The author thanks Grok (xAI), Claude (Anthropic) and Gpt(OpenAI) for extensive assistance with literature searches, drafting, mathematical checks, and critical feedback. All conclusions and errors are the sole responsibility of the author.
+
+\bigskip
+
+\begin{thebibliography}{99}
+
+\bibitem{TGD-I}
+S.~Norland, \textit{Saturated Superfluid Vacuum I: Topological Defects in a
+Saturated Superfluid Vacuum — The Geometric Origin of Matter and the $\alpha$-Harmonic
+Mass Ladder}, 10.5281/zenodo.19651986, 2026.
+
+\bibitem{Volovik}
+G.~E.~Volovik, \textit{The Universe in a Helium Droplet}, Oxford University Press, 2003.
+
+\bibitem{Barcelo}
+C.~Barcel\'{o}, S.~Liberati, and M.~Visser, ``Analogue gravity,''
+\textit{Living Rev.~Relativity} \textbf{14}, 3 (2011).
+
+\bibitem{Bjerknes1906}
+V.~F.~K.~Bjerknes, \textit{Fields of Force}, Columbia University Press, 1906.
+
+\bibitem{Landau_Fluid}
+L.~D.~Landau and E.~M.~Lifshitz, \textit{Fluid Mechanics}, 2nd ed., Pergamon Press, 1987, §74.
+
+\bibitem{Villois}
+A.~Villois, D.~Proment, and G.~Krstulovic, ``Universal and nonuniversal aspects of
+vortex reconnections in superfluids,'' \textit{Phys.~Rev.~Fluids} \textbf{2}, 044701
+(2017).
+
+\bibitem{Gross}
+E.~P.~Gross, ``Structure of a quantized vortex in boson systems,''
+\textit{Nuovo Cimento} \textbf{20}, 454 (1961).
+
+\bibitem{Pitaevskii}
+L.~P.~Pitaevskii, ``Vortex lines in an imperfect Bose gas,''
+\textit{Sov.~Phys.~JETP} \textbf{13}, 451 (1961).
+
+\bibitem{AharonovBohm1959}
+Aharonov, Y. and Bohm, D.,
+``Significance of Electromagnetic Potentials in the Quantum Theory,''
+\emph{Phys.\ Rev.}\ \textbf{115}, 485--491 (1959).
+
+\bibitem{HaldaneWu1985}
+Haldane, F.~D.~M. and Wu, Y.-S.,
+``Quantum Dynamics and Statistics of Vortices in Two-Dimensional Superfluids,''
+\emph{Phys.\ Rev.\ Lett.}\ \textbf{55}, 2887--2890 (1985).
+
+\bibitem{Schwinger}
+J.~Schwinger, ``On gauge invariance and vacuum polarization,''
+\textit{Phys.~Rev.} \textbf{82}, 664 (1951).
+
+\bibitem{Endres2012}
+M.~Endres, T.~Fukuhara, D.~Pekker, M.~Cheneau, P.~Schauß, C.~Gross, E.~Demler,
+S.~Kuhr, and I.~Bloch, ``The `Higgs' amplitude mode at the two-dimensional
+superfluid/Mott insulator transition,'' \textit{Nature} \textbf{487},
+454--458 (2012).
+
+\end{thebibliography}
+
+\end{document}

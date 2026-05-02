@@ -22,6 +22,23 @@ This repo now supports both:
 | `src/bh_eigenfrequency.py` | BH eigenfrequency and node spacing calculator |
 | `src/calculate_velocity_profile.py` | Rotation curve model |
 | `src/calibration_analysis.py` | Calibration constant analysis |
+| `src/paper_i/` | Paper I vortex, toroidal-background, and muon-mode numerical prototypes |
+| `src/paper_ii_reconnection_supplement.py` | Paper II reconnection-barrier numerical supplement |
+
+## Paper I Supplement
+
+The Paper I numerical prototypes and notes live in:
+
+- `src/paper_i/`
+- `papers/SSV-I/numerical-prototypes-summary.md`
+- `papers/SSV-I/data/`
+
+## Paper II Supplement
+
+The current reconnection-barrier numerical note and curated result tables live in:
+
+- `papers/SSV-II/reconnection-barrier-results.md`
+- `papers/SSV-II/data/`
 
 ## Roadmap
 

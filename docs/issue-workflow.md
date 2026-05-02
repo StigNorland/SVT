@@ -50,6 +50,19 @@ The issue tracker should be the main place where progress is structured.
 - Link code, notes, and draft sections back to the issue number.
 - Close an issue only when the argument is either completed, explicitly dropped, or rewritten more modestly.
 
+## Commit Convention
+
+When work clearly belongs to an issue, include the issue number in the commit message.
+
+Examples:
+
+- `#1 Refine SSV III around irreversible time and wake entropy`
+- `#9 Expand SSV VIII cosmogony`
+- `#4 Rework entropy formulation as wake-complexity`
+
+This keeps git history aligned with the issue tracker and makes later reconstruction much
+easier.
+
 ## Suggested First Issues
 
 - Rebuild `SSV III` around wake entropy and irreversible time

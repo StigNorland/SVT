@@ -1,0 +1,13 @@
+check,quantity,value
+vortex_profile,slope,1.140313646074
+vortex_profile,f(1),0.735813385965
+vortex_profile,f(5),0.989554432168
+muon_mode,mu0_MeV,70.025251644
+muon_mode,muon_ladder_prediction_MeV,105.037877466
+muon_mode,observed_muon_mass_MeV,105.6583755
+muon_mode,enhancement_needed,12.788267461
+kelvin_self_induction,ring_radius,137.035999084
+kelvin_self_induction,energy_0,616.9268837511
+kelvin_self_induction,stiffness,0.07997959983186
+kelvin_self_induction,omega_first_order,0.00009288908567704
+kelvin_self_induction,omega_bdg_scale,0.009637898405619

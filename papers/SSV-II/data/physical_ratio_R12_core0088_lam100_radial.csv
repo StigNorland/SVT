@@ -1,0 +1,3 @@
+label,lambda_perp,sqrt_lambda,saddle_index,saddle_excess,cap_radius,mode_eigenvalue,cos_phi,core_xi,ring_radius
+opposite,100,10,7,3099029.94696,27.8423295092,-7657608.82336,0.666938150983,1,nan
+same,100,10,6,2896757.75137,23.8361922819,11.5054972372,0.647636905626,1,nan
