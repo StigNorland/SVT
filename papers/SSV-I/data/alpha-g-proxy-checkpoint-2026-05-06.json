@@ -1,0 +1,162 @@
+{
+  "metadata": {
+    "problem_type": "static",
+    "status": "candidate",
+    "nondimensionalisation": "xi = 1, rho0 = 1, c = 1",
+    "observables": [
+      "shell_mean_deficit",
+      "far_field_moment",
+      "effective_radius",
+      "residual_norm"
+    ],
+    "diagnostics": [
+      "box_sensitivity",
+      "resolution_sensitivity",
+      "run_selection"
+    ],
+    "issue_refs": [
+      "#14"
+    ],
+    "limitations": [
+      "Does not produce a first-principles alpha_G value.",
+      "Uses shell-averaged static far-field observables as provisional suppression proxies only."
+    ]
+  },
+  "nondimensionalisation": {
+    "xi": 1.0,
+    "rho0": 1.0,
+    "c": 1.0
+  },
+  "records": [
+    {
+      "source": "papers\\SSV-I\\data\\trefoil-boxsize-sweep-n24-softbc-200steps-2026-05-06.json",
+      "n": 24,
+      "half_width": 5.0,
+      "steps_completed": 200,
+      "residual_norm": 0.03415691793302642,
+      "effective_radius": 3.2801781208888663,
+      "shell_mean_density": 0.993091319082684,
+      "shell_mean_deficit": 0.006908680917316001,
+      "far_field_moment": 0.01139024171885133,
+      "alpha_g_proxy_shell_deficit": 0.006908680917316001,
+      "alpha_g_proxy_moment_scaled": 0.002278048343770266,
+      "selection_score": 0.006831383586605284
+    },
+    {
+      "source": "papers\\SSV-I\\data\\trefoil-boxsize-sweep-n24-softbc-200steps-2026-05-06.json",
+      "n": 24,
+      "half_width": 6.0,
+      "steps_completed": 200,
+      "residual_norm": 0.052054212903686836,
+      "effective_radius": 3.8627526849333162,
+      "shell_mean_density": 0.9830579137620907,
+      "shell_mean_deficit": 0.01694208623790927,
+      "far_field_moment": 0.03343707216516103,
+      "alpha_g_proxy_shell_deficit": 0.01694208623790927,
+      "alpha_g_proxy_moment_scaled": 0.0055728453608601715,
+      "selection_score": 0.008675702150614473
+    },
+    {
+      "source": "papers\\SSV-I\\data\\trefoil-boxsize-sweep-n24-softbc-200steps-2026-05-06.json",
+      "n": 24,
+      "half_width": 7.0,
+      "steps_completed": 200,
+      "residual_norm": 0.05709430446622008,
+      "effective_radius": 4.486753556821869,
+      "shell_mean_density": 0.976643967673324,
+      "shell_mean_deficit": 0.023356032326676046,
+      "far_field_moment": 0.054555867129897434,
+      "alpha_g_proxy_shell_deficit": 0.023356032326676046,
+      "alpha_g_proxy_moment_scaled": 0.007793695304271062,
+      "selection_score": 0.008156329209460012
+    },
+    {
+      "source": "papers\\SSV-I\\data\\trefoil-boxsize-sweep-n48-softbc-400steps-scaled-2026-05-06.json",
+      "n": 48,
+      "half_width": 5.0,
+      "steps_completed": 400,
+      "residual_norm": 0.18167799432071227,
+      "effective_radius": 3.338142885461939,
+      "shell_mean_density": 0.8744144628892311,
+      "shell_mean_deficit": 0.12558553711076892,
+      "far_field_moment": 0.23721927694553677,
+      "alpha_g_proxy_shell_deficit": 0.12558553711076892,
+      "alpha_g_proxy_moment_scaled": 0.04744385538910735,
+      "selection_score": 0.036335598864142456
+    },
+    {
+      "source": "papers\\SSV-I\\data\\trefoil-boxsize-sweep-n48-softbc-400steps-scaled-2026-05-06.json",
+      "n": 48,
+      "half_width": 6.0,
+      "steps_completed": 400,
+      "residual_norm": 0.11510603535220364,
+      "effective_radius": 3.986799136412867,
+      "shell_mean_density": 0.9446106120831488,
+      "shell_mean_deficit": 0.05538938791685122,
+      "far_field_moment": 0.13018225497149566,
+      "alpha_g_proxy_shell_deficit": 0.05538938791685122,
+      "alpha_g_proxy_moment_scaled": 0.021697042495249275,
+      "selection_score": 0.01918433922536727
+    },
+    {
+      "source": "papers\\SSV-I\\data\\trefoil-boxsize-sweep-n48-softbc-400steps-scaled-2026-05-06.json",
+      "n": 48,
+      "half_width": 7.0,
+      "steps_completed": 400,
+      "residual_norm": 0.07284759822754107,
+      "effective_radius": 4.921334827624365,
+      "shell_mean_density": 0.9730517661764407,
+      "shell_mean_deficit": 0.026948233823559264,
+      "far_field_moment": 0.07763755231483875,
+      "alpha_g_proxy_shell_deficit": 0.026948233823559264,
+      "alpha_g_proxy_moment_scaled": 0.011091078902119822,
+      "selection_score": 0.010406799746791581
+    }
+  ],
+  "summary": {
+    "primary_proxy_definition": "alpha_g_proxy_shell_deficit = 1 - shell_mean_density",
+    "secondary_proxy_definition": "alpha_g_proxy_moment_scaled = far_field_moment / half_width",
+    "best_shell_proxy_run": {
+      "source": "papers\\SSV-I\\data\\trefoil-boxsize-sweep-n24-softbc-200steps-2026-05-06.json",
+      "n": 24,
+      "half_width": 5.0,
+      "steps_completed": 200,
+      "residual_norm": 0.03415691793302642,
+      "effective_radius": 3.2801781208888663,
+      "shell_mean_density": 0.993091319082684,
+      "shell_mean_deficit": 0.006908680917316001,
+      "far_field_moment": 0.01139024171885133,
+      "alpha_g_proxy_shell_deficit": 0.006908680917316001,
+      "alpha_g_proxy_moment_scaled": 0.002278048343770266,
+      "selection_score": 0.006831383586605284
+    },
+    "best_moment_proxy_run": {
+      "source": "papers\\SSV-I\\data\\trefoil-boxsize-sweep-n24-softbc-200steps-2026-05-06.json",
+      "n": 24,
+      "half_width": 5.0,
+      "steps_completed": 200,
+      "residual_norm": 0.03415691793302642,
+      "effective_radius": 3.2801781208888663,
+      "shell_mean_density": 0.993091319082684,
+      "shell_mean_deficit": 0.006908680917316001,
+      "far_field_moment": 0.01139024171885133,
+      "alpha_g_proxy_shell_deficit": 0.006908680917316001,
+      "alpha_g_proxy_moment_scaled": 0.002278048343770266,
+      "selection_score": 0.006831383586605284
+    },
+    "representative_run": {
+      "source": "papers\\SSV-I\\data\\trefoil-boxsize-sweep-n24-softbc-200steps-2026-05-06.json",
+      "n": 24,
+      "half_width": 5.0,
+      "steps_completed": 200,
+      "residual_norm": 0.03415691793302642,
+      "effective_radius": 3.2801781208888663,
+      "shell_mean_density": 0.993091319082684,
+      "shell_mean_deficit": 0.006908680917316001,
+      "far_field_moment": 0.01139024171885133,
+      "alpha_g_proxy_shell_deficit": 0.006908680917316001,
+      "alpha_g_proxy_moment_scaled": 0.002278048343770266,
+      "selection_score": 0.006831383586605284
+    }
+  }
+}

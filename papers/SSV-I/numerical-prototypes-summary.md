@@ -129,6 +129,13 @@ The direct matched-resolution comparison between the `n = 24` and `n = 48` branc
 papers/SSV-I/trefoil-matched-resolution-comparison-note.md
 ```
 
+The first gravity-branch bridge note is recorded in:
+
+```text
+papers/SSV-I/alpha-g-proxy-note.md
+papers/SSV-I/data/alpha-g-proxy-checkpoint-2026-05-06.json
+```
+
 Representative values:
 
 | check | quantity | value |
