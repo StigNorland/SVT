@@ -64,6 +64,13 @@ papers/SSV-I/data/trefoil-refinement-farfield-checkpoint-2026-05-06.json
 papers/SSV-I/trefoil-farfield-checkpoint.md
 ```
 
+The first box-size radial-profile comparison is recorded in:
+
+```text
+papers/SSV-I/data/example-trefoil-farfield-compare-hw5-vs-hw6.json
+papers/SSV-I/trefoil-farfield-compare-note.md
+```
+
 Representative values:
 
 | check | quantity | value |

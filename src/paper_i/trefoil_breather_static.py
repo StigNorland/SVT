@@ -286,6 +286,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--patience-intervals", type=int, default=3)
     parser.add_argument("--energy-tol", type=float, default=1.0e-9)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--save-state", type=Path)
     return parser.parse_args()
 
 
@@ -309,7 +310,7 @@ def main() -> None:
         patience_intervals=args.patience_intervals,
         energy_tol=args.energy_tol,
     )
-    _, summary = relax(cfg, controls)
+    psi, summary = relax(cfg, controls)
 
     payload = {
         "metadata": {
@@ -331,6 +332,20 @@ def main() -> None:
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(text + "\n", encoding="utf-8")
+    if args.save_state:
+        args.save_state.parent.mkdir(parents=True, exist_ok=True)
+        x, y, z = coordinate_grid(cfg)
+        np.savez_compressed(
+            args.save_state,
+            psi_real=psi.real,
+            psi_imag=psi.imag,
+            x=x,
+            y=y,
+            z=z,
+            config=json.dumps(asdict(cfg)),
+            controls=json.dumps(asdict(controls)),
+            summary=json.dumps(asdict(summary)),
+        )
     print(text)
 
 

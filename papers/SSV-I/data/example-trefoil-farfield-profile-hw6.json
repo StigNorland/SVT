@@ -1,0 +1,133 @@
+{
+  "state": "papers\\SSV-I\\data\\example-trefoil-state-hw6.npz",
+  "config": {
+    "n": 20,
+    "half_width": 6.0,
+    "xi": 1.0,
+    "major_radius": 2.8,
+    "minor_radius": 0.85,
+    "smoothing_radius": 0.2,
+    "log_pressure": 0.5,
+    "density_floor": 1e-12,
+    "anchor_shell": 2,
+    "depressed_threshold": 0.35,
+    "frame_samples": 600
+  },
+  "summary": {
+    "steps_completed": 20,
+    "final_energy": 427.073294480678,
+    "best_energy": 427.073294480678,
+    "energy_monotonicity_violations": 0,
+    "accepted_steps": 20,
+    "rejected_steps": 0,
+    "final_step_size": 0.01326648852572211,
+    "residual_norm": 0.6586011379497705,
+    "depressed_fraction": 0.06825,
+    "effective_radius": 4.1914480706593364,
+    "far_field_shell_density": 0.8013599536783921,
+    "far_field_shell_deficit": 0.19864004632160792,
+    "far_field_moment": 0.437665002375678,
+    "min_density": 0.002439569085301232,
+    "max_density": 1.0,
+    "stop_reason": "max_steps"
+  },
+  "bins": 12,
+  "profile": [
+    {
+      "r_inner": 0.5196152422706629,
+      "r_outer": 1.2990381056766578,
+      "r_mid": 0.9093266739736603,
+      "mean_density": 0.5340889078395474,
+      "mean_deficit": 0.46591109216045257,
+      "count": 32
+    },
+    {
+      "r_inner": 1.2990381056766578,
+      "r_outer": 2.0784609690826525,
+      "r_mid": 1.688749537379655,
+      "mean_density": 0.40011765943532374,
+      "mean_deficit": 0.5998823405646762,
+      "count": 128
+    },
+    {
+      "r_inner": 2.0784609690826525,
+      "r_outer": 2.8578838324886475,
+      "r_mid": 2.46817240078565,
+      "mean_density": 0.3718051164801639,
+      "mean_deficit": 0.628194883519836,
+      "count": 272
+    },
+    {
+      "r_inner": 2.8578838324886475,
+      "r_outer": 3.6373066958946425,
+      "r_mid": 3.247595264191645,
+      "mean_density": 0.4586734856003705,
+      "mean_deficit": 0.5413265143996295,
+      "count": 511
+    },
+    {
+      "r_inner": 3.6373066958946425,
+      "r_outer": 4.416729559300637,
+      "r_mid": 4.02701812759764,
+      "mean_density": 0.6248596816472763,
+      "mean_deficit": 0.37514031835272377,
+      "count": 697
+    },
+    {
+      "r_inner": 4.416729559300637,
+      "r_outer": 5.196152422706632,
+      "r_mid": 4.806440991003635,
+      "mean_density": 0.7675678090617365,
+      "mean_deficit": 0.23243219093826356,
+      "count": 1160
+    },
+    {
+      "r_inner": 5.196152422706632,
+      "r_outer": 5.975575286112627,
+      "r_mid": 5.585863854409629,
+      "mean_density": 0.9076310979921238,
+      "mean_deficit": 0.09236890200787608,
+      "count": 1424
+    },
+    {
+      "r_inner": 5.975575286112627,
+      "r_outer": 6.754998149518622,
+      "r_mid": 6.365286717815625,
+      "mean_density": 0.9525002928381503,
+      "mean_deficit": 0.04749970716184951,
+      "count": 1445
+    },
+    {
+      "r_inner": 6.754998149518622,
+      "r_outer": 7.534421012924617,
+      "r_mid": 7.144709581221619,
+      "mean_density": 0.9795446662125018,
+      "mean_deficit": 0.020455333787498097,
+      "count": 1179
+    },
+    {
+      "r_inner": 7.534421012924617,
+      "r_outer": 8.313843876330612,
+      "r_mid": 7.924132444627615,
+      "mean_density": 0.998050752214835,
+      "mean_deficit": 0.0019492477851650806,
+      "count": 776
+    },
+    {
+      "r_inner": 8.313843876330612,
+      "r_outer": 9.093266739736606,
+      "r_mid": 8.703555308033609,
+      "mean_density": 1.0,
+      "mean_deficit": 0.0,
+      "count": 296
+    },
+    {
+      "r_inner": 9.093266739736606,
+      "r_outer": 9.8726896031426,
+      "r_mid": 9.482978171439603,
+      "mean_density": 1.0,
+      "mean_deficit": 0.0,
+      "count": 80
+    }
+  ]
+}

@@ -24,6 +24,8 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 | `trefoil_breather_static.py` | `candidate` | first concrete static 3D trefoil-breather prototype for `#13` |
 | `trefoil_observables.py` | `candidate` | shared observables for the static trefoil prototype and sweeps |
 | `trefoil_breather_refinement.py` | `candidate` | first grid / box sensitivity harness for `#13` milestone 4 |
+| `trefoil_farfield_profile.py` | `candidate` | radial outer-density diagnostic for saved trefoil states |
+| `trefoil_farfield_compare.py` | `candidate` | profile-to-profile far-field comparison helper |
 | muon / BdG scripts | `prototype` | reduced spectral experiments, not closure evidence |
 | Kelvin / chiral bridge scripts | `prototype` | exploratory coupling structure only |
 
@@ -36,6 +38,8 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 - `trefoil_breather_static.py` seeds and relaxes a first static 3D trefoil-breather prototype.
 - `trefoil_observables.py` centralises the early static-branch observables.
 - `trefoil_breather_refinement.py` compares early observables across grid and box settings.
+- `trefoil_farfield_profile.py` reads a saved relaxed state and reports radial shell-averaged density/deficit.
+- `trefoil_farfield_compare.py` compares two saved radial far-field profile JSON files.
 
 ## Muon-Mode Diagnostics
 
@@ -58,6 +62,8 @@ Run from the repository root:
 python src/paper_i/vortex_profile.py --n 400 --x-max 12
 python src/paper_i/trefoil_breather_static.py --n 40 --max-steps 100
 python src/paper_i/trefoil_breather_refinement.py --n-values 24,32 --half-width-values 5,6 --max-steps 30
+python src/paper_i/trefoil_farfield_profile.py papers/SSV-I/data/example-trefoil-state.npz --bins 16
+python src/paper_i/trefoil_farfield_compare.py papers/SSV-I/data/profile-a.json papers/SSV-I/data/profile-b.json
 python src/paper_i/muon_mode_prototype.py
 python src/paper_i/kelvin_self_induction.py --phi-n 64
 ```
