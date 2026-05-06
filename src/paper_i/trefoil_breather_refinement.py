@@ -31,7 +31,15 @@ SCRIPT_METADATA = ScriptMetadata(
     problem_type="static",
     status=OutputStatus.CANDIDATE,
     nondimensionalisation="xi = 1, rho0 = 1, c = 1",
-    observables=("final_energy", "residual_norm", "effective_radius", "depressed_fraction", "shell_mean_density"),
+    observables=(
+        "final_energy",
+        "residual_norm",
+        "effective_radius",
+        "depressed_fraction",
+        "shell_mean_density",
+        "deficit_volume",
+        "equivalent_deficit_radius",
+    ),
     diagnostics=("grid_sensitivity", "box_sensitivity"),
     issue_refs=("#13",),
     limitations=(
@@ -131,6 +139,20 @@ def build_comparison_summary(runs: list[dict[str, object]]) -> dict[str, object]
     shell_densities = [float(run["shell_mean_density"]) for run in runs]
     shell_deficits = [float(run["shell_mean_deficit"]) for run in runs]
     far_field_moments = [float(run["far_field_moment"]) for run in runs]
+    deficit_volumes = [float(run["summary"]["deficit_volume"]) for run in runs]
+    equivalent_radii = [float(run["summary"]["equivalent_deficit_radius"]) for run in runs]
+    compactness = [
+        float(run["summary"]["equivalent_deficit_radius"]) / max(float(run["summary"]["effective_radius"]), 1.0e-12)
+        for run in runs
+    ]
+    volume_over_radius_cubed = [
+        float(run["summary"]["deficit_volume"]) / max(float(run["summary"]["effective_radius"]) ** 3, 1.0e-12)
+        for run in runs
+    ]
+    shell_to_volume = [
+        float(run["shell_mean_deficit"]) / max(float(run["summary"]["deficit_volume"]), 1.0e-12)
+        for run in runs
+    ]
 
     by_n: dict[int, list[dict[str, object]]] = {}
     by_half_width: dict[float, list[dict[str, object]]] = {}
@@ -149,6 +171,11 @@ def build_comparison_summary(runs: list[dict[str, object]]) -> dict[str, object]
             "shell_mean_density": metric_span(shell_densities),
             "shell_mean_deficit": metric_span(shell_deficits),
             "far_field_moment": metric_span(far_field_moments),
+            "deficit_volume": metric_span(deficit_volumes),
+            "equivalent_deficit_radius": metric_span(equivalent_radii),
+            "compactness_ratio": metric_span(compactness),
+            "deficit_volume_over_radius_cubed": metric_span(volume_over_radius_cubed),
+            "shell_to_volume_ratio": metric_span(shell_to_volume),
         },
         "by_n": {
             str(n): {
@@ -156,6 +183,23 @@ def build_comparison_summary(runs: list[dict[str, object]]) -> dict[str, object]
                 "final_energy": metric_span([float(entry["summary"]["final_energy"]) for entry in entries]),
                 "residual_norm": metric_span([float(entry["summary"]["residual_norm"]) for entry in entries]),
                 "effective_radius": metric_span([float(entry["summary"]["effective_radius"]) for entry in entries]),
+                "deficit_volume": metric_span([float(entry["summary"]["deficit_volume"]) for entry in entries]),
+                "equivalent_deficit_radius": metric_span(
+                    [float(entry["summary"]["equivalent_deficit_radius"]) for entry in entries]
+                ),
+                "compactness_ratio": metric_span(
+                    [
+                        float(entry["summary"]["equivalent_deficit_radius"])
+                        / max(float(entry["summary"]["effective_radius"]), 1.0e-12)
+                        for entry in entries
+                    ]
+                ),
+                "shell_to_volume_ratio": metric_span(
+                    [
+                        float(entry["shell_mean_deficit"]) / max(float(entry["summary"]["deficit_volume"]), 1.0e-12)
+                        for entry in entries
+                    ]
+                ),
             }
             for n, entries in sorted(by_n.items())
         },

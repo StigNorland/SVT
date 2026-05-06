@@ -1,0 +1,50 @@
+{
+  "state": "papers\\SSV-I\\data\\trefoil-state-n48-hw6-400steps-2026-05-06.npz",
+  "config": {
+    "n": 48,
+    "half_width": 6.0,
+    "xi": 1.0,
+    "major_radius": 2.8,
+    "minor_radius": 0.85,
+    "smoothing_radius": 0.2,
+    "log_pressure": 0.5,
+    "density_floor": 1e-12,
+    "anchor_shell": 2,
+    "boundary_blend_fraction": 0.18,
+    "depressed_threshold": 0.35,
+    "frame_samples": 600
+  },
+  "summary": {
+    "steps_completed": 400,
+    "final_energy": 33.66473455512892,
+    "best_energy": 33.66473455512892,
+    "energy_monotonicity_violations": 0,
+    "accepted_steps": 400,
+    "rejected_steps": 0,
+    "final_step_size": 0.018,
+    "residual_norm": 0.11510603535220364,
+    "depressed_fraction": 0.00043402777777777775,
+    "effective_radius": 3.986799136412867,
+    "deficit_volume": 90.70924685218449,
+    "equivalent_deficit_radius": 2.7873252600043217,
+    "far_field_shell_density": 0.9446106120831488,
+    "far_field_shell_deficit": 0.05538938791685122,
+    "far_field_moment": 0.13018225497149566,
+    "min_density": 0.3079339370226597,
+    "max_density": 1.0,
+    "stop_reason": "max_steps"
+  },
+  "geometry": {
+    "deficit_volume": 90.70924685218449,
+    "equivalent_deficit_radius": 2.7873252600043217,
+    "shell_deficit": 0.05538938791685122,
+    "effective_radius": 3.986799136412867,
+    "compactness_ratio": 0.6991386234000805,
+    "deficit_volume_over_radius_cubed": 1.4314576192498785,
+    "shell_to_volume_ratio": 0.0006106255959451537
+  },
+  "interpretation": {
+    "role": "candidate geometric constraints for the unresolved Q_p calibration",
+    "warning": "These ratios are geometry diagnostics only; none should be read as a solved C_Q value."
+  }
+}

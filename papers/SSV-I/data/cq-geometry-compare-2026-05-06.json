@@ -1,0 +1,102 @@
+{
+  "rows": [
+    {
+      "source": "papers\\SSV-I\\data\\cq-geometry-n24-hw5-200steps-2026-05-06.json",
+      "n": 24,
+      "half_width": 5.0,
+      "steps_completed": 200,
+      "residual_norm": 0.03415691793302642,
+      "shell_deficit": 0.006908680917316001,
+      "deficit_volume": 5.779112282283423,
+      "equivalent_deficit_radius": 1.1132452251135432,
+      "compactness_ratio": 0.33938560166113013,
+      "deficit_volume_over_radius_cubed": 0.16374530253246194,
+      "shell_to_volume_ratio": 0.0011954571186469953
+    },
+    {
+      "source": "papers\\SSV-I\\data\\cq-geometry-n24-hw6-200steps-2026-05-06.json",
+      "n": 24,
+      "half_width": 6.0,
+      "steps_completed": 200,
+      "residual_norm": 0.019577009119524504,
+      "shell_deficit": 0.002229859898205233,
+      "deficit_volume": 2.9501171294886084,
+      "equivalent_deficit_radius": 0.8897135743655794,
+      "compactness_ratio": 0.21928903296573019,
+      "deficit_volume_over_radius_cubed": 0.04417121510779011,
+      "shell_to_volume_ratio": 0.0007558547001121175
+    },
+    {
+      "source": "papers\\SSV-I\\data\\cq-geometry-n24-hw7-200steps-2026-05-06.json",
+      "n": 24,
+      "half_width": 7.0,
+      "steps_completed": 200,
+      "residual_norm": 0.011893297637352519,
+      "shell_deficit": 0.0009701493542041417,
+      "deficit_volume": 1.9325484683500704,
+      "equivalent_deficit_radius": 0.7727053665845687,
+      "compactness_ratio": 0.16023092518689852,
+      "deficit_volume_over_radius_cubed": 0.017231680371519436,
+      "shell_to_volume_ratio": 0.0005020051864636621
+    },
+    {
+      "source": "papers\\SSV-I\\data\\cq-geometry-n48-hw5-400steps-2026-05-06.json",
+      "n": 48,
+      "half_width": 5.0,
+      "steps_completed": 400,
+      "residual_norm": 0.18167799432071227,
+      "shell_deficit": 0.12558553711076892,
+      "deficit_volume": 115.7127865955362,
+      "equivalent_deficit_radius": 3.022949654860183,
+      "compactness_ratio": 0.9055782686911142,
+      "deficit_volume_over_radius_cubed": 3.1107605716036817,
+      "shell_to_volume_ratio": 0.001085321171546426
+    },
+    {
+      "source": "papers\\SSV-I\\data\\cq-geometry-n48-hw6-400steps-2026-05-06.json",
+      "n": 48,
+      "half_width": 6.0,
+      "steps_completed": 400,
+      "residual_norm": 0.11510603535220364,
+      "shell_deficit": 0.05538938791685122,
+      "deficit_volume": 90.70924685218449,
+      "equivalent_deficit_radius": 2.7873252600043217,
+      "compactness_ratio": 0.6991386234000805,
+      "deficit_volume_over_radius_cubed": 1.4314576192498785,
+      "shell_to_volume_ratio": 0.0006106255959451537
+    },
+    {
+      "source": "papers\\SSV-I\\data\\cq-geometry-n48-hw7-400steps-2026-05-06.json",
+      "n": 48,
+      "half_width": 7.0,
+      "steps_completed": 400,
+      "residual_norm": 0.07284759822754107,
+      "shell_deficit": 0.026948233823559264,
+      "deficit_volume": 61.521107420486594,
+      "equivalent_deficit_radius": 2.4489420686165584,
+      "compactness_ratio": 0.4976174461591583,
+      "deficit_volume_over_radius_cubed": 0.5161493721989371,
+      "shell_to_volume_ratio": 0.00043803232668379236
+    }
+  ],
+  "summary": {
+    "compactness_ratio": {
+      "min": 0.16023092518689852,
+      "max": 0.9055782686911142,
+      "span": 0.7453473435042157,
+      "relative_span": 0.8230623119760927
+    },
+    "deficit_volume_over_radius_cubed": {
+      "min": 0.017231680371519436,
+      "max": 3.1107605716036817,
+      "span": 3.0935288912321623,
+      "relative_span": 0.9944606214541816
+    },
+    "shell_to_volume_ratio": {
+      "min": 0.00043803232668379236,
+      "max": 0.0011954571186469953,
+      "span": 0.000757424791963203,
+      "relative_span": 0.6335859146670586
+    }
+  }
+}

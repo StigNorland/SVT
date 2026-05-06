@@ -136,6 +136,10 @@ papers/SSV-I/alpha-g-proxy-note.md
 papers/SSV-I/data/alpha-g-proxy-checkpoint-2026-05-06.json
 papers/SSV-I/alpha-g-mapping-note.md
 papers/SSV-I/cq-geometry-note.md
+papers/SSV-I/data/cq-geometry-compare-2026-05-06.json
+papers/SSV-I/cq-geometry-sweep-note.md
+papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json
+papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
 ```
 
 Representative values:
