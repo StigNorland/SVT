@@ -144,6 +144,8 @@ papers/SSV-I/q-p-two-factor-probe-note.md
 papers/SSV-I/data/q-p-two-factor-probe-2026-05-06.json
 papers/SSV-I/q-p-two-factor-scan-note.md
 papers/SSV-I/data/q-p-two-factor-scan-2026-05-06.json
+papers/SSV-I/q-p-two-factor-normalized-scan-note.md
+papers/SSV-I/data/q-p-two-factor-normalized-scan-2026-05-06.json
 ```
 
 Representative values:

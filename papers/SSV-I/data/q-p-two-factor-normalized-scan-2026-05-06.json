@@ -1,0 +1,265 @@
+{
+  "branch_scales": {
+    "24": 0.0033695633899084587,
+    "48": 0.0693077196170598
+  },
+  "scan": [
+    {
+      "eta": 0.25,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "shell_deficit_scale": 0.0033695633899084587,
+          "candidate_span": {
+            "min": 0.0010864857333939056,
+            "max": 0.007122133506510836,
+            "span": 0.006035647773116931,
+            "relative_span": 0.8474494008851879
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "shell_deficit_scale": 0.0693077196170598,
+          "candidate_span": {
+            "min": 0.03270550022750763,
+            "max": 0.13381972588288069,
+            "span": 0.10111422565537306,
+            "relative_span": 0.755600304725392
+          }
+        }
+      }
+    },
+    {
+      "eta": 0.5,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "shell_deficit_scale": 0.0033695633899084587,
+          "candidate_span": {
+            "min": 0.0012028221125836697,
+            "max": 0.007335586095705671,
+            "span": 0.006132763983122001,
+            "relative_span": 0.8360291738259585
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "shell_deficit_scale": 0.0693077196170598,
+          "candidate_span": {
+            "min": 0.03846276663145599,
+            "max": 0.14205391465499245,
+            "span": 0.10359114802353647,
+            "relative_span": 0.7292382492600022
+          }
+        }
+      }
+    },
+    {
+      "eta": 1.0,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "shell_deficit_scale": 0.0033695633899084587,
+          "candidate_span": {
+            "min": 0.0014354948709631974,
+            "max": 0.00776249127409534,
+            "span": 0.006326996403132143,
+            "relative_span": 0.8150729166351954
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "shell_deficit_scale": 0.0693077196170598,
+          "candidate_span": {
+            "min": 0.04997729943935271,
+            "max": 0.158522292199216,
+            "span": 0.10854499275986328,
+            "relative_span": 0.6847301490155977
+          }
+        }
+      }
+    },
+    {
+      "eta": 1.5,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "shell_deficit_scale": 0.0033695633899084587,
+          "candidate_span": {
+            "min": 0.0016681676293427254,
+            "max": 0.00818939645248501,
+            "span": 0.006521228823142284,
+            "relative_span": 0.7963015175756288
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "shell_deficit_scale": 0.0693077196170598,
+          "candidate_span": {
+            "min": 0.06149183224724944,
+            "max": 0.17499066974343955,
+            "span": 0.11349883749619011,
+            "relative_span": 0.648599366255327
+          }
+        }
+      }
+    },
+    {
+      "eta": 2.0,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "shell_deficit_scale": 0.0033695633899084587,
+          "candidate_span": {
+            "min": 0.0019008403877222532,
+            "max": 0.008616301630874679,
+            "span": 0.006715461243152426,
+            "relative_span": 0.7793902222606742
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "shell_deficit_scale": 0.0693077196170598,
+          "candidate_span": {
+            "min": 0.07300636505514616,
+            "max": 0.19145904728766308,
+            "span": 0.11845268223251693,
+            "relative_span": 0.6186841724671508
+          }
+        }
+      }
+    },
+    {
+      "eta": 3.0,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "shell_deficit_scale": 0.0033695633899084587,
+          "candidate_span": {
+            "min": 0.002366185904481309,
+            "max": 0.009470111987654017,
+            "span": 0.007103926083172708,
+            "relative_span": 0.7501417187498886
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "shell_deficit_scale": 0.0693077196170598,
+          "candidate_span": {
+            "min": 0.09603543067093961,
+            "max": 0.22439580237611018,
+            "span": 0.12836037170517056,
+            "relative_span": 0.5720266170132075
+          }
+        }
+      }
+    },
+    {
+      "eta": 4.0,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "shell_deficit_scale": 0.0033695633899084587,
+          "candidate_span": {
+            "min": 0.0028315314212403646,
+            "max": 0.010323922344433356,
+            "span": 0.0074923909231929915,
+            "relative_span": 0.7257310422557448
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "shell_deficit_scale": 0.0693077196170598,
+          "candidate_span": {
+            "min": 0.11906449628673306,
+            "max": 0.25733255746455724,
+            "span": 0.1382680611778242,
+            "relative_span": 0.5373127385829056
+          }
+        }
+      }
+    }
+  ],
+  "best_by_n": {
+    "24": {
+      "eta": 4.0,
+      "shell_deficit_scale": 0.0033695633899084587,
+      "candidate_span": {
+        "min": 0.0028315314212403646,
+        "max": 0.010323922344433356,
+        "span": 0.0074923909231929915,
+        "relative_span": 0.7257310422557448
+      }
+    },
+    "48": {
+      "eta": 4.0,
+      "shell_deficit_scale": 0.0693077196170598,
+      "candidate_span": {
+        "min": 0.11906449628673306,
+        "max": 0.25733255746455724,
+        "span": 0.1382680611778242,
+        "relative_span": 0.5373127385829056
+      }
+    }
+  },
+  "interpretation": {
+    "purpose": "Test a dimensionless normalized additive saturating Q_p family using branch mean shell deficit as the correction scale.",
+    "warning": "A numerically preferred eta is not yet a physical constant, and branch normalization is itself only a provisional device."
+  }
+}
