@@ -21,6 +21,7 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 | `toroidal_background.py` | `prototype` | background geometry and analytic helper layer |
 | `curved_torus_relaxation.py` | `validation` | reduced static-branch relaxation check |
 | `toroidal_projection_integrals.py` | `validation` | projected observable/integral baseline |
+| `trefoil_breather_static.py` | `candidate` | first concrete static 3D trefoil-breather prototype for `#13` |
 | muon / BdG scripts | `prototype` | reduced spectral experiments, not closure evidence |
 | Kelvin / chiral bridge scripts | `prototype` | exploratory coupling structure only |
 
@@ -30,6 +31,7 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 - `toroidal_background.py` defines the leading toroidal vortex-ring background and curvature-corrected variants.
 - `curved_torus_relaxation.py` performs a small-basis relaxation of curvature corrections.
 - `toroidal_projection_integrals.py` computes projected stiffness, norm, and chiral-shear integrals.
+- `trefoil_breather_static.py` seeds and relaxes a first static 3D trefoil-breather prototype.
 
 ## Muon-Mode Diagnostics
 
@@ -50,6 +52,7 @@ Run from the repository root:
 
 ```bash
 python src/paper_i/vortex_profile.py --n 400 --x-max 12
+python src/paper_i/trefoil_breather_static.py --n 40 --max-steps 100
 python src/paper_i/muon_mode_prototype.py
 python src/paper_i/kelvin_self_induction.py --phi-n 64
 ```
