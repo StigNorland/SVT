@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from multiprocessing import Pool
 import sys
 from dataclasses import asdict
 from pathlib import Path
@@ -23,7 +24,7 @@ if str(SRC_ROOT) not in sys.path:
 from shared_numerics import Nondimensionalisation, OutputStatus, RelaxationControls, ScriptMetadata
 
 from trefoil_breather_static import TrefoilConfig, coordinate_grid, relax
-from trefoil_observables import shell_mean_density
+from trefoil_observables import far_field_moment, shell_mean_deficit, shell_mean_density
 
 
 SCRIPT_METADATA = ScriptMetadata(
@@ -58,8 +59,52 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--step-size", type=float, default=0.005)
     parser.add_argument("--max-steps", type=int, default=40)
     parser.add_argument("--tolerance", type=float, default=2.0e-3)
+    parser.add_argument("--min-step-size", type=float, default=1.0e-5)
+    parser.add_argument("--max-step-size", type=float, default=5.0e-2)
+    parser.add_argument("--check-interval", type=int, default=10)
+    parser.add_argument("--patience-intervals", type=int, default=3)
+    parser.add_argument("--energy-tol", type=float, default=1.0e-9)
+    parser.add_argument("--workers", type=int, default=1)
     parser.add_argument("--output", type=Path)
     return parser.parse_args()
+
+
+def run_case(task: tuple[TrefoilConfig, RelaxationControls]) -> dict[str, object]:
+    cfg, controls = task
+    psi, summary = relax(cfg, controls)
+    x, y, z = coordinate_grid(cfg)
+    shell_inner = max(0.7 * cfg.half_width, 0.0)
+    shell_outer = 0.95 * cfg.half_width
+    shell_density = shell_mean_density(
+        psi,
+        x,
+        y,
+        z,
+        shell_inner=shell_inner,
+        shell_outer=shell_outer,
+    )
+    shell_deficit = shell_mean_deficit(
+        psi,
+        x,
+        y,
+        z,
+        shell_inner=shell_inner,
+        shell_outer=shell_outer,
+    )
+    outer_moment = far_field_moment(
+        psi,
+        x,
+        y,
+        z,
+        shell_inner=shell_inner,
+    )
+    return {
+        "config": asdict(cfg),
+        "summary": asdict(summary),
+        "shell_mean_density": shell_density,
+        "shell_mean_deficit": shell_deficit,
+        "far_field_moment": outer_moment,
+    }
 
 
 def metric_span(values: list[float]) -> dict[str, float]:
@@ -83,6 +128,8 @@ def build_comparison_summary(runs: list[dict[str, object]]) -> dict[str, object]
     radii = [float(run["summary"]["effective_radius"]) for run in runs]
     depressed = [float(run["summary"]["depressed_fraction"]) for run in runs]
     shell_densities = [float(run["shell_mean_density"]) for run in runs]
+    shell_deficits = [float(run["shell_mean_deficit"]) for run in runs]
+    far_field_moments = [float(run["far_field_moment"]) for run in runs]
 
     by_n: dict[int, list[dict[str, object]]] = {}
     by_half_width: dict[float, list[dict[str, object]]] = {}
@@ -99,6 +146,8 @@ def build_comparison_summary(runs: list[dict[str, object]]) -> dict[str, object]
             "effective_radius": metric_span(radii),
             "depressed_fraction": metric_span(depressed),
             "shell_mean_density": metric_span(shell_densities),
+            "shell_mean_deficit": metric_span(shell_deficits),
+            "far_field_moment": metric_span(far_field_moments),
         },
         "by_n": {
             str(n): {
@@ -129,9 +178,14 @@ def main() -> None:
         step_size=args.step_size,
         max_steps=args.max_steps,
         tolerance=args.tolerance,
+        min_step_size=args.min_step_size,
+        max_step_size=args.max_step_size,
+        check_interval=args.check_interval,
+        patience_intervals=args.patience_intervals,
+        energy_tol=args.energy_tol,
     )
 
-    runs: list[dict[str, object]] = []
+    tasks: list[tuple[TrefoilConfig, RelaxationControls]] = []
     for n in n_values:
         for half_width in half_width_values:
             cfg = TrefoilConfig(
@@ -142,23 +196,13 @@ def main() -> None:
                 smoothing_radius=args.smoothing_radius,
                 log_pressure=args.log_pressure,
             )
-            psi, summary = relax(cfg, controls)
-            x, y, z = coordinate_grid(cfg)
-            shell_density = shell_mean_density(
-                psi,
-                x,
-                y,
-                z,
-                shell_inner=max(0.7 * half_width, 0.0),
-                shell_outer=0.95 * half_width,
-            )
-            runs.append(
-                {
-                    "config": asdict(cfg),
-                    "summary": asdict(summary),
-                    "shell_mean_density": shell_density,
-                }
-            )
+            tasks.append((cfg, controls))
+
+    if args.workers == 1:
+        runs = [run_case(task) for task in tasks]
+    else:
+        with Pool(processes=args.workers) as pool:
+            runs = pool.map(run_case, tasks)
 
     payload = {
         "metadata": {
@@ -172,6 +216,7 @@ def main() -> None:
         },
         "nondimensionalisation": asdict(Nondimensionalisation()),
         "controls": asdict(controls),
+        "workers": args.workers,
         "runs": runs,
         "comparison_summary": build_comparison_summary(runs),
     }
