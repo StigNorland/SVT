@@ -48,6 +48,7 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 - `cq_geometry_compare.py` compares the saved geometry diagnostics across coarse and fine representative states.
 - `trefoil_breather_refinement.py` now also reports deficit-volume and compactness-style geometry summaries for gravity-branch comparison.
 - `q_p_two_factor_probe.py` compares simple reduced two-factor `Q_p` candidates against shell deficit alone.
+- `q_p_two_factor_scan.py` scans the additive saturating reduced `Q_p` family over a small coefficient range.
 
 ## Muon-Mode Diagnostics
 
