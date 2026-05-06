@@ -1,0 +1,75 @@
+{
+  "metadata": {
+    "problem_type": "static",
+    "status": "candidate",
+    "nondimensionalisation": "xi = 1, rho0 = 1, c = 1",
+    "observables": [
+      "total_energy",
+      "residual_norm",
+      "depressed_fraction",
+      "effective_radius"
+    ],
+    "diagnostics": [
+      "energy_monotonicity",
+      "residual_norm",
+      "boundary_anchor"
+    ],
+    "issue_refs": [
+      "#13"
+    ],
+    "limitations": [
+      "Uses a single trefoil-filament background rather than a full trefoil Y-junction skeleton.",
+      "Uses a simple LogSE gradient flow without the full coupled L + L_perp production treatment."
+    ]
+  },
+  "nondimensionalisation": {
+    "xi": 1.0,
+    "rho0": 1.0,
+    "c": 1.0
+  },
+  "config": {
+    "n": 24,
+    "half_width": 5.0,
+    "xi": 1.0,
+    "major_radius": 2.8,
+    "minor_radius": 0.85,
+    "smoothing_radius": 0.2,
+    "log_pressure": 0.5,
+    "density_floor": 1e-12,
+    "anchor_shell": 2,
+    "boundary_blend_fraction": 0.18,
+    "depressed_threshold": 0.35,
+    "frame_samples": 600
+  },
+  "controls": {
+    "step_size": 0.005,
+    "max_steps": 200,
+    "tolerance": 0.002,
+    "min_step_size": 1e-05,
+    "max_step_size": 0.05,
+    "check_interval": 10,
+    "patience_intervals": 3,
+    "energy_tol": 1e-09,
+    "reference_spacing": null
+  },
+  "summary": {
+    "steps_completed": 200,
+    "final_energy": 1.3377070686760604,
+    "best_energy": 1.3377070686760604,
+    "energy_monotonicity_violations": 0,
+    "accepted_steps": 200,
+    "rejected_steps": 0,
+    "final_step_size": 0.05,
+    "residual_norm": 0.03415691793302642,
+    "depressed_fraction": 0.0,
+    "effective_radius": 3.2801781208888663,
+    "deficit_volume": 5.779112282283411,
+    "equivalent_deficit_radius": 1.1132452251135423,
+    "far_field_shell_density": 0.993091319082684,
+    "far_field_shell_deficit": 0.006908680917316001,
+    "far_field_moment": 0.01139024171885133,
+    "min_density": 0.9566413072592558,
+    "max_density": 1.0,
+    "stop_reason": "max_steps"
+  }
+}

@@ -26,8 +26,10 @@ if str(SRC_ROOT) not in sys.path:
 
 from shared_numerics import GridSpec, Nondimensionalisation, OutputStatus, RelaxationControls, ScriptMetadata, grid_step_scale
 from trefoil_observables import (
+    deficit_volume,
     depressed_fraction,
     effective_radius,
+    equivalent_deficit_radius,
     far_field_moment,
     residual_norm,
     shell_mean_deficit,
@@ -82,6 +84,8 @@ class RunSummary:
     residual_norm: float
     depressed_fraction: float
     effective_radius: float
+    deficit_volume: float
+    equivalent_deficit_radius: float
     far_field_shell_density: float
     far_field_shell_deficit: float
     far_field_moment: float
@@ -284,6 +288,8 @@ def relax(
         residual_norm=residual_norm(psi, gradient_fn),
         depressed_fraction=depressed_fraction(psi, cfg.depressed_threshold),
         effective_radius=effective_radius(psi, x, y, z),
+        deficit_volume=deficit_volume(psi, cfg.grid.spacing),
+        equivalent_deficit_radius=equivalent_deficit_radius(psi, cfg.grid.spacing),
         far_field_shell_density=shell_mean_density(psi, x, y, z, shell_inner, shell_outer),
         far_field_shell_deficit=shell_mean_deficit(psi, x, y, z, shell_inner, shell_outer),
         far_field_moment=far_field_moment(psi, x, y, z, shell_inner),

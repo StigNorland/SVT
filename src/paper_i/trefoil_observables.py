@@ -58,6 +58,25 @@ def effective_radius(
     return float(np.sqrt(np.sum(weight * radius_sq) / total_weight))
 
 
+def deficit_volume(
+    psi: np.ndarray,
+    spacing: float,
+) -> float:
+    rho = np.abs(psi) ** 2
+    deficit = np.clip(1.0 - rho, 0.0, None)
+    return float(np.sum(deficit) * spacing**3)
+
+
+def equivalent_deficit_radius(
+    psi: np.ndarray,
+    spacing: float,
+) -> float:
+    volume = deficit_volume(psi, spacing)
+    if volume <= 1.0e-12:
+        return 0.0
+    return float(((3.0 * volume) / (4.0 * np.pi)) ** (1.0 / 3.0))
+
+
 def depressed_fraction(
     psi: np.ndarray,
     threshold: float,
