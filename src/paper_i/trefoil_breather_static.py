@@ -65,12 +65,17 @@ class TrefoilConfig:
 class RunSummary:
     steps_completed: int
     final_energy: float
+    best_energy: float
     energy_monotonicity_violations: int
+    accepted_steps: int
+    rejected_steps: int
+    final_step_size: float
     residual_norm: float
     depressed_fraction: float
     effective_radius: float
     min_density: float
     max_density: float
+    stop_reason: str
 
 
 def coordinate_grid(cfg: TrefoilConfig) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
@@ -177,35 +182,73 @@ def relax(
     gradient_fn = lambda field: logse_gradient(field, cfg)
 
     last_energy = total_energy(psi, cfg.grid.spacing, cfg.log_pressure, cfg.density_floor)
+    best_energy = last_energy
+    best_psi = psi.copy()
     violations = 0
     completed = 0
+    accepted_steps = 0
+    rejected_steps = 0
+    step_size = controls.step_size
+    stale_intervals = 0
+    stop_reason = "max_steps"
 
     for step in range(1, controls.max_steps + 1):
         gradient = logse_gradient(psi, cfg)
-        psi = psi - controls.step_size * gradient
-        apply_boundary_anchor(psi, cfg)
+        candidate = psi - step_size * gradient
+        apply_boundary_anchor(candidate, cfg)
 
-        current_energy = total_energy(psi, cfg.grid.spacing, cfg.log_pressure, cfg.density_floor)
-        if current_energy > last_energy + 1.0e-9:
+        current_energy = total_energy(candidate, cfg.grid.spacing, cfg.log_pressure, cfg.density_floor)
+        if current_energy > last_energy + controls.energy_tol:
             violations += 1
-        last_energy = current_energy
+            rejected_steps += 1
+            step_size *= 0.5
+            if step_size < controls.min_step_size:
+                stop_reason = "step_size_floor"
+                completed = step
+                break
+            continue
+
+        psi = candidate
+        accepted_steps += 1
         completed = step
 
-        if step % 10 == 0:
+        energy_improvement = last_energy - current_energy
+        last_energy = current_energy
+        if current_energy < best_energy:
+            best_energy = current_energy
+            best_psi = psi.copy()
+
+        if energy_improvement <= controls.energy_tol:
+            stale_intervals += 1
+        else:
+            stale_intervals = 0
+            step_size = min(step_size * 1.05, controls.max_step_size)
+
+        if accepted_steps % controls.check_interval == 0:
             current_residual = residual_norm(psi, gradient_fn)
             if current_residual <= controls.tolerance:
+                stop_reason = "residual_tolerance"
+                break
+            if stale_intervals >= controls.patience_intervals:
+                stop_reason = "energy_plateau"
                 break
 
+    psi = best_psi
     rho = np.abs(psi) ** 2
     summary = RunSummary(
         steps_completed=completed,
         final_energy=last_energy,
+        best_energy=best_energy,
         energy_monotonicity_violations=violations,
+        accepted_steps=accepted_steps,
+        rejected_steps=rejected_steps,
+        final_step_size=step_size,
         residual_norm=residual_norm(psi, gradient_fn),
         depressed_fraction=depressed_fraction(psi, cfg.depressed_threshold),
         effective_radius=effective_radius(psi, x, y, z),
         min_density=float(np.min(rho)),
         max_density=float(np.max(rho)),
+        stop_reason=stop_reason,
     )
     return psi, summary
 
@@ -221,6 +264,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--step-size", type=float, default=0.01)
     parser.add_argument("--max-steps", type=int, default=200)
     parser.add_argument("--tolerance", type=float, default=2.0e-3)
+    parser.add_argument("--min-step-size", type=float, default=1.0e-5)
+    parser.add_argument("--max-step-size", type=float, default=5.0e-2)
+    parser.add_argument("--check-interval", type=int, default=10)
+    parser.add_argument("--patience-intervals", type=int, default=3)
+    parser.add_argument("--energy-tol", type=float, default=1.0e-9)
     parser.add_argument("--output", type=Path)
     return parser.parse_args()
 
@@ -239,6 +287,11 @@ def main() -> None:
         step_size=args.step_size,
         max_steps=args.max_steps,
         tolerance=args.tolerance,
+        min_step_size=args.min_step_size,
+        max_step_size=args.max_step_size,
+        check_interval=args.check_interval,
+        patience_intervals=args.patience_intervals,
+        energy_tol=args.energy_tol,
     )
     _, summary = relax(cfg, controls)
 

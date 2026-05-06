@@ -37,6 +37,11 @@ class RelaxationControls:
     step_size: float
     max_steps: int
     tolerance: float
+    min_step_size: float = 1.0e-5
+    max_step_size: float = 5.0e-2
+    check_interval: int = 10
+    patience_intervals: int = 3
+    energy_tol: float = 1.0e-9
 
 
 @dataclass(frozen=True)
