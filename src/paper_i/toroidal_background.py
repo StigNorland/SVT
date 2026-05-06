@@ -1,3 +1,12 @@
+"""Toroidal background helpers for the Paper I static branch.
+
+Status: prototype
+Problem type: static
+Nondimensionalisation: xi = 1, background density rho0 = 1
+Primary role: provide a reusable toroidal-ring background family for issue #13
+Key limitation: this is an analytic / semi-analytic background helper, not a 3D relaxed trefoil solver
+"""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

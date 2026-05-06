@@ -1,3 +1,12 @@
+"""Reduced curved-torus relaxation check for the Paper I static branch.
+
+Status: validation
+Problem type: static
+Nondimensionalisation: xi = 1, background density rho0 = 1
+Primary observables: reduced-basis relaxation coefficients and energy response
+Primary role: small-basis validation asset for issue #12, not closure-grade evidence for #13
+"""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
