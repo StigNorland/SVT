@@ -22,6 +22,8 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 | `curved_torus_relaxation.py` | `validation` | reduced static-branch relaxation check |
 | `toroidal_projection_integrals.py` | `validation` | projected observable/integral baseline |
 | `trefoil_breather_static.py` | `candidate` | first concrete static 3D trefoil-breather prototype for `#13` |
+| `trefoil_observables.py` | `candidate` | shared observables for the static trefoil prototype and sweeps |
+| `trefoil_breather_refinement.py` | `candidate` | first grid / box sensitivity harness for `#13` milestone 4 |
 | muon / BdG scripts | `prototype` | reduced spectral experiments, not closure evidence |
 | Kelvin / chiral bridge scripts | `prototype` | exploratory coupling structure only |
 
@@ -32,6 +34,8 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 - `curved_torus_relaxation.py` performs a small-basis relaxation of curvature corrections.
 - `toroidal_projection_integrals.py` computes projected stiffness, norm, and chiral-shear integrals.
 - `trefoil_breather_static.py` seeds and relaxes a first static 3D trefoil-breather prototype.
+- `trefoil_observables.py` centralises the early static-branch observables.
+- `trefoil_breather_refinement.py` compares early observables across grid and box settings.
 
 ## Muon-Mode Diagnostics
 
@@ -53,6 +57,7 @@ Run from the repository root:
 ```bash
 python src/paper_i/vortex_profile.py --n 400 --x-max 12
 python src/paper_i/trefoil_breather_static.py --n 40 --max-steps 100
+python src/paper_i/trefoil_breather_refinement.py --n-values 24,32 --half-width-values 5,6 --max-steps 30
 python src/paper_i/muon_mode_prototype.py
 python src/paper_i/kelvin_self_induction.py --phi-n 64
 ```

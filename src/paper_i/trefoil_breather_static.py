@@ -25,6 +25,7 @@ if str(SRC_ROOT) not in sys.path:
     sys.path.append(str(SRC_ROOT))
 
 from shared_numerics import GridSpec, Nondimensionalisation, OutputStatus, RelaxationControls, ScriptMetadata
+from trefoil_observables import depressed_fraction, effective_radius, residual_norm, total_energy
 
 
 SCRIPT_METADATA = ScriptMetadata(
@@ -166,46 +167,16 @@ def logse_gradient(psi: np.ndarray, cfg: TrefoilConfig) -> np.ndarray:
     return -0.5 * laplacian(psi, cfg.grid.spacing) + cfg.log_pressure * np.log(rho) * psi
 
 
-def energy_density(psi: np.ndarray, cfg: TrefoilConfig) -> np.ndarray:
-    grad_sq = sum(np.abs(np.roll(psi, -1, axis=axis) - psi) ** 2 for axis in range(3)) / (cfg.grid.spacing**2)
-    rho = np.maximum(np.abs(psi) ** 2, cfg.density_floor)
-    potential = cfg.log_pressure * (rho * np.log(rho) - rho + 1.0)
-    return 0.5 * grad_sq + potential
-
-
-def total_energy(psi: np.ndarray, cfg: TrefoilConfig) -> float:
-    return float(np.sum(energy_density(psi, cfg)) * cfg.grid.spacing**3)
-
-
-def residual_norm(psi: np.ndarray, cfg: TrefoilConfig) -> float:
-    grad = logse_gradient(psi, cfg)
-    return float(np.sqrt(np.mean(np.abs(grad) ** 2)))
-
-
-def effective_radius(psi: np.ndarray, cfg: TrefoilConfig) -> float:
-    x, y, z = coordinate_grid(cfg)
-    rho = np.abs(psi) ** 2
-    weight = np.clip(1.0 - rho, 0.0, None)
-    total_weight = float(np.sum(weight))
-    if total_weight <= 1.0e-12:
-        return 0.0
-    radius_sq = x * x + y * y + z * z
-    return float(np.sqrt(np.sum(weight * radius_sq) / total_weight))
-
-
-def depressed_fraction(psi: np.ndarray, cfg: TrefoilConfig) -> float:
-    rho = np.abs(psi) ** 2
-    return float(np.count_nonzero(rho < cfg.depressed_threshold) / rho.size)
-
-
 def relax(
     cfg: TrefoilConfig,
     controls: RelaxationControls,
 ) -> tuple[np.ndarray, RunSummary]:
     psi = initial_state(cfg)
     apply_boundary_anchor(psi, cfg)
+    x, y, z = coordinate_grid(cfg)
+    gradient_fn = lambda field: logse_gradient(field, cfg)
 
-    last_energy = total_energy(psi, cfg)
+    last_energy = total_energy(psi, cfg.grid.spacing, cfg.log_pressure, cfg.density_floor)
     violations = 0
     completed = 0
 
@@ -214,14 +185,14 @@ def relax(
         psi = psi - controls.step_size * gradient
         apply_boundary_anchor(psi, cfg)
 
-        current_energy = total_energy(psi, cfg)
+        current_energy = total_energy(psi, cfg.grid.spacing, cfg.log_pressure, cfg.density_floor)
         if current_energy > last_energy + 1.0e-9:
             violations += 1
         last_energy = current_energy
         completed = step
 
         if step % 10 == 0:
-            current_residual = residual_norm(psi, cfg)
+            current_residual = residual_norm(psi, gradient_fn)
             if current_residual <= controls.tolerance:
                 break
 
@@ -230,9 +201,9 @@ def relax(
         steps_completed=completed,
         final_energy=last_energy,
         energy_monotonicity_violations=violations,
-        residual_norm=residual_norm(psi, cfg),
-        depressed_fraction=depressed_fraction(psi, cfg),
-        effective_radius=effective_radius(psi, cfg),
+        residual_norm=residual_norm(psi, gradient_fn),
+        depressed_fraction=depressed_fraction(psi, cfg.depressed_threshold),
+        effective_radius=effective_radius(psi, x, y, z),
         min_density=float(np.min(rho)),
         max_density=float(np.max(rho)),
     )
