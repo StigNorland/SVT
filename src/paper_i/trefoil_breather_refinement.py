@@ -64,6 +64,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--check-interval", type=int, default=10)
     parser.add_argument("--patience-intervals", type=int, default=3)
     parser.add_argument("--energy-tol", type=float, default=1.0e-9)
+    parser.add_argument("--reference-spacing", type=float)
     parser.add_argument("--workers", type=int, default=1)
     parser.add_argument("--output", type=Path)
     return parser.parse_args()
@@ -183,6 +184,7 @@ def main() -> None:
         check_interval=args.check_interval,
         patience_intervals=args.patience_intervals,
         energy_tol=args.energy_tol,
+        reference_spacing=args.reference_spacing,
     )
 
     tasks: list[tuple[TrefoilConfig, RelaxationControls]] = []

@@ -24,7 +24,7 @@ SRC_ROOT = Path(__file__).resolve().parents[1]
 if str(SRC_ROOT) not in sys.path:
     sys.path.append(str(SRC_ROOT))
 
-from shared_numerics import GridSpec, Nondimensionalisation, OutputStatus, RelaxationControls, ScriptMetadata
+from shared_numerics import GridSpec, Nondimensionalisation, OutputStatus, RelaxationControls, ScriptMetadata, grid_step_scale
 from trefoil_observables import (
     depressed_fraction,
     effective_radius,
@@ -61,6 +61,7 @@ class TrefoilConfig:
     log_pressure: float = 0.5
     density_floor: float = 1.0e-12
     anchor_shell: int = 2
+    boundary_blend_fraction: float = 0.18
     depressed_threshold: float = 0.35
     frame_samples: int = 600
 
@@ -168,14 +169,34 @@ def laplacian(field: np.ndarray, dx: float) -> np.ndarray:
 
 def apply_boundary_anchor(psi: np.ndarray, cfg: TrefoilConfig) -> None:
     shell = cfg.anchor_shell
-    if shell <= 0:
+    if shell <= 0 and cfg.boundary_blend_fraction <= 0.0:
         return
-    psi[:shell, :, :] = 1.0 + 0.0j
-    psi[-shell:, :, :] = 1.0 + 0.0j
-    psi[:, :shell, :] = 1.0 + 0.0j
-    psi[:, -shell:, :] = 1.0 + 0.0j
-    psi[:, :, :shell] = 1.0 + 0.0j
-    psi[:, :, -shell:] = 1.0 + 0.0j
+
+    # Keep the very outermost cells pinned to the background to avoid wraparound artefacts.
+    if shell > 0:
+        psi[:shell, :, :] = 1.0 + 0.0j
+        psi[-shell:, :, :] = 1.0 + 0.0j
+        psi[:, :shell, :] = 1.0 + 0.0j
+        psi[:, -shell:, :] = 1.0 + 0.0j
+        psi[:, :, :shell] = 1.0 + 0.0j
+        psi[:, :, -shell:] = 1.0 + 0.0j
+
+    # Apply a soft radial blend in the outer region so the recovery profile is not
+    # dominated by a hard box-wall clamp.
+    if cfg.boundary_blend_fraction <= 0.0:
+        return
+
+    x, y, z = coordinate_grid(cfg)
+    radius = np.sqrt(x * x + y * y + z * z)
+    r_max = math.sqrt(3.0) * cfg.half_width
+    blend_start = max((1.0 - cfg.boundary_blend_fraction) * r_max, 0.0)
+    blend_width = max(r_max - blend_start, 1.0e-12)
+    mask = radius > blend_start
+    if not np.any(mask):
+        return
+    alpha = np.clip((radius - blend_start) / blend_width, 0.0, 1.0)
+    alpha = alpha * alpha * (3.0 - 2.0 * alpha)
+    psi[mask] = (1.0 - alpha[mask]) * psi[mask] + alpha[mask] * (1.0 + 0.0j)
 
 
 def logse_gradient(psi: np.ndarray, cfg: TrefoilConfig) -> np.ndarray:
@@ -199,7 +220,11 @@ def relax(
     completed = 0
     accepted_steps = 0
     rejected_steps = 0
-    step_size = controls.step_size
+    reference_spacing = controls.reference_spacing if controls.reference_spacing is not None else (10.0 / 24.0)
+    step_scale = grid_step_scale(cfg.grid.spacing, reference_spacing)
+    step_size = min(controls.step_size * step_scale, controls.max_step_size * step_scale)
+    effective_min_step_size = controls.min_step_size * step_scale
+    effective_max_step_size = controls.max_step_size * step_scale
     stale_intervals = 0
     stop_reason = "max_steps"
 
@@ -213,7 +238,7 @@ def relax(
             violations += 1
             rejected_steps += 1
             step_size *= 0.5
-            if step_size < controls.min_step_size:
+            if step_size < effective_min_step_size:
                 stop_reason = "step_size_floor"
                 completed = step
                 break
@@ -233,7 +258,7 @@ def relax(
             stale_intervals += 1
         else:
             stale_intervals = 0
-            step_size = min(step_size * 1.05, controls.max_step_size)
+            step_size = min(step_size * 1.05, effective_max_step_size)
 
         if accepted_steps % controls.check_interval == 0:
             current_residual = residual_norm(psi, gradient_fn)
@@ -285,6 +310,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--check-interval", type=int, default=10)
     parser.add_argument("--patience-intervals", type=int, default=3)
     parser.add_argument("--energy-tol", type=float, default=1.0e-9)
+    parser.add_argument("--reference-spacing", type=float)
+    parser.add_argument("--boundary-blend-fraction", type=float, default=0.18)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--save-state", type=Path)
     return parser.parse_args()
@@ -299,6 +326,7 @@ def main() -> None:
         minor_radius=args.minor_radius,
         smoothing_radius=args.smoothing_radius,
         log_pressure=args.log_pressure,
+        boundary_blend_fraction=args.boundary_blend_fraction,
     )
     controls = RelaxationControls(
         step_size=args.step_size,
@@ -309,6 +337,7 @@ def main() -> None:
         check_interval=args.check_interval,
         patience_intervals=args.patience_intervals,
         energy_tol=args.energy_tol,
+        reference_spacing=args.reference_spacing,
     )
     psi, summary = relax(cfg, controls)
 

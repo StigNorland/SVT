@@ -11,7 +11,7 @@ The current scope is intentionally small:
 It is not yet a production solver layer.
 """
 
-from .static_branch import GridSpec, Nondimensionalisation, RelaxationControls, StaticDiagnostics
+from .static_branch import GridSpec, Nondimensionalisation, RelaxationControls, StaticDiagnostics, grid_step_scale
 from .status import OutputStatus, ScriptMetadata
 
 __all__ = [
@@ -19,6 +19,7 @@ __all__ = [
     "Nondimensionalisation",
     "RelaxationControls",
     "StaticDiagnostics",
+    "grid_step_scale",
     "OutputStatus",
     "ScriptMetadata",
 ]

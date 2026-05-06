@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import math
 
 
 @dataclass(frozen=True)
@@ -30,6 +31,20 @@ class GridSpec:
         return 2.0 * self.half_width / self.n
 
 
+def grid_step_scale(spacing: float, reference_spacing: float) -> float:
+    """Scale explicit relaxation steps with the square of grid spacing.
+
+    For the present prototype gradient flow, the Laplacian term is the stiff part
+    of the update, so a simple `dx^2` scaling is a reasonable first stabilisation
+    rule when moving between coarse and fine Cartesian grids.
+    """
+
+    if reference_spacing <= 0.0:
+        return 1.0
+    ratio = max(spacing / reference_spacing, 1.0e-12)
+    return ratio * ratio
+
+
 @dataclass(frozen=True)
 class RelaxationControls:
     """Common static relaxation controls."""
@@ -42,6 +57,7 @@ class RelaxationControls:
     check_interval: int = 10
     patience_intervals: int = 3
     energy_tol: float = 1.0e-9
+    reference_spacing: float | None = None
 
 
 @dataclass(frozen=True)

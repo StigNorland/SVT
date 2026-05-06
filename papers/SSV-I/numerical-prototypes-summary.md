@@ -78,6 +78,57 @@ papers/SSV-I/data/trefoil-boxsize-sweep-n24-2026-05-06.json
 papers/SSV-I/trefoil-boxsize-sweep-note.md
 ```
 
+The longer soft-boundary box-size sweep is recorded in:
+
+```text
+papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-60steps-2026-05-06.json
+papers/SSV-I/trefoil-boxsize-sweep-softbc-60steps-note.md
+```
+
+The `100`-step soft-boundary box-size sweep is recorded in:
+
+```text
+papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-100steps-2026-05-06.json
+papers/SSV-I/trefoil-boxsize-sweep-softbc-100steps-note.md
+```
+
+The direct `60`-vs-`100` step comparison is recorded in:
+
+```text
+papers/SSV-I/trefoil-boxsize-sweep-softbc-60-vs-100-note.md
+```
+
+The longer `150`/`200` step runs and the doubled-resolution `n = 48` check are recorded in:
+
+```text
+papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-150steps-2026-05-06.json
+papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-2026-05-06.json
+papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-100steps-2026-05-06.json
+papers/SSV-I/trefoil-longrun-and-resolution-note.md
+```
+
+The first scaled-control rerun of the doubled-resolution branch is recorded in:
+
+```text
+papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-100steps-scaled-2026-05-06.json
+papers/SSV-I/trefoil-n48-scaled-control-note.md
+```
+
+The longer scaled `n = 48` follow-up, including the `400`-step checkpoint, is recorded in:
+
+```text
+papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-150steps-scaled-2026-05-06.json
+papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-200steps-scaled-2026-05-06.json
+papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-scaled-2026-05-06.json
+papers/SSV-I/trefoil-n48-400steps-note.md
+```
+
+The direct matched-resolution comparison between the `n = 24` and `n = 48` branches is recorded in:
+
+```text
+papers/SSV-I/trefoil-matched-resolution-comparison-note.md
+```
+
 Representative values:
 
 | check | quantity | value |
