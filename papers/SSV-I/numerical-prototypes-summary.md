@@ -71,6 +71,13 @@ papers/SSV-I/data/example-trefoil-farfield-compare-hw5-vs-hw6.json
 papers/SSV-I/trefoil-farfield-compare-note.md
 ```
 
+The first fixed-resolution box-size sweep is recorded in:
+
+```text
+papers/SSV-I/data/trefoil-boxsize-sweep-n24-2026-05-06.json
+papers/SSV-I/trefoil-boxsize-sweep-note.md
+```
+
 Representative values:
 
 | check | quantity | value |
