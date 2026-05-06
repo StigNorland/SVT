@@ -57,6 +57,13 @@ papers/SSV-I/data/trefoil-refinement-checkpoint-2026-05-06b.json
 papers/SSV-I/trefoil-refinement-checkpoint-2.md
 ```
 
+The first far-field-enabled checkpoint is recorded in:
+
+```text
+papers/SSV-I/data/trefoil-refinement-farfield-checkpoint-2026-05-06.json
+papers/SSV-I/trefoil-farfield-checkpoint.md
+```
+
 Representative values:
 
 | check | quantity | value |

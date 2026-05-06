@@ -80,3 +80,35 @@ def shell_mean_density(
         return 1.0
     rho = np.abs(psi) ** 2
     return float(np.mean(rho[mask]))
+
+
+def shell_mean_deficit(
+    psi: np.ndarray,
+    x: np.ndarray,
+    y: np.ndarray,
+    z: np.ndarray,
+    shell_inner: float,
+    shell_outer: float,
+) -> float:
+    return 1.0 - shell_mean_density(psi, x, y, z, shell_inner, shell_outer)
+
+
+def far_field_moment(
+    psi: np.ndarray,
+    x: np.ndarray,
+    y: np.ndarray,
+    z: np.ndarray,
+    shell_inner: float,
+) -> float:
+    """Simple outer-region deficit moment for early gravity-branch diagnostics.
+
+    This is not yet a physical alpha_G extractor. It is a prototype proxy:
+    integrate the density deficit in the outer region weighted by radius.
+    """
+    radius = np.sqrt(x * x + y * y + z * z)
+    mask = radius >= shell_inner
+    if not np.any(mask):
+        return 0.0
+    rho = np.abs(psi) ** 2
+    deficit = np.clip(1.0 - rho, 0.0, None)
+    return float(np.mean(deficit[mask] * radius[mask]))

@@ -25,7 +25,15 @@ if str(SRC_ROOT) not in sys.path:
     sys.path.append(str(SRC_ROOT))
 
 from shared_numerics import GridSpec, Nondimensionalisation, OutputStatus, RelaxationControls, ScriptMetadata
-from trefoil_observables import depressed_fraction, effective_radius, residual_norm, total_energy
+from trefoil_observables import (
+    depressed_fraction,
+    effective_radius,
+    far_field_moment,
+    residual_norm,
+    shell_mean_deficit,
+    shell_mean_density,
+    total_energy,
+)
 
 
 SCRIPT_METADATA = ScriptMetadata(
@@ -73,6 +81,9 @@ class RunSummary:
     residual_norm: float
     depressed_fraction: float
     effective_radius: float
+    far_field_shell_density: float
+    far_field_shell_deficit: float
+    far_field_moment: float
     min_density: float
     max_density: float
     stop_reason: str
@@ -235,6 +246,8 @@ def relax(
 
     psi = best_psi
     rho = np.abs(psi) ** 2
+    shell_inner = 0.7 * cfg.half_width
+    shell_outer = 0.95 * cfg.half_width
     summary = RunSummary(
         steps_completed=completed,
         final_energy=last_energy,
@@ -246,6 +259,9 @@ def relax(
         residual_norm=residual_norm(psi, gradient_fn),
         depressed_fraction=depressed_fraction(psi, cfg.depressed_threshold),
         effective_radius=effective_radius(psi, x, y, z),
+        far_field_shell_density=shell_mean_density(psi, x, y, z, shell_inner, shell_outer),
+        far_field_shell_deficit=shell_mean_deficit(psi, x, y, z, shell_inner, shell_outer),
+        far_field_moment=far_field_moment(psi, x, y, z, shell_inner),
         min_density=float(np.min(rho)),
         max_density=float(np.max(rho)),
         stop_reason=stop_reason,

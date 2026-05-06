@@ -73,6 +73,6 @@ This checkpoint is a real numerical improvement, not just a documentation update
 
 It supports the next move being:
 
-1. add a simple far-field diagnostic from the saved relaxed state
-2. test whether larger boxes reduce the remaining box-size drift
+1. test whether larger boxes reduce the remaining box-size drift
+2. compare the new far-field shell diagnostics against the weighted far-field moment
 3. only after that start asking whether any static observable is nearing a plateau
