@@ -2,9 +2,10 @@
 
 This note records the first coefficient scan of the additive saturating reduced `Q_p` probe.
 
-Artifact:
+Artifacts:
 
 - `papers/SSV-I/data/q-p-two-factor-scan-2026-05-06.json`
+- `papers/SSV-I/data/q-p-two-factor-scan-extended-2026-05-06.json`
 
 The scanned family is
 
@@ -67,4 +68,47 @@ The repo can now support the following statement:
 - it is a shell-deficit quantity plus a compactness-style saturating correction
 - the correction strength should be treated as an open parameter, not yet a physical constant
 
-The next step is therefore obvious: widen the coefficient scan beyond `0.2` before treating this family as more than a promising numerical lead.
+## Extended Scan Read
+
+The widened scan pushes the same family out to
+
+\[
+\varepsilon \in \{0.02, 0.05, 0.1, 0.15, 0.2, 0.3, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0, 4.0, 5.0, 7.5, 10.0\}.
+\]
+
+The important result is that the branch-wise spread keeps dropping across the full tested range.
+
+Best tested values in the widened scan:
+
+- `n = 24`: `\varepsilon = 10.0`, relative span `0.456`
+- `n = 48`: `\varepsilon = 10.0`, relative span `0.313`
+
+There is still no turnover.
+
+## What That Means
+
+This is both encouraging and cautionary.
+
+Encouraging:
+
+- the additive saturating family is not a fragile one-point trick
+- it keeps improving as the correction strength grows
+
+Cautionary:
+
+- `\varepsilon` is no longer behaving like a small perturbative coefficient
+- the numerically preferred region is pushing the correction toward a dominant term
+
+So the family itself looks promising, but the current parameterization is probably wrong. A bare additive coefficient is not a satisfying long-term form if the best numerical behavior keeps asking for larger and larger values.
+
+## Current Read
+
+The next step is no longer "just scan higher."
+
+The better interpretation is:
+
+- keep the additive saturating functional shape
+- rethink how its strength is parameterized
+- absorb the effective correction strength into a geometry-tied scale or dimensionless normalization instead of treating `\varepsilon` as a naked constant
+
+That is the cleaner next move for the gravity branch.

@@ -50,6 +50,8 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 - `q_p_two_factor_probe.py` compares simple reduced two-factor `Q_p` candidates against shell deficit alone.
 - `q_p_two_factor_scan.py` scans the additive saturating reduced `Q_p` family over a small coefficient range.
 - `q_p_two_factor_normalized_scan.py` tests a branch-normalized variant of the additive saturating reduced `Q_p` family.
+- `q_p_two_factor_reexpress_scan.py` tests geometry-tied re-expressions of the additive saturating reduced `Q_p` family.
+- `q_p_two_factor_local_scale_scan.py` tests run-local geometric re-expressions of the additive saturating reduced `Q_p` family.
 
 ## Muon-Mode Diagnostics
 
@@ -77,6 +79,8 @@ python src/paper_i/trefoil_farfield_compare.py papers/SSV-I/data/profile-a.json 
 python src/paper_i/alpha_g_proxy.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-2026-05-06.json
 python src/paper_i/cq_geometry_proxy.py papers/SSV-I/data/trefoil-state-n24-hw5-200steps-2026-05-06.npz
 python src/paper_i/cq_geometry_compare.py papers/SSV-I/data/cq-geometry-n24-hw5-200steps-2026-05-06.json papers/SSV-I/data/cq-geometry-n48-hw7-400steps-2026-05-06.json
+python src/paper_i/q_p_two_factor_reexpress_scan.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
+python src/paper_i/q_p_two_factor_local_scale_scan.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
 python src/paper_i/muon_mode_prototype.py
 python src/paper_i/kelvin_self_induction.py --phi-n 64
 ```

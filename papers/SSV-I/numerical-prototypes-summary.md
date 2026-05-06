@@ -146,6 +146,10 @@ papers/SSV-I/q-p-two-factor-scan-note.md
 papers/SSV-I/data/q-p-two-factor-scan-2026-05-06.json
 papers/SSV-I/q-p-two-factor-normalized-scan-note.md
 papers/SSV-I/data/q-p-two-factor-normalized-scan-2026-05-06.json
+papers/SSV-I/q-p-two-factor-reexpress-scan-note.md
+papers/SSV-I/data/q-p-two-factor-reexpress-scan-2026-05-07.json
+papers/SSV-I/q-p-two-factor-local-scale-scan-note.md
+papers/SSV-I/data/q-p-two-factor-local-scale-scan-2026-05-07.json
 ```
 
 Representative values:
