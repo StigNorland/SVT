@@ -1,0 +1,274 @@
+{
+  "metadata": {
+    "problem_type": "static",
+    "status": "candidate",
+    "nondimensionalisation": "xi = 1, rho0 = 1, c = 1",
+    "observables": [
+      "final_energy",
+      "residual_norm",
+      "effective_radius",
+      "depressed_fraction",
+      "shell_mean_density"
+    ],
+    "diagnostics": [
+      "grid_sensitivity",
+      "box_sensitivity"
+    ],
+    "issue_refs": [
+      "#13"
+    ],
+    "limitations": [
+      "Uses the early static prototype solver rather than a closure-grade Y-junction solver."
+    ]
+  },
+  "nondimensionalisation": {
+    "xi": 1.0,
+    "rho0": 1.0,
+    "c": 1.0
+  },
+  "controls": {
+    "step_size": 0.005,
+    "max_steps": 20,
+    "tolerance": 0.002
+  },
+  "runs": [
+    {
+      "config": {
+        "n": 20,
+        "half_width": 5.0,
+        "xi": 1.0,
+        "major_radius": 2.8,
+        "minor_radius": 0.85,
+        "smoothing_radius": 0.2,
+        "log_pressure": 0.5,
+        "density_floor": 1e-12,
+        "anchor_shell": 2,
+        "depressed_threshold": 0.35,
+        "frame_samples": 600
+      },
+      "summary": {
+        "steps_completed": 20,
+        "final_energy": 424.06740549920613,
+        "energy_monotonicity_violations": 0,
+        "residual_norm": 1.0813765347004851,
+        "depressed_fraction": 0.11375,
+        "effective_radius": 3.661705175963131,
+        "min_density": 5.9237433943675686e-05,
+        "max_density": 1.0
+      },
+      "shell_mean_density": 0.6656198550025538
+    },
+    {
+      "config": {
+        "n": 20,
+        "half_width": 6.0,
+        "xi": 1.0,
+        "major_radius": 2.8,
+        "minor_radius": 0.85,
+        "smoothing_radius": 0.2,
+        "log_pressure": 0.5,
+        "density_floor": 1e-12,
+        "anchor_shell": 2,
+        "depressed_threshold": 0.35,
+        "frame_samples": 600
+      },
+      "summary": {
+        "steps_completed": 20,
+        "final_energy": 488.09005642293596,
+        "energy_monotonicity_violations": 0,
+        "residual_norm": 0.7648326761786262,
+        "depressed_fraction": 0.069,
+        "effective_radius": 4.10120331101158,
+        "min_density": 0.004734374824527609,
+        "max_density": 1.0
+      },
+      "shell_mean_density": 0.8192839527874684
+    },
+    {
+      "config": {
+        "n": 24,
+        "half_width": 5.0,
+        "xi": 1.0,
+        "major_radius": 2.8,
+        "minor_radius": 0.85,
+        "smoothing_radius": 0.2,
+        "log_pressure": 0.5,
+        "density_floor": 1e-12,
+        "anchor_shell": 2,
+        "depressed_threshold": 0.35,
+        "frame_samples": 600
+      },
+      "summary": {
+        "steps_completed": 20,
+        "final_energy": 460.76023955694234,
+        "energy_monotonicity_violations": 0,
+        "residual_norm": 1.274377134576152,
+        "depressed_fraction": 0.11820023148148148,
+        "effective_radius": 3.780204285764146,
+        "min_density": 0.00047924396329791395,
+        "max_density": 1.0
+      },
+      "shell_mean_density": 0.6516228436387037
+    },
+    {
+      "config": {
+        "n": 24,
+        "half_width": 6.0,
+        "xi": 1.0,
+        "major_radius": 2.8,
+        "minor_radius": 0.85,
+        "smoothing_radius": 0.2,
+        "log_pressure": 0.5,
+        "density_floor": 1e-12,
+        "anchor_shell": 2,
+        "depressed_threshold": 0.35,
+        "frame_samples": 600
+      },
+      "summary": {
+        "steps_completed": 20,
+        "final_energy": 539.4180365263885,
+        "energy_monotonicity_violations": 0,
+        "residual_norm": 0.9189287247519615,
+        "depressed_fraction": 0.06770833333333333,
+        "effective_radius": 4.238226060042618,
+        "min_density": 5.922030994006527e-05,
+        "max_density": 1.0
+      },
+      "shell_mean_density": 0.812163104789723
+    }
+  ],
+  "comparison_summary": {
+    "global": {
+      "final_energy": {
+        "min": 424.06740549920613,
+        "max": 539.4180365263885,
+        "span": 115.35063102718237,
+        "relative_span": 0.213842740168625
+      },
+      "residual_norm": {
+        "min": 0.7648326761786262,
+        "max": 1.274377134576152,
+        "span": 0.5095444583975259,
+        "relative_span": 0.3998380421090939
+      },
+      "effective_radius": {
+        "min": 3.661705175963131,
+        "max": 4.238226060042618,
+        "span": 0.5765208840794869,
+        "relative_span": 0.13602881864062003
+      },
+      "depressed_fraction": {
+        "min": 0.06770833333333333,
+        "max": 0.11820023148148148,
+        "span": 0.050491898148148154,
+        "relative_span": 0.4271725826193391
+      },
+      "shell_mean_density": {
+        "min": 0.6516228436387037,
+        "max": 0.8192839527874684,
+        "span": 0.16766110914876464,
+        "relative_span": 0.20464346772364753
+      }
+    },
+    "by_n": {
+      "20": {
+        "half_width_values": [
+          5.0,
+          6.0
+        ],
+        "final_energy": {
+          "min": 424.06740549920613,
+          "max": 488.09005642293596,
+          "span": 64.02265092372983,
+          "relative_span": 0.13116975050246346
+        },
+        "residual_norm": {
+          "min": 0.7648326761786262,
+          "max": 1.0813765347004851,
+          "span": 0.31654385852185896,
+          "relative_span": 0.29272306949913046
+        },
+        "effective_radius": {
+          "min": 3.661705175963131,
+          "max": 4.10120331101158,
+          "span": 0.4394981350484488,
+          "relative_span": 0.10716321570023424
+        }
+      },
+      "24": {
+        "half_width_values": [
+          5.0,
+          6.0
+        ],
+        "final_energy": {
+          "min": 460.76023955694234,
+          "max": 539.4180365263885,
+          "span": 78.65779696944617,
+          "relative_span": 0.1458197383905946
+        },
+        "residual_norm": {
+          "min": 0.9189287247519615,
+          "max": 1.274377134576152,
+          "span": 0.35544840982419057,
+          "relative_span": 0.2789193247275344
+        },
+        "effective_radius": {
+          "min": 3.780204285764146,
+          "max": 4.238226060042618,
+          "span": 0.458021774278472,
+          "relative_span": 0.10806921759002783
+        }
+      }
+    },
+    "by_half_width": {
+      "5.0": {
+        "n_values": [
+          20,
+          24
+        ],
+        "final_energy": {
+          "min": 424.06740549920613,
+          "max": 460.76023955694234,
+          "span": 36.692834057736206,
+          "relative_span": 0.07963541752868973
+        },
+        "residual_norm": {
+          "min": 1.0813765347004851,
+          "max": 1.274377134576152,
+          "span": 0.19300059987566698,
+          "relative_span": 0.1514470046889671
+        },
+        "effective_radius": {
+          "min": 3.661705175963131,
+          "max": 3.780204285764146,
+          "span": 0.11849910980101486,
+          "relative_span": 0.03134727671921597
+        }
+      },
+      "6.0": {
+        "n_values": [
+          20,
+          24
+        ],
+        "final_energy": {
+          "min": 488.09005642293596,
+          "max": 539.4180365263885,
+          "span": 51.327980103452546,
+          "relative_span": 0.09515436382880677
+        },
+        "residual_norm": {
+          "min": 0.7648326761786262,
+          "max": 0.9189287247519615,
+          "span": 0.15409604857333536,
+          "relative_span": 0.1676909693022483
+        },
+        "effective_radius": {
+          "min": 4.10120331101158,
+          "max": 4.238226060042618,
+          "span": 0.13702274903103806,
+          "relative_span": 0.03233021247329601
+        }
+      }
+    }
+  }
+}

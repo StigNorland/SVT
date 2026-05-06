@@ -43,6 +43,13 @@ Curated smoke-test output is stored in:
 papers/SSV-I/data/smoke-results.csv
 ```
 
+The first saved static-trefoil refinement checkpoint is recorded in:
+
+```text
+papers/SSV-I/data/trefoil-refinement-checkpoint-2026-05-06.json
+papers/SSV-I/trefoil-refinement-checkpoint.md
+```
+
 Representative values:
 
 | check | quantity | value |
