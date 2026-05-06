@@ -47,6 +47,8 @@ The working paper plan is described in:
 - [docs/roadmap.md](docs/roadmap.md)
 - [docs/paper-mapping.md](docs/paper-mapping.md)
 - [docs/numerical-minimisation-roadmap.md](docs/numerical-minimisation-roadmap.md)
+- [docs/numerical-conventions.md](docs/numerical-conventions.md)
+- [docs/numerical-issue-drafts.md](docs/numerical-issue-drafts.md)
 - [docs/issue-workflow.md](docs/issue-workflow.md)
 
 The main restructuring idea is simple: one main claim per paper.
