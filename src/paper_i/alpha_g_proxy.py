@@ -1,4 +1,4 @@
-"""Prototype alpha_G proxy extraction from static trefoil sweep outputs.
+"""Prototype proton acoustic monopole suppression extraction from static trefoil sweep outputs.
 
 Status: candidate
 Problem type: static
@@ -6,7 +6,7 @@ Nondimensionalisation: xi = 1, background density rho0 = 1, longitudinal speed c
 Primary observables: shell deficit, far-field moment, effective radius, residual norm
 Primary role: first conservative bridge from issue #13 static sweeps to issue #14 gravity extraction
 Key limitation: this script does not predict alpha_G; it only extracts provisional
-dimensionless suppression proxies from the best available static far-field diagnostics.
+dimensionless estimators for the proton's sub-grain acoustic monopole suppression.
 """
 
 from __future__ import annotations
@@ -33,13 +33,15 @@ SCRIPT_METADATA = ScriptMetadata(
     issue_refs=("#14",),
     limitations=(
         "Does not produce a first-principles alpha_G value.",
-        "Uses shell-averaged static far-field observables as provisional suppression proxies only.",
+        "Uses shell-averaged static far-field observables as provisional estimators for the proton acoustic monopole suppression only.",
     ),
 )
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Extract provisional alpha_G proxies from static trefoil sweep outputs.")
+    parser = argparse.ArgumentParser(
+        description="Extract provisional proton acoustic monopole suppression estimators from static trefoil sweep outputs."
+    )
     parser.add_argument("inputs", nargs="+", type=Path, help="Sweep JSON files from trefoil_breather_refinement.py")
     parser.add_argument("--output", type=Path)
     return parser.parse_args()
@@ -60,13 +62,14 @@ def build_run_record(source: Path, run: dict[str, object]) -> dict[str, object]:
     half_width = float(config["half_width"])
     n = int(config["n"])
 
-    # Primary proxy: the shell deficit is currently the most stable simple outer-region
-    # scalar across the long static sweeps, so this is the conservative bridge quantity.
-    proxy_shell = shell_deficit
+    # Primary estimator: by the units-audit reading, the gravity branch needs a
+    # sub-grain acoustic monopole suppression factor built from the proton breather's
+    # far field. The shell deficit is the most stable simple scalar we currently have.
+    monopole_shell = shell_deficit
 
     # Secondary cross-check: convert the far-field moment into a dimensionless geometric
-    # ratio using the box scale, while keeping it clearly separate from the primary proxy.
-    proxy_moment = far_moment / max(half_width, 1.0e-12)
+    # ratio using the box scale, while keeping it clearly separate from the primary estimator.
+    monopole_moment = far_moment / max(half_width, 1.0e-12)
 
     # A very lightweight ranking score for choosing representative runs: prefer small
     # residual and large half-width, without pretending this is a convergence proof.
@@ -82,8 +85,8 @@ def build_run_record(source: Path, run: dict[str, object]) -> dict[str, object]:
         "shell_mean_density": shell_density,
         "shell_mean_deficit": shell_deficit,
         "far_field_moment": far_moment,
-        "alpha_g_proxy_shell_deficit": proxy_shell,
-        "alpha_g_proxy_moment_scaled": proxy_moment,
+        "acoustic_monopole_estimator_shell_deficit": monopole_shell,
+        "acoustic_monopole_estimator_moment_scaled": monopole_moment,
         "selection_score": selection_score,
     }
 
@@ -98,8 +101,8 @@ def main() -> None:
             records.append(build_run_record(path, run))
 
     records.sort(key=lambda item: (item["n"], item["steps_completed"], item["half_width"]))
-    best_shell = min(records, key=lambda item: item["alpha_g_proxy_shell_deficit"])
-    best_moment = min(records, key=lambda item: item["alpha_g_proxy_moment_scaled"])
+    best_shell = min(records, key=lambda item: item["acoustic_monopole_estimator_shell_deficit"])
+    best_moment = min(records, key=lambda item: item["acoustic_monopole_estimator_moment_scaled"])
     representative = min(records, key=lambda item: item["selection_score"])
 
     payload = {
@@ -115,10 +118,15 @@ def main() -> None:
         "nondimensionalisation": asdict(Nondimensionalisation()),
         "records": records,
         "summary": {
-            "primary_proxy_definition": "alpha_g_proxy_shell_deficit = 1 - shell_mean_density",
-            "secondary_proxy_definition": "alpha_g_proxy_moment_scaled = far_field_moment / half_width",
-            "best_shell_proxy_run": best_shell,
-            "best_moment_proxy_run": best_moment,
+            "audit_alignment": {
+                "electron_healing_length_xi_role": "The xi implicit in the static branch is the electron healing length used in the cross-defect ratio a_p / xi = m_e / m_p.",
+                "gravity_branch_role": "The extracted quantity is a provisional estimator for the proton's sub-grain acoustic monopole suppression, not alpha_G itself.",
+                "paper_ii_target": "Issue #14 must still map this suppression estimator into the structural Paper II relation G = alpha_G hbar c alpha^2 / (N_p^2 m_e^2).",
+            },
+            "primary_estimator_definition": "acoustic_monopole_estimator_shell_deficit = 1 - shell_mean_density",
+            "secondary_estimator_definition": "acoustic_monopole_estimator_moment_scaled = far_field_moment / half_width",
+            "best_shell_estimator_run": best_shell,
+            "best_moment_estimator_run": best_moment,
             "representative_run": representative,
         },
     }

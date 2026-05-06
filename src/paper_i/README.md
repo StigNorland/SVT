@@ -26,7 +26,7 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 | `trefoil_breather_refinement.py` | `candidate` | first grid / box sensitivity harness for `#13` milestone 4 |
 | `trefoil_farfield_profile.py` | `candidate` | radial outer-density diagnostic for saved trefoil states |
 | `trefoil_farfield_compare.py` | `candidate` | profile-to-profile far-field comparison helper |
-| `alpha_g_proxy.py` | `candidate` | first conservative bridge from static far-field diagnostics to issue `#14` |
+| `alpha_g_proxy.py` | `candidate` | first conservative bridge from static far-field diagnostics to the proton acoustic monopole suppression track in issue `#14` |
 | muon / BdG scripts | `prototype` | reduced spectral experiments, not closure evidence |
 | Kelvin / chiral bridge scripts | `prototype` | exploratory coupling structure only |
 
@@ -41,7 +41,7 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 - `trefoil_breather_refinement.py` compares early observables across grid and box settings.
 - `trefoil_farfield_profile.py` reads a saved relaxed state and reports radial shell-averaged density/deficit.
 - `trefoil_farfield_compare.py` compares two saved radial far-field profile JSON files.
-- `alpha_g_proxy.py` extracts provisional gravity-facing suppression proxies from static sweep JSON artifacts.
+- `alpha_g_proxy.py` extracts provisional estimators for the proton acoustic monopole suppression from static sweep JSON artifacts.
 
 ## Muon-Mode Diagnostics
 
