@@ -16,6 +16,20 @@ These can be copied into GitHub issues directly.
 - Formalize local update-capacity as a usable concept in the gravity paper
 - Clarify the relation between freezing, outward progress, and local light speed at the horizon
 
+## Computation tasks
+
+- Build one shared numerical conventions note for `\mathcal{L}+\mathcal{L}_\perp`
+- Turn the trefoil breather into a real 3D static minimisation task with diagnostics
+- Separate `\alpha_G` closure from the reconnection-geometry programme
+- Turn the Paper II reconnection story into a real 3D time-dependent minimisation task
+- Add sensitivity gates for reduced problems before promoting full 3D claims
+
+## Claim-status tasks
+
+- Mark proton `N_Y` and `F` as provisional until the static 3D pipeline is reproducible
+- Mark `W` mass as an ansatz-backed estimate until cap geometry is measured directly
+- Mark neutrino, PMNS, CP, and generation claims as downstream targets of the reconnection spectrum
+
 ## Objection tasks
 
 - Write a clean answer to "If time stops at the horizon, why does the black hole spin?"

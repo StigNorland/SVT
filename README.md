@@ -46,9 +46,12 @@ The working paper plan is described in:
 
 - [docs/roadmap.md](docs/roadmap.md)
 - [docs/paper-mapping.md](docs/paper-mapping.md)
+- [docs/numerical-minimisation-roadmap.md](docs/numerical-minimisation-roadmap.md)
 - [docs/issue-workflow.md](docs/issue-workflow.md)
 
 The main restructuring idea is simple: one main claim per paper.
+The main quantitative bottleneck is also now explicit: two linked numerical programmes,
+one static and one dynamic, stand behind most unresolved flagship claims.
 
 ## Issue-Driven Workflow
 
