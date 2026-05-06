@@ -53,6 +53,8 @@ Use these names consistently in code, docs, and issue text.
 - `L_perp` or `lambda_perp`: chiral-shear sector
 - `static breather`: relaxed 3D trefoil Y-junction background
 - `reconnection event`: time-dependent topology-changing dynamic run
+- `acoustic monopole suppression estimator`: static far-field quantity used as a provisional bridge toward the gravity branch
+- `Q_p`: effective proton acoustic monopole moment in the Paper II gravity sector
 - `observable`: quantity reported to papers
 - `diagnostic`: quantity used to judge solver health
 
@@ -127,6 +129,7 @@ Examples:
 - cap volume
 - saddle excess
 - far-field suppression factor
+- acoustic monopole suppression estimator
 - mode splitting
 
 ## Status Labels for Outputs
@@ -162,6 +165,12 @@ Any static breather solver should report at minimum:
 - sensitivity to grid size
 - sensitivity to box size
 - sensitivity to initial condition family
+
+If the run is being used for the gravity branch, report additionally:
+
+- which quantity is being treated as the acoustic monopole suppression estimator
+- how that estimator depends on shell location or outer-region extraction choice
+- whether any mapping to `Q_p` introduces an explicit calibration factor
 
 ## Dynamic-Branch Minimum Diagnostics
 

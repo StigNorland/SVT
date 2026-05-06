@@ -88,10 +88,11 @@ Once a converged static breather exists, what pipeline turns its far-field densi
 
 **Tasks**
 
-- [ ] Define the far-field observable to extract from the relaxed breather
-- [ ] Connect that observable to the structural gravity formula used in Paper II
-- [ ] Measure numerical sensitivity in the extracted suppression factor
-- [ ] Compare the resulting `\alpha_G` with the current Paper II consistency check
+- [ ] Define the far-field observable to extract from the relaxed breather as a proton acoustic monopole suppression estimator, not yet as `\alpha_G`
+- [ ] Connect that estimator to the Paper II acoustic monopole moment `Q_p`
+- [ ] Make any calibration factor between the estimator and `Q_p` explicit
+- [ ] Measure numerical sensitivity in the extracted suppression estimator
+- [ ] Compare the resulting mapped `\alpha_G` with the current Paper II consistency check
 - [ ] Rewrite the relevant Paper II language according to the measured result
 
 ## 4. Dynamic Reconnection Closure

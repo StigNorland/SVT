@@ -161,14 +161,27 @@ Goal: compute the far-field quantity needed for `\alpha_G` from the converged br
 Tasks:
 
 1. Extract the long-range density / acoustic field around the relaxed breather.
-2. Measure the effective monopole suppression and its scaling with breather geometry.
-3. Propagate that result into the structural Paper II gravity formula.
-4. Compare predicted `\alpha_G` with the current consistency check.
+2. Measure a provisional estimator for the proton's sub-grain acoustic monopole suppression.
+3. Map that estimator into the effective acoustic monopole moment `Q_p`.
+4. Propagate that result into the structural Paper II gravity formula.
+5. Compare predicted `\alpha_G` with the current consistency check.
+
+Current bridge discipline:
+
+- do not identify a raw far-field scalar with `\alpha_G`
+- treat the static output first as an estimator for the proton acoustic monopole suppression
+- keep any calibration factor between the estimator and `Q_p` explicit until the geometry fixes it
+
+Current working template:
+
+- static branch estimator: `\Pi_{\rm mono} \approx 1 - \rho_{\rm shell}`
+- Paper II structural hook: `Q_p \sim \delta V_p (a_p / \xi)^3`
+- gravity target relation: `G = \rho_0 \omega_p^2 Q_p^2/(8\pi m_p^2)` and therefore `G = \alpha_G \hbar c \alpha^2/(N_p^2 m_e^2)`
 
 Exit gate:
 
 - a single documented pipeline maps the relaxed breather to a predicted `\alpha_G`
-- uncertainty is dominated by measured numerical sensitivity, not a guessed geometric factor
+- uncertainty is dominated by measured numerical sensitivity, not a hidden or guessed calibration factor
 
 ### Workstream 4: Dynamic Reconnection Closure
 
@@ -225,7 +238,7 @@ Exit gate:
 | Observable | Depends first on | Current status | Upgrade condition |
 |------|------|------|------|
 | Proton mass closure | Static breather | structural + scalar factors | converged `N_Y` and `F` |
-| `\alpha_G` | Static breather far field | CODATA consistency check | predicted from relaxed breather |
+| `\alpha_G` | Static breather far field | CODATA consistency check + provisional monopole estimator | predicted from relaxed breather through documented `Q_p` map |
 | `W` mass | Dynamic reconnection | `\phi` ansatz | measured cap geometry |
 | Neutrino spectrum | Event-background linearisation | structural hypothesis | computed mode spectrum |
 | PMNS / CP observables | Event-background linearisation + chirality statistics | speculative | reproducible asymmetry and phase extraction |
