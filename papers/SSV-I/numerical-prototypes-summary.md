@@ -135,6 +135,7 @@ The first gravity-branch bridge note is recorded in:
 papers/SSV-I/alpha-g-proxy-note.md
 papers/SSV-I/data/alpha-g-proxy-checkpoint-2026-05-06.json
 papers/SSV-I/alpha-g-mapping-note.md
+papers/SSV-I/cq-geometry-note.md
 ```
 
 Representative values:

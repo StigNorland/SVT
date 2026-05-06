@@ -27,6 +27,7 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 | `trefoil_farfield_profile.py` | `candidate` | radial outer-density diagnostic for saved trefoil states |
 | `trefoil_farfield_compare.py` | `candidate` | profile-to-profile far-field comparison helper |
 | `alpha_g_proxy.py` | `candidate` | first conservative bridge from static far-field diagnostics to the proton acoustic monopole suppression track in issue `#14` |
+| `cq_geometry_proxy.py` | `candidate` | first geometry-level constraint extractor for the unresolved monopole calibration in issue `#14` |
 | muon / BdG scripts | `prototype` | reduced spectral experiments, not closure evidence |
 | Kelvin / chiral bridge scripts | `prototype` | exploratory coupling structure only |
 
@@ -42,6 +43,7 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 - `trefoil_farfield_profile.py` reads a saved relaxed state and reports radial shell-averaged density/deficit.
 - `trefoil_farfield_compare.py` compares two saved radial far-field profile JSON files.
 - `alpha_g_proxy.py` extracts provisional estimators for the proton acoustic monopole suppression from static sweep JSON artifacts.
+- `cq_geometry_proxy.py` extracts deficit-volume and compactness diagnostics from saved static states for the later `Q_p` calibration path.
 
 ## Muon-Mode Diagnostics
 
@@ -67,6 +69,7 @@ python src/paper_i/trefoil_breather_refinement.py --n-values 24,32 --half-width-
 python src/paper_i/trefoil_farfield_profile.py papers/SSV-I/data/example-trefoil-state.npz --bins 16
 python src/paper_i/trefoil_farfield_compare.py papers/SSV-I/data/profile-a.json papers/SSV-I/data/profile-b.json
 python src/paper_i/alpha_g_proxy.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-2026-05-06.json
+python src/paper_i/cq_geometry_proxy.py papers/SSV-I/data/trefoil-state-n24-hw5-200steps-2026-05-06.npz
 python src/paper_i/muon_mode_prototype.py
 python src/paper_i/kelvin_self_induction.py --phi-n 64
 ```
