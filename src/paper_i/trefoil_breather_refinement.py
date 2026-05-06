@@ -62,6 +62,65 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def metric_span(values: list[float]) -> dict[str, float]:
+    if not values:
+        return {"min": 0.0, "max": 0.0, "span": 0.0, "relative_span": 0.0}
+    v_min = min(values)
+    v_max = max(values)
+    span = v_max - v_min
+    scale = max(abs(v_min), abs(v_max), 1.0e-12)
+    return {
+        "min": v_min,
+        "max": v_max,
+        "span": span,
+        "relative_span": span / scale,
+    }
+
+
+def build_comparison_summary(runs: list[dict[str, object]]) -> dict[str, object]:
+    energies = [float(run["summary"]["final_energy"]) for run in runs]
+    residuals = [float(run["summary"]["residual_norm"]) for run in runs]
+    radii = [float(run["summary"]["effective_radius"]) for run in runs]
+    depressed = [float(run["summary"]["depressed_fraction"]) for run in runs]
+    shell_densities = [float(run["shell_mean_density"]) for run in runs]
+
+    by_n: dict[int, list[dict[str, object]]] = {}
+    by_half_width: dict[float, list[dict[str, object]]] = {}
+    for run in runs:
+        n = int(run["config"]["n"])
+        half_width = float(run["config"]["half_width"])
+        by_n.setdefault(n, []).append(run)
+        by_half_width.setdefault(half_width, []).append(run)
+
+    return {
+        "global": {
+            "final_energy": metric_span(energies),
+            "residual_norm": metric_span(residuals),
+            "effective_radius": metric_span(radii),
+            "depressed_fraction": metric_span(depressed),
+            "shell_mean_density": metric_span(shell_densities),
+        },
+        "by_n": {
+            str(n): {
+                "half_width_values": [float(entry["config"]["half_width"]) for entry in entries],
+                "final_energy": metric_span([float(entry["summary"]["final_energy"]) for entry in entries]),
+                "residual_norm": metric_span([float(entry["summary"]["residual_norm"]) for entry in entries]),
+                "effective_radius": metric_span([float(entry["summary"]["effective_radius"]) for entry in entries]),
+            }
+            for n, entries in sorted(by_n.items())
+        },
+        "by_half_width": {
+            str(half_width): {
+                "n_values": [int(entry["config"]["n"]) for entry in entries],
+                "final_energy": metric_span([float(entry["summary"]["final_energy"]) for entry in entries]),
+                "residual_norm": metric_span([float(entry["summary"]["residual_norm"]) for entry in entries]),
+                "effective_radius": metric_span([float(entry["summary"]["effective_radius"]) for entry in entries]),
+            }
+            for half_width, entries in sorted(by_half_width.items())
+        },
+    }
+
+
 def main() -> None:
     args = parse_args()
     n_values = parse_int_list(args.n_values)
@@ -114,6 +173,7 @@ def main() -> None:
         "nondimensionalisation": asdict(Nondimensionalisation()),
         "controls": asdict(controls),
         "runs": runs,
+        "comparison_summary": build_comparison_summary(runs),
     }
 
     text = json.dumps(payload, indent=2)
