@@ -1,0 +1,689 @@
+{
+  "scan": [
+    {
+      "eta": 0.1,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_shell_saturating_local": {
+            "min": 0.0009835473705144344,
+            "max": 0.0070837393043032965,
+            "span": 0.006100191933788862,
+            "relative_span": 0.8611542113193041
+          },
+          "candidate_shell_compactness_local": {
+            "min": 0.0009856941470635019,
+            "max": 0.007143151600296807,
+            "span": 0.006157457453233306,
+            "relative_span": 0.8620085079781108
+          },
+          "candidate_shell_volume_fraction_local": {
+            "min": 0.0009717927658189054,
+            "max": 0.007005889820711304,
+            "span": 0.006034097054892398,
+            "relative_span": 0.8612891737255097
+          },
+          "candidate_shell_mixed_local": {
+            "min": 0.00097767006816667,
+            "max": 0.0070448145625073,
+            "span": 0.00606714449434063,
+            "relative_span": 0.8612213196682482
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_shell_saturating_local": {
+            "min": 0.027843650161568076,
+            "max": 0.13155367471697335,
+            "span": 0.10371002455540528,
+            "relative_span": 0.7883476062415486
+          },
+          "candidate_shell_compactness_local": {
+            "min": 0.028289224952937203,
+            "max": 0.13695829043771032,
+            "span": 0.10866906548477312,
+            "relative_span": 0.7934464218082267
+          },
+          "candidate_shell_volume_fraction_local": {
+            "min": 0.027865644352162194,
+            "max": 0.1350890469942318,
+            "span": 0.1072234026420696,
+            "relative_span": 0.793723880860955
+          },
+          "candidate_shell_mixed_local": {
+            "min": 0.027854647256865133,
+            "max": 0.1333213608556026,
+            "span": 0.10546671359873745,
+            "relative_span": 0.7910713851245946
+          }
+        }
+      }
+    },
+    {
+      "eta": 0.25,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_shell_saturating_local": {
+            "min": 0.0010036443949798738,
+            "max": 0.00734632688478424,
+            "span": 0.006342682489804366,
+            "relative_span": 0.863381467947114
+          },
+          "candidate_shell_compactness_local": {
+            "min": 0.0010090113363525422,
+            "max": 0.007494857624768016,
+            "span": 0.006485846288415474,
+            "relative_span": 0.8653728480420902
+          },
+          "candidate_shell_volume_fraction_local": {
+            "min": 0.000974257883241051,
+            "max": 0.007151703175804258,
+            "span": 0.006177445292563207,
+            "relative_span": 0.8637726064279103
+          },
+          "candidate_shell_mixed_local": {
+            "min": 0.0009889511391104624,
+            "max": 0.007249015030294249,
+            "span": 0.006260063891183786,
+            "relative_span": 0.8635744118369804
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_shell_saturating_local": {
+            "min": 0.02918677466858129,
+            "max": 0.14050588112628,
+            "span": 0.11131910645769873,
+            "relative_span": 0.7922736441021312
+          },
+          "candidate_shell_compactness_local": {
+            "min": 0.030300711647004114,
+            "max": 0.15401742042812241,
+            "span": 0.1237167087811183,
+            "relative_span": 0.8032643868285991
+          },
+          "candidate_shell_volume_fraction_local": {
+            "min": 0.029241760145066586,
+            "max": 0.14934431181942615,
+            "span": 0.12010255167435956,
+            "relative_span": 0.8041990365162142
+          },
+          "candidate_shell_mixed_local": {
+            "min": 0.029214267406823938,
+            "max": 0.14492509647285307,
+            "span": 0.11571082906602913,
+            "relative_span": 0.7984181613962474
+          }
+        }
+      }
+    },
+    {
+      "eta": 0.5,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_shell_saturating_local": {
+            "min": 0.0010371394357556057,
+            "max": 0.007783972852252479,
+            "span": 0.006746833416496873,
+            "relative_span": 0.8667596283489755
+          },
+          "candidate_shell_compactness_local": {
+            "min": 0.0010478733185009426,
+            "max": 0.00808103433222003,
+            "span": 0.007033161013719088,
+            "relative_span": 0.870329307434947
+          },
+          "candidate_shell_volume_fraction_local": {
+            "min": 0.0009783664122779603,
+            "max": 0.007394725434292515,
+            "span": 0.006416359022014554,
+            "relative_span": 0.8676940177195956
+          },
+          "candidate_shell_mixed_local": {
+            "min": 0.001007752924016783,
+            "max": 0.007589349143272497,
+            "span": 0.006581596219255714,
+            "relative_span": 0.8672148421435987
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_shell_saturating_local": {
+            "min": 0.031425315513603315,
+            "max": 0.1554262251417911,
+            "span": 0.1240009096281878,
+            "relative_span": 0.7978120134814132
+          },
+          "candidate_shell_compactness_local": {
+            "min": 0.033653189470448965,
+            "max": 0.1824493037454759,
+            "span": 0.14879611427502695,
+            "relative_span": 0.8155477232327699
+          },
+          "candidate_shell_volume_fraction_local": {
+            "min": 0.03153528646657391,
+            "max": 0.17310308652808334,
+            "span": 0.14156780006150943,
+            "relative_span": 0.8178236616164681
+          },
+          "candidate_shell_mixed_local": {
+            "min": 0.03148030099008861,
+            "max": 0.16426465583493724,
+            "span": 0.13278435484484863,
+            "relative_span": 0.8083562113220396
+          }
+        }
+      }
+    },
+    {
+      "eta": 1.0,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_shell_saturating_local": {
+            "min": 0.0011041295173070697,
+            "max": 0.008659264787188956,
+            "span": 0.007555135269881887,
+            "relative_span": 0.872491540050769
+          },
+          "candidate_shell_compactness_local": {
+            "min": 0.0011255972827977434,
+            "max": 0.009253387747124059,
+            "span": 0.008127790464326316,
+            "relative_span": 0.8783583576568942
+          },
+          "candidate_shell_volume_fraction_local": {
+            "min": 0.000986583470351779,
+            "max": 0.007880769951269028,
+            "span": 0.006894186480917249,
+            "relative_span": 0.8748112841191473
+          },
+          "candidate_shell_mixed_local": {
+            "min": 0.0010453564938294245,
+            "max": 0.008270017369228992,
+            "span": 0.007224660875399568,
+            "relative_span": 0.8735968200358348
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_shell_saturating_local": {
+            "min": 0.035902397203647365,
+            "max": 0.18526691317281332,
+            "span": 0.14936451596916595,
+            "relative_span": 0.806212579522182
+          },
+          "candidate_shell_compactness_local": {
+            "min": 0.040358145117338665,
+            "max": 0.2393130703801829,
+            "span": 0.19895492526284425,
+            "relative_span": 0.831358374813277
+          },
+          "candidate_shell_volume_fraction_local": {
+            "min": 0.03612233910958855,
+            "max": 0.22062063594539777,
+            "span": 0.1844982968358092,
+            "relative_span": 0.8362694452638211
+          },
+          "candidate_shell_mixed_local": {
+            "min": 0.03601236815661796,
+            "max": 0.20294377455910556,
+            "span": 0.1669314064024876,
+            "relative_span": 0.8225500228580321
+          }
+        }
+      }
+    },
+    {
+      "eta": 1.5,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_shell_saturating_local": {
+            "min": 0.001171119598858534,
+            "max": 0.009534556722125435,
+            "span": 0.008363437123266902,
+            "relative_span": 0.877171049164678
+          },
+          "candidate_shell_compactness_local": {
+            "min": 0.0012033212470945445,
+            "max": 0.010425741162028088,
+            "span": 0.009222419914933543,
+            "relative_span": 0.8845817071042202
+          },
+          "candidate_shell_volume_fraction_local": {
+            "min": 0.0009948005284255977,
+            "max": 0.008366814468245541,
+            "span": 0.007372013939819944,
+            "relative_span": 0.8811016388374392
+          },
+          "candidate_shell_mixed_local": {
+            "min": 0.0010829600636420658,
+            "max": 0.008950685595185488,
+            "span": 0.007867725531543421,
+            "relative_span": 0.8790081438873707
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_shell_saturating_local": {
+            "min": 0.04037947889369142,
+            "max": 0.21510760120383554,
+            "span": 0.17472812231014412,
+            "relative_span": 0.8122824174147714
+          },
+          "candidate_shell_compactness_local": {
+            "min": 0.04706310076422836,
+            "max": 0.29617683701488984,
+            "span": 0.24911373625066147,
+            "relative_span": 0.8410979695827383
+          },
+          "candidate_shell_volume_fraction_local": {
+            "min": 0.04070939175260319,
+            "max": 0.2681381853627122,
+            "span": 0.22742879361010904,
+            "relative_span": 0.8481775667365865
+          },
+          "candidate_shell_mixed_local": {
+            "min": 0.040544435323147304,
+            "max": 0.24162289328327385,
+            "span": 0.20107845796012655,
+            "relative_span": 0.8321995288930929
+          }
+        }
+      }
+    },
+    {
+      "eta": 2.0,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_shell_saturating_local": {
+            "min": 0.001238109680409998,
+            "max": 0.010409848657061913,
+            "span": 0.009171738976651914,
+            "relative_span": 0.8810636233822592
+          },
+          "candidate_shell_compactness_local": {
+            "min": 0.0012810452113913454,
+            "max": 0.011598094576932116,
+            "span": 0.010317049365540771,
+            "relative_span": 0.8895469248940887
+          },
+          "candidate_shell_volume_fraction_local": {
+            "min": 0.0010030175864994162,
+            "max": 0.008852858985222055,
+            "span": 0.007849841398722638,
+            "relative_span": 0.8867012805497366
+          },
+          "candidate_shell_mixed_local": {
+            "min": 0.001120563633454707,
+            "max": 0.009631353821141983,
+            "span": 0.008510790187687276,
+            "relative_span": 0.8836546082446961
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_shell_saturating_local": {
+            "min": 0.044856560583735466,
+            "max": 0.24494828923485773,
+            "span": 0.20009172865112226,
+            "relative_span": 0.8168733461096894
+          },
+          "candidate_shell_compactness_local": {
+            "min": 0.053768056411118065,
+            "max": 0.3530406036495969,
+            "span": 0.29927254723847885,
+            "relative_span": 0.8477000779647307
+          },
+          "candidate_shell_volume_fraction_local": {
+            "min": 0.045296444395617835,
+            "max": 0.3156557347800266,
+            "span": 0.27035929038440876,
+            "relative_span": 0.8565004864328414
+          },
+          "candidate_shell_mixed_local": {
+            "min": 0.04507650248967665,
+            "max": 0.2803020120074422,
+            "span": 0.23522550951776555,
+            "relative_span": 0.8391859474469993
+          }
+        }
+      }
+    },
+    {
+      "eta": 3.0,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_shell_saturating_local": {
+            "min": 0.0013720898435129261,
+            "max": 0.01216043252693487,
+            "span": 0.010788342683421943,
+            "relative_span": 0.8871676775909243
+          },
+          "candidate_shell_compactness_local": {
+            "min": 0.0014364931399849473,
+            "max": 0.013942801406740174,
+            "span": 0.012506308266755226,
+            "relative_span": 0.896972416225442
+          },
+          "candidate_shell_volume_fraction_local": {
+            "min": 0.0010194517026470536,
+            "max": 0.009824948019175082,
+            "span": 0.008805496316528029,
+            "relative_span": 0.8962384634852605
+          },
+          "candidate_shell_mixed_local": {
+            "min": 0.0011957707730799899,
+            "max": 0.010992690273054974,
+            "span": 0.009796919499974984,
+            "relative_span": 0.8912212803801964
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_shell_saturating_local": {
+            "min": 0.053810723963823574,
+            "max": 0.30462966529690216,
+            "span": 0.2508189413330786,
+            "relative_span": 0.8233569146610267
+          },
+          "candidate_shell_compactness_local": {
+            "min": 0.06717796770489745,
+            "max": 0.4667681369190108,
+            "span": 0.3995901692141134,
+            "relative_span": 0.8560785058116478
+          },
+          "candidate_shell_volume_fraction_local": {
+            "min": 0.05447054968164712,
+            "max": 0.4106908336146555,
+            "span": 0.3562202839330084,
+            "relative_span": 0.867368479587845
+          },
+          "candidate_shell_mixed_local": {
+            "min": 0.054140636822735344,
+            "max": 0.3576602494557788,
+            "span": 0.30351961263304345,
+            "relative_span": 0.848625512885157
+          }
+        }
+      }
+    },
+    {
+      "eta": 4.0,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_shell_saturating_local": {
+            "min": 0.0015060700066158541,
+            "max": 0.013911016396807824,
+            "span": 0.01240494639019197,
+            "relative_span": 0.8917354445099027
+          },
+          "candidate_shell_compactness_local": {
+            "min": 0.001591941068578549,
+            "max": 0.01628750823654823,
+            "span": 0.014695567167969683,
+            "relative_span": 0.902259999168791
+          },
+          "candidate_shell_volume_fraction_local": {
+            "min": 0.0010358858187946907,
+            "max": 0.010797037053128107,
+            "span": 0.009761151234333416,
+            "relative_span": 0.9040583251036844
+          },
+          "candidate_shell_mixed_local": {
+            "min": 0.0012709779127052724,
+            "max": 0.012354026724967965,
+            "span": 0.011083048812262693,
+            "relative_span": 0.8971203526590584
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_shell_saturating_local": {
+            "min": 0.06276488734391167,
+            "max": 0.36431104135894654,
+            "span": 0.3015461540150349,
+            "relative_span": 0.8277162089027355
+          },
+          "candidate_shell_compactness_local": {
+            "min": 0.08058787899867687,
+            "max": 0.5804956701884247,
+            "span": 0.4999077911897479,
+            "relative_span": 0.8611740222411675
+          },
+          "candidate_shell_volume_fraction_local": {
+            "min": 0.0636446549676764,
+            "max": 0.5057259324492844,
+            "span": 0.442081277481608,
+            "relative_span": 0.8741518856677201
+          },
+          "candidate_shell_mixed_local": {
+            "min": 0.06320477115579404,
+            "max": 0.43501848690411543,
+            "span": 0.3718137157483214,
+            "relative_span": 0.854707850221259
+          }
+        }
+      }
+    },
+    {
+      "eta": 5.0,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_shell_saturating_local": {
+            "min": 0.001640050169718782,
+            "max": 0.01566160026668078,
+            "span": 0.014021550096961998,
+            "relative_span": 0.8952820821759894
+          },
+          "candidate_shell_compactness_local": {
+            "min": 0.0017473889971721507,
+            "max": 0.01863221506635629,
+            "span": 0.01688482606918414,
+            "relative_span": 0.9062167868420881
+          },
+          "candidate_shell_volume_fraction_local": {
+            "min": 0.0010523199349423281,
+            "max": 0.011769126087081134,
+            "span": 0.010716806152138806,
+            "relative_span": 0.9105863997754727
+          },
+          "candidate_shell_mixed_local": {
+            "min": 0.0013461850523305552,
+            "max": 0.013715363176880957,
+            "span": 0.012369178124550403,
+            "relative_span": 0.9018483845473574
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_shell_saturating_local": {
+            "min": 0.07171905072399978,
+            "max": 0.4239924174209909,
+            "span": 0.35227336669699116,
+            "relative_span": 0.8308482704472793
+          },
+          "candidate_shell_compactness_local": {
+            "min": 0.09399779029245625,
+            "max": 0.6942232034578387,
+            "span": 0.6002254131653825,
+            "relative_span": 0.864600045310694
+          },
+          "candidate_shell_volume_fraction_local": {
+            "min": 0.07281876025370569,
+            "max": 0.6007610312839132,
+            "span": 0.5279422710302075,
+            "relative_span": 0.8787891416690569
+          },
+          "candidate_shell_mixed_local": {
+            "min": 0.07226890548885273,
+            "max": 0.5123767243524521,
+            "span": 0.44010781886359934,
+            "relative_span": 0.8589535744813798
+          }
+        }
+      }
+    }
+  ],
+  "best_by_n": {
+    "24": {
+      "shell_saturating_local": {
+        "eta": 0.1,
+        "candidate_span": {
+          "min": 0.0009835473705144344,
+          "max": 0.0070837393043032965,
+          "span": 0.006100191933788862,
+          "relative_span": 0.8611542113193041
+        }
+      },
+      "shell_compactness_local": {
+        "eta": 0.1,
+        "candidate_span": {
+          "min": 0.0009856941470635019,
+          "max": 0.007143151600296807,
+          "span": 0.006157457453233306,
+          "relative_span": 0.8620085079781108
+        }
+      },
+      "shell_volume_fraction_local": {
+        "eta": 0.1,
+        "candidate_span": {
+          "min": 0.0009717927658189054,
+          "max": 0.007005889820711304,
+          "span": 0.006034097054892398,
+          "relative_span": 0.8612891737255097
+        }
+      },
+      "shell_mixed_local": {
+        "eta": 0.1,
+        "candidate_span": {
+          "min": 0.00097767006816667,
+          "max": 0.0070448145625073,
+          "span": 0.00606714449434063,
+          "relative_span": 0.8612213196682482
+        }
+      }
+    },
+    "48": {
+      "shell_saturating_local": {
+        "eta": 0.1,
+        "candidate_span": {
+          "min": 0.027843650161568076,
+          "max": 0.13155367471697335,
+          "span": 0.10371002455540528,
+          "relative_span": 0.7883476062415486
+        }
+      },
+      "shell_compactness_local": {
+        "eta": 0.1,
+        "candidate_span": {
+          "min": 0.028289224952937203,
+          "max": 0.13695829043771032,
+          "span": 0.10866906548477312,
+          "relative_span": 0.7934464218082267
+        }
+      },
+      "shell_volume_fraction_local": {
+        "eta": 0.1,
+        "candidate_span": {
+          "min": 0.027865644352162194,
+          "max": 0.1350890469942318,
+          "span": 0.1072234026420696,
+          "relative_span": 0.793723880860955
+        }
+      },
+      "shell_mixed_local": {
+        "eta": 0.1,
+        "candidate_span": {
+          "min": 0.027854647256865133,
+          "max": 0.1333213608556026,
+          "span": 0.10546671359873745,
+          "relative_span": 0.7910713851245946
+        }
+      }
+    }
+  },
+  "interpretation": {
+    "purpose": "Test run-local geometry scales as re-expressions of the additive saturating reduced Q_p family.",
+    "warning": "Local numerical improvement alone does not establish a physical Q_p map."
+  }
+}

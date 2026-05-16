@@ -29,6 +29,8 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 | `alpha_g_proxy.py` | `candidate` | first conservative bridge from static far-field diagnostics to the proton acoustic monopole suppression track in issue `#14` |
 | `cq_geometry_proxy.py` | `candidate` | first geometry-level constraint extractor for the unresolved monopole calibration in issue `#14` |
 | `cq_geometry_compare.py` | `candidate` | comparison harness for geometry-level monopole-calibration diagnostics across saved states |
+| `q_p_two_factor_pure_additive_local_scan.py` | `candidate` | pure additive local-geometry Q_p scan for issue `#14` |
+| `trefoil_y_junction_static.py` | `prototype` | first open three-prong Y-junction relaxation for `N_Y` / `F` on issue `#13` |
 | muon / BdG scripts | `prototype` | reduced spectral experiments, not closure evidence |
 | Kelvin / chiral bridge scripts | `prototype` | exploratory coupling structure only |
 
@@ -50,6 +52,10 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 - `q_p_two_factor_probe.py` compares simple reduced two-factor `Q_p` candidates against shell deficit alone.
 - `q_p_two_factor_scan.py` scans the additive saturating reduced `Q_p` family over a small coefficient range.
 - `q_p_two_factor_normalized_scan.py` tests a branch-normalized variant of the additive saturating reduced `Q_p` family.
+- `q_p_two_factor_reexpress_scan.py` tests geometry-tied re-expressions of the additive saturating reduced `Q_p` family.
+- `q_p_two_factor_local_scale_scan.py` tests run-local geometric re-expressions of the additive saturating reduced `Q_p` family.
+- `q_p_two_factor_pure_additive_local_scan.py` tests the same local geometric scales purely additively, with no `Pi_shell` multiplier on the correction term.
+- `trefoil_y_junction_static.py` relaxes the open three-prong Y-junction (three vortex filaments meeting at a central node, 120 deg apart in the equatorial plane) using a product-vortex ansatz with initial-state boundary anchoring.
 
 ## Muon-Mode Diagnostics
 
@@ -77,6 +83,10 @@ python src/paper_i/trefoil_farfield_compare.py papers/SSV-I/data/profile-a.json 
 python src/paper_i/alpha_g_proxy.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-2026-05-06.json
 python src/paper_i/cq_geometry_proxy.py papers/SSV-I/data/trefoil-state-n24-hw5-200steps-2026-05-06.npz
 python src/paper_i/cq_geometry_compare.py papers/SSV-I/data/cq-geometry-n24-hw5-200steps-2026-05-06.json papers/SSV-I/data/cq-geometry-n48-hw7-400steps-2026-05-06.json
+python src/paper_i/q_p_two_factor_reexpress_scan.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
+python src/paper_i/q_p_two_factor_local_scale_scan.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
+python src/paper_i/q_p_two_factor_pure_additive_local_scan.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
+python src/paper_i/trefoil_y_junction_static.py --n 24 --half-width 6 --max-steps 200
 python src/paper_i/muon_mode_prototype.py
 python src/paper_i/kelvin_self_induction.py --phi-n 64
 ```
