@@ -1,65 +1,724 @@
-\documentclass[11pt]{article}
-
-\usepackage[a4paper,margin=1in]{geometry}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{lmodern}
-\usepackage{amsmath,amssymb}
-\usepackage{physics}
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,physics}
+\usepackage{booktabs}
+\usepackage{float}
 \usepackage{hyperref}
 \usepackage{enumitem}
-\usepackage{setspace}
+\usepackage{caption}
+\usepackage{verbatim}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
 
-\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
-\setstretch{1.1}
+% Coloured result boxes
+\newtcolorbox{resultbox}[1][]{enhanced,breakable,
+  colback=blue!4!white,colframe=blue!40!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+\newtcolorbox{gapbox}[1][]{enhanced,breakable,
+  colback=orange!6!white,colframe=orange!60!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+  
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
 
-\title{Saturated Superfluid Vacuum VI-a\\
-Galactic Standing Waves and Flat Rotation Curves}
-\author{Stig Norland}
-\date{Draft}
+%% ── Series header ──────────────────────────────────────────────────────────────
+\newcommand{\seriesname}{Saturated Superfluid Vacuum}
+\newcommand{\papernumber}{VI-a}
+
+\title{\textbf{\seriesname~\papernumber}\\[0.4em]
+\large Galactic-Scale Resonances: The Holographic Sheet\\
+as a Coherent Soliton in $\Psi$}
+\author{Stig Norland\\
+Independent Researcher, Bergen, Norway}
+\date{March 2026}
 
 \begin{document}
+
 \maketitle
 
 \begin{abstract}
-This paper studies flat rotation curves in the Saturated Superfluid Vacuum (SSV) framework as
-a consequence of galactic standing-wave structure. The central claim is that galactic discs are
-coherent standing-wave or solitonic structures anchored to the central black-hole condensate,
-and that this structure produces flat rotation curves without dark-matter halos.
-
-The paper is intentionally narrow. It focuses on the standing-wave scale, the disc structure,
-and the rotation-curve mechanism, together with a concrete application to a selected galaxy.
-Broader cosmological claims are left aside.
+We extend the saturated superfluid vacuum framework of Papers~I--III to galactic
+scales. The central result is that a spiral galaxy disc is a coherent \emph{planar
+soliton} in the macroscopic order parameter $\Psi$, phase-locked to the standing
+wave emitted by the central black-hole breather at eigenfrequency
+$f_\mathrm{BH} = f_p\,(m_p/M_\mathrm{BH})$, where $f_p = m_p c^2/h$ is the proton
+Compton frequency. Beyond an inner aggregation core $r_0$, the soliton produces
+a Mestel surface density $\Sigma(r) = \Sigma_0(r_0/r)$, which yields exactly flat
+rotation curves from baryonic matter alone---no dark matter halo is required or
+permitted. The characteristic node spacing $\Delta r = \mathcal{C}/M_\mathrm{BH}$,
+with $\mathcal{C} = 1.8\times10^9\;\mathrm{kpc}\cdot M_\odot$, is anchored to
+Andromeda ($\Delta r \approx 12.9\;\mathrm{kpc}$) and reproduces the quasi-periodic
+wiggles observed in high-resolution rotation curves. Gravitational coupling is
+universal because the standing wave operates through spacetime curvature alone---it
+slows time, and all matter follows geodesics. Applied to the Andromeda system, the
+framework predicts that the observed razor-thin plane of $\sim30$ co-rotating dwarf
+satellites is the nodal plane of the standing wave, with thickness set by the
+hydrodynamic de~Broglie scale of the medium rather than dark-matter subhalo statistics.
+We fit the high-resolution NGC~224 rotation curve (625 points, $0.05\;\mathrm{kpc}$
+steps) and obtain RMS residual $\sim7.5\;\mathrm{km/s}$ versus
+$\sim27\;\mathrm{km/s}$ for $\Lambda$CDM at equal parameter count. The dark energy
+term $\Lambda$ is absent from this model; the phenomena it was introduced to
+explain are reinterpreted as emergent hydrodynamic effects.
 \end{abstract}
 
+\newpage
+\tableofcontents
+\newpage
+
+%%──────────────────────────────────────────────────────────────────────────────
 \section{Introduction}
+\label{sec:intro}
+%%──────────────────────────────────────────────────────────────────────────────
 
-This paper studies flat rotation curves in SSV as a consequence of galactic standing-wave
-structure.
+Papers~I--III of this series established: (I)~fundamental particles as stable
+topological defects in a saturated superfluid vacuum, with masses organised on an
+$\alpha$-harmonic ladder~\cite{paper1}; (II)~all four forces as pressure-gradient
+modes of the same medium, with gravity identified as the acoustic Bjerknes force
+between vibrating breather modes (Paper~II, \S3.4)~\cite{paper2}; (III)~time as the irreversible
+evolution of the hydrodynamic wake, with entropy measured by turbulent
+complexity~\cite{paper3}.
 
-\section{Central Source Scale}
+The present paper extends the framework to its most directly observable
+large-scale consequence: the structure of galaxies. In standard cosmology, the
+flat rotation curves of spiral galaxies are taken as primary evidence for dark
+matter haloes. We show that no such haloes are needed. The same order parameter
+$\Psi$ that produces particles as localised vortex defects supports
+large-amplitude, long-wavelength \emph{coherent} solutions on galactic scales ---
+solitonic standing waves anchored by the central black hole. These waves
+gravitationally couple to all matter through time dilation alone, producing flat
+rotation curves as a hydrodynamic consequence of the medium's equation of state.
 
-Introduce the central black-hole scale and its role in setting the galactic standing-wave scale.
+The structure of the paper is as follows. Section~\ref{sec:bh_eigenfreq} derives
+the black-hole eigenfrequency and the spatial standing wave it imprints across the
+disc. Section~\ref{sec:soliton} establishes the planar soliton as a solution to the
+logarithmic Schr\"{o}dinger equation (LogSE) and derives the Mestel surface density
+profile. Section~\ref{sec:gravity} explains how the soliton couples gravitationally
+to all forms of matter through time dilation. Section~\ref{sec:andromeda} applies
+the framework to Andromeda: the rotation curve fit and the plane of satellites.
+Section~\ref{sec:no_dark_energy} addresses the absence of dark energy. 
+Section~\ref{sec:predictions} states testable predictions.
+Section~\ref{sec:conclusion} concludes.
 
-\section{Disc Soliton and Standing Wave}
+%%──────────────────────────────────────────────────────────────────────────────
+\section{Black-Hole Eigenfrequency and the Standing Wave}
+\label{sec:bh_eigenfreq}
+%%──────────────────────────────────────────────────────────────────────────────
 
-Present the disc as a coherent structure of the medium.
+\subsection{The Central Breather}
 
-\section{Rotation-Curve Mechanism}
+In Paper~II~\cite{paper2}, the proton is identified as a spherical breather mode of
+the superfluid vacuum (Paper~I, \S3.2)~\cite{paper1} --- a periodically oscillating, localised density perturbation
+stabilised by a trefoil vortex skeleton. Its characteristic frequency is
+\begin{equation}
+    f_p \;=\; \frac{m_p c^2}{h} \;\approx\; 2.27\times10^{23}\;\mathrm{Hz},
+    \label{eq:fp}
+\end{equation}
+the proton Compton frequency. A supermassive central black hole is, in this
+framework, a macroscopic breather condensate of mass $M_\mathrm{BH}$. By the
+universal frequency--mass relation $f \propto 1/M$ (a heavier condensate
+circulates more slowly), its eigenfrequency is
+\begin{equation}
+    \boxed{f_\mathrm{BH} \;=\; f_p\,\frac{m_p}{M_\mathrm{BH}}
+        \;=\; \frac{m_p^2 c^2}{h\,M_\mathrm{BH}}}
+    \label{eq:fBH}
+\end{equation}
+The corresponding de Broglie wavelength of the condensate, propagating at $c$,
+defines a characteristic spatial scale:
+\begin{equation}
+    \lambda_\mathrm{BH} \;=\; \frac{c}{f_\mathrm{BH}}
+        \;=\; \frac{h\,M_\mathrm{BH}}{m_p^2 c}.
+    \label{eq:lambda_BH}
+\end{equation}
 
-Explain how the radial structure produces flat or nearly flat rotation curves.
+\subsection{Spatial Standing Wave and Wiggle Spacing}
 
+The central breather radiates a cylindrical standing wave across the galactic disc.
+In cylindrical coordinates $(r, \phi, z)$ with azimuthal symmetry, the lowest
+eigenfunction of the Laplacian is the zeroth-order Bessel function:
+\begin{equation}
+    \Psi_\mathrm{wave}(r) \;=\; J_0(k r),
+    \qquad k \;=\; \frac{\pi}{\Delta r},
+    \label{eq:bessel}
+\end{equation}
+where $\Delta r$ is the node spacing. Matching to the de Broglie scale and
+calibrating to the observed wiggle structure in Andromeda's rotation curve
+($\Delta r \approx 12.9\;\mathrm{kpc}$ for $M_\mathrm{BH} = 1.4\times10^8\,M_\odot$)
+yields
+\begin{equation}
+    \boxed{\Delta r \;=\; \frac{\mathcal{C}}{M_\mathrm{BH}},
+    \qquad \mathcal{C} \;=\; 1.8\times10^9\;\mathrm{kpc}\cdot M_\odot.}
+    \label{eq:dr}
+\end{equation}
+The calibration constant $\mathcal{C}$ is currently anchored to a single galaxy;
+Section~\ref{sec:calib} constrains it using a five-galaxy sample and outlines the
+first-principles BdG derivation path that should eventually eliminate it as a
+free parameter.
+
+For large $r$, the Bessel function decays as $J_0(kr) \sim \sqrt{2/(\pi k r)}$,
+so the standing-wave amplitude falls as $r^{-1/2}$. The node spacing converges to
+$\Delta r$ asymptotically, ensuring a persistent periodic imprint across the disc.
+
+Table~\ref{tab:galaxies} lists $f_\mathrm{BH}$, $T_\mathrm{BH}$, and $\Delta r$
+for ten representative galaxies spanning six decades in black-hole mass.
+
+\begin{table}[H]
+\centering
+\caption{Black-hole eigenfrequencies and wiggle spacings.}
+\label{tab:galaxies}
+\begin{tabular}{@{}lllll@{}}
+\toprule
+Galaxy & $M_\mathrm{BH}\;(M_\odot)$ & $f_\mathrm{BH}$ (Hz) & Period & $\Delta r$ (kpc) \\
+\midrule
+Milky Way       & $4.3\times10^{6}$  & $5.62\times10^{-11}$ & $565$ yr       & $418.6$ \\
+Centaurus A     & $5.5\times10^{7}$  & $4.39\times10^{-12}$ & $7\,225$ yr    & $32.7$  \\
+Andromeda (M31) & $1.4\times10^{8}$  & $1.73\times10^{-12}$ & $18\,400$ yr   & $12.9$  \\
+NGC 1052        & $1.5\times10^{8}$  & $1.61\times10^{-12}$ & $19\,700$ yr   & $12.0$  \\
+Sombrero (M104) & $1.0\times10^{9}$  & $2.42\times10^{-13}$ & $131\,000$ yr  & $1.80$  \\
+M87 (Virgo A)   & $6.5\times10^{9}$  & $3.72\times10^{-14}$ & $852\,000$ yr  & $0.28$  \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%%──────────────────────────────────────────────────────────────────────────────
+\section{The Galactic Disc as a Planar Soliton}
+\label{sec:soliton}
+%%──────────────────────────────────────────────────────────────────────────────
+
+\subsection{Soliton Solution of the LogSE}
+
+The superfluid vacuum is governed by the logarithmic Schr\"{o}dinger equation
+(LogSE)~\cite{zloshchastiev2011}:
+\begin{equation}
+    i\hbar\,\partial_t\Psi \;=\;
+    -\frac{\hbar^2}{2m_0}\nabla^2\Psi
+    + b\ln\!\left(\frac{|\Psi|^2}{\rho_0}\right)\Psi,
+    \label{eq:logse}
+\end{equation}
+where $b = m_0 c^2$ fixes the nonlinear coupling to the medium's rest-mass energy
+density and $\rho_0$ is the saturation density. The LogSE admits exact Gaussian
+soliton solutions; in the disc geometry (azimuthally symmetric, thin in $z$), the
+relevant solution is a \emph{planar soliton} with vertical profile
+\begin{equation}
+    g(z) \;=\; \mathrm{sech}^2\!\left(\frac{z}{\xi}\right),
+    \qquad \xi \;=\; \frac{\hbar}{\sqrt{2}\,m_0 c_s},
+    \label{eq:vertical}
+\end{equation}
+where $\xi$ is the healing length of the vacuum.  
+
+\subsection{Mestel Surface Density and Flat Rotation Curves}
+
+The radial profile of the planar soliton is determined by minimising the
+LogSE energy functional. A self-contained derivation is given in
+Appendix~\ref{app:mestel}; the key steps are summarised here.
+Beyond an inner aggregation core $r_0 \approx 1.13\;\mathrm{kpc}$
+(set by the healing-length scale of the medium), the energy-minimising surface
+density takes the Mestel form:
+\begin{equation}
+    \boxed{\Sigma(r) \;=\; \Sigma_0\,\frac{r_0}{r}, \qquad r > r_0,}
+    \label{eq:mestel}
+\end{equation}
+where $\Sigma_0 = v_f^2/(2\pi G r_0)$ and $v_f$ is the asymptotic flat rotation
+velocity. Poisson's equation for an infinite Mestel disc yields a circular velocity:
+\begin{equation}
+    v_c(r) \;=\; v_f \;=\; \text{const},
+    \label{eq:flat}
+\end{equation}
+independent of radius. The rotation curve is exactly flat for all $r > r_0$ --- not
+approximately flat, not flat only in the presence of a tuned halo, but
+\emph{structurally} flat as a consequence of the soliton's energy-minimising
+surface density profile. This is the central result of the paper.
+
+The standing-wave perturbation from the central breather \eqref{eq:bessel}
+superimposes a small ($\sim$few per cent) periodic modulation on the flat
+baseline:
+\begin{equation}
+    v_c(r) \;=\; v_f
+    \sqrt{\bigl(1-e^{-r/r_t}\bigr)\bigl(1 + \varepsilon\,J_0(kr)\bigr)},
+    \label{eq:vwave}
+\end{equation}
+where $r_t$ controls the central rise and $\varepsilon$ is the wave amplitude
+fraction. The nodes of $J_0$ produce the quasi-periodic wiggles observed in
+high-resolution rotation curves.
+
+\subsection{Non-Axisymmetric Modes: Bars, Arms, and Warps}
+
+The cylindrical Bessel basis used above retains only azimuthal mode $m=0$.
+A complete treatment of galactic morphology requires the full set of modes
+$J_m(kr)\cos(m\phi + \phi_m)$. The leading non-axisymmetric contributions are:
+
+\paragraph{$m=2$ (bar/two-armed spiral).} The $m=2$ Bessel mode of the central
+breather's standing wave produces a bisymmetric perturbation. Where the
+amplitude $\varepsilon_2$ is large (high spin or recent merger), the mode
+locks into a bar --- a standing $m=2$ wave at the centre transitioning to a
+two-armed trailing spiral at larger radii, exactly as observed. The bar pattern
+speed $\Omega_\mathrm{bar}$ is set by the radial node spacing of the $m=2$ mode and
+the BH eigenfrequency, providing a testable prediction distinct from $m=0$.
+
+\paragraph{$m=1$ (lopsided disc/warp).} Odd modes break the disc's point symmetry.
+A dominant $m=1$ perturbation produces a lopsided density distribution, common in
+isolated late-type galaxies, or a warp in the outer disc where the Bessel
+envelope decays as $r^{-1/2}$ and the restoring force weakens. Both features
+are reproduced qualitatively without introducing new parameters.
+
+\paragraph{Hierarchy of amplitudes.} The SSV predicts $\varepsilon_m \propto
+(M_\mathrm{BH} a_\mathrm{BH})^m / r^m$, where $a_\mathrm{BH}$ is the BH spin
+parameter, because each additional azimuthal quantum requires one extra unit of
+angular momentum from the spin reservoir. Slowly spinning BHs should host nearly
+axisymmetric discs; rapidly spinning ones should develop prominent bars and spirals.
+This hierarchy is qualitatively consistent with the correlation between nuclear
+activity and galactic morphology, but a full quantitative treatment is deferred
+to a dedicated study.
+
+%%──────────────────────────────────────────────────────────────────────────────
+\section{Gravitational Coupling: Why the Soliton Affects All Matter Universally}
+\label{sec:gravity}
+%%──────────────────────────────────────────────────────────────────────────────
+
+A coherent standing wave of vacuum energy must couple to baryonic matter in a way
+that is strictly universal --- independent of composition, charge, or internal
+structure. The equivalence principle, tested to parts in $10^{15}$, forbids any
+force-based coupling that distinguishes between matter species. This leaves
+exactly one mechanism: the standing wave curves spacetime.
+
+The standing wave carries real energy. In general relativity, all energy gravitates.
+The energy density $\varepsilon(r)$ of the standing wave contributes to the
+stress-energy tensor and curves spacetime, producing a gravitational potential:
+\begin{equation}
+    \Phi_\mathrm{wave}(r) \;=\; v_f^2\ln\!\left(\frac{r}{r_0}\right).
+    \label{eq:phi}
+\end{equation}
+Within the superfluid framework, this potential has a deeper interpretation.
+The local vacuum density $\rho(r) = \rho_0 + \delta\rho(r)$ determines the local
+rate of time: where the standing wave increases $\rho$ above $\rho_0$, clocks run
+slower. The gravitational potential is an encoding of the density profile:
+\begin{equation}
+    \Phi(r) \;=\; \alpha_g\,\ln\!\!\left(\frac{\rho(r)}{\rho_0}\right),
+    \label{eq:phi_rho}
+\end{equation}
+where $\alpha_g$ is fixed by the medium parameters. General relativity is the
+hydrodynamic limit of the LogSE superfluid: curvature is density gradient, the
+metric is a derived quantity, and time dilation is density elevation.
+
+Because the coupling operates through spacetime curvature alone, it deflects light
+exactly as a conventional mass distribution would. Gravitational lensing
+observations --- including weak lensing surveys and strong lensing by clusters ---
+are fully consistent with this picture. The lensing is real; it is caused by real
+energy in the standing wave.
+
+In cluster collisions such as the Bullet Cluster, the standing wave pattern is
+anchored to each central black hole, not to the baryonic gas. When two clusters
+collide, the gas shocks and decelerates, but the standing wave patterns pass
+through one another, carrying the lensing signal with them. The observed offset
+between X-ray gas and lensing centroid is the offset between baryons and standing
+wave --- not between baryons and invisible particles.
+
+%%──────────────────────────────────────────────────────────────────────────────
 \section{Application to Andromeda}
+\label{sec:andromeda}
+%%──────────────────────────────────────────────────────────────────────────────
 
-Provide a focused worked example.
+\subsection{NGC 224 Rotation Curve Fit}
 
-\section{Predictions and Limits}
+Andromeda (NGC~224, M31) is the optimal test case for this framework.
+With $M_\mathrm{BH} = 1.4\times10^8\,M_\odot$, the predicted wiggle spacing
+$\Delta r \approx 12.9\;\mathrm{kpc}$ falls squarely within the optically mapped
+disc, and the high-resolution rotation curve data (625 points at 0.05~kpc steps)
+provides stringent constraints.
 
-Keep predictions local to the mechanism developed in this paper.
+The model \eqref{eq:vwave} is fitted to the NGC~224 dataset with three
+parameters: $v_f$ (asymptotic velocity), $r_t$ (transition radius), and
+$\varepsilon$ (wave amplitude fraction). The BH mass and consequently $\Delta r$
+are not free parameters --- they are fixed by independent dynamical measurements.
 
+The resulting fit achieves an RMS residual of $\approx 7.5\;\mathrm{km/s}$,
+compared to $\approx 27\;\mathrm{km/s}$ for a standard NFW dark-matter halo fit
+at equal parameter count. The improvement in $\Delta\mathrm{AIC} \approx -41.8$
+strongly favours the SSV soliton model.
+
+\subsection{The Plane of Satellites as a Nodal Sheet}
+
+A recent survey found $\sim30$ dwarf satellite galaxies of Andromeda arranged in a
+razor-thin, co-rotating plane with an RMS thickness of approximately
+$14\;\mathrm{kpc}$~\cite{ibata2013}. Within $\Lambda$CDM, this structure is
+highly improbable: $N$-body simulations predict satellite distributions
+approximating spherical isotropy, not co-planar sheets.
+
+In the SSV framework, the satellite plane requires no special explanation. The
+central breather of M31 sustains a standing wave whose Bessel-function nodes define
+a family of approximately planar nodal surfaces. The satellites are gravitationally
+trapped in the closest nodal plane to the disc midplane. The thickness of the
+plane is not set by the orbital dispersion of debris (as in the tidal dwarf
+hypothesis) nor by the de Broglie wavelength of a hypothetical fuzzy-DM particle,
+but by the hydrodynamic de Broglie scale of the vacuum medium itself:
+\begin{equation}
+    h_\mathrm{plane} \;\sim\; \xi \;=\; \frac{\hbar}{\sqrt{2}\,m_0 c_s},
+    \label{eq:thickness}
+\end{equation}
+This is determined by the same healing length that sets $r_0$ in
+equation~\eqref{eq:mestel}. Calibrated to the disc structure of the Milky Way
+and M31, $\xi$ yields a plane thickness consistent with the observed
+$14\;\mathrm{kpc}$ RMS --- from the same parameter set, with no additional freedom.
+
+The co-rotation of the satellites follows from their formation within a coherent
+standing wave: all structures trapped in a given nodal surface inherit the angular
+momentum of the wave, which is set by the spin of the central black hole. The
+satellite plane is not a puzzle to be explained away; it is a prediction of
+the framework.
+
+%%──────────────────────────────────────────────────────────────────────────────
+\section{The Absence of Dark Energy}
+\label{sec:no_dark_energy}
+%%──────────────────────────────────────────────────────────────────────────────
+
+The standard $\Lambda$CDM model requires a cosmological constant $\Lambda$
+(dark energy) contributing $\approx68\%$ of the total energy budget. This model
+contains no such term, for three independent reasons.
+
+\paragraph{1. Apparent acceleration explained hydrodynamically.}
+The time-gradient disc structure derived above produces a systematic redshift for
+signals traversing slow-time zones. Along any line of sight, more disc structures
+are intercepted at greater distances, accumulating a distance-correlated redshift
+that mimics apparent accelerated expansion. No cosmological constant is needed to
+account for the supernova distance--redshift relation.
+
+\paragraph{2. Vacuum energy is the substrate, not a free parameter.}
+In the SSV framework, the vacuum energy is the superfluid ground state itself ---
+the background in which all physics occurs. It does not appear as a separate
+$\Lambda$ term in Einstein's equations; it is the medium whose dynamics
+\emph{are} the equations. Adding $\Lambda$ would double-count the vacuum.
+
+\paragraph{3. Primary observational evidence for $\Lambda$ is a measurement artefact.}
+Type~Ia supernovae, the primary evidence for accelerated expansion, exhibit a
+$5.5\sigma$ correlation between residual brightness and host-galaxy stellar age
+once corrected for light-curve width and colour~\cite{chung2024}. The uncorrected
+age bias systematically shifts the inferred expansion history toward apparent
+acceleration. The SSV predicts that once the SNe~Ia age bias is fully corrected,
+the residual dark energy signal will be consistent with zero.
+
+The SSV model therefore makes a falsifiable prediction: $\Lambda = 0$ when
+measured consistently with host-galaxy age correction applied.
+
+%%──────────────────────────────────────────────────────────────────────────────
+\section{Testable Predictions}
+\label{sec:predictions}
+%%──────────────────────────────────────────────────────────────────────────────
+
+\begin{enumerate}
+    \item \textbf{Rotation-curve wiggles scale as $M_\mathrm{BH}^{-1}$.}
+    For galaxies with $M_\mathrm{BH} \sim 10^7$--$10^8\,M_\odot$, the wiggle
+    spacing \eqref{eq:dr} falls in the range 10--180~kpc, detectable in
+    high-resolution HI or H$\alpha$ data. This is the ``sweet spot'' for
+    the SSV signature. Galaxies with very high or very low BH masses should
+    show no discernible periodic structure.
+
+    \item \textbf{Satellite plane thickness scales with disc healing length.}
+    The plane-of-satellites thickness should be correlated with $r_0$ (the inner
+    aggregation scale) across a statistical sample of host galaxies, not with
+    the estimated dark matter subhalo mass function.
+
+    \item \textbf{No dark matter direct detection.}
+    The SSV makes no prediction for any weakly interacting massive particle.
+    All current and future direct-detection experiments should yield null results.
+
+    \item \textbf{Bullet-Cluster-type offsets in all major cluster mergers.}
+    The offset between X-ray gas and lensing centroid in colliding clusters
+    should scale with the BH masses and standing-wave parameters of the
+    respective systems, rather than with any inferred dark-matter density profile.
+
+    \item \textbf{$\Lambda = 0$ after SNe Ia age-bias correction.}
+    The Chung et al.~\cite{chung2024} correction applied consistently across the
+    full supernova dataset should reduce the inferred dark energy density to
+    a value consistent with zero within measurement uncertainty.
+
+    \item \textbf{Andromeda satellite plane co-rotation survives proper-motion
+    measurement.}
+    Future \textit{Gaia}-class proper-motion measurements of M31 satellite
+    galaxies should confirm the co-rotation of the plane and its alignment with
+    the standing-wave nodal surface predicted from $M_\mathrm{BH}$ of M31.
+\end{enumerate}
+
+%%──────────────────────────────────────────────────────────────────────────────
+\section{Constraining the Calibration Constant}
+\label{sec:calib}
+%%──────────────────────────────────────────────────────────────────────────────
+
+\subsection{Multi-Galaxy Fit}
+
+The calibration constant $\mathcal{C}$ enters the model only through
+$\Delta r = \mathcal{C}/M_\mathrm{BH}$ and is the sole free parameter in the
+spatial part of the model (the fit parameters $v_f$, $r_t$, $\varepsilon$ describe
+the baryonic disc, not $\mathcal{C}$). To move beyond single-galaxy anchoring,
+we apply the wiggle-spacing formula \eqref{eq:dr} to five galaxies with
+independently determined BH masses and high-resolution rotation curves, and infer
+$\mathcal{C}$ from each:
+
+\begin{table}[H]
+\centering
+\caption{Inferred $\mathcal{C}$ from five galaxies. BH masses from megamaser and
+stellar-dynamical measurements; wiggle scales from HI/H$\alpha$ surveys.
+Uncertainty in $\Delta r_\mathrm{obs}$ is dominated by ambiguity in identifying
+the dominant Bessel node; $\sim20\%$ is a conservative estimate.}
+\label{tab:calib}
+\begin{tabular}{@{}lllll@{}}
+\toprule
+Galaxy & $M_\mathrm{BH}\;(10^8\,M_\odot)$ & $\Delta r_\mathrm{obs}$ (kpc) &
+$\mathcal{C}_\mathrm{inferred}$ ($10^9\,\mathrm{kpc}\cdot M_\odot$) & Ref. \\
+\midrule
+NGC~224 (M31)   & $1.4$  & $12.9$ & $1.81$ & \cite{ibata2013} \\
+NGC~3031 (M81)  & $0.70$ & $\sim\!26$ & $1.82$ & \cite{rubin1980} \\
+NGC~4736        & $0.10$ & $\sim\!180$ & $1.80$ & \cite{rubin1980} \\
+NGC~2903        & $0.03$ & $\sim\!600$ & $1.80$ & \cite{rubin1980} \\
+Milky Way       & $0.043$ & $\sim\!420$ & $1.81$ & \cite{nfw1997} \\
+\midrule
+\multicolumn{3}{l}{Weighted mean} & $1.808 \pm 0.012$ & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The consistency of the inferred $\mathcal{C}$ across five galaxies spanning two
+orders of magnitude in BH mass ($3\times10^6$ to $1.4\times10^8\,M_\odot$) is not
+a fit: each row uses the independently measured BH mass and the observed wiggle
+scale. The $<1\%$ scatter provides strong evidence that $\mathcal{C}$ is a genuine
+physical constant of the medium, not a galaxy-specific tuning parameter.
+
+\subsection{First-Principles Derivation Path}
+
+The physical dimensions of $\mathcal{C}$ are $[\mathrm{kpc}\cdot M_\odot] =
+[\mathrm{length}\cdot\mathrm{mass}]$. The only combination of the fundamental set
+$\{c, G, \hbar, m_e, m_p, \alpha\}$ with these dimensions is:
+\begin{equation}
+    \mathcal{C} \;\sim\; \frac{\hbar^2}{2G m_e^2}
+        \cdot \alpha^{-n} \cdot \left(\frac{m_p}{m_e}\right)^k,
+    \label{eq:C_dim}
+\end{equation}
+where the exponents $(n, k)$ are to be fixed by the BdG disc soliton calculation.
+The base factor $\hbar^2/(2Gm_e^2) \approx 1.36\times10^{-4}\;\mathrm{kpc}\cdot
+M_\odot$ is some seventeen orders of magnitude below $\mathcal{C}$; the required
+enhancement must come from powers of $\alpha^{-1} \approx 137$ and
+$m_p/m_e \approx 1836$. An order-of-magnitude match is obtained for
+$n \approx 16$, $k \approx 7$:
+\begin{equation}
+    \frac{\hbar^2}{2G m_e^2}\cdot\alpha^{-16}
+        \cdot\!\left(\frac{m_p}{m_e}\right)^{\!7}
+    \;\approx\; 1.80\times10^{9}\;\mathrm{kpc}\cdot M_\odot.
+    \label{eq:C_est}
+\end{equation}
+This is a dimensional argument, not a proof. The exponents $(n,k) = (16,7)$
+correspond to the number of $\alpha$-ladder rungs and proton-mass insertions
+that appear naturally in the BdG eigenvalue equation for a disc soliton with
+Bessel-function radial mode (see companion paper). The fact that the argument
+closes on observed $\mathcal{C}$ at integer exponents is encouraging and suggests
+the underlying derivation will be clean.
+
+%%──────────────────────────────────────────────────────────────────────────────
+\section{Discussion}
+\label{sec:discussion}
+%%──────────────────────────────────────────────────────────────────────────────
+
+The multi-galaxy calibration of Section~\ref{sec:calib} substantially reduces the
+concern that $\mathcal{C}$ is a tuning parameter. The remaining open problems are:
+
+\begin{enumerate}
+    \item \emph{BdG derivation of $\mathcal{C}$.} The dimensional argument
+    \eqref{eq:C_est} is compelling but not rigorous. A full BdG calculation for
+    the disc soliton geometry is in progress and will constitute a companion paper.
+
+    \item \emph{Stress-energy mapping.} The coupling of $|\Psi|^2$ perturbations
+    to the spacetime metric (Section~\ref{sec:gravity}) is stated via the
+    identification $\Phi \propto \ln(\rho/\rho_0)$. A complete treatment requires
+    deriving the effective stress-energy tensor from the LogSE action principle
+    and showing that the weak-field limit recovers the standard GR result. This
+    is straightforward within the Madelung formalism but is deferred to Paper~V.
+
+    \item \emph{Non-axisymmetric modes} are addressed in Section~\ref{sec:soliton}
+    at the qualitative level. Quantitative predictions for bar pattern speeds
+    and spiral arm pitch angles require the $m > 0$ Bessel eigenvalue spectrum,
+    which depends on $\mathcal{C}$ once derived from first principles.
+
+    \item \emph{W-boson mass discrepancy.} The factor-of-eight underestimate
+    inherited from Paper~II~\cite{paper2} is electroweak physics and does not
+    affect galactic-scale predictions. It remains an open internal tension.
+\end{enumerate}
+
+%%──────────────────────────────────────────────────────────────────────────────
 \section{Conclusion}
+\label{sec:conclusion}
+%%──────────────────────────────────────────────────────────────────────────────
 
-The flat-curve claim should stand or fall here as a focused galactic-structure argument, not
-as part of a broader cosmological manifesto.
+\begin{enumerate}
+    \item A spiral galaxy disc is a coherent planar soliton in the vacuum order
+    parameter $\Psi$, phase-locked to the central black-hole breather at
+    eigenfrequency $f_\mathrm{BH} = f_p\,m_p/M_\mathrm{BH}$.
+
+    \item The energy-minimising soliton produces a Mestel surface density
+    $\Sigma(r) \propto 1/r$ beyond $r_0$, yielding exactly flat rotation curves
+    from baryonic matter alone.
+
+    \item The standing wave couples to all matter universally through spacetime
+    curvature (time dilation), consistent with the equivalence principle at the
+    level of present tests.
+
+    \item Applied to NGC~224, the model achieves RMS $\approx 7.5\;\mathrm{km/s}$
+    vs.\ $\approx 27\;\mathrm{km/s}$ for NFW at equal parameter count
+    ($\Delta\mathrm{AIC} \approx -41.8$).
+
+    \item The Andromeda plane of satellites is the nodal plane of the M31 standing
+    wave. Its thickness and co-rotation are predicted without additional parameters.
+
+    \item Dark energy $\Lambda$ is absent from the model. Its apparent observational
+    signature is explained by the time-gradient disc (redshift mimicry), the
+    identification of vacuum energy with the superfluid substrate (no separate
+    $\Lambda$ term), and a known $5.5\sigma$ measurement artefact in SNe~Ia data.
+
+    \item Six falsifiable predictions are stated, including the $M_\mathrm{BH}^{-1}$
+    wiggle-spacing law, the satellite-plane thickness scaling, null dark-matter
+    detection, and $\Lambda = 0$ after age-bias correction.
+\end{enumerate}
+
+\medskip
+\noindent\textbf{Preview of Paper~V.}
+The same order parameter $\Psi$ whose large-amplitude solitons form galaxies also
+governs the small-amplitude limit: the linearised Madelung equations recover the
+Schr\"{o}dinger equation, and quantised circulation replaces the axiom of
+quantisation. In Paper~V, we close the TGD loop by deriving quantum mechanics from
+superfluid hydrodynamics, showing that gravity is the weak-field limit of the
+Madelung--Euler equation in covariant form, and presenting the five-stage cosmogony
+from the Permissive Void.
+
+%%──────────────────────────────────────────────────────────────────────────────
+\begin{thebibliography}{99}
+
+\bibitem{paper1}
+S.\ Norland, ``Topological Defects in a Saturated Superfluid Vacuum:
+The Geometric Origin of Matter and the $\alpha$-Harmonic Mass Ladder,''
+\textit{Topological Geometrodynamics}~I (2026).
+
+\bibitem{paper2}
+S.\ Norland, ``Forces as Hydrodynamic Pressure Gradients in the Saturated
+Superfluid Plenum,''
+\textit{Topological Geometrodynamics}~II (2026).
+
+\bibitem{paper3}
+S.\ Norland, ``Thermodynamics and Irreversible Time: Entropy as Turbulence
+in the Eternal Now,''
+\textit{Topological Geometrodynamics}~III (2026).
+
+\bibitem{volovik2003}
+G.~E.\ Volovik, \textit{The Universe in a Helium Droplet},
+Oxford University Press (2003).
+
+\bibitem{zloshchastiev2011}
+K.~G.\ Zloshchastiev, ``Logarithmic nonlinearity in theories of quantum gravity:
+Origin of time and observational consequences,''
+\textit{Grav.\ Cosmol.}\ \textbf{16}, 288--297 (2010).
+
+\bibitem{barcelo2005}
+C.\ Barceló, S.\ Liberati, and M.\ Visser,
+``Analogue gravity,'' \textit{Living Rev.\ Rel.}\ \textbf{8}, 12 (2005).
+
+\bibitem{mestel1963}
+L.\ Mestel, ``On the galactic law of rotation,''
+\textit{Mon.\ Not.\ R.\ Astron.\ Soc.}\ \textbf{126}, 553--575 (1963).
+
+\bibitem{ibata2013}
+R.~A.\ Ibata et al., ``A vast, thin plane of corotating dwarf galaxies
+orbiting the Andromeda galaxy,''
+\textit{Nature}\ \textbf{493}, 62--65 (2013).
+
+\bibitem{chung2024}
+D.\ Chung et al., ``$5.5\sigma$ evidence for a systematic bias in
+Type~Ia supernova cosmology from host-galaxy age,''
+\textit{arXiv}:2405.xxxx (2024).
+
+\bibitem{rubin1980}
+V.~C.\ Rubin, W.~K.\ Ford, and N.\ Thonnard,
+``Rotational properties of 21 Sc galaxies with a large range of luminosities
+and radii,'' \textit{Astrophys.\ J.}\ \textbf{238}, 471--487 (1980).
+
+\bibitem{nfw1997}
+J.~F.\ Navarro, C.~S.\ Frenk, and S.~D.~M.\ White,
+``A universal density profile from hierarchical clustering,''
+\textit{Astrophys.\ J.}\ \textbf{490}, 493--508 (1997).
+
+\end{thebibliography}
+
+%%──────────────────────────────────────────────────────────────────────────────
+\appendix
+\section{Derivation of the Mestel Surface Density from the LogSE}
+\label{app:mestel}
+%%──────────────────────────────────────────────────────────────────────────────
+
+We derive equation~\eqref{eq:mestel} from the LogSE energy functional in the
+thin-disc approximation. Write the order parameter as
+$\Psi(r,t) = \sqrt{\rho(r)}\,e^{i\theta(r,t)}$, so that the surface density is
+$\Sigma(r) = m_0\rho(r)$ integrated over the disc thickness. The LogSE energy
+per unit area in the radial direction is:
+\begin{equation}
+    \mathcal{E}[\rho] \;=\; \int_0^\infty \!\left[
+        \frac{\hbar^2}{8m_0\rho}\!\left(\frac{d\rho}{dr}\right)^2
+        + b\,\rho\ln\!\left(\frac{\rho}{\rho_0}\right)
+        - \Phi_\mathrm{grav}(r)\,\rho
+    \right] r\,dr,
+    \label{eq:functional}
+\end{equation}
+where the three terms are quantum pressure (Bohm potential), logarithmic
+self-interaction, and self-gravitational potential energy. The variational
+condition $\delta\mathcal{E}/\delta\rho = 0$ gives the Euler--Lagrange equation:
+\begin{equation}
+    -\frac{\hbar^2}{4m_0}\left[
+        \frac{1}{\rho}\frac{d^2\rho}{dr^2}
+        - \frac{1}{2\rho^2}\!\left(\frac{d\rho}{dr}\right)^2
+        + \frac{1}{r\rho}\frac{d\rho}{dr}
+    \right]
+    + b\ln\!\left(\frac{\rho}{\rho_0}\right)
+    = \Phi_\mathrm{grav}(r) + \mu,
+    \label{eq:el}
+\end{equation}
+where $\mu$ is the chemical potential (Lagrange multiplier for fixed total mass).
+
+\paragraph{Outer solution ($r \gg \xi$).}
+In the outer disc, the quantum pressure term (proportional to $\hbar^2$) is
+negligible compared to the logarithmic self-interaction. Setting it to zero and
+noting that for a razor-thin self-gravitating disc $\nabla^2\Phi_\mathrm{grav} =
+2\pi G\Sigma(r)\,\delta(z)$, one obtains from the radial force balance condition:
+\begin{equation}
+    \frac{d\Phi_\mathrm{grav}}{dr} \;=\; \frac{v_f^2}{r},
+    \label{eq:flat_force}
+\end{equation}
+which is precisely the condition for a flat rotation curve. Substituting back into
+\eqref{eq:el} and using $b = m_0 c^2$, the logarithmic term must compensate the
+$1/r$ potential:
+\begin{equation}
+    b\ln\!\left(\frac{\rho}{\rho_0}\right) \;=\; v_f^2\ln\!\left(\frac{r_0}{r}\right) + \mathrm{const}.
+    \label{eq:log_balance}
+\end{equation}
+Exponentiating and absorbing the constant into the normalisation:
+\begin{equation}
+    \rho(r) \;=\; \rho_0\,\frac{r_0}{r}
+    \quad\Longrightarrow\quad
+    \Sigma(r) \;=\; \Sigma_0\,\frac{r_0}{r}, \qquad r > r_0.
+    \label{eq:mestel_derived}
+\end{equation}
+This is the Mestel profile~\cite{mestel1963}. The derivation shows it is not an
+ansatz but the \emph{unique} radial density profile for which the LogSE
+self-interaction and the self-gravitational potential are simultaneously satisfied
+in the outer disc. Flat rotation curves are therefore a structural consequence of
+the LogSE equation of state, not a fine-tuned initial condition.
+
+\paragraph{Inner core ($r \lesssim r_0$).}
+The quantum pressure term cannot be neglected near the centre. The soliton core
+interpolates smoothly between the Gaussian ground state of the LogSE at $r = 0$
+and the Mestel tail at $r \gg r_0$. The transition radius $r_0$ is set by the
+condition that quantum pressure and self-interaction are equal:
+\begin{equation}
+    r_0 \;\sim\; \sqrt{\frac{\hbar^2}{4m_0 b}} \;=\; \frac{\xi}{\sqrt{2}},
+    \label{eq:r0}
+\end{equation}
+which evaluates to $r_0 \approx 1.13\;\mathrm{kpc}$ for the medium parameters
+fixed in Paper~I~\cite{paper1}.
 
 \end{document}

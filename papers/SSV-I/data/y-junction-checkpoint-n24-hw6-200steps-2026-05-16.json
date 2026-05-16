@@ -1,0 +1,74 @@
+{
+  "metadata": {
+    "problem_type": "static",
+    "status": "prototype",
+    "nondimensionalisation": "xi = 1, rho0 = 1, c = 1",
+    "observables": [
+      "total_energy",
+      "residual_norm",
+      "depressed_fraction",
+      "effective_radius"
+    ],
+    "diagnostics": [
+      "energy_monotonicity",
+      "residual_norm",
+      "boundary_anchor"
+    ],
+    "issue_refs": [
+      "#13"
+    ],
+    "limitations": [
+      "Uses an open three-prong Y geometry rather than a closed trefoil knot.",
+      "Phase pattern uses the canonical product-vortex ansatz; the 120 deg balance at the node emerges from geometry, with no extra color offset.",
+      "N_Y / F extraction is not implemented in this script; it only produces the relaxed Y-junction field."
+    ]
+  },
+  "nondimensionalisation": {
+    "xi": 1.0,
+    "rho0": 1.0,
+    "c": 1.0
+  },
+  "config": {
+    "n": 24,
+    "half_width": 6.0,
+    "xi": 1.0,
+    "junction_smoothing": 0.0,
+    "log_pressure": 0.5,
+    "density_floor": 1e-12,
+    "anchor_shell": 2,
+    "boundary_blend_fraction": 0.18,
+    "depressed_threshold": 0.35
+  },
+  "controls": {
+    "step_size": 0.01,
+    "max_steps": 200,
+    "tolerance": 0.002,
+    "min_step_size": 1e-05,
+    "max_step_size": 0.05,
+    "check_interval": 10,
+    "patience_intervals": 3,
+    "energy_tol": 1e-09,
+    "reference_spacing": null
+  },
+  "summary": {
+    "steps_completed": 200,
+    "final_energy": 857.0192563293961,
+    "best_energy": 857.0192563293961,
+    "energy_monotonicity_violations": 0,
+    "accepted_steps": 200,
+    "rejected_steps": 0,
+    "final_step_size": 0.072,
+    "residual_norm": 1.2977301316711793,
+    "depressed_fraction": 0.05381944444444445,
+    "effective_radius": 4.4526921340531525,
+    "deficit_volume": 235.7103556469571,
+    "equivalent_deficit_radius": 3.8320398607484463,
+    "far_field_shell_density": 0.8298149198476511,
+    "far_field_shell_deficit": 0.1701850801523489,
+    "far_field_moment": 0.46048285731281435,
+    "min_density": 0.03233669865378268,
+    "max_density": 0.9999522233472966,
+    "initial_energy": 901.0383625542316,
+    "stop_reason": "max_steps"
+  }
+}

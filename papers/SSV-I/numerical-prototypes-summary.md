@@ -43,6 +43,122 @@ Curated smoke-test output is stored in:
 papers/SSV-I/data/smoke-results.csv
 ```
 
+The first saved static-trefoil refinement checkpoint is recorded in:
+
+```text
+papers/SSV-I/data/trefoil-refinement-checkpoint-2026-05-06.json
+papers/SSV-I/trefoil-refinement-checkpoint.md
+```
+
+The improved-controller checkpoint is recorded in:
+
+```text
+papers/SSV-I/data/trefoil-refinement-checkpoint-2026-05-06b.json
+papers/SSV-I/trefoil-refinement-checkpoint-2.md
+```
+
+The first far-field-enabled checkpoint is recorded in:
+
+```text
+papers/SSV-I/data/trefoil-refinement-farfield-checkpoint-2026-05-06.json
+papers/SSV-I/trefoil-farfield-checkpoint.md
+```
+
+The first box-size radial-profile comparison is recorded in:
+
+```text
+papers/SSV-I/data/example-trefoil-farfield-compare-hw5-vs-hw6.json
+papers/SSV-I/trefoil-farfield-compare-note.md
+```
+
+The first fixed-resolution box-size sweep is recorded in:
+
+```text
+papers/SSV-I/data/trefoil-boxsize-sweep-n24-2026-05-06.json
+papers/SSV-I/trefoil-boxsize-sweep-note.md
+```
+
+The longer soft-boundary box-size sweep is recorded in:
+
+```text
+papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-60steps-2026-05-06.json
+papers/SSV-I/trefoil-boxsize-sweep-softbc-60steps-note.md
+```
+
+The `100`-step soft-boundary box-size sweep is recorded in:
+
+```text
+papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-100steps-2026-05-06.json
+papers/SSV-I/trefoil-boxsize-sweep-softbc-100steps-note.md
+```
+
+The direct `60`-vs-`100` step comparison is recorded in:
+
+```text
+papers/SSV-I/trefoil-boxsize-sweep-softbc-60-vs-100-note.md
+```
+
+The longer `150`/`200` step runs and the doubled-resolution `n = 48` check are recorded in:
+
+```text
+papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-150steps-2026-05-06.json
+papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-2026-05-06.json
+papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-100steps-2026-05-06.json
+papers/SSV-I/trefoil-longrun-and-resolution-note.md
+```
+
+The first scaled-control rerun of the doubled-resolution branch is recorded in:
+
+```text
+papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-100steps-scaled-2026-05-06.json
+papers/SSV-I/trefoil-n48-scaled-control-note.md
+```
+
+The longer scaled `n = 48` follow-up, including the `400`-step checkpoint, is recorded in:
+
+```text
+papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-150steps-scaled-2026-05-06.json
+papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-200steps-scaled-2026-05-06.json
+papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-scaled-2026-05-06.json
+papers/SSV-I/trefoil-n48-400steps-note.md
+```
+
+The direct matched-resolution comparison between the `n = 24` and `n = 48` branches is recorded in:
+
+```text
+papers/SSV-I/trefoil-matched-resolution-comparison-note.md
+```
+
+The first gravity-branch bridge note is recorded in:
+
+```text
+papers/SSV-I/alpha-g-proxy-note.md
+papers/SSV-I/data/alpha-g-proxy-checkpoint-2026-05-06.json
+papers/SSV-I/alpha-g-mapping-note.md
+papers/SSV-I/cq-geometry-note.md
+papers/SSV-I/data/cq-geometry-compare-2026-05-06.json
+papers/SSV-I/cq-geometry-sweep-note.md
+papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json
+papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
+papers/SSV-I/q-p-two-factor-probe-note.md
+papers/SSV-I/data/q-p-two-factor-probe-2026-05-06.json
+papers/SSV-I/q-p-two-factor-scan-note.md
+papers/SSV-I/data/q-p-two-factor-scan-2026-05-06.json
+papers/SSV-I/q-p-two-factor-normalized-scan-note.md
+papers/SSV-I/data/q-p-two-factor-normalized-scan-2026-05-06.json
+papers/SSV-I/q-p-two-factor-reexpress-scan-note.md
+papers/SSV-I/data/q-p-two-factor-reexpress-scan-2026-05-07.json
+papers/SSV-I/q-p-two-factor-local-scale-scan-note.md
+papers/SSV-I/data/q-p-two-factor-local-scale-scan-2026-05-07.json
+papers/SSV-I/q-p-two-factor-pure-additive-local-scan-note.md
+papers/SSV-I/data/q-p-two-factor-pure-additive-local-scan-2026-05-16.json
+papers/SSV-I/y-junction-prototype-checkpoint.md
+papers/SSV-I/data/y-junction-checkpoint-n24-hw6-200steps-2026-05-16.json
+papers/SSV-I/data/y-junction-state-n24-hw6-200steps-2026-05-16.npz
+papers/SSV-I/data/y-junction-checkpoint-n24-hw6-600steps-2026-05-16.json
+papers/SSV-I/data/y-junction-state-n24-hw6-600steps-2026-05-16.npz
+```
+
 Representative values:
 
 | check | quantity | value |

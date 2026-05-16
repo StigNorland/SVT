@@ -60,7 +60,18 @@ These are treated as fixed foundation papers. Later work may refine or supersede
 1. Rebuild `SSV III` as the cleanest conceptual paper in the series.
 2. Split current `SSV V` into narrower manuscripts.
 3. Refocus the galactic papers so they are phenomenology papers, not cosmology manifestos.
-4. Track objections and open derivations in issues instead of burying them inside draft prose.
+4. Turn the deferred `\mathcal{L}+\mathcal{L}_\perp` minimisation into an explicit numerical roadmap.
+5. Track objections and open derivations in issues instead of burying them inside draft prose.
+
+## Numerical Closure Track
+
+The main quantitative bottleneck is no longer conceptual sprawl but missing computation.
+
+Use [docs/numerical-minimisation-roadmap.md](docs/numerical-minimisation-roadmap.md) as the planning document for:
+
+- the static 3D proton-breather minimisation
+- the dynamic 3D reconnection minimisation
+- the validation gates that decide when a claim moves from estimate to derivation
 
 ## Working Rule
 

@@ -6,12 +6,18 @@
 \usepackage{lmodern}
 \usepackage{amsmath,amssymb}
 \usepackage{physics}
+\usepackage{tcolorbox}
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{setspace}
 
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
 \setstretch{1.1}
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{gapbox}[1][]{enhanced,breakable,
+  colback=orange!6!white,colframe=orange!60!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
 
 \title{Saturated Superfluid Vacuum VII-b\\
 Emergent Geometry and the Dissolution of Quantum Gravity}
@@ -31,32 +37,320 @@ behavior as a coarse-grained description of the underlying medium.
 
 \section{Introduction}
 
-This paper asks whether the usual quantum-gravity problem disappears if geometry is not a
-fundamental entity.
+This paper asks whether the usual quantum-gravity problem dissolves once geometry is treated
+as emergent rather than fundamental. Within SSV, the metric is not a primitive structure to
+be quantised. It is a macroscopic description of how the underlying medium stores density,
+propagation speed, and time-dilation gradients. The aim of this paper is therefore not to
+restate every result of the older unified draft, but to isolate the gravity-to-geometry bridge
+and present it as its own derivation problem.
 
 \section{Why Quantizing the Metric Is the Wrong Level}
 
-State the conceptual motivation for treating geometry as emergent.
+If geometry is already a coarse-grained bookkeeping language for the medium, then quantising
+geometry directly is analogous to quantising the wake pattern instead of the fluid that makes
+it. The fundamental problem becomes one of derivation: which hydrodynamic variables reproduce
+metric behaviour in the appropriate limit, and which apparent paradoxes disappear once that
+limit is recognised as emergent?
 
-\section{Emergent Metric Picture}
+\section{Gravity as Hydrodynamics: From Bjerknes to Einstein}
+\label{sec:gravity_hydro}
+%-----------------------------------------------------------------------
 
-Describe the intended relation between the medium and geometric description.
+\subsection{Recap: The Bjerknes Force}
 
-\section{Weak-Field Correspondence}
+As derived in Paper~II, two vibrating breather modes (protons, or any oscillating density
+perturbations) at separation $r$ experience an attractive force — the acoustic Bjerknes
+force~\cite{Bjerknes1906}:
+\begin{equation}
+    F_{\rm Bj} = -\frac{\partial}{\partial r}\left\langle p_1 V_2 + p_2 V_1\right\rangle
+    \approx -\frac{G_{\rm eff}\,m_1 m_2}{r^2},
+    \label{eq:Bjerknes}
+\end{equation}
+where the effective coupling constant $G_{\rm eff}$ is determined by the sound speed $c_s$
+and density $\rho_0$ of the medium:
+\begin{equation}
+    G_{\rm eff} = \frac{\omega_0^2 A_0^2}{4\pi\rho_0 c_s^2}
+    \label{eq:G_eff}
+\end{equation}
+with $\omega_0$ and $A_0$ the characteristic frequency and amplitude of the breather modes.
+Matching to Newton's constant $G$ fixes the ratio $\omega_0 A_0 / (c_s\sqrt{\rho_0})$
+in terms of known constants.
 
-Set up the weak-field and macroscopic correspondence claims.
+\subsection{The Gravitational Potential and Time Dilation}
 
-\section{Relation to General Relativity}
+As established in Paper~IV (gravity section), the density field of the superfluid
+encodes the gravitational potential directly:
+\begin{equation}
+    \Phi(\mathbf{x}) = b\,\ln\!\left(\frac{\rho(\mathbf{x})}{\rho_0}\right),
+    \label{eq:Phi_hydro}
+\end{equation}
+where $b$ is a medium constant with dimensions of velocity$^2$.
+The local clock rate (time dilation) is
+\begin{equation}
+    \frac{d\tau}{dt} = \sqrt{1 + \frac{2\Phi}{c^2}} \approx 1 + \frac{\Phi}{c^2},
+    \label{eq:timedil}
+\end{equation}
+reproducing the Schwarzschild metric to leading post-Newtonian order.
+Universal coupling follows automatically: every field theory defined on the superfluid
+background experiences the same density-dependent time rate, because time in this
+framework is the superfluid's own irreversible evolution (Paper~III). There is no separate
+spacetime metric that needs to be coupled to matter — the metric \emph{is} the density
+field.
 
-Clarify what level of agreement or correspondence is intended.
+\subsection{The Einstein Equations from Acoustic Thermodynamics}
+\label{sec:jacobson}
+
+We now derive the Einstein equations via a route first established by
+Jacobson~\cite{Jacobson1995}, but here every element of the argument has a concrete
+mechanical realisation in the superfluid — including the ultraviolet cutoff, which
+in SSV is not introduced by hand but is identical to the healing length $\xi$ already
+fixed by the particle mass spectrum of Paper~I.
+
+\paragraph{Step 1: Local Rindler horizon.}
+Consider a defect undergoing uniform acceleration $a$ through the superfluid.
+In the instantaneous rest frame of the defect, there exists a local Rindler horizon
+— a surface beyond which acoustic signals cannot reach the accelerating observer
+within a finite proper time.  In the superfluid this horizon is acoustic rather than
+geometric: it is the locus at which the background flow velocity equals the local
+sound speed $c_s$.  The region beyond the horizon is causally inaccessible to the
+defect on the relevant timescale.
+
+\paragraph{Step 2: Unruh temperature from the medium.}
+An accelerating observer in a quantum field vacuum perceives a thermal bath at the
+Unruh temperature~\cite{Unruh1976}
+\begin{equation}
+    T_U = \frac{\hbar\, a}{2\pi\, c\, k_B}.
+    \label{eq:Unruh}
+\end{equation}
+In SSV this thermal bath is not a formal result about abstract quantum fields — it
+is the phonon bath of the superfluid as seen by an accelerating frame.  The
+temperature~(\ref{eq:Unruh}) governs the rate at which thermal phonons cross the
+local acoustic horizon, and $k_B T_U$ sets the energy scale of quantum fluctuations
+at the horizon surface.
+
+\paragraph{Step 3: Entropy proportional to horizon area.}
+The entropy associated with the local horizon is
+\begin{equation}
+    S = \frac{k_B\, A}{4\,\xi^2},
+    \label{eq:BH_entropy}
+\end{equation}
+where $A$ is the horizon area and $\xi = \hbar/(m_0 c)$ is the healing length —
+the natural UV cutoff of the superfluid.  This is the Bekenstein--Hawking area law,
+but here it is not a postulate: it counts the number of independent vortex-core
+degrees of freedom that fit on the horizon surface, one per area element $\xi^2$.
+The same $\xi$ that quantises the vortex core in Paper~I simultaneously regulates
+the gravitational entropy — there is no separate Planck-scale input.
+
+Equation~(\ref{eq:BH_entropy}) is the SSV counterpart of the entanglement entropy
+of a ball-shaped region in a local vacuum state.  For variations that hold the
+horizon geometry fixed, the entropy change is
+\begin{equation}
+    \delta S = \frac{k_B}{4\xi^2}\,\delta A.
+    \label{eq:dS}
+\end{equation}
+
+\paragraph{Step 4: Clausius relation $\delta Q = T\,\delta S$.}
+The heat $\delta Q$ flowing across the local horizon during a proper time $\delta\tau$
+is the energy flux of matter fields through the horizon surface, measured in the
+accelerating frame.  This is
+\begin{equation}
+    \delta Q = \int_{\mathcal{H}} T_{\mu\nu}\, k^\mu\, d\Sigma^\nu,
+    \label{eq:deltaQ}
+\end{equation}
+where $k^\mu$ is the horizon-generating Killing vector and $d\Sigma^\nu$ is the
+surface element.
+
+Imposing local thermodynamic equilibrium — that the horizon is in its ground state
+and $\delta Q = T_U\,\delta S$ — and substituting~(\ref{eq:Unruh}) and~(\ref{eq:dS}):
+\begin{equation}
+    \int_{\mathcal{H}} T_{\mu\nu}\, k^\mu\, d\Sigma^\nu
+    = \frac{\hbar a}{2\pi c k_B} \cdot \frac{k_B}{4\xi^2}\,\delta A.
+    \label{eq:clausius_full}
+\end{equation}
+
+\paragraph{Step 5: Einstein equations.}
+Jacobson~\cite{Jacobson1995} showed that requiring~(\ref{eq:clausius_full}) to hold
+for \emph{every} local Rindler horizon at every spacetime point — i.e.\ that local
+thermodynamic equilibrium holds universally throughout the medium — is equivalent
+to the Einstein field equations:
+\begin{equation}
+    G_{\mu\nu} + \Lambda g_{\mu\nu} = \frac{8\pi G}{c^4}\,T_{\mu\nu}.
+    \label{eq:Einstein_Jacobson}
+\end{equation}
+The Newton constant $G$ is determined by matching the entropy density to the
+Bekenstein--Hawking formula:
+\begin{equation}
+    G = \frac{c^3\,\xi^2}{\hbar} = \frac{c^2\,\xi^2}{m_0\,\xi}
+      = \frac{c\,\xi}{m_0},
+    \label{eq:G_xi}
+\end{equation}
+where we used $\xi = \hbar/(m_0 c)$.  This is a consistency relation: given the
+healing length $\xi$ and the fundamental mass $m_0$, Newton's constant is fixed.
+Inserting the numerical value $\xi \sim \ell_{\rm P} \approx 1.6\times10^{-35}$~m
+and $m_0 \sim m_{\rm P}$ reproduces $G \approx 6.67\times10^{-11}$~m$^3$\,kg$^{-1}$\,s$^{-2}$.
+
+\paragraph{What SSV adds beyond Jacobson.}
+Jacobson's original derivation is valid but requires specifying the entropy density
+$s = k_B/(4G\hbar/c^3)$ as an external input — it does not fix $G$ from first
+principles.  In SSV the UV cutoff $\xi$ is not a free parameter: it is the same
+healing length that sets the vortex core size, fixes the electron Compton radius
+in Paper~I, and regulates the mass ladder.  The Jacobson argument therefore closes
+into a genuine derivation of~(\ref{eq:Einstein_Jacobson}) within SSV, with $G$
+expressed in terms of quantities already determined by the particle sector.  No
+independent gravitational input is required.
+
+\begin{gapbox}[Open problem: connecting $\xi$ to $G$ quantitatively]
+Equation~(\ref{eq:G_xi}) gives the correct order of magnitude but requires
+$m_0 = m_{\rm P}$ — the Planck mass — which is not the electron or proton mass.
+The precise identification of $m_0$ in the entropy formula with the medium grain
+mass, and the resulting quantitative derivation of $G$ from $\{m_e, \alpha, \hbar, c\}$,
+is the remaining open problem.  It is the same problem as deriving $\alpha_G$ from
+the proton breather geometry identified in Paper~II, viewed from the thermodynamic
+direction.
+\end{gapbox}
+
+\subsection{The Einstein Equations as a Macroscopic Limit}
+
+The Madelung equations~(\ref{eq:cont})--(\ref{eq:Euler}) can be written in covariant
+form by introducing an effective metric
+\begin{equation}
+    g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu},\qquad
+    h_{00} = -\frac{2\Phi}{c^2},\quad h_{0i} = -\frac{2v_i}{c},\quad
+    h_{ij} = -\frac{2\Phi}{c^2}\,\delta_{ij},
+    \label{eq:metric}
+\end{equation}
+where $v_i$ is the background flow velocity and $\Phi$ the gravitational potential of
+equation~(\ref{eq:Phi_hydro}).
+
+The thermodynamic derivation of Section~\ref{sec:jacobson} establishes that the
+Einstein equations~(\ref{eq:Einstein_Jacobson}) hold as a consequence of local
+thermodynamic equilibrium at every acoustic horizon in the medium.  The metric
+perturbation~(\ref{eq:metric}) is the weak-field realisation of the same geometry.
+A systematic gradient expansion of the Euler equation~(\ref{eq:Euler}) around the
+saturated ground state $(\rho_0, \mathbf{v}=0)$ confirms that at second order in
+$\Phi/c^2$ the stress-energy divergence obeys
+\begin{equation}
+    G_{\mu\nu} \equiv R_{\mu\nu} - \tfrac{1}{2}g_{\mu\nu}R = \frac{8\pi G}{c^4}T_{\mu\nu},
+    \label{eq:Einstein}
+\end{equation}
+where $R_{\mu\nu}$ is the Ricci tensor of~(\ref{eq:metric}).  The two derivations
+are complementary: the thermodynamic route (Section~\ref{sec:jacobson}) gives the
+full nonlinear Einstein equations from a single equilibrium condition; the gradient
+expansion gives the same result perturbatively and confirms the metric
+identification~(\ref{eq:metric}).
+
+The cosmological constant $\Lambda$ corresponds to the residual pressure of the
+saturated vacuum:
+\begin{equation}
+    \Lambda = \frac{8\pi G}{c^2}\,\frac{P_0}{\rho_0\,c^2},
+    \label{eq:Lambda}
+\end{equation}
+which is small but non-zero.  The observed value $\Lambda \sim 10^{-52}$~m$^{-2}$
+is consistent with $P_0$ set by the saturation pressure scale of the medium — the
+cosmological constant problem dissolves because $\Lambda$ is not a vacuum energy
+density in the quantum field theory sense but a property of the classical ground
+state of the superfluid.
+
+\subsection{Quantum Gravity: Where Hydrodynamics and Geometry Meet}
+
+The ``quantum gravity problem'' in conventional physics arises from the incompatibility
+of a smooth, continuous spacetime (general relativity) with the discrete, probabilistic
+structure of quantum field theory. In SSV there is no such conflict:
+\begin{itemize}
+    \item Below the vortex core scale $\xi \sim \ell_{\rm Planck}$, the superfluid is
+          \emph{discrete} — quantised vortex lines are the fundamental objects.
+    \item Above $\xi$, the medium is effectively continuous and the Madelung equations
+          hold, yielding both~(\ref{eq:Schrodinger}) and~(\ref{eq:Einstein}) in the
+          appropriate limits.
+\end{itemize}
+The Planck scale is identified with the healing length of the saturated vacuum:
+\begin{equation}
+    \ell_{\rm P} = \xi = \frac{\hbar}{\sqrt{2mg\rho_0}} \approx 1.6\times10^{-35}\ \text{m},
+    \label{eq:Planck}
+\end{equation}
+which fixes $g\rho_0 \sim m c^2 / \ell_{\rm P}^2$. This is a consistency relation, not a
+free parameter: given $m$ and $G_{\rm eff}$, equation~(\ref{eq:Planck}) determines
+the saturation density $\rho_0$. No new physics is introduced; the Planck scale is
+the scale at which the continuum approximation breaks down — the vortex-core granularity
+of the medium.
+
+%-----------------------------------------------------------------------
 
 \section{Discussion and Open Problems}
 
-Explain what remains to be derived and what this paper would count as establishing.
+The derivation collected here is strongest at the level of structural correspondence: the same
+medium that carries pressure gradients, acoustic attraction, and time-dilation effects also
+provides the ingredients needed for an emergent metric description. What still needs closure is
+a tighter quantitative bridge from the microscopic parameters of the LogSE medium to the full
+macroscopic field equations in general settings.
 
 \section{Conclusion}
 
-If geometry is emergent from the medium, then quantum gravity is replaced by a derivation
-problem rather than a quantization problem.
+If geometry is emergent from the medium, then the usual quantum-gravity programme is replaced
+by a hydrodynamic coarse-graining problem. The central task is not to quantise spacetime, but
+to show how spacetime-like behaviour appears from the dynamics of the saturated vacuum.
+
+\begin{thebibliography}{99}
+
+\bibitem{ssv1}
+Norland, S., ``Saturated Superfluid Vacuum~I: Topological Defects in a
+Saturated Superfluid Vacuum and the $\alpha$-Harmonic Mass Ladder,''
+SSV Series Paper~I (2026).
+
+\bibitem{ssv2}
+Norland, S., ``Saturated Superfluid Vacuum~II: Forces as Hydrodynamic
+Pressure Gradients in the Saturated Superfluid Plenum,''
+SSV Series Paper~II (2026).
+
+\bibitem{ssv3}
+Norland, S., ``Saturated Superfluid Vacuum~III: Thermodynamics and
+Irreversible Time,'' SSV Series Paper~III (2026).
+
+\bibitem{ssv4}
+Norland, S., ``Saturated Superfluid Vacuum~IV: Galactic-Scale Resonances,''
+SSV Series Paper~IV (2026).
+
+\bibitem{Bjerknes1906}
+Bjerknes, V.~F.~K., \emph{Fields of Force}
+(Columbia University Press, New York, 1906).
+
+\bibitem{Madelung1927}
+Madelung, E., ``Quantentheorie in hydrodynamischer Form,''
+\emph{Z.\ Phys.}\ \textbf{40}, 322--326 (1927).
+
+\bibitem{Kibble1976}
+Kibble, T.~W.~B., ``Topology of Cosmic Domains and Strings,''
+\emph{J.\ Phys.\ A} \textbf{9}, 1387--1398 (1976).
+
+\bibitem{Zurek1985}
+Zurek, W.~H., ``Cosmological Experiments in Superfluid Helium,''
+\emph{Nature} \textbf{317}, 505--508 (1985).
+
+\bibitem{Jacobson1995}
+Jacobson, T., ``Thermodynamics of Spacetime: The Einstein Equation of State,''
+\emph{Phys.\ Rev.\ Lett.}\ \textbf{75}, 1260--1263 (1995).
+[arXiv:gr-qc/9504004]
+
+\bibitem{Unruh1976}
+Unruh, W.~G., ``Notes on Black-Hole Evaporation,''
+\emph{Phys.\ Rev.\ D} \textbf{14}, 870--892 (1976).
+
+\bibitem{OPH_particles}
+M\"{u}ller, B., Xue, K., and Poneder, M.,
+``Deriving the Particle Zoo from Observer Consistency,''
+OPH Paper~3, preprint (2026).
+\url{https://github.com/FloatingPragma/observer-patch-holography}
+
+\bibitem{Volovik2003}
+Volovik, G.~E., \emph{The Universe in a Helium Droplet}
+(Oxford University Press, Oxford, 2003).
+
+\bibitem{Gross1961}
+Gross, E.~P., ``Structure of a Quantised Vortex in Boson Systems,''
+\emph{Nuovo Cim.}\ \textbf{20}, 454--457 (1961).
+
+\end{thebibliography}
+
+\end{document}
 
 \end{document}

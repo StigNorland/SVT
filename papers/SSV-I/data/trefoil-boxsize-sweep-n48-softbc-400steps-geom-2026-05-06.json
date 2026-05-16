@@ -1,0 +1,360 @@
+{
+  "metadata": {
+    "problem_type": "static",
+    "status": "candidate",
+    "nondimensionalisation": "xi = 1, rho0 = 1, c = 1",
+    "observables": [
+      "final_energy",
+      "residual_norm",
+      "effective_radius",
+      "depressed_fraction",
+      "shell_mean_density",
+      "deficit_volume",
+      "equivalent_deficit_radius"
+    ],
+    "diagnostics": [
+      "grid_sensitivity",
+      "box_sensitivity"
+    ],
+    "issue_refs": [
+      "#13"
+    ],
+    "limitations": [
+      "Uses the early static prototype solver rather than a closure-grade Y-junction solver."
+    ]
+  },
+  "nondimensionalisation": {
+    "xi": 1.0,
+    "rho0": 1.0,
+    "c": 1.0
+  },
+  "controls": {
+    "step_size": 0.005,
+    "max_steps": 400,
+    "tolerance": 0.002,
+    "min_step_size": 1e-05,
+    "max_step_size": 0.05,
+    "check_interval": 10,
+    "patience_intervals": 3,
+    "energy_tol": 1e-09,
+    "reference_spacing": null
+  },
+  "workers": 3,
+  "runs": [
+    {
+      "config": {
+        "n": 48,
+        "half_width": 5.0,
+        "xi": 1.0,
+        "major_radius": 2.8,
+        "minor_radius": 0.85,
+        "smoothing_radius": 0.2,
+        "log_pressure": 0.5,
+        "density_floor": 1e-12,
+        "anchor_shell": 2,
+        "boundary_blend_fraction": 0.18,
+        "depressed_threshold": 0.35,
+        "frame_samples": 600
+      },
+      "summary": {
+        "steps_completed": 400,
+        "final_energy": 49.00153332653815,
+        "best_energy": 49.00153332653815,
+        "energy_monotonicity_violations": 0,
+        "accepted_steps": 400,
+        "rejected_steps": 0,
+        "final_step_size": 0.0125,
+        "residual_norm": 0.18167799432071227,
+        "depressed_fraction": 0.022117332175925927,
+        "effective_radius": 3.338142885461939,
+        "deficit_volume": 115.71278659553671,
+        "equivalent_deficit_radius": 3.0229496548601875,
+        "far_field_shell_density": 0.8744144628892311,
+        "far_field_shell_deficit": 0.12558553711076892,
+        "far_field_moment": 0.23721927694553677,
+        "min_density": 0.006929644519045606,
+        "max_density": 1.0,
+        "stop_reason": "max_steps"
+      },
+      "shell_mean_density": 0.8744144628892311,
+      "shell_mean_deficit": 0.12558553711076892,
+      "far_field_moment": 0.23721927694553677
+    },
+    {
+      "config": {
+        "n": 48,
+        "half_width": 6.0,
+        "xi": 1.0,
+        "major_radius": 2.8,
+        "minor_radius": 0.85,
+        "smoothing_radius": 0.2,
+        "log_pressure": 0.5,
+        "density_floor": 1e-12,
+        "anchor_shell": 2,
+        "boundary_blend_fraction": 0.18,
+        "depressed_threshold": 0.35,
+        "frame_samples": 600
+      },
+      "summary": {
+        "steps_completed": 400,
+        "final_energy": 33.66473455512892,
+        "best_energy": 33.66473455512892,
+        "energy_monotonicity_violations": 0,
+        "accepted_steps": 400,
+        "rejected_steps": 0,
+        "final_step_size": 0.018,
+        "residual_norm": 0.11510603535220364,
+        "depressed_fraction": 0.00043402777777777775,
+        "effective_radius": 3.986799136412867,
+        "deficit_volume": 90.70924685218449,
+        "equivalent_deficit_radius": 2.7873252600043217,
+        "far_field_shell_density": 0.9446106120831488,
+        "far_field_shell_deficit": 0.05538938791685122,
+        "far_field_moment": 0.13018225497149566,
+        "min_density": 0.3079339370226597,
+        "max_density": 1.0,
+        "stop_reason": "max_steps"
+      },
+      "shell_mean_density": 0.9446106120831488,
+      "shell_mean_deficit": 0.05538938791685122,
+      "far_field_moment": 0.13018225497149566
+    },
+    {
+      "config": {
+        "n": 48,
+        "half_width": 7.0,
+        "xi": 1.0,
+        "major_radius": 2.8,
+        "minor_radius": 0.85,
+        "smoothing_radius": 0.2,
+        "log_pressure": 0.5,
+        "density_floor": 1e-12,
+        "anchor_shell": 2,
+        "boundary_blend_fraction": 0.18,
+        "depressed_threshold": 0.35,
+        "frame_samples": 600
+      },
+      "summary": {
+        "steps_completed": 400,
+        "final_energy": 25.107270959640076,
+        "best_energy": 25.107270959640076,
+        "energy_monotonicity_violations": 0,
+        "accepted_steps": 400,
+        "rejected_steps": 0,
+        "final_step_size": 0.024500000000000008,
+        "residual_norm": 0.07284759822754107,
+        "depressed_fraction": 0.0,
+        "effective_radius": 4.921334827624365,
+        "deficit_volume": 61.521107420486416,
+        "equivalent_deficit_radius": 2.4489420686165557,
+        "far_field_shell_density": 0.9730517661764407,
+        "far_field_shell_deficit": 0.026948233823559264,
+        "far_field_moment": 0.07763755231483875,
+        "min_density": 0.7732181767001614,
+        "max_density": 1.0,
+        "stop_reason": "max_steps"
+      },
+      "shell_mean_density": 0.9730517661764407,
+      "shell_mean_deficit": 0.026948233823559264,
+      "far_field_moment": 0.07763755231483875
+    }
+  ],
+  "comparison_summary": {
+    "global": {
+      "final_energy": {
+        "min": 25.107270959640076,
+        "max": 49.00153332653815,
+        "span": 23.894262366898076,
+        "relative_span": 0.48762274861218413
+      },
+      "residual_norm": {
+        "min": 0.07284759822754107,
+        "max": 0.18167799432071227,
+        "span": 0.1088303960931712,
+        "relative_span": 0.5990290486202486
+      },
+      "effective_radius": {
+        "min": 3.338142885461939,
+        "max": 4.921334827624365,
+        "span": 1.5831919421624265,
+        "relative_span": 0.32169970091766087
+      },
+      "depressed_fraction": {
+        "min": 0.0,
+        "max": 0.022117332175925927,
+        "span": 0.022117332175925927,
+        "relative_span": 1.0
+      },
+      "shell_mean_density": {
+        "min": 0.8744144628892311,
+        "max": 0.9730517661764407,
+        "span": 0.09863730328720965,
+        "relative_span": 0.10136901932237388
+      },
+      "shell_mean_deficit": {
+        "min": 0.026948233823559264,
+        "max": 0.12558553711076892,
+        "span": 0.09863730328720965,
+        "relative_span": 0.7854192891671086
+      },
+      "far_field_moment": {
+        "min": 0.07763755231483875,
+        "max": 0.23721927694553677,
+        "span": 0.15958172463069803,
+        "relative_span": 0.6727181984764942
+      },
+      "deficit_volume": {
+        "min": 61.521107420486416,
+        "max": 115.71278659553671,
+        "span": 54.1916791750503,
+        "relative_span": 0.46832922073229705
+      },
+      "equivalent_deficit_radius": {
+        "min": 2.4489420686165557,
+        "max": 3.0229496548601875,
+        "span": 0.5740075862436318,
+        "relative_span": 0.189883276858668
+      },
+      "compactness_ratio": {
+        "min": 0.4976174461591578,
+        "max": 0.9055782686911156,
+        "span": 0.40796082253195776,
+        "relative_span": 0.45049758440162996
+      },
+      "deficit_volume_over_radius_cubed": {
+        "min": 0.5161493721989355,
+        "max": 3.1107605716036955,
+        "span": 2.59461119940476,
+        "relative_span": 0.8340761494437856
+      },
+      "shell_to_volume_ratio": {
+        "min": 0.0004380323266837936,
+        "max": 0.0010853211715464212,
+        "span": 0.0006472888448626275,
+        "relative_span": 0.5964030388722052
+      }
+    },
+    "by_n": {
+      "48": {
+        "half_width_values": [
+          5.0,
+          6.0,
+          7.0
+        ],
+        "final_energy": {
+          "min": 25.107270959640076,
+          "max": 49.00153332653815,
+          "span": 23.894262366898076,
+          "relative_span": 0.48762274861218413
+        },
+        "residual_norm": {
+          "min": 0.07284759822754107,
+          "max": 0.18167799432071227,
+          "span": 0.1088303960931712,
+          "relative_span": 0.5990290486202486
+        },
+        "effective_radius": {
+          "min": 3.338142885461939,
+          "max": 4.921334827624365,
+          "span": 1.5831919421624265,
+          "relative_span": 0.32169970091766087
+        },
+        "deficit_volume": {
+          "min": 61.521107420486416,
+          "max": 115.71278659553671,
+          "span": 54.1916791750503,
+          "relative_span": 0.46832922073229705
+        },
+        "equivalent_deficit_radius": {
+          "min": 2.4489420686165557,
+          "max": 3.0229496548601875,
+          "span": 0.5740075862436318,
+          "relative_span": 0.189883276858668
+        },
+        "compactness_ratio": {
+          "min": 0.4976174461591578,
+          "max": 0.9055782686911156,
+          "span": 0.40796082253195776,
+          "relative_span": 0.45049758440162996
+        },
+        "shell_to_volume_ratio": {
+          "min": 0.0004380323266837936,
+          "max": 0.0010853211715464212,
+          "span": 0.0006472888448626275,
+          "relative_span": 0.5964030388722052
+        }
+      }
+    },
+    "by_half_width": {
+      "5.0": {
+        "n_values": [
+          48
+        ],
+        "final_energy": {
+          "min": 49.00153332653815,
+          "max": 49.00153332653815,
+          "span": 0.0,
+          "relative_span": 0.0
+        },
+        "residual_norm": {
+          "min": 0.18167799432071227,
+          "max": 0.18167799432071227,
+          "span": 0.0,
+          "relative_span": 0.0
+        },
+        "effective_radius": {
+          "min": 3.338142885461939,
+          "max": 3.338142885461939,
+          "span": 0.0,
+          "relative_span": 0.0
+        }
+      },
+      "6.0": {
+        "n_values": [
+          48
+        ],
+        "final_energy": {
+          "min": 33.66473455512892,
+          "max": 33.66473455512892,
+          "span": 0.0,
+          "relative_span": 0.0
+        },
+        "residual_norm": {
+          "min": 0.11510603535220364,
+          "max": 0.11510603535220364,
+          "span": 0.0,
+          "relative_span": 0.0
+        },
+        "effective_radius": {
+          "min": 3.986799136412867,
+          "max": 3.986799136412867,
+          "span": 0.0,
+          "relative_span": 0.0
+        }
+      },
+      "7.0": {
+        "n_values": [
+          48
+        ],
+        "final_energy": {
+          "min": 25.107270959640076,
+          "max": 25.107270959640076,
+          "span": 0.0,
+          "relative_span": 0.0
+        },
+        "residual_norm": {
+          "min": 0.07284759822754107,
+          "max": 0.07284759822754107,
+          "span": 0.0,
+          "relative_span": 0.0
+        },
+        "effective_radius": {
+          "min": 4.921334827624365,
+          "max": 4.921334827624365,
+          "span": 0.0,
+          "relative_span": 0.0
+        }
+      }
+    }
+  }
+}

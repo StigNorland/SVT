@@ -12,3 +12,8 @@ Suggested first issues to open on GitHub:
 8. `[paper] Trim SSV VI-a to flat curves and Andromeda only`
 9. `[paper] Keep SSV VI-b focused on morphology and azimuthal modes`
 10. `[paper] Move CMB claims out of SSV III into a future standalone paper`
+11. `[computation] Build the shared numerical core for \mathcal{L}+\mathcal{L}_\perp`
+12. `[computation] Close the static 3D trefoil-breather minimisation`
+13. `[computation] Close the dynamic 3D reconnection minimisation`
+14. `[validation] Add grid-refinement and domain-size checks to reduced prototype problems`
+15. `[claims] Re-label W mass, \alpha_G, neutrino, CP, and generation claims by status`

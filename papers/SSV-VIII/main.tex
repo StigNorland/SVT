@@ -5,6 +5,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
 \usepackage{amsmath,amssymb}
+\usepackage{booktabs}
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{setspace}
@@ -39,461 +40,269 @@ release of previously stored structure rather than as the first appearance of or
 
 \section{Introduction}
 
-This paper presents a staged cosmogony for the emergence of the saturated vacuum in SSV. Its
-purpose is not to derive every later structure in full detail, but to state the founding logic
-of the cosmological picture clearly enough that later dynamical claims have a genuine
-ontological starting point.
+This paper presents the staged cosmogony of the Saturated Superfluid Vacuum framework in its
+own right. The goal is not to derive every later structure of the series again, but to separate
+the ontological and cosmological sequence from the quantum and gravity derivations: permissive
+void, primordial perturbation, interference, saturation, and defect nucleation.
 
-That aim makes the present paper philosophical in the strict sense. At the foundations of
-cosmology, physics cannot avoid questions of ontology: what counts as a genuine beginning, what
-it means for structure to emerge, what kind of thing spacetime is, and what relation holds
-between formal description and physical reality. These are not questions that calculation alone
-can settle, because calculation already presupposes a framework within which its symbols are
-interpreted.
+The body below is adapted from the legacy unified SSV V manuscript and reorganised to fit the
+scoped paper plan of the repository.
 
-For that reason, the present paper should not be read as a completed quantitative cosmology. It
-is instead an explicit examination of the ontological conditions that a cosmology must satisfy
-if it is not to smuggle structure into its own foundation. ``Shut up and calculate'' is an
-effective rule for technical work inside an accepted theory. It is not a method for deciding
-what the theory says reality is, nor for determining whether its apparent starting point is
-genuine. At the foundations, there is no philosophy-free physics. There is only implicit
-philosophy, left unexamined, or explicit philosophy, brought into the open.
+\section{Cosmogony: From the Permissive Void to the Resonant Cosmos}
+\label{sec:cosmogony}
+%-----------------------------------------------------------------------
 
-The narrower task of this paper is to do the latter. It argues that a final cosmology cannot
-begin from an already structured state, that the true foundation must therefore be the absence
-of structure, and that from this permissive non-structure there follows the possibility of
-minimal distinction, interference, gestational buildup, global release, and only then stable
-massive structure.
+We now ask the deepest question the framework permits: \emph{why is there a saturated
+superfluid at all?} The answer proceeds in five stages, each following necessarily
+from the one before.
 
-The argument proceeds in stages. We begin with the Void as the absence of structure, then
-clarify the status of time and causality at that level. We then ask what the first emergence
-could be, how minimal distinction becomes seed pattern, how seed pattern grows into a medium,
-and how the release of stored structure can open the way to the first massive sector.
+\subsection{Stage 1 — The Permissive Void}
 
-\section{The Permissive Void}
+Before the superfluid existed, there was neither matter, nor energy, nor time.
+We posit a \emph{permissive void}: a state of absolute zero density
+($\rho = 0$), zero temperature, zero entropy, and zero curvature. It has no
+properties save one — it does not forbid change. This is a minimal ontological
+assumption: the void is not nothing (a logical nullity), but rather a \emph{substrate
+of pure potentiality} — a mathematical space in which the field equation~(\ref{eq:GPE})
+is defined but with $\rho = 0$ everywhere.
 
-A cosmology that seeks a true foundation cannot begin from an already structured state. Any
-such starting point immediately invites a further question: why this structure rather than
-another? Why this law, this geometry, this symmetry, this dimensionality, this energy content?
-If the starting point already contains form, then explanation has not yet reached bedrock.
+In this state the Madelung equations reduce trivially to $\partial_t\Psi = 0$:
+the void is static. But the void has an instability. The zero-density state
+$\Psi = 0$ is an \emph{unstable fixed point} of the GPE whenever the
+interaction coefficient $g < 0$ (attractive case) or when the
+vacuum energy $P_0$ in the full equation of state provides a positive pressure at
+finite $\rho$. Either condition means that the trivial solution is not the global energy
+minimum — the true ground state is the saturated superfluid at $\rho = \rho_0 > 0$.
 
-The only genuine foundation is therefore not a first object, a first field, or a first
-spacetime. It is the absence of structure: the Void.
+\subsection{Stage 2 — The Primordial Photon: First Perturbation}
 
-The Void must not be confused with empty space. Empty space is already something. It has
-extension, distinguishable locations, and therefore structure. The Void is more radical than
-that. It has no metric, no dimensionality, no boundary, no causal order, no energy, and no
-proper time, because each of these would already count as structure.
+A spontaneous, arbitrarily small transverse perturbation $\delta\Psi$ to the
+void state is \emph{not forbidden}. Since the void has no thermodynamic equilibrium
+(it has no temperature), there is no Boltzmann suppression of fluctuations. The
+perturbation does not require an external cause; it is permitted by the field
+equation. We identify this first perturbation with the \emph{primordial photon} —
+a transverse phonon mode propagating through the otherwise empty void at phase
+velocity $c$ (the limiting speed of transverse perturbations in the medium, as
+set by the ratio $\alpha c$ → $c$ as $\rho \to 0$).
 
-\subsection{Why the Void Is Permissive}
+The primordial photon is not a quantum mechanical object in the usual sense — there
+is no pre-existing Hilbert space for it to live in. It is a classical perturbation in
+the nascent field $\Psi$, and it is the \emph{first event}: the origin of time.
+Time begins not with a singularity but with a gradient — the irreversible propagation of
+a density wave through a medium that, for the first time, is no longer uniform.
 
-The absence of structure has an important consequence. To constrain, forbid, block, or exclude
-requires structure. A boundary is structure. A law is structure. A metric is structure. A
-causal restriction is structure. The Void has none of these. Therefore the Void cannot prevent
-change.
+\subsection{Stage 3 — Interference and the Seed Pattern}
 
-This is the central ontological move of the present cosmogony. The Void is not productive
-because it contains hidden machinery. It is permissive because it lacks the structure required
-to forbid emergence. The first structured state does not need a prior spatial arena, a prior
-clock, or a prior law that authorizes it. It requires only that nothing prevent it. And in the
-Void, nothing can.
+A single photon propagating through the void will, on reflection or scattering
+from the effective boundary conditions imposed by the medium's own self-consistent
+density (a back-reaction), interfere with itself. Two counter-propagating photon
+modes of wavenumber $k$ produce a standing wave:
+\begin{equation}
+    \delta\rho(\mathbf{x},t) = \delta\rho_0\,\cos(kx)\cos(\omega t),
+    \label{eq:standing}
+\end{equation}
+with $\omega = c k$ in the dilute limit. This standing wave is the \emph{seed pattern}:
+a spatially modulated template of alternating high- and low-density regions. Crucially,
+this pattern carries \emph{geometric information} — a preferred length scale $\lambda = 2\pi/k$
+— from which all subsequent structure will grow.
 
-\subsection{Change and Proper Time}
+\subsection{Stage 4 — Nonlinear Growth to Saturation}
 
-This also forces a distinction between change and time. Spacetime is itself structure, and
-proper time belongs to that structure. Proper time is therefore not primordial. It appears only
-once a real medium exists within which local rates of change can be ordered, compared, and
-measured.
+Where the seed pattern is constructive ($\delta\rho > 0$), the local density exceeds
+the void value and the GPE nonlinearity amplifies the perturbation. Where it is
+destructive, density remains near zero. The amplification is self-accelerating:
+higher local density increases the interaction energy $g\rho$, which deepens the
+potential well and attracts more density from neighbouring regions.
 
-At the same time, a further distinction is needed between proper time and primordial time.
-Primordial time is not proper time and not a property of the Void. The Void contains no
-structure, and therefore no metric, no duration, and no clock-like temporal order. But because
-the Void also lacks the structure required to forbid change, the possibility of change follows
-from it. In that sense, primordial time may still be called emergent: it is not a property of
-the Void, but a consequence of it.
-
-This is why the possibility of change is more primitive than proper time, even though proper
-time itself is a later structured feature of the medium. The correct sequence is therefore not
-\begin{quote}
-first time, then change within time,
-\end{quote}
-but rather
-\begin{quote}
-first the non-prohibition of change, then the emergence of structure, and only then proper time
-as structured local change within that structure.
-\end{quote}
-
-On this view, what is prior to spacetime is not a larger or earlier time. It is the permissive
-absence of structure. Proper time begins with the medium. The possibility of change does not.
-
-\subsection{Causality and Ontological Priority}
-
-A further distinction is needed between physical causality and causality in the deeper logical
-sense. Physical causality should not be treated as a mysterious principle of ``ordered events,''
-since that language can make causality sound more magical than it is and can also smuggle
-structured spacetime in too early. In the physical universe, causality is simply the propagation
-of information and energy through a structured medium. A cause is not an occult push from one
-event to another; it is the transmission of influence through a real substrate.
-
-For that reason, physical causality is not primordial. It belongs to the structured universe and
-appears only once a medium exists in which information and energy can propagate. Prior to that,
-one should not speak of physical causes and effects in the ordinary sense.
-
-At the same time, the present framework still relies on a deeper notion of dependence. What
-belongs to logic and mathematics is not physical transmission itself, but the more abstract fact
-that one thing may follow from another. In this sense, causality as intelligible dependence is
-pre-physical and cannot be derived from within the physical system, because any such derivation
-would already presuppose it.
-
-The transition from the Void to structure should therefore not be described as a physical cause
-producing a later effect within time. It is better described through ontological and logical
-priority. The Void does not physically cause the first emergence by transmitting influence across
-an earlier spacetime. Rather, structure becomes possible because the absence of structure cannot
-forbid it. Physical causality is one later expression of deeper logical dependence once a
-structured medium exists.
-
-\section{Primordial Perturbation}
-
-If the Void cannot forbid change, the next question is what the first emergence can be. It
-cannot yet be a stable particle, a galaxy, or a fully formed spacetime, since each of these
-already presupposes rich structure. The first admissible emergence must therefore be minimal:
-not a completed world, but the slightest departure from perfect non-structure.
-
-In SSV, this is described as a primordial perturbation. The word should be taken carefully. It
-does not mean a perturbation \emph{of} an already existing material background in the ordinary
-physical sense. It means the first nontrivial distinction to arise where previously there was no
-structured distinction at all.
-
-\subsection{Why the First Emergence Must Be Minimal}
-
-The first emergence cannot coherently be maximally complex. A rich structure presupposes
-internal relations, scales, and differentiations. A true first emergence must be the weakest
-possible positive departure from the Void: the earliest structured contrast.
-
-This is why the cosmogony does not begin with particles or with a pre-written manifold. It
-begins with the smallest admissible asymmetry.
-
-\subsection{Perturbation Without Prior Proper Time}
-
-Because proper time belongs to structured spacetime, the primordial perturbation cannot be said
-to occur \emph{at} some earlier time in the ordinary physical sense. Rather, its emergence is
-the beginning of the very order within which before and after become meaningful.
-
-This is another place where ordinary language is misleading. To say that the perturbation is
-``first'' does not mean that it is preceded by an earlier clock reading in a larger temporal
-container. It means that it is logically prior to every later structured distinction.
-
-\subsection{The First Perturbation as Wave-Like Distinction}
-
-The most natural candidate for the first emergence is not a localized object but a propagative
-contrast: a primitive wave-like distinction. A localized object would already presuppose a
-background within which localization is defined. A propagative distinction is more primitive:
-it is simply the first structured difference sustaining itself against the prior absence of
-structure.
-
-In later SSV language this is described as the primordial photon, but that term must be read
-cautiously at this stage. The point is not that an ordinary late-universe photon somehow exists
-before spacetime, but that the first structured emergence is most naturally described as a
-minimal propagative mode rather than as a bound object.
-
-\subsection{A Gestalting Phase of Medium Formation}
-
-The most conservative version of the SSV cosmogony is that the first distinction does not
-immediately generate a finished universe. Instead, repeated or sustained quanta of excitation
-emerge into the absence of prior structure and contribute directly to building the medium
-itself. Because there are not yet other fully formed structures to absorb, scatter, or bind
-them in the familiar late-universe sense, these early excitations are interpreted as formative
-of the medium rather than merely propagating within a pre-existing medium.
-
-On this picture, the earliest phase of cosmogony is a gestalting phase: structure is not
-inserted all at once, but gradually sedimented from recurrent excitation. The medium forms by
-accumulation and organization of these minimal distinctions. In this phase, the earliest quanta
-are not yet ordinary particles in an already structured spacetime. They are part of the process
-by which structured spacetime and the medium that supports it come into being.
-
-\subsection{A More Dramatic Limiting Picture: Global Self-Interference}
-
-A more speculative limiting picture is also possible. If the first excitation emerges before
-there is any fully formed metric structure, then it need not be bounded in the ordinary sense
-by the propagation limits that hold in the later medium. In that case the first distinction may
-be better understood not as a localized propagating signal inside a finished world, but as a
-globally self-overlapping excitation whose self-interference seeds structure effectively
-everywhere at once.
-
-This is the more dramatic picture: the first excitation closes on itself like an Ouroboros, not
-because it travels through a pre-existing spatial loop, but because in the absence of prior
-structure its self-overlap is global rather than local. When self-interference occurs, structure
-is no longer confined to one region; it is imprinted throughout the emergent order.
-
-The present paper does not treat this picture as established physics. It is retained as a
-speculative limiting image of what unconstrained first emergence might mean if there is not yet
-an already formed spacetime to localize propagation.
-
-\section{Interference and Seed Pattern}
-
-Once a propagative distinction exists, the next conceptual step is not yet matter but pattern.
-A single mode is already structure, but by itself it does not yet explain richness. Richness
-enters when structured distinctions overlap, reinforce, cancel, and generate persistent contrast
-relations. This is the role of interference in the cosmogony.
-
-\subsection{From Propagation to Pattern}
-
-Interference matters because it is the first route from simple distinction to articulated
-structure. Where wave-like perturbations overlap, some relations are enhanced while others are
-suppressed. The result is not yet a stable object, but a seed pattern: an ordered nonuniformity
-that can guide later growth.
-
-The key idea is that structure does not have to appear all at once. It can accumulate by
-pattern selection. Interference provides the first selection principle internal to the emerging
-order itself.
-
-\subsection{Why Seed Patterns Matter}
-
-The seed pattern is the first bridge between primordial distinction and later world structure.
-Without it, emergence would have to jump directly from a minimal perturbation to a fully
-articulated medium. With it, one may instead describe a staged growth:
-\begin{enumerate}[label=\arabic*.]
-  \item minimal distinction appears,
-  \item distinctions interfere,
-  \item interference creates nonuniform seed structure,
-  \item seed structure amplifies under later dynamics.
+The growth proceeds through three sub-stages:
+\begin{enumerate}
+    \item \textbf{Exponential amplification} (linear instability regime): the high-density
+          crests grow as $\rho(t) \propto e^{\gamma t}$ with growth rate
+          $\gamma = c/\xi_0$ (the inverse of the initial healing length).
+    \item \textbf{Nonlinear broadening}: as $\rho$ approaches $\rho_0$, the equation
+          of state stiffens and the growth slows. The density profile develops a plateau
+          at $\rho_0$ separated by sharp domain walls — precursors of the vacuum
+          surface tension that will become the strong force (Paper~II).
+    \item \textbf{Saturation}: when $\rho \to \rho_0$ throughout the high-density crests,
+          the medium has reached its ground state locally. The process is exothermic:
+          the binding energy released goes into kinetic energy of the flow field, driving
+          turbulence.
 \end{enumerate}
 
-This is conceptually important even before detailed equations are supplied, because it shows how
-complexity may arise incrementally rather than by unexplained leap.
+This stage corresponds, in cosmological language, to \emph{inflation}: an exponential
+expansion of ordered vacuum from the initial seed, followed by a transition to the
+saturated state (analogous to reheating). No inflaton field is needed; the growth
+is driven by the superfluid's own equation of state.
 
-\subsection{On the Limits of Cosmological Knowledge at the Foundation}
+\subsection{Stage 5 — Vortex Nucleation: The First Particles}
 
-The earliest stages described in this paper cannot be treated in the same way as late-universe
-physics. They are prior to any direct observation we can make and prior even to the structured
-conditions that make ordinary observation possible. For this reason, the foundational stages of
-the cosmogony are necessarily more speculative than the later phenomenological claims of the
-SSV program.
+When neighbouring saturation fronts collide, the phase $\varphi$ of $\Psi$ must
+reconnect continuously across the interface. For generic phase mismatches, the only
+topologically consistent solution is the nucleation of a vortex filament at the
+intersection point — a line defect across which the phase winds by $2\pi n$.
 
-This does not make them arbitrary. The relevant standard here is not direct observation, which
-is unavailable by definition, but logical constraint and ontological coherence. The proposed
-sequence must be judged by whether it follows consistently from the foundational claim that the
-Void lacks structure and therefore cannot forbid emergence, and by whether it leads to a
-plausible route toward the later medium and its observable consequences.
+These are the \emph{first particles}: toroidal vortex rings (electrons) and
+spherical breather modes (protons) nucleating spontaneously wherever the phase
+mosaic of the saturating vacuum forced a topological mismatch. Their number density
+is set by the Kibble--Zurek mechanism:
+\begin{equation}
+    n_{\rm defect} \sim \frac{1}{\xi^3} \cdot \left(\frac{\xi}{\hat\xi}\right)^{3\nu/(1+\nu)},
+    \label{eq:Kibble_Zurek}
+\end{equation}
+where $\hat\xi$ is the correlation length at the onset of the phase transition and
+$\nu$ is the correlation-length exponent of the GPE universality class ($\nu = 1/2$
+for mean-field, $\nu \approx 0.67$ for the 3D XY fixed point).
 
-\section{Growth to Saturation}
+The baryon-to-photon ratio $\eta \sim 6\times10^{-10}$ is, in this picture, not a
+free parameter but the Kibble--Zurek defect density at the saturation transition,
+calculable once $\xi$ and the transition dynamics are known. A precise estimate
+requires numerical simulation of the GPE across the void-to-saturation phase
+transition — a tractable computation that we flag as the primary numerical prediction
+of this paper.
 
-The central question at this stage is how minimal distinction grows into a real medium. If one
-admits the emergence of something from the Void at all, then one has already admitted the
-emergence of structure with it. A genuinely structureless ``something'' would be
-indistinguishable from nothing and therefore would not count as emergence in any meaningful
-sense. To emerge is already to differ, and to differ is already to possess the first trace of
-structure.
+%-----------------------------------------------------------------------
+\section{The Resonant Cosmos: Universe as a Single Eigenmode}
+\label{sec:resonant_cosmos}
+%-----------------------------------------------------------------------
 
-The question is therefore not whether structure emerges once something does. The emergence of
-something already is the emergence of structure. The real question is how minimal distinction
-grows into stable organized structure, and then into a medium capable of supporting proper
-time, metric order, and substance.
+\subsection{Synthesis}
 
-\subsection{Emergence Is Not Magic}
+The five stages of Section~\ref{sec:cosmogony}, taken together with the results of
+Papers~I--IV, yield a complete and self-consistent picture of the universe:
 
-The language of emergence can easily become misleading if it is treated as a placeholder for
-what one does not understand. In the present framework, emergence is not invoked as an
-unexplainable jump or a mystical surplus. It means that new properties appear as direct
-consequences of underlying structure and interaction once a system reaches the relevant
-relational organization.
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{lll}
+\toprule
+\textbf{Level} & \textbf{Physical Object} & \textbf{SSV Identification} \\
+\midrule
+Vacuum         & Saturated superfluid at $\rho_0$         & Ground state of GPE \\
+Particles      & Topological defects                       & Vortex rings \& breathers \\
+Forces         & Pressure-gradient interactions            & EM, strong, weak, gravity \\
+Time           & Irreversible wake evolution               & Entropy = turbulence \\
+Galaxies       & Coherent planar solitons                  & BH-pinned standing waves \\
+Universe       & Single resonant eigenmode                 & Global coherent state of $\Psi$ \\
+\bottomrule
+\end{tabular}
+\end{center}
 
-Wetness is a familiar example. Neither hydrogen nor oxygen atoms are wet in isolation, and even
-an individual water molecule is not wet in the full macroscopic sense. Wetness appears only
-when many $H_2O$ molecules, by virtue of their geometry and mutual interactions, organize into a
-regime where fluid behavior becomes possible. The property is not magical, nor inserted from
-outside. It is a direct consequence of underlying form and interaction.
+\subsection{The Universe as Self-Tuned Instrument}
 
-The same logic is proposed here for the early universe. The structured vacuum need not be
-assumed as a finished hidden object present from the start. It may emerge when accumulated
-energetic distinctions, through interference, storage, and mutual relation, cross a threshold
-at which stable medium-like behavior becomes possible.
+The seed wavelength $\lambda_{\rm seed} = 2\pi/k$ set in Stage 3 is the fundamental tone
+of the resonant cosmos. All subsequent structure — from the proton Compton wavelength
+($\sim 10^{-15}$ m) to the galactic aggregation radius ($r_0 \sim 1.13$ kpc, Paper~IV)
+to the Hubble horizon ($\sim 10^{26}$ m) — is a harmonic or overtone of this
+fundamental scale, mediated by the dimensionless ratios $\alpha$, $\alpha^{-1}$, and
+$G_{\rm eff}/(c^2\xi)$.
 
-\subsection{From Stored Distinction to Medium}
-
-In the gestational phase, the active degrees of freedom are best understood as radiative quanta
-of the forming medium. The regime does not yet support larger stable structures: the available
-energy and pressure are insufficient for the formation of massive particles or other bound
-substance. What exists is structured excitation, not yet a matter sector in the ordinary sense.
-
-Its primary content is accumulated structured distinction written into the vacuum. More and more
-of the available energy is held not as freely propagating radiation or stable matter, but as
-encoded relational pattern. The universe is therefore structurally rich while remaining
-materially poor.
-
-As this process continues, the vacuum becomes increasingly information-loaded. Distinctions,
-their interference traces, and their higher-order patterning are retained as structured stress
-within the forming medium. This gradual accumulation is what allows minimal structure to grow
-toward a true medium rather than remaining a sparse set of isolated departures from the Void.
-
-\subsection{Threshold and Saturation}
-
-The transition to a saturated medium should then be understood as a threshold phenomenon. New
-collective properties arise once the accumulated structure reaches a degree of organization at
-which self-supporting metric and medium-like behavior become stable. Just as fluidity is a
-collective consequence of molecular form and interaction, the vacuum medium of SSV may be
-understood as a collective consequence of sufficiently organized primordial distinctions.
-
-In this sense, saturation is not an arbitrary extra stage added from outside. It is the point at
-which accumulated structure becomes able to sustain a genuine medium with its own effective
-order, local rates of change, and later capacity for stable defects.
-
-\subsection{A Note on Holographic Compatibility}
-
-The present framework does not attempt to construct a new holographic theory. Rather, it notes
-that existing holographic approaches to information storage are highly compatible with the SSV
-ontology. If information in SSV is always physically encoded as structure in the medium, then
-boundary- and interface-based storage is not an added hypothesis but a natural interpretive
-fit.
-
-In this sense, holography is not introduced here as a separate foundational principle, but
-acknowledged as an existing framework that aligns well with the structural and informational
-logic of SSV. This is relevant to the gestational universe described above, because it suggests
-that growing vacuum structure may be stored in relational and boundary-like form long before
-the later universe becomes rich in freely propagating energy and ordinary matter.
-
-\subsection{Collapse and Release}
-
-This accumulation cannot continue indefinitely. If more and more of the available energy is
-bound into maintaining holographically stored structure, the vacuum may eventually reach a
-metastable limit beyond which its latent organization is no longer dynamically sustainable. At
-that point the stored structure can no longer remain confined to encoded form alone.
-
-The result is a global release. The Big Bang is then interpreted not as the first appearance of
-structure, but as the catastrophic deconfinement of previously stored structure. Because the
-stored information was already distributed holographically, the release is global rather than
-pointlike from the outset. On this view there is no need to imagine a tiny local seed carrying
-all structure outward into emptiness. The structure is already globally latent before it is
-energetically liberated.
-
-The release also changes the physical regime qualitatively. Once stored structure is liberated as
-intense radiation, the energy density and pressure are no longer those of the gestational phase.
-The universe enters a mass-producing regime in which larger stable structures become possible
-through known physics rather than through a special additional cosmological law.
-
-\section{Topological Defect Nucleation}
-
-The next stage is the appearance of stable structure in the stronger sense: not merely radiative
-quanta of the forming medium, but enduring topological defects and the first massive sector.
-
-\subsection{From Radiation to Defect}
-
-In the gestational phase, the energy and pressure conditions were insufficient for the formation
-of larger stable structures. After the release, this changes. The newly liberated radiation is no
-longer simply maintaining latent vacuum structure; it now fills a formed medium in a regime of
-sufficient energy density and pressure for mass production and stable organization.
-
-The appearance of defects should therefore not be treated as a second miracle independent of the
-release. It is a downstream consequence of the same transition. Once the medium exists in a
-sufficiently energized and structured state, topologically protected configurations can nucleate
-within it. These are the first candidates for enduring particles in the SSV program.
-
-\subsection{Why Topology Matters}
-
-The importance of topology is that it allows some configurations to survive where ordinary
-fluctuations would decay. A purely propagative disturbance disperses. A topological defect, by
-contrast, is protected by the organization of the field itself. This is what makes the transition
-from pure radiation to stable particle-like structure conceptually possible.
-
-In this sense, mass does not need to be inserted as an independent principle. The release event
-creates the energetic regime in which stable defects can form, and the topology of the medium
-selects which structures are able to persist.
-
-\subsection{The First Massive Sector}
-
-The first massive sector is therefore not primordial in the strictest sense. It is later than
-the Void, later than the first perturbative distinctions, later than interference, and later than
-the long gestational buildup of encoded structure. Matter appears only once the released universe
-crosses into a regime where larger stable structures are physically supportable.
-
-This sequence preserves a clear hierarchy:
-\begin{enumerate}[label=\arabic*.]
-  \item Void,
-  \item minimal distinction,
-  \item interference and seed structure,
-  \item gestational storage,
-  \item global release,
-  \item massive defect nucleation.
+This is not numerology. It follows necessarily from:
+\begin{enumerate}
+    \item A single postulate (saturated superfluid);
+    \item A single initial perturbation (primordial transverse mode);
+    \item The self-consistent nonlinear dynamics of the GPE.
 \end{enumerate}
+The universe did not need to be fine-tuned. It was \emph{self-tuning}: the equation
+of state of the saturated superfluid selects $\rho_0$, the healing length $\xi$, the
+saturation pressure $P_0$, and hence all dimensionless ratios — including $\alpha$ —
+from a single internal consistency condition.
 
-\section{Discussion and Open Problems}
+\subsection{The Cosmological Constant Problem, Resolved}
 
-Several levels of claim are intentionally mixed in the present paper and should be kept clearly
-separated:
+The ``problem'' is that naive estimates of vacuum energy density exceed the observed
+dark energy density by $\sim 10^{120}$. In SSV, vacuum energy is the rest-energy
+of the saturated superfluid at density $\rho_0$. It does not gravitate in the conventional
+sense, because gravity itself is the Bjerknes force between \emph{perturbations} above
+$\rho_0$, not a response to $\rho_0$ itself. The dark energy — the residual cosmological
+acceleration — corresponds to the slow decrease of $\rho_0$ as the superfluid gradually
+relaxes its saturation state at cosmological timescales (a feature already implicit in
+the logarithmic equation of state of Paper~III). The required value $\Lambda \sim 10^{-52}$ m$^{-2}$
+corresponds to a fractional relaxation rate $\dot\rho_0/\rho_0 \sim H_0$ — the Hubble
+constant — which is exactly the rate at which the universe's wake expands into previously
+unperturbed void regions.
 
-\begin{enumerate}[label=\arabic*.]
-  \item ontological claims about what can count as a genuine foundation,
-  \item interpretive claims about the Void as permissive rather than productive,
-  \item dynamical conjectures about primordial perturbation, interference, and growth,
-  \item later physical identifications that would require independent mathematical support.
+%-----------------------------------------------------------------------
+
+\section{Focused Predictions}
+
+Two quantitative consequences are especially central to the cosmogonic picture.
+
+\begin{enumerate}[label=\textbf{C\arabic*.}]
+    \item \textbf{Baryon-to-photon ratio from the void-to-saturation transition.}
+    Numerical GPE simulation of the Kibble--Zurek freeze-out should recover the observed
+    baryon-to-photon ratio to order unity without parameter tuning.
+
+    \item \textbf{No separate dark-energy substance.}
+    Late-time acceleration should track the slow relaxation of the saturated background rather
+    than require an independent dark-energy field or cosmological constant sector.
 \end{enumerate}
-
-The paper is strongest where it clarifies the ontological starting point. It is weakest where
-it would pretend to have already derived the whole later universe from first principles. The
-right standard is therefore not to oversell the early stages as already complete, but to state
-clearly what would count as genuine support for them in later work.
-
-\subsection{Cyclic or Quasi-Cyclic Possibility}
-
-The present cosmology naturally suggests a cyclic or quasi-cyclic reading. The pre-bang
-gestational state and the post-historical heat-death state need not be opposite in kind. Both
-may be overwhelmingly dominated by latent encoded structure rather than by rich free substance.
-In that sense, heat death may be understood not as a terminal end-state, but as a return to a
-condition analogous to the pre-release universe.
-
-This does not imply literal repetition of the same history. The cycle, if real, would be a
-recurrence of cosmological phases rather than an exact replay of events. The relevant symmetry
-is one of state-type, not necessarily of historical content.
-
-\subsection{Why This Is Not a Boltzmann-Fluctuation Cosmology}
-
-The present picture should not be confused with a Boltzmann-fluctuation cosmology. In such
-cosmologies, one begins from a near-equilibrium background and explains structure through rare
-random departures from equilibrium. This generically creates the Boltzmann-brain problem:
-small localized fluctuations are overwhelmingly more probable than a full structured universe.
-
-SSV proposes a different mechanism. The pre-release universe is not a featureless equilibrium
-waiting for arbitrary fluctuations. It is a globally structured, information-loaded vacuum
-approaching a metastable limit. The bang is not a small chance fluctuation, but a collective
-release of stored structure. For that reason, the framework is not naturally dominated by tiny
-isolated observers appearing in an otherwise empty equilibrium. Its basic transition is global
-rather than local, and structural rather than statistical.
 
 \section{Conclusion}
 
-This paper has proposed a staged cosmogony for the emergence of the saturated vacuum in SSV.
-The argument begins from the claim that a final cosmology cannot rest on an already structured
-starting point. Its true foundation must therefore be the absence of structure: the Void. The
-Void is not treated as a hidden productive mechanism, but as a permissive condition. Because it
-lacks the structure required to constrain or forbid, it cannot prevent change.
+Within the scoped SSV programme, this paper carries the cosmological claim alone: the present
+vacuum is the end state of a staged growth process from permissive non-structure to a saturated,
+defect-bearing medium.
 
-From this starting point, the paper distinguishes proper time from primordial time. Proper time
-belongs to structured spacetime and therefore begins only with the medium. Primordial time is
-not a property of the Void, but the consequence of the Void's inability to forbid change. The
-first emergence is therefore not a finished world but a minimal distinction: the earliest
-structured departure from non-structure.
+\begin{thebibliography}{99}
 
-The subsequent stages are then developed in sequence. Minimal distinction becomes propagative
-contrast. Propagative contrast gives rise to interference and seed pattern. These in turn permit
-a long gestational phase in which radiative quanta of the forming medium build encoded vacuum
-structure without yet producing a massive sector. As this stored structure accumulates, the
-vacuum approaches a metastable limit. The Big Bang is then reinterpreted not as the first
-appearance of structure, but as the catastrophic deconfinement of structure already stored in
-latent form. Once released, the universe enters a regime in which larger stable structures can
-form and topological defects can nucleate.
+\bibitem{ssv1}
+Norland, S., ``Saturated Superfluid Vacuum~I: Topological Defects in a
+Saturated Superfluid Vacuum and the $\alpha$-Harmonic Mass Ladder,''
+SSV Series Paper~I (2026).
 
-The paper does not claim that these earliest stages have been directly observed, nor could they
-be. They are prior to the structured conditions that make ordinary observation possible. For
-that reason, the present work remains primarily ontological and philosophical. Its burden is not
-to pretend that primordial stages have already been measured, but to show that the proposed
-sequence is logically disciplined, internally coherent, and capable of supporting the later
-physical stages of the SSV program.
+\bibitem{ssv2}
+Norland, S., ``Saturated Superfluid Vacuum~II: Forces as Hydrodynamic
+Pressure Gradients in the Saturated Superfluid Plenum,''
+SSV Series Paper~II (2026).
 
-If successful, this picture replaces the usual image of a universe beginning from a featureless
-explosion in empty space with something richer: a cosmology in which structure gestates, is
-stored, is globally released, and only then becomes substance. The task of later work is to
-connect this ontological arc more tightly to explicit dynamics and observable consequences. The
-task of the present paper has been narrower: to show that the beginning of a structured cosmos
-can be conceived without smuggling structure into the foundation.
+\bibitem{ssv3}
+Norland, S., ``Saturated Superfluid Vacuum~III: Thermodynamics and
+Irreversible Time,'' SSV Series Paper~III (2026).
+
+\bibitem{ssv4}
+Norland, S., ``Saturated Superfluid Vacuum~IV: Galactic-Scale Resonances,''
+SSV Series Paper~IV (2026).
+
+\bibitem{Bjerknes1906}
+Bjerknes, V.~F.~K., \emph{Fields of Force}
+(Columbia University Press, New York, 1906).
+
+\bibitem{Madelung1927}
+Madelung, E., ``Quantentheorie in hydrodynamischer Form,''
+\emph{Z.\ Phys.}\ \textbf{40}, 322--326 (1927).
+
+\bibitem{Kibble1976}
+Kibble, T.~W.~B., ``Topology of Cosmic Domains and Strings,''
+\emph{J.\ Phys.\ A} \textbf{9}, 1387--1398 (1976).
+
+\bibitem{Zurek1985}
+Zurek, W.~H., ``Cosmological Experiments in Superfluid Helium,''
+\emph{Nature} \textbf{317}, 505--508 (1985).
+
+\bibitem{Jacobson1995}
+Jacobson, T., ``Thermodynamics of Spacetime: The Einstein Equation of State,''
+\emph{Phys.\ Rev.\ Lett.}\ \textbf{75}, 1260--1263 (1995).
+[arXiv:gr-qc/9504004]
+
+\bibitem{Unruh1976}
+Unruh, W.~G., ``Notes on Black-Hole Evaporation,''
+\emph{Phys.\ Rev.\ D} \textbf{14}, 870--892 (1976).
+
+\bibitem{OPH_particles}
+M\"{u}ller, B., Xue, K., and Poneder, M.,
+``Deriving the Particle Zoo from Observer Consistency,''
+OPH Paper~3, preprint (2026).
+\url{https://github.com/FloatingPragma/observer-patch-holography}
+
+\bibitem{Volovik2003}
+Volovik, G.~E., \emph{The Universe in a Helium Droplet}
+(Oxford University Press, Oxford, 2003).
+
+\bibitem{Gross1961}
+Gross, E.~P., ``Structure of a Quantised Vortex in Boson Systems,''
+\emph{Nuovo Cim.}\ \textbf{20}, 454--457 (1961).
+
+\end{thebibliography}
+
+\end{document}
 
 \end{document}

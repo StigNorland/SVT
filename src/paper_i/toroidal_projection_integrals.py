@@ -1,3 +1,12 @@
+"""Projected integral diagnostics for toroidal static-branch backgrounds.
+
+Status: validation
+Problem type: static
+Nondimensionalisation: hbar = m0 = rho0 = 1 by default in the reduced projection model
+Primary observables: projected stiffness and norm integrals
+Primary role: reduced observable baseline for issue #12 and later static-branch checks
+"""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

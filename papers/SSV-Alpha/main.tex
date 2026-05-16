@@ -1,0 +1,555 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{physics}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\newenvironment{resultbox}[1][Result]{%
+  \begin{quote}\noindent\textbf{#1.}\ }{\end{quote}}
+\newenvironment{gapbox}[1][Open problem]{%
+  \begin{quote}\noindent\textbf{#1.}\ }{\end{quote}}
+
+\newcommand{\half}{\tfrac{1}{2}}
+\newcommand{\mzero}{m_0}
+\newcommand{\seriesname}{Saturated Superfluid Vacuum}
+\newcommand{\papernumber}{Alpha}
+
+\title{\textbf{\seriesname~\papernumber}\\[0.4em]
+The Fine-Structure Constant as a Vortex Aspect Ratio}
+\author{Stig Norland \\ Independent Researcher \\ Bergen, Norway}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The fine-structure constant $\alpha \approx 1/137$ enters ordinary
+quantum electrodynamics as the dimensionless strength of electromagnetic
+coupling.  In the Saturated Superfluid Vacuum (SSV) programme it appears
+more widely: as the strength of the chiral-shear sector, the ratio between
+the electron vortex-ring radius and the healing length, the scale
+$\mu_0=m_e/\alpha$ of the mass ladder, the small parameter controlling
+finite-ring corrections, and the geometric lever in weak-sector
+reconnection estimates.  This paper isolates the common content of these
+appearances.
+
+We do not claim here to derive the numerical value of $\alpha$.  Instead
+we show that, within SSV, the problem of deriving $\alpha$ is equivalent to
+a sharply defined defect-geometry problem: compute the equilibrium aspect
+ratio $R^*/\xi$ of the stable toroidal electron vortex from the full
+LogSE plus chiral-shear functional, without inserting $\alpha$ as an
+empirical input, and show that
+\[
+        \frac{R^*}{\xi} = \alpha^{-1} \approx 137.036 .
+\]
+This reframes the fine-structure constant as a dimensionless eigenvalue of
+the vacuum defect spectrum rather than as a fundamental coupling constant
+postulated independently of the medium.
+
+The paper also clarifies what this proposal is not.  Following the
+propagation-speed audit in Paper~II, $\alpha$ should not be interpreted as
+the ratio of the observed photon speed to the medium sound speed.  The
+observed photon is instead expected to belong to the Goldstone/Bogoliubov
+channel propagating at $c$, while $\alpha$ belongs to the static
+chiral-shear sector that fixes Coulomb strength and defect geometry.  The
+central open calculation is therefore not a wave-speed calculation but a
+three-dimensional toroidal-vortex minimisation.
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+
+% ---------------------------------------------------------------------
+\section{Introduction}
+\label{sec:introduction}
+% ---------------------------------------------------------------------
+
+The fine-structure constant is one of the sharpest dimensionless numbers
+in physics:
+\begin{equation}
+    \alpha = \frac{e^2}{4\pi\epsilon_0\hbar c}
+    \approx 7.29735256\times 10^{-3},
+    \qquad
+    \alpha^{-1}\approx 137.036 .
+    \label{eq:alpha_qed}
+\end{equation}
+In the Standard Model it is a measured low-energy coupling, whose running
+with scale is computed once the empirical value is fixed.  Its numerical
+value is not derived from the structure of the theory.
+
+The SSV programme changes the location of the question.  In Paper~I
+\cite{SSV-I}, particles were identified with topological defects of a
+saturated logarithmic superfluid: leptons as toroidal vortex rings and
+baryons as breather modes stabilised by knotted vortex skeletons.  In
+Paper~II \cite{SSV-II}, the force sector was developed and the earlier
+wave-speed interpretation of $\alpha$ was refined: the observed photon
+should not be the chiral-shear mode propagating at $c_\perp$, but rather a
+Goldstone/Bogoliubov-channel excitation propagating at $c$.  The
+chiral-shear sector remains physically real, but its role is the static
+near-field Coulomb interaction and the geometry of charged defects.
+
+This paper extracts the resulting implication:
+\begin{quote}
+\emph{In SSV, deriving the fine-structure constant is equivalent to
+deriving the aspect ratio of the stable toroidal electron vortex.}
+\end{quote}
+
+The key target is
+\begin{equation}
+    R^* = \frac{\xi}{\alpha},
+    \qquad
+    \frac{R^*}{\xi} = \alpha^{-1}.
+    \label{eq:target_ratio}
+\end{equation}
+Here $\xi$ is the electron healing length, the minor/core scale of the
+vortex ring, and $R^*$ is the equilibrium major radius of the electron
+torus.  Paper~I used $\alpha$ as an empirical input to obtain
+$R^*/\xi\approx137$.  The present paper reverses the logic: the first
+principles calculation that remains to be done is the minimisation that
+outputs this number.
+
+\begin{resultbox}[Claim of this paper]
+The SSV framework does not yet derive $\alpha$.  It reduces the problem to
+a concrete eigenvalue calculation: solve the full 3D LogSE plus
+chiral-shear toroidal-vortex variational problem and compute the
+dimensionless equilibrium aspect ratio $R^*/\xi$.  If the result is
+$137.036\ldots$, the fine-structure constant is geometrically derived as
+$\alpha=\xi/R^*$.
+\end{resultbox}
+
+% ---------------------------------------------------------------------
+\section{Inputs from the SSV Series}
+\label{sec:inputs}
+% ---------------------------------------------------------------------
+
+Only three pieces of the previous papers are needed here.
+
+\paragraph{The saturated medium.}
+The vacuum is described by a macroscopic complex order parameter
+$\Psi(\mathbf{x},t)$.  Its Madelung form gives a density and phase,
+\[
+    \Psi = \sqrt{\rho}\,e^{i\theta},
+    \qquad
+    \mathbf{v} = \frac{\hbar}{\mzero}\nabla\theta ,
+\]
+with quantised circulation
+\begin{equation}
+    \oint \mathbf{v}\cdot d\mathbf{l}
+    = n\kappa_0,
+    \qquad
+    \kappa_0 = \frac{h}{\mzero}.
+    \label{eq:circulation}
+\end{equation}
+The logarithmic equation of state fixes the sound speed at saturation and
+the healing length
+\begin{equation}
+    c_s(\rho_0)=c,
+    \qquad
+    \xi = \frac{\hbar}{\mzero c}.
+    \label{eq:xi}
+\end{equation}
+
+\paragraph{The charged toroidal defect.}
+The electron is identified with a stable toroidal vortex ring.  Its
+minor/core radius is set by $\xi$; its major radius $R$ is a variational
+degree of freedom.  Charge is the chirality of the toroidal winding: the
+two signs of electric charge correspond to the two orientations of the
+vortex-ring phase winding.
+
+\paragraph{The chiral-shear sector.}
+Paper~I introduced a chiral-shear contribution to the functional in order
+to make transverse, handed flow gradients energetic.  Paper~II clarified
+that the empirical $\alpha$ in this sector should be read as a
+dimensionless chiral-shear coupling, not as the speed of the observed
+photon.  The Coulomb force is then recovered as a Bernoulli pressure of the
+chiral-shear near field,
+\begin{equation}
+    F_C(r) = \frac{\alpha\hbar c}{r^2},
+    \label{eq:coulomb_ssv}
+\end{equation}
+after matching the elementary charge through
+$e^2/(4\pi\epsilon_0)=\alpha\hbar c$.
+
+These inputs deliberately leave the numerical value of $\alpha$ open.
+That is the point of the present paper.
+
+% ---------------------------------------------------------------------
+\section{Where \texorpdfstring{$\alpha$}{alpha} Appears}
+\label{sec:appearances}
+% ---------------------------------------------------------------------
+
+The same dimensionless number appears in several places in the SSV series.
+The table below collects the appearances that matter for the derivation
+problem.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{lll}
+\toprule
+\textbf{Sector} & \textbf{Appearance of $\alpha$} & \textbf{SSV reading} \\
+\midrule
+Electromagnetic near field
+  & $F_C=\alpha\hbar c/r^2$
+  & chiral-shear coupling strength \\
+Electron geometry
+  & $R^*/\xi=\alpha^{-1}$
+  & toroidal aspect ratio \\
+Mass ladder
+  & $\mu_0=m_e/\alpha$
+  & flux-tube energy scale \\
+Finite ring corrections
+  & $(\xi/R^*)^2=\alpha^2$
+  & small expansion parameter \\
+Weak reconnection estimates
+  & $E_{\rm recon}\sim m_e/\alpha^2$
+  & ring-scale cavity energy \\
+Gravity consistency
+  & $G\propto \alpha^2/(N_p^2m_e^2)$
+  & mass-ladder bookkeeping \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+This pattern is suggestive but not itself a derivation.  The danger is to
+mistake recurrence for explanation.  A number that appears everywhere in a
+framework may be fundamental, or it may be the shadow of one deeper
+geometric quantity.  The SSV proposal is the latter: all appearances of
+$\alpha$ trace back to the relative scale of the electron torus and its
+core.
+
+\begin{resultbox}[Reduction]
+If the full toroidal-vortex calculation yields $R^*/\xi=137.036\ldots$,
+then the Coulomb coupling, the mass-ladder scale, and the small expansion
+parameter all inherit the same number from one defect-geometry eigenvalue.
+\end{resultbox}
+
+% ---------------------------------------------------------------------
+\section{What \texorpdfstring{$\alpha$}{alpha} Is Not}
+\label{sec:not}
+% ---------------------------------------------------------------------
+
+The early SSV drafts treated $\alpha$ as a wave-speed ratio in the form
+$c_\perp/c$ or $c_\perp^2/c^2$, depending on convention.  This was a useful
+scaffold because it placed $\alpha$ in the medium rather than in a
+separate gauge sector.  But the propagation-speed audit in Paper~II shows
+that this cannot be the final physical interpretation of the observed
+photon.  Light in vacuum propagates at $c$, and so does gravitational
+radiation to the accuracy constrained by GW170817.  The channel that
+supports physical radiation is therefore the Goldstone/Bogoliubov channel,
+not the slower chiral-shear mode.
+
+This distinction is not a retreat from the SSV interpretation of
+$\alpha$; it sharpens it.  The role of $\alpha$ is not to slow photons.  It
+is to set the strength and geometry of the chiral-shear sector:
+\begin{equation}
+    \alpha
+    \quad\hbox{belongs to coupling and defect geometry, not to photon speed.}
+    \label{eq:not_speed}
+\end{equation}
+
+The time-dilation check in Paper~II reinforces this split.  In a
+density-depressed region near a mass, the longitudinal Bogoliubov speed
+scales as
+\begin{equation}
+    \frac{c_s(\rho)}{c_s(\rho_0)}
+    = \sqrt{\frac{\rho}{\rho_0}}
+    \approx 1+\frac{\Phi}{c^2},
+    \label{eq:time_dilation_alpha_paper}
+\end{equation}
+which has the correct weak-field sign for gravitational time dilation.  A
+naive local-density reading of the chiral-shear speed has the opposite
+sign.  The same audit therefore points to a clean separation:
+\begin{align}
+    c &: \hbox{Goldstone/Bogoliubov propagation, light, gravity, clocks},\\
+    \alpha &: \hbox{chiral-shear coupling, Coulomb near field, defect aspect ratio}.
+\end{align}
+
+% ---------------------------------------------------------------------
+\section{The Geometric Target}
+\label{sec:target}
+% ---------------------------------------------------------------------
+
+The electron ring is characterised by a major radius $R$ and a minor/core
+radius $a$.  The core minimisation is local and fixes
+\begin{equation}
+    a^* = \xi .
+    \label{eq:core_target}
+\end{equation}
+The nontrivial calculation is the major-radius minimisation,
+\begin{equation}
+    R^* = \operatorname*{arg\,min}_{R}
+    E_{\rm torus}[R,a^*;\,\mathcal{L}_{\rm LogSE}+\mathcal{L}_{\perp}] .
+    \label{eq:R_min}
+\end{equation}
+The desired output is the dimensionless number
+\begin{equation}
+    r^* \equiv \frac{R^*}{\xi}.
+    \label{eq:rstar}
+\end{equation}
+In Paper~I, the empirical input $\alpha$ was used to write
+\[
+    r^* = \alpha^{-1}.
+\]
+The alpha derivation problem is the inverse question:
+\begin{equation}
+    r^*_{\rm computed}
+    \stackrel{?}{=}
+    137.036\ldots .
+    \label{eq:alpha_test}
+\end{equation}
+
+\begin{gapbox}[Open calculation]
+The alpha problem is not solved by restating $R^*=\xi/\alpha$.  It is solved
+only if the functional minimisation computes $R^*/\xi$ without inserting
+$\alpha$ anywhere as an empirical coupling or target radius.
+\end{gapbox}
+
+% ---------------------------------------------------------------------
+\section{Variational Form of the Problem}
+\label{sec:variational}
+% ---------------------------------------------------------------------
+
+The most compact way to state the calculation is as a constrained
+minimisation over toroidal vortex configurations:
+\begin{equation}
+    E[\Psi]
+    =
+    \int d^3x\,
+    \left[
+        \frac{\hbar^2}{2\mzero}|\nabla\Psi|^2
+        + V_{\rm LogSE}(|\Psi|^2)
+        + \mathcal{E}_{\perp}(\Psi,\nabla\Psi)
+    \right],
+    \label{eq:functional}
+\end{equation}
+subject to the topological constraints
+\begin{equation}
+    \oint_{\rm poloidal}\nabla\theta\cdot d\mathbf{l}=2\pi n,
+    \qquad
+    \oint_{\rm toroidal}\nabla\theta\cdot d\mathbf{l}=2\pi m,
+    \label{eq:constraints}
+\end{equation}
+with the electron corresponding to the minimal charged toroidal sector.
+The chiral-shear term $\mathcal{E}_{\perp}$ must be written in a form that
+does not already contain the observed $\alpha$ as a numerical input.  Its
+dimensionless coefficient should either be fixed by saturation/topology or
+absorbed into the same eigenvalue problem.
+
+In the thin-ring language, the energy can be schematically decomposed as
+\begin{equation}
+    E_{\rm torus}(R,a)
+    =
+    E_{\rm core}(a)
+    + E_{\rm flow}(R,a)
+    + E_{\rm shear}(R,a)
+    + E_{\rm curvature}(R,a)
+    + \cdots ,
+    \label{eq:energy_decomp}
+\end{equation}
+where
+\begin{itemize}[leftmargin=2em]
+    \item $E_{\rm core}$ fixes the minor radius $a^*=\xi$;
+    \item $E_{\rm flow}$ is the circulation energy of the vortex ring;
+    \item $E_{\rm shear}$ is the chiral contribution that resists or favours expansion;
+    \item $E_{\rm curvature}$ contains Kelvin, bending, and finite-core corrections.
+\end{itemize}
+The output of the calculation is not a mass in isolation, but the
+dimensionless stationary point
+\begin{equation}
+    \frac{\partial E_{\rm torus}}{\partial R}=0,
+    \qquad
+    \frac{\partial^2 E_{\rm torus}}{\partial R^2}>0,
+    \qquad
+    r^*=\frac{R^*}{\xi}.
+    \label{eq:stationary}
+\end{equation}
+
+% ---------------------------------------------------------------------
+\section{Avoiding the Circular Derivation}
+\label{sec:circularity}
+% ---------------------------------------------------------------------
+
+The most important discipline in an alpha paper is to avoid proving
+$\alpha$ by hiding it in the assumptions.  The following routes are
+therefore disallowed as derivations:
+
+\begin{enumerate}[label=(\roman*)]
+    \item inserting $\lambda=\alpha^2\rho_0/\mzero$ and then obtaining
+          $R^*/\xi=\alpha^{-1}$;
+    \item imposing $e^2/(4\pi\epsilon_0)=\alpha\hbar c$ before solving the
+          toroidal defect;
+    \item choosing a boundary condition equivalent to $R^*/\xi=137$;
+    \item fitting a numerical coefficient in the shear term to recover the
+          observed value.
+\end{enumerate}
+
+A valid derivation must instead have the following form:
+\begin{enumerate}[label=(D\arabic*)]
+    \item Write the LogSE plus chiral-shear functional with all
+          dimensionless coefficients fixed by symmetry, saturation, or
+          topology.
+    \item Solve the minimal charged toroidal defect in three dimensions.
+    \item Extract the equilibrium ratio $R^*/\xi$.
+    \item Only then identify $\alpha=\xi/R^*$ and compare with CODATA.
+\end{enumerate}
+
+\begin{resultbox}[Success criterion]
+The alpha derivation succeeds if a calculation that contains no empirical
+$\alpha$ produces
+\[
+    R^*/\xi = 137.036\ldots
+\]
+with a controlled error estimate.  It fails if the result is not close, or
+if the value can be recovered only by inserting an equivalent dimensionless
+constant by hand.
+\end{resultbox}
+
+% ---------------------------------------------------------------------
+\section{Numerical Programme}
+\label{sec:numerics}
+% ---------------------------------------------------------------------
+
+The practical route is numerical before it is analytic.  The cleanest
+calculation is a 3D constrained minimisation in the toroidal topological
+sector:
+\begin{enumerate}[label=(N\arabic*)]
+    \item Choose a cylindrical or toroidal computational grid with adaptive
+          refinement near the core.
+    \item Initialise $\Psi$ with a minimal charged toroidal vortex of major
+          radius $R$ and core radius near $\xi$.
+    \item Evolve by imaginary time or gradient flow under the full
+          LogSE plus chiral-shear functional.
+    \item Enforce the topological winding constraints so the defect cannot
+          unwind.
+    \item Measure the relaxed $R^*/\xi$ and its dependence on grid size,
+          box size, and finite-core treatment.
+    \item Repeat across allowed chiral-shear functional variants to test
+          whether $137$ is robust or model-dependent.
+\end{enumerate}
+
+The calculation has a clear falsification structure.  A robust equilibrium
+near $137$ would be strong evidence that $\alpha$ is indeed a vortex aspect
+ratio.  A robust equilibrium at some unrelated number would falsify the
+specific SSV alpha proposal, even if other parts of the framework survived.
+
+% ---------------------------------------------------------------------
+\section{Consequences of a Successful Derivation}
+\label{sec:consequences}
+% ---------------------------------------------------------------------
+
+If $R^*/\xi=\alpha^{-1}$ is derived, several SSV claims become less
+independent than they currently appear.
+
+\paragraph{Electromagnetic coupling.}
+The Coulomb strength would be inherited from the geometry of the charged
+defect:
+\[
+    e^2/(4\pi\epsilon_0)=\hbar c\,\xi/R^*.
+\]
+The electromagnetic coupling would no longer be a separately inserted
+number.
+
+\paragraph{The mass ladder.}
+The scale $\mu_0=m_e/\alpha$ would become
+\[
+    \mu_0 = m_e\,\frac{R^*}{\xi},
+\]
+so the hadronic ladder would inherit its spacing from the electron-ring
+aspect ratio.
+
+\paragraph{Weak-sector estimates.}
+Quantities scaling as $m_e/\alpha^2$ would become ring-geometry energies
+scaling as
+\[
+    m_e\left(\frac{R^*}{\xi}\right)^2 .
+\]
+The weak sector would still require the reconnection-cap calculation, but
+its small parameter would be geometrically anchored.
+
+\paragraph{Perturbative corrections.}
+Finite-ring corrections use
+\[
+    \varepsilon = (\xi/R^*)^2 = \alpha^2 .
+\]
+If $\alpha$ is geometric, the perturbation expansion is an expansion in
+the inverse aspect ratio of the electron torus.
+
+% ---------------------------------------------------------------------
+\section{Discussion}
+\label{sec:discussion}
+% ---------------------------------------------------------------------
+
+This paper is intentionally narrower than the force-sector unification of
+Paper~II.  Its purpose is to identify one load-bearing calculation.  The
+fine-structure constant is not explained by showing that it appears in many
+places.  It is explained only if all of those appearances trace back to a
+single dimensionless eigenvalue of the vacuum defect spectrum.
+
+The connectedness of the SSV series is therefore not a weakness here.  It
+is the reason the alpha problem is worth isolating.  Coulomb strength,
+electron geometry, mass-ladder spacing, weak reconnection scales, and
+finite-ring corrections all point to the same ratio.  If the ratio can be
+computed, the framework gains a central derivation.  If it cannot, the
+failure is equally informative.
+
+There is also an important conceptual payoff.  The propagation-speed audit
+separates two roles that were previously entangled:
+\[
+    \hbox{propagation speed} \neq \hbox{coupling strength}.
+\]
+The observed photon belongs to the propagation channel at $c$.  The
+fine-structure constant belongs to the defect and near-field channel.  This
+makes the alpha problem more geometric, not less.
+
+% ---------------------------------------------------------------------
+\section{Conclusion}
+\label{sec:conclusion}
+% ---------------------------------------------------------------------
+
+The SSV framework does not yet derive the fine-structure constant.  It
+does, however, sharpen the question.  The fine-structure constant is not
+treated as an unexplained electromagnetic input, nor as a photon-speed
+ratio.  It is the dimensionless chiral-shear/topological scale that fixes
+the electron torus relative to its healing length.
+
+The derivation target is therefore:
+\[
+    \boxed{\quad R^*/\xi = \alpha^{-1} \approx 137.036 \quad}
+\]
+from the full 3D LogSE plus chiral-shear toroidal-vortex minimisation.
+That calculation is small enough to be stated precisely and large enough to
+matter.  It is the point at which the SSV programme either turns the
+fine-structure constant into geometry, or learns exactly where the proposed
+geometry fails.
+
+\begin{thebibliography}{99}
+
+\bibitem{SSV-I}
+S.~Norland,
+``Saturated Superfluid Vacuum I: Particle Defects and the
+$\alpha$-Harmonic Mass Ladder,''
+manuscript in preparation.
+
+\bibitem{SSV-II}
+S.~Norland,
+``Saturated Superfluid Vacuum II: The Force Sector,''
+manuscript in preparation.
+
+\bibitem{Volovik2003}
+G.~E.~Volovik,
+\textit{The Universe in a Helium Droplet},
+Oxford University Press, Oxford (2003).
+
+\bibitem{Zloshchastiev2020}
+K.~G.~Zloshchastiev,
+``Superfluid vacuum theory and deformed dispersion relations,''
+\textit{Int.~J.~Mod.~Phys.~A} \textbf{35}, 2040032 (2020);
+arXiv:2011.11897.
+
+\end{thebibliography}
+
+\end{document}

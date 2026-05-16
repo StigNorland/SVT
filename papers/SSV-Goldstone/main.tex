@@ -1,0 +1,475 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{physics}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\newenvironment{resultbox}[1][Result]{%
+  \begin{quote}\noindent\textbf{#1.}\ }{\end{quote}}
+\newenvironment{gapbox}[1][Open problem]{%
+  \begin{quote}\noindent\textbf{#1.}\ }{\end{quote}}
+
+\newcommand{\half}{\tfrac{1}{2}}
+\newcommand{\mzero}{m_0}
+\newcommand{\seriesname}{Saturated Superfluid Vacuum}
+\newcommand{\papernumber}{Goldstone}
+
+\title{\textbf{\seriesname~\papernumber}\\[0.4em]
+The Photon as a Goldstone Mode and the Chiral-Shear Near Field}
+\author{Stig Norland \\ Independent Researcher \\ Bergen, Norway}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Paper~II of the Saturated Superfluid Vacuum (SSV) series identified a
+tension in the electromagnetic sector.  The static Coulomb and magnetic
+near-field mechanisms arise naturally from chiral-shear flow gradients
+around toroidal charged vortices, with coupling strength set by the
+dimensionless parameter $\alpha$.  But the same preliminary derivation
+identified the propagating photon with the chiral-shear mode at
+$c_\perp$, producing a speed mismatch: observed light in vacuum propagates
+at $c$, not at $c_\perp$.
+
+This paper isolates the correction required by that audit.  The observed
+photon should be identified with the Goldstone/Bogoliubov phase mode of
+the saturated order parameter $\Psi$, propagating at the medium sound speed
+$c$.  The chiral-shear sector remains physically real, but it is reassigned
+to the static and near-field electromagnetic structure: Coulomb pressure,
+magnetic circulation, Aharonov--Bohm phase, and vortex-ring self-energy.
+
+The central task is therefore a two-channel derivation.  One must derive
+the radiative Maxwell sector from the Goldstone phase channel at speed $c$,
+while preserving the static Coulomb and magnetic results of Paper~II as the
+near-field limit of chiral-shear topology.  We do not claim this
+derivation is complete here.  We state the consistency conditions,
+identify the matching problem between the two channels, and define the
+success criterion for a future full calculation.
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+
+% ---------------------------------------------------------------------
+\section{Introduction}
+\label{sec:introduction}
+% ---------------------------------------------------------------------
+
+The electromagnetic sector of SSV has split into two logically distinct
+pieces:
+\begin{enumerate}[label=(\roman*),leftmargin=2em]
+    \item a \emph{static near-field sector}, where charge, Coulomb force,
+          magnetic circulation, and AB phase arise from the
+          topology and chiral-shear flow of toroidal vortices;
+    \item a \emph{radiative sector}, where the observed photon must
+          propagate at the measured vacuum speed $c$.
+\end{enumerate}
+Paper~II developed the first piece but used the wrong carrier for the
+second.  It treated the chiral-shear mode as the photon and assigned it the
+speed $c_\perp$.  This cannot be the final physical interpretation because
+the observed photon propagates at $c$.
+
+The correction is suggested by analogue-gravity and logarithmic-superfluid
+vacuum theory: the physical photon is the Goldstone phase mode of
+$\Psi$~\cite{Volovik2003,Zloshchastiev2020}.  The phase mode propagates at
+the medium sound speed,
+\begin{equation}
+    c_s(\rho_0)=c,
+    \label{eq:cs_c}
+\end{equation}
+and is therefore compatible with observed light propagation and with
+gravitational-wave constraints such as GW170817.
+
+The question is not simply whether one can rename the photon.  The hard
+question is whether the successful static electromagnetic mechanisms of
+Paper~II survive the replacement:
+\[
+    \hbox{chiral-shear photon at }c_\perp
+    \quad\longrightarrow\quad
+    \hbox{Goldstone photon at }c .
+\]
+The present paper formulates that problem.
+
+\begin{resultbox}[Claim of this paper]
+The observed photon should be the Goldstone/Bogoliubov phase mode of the
+SSV order parameter, propagating at $c$.  The chiral-shear field should be
+retained as the static near-field sector that fixes Coulomb strength and
+magnetic topology.  The open calculation is the matching between these two
+sectors.
+\end{resultbox}
+
+% ---------------------------------------------------------------------
+\section{The Problem in Paper II}
+\label{sec:problem}
+% ---------------------------------------------------------------------
+
+Paper~II recovered a set of electromagnetic structures from chiral vortex
+topology:
+\begin{align}
+    F_C(r) &= \frac{\alpha\hbar c}{r^2}, \label{eq:coulomb}\\
+    \mathbf{B} &\sim \nabla\times\mathbf{v}_\perp, \label{eq:Bcurl}\\
+    \gamma_{\rm AB} &= \frac{q}{\hbar}\oint\mathbf{A}\cdot d\mathbf{l}.
+    \label{eq:AB}
+\end{align}
+Here $\mathbf{v}_\perp$ is the chiral-shear flow associated with the
+toroidal vortex, and $\alpha$ is the empirical dimensionless strength of
+that sector.
+
+The same section then tentatively identified the propagating photon with a
+transverse chiral-shear phonon satisfying
+\begin{equation}
+    \partial_t^2\delta\theta
+    =
+    c_\perp^2\nabla^2\delta\theta,
+    \qquad
+    c_\perp \neq c.
+    \label{eq:old_photon}
+\end{equation}
+This produces the speed problem.  If the physical photon propagated at
+$c_\perp$, vacuum light speed would be $c_\perp$, not $c$.  The earlier
+patch that $\alpha\to1$ in free vacuum is not available inside SSV because
+vacuum \emph{is} the saturated medium.
+
+The diagnosis is therefore:
+\begin{equation}
+    \hbox{static chiral-shear mechanism: keep,}
+    \qquad
+    \hbox{radiative photon identification: replace.}
+    \label{eq:diagnosis}
+\end{equation}
+
+% ---------------------------------------------------------------------
+\section{Goldstone Channel of the Saturated Medium}
+\label{sec:goldstone}
+% ---------------------------------------------------------------------
+
+Write the order parameter as
+\begin{equation}
+    \Psi(\mathbf{x},t)
+    =
+    \left(\sqrt{\rho_0}
+    +\frac{\delta\rho}{2\sqrt{\rho_0}}\right)
+    e^{i\theta_0+i\delta\theta}.
+    \label{eq:psi_expand}
+\end{equation}
+Linearisation gives two familiar modes:
+\begin{itemize}[leftmargin=2em]
+    \item the amplitude mode $\delta\rho$, gapped by the stiffness of the
+          saturated medium;
+    \item the phase mode $\delta\theta$, the Goldstone/Bogoliubov mode.
+\end{itemize}
+At long wavelengths, the phase mode obeys
+\begin{equation}
+    \partial_t^2\delta\theta
+    =
+    c^2\nabla^2\delta\theta,
+    \label{eq:goldstone_wave}
+\end{equation}
+with dispersion
+\begin{equation}
+    \omega = ck .
+    \label{eq:goldstone_disp}
+\end{equation}
+
+This is the natural carrier for physical radiation in SSV.  It is massless,
+universal, and propagates at the observed vacuum light speed.  It is also
+the same channel used in the acoustic-metric reading of gravity, where
+local density variations modify the local propagation rate.
+
+\begin{resultbox}[Channel assignment]
+The Goldstone/Bogoliubov channel carries propagating radiation at $c$.
+The chiral-shear channel fixes the handed near-field structure of charged
+defects and the coupling strength $\alpha$.
+\end{resultbox}
+
+% ---------------------------------------------------------------------
+\section{Two-Channel Electromagnetism}
+\label{sec:two_channel}
+% ---------------------------------------------------------------------
+
+The corrected EM sector should be written as a two-channel theory:
+\begin{align}
+    \hbox{near field:}\qquad
+    &\mathbf{v}_\perp,\ \Phi_\perp,\ \mathbf{A}_\perp,
+    &&\hbox{chiral-shear/topological sector},\\
+    \hbox{radiation:}\qquad
+    &\delta\theta_{\rm G},
+    &&\hbox{Goldstone phase channel}.
+    \label{eq:two_channel}
+\end{align}
+The near field knows about charge chirality and the dimensionless coupling
+$\alpha$.  The radiative field knows about propagation at $c$.
+
+This is not unusual from the point of view of ordinary electrodynamics.  In
+QED, the Coulomb field is not a freely propagating transverse photon; it is
+the constrained or longitudinal part of the gauge field.  Radiation is
+carried by transverse on-shell photon modes.  SSV should reproduce this
+division mechanically:
+\begin{align}
+    \hbox{Coulomb interaction}
+    &\leftrightarrow
+    \hbox{static chiral-shear pressure constraint},\\
+    \hbox{on-shell light}
+    &\leftrightarrow
+    \hbox{Goldstone phase wave at }c.
+    \label{eq:qed_analogy}
+\end{align}
+
+The task is to derive the effective Maxwell system in which the source
+sector is chiral-shear/topological, while the homogeneous radiative sector
+propagates at $c$:
+\begin{align}
+    \nabla\cdot\mathbf{E} &= \rho_{\rm ch}/\epsilon_0,\\
+    \nabla\cdot\mathbf{B} &= 0,\\
+    \nabla\times\mathbf{E} &= -\partial_t\mathbf{B},\\
+    \nabla\times\mathbf{B} &= \mu_0\mathbf{J}
+       +\frac{1}{c^2}\partial_t\mathbf{E}.
+    \label{eq:maxwell_target}
+\end{align}
+Relative to the provisional Paper~II derivation, the displacement-current
+coefficient must be $1/c^2$ rather than $1/c_\perp^2$.
+
+% ---------------------------------------------------------------------
+\section{What Must Survive}
+\label{sec:survive}
+% ---------------------------------------------------------------------
+
+The Goldstone correction is acceptable only if it preserves the successful
+static and topological content of Paper~II.  The following structures must
+survive.
+
+\paragraph{Coulomb strength.}
+The static force must remain
+\begin{equation}
+    F_C(r)=\frac{\alpha\hbar c}{r^2}.
+    \label{eq:coulomb_survive}
+\end{equation}
+In the corrected reading, $\alpha$ is not a photon-speed ratio.  It is the
+strength of the chiral-shear near-field coupling.
+
+\paragraph{Magnetic topology.}
+The magnetic field must remain the curl of a vector flow,
+\begin{equation}
+    \mathbf{B}\propto\nabla\times\mathbf{v}_\perp,
+    \label{eq:B_survive}
+\end{equation}
+so that $\nabla\cdot\mathbf{B}=0$ remains a vector identity and magnetic
+monopoles remain topologically forbidden.
+
+\paragraph{Aharonov--Bohm phase.}
+The phase shift must remain a Berry phase of the charged ring in a
+background circulation:
+\begin{equation}
+    \gamma_{\rm AB}
+    =
+    \frac{q}{\hbar}\oint\mathbf{A}\cdot d\mathbf{l}.
+    \label{eq:AB_survive}
+\end{equation}
+This is naturally near-field/topological rather than radiative.
+
+\paragraph{Anomalous magnetic moment.}
+The one-loop self-energy picture must be reinterpreted carefully.  The
+virtual exchange responsible for $g-2$ may continue to involve the
+chiral-shear near field, but the on-shell photon propagator must belong to
+the Goldstone channel.  The calculation therefore has to distinguish
+virtual constrained exchange from physical radiative quanta.
+
+\begin{gapbox}[Open matching problem]
+The central technical challenge is to show that the chiral-shear near field
+and the Goldstone radiation field are not two unrelated electromagnetic
+fields, but two limits of one effective EM response of the saturated medium.
+\end{gapbox}
+
+% ---------------------------------------------------------------------
+\section{The Matching Calculation}
+\label{sec:matching}
+% ---------------------------------------------------------------------
+
+A complete derivation should start from the full SSV functional,
+\begin{equation}
+    S[\Psi]
+    =
+    \int dt\,d^3x\,
+    \left[
+        \mathcal{L}_{\rm LogSE}(\Psi)
+        +
+        \mathcal{L}_{\perp}(\Psi,\nabla\Psi)
+        +
+        \mathcal{L}_{\rm defect}
+    \right],
+    \label{eq:full_action}
+\end{equation}
+expand around a charged toroidal background $\Psi_{\rm e}$, and separate
+fluctuations into constrained near-field and propagating Goldstone parts:
+\begin{equation}
+    \Psi
+    =
+    \Psi_{\rm e}
+    + \delta\Psi_{\rm near}
+    + \delta\Psi_{\rm rad}.
+    \label{eq:split}
+\end{equation}
+The desired effective action has the schematic form
+\begin{equation}
+    S_{\rm eff}
+    =
+    \int dt\,d^3x\,
+    \left[
+      \frac{\epsilon_0}{2}E^2
+      -\frac{1}{2\mu_0}B^2
+      + J^\mu A_\mu
+    \right],
+    \label{eq:Seff}
+\end{equation}
+with two requirements:
+\begin{align}
+    \hbox{static limit:}\quad
+    &\nabla^2\Phi = -\rho_{\rm ch}/\epsilon_0,
+    &&F_C=\alpha\hbar c/r^2,\\
+    \hbox{radiative limit:}\quad
+    &\partial_t^2 A_i - c^2\nabla^2 A_i = 0,
+    &&\omega=ck.
+    \label{eq:limits}
+\end{align}
+
+The calculation is therefore a matched asymptotic problem.  Near charged
+defects, chiral-shear topology fixes the source and static response.  Far
+from sources, the propagating disturbance must project onto the Goldstone
+phase mode.
+
+% ---------------------------------------------------------------------
+\section{Avoiding New Circularity}
+\label{sec:circularity}
+% ---------------------------------------------------------------------
+
+The Goldstone photon correction must not simply insert Maxwell theory by
+hand.  The following shortcuts would not count as derivations:
+\begin{enumerate}[label=(\roman*)]
+    \item postulating a separate electromagnetic gauge field in addition to
+          $\Psi$;
+    \item replacing $c_\perp$ by $c$ in Paper~II's equations without
+          deriving the channel projection;
+    \item keeping Coulomb from chiral shear and radiation from Goldstone
+          without deriving their matching at sources;
+    \item using observed light speed to tune a coefficient in the
+          chiral-shear sector.
+\end{enumerate}
+
+A valid derivation should show that the same saturated order parameter
+supports both the constrained static response and the propagating radiation
+response, with no additional gauge field inserted by hand.
+
+\begin{resultbox}[Success criterion]
+The Goldstone photon programme succeeds if the full SSV linearisation around
+charged toroidal defects yields Maxwell electrodynamics with static Coulomb
+strength $\alpha\hbar c$, magnetic topology from chiral-shear circulation,
+and on-shell radiation satisfying $\omega=ck$.
+\end{resultbox}
+
+% ---------------------------------------------------------------------
+\section{Consequences}
+\label{sec:consequences}
+% ---------------------------------------------------------------------
+
+If the matching calculation succeeds, several tensions in Paper~II are
+resolved at once.
+
+\paragraph{Light and gravity share the correct speed.}
+Both electromagnetic radiation and gravitational disturbances can be read
+as Goldstone/Bogoliubov-channel excitations at $c$, consistent with
+GW170817.
+
+\paragraph{\texorpdfstring{$\alpha$}{alpha} is not a speed ratio.}
+The fine-structure constant becomes a chiral-shear/topological coupling and
+defect-geometry parameter, not a ratio involving the observed photon speed.
+This matches the separate alpha-paper proposal
+$\alpha=\xi/R^*$.
+
+\paragraph{The old EM derivation becomes a near-field derivation.}
+The Paper~II chiral-shear equations are not discarded; they are reclassified.
+They describe constrained near-field structure and virtual exchange rather
+than the on-shell photon.
+
+\paragraph{Magnetic monopoles remain forbidden.}
+Because the magnetic field still descends from a curl of the chiral-shear
+flow, $\nabla\cdot\mathbf{B}=0$ remains topological rather than postulated.
+
+% ---------------------------------------------------------------------
+\section{Discussion}
+\label{sec:discussion}
+% ---------------------------------------------------------------------
+
+The Goldstone photon problem is a cleanup calculation, but it is not a
+minor one.  It decides whether the SSV electromagnetic sector can be made
+internally coherent after the propagation-speed audit.  The desired result
+is conceptually simple: sources live in chiral topology; radiation lives in
+the Goldstone phase channel.  The hard part is proving that these are two
+faces of one effective electromagnetic field.
+
+This also clarifies the status of Paper~II.  Its static Coulomb and
+magnetic results remain valuable because they identify how charge and
+magnetic topology arise mechanically.  Its original radiative photon
+identification should be treated as provisional scaffolding.  The present
+paper states the corrected target.
+
+% ---------------------------------------------------------------------
+\section{Conclusion}
+\label{sec:conclusion}
+% ---------------------------------------------------------------------
+
+The observed photon in SSV should be the Goldstone/Bogoliubov phase mode of
+the saturated order parameter, propagating at $c$.  The chiral-shear sector
+should be retained as the near-field and topological electromagnetic sector,
+where it fixes Coulomb strength, magnetic circulation, and the role of
+$\alpha$.
+
+The open derivation is the matching calculation:
+\[
+    \boxed{
+    \hbox{chiral-shear near field}
+    \quad\longleftrightarrow\quad
+    \hbox{Goldstone radiation at }c
+    }
+\]
+If this can be derived from the full SSV functional without adding a
+separate gauge field, the electromagnetic sector becomes substantially more
+coherent.  If it cannot, the SSV force-sector programme must be revised at
+one of its central joints.
+
+\begin{thebibliography}{99}
+
+\bibitem{SSV-I}
+S.~Norland,
+``Saturated Superfluid Vacuum I: Particle Defects and the
+$\alpha$-Harmonic Mass Ladder,''
+manuscript in preparation.
+
+\bibitem{SSV-II}
+S.~Norland,
+``Saturated Superfluid Vacuum II: The Force Sector,''
+manuscript in preparation.
+
+\bibitem{Volovik2003}
+G.~E.~Volovik,
+\textit{The Universe in a Helium Droplet},
+Oxford University Press, Oxford (2003).
+
+\bibitem{Zloshchastiev2020}
+K.~G.~Zloshchastiev,
+``Superfluid vacuum theory and deformed dispersion relations,''
+\textit{Int.~J.~Mod.~Phys.~A} \textbf{35}, 2040032 (2020);
+arXiv:2011.11897.
+
+\bibitem{GW170817}
+B.~P.~Abbott et al.,
+``Multi-messenger Observations of a Binary Neutron Star Merger,''
+\textit{Astrophys.~J.~Lett.} \textbf{848}, L12 (2017).
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,183 @@
+{
+  "scan": [
+    {
+      "epsilon": 0.02,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_span": {
+            "min": 0.0037322016613530384,
+            "max": 0.011976461267354375,
+            "span": 0.008244259606001336,
+            "relative_span": 0.6883719173771027
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_span": {
+            "min": 0.03359368854145622,
+            "max": 0.13509003538900685,
+            "span": 0.10149634684755063,
+            "relative_span": 0.7513237120360547
+          }
+        }
+      }
+    },
+    {
+      "epsilon": 0.05,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_span": {
+            "min": 0.007875280122076384,
+            "max": 0.019578131792411933,
+            "span": 0.01170285167033555,
+            "relative_span": 0.597751194772901
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_span": {
+            "min": 0.043561870618301635,
+            "max": 0.14934678280636374,
+            "span": 0.1057849121880621,
+            "relative_span": 0.7083173149114167
+          }
+        }
+      }
+    },
+    {
+      "epsilon": 0.1,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_span": {
+            "min": 0.014780410889948626,
+            "max": 0.032247582667507865,
+            "span": 0.01746717177755924,
+            "relative_span": 0.5416583301035731
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_span": {
+            "min": 0.06017550741304401,
+            "max": 0.17310802850195856,
+            "span": 0.11293252108891455,
+            "relative_span": 0.6523817645328728
+          }
+        }
+      }
+    },
+    {
+      "epsilon": 0.15,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_span": {
+            "min": 0.021685541657820866,
+            "max": 0.0449170335426038,
+            "span": 0.02323149188478293,
+            "relative_span": 0.5172089528741444
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_span": {
+            "min": 0.07678914420778638,
+            "max": 0.19686927419755335,
+            "span": 0.12008012998976697,
+            "relative_span": 0.6099485583985523
+          }
+        }
+      }
+    },
+    {
+      "epsilon": 0.2,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_span": {
+            "min": 0.02859067242569311,
+            "max": 0.057586484417699736,
+            "span": 0.028995811992006626,
+            "relative_span": 0.503517661916769
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_span": {
+            "min": 0.09340278100252876,
+            "max": 0.22063051989314816,
+            "span": 0.1272277388906194,
+            "relative_span": 0.5766552104950669
+          }
+        }
+      }
+    }
+  ],
+  "best_by_n": {
+    "24": {
+      "epsilon": 0.2,
+      "candidate_span": {
+        "min": 0.02859067242569311,
+        "max": 0.057586484417699736,
+        "span": 0.028995811992006626,
+        "relative_span": 0.503517661916769
+      }
+    },
+    "48": {
+      "epsilon": 0.2,
+      "candidate_span": {
+        "min": 0.09340278100252876,
+        "max": 0.22063051989314816,
+        "span": 0.1272277388906194,
+        "relative_span": 0.5766552104950669
+      }
+    }
+  },
+  "interpretation": {
+    "purpose": "Check whether the additive saturating Q_p probe improvement is robust to epsilon choice.",
+    "warning": "A numerically preferred epsilon is not yet a physical constant."
+  }
+}

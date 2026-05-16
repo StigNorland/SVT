@@ -1,0 +1,410 @@
+{
+  "branch_scales": {
+    "24": {
+      "mean_ratio": 0.015562802748847977,
+      "median_ratio": 0.012398448213124332,
+      "ratio_of_means": 0.017692902168891543
+    },
+    "48": {
+      "mean_ratio": 0.15999426736290842,
+      "median_ratio": 0.1346145745436166,
+      "ratio_of_means": 0.1705736454860191
+    }
+  },
+  "scan": [
+    {
+      "eta": 0.25,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_mean_ratio_scale": {
+            "min": 0.0015074652946811262,
+            "max": 0.007894541741842688,
+            "span": 0.0063870764471615615,
+            "relative_span": 0.809049677109027
+          },
+          "candidate_median_ratio_scale": {
+            "min": 0.001398213885355719,
+            "max": 0.007694088570134,
+            "span": 0.006295874684778281,
+            "relative_span": 0.81827426697645
+          },
+          "candidate_ratio_of_means_scale": {
+            "min": 0.0015810083699009743,
+            "max": 0.00802947769164925,
+            "span": 0.006448469321748276,
+            "relative_span": 0.8030994753811644
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_mean_ratio_scale": {
+            "min": 0.04023866705960059,
+            "max": 0.14459385259425267,
+            "span": 0.10435518553465209,
+            "relative_span": 0.7217124633056496
+          },
+          "candidate_median_ratio_scale": {
+            "min": 0.03813042206729136,
+            "max": 0.1415785870104631,
+            "span": 0.10344816494317174,
+            "relative_span": 0.7306766307501472
+          },
+          "candidate_ratio_of_means_scale": {
+            "min": 0.041117476787858605,
+            "max": 0.14585074860870184,
+            "span": 0.10473327182084324,
+            "relative_span": 0.7180852537262505
+          }
+        }
+      }
+    },
+    {
+      "eta": 0.5,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_mean_ratio_scale": {
+            "min": 0.0020447812351581107,
+            "max": 0.008880402566369376,
+            "span": 0.006835621331211265,
+            "relative_span": 0.7697422814026673
+          },
+          "candidate_median_ratio_scale": {
+            "min": 0.0018262784165072963,
+            "max": 0.008479496222951998,
+            "span": 0.006653217806444702,
+            "relative_span": 0.7846241842099073
+          },
+          "candidate_ratio_of_means_scale": {
+            "min": 0.002191867385597807,
+            "max": 0.009150274465982499,
+            "span": 0.006958407080384692,
+            "relative_span": 0.7604588371915619
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_mean_ratio_scale": {
+            "min": 0.05352910029564191,
+            "max": 0.16360216807773645,
+            "span": 0.11007306778209454,
+            "relative_span": 0.6728093464494476
+          },
+          "candidate_median_ratio_scale": {
+            "min": 0.04931261031102345,
+            "max": 0.1575716369101573,
+            "span": 0.10825902659913385,
+            "relative_span": 0.687046404556043
+          },
+          "candidate_ratio_of_means_scale": {
+            "min": 0.055286719752157945,
+            "max": 0.1661159601066348,
+            "span": 0.11082924035447685,
+            "relative_span": 0.6671799644256473
+          }
+        }
+      }
+    },
+    {
+      "eta": 1.0,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_mean_ratio_scale": {
+            "min": 0.0031194131161120793,
+            "max": 0.01085212421542275,
+            "span": 0.0077327110993106705,
+            "relative_span": 0.7125527634784301
+          },
+          "candidate_median_ratio_scale": {
+            "min": 0.002682407478810451,
+            "max": 0.010050311528587996,
+            "span": 0.007367904049777545,
+            "relative_span": 0.7331020564705508
+          },
+          "candidate_ratio_of_means_scale": {
+            "min": 0.003413585416991472,
+            "max": 0.011391868014648995,
+            "span": 0.007978282597657524,
+            "relative_span": 0.7003489320099316
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_mean_ratio_scale": {
+            "min": 0.08010996676772456,
+            "max": 0.20161879904470398,
+            "span": 0.12150883227697942,
+            "relative_span": 0.6026661841688574
+          },
+          "candidate_median_ratio_scale": {
+            "min": 0.07167698679848764,
+            "max": 0.18955773670954568,
+            "span": 0.11788074991105804,
+            "relative_span": 0.6218725331780238
+          },
+          "candidate_ratio_of_means_scale": {
+            "min": 0.08362520568075663,
+            "max": 0.20664638310250066,
+            "span": 0.12302117742174404,
+            "relative_span": 0.595322190375445
+          }
+        }
+      }
+    },
+    {
+      "eta": 1.5,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_mean_ratio_scale": {
+            "min": 0.004194044997066048,
+            "max": 0.012823845864476123,
+            "span": 0.008629800867410074,
+            "relative_span": 0.6729495159728838
+          },
+          "candidate_median_ratio_scale": {
+            "min": 0.003538536541113605,
+            "max": 0.011621126834223991,
+            "span": 0.008082590293110386,
+            "relative_span": 0.6955083107179689
+          },
+          "candidate_ratio_of_means_scale": {
+            "min": 0.004635303448385137,
+            "max": 0.013633461563315491,
+            "span": 0.008998158114930354,
+            "relative_span": 0.66000538991083
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_mean_ratio_scale": {
+            "min": 0.10669083323980719,
+            "max": 0.23963543001167148,
+            "span": 0.1329445967718643,
+            "relative_span": 0.5547785515914287
+          },
+          "candidate_median_ratio_scale": {
+            "min": 0.09404136328595183,
+            "max": 0.22154383650893403,
+            "span": 0.1275024732229822,
+            "relative_span": 0.5755180339573135
+          },
+          "candidate_ratio_of_means_scale": {
+            "min": 0.1119636916093553,
+            "max": 0.2471768060983665,
+            "span": 0.1352131144890112,
+            "relative_span": 0.5470299443678456
+          }
+        }
+      }
+    },
+    {
+      "eta": 2.0,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_mean_ratio_scale": {
+            "min": 0.005268676878020017,
+            "max": 0.014795567513529497,
+            "span": 0.009526890635509482,
+            "relative_span": 0.6439016703345658
+          },
+          "candidate_median_ratio_scale": {
+            "min": 0.00439466560341676,
+            "max": 0.013191942139859988,
+            "span": 0.008797276536443228,
+            "relative_span": 0.6668674288573402
+          },
+          "candidate_ratio_of_means_scale": {
+            "min": 0.005857021479778802,
+            "max": 0.01587505511198199,
+            "span": 0.010018033632203186,
+            "relative_span": 0.6310550458903221
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_mean_ratio_scale": {
+            "min": 0.13327169971188985,
+            "max": 0.27765206097863904,
+            "span": 0.1443803612667492,
+            "relative_span": 0.5200046445102995
+          },
+          "candidate_median_ratio_scale": {
+            "min": 0.11640573977341602,
+            "max": 0.25352993630832243,
+            "span": 0.13712419653490643,
+            "relative_span": 0.5408599810010095
+          },
+          "candidate_ratio_of_means_scale": {
+            "min": 0.140302177537954,
+            "max": 0.2877072290942324,
+            "span": 0.14740505155627842,
+            "relative_span": 0.512343926916063
+          }
+        }
+      }
+    },
+    {
+      "eta": 3.0,
+      "by_n": {
+        "24": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_mean_ratio_scale": {
+            "min": 0.007417940639927954,
+            "max": 0.018739010811636245,
+            "span": 0.01132107017170829,
+            "relative_span": 0.6041444922310583
+          },
+          "candidate_median_ratio_scale": {
+            "min": 0.006106923728023068,
+            "max": 0.01633357275113198,
+            "span": 0.010226649023108911,
+            "relative_span": 0.6261121910636585
+          },
+          "candidate_ratio_of_means_scale": {
+            "min": 0.008300457542566132,
+            "max": 0.02035824220931498,
+            "span": 0.012057784666748849,
+            "relative_span": 0.5922802441770622
+          }
+        },
+        "48": {
+          "half_width_values": [
+            5.0,
+            6.0,
+            7.0
+          ],
+          "candidate_mean_ratio_scale": {
+            "min": 0.1864334326560551,
+            "max": 0.35368532291257404,
+            "span": 0.16725189025651893,
+            "relative_span": 0.47288332147687456
+          },
+          "candidate_median_ratio_scale": {
+            "min": 0.1611344927483444,
+            "max": 0.31750213590709914,
+            "span": 0.15636764315875473,
+            "relative_span": 0.49249320075285347
+          },
+          "candidate_ratio_of_means_scale": {
+            "min": 0.19697914939515135,
+            "max": 0.3687680750859641,
+            "span": 0.17178892569081275,
+            "relative_span": 0.4658454386290537
+          }
+        }
+      }
+    }
+  ],
+  "best_by_n": {
+    "24": {
+      "mean_ratio_scale": {
+        "eta": 3.0,
+        "candidate_span": {
+          "min": 0.007417940639927954,
+          "max": 0.018739010811636245,
+          "span": 0.01132107017170829,
+          "relative_span": 0.6041444922310583
+        }
+      },
+      "median_ratio_scale": {
+        "eta": 3.0,
+        "candidate_span": {
+          "min": 0.006106923728023068,
+          "max": 0.01633357275113198,
+          "span": 0.010226649023108911,
+          "relative_span": 0.6261121910636585
+        }
+      },
+      "ratio_of_means_scale": {
+        "eta": 3.0,
+        "candidate_span": {
+          "min": 0.008300457542566132,
+          "max": 0.02035824220931498,
+          "span": 0.012057784666748849,
+          "relative_span": 0.5922802441770622
+        }
+      }
+    },
+    "48": {
+      "mean_ratio_scale": {
+        "eta": 3.0,
+        "candidate_span": {
+          "min": 0.1864334326560551,
+          "max": 0.35368532291257404,
+          "span": 0.16725189025651893,
+          "relative_span": 0.47288332147687456
+        }
+      },
+      "median_ratio_scale": {
+        "eta": 3.0,
+        "candidate_span": {
+          "min": 0.1611344927483444,
+          "max": 0.31750213590709914,
+          "span": 0.15636764315875473,
+          "relative_span": 0.49249320075285347
+        }
+      },
+      "ratio_of_means_scale": {
+        "eta": 3.0,
+        "candidate_span": {
+          "min": 0.19697914939515135,
+          "max": 0.3687680750859641,
+          "span": 0.17178892569081275,
+          "relative_span": 0.4658454386290537
+        }
+      }
+    }
+  },
+  "interpretation": {
+    "purpose": "Replace the bare epsilon of the additive saturating family with branch geometry scales derived from shell-deficit-to-saturating ratios.",
+    "warning": "These re-expressions are still reduced probes; better numerical conditioning does not make the resulting scale physical by itself."
+  }
+}
