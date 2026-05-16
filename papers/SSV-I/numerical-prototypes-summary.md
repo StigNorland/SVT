@@ -150,6 +150,13 @@ papers/SSV-I/q-p-two-factor-reexpress-scan-note.md
 papers/SSV-I/data/q-p-two-factor-reexpress-scan-2026-05-07.json
 papers/SSV-I/q-p-two-factor-local-scale-scan-note.md
 papers/SSV-I/data/q-p-two-factor-local-scale-scan-2026-05-07.json
+papers/SSV-I/q-p-two-factor-pure-additive-local-scan-note.md
+papers/SSV-I/data/q-p-two-factor-pure-additive-local-scan-2026-05-16.json
+papers/SSV-I/y-junction-prototype-checkpoint.md
+papers/SSV-I/data/y-junction-checkpoint-n24-hw6-200steps-2026-05-16.json
+papers/SSV-I/data/y-junction-state-n24-hw6-200steps-2026-05-16.npz
+papers/SSV-I/data/y-junction-checkpoint-n24-hw6-600steps-2026-05-16.json
+papers/SSV-I/data/y-junction-state-n24-hw6-600steps-2026-05-16.npz
 ```
 
 Representative values:
