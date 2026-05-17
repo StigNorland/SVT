@@ -1,0 +1,93 @@
+{
+  "metadata": {
+    "problem_type": "static",
+    "status": "prototype",
+    "nondimensionalisation": "xi = 1, rho0 = 1, c = 1",
+    "observables": [
+      "N_Y",
+      "F",
+      "mu_0_grid",
+      "E_filaments",
+      "E_node_top",
+      "E_node_bottom",
+      "E_total"
+    ],
+    "diagnostics": [
+      "anchor_shell_energy_fraction",
+      "tube_arc_length_vs_geometric"
+    ],
+    "issue_refs": [
+      "#13"
+    ],
+    "limitations": [
+      "Tube radius, node radius, and equatorial calibration half-width are free parameters.",
+      "mu_0_grid here is the energy per unit arc-length of a curved filament, so it bakes in arc curvature; not directly comparable to the open-Y straight-line mu_0.",
+      "Closed theta-graph geometry only; assumes the state was produced by trefoil_y_junction_closed_static.py."
+    ]
+  },
+  "extraction_config": {
+    "r_tube": 2.0,
+    "r_node": 2.0,
+    "cal_half_width": 0.5
+  },
+  "summary": {
+    "state_path": "papers\\SSV-I\\data\\y-junction-closed-state-n24-hw6-200steps-2026-05-17.npz",
+    "n": 24,
+    "half_width": 6.0,
+    "spacing": 0.5,
+    "log_pressure": 0.5,
+    "node_radius": 2.5,
+    "arc_radius": 2.5,
+    "e_total_raw": 288.9835644400916,
+    "e_anchor_shell": 223.91857300580423,
+    "e_interior": 65.06499143428735,
+    "e_filaments": 2.0723746391794053,
+    "e_node_top": 0.02643233460458277,
+    "e_node_bottom": 0.023836344933518584,
+    "e_bulk_residual": 62.942348115569835,
+    "mu_0_grid": 0.2526615702818619,
+    "mu_0_per_filament": [
+      0.2308118206126367,
+      0.2938562026460412,
+      0.23331668758690793
+    ],
+    "l_filament_total_tube": 15.000353386411135,
+    "l_filament_total_geometric": 23.561700225494157,
+    "n_y_per_xi": 8.40113245694447,
+    "n_y_per_filament_length": 0.5600623025691569,
+    "f_factor_interior": 30.652814281392967,
+    "f_factor_raw": 136.14325209130962,
+    "filaments": [
+      {
+        "index": 0,
+        "tube_energy": 0.5563204248284619,
+        "tube_volume": 64.0,
+        "tube_arc_length": 5.092958178940651,
+        "geometric_arc_length": 7.853900075164719,
+        "cal_energy": 0.2308118206126367,
+        "cal_length": 1.0,
+        "cal_energy_per_length": 0.2308118206126367
+      },
+      {
+        "index": 1,
+        "tube_energy": 0.8540484214211244,
+        "tube_volume": 62.25,
+        "tube_arc_length": 4.953697603735242,
+        "geometric_arc_length": 7.853900075164717,
+        "cal_energy": 0.2938562026460412,
+        "cal_length": 1.0,
+        "cal_energy_per_length": 0.2938562026460412
+      },
+      {
+        "index": 2,
+        "tube_energy": 0.6620057929298191,
+        "tube_volume": 62.25,
+        "tube_arc_length": 4.953697603735242,
+        "geometric_arc_length": 7.853900075164718,
+        "cal_energy": 0.23331668758690793,
+        "cal_length": 1.0,
+        "cal_energy_per_length": 0.23331668758690793
+      }
+    ]
+  }
+}

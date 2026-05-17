@@ -1,0 +1,76 @@
+{
+  "metadata": {
+    "problem_type": "static",
+    "status": "prototype",
+    "nondimensionalisation": "xi = 1, rho0 = 1, c = 1",
+    "observables": [
+      "total_energy",
+      "residual_norm",
+      "depressed_fraction",
+      "effective_radius"
+    ],
+    "diagnostics": [
+      "energy_monotonicity",
+      "residual_norm",
+      "boundary_anchor"
+    ],
+    "issue_refs": [
+      "#13"
+    ],
+    "limitations": [
+      "Uses the theta-graph closed topology (two Y-nodes joined by three arcs in meridian planes), not the (2,3) trefoil knot.",
+      "Initial condition uses the product-vortex ansatz with one azimuthal winding per arc; no extra colour offset.",
+      "N_Y / F extraction will need an arc-aware variant of the open-Y extractor; not implemented in this script."
+    ]
+  },
+  "nondimensionalisation": {
+    "xi": 1.0,
+    "rho0": 1.0,
+    "c": 1.0
+  },
+  "config": {
+    "n": 24,
+    "half_width": 6.0,
+    "xi": 1.0,
+    "node_radius": 2.5,
+    "arc_radius": 2.5,
+    "samples_per_arc": 200,
+    "log_pressure": 0.5,
+    "density_floor": 1e-12,
+    "anchor_shell": 2,
+    "boundary_blend_fraction": 0.18,
+    "depressed_threshold": 0.35
+  },
+  "controls": {
+    "step_size": 0.01,
+    "max_steps": 600,
+    "tolerance": 0.002,
+    "min_step_size": 1e-05,
+    "max_step_size": 0.05,
+    "check_interval": 20,
+    "patience_intervals": 3,
+    "energy_tol": 1e-09,
+    "reference_spacing": null
+  },
+  "summary": {
+    "steps_completed": 600,
+    "final_energy": 288.9434904332633,
+    "best_energy": 288.9434904332633,
+    "energy_monotonicity_violations": 0,
+    "accepted_steps": 600,
+    "rejected_steps": 0,
+    "final_step_size": 0.072,
+    "residual_norm": 0.665580283661982,
+    "depressed_fraction": 0.026909722222222224,
+    "effective_radius": 5.818932620087211,
+    "deficit_volume": 190.5967542690816,
+    "equivalent_deficit_radius": 3.5700609480134333,
+    "far_field_shell_density": 0.8426125961378328,
+    "far_field_shell_deficit": 0.1573874038621672,
+    "far_field_moment": 0.7117365497101095,
+    "min_density": 0.015843420655476937,
+    "max_density": 0.9995306134418167,
+    "initial_energy": 433.56728778674113,
+    "stop_reason": "max_steps"
+  }
+}

@@ -1,0 +1,935 @@
+{
+  "metadata": {
+    "problem_type": "static",
+    "status": "prototype",
+    "nondimensionalisation": "xi = 1, rho0 = 1, c = 1",
+    "observables": [
+      "final_energy",
+      "residual_norm",
+      "mu_0_grid",
+      "N_Y_per_filament_length",
+      "F_factor_interior"
+    ],
+    "diagnostics": [
+      "grid_sensitivity",
+      "box_sensitivity"
+    ],
+    "issue_refs": [
+      "#13"
+    ],
+    "limitations": [
+      "Extraction parameters (r_tube, r_node) are held fixed across the sweep.",
+      "Open three-prong Y geometry only."
+    ]
+  },
+  "extraction_settings": {
+    "r_tube": 2.0,
+    "r_node": 2.0,
+    "cal_window_rule": "cal_start=2.5, cal_stop=max(3.0, half_width-1.5)"
+  },
+  "step_scaling_rule": "max_steps = min(400, 200 * (n / 24)^2)",
+  "runs": [
+    {
+      "n": 24,
+      "half_width": 5.0,
+      "max_steps": 200,
+      "state_path": "papers/SSV-I/data/y-junction-state-n24-hw5-200steps-2026-05-17.npz",
+      "extraction_config": {
+        "r_tube": 2.0,
+        "r_node": 2.0,
+        "cal_start": 2.5,
+        "cal_stop": 3.5
+      },
+      "relaxation": {
+        "steps_completed": 200,
+        "final_energy": 694.6218379761724,
+        "best_energy": 694.6218379761724,
+        "energy_monotonicity_violations": 0,
+        "accepted_steps": 200,
+        "rejected_steps": 0,
+        "final_step_size": 0.05,
+        "residual_norm": 1.8590521587788993,
+        "depressed_fraction": 0.08217592592592593,
+        "effective_radius": 3.8323378340432788,
+        "deficit_volume": 173.2790121102219,
+        "equivalent_deficit_radius": 3.4584841101213164,
+        "far_field_shell_density": 0.7815350459586439,
+        "far_field_shell_deficit": 0.21846495404135613,
+        "far_field_moment": 0.5272474009919407,
+        "min_density": 0.022546848332558288,
+        "max_density": 0.9996509588441111,
+        "initial_energy": 728.5352984840505,
+        "stop_reason": "max_steps"
+      },
+      "extraction": {
+        "state_path": "",
+        "n": 24,
+        "half_width": 5.0,
+        "spacing": 0.4166666666666667,
+        "log_pressure": 0.5,
+        "e_total_raw": 694.6218379761724,
+        "e_anchor_shell": 609.1133763264087,
+        "e_interior": 85.50846164976372,
+        "e_filaments": 30.310138119779378,
+        "e_node": 14.106374594723565,
+        "e_bulk_residual": 41.091948935260774,
+        "mu_0_grid": 3.6345955163843597,
+        "mu_0_per_filament": [
+          3.1415363318907605,
+          3.904129588178065,
+          3.8581206290842527
+        ],
+        "l_filament_total": 8.174190508915345,
+        "n_y_per_xi": 12.220482998528489,
+        "n_y_per_filament_length": 1.4950083418290747,
+        "f_factor_interior": 1.9251502746149491,
+        "f_factor_raw": 15.638819788509949,
+        "n_y_per_xi_times_f_interior": 23.526266200544438,
+        "filaments": [
+          {
+            "index": 0,
+            "tube_energy": 8.575707483191348,
+            "tube_volume": 29.513888888888896,
+            "tube_arc_length": 2.348640653265817,
+            "cal_energy": 3.1415363318907605,
+            "cal_length": 1.0,
+            "cal_energy_per_length": 3.1415363318907605
+          },
+          {
+            "index": 1,
+            "tube_energy": 10.93226986128817,
+            "tube_volume": 36.60300925925927,
+            "tube_arc_length": 2.9127749278247634,
+            "cal_energy": 3.904129588178065,
+            "cal_length": 1.0,
+            "cal_energy_per_length": 3.904129588178065
+          },
+          {
+            "index": 2,
+            "tube_energy": 10.80216077529986,
+            "tube_volume": 36.60300925925927,
+            "tube_arc_length": 2.9127749278247634,
+            "cal_energy": 3.8581206290842527,
+            "cal_length": 1.0,
+            "cal_energy_per_length": 3.8581206290842527
+          }
+        ]
+      }
+    },
+    {
+      "n": 24,
+      "half_width": 6.0,
+      "max_steps": 200,
+      "state_path": "papers/SSV-I/data/y-junction-state-n24-hw6-200steps-2026-05-17.npz",
+      "extraction_config": {
+        "r_tube": 2.0,
+        "r_node": 2.0,
+        "cal_start": 2.5,
+        "cal_stop": 4.5
+      },
+      "relaxation": {
+        "steps_completed": 200,
+        "final_energy": 857.0192563293961,
+        "best_energy": 857.0192563293961,
+        "energy_monotonicity_violations": 0,
+        "accepted_steps": 200,
+        "rejected_steps": 0,
+        "final_step_size": 0.072,
+        "residual_norm": 1.2977301316711793,
+        "depressed_fraction": 0.05381944444444445,
+        "effective_radius": 4.4526921340531525,
+        "deficit_volume": 235.7103556469571,
+        "equivalent_deficit_radius": 3.8320398607484463,
+        "far_field_shell_density": 0.8298149198476511,
+        "far_field_shell_deficit": 0.1701850801523489,
+        "far_field_moment": 0.46048285731281435,
+        "min_density": 0.03233669865378268,
+        "max_density": 0.9999522233472966,
+        "initial_energy": 901.0383625542316,
+        "stop_reason": "max_steps"
+      },
+      "extraction": {
+        "state_path": "",
+        "n": 24,
+        "half_width": 6.0,
+        "spacing": 0.5,
+        "log_pressure": 0.5,
+        "e_total_raw": 857.0192563293961,
+        "e_anchor_shell": 740.797482815663,
+        "e_interior": 116.22177351373307,
+        "e_filaments": 41.12640311913613,
+        "e_node": 13.925313313196284,
+        "e_bulk_residual": 61.17005708140066,
+        "mu_0_grid": 3.911165673069965,
+        "mu_0_per_filament": [
+          3.92376755365884,
+          3.9237451579049765,
+          3.8859843076460803
+        ],
+        "l_filament_total": 10.981691073340778,
+        "n_y_per_xi": 14.075526590803053,
+        "n_y_per_filament_length": 1.2817266937123089,
+        "f_factor_interior": 2.111138054280082,
+        "f_factor_raw": 15.567530167434711,
+        "n_y_per_xi_times_f_interior": 29.715379819875515,
+        "filaments": [
+          {
+            "index": 0,
+            "tube_energy": 11.91960616422646,
+            "tube_volume": 40.0,
+            "tube_arc_length": 3.183098861837907,
+            "cal_energy": 7.84753510731768,
+            "cal_length": 2.0,
+            "cal_energy_per_length": 3.92376755365884
+          },
+          {
+            "index": 1,
+            "tube_energy": 14.681009668024677,
+            "tube_volume": 49.0,
+            "tube_arc_length": 3.8992961057514357,
+            "cal_energy": 7.847490315809953,
+            "cal_length": 2.0,
+            "cal_energy_per_length": 3.9237451579049765
+          },
+          {
+            "index": 2,
+            "tube_energy": 14.525787286884995,
+            "tube_volume": 49.0,
+            "tube_arc_length": 3.8992961057514357,
+            "cal_energy": 7.7719686152921605,
+            "cal_length": 2.0,
+            "cal_energy_per_length": 3.8859843076460803
+          }
+        ]
+      }
+    },
+    {
+      "n": 24,
+      "half_width": 7.0,
+      "max_steps": 200,
+      "state_path": "papers/SSV-I/data/y-junction-state-n24-hw7-200steps-2026-05-17.npz",
+      "extraction_config": {
+        "r_tube": 2.0,
+        "r_node": 2.0,
+        "cal_start": 2.5,
+        "cal_stop": 5.5
+      },
+      "relaxation": {
+        "steps_completed": 200,
+        "final_energy": 1020.5443082461194,
+        "best_energy": 1020.5443082461194,
+        "energy_monotonicity_violations": 0,
+        "accepted_steps": 200,
+        "rejected_steps": 0,
+        "final_step_size": 0.09800000000000003,
+        "residual_norm": 0.9559969981109457,
+        "depressed_fraction": 0.036458333333333336,
+        "effective_radius": 5.079989007851528,
+        "deficit_volume": 305.4132542903705,
+        "equivalent_deficit_radius": 4.177659985788956,
+        "far_field_shell_density": 0.8629583146658,
+        "far_field_shell_deficit": 0.13704168533420003,
+        "far_field_moment": 0.41485093364879655,
+        "min_density": 0.043695054885625154,
+        "max_density": 0.9999933238321923,
+        "initial_energy": 1073.1812541011175,
+        "stop_reason": "max_steps"
+      },
+      "extraction": {
+        "state_path": "",
+        "n": 24,
+        "half_width": 7.0,
+        "spacing": 0.5833333333333334,
+        "log_pressure": 0.5,
+        "e_total_raw": 1020.5443082461194,
+        "e_anchor_shell": 870.8854522276283,
+        "e_interior": 149.65885601849106,
+        "e_filaments": 51.20216195158606,
+        "e_node": 12.278195090343551,
+        "e_bulk_residual": 86.17849897656146,
+        "mu_0_grid": 3.6525165535126547,
+        "mu_0_per_filament": [
+          3.630026678725877,
+          3.6797181006990605,
+          3.647804881113027
+        ],
+        "l_filament_total": 12.573424711369796,
+        "n_y_per_xi": 17.37989578195889,
+        "n_y_per_filament_length": 1.3822722274101453,
+        "f_factor_interior": 2.3575616614701684,
+        "f_factor_raw": 16.076536991939673,
+        "n_y_per_xi_times_f_interior": 40.974175975893374,
+        "filaments": [
+          {
+            "index": 0,
+            "tube_energy": 14.694600536102987,
+            "tube_volume": 43.66898148148149,
+            "tube_arc_length": 3.475067131283109,
+            "cal_energy": 10.89008003617763,
+            "cal_length": 3.0,
+            "cal_energy_per_length": 3.630026678725877
+          },
+          {
+            "index": 1,
+            "tube_energy": 18.338806338228153,
+            "tube_volume": 57.16666666666668,
+            "tube_arc_length": 4.549178790043343,
+            "cal_energy": 11.039154302097181,
+            "cal_length": 3.0,
+            "cal_energy_per_length": 3.6797181006990605
+          },
+          {
+            "index": 2,
+            "tube_energy": 18.16875507725492,
+            "tube_volume": 57.16666666666668,
+            "tube_arc_length": 4.549178790043343,
+            "cal_energy": 10.94341464333908,
+            "cal_length": 3.0,
+            "cal_energy_per_length": 3.647804881113027
+          }
+        ]
+      }
+    },
+    {
+      "n": 32,
+      "half_width": 5.0,
+      "max_steps": 356,
+      "state_path": "papers/SSV-I/data/y-junction-state-n32-hw5-356steps-2026-05-17.npz",
+      "extraction_config": {
+        "r_tube": 2.0,
+        "r_node": 2.0,
+        "cal_start": 2.5,
+        "cal_stop": 3.5
+      },
+      "relaxation": {
+        "steps_completed": 356,
+        "final_energy": 882.7879538008208,
+        "best_energy": 882.7879538008208,
+        "energy_monotonicity_violations": 0,
+        "accepted_steps": 356,
+        "rejected_steps": 0,
+        "final_step_size": 0.028125,
+        "residual_norm": 2.8309218331193837,
+        "depressed_fraction": 0.0758056640625,
+        "effective_radius": 3.8674254869008062,
+        "deficit_volume": 179.43791375793734,
+        "equivalent_deficit_radius": 3.4989832809802985,
+        "far_field_shell_density": 0.7741703656088033,
+        "far_field_shell_deficit": 0.22582963439119674,
+        "far_field_moment": 0.5572623616116142,
+        "min_density": 0.012642303577447136,
+        "max_density": 0.9996869112652975,
+        "initial_energy": 926.2170473453053,
+        "stop_reason": "max_steps"
+      },
+      "extraction": {
+        "state_path": "",
+        "n": 32,
+        "half_width": 5.0,
+        "spacing": 0.3125,
+        "log_pressure": 0.5,
+        "e_total_raw": 882.7879538008208,
+        "e_anchor_shell": 788.9401851830489,
+        "e_interior": 93.84776861777186,
+        "e_filaments": 33.346387813626734,
+        "e_node": 13.382767943043477,
+        "e_bulk_residual": 47.11861286110165,
+        "mu_0_grid": 3.7072979684721443,
+        "mu_0_per_filament": [
+          3.5108177786546824,
+          3.8192290911193485,
+          3.791847035642402
+        ],
+        "l_filament_total": 8.480362873487833,
+        "n_y_per_xi": 12.604639862796969,
+        "n_y_per_filament_length": 1.4863326075589132,
+        "f_factor_interior": 2.008334349254231,
+        "f_factor_raw": 18.891587907081114,
+        "n_y_per_xi_times_f_interior": 25.31433119643429,
+        "filaments": [
+          {
+            "index": 0,
+            "tube_energy": 9.267094711632149,
+            "tube_volume": 29.6630859375,
+            "tube_arc_length": 2.3605133771564066,
+            "cal_energy": 3.5108177786546824,
+            "cal_length": 1.0,
+            "cal_energy_per_length": 3.5108177786546824
+          },
+          {
+            "index": 1,
+            "tube_energy": 12.087217249070612,
+            "tube_volume": 38.4521484375,
+            "tube_arc_length": 3.0599247481657126,
+            "cal_energy": 3.8192290911193485,
+            "cal_length": 1.0,
+            "cal_energy_per_length": 3.8192290911193485
+          },
+          {
+            "index": 2,
+            "tube_energy": 11.992075852923975,
+            "tube_volume": 38.4521484375,
+            "tube_arc_length": 3.0599247481657126,
+            "cal_energy": 3.791847035642402,
+            "cal_length": 1.0,
+            "cal_energy_per_length": 3.791847035642402
+          }
+        ]
+      }
+    },
+    {
+      "n": 32,
+      "half_width": 6.0,
+      "max_steps": 356,
+      "state_path": "papers/SSV-I/data/y-junction-state-n32-hw6-356steps-2026-05-17.npz",
+      "extraction_config": {
+        "r_tube": 2.0,
+        "r_node": 2.0,
+        "cal_start": 2.5,
+        "cal_stop": 4.5
+      },
+      "relaxation": {
+        "steps_completed": 356,
+        "final_energy": 1085.588452190055,
+        "best_energy": 1085.588452190055,
+        "energy_monotonicity_violations": 0,
+        "accepted_steps": 356,
+        "rejected_steps": 0,
+        "final_step_size": 0.040499999999999994,
+        "residual_norm": 1.9760511379247125,
+        "depressed_fraction": 0.058349609375,
+        "effective_radius": 4.509652048000914,
+        "deficit_volume": 245.89480231715623,
+        "equivalent_deficit_radius": 3.8864544300813186,
+        "far_field_shell_density": 0.8224557338053056,
+        "far_field_shell_deficit": 0.17754426619469443,
+        "far_field_moment": 0.4947285327749181,
+        "min_density": 0.018203760533208768,
+        "max_density": 0.9999580020647172,
+        "initial_energy": 1141.9872419773512,
+        "stop_reason": "max_steps"
+      },
+      "extraction": {
+        "state_path": "",
+        "n": 32,
+        "half_width": 6.0,
+        "spacing": 0.375,
+        "log_pressure": 0.5,
+        "e_total_raw": 1085.588452190055,
+        "e_anchor_shell": 958.3836510780181,
+        "e_interior": 127.20480111203688,
+        "e_filaments": 44.600883451744316,
+        "e_node": 13.312870939441886,
+        "e_bulk_residual": 69.29104672085066,
+        "mu_0_grid": 3.7735699533735243,
+        "mu_0_per_filament": [
+          3.636198034871373,
+          3.8551597597449603,
+          3.82935206550424
+        ],
+        "l_filament_total": 11.431179447776092,
+        "n_y_per_xi": 15.347205724757277,
+        "n_y_per_filament_length": 1.3425741232452648,
+        "f_factor_interior": 2.196452335878883,
+        "f_factor_raw": 18.744915842570016,
+        "n_y_per_xi_times_f_interior": 33.70940586335689,
+        "filaments": [
+          {
+            "index": 0,
+            "tube_energy": 12.842346853779928,
+            "tube_volume": 41.34375,
+            "tube_arc_length": 3.290031089227774,
+            "cal_energy": 7.272396069742746,
+            "cal_length": 2.0,
+            "cal_energy_per_length": 3.636198034871373
+          },
+          {
+            "index": 1,
+            "tube_energy": 15.936498503497903,
+            "tube_volume": 51.15234375,
+            "tube_arc_length": 4.070574179274159,
+            "cal_energy": 7.710319519489921,
+            "cal_length": 2.0,
+            "cal_energy_per_length": 3.8551597597449603
+          },
+          {
+            "index": 2,
+            "tube_energy": 15.822038094466487,
+            "tube_volume": 51.15234375,
+            "tube_arc_length": 4.070574179274159,
+            "cal_energy": 7.65870413100848,
+            "cal_length": 2.0,
+            "cal_energy_per_length": 3.82935206550424
+          }
+        ]
+      }
+    },
+    {
+      "n": 32,
+      "half_width": 7.0,
+      "max_steps": 356,
+      "state_path": "papers/SSV-I/data/y-junction-state-n32-hw7-356steps-2026-05-17.npz",
+      "extraction_config": {
+        "r_tube": 2.0,
+        "r_node": 2.0,
+        "cal_start": 2.5,
+        "cal_stop": 5.5
+      },
+      "relaxation": {
+        "steps_completed": 356,
+        "final_energy": 1289.350476936258,
+        "best_energy": 1289.350476936258,
+        "energy_monotonicity_violations": 0,
+        "accepted_steps": 356,
+        "rejected_steps": 0,
+        "final_step_size": 0.05512500000000001,
+        "residual_norm": 1.4557743561872356,
+        "depressed_fraction": 0.046630859375,
+        "effective_radius": 5.157923058692228,
+        "deficit_volume": 320.0093140908701,
+        "equivalent_deficit_radius": 4.243178839065737,
+        "far_field_shell_density": 0.856213790384433,
+        "far_field_shell_deficit": 0.14378620961556698,
+        "far_field_moment": 0.45047114471282584,
+        "min_density": 0.024689120935976954,
+        "max_density": 0.9999942482898262,
+        "initial_energy": 1357.0421370624956,
+        "stop_reason": "max_steps"
+      },
+      "extraction": {
+        "state_path": "",
+        "n": 32,
+        "half_width": 7.0,
+        "spacing": 0.4375,
+        "log_pressure": 0.5,
+        "e_total_raw": 1289.350476936258,
+        "e_anchor_shell": 1125.8144505256157,
+        "e_interior": 163.5360264106423,
+        "e_filaments": 55.659661206183586,
+        "e_node": 14.071069826082107,
+        "e_bulk_residual": 93.80529537837661,
+        "mu_0_grid": 3.9251254522943113,
+        "mu_0_per_filament": [
+          4.0667342310869,
+          3.866860258782104,
+          3.84178186701393
+        ],
+        "l_filament_total": 14.607128771154793,
+        "n_y_per_xi": 17.7652235271886,
+        "n_y_per_filament_length": 1.2162022944762565,
+        "f_factor_interior": 2.345250422442455,
+        "f_factor_raw": 18.490419616275812,
+        "n_y_per_xi_times_f_interior": 41.663897981923704,
+        "filaments": [
+          {
+            "index": 0,
+            "tube_energy": 16.468905275944095,
+            "tube_volume": 54.93359375,
+            "tube_arc_length": 4.371476493557274,
+            "cal_energy": 12.200202693260701,
+            "cal_length": 3.0,
+            "cal_energy_per_length": 4.0667342310869
+          },
+          {
+            "index": 1,
+            "tube_energy": 19.663014419421636,
+            "tube_volume": 64.3125,
+            "tube_arc_length": 5.11782613879876,
+            "cal_energy": 11.600580776346312,
+            "cal_length": 3.0,
+            "cal_energy_per_length": 3.866860258782104
+          },
+          {
+            "index": 2,
+            "tube_energy": 19.52774151081785,
+            "tube_volume": 64.3125,
+            "tube_arc_length": 5.11782613879876,
+            "cal_energy": 11.52534560104179,
+            "cal_length": 3.0,
+            "cal_energy_per_length": 3.84178186701393
+          }
+        ]
+      }
+    },
+    {
+      "n": 48,
+      "half_width": 5.0,
+      "max_steps": 400,
+      "state_path": "papers/SSV-I/data/y-junction-state-n48-hw5-400steps-2026-05-17.npz",
+      "extraction_config": {
+        "r_tube": 2.0,
+        "r_node": 2.0,
+        "cal_start": 2.5,
+        "cal_stop": 3.5
+      },
+      "relaxation": {
+        "steps_completed": 400,
+        "final_energy": 1258.5928680531506,
+        "best_energy": 1258.5928680531506,
+        "energy_monotonicity_violations": 0,
+        "accepted_steps": 400,
+        "rejected_steps": 0,
+        "final_step_size": 0.0125,
+        "residual_norm": 5.150116559806095,
+        "depressed_fraction": 0.08503327546296297,
+        "effective_radius": 3.906882305153292,
+        "deficit_volume": 185.9284038896382,
+        "equivalent_deficit_radius": 3.5406721145629825,
+        "far_field_shell_density": 0.7639065691759676,
+        "far_field_shell_deficit": 0.23609343082403245,
+        "far_field_moment": 0.5943966684456289,
+        "min_density": 0.005465020390657411,
+        "max_density": 0.9997191389786457,
+        "initial_energy": 1315.6891204623248,
+        "stop_reason": "max_steps"
+      },
+      "extraction": {
+        "state_path": "",
+        "n": 48,
+        "half_width": 5.0,
+        "spacing": 0.20833333333333334,
+        "log_pressure": 0.5,
+        "e_total_raw": 1258.5928680531506,
+        "e_anchor_shell": 1155.9493914263633,
+        "e_interior": 102.64347662678733,
+        "e_filaments": 36.26909946018087,
+        "e_node": 13.48380915302007,
+        "e_bulk_residual": 52.890568013586396,
+        "mu_0_grid": 3.816995927738534,
+        "mu_0_per_filament": [
+          3.9440460203884644,
+          3.7627439227910675,
+          3.74419784003607
+        ],
+        "l_filament_total": 9.406075557442025,
+        "n_y_per_xi": 13.034572096774067,
+        "n_y_per_filament_length": 1.3857609389987517,
+        "f_factor_interior": 2.0630648436009817,
+        "f_factor_raw": 25.296870135532302,
+        "n_y_per_xi_times_f_interior": 26.89116744423691,
+        "filaments": [
+          {
+            "index": 0,
+            "tube_energy": 10.185597008894895,
+            "tube_volume": 32.98611111111112,
+            "tube_arc_length": 2.6249513183559134,
+            "cal_energy": 3.9440460203884644,
+            "cal_length": 1.0,
+            "cal_energy_per_length": 3.9440460203884644
+          },
+          {
+            "index": 1,
+            "tube_energy": 13.078562221264683,
+            "tube_volume": 42.6070601851852,
+            "tube_arc_length": 3.390562119543055,
+            "cal_energy": 3.7627439227910675,
+            "cal_length": 1.0,
+            "cal_energy_per_length": 3.7627439227910675
+          },
+          {
+            "index": 2,
+            "tube_energy": 13.004940230021294,
+            "tube_volume": 42.6070601851852,
+            "tube_arc_length": 3.390562119543055,
+            "cal_energy": 3.74419784003607,
+            "cal_length": 1.0,
+            "cal_energy_per_length": 3.74419784003607
+          }
+        ]
+      }
+    },
+    {
+      "n": 48,
+      "half_width": 6.0,
+      "max_steps": 400,
+      "state_path": "papers/SSV-I/data/y-junction-state-n48-hw6-400steps-2026-05-17.npz",
+      "extraction_config": {
+        "r_tube": 2.0,
+        "r_node": 2.0,
+        "cal_start": 2.5,
+        "cal_stop": 4.5
+      },
+      "relaxation": {
+        "steps_completed": 400,
+        "final_energy": 1541.6797036261687,
+        "best_energy": 1541.6797036261687,
+        "energy_monotonicity_violations": 0,
+        "accepted_steps": 400,
+        "rejected_steps": 0,
+        "final_step_size": 0.018,
+        "residual_norm": 3.5949560871548254,
+        "depressed_fraction": 0.05935329861111111,
+        "effective_radius": 4.571266831176498,
+        "deficit_volume": 256.1519335045389,
+        "equivalent_deficit_radius": 3.939759182024443,
+        "far_field_shell_density": 0.813238224487732,
+        "far_field_shell_deficit": 0.18676177551226802,
+        "far_field_moment": 0.5356418007714442,
+        "min_density": 0.007874050878869804,
+        "max_density": 0.9999630786486641,
+        "initial_energy": 1615.9487232719532,
+        "stop_reason": "max_steps"
+      },
+      "extraction": {
+        "state_path": "",
+        "n": 48,
+        "half_width": 6.0,
+        "spacing": 0.25,
+        "log_pressure": 0.5,
+        "e_total_raw": 1541.6797036261687,
+        "e_anchor_shell": 1402.9829074485624,
+        "e_interior": 138.6967961776063,
+        "e_filaments": 48.22996029324335,
+        "e_node": 13.825235628575735,
+        "e_bulk_residual": 76.64160025578721,
+        "mu_0_grid": 3.887714881601873,
+        "mu_0_per_filament": [
+          3.950027473715534,
+          3.8658797950563053,
+          3.847237376033781
+        ],
+        "l_filament_total": 12.608055648061084,
+        "n_y_per_xi": 15.961869070051298,
+        "n_y_per_filament_length": 1.266005601149609,
+        "f_factor_interior": 2.2350553264281845,
+        "f_factor_raw": 24.84368441231691,
+        "n_y_per_xi_times_f_interior": 35.67566048476745,
+        "filaments": [
+          {
+            "index": 0,
+            "tube_energy": 13.878743041560934,
+            "tube_volume": 46.25,
+            "tube_arc_length": 3.6804580590000797,
+            "cal_energy": 7.900054947431068,
+            "cal_length": 2.0,
+            "cal_energy_per_length": 3.950027473715534
+          },
+          {
+            "index": 1,
+            "tube_energy": 17.21893480039403,
+            "tube_volume": 56.09375,
+            "tube_arc_length": 4.463798794530502,
+            "cal_energy": 7.731759590112611,
+            "cal_length": 2.0,
+            "cal_energy_per_length": 3.8658797950563053
+          },
+          {
+            "index": 2,
+            "tube_energy": 17.13228245128839,
+            "tube_volume": 56.09375,
+            "tube_arc_length": 4.463798794530502,
+            "cal_energy": 7.694474752067562,
+            "cal_length": 2.0,
+            "cal_energy_per_length": 3.847237376033781
+          }
+        ]
+      }
+    },
+    {
+      "n": 48,
+      "half_width": 7.0,
+      "max_steps": 400,
+      "state_path": "papers/SSV-I/data/y-junction-state-n48-hw7-400steps-2026-05-17.npz",
+      "extraction_config": {
+        "r_tube": 2.0,
+        "r_node": 2.0,
+        "cal_start": 2.5,
+        "cal_stop": 5.5
+      },
+      "relaxation": {
+        "steps_completed": 400,
+        "final_energy": 1825.0941159307836,
+        "best_energy": 1825.0941159307836,
+        "energy_monotonicity_violations": 0,
+        "accepted_steps": 400,
+        "rejected_steps": 0,
+        "final_step_size": 0.024500000000000008,
+        "residual_norm": 2.6486353484715672,
+        "depressed_fraction": 0.04676649305555555,
+        "effective_radius": 5.240641586811003,
+        "deficit_volume": 334.43160085626647,
+        "equivalent_deficit_radius": 4.3059888356850085,
+        "far_field_shell_density": 0.8482201001051087,
+        "far_field_shell_deficit": 0.15177989989489127,
+        "far_field_moment": 0.49253395385205156,
+        "min_density": 0.010701832057308064,
+        "max_density": 0.9999950443073327,
+        "initial_energy": 1914.7026121850758,
+        "stop_reason": "max_steps"
+      },
+      "extraction": {
+        "state_path": "",
+        "n": 48,
+        "half_width": 7.0,
+        "spacing": 0.2916666666666667,
+        "log_pressure": 0.5,
+        "e_total_raw": 1825.0941159307836,
+        "e_anchor_shell": 1647.1550473128348,
+        "e_interior": 177.9390686179488,
+        "e_filaments": 59.939158517954304,
+        "e_node": 13.840707785274057,
+        "e_bulk_residual": 104.15920231472045,
+        "mu_0_grid": 3.8690090801297337,
+        "mu_0_per_filament": [
+          3.8066215805172097,
+          3.9093360046221384,
+          3.8910696552498525
+        ],
+        "l_filament_total": 15.60621057139869,
+        "n_y_per_xi": 19.06944769970775,
+        "n_y_per_filament_length": 1.2219140330360592,
+        "f_factor_interior": 2.411756452453246,
+        "f_factor_raw": 24.737021187186993,
+        "n_y_per_xi_times_f_interior": 45.990863534489876,
+        "filaments": [
+          {
+            "index": 0,
+            "tube_energy": 17.315301871725804,
+            "tube_volume": 56.47193287037038,
+            "tube_arc_length": 4.493893631136566,
+            "cal_energy": 11.41986474155163,
+            "cal_length": 3.0,
+            "cal_energy_per_length": 3.8066215805172097
+          },
+          {
+            "index": 1,
+            "tube_energy": 21.362820560035757,
+            "tube_volume": 69.82074652777779,
+            "tube_arc_length": 5.556158470131061,
+            "cal_energy": 11.728008013866415,
+            "cal_length": 3.0,
+            "cal_energy_per_length": 3.9093360046221384
+          },
+          {
+            "index": 2,
+            "tube_energy": 21.26103608619274,
+            "tube_volume": 69.82074652777779,
+            "tube_arc_length": 5.556158470131061,
+            "cal_energy": 11.673208965749557,
+            "cal_length": 3.0,
+            "cal_energy_per_length": 3.8910696552498525
+          }
+        ]
+      }
+    }
+  ],
+  "summary_table": [
+    {
+      "n": 24,
+      "half_width": 5.0,
+      "max_steps": 200,
+      "final_energy": 694.6218379761724,
+      "residual_norm": 1.8590521587788993,
+      "e_interior": 85.50846164976372,
+      "mu_0_grid": 3.6345955163843597,
+      "l_filament_total": 8.174190508915345,
+      "n_y_per_xi": 12.220482998528489,
+      "n_y_per_filament_length": 1.4950083418290747,
+      "f_factor_interior": 1.9251502746149491
+    },
+    {
+      "n": 24,
+      "half_width": 6.0,
+      "max_steps": 200,
+      "final_energy": 857.0192563293961,
+      "residual_norm": 1.2977301316711793,
+      "e_interior": 116.22177351373307,
+      "mu_0_grid": 3.911165673069965,
+      "l_filament_total": 10.981691073340778,
+      "n_y_per_xi": 14.075526590803053,
+      "n_y_per_filament_length": 1.2817266937123089,
+      "f_factor_interior": 2.111138054280082
+    },
+    {
+      "n": 24,
+      "half_width": 7.0,
+      "max_steps": 200,
+      "final_energy": 1020.5443082461194,
+      "residual_norm": 0.9559969981109457,
+      "e_interior": 149.65885601849106,
+      "mu_0_grid": 3.6525165535126547,
+      "l_filament_total": 12.573424711369796,
+      "n_y_per_xi": 17.37989578195889,
+      "n_y_per_filament_length": 1.3822722274101453,
+      "f_factor_interior": 2.3575616614701684
+    },
+    {
+      "n": 32,
+      "half_width": 5.0,
+      "max_steps": 356,
+      "final_energy": 882.7879538008208,
+      "residual_norm": 2.8309218331193837,
+      "e_interior": 93.84776861777186,
+      "mu_0_grid": 3.7072979684721443,
+      "l_filament_total": 8.480362873487833,
+      "n_y_per_xi": 12.604639862796969,
+      "n_y_per_filament_length": 1.4863326075589132,
+      "f_factor_interior": 2.008334349254231
+    },
+    {
+      "n": 32,
+      "half_width": 6.0,
+      "max_steps": 356,
+      "final_energy": 1085.588452190055,
+      "residual_norm": 1.9760511379247125,
+      "e_interior": 127.20480111203688,
+      "mu_0_grid": 3.7735699533735243,
+      "l_filament_total": 11.431179447776092,
+      "n_y_per_xi": 15.347205724757277,
+      "n_y_per_filament_length": 1.3425741232452648,
+      "f_factor_interior": 2.196452335878883
+    },
+    {
+      "n": 32,
+      "half_width": 7.0,
+      "max_steps": 356,
+      "final_energy": 1289.350476936258,
+      "residual_norm": 1.4557743561872356,
+      "e_interior": 163.5360264106423,
+      "mu_0_grid": 3.9251254522943113,
+      "l_filament_total": 14.607128771154793,
+      "n_y_per_xi": 17.7652235271886,
+      "n_y_per_filament_length": 1.2162022944762565,
+      "f_factor_interior": 2.345250422442455
+    },
+    {
+      "n": 48,
+      "half_width": 5.0,
+      "max_steps": 400,
+      "final_energy": 1258.5928680531506,
+      "residual_norm": 5.150116559806095,
+      "e_interior": 102.64347662678733,
+      "mu_0_grid": 3.816995927738534,
+      "l_filament_total": 9.406075557442025,
+      "n_y_per_xi": 13.034572096774067,
+      "n_y_per_filament_length": 1.3857609389987517,
+      "f_factor_interior": 2.0630648436009817
+    },
+    {
+      "n": 48,
+      "half_width": 6.0,
+      "max_steps": 400,
+      "final_energy": 1541.6797036261687,
+      "residual_norm": 3.5949560871548254,
+      "e_interior": 138.6967961776063,
+      "mu_0_grid": 3.887714881601873,
+      "l_filament_total": 12.608055648061084,
+      "n_y_per_xi": 15.961869070051298,
+      "n_y_per_filament_length": 1.266005601149609,
+      "f_factor_interior": 2.2350553264281845
+    },
+    {
+      "n": 48,
+      "half_width": 7.0,
+      "max_steps": 400,
+      "final_energy": 1825.0941159307836,
+      "residual_norm": 2.6486353484715672,
+      "e_interior": 177.9390686179488,
+      "mu_0_grid": 3.8690090801297337,
+      "l_filament_total": 15.60621057139869,
+      "n_y_per_xi": 19.06944769970775,
+      "n_y_per_filament_length": 1.2219140330360592,
+      "f_factor_interior": 2.411756452453246
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "problem_type": "static",
+    "status": "prototype",
+    "nondimensionalisation": "xi = 1, rho0 = 1, c = 1",
+    "observables": [
+      "N_Y",
+      "F",
+      "mu_0_grid",
+      "E_filaments",
+      "E_node",
+      "E_total"
+    ],
+    "diagnostics": [
+      "tube_overlap_fraction",
+      "boundary_anchor_energy_fraction"
+    ],
+    "issue_refs": [
+      "#13"
+    ],
+    "limitations": [
+      "Tube radius, node radius, and calibration arc-length window are free parameters.",
+      "Self-calibration assumes the chosen slab is far enough from both the node and the boundary anchor to look like a straight isolated vortex.",
+      "The relaxed Y-junction must be produced by trefoil_y_junction_static.py with the equatorial 120 deg geometry; other layouts are not supported."
+    ]
+  },
+  "extraction_config": {
+    "r_tube": 2.0,
+    "r_node": 2.0,
+    "cal_start": 2.5,
+    "cal_stop": 4.5
+  },
+  "summary": {
+    "state_path": "papers\\SSV-I\\data\\y-junction-state-n24-hw6-200steps-2026-05-16.npz",
+    "n": 24,
+    "half_width": 6.0,
+    "spacing": 0.5,
+    "log_pressure": 0.5,
+    "e_total_raw": 857.0192563293961,
+    "e_anchor_shell": 740.797482815663,
+    "e_interior": 116.22177351373307,
+    "e_filaments": 41.12640311913613,
+    "e_node": 13.925313313196284,
+    "e_bulk_residual": 61.17005708140066,
+    "mu_0_grid": 3.911165673069965,
+    "mu_0_per_filament": [
+      3.92376755365884,
+      3.9237451579049765,
+      3.8859843076460803
+    ],
+    "l_filament_total": 10.981691073340778,
+    "n_y_per_xi": 14.075526590803053,
+    "n_y_per_filament_length": 1.2817266937123089,
+    "f_factor_interior": 2.111138054280082,
+    "f_factor_raw": 15.567530167434711,
+    "n_y_per_xi_times_f_interior": 29.715379819875515,
+    "filaments": [
+      {
+        "index": 0,
+        "tube_energy": 11.91960616422646,
+        "tube_volume": 40.0,
+        "tube_arc_length": 3.183098861837907,
+        "cal_energy": 7.84753510731768,
+        "cal_length": 2.0,
+        "cal_energy_per_length": 3.92376755365884
+      },
+      {
+        "index": 1,
+        "tube_energy": 14.681009668024677,
+        "tube_volume": 49.0,
+        "tube_arc_length": 3.8992961057514357,
+        "cal_energy": 7.847490315809953,
+        "cal_length": 2.0,
+        "cal_energy_per_length": 3.9237451579049765
+      },
+      {
+        "index": 2,
+        "tube_energy": 14.525787286884995,
+        "tube_volume": 49.0,
+        "tube_arc_length": 3.8992961057514357,
+        "cal_energy": 7.7719686152921605,
+        "cal_length": 2.0,
+        "cal_energy_per_length": 3.8859843076460803
+      }
+    ]
+  }
+}
