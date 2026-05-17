@@ -1,0 +1,81 @@
+{
+  "metadata": {
+    "problem_type": "static",
+    "status": "prototype",
+    "nondimensionalisation": "xi = 1, rho0 = 1, c = 1",
+    "observables": [
+      "total_energy",
+      "residual_norm",
+      "depressed_fraction",
+      "effective_radius"
+    ],
+    "diagnostics": [
+      "energy_monotonicity",
+      "residual_norm",
+      "boundary_anchor"
+    ],
+    "issue_refs": [
+      "#13"
+    ],
+    "limitations": [
+      "Uses an asymmetric (+1, +1, -1) phase-sign pattern on the closed theta-graph skeleton.",
+      "Net winding at each Y-node is +1 instead of +3 to avoid the multi-quantum fission instability.",
+      "3-fold rotational symmetry is broken; only a single reflection symmetry survives."
+    ]
+  },
+  "nondimensionalisation": {
+    "xi": 1.0,
+    "rho0": 1.0,
+    "c": 1.0
+  },
+  "config": {
+    "n": 24,
+    "half_width": 6.0,
+    "xi": 1.0,
+    "node_radius": 2.5,
+    "arc_radius": 2.5,
+    "samples_per_arc": 200,
+    "log_pressure": 0.5,
+    "density_floor": 1e-12,
+    "anchor_shell": 2,
+    "boundary_blend_fraction": 0.18,
+    "depressed_threshold": 0.35,
+    "phase_signs": [
+      1,
+      1,
+      -1
+    ]
+  },
+  "controls": {
+    "step_size": 0.01,
+    "max_steps": 200,
+    "tolerance": 0.002,
+    "min_step_size": 1e-05,
+    "max_step_size": 0.05,
+    "check_interval": 10,
+    "patience_intervals": 3,
+    "energy_tol": 1e-09,
+    "reference_spacing": null
+  },
+  "summary": {
+    "steps_completed": 200,
+    "final_energy": 1001.534162120921,
+    "best_energy": 1001.534162120921,
+    "energy_monotonicity_violations": 0,
+    "accepted_steps": 200,
+    "rejected_steps": 0,
+    "final_step_size": 0.072,
+    "residual_norm": 1.3713502364864887,
+    "depressed_fraction": 0.06351273148148148,
+    "effective_radius": 5.13257098334651,
+    "deficit_volume": 374.7256467063783,
+    "equivalent_deficit_radius": 4.472409927630909,
+    "far_field_shell_density": 0.715273194904156,
+    "far_field_shell_deficit": 0.284726805095844,
+    "far_field_moment": 1.0384575441183306,
+    "min_density": 0.0011952332826882953,
+    "max_density": 0.9995306134418169,
+    "initial_energy": 1093.9819753192137,
+    "stop_reason": "max_steps"
+  }
+}

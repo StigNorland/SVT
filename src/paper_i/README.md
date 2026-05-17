@@ -31,6 +31,21 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 | `cq_geometry_compare.py` | `candidate` | comparison harness for geometry-level monopole-calibration diagnostics across saved states |
 | `q_p_two_factor_pure_additive_local_scan.py` | `candidate` | pure additive local-geometry Q_p scan for issue `#14` |
 | `trefoil_y_junction_static.py` | `prototype` | first open three-prong Y-junction relaxation for `N_Y` / `F` on issue `#13` |
+| `trefoil_y_junction_observables.py` | `prototype` | first `N_Y` / `F` extractor with self-calibration on saved Y-junction states |
+| `trefoil_y_junction_refinement.py` | `prototype` | first grid + box sensitivity sweep for the Y-junction track |
+| `trefoil_y_junction_closed_static.py` | `prototype` | closed-topology theta-graph Y-junction prototype to remove the open-Y `F` divergence |
+| `trefoil_y_junction_closed_observables.py` | `prototype` | arc-aware `N_Y` / `F` extractor for closed theta-graph states (revealed `+3` monopole instability of the symmetric seed) |
+| `trefoil_breather_observables.py` | `prototype` | single-curve `N_Y` / `F` extractor for the `(2,3)`-trefoil-knot states from `trefoil_breather_static.py` |
+| `trefoil_y_junction_closed_asym_static.py` | `prototype` | asymmetric `(+1,+1,-1)` closed Y-junction; first multi-filament configuration with stable seeded geometry and finite `F^int` |
+| `trefoil_y_junction_closed_asym_refinement.py` | `prototype` | first grid + box sensitivity sweep for the asymmetric closed Y-junction track |
+| `trefoil_y_junction_closed_asym_lperp_static.py` | `prototype` | asymmetric closed Y-junction with the `L_perp` chiral non-local shear term added to the relaxation gradient |
+| `trefoil_breather_lperp_static.py` | `prototype` | `(2,3)`-trefoil knot relaxation with `L_perp` added; binary test of whether L_perp at reachable couplings prevents dissolution |
+| `lperp_helpers.py` | `prototype` | shared L_perp gradient + energy helpers used by the per-geometry L_perp scripts |
+| `lperp_implicit_helpers.py` | `prototype` | FFT-based semi-implicit step for L_perp; unlocks the paper's `lambda = 2000` regime |
+| `trefoil_y_junction_closed_asym_lperp_implicit_static.py` | `prototype` | asym closed Y-junction with L_perp via semi-implicit time stepping |
+| `trefoil_breather_lperp_implicit_static.py` | `prototype` | trefoil knot + L_perp via semi-implicit stepping; first **stable** closed-knot configuration in the repo |
+| `lperp_krylov_helpers.py` | `prototype` | matrix-free GMRES + FFT left-preconditioner for fully implicit Krylov L_perp solver |
+| `trefoil_breather_lperp_krylov_static.py` | `prototype` | trefoil + L_perp via true-Jacobian Krylov implicit step; 100x deeper cores than FFT-only |
 | muon / BdG scripts | `prototype` | reduced spectral experiments, not closure evidence |
 | Kelvin / chiral bridge scripts | `prototype` | exploratory coupling structure only |
 
@@ -56,6 +71,21 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 - `q_p_two_factor_local_scale_scan.py` tests run-local geometric re-expressions of the additive saturating reduced `Q_p` family.
 - `q_p_two_factor_pure_additive_local_scan.py` tests the same local geometric scales purely additively, with no `Pi_shell` multiplier on the correction term.
 - `trefoil_y_junction_static.py` relaxes the open three-prong Y-junction (three vortex filaments meeting at a central node, 120 deg apart in the equatorial plane) using a product-vortex ansatz with initial-state boundary anchoring.
+- `trefoil_y_junction_observables.py` extracts `mu_0_grid`, `E_filaments`, `E_node`, `E_bulk_residual`, `N_Y`, and `F` from a saved Y-junction state, with self-calibration from straight filament sections of the same state.
+- `trefoil_y_junction_refinement.py` runs the relaxation + extraction across a `(n, half_width)` grid for the Y-junction track and tabulates the refinement-gate observables.
+- `trefoil_y_junction_closed_static.py` relaxes a closed theta-graph Y-junction (three arcs in meridian planes connecting two Y-nodes on the `z`-axis), the compact-closed analogue of the open three-prong Y.
+- `trefoil_y_junction_closed_observables.py` extracts `N_Y`, `F`, and energy decomposition from a saved closed Y-junction state using arc-aware tube assignment and two node balls.
+- `trefoil_breather_observables.py` extracts `N_Y`, `F`, and energy decomposition (line tube + cavity ball + bulk residual) from a saved `(2,3)`-trefoil-knot state.
+- `trefoil_y_junction_closed_asym_static.py` relaxes the asymmetric `(+1, +1, -1)` closed Y-junction; one sign flip in the phase ansatz removes the `+3` monopole fission instability that destroyed the symmetric seed.
+- `trefoil_y_junction_closed_asym_refinement.py` runs the asymmetric-closed-Y relaxation + extraction across a `(n, half_width)` grid and tabulates the refinement-gate observables.
+- `trefoil_y_junction_closed_asym_lperp_static.py` adds the `L_perp = (lambda / 2) integral |curl j|^2` energy term to the asymmetric closed Y-junction relaxation; first implementation of the chiral non-local shear sector in the repo.
+- `trefoil_breather_lperp_static.py` adds `L_perp` on top of the `(2,3)`-trefoil knot initial condition; tested whether the chiral non-local shear term prevents the curvature-driven dissolution we observed at `lambda = 0`.
+- `lperp_helpers.py` provides shared `grad_psi`, `current`, `curl3`, `lperp_energy`, `lperp_gradient` functions used by the per-geometry L_perp scripts.
+- `lperp_implicit_helpers.py` provides `fourier_k_squared` and `semi_implicit_step`: an FFT-based semi-implicit Euler step that absorbs the L_perp leading stiffness (approximated as `lambda * (-Laplacian)^2`) into the implicit operator.
+- `trefoil_y_junction_closed_asym_lperp_implicit_static.py` runs the asymmetric closed Y-junction with semi-implicit L_perp stepping; reaches the paper's `lambda = 2000` regime.
+- `trefoil_breather_lperp_implicit_static.py` runs the `(2,3)`-trefoil knot with semi-implicit L_perp stepping; produces the first stable closed-knot configuration in the repo.
+- `lperp_krylov_helpers.py` provides matrix-free GMRES + FFT left-preconditioner. Used by the Krylov-implicit static scripts to solve the linearised backward-Euler equation `(I + dt J_true) dpsi = -dt g_full` without scipy.
+- `trefoil_breather_lperp_krylov_static.py` runs the trefoil + L_perp with true-Jacobian Krylov-implicit stepping; deepest stable cores in the repo (`min_rho ~ 2.5e-3` at `lambda = 2000`), and the first configuration whose `F^int` matches the paper's quoted order of magnitude.
 
 ## Muon-Mode Diagnostics
 
@@ -87,6 +117,18 @@ python src/paper_i/q_p_two_factor_reexpress_scan.py papers/SSV-I/data/trefoil-bo
 python src/paper_i/q_p_two_factor_local_scale_scan.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
 python src/paper_i/q_p_two_factor_pure_additive_local_scan.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
 python src/paper_i/trefoil_y_junction_static.py --n 24 --half-width 6 --max-steps 200
+python src/paper_i/trefoil_y_junction_observables.py papers/SSV-I/data/y-junction-state-n24-hw6-200steps-2026-05-16.npz
+python src/paper_i/trefoil_y_junction_refinement.py --n-values "24,32" --half-width-values "5,6"
+python src/paper_i/trefoil_y_junction_closed_static.py --n 24 --half-width 6 --max-steps 200
+python src/paper_i/trefoil_y_junction_closed_observables.py papers/SSV-I/data/y-junction-closed-state-n24-hw6-200steps-2026-05-17.npz
+python src/paper_i/trefoil_breather_observables.py papers/SSV-I/data/trefoil-state-n48-hw5-400steps-2026-05-06.npz
+python src/paper_i/trefoil_y_junction_closed_asym_static.py --n 24 --half-width 6 --max-steps 200
+python src/paper_i/trefoil_y_junction_closed_asym_refinement.py --n-values "24,32" --half-width-values "5,6"
+python src/paper_i/trefoil_y_junction_closed_asym_lperp_static.py --n 24 --half-width 6 --max-steps 200 --lambda-perp 10 --step-size 0.002
+python src/paper_i/trefoil_breather_lperp_static.py --n 24 --half-width 6 --max-steps 400 --lambda-perp 10 --step-size 0.002
+python src/paper_i/trefoil_y_junction_closed_asym_lperp_implicit_static.py --n 24 --half-width 6 --max-steps 200 --lambda-perp 2000
+python src/paper_i/trefoil_breather_lperp_implicit_static.py --n 24 --half-width 6 --max-steps 800 --lambda-perp 2000
+python src/paper_i/trefoil_breather_lperp_krylov_static.py --n 24 --half-width 6 --max-steps 200 --lambda-perp 2000
 python src/paper_i/muon_mode_prototype.py
 python src/paper_i/kelvin_self_induction.py --phi-n 64
 ```

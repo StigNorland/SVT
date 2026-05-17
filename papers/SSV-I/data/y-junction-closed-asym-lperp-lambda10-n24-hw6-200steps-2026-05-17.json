@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "problem_type": "static",
+    "status": "prototype",
+    "nondimensionalisation": "xi = 1, rho0 = 1, c = 1",
+    "observables": [
+      "total_energy_full",
+      "e_logse",
+      "e_perp",
+      "residual_norm",
+      "depressed_fraction"
+    ],
+    "diagnostics": [
+      "energy_monotonicity",
+      "residual_norm",
+      "boundary_anchor",
+      "lperp_step_constraint"
+    ],
+    "issue_refs": [
+      "#13"
+    ],
+    "limitations": [
+      "Explicit Euler gradient flow is stiff at large lambda (5th-order operator). The paper's quoted lambda = 2000 may need a much finer grid or an implicit scheme.",
+      "Only the asymmetric closed Y skeleton is supported; topology choice is inherited from trefoil_y_junction_closed_asym_static."
+    ]
+  },
+  "nondimensionalisation": {
+    "xi": 1.0,
+    "rho0": 1.0,
+    "c": 1.0
+  },
+  "config": {
+    "n": 24,
+    "half_width": 6.0,
+    "xi": 1.0,
+    "node_radius": 2.5,
+    "arc_radius": 2.5,
+    "samples_per_arc": 200,
+    "log_pressure": 0.5,
+    "density_floor": 1e-12,
+    "anchor_shell": 2,
+    "boundary_blend_fraction": 0.18,
+    "depressed_threshold": 0.35,
+    "phase_signs": [
+      1,
+      1,
+      -1
+    ]
+  },
+  "controls": {
+    "step_size": 0.002,
+    "max_steps": 200,
+    "tolerance": 0.002,
+    "min_step_size": 1e-09,
+    "max_step_size": 0.02,
+    "check_interval": 20,
+    "patience_intervals": 3,
+    "energy_tol": 1e-09,
+    "reference_spacing": null
+  },
+  "lperp": {
+    "lambda_perp": 10.0
+  },
+  "summary": {
+    "steps_completed": 200,
+    "lambda_perp": 10.0,
+    "final_energy_full": 1879.0716065040328,
+    "final_energy_logse": 1031.285248922984,
+    "final_energy_perp": 847.786357581049,
+    "initial_energy_full": 2247.0921390059725,
+    "initial_energy_logse": 1093.9819753192137,
+    "initial_energy_perp": 1153.1101636867588,
+    "best_energy_full": 1879.0716065040328,
+    "energy_monotonicity_violations": 0,
+    "accepted_steps": 200,
+    "rejected_steps": 0,
+    "final_step_size": 0.0288,
+    "residual_norm": 5.788801484349606,
+    "depressed_fraction": 0.15089699074074073,
+    "effective_radius": 4.958152655430741,
+    "deficit_volume": 507.7228837588857,
+    "equivalent_deficit_radius": 4.948945937608585,
+    "far_field_shell_density": 0.609536684248374,
+    "far_field_shell_deficit": 0.39046331575162596,
+    "min_density": 0.00011989787687092551,
+    "max_density": 0.9995306134418169,
+    "stop_reason": "max_steps"
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "metadata": {
+    "problem_type": "static",
+    "status": "prototype",
+    "nondimensionalisation": "xi = 1, rho0 = 1, c = 1",
+    "observables": [
+      "final_energy",
+      "residual_norm",
+      "mu_0_grid",
+      "N_Y_per_filament_length",
+      "F_factor_interior"
+    ],
+    "diagnostics": [
+      "grid_sensitivity",
+      "box_sensitivity"
+    ],
+    "issue_refs": [
+      "#13"
+    ],
+    "limitations": [
+      "Extraction parameters (r_tube, r_node) are held fixed across the sweep.",
+      "Open three-prong Y geometry only."
+    ]
+  },
+  "extraction_settings": {
+    "r_tube": 2.0,
+    "r_node": 2.0,
+    "cal_window_rule": "cal_start=2.5, cal_stop=max(3.0, half_width-1.5)"
+  },
+  "step_scaling_rule": "max_steps = min(400, 200 * (n / 24)^2)",
+  "runs": [
+    {
+      "n": 48,
+      "half_width": 8.0,
+      "max_steps": 400,
+      "state_path": "papers/SSV-I/data/y-junction-state-n48-hw8-400steps-2026-05-17.npz",
+      "extraction_config": {
+        "r_tube": 2.0,
+        "r_node": 2.0,
+        "cal_start": 2.5,
+        "cal_stop": 6.5
+      },
+      "relaxation": {
+        "steps_completed": 400,
+        "final_energy": 2110.2638931204247,
+        "best_energy": 2110.2638931204247,
+        "energy_monotonicity_violations": 0,
+        "accepted_steps": 400,
+        "rejected_steps": 0,
+        "final_step_size": 0.031999999999999994,
+        "residual_norm": 2.0315760321013565,
+        "depressed_fraction": 0.033528645833333336,
+        "effective_radius": 5.912191688601462,
+        "deficit_volume": 419.1236128595342,
+        "equivalent_deficit_radius": 4.642492098680863,
+        "far_field_shell_density": 0.8740780625861911,
+        "far_field_shell_deficit": 0.12592193741380886,
+        "far_field_moment": 0.45795941142593205,
+        "min_density": 0.013948603032269467,
+        "max_density": 0.999999324549789,
+        "initial_energy": 2213.4775855735083,
+        "stop_reason": "max_steps"
+      },
+      "extraction": {
+        "state_path": "",
+        "n": 48,
+        "half_width": 8.0,
+        "spacing": 0.3333333333333333,
+        "log_pressure": 0.5,
+        "e_total_raw": 2110.2638931204247,
+        "e_anchor_shell": 1890.323615288901,
+        "e_interior": 219.94027783152364,
+        "e_filaments": 71.73502796820438,
+        "e_node": 13.709148495628998,
+        "e_bulk_residual": 134.49610136769027,
+        "mu_0_grid": 4.005839754741396,
+        "mu_0_per_filament": [
+          4.171012558840411,
+          3.931562088496944,
+          3.9149446168868334
+        ],
+        "l_filament_total": 18.591655204142143,
+        "n_y_per_xi": 21.32990376429807,
+        "n_y_per_filament_length": 1.1472837426301805,
+        "f_factor_interior": 2.57408154579873,
+        "f_factor_raw": 24.697574257897525,
+        "n_y_per_xi_times_f_interior": 54.90491165334252,
+        "filaments": [
+          {
+            "index": 0,
+            "tube_energy": 20.820442135084267,
+            "tube_volume": 67.25925925925924,
+            "tube_arc_length": 5.352321789905219,
+            "cal_energy": 16.684050235361646,
+            "cal_length": 4.0,
+            "cal_energy_per_length": 4.171012558840411
+          },
+          {
+            "index": 1,
+            "tube_energy": 25.515993249029464,
+            "tube_volume": 83.18518518518516,
+            "tube_arc_length": 6.61966670711846,
+            "cal_energy": 15.726248353987776,
+            "cal_length": 4.0,
+            "cal_energy_per_length": 3.931562088496944
+          },
+          {
+            "index": 2,
+            "tube_energy": 25.398592584090657,
+            "tube_volume": 83.18518518518516,
+            "tube_arc_length": 6.61966670711846,
+            "cal_energy": 15.659778467547333,
+            "cal_length": 4.0,
+            "cal_energy_per_length": 3.9149446168868334
+          }
+        ]
+      }
+    }
+  ],
+  "summary_table": [
+    {
+      "n": 48,
+      "half_width": 8.0,
+      "max_steps": 400,
+      "final_energy": 2110.2638931204247,
+      "residual_norm": 2.0315760321013565,
+      "e_interior": 219.94027783152364,
+      "mu_0_grid": 4.005839754741396,
+      "l_filament_total": 18.591655204142143,
+      "n_y_per_xi": 21.32990376429807,
+      "n_y_per_filament_length": 1.1472837426301805,
+      "f_factor_interior": 2.57408154579873
+    }
+  ]
+}

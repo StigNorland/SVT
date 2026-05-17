@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "problem_type": "static",
+    "status": "prototype",
+    "nondimensionalisation": "xi = 1, rho0 = 1, c = 1",
+    "observables": [
+      "N_Y",
+      "F",
+      "mu_0_grid",
+      "E_line",
+      "E_cavity",
+      "E_total"
+    ],
+    "diagnostics": [
+      "anchor_shell_energy_fraction",
+      "min_density_position"
+    ],
+    "issue_refs": [
+      "#13"
+    ],
+    "limitations": [
+      "Tube radius, cavity radius and calibration half-width are free parameters.",
+      "mu_0_grid is the energy per unit arc-length along a continuously curved knot, so it bakes in curvature effects.",
+      "Closed (2,3)-trefoil-knot geometry only; assumes state was produced by trefoil_breather_static.py."
+    ]
+  },
+  "extraction_config": {
+    "r_tube": 1.5,
+    "r_cavity": 1.5,
+    "cal_arc_half_width": 0.5
+  },
+  "summary": {
+    "state_path": "papers\\SSV-I\\data\\trefoil-lperp-implicit-lambda2000-n24-hw6-800steps-2026-05-17.npz",
+    "n": 24,
+    "half_width": 6.0,
+    "spacing": 0.5,
+    "log_pressure": 0.5,
+    "major_radius": 2.8,
+    "minor_radius": 0.85,
+    "e_total_raw": 158.78269806288986,
+    "e_anchor_shell": 19.37133008854238,
+    "e_interior": 139.41136797434748,
+    "e_line": 58.90913990442439,
+    "e_cavity": 4.067127586619714,
+    "e_bulk_residual": 76.43510048330337,
+    "mu_0_grid": 1.6834139183626797,
+    "cal_energy": 1.6834139183626797,
+    "cal_length": 1.0,
+    "l_curve_geometric": 38.79355669111729,
+    "l_line_tube": 30.982162255222292,
+    "tube_volume": 219.0,
+    "n_y_per_xi": 37.40985315857197,
+    "n_y_per_curve_length": 1.2074642450839994,
+    "f_factor_interior": 2.2137127767086744,
+    "f_factor_raw": 2.5213100805866344,
+    "min_density": 0.30831506461780595,
+    "min_density_position": [
+      2.75,
+      0.25,
+      0.75
+    ]
+  }
+}

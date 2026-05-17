@@ -1,0 +1,88 @@
+{
+  "metadata": {
+    "problem_type": "static",
+    "status": "prototype",
+    "nondimensionalisation": "xi = 1, rho0 = 1, c = 1",
+    "observables": [
+      "total_energy_full",
+      "e_logse",
+      "e_perp",
+      "residual_norm",
+      "depressed_fraction",
+      "min_density"
+    ],
+    "diagnostics": [
+      "energy_monotonicity",
+      "residual_norm",
+      "boundary_anchor",
+      "implicit_lperp"
+    ],
+    "issue_refs": [
+      "#13"
+    ],
+    "limitations": [
+      "Approximate implicit Jacobian: lambda * (-Laplacian)^2.",
+      "FFT solver assumes periodic BC; boundary anchor reapplied after each step.",
+      "Trefoil knot initial condition; same dissolution susceptibility as the explicit version."
+    ]
+  },
+  "nondimensionalisation": {
+    "xi": 1.0,
+    "rho0": 1.0,
+    "c": 1.0
+  },
+  "config": {
+    "n": 24,
+    "half_width": 6.0,
+    "xi": 1.0,
+    "major_radius": 2.8,
+    "minor_radius": 0.85,
+    "smoothing_radius": 0.2,
+    "log_pressure": 0.5,
+    "density_floor": 1e-12,
+    "anchor_shell": 2,
+    "boundary_blend_fraction": 0.18,
+    "depressed_threshold": 0.35,
+    "frame_samples": 600
+  },
+  "controls": {
+    "step_size": 0.002,
+    "max_steps": 800,
+    "tolerance": 0.002,
+    "min_step_size": 1e-09,
+    "max_step_size": 0.02,
+    "check_interval": 40,
+    "patience_intervals": 3,
+    "energy_tol": 1e-09,
+    "reference_spacing": null
+  },
+  "lperp": {
+    "lambda_perp": 2000.0
+  },
+  "summary": {
+    "steps_completed": 800,
+    "lambda_perp": 2000.0,
+    "final_energy_full": 382.7338891515831,
+    "final_energy_logse": 158.78269806288986,
+    "final_energy_perp": 223.95119108869326,
+    "initial_energy_full": 87841.31580325222,
+    "initial_energy_logse": 812.1999342141248,
+    "initial_energy_perp": 87029.1158690381,
+    "best_energy_full": 382.7338891515831,
+    "energy_monotonicity_violations": 0,
+    "accepted_steps": 800,
+    "rejected_steps": 0,
+    "final_step_size": 0.0288,
+    "residual_norm": 11.574013033013676,
+    "depressed_fraction": 0.00014467592592592592,
+    "effective_radius": 5.639309458471801,
+    "deficit_volume": 88.39399638109279,
+    "equivalent_deficit_radius": 2.76340615121901,
+    "far_field_shell_density": 1.0252377772567527,
+    "far_field_shell_deficit": -0.02523777725675269,
+    "far_field_moment": 0.3030592759567544,
+    "min_density": 0.30831506461780595,
+    "max_density": 2.35404670049884,
+    "stop_reason": "max_steps"
+  }
+}

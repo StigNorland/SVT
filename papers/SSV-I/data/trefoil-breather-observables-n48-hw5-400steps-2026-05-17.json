@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "problem_type": "static",
+    "status": "prototype",
+    "nondimensionalisation": "xi = 1, rho0 = 1, c = 1",
+    "observables": [
+      "N_Y",
+      "F",
+      "mu_0_grid",
+      "E_line",
+      "E_cavity",
+      "E_total"
+    ],
+    "diagnostics": [
+      "anchor_shell_energy_fraction",
+      "min_density_position"
+    ],
+    "issue_refs": [
+      "#13"
+    ],
+    "limitations": [
+      "Tube radius, cavity radius and calibration half-width are free parameters.",
+      "mu_0_grid is the energy per unit arc-length along a continuously curved knot, so it bakes in curvature effects.",
+      "Closed (2,3)-trefoil-knot geometry only; assumes state was produced by trefoil_breather_static.py."
+    ]
+  },
+  "extraction_config": {
+    "r_tube": 1.5,
+    "r_cavity": 1.5,
+    "cal_arc_half_width": 0.5
+  },
+  "summary": {
+    "state_path": "papers\\SSV-I\\data\\trefoil-state-n48-hw5-400steps-2026-05-06.npz",
+    "n": 48,
+    "half_width": 5.0,
+    "spacing": 0.20833333333333334,
+    "log_pressure": 0.5,
+    "major_radius": 2.8,
+    "minor_radius": 0.85,
+    "e_total_raw": 49.00153332653815,
+    "e_anchor_shell": 0.8787971295874134,
+    "e_interior": 48.12273619695074,
+    "e_line": 22.054233268120555,
+    "e_cavity": 7.693290955376293,
+    "e_bulk_residual": 18.375211973453894,
+    "mu_0_grid": 0.2344701728985348,
+    "cal_energy": 0.2344701728985348,
+    "cal_length": 1.0,
+    "l_curve_geometric": 38.79355669111729,
+    "l_line_tube": 30.38905629574224,
+    "tube_volume": 214.80758101851856,
+    "n_y_per_xi": 126.87125128009293,
+    "n_y_per_curve_length": 4.174899346837192,
+    "f_factor_interior": 1.617705589056711,
+    "f_factor_raw": 1.6472474468256095,
+    "min_density": 0.006929644519045606,
+    "min_density_position": [
+      0.3125,
+      -0.9375,
+      -0.10416666666666607
+    ]
+  }
+}
