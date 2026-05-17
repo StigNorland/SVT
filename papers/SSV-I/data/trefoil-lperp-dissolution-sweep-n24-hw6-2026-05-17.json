@@ -1,0 +1,205 @@
+{
+  "note": "Trefoil + L_perp dissolution timeline at n=24, hw=6: time evolution of min_rho across lambda values",
+  "rows": [
+    {
+      "lambda": 0,
+      "steps": 50,
+      "final_energy_logse": 277.47531466677515,
+      "final_energy_perp": 0.0,
+      "min_density": 0.0008570793006840699,
+      "deficit_volume": 321.56434332351097,
+      "depressed_fraction": 0.057436342592592594,
+      "energy_monotonicity_violations": 0
+    },
+    {
+      "lambda": 0,
+      "steps": 100,
+      "final_energy_logse": 149.92462498786261,
+      "final_energy_perp": 0.0,
+      "min_density": 0.027094254153176532,
+      "deficit_volume": 259.0467641958778,
+      "depressed_fraction": 0.031684027777777776,
+      "energy_monotonicity_violations": 0
+    },
+    {
+      "lambda": 0,
+      "steps": 200,
+      "final_energy_logse": 62.55845535237229,
+      "final_energy_perp": 0.0,
+      "min_density": 0.05007219764303318,
+      "deficit_volume": 139.2828941485209,
+      "depressed_fraction": 0.016203703703703703,
+      "energy_monotonicity_violations": 0
+    },
+    {
+      "lambda": 0,
+      "steps": 400,
+      "final_energy_logse": 2.5786685234021105,
+      "final_energy_perp": 0.0,
+      "min_density": 0.9647228877225663,
+      "deficit_volume": 7.574145814181263,
+      "depressed_fraction": 0.0,
+      "energy_monotonicity_violations": 0
+    },
+    {
+      "lambda": 0,
+      "steps": 800,
+      "final_energy_logse": 0.009894643593611047,
+      "final_energy_perp": 0.0,
+      "min_density": 0.9998932316439038,
+      "deficit_volume": 0.02634789792675285,
+      "depressed_fraction": 0.0,
+      "energy_monotonicity_violations": 0
+    },
+    {
+      "lambda": 0.1,
+      "steps": 50,
+      "final_energy_logse": 276.56211600905715,
+      "final_energy_perp": 1.276365446147252,
+      "min_density": 0.0022781268003291993,
+      "deficit_volume": 323.92906298086723,
+      "depressed_fraction": 0.05787037037037037,
+      "energy_monotonicity_violations": 0
+    },
+    {
+      "lambda": 0.1,
+      "steps": 100,
+      "final_energy_logse": 149.06531936087737,
+      "final_energy_perp": 1.2577928329527566,
+      "min_density": 0.027795863667424717,
+      "deficit_volume": 262.23840813098593,
+      "depressed_fraction": 0.031828703703703706,
+      "energy_monotonicity_violations": 0
+    },
+    {
+      "lambda": 0.1,
+      "steps": 200,
+      "final_energy_logse": 58.58020245169746,
+      "final_energy_perp": 0.37804377896472696,
+      "min_density": 0.04919379702184325,
+      "deficit_volume": 136.8229580557146,
+      "depressed_fraction": 0.013310185185185185,
+      "energy_monotonicity_violations": 0
+    },
+    {
+      "lambda": 0.1,
+      "steps": 400,
+      "final_energy_logse": 2.3950373077301523,
+      "final_energy_perp": 3.833810066152339e-06,
+      "min_density": 0.9684949500455602,
+      "deficit_volume": 6.933276793797958,
+      "depressed_fraction": 0.0,
+      "energy_monotonicity_violations": 0
+    },
+    {
+      "lambda": 0.1,
+      "steps": 800,
+      "final_energy_logse": 0.00919974946365276,
+      "final_energy_perp": 1.3384380090794514e-13,
+      "min_density": 0.9999007821596231,
+      "deficit_volume": 0.024491116339853,
+      "depressed_fraction": 0.0,
+      "energy_monotonicity_violations": 0
+    },
+    {
+      "lambda": 1.0,
+      "steps": 50,
+      "final_energy_logse": 272.2492329267951,
+      "final_energy_perp": 10.220112142537065,
+      "min_density": 0.010634940021694324,
+      "deficit_volume": 341.0822521725729,
+      "depressed_fraction": 0.060474537037037035,
+      "energy_monotonicity_violations": 0
+    },
+    {
+      "lambda": 1.0,
+      "steps": 100,
+      "final_energy_logse": 143.18365279414104,
+      "final_energy_perp": 7.156708066806347,
+      "min_density": 0.028893523017927206,
+      "deficit_volume": 280.55633263227054,
+      "depressed_fraction": 0.03747106481481482,
+      "energy_monotonicity_violations": 0
+    },
+    {
+      "lambda": 1.0,
+      "steps": 200,
+      "final_energy_logse": 38.417663517082985,
+      "final_energy_perp": 0.19059134335941552,
+      "min_density": 0.5040623965660043,
+      "deficit_volume": 104.77640238996338,
+      "depressed_fraction": 0.0,
+      "energy_monotonicity_violations": 0
+    },
+    {
+      "lambda": 1.0,
+      "steps": 400,
+      "final_energy_logse": 1.704947829527047,
+      "final_energy_perp": 1.0180083768169056e-05,
+      "min_density": 0.9802523176988653,
+      "deficit_volume": 4.695897851604659,
+      "depressed_fraction": 0.0,
+      "energy_monotonicity_violations": 0
+    },
+    {
+      "lambda": 1.0,
+      "steps": 800,
+      "final_energy_logse": 0.006564384232248637,
+      "final_energy_perp": 4.841201950255223e-13,
+      "min_density": 0.9999293298522872,
+      "deficit_volume": 0.017460341636749283,
+      "depressed_fraction": 0.0,
+      "energy_monotonicity_violations": 0
+    },
+    {
+      "lambda": 10.0,
+      "steps": 50,
+      "final_energy_logse": 265.3794195009589,
+      "final_energy_perp": 32.452634124337926,
+      "min_density": 0.02180364687062114,
+      "deficit_volume": 417.42456650747977,
+      "depressed_fraction": 0.0763888888888889,
+      "energy_monotonicity_violations": 0
+    },
+    {
+      "lambda": 10.0,
+      "steps": 100,
+      "final_energy_logse": 132.81219018225676,
+      "final_energy_perp": 2.536946182137786,
+      "min_density": 0.46786082565109377,
+      "deficit_volume": 288.2953779820609,
+      "depressed_fraction": 0.0,
+      "energy_monotonicity_violations": 2
+    },
+    {
+      "lambda": 10.0,
+      "steps": 200,
+      "final_energy_logse": 28.537364265373775,
+      "final_energy_perp": 0.08553265656673767,
+      "min_density": 0.8282339867062991,
+      "deficit_volume": 72.30879807827151,
+      "depressed_fraction": 0.0,
+      "energy_monotonicity_violations": 2
+    },
+    {
+      "lambda": 10.0,
+      "steps": 400,
+      "final_energy_logse": 1.3055776855635561,
+      "final_energy_perp": 3.303567000005742e-05,
+      "min_density": 0.9867994660916715,
+      "deficit_volume": 3.470077560399533,
+      "depressed_fraction": 0.0,
+      "energy_monotonicity_violations": 2
+    },
+    {
+      "lambda": 10.0,
+      "steps": 800,
+      "final_energy_logse": 0.00904518429439351,
+      "final_energy_perp": 1.2622875147866276e-11,
+      "min_density": 0.999902757865587,
+      "deficit_volume": 0.024046687343879325,
+      "depressed_fraction": 0.0,
+      "energy_monotonicity_violations": 2
+    }
+  ]
+}

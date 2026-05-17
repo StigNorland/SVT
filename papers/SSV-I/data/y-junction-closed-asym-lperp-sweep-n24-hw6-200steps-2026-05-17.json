@@ -1,0 +1,89 @@
+{
+  "note": "L_perp coupling sweep on the asym (+1,+1,-1) closed Y-junction; explicit Euler stiffness wall around lambda ~ 30-100 at dx=0.5",
+  "rows": [
+    {
+      "lambda": 0,
+      "final_energy_full": 1008.1021946820722,
+      "final_energy_logse": 1008.1021946820722,
+      "final_energy_perp": 0.0,
+      "energy_monotonicity_violations": 0,
+      "rejected_steps": 0,
+      "final_step_size": 0.0288,
+      "residual_norm": 1.3690618907489978,
+      "min_density": 0.0012596233660552758,
+      "depressed_fraction": 0.0814525462962963,
+      "far_field_shell_density": 0.7031514433623028,
+      "effective_radius": 5.0493866020959555
+    },
+    {
+      "lambda": 0.1,
+      "final_energy_full": 1018.3291034987811,
+      "final_energy_logse": 1008.0899402794338,
+      "final_energy_perp": 10.239163219347397,
+      "energy_monotonicity_violations": 0,
+      "rejected_steps": 0,
+      "final_step_size": 0.0288,
+      "residual_norm": 1.379441449358935,
+      "min_density": 0.0003974409778111119,
+      "depressed_fraction": 0.0865162037037037,
+      "far_field_shell_density": 0.6975764073453017,
+      "effective_radius": 5.039784422157787
+    },
+    {
+      "lambda": 1.0,
+      "final_energy_full": 1104.3804761790234,
+      "final_energy_logse": 1011.4347751588075,
+      "final_energy_perp": 92.94570102021588,
+      "energy_monotonicity_violations": 0,
+      "rejected_steps": 0,
+      "final_step_size": 0.0288,
+      "residual_norm": 1.5570103060050178,
+      "min_density": 0.0002793296372404217,
+      "depressed_fraction": 0.10836226851851852,
+      "far_field_shell_density": 0.668036785762757,
+      "effective_radius": 5.004874305941291
+    },
+    {
+      "lambda": 10.0,
+      "final_energy_full": 1879.0716065040328,
+      "final_energy_logse": 1031.285248922984,
+      "final_energy_perp": 847.786357581049,
+      "energy_monotonicity_violations": 0,
+      "rejected_steps": 0,
+      "final_step_size": 0.0288,
+      "residual_norm": 5.788801484349606,
+      "min_density": 0.00011989787687092551,
+      "depressed_fraction": 0.15089699074074073,
+      "far_field_shell_density": 0.609536684248374,
+      "effective_radius": 4.958152655430741
+    },
+    {
+      "lambda": 30.0,
+      "final_energy_full": 3520.245072281742,
+      "final_energy_logse": 1050.567735938994,
+      "final_energy_perp": 2469.6773363427483,
+      "energy_monotonicity_violations": 12,
+      "rejected_steps": 12,
+      "final_step_size": 0.0047202927422286475,
+      "residual_norm": 16.438876791366816,
+      "min_density": 0.00161118805677633,
+      "depressed_fraction": 0.1462673611111111,
+      "far_field_shell_density": 0.5957576758302336,
+      "effective_radius": 4.99133862294076
+    },
+    {
+      "lambda": 100.0,
+      "final_energy_full": 9350.836450567822,
+      "final_energy_logse": 1103.630468169476,
+      "final_energy_perp": 8247.205982398345,
+      "energy_monotonicity_violations": 14,
+      "rejected_steps": 14,
+      "final_step_size": 0.0015352608505645009,
+      "residual_norm": 54.033015808132426,
+      "min_density": 6.100579497745717e-05,
+      "depressed_fraction": 0.18619791666666666,
+      "far_field_shell_density": 0.557813455533862,
+      "effective_radius": 4.93647860606735
+    }
+  ]
+}

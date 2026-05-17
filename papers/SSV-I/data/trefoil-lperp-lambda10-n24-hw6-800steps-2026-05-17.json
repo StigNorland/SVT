@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "problem_type": "static",
+    "status": "prototype",
+    "nondimensionalisation": "xi = 1, rho0 = 1, c = 1",
+    "observables": [
+      "total_energy_full",
+      "e_logse",
+      "e_perp",
+      "residual_norm",
+      "depressed_fraction",
+      "min_density"
+    ],
+    "diagnostics": [
+      "energy_monotonicity",
+      "residual_norm",
+      "boundary_anchor",
+      "lperp_step_constraint"
+    ],
+    "issue_refs": [
+      "#13"
+    ],
+    "limitations": [
+      "Explicit Euler gradient flow is stiff at large lambda; paper's lambda = 2000 needs implicit methods or much finer grid.",
+      "Uses the (2,3) torus-knot initial condition from trefoil_breather_static; topology choice is inherited."
+    ]
+  },
+  "nondimensionalisation": {
+    "xi": 1.0,
+    "rho0": 1.0,
+    "c": 1.0
+  },
+  "config": {
+    "n": 24,
+    "half_width": 6.0,
+    "xi": 1.0,
+    "major_radius": 2.8,
+    "minor_radius": 0.85,
+    "smoothing_radius": 0.2,
+    "log_pressure": 0.5,
+    "density_floor": 1e-12,
+    "anchor_shell": 2,
+    "boundary_blend_fraction": 0.18,
+    "depressed_threshold": 0.35,
+    "frame_samples": 600
+  },
+  "controls": {
+    "step_size": 0.002,
+    "max_steps": 800,
+    "tolerance": 0.002,
+    "min_step_size": 1e-09,
+    "max_step_size": 0.02,
+    "check_interval": 40,
+    "patience_intervals": 3,
+    "energy_tol": 1e-09,
+    "reference_spacing": null
+  },
+  "lperp": {
+    "lambda_perp": 10.0
+  },
+  "summary": {
+    "steps_completed": 722,
+    "lambda_perp": 10.0,
+    "final_energy_full": 0.009045184307016386,
+    "final_energy_logse": 0.00904518429439351,
+    "final_energy_perp": 1.2622875147866276e-11,
+    "initial_energy_full": 1247.3455135593153,
+    "initial_energy_logse": 812.1999342141248,
+    "initial_energy_perp": 435.14557934519047,
+    "best_energy_full": 0.009045184307016386,
+    "energy_monotonicity_violations": 2,
+    "accepted_steps": 720,
+    "rejected_steps": 2,
+    "final_step_size": 0.0288,
+    "residual_norm": 0.0018324276424740106,
+    "depressed_fraction": 0.0,
+    "effective_radius": 4.113567058236102,
+    "deficit_volume": 0.024046687343879325,
+    "equivalent_deficit_radius": 0.17905600167844316,
+    "far_field_shell_density": 0.9999812576996561,
+    "far_field_shell_deficit": 1.8742300343932428e-05,
+    "far_field_moment": 3.8817473326409206e-05,
+    "min_density": 0.999902757865587,
+    "max_density": 1.0,
+    "stop_reason": "residual_tolerance"
+  }
+}
