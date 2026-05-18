@@ -54,6 +54,7 @@ from trefoil_breather_static import (
 )
 from lperp_helpers import lperp_energy, lperp_gradient
 from lperp_krylov_helpers import krylov_implicit_step
+from topology_helpers import count_vortex_links
 
 
 SCRIPT_METADATA = ScriptMetadata(
@@ -74,6 +75,7 @@ SCRIPT_METADATA = ScriptMetadata(
         "boundary_anchor",
         "gmres_iter",
         "gmres_relres",
+        "vortex_links",
     ),
     issue_refs=("#13",),
     limitations=(
@@ -81,6 +83,10 @@ SCRIPT_METADATA = ScriptMetadata(
         "FFT preconditioner (k^2 + lambda*k^4) assumes periodic BC; boundary anchor applied afterwards.",
         "Tied to the (2,3)-trefoil-knot initial condition.",
         "mean_gmres_iter reports total iterations across all restart cycles, not per-cycle.",
+        "Lattice plaquette vortex link counting (initial/final_vortex_links) fails for converged "
+        "sharp vortex cores at dx~0.5xi: phase jumps exceed pi and are wrapped to zero. "
+        "Reliable vortex detection requires dx << xi/pi ~ 0.32xi (i.e. n >= 48 at hw=6). "
+        "The winding guard is therefore disabled by default (winding_drop_tol=-1).",
     ),
 )
 
@@ -90,11 +96,13 @@ class LperpControls:
     lambda_perp: float
     gmres_tol: float = 1.0e-4
     gmres_restart: int = 30
-    gmres_max_cycles: int = 1  # >1 cycles dissolve vortex topology without min_rho guard
-    kinetic_coeff: float = 0.0        # k^4 only is topology-safe; k^2+k^4 erodes topology (see gmres-tuning-final-summary.md)
-    min_rho_threshold: float = 0.5   # guard only active once best_min_rho drops below this
-    min_rho_drift_tol: float = 0.5   # reject if candidate_min_rho > best_min_rho * (1 + drift_tol)
-    min_rho_warmup: int = 150        # accepted steps before guard activates (lets equilibrium form first)
+    gmres_max_cycles: int = 1  # >1 cycles dissolve vortex topology (see gmres-tuning-final-summary.md)
+    kinetic_coeff: float = 0.0        # k^4 only is topology-safe; k^2+k^4 erodes topology
+    min_rho_threshold: float = 0.5   # legacy min_rho guard (inactive when min_rho_drift_tol < 0)
+    min_rho_drift_tol: float = -1.0  # set >= 0 to enable legacy min_rho guard; replaced by winding guard
+    min_rho_warmup: int = 150
+    winding_drop_tol: float = -1.0   # disabled: lattice plaquette detection fails at dx~0.5xi (sub-resolution cores)
+    winding_warmup: int = 150        # accepted steps before winding guard activates (if enabled)
 
 
 @dataclass(frozen=True)
@@ -125,6 +133,8 @@ class RunSummary:
     max_density: float
     mean_gmres_iter: float
     max_gmres_iter: int
+    initial_vortex_links: int
+    final_vortex_links: int
     stop_reason: str
 
 
@@ -175,6 +185,8 @@ def relax(
     g_full_for_krylov = lambda field: full_gradient(field, cfg, lperp.lambda_perp)
 
     gmres_iters: list[int] = []
+    initial_links = count_vortex_links(psi)
+    winding_reference: int | None = None  # set from equilibrium after warmup, not initial state
 
     for step in range(1, controls.max_steps + 1):
         candidate, n_iter, _relres = krylov_implicit_step(
@@ -201,10 +213,7 @@ def relax(
                 break
             continue
 
-        # Topology guard: anchored to best_min_rho (deepest core seen so far).
-        # Inactive during warmup so the field can descend freely from the initial
-        # near-zero min_rho to equilibrium before the guard locks in the reference.
-        # Once active: rejects steps where candidate_min_rho > best_min_rho * (1 + drift_tol).
+        # Legacy min_rho guard (disabled by default; see gmres-tuning-final-summary.md).
         candidate_min_rho = float(np.min(np.abs(candidate) ** 2))
         if (
             accepted_steps >= lperp.min_rho_warmup
@@ -217,11 +226,33 @@ def relax(
             rejected_steps += 1
             continue
 
+        # Winding-number guard: reject steps that reduce total vortex line length
+        # by more than winding_drop_tol relative to the post-warmup equilibrium.
+        # Reference is set from the field state at the end of warmup (not from the
+        # initial condition, whose link count is inflated by the broad smooth IC).
+        candidate_links = (
+            count_vortex_links(candidate) if lperp.winding_drop_tol >= 0.0 else 0
+        )
+        if (lperp.winding_drop_tol >= 0.0
+                and winding_reference is None
+                and accepted_steps == lperp.winding_warmup):
+            winding_reference = count_vortex_links(psi)
+        if (
+            lperp.winding_drop_tol >= 0.0
+            and winding_reference is not None
+            and candidate_links < winding_reference * (1.0 - lperp.winding_drop_tol)
+        ):
+            topology_violations += 1
+            rejected_steps += 1
+            continue
+
         gmres_iters.append(n_iter)
         psi = candidate
         accepted_steps += 1
         completed = step
         best_min_rho = min(best_min_rho, candidate_min_rho)
+        if lperp.winding_drop_tol >= 0.0 and winding_reference is not None:
+            winding_reference = max(winding_reference, candidate_links)
 
         energy_improvement = last_energy - current_energy
         last_energy = current_energy
@@ -276,6 +307,8 @@ def relax(
         max_density=float(np.max(rho)),
         mean_gmres_iter=float(np.mean(gmres_iters)) if gmres_iters else 0.0,
         max_gmres_iter=int(max(gmres_iters)) if gmres_iters else 0,
+        initial_vortex_links=initial_links,
+        final_vortex_links=count_vortex_links(psi),
         stop_reason=stop_reason,
     )
     return psi, summary
@@ -295,8 +328,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--gmres-max-cycles", type=int, default=1)
     parser.add_argument("--kinetic-coeff", type=float, default=0.0)
     parser.add_argument("--min-rho-threshold", type=float, default=0.5)
-    parser.add_argument("--min-rho-drift-tol", type=float, default=0.5)
+    parser.add_argument("--min-rho-drift-tol", type=float, default=-1.0)
     parser.add_argument("--min-rho-warmup", type=int, default=150)
+    parser.add_argument("--winding-drop-tol", type=float, default=-1.0)
+    parser.add_argument("--winding-warmup", type=int, default=150)
     parser.add_argument("--step-size", type=float, default=0.005)
     parser.add_argument("--max-steps", type=int, default=200)
     parser.add_argument("--tolerance", type=float, default=2.0e-3)
@@ -343,6 +378,8 @@ def main() -> None:
         min_rho_threshold=args.min_rho_threshold,
         min_rho_drift_tol=args.min_rho_drift_tol,
         min_rho_warmup=args.min_rho_warmup,
+        winding_drop_tol=args.winding_drop_tol,
+        winding_warmup=args.winding_warmup,
     )
     psi, summary = relax(cfg, controls, lperp)
 
