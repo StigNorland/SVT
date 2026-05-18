@@ -67,6 +67,37 @@ Move to `SSV VIII`:
 - Vortex nucleation
 - Resonant-cosmos cosmogony
 
+### SSV IX (CMB and Primordial Phonon Bath)
+
+New paper — no current draft to map from.
+
+Content drawn from material deferred out of other papers:
+- Primordial phonon bath (deferred from SSV III)
+- CMB interpretation (deferred from SSV III)
+- Entropy-budget cosmology sections (deferred from SSV III)
+- Connection to SSV VIII cosmogony
+
+Prerequisite: SSV VIII should be substantially settled first.
+
+### SSV Alpha (Fine-Structure Constant)
+
+Standalone focused draft — not split from another paper.
+
+Core content:
+- Fine-structure constant as toroidal-vortex aspect-ratio problem: `R*/ξ = α⁻¹`
+- Frames the 3D LogSE plus chiral-shear toroidal-vortex minimisation needed to derive `α`
+- Scope is strictly the framing and calculation setup — does not claim to deliver the full derivation
+
+### SSV Goldstone (EM Propagation and Goldstone Mode)
+
+Standalone focused draft — repairs an open issue from SSV II.
+
+Core content:
+- Observed photon identified as Goldstone/Bogoliubov phase mode propagating at c
+- Chiral-shear sector assigned to static near-field (Coulomb and magnetic topology)
+- Frames the matching calculation connecting chiral-shear near field to Goldstone radiation
+- Scope is the identification and framing — full Maxwell re-derivation deferred
+
 ## Scope Lines
 
 Each draft should open with a short scope sentence like:
