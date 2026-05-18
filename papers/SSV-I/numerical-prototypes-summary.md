@@ -225,6 +225,21 @@ papers/SSV-I/min-rho-guard-checkpoint.md
 papers/SSV-I/gmres-tuning-final-summary.md
 ```
 
+The topology-penalty breakthrough (first run with preserved trefoil topology) is recorded in:
+
+```text
+papers/SSV-I/topology-penalty-checkpoint.md
+src/paper_i/topology_penalty.py
+src/paper_i/test_topology_penalty.py
+papers/SSV-I/data/trefoil-lperp-krylov-penalty-mu1000-n24-hw6-800steps-2026-05-18.json
+papers/SSV-I/data/trefoil-lperp-krylov-penalty-mu1000-n24-hw6-800steps-2026-05-18.npz
+```
+
+Headline: at `mu=1000`, the run preserves 50 vortex links (vs 0 in every
+prior run), gives `F^int = 1.223` (first physically meaningful trefoil
+moment), and reaches `min_rho = 1.01e-4`.  All prior Krylov "trefoil" results
+should be treated as topologically trivial.
+
 The refinement gate (grid and box convergence sweep) is recorded in:
 
 ```text
