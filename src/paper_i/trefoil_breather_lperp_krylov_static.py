@@ -90,8 +90,8 @@ class LperpControls:
     lambda_perp: float
     gmres_tol: float = 1.0e-4
     gmres_restart: int = 30
-    gmres_max_cycles: int = 5
-    kinetic_coeff: float = 0.5
+    gmres_max_cycles: int = 1  # >1 cycles dissolve vortex topology; see gmres-topology-loss-note.md
+    kinetic_coeff: float = 0.0  # k^2 term erodes topology over long runs; needs min_rho guard first
 
 
 @dataclass(frozen=True)
@@ -268,8 +268,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--lambda-perp", type=float, default=2000.0)
     parser.add_argument("--gmres-tol", type=float, default=1.0e-4)
     parser.add_argument("--gmres-restart", type=int, default=30)
-    parser.add_argument("--gmres-max-cycles", type=int, default=5)
-    parser.add_argument("--kinetic-coeff", type=float, default=0.5)
+    parser.add_argument("--gmres-max-cycles", type=int, default=1)
+    parser.add_argument("--kinetic-coeff", type=float, default=0.0)
     parser.add_argument("--step-size", type=float, default=0.005)
     parser.add_argument("--max-steps", type=int, default=200)
     parser.add_argument("--tolerance", type=float, default=2.0e-3)
