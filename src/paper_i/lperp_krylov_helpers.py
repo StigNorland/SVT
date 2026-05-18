@@ -18,14 +18,23 @@ matrix-free GMRES solve against the true Jacobian.  The Jacobian action
     J . v ~ (g_full(psi + eps v) - g_full(psi)) / eps,
 
 with `eps` chosen for numerical stability.  The FFT diagonal serves as a
-LEFT PRECONDITIONER `M ~ I + dt lambda (-Laplacian)^2`, so GMRES converges
-in a small number of iterations.
+LEFT PRECONDITIONER capturing both the LogSE kinetic stiffness and the
+L_perp stiffness:
+
+    M = I + dt * (kinetic_coeff * k^2 + lambda_perp * k^4)
+
+in Fourier space.  Including the k^2 kinetic term (previously absent)
+substantially improves conditioning at intermediate wavenumbers.
+
+GMRES is run in restarted mode: up to `gmres_max_cycles` cycles of
+`gmres_restart` iterations each.  Restarting avoids memory growth and
+can escape stagnation that unrestarted GMRES hits at the iteration cap.
 
 The solve is done in a real (2N-component) packed representation because
 the true L_perp Jacobian is R-linear (Wirtinger), not C-linear.
 
-Cost per implicit step: about `K + 1` evaluations of `g_full` where `K` is
-the number of GMRES iterations (typically 5-15 with the FFT preconditioner).
+Cost per implicit step: about `(K + 1) * cycles` evaluations of `g_full`
+where K is iterations per cycle (typically fewer with the improved preconditioner).
 """
 
 from __future__ import annotations
@@ -36,17 +45,26 @@ import numpy as np
 
 
 def fft_left_preconditioner(
-    shape: tuple[int, ...], dx: float, dt: float, lambda_perp: float
+    shape: tuple[int, ...],
+    dx: float,
+    dt: float,
+    lambda_perp: float,
+    kinetic_coeff: float = 0.5,
 ) -> Callable[[np.ndarray], np.ndarray]:
-    """Return a function `M_inv(v)` for v complex, applying `(1 + dt lambda k^4)^-1` in Fourier."""
-    if lambda_perp == 0.0 or dt == 0.0:
+    """Return M_inv applying (1 + dt*(kinetic_coeff*k^2 + lambda*k^4))^-1 in Fourier.
+
+    kinetic_coeff=0.5 matches the LogSE kinetic term (-1/2 nabla^2) in
+    nondimensional units xi=1, rho0=1, c=1.  Setting it to 0 recovers the
+    old k^4-only preconditioner.
+    """
+    if dt == 0.0:
         return lambda v: v
     kx = 2.0 * np.pi * np.fft.fftfreq(shape[0], d=dx)
     ky = 2.0 * np.pi * np.fft.fftfreq(shape[1], d=dx)
     kz = 2.0 * np.pi * np.fft.fftfreq(shape[2], d=dx)
     KX, KY, KZ = np.meshgrid(kx, ky, kz, indexing="ij")
     k_sq = KX * KX + KY * KY + KZ * KZ
-    denom = 1.0 + dt * lambda_perp * k_sq * k_sq
+    denom = 1.0 + dt * (kinetic_coeff * k_sq + lambda_perp * k_sq * k_sq)
 
     def m_inv(v: np.ndarray) -> np.ndarray:
         v_hat = np.fft.fftn(v)
@@ -70,10 +88,10 @@ def gmres_matrix_free(
     tol: float = 1.0e-5,
     maxiter: int = 30,
 ) -> tuple[np.ndarray, int, float]:
-    """Simple unrestarted GMRES on a real vector system.
+    """Unrestarted GMRES on a real vector system.
 
-    Returns `(x, k, relres)` where `k` is iteration count used and `relres`
-    is the achieved relative residual.
+    Returns (x, k, relres) where k is iteration count and relres = ||b - Ax|| / ||b||.
+    Called directly for one cycle; use gmres_restarted for multi-cycle runs.
     """
     n = len(b)
     x = np.zeros(n)
@@ -100,7 +118,6 @@ def gmres_matrix_free(
         H[k + 1, k] = float(np.linalg.norm(w))
         if H[k + 1, k] > 1.0e-14:
             V[k + 1] = w / H[k + 1, k]
-        # Least-squares for y in [0, k]
         e1 = np.zeros(k + 2)
         e1[0] = beta
         y, *_ = np.linalg.lstsq(H[: k + 2, : k + 1], e1, rcond=None)
@@ -116,6 +133,48 @@ def gmres_matrix_free(
     return x, maxiter, relres
 
 
+def gmres_restarted(
+    matvec: Callable[[np.ndarray], np.ndarray],
+    b: np.ndarray,
+    tol: float = 1.0e-5,
+    restart: int = 30,
+    max_cycles: int = 5,
+) -> tuple[np.ndarray, int, float]:
+    """Restarted GMRES(restart) with up to max_cycles restart cycles.
+
+    Each cycle runs at most `restart` iterations of unrestarted GMRES on
+    the current residual equation, then updates x and checks convergence.
+    Memory cost is O(restart * n) per cycle rather than O(total_iters * n).
+
+    Returns (x, total_iters, relres) where relres = ||b - Ax|| / ||b||.
+    """
+    x = np.zeros(len(b))
+    b_norm = float(np.linalg.norm(b))
+    if b_norm == 0.0:
+        return x, 0, 0.0
+
+    total_iters = 0
+    relres = 1.0
+
+    for _ in range(max_cycles):
+        r = b - matvec(x)
+        relres = float(np.linalg.norm(r)) / b_norm
+        if relres <= tol:
+            break
+        r_norm = float(np.linalg.norm(r))
+        # Solve correction equation A*dx = r; pass tol scaled to ||r|| so the
+        # outer residual ||b - A*x|| drops by at least tol * b_norm / r_norm.
+        inner_tol = tol * b_norm / r_norm if r_norm > 0.0 else tol
+        dx, k, _ = gmres_matrix_free(matvec, r, tol=inner_tol, maxiter=restart)
+        x = x + dx
+        total_iters += k
+
+    # Recompute final relres after last cycle update.
+    r = b - matvec(x)
+    relres = float(np.linalg.norm(r)) / b_norm
+    return x, total_iters, relres
+
+
 def krylov_implicit_step(
     psi: np.ndarray,
     g_full_fn: Callable[[np.ndarray], np.ndarray],
@@ -123,24 +182,26 @@ def krylov_implicit_step(
     lambda_perp: float,
     dx: float,
     gmres_tol: float = 1.0e-4,
-    gmres_maxiter: int = 30,
+    gmres_restart: int = 30,
+    gmres_max_cycles: int = 5,
+    kinetic_coeff: float = 0.5,
 ) -> tuple[np.ndarray, int, float]:
-    """Single fully-implicit step with Krylov solve.
+    """Single fully-implicit step with restarted Krylov solve.
 
-    Solves `(I + dt J) dpsi = -dt g_full(psi)` for `dpsi`, returns
-    `(psi + dpsi, n_iter, relres)`.
+    Solves (I + dt J) dpsi = -dt g_full(psi) for dpsi via GMRES(restart)
+    with up to gmres_max_cycles restart cycles.  Returns (psi + dpsi, total_iters, relres).
 
-    `g_full_fn(psi) -> complex array of same shape as psi` is the full
-    gradient (LogSE + L_perp) the caller provides.
+    Preconditioner captures both LogSE kinetic stiffness (kinetic_coeff * k^2)
+    and L_perp stiffness (lambda_perp * k^4), improving conditioning at
+    intermediate wavenumbers relative to the old k^4-only preconditioner.
     """
     g_old = g_full_fn(psi)
     if lambda_perp == 0.0:
-        # No L_perp -> trivial explicit step.
         return psi - dt * g_old, 0, 0.0
 
     shape = psi.shape
     psi_norm = float(np.linalg.norm(psi))
-    m_inv = fft_left_preconditioner(shape, dx, dt, lambda_perp)
+    m_inv = fft_left_preconditioner(shape, dx, dt, lambda_perp, kinetic_coeff=kinetic_coeff)
 
     def matvec_real(v_real: np.ndarray) -> np.ndarray:
         v = _unpack(v_real, shape)
@@ -150,16 +211,14 @@ def krylov_implicit_step(
         eps = 1.0e-7 * max(psi_norm, 1.0) / v_norm
         g_pert = g_full_fn(psi + eps * v)
         jv = (g_pert - g_old) / eps
-        a_v = v + dt * jv  # (I + dt J) v
-        a_v_pc = m_inv(a_v)  # left-preconditioned
-        return _pack(a_v_pc)
+        a_v = v + dt * jv
+        return _pack(m_inv(a_v))
 
-    b_complex = -dt * g_old
-    b_pc = m_inv(b_complex)
+    b_pc = m_inv(-dt * g_old)
     b_real = _pack(b_pc)
 
-    dpsi_real, n_iter, relres = gmres_matrix_free(
-        matvec_real, b_real, tol=gmres_tol, maxiter=gmres_maxiter
+    dpsi_real, total_iters, relres = gmres_restarted(
+        matvec_real, b_real, tol=gmres_tol, restart=gmres_restart, max_cycles=gmres_max_cycles
     )
     dpsi = _unpack(dpsi_real, shape)
-    return psi + dpsi, n_iter, relres
+    return psi + dpsi, total_iters, relres

@@ -78,8 +78,9 @@ SCRIPT_METADATA = ScriptMetadata(
     issue_refs=("#13",),
     limitations=(
         "Jacobian action by finite differencing of g_full; eps choice affects accuracy.",
-        "FFT preconditioner assumes periodic BC; boundary anchor applied afterwards.",
+        "FFT preconditioner (k^2 + lambda*k^4) assumes periodic BC; boundary anchor applied afterwards.",
         "Tied to the (2,3)-trefoil-knot initial condition.",
+        "mean_gmres_iter reports total iterations across all restart cycles, not per-cycle.",
     ),
 )
 
@@ -88,7 +89,9 @@ SCRIPT_METADATA = ScriptMetadata(
 class LperpControls:
     lambda_perp: float
     gmres_tol: float = 1.0e-4
-    gmres_maxiter: int = 30
+    gmres_restart: int = 30
+    gmres_max_cycles: int = 5
+    kinetic_coeff: float = 0.5
 
 
 @dataclass(frozen=True)
@@ -175,7 +178,9 @@ def relax(
             lambda_perp=lperp.lambda_perp,
             dx=dx,
             gmres_tol=lperp.gmres_tol,
-            gmres_maxiter=lperp.gmres_maxiter,
+            gmres_restart=lperp.gmres_restart,
+            gmres_max_cycles=lperp.gmres_max_cycles,
+            kinetic_coeff=lperp.kinetic_coeff,
         )
         apply_boundary_anchor(candidate, cfg)
 
@@ -262,7 +267,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--log-pressure", type=float, default=0.5)
     parser.add_argument("--lambda-perp", type=float, default=2000.0)
     parser.add_argument("--gmres-tol", type=float, default=1.0e-4)
-    parser.add_argument("--gmres-maxiter", type=int, default=30)
+    parser.add_argument("--gmres-restart", type=int, default=30)
+    parser.add_argument("--gmres-max-cycles", type=int, default=5)
+    parser.add_argument("--kinetic-coeff", type=float, default=0.5)
     parser.add_argument("--step-size", type=float, default=0.005)
     parser.add_argument("--max-steps", type=int, default=200)
     parser.add_argument("--tolerance", type=float, default=2.0e-3)
@@ -303,7 +310,9 @@ def main() -> None:
     lperp = LperpControls(
         lambda_perp=args.lambda_perp,
         gmres_tol=args.gmres_tol,
-        gmres_maxiter=args.gmres_maxiter,
+        gmres_restart=args.gmres_restart,
+        gmres_max_cycles=args.gmres_max_cycles,
+        kinetic_coeff=args.kinetic_coeff,
     )
     psi, summary = relax(cfg, controls, lperp)
 

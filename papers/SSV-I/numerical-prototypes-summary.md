@@ -200,6 +200,21 @@ papers/SSV-I/lperp-krylov-checkpoint.md
 papers/SSV-I/data/trefoil-lperp-krylov-lambda2000-n24-hw6-800steps-2026-05-17.json
 papers/SSV-I/data/trefoil-lperp-krylov-lambda2000-n24-hw6-800steps-2026-05-17.npz
 papers/SSV-I/data/trefoil-lperp-krylov-lambda2000-observables-n24-hw6-2026-05-17.json
+
+The GMRES tuning pass (improved preconditioner + restarted GMRES) is recorded in:
+
+```text
+papers/SSV-I/gmres-tuning-checkpoint.md
+src/paper_i/lperp_krylov_helpers.py   (k^2+k^4 preconditioner, gmres_restarted)
+src/paper_i/test_lperp_krylov.py      (17 unit tests, all passing)
+```
+
+Smoke-test comparison at `(n=16, hw=5, lambda=2000, 50 steps)`:
+
+| solver | `min_rho` | `F^int` | violations | mean GMRES iters/step |
+|---|---:|---:|---:|---:|
+| k^4 only, 1 cycle (old) | 2.61e-3 | 1.034 | 5 | 30.0 |
+| k^2+k^4, 5 cycles (new) | 2.23e-3 | 1.094 | 8 | 130.9 |
 ```
 
 Representative values:
