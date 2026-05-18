@@ -91,8 +91,10 @@ class LperpControls:
     gmres_tol: float = 1.0e-4
     gmres_restart: int = 30
     gmres_max_cycles: int = 1  # >1 cycles dissolve vortex topology without min_rho guard
-    kinetic_coeff: float = 0.5
-    min_rho_threshold: float = 0.5  # reject steps that lift min_rho above threshold once cores have formed
+    kinetic_coeff: float = 0.0        # k^4 only is topology-safe; k^2+k^4 erodes topology (see gmres-tuning-final-summary.md)
+    min_rho_threshold: float = 0.5   # guard only active once best_min_rho drops below this
+    min_rho_drift_tol: float = 0.5   # reject if candidate_min_rho > best_min_rho * (1 + drift_tol)
+    min_rho_warmup: int = 150        # accepted steps before guard activates (lets equilibrium form first)
 
 
 @dataclass(frozen=True)
@@ -158,6 +160,7 @@ def relax(
     completed = 0
     accepted_steps = 0
     rejected_steps = 0
+    best_min_rho = float("inf")  # deepest core seen across all accepted steps
     reference_spacing = (
         controls.reference_spacing if controls.reference_spacing is not None else (10.0 / 24.0)
     )
@@ -198,22 +201,27 @@ def relax(
                 break
             continue
 
-        # Topology guard: once a core has formed (min_rho < threshold), reject
-        # steps that would fill it back in above the threshold.
-        # Does NOT reduce step_size — topology erosion is not fixed by smaller steps;
-        # only a genuinely topology-preserving implicit direction can pass this gate.
-        if lperp.min_rho_threshold > 0.0:
-            current_min_rho = float(np.min(np.abs(psi) ** 2))
-            candidate_min_rho = float(np.min(np.abs(candidate) ** 2))
-            if current_min_rho < lperp.min_rho_threshold and candidate_min_rho > lperp.min_rho_threshold:
-                topology_violations += 1
-                rejected_steps += 1
-                continue
+        # Topology guard: anchored to best_min_rho (deepest core seen so far).
+        # Inactive during warmup so the field can descend freely from the initial
+        # near-zero min_rho to equilibrium before the guard locks in the reference.
+        # Once active: rejects steps where candidate_min_rho > best_min_rho * (1 + drift_tol).
+        candidate_min_rho = float(np.min(np.abs(candidate) ** 2))
+        if (
+            accepted_steps >= lperp.min_rho_warmup
+            and lperp.min_rho_threshold > 0.0
+            and best_min_rho < lperp.min_rho_threshold
+            and lperp.min_rho_drift_tol >= 0.0
+            and candidate_min_rho > best_min_rho * (1.0 + lperp.min_rho_drift_tol)
+        ):
+            topology_violations += 1
+            rejected_steps += 1
+            continue
 
         gmres_iters.append(n_iter)
         psi = candidate
         accepted_steps += 1
         completed = step
+        best_min_rho = min(best_min_rho, candidate_min_rho)
 
         energy_improvement = last_energy - current_energy
         last_energy = current_energy
@@ -285,8 +293,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--gmres-tol", type=float, default=1.0e-4)
     parser.add_argument("--gmres-restart", type=int, default=30)
     parser.add_argument("--gmres-max-cycles", type=int, default=1)
-    parser.add_argument("--kinetic-coeff", type=float, default=0.5)
+    parser.add_argument("--kinetic-coeff", type=float, default=0.0)
     parser.add_argument("--min-rho-threshold", type=float, default=0.5)
+    parser.add_argument("--min-rho-drift-tol", type=float, default=0.5)
+    parser.add_argument("--min-rho-warmup", type=int, default=150)
     parser.add_argument("--step-size", type=float, default=0.005)
     parser.add_argument("--max-steps", type=int, default=200)
     parser.add_argument("--tolerance", type=float, default=2.0e-3)
@@ -331,6 +341,8 @@ def main() -> None:
         gmres_max_cycles=args.gmres_max_cycles,
         kinetic_coeff=args.kinetic_coeff,
         min_rho_threshold=args.min_rho_threshold,
+        min_rho_drift_tol=args.min_rho_drift_tol,
+        min_rho_warmup=args.min_rho_warmup,
     )
     psi, summary = relax(cfg, controls, lperp)
 
