@@ -217,6 +217,27 @@ Smoke-test comparison at `(n=16, hw=5, lambda=2000, 50 steps)`:
 | k^2+k^4, 5 cycles (new) | 2.23e-3 | 1.094 | 8 | 130.9 |
 ```
 
+The GMRES topology-loss and min_rho guard investigation is recorded in:
+
+```text
+papers/SSV-I/gmres-topology-loss-note.md
+papers/SSV-I/min-rho-guard-checkpoint.md
+papers/SSV-I/gmres-tuning-final-summary.md
+```
+
+The refinement gate (grid and box convergence sweep) is recorded in:
+
+```text
+papers/SSV-I/refinement-gate-checkpoint.md
+papers/SSV-I/data/refinement-krylov-n24-hw5-800steps-noguard-2026-05-18.json
+papers/SSV-I/data/refinement-krylov-n24-hw7-800steps-noguard-2026-05-18.json
+papers/SSV-I/data/refinement-krylov-n32-hw6-800steps-noguard-2026-05-18.json
+```
+
+Key finding: the reference (n=24, hw=6) result is **not grid/box converged**.
+Any change in dx or box size dissolves the vortex topology.  Converged results
+require explicit topology enforcement (winding-number, penalty, or projected gradient).
+
 Representative values:
 
 | check | quantity | value |
