@@ -240,6 +240,15 @@ prior run), gives `F^int = 1.223` (first physically meaningful trefoil
 moment), and reaches `min_rho = 1.01e-4`.  All prior Krylov "trefoil" results
 should be treated as topologically trivial.
 
+The follow-up parameter expansion (19 runs across mu, grid, box, rho_target,
+mask_threshold) is recorded in `papers/SSV-I/penalty-expansion-checkpoint.md`.
+Best configuration: `mu=400, rho_target=0.01, n=24 hw=6, 800 steps` -- gives
+**F^int = 2.248** with **136 out of 166 vortex links preserved** (82% of
+initial topology).  Topology-preserving configurations validated at hw=5
+(F^int=2.13), hw=7 (with wider mask=0.8, F^int=1.92), and n=32 (F^int=2.15).
+Penalty term confirmed to generalise across grids with appropriate per-grid
+tuning of `mu`, `rho_target`, and `mask_threshold`.
+
 The refinement gate (grid and box convergence sweep) is recorded in:
 
 ```text
