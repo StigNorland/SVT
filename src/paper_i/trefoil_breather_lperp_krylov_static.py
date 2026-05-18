@@ -83,10 +83,13 @@ SCRIPT_METADATA = ScriptMetadata(
         "FFT preconditioner (k^2 + lambda*k^4) assumes periodic BC; boundary anchor applied afterwards.",
         "Tied to the (2,3)-trefoil-knot initial condition.",
         "mean_gmres_iter reports total iterations across all restart cycles, not per-cycle.",
-        "Lattice plaquette vortex link counting (initial/final_vortex_links) fails for converged "
-        "sharp vortex cores at dx~0.5xi: phase jumps exceed pi and are wrapped to zero. "
-        "Reliable vortex detection requires dx << xi/pi ~ 0.32xi (i.e. n >= 48 at hw=6). "
-        "The winding guard is therefore disabled by default (winding_drop_tol=-1).",
+        "Lattice plaquette vortex link counting (initial/final_vortex_links) is reliable "
+        "at the production grid; final_vortex_links=0 in any run indicates topology has "
+        "been destroyed by the solver (the min_rho proxy is unreliable, see "
+        "winding-number-checkpoint.md). Krylov steps destroy ~20% of vortex links per step; "
+        "rejection-based guards cannot prevent this. The winding guard is disabled by default "
+        "(winding_drop_tol=-1); enabling it stalls the solver after 2-5 accepted steps. "
+        "Topology enforcement requires a penalty term, projected gradient, or constrained method.",
     ),
 )
 
@@ -101,8 +104,8 @@ class LperpControls:
     min_rho_threshold: float = 0.5   # legacy min_rho guard (inactive when min_rho_drift_tol < 0)
     min_rho_drift_tol: float = -1.0  # set >= 0 to enable legacy min_rho guard; replaced by winding guard
     min_rho_warmup: int = 150
-    winding_drop_tol: float = -1.0   # disabled: lattice plaquette detection fails at dx~0.5xi (sub-resolution cores)
-    winding_warmup: int = 150        # accepted steps before winding guard activates (if enabled)
+    winding_drop_tol: float = -1.0   # disabled: GMRES destroys topology in <5 steps regardless of tol (see winding-number-checkpoint.md)
+    winding_warmup: int = 0          # winding guard activates from step 1 (when enabled); initial state has clean 2pi windings
 
 
 @dataclass(frozen=True)
@@ -186,7 +189,6 @@ def relax(
 
     gmres_iters: list[int] = []
     initial_links = count_vortex_links(psi)
-    winding_reference: int | None = None  # set from equilibrium after warmup, not initial state
 
     for step in range(1, controls.max_steps + 1):
         candidate, n_iter, _relres = krylov_implicit_step(
@@ -227,20 +229,17 @@ def relax(
             continue
 
         # Winding-number guard: reject steps that reduce total vortex line length
-        # by more than winding_drop_tol relative to the post-warmup equilibrium.
-        # Reference is set from the field state at the end of warmup (not from the
-        # initial condition, whose link count is inflated by the broad smooth IC).
+        # by more than winding_drop_tol relative to the INITIAL trefoil topology.
+        # The initial condition has clean 2pi phase windings (links=initial_links).
+        # The relaxation tends to destroy these windings; the guard enforces a floor
+        # on links to keep the field in the topological sector.
         candidate_links = (
             count_vortex_links(candidate) if lperp.winding_drop_tol >= 0.0 else 0
         )
-        if (lperp.winding_drop_tol >= 0.0
-                and winding_reference is None
-                and accepted_steps == lperp.winding_warmup):
-            winding_reference = count_vortex_links(psi)
         if (
             lperp.winding_drop_tol >= 0.0
-            and winding_reference is not None
-            and candidate_links < winding_reference * (1.0 - lperp.winding_drop_tol)
+            and accepted_steps >= lperp.winding_warmup
+            and candidate_links < initial_links * (1.0 - lperp.winding_drop_tol)
         ):
             topology_violations += 1
             rejected_steps += 1
@@ -251,8 +250,6 @@ def relax(
         accepted_steps += 1
         completed = step
         best_min_rho = min(best_min_rho, candidate_min_rho)
-        if lperp.winding_drop_tol >= 0.0 and winding_reference is not None:
-            winding_reference = max(winding_reference, candidate_links)
 
         energy_improvement = last_energy - current_energy
         last_energy = current_energy
@@ -331,7 +328,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--min-rho-drift-tol", type=float, default=-1.0)
     parser.add_argument("--min-rho-warmup", type=int, default=150)
     parser.add_argument("--winding-drop-tol", type=float, default=-1.0)
-    parser.add_argument("--winding-warmup", type=int, default=150)
+    parser.add_argument("--winding-warmup", type=int, default=0)
     parser.add_argument("--step-size", type=float, default=0.005)
     parser.add_argument("--max-steps", type=int, default=200)
     parser.add_argument("--tolerance", type=float, default=2.0e-3)

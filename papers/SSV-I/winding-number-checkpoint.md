@@ -1,111 +1,142 @@
-# Winding-Number Topology Guard — Implementation and Resolution Limit (2026-05-18)
+# Winding-Number Diagnostic — The Topology Was Never Preserved (2026-05-18)
 
-This note records the implementation of lattice vortex-link counting for topology
-monitoring and the discovery that the method fails at the production grid resolution.
+This note records what was supposed to be a topology-guard implementation but
+became the discovery that **the trefoil topology has never been preserved by
+the Krylov solver** — even in the runs we have been calling "production."  The
+min_rho proxy that we trusted as a topology indicator is unreliable: density
+depressions can persist without any phase winding around them.
 
 ## What was implemented
 
-`src/paper_i/topology_helpers.py` — `count_vortex_links(psi)` and `vortex_link_density(psi, dx)`.
+`src/paper_i/topology_helpers.py` — `count_vortex_links(psi)`:
+lattice plaquette phase-winding counter (|W| > pi on each xy/xz/yz face).
+12 unit tests, all passing (incl. clean single straight vortex giving exactly
+N_z links at n=24, dx=0.5xi — so the method works correctly at this resolution
+for clean topological vortices).
 
-`count_vortex_links` computes the sum of lattice plaquette phase windings |W| > pi across
-all three face orientations of the cubic grid.  Each such plaquette corresponds to one
-lattice link of a quantised vortex line; the total count is proportional to the total
-vortex line length in lattice units.
+Integrated into `trefoil_breather_lperp_krylov_static.py`:
+- Reports `initial_vortex_links` and `final_vortex_links` in RunSummary
+- Winding guard wired up (init-anchored reference, `winding_drop_tol` parameter)
+- **Disabled by default**: rejection-based guards cannot prevent the topology
+  destruction (see below)
 
-The formula for the xy-plaquette winding at site (i,j,k):
+## The diagnostic finding
 
-```
-W_z(i,j,k) = wrap(phi(i+1,j,k)-phi(i,j,k))
-           + wrap(phi(i+1,j+1,k)-phi(i+1,j,k))
-           - wrap(phi(i+1,j+1,k)-phi(i,j+1,k))
-           - wrap(phi(i,j+1,k)-phi(i,j,k))
-```
-
-where wrap(.) maps phase differences to (-pi, pi].  Analogous expressions hold for
-xz (W_y) and yz (W_x) plaquettes.
-
-Unit tests: `src/paper_i/test_topology_helpers.py`, 12 tests, all passing.
-- Uniform field: 0 links
-- Single straight vortex in z: exactly N_z links (one per z-slice)
-- Antivortex gives same count as vortex (|W| > pi for both signs)
-- Near-uniform field (99% uniform): 0 links
-- Two parallel vortices: ~2x the link count of one
-
-## Integration into Krylov solver
-
-`trefoil_breather_lperp_krylov_static.py` was updated to:
-- Import `count_vortex_links`
-- Compute and report `initial_vortex_links` and `final_vortex_links` in RunSummary
-- Include winding guard parameters in `LperpControls`:
-  - `winding_drop_tol = -1.0` (disabled by default — see below)
-  - `winding_warmup = 150`
-- Disable the legacy min_rho guard by default (`min_rho_drift_tol = -1.0`)
-- Winding guard logic: after `winding_warmup` accepted steps, record `winding_reference`
-  from the current field state; reject steps where candidate_links < reference*(1-tol).
-
-## The resolution limit
-
-Testing the reference final state (`trefoil-lperp-krylov-lambda2000-n24-hw6-800steps-2026-05-17.npz`,
-min_rho=2.515e-3, topology intact) with `count_vortex_links` returned **0 links**.
-
-Maximum xy-plaquette winding in the reference state: **0.000** (exactly zero on all faces).
-
-Diagnosis: the vortex cores at the production grid (n=24, hw=6, dx=0.5 xi) are sub-resolution.
-The phase difference between adjacent grid points near the vortex core exceeds pi and is
-wrapped to the wrong sign by `_wrap`.  This makes the plaquette circulation appear to be
-zero even with a live vortex present.
-
-Reliability condition: for phase differences to remain < pi, the vortex phase must
-change by < pi per grid cell near the core.  Near the outer edge of a vortex core
-(at radius ~xi), the phase gradient is ~1/xi.  So the phase change per grid cell is:
+### Initial state has clean trefoil topology
 
 ```
-delta_phi ~ dx / xi
+initial trefoil (n=24, hw=6):  links=166
+phase pattern around a vortex core (5x5 slice, z fixed):
+  -1.42 -0.03 +0.07 +0.19 +0.29
+  -0.20 -0.11 +0.09 +0.91 +2.56
+  -0.39 -0.39 +3.05 +2.89 +2.98
+  -0.78 -1.58 -3.00 +3.04 +3.02
+  -1.34 -2.25 -2.90 +3.12 +3.04
+max plaquette winding: 6.283 (= 2pi exactly)
+24 plaquettes with |W| > pi.
 ```
 
-For delta_phi < pi: dx < pi * xi ~ 3.14 xi.  But the critical condition for detection
-is that the total 2pi winding around one plaquette is NOT split into two > pi contributions
-that cancel after wrapping.  This requires the phase change to be gradual relative to dx:
+The initial condition has well-defined topological vortex tubes with clean
+quantised 2pi circulation.  Estimated trefoil knot length / dx ~ 126 links;
+initial state has 166 due to the smoothed initial-condition broadening.
+
+### Reference "converged" state has no topology
+
+Loading the canonical reference state
+(`papers/SSV-I/data/trefoil-lperp-krylov-lambda2000-n24-hw6-800steps-2026-05-17.npz`,
+min_rho=2.515e-3, treated as "topology preserved" by the min_rho proxy):
 
 ```
-dx << xi / pi ~ 0.32 xi
+reference state:  links=0
+maximum plaquette winding anywhere on the grid: 0.000
+phase pattern around the deepest density depression:
+  +0.10 -0.17 +0.01 +0.05 +0.04
+  -0.22 +1.01 -0.15 -0.01 +0.00
+  +0.04 -0.37 +0.30 -0.06 +0.03
+  +0.07 +0.11 -0.14 +0.09 -0.02
+  -0.16 +0.27 +0.08 -0.03 +0.02
 ```
 
-At n=24, hw=6: dx=0.50 xi — above the detection limit.
-At n=32, hw=6: dx=0.375 xi — marginally above.
-At n=48, hw=6: dx=0.250 xi — below the limit; detection should work.
+Random small phases (max ~+1 rad).  No 2pi winding anywhere.  The deep density
+depression at the centre is a **density inhomogeneity, not a quantised vortex**.
 
-## What the count_vortex_links diagnostic actually measures
+### The Krylov solver destroys topology in the first few steps
 
-The function correctly counts broad phase-winding structures.  At the START of relaxation
-(initial state: broad smooth vortex tubes), the link count is meaningful (n=24 hw=6: 166).
-As the cores sharpen during relaxation, the phase jumps grow beyond pi and the count drops
-to 0 — even though the topology is preserved.
+With the winding guard enabled and initial_links as the reference (rejecting
+steps that drop links below `initial_links * (1 - tol)`):
 
-So the link count trajectory (166→0 during convergence) measures **core sharpening**, not
-topology loss.  This is not usable as a topology rejection criterion.
+| tol | accepted | links 0->final | guard fires |
+|---:|---:|---|---:|
+| 0.30 | 2 | 166 -> 128 | step 3 |
+| 0.50 | 3 | 166 -> 102 | step 4 |
+| 0.70 | 4 | 166 -> 64  | step 5 |
 
-## Conclusion
+Every single step the GMRES solver proposes a move that destroys ~20% of the
+vortex links.  After 4-5 accepted steps, even a 70% drop tolerance is exceeded.
 
-| grid | dx/xi | detection works? |
-|---|---:|---|
-| n=24, hw=6 (production) | 0.50 | NO — cores sub-resolution |
-| n=32, hw=6 | 0.375 | NO — borderline |
-| n=48, hw=6 | 0.250 | likely YES |
-| n=64, hw=6 | 0.188 | YES |
+This is the same mechanism documented in `gmres-topology-loss-note.md` but now
+**directly verified at the topological level** (not via the min_rho proxy):
+the backward-Euler implicit step moves toward the uniform-condensate ground
+state, exiting the topological sector immediately.
 
-**The winding guard is disabled by default** (`winding_drop_tol=-1.0`).  The initial and
-final vortex link counts are reported in RunSummary as diagnostics (informative for the
-initial transient) but cannot be used for topology enforcement at the current resolution.
+## Implications
 
-## What topology enforcement actually requires (updated)
+1. **All previous "production" results are topologically wrong.**  The
+   converged states at n=24, hw=6 (and at every other grid we have tested) do
+   not represent the trefoil knot.  They are uniform condensates with residual
+   density inhomogeneities that fooled the min_rho proxy.
 
-The winding-number guard as a rejection criterion still has the correct INTENT — but
-requires the vortex to be resolved over multiple grid cells.  At n>=48, hw=6:
-1. `count_vortex_links` would correctly detect the converged vortex (dx=0.25xi < 0.32xi)
-2. The winding guard (e.g., winding_drop_tol=0.10, winding_warmup=150) could be enabled
-3. This would provide principled topology enforcement independent of min_rho
+2. **The min_rho proxy is unreliable.**  Density depressions can persist
+   without phase winding.  min_rho < 0.01 does not imply a topological vortex.
 
-Until then, the min_rho proxy remains the only available topology diagnostic at the
-production grid resolution.  True topology enforcement (penalty term or projected gradient)
-does not depend on the grid resolution issue and remains the recommended long-term path.
+3. **Rejection-based topology guards cannot fix this.**  Every Krylov step
+   destroys topology by ~20%; no rejection tolerance accepts enough steps for
+   useful relaxation.  Confirmed across `winding_drop_tol = 0.30, 0.50, 0.70`.
+
+4. **The lattice plaquette method works correctly at the production grid.**
+   Initial state shows clean 2pi windings (Wz max = 2pi exactly).  Single
+   straight vortex test gives the expected link count.  Detection failure on
+   the reference state reflects real absence of topology, not a resolution
+   limitation.
+
+5. **F^int, depressed_fraction, and other observables are not measuring
+   trefoil properties** in any previous run.  They are measuring properties
+   of a topologically trivial density field.
+
+## What topology enforcement actually requires
+
+Rejection guards cannot work.  The only viable approaches:
+
+1. **Penalty term in the energy functional**: add a term like
+   `mu * sum(rho - rho_floor)^2 * H(rho_floor - rho)` (Heaviside-cutoff
+   penalty for density above some floor in the core region) — but this only
+   works if rho_floor identifies vortex-core locations, which itself requires
+   knowing where the vortex is.  A topology-aware penalty (e.g., based on
+   `|nabla(phase)|^2`) would be more principled but harder to implement.
+
+2. **Projected gradient**: project each GMRES step onto the subspace of
+   topology-preserving directions.  Requires the tangent space of the
+   topological sector at the current field — non-trivial.
+
+3. **Constrained Newton**: solve `min E(psi) s.t. winding(psi) = winding_0`
+   using Lagrange multipliers.  Mathematically clean, computationally heavy.
+
+4. **Better initial condition**: the current initial condition is broad and
+   easily eroded.  A pre-relaxed sharp trefoil might be more stable.  Worth
+   trying as a quick experiment before committing to (1)-(3).
+
+The first practical experiment to do (before any of 1-3) is to verify whether
+the topology destruction is genuine or an artefact of the broad initial
+condition.  If we start from a sharp pre-relaxed trefoil and the solver still
+destroys it, we know the issue is the GMRES step itself.
+
+## Production configuration
+
+The winding guard is **disabled by default** (`winding_drop_tol=-1.0`).
+Initial/final link counts are still reported as diagnostics so future runs
+can be assessed for topological integrity without changing the solver.
+
+Until topology enforcement is added (option 1/2/3 above), all Krylov-solver
+results should be **assessed against `final_vortex_links > 0`** before being
+treated as trefoil-knot data.  The reference 800-step run (`final_vortex_links=0`)
+should be relabelled as a density-depression state, not a trefoil result.

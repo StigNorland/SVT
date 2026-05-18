@@ -5,11 +5,11 @@ phase winding |W| > pi.  This is the lattice measure of total vortex line
 length; for a trefoil knot it remains approximately constant as long as
 the topology is preserved.
 
-Resolution limit: the method requires dx << xi / pi ~ 0.32 xi so that the
-phase difference between adjacent grid points stays below pi near the vortex
-core.  At the production grid (n=24, hw=6, dx=0.5 xi), converged sharp cores
-produce phase jumps > pi that wrap to zero — making the link count 0 even
-with intact topology.  Reliable detection requires n >= 48 at hw=6 (dx=0.25 xi).
+The method is reliable at the production grid (n=24, hw=6, dx=0.5 xi):
+- A clean single straight vortex at this resolution gives the expected N_z links
+- The initial trefoil condition gives 166 links (clean 2pi windings, max=2pi)
+- final_vortex_links=0 means the topology has been genuinely destroyed
+  (not a resolution artifact — see winding-number-checkpoint.md)
 
 Theory: on a cubic lattice, a vortex line passing through a face (plaquette)
 produces a phase circulation of +/-2pi around that face.  Summing the four
