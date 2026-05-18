@@ -55,6 +55,11 @@ from trefoil_breather_static import (
 from lperp_helpers import lperp_energy, lperp_gradient
 from lperp_krylov_helpers import krylov_implicit_step
 from topology_helpers import count_vortex_links
+from topology_penalty import (
+    core_mask,
+    topology_penalty_energy,
+    topology_penalty_gradient,
+)
 
 
 SCRIPT_METADATA = ScriptMetadata(
@@ -106,6 +111,9 @@ class LperpControls:
     min_rho_warmup: int = 150
     winding_drop_tol: float = -1.0   # disabled: GMRES destroys topology in <5 steps regardless of tol (see winding-number-checkpoint.md)
     winding_warmup: int = 0          # winding guard activates from step 1 (when enabled); initial state has clean 2pi windings
+    penalty_mu: float = 0.0          # topology penalty strength; 0 = disabled (matches old behaviour)
+    penalty_rho_target: float = 0.05 # density floor below which no penalty is applied
+    penalty_mask_threshold: float = 0.5  # initial cells with rho < this are marked as core mask
 
 
 @dataclass(frozen=True)
@@ -115,10 +123,13 @@ class RunSummary:
     final_energy_full: float
     final_energy_logse: float
     final_energy_perp: float
+    final_energy_penalty: float
     initial_energy_full: float
     initial_energy_logse: float
     initial_energy_perp: float
+    initial_energy_penalty: float
     best_energy_full: float
+    penalty_mask_cells: int
     energy_monotonicity_violations: int
     topology_violations: int
     accepted_steps: int
@@ -141,16 +152,42 @@ class RunSummary:
     stop_reason: str
 
 
-def full_energy(psi: np.ndarray, cfg: TrefoilConfig, lambda_perp: float) -> tuple[float, float, float]:
+def full_energy(
+    psi: np.ndarray,
+    cfg: TrefoilConfig,
+    lambda_perp: float,
+    *,
+    penalty_mask: np.ndarray | None = None,
+    penalty_mu: float = 0.0,
+    penalty_rho_target: float = 0.0,
+) -> tuple[float, float, float, float]:
     e_log = total_energy(psi, cfg.grid.spacing, cfg.log_pressure, cfg.density_floor)
     e_perp = lperp_energy(psi, cfg.grid.spacing, lambda_perp)
-    return e_log + e_perp, e_log, e_perp
+    e_pen = 0.0
+    if penalty_mu > 0.0 and penalty_mask is not None:
+        e_pen = topology_penalty_energy(
+            psi, penalty_mask, penalty_rho_target, penalty_mu, cfg.grid.spacing
+        )
+    return e_log + e_perp + e_pen, e_log, e_perp, e_pen
 
 
-def full_gradient(psi: np.ndarray, cfg: TrefoilConfig, lambda_perp: float) -> np.ndarray:
+def full_gradient(
+    psi: np.ndarray,
+    cfg: TrefoilConfig,
+    lambda_perp: float,
+    *,
+    penalty_mask: np.ndarray | None = None,
+    penalty_mu: float = 0.0,
+    penalty_rho_target: float = 0.0,
+) -> np.ndarray:
     g_log = logse_gradient(psi, cfg)
     g_perp = lperp_gradient(psi, cfg.grid.spacing, lambda_perp)
-    return g_log + g_perp
+    g_pen = (
+        topology_penalty_gradient(psi, penalty_mask, penalty_rho_target, penalty_mu)
+        if penalty_mu > 0.0 and penalty_mask is not None
+        else 0.0
+    )
+    return g_log + g_perp + g_pen
 
 
 def relax(
@@ -164,7 +201,20 @@ def relax(
 
     dx = cfg.grid.spacing
 
-    initial_full, initial_log, initial_perp = full_energy(psi, cfg, lperp.lambda_perp)
+    penalty_mask = (
+        core_mask(psi, lperp.penalty_mask_threshold)
+        if lperp.penalty_mu > 0.0
+        else None
+    )
+    penalty_kwargs = dict(
+        penalty_mask=penalty_mask,
+        penalty_mu=lperp.penalty_mu,
+        penalty_rho_target=lperp.penalty_rho_target,
+    )
+
+    initial_full, initial_log, initial_perp, initial_pen = full_energy(
+        psi, cfg, lperp.lambda_perp, **penalty_kwargs
+    )
     last_energy = initial_full
     best_energy = last_energy
     best_psi = psi.copy()
@@ -184,8 +234,8 @@ def relax(
     stale_intervals = 0
     stop_reason = "max_steps"
 
-    gradient_fn = lambda field: full_gradient(field, cfg, lperp.lambda_perp)
-    g_full_for_krylov = lambda field: full_gradient(field, cfg, lperp.lambda_perp)
+    gradient_fn = lambda field: full_gradient(field, cfg, lperp.lambda_perp, **penalty_kwargs)
+    g_full_for_krylov = lambda field: full_gradient(field, cfg, lperp.lambda_perp, **penalty_kwargs)
 
     gmres_iters: list[int] = []
     initial_links = count_vortex_links(psi)
@@ -204,7 +254,9 @@ def relax(
         )
         apply_boundary_anchor(candidate, cfg)
 
-        current_energy, _e_log, _e_perp = full_energy(candidate, cfg, lperp.lambda_perp)
+        current_energy, _e_log, _e_perp, _e_pen = full_energy(
+            candidate, cfg, lperp.lambda_perp, **penalty_kwargs
+        )
         if current_energy > last_energy + controls.energy_tol:
             violations += 1
             rejected_steps += 1
@@ -276,17 +328,22 @@ def relax(
     rho = np.abs(psi) ** 2
     shell_inner = 0.7 * cfg.half_width
     shell_outer = 0.95 * cfg.half_width
-    final_full, final_log, final_perp = full_energy(psi, cfg, lperp.lambda_perp)
+    final_full, final_log, final_perp, final_pen = full_energy(
+        psi, cfg, lperp.lambda_perp, **penalty_kwargs
+    )
     summary = RunSummary(
         steps_completed=completed,
         lambda_perp=lperp.lambda_perp,
         final_energy_full=final_full,
         final_energy_logse=final_log,
         final_energy_perp=final_perp,
+        final_energy_penalty=final_pen,
         initial_energy_full=initial_full,
         initial_energy_logse=initial_log,
         initial_energy_perp=initial_perp,
+        initial_energy_penalty=initial_pen,
         best_energy_full=best_energy,
+        penalty_mask_cells=int(penalty_mask.sum()) if penalty_mask is not None else 0,
         energy_monotonicity_violations=violations,
         topology_violations=topology_violations,
         accepted_steps=accepted_steps,
@@ -329,6 +386,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--min-rho-warmup", type=int, default=150)
     parser.add_argument("--winding-drop-tol", type=float, default=-1.0)
     parser.add_argument("--winding-warmup", type=int, default=0)
+    parser.add_argument("--penalty-mu", type=float, default=0.0)
+    parser.add_argument("--penalty-rho-target", type=float, default=0.05)
+    parser.add_argument("--penalty-mask-threshold", type=float, default=0.5)
     parser.add_argument("--step-size", type=float, default=0.005)
     parser.add_argument("--max-steps", type=int, default=200)
     parser.add_argument("--tolerance", type=float, default=2.0e-3)
@@ -377,6 +437,9 @@ def main() -> None:
         min_rho_warmup=args.min_rho_warmup,
         winding_drop_tol=args.winding_drop_tol,
         winding_warmup=args.winding_warmup,
+        penalty_mu=args.penalty_mu,
+        penalty_rho_target=args.penalty_rho_target,
+        penalty_mask_threshold=args.penalty_mask_threshold,
     )
     psi, summary = relax(cfg, controls, lperp)
 
