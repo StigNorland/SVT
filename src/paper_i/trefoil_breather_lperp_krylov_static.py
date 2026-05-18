@@ -90,8 +90,9 @@ class LperpControls:
     lambda_perp: float
     gmres_tol: float = 1.0e-4
     gmres_restart: int = 30
-    gmres_max_cycles: int = 1  # >1 cycles dissolve vortex topology; see gmres-topology-loss-note.md
-    kinetic_coeff: float = 0.0  # k^2 term erodes topology over long runs; needs min_rho guard first
+    gmres_max_cycles: int = 1  # >1 cycles dissolve vortex topology without min_rho guard
+    kinetic_coeff: float = 0.5
+    min_rho_threshold: float = 0.5  # reject steps that lift min_rho above threshold once cores have formed
 
 
 @dataclass(frozen=True)
@@ -106,6 +107,7 @@ class RunSummary:
     initial_energy_perp: float
     best_energy_full: float
     energy_monotonicity_violations: int
+    topology_violations: int
     accepted_steps: int
     rejected_steps: int
     final_step_size: float
@@ -152,6 +154,7 @@ def relax(
     best_energy = last_energy
     best_psi = psi.copy()
     violations = 0
+    topology_violations = 0
     completed = 0
     accepted_steps = 0
     rejected_steps = 0
@@ -195,6 +198,18 @@ def relax(
                 break
             continue
 
+        # Topology guard: once a core has formed (min_rho < threshold), reject
+        # steps that would fill it back in above the threshold.
+        # Does NOT reduce step_size — topology erosion is not fixed by smaller steps;
+        # only a genuinely topology-preserving implicit direction can pass this gate.
+        if lperp.min_rho_threshold > 0.0:
+            current_min_rho = float(np.min(np.abs(psi) ** 2))
+            candidate_min_rho = float(np.min(np.abs(candidate) ** 2))
+            if current_min_rho < lperp.min_rho_threshold and candidate_min_rho > lperp.min_rho_threshold:
+                topology_violations += 1
+                rejected_steps += 1
+                continue
+
         gmres_iters.append(n_iter)
         psi = candidate
         accepted_steps += 1
@@ -237,6 +252,7 @@ def relax(
         initial_energy_perp=initial_perp,
         best_energy_full=best_energy,
         energy_monotonicity_violations=violations,
+        topology_violations=topology_violations,
         accepted_steps=accepted_steps,
         rejected_steps=rejected_steps,
         final_step_size=step_size,
@@ -269,7 +285,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--gmres-tol", type=float, default=1.0e-4)
     parser.add_argument("--gmres-restart", type=int, default=30)
     parser.add_argument("--gmres-max-cycles", type=int, default=1)
-    parser.add_argument("--kinetic-coeff", type=float, default=0.0)
+    parser.add_argument("--kinetic-coeff", type=float, default=0.5)
+    parser.add_argument("--min-rho-threshold", type=float, default=0.5)
     parser.add_argument("--step-size", type=float, default=0.005)
     parser.add_argument("--max-steps", type=int, default=200)
     parser.add_argument("--tolerance", type=float, default=2.0e-3)
@@ -313,6 +330,7 @@ def main() -> None:
         gmres_restart=args.gmres_restart,
         gmres_max_cycles=args.gmres_max_cycles,
         kinetic_coeff=args.kinetic_coeff,
+        min_rho_threshold=args.min_rho_threshold,
     )
     psi, summary = relax(cfg, controls, lperp)
 
