@@ -51,9 +51,23 @@ These are treated as fixed foundation papers. Later work may refine or supersede
 8. `SSV VIII: Cosmogony from the Permissive Void`
    - Void, primordial perturbation, saturation, defect nucleation
 
-9. `Future CMB Paper`
+9. `SSV IX: CMB and Primordial Phonon Bath`
    - Keep separate from the time paper
    - Only after the cosmology pieces are tighter
+   - Primordial phonon bath
+   - CMB interpretation
+   - Entropy-budget cosmology
+
+10. `SSV Alpha: Fine-Structure Constant from Toroidal Vortex Geometry`
+    - Core claim: `R*/ξ = α⁻¹`
+    - Frames the calculation to derive `α` from 3D LogSE plus chiral-shear toroidal-vortex minimisation
+    - Does not claim to derive `α` outright; specifies what computation is needed
+
+11. `SSV Goldstone: Electromagnetic Propagation and the Goldstone Mode`
+    - Repairs the EM propagation-speed issue raised in Paper II
+    - Observed photon = Goldstone/Bogoliubov phase mode at c
+    - Chiral-shear sector = static near-field Coulomb and magnetic topology
+    - Frames the matching calculation connecting chiral-shear near field to Goldstone radiation
 
 ## Immediate Priorities
 
