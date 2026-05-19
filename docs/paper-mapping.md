@@ -59,6 +59,11 @@ Move to `SSV VII-a`:
 - Measurement as reconnection
 - Uncertainty as hydraulic bound
 
+Issue `#6` status: complete. `SSV VII-a` now stands as the quantum-mechanics
+paper, with the formal Madelung / Schrodinger-limit material separated from the
+interpretive measurement and uncertainty claims. Geometry, Einstein-equation,
+cosmogony, and full-series synthesis language remain outside this paper.
+
 Move to `SSV VII-b`:
 - Gravity to geometry argument
 - Emergent metric
