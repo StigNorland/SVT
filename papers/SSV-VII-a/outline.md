@@ -34,5 +34,10 @@ Quantum behavior is not a separate foundational axiom but the linearized / low-a
 
 ## Immediate drafting tasks
 
-- Tighten the claim level around the Schrodinger limit
-- Keep the measurement section focused and separate from cosmology
+- [x] Tighten the claim level around the Schrodinger limit
+- [x] Decide what is interpretation versus formal derivation
+- [x] Keep the measurement section focused and separate from cosmology
+
+## Issue `#6` Status
+
+This draft now exists as a standalone quantum-mechanics-from-hydrodynamics manuscript. The formal core is the Madelung bridge and Schrodinger limit; quantisation, uncertainty, and measurement are framed as physical interpretations or open calculations where they go beyond that derivation.

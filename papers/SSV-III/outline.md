@@ -34,9 +34,12 @@ Time is local change in `Psi`, the past survives only as wake structure in the p
    - Phonons, Kelvin waves, distortions, altered future reconnection opportunities
 
 4. Entropy as Wake-Complexity
-   - Replace event counting with structural complexity
-   - Candidate entropy functional
-   - Why monotonicity is not tautological
+   - [x] Replace event counting with structural complexity
+   - [x] Candidate entropy functional
+   - [x] Why monotonicity is not tautological
+   - [x] Local cancellation versus global unwriting
+   - [x] Reconnection as one wake-writing channel, not the entropy definition
+   - [x] Remaining dimensional and formal gaps flagged explicitly
 
 5. Formal Time Reversal vs Physical Reversal
    - Equations versus available operations
@@ -56,7 +59,16 @@ Time is local change in `Psi`, the past survives only as wake structure in the p
 
 ## Immediate drafting tasks
 
-- Rewrite abstract around wake-complexity
-- Replace entropy-as-count language
-- Add section separating formal and physical reversal
-- Move black-hole and CMB material to other papers
+- [x] Rewrite abstract around wake-complexity
+- [x] Replace entropy-as-count language
+- [x] Add section separating formal and physical reversal
+- [x] Move black-hole material to `papers/SSV-V`
+- [x] Move CMB material to `papers/SSV-IX`
+
+## Issue `#1` Status
+
+The current `main.tex` is a narrow SSV III draft that can stand on its own as the time paper for the series. The remaining open items are not scope-rebuild tasks; they are follow-on derivation tasks around the computable wake functional, coarse-graining, and links to later gravity / black-hole papers.
+
+## Issue `#4` Status
+
+The entropy section no longer depends on event-count language. It states entropy as persistent wake-complexity of the present `Psi` state, provides schematic `W[Psi]` and `Omega_wake[Psi]` forms, explains why monotonicity is a physical inverse-process claim, and flags the remaining formal derivation gaps.

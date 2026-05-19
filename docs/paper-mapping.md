@@ -46,6 +46,11 @@ Keep in `SSV VI-b`:
 - Morphology sequence
 - Wiggle smoothing / azimuthal averaging story
 
+Issue `#5` status: complete. `SSV VI-a` is the flat-curve / standing-wave
+phenomenology paper; `SSV VI-b` is the downstream 2D morphology and wiggle paper.
+Dark-energy, supernova, and broad cosmology claims are kept out of the galactic
+prediction set unless a later standalone paper justifies them independently.
+
 ### Current `SSV V`
 
 Move to `SSV VII-a`:
@@ -53,6 +58,11 @@ Move to `SSV VII-a`:
 - Schrodinger limit
 - Measurement as reconnection
 - Uncertainty as hydraulic bound
+
+Issue `#6` status: complete. `SSV VII-a` now stands as the quantum-mechanics
+paper, with the formal Madelung / Schrodinger-limit material separated from the
+interpretive measurement and uncertainty claims. Geometry, Einstein-equation,
+cosmogony, and full-series synthesis language remain outside this paper.
 
 Move to `SSV VII-b`:
 - Gravity to geometry argument
@@ -66,6 +76,12 @@ Move to `SSV VIII`:
 - Saturation
 - Vortex nucleation
 - Resonant-cosmos cosmogony
+
+Issue `#2` status: complete. The overloaded legacy `SSV V` is no longer treated as one
+manuscript. Its former quantum-mechanics material now lives in `papers/SSV-VII-a`,
+its geometry / quantum-gravity material in `papers/SSV-VII-b`, and its cosmogony
+material in `papers/SSV-VIII`. The current `papers/SSV-V` is a separate black-hole
+manuscript.
 
 ### SSV IX (CMB and Primordial Phonon Bath)
 

@@ -1,0 +1,256 @@
+{
+  "rows": [
+    {
+      "source": "papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json",
+      "n": 24,
+      "half_width": 5.0,
+      "steps_completed": 200,
+      "shell_mean_density": 0.993091319082684,
+      "shell_mean_deficit": 0.006908680917316001,
+      "residual_norm": 0.03415691793302642,
+      "projected_residual_norm": 0.03415691793302642,
+      "deficit_volume": 5.779112282283411,
+      "equivalent_deficit_radius": 1.1132452251135423
+    },
+    {
+      "source": "papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json",
+      "n": 24,
+      "half_width": 6.0,
+      "steps_completed": 200,
+      "shell_mean_density": 0.9977701401017948,
+      "shell_mean_deficit": 0.002229859898205233,
+      "residual_norm": 0.019577009119524504,
+      "projected_residual_norm": 0.019577009119524504,
+      "deficit_volume": 2.9501171294886084,
+      "equivalent_deficit_radius": 0.8897135743655794
+    },
+    {
+      "source": "papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json",
+      "n": 24,
+      "half_width": 7.0,
+      "steps_completed": 200,
+      "shell_mean_density": 0.9990298506457959,
+      "shell_mean_deficit": 0.0009701493542041417,
+      "residual_norm": 0.011893297637352519,
+      "projected_residual_norm": 0.011893297637352519,
+      "deficit_volume": 1.9325484683500738,
+      "equivalent_deficit_radius": 0.7727053665845691
+    },
+    {
+      "source": "papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json",
+      "n": 48,
+      "half_width": 5.0,
+      "steps_completed": 400,
+      "shell_mean_density": 0.8744144628892311,
+      "shell_mean_deficit": 0.12558553711076892,
+      "residual_norm": 0.18167799432071227,
+      "projected_residual_norm": 0.18167799432071227,
+      "deficit_volume": 115.71278659553671,
+      "equivalent_deficit_radius": 3.0229496548601875
+    },
+    {
+      "source": "papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json",
+      "n": 48,
+      "half_width": 6.0,
+      "steps_completed": 400,
+      "shell_mean_density": 0.9446106120831488,
+      "shell_mean_deficit": 0.05538938791685122,
+      "residual_norm": 0.11510603535220364,
+      "projected_residual_norm": 0.11510603535220364,
+      "deficit_volume": 90.70924685218449,
+      "equivalent_deficit_radius": 2.7873252600043217
+    },
+    {
+      "source": "papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json",
+      "n": 48,
+      "half_width": 7.0,
+      "steps_completed": 400,
+      "shell_mean_density": 0.9730517661764407,
+      "shell_mean_deficit": 0.026948233823559264,
+      "residual_norm": 0.07284759822754107,
+      "projected_residual_norm": 0.07284759822754107,
+      "deficit_volume": 61.521107420486416,
+      "equivalent_deficit_radius": 2.4489420686165557
+    }
+  ],
+  "within_branch": {
+    "24": {
+      "shell_mean_density": {
+        "min": 0.993091319082684,
+        "max": 0.9990298506457959,
+        "relative_drift": 0.005944298420385593
+      },
+      "shell_mean_deficit": {
+        "min": 0.0009701493542041417,
+        "max": 0.006908680917316001,
+        "relative_drift": 0.8595753131726568
+      },
+      "deficit_volume": {
+        "min": 1.9325484683500738,
+        "max": 5.779112282283411,
+        "relative_drift": 0.6655976949479694
+      },
+      "equivalent_deficit_radius": {
+        "min": 0.7727053665845691,
+        "max": 1.1132452251135423,
+        "relative_drift": 0.30589833295197
+      },
+      "residual_norm": {
+        "min": 0.011893297637352519,
+        "max": 0.03415691793302642,
+        "relative_drift": 0.6518041334797114
+      },
+      "projected_residual_norm": {
+        "min": 0.011893297637352519,
+        "max": 0.03415691793302642,
+        "relative_drift": 0.6518041334797114
+      }
+    },
+    "48": {
+      "shell_mean_density": {
+        "min": 0.8744144628892311,
+        "max": 0.9730517661764407,
+        "relative_drift": 0.10136901932237388
+      },
+      "shell_mean_deficit": {
+        "min": 0.026948233823559264,
+        "max": 0.12558553711076892,
+        "relative_drift": 0.7854192891671086
+      },
+      "deficit_volume": {
+        "min": 61.521107420486416,
+        "max": 115.71278659553671,
+        "relative_drift": 0.46832922073229705
+      },
+      "equivalent_deficit_radius": {
+        "min": 2.4489420686165557,
+        "max": 3.0229496548601875,
+        "relative_drift": 0.189883276858668
+      },
+      "residual_norm": {
+        "min": 0.07284759822754107,
+        "max": 0.18167799432071227,
+        "relative_drift": 0.5990290486202486
+      },
+      "projected_residual_norm": {
+        "min": 0.07284759822754107,
+        "max": 0.18167799432071227,
+        "relative_drift": 0.5990290486202486
+      }
+    }
+  },
+  "cross_resolution": {
+    "5.0": {
+      "coarse_n": 24,
+      "fine_n": 48,
+      "shell_mean_density": {
+        "coarse": 0.993091319082684,
+        "fine": 0.8744144628892311,
+        "relative_drift": 0.11950246056231208
+      },
+      "shell_mean_deficit": {
+        "coarse": 0.006908680917316001,
+        "fine": 0.12558553711076892,
+        "relative_drift": 0.9449882440585303
+      },
+      "deficit_volume": {
+        "coarse": 5.779112282283411,
+        "fine": 115.71278659553671,
+        "relative_drift": 0.9500564073140528
+      },
+      "equivalent_deficit_radius": {
+        "coarse": 1.1132452251135423,
+        "fine": 3.0229496548601875,
+        "relative_drift": 0.6317354398133269
+      },
+      "residual_norm": {
+        "coarse": 0.03415691793302642,
+        "fine": 0.18167799432071227,
+        "relative_drift": 0.8119919913210296
+      },
+      "projected_residual_norm": {
+        "coarse": 0.03415691793302642,
+        "fine": 0.18167799432071227,
+        "relative_drift": 0.8119919913210296
+      }
+    },
+    "6.0": {
+      "coarse_n": 24,
+      "fine_n": 48,
+      "shell_mean_density": {
+        "coarse": 0.9977701401017948,
+        "fine": 0.9446106120831488,
+        "relative_drift": 0.05327833123290553
+      },
+      "shell_mean_deficit": {
+        "coarse": 0.002229859898205233,
+        "fine": 0.05538938791685122,
+        "relative_drift": 0.9597421097782732
+      },
+      "deficit_volume": {
+        "coarse": 2.9501171294886084,
+        "fine": 90.70924685218449,
+        "relative_drift": 0.9674772172422953
+      },
+      "equivalent_deficit_radius": {
+        "coarse": 0.8897135743655794,
+        "fine": 2.7873252600043217,
+        "relative_drift": 0.6808002327061751
+      },
+      "residual_norm": {
+        "coarse": 0.019577009119524504,
+        "fine": 0.11510603535220364,
+        "relative_drift": 0.8299219579614362
+      },
+      "projected_residual_norm": {
+        "coarse": 0.019577009119524504,
+        "fine": 0.11510603535220364,
+        "relative_drift": 0.8299219579614362
+      }
+    },
+    "7.0": {
+      "coarse_n": 24,
+      "fine_n": 48,
+      "shell_mean_density": {
+        "coarse": 0.9990298506457959,
+        "fine": 0.9730517661764407,
+        "relative_drift": 0.026003311565277347
+      },
+      "shell_mean_deficit": {
+        "coarse": 0.0009701493542041417,
+        "fine": 0.026948233823559264,
+        "relative_drift": 0.9639995199479086
+      },
+      "deficit_volume": {
+        "coarse": 1.9325484683500738,
+        "fine": 61.521107420486416,
+        "relative_drift": 0.9685872288490935
+      },
+      "equivalent_deficit_radius": {
+        "coarse": 0.7727053665845691,
+        "fine": 2.4489420686165557,
+        "relative_drift": 0.6844738074914601
+      },
+      "residual_norm": {
+        "coarse": 0.011893297637352519,
+        "fine": 0.07284759822754107,
+        "relative_drift": 0.8367372716914627
+      },
+      "projected_residual_norm": {
+        "coarse": 0.011893297637352519,
+        "fine": 0.07284759822754107,
+        "relative_drift": 0.8367372716914627
+      }
+    }
+  },
+  "ceiling": {
+    "best_case_shell_mean_density_cross_resolution_drift": 0.026003311565277347,
+    "worst_case_shell_mean_density_cross_resolution_drift": 0.11950246056231208,
+    "statement": "Any reduced Q_p extracted from the current static states inherits at least this level of coarse-fine uncertainty before additional modeling uncertainty is added."
+  },
+  "interpretation": {
+    "purpose": "Quantify whether the static trefoil branch is independently converged in half_width and resolution before further Q_p ansatz fitting.",
+    "warning": "Large shell-deficit drift means reduced Q_p fitting can fall below the current solver noise floor.",
+    "residual_note": "For constrained continuation states, projected_residual_norm is the relevant stationarity measure; raw residual_norm includes forbidden off-manifold directions."
+  }
+}

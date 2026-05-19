@@ -3,3 +3,5 @@
 Working title: `Emergent Geometry and the Dissolution of Quantum Gravity`
 
 Scope: geometry as a macroscopic limit of the medium and why the usual quantum-gravity problem is mis-posed in SSV.
+
+Issue `#2` split role: receives the emergent-geometry and quantum-gravity material from the legacy unified `SSV V` draft and keeps it separate from QM and cosmogony.
