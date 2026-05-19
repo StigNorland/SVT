@@ -178,7 +178,7 @@ This distributed character is what makes wake entropy different from a memory me
 medium does not merely ``remember'' in an observer-dependent sense. Its present physical state
 has been changed in ways that affect what subsequent local updates are possible.
 
-\subsection{Why Reconnection Matters But Does Not Exhaust the Story}
+\subsection{Why Reconnection Matters But Does Not Exhaust the Story}\label{sec:reconnection}
 
 Vortex reconnection remains an important process in SSV because it is one of the clearest
 mechanisms by which localized structure is converted into distributed wake structure. A
@@ -280,6 +280,52 @@ dimensionless functionals, the coefficients $\alpha_i$ have not been fixed by a 
 normalization, and the coarse-graining map from microscopic wake structure to macroscopic
 entropy has not yet been derived. Thus $W[\Psi]$ should be read as a candidate structure and
 checklist for the final functional, not as a closed entropy law.
+
+\subsection{Fate of the Wake Channels}\label{sec:channelfate}
+
+Although the $I_i$ are not yet canonical functionals, their physical content is concrete
+enough to classify by fate. Each channel of $W[\Psi]$ corresponds to wake content with a
+characteristic mode of propagation, decay, or persistence in the medium, and the irreversible
+burden carried by the present state is not distributed evenly across them. Table~1 summarizes
+the dominant fate of each channel.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lll}
+\hline
+Channel & Dominant fate & Notes \\
+\hline
+$I_\phi$ (phase disorder) & radiated, then thermalized & Carried outward by phonons; \\
+ & & mixed into phonon bath on scattering timescales. \\[2pt]
+$I_\rho$ (density disorder) & radiated, then thermalized & Sound-wave content; integral mass \\
+ & & conservation gives a global constraint only. \\[2pt]
+$I_\mathcal{V}$ (vortex tangle) & conserved between events & Line length, writhe, and topology \\
+ & & approximately conserved between reconnections; \\
+ & & converted at events into $I_\mathcal{K}$ and $I_\phi$. \\[2pt]
+$I_\mathcal{K}$ (Kelvin-wave) & radiated along filaments & Kelvin cascade transports to small scales; \\
+ & & ultimately decays into $I_\phi$ via Kelvin-phonon \\
+ & & coupling at short wavelength. \\[2pt]
+$I_\mathcal{C}$ (correlation) & erased from observation & Long-range entanglement with the \\
+ & & environment; structurally present but typically \\
+ & & below resolved $(\ell,\mathcal{O})$. \\
+\hline
+\end{tabular}
+\caption{Dominant fate of each wake channel under forward evolution in $\Psi$. ``Radiated''
+means the content propagates outward but remains within $\Psi$; ``thermalized'' means it has
+mixed with bath modes such that the macroscopic description loses access to it; ``erased from
+observation'' means it persists in $\Psi$ but falls below the coarse-graining
+$(\ell,\mathcal{O})$ of any realistic measurement.}
+\end{table}
+
+Three structural points follow. First, no channel is genuinely \emph{lost} — every fate
+column other than ``conserved'' transfers wake content to another channel or to a sector
+below resolution, never out of $\Psi$. Second, vortex tangle $I_\mathcal{V}$ is the only
+channel that carries wake across long timescales without converting; this is why reconnection
+acts as the rate-limiting event for irreversibility in vortex-dominated regimes (\S\ref{sec:reconnection}). Third, the
+classification is observer-relative only in the last column: the wake content tagged as
+``erased from observation'' is real structure in $\Psi$ that is missed by a specific
+$(\ell,\mathcal{O})$, not absent from the medium. The first quantity of \S5.7 retains it;
+the second loses it.
 
 \subsection{Extensivity, Coarse-Graining, and Present Structure}
 
@@ -466,9 +512,8 @@ The paper makes a narrow ontological claim, but several technical tasks remain o
   coarse-graining measure,
   \item show explicitly how wake-complexity reduces to thermodynamic entropy under
   coarse-graining,
-  \item clarify which parts of the wake are conserved, radiated, thermalized, or erased from
-  practical observation,
-  \item quantify the role of reconnection within the broader wake picture,
+  \item quantify the role of reconnection within the broader wake picture by measuring
+  per-event wake deposition against the channel decomposition of \S\ref{sec:channelfate},
   \item connect this time framework to gravity and black holes in later papers without
   overloading the present one.
 \end{enumerate}
