@@ -1,0 +1,112 @@
+{
+  "metadata": {
+    "problem_type": "static",
+    "status": "prototype",
+    "nondimensionalisation": "xi = 1, rho0 = 1, c = 1",
+    "observables": [
+      "total_energy_full",
+      "e_logse",
+      "e_perp",
+      "residual_norm",
+      "depressed_fraction",
+      "min_density"
+    ],
+    "diagnostics": [
+      "energy_monotonicity",
+      "residual_norm",
+      "boundary_anchor",
+      "gmres_iter",
+      "gmres_relres",
+      "vortex_links"
+    ],
+    "issue_refs": [
+      "#13"
+    ],
+    "limitations": [
+      "Jacobian action by finite differencing of g_full; eps choice affects accuracy.",
+      "FFT preconditioner (k^2 + lambda*k^4) assumes periodic BC; boundary anchor applied afterwards.",
+      "Tied to the (2,3)-trefoil-knot initial condition.",
+      "mean_gmres_iter reports total iterations across all restart cycles, not per-cycle.",
+      "Lattice plaquette vortex link counting (initial/final_vortex_links) is reliable at the production grid; final_vortex_links=0 in any run indicates topology has been destroyed by the solver (the min_rho proxy is unreliable, see winding-number-checkpoint.md). Krylov steps destroy ~20% of vortex links per step; rejection-based guards cannot prevent this. The winding guard is disabled by default (winding_drop_tol=-1); enabling it stalls the solver after 2-5 accepted steps. Topology enforcement requires a penalty term, projected gradient, or constrained method."
+    ]
+  },
+  "nondimensionalisation": {
+    "xi": 1.0,
+    "rho0": 1.0,
+    "c": 1.0
+  },
+  "config": {
+    "n": 24,
+    "half_width": 7.0,
+    "xi": 1.0,
+    "major_radius": 2.8,
+    "minor_radius": 0.85,
+    "smoothing_radius": 0.2,
+    "log_pressure": 0.5,
+    "density_floor": 1e-12,
+    "anchor_shell": 2,
+    "boundary_blend_fraction": 0.18,
+    "depressed_threshold": 0.35,
+    "frame_samples": 600
+  },
+  "controls": {
+    "step_size": 0.005,
+    "max_steps": 800,
+    "tolerance": 0.002,
+    "min_step_size": 1e-09,
+    "max_step_size": 0.05,
+    "check_interval": 20,
+    "patience_intervals": 3,
+    "energy_tol": 1e-09,
+    "reference_spacing": null
+  },
+  "lperp": {
+    "lambda_perp": 2000.0,
+    "gmres_tol": 0.0001,
+    "gmres_restart": 30,
+    "gmres_max_cycles": 1,
+    "kinetic_coeff": 0.0,
+    "min_rho_threshold": 0.5,
+    "min_rho_drift_tol": -1.0,
+    "min_rho_warmup": 150,
+    "winding_drop_tol": -1.0,
+    "winding_warmup": 0,
+    "penalty_mu": 1000.0,
+    "penalty_rho_target": 0.05,
+    "penalty_mask_threshold": 0.8
+  },
+  "summary": {
+    "steps_completed": 800,
+    "lambda_perp": 2000.0,
+    "final_energy_full": 970.9281113249145,
+    "final_energy_logse": 775.3093459241653,
+    "final_energy_perp": 178.42388037700007,
+    "final_energy_penalty": 17.194885023749155,
+    "initial_energy_full": 168669.35508276525,
+    "initial_energy_logse": 841.0106187885423,
+    "initial_energy_perp": 71716.41252712165,
+    "initial_energy_penalty": 96111.93193685506,
+    "best_energy_full": 970.9281113249145,
+    "penalty_mask_cells": 1914,
+    "energy_monotonicity_violations": 61,
+    "topology_violations": 0,
+    "accepted_steps": 739,
+    "rejected_steps": 61,
+    "final_step_size": 1.937708091840148e-05,
+    "residual_norm": 7.072090807641064,
+    "depressed_fraction": 0.29499421296296297,
+    "effective_radius": 5.624700812297732,
+    "deficit_volume": 1080.4878993887776,
+    "equivalent_deficit_radius": 6.3656648005561784,
+    "far_field_shell_density": 0.45024311067007783,
+    "far_field_shell_deficit": 0.5497568893299222,
+    "far_field_moment": 1.9195282383744554,
+    "min_density": 0.00013655364820819971,
+    "max_density": 1.0089242777106548,
+    "mean_gmres_iter": 30.0,
+    "max_gmres_iter": 30,
+    "initial_vortex_links": 130,
+    "final_vortex_links": 26,
+    "stop_reason": "max_steps"
+  }
+}
