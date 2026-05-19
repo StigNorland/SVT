@@ -4,9 +4,9 @@ This note records the first box-size comparison of saved radial far-field profil
 
 Artifacts:
 
-- smaller-box profile: [papers/SSV-I/data/example-trefoil-farfield-profile.json](C:/Users/stino/Documents/New%20project/SVT/papers/SSV-I/data/example-trefoil-farfield-profile.json)
-- larger-box profile: [papers/SSV-I/data/example-trefoil-farfield-profile-hw6.json](C:/Users/stino/Documents/New%20project/SVT/papers/SSV-I/data/example-trefoil-farfield-profile-hw6.json)
-- comparison: [papers/SSV-I/data/example-trefoil-farfield-compare-hw5-vs-hw6.json](C:/Users/stino/Documents/New%20project/SVT/papers/SSV-I/data/example-trefoil-farfield-compare-hw5-vs-hw6.json)
+- smaller-box profile: [papers/SSV-I/data/example-trefoil-farfield-profile.json](papers/SSV-I/data/example-trefoil-farfield-profile.json)
+- larger-box profile: [papers/SSV-I/data/example-trefoil-farfield-profile-hw6.json](papers/SSV-I/data/example-trefoil-farfield-profile-hw6.json)
+- comparison: [papers/SSV-I/data/example-trefoil-farfield-compare-hw5-vs-hw6.json](papers/SSV-I/data/example-trefoil-farfield-compare-hw5-vs-hw6.json)
 
 Command used:
 

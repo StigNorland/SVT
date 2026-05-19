@@ -4,7 +4,7 @@ This note records the `100`-step fixed-resolution box-size sweep for the static 
 
 Artifact:
 
-- [papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-100steps-2026-05-06.json](C:/Users/stino/Documents/New%20project/SVT/papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-100steps-2026-05-06.json)
+- [papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-100steps-2026-05-06.json](papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-100steps-2026-05-06.json)
 
 Command used:
 

@@ -38,7 +38,7 @@ Let
 \Pi_{\rm mono} \equiv 1 - \rho_{\rm shell}
 \]
 
-be the current leading static estimator from [alpha-g-proxy-note.md](C:/Users/stino/Documents/New%20project/SVT/papers/SSV-I/alpha-g-proxy-note.md).
+be the current leading static estimator from [alpha-g-proxy-note.md](papers/SSV-I/alpha-g-proxy-note.md).
 
 The first conservative mapping ansatz is
 

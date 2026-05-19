@@ -4,7 +4,7 @@ This note records the first clean box-size-only sweep for the static trefoil pro
 
 Artifact:
 
-- [papers/SSV-I/data/trefoil-boxsize-sweep-n24-2026-05-06.json](C:/Users/stino/Documents/New%20project/SVT/papers/SSV-I/data/trefoil-boxsize-sweep-n24-2026-05-06.json)
+- [papers/SSV-I/data/trefoil-boxsize-sweep-n24-2026-05-06.json](papers/SSV-I/data/trefoil-boxsize-sweep-n24-2026-05-06.json)
 
 Command used:
 
