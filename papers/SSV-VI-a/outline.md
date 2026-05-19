@@ -34,6 +34,10 @@ Galactic discs are coherent standing-wave / soliton structures anchored to the c
 
 ## Immediate drafting tasks
 
-- Keep one primary galaxy example clean
-- Separate derivation from fit procedure
-- Move nonessential cosmological claims out
+- [x] Keep one primary galaxy example clean
+- [x] Separate derivation from fit procedure
+- [x] Move nonessential cosmological claims out
+
+## Issue `#5` Status
+
+This draft is now scoped as the flat-curve / standing-wave paper. Non-axisymmetric morphology is only a boundary note pointing to `SSV VI-b`, and dark-energy / supernova / broad cosmology claims are outside the paper's prediction set.

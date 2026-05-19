@@ -32,5 +32,9 @@ The 2D resonant structure of the galactic disc generates azimuthal overtone patt
 
 ## Immediate drafting tasks
 
-- Keep this clearly downstream of VI-a
-- Use only the minimum needed recap
+- [x] Keep this clearly downstream of VI-a
+- [x] Use only the minimum needed recap
+
+## Issue `#5` Status
+
+This draft is scoped as the morphology companion to `SSV VI-a`. It inherits the flat-curve mechanism instead of re-deriving the whole galactic model, and keeps broad cosmology out of scope.

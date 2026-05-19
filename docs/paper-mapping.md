@@ -46,6 +46,11 @@ Keep in `SSV VI-b`:
 - Morphology sequence
 - Wiggle smoothing / azimuthal averaging story
 
+Issue `#5` status: complete. `SSV VI-a` is the flat-curve / standing-wave
+phenomenology paper; `SSV VI-b` is the downstream 2D morphology and wiggle paper.
+Dark-energy, supernova, and broad cosmology claims are kept out of the galactic
+prediction set unless a later standalone paper justifies them independently.
+
 ### Current `SSV V`
 
 Move to `SSV VII-a`:
