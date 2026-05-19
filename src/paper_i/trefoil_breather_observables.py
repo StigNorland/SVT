@@ -123,6 +123,8 @@ class ExtractionSummary:
     straight_vortex_r_max: float
     f_factor_straight_int: float
     f_factor_straight_raw: float
+    n_y_straight: float
+    n_y_times_f_straight: float
     min_density: float
     min_density_position: tuple[float, float, float]
 
@@ -246,10 +248,16 @@ def extract(state: dict, ec: ExtractionConfig) -> ExtractionSummary:
         denom_str = l_curve_geometric * mu_0_str
         f_factor_straight_int = e_interior / denom_str if denom_str > 0 else float("nan")
         f_factor_straight_raw = e_total / denom_str if denom_str > 0 else float("nan")
+        # N_Y under the SAME straight-vortex calibration:
+        # N_Y_straight = (e_line + e_cavity) / mu_0_straight(R)
+        n_y_straight = (e_line + e_cavity) / mu_0_str if mu_0_str > 0 else float("nan")
+        n_y_times_f_straight = n_y_straight * f_factor_straight_int
     else:
         mu_0_str = 0.0
         f_factor_straight_int = float("nan")
         f_factor_straight_raw = float("nan")
+        n_y_straight = float("nan")
+        n_y_times_f_straight = float("nan")
 
     rho = np.abs(psi) ** 2
     flat_idx = int(np.argmin(rho))
@@ -287,6 +295,8 @@ def extract(state: dict, ec: ExtractionConfig) -> ExtractionSummary:
         straight_vortex_r_max=ec.straight_vortex_r_max,
         f_factor_straight_int=f_factor_straight_int,
         f_factor_straight_raw=f_factor_straight_raw,
+        n_y_straight=n_y_straight,
+        n_y_times_f_straight=n_y_times_f_straight,
         min_density=min_density,
         min_density_position=min_pos,
     )
