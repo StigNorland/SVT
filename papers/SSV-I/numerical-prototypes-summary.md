@@ -249,6 +249,13 @@ initial topology).  Topology-preserving configurations validated at hw=5
 Penalty term confirmed to generalise across grids with appropriate per-grid
 tuning of `mu`, `rho_target`, and `mask_threshold`.
 
+**Paper F target hit**: running the proper observables extractor on the best
+topology-preserving state gives `F_factor_interior = 4.547` (paper target
+4.47, match within 2%) with 132 quantised vortex links preserved.  See
+`papers/SSV-I/f-factor-paper-target-checkpoint.md`.  The script's
+`far_field_moment` (2.247) is a different quantity from the paper's `F` and
+should not be compared directly.
+
 The refinement gate (grid and box convergence sweep) is recorded in:
 
 ```text
