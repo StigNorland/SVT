@@ -345,13 +345,17 @@ harmonic oscillator with frequency $\omega_k = c_s k$ and thermal occupation
   n_k = \frac{1}{e^{\hbar\omega_k/k_B T} - 1}.
 \end{equation}
 
-For the phase-disorder channel, take $I_\phi$ to count the per-mode von Neumann entropies of
-the phase quadrature,
+For the phonon channel, take $I_\phi$ to count the per-mode von Neumann entropy of the
+bulk acoustic excitations,
 \begin{equation}
   I_\phi \;=\; \sum_k \left[(1+n_k)\ln(1+n_k) - n_k \ln n_k\right].
 \end{equation}
 This is dimensionless, manifestly a functional of the present state of $\Psi$, and vanishes
-on the zero-temperature ground state ($n_k = 0$ for all $k$).
+on the zero-temperature ground state ($n_k = 0$ for all $k$). Note that for Bogoliubov
+phonons, the phase and density quadratures are conjugate quadratures of the \emph{same}
+oscillator, so a separate ``density'' channel $I_\rho$ would double-count on this sector;
+$I_\rho$ should therefore be reserved for non-phonon density structure (defects, solitons,
+condensate-density inhomogeneity) outside the bulk acoustic bath.
 
 Setting $\alpha_\phi = k_B$ and applying the coarse-graining $(\ell,\mathcal{O})$ that
 resolves mode occupations but discards intra-mode phase information,
@@ -368,10 +372,52 @@ Two structural lessons. First, the calibration $\alpha_\phi = k_B$ is fixed by m
 known thermodynamic entropy, illustrating in concrete terms the normalization route promised
 in \S5.3. Second, the reduction is exact at the level of the phonon channel and serves as a
 template: an analogous construction in each remaining channel (with the appropriate mode
-basis for $I_\rho$, $I_\mathcal{V}$, $I_\mathcal{K}$, $I_\mathcal{C}$) would reduce $W[\Psi]$
-to the full thermodynamic entropy under the union of those coarse-grainings. The general
-derivation across all channels remains open; the phonon channel shows the program is not
-vacuous.
+basis for $I_\mathcal{V}$, $I_\mathcal{K}$, $I_\mathcal{C}$, and a non-phonon $I_\rho$) would
+reduce $W[\Psi]$ to the full thermodynamic entropy under the union of those coarse-grainings.
+The next subsection carries out the same reduction on a genuinely independent channel, the
+Kelvin sector.
+
+\subsection{Worked Example: Kelvin Sector}\label{sec:kelvinreduction}
+
+The Kelvin sector is genuinely independent of the bulk phonon bath: Kelvin waves are
+transverse bending excitations of quantized vortex filaments, supported on the one-dimensional
+locus of the vortex core rather than in the three-dimensional bulk. Their dispersion in the
+long-wavelength limit is~\cite{Vinen2002}
+\begin{equation}
+  \omega_\mathcal{K}(k) \;\approx\; \frac{\hbar}{2 m}\, k^2 \,\Lambda(k\xi),
+  \qquad \Lambda(k\xi) \;=\; \ln(1/k\xi) + O(1),
+\end{equation}
+with $m$ the boson mass and $\xi$ the healing length; the slow logarithm reflects the
+long-range interaction along the filament. In thermal equilibrium each Kelvin mode is again
+a harmonic oscillator with occupation
+\begin{equation}
+  n_k^\mathcal{K} \;=\; \frac{1}{e^{\hbar \omega_\mathcal{K}(k)/k_B T} - 1}.
+\end{equation}
+
+Take $I_\mathcal{K}$ to count the per-mode von Neumann entropy of the Kelvin sector,
+\begin{equation}
+  I_\mathcal{K} \;=\; \sum_k
+  \left[(1 + n_k^\mathcal{K})\ln(1 + n_k^\mathcal{K}) - n_k^\mathcal{K} \ln n_k^\mathcal{K}\right],
+\end{equation}
+where the sum runs over Kelvin modes on the filament. Setting $\alpha_\mathcal{K} = k_B$ and
+applying the analogous coarse-graining $(\ell, \mathcal{O})$ that resolves Kelvin-mode
+occupations but discards intra-mode phases,
+\begin{equation}
+  \alpha_\mathcal{K} I_\mathcal{K} \;=\; S_{\text{Kelvin}}^{\text{thermal}},
+\end{equation}
+the standard thermodynamic entropy of a Bose gas of Kelvin quanta on the filament.
+
+Two remarks. First, although the formula for the per-mode entropy is identical to the phonon
+case, the underlying mode basis is different: bulk acoustic modes labeled by $\mathbf{k}
+\in \mathbb{R}^3$ for $I_\phi$ versus one-dimensional filament-bending modes for
+$I_\mathcal{K}$. The sum $\alpha_\phi I_\phi + \alpha_\mathcal{K} I_\mathcal{K}$ is therefore
+genuinely additive and does \emph{not} double-count, in contrast to the conjugacy issue
+flagged in \S\ref{sec:phononreduction} for a putative $I_\rho$ on the same phonon modes.
+Second, because $\omega_\mathcal{K}(k) \propto k^2 \Lambda$ rather than $c_s k$, the
+low-temperature scaling of $S_{\text{Kelvin}}^{\text{thermal}}$ differs from the acoustic
+$T^3$ law; the Kelvin channel therefore contributes a thermodynamically distinct dependence
+on $T$ at low temperature, which is in principle observable in geometries where the Kelvin
+sector dominates over bulk phonons (slender vortex filaments at low density).
 
 \subsection{The Initial-Condition Question}
 
@@ -544,13 +590,15 @@ heavier mathematics.
 The paper makes a narrow ontological claim, but several technical tasks remain open:
 
 \begin{enumerate}
-  \item define the remaining $I_i$ channels in $W[\Psi]$ as computable dimensionless
-  functionals (the $I_\phi$ form of \S\ref{sec:phononreduction} provides a template),
-  \item fix the remaining coefficients $\alpha_\rho, \alpha_\mathcal{V}, \alpha_\mathcal{K},
-  \alpha_\mathcal{C}$ by analogous calibration to known thermodynamic limits,
-  \item extend the phonon-channel reduction of \S\ref{sec:phononreduction} to the remaining
-  channels, completing the demonstration that wake-complexity reduces to thermodynamic
-  entropy under the union of channel-wise coarse-grainings,
+  \item define the remaining $I_i$ channels ($I_\mathcal{V}$, $I_\mathcal{C}$, and a
+  non-phonon $I_\rho$) as computable dimensionless functionals, following the templates of
+  \S\ref{sec:phononreduction} and \S\ref{sec:kelvinreduction},
+  \item fix the remaining coefficients $\alpha_\mathcal{V}, \alpha_\mathcal{C}, \alpha_\rho$
+  by analogous calibration to known thermodynamic or counting limits,
+  \item extend the channel-wise reductions of \S\ref{sec:phononreduction} and
+  \S\ref{sec:kelvinreduction} to the remaining channels, completing the demonstration that
+  wake-complexity reduces to thermodynamic entropy under the union of channel-wise
+  coarse-grainings,
   \item quantify the role of reconnection within the broader wake picture by measuring
   per-event wake deposition against the channel decomposition of \S\ref{sec:channelfate},
   \item connect this time framework to gravity and black holes in later papers without
