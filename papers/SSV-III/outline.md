@@ -56,7 +56,12 @@ Time is local change in `Psi`, the past survives only as wake structure in the p
 
 ## Immediate drafting tasks
 
-- Rewrite abstract around wake-complexity
-- Replace entropy-as-count language
-- Add section separating formal and physical reversal
-- Move black-hole and CMB material to other papers
+- [x] Rewrite abstract around wake-complexity
+- [x] Replace entropy-as-count language
+- [x] Add section separating formal and physical reversal
+- [x] Move black-hole material to `papers/SSV-V`
+- [x] Move CMB material to `papers/SSV-IX`
+
+## Issue `#1` Status
+
+The current `main.tex` is a narrow SSV III draft that can stand on its own as the time paper for the series. The remaining open items are not scope-rebuild tasks; they are follow-on derivation tasks around the computable wake functional, coarse-graining, and links to later gravity / black-hole papers.
