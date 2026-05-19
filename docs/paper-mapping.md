@@ -67,6 +67,12 @@ Move to `SSV VIII`:
 - Vortex nucleation
 - Resonant-cosmos cosmogony
 
+Issue `#2` status: complete. The overloaded legacy `SSV V` is no longer treated as one
+manuscript. Its former quantum-mechanics material now lives in `papers/SSV-VII-a`,
+its geometry / quantum-gravity material in `papers/SSV-VII-b`, and its cosmogony
+material in `papers/SSV-VIII`. The current `papers/SSV-V` is a separate black-hole
+manuscript.
+
 ### SSV IX (CMB and Primordial Phonon Bath)
 
 New paper — no current draft to map from.
