@@ -32,6 +32,40 @@ if str(SRC_ROOT) not in sys.path:
 from shared_numerics import OutputStatus, ScriptMetadata
 from trefoil_observables import energy_density
 from trefoil_breather_static import trefoil_curve
+from vortex_profile import VortexProfile
+
+
+_VORTEX_PROFILE_CACHE: VortexProfile | None = None
+
+
+def _get_vortex_profile() -> VortexProfile:
+    global _VORTEX_PROFILE_CACHE
+    if _VORTEX_PROFILE_CACHE is None:
+        _VORTEX_PROFILE_CACHE = VortexProfile.solve(x_min=1e-4, x_max=20.0, n=4000)
+    return _VORTEX_PROFILE_CACHE
+
+
+def mu_0_straight_vortex(log_pressure: float, r_max: float, n_pts: int = 4000) -> float:
+    """Per-length tension of an infinite straight LogSE vortex, integrated to r=r_max.
+
+    Energy density (cylindrical, per area) = 0.5*(f'^2 + f^2/r^2) + log_p*(f^2*log(f^2) - f^2 + 1)
+    Energy per unit length = integral_0^r_max 2*pi*r * (density) dr
+
+    The 1/r^2 kinetic term diverges logarithmically as r_max -> infty (2D vortex
+    log-divergence).  The result depends on the cutoff r_max -- this is the
+    natural physical scale beyond which neighbouring vortex contributions matter.
+    Grid-independent (computed from the ODE-solved profile, not the lattice).
+    """
+    prof = _get_vortex_profile()
+    rs = np.linspace(1e-4, r_max, n_pts)
+    fs = np.array([prof.value(r) for r in rs])
+    fps = np.array([prof.derivative(r) for r in rs])
+    rho = fs**2
+    rho_safe = np.maximum(rho, 1e-300)
+    kinetic = 0.5 * (fps**2 + fs**2 / rs**2)
+    potential = log_pressure * (rho * np.log(rho_safe) - rho + 1.0)
+    integrand = 2.0 * math.pi * rs * (kinetic + potential)
+    return float(np.trapezoid(integrand, rs))
 
 
 SCRIPT_METADATA = ScriptMetadata(
@@ -55,6 +89,7 @@ class ExtractionConfig:
     r_cavity: float
     cal_arc_half_width: float
     anchor_thickness_xi: float = -1.0  # if >0, overrides cell-based anchor_shell with a fixed physical thickness
+    straight_vortex_r_max: float = -1.0  # if >0, also compute F_straight using straight-vortex tension at this R cutoff
 
 
 @dataclass(frozen=True)
@@ -84,6 +119,10 @@ class ExtractionSummary:
     n_y_per_curve_length: float
     f_factor_interior: float
     f_factor_raw: float
+    mu_0_straight: float
+    straight_vortex_r_max: float
+    f_factor_straight_int: float
+    f_factor_straight_raw: float
     min_density: float
     min_density_position: tuple[float, float, float]
 
@@ -199,6 +238,19 @@ def extract(state: dict, ec: ExtractionConfig) -> ExtractionSummary:
         f_factor_interior = float("nan")
         f_factor_raw = float("nan")
 
+    # Straight-vortex calibration: grid-invariant denominator using
+    # geometric curve length * theoretical per-length tension.
+    # This decouples F from the UV-sensitive resolved tube energy.
+    if ec.straight_vortex_r_max > 0.0:
+        mu_0_str = mu_0_straight_vortex(log_pressure, ec.straight_vortex_r_max)
+        denom_str = l_curve_geometric * mu_0_str
+        f_factor_straight_int = e_interior / denom_str if denom_str > 0 else float("nan")
+        f_factor_straight_raw = e_total / denom_str if denom_str > 0 else float("nan")
+    else:
+        mu_0_str = 0.0
+        f_factor_straight_int = float("nan")
+        f_factor_straight_raw = float("nan")
+
     rho = np.abs(psi) ** 2
     flat_idx = int(np.argmin(rho))
     i, j, k = np.unravel_index(flat_idx, rho.shape)
@@ -231,6 +283,10 @@ def extract(state: dict, ec: ExtractionConfig) -> ExtractionSummary:
         n_y_per_curve_length=n_y_per_curve_length,
         f_factor_interior=f_factor_interior,
         f_factor_raw=f_factor_raw,
+        mu_0_straight=mu_0_str,
+        straight_vortex_r_max=ec.straight_vortex_r_max,
+        f_factor_straight_int=f_factor_straight_int,
+        f_factor_straight_raw=f_factor_straight_raw,
         min_density=min_density,
         min_density_position=min_pos,
     )
@@ -243,6 +299,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--r-cavity", type=float, default=1.5, help="Cavity ball radius (in xi) around origin")
     parser.add_argument("--cal-arc-half-width", type=float, default=0.5, help="Half-length of arc-length calibration slab")
     parser.add_argument("--anchor-thickness-xi", type=float, default=-1.0, help="If >0, exclude a physical boundary thickness (in xi) from e_interior, overriding the cell-based anchor_shell (grid-invariant comparator)")
+    parser.add_argument("--straight-vortex-r-max", type=float, default=-1.0, help="If >0, also compute F_straight using the LogSE straight-vortex tension integrated to this radial cutoff (in xi). Grid-invariant calibration.")
     parser.add_argument("--output", type=Path)
     return parser.parse_args()
 
@@ -255,6 +312,7 @@ def main() -> None:
         r_cavity=args.r_cavity,
         cal_arc_half_width=args.cal_arc_half_width,
         anchor_thickness_xi=args.anchor_thickness_xi,
+        straight_vortex_r_max=args.straight_vortex_r_max,
     )
     summary = extract(state, ec)
     summary_payload = asdict(summary)
