@@ -335,6 +335,44 @@ at the macroscopic level by coarse-graining over the fine wake structure of the 
 view, extensivity and additivity are not primitive axioms, but emergent properties of how wake
 structure composes across weakly coupled subsystems.
 
+\subsection{Worked Example: Phonon-Bath Reduction}\label{sec:phononreduction}
+
+The preceding claim is concrete enough to demonstrate on a single channel. Consider a region
+of $\Psi$ supporting a thermal bath of Bogoliubov phonons at temperature $T$. The Madelung
+phase $\theta(\mathbf{x},t)$ decomposes into mode amplitudes; each long-wavelength mode is a
+harmonic oscillator with frequency $\omega_k = c_s k$ and thermal occupation
+\begin{equation}
+  n_k = \frac{1}{e^{\hbar\omega_k/k_B T} - 1}.
+\end{equation}
+
+For the phase-disorder channel, take $I_\phi$ to count the per-mode von Neumann entropies of
+the phase quadrature,
+\begin{equation}
+  I_\phi \;=\; \sum_k \left[(1+n_k)\ln(1+n_k) - n_k \ln n_k\right].
+\end{equation}
+This is dimensionless, manifestly a functional of the present state of $\Psi$, and vanishes
+on the zero-temperature ground state ($n_k = 0$ for all $k$).
+
+Setting $\alpha_\phi = k_B$ and applying the coarse-graining $(\ell,\mathcal{O})$ that
+resolves mode occupations but discards intra-mode phase information,
+\begin{equation}
+  \alpha_\phi I_\phi
+  \;=\; k_B \sum_k \left[(1+n_k)\ln(1+n_k) - n_k \ln n_k\right]
+  \;=\; S_{\text{thermal}},
+\end{equation}
+which is the standard thermodynamic entropy of a Bose gas of phonons. The familiar
+$S \propto T^3$ scaling in the acoustic limit follows from $D(\omega) \propto \omega^2$ in
+three dimensions; no further input is required.
+
+Two structural lessons. First, the calibration $\alpha_\phi = k_B$ is fixed by matching to a
+known thermodynamic entropy, illustrating in concrete terms the normalization route promised
+in \S5.3. Second, the reduction is exact at the level of the phonon channel and serves as a
+template: an analogous construction in each remaining channel (with the appropriate mode
+basis for $I_\rho$, $I_\mathcal{V}$, $I_\mathcal{K}$, $I_\mathcal{C}$) would reduce $W[\Psi]$
+to the full thermodynamic entropy under the union of those coarse-grainings. The general
+derivation across all channels remains open; the phonon channel shows the program is not
+vacuous.
+
 \subsection{The Initial-Condition Question}
 
 A monotonicity claim for $W[\Psi]$ has an immediate consequence: there must have been an
@@ -506,12 +544,13 @@ heavier mathematics.
 The paper makes a narrow ontological claim, but several technical tasks remain open:
 
 \begin{enumerate}
-  \item define the schematic $I_i$ channels in $W[\Psi]$ as computable dimensionless
-  functionals,
-  \item fix the coefficients $\alpha_i$ by thermodynamic normalization or by a derived
-  coarse-graining measure,
-  \item show explicitly how wake-complexity reduces to thermodynamic entropy under
-  coarse-graining,
+  \item define the remaining $I_i$ channels in $W[\Psi]$ as computable dimensionless
+  functionals (the $I_\phi$ form of \S\ref{sec:phononreduction} provides a template),
+  \item fix the remaining coefficients $\alpha_\rho, \alpha_\mathcal{V}, \alpha_\mathcal{K},
+  \alpha_\mathcal{C}$ by analogous calibration to known thermodynamic limits,
+  \item extend the phonon-channel reduction of \S\ref{sec:phononreduction} to the remaining
+  channels, completing the demonstration that wake-complexity reduces to thermodynamic
+  entropy under the union of channel-wise coarse-grainings,
   \item quantify the role of reconnection within the broader wake picture by measuring
   per-event wake deposition against the channel decomposition of \S\ref{sec:channelfate},
   \item connect this time framework to gravity and black holes in later papers without
