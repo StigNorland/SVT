@@ -52,6 +52,10 @@ Black holes are finite coherent condensates of the vacuum medium, not singularit
 
 ## Immediate drafting tasks
 
-- Clarify "freezing" versus "pinning"
-- Replace any singularity language with finite condensate language
-- Separate spin-persistence claim from any population claim about near-extremal clustering
+- [x] Clarify "freezing" versus "pinning"
+- [x] Replace singular endpoint language with finite condensate language
+- [x] Separate spin-persistence claim from any population claim about near-extremal clustering
+
+## Issue `#3` Status
+
+The current `main.tex` is a focused condensate black-hole draft. It keeps galaxy standing-wave applications, broad cosmology, and full Kerr derivation out of scope while preserving the core ontology: finite condensate interior, acoustic-freezing horizon, topological spin, and memory-bearing boundary.
