@@ -31,6 +31,8 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 | `cq_geometry_proxy.py` | `candidate` | first geometry-level constraint extractor for the unresolved monopole calibration in issue `#14` |
 | `cq_geometry_compare.py` | `candidate` | comparison harness for geometry-level monopole-calibration diagnostics across saved states |
 | `q_p_two_factor_pure_additive_local_scan.py` | `candidate` | pure additive local-geometry Q_p scan for issue `#14` |
+| `q_p_convergence_audit.py` | `candidate` | numerical ceiling audit for reduced `Q_p` extraction in issue `#14` |
+| `q_p_kernel_integral.py` | `candidate` | direct long-wavelength `Q_p = delta V_p (a_p / xi)^3` kernel checkpoint for issue `#14` |
 | `trefoil_y_junction_static.py` | `prototype` | first open three-prong Y-junction relaxation for `N_Y` / `F` on issue `#13` |
 | `trefoil_y_junction_observables.py` | `prototype` | first `N_Y` / `F` extractor with self-calibration on saved Y-junction states |
 | `trefoil_y_junction_refinement.py` | `prototype` | first grid + box sensitivity sweep for the Y-junction track |

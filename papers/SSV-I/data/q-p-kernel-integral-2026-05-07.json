@@ -1,0 +1,209 @@
+{
+  "ap_over_xi": 0.0005446170214876324,
+  "window": "full_support",
+  "rows": [
+    {
+      "state": "papers/SSV-I/data/trefoil-state-n24-hw5-200steps-2026-05-06.npz",
+      "n": 24,
+      "half_width": 5.0,
+      "steps_completed": 200,
+      "residual_norm": 0.03415691793302642,
+      "shell_mean_density": 0.993091319082684,
+      "shell_mean_deficit": 0.006908680917316001,
+      "deficit_volume": 5.779112282283423,
+      "kernel_prefactor": 1.6153760217552402e-10,
+      "q_p_kernel_long_wavelength": 9.335439407831842e-10
+    },
+    {
+      "state": "papers/SSV-I/data/trefoil-state-n24-hw6-200steps-2026-05-06.npz",
+      "n": 24,
+      "half_width": 6.0,
+      "steps_completed": 200,
+      "residual_norm": 0.019577009119524504,
+      "shell_mean_density": 0.9977701401017948,
+      "shell_mean_deficit": 0.002229859898205233,
+      "deficit_volume": 2.9501171294886084,
+      "kernel_prefactor": 1.6153760217552402e-10,
+      "q_p_kernel_long_wavelength": 4.765548472345297e-10
+    },
+    {
+      "state": "papers/SSV-I/data/trefoil-state-n24-hw7-200steps-2026-05-06.npz",
+      "n": 24,
+      "half_width": 7.0,
+      "steps_completed": 200,
+      "residual_norm": 0.011893297637352519,
+      "shell_mean_density": 0.9990298506457959,
+      "shell_mean_deficit": 0.0009701493542041417,
+      "deficit_volume": 1.9325484683500704,
+      "kernel_prefactor": 1.6153760217552402e-10,
+      "q_p_kernel_long_wavelength": 3.1217924566525194e-10
+    },
+    {
+      "state": "papers/SSV-I/data/trefoil-state-n48-hw5-400steps-2026-05-06.npz",
+      "n": 48,
+      "half_width": 5.0,
+      "steps_completed": 400,
+      "residual_norm": 0.18167799432071227,
+      "shell_mean_density": 0.8744144628892311,
+      "shell_mean_deficit": 0.12558553711076892,
+      "deficit_volume": 115.7127865955362,
+      "kernel_prefactor": 1.6153760217552402e-10,
+      "q_p_kernel_long_wavelength": 1.8691966087691037e-08
+    },
+    {
+      "state": "papers/SSV-I/data/trefoil-state-n48-hw6-400steps-2026-05-06.npz",
+      "n": 48,
+      "half_width": 6.0,
+      "steps_completed": 400,
+      "residual_norm": 0.11510603535220364,
+      "shell_mean_density": 0.9446106120831488,
+      "shell_mean_deficit": 0.05538938791685122,
+      "deficit_volume": 90.70924685218449,
+      "kernel_prefactor": 1.6153760217552402e-10,
+      "q_p_kernel_long_wavelength": 1.4652954231649584e-08
+    },
+    {
+      "state": "papers/SSV-I/data/trefoil-state-n48-hw7-400steps-2026-05-06.npz",
+      "n": 48,
+      "half_width": 7.0,
+      "steps_completed": 400,
+      "residual_norm": 0.07284759822754107,
+      "shell_mean_density": 0.9730517661764407,
+      "shell_mean_deficit": 0.026948233823559264,
+      "deficit_volume": 61.521107420486594,
+      "kernel_prefactor": 1.6153760217552402e-10,
+      "q_p_kernel_long_wavelength": 9.937972175888241e-09
+    }
+  ],
+  "by_n": {
+    "24": {
+      "half_width_values": [
+        5.0,
+        6.0,
+        7.0
+      ],
+      "deficit_volume": {
+        "min": 1.9325484683500704,
+        "max": 5.779112282283423,
+        "span": 3.8465638139333524,
+        "relative_span": 0.6655976949479707
+      },
+      "q_p_kernel_long_wavelength": {
+        "min": 3.1217924566525194e-10,
+        "max": 9.335439407831842e-10,
+        "span": 6.213646951179322e-10,
+        "relative_span": 0.6655976949479707
+      },
+      "shell_mean_density": {
+        "min": 0.993091319082684,
+        "max": 0.9990298506457959,
+        "span": 0.00593853156311186,
+        "relative_span": 0.005944298420385593
+      }
+    },
+    "48": {
+      "half_width_values": [
+        5.0,
+        6.0,
+        7.0
+      ],
+      "deficit_volume": {
+        "min": 61.521107420486594,
+        "max": 115.7127865955362,
+        "span": 54.19167917504961,
+        "relative_span": 0.46832922073229316
+      },
+      "q_p_kernel_long_wavelength": {
+        "min": 9.937972175888241e-09,
+        "max": 1.8691966087691037e-08,
+        "span": 8.753993911802795e-09,
+        "relative_span": 0.4683292207322932
+      },
+      "shell_mean_density": {
+        "min": 0.8744144628892311,
+        "max": 0.9730517661764407,
+        "span": 0.09863730328720965,
+        "relative_span": 0.10136901932237388
+      }
+    }
+  },
+  "cross_resolution": {
+    "5.0": {
+      "coarse_n": 24,
+      "fine_n": 48,
+      "deficit_volume": {
+        "coarse": 5.779112282283423,
+        "fine": 115.7127865955362,
+        "relative_drift": 0.9500564073140525
+      },
+      "q_p_kernel_long_wavelength": {
+        "coarse": 9.335439407831842e-10,
+        "fine": 1.8691966087691037e-08,
+        "relative_drift": 0.9500564073140526
+      },
+      "shell_mean_density": {
+        "coarse": 0.993091319082684,
+        "fine": 0.8744144628892311,
+        "relative_drift": 0.11950246056231208
+      },
+      "residual_norm": {
+        "coarse": 0.03415691793302642,
+        "fine": 0.18167799432071227,
+        "relative_drift": 0.8119919913210296
+      }
+    },
+    "6.0": {
+      "coarse_n": 24,
+      "fine_n": 48,
+      "deficit_volume": {
+        "coarse": 2.9501171294886084,
+        "fine": 90.70924685218449,
+        "relative_drift": 0.9674772172422953
+      },
+      "q_p_kernel_long_wavelength": {
+        "coarse": 4.765548472345297e-10,
+        "fine": 1.4652954231649584e-08,
+        "relative_drift": 0.9674772172422953
+      },
+      "shell_mean_density": {
+        "coarse": 0.9977701401017948,
+        "fine": 0.9446106120831488,
+        "relative_drift": 0.05327833123290553
+      },
+      "residual_norm": {
+        "coarse": 0.019577009119524504,
+        "fine": 0.11510603535220364,
+        "relative_drift": 0.8299219579614362
+      }
+    },
+    "7.0": {
+      "coarse_n": 24,
+      "fine_n": 48,
+      "deficit_volume": {
+        "coarse": 1.9325484683500704,
+        "fine": 61.521107420486594,
+        "relative_drift": 0.9685872288490937
+      },
+      "q_p_kernel_long_wavelength": {
+        "coarse": 3.1217924566525194e-10,
+        "fine": 9.937972175888241e-09,
+        "relative_drift": 0.9685872288490937
+      },
+      "shell_mean_density": {
+        "coarse": 0.9990298506457959,
+        "fine": 0.9730517661764407,
+        "relative_drift": 0.026003311565277347
+      },
+      "residual_norm": {
+        "coarse": 0.011893297637352519,
+        "fine": 0.07284759822754107,
+        "relative_drift": 0.8367372716914627
+      }
+    }
+  },
+  "interpretation": {
+    "purpose": "Compute the long-wavelength Q_p kernel integral Q_p = deltaV * (a_p / xi)^3 from saved static proton states.",
+    "carrier_scale": "xi is the electron healing length of the surrounding medium, not the proton grain length a_p.",
+    "warning": "This is the long-wavelength kernel limit only. Any sub-grain operator beyond this limit is unresolved on the current grid."
+  }
+}
