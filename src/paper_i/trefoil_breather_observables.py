@@ -54,6 +54,7 @@ class ExtractionConfig:
     r_tube: float
     r_cavity: float
     cal_arc_half_width: float
+    anchor_thickness_xi: float = -1.0  # if >0, overrides cell-based anchor_shell with a fixed physical thickness
 
 
 @dataclass(frozen=True)
@@ -68,6 +69,8 @@ class ExtractionSummary:
     e_total_raw: float
     e_anchor_shell: float
     e_interior: float
+    anchor_cells_used: int
+    anchor_thickness_xi_actual: float
     e_line: float
     e_cavity: float
     e_bulk_residual: float
@@ -130,14 +133,21 @@ def extract(state: dict, ec: ExtractionConfig) -> ExtractionSummary:
     edens = energy_density(psi, spacing, log_pressure, density_floor)
     e_total = float(np.sum(edens) * cell_volume)
 
+    # Anchor shell: by default uses the cell-based anchor_shell from cfg.
+    # If ec.anchor_thickness_xi > 0, use a fixed physical thickness instead
+    # (grid-invariant: cells within anchor_thickness_xi of any box face are excluded).
+    if ec.anchor_thickness_xi > 0.0:
+        anchor_cells = max(1, int(round(ec.anchor_thickness_xi / spacing)))
+    else:
+        anchor_cells = anchor_shell
     anchor_mask = np.zeros_like(edens, dtype=bool)
-    if anchor_shell > 0:
-        anchor_mask[:anchor_shell, :, :] = True
-        anchor_mask[-anchor_shell:, :, :] = True
-        anchor_mask[:, :anchor_shell, :] = True
-        anchor_mask[:, -anchor_shell:, :] = True
-        anchor_mask[:, :, :anchor_shell] = True
-        anchor_mask[:, :, -anchor_shell:] = True
+    if anchor_cells > 0:
+        anchor_mask[:anchor_cells, :, :] = True
+        anchor_mask[-anchor_cells:, :, :] = True
+        anchor_mask[:, :anchor_cells, :] = True
+        anchor_mask[:, -anchor_cells:, :] = True
+        anchor_mask[:, :, :anchor_cells] = True
+        anchor_mask[:, :, -anchor_cells:] = True
     e_anchor_shell = float(np.sum(edens[anchor_mask]) * cell_volume)
     e_interior = e_total - e_anchor_shell
 
@@ -206,6 +216,8 @@ def extract(state: dict, ec: ExtractionConfig) -> ExtractionSummary:
         e_total_raw=e_total,
         e_anchor_shell=e_anchor_shell,
         e_interior=e_interior,
+        anchor_cells_used=anchor_cells,
+        anchor_thickness_xi_actual=anchor_cells * spacing,
         e_line=e_line,
         e_cavity=e_cavity,
         e_bulk_residual=e_bulk_residual,
@@ -230,6 +242,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--r-tube", type=float, default=1.5, help="Tube radius (in xi) around the knot curve")
     parser.add_argument("--r-cavity", type=float, default=1.5, help="Cavity ball radius (in xi) around origin")
     parser.add_argument("--cal-arc-half-width", type=float, default=0.5, help="Half-length of arc-length calibration slab")
+    parser.add_argument("--anchor-thickness-xi", type=float, default=-1.0, help="If >0, exclude a physical boundary thickness (in xi) from e_interior, overriding the cell-based anchor_shell (grid-invariant comparator)")
     parser.add_argument("--output", type=Path)
     return parser.parse_args()
 
@@ -241,6 +254,7 @@ def main() -> None:
         r_tube=args.r_tube,
         r_cavity=args.r_cavity,
         cal_arc_half_width=args.cal_arc_half_width,
+        anchor_thickness_xi=args.anchor_thickness_xi,
     )
     summary = extract(state, ec)
     summary_payload = asdict(summary)
