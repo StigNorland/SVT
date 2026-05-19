@@ -1,5 +1,10 @@
 # Paper F-Factor Target HIT with Topology-Preserved State (2026-05-19)
 
+**Caveat (added later, 2026-05-19):** the 2% match is at n=24 only.  Doubling
+the grid resolution to n=48 (same configuration, mu re-tuned) gives F=6.886
+(+54% above paper).  The F observable is not grid-converged in this prototype.
+See `f-factor-grid-convergence-checkpoint.md` for the honest assessment.
+
 The topology-preserving Krylov+penalty configuration reproduces the paper's
 target observable **F = 4.47** to within 2%, with genuine vortex topology
 verified by lattice plaquette winding.

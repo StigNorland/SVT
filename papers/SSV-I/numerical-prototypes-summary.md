@@ -249,12 +249,14 @@ initial topology).  Topology-preserving configurations validated at hw=5
 Penalty term confirmed to generalise across grids with appropriate per-grid
 tuning of `mu`, `rho_target`, and `mask_threshold`.
 
-**Paper F target hit**: running the proper observables extractor on the best
-topology-preserving state gives `F_factor_interior = 4.547` (paper target
-4.47, match within 2%) with 132 quantised vortex links preserved.  See
-`papers/SSV-I/f-factor-paper-target-checkpoint.md`.  The script's
-`far_field_moment` (2.247) is a different quantity from the paper's `F` and
-should not be compared directly.
+**Paper F target hit at n=24** (but NOT grid-converged): the topology-preserving
+state at n=24 hw=6 gives `F_factor_interior = 4.547` (paper target 4.47, +1.7%).
+At n=48 hw=6 the same observable rises to **6.886 (+54%)** -- the n=24 match
+was a coarse-grid coincidence, not a real precision claim.  See
+`papers/SSV-I/f-factor-paper-target-checkpoint.md` for the n=24 result and
+`papers/SSV-I/f-factor-grid-convergence-checkpoint.md` for the honest assessment.
+The penalty mechanism preserves topology robustly across all tested grids;
+the F observable itself is not stable enough to claim paper-level precision.
 
 The refinement gate (grid and box convergence sweep) is recorded in:
 
