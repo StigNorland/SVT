@@ -32,8 +32,6 @@ is distinguished from physical reversal in the medium: the substitution $t \to -
 mathematical transformation on trajectories, but does not supply a physical operation that
 globally unwrites the distributed wake of an event. This dissolves the usual paradoxes of time
 travel by treating them as category errors arising from the reification of the past as a place.
-The paper is deliberately narrow in scope. It does not attempt black-hole mechanics,
-cosmology, or the cosmic microwave background; those belong in later papers.
 \end{abstract}
 
 \section{Introduction}
@@ -43,9 +41,10 @@ At the level of formal equations, time often appears as a reversible parameter. 
 experience and thermodynamics, it appears as an irreversible order of change. This tension is
 usually managed rather than resolved.
 
-The aim of this paper is narrow. We do not attempt here to derive gravity, black holes,
-cosmology, or galactic structure. We address only the origin of irreversible time in the SSV
-framework. The central claim is:
+The aim of this paper is narrow. We address only the origin of irreversible time in the SSV
+framework introduced in Paper~I~\cite{SSV-I} and developed in Paper~II~\cite{SSV-II}; the
+scope boundary of the present paper is stated explicitly in \S\ref{sec:scope} below. The
+central claim is:
 
 \begin{quote}
 Time is the local rate of change of $\Psi$, the past survives only as wake structure in the
@@ -56,7 +55,7 @@ This paper is therefore about ontology first and thermodynamic interpretation se
 goal is to state the time claim cleanly enough that the later papers can inherit it without
 having to carry the whole argument again.
 
-\subsection{What This Paper Does Not Attempt}
+\subsection{What This Paper Does Not Attempt}\label{sec:scope}
 
 Because the SSV program is broad, it is important to state the boundary conditions of the
 present paper explicitly. This paper does not attempt:
@@ -73,11 +72,11 @@ paper is to make the time claim stand on its own.
 \subsection{Roadmap}
 
 Section 2 states the minimal SSV setting used in this paper. Section 3 states the ontological
-claim that time is local change rather than a background dimension. Section 4 develops the
-idea that events write wake structure into the medium. Section 5 reframes entropy as
-wake-complexity. Section 6 distinguishes formal time reversal in equations from physical
-reversal in the medium. Section 7 treats time-travel paradoxes as category errors. Section 8
-closes with the remaining open technical questions.
+claim that time is local change rather than a background dimension, and draws the immediate
+consequence for time-travel paradoxes. Section 4 develops the idea that events write wake
+structure into the medium. Section 5 reframes entropy as wake-complexity. Section 6
+distinguishes formal time reversal in equations from physical reversal in the medium.
+Section 7 closes with the remaining open technical questions.
 
 \section{Minimal SSV Setting}
 
@@ -91,11 +90,21 @@ from vortex cores. The exact field equation is not required for the present argu
 required is that the state of the medium has real local structure: phase, density, vortex
 geometry, phonon content, correlations, and boundary data.
 
-In this paper, an ``event'' means a localized update of that structure. Examples include a
-vortex displacement, the emission or scattering of phonons, the excitation of Kelvin waves, or
-a reconnection. A reconnection is especially clear because it changes the connectivity of
-vortex filaments and converts localized order into distributed excitations. But it is not the
-only possible event, and it is not used here as a primitive counter for entropy.
+In this paper, an ``event'' means a localized update of that structure whose forward
+realization deposits wake content the medium cannot locally re-gather into the prior state.
+This criterion is deliberately structural rather than threshold-based. It admits any process
+whose forward and reverse boundary-data requirements differ — a reconnection, a phonon
+emission, a Kelvin-wave excitation, a vortex displacement that radiates — and excludes
+purely reversible relabellings and stationary zero-point fluctuations, whose statistics by
+construction contribute no net wake to $\mathcal{P}(t)$. Reconnection is the clearest
+illustrative case because it changes the connectivity of vortex filaments and converts
+localized order into distributed excitations, but it is not the only possible event, and it is
+not used here as a primitive counter for entropy.
+
+The criterion is circular in form — wake is what events deposit, events are what deposit wake
+— but the circularity is shared with any account of irreversibility, and it is closed
+empirically by the candidate functional in \S5: a process counts as an event to the extent
+that it raises $W[\Psi]$ in any of its channels.
 
 The present state of the medium will be denoted schematically by
 \begin{equation}
@@ -109,7 +118,10 @@ argument attached to present physical structure rather than to an abstract exter
 
 In SSV, the physical vacuum is a real medium described by an order parameter $\Psi$. What
 physics ordinarily measures as time is not an independent dimension in which the medium is
-embedded, but the local rate at which the state of the medium changes.
+embedded, but the local rate at which the state of the medium changes. This is closer in
+spirit to the relational treatments of time advanced by Barbour~\cite{Barbour1999} and
+Rovelli~\cite{Rovelli1993,Rovelli2018} than to the block-universe reading common in
+spacetime physics.
 
 A useful schematic statement is
 \begin{equation}
@@ -124,30 +136,27 @@ This is not yet a final derivation, but a statement of ontology. The present is 
 state of $\Psi$. The future does not yet exist. The past is not a region one could return to. It
 exists only insofar as earlier events have left structure in the present state of the medium.
 
-\subsection{Ordering Without a Block Universe}
+\subsection{Present-State Ontology and Causal Ordering}\label{sec:presentstate}
 
-The claim that only the present state physically exists does not deny ordering. Earlier and
-later remain meaningful because wake structure is asymmetric. A present configuration can
-contain records of a previous event: outgoing phases, displaced vortex geometry, thermalized
-phonons, and modified reconnection opportunities. The inverse relation is not generally true.
-The pre-event configuration does not contain the later wake as an already-existing region.
-
-Thus SSV keeps causal order while rejecting the reification of the past as a second place. The
-ordering relation is carried by structure in $\mathcal{P}(t)$, not by an external archive of
-completed moments.
-
-\subsection{Present-State Ontology}
-
-The strongest version of the claim is:
+The strongest version of the claim has three parts:
 \begin{enumerate}
   \item only the present state of $\Psi$ physically exists,
   \item the past is encoded in that state as record, wake, and correlation,
   \item there is no second arena in which earlier states continue to exist as accessible places.
 \end{enumerate}
 
-This is why time travel paradoxes are not treated here as exotic possibilities, but as signs of
-a mistaken description. They rely on the assumption that the past remains available as a
-destination.
+This does not deny ordering. Earlier and later remain meaningful because wake structure is
+asymmetric: a present configuration can contain records of a previous event (outgoing phases,
+displaced vortex geometry, thermalized phonons, modified reconnection opportunities), while the
+pre-event configuration does not contain the later wake as an already-existing region. Causal
+order is carried by structure in $\mathcal{P}(t)$, not by an external archive of completed
+moments.
+
+A direct consequence is that time-travel paradoxes are not exotic physical possibilities but
+signs of a mistaken description. They rely on the assumption that the past remains available as
+a destination; in SSV there is no such region, and a journey ``to'' the past would require the
+current state of $\Psi$ to be both itself and an earlier state whose records it already
+contains. That is a contradiction in description, not a physical process to be analyzed.
 
 \section{Wake Production in $\Psi$}
 
@@ -210,24 +219,56 @@ start. The stronger claim is:
 Entropy is the irreducible wake-complexity of the present state of $\Psi$.
 \end{quote}
 
-A schematic functional form is
+\subsection{Why This Is Not Tautological}
+
+The monotonicity claim is not:
+\begin{quote}
+Entropy increases because we defined it to count only positive increments.
+\end{quote}
+
+It is instead:
+\begin{quote}
+Events write distributed structure into $\Psi$, and no physical process available to the medium
+globally unwrites that structure back into the exact pre-event state.
+\end{quote}
+
+This is a physical claim about the availability of inverse processes, not merely a bookkeeping
+choice.
+
+\subsection{Relation to Boltzmann Entropy}
+
+The standard expression $S=k_B\ln\Omega$ remains useful; SSV changes the interpretation of the
+microstates being counted. A statistical form for wake entropy is
+\begin{equation}
+  S_{\text{wake}}(t) = k_B \ln \Omega_{\text{wake}}[\Psi(t)],
+\end{equation}
+where $\Omega_{\text{wake}}$ counts physically distinct present wake configurations compatible
+with the same coarse description, rather than an abstract set of hidden possibilities beneath a
+macrostate.
+
+The phrase ``the same coarse description'' has to do real work. Concretely, ``the same''
+means: equivalent under the smoothing of $\Psi$ to some scale $\ell$ and under restriction to
+a specified observable set $\mathcal{O}$. Two wake configurations are identified when their
+$\Psi$-fields, smoothed at scale $\ell$, agree on every observable in $\mathcal{O}$. Different
+choices of $(\ell,\mathcal{O})$ generate different $\Omega_{\text{wake}}$ and therefore
+different numerical entropies — a familiar feature of coarse-grained entropy, made explicit
+here so that $\Omega_{\text{wake}}$ is not a rename of $\Omega$ but a counting tied to the
+medium's resolvable wake channels.
+
+This also explains why entropy can increase while the microscopic state remains definite. The
+medium has one actual state, but the macroscopic description loses access to the detailed
+distribution of wake structure. Thermodynamic entropy is then the coarse-grained shadow of a
+real structural burden in $\Psi$.
+
+\subsection{Candidate Wake Functional}
+
+Equivalently, one may write
 \begin{equation}
   S_{\text{wake}}(t) = k_B\, W[\Psi(t)],
 \end{equation}
 where $W[\Psi(t)]$ measures the amount of present-state structure required to encode the
-surviving wake of prior events.
-
-An alternative statistical form is
-\begin{equation}
-  S_{\text{wake}}(t) = k_B \ln \Omega_{\text{wake}}[\Psi(t)],
-\end{equation}
-where $\Omega_{\text{wake}}$ denotes the number of distinguishable wake configurations
-compatible with the macroscopic state.
-
-\subsection{Candidate Wake Functional}
-
-A usable functional should respond to the parts of $\Psi$ that carry persistent wake structure.
-One possible schematic decomposition is
+surviving wake of prior events. A usable functional should respond to the parts of $\Psi$ that
+carry persistent wake structure. One possible schematic decomposition is
 \begin{equation}
   W[\Psi] =
   \alpha_{\phi} I_{\phi}
@@ -253,39 +294,67 @@ checklist for the final functional, not as a closed entropy law.
 
 \subsection{Extensivity, Coarse-Graining, and Present Structure}
 
-The proposed wake formulation is not meant to deny the usefulness of ordinary thermodynamic
-entropy. Rather, it proposes a deeper physical interpretation for it. Standard thermodynamic
-entropy is recovered at the macroscopic level by coarse-graining over the fine wake structure of
-the medium. On this view, extensivity and additivity are not primitive axioms, but emergent
-properties of how wake structure composes across weakly coupled subsystems.
+The wake formulation is not meant to deny the usefulness of ordinary thermodynamic entropy. It
+proposes a deeper physical interpretation for it: standard thermodynamic entropy is recovered
+at the macroscopic level by coarse-graining over the fine wake structure of the medium. On this
+view, extensivity and additivity are not primitive axioms, but emergent properties of how wake
+structure composes across weakly coupled subsystems.
 
-\subsection{Why This Is Not Tautological}
+\subsection{The Initial-Condition Question}
 
-The monotonicity claim is not:
-\begin{quote}
-Entropy increases because we defined it to count only positive increments.
-\end{quote}
+A monotonicity claim for $W[\Psi]$ has an immediate consequence: there must have been an
+earliest moment at which $W$ was minimal. This is the SSV analogue of the past hypothesis in
+standard cosmology — the assumption that the universe began in a low-entropy state, as
+emphasized by Penrose's Weyl-curvature hypothesis~\cite{Penrose1979} and developed in
+philosophical detail by Albert~\cite{Albert2000} and Price~\cite{Price1996}. The
+present paper does not attempt to derive that condition. It treats it as a separate problem
+deferred to a later cosmological paper in the SSV program, where the initial condition on
+$\Psi$ should be addressed alongside the structure of the early medium. What the present
+paper does claim is weaker and self-contained: \emph{given} a low-wake initial state of
+$\Psi$, the dynamics described in \S4 and \S6 cannot locally undo wake accumulation, and
+$W[\Psi(t)]$ therefore rises along physical histories. Whether the initial condition itself
+is natural, fine-tuned, or derivable from deeper structure is a question outside the scope of
+this paper.
 
-It is instead:
-\begin{quote}
-Events write distributed structure into $\Psi$, and no physical process available to the medium
-globally unwrites that structure back into the exact pre-event state.
-\end{quote}
+\subsection{Two Quantities, Not One: Where the Observer Enters}
 
-This is a physical claim about the availability of inverse processes, not merely a bookkeeping
-choice.
+The preceding subsections actually describe two distinct quantities, and conflating them is
+the source of the standard worry about whether entropy is ``in the world'' or ``in the head.''
+The wake functional $W[\Psi]$ is a property of $\Psi$ alone: it is observer-independent, in
+the same sense that the density $\rho(\mathbf{x},t)$ is observer-independent. The
+coarse-grained entropy that follows from $\Omega_{\text{wake}}$ depends on the choice of
+$(\ell,\mathcal{O})$, and is therefore observer-relative in the standard thermodynamic sense.
 
-\subsection{Relation to Boltzmann Entropy}
+SSV takes both seriously. There is a structural burden carried by $\Psi$ regardless of
+description, and there is a coarse-grained shadow of that burden read off by an observer who
+resolves the medium only down to a particular scale and observable set. The two coincide in
+the limit where $(\ell,\mathcal{O})$ resolves every wake channel; they diverge wherever they
+do not. The monotonicity argument of \S5.1 belongs to the first quantity. The recovery of
+ordinary thermodynamics in \S5.4 belongs to the second.
 
-The standard expression $S=k_B\ln\Omega$ remains useful. The SSV proposal changes the
-interpretation of the microstates being counted. Instead of treating $\Omega$ as an abstract
-set of hidden possibilities beneath a macrostate, $\Omega_{\text{wake}}$ counts physically
-distinct present wake configurations compatible with the same coarse description.
+\subsection{Possible Empirical Signatures}
 
-This also explains why entropy can increase while the microscopic state remains definite. The
-medium has one actual state, but the macroscopic description loses access to the detailed
-distribution of wake structure. Thermodynamic entropy is then the coarse-grained shadow of a
-real structural burden in $\Psi$.
+The present paper does not advance a closed prediction, but the wake formulation suggests
+where wake entropy could in principle diverge from standard thermodynamic entropy. The most
+promising regimes are those where the medium's vortex and Kelvin-wave sectors carry a
+disproportionate share of $W[\Psi]$ relative to thermal degrees of freedom.
+
+Three illustrative regimes are worth naming. (i) Decaying vortex tangles in superfluid
+$^4$He~\cite{Vinen2002}: in the late-time decay of quantum turbulence, conventional
+thermodynamic entropy counts only the phonon bath, while $\alpha_{\mathcal{V}}
+I_{\mathcal{V}} + \alpha_{\mathcal{K}} I_{\mathcal{K}}$ would track the residual tangle and
+Kelvin-wave content that has not yet thermalized. A measured discrepancy between bulk thermal entropy and a
+geometry-aware estimator over the same volume would be evidence for the wake decomposition.
+(ii) BEC reconnection cascades~\cite{Villois2017}: the controlled reconnection of vortex
+filaments in Bose-Einstein condensates allows direct imaging of the topological event and its
+outgoing radiation, and is therefore a natural laboratory for comparing event-by-event wake
+deposition against post-reconnection thermal balance. (iii) Two coarse-grainings of the same
+state: any setting in which $(\ell, \mathcal{O})$ can be varied while the underlying $\Psi$
+is held fixed should exhibit the predicted dependence of coarse-grained entropy on the
+resolved wake channels, in the manner described in \S5.2.
+
+None of these constitute a quantitative prediction in the present paper. They mark the
+regimes where the formalism developed here would most plausibly first be tested.
 
 \section{Formal Time Reversal and Physical Reversal}
 
@@ -304,11 +373,15 @@ the equations.
 
 Physical reversal would require the medium itself to perform the inverse history: gather the
 distributed wake, reconstruct the exact incoming phases and correlations, and restore the prior
-global state. The existence of a formal reverse solution does not imply the existence of a
-physical operation that realizes it.
+global state. In the language of \S3, it would require $\mathcal{R}[\Psi]$ to act with the sign
+and content of an inverse update rather than a forward one — not merely a sign change on an
+external time coordinate, but a physical operation the medium must actually carry out.
 
-This distinction is the basis for the SSV claim that time reversal may exist as a formal
-transformation without existing as an available process in nature.
+The existence of a formal reverse solution does not imply the existence of such an operation.
+Without this distinction, the phrase ``time-reversal symmetry'' invites a misleading inference:
+that because an equation admits a formally reversed trajectory, the physical world must be able
+to run backward in the same sense. Formal reversal is a property of a mathematical description;
+physical reversal is a claim about what operations the medium can actually perform.
 
 \subsection{Boundary Data and the Inverse Problem}
 
@@ -323,23 +396,75 @@ available physical operation. The reverse trajectory may exist in the mathematic
 space. The present medium does not thereby contain a machine that prepares its boundary
 conditions.
 
-\subsection{Why This Distinction Matters}
+This is also where the standard Loschmidt~\cite{Loschmidt1876} and
+Poincaré~\cite{Poincare1890} objections are absorbed. Loschmidt's paradox notes that
+microreversible dynamics admit a formally reversed trajectory for every forward one; SSV does
+not deny that, but holds (with Price~\cite{Price1996}) that the reverse trajectory is realized
+only when the required incoming boundary data are actually supplied — which the medium does
+not do spontaneously. Poincaré recurrence guarantees return to an arbitrarily close state in a
+bounded system with discrete spectrum on cosmologically long timescales, but $\Psi$ in SSV is
+effectively unbounded and supports continuous-spectrum excitations (outgoing phonons,
+radiated Kelvin content, long-range correlations). The wake propagates into channels with no
+finite recurrence time on physically relevant scales. Both objections are about what the
+mathematics permits in the limit; the SSV claim is about what the medium delivers in finite
+time.
 
-Without this distinction, the phrase ``time-reversal symmetry'' invites a misleading inference:
-that because an equation admits a formally reversed trajectory, the physical world must be able
-to run backward in the same sense. The SSV claim is that this inference is invalid. Formal
-reversal is a property of a mathematical description. Physical reversal is a claim about what
-operations the medium can actually perform.
+\subsection{Classical Time Reversal Versus Quantum Unitarity}
 
-\section{Time-Travel Paradoxes as Category Errors}
+The phrase ``time reversal'' covers two different mathematical structures, and the wake
+argument is closer to one than the other. Classical time-reversal symmetry takes a trajectory
+$\{q(t),p(t)\}$ to $\{q(-t),-p(-t)\}$ and is the symmetry Loschmidt invoked. Quantum unitary
+evolution is more delicate: a closed system's state evolves under $U(t) = e^{-iHt/\hbar}$, and
+$U^\dagger(t)$ is the formal inverse — backward evolution exists in principle for any pure
+state.
 
-If the past exists only as structure encoded in the present state, then the usual paradoxes of
-time travel are misdescribed from the start. They treat the past as an existing region into
-which an observer may move. In SSV there is no such region. A journey to the past would mean
-that the current state of $\Psi$ must somehow become both itself and an earlier state whose
-records it already contains.
+The wake argument applies to both, but for related-yet-distinct reasons. Against classical
+reversal it is the Loschmidt response just given. Against quantum reversal it is closer in
+spirit to einselection and decoherence~\cite{Zurek2003,JoosZeh2003}: the wake of an event in
+$\Psi$ is information entangled with environmental degrees of freedom across a vast region
+of the medium, and the local subsystem no longer admits a pure-state description compatible
+with the pre-event state. SSV does not deny global unitarity; it claims that the globally unitary operation
+needed to physically reverse an event is not available to any local agent in $\Psi$, because
+the requisite environmental boundary conditions cannot be locally prepared. The distinction
+between formal and physical reversal is, in the quantum case, the distinction between
+the existence of $U^\dagger$ as an operator and the existence of an apparatus that implements
+it on a wake-dispersed state.
 
-That is not an exotic physical process. It is a contradiction in description.
+\subsection{Application: Closed Timelike Curves and Quantum CTCs}
+
+The wake argument has direct consequences for physical proposals that invoke time travel as
+a literal possibility. Two cases are worth naming.
+
+\emph{Classical closed timelike curves.} General relativity admits solutions
+(Gödel~\cite{Godel1949}, Kerr-interior, Tipler cylinder, traversable wormholes with exotic
+matter~\cite{MorrisThorne1988}) containing closed timelike curves. The usual interpretation is that a worldline could in principle return to
+its own past. In SSV this reading is incoherent for the reason developed in \S3: there is no
+past region to return to. A closed timelike curve in the metric, if such a configuration of
+$\Psi$ were physically realizable at all, would have to be reinterpreted as a closed structure
+in the present state of the medium — a peculiar geometry, not an access route to an earlier
+moment. The metric solution may exist; what does not exist is a destination at the other end
+of the loop.
+
+\emph{Deutsch's quantum CTCs.} Deutsch's D-CTC proposal~\cite{Deutsch1991} restores
+self-consistency by demanding a fixed-point density matrix on the chronology-violating
+region:
+$\rho_{\text{CTC}} = \operatorname{Tr}_A[U(\rho_A \otimes \rho_{\text{CTC}})U^\dagger]$. The
+mathematical content is a fixed point of a quantum channel; it is closed under any unitary
+$U$ and famously implies computational consequences (efficient solution of \textsc{NP}-hard
+problems, distinguishability of non-orthogonal states; see also the postselected variant of
+Lloyd~\textit{et~al.}~\cite{Lloyd2011}). The SSV response is structural rather
+than computational: the D-CTC prescription quietly assumes that the fixed-point state is
+\emph{prepared} on the chronology-violating region, but preparation is itself a wake-writing
+operation in $\Psi$. There is no agent in the medium whose preparing the fixed-point state
+does not itself write distributed wake whose pre-state cannot be reassembled. Deutsch's
+formalism solves the consistency problem at the level of operators while ignoring the
+ontological problem at the level of $\Psi$: the wake of preparing the loop is already
+elsewhere by the time the loop is supposed to close on itself.
+
+Both cases share the same structure. They treat a formal solution (a CTC metric, a fixed-point
+density matrix) as if the formal existence of the solution sufficed to make the physical
+operation available. SSV holds that this is the same category error as before, dressed in
+heavier mathematics.
 
 \section{Discussion and Open Problems}
 
@@ -365,11 +490,99 @@ block universe. It is the physical consequence of how events are written into a 
 
 \section{Conclusion}
 
-We have argued that SSV should treat time as local change in $\Psi$, not as a background
-dimension; the past as present wake structure, not as a destination; and entropy as persistent
-wake-complexity, not as a bare event count. This reframing separates formal time reversal in
-equations from physical reversal in the medium and dissolves time-travel paradoxes as category
-errors. Later papers may build on this ontology, but this paper is intended to stand on its own
-as the cleanest statement of irreversible time in the SSV program.
+The payoff of the present framing is that irreversibility stops being an extra rule layered on
+top of a reversible block universe. If time is local change in $\Psi$ and the past survives
+only as wake structure in the present state, then the asymmetry of experience and the
+asymmetry of equations are no longer in tension: they describe different objects. Equations
+describe trajectory classes that admit formal reversal; the medium carries out forward updates
+whose distributed wake is not locally invertible. Entropy, on this account, is what that
+non-invertibility looks like when it is read off the present state of $\Psi$.
+
+What later papers inherit from this one is therefore a constraint, not a theorem. Any
+SSV-derived account of gravitation, cosmology, or black-hole structure must be compatible with
+the claim that the past is not a place — and any candidate entropy law for $\Psi$ must
+ultimately reduce to a wake-functional of the kind sketched in \S5. The technical work of
+turning that constraint into closed expressions is left to subsequent papers and to the open
+problems listed above.
+
+\begin{thebibliography}{99}
+
+\bibitem{SSV-I}
+S.~Norland, \textit{Saturated Superfluid Vacuum I: Topological Defects in a Saturated
+Superfluid Vacuum --- The Geometric Origin of Matter and the $\alpha$-Harmonic Mass Ladder},
+10.5281/zenodo.19651986, 2026.
+
+\bibitem{SSV-II}
+S.~Norland, \textit{Saturated Superfluid Vacuum II}, SSV program, 2026.
+
+\bibitem{Barbour1999}
+J.~Barbour, \textit{The End of Time: The Next Revolution in Physics}, Oxford University
+Press, 1999.
+
+\bibitem{Rovelli1993}
+C.~Rovelli, ``Statistical mechanics of gravity and the thermodynamical origin of time,''
+\textit{Class.~Quantum Grav.} \textbf{10}, 1549--1566 (1993).
+
+\bibitem{Rovelli2018}
+C.~Rovelli, \textit{The Order of Time}, Riverhead Books, 2018.
+
+\bibitem{Price1996}
+H.~Price, \textit{Time's Arrow and Archimedes' Point: New Directions for the Physics of
+Time}, Oxford University Press, 1996.
+
+\bibitem{Albert2000}
+D.~Z.~Albert, \textit{Time and Chance}, Harvard University Press, 2000.
+
+\bibitem{Penrose1979}
+R.~Penrose, ``Singularities and time-asymmetry,'' in \textit{General Relativity: An Einstein
+Centenary Survey}, eds.\ S.~W.~Hawking and W.~Israel, Cambridge University Press, 1979,
+pp.~581--638.
+
+\bibitem{Loschmidt1876}
+J.~Loschmidt, ``Über den Zustand des Wärmegleichgewichtes eines Systems von Körpern mit
+Rücksicht auf die Schwerkraft,'' \textit{Sitzungsber.~Akad.~Wiss.~Wien} \textbf{73},
+128--142 (1876).
+
+\bibitem{Poincare1890}
+H.~Poincaré, ``Sur le problème des trois corps et les équations de la dynamique,''
+\textit{Acta Math.} \textbf{13}, 1--270 (1890).
+
+\bibitem{Zurek2003}
+W.~H.~Zurek, ``Decoherence, einselection, and the quantum origins of the classical,''
+\textit{Rev.~Mod.~Phys.} \textbf{75}, 715--775 (2003).
+
+\bibitem{JoosZeh2003}
+E.~Joos, H.~D.~Zeh, C.~Kiefer, D.~Giulini, J.~Kupsch, and I.-O.~Stamatescu,
+\textit{Decoherence and the Appearance of a Classical World in Quantum Theory}, 2nd ed.,
+Springer, 2003.
+
+\bibitem{Godel1949}
+K.~Gödel, ``An example of a new type of cosmological solutions of Einstein's field
+equations of gravitation,'' \textit{Rev.~Mod.~Phys.} \textbf{21}, 447--450 (1949).
+
+\bibitem{MorrisThorne1988}
+M.~S.~Morris and K.~S.~Thorne, ``Wormholes in spacetime and their use for interstellar
+travel: A tool for teaching general relativity,'' \textit{Am.~J.~Phys.} \textbf{56},
+395--412 (1988).
+
+\bibitem{Deutsch1991}
+D.~Deutsch, ``Quantum mechanics near closed timelike lines,''
+\textit{Phys.~Rev.~D} \textbf{44}, 3197--3217 (1991).
+
+\bibitem{Lloyd2011}
+S.~Lloyd, L.~Maccone, R.~Garcia-Patron, V.~Giovannetti, Y.~Shikano, S.~Pirandola,
+L.~A.~Rozema, A.~Darabi, Y.~Soudagar, L.~K.~Shalm, and A.~M.~Steinberg, ``Closed timelike
+curves via postselection: Theory and experimental test of consistency,''
+\textit{Phys.~Rev.~Lett.} \textbf{106}, 040403 (2011).
+
+\bibitem{Vinen2002}
+W.~F.~Vinen and J.~J.~Niemela, ``Quantum turbulence,''
+\textit{J.~Low Temp.~Phys.} \textbf{128}, 167--231 (2002).
+
+\bibitem{Villois2017}
+A.~Villois, D.~Proment, and G.~Krstulovic, ``Universal and nonuniversal aspects of vortex
+reconnections in superfluids,'' \textit{Phys.~Rev.~Fluids} \textbf{2}, 044701 (2017).
+
+\end{thebibliography}
 
 \end{document}
