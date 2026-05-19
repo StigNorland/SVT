@@ -30,7 +30,39 @@ The open problem is therefore not "find some gravity-looking number." It is:
 - map that quantity into the effective acoustic monopole moment `Q_p`
 - propagate that map into `\alpha_G`
 
-## Provisional Map
+## Kernel Form
+
+The reduced map should be understood as a shorthand for an underlying kernel functional of the static deficit profile:
+
+\[
+Q_p[\rho]
+  =
+  \left(\frac{a_p}{\xi}\right)^3
+  \int_{\mathbb{R}^3}
+    W_p(\mathbf{x})
+    \,\mathcal{S}_{\xi}\!\left[1-\rho(\mathbf{x})\right]
+  \, d^3x.
+\]
+
+Here `W_p` is the proton-support window for the resolved static breather, and `\mathcal{S}_{\xi}` is the carrier-medium coupling operator set by the healing length `\xi = \hbar/(m_e c)` of the surrounding medium. The proton grain scale `a_p = \hbar/(m_p c)` enters through the explicit suppression factor `\left(a_p/\xi\right)^3`, not by replacing `\xi`.
+
+The basic long-wavelength test is
+
+\[
+\mathcal{S}_{\xi}[1-\rho] \to 1-\rho,
+\]
+
+so that the kernel reduces to
+
+\[
+Q_p \to \delta V_p \left(\frac{a_p}{\xi}\right)^3
+\]
+
+when the static deficit varies slowly on the carrier healing-length scale and the resolved proton window captures the full support.
+
+That is the object the static numerical pipeline should eventually compute directly.
+
+## Provisional Reduced Map
 
 Let
 
@@ -38,7 +70,7 @@ Let
 \Pi_{\rm mono} \equiv 1 - \rho_{\rm shell}
 \]
 
-be the current leading static estimator from [alpha-g-proxy-note.md](C:/Users/stino/Documents/New%20project/SVT/papers/SSV-I/alpha-g-proxy-note.md).
+be the current leading static estimator from [alpha-g-proxy-note.md](../../papers/SSV-I/alpha-g-proxy-note.md).
 
 The first conservative mapping ansatz is
 
@@ -46,7 +78,7 @@ The first conservative mapping ansatz is
 Q_p = C_Q \, \delta V_p \, \Pi_{\rm mono},
 \]
 
-where `C_Q` is an unresolved dimensionless calibration factor encoding everything the present prototype branch does not yet separate cleanly:
+where `C_Q` is an unresolved dimensionless calibration factor encoding everything the present prototype branch does not yet separate cleanly relative to the kernel above:
 
 - shell-location convention
 - static-to-asymptotic extrapolation

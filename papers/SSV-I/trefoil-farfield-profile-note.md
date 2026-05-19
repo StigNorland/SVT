@@ -4,8 +4,8 @@ This note records the first saved radial far-field profile for the static trefoi
 
 Artifacts:
 
-- state: [papers/SSV-I/data/example-trefoil-state.npz](C:/Users/stino/Documents/New%20project/SVT/papers/SSV-I/data/example-trefoil-state.npz)
-- profile: [papers/SSV-I/data/example-trefoil-farfield-profile.json](C:/Users/stino/Documents/New%20project/SVT/papers/SSV-I/data/example-trefoil-farfield-profile.json)
+- state: [papers/SSV-I/data/example-trefoil-state.npz](../../papers/SSV-I/data/example-trefoil-state.npz)
+- profile: [papers/SSV-I/data/example-trefoil-farfield-profile.json](../../papers/SSV-I/data/example-trefoil-farfield-profile.json)
 
 Commands used:
 

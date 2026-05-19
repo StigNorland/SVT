@@ -6,6 +6,15 @@ The Paper I codebase tests the foundational SSV particle picture:
 - a toroidal electron background with major radius `R_e = xi / alpha`,
 - reduced collective-coordinate routes toward the muon mode,
 - chiral/Kelvin coupling diagnostics that motivate the transverse sector.
+- source-vs-topology closure questions for the static proton branch.
+
+Recent source-driven static-branch work has added a topology-facing diagnostic layer. The current repo state now says something sharper than before: the present constrained static branch can stabilize gravity-facing source observables while still losing the local branch winding that the Paper I proton text appears to require, and the unconstrained comparison branch loses that winding too. See [topological-closure-memo.md](../../papers/SSV-I/topological-closure-memo.md), [topology-winding-check-note.md](../../papers/SSV-I/topology-winding-check-note.md), and [q-p-constraint-sensitivity-note.md](../../papers/SSV-I/q-p-constraint-sensitivity-note.md).
+
+The first topology-guard pilot now exists too. It shows that a hard winding-aware acceptance rule can keep the branch from falling below the chosen local winding floor, but the current relaxer then stalls early and leaves a larger residual and source-heavy state. A follow-up pressure scan also shows an intermediate soft-pressure regime that bends branch selection without fully reproducing the hard stop. See [topology-guard-probe-note.md](../../papers/SSV-I/topology-guard-probe-note.md).
+
+The medium-pressure branch has now been carried into the source diagnostics too. It is not yet a resolved proton branch, but it does change the source distribution in a promising direction: compared with the baseline branch from the same fresh initial state, it shifts weight from halo into the mid region and slightly reduces the outer-interior share of the total `Q_p`. See [topology-pressure-source-note.md](../../papers/SSV-I/topology-pressure-source-note.md).
+
+The later flow-based follow-up is now more specific too. Broad topology-flow, phase-aware flow, loop-circulation flow, and even a direct winding-error flow built from phase-increment mismatch are all smoother numerically than the hard guard or pressure branch. But in the tested `hw = 7` pilot they still leave `topology_alignment_score ~ 0.25`, so they are not yet preserving or restoring the seeded local winding. See [topology-guard-probe-note.md](../../papers/SSV-I/topology-guard-probe-note.md).
 
 ## Main Takeaways
 
@@ -200,6 +209,49 @@ papers/SSV-I/lperp-krylov-checkpoint.md
 papers/SSV-I/data/trefoil-lperp-krylov-lambda2000-n24-hw6-800steps-2026-05-17.json
 papers/SSV-I/data/trefoil-lperp-krylov-lambda2000-n24-hw6-800steps-2026-05-17.npz
 papers/SSV-I/data/trefoil-lperp-krylov-lambda2000-observables-n24-hw6-2026-05-17.json
+papers/SSV-I/q-p-two-factor-local-additive-scan-note.md
+papers/SSV-I/data/q-p-two-factor-local-additive-scan-2026-05-07.json
+papers/SSV-I/q-p-two-factor-local-modulated-scan-note.md
+papers/SSV-I/data/q-p-two-factor-local-modulated-scan-2026-05-07.json
+papers/SSV-I/q-p-two-factor-eta-calibration-note.md
+papers/SSV-I/data/q-p-two-factor-eta-calibration-2026-05-07.json
+papers/SSV-I/data/q-p-two-factor-eta-shape-calibration-2026-05-07.json
+papers/SSV-I/q-p-two-factor-calibrated-checkpoint-note.md
+papers/SSV-I/data/q-p-two-factor-calibrated-checkpoint-2026-05-07.json
+papers/SSV-I/q-p-convergence-and-kernel-note.md
+papers/SSV-I/data/q-p-convergence-audit-2026-05-07.json
+papers/SSV-I/q-p-kernel-integral-note.md
+papers/SSV-I/data/q-p-kernel-integral-2026-05-07.json
+papers/SSV-I/q-p-static-potential-note.md
+papers/SSV-I/data/q-p-static-potential-2026-05-07.json
+papers/SSV-I/logse-static-green-function-note.md
+papers/SSV-I/trefoil-continuation-sweep-note.md
+papers/SSV-I/data/trefoil-continuation-sweep-n48-plus100-2026-05-17.json
+papers/SSV-I/data/trefoil-continuation-sweep-n48-plus200-2026-05-17.json
+papers/SSV-I/data/trefoil-plateau-driven-n48-2026-05-17.json
+papers/SSV-I/data/trefoil-continuation-sweep-n48-constrained-plus100-2026-05-17.json
+papers/SSV-I/data/trefoil-plateau-driven-n48-constrained-2026-05-17.json
+papers/SSV-I/data/trefoil-hw6-constrained-plateau-extension-2026-05-17.json
+papers/SSV-I/data/trefoil-hw6-constrained-plateau-extension-2-2026-05-17.json
+papers/SSV-I/data/trefoil-hw6-projected-residual-2026-05-17.json
+papers/SSV-I/data/q-p-convergence-audit-2026-05-17.json
+papers/SSV-I/trefoil-hw8-note.md
+papers/SSV-I/data/trefoil-hw8-projected-residual-2026-05-17.json
+papers/SSV-I/trefoil-hw8-resolution-note.md
+papers/SSV-I/data/trefoil-hw8-n64-projected-residual-2026-05-17.json
+papers/SSV-I/trefoil-boxsize-trend-6-7-8-note.md
+papers/SSV-I/data/trefoil-boxsize-trend-6-7-8-2026-05-17.json
+papers/SSV-I/q-p-source-mechanism-probe-note.md
+papers/SSV-I/data/q-p-source-mechanism-probe-2026-05-17.json
+papers/SSV-I/q-p-halo-window-scan-note.md
+papers/SSV-I/data/q-p-halo-window-scan-2026-05-17.json
+papers/SSV-I/q-p-preboundary-plateau-check-note.md
+papers/SSV-I/data/q-p-preboundary-plateau-check-2026-05-17.json
+papers/SSV-I/q-p-cumulative-curve-compare-note.md
+papers/SSV-I/data/q-p-cumulative-curve-compare-2026-05-17.json
+papers/SSV-I/q-p-constraint-sensitivity-note.md
+papers/SSV-I/data/q-p-constraint-sensitivity-2026-05-17.json
+```
 
 The GMRES tuning pass (improved preconditioner + restarted GMRES) is recorded in:
 

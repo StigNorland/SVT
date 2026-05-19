@@ -4,7 +4,7 @@ This note records the second saved refinement checkpoint for issue [#13](https:/
 
 Data file:
 
-- [papers/SSV-I/data/trefoil-refinement-checkpoint-2026-05-06b.json](C:/Users/stino/Documents/New%20project/SVT/papers/SSV-I/data/trefoil-refinement-checkpoint-2026-05-06b.json)
+- [papers/SSV-I/data/trefoil-refinement-checkpoint-2026-05-06b.json](../../papers/SSV-I/data/trefoil-refinement-checkpoint-2026-05-06b.json)
 
 Command used:
 
