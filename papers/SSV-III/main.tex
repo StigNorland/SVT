@@ -371,11 +371,11 @@ three dimensions; no further input is required.
 Two structural lessons. First, the calibration $\alpha_\phi = k_B$ is fixed by matching to a
 known thermodynamic entropy, illustrating in concrete terms the normalization route promised
 in \S5.3. Second, the reduction is exact at the level of the phonon channel and serves as a
-template: an analogous construction in each remaining channel (with the appropriate mode
-basis for $I_\mathcal{V}$, $I_\mathcal{K}$, $I_\mathcal{C}$, and a non-phonon $I_\rho$) would
-reduce $W[\Psi]$ to the full thermodynamic entropy under the union of those coarse-grainings.
-The next subsection carries out the same reduction on a genuinely independent channel, the
-Kelvin sector.
+template: an analogous construction in each remaining channel (with the appropriate basis for
+$I_\mathcal{K}$, $I_\mathcal{V}$, $I_\mathcal{C}$, and a non-phonon $I_\rho$) would reduce
+$W[\Psi]$ to the full thermodynamic entropy under the union of those coarse-grainings. The
+next two subsections carry out the reduction on two further independent channels, the Kelvin
+and vortex-tangle sectors.
 
 \subsection{Worked Example: Kelvin Sector}\label{sec:kelvinreduction}
 
@@ -418,6 +418,75 @@ low-temperature scaling of $S_{\text{Kelvin}}^{\text{thermal}}$ differs from the
 $T^3$ law; the Kelvin channel therefore contributes a thermodynamically distinct dependence
 on $T$ at low temperature, which is in principle observable in geometries where the Kelvin
 sector dominates over bulk phonons (slender vortex filaments at low density).
+
+\subsection{Worked Example: Vortex-Tangle Sector}\label{sec:tanglereduction}
+
+The vortex-tangle channel differs in kind from the two preceding examples. Phonons and Kelvin
+waves are harmonic excitations, and their entropy is the thermal entropy of a Bose gas of
+modes. A vortex tangle is not harmonic: its wake content is \emph{configurational and
+topological} --- the geometric arrangement of the filament network, its total quantized line
+length, and the knotting and linking of its components. The appropriate entropy is therefore
+a configurational count, and this channel turns out to be the most direct realization of the
+$S = k_B \ln\Omega_{\text{wake}}$ form of \S5.2.
+
+Discretize the medium at the healing length $\xi$, which is the physical core size of a
+quantized vortex and the natural short-distance cutoff: two filament segments approaching
+within $\sim\xi$ either reconnect or cease to be independent. A tangle of total line length
+$L$ then occupies $\ell = L/\xi$ filament segments on a lattice of spacing $\xi$. Because
+vortex cores cannot overlap, the filament network is a self-avoiding set of closed loops
+(together with any open arcs terminating on boundaries). The number of distinguishable tangle
+configurations at fixed total length scales, to leading order, as
+\begin{equation}
+  \Omega_\mathcal{V} \;\sim\; \mu_{\text{eff}}^{\,L/\xi},
+\end{equation}
+where $\mu_{\text{eff}}$ is a dimensionless constant of order unity --- the connective
+constant of the self-avoiding filament ensemble, enlarged to absorb the exponentially growing
+multiplicity of distinct knot and link types accessible at length $L/\xi$. Its precise value
+is regularization-dependent (for self-avoiding walks on a simple cubic lattice the geometric
+part alone gives $\mu \approx 4.68$); what is robust is that $\ln\mu_{\text{eff}}$ is a
+positive number of order unity.
+
+The tangle-channel functional is then
+\begin{equation}
+  I_\mathcal{V} \;=\; \ln\Omega_\mathcal{V} \;=\; \frac{L}{\xi}\,\ln\mu_{\text{eff}}
+  \;+\; (\text{subleading loop-closure and loop-number terms}).
+\end{equation}
+This is dimensionless ($L/\xi$ is a pure ratio), is a functional of the present state of
+$\Psi$ --- the core locus is the set where $\rho \to 0$ with nonzero phase winding ---
+vanishes on the vortex-free ground state ($L = 0$), and is invariant under rigid relabellings
+of the medium.
+
+Setting $\alpha_\mathcal{V} = k_B$, as for the previous two channels,
+\begin{equation}
+  \alpha_\mathcal{V} I_\mathcal{V} \;=\; k_B \ln\Omega_\mathcal{V} \;=\; S_{\text{config}},
+\end{equation}
+a bona fide Boltzmann configurational entropy of the vortex tangle. No coarse-graining over a
+mode bath is required here: the tangle configurations \emph{are} the microstates, and the
+vortex channel is therefore the cleanest instance of the interpretation advanced in \S5.2,
+where $\Omega_{\text{wake}}$ counts physically distinct present configurations rather than
+abstract hidden possibilities beneath a macrostate.
+
+One subtlety is essential and, properly understood, strengthens the framework: \emph{the
+tangle functional $I_\mathcal{V}$ is not individually monotonic.} In freely decaying quantum
+turbulence the line-length density falls --- in the Vinen regime as $L \propto
+t^{-1}$~\cite{Vinen2002} --- so $I_\mathcal{V}$ \emph{decreases} with time. This does not
+violate the monotonicity of $W[\Psi]$. Tangle decay proceeds by reconnection, and each
+reconnection converts organized line length into Kelvin-wave excitation and radiated phonons:
+wake flows out of $I_\mathcal{V}$ and into $I_\mathcal{K}$ and $I_\phi$. The total
+$W = \sum_i \alpha_i I_i$ does not decrease, because the conversion is dissipative --- an
+organized, low-entropy channel feeding high-entropy thermalized channels. Only the sum is
+protected; the individual channels exchange wake. This is exactly the fate-table entry of
+\S\ref{sec:channelfate}, in which $I_\mathcal{V}$ carries wake across long timescales until
+reconnection converts it, and it is why reconnection is the rate-limiting event for
+irreversibility in vortex-dominated regimes.
+
+Finally, $I_\mathcal{V}$ is directly computable. The total line length $L$ is a
+straightforward readout of any simulated state of $\Psi$: locate the core locus as the set of
+density zeros carrying nonzero phase winding, and measure its length. The knotted-filament
+states and continuation sweeps of Paper~I~\cite{SSV-I} are therefore immediate test data for
+the vortex channel, and a measured $I_\mathcal{V}(t)$ along a reconnection cascade --- paired
+with $I_\mathcal{K}(t)$ and $I_\phi(t)$ --- would exhibit the inter-channel wake transfer
+just described as an explicit budget that is conserved in sum.
 
 \subsection{The Initial-Condition Question}
 
@@ -590,15 +659,15 @@ heavier mathematics.
 The paper makes a narrow ontological claim, but several technical tasks remain open:
 
 \begin{enumerate}
-  \item define the remaining $I_i$ channels ($I_\mathcal{V}$, $I_\mathcal{C}$, and a
-  non-phonon $I_\rho$) as computable dimensionless functionals, following the templates of
-  \S\ref{sec:phononreduction} and \S\ref{sec:kelvinreduction},
-  \item fix the remaining coefficients $\alpha_\mathcal{V}, \alpha_\mathcal{C}, \alpha_\rho$
-  by analogous calibration to known thermodynamic or counting limits,
-  \item extend the channel-wise reductions of \S\ref{sec:phononreduction} and
-  \S\ref{sec:kelvinreduction} to the remaining channels, completing the demonstration that
-  wake-complexity reduces to thermodynamic entropy under the union of channel-wise
-  coarse-grainings,
+  \item define the remaining $I_i$ channels ($I_\mathcal{C}$ and a non-phonon $I_\rho$) as
+  computable dimensionless functionals, following the templates of
+  \S\ref{sec:phononreduction}--\S\ref{sec:tanglereduction},
+  \item fix the remaining coefficients $\alpha_\mathcal{C}$ and $\alpha_\rho$ by analogous
+  calibration to known thermodynamic or counting limits,
+  \item extend the channel-wise reductions of \S\ref{sec:phononreduction},
+  \S\ref{sec:kelvinreduction}, and \S\ref{sec:tanglereduction} to the remaining two channels,
+  completing the demonstration that wake-complexity reduces to thermodynamic entropy under
+  the union of channel-wise coarse-grainings,
   \item quantify the role of reconnection within the broader wake picture by measuring
   per-event wake deposition against the channel decomposition of \S\ref{sec:channelfate},
   \item connect this time framework to gravity and black holes in later papers without
