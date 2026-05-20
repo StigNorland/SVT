@@ -65,8 +65,11 @@ claim that time is local change rather than a background dimension, and draws th
 consequence for time-travel paradoxes. Section 4 develops the idea that events write wake
 structure into the medium. Section 5 reframes entropy as wake-complexity and defines the five
 wake channels. Section 6 carries out the channel-wise reductions, working each channel to a
-recognizable entropy. Section 7 distinguishes formal time reversal in equations from physical
-reversal in the medium. Section 8 closes with the remaining open technical questions.
+recognizable entropy. Section 7 closes the remaining functional questions --- subleading
+terms, the status of the regularization constants, the reduction of the five coarse-grainings
+to one renormalization flow, and the per-event accounting of reconnection. Section 8
+distinguishes formal time reversal in equations from physical reversal in the medium.
+Section 9 closes with the remaining open technical questions.
 
 \section{Minimal SSV Setting}
 
@@ -93,8 +96,8 @@ not used here as a primitive counter for entropy.
 
 The criterion is circular in form — wake is what events deposit, events are what deposit wake
 — but the circularity is shared with any account of irreversibility, and it is closed
-empirically by the candidate functional in \S5: a process counts as an event to the extent
-that it raises $W[\Psi]$ in any of its channels.
+empirically by the candidate functional in \S\ref{sec:candidatefunctional}: a process counts
+as an event to the extent that it raises $W[\Psi]$ in any of its channels.
 
 The present state of the medium will be denoted schematically by
 \begin{equation}
@@ -199,7 +202,7 @@ unique incoming configuration that recreates the earlier state.
 That is a nonlocal requirement. No local dynamical process in the medium is known to perform
 it.
 
-\section{Entropy as Wake-Complexity}
+\section{Entropy as Wake-Complexity}\label{sec:wakecomplexity}
 
 This motivates a reframing of entropy in SSV. Entropy should not be introduced as a bare count
 of past events. That would risk tautology if monotonicity is built into the definition from the
@@ -337,7 +340,7 @@ at the macroscopic level by coarse-graining over the fine wake structure of the 
 view, extensivity and additivity are not primitive axioms, but emergent properties of how wake
 structure composes across weakly coupled subsystems.
 
-\subsection{The Initial-Condition Question}
+\subsection{The Initial-Condition Question}\label{sec:initialcondition}
 
 A monotonicity claim for $W[\Psi]$ has an immediate consequence: there must have been an
 earliest moment at which $W$ was minimal. This is the SSV analogue of the past hypothesis in
@@ -506,11 +509,12 @@ configurations at fixed total length scales, to leading order, as
   \Omega_\mathcal{V} \;\sim\; \mu_{\text{eff}}^{\,L/\xi},
 \end{equation}
 where $\mu_{\text{eff}}$ is a dimensionless constant of order unity --- the connective
-constant of the self-avoiding filament ensemble, enlarged to absorb the exponentially growing
-multiplicity of distinct knot and link types accessible at length $L/\xi$. Its precise value
-is regularization-dependent (for self-avoiding walks on a simple cubic lattice the geometric
-part alone gives $\mu \approx 4.68$); what is robust is that $\ln\mu_{\text{eff}}$ is a
-positive number of order unity.
+constant of the self-avoiding filament ensemble. Its precise value is
+regularization-dependent (for self-avoiding walks on a simple cubic lattice
+$\mu \approx 4.68$); what is robust is that $\ln\mu_{\text{eff}}$ is a positive number of
+order unity. Section~\ref{sec:subleading} sharpens this: knotting and linking do not enlarge
+$\mu_{\text{eff}}$ but enter through a universal subleading exponent, so that
+$\mu_{\text{eff}} = \mu$ is exactly the polygon connective constant.
 
 The tangle-channel functional is then
 \begin{equation}
@@ -691,10 +695,282 @@ The relative-weight problem flagged in \S\ref{sec:candidatefunctional} therefore
 once each channel is defined as a proper entropy, there are no free relative weights, and the
 only dimensionful constant in the construction is $k_B$. The content did not disappear --- it
 moved, from ``what are the relative weights'' to ``what is the correct entropy functional for
-each channel,'' which is where it belongs. What remains genuinely open is finer: the
-subleading terms in each functional, the regularization-dependent constants
-($\mu_{\text{eff}}$, $v_0$, $g_{\text{int}}$), and the derivation of the channel-wise
-coarse-grainings as a single renormalization flow rather than five separately specified maps.
+each channel,'' which is where it belongs. What remains is finer, and is taken up in
+Section~\ref{sec:refinements}: the subleading terms in each functional, the status of the
+regularization constants ($\mu_{\text{eff}}$, $v_0$, $g_{\text{int}}$), and the reduction of
+the channel-wise coarse-grainings to a single renormalization flow.
+
+\section{Subleading Structure, a Unified Flow, and the Reconnection Quantum}\label{sec:refinements}
+
+The completeness result of \S\ref{sec:channelcomplete} left a finer residue --- the
+subleading terms of the configurational channels, the status of their regularization
+constants, and the reduction of the five channel-wise coarse-grainings to one flow --- and
+the treatment of reconnection in \S\ref{sec:reconnection} was deliberately left qualitative.
+This section closes both. The parts are not independent: \S\ref{sec:subleading} shows that
+the regularization constants of every channel play one and the same role,
+\S\ref{sec:rgflow} shows that the five coarse-grainings are sectors of one renormalization
+flow whose initial data are exactly those constants, and \S\ref{sec:reconnectionquantum}
+shows that reconnection is the discrete event that drives that flow in vortex-dominated
+regimes.
+
+\subsection{Subleading Terms and the Status of the Regularization Constants}\label{sec:subleading}
+
+Three channels were given only to leading order: the configurational counts $I_\mathcal{V}$
+and $I_\rho$, and the connected-part subtraction in $I_\mathcal{C}$. Completing them shows
+that the leftover constants $\mu_{\text{eff}}$, $v_0$, and $g_{\text{int}}$ are not three
+separate loose ends but three instances of one structure.
+
+\emph{Vortex tangle.} The leading term $(L/\xi)\ln\mu_{\text{eff}}$ of
+\S\ref{sec:tanglereduction} counts a self-avoiding loop ensemble. The asymptotic enumeration
+of a single self-avoiding polygon of $n = L/\xi$ segments is known~\cite{MadrasSlade1993},
+\begin{equation}
+  p_n \;\sim\; A\,\mu^{\,n}\,n^{\,\theta},
+  \qquad \theta \;=\; \alpha - 3 \;=\; -(1 + 3\nu),
+\end{equation}
+with $\mu$ the connective constant of the regularization, $A$ a non-universal amplitude, and
+$\nu \approx 0.587597$ the self-avoiding-walk correlation-length exponent~\cite{Clisby2010}.
+The exponent $\theta \approx -2.76$ is universal --- fixed by the hyperscaling relation
+$\alpha = 2 - d\nu$ in $d = 3$ --- and hence regularization-independent. A tangle of
+$\mathcal{N}$ closed loops of lengths $\{L_i\}$ summing to $L$ then has
+\begin{equation}
+  \Omega_\mathcal{V} \;=\; \frac{1}{\mathcal{N}!}\prod_{i=1}^{\mathcal{N}}
+  \left[\frac{V}{\xi^{3}}\,A\,\mu^{\,L_i/\xi}\,(L_i/\xi)^{\theta}\right],
+\end{equation}
+the factor $V/\xi^{3}$ placing each loop's centroid and the $\mathcal{N}!$ removing loop
+relabellings. With Stirling's approximation,
+\begin{equation}
+  I_\mathcal{V} \;=\;
+  \underbrace{\frac{L}{\xi}\,\ln\mu}_{\text{leading, extensive}}
+  \;+\; \underbrace{\mathcal{N}\ln\!\frac{e\,A\,V}{\mathcal{N}\,\xi^{3}}}_{\text{loop-number}}
+  \;+\; \underbrace{\theta\sum_{i=1}^{\mathcal{N}}\ln\frac{L_i}{\xi}}_{\text{loop-closure}}.
+\end{equation}
+The leading term is unchanged. The loop-number term is itself a Sackur--Tetrode
+configurational entropy --- now of the gas of loops rather than of the solitons of
+\S\ref{sec:densityreduction} --- and the loop-closure term carries the universal exponent
+$\theta$. Knotting and linking, which \S\ref{sec:tanglereduction} tentatively absorbed into
+an enlarged $\mu_{\text{eff}}$, are settled here in the opposite direction: knotted polygons
+are exponentially generic~\cite{SumnersWhittington1988}, so the \emph{unrestricted} count
+already grows as $\mu^{n}$, and demanding a definite topology \emph{lowers} the growth
+constant rather than raising it. Knotting does not enlarge the base; it shifts the subleading
+exponent, $\theta \to \theta + N_K$ with $N_K$ the number of prime factors of the knot type.
+Hence $\mu_{\text{eff}} = \mu$ exactly --- the connective constant of the unrestricted
+self-avoiding-polygon ensemble, with knot diversity already counted in it.
+
+\emph{Soliton gas.} The dilute-gas count of \S\ref{sec:densityreduction} is the leading term
+of a virial expansion. Restoring the pairwise soliton interaction $U(r)$,
+\begin{equation}
+  I_\rho \;=\; N\!\left[\ln\frac{V}{N v_0} + 1 + \ln g_{\text{int}}\right]
+  \;-\; \frac{N^{2}}{V}\,B_2(T) \;+\; O\!\left(\frac{N^{3}}{V^{2}}\right),
+  \qquad
+  B_2(T) = \tfrac12\!\int\! d^{d}r\,\bigl(1 - e^{-U(r)/k_B T}\bigr).
+\end{equation}
+For Gross--Pitaevskii dark solitons the interaction is exponentially screened,
+$U(r) \approx U_0\,e^{-2r/\xi}$~\cite{Frantzeskakis2010}, so $B_2$ is finite and of order
+$\xi^{d}$, with only a weak logarithmic temperature dependence,
+$B_2 \approx (\xi^{d}/4)\ln(U_0/k_B T)$ for $k_B T \ll U_0$. The virial term is therefore
+computable and small in the dilute regime $N\xi^{d}/V \ll 1$ in which the channel was
+defined. The internal multiplicity is computable in the same way: it is the soliton internal
+partition function,
+\begin{equation}
+  g_{\text{int}}(T) \;=\; \frac{1}{v_{\text{res}}}\!\int_{-c_s}^{\,c_s}\! dv\;
+  e^{-E(v)/k_B T},
+  \qquad E(v) = E_0\bigl(1 - v^{2}/c_s^{2}\bigr)^{3/2},
+\end{equation}
+the integral running over the grey-soliton velocity family and $v_{\text{res}}$ being the
+velocity-resolution cell.
+
+\emph{Correlation channel.} The connected-part subtraction of
+\S\ref{sec:correlationreduction} is made precise as a relative entropy. Let $\rho_{AB}$ be
+the coarse-grained joint state of two regions and $\sigma_{AB}$ the maximum-entropy state
+consistent with all data local to each region and with correlations out to the equilibrium
+scales $\xi$ and $\lambda_T$. Then
+\begin{equation}
+  I_{\text{conn}}(A\!:\!B) \;=\; S\bigl(\rho_{AB}\,\|\,\sigma_{AB}\bigr)
+  \;=\; \operatorname{Tr}\rho_{AB}\bigl(\ln\rho_{AB} - \ln\sigma_{AB}\bigr).
+\end{equation}
+Relative entropy is non-negative and vanishes if and only if $\rho_{AB} = \sigma_{AB}$, i.e.
+exactly when the state carries no correlation beyond local equilibrium; for regions separated
+by more than $\xi$ and $\lambda_T$ the reference $\sigma_{AB}$ factorizes and
+$I_{\text{conn}}$ coincides with the mutual information of \S\ref{sec:correlationreduction}.
+The relative-entropy form is what makes ``subtract the short-range equilibrium part'' exact
+rather than schematic, and it guarantees $I_{\text{conn}} \ge 0$ with equality on local
+equilibrium. To Gaussian order it reduces to a sum over connected two-point functions,
+$I_{\text{conn}} \approx \tfrac12\sum_{r \,\gtrsim\, \xi,\lambda_T}
+|G_c(r)|^{2}/(\chi_A\chi_B)$, with $\chi$ the local susceptibilities --- the explicit
+long-range subleading structure of the channel.
+
+\emph{The status of $\mu$, $v_0$, $g_{\text{int}}$.} The three constants left undetermined
+are now seen to be the same kind of object. Each is a phase-space-cell measure: $\mu$ fixes
+the configurational volume per healing length of filament, $v_0 = c_0\,\xi^{d}$ the
+configurational volume per soliton, and $g_{\text{int}}$, through $v_{\text{res}}$, the cell
+of the soliton internal-parameter space. All three are non-universal, all three are fixed by
+the short-distance regularization at scale $\xi$, and all three enter $W[\Psi]$ only
+additively, as the zero-point of a channel's entropy. They therefore cancel in entropy
+differences at fixed defect content; and because the configurational entropy of a decaying
+defect is transferred intact to the channels that receive its wake --- as the reconnection
+budget of \S\ref{sec:reconnectionquantum} makes explicit --- they cancel in the total rate
+$dW/dt$ as well. This is precisely the role of $h^{3}$ in the Sackur--Tetrode entropy: a
+regularization constant that sets the entropy zero, fixed externally --- there by quantum
+mechanics, here by the Third-Law requirement that $W \to 0$ on the defect-free,
+zero-temperature ground state --- and irrelevant to every entropy change. Computing $\mu$,
+$v_0$, and $g_{\text{int}}$ ``from the microscopic field equation'' is therefore not a
+missing universal result but a category error: they are non-universal by construction. What
+\emph{is} universal in the subleading structure --- the closure exponent
+$\theta = -(1+3\nu)$, the virial coefficient $B_2(T)$, and the relative-entropy form of
+$I_{\text{conn}}$ --- has been given in closed form above.
+
+\subsection{The Five Coarse-Grainings as One Renormalization Flow}\label{sec:rgflow}
+
+The construction so far attached a separate coarse-graining $(\ell,\mathcal{O})$ to each
+channel. That is an economy of presentation, not a fundamental feature, and this subsection
+removes it: the five coarse-grainings are five sectors of one renormalization flow on
+$\Psi$.
+
+Define a single block transformation $\mathcal{R}_b$ that smooths the order parameter from
+resolution $\xi$ to resolution $b\xi$ --- a real-space block average, or equivalently the
+integration of every mode with wavenumber between $\Lambda/b$ and $\Lambda = \xi^{-1}$. As a
+map on states of the medium, $\mathcal{R}_b$ is completely positive and trace-preserving: it
+discards information while preserving the structure of a probability assignment. Two
+consequences follow at once.
+
+\emph{Monotonicity becomes a theorem.} Under any completely positive trace-preserving map,
+the relative entropy to a fixed reference cannot increase~\cite{Lindblad1975}. Take the
+reference to be the local-equilibrium state $\sigma$ compatible with the present defect
+content; it is by construction a fixed point of the flow, $\mathcal{R}_b\,\sigma = \sigma$.
+Then $S(\mathcal{R}_b\,\rho \,\|\, \sigma)$ decreases monotonically along the flow: the state
+moves monotonically toward local equilibrium as it is coarse-grained. Equivalently, the
+entropy produced per step of the flow is non-negative,
+\begin{equation}
+  \frac{dS}{d\ln b} \;\ge\; 0,
+\end{equation}
+and the wake functional is the total entropy generated by running the single flow from the
+microscopic scale to the observation scale $\ell$,
+\begin{equation}
+  W[\Psi] \;=\; \int_{0}^{\,\ln(\ell/\xi)} d(\ln b)\;\frac{dS}{d\ln b}.
+\end{equation}
+The monotonicity of $W$, posited in \S\ref{sec:nottautological} as a physical claim about
+the unavailability of inverse processes, is here recovered as the data-processing inequality
+for a coarse-graining map~\cite{Vedral2002} --- the same statement in information-theoretic
+dress.
+
+\emph{The five channels are the sectors of one generator.} The integrand $dS/d\ln b$ is a
+single quantity, but the modes it removes at scale $b$ fall into disjoint classes. Any
+fluctuation of $\Psi$ about a local condensate background is exactly one of the following,
+by the symmetry of the order parameter together with the homotopy classification of its
+defects~\cite{Mermin1979}:
+\begin{itemize}
+  \item a smooth $U(1)$ phase (Goldstone) fluctuation, with its conjugate density partner
+        --- the Bogoliubov sector --- contributing $dS_\phi/d\ln b$;
+  \item a codimension-two topological defect classified by $\pi_1$ --- a vortex line ---
+        whose coarse-grained geometry contributes $dS_\mathcal{V}/d\ln b$;
+  \item a mode bound to such a defect --- a Kelvin wave on the filament --- contributing
+        $dS_\mathcal{K}/d\ln b$;
+  \item a codimension-one non-perturbative density defect --- a soliton --- contributing
+        $dS_\rho/d\ln b$;
+  \item a connected correlation between regions, not reducible to local data, contributing
+        $dS_\mathcal{C}/d\ln b$.
+\end{itemize}
+These five classes are mutually exclusive and jointly exhaustive --- that is the content of
+the homotopy classification together with the Goldstone decomposition --- so the generator
+splits with no remainder,
+\begin{equation}
+  \frac{dS}{d\ln b} \;=\;
+  \sum_{i\,\in\,\{\phi,\rho,\mathcal{V},\mathcal{K},\mathcal{C}\}}
+  \frac{dS_i}{d\ln b},
+  \qquad
+  I_i \;=\; \int_{0}^{\,\ln(\ell/\xi)} d(\ln b)\;\frac{dS_i}{d\ln b}.
+\end{equation}
+The five channels are thus not five maps but one flow resolved into its irreducible sectors,
+and the completeness asserted in \S\ref{sec:channelcomplete} is re-derived as the
+completeness of this classification. The common coefficient $\alpha_i = k_B$ follows in the
+same breath: each $I_i$ is the one entropy functional $S$ evaluated on a different sector of
+the one flow, so no sector can carry a different prefactor.
+
+Two structural points close the picture. First, the regularization constants of
+\S\ref{sec:subleading} are the \emph{initial data} of the flow at $b = 1$. The flow itself
+--- its generator, its fixed point, its sector decomposition --- is universal, while the
+value of $S$ at the bottom of the flow is the non-universal cell count. This is why $\mu$,
+$v_0$, and $g_{\text{int}}$ could be left unspecified without loss: they are boundary
+conditions on a universal flow, not parameters of it. Second, the flow has the expected
+fixed-point structure. As $b \to \infty$ the correlation sector is exhausted,
+$I_\mathcal{C} \to 0$, and the medium reaches local equilibrium --- exactly the limit of
+\S\ref{sec:correlationreduction} in which ordinary thermodynamics is recovered. The defect
+sectors $I_\mathcal{V}$ and $I_\rho$ do not flow to zero under coarse-graining alone: they
+are topologically protected, and can be discharged only by a defect-changing event. In
+vortex-dominated regimes that event is reconnection, to which we now turn.
+
+\subsection{The Reconnection Quantum}\label{sec:reconnectionquantum}
+
+Reconnection was introduced in \S\ref{sec:reconnection} as one wake-writing process among
+others, and deliberately not used as a primitive entropy counter. The channel decomposition
+now permits the quantitative statement that was postponed there: a reconnection is the
+discrete event that advances the flow of \S\ref{sec:rgflow}, and its wake can be priced
+exactly.
+
+\emph{Per-event budget.} A reconnection exchanges two filament strands and leaves two cusps
+that retract, removing a line length of order the inter-vortex spacing
+$\delta = \mathcal{L}^{-1/2}$, with $\mathcal{L}$ the line-length density. The energy
+released is the line energy of the removed segment,
+\begin{equation}
+  \Delta E_{\text{rec}} \;\approx\; \epsilon\,\delta,
+  \qquad
+  \epsilon \;=\; \frac{\rho_s\,\kappa^{2}}{4\pi}\,\ln(\delta/\xi),
+\end{equation}
+with $\epsilon$ the vortex line tension and $\kappa = h/m$ the circulation quantum. Resolved
+on the channels, the event debits the vortex sector and credits the Kelvin and phonon
+sectors,
+\begin{equation}
+  \Delta I_\mathcal{V} \;=\; -\frac{\delta}{\xi}\,\ln\mu \;<\; 0,
+  \qquad
+  \Delta I_\mathcal{K} + \Delta I_\phi \;>\; \frac{\delta}{\xi}\,\ln\mu,
+\end{equation}
+the configurational entropy $(\delta/\xi)\ln\mu$ of the destroyed segment passing intact
+into the microstates of the emitted burst, and the inequality holding because that burst
+also thermalizes the released energy. Once the burst thermalizes at the ambient temperature
+$T$, the net wake deposited by one reconnection takes the Clausius form
+\begin{equation}
+  \Delta W_{\text{rec}}
+  \;=\; \Delta I_\mathcal{V} + \Delta I_\mathcal{K} + \Delta I_\phi
+  \;=\; \frac{\Delta E_{\text{rec}}}{k_B T}
+  \;\approx\; \frac{\epsilon\,\delta}{k_B T},
+\end{equation}
+in which the cell constant $\mu$ has cancelled: the configurational entropy lost from
+$I_\mathcal{V}$ is exactly the configurational entropy gained by the burst, and only the
+thermalization term survives. A reconnection is, in this precise sense, a \emph{quantum of
+irreversibility}: a discrete event depositing a definite, computable increment of wake.
+
+\emph{Rate and thermodynamic consistency.} The reconnection rate per unit volume is fixed by
+dimensional analysis from the only quantities available, the circulation $\kappa$ and the
+line density $\mathcal{L}$~\cite{Barenghi2014},
+\begin{equation}
+  \dot N_{\text{rec}} \;=\; c_{\text{rec}}\,\kappa\,\mathcal{L}^{5/2},
+\end{equation}
+with $c_{\text{rec}}$ a dimensionless constant of order unity. The wake-production rate from
+reconnections is then, using $\delta = \mathcal{L}^{-1/2}$,
+\begin{equation}
+  \frac{dW}{dt}\bigg|_{\text{rec}}
+  \;=\; \dot N_{\text{rec}}\,V\;\Delta W_{\text{rec}}
+  \;=\; c_{\text{rec}}\,\frac{\kappa\,\epsilon}{k_B T}\,\mathcal{L}^{2}\,V.
+\end{equation}
+This is a non-trivial consistency check. Freely decaying quantum turbulence obeys the Vinen
+law $d\mathcal{L}/dt = -\beta\,\kappa\,\mathcal{L}^{2}$~\cite{Vinen2002}, so the line energy
+is dissipated at the rate
+$\epsilon\,|d\mathcal{L}/dt|\,V = \epsilon\beta\kappa\mathcal{L}^{2}V$, and the associated
+thermodynamic entropy production is that power divided by $T$. The wake framework reproduces
+it exactly, and identifies the phenomenological Vinen coefficient with the reconnection
+count, $\beta = c_{\text{rec}}$. The wake-production rate is therefore not an independent
+posit: it \emph{is} the Vinen dissipation, $dW/dt = \epsilon\,|\dot L|/k_B T$, resolved into
+discrete events.
+
+\emph{Kinematic signature.} The per-event picture is testable below the level of bulk rates.
+The post-reconnection strand separation follows the universal law
+$\delta(t) \approx A_{\pm}\,|t - t_0|^{1/2}$, with distinct prefactors on approach ($A_-$)
+and recession ($A_+$)~\cite{Villois2017}. The asymmetry $\Delta A = A_+ - A_-$ is the
+kinematic marker of irreversibility --- a time-symmetric reconnection would have
+$\Delta A = 0$ --- and the energy radiated into the Kelvin and phonon sectors scales as
+$\Delta E_{\text{rec}} \propto \Delta A^{2}$. A measured $\Delta A$ in a controlled
+Bose--Einstein-condensate reconnection therefore fixes $\Delta W_{\text{rec}}$ for that event
+directly, turning the reconnection quantum from an estimate into a measured number.
 
 \section{Formal Time Reversal and Physical Reversal}\label{sec:formalreversal}
 
@@ -809,23 +1085,24 @@ heavier mathematics.
 \section{Discussion and Open Problems}
 
 The paper makes a narrow ontological claim. The wake functional $W[\Psi]$ has been carried
-from a schematic checklist to a complete channel set: all five channels are defined as
-concrete dimensionless functionals, all coefficients are calibrated, and each channel reduces
-to a recognizable entropy (Section~\ref{sec:reductions}). Several
-technical tasks nonetheless remain open:
+from a schematic checklist to a closed construction: all five channels are defined as
+concrete dimensionless functionals and calibrated to the single coefficient $k_B$
+(Section~\ref{sec:reductions}); their subleading structure is given in closed form, the five
+channel-wise coarse-grainings are unified as one renormalization flow, and reconnection is
+priced as a discrete quantum of wake (Section~\ref{sec:refinements}). The three technical
+tasks left open at \S\ref{sec:channelcomplete} are thereby resolved at the level of
+structure. What remains open is of a different and more limited kind:
 
 \begin{enumerate}
-  \item pin down the subleading terms in each channel functional --- loop-closure and
-  loop-number corrections in $I_\mathcal{V}$, interaction corrections in the soliton-gas
-  $I_\rho$, the precise connected-part subtraction in $I_\mathcal{C}$ --- and compute the
-  regularization-dependent constants $\mu_{\text{eff}}$, $v_0$, and $g_{\text{int}}$ from the
-  microscopic field equation rather than leaving them as order-unity inputs,
-  \item derive the five channel-wise coarse-grainings as a single renormalization flow on
-  $\Psi$, rather than five separately specified $(\ell,\mathcal{O})$ maps,
-  \item quantify the role of reconnection within the broader wake picture by measuring
-  per-event wake deposition against the channel decomposition of \S\ref{sec:channelfate},
+  \item evaluate the non-universal cell constants --- $\mu$ for the vortex channel, $v_0$ and
+  $g_{\text{int}}$ for the soliton channel, $c_{\text{rec}}$ for the reconnection rate ---
+  numerically, by direct enumeration on the Gross--Pitaevskii ground state. This is a
+  computation, not a conceptual gap: \S\ref{sec:subleading} has shown that these constants
+  set only the zero of each channel's entropy and cancel in every entropy difference and
+  rate,
   \item connect this time framework to gravity and black holes in later papers without
-  overloading the present one.
+  overloading the present one, and in particular supply the cosmological initial condition
+  on $\Psi$ left open at \S\ref{sec:initialcondition}.
 \end{enumerate}
 
 The gain from the present framing is conceptual clarity. If time is local change, and the past
@@ -845,9 +1122,10 @@ non-invertibility looks like when it is read off the present state of $\Psi$.
 What later papers inherit from this one is therefore a constraint, not a theorem. Any
 SSV-derived account of gravitation, cosmology, or black-hole structure must be compatible with
 the claim that the past is not a place — and any candidate entropy law for $\Psi$ must
-ultimately reduce to a wake-functional of the kind sketched in \S5. The technical work of
-turning that constraint into closed expressions is left to subsequent papers and to the open
-problems listed above.
+ultimately reduce to a wake-functional of the kind constructed in
+Sections~\ref{sec:wakecomplexity}--\ref{sec:refinements}. That functional has here been
+carried to closed form, channel by channel; what is left to subsequent papers is its coupling
+to gravitation and the cosmological initial condition on $\Psi$.
 
 \begin{thebibliography}{99}
 
@@ -926,6 +1204,38 @@ W.~F.~Vinen and J.~J.~Niemela, ``Quantum turbulence,''
 \bibitem{Villois2017}
 A.~Villois, D.~Proment, and G.~Krstulovic, ``Universal and nonuniversal aspects of vortex
 reconnections in superfluids,'' \textit{Phys.~Rev.~Fluids} \textbf{2}, 044701 (2017).
+
+\bibitem{MadrasSlade1993}
+N.~Madras and G.~Slade, \textit{The Self-Avoiding Walk}, Birkh\"auser, Boston, 1993.
+
+\bibitem{Clisby2010}
+N.~Clisby, ``Accurate estimate of the critical exponent $\nu$ for self-avoiding walks via a
+fast implementation of the pivot algorithm,'' \textit{Phys.~Rev.~Lett.} \textbf{104},
+055702 (2010).
+
+\bibitem{SumnersWhittington1988}
+D.~W.~Sumners and S.~G.~Whittington, ``Knots in self-avoiding walks,''
+\textit{J.~Phys.~A: Math.~Gen.} \textbf{21}, 1689--1694 (1988).
+
+\bibitem{Mermin1979}
+N.~D.~Mermin, ``The topological theory of defects in ordered media,''
+\textit{Rev.~Mod.~Phys.} \textbf{51}, 591--648 (1979).
+
+\bibitem{Lindblad1975}
+G.~Lindblad, ``Completely positive maps and entropy inequalities,''
+\textit{Commun.~Math.~Phys.} \textbf{40}, 147--151 (1975).
+
+\bibitem{Vedral2002}
+V.~Vedral, ``The role of relative entropy in quantum information theory,''
+\textit{Rev.~Mod.~Phys.} \textbf{74}, 197--234 (2002).
+
+\bibitem{Frantzeskakis2010}
+D.~J.~Frantzeskakis, ``Dark solitons in atomic Bose--Einstein condensates: from theory to
+experiments,'' \textit{J.~Phys.~A: Math.~Theor.} \textbf{43}, 213001 (2010).
+
+\bibitem{Barenghi2014}
+C.~F.~Barenghi, L.~Skrbek, and K.~R.~Sreenivasan, ``Introduction to quantum turbulence,''
+\textit{Proc.~Natl.~Acad.~Sci.~USA} \textbf{111}, 4647--4652 (2014).
 
 \end{thebibliography}
 
