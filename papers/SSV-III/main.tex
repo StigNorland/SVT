@@ -270,16 +270,18 @@ where the $I$ terms measure phase disorder, density disorder, vortex tangle comp
 Kelvin-wave excitation, and correlation complexity respectively. The coefficients $\alpha_i$
 set the relative thermodynamic weight of each channel.
 
-This is not proposed as the final entropy formula. Its purpose is to clarify what a final
-formula must do. It must be a functional of the present state, it must be insensitive to
-purely reversible relabellings, and it must increase when localized order is converted into
-distributed wake structure that cannot be locally unwritten.
+Any acceptable $I_i$ must satisfy three requirements. It must be a functional of the present
+state, it must be insensitive to purely reversible relabellings, and it must increase when
+localized order is converted into distributed wake structure that cannot be locally
+unwritten.
 
-Several formal gaps remain. The terms $I_i$ have not yet been defined as canonical
-dimensionless functionals, the coefficients $\alpha_i$ have not been fixed by a thermodynamic
-normalization, and the coarse-graining map from microscopic wake structure to macroscopic
-entropy has not yet been derived. Thus $W[\Psi]$ should be read as a candidate structure and
-checklist for the final functional, not as a closed entropy law.
+This subsection states the decomposition as a checklist; the five subsections
+\S\ref{sec:phononreduction}--\S\ref{sec:densityreduction} then carry it out, defining each
+$I_i$ as a concrete dimensionless functional, fixing each coefficient $\alpha_i$ by
+calibration to a known thermodynamic or counting limit, and reducing each channel to a
+recognizable entropy. The outcome is summarized in \S\ref{sec:channelcomplete}. The reader
+who wants the schematic picture first may treat the present equation as a checklist and read
+those subsections as its execution.
 
 \subsection{Fate of the Wake Channels}\label{sec:channelfate}
 
@@ -557,6 +559,80 @@ correlations spread as the medium evolves, raising the number of correlated regi
 while diluting the mutual information carried by each. Only the total $W$ is protected; the
 correlation channel exchanges wake with the others as records disperse.
 
+\subsection{Worked Example: Solitonic Density Channel}\label{sec:densityreduction}
+
+The final channel is the non-phonon density channel $I_\rho$. As noted in
+\S\ref{sec:phononreduction}, density and phase are conjugate quadratures of the same
+Bogoliubov oscillator, so $I_\rho$ must \emph{not} count small-amplitude acoustic structure
+--- that is already in $I_\phi$. What it counts is the genuinely non-perturbative localized
+density structure of the medium: solitonic objects --- dark and grey solitons, density
+notches, and other codimension-one density defects --- that are neither sound nor vortex
+line. They are identified in $\Psi$ by a density depletion exceeding a fixed fraction of
+$\bar\rho$, localized over a width of order the healing length $\xi$, and carrying no net
+circulation (which would make them vortices, counted in $I_\mathcal{V}$).
+
+The channel is configurational, and the counting follows the template of
+\S\ref{sec:tanglereduction}. Consider $N$ such solitonic objects in volume $V$. Each occupies
+a phase-space cell $v_0 = c_0\,\xi^{d}$, with $c_0$ a dimensionless constant of order unity
+and $d$ the spatial dimension, and carries an internal-parameter multiplicity $g_{\text{int}}$
+--- the number of distinguishable depth and velocity states of the soliton family. The number
+of distinguishable configurations of the dilute soliton gas is
+\begin{equation}
+  \Omega_\rho \;=\; \frac{1}{N!}\left(\frac{V}{v_0}\right)^{\!N} g_{\text{int}}^{\,N},
+\end{equation}
+the $N!$ removing permutations of identical objects. With Stirling's approximation the
+channel functional is
+\begin{equation}
+  I_\rho \;=\; \ln\Omega_\rho
+  \;=\; N\left[\ln\!\left(\frac{V}{N v_0}\right) + 1 + \ln g_{\text{int}}\right].
+\end{equation}
+This is dimensionless, is a functional of the present state of $\Psi$ (soliton number and
+parameters are readouts of the density and phase fields), vanishes on the soliton-free ground
+state ($N = 0$), and is invariant under rigid relabellings.
+
+Setting $\alpha_\rho = k_B$,
+\begin{equation}
+  \alpha_\rho I_\rho \;=\; k_B \ln\Omega_\rho \;=\; S_{\text{soliton gas}},
+\end{equation}
+which is the configurational entropy of a dilute gas of localized objects --- the
+Sackur--Tetrode configurational term, with $v_0$ in place of the thermal phase-space cell.
+The reduction to a recognizable thermodynamic entropy is therefore immediate, as for the
+vortex channel.
+
+Two remarks complete the parallel with the earlier channels. First, $I_\rho$ does not
+double-count: solitonic objects are non-perturbative and codimension-one, distinct both from
+the linearized phonon bath ($I_\phi$) and from the codimension-two circulating defects of
+$I_\mathcal{V}$. Second, $I_\rho$ is not individually monotonic. In three dimensions dark
+solitons are unstable to the snake instability and decay into vortex rings --- a wake
+transfer from $I_\rho$ into $I_\mathcal{V}$ --- while soliton collisions radiate phonons into
+$I_\phi$. As before, $N$ can fall, $I_\rho$ with it, and only the total $W$ is protected.
+
+\subsection{The Channel Set Is Complete}\label{sec:channelcomplete}
+
+With the density channel in hand, all five channels of the candidate functional
+(\S\ref{sec:candidatefunctional}) have been given concrete dimensionless definitions and
+calibrated coefficients. A structural result emerges. Each $I_i$ was defined as a genuine
+entropy measured in nats --- a Bose-gas entropy for $I_\phi$ and $I_\mathcal{K}$, a Boltzmann
+configurational entropy for $I_\mathcal{V}$ and $I_\rho$, a connected mutual information for
+$I_\mathcal{C}$. The coefficient that converts each to thermodynamic units is then the same
+in every case,
+\begin{equation}
+  \alpha_\phi = \alpha_\rho = \alpha_\mathcal{V}
+  = \alpha_\mathcal{K} = \alpha_\mathcal{C} = k_B,
+\end{equation}
+so the wake entropy collapses to
+\begin{equation}
+  S_{\text{wake}} = k_B\, W[\Psi] = k_B \sum_i I_i.
+\end{equation}
+The relative-weight problem flagged in \S\ref{sec:candidatefunctional} therefore dissolves:
+once each channel is defined as a proper entropy, there are no free relative weights, and the
+only dimensionful constant in the construction is $k_B$. The content did not disappear --- it
+moved, from ``what are the relative weights'' to ``what is the correct entropy functional for
+each channel,'' which is where it belongs. What remains genuinely open is finer: the
+subleading terms in each functional, the regularization-dependent constants
+($\mu_{\text{eff}}$, $v_0$, $g_{\text{int}}$), and the derivation of the channel-wise
+coarse-grainings as a single renormalization flow rather than five separately specified maps.
+
 \subsection{The Initial-Condition Question}
 
 A monotonicity claim for $W[\Psi]$ has an immediate consequence: there must have been an
@@ -726,18 +802,20 @@ heavier mathematics.
 
 \section{Discussion and Open Problems}
 
-The paper makes a narrow ontological claim, but several technical tasks remain open:
+The paper makes a narrow ontological claim. The wake functional $W[\Psi]$ has been carried
+from a schematic checklist to a complete channel set: all five channels are defined as
+concrete dimensionless functionals, all coefficients are calibrated, and each channel reduces
+to a recognizable entropy (\S\ref{sec:phononreduction}--\S\ref{sec:channelcomplete}). Several
+technical tasks nonetheless remain open:
 
 \begin{enumerate}
-  \item define the one remaining channel, a non-phonon $I_\rho$ for solitonic and
-  defect-density structure, as a computable dimensionless functional, following the
-  configurational template of \S\ref{sec:tanglereduction},
-  \item fix the remaining coefficient $\alpha_\rho$ by analogous calibration to a known
-  counting limit,
-  \item extend the channel-wise reductions of
-  \S\ref{sec:phononreduction}--\S\ref{sec:correlationreduction} to the non-phonon density
-  channel, completing the demonstration that wake-complexity reduces to thermodynamic entropy
-  under the union of channel-wise coarse-grainings,
+  \item pin down the subleading terms in each channel functional --- loop-closure and
+  loop-number corrections in $I_\mathcal{V}$, interaction corrections in the soliton-gas
+  $I_\rho$, the precise connected-part subtraction in $I_\mathcal{C}$ --- and compute the
+  regularization-dependent constants $\mu_{\text{eff}}$, $v_0$, and $g_{\text{int}}$ from the
+  microscopic field equation rather than leaving them as order-unity inputs,
+  \item derive the five channel-wise coarse-grainings as a single renormalization flow on
+  $\Psi$, rather than five separately specified $(\ell,\mathcal{O})$ maps,
   \item quantify the role of reconnection within the broader wake picture by measuring
   per-event wake deposition against the channel decomposition of \S\ref{sec:channelfate},
   \item connect this time framework to gravity and black holes in later papers without
