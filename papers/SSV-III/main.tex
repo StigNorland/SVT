@@ -63,9 +63,10 @@ having to carry the whole argument again.
 Section 2 states the minimal SSV setting used in this paper. Section 3 states the ontological
 claim that time is local change rather than a background dimension, and draws the immediate
 consequence for time-travel paradoxes. Section 4 develops the idea that events write wake
-structure into the medium. Section 5 reframes entropy as wake-complexity. Section 6
-distinguishes formal time reversal in equations from physical reversal in the medium.
-Section 7 closes with the remaining open technical questions.
+structure into the medium. Section 5 reframes entropy as wake-complexity and defines the five
+wake channels. Section 6 carries out the channel-wise reductions, working each channel to a
+recognizable entropy. Section 7 distinguishes formal time reversal in equations from physical
+reversal in the medium. Section 8 closes with the remaining open technical questions.
 
 \section{Minimal SSV Setting}
 
@@ -275,13 +276,12 @@ state, it must be insensitive to purely reversible relabellings, and it must inc
 localized order is converted into distributed wake structure that cannot be locally
 unwritten.
 
-This subsection states the decomposition as a checklist; the five subsections
-\S\ref{sec:phononreduction}--\S\ref{sec:densityreduction} then carry it out, defining each
-$I_i$ as a concrete dimensionless functional, fixing each coefficient $\alpha_i$ by
-calibration to a known thermodynamic or counting limit, and reducing each channel to a
-recognizable entropy. The outcome is summarized in \S\ref{sec:channelcomplete}. The reader
-who wants the schematic picture first may treat the present equation as a checklist and read
-those subsections as its execution.
+This subsection states the decomposition as a checklist; Section~\ref{sec:reductions} then
+carries it out, defining each $I_i$ as a concrete dimensionless functional, fixing each
+coefficient $\alpha_i$ by calibration to a known thermodynamic or counting limit, and
+reducing each channel to a recognizable entropy. The outcome is summarized in
+\S\ref{sec:channelcomplete}. The reader who wants the schematic picture first may treat the
+present equation as a checklist and read that section as its execution.
 
 \subsection{Fate of the Wake Channels}\label{sec:channelfate}
 
@@ -337,7 +337,72 @@ at the macroscopic level by coarse-graining over the fine wake structure of the 
 view, extensivity and additivity are not primitive axioms, but emergent properties of how wake
 structure composes across weakly coupled subsystems.
 
-\subsection{Worked Example: Phonon-Bath Reduction}\label{sec:phononreduction}
+\subsection{The Initial-Condition Question}
+
+A monotonicity claim for $W[\Psi]$ has an immediate consequence: there must have been an
+earliest moment at which $W$ was minimal. This is the SSV analogue of the past hypothesis in
+standard cosmology — the assumption that the universe began in a low-entropy state, as
+emphasized by Penrose's Weyl-curvature hypothesis~\cite{Penrose1979} and developed in
+philosophical detail by Albert~\cite{Albert2000} and Price~\cite{Price1996}. The
+present paper does not attempt to derive that condition. It treats it as a separate problem
+deferred to a later cosmological paper in the SSV program, where the initial condition on
+$\Psi$ should be addressed alongside the structure of the early medium. What the present
+paper does claim is weaker and self-contained: \emph{given} a low-wake initial state of
+$\Psi$, the dynamics described in \S4 and \S\ref{sec:formalreversal} cannot locally undo wake accumulation, and
+$W[\Psi(t)]$ therefore rises along physical histories. Whether the initial condition itself
+is natural, fine-tuned, or derivable from deeper structure is a question outside the scope of
+this paper.
+
+\subsection{Two Quantities, Not One: Where the Observer Enters}\label{sec:twoquantities}
+
+The preceding subsections actually describe two distinct quantities, and conflating them is
+the source of the standard worry about whether entropy is ``in the world'' or ``in the head.''
+The wake functional $W[\Psi]$ is a property of $\Psi$ alone: it is observer-independent, in
+the same sense that the density $\rho(\mathbf{x},t)$ is observer-independent. The
+coarse-grained entropy that follows from $\Omega_{\text{wake}}$ depends on the choice of
+$(\ell,\mathcal{O})$, and is therefore observer-relative in the standard thermodynamic sense.
+
+SSV takes both seriously. There is a structural burden carried by $\Psi$ regardless of
+description, and there is a coarse-grained shadow of that burden read off by an observer who
+resolves the medium only down to a particular scale and observable set. The two coincide in
+the limit where $(\ell,\mathcal{O})$ resolves every wake channel; they diverge wherever they
+do not. The monotonicity argument of \S\ref{sec:nottautological} belongs to the first
+quantity. The recovery of ordinary thermodynamics in \S\ref{sec:extensivity} belongs to the
+second.
+
+\subsection{Possible Empirical Signatures}
+
+The present paper does not advance a closed prediction, but the wake formulation suggests
+where wake entropy could in principle diverge from standard thermodynamic entropy. The most
+promising regimes are those where the medium's vortex and Kelvin-wave sectors carry a
+disproportionate share of $W[\Psi]$ relative to thermal degrees of freedom.
+
+Three illustrative regimes are worth naming. (i) Decaying vortex tangles in superfluid
+$^4$He~\cite{Vinen2002}: in the late-time decay of quantum turbulence, conventional
+thermodynamic entropy counts only the phonon bath, while $\alpha_{\mathcal{V}}
+I_{\mathcal{V}} + \alpha_{\mathcal{K}} I_{\mathcal{K}}$ would track the residual tangle and
+Kelvin-wave content that has not yet thermalized. A measured discrepancy between bulk thermal entropy and a
+geometry-aware estimator over the same volume would be evidence for the wake decomposition.
+(ii) BEC reconnection cascades~\cite{Villois2017}: the controlled reconnection of vortex
+filaments in Bose-Einstein condensates allows direct imaging of the topological event and its
+outgoing radiation, and is therefore a natural laboratory for comparing event-by-event wake
+deposition against post-reconnection thermal balance. (iii) Two coarse-grainings of the same
+state: any setting in which $(\ell, \mathcal{O})$ can be varied while the underlying $\Psi$
+is held fixed should exhibit the predicted dependence of coarse-grained entropy on the
+resolved wake channels, in the manner described in \S\ref{sec:boltzmann}.
+
+None of these constitute a quantitative prediction in the present paper. They mark the
+regimes where the formalism developed here would most plausibly first be tested.
+
+\section{Channel-wise Reductions of the Wake Functional}\label{sec:reductions}
+
+This section carries out the reductions promised in \S\ref{sec:candidatefunctional}. Each of
+the five channels of $W[\Psi]$ is given a concrete dimensionless definition, calibrated by
+matching to a known thermodynamic or counting limit, and reduced to a recognizable entropy
+form. The final subsection confirms that the channel set is complete and that all coefficients
+equal $k_B$.
+
+\subsection{Phonon-Bath Reduction}\label{sec:phononreduction}
 
 The preceding claim is concrete enough to demonstrate on a single channel. Consider a region
 of $\Psi$ supporting a thermal bath of Bogoliubov phonons at temperature $T$. The Madelung
@@ -373,14 +438,12 @@ three dimensions; no further input is required.
 Two structural lessons. First, the calibration $\alpha_\phi = k_B$ is fixed by matching to a
 known thermodynamic entropy, illustrating in concrete terms the normalization route promised
 in \S\ref{sec:candidatefunctional}. Second, the reduction is exact at the level of the phonon
-channel and serves as a
-template: an analogous construction in each remaining channel (with the appropriate basis for
-$I_\mathcal{K}$, $I_\mathcal{V}$, $I_\mathcal{C}$, and a non-phonon $I_\rho$) would reduce
-$W[\Psi]$ to the full thermodynamic entropy under the union of those coarse-grainings. The
-next two subsections carry out the reduction on two further independent channels, the Kelvin
-and vortex-tangle sectors.
+channel and serves as a template: an analogous construction in each remaining channel (with
+the appropriate basis for $I_\mathcal{K}$, $I_\mathcal{V}$, $I_\mathcal{C}$, and a non-phonon
+$I_\rho$) would reduce $W[\Psi]$ to the full thermodynamic entropy under the union of those
+coarse-grainings. The next subsections carry out the reduction on the remaining four channels.
 
-\subsection{Worked Example: Kelvin Sector}\label{sec:kelvinreduction}
+\subsection{Kelvin Sector}\label{sec:kelvinreduction}
 
 The Kelvin sector is genuinely independent of the bulk phonon bath: Kelvin waves are
 transverse bending excitations of quantized vortex filaments, supported on the one-dimensional
@@ -422,7 +485,7 @@ $T^3$ law; the Kelvin channel therefore contributes a thermodynamically distinct
 on $T$ at low temperature, which is in principle observable in geometries where the Kelvin
 sector dominates over bulk phonons (slender vortex filaments at low density).
 
-\subsection{Worked Example: Vortex-Tangle Sector}\label{sec:tanglereduction}
+\subsection{Vortex-Tangle Sector}\label{sec:tanglereduction}
 
 The vortex-tangle channel differs in kind from the two preceding examples. Phonons and Kelvin
 waves are harmonic excitations, and their entropy is the thermal entropy of a Bose gas of
@@ -491,7 +554,7 @@ the vortex channel, and a measured $I_\mathcal{V}(t)$ along a reconnection casca
 with $I_\mathcal{K}(t)$ and $I_\phi(t)$ --- would exhibit the inter-channel wake transfer
 just described as an explicit budget that is conserved in sum.
 
-\subsection{Worked Example: Correlation Channel}\label{sec:correlationreduction}
+\subsection{Correlation Channel}\label{sec:correlationreduction}
 
 The four channels treated so far are all \emph{local} in character: each counts entropy
 carried by degrees of freedom identified at a point or along a filament --- bulk acoustic
@@ -559,7 +622,7 @@ correlations spread as the medium evolves, raising the number of correlated regi
 while diluting the mutual information carried by each. Only the total $W$ is protected; the
 correlation channel exchanges wake with the others as records disperse.
 
-\subsection{Worked Example: Solitonic Density Channel}\label{sec:densityreduction}
+\subsection{Solitonic Density Channel}\label{sec:densityreduction}
 
 The final channel is the non-phonon density channel $I_\rho$. As noted in
 \S\ref{sec:phononreduction}, density and phase are conjugate quadratures of the same
@@ -633,64 +696,7 @@ subleading terms in each functional, the regularization-dependent constants
 ($\mu_{\text{eff}}$, $v_0$, $g_{\text{int}}$), and the derivation of the channel-wise
 coarse-grainings as a single renormalization flow rather than five separately specified maps.
 
-\subsection{The Initial-Condition Question}
-
-A monotonicity claim for $W[\Psi]$ has an immediate consequence: there must have been an
-earliest moment at which $W$ was minimal. This is the SSV analogue of the past hypothesis in
-standard cosmology — the assumption that the universe began in a low-entropy state, as
-emphasized by Penrose's Weyl-curvature hypothesis~\cite{Penrose1979} and developed in
-philosophical detail by Albert~\cite{Albert2000} and Price~\cite{Price1996}. The
-present paper does not attempt to derive that condition. It treats it as a separate problem
-deferred to a later cosmological paper in the SSV program, where the initial condition on
-$\Psi$ should be addressed alongside the structure of the early medium. What the present
-paper does claim is weaker and self-contained: \emph{given} a low-wake initial state of
-$\Psi$, the dynamics described in \S4 and \S6 cannot locally undo wake accumulation, and
-$W[\Psi(t)]$ therefore rises along physical histories. Whether the initial condition itself
-is natural, fine-tuned, or derivable from deeper structure is a question outside the scope of
-this paper.
-
-\subsection{Two Quantities, Not One: Where the Observer Enters}\label{sec:twoquantities}
-
-The preceding subsections actually describe two distinct quantities, and conflating them is
-the source of the standard worry about whether entropy is ``in the world'' or ``in the head.''
-The wake functional $W[\Psi]$ is a property of $\Psi$ alone: it is observer-independent, in
-the same sense that the density $\rho(\mathbf{x},t)$ is observer-independent. The
-coarse-grained entropy that follows from $\Omega_{\text{wake}}$ depends on the choice of
-$(\ell,\mathcal{O})$, and is therefore observer-relative in the standard thermodynamic sense.
-
-SSV takes both seriously. There is a structural burden carried by $\Psi$ regardless of
-description, and there is a coarse-grained shadow of that burden read off by an observer who
-resolves the medium only down to a particular scale and observable set. The two coincide in
-the limit where $(\ell,\mathcal{O})$ resolves every wake channel; they diverge wherever they
-do not. The monotonicity argument of \S\ref{sec:nottautological} belongs to the first
-quantity. The recovery of ordinary thermodynamics in \S\ref{sec:extensivity} belongs to the
-second.
-
-\subsection{Possible Empirical Signatures}
-
-The present paper does not advance a closed prediction, but the wake formulation suggests
-where wake entropy could in principle diverge from standard thermodynamic entropy. The most
-promising regimes are those where the medium's vortex and Kelvin-wave sectors carry a
-disproportionate share of $W[\Psi]$ relative to thermal degrees of freedom.
-
-Three illustrative regimes are worth naming. (i) Decaying vortex tangles in superfluid
-$^4$He~\cite{Vinen2002}: in the late-time decay of quantum turbulence, conventional
-thermodynamic entropy counts only the phonon bath, while $\alpha_{\mathcal{V}}
-I_{\mathcal{V}} + \alpha_{\mathcal{K}} I_{\mathcal{K}}$ would track the residual tangle and
-Kelvin-wave content that has not yet thermalized. A measured discrepancy between bulk thermal entropy and a
-geometry-aware estimator over the same volume would be evidence for the wake decomposition.
-(ii) BEC reconnection cascades~\cite{Villois2017}: the controlled reconnection of vortex
-filaments in Bose-Einstein condensates allows direct imaging of the topological event and its
-outgoing radiation, and is therefore a natural laboratory for comparing event-by-event wake
-deposition against post-reconnection thermal balance. (iii) Two coarse-grainings of the same
-state: any setting in which $(\ell, \mathcal{O})$ can be varied while the underlying $\Psi$
-is held fixed should exhibit the predicted dependence of coarse-grained entropy on the
-resolved wake channels, in the manner described in \S\ref{sec:boltzmann}.
-
-None of these constitute a quantitative prediction in the present paper. They mark the
-regimes where the formalism developed here would most plausibly first be tested.
-
-\section{Formal Time Reversal and Physical Reversal}
+\section{Formal Time Reversal and Physical Reversal}\label{sec:formalreversal}
 
 A central distinction is needed between formal and physical reversal.
 
@@ -805,7 +811,7 @@ heavier mathematics.
 The paper makes a narrow ontological claim. The wake functional $W[\Psi]$ has been carried
 from a schematic checklist to a complete channel set: all five channels are defined as
 concrete dimensionless functionals, all coefficients are calibrated, and each channel reduces
-to a recognizable entropy (\S\ref{sec:phononreduction}--\S\ref{sec:channelcomplete}). Several
+to a recognizable entropy (Section~\ref{sec:reductions}). Several
 technical tasks nonetheless remain open:
 
 \begin{enumerate}
