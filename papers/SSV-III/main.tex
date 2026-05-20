@@ -208,7 +208,7 @@ start. The stronger claim is:
 Entropy is the irreducible wake-complexity of the present state of $\Psi$.
 \end{quote}
 
-\subsection{Why This Is Not Tautological}
+\subsection{Why This Is Not Tautological}\label{sec:nottautological}
 
 The monotonicity claim is not:
 \begin{quote}
@@ -224,7 +224,7 @@ globally unwrites that structure back into the exact pre-event state.
 This is a physical claim about the availability of inverse processes, not merely a bookkeeping
 choice.
 
-\subsection{Relation to Boltzmann Entropy}
+\subsection{Relation to Boltzmann Entropy}\label{sec:boltzmann}
 
 The standard expression $S=k_B\ln\Omega$ remains useful; SSV changes the interpretation of the
 microstates being counted. A statistical form for wake entropy is
@@ -249,7 +249,7 @@ medium has one actual state, but the macroscopic description loses access to the
 distribution of wake structure. Thermodynamic entropy is then the coarse-grained shadow of a
 real structural burden in $\Psi$.
 
-\subsection{Candidate Wake Functional}
+\subsection{Candidate Wake Functional}\label{sec:candidatefunctional}
 
 Equivalently, one may write
 \begin{equation}
@@ -324,10 +324,10 @@ channel that carries wake across long timescales without converting; this is why
 acts as the rate-limiting event for irreversibility in vortex-dominated regimes (\S\ref{sec:reconnection}). Third, the
 classification is observer-relative only in the last column: the wake content tagged as
 ``erased from observation'' is real structure in $\Psi$ that is missed by a specific
-$(\ell,\mathcal{O})$, not absent from the medium. The first quantity of \S5.7 retains it;
-the second loses it.
+$(\ell,\mathcal{O})$, not absent from the medium. The first quantity of
+\S\ref{sec:twoquantities} retains it; the second loses it.
 
-\subsection{Extensivity, Coarse-Graining, and Present Structure}
+\subsection{Extensivity, Coarse-Graining, and Present Structure}\label{sec:extensivity}
 
 The wake formulation is not meant to deny the usefulness of ordinary thermodynamic entropy. It
 proposes a deeper physical interpretation for it: standard thermodynamic entropy is recovered
@@ -370,7 +370,8 @@ three dimensions; no further input is required.
 
 Two structural lessons. First, the calibration $\alpha_\phi = k_B$ is fixed by matching to a
 known thermodynamic entropy, illustrating in concrete terms the normalization route promised
-in \S5.3. Second, the reduction is exact at the level of the phonon channel and serves as a
+in \S\ref{sec:candidatefunctional}. Second, the reduction is exact at the level of the phonon
+channel and serves as a
 template: an analogous construction in each remaining channel (with the appropriate basis for
 $I_\mathcal{K}$, $I_\mathcal{V}$, $I_\mathcal{C}$, and a non-phonon $I_\rho$) would reduce
 $W[\Psi]$ to the full thermodynamic entropy under the union of those coarse-grainings. The
@@ -427,7 +428,7 @@ modes. A vortex tangle is not harmonic: its wake content is \emph{configurationa
 topological} --- the geometric arrangement of the filament network, its total quantized line
 length, and the knotting and linking of its components. The appropriate entropy is therefore
 a configurational count, and this channel turns out to be the most direct realization of the
-$S = k_B \ln\Omega_{\text{wake}}$ form of \S5.2.
+$S = k_B \ln\Omega_{\text{wake}}$ form of \S\ref{sec:boltzmann}.
 
 Discretize the medium at the healing length $\xi$, which is the physical core size of a
 quantized vortex and the natural short-distance cutoff: two filament segments approaching
@@ -462,9 +463,9 @@ Setting $\alpha_\mathcal{V} = k_B$, as for the previous two channels,
 \end{equation}
 a bona fide Boltzmann configurational entropy of the vortex tangle. No coarse-graining over a
 mode bath is required here: the tangle configurations \emph{are} the microstates, and the
-vortex channel is therefore the cleanest instance of the interpretation advanced in \S5.2,
-where $\Omega_{\text{wake}}$ counts physically distinct present configurations rather than
-abstract hidden possibilities beneath a macrostate.
+vortex channel is therefore the cleanest instance of the interpretation advanced in
+\S\ref{sec:boltzmann}, where $\Omega_{\text{wake}}$ counts physically distinct present
+configurations rather than abstract hidden possibilities beneath a macrostate.
 
 One subtlety is essential and, properly understood, strengthens the framework: \emph{the
 tangle functional $I_\mathcal{V}$ is not individually monotonic.} In freely decaying quantum
@@ -488,6 +489,74 @@ the vortex channel, and a measured $I_\mathcal{V}(t)$ along a reconnection casca
 with $I_\mathcal{K}(t)$ and $I_\phi(t)$ --- would exhibit the inter-channel wake transfer
 just described as an explicit budget that is conserved in sum.
 
+\subsection{Worked Example: Correlation Channel}\label{sec:correlationreduction}
+
+The four channels treated so far are all \emph{local} in character: each counts entropy
+carried by degrees of freedom identified at a point or along a filament --- bulk acoustic
+modes, Kelvin modes, vortex line. The correlation channel $I_\mathcal{C}$ is different in
+kind. It measures wake that resides in no single region but in the \emph{joint statistics} of
+separated regions: the imprint left when one event correlates parts of the medium that a
+local description would treat as independent.
+
+The natural measure is mutual information. Partition the coarse-grained medium at scale
+$\ell$ into regions, and for two regions $A$ and $B$ at separation $r$ define
+\begin{equation}
+  I(A\!:\!B) \;=\; S(A) + S(B) - S(A\cup B),
+\end{equation}
+with $S(\cdot)$ the entropy of the coarse-grained reduced state. A subtlety must be settled
+before this can serve as a channel of $W[\Psi]$. A state in local thermal equilibrium
+already carries correlations --- the equilibrium correlations dictated by the same mode
+occupations already counted in $I_\phi$ and $I_\mathcal{K}$. Including those in
+$I_\mathcal{C}$ would double-count. The correlation channel must therefore count only the
+\emph{connected, long-range} mutual information: the part that remains once the contributions
+already attributed to the local channels are removed, and that persists at separations $r$
+much larger than the healing length $\xi$ and the thermal correlation length $\lambda_T$.
+Write
+\begin{equation}
+  I_\mathcal{C} \;=\; \sum_{\text{region pairs}} I_{\text{conn}}(A\!:\!B),
+  \qquad I_{\text{conn}}(A\!:\!B)\big|_{r \,\lesssim\, \xi,\,\lambda_T} \;\equiv\; 0,
+\end{equation}
+the sum running over pairs in the partition family, with the short-range equilibrium part
+subtracted by construction.
+
+So defined, $I_\mathcal{C}$ is dimensionless, is a functional of the present state of
+$\Psi$, and vanishes on any state of local thermal equilibrium. Setting
+$\alpha_\mathcal{C} = k_B$,
+\begin{equation}
+  \alpha_\mathcal{C} I_\mathcal{C}
+  \;=\; k_B \sum_{\text{region pairs}} I_{\text{conn}}(A\!:\!B),
+\end{equation}
+a genuine entropy in thermodynamic units.
+
+This channel carries the conceptual payoff of the whole decomposition. The first three
+worked examples each reduced a channel to a recognizable entropy --- two Bose-gas entropies
+and a Boltzmann configurational entropy. The correlation channel does the opposite: it is the
+channel that \emph{has no counterpart in ordinary local thermodynamics}, and that is exactly
+why it is the formal home of the wake idea. Standard thermodynamic entropy is recovered as
+the limit
+\begin{equation}
+  I_\mathcal{C} \to 0
+  \quad\Longrightarrow\quad
+  W[\Psi] \to
+  \alpha_\phi I_\phi + \alpha_\rho I_\rho
+  + \alpha_\mathcal{V} I_\mathcal{V} + \alpha_\mathcal{K} I_\mathcal{K},
+\end{equation}
+the sum of local channel entropies --- the standard, extensive, locally-additive
+thermodynamic entropy of \S\ref{sec:extensivity}. A medium in local equilibrium has
+$I_\mathcal{C} = 0$ and obeys ordinary thermodynamics. A medium carrying wake has
+$I_\mathcal{C} > 0$: its separated regions share records of a common past. The correlation
+channel is the precise statement that the past survives as present structure --- the
+structure being the connected correlations that local thermodynamics discards.
+
+Two remarks. First, $I_\mathcal{C}$ is the most observer-relative channel: mutual information
+depends on the partition $(\ell,\mathcal{O})$, so $I_\mathcal{C}$ belongs squarely to the
+second of the two quantities distinguished in \S\ref{sec:twoquantities} --- the
+coarse-grained shadow, not the partition-independent burden carried by $\Psi$ itself.
+Second, like $I_\mathcal{V}$, $I_\mathcal{C}$ is not individually monotonic: wake
+correlations spread as the medium evolves, raising the number of correlated region pairs
+while diluting the mutual information carried by each. Only the total $W$ is protected; the
+correlation channel exchanges wake with the others as records disperse.
+
 \subsection{The Initial-Condition Question}
 
 A monotonicity claim for $W[\Psi]$ has an immediate consequence: there must have been an
@@ -504,7 +573,7 @@ $W[\Psi(t)]$ therefore rises along physical histories. Whether the initial condi
 is natural, fine-tuned, or derivable from deeper structure is a question outside the scope of
 this paper.
 
-\subsection{Two Quantities, Not One: Where the Observer Enters}
+\subsection{Two Quantities, Not One: Where the Observer Enters}\label{sec:twoquantities}
 
 The preceding subsections actually describe two distinct quantities, and conflating them is
 the source of the standard worry about whether entropy is ``in the world'' or ``in the head.''
@@ -517,8 +586,9 @@ SSV takes both seriously. There is a structural burden carried by $\Psi$ regardl
 description, and there is a coarse-grained shadow of that burden read off by an observer who
 resolves the medium only down to a particular scale and observable set. The two coincide in
 the limit where $(\ell,\mathcal{O})$ resolves every wake channel; they diverge wherever they
-do not. The monotonicity argument of \S5.1 belongs to the first quantity. The recovery of
-ordinary thermodynamics in \S5.4 belongs to the second.
+do not. The monotonicity argument of \S\ref{sec:nottautological} belongs to the first
+quantity. The recovery of ordinary thermodynamics in \S\ref{sec:extensivity} belongs to the
+second.
 
 \subsection{Possible Empirical Signatures}
 
@@ -539,7 +609,7 @@ outgoing radiation, and is therefore a natural laboratory for comparing event-by
 deposition against post-reconnection thermal balance. (iii) Two coarse-grainings of the same
 state: any setting in which $(\ell, \mathcal{O})$ can be varied while the underlying $\Psi$
 is held fixed should exhibit the predicted dependence of coarse-grained entropy on the
-resolved wake channels, in the manner described in \S5.2.
+resolved wake channels, in the manner described in \S\ref{sec:boltzmann}.
 
 None of these constitute a quantitative prediction in the present paper. They mark the
 regimes where the formalism developed here would most plausibly first be tested.
@@ -659,15 +729,15 @@ heavier mathematics.
 The paper makes a narrow ontological claim, but several technical tasks remain open:
 
 \begin{enumerate}
-  \item define the remaining $I_i$ channels ($I_\mathcal{C}$ and a non-phonon $I_\rho$) as
-  computable dimensionless functionals, following the templates of
-  \S\ref{sec:phononreduction}--\S\ref{sec:tanglereduction},
-  \item fix the remaining coefficients $\alpha_\mathcal{C}$ and $\alpha_\rho$ by analogous
-  calibration to known thermodynamic or counting limits,
-  \item extend the channel-wise reductions of \S\ref{sec:phononreduction},
-  \S\ref{sec:kelvinreduction}, and \S\ref{sec:tanglereduction} to the remaining two channels,
-  completing the demonstration that wake-complexity reduces to thermodynamic entropy under
-  the union of channel-wise coarse-grainings,
+  \item define the one remaining channel, a non-phonon $I_\rho$ for solitonic and
+  defect-density structure, as a computable dimensionless functional, following the
+  configurational template of \S\ref{sec:tanglereduction},
+  \item fix the remaining coefficient $\alpha_\rho$ by analogous calibration to a known
+  counting limit,
+  \item extend the channel-wise reductions of
+  \S\ref{sec:phononreduction}--\S\ref{sec:correlationreduction} to the non-phonon density
+  channel, completing the demonstration that wake-complexity reduces to thermodynamic entropy
+  under the union of channel-wise coarse-grainings,
   \item quantify the role of reconnection within the broader wake picture by measuring
   per-event wake deposition against the channel decomposition of \S\ref{sec:channelfate},
   \item connect this time framework to gravity and black holes in later papers without
