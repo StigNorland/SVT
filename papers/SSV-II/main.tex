@@ -113,9 +113,7 @@ scale of the heaviest stable defect.  What lies below this scale is a
 separate question, in the same sense that Navier--Stokes is silent about
 sub-molecular structure.  The mean-field force-sector treatment is the
 static envelope of a fuller picture in which the medium's accumulated
-record is the substrate of irreversible time (Paper~III); the same
-hydrodynamics governs galactic-scale Bjerknes resonances and flat rotation
-curves without dark matter (Paper~IV).
+record is the substrate of irreversible time (Paper~III).
 \end{abstract}
 
 \newpage
@@ -246,8 +244,8 @@ medium that records.  Section~\ref{sec:leptons} locates the charged leptons as
 higher breather modes; Section~\ref{sec:gravity} treats gravity, including a
 forward connection to Paper~III.  Section~\ref{sec:unification} discusses the
 unified picture.  Section~\ref{sec:predictions} lists testable predictions.
-Section~\ref{sec:outlook} flags the connection to thermodynamics and large-scale
-structure.  Section~\ref{sec:discussion} collects open problems.
+Section~\ref{sec:outlook} flags the connection to thermodynamics and irreversible
+time.  Section~\ref{sec:discussion} collects open problems.
 
 % ═══════════════════════════════════════════════════════════════════════
 \section{Framework: The Superfluid Vacuum in Brief}
@@ -1479,8 +1477,8 @@ properties of the medium's global saturated state, not signals propagating
 between measurement sites, and the experimental lower bounds on any
 ``speed of spooky action'' \cite{Salart2008,Yin2013} constrain hypothetical
 signal velocities and are vacuous in the present framework --- they fall
-outside the propagation-speed analysis of \S\S\ref{sec:EM} and
-\ref{sec:no_graviton} entirely.
+outside the propagation-speed analysis of \S\ref{sec:EM} and
+\S\ref{sec:gravity} entirely.
 
 \subsection{Neutrinos as Torsional Radiation}
 \label{sec:neutrino}
@@ -1660,201 +1658,114 @@ three open problems share the same $\mathcal{L}+\mathcal{L}_\perp$
 computation as their target.
 
 % ═══════════════════════════════════════════════════════════════════════
-\section{Gravity: Density Depression and the Bjerknes Mechanism}
+\section{Gravity: Time-Delay Gradients from Interfering Pressure Waves}
 \label{sec:gravity}
 % ═══════════════════════════════════════════════════════════════════════
 
 \subsection{The Physical Picture}
 
-Gravity in SSV operates through two complementary but consistent
-descriptions that are dual to each other:
+Gravity is the gradient of a time delay.  Every massive defect is a breather
+(Paper~I) --- a localised region of $\Psi$ oscillating at its Compton
+frequency --- and it radiates a longitudinal pressure wave into the medium,
+with amplitude falling as $1/r$ from spherical dilution.  A second breather,
+or a light wave, propagating through that radiated wave interferes with it;
+the time-averaged interference, through the medium's logarithmic
+nonlinearity, slows the local rate of change of $\Psi$.  Since physical time
+is that rate of change (Paper~III), the interference imposes a time delay,
+strongest near the mass and fading with distance.  Its gradient bends every
+trajectory that crosses it toward the region of greatest delay --- and that
+bending is gravity.
 
-\begin{enumerate}
-  \item \textbf{Static (field) picture.} A mass~$M$ depresses the
-        surrounding superfluid density below $\rho_0$.  The
-        gravitational potential is encoded directly in this depression:
-        \begin{equation}
-            \Phi(\mathbf{x})
-              = b\ln\!\frac{\rho(\mathbf{x})}{\rho_0}
-              \approx \frac{b}{\rho_0}\,\delta\rho(\mathbf{x}),
-              \qquad \delta\rho < 0.
-            \label{eq:Phi_density}
-        \end{equation}
-        Since $\Phi < 0$ near a mass (attractive potential), we have
-        $\rho < \rho_0$ there: the medium is \emph{rarefied}, not
-        compressed.  Clocks run slower in this rarefied region because
-        the local longitudinal sound speed of the medium is reduced in
-        the depressed-density region.  If the Goldstone reinterpretation
-        of \S\ref{sec:EM_open_issue} is correct, this is the channel
-        that sets the propagation scale for light, gravitational
-        radiation, and the modes that constitute clocks.  The
-        leading-order calculation in \S\ref{sec:tdcalc} reproduces the
-        GR weak-field time-dilation form under this identification.
-
-  \item \textbf{Dynamic (force) picture.} Every mass is also a
-        pulsating breather.  Two such breathers attract each other via
-        the time-averaged Bjerknes force --- the mechanical origin of
-        Newton's inverse-square law.  The time-varying (radiative) part
-        of this interaction is naturally read as a phase-channel
-        disturbance of $\Psi$ propagating at the medium's sound speed
-        $c$; this reading depends on the EM reinterpretation discussed in
-        \S\ref{sec:EM_open_issue}.
-\end{enumerate}
-
-These are not two different theories: the static density depression is
-the time-averaged envelope of the dynamic pulsation field.  The
-Bjerknes mechanism explains \emph{why} the depression forms; the
-potential $\Phi = b\ln(\rho/\rho_0)$ describes \emph{what} it does
-to clocks and trajectories.
-
-\subsection{Time Dilation from the Local Sound Speed}
-\label{sec:tdcalc}
-
-Before turning to the Bjerknes force itself, we show that the
-density-depression picture above already reproduces the GR weak-field
-time dilation factor at leading order, using only the LogSE
-Lagrangian and the stiffness relation $b = m_0 c^2/(2\rho_0)$ fixed
-in Paper~I.
-
-\paragraph{Setup.}
-The Bogoliubov sound speed in the LogSE medium, evaluated at local
-density $\rho$, is~\cite{TGD-I}
-\begin{equation}
-    c_s(\rho) = \sqrt{\frac{2 b \rho}{m_0}}.
-    \label{eq:cs_local}
-\end{equation}
-Setting $c_s(\rho_0) = c$ at saturation fixes the stiffness
-$b = m_0 c^2/(2\rho_0)$ (Paper~I, eq.~II.4).  Substituting back into
-\eqref{eq:cs_local} gives the local sound speed as a function of
-local density alone:
-\begin{equation}
-    c_s(\rho) = c\sqrt{\frac{\rho}{\rho_0}}.
-    \label{eq:cs_rho}
-\end{equation}
-
-\paragraph{Local sound speed in the depressed region.}
-Near a mass, the medium is rarefied: $\rho(\mathbf{x}) = \rho_0 +
-\delta\rho(\mathbf{x})$ with $\delta\rho < 0$.  The local sound
-speed is reduced:
-\begin{equation}
-    \frac{c_s(\mathbf{x})}{c_s(\infty)}
-    = \sqrt{\frac{\rho(\mathbf{x})}{\rho_0}}
-    = \sqrt{1 + \frac{\delta\rho(\mathbf{x})}{\rho_0}}.
-    \label{eq:cs_ratio}
-\end{equation}
-The gravitational potential of \S\ref{sec:gravity} as written in
-Paper~II is $\Phi_{\rm SSV} = b\ln(\rho/\rho_0)$, which has units of
-energy per particle in Paper~I's conventions ($|\Psi|^2 = \rho/\rho_0$
-dimensionless, $\rho$ a number density).  The Newtonian gravitational
-potential carries units of energy per mass, so the SSV-to-Newtonian
-correspondence is
-\begin{equation}
-    \Phi_{\rm Newt}(\mathbf{x})
-    \;\equiv\; \frac{\Phi_{\rm SSV}}{m_0}
-    \;=\; \frac{b}{m_0}\ln\!\frac{\rho}{\rho_0}
-    \;\approx\; \frac{c^2}{2}\,\frac{\delta\rho}{\rho_0},
-    \label{eq:Phi_correspondence}
-\end{equation}
-where the last step uses $b = m_0 c^2/(2\rho_0)$ at leading order in
-$\delta\rho/\rho_0$.  Inverting,
-\begin{equation}
-    \frac{\delta\rho}{\rho_0} = \frac{2\Phi_{\rm Newt}}{c^2}.
-    \label{eq:drho_to_Phi}
-\end{equation}
-
-\paragraph{Result.}
-Substituting \eqref{eq:drho_to_Phi} into \eqref{eq:cs_ratio} and
-writing $\Phi$ for $\Phi_{\rm Newt}$ from here on:
-\begin{equation}
-    \boxed{\;
-    \frac{c_s(\mathbf{x})}{c_s(\infty)}
-    = \sqrt{1 + \frac{2\Phi(\mathbf{x})}{c^2}}
-    \approx 1 + \frac{\Phi(\mathbf{x})}{c^2}
-    \;}
-    \label{eq:time_dilation}
-\end{equation}
-This reproduces the GR weak-field time-dilation form under the stated
-identification of $\Phi_{\rm Newt}$ with $\Phi_{\rm SSV}/m_0$.  If
-clock-setting processes in the medium track the local longitudinal
-propagation scale, then a clock built from such waves or interactions
-ticks at a rate proportional, at leading order, to the local sound speed;
-in a region with $\Phi < 0$ the sound speed is reduced and the clock runs
-slow by the factor $\sqrt{1+2\Phi/c^2}$.
-
-\paragraph{What this calculation establishes.}
-At leading order in $\Phi/c^2$, the density-depression picture gives a
-mechanical route to gravitational time dilation: clocks slow because the
-medium itself supports slower longitudinal waves in the depressed-density
-region around a mass.  Within the identifications above, the result
-requires no additional free parameters beyond those fixed in Paper~I; it
-uses the Bogoliubov dispersion and the relation $c_s(\rho_0)=c$.  The key
-physical step is the identification of the clock-setting propagation
-channel with the longitudinal (Bogoliubov) mode of $\Psi$, consistent with
-Volovik's analogue-gravity programme \cite{Volovik2003} and
-Zloshchastiev's logarithmic SVT \cite{Zloshchastiev2020}.  The
-chiral-shear sector at $c_\perp$ has the wrong local-density sign for
-time dilation under the naive substitution and therefore plays no role in
-this weak-field calculation.
-
-\begin{gapbox}[Open: extension beyond leading order]
-The derivation is exact at $O(\Phi/c^2)$ but uses the Bogoliubov
-dispersion at zero momentum.  Extension to higher orders in
-$\Phi/c^2$ requires (i) treating the full LogSE non-linearly rather
-than at the linearised Bogoliubov level, and (ii) confirming that
-the next-order corrections in the LogSE reproduce the
-post-Newtonian expansion of GR (the parametrised PPN coefficients
-$\beta$, $\gamma$, etc.).  This is a clean test: SSV makes a
-specific prediction at each order, and any deviation from
-$\beta = \gamma = 1$ would be a structural prediction of the
-framework distinct from GR.  The calculation is non-trivial but
-finite, and is deferred to a companion paper.
-\end{gapbox}
-
-\subsection{Bjerknes Forces in Classical Hydrodynamics}
-
-In classical fluid mechanics, the \emph{Bjerknes force}
-\cite{Bjerknes1906} is the time-averaged force between two objects
-that pulsate (oscillate in volume) while immersed in a compressible
-medium. If object~1 pulsates with volume rate $\dot{V}_1$ and
-object~2 with $\dot{V}_2$, the time-averaged force between them is
-\begin{equation}
-    \langle F \rangle
-      = -\rho_0 \langle \dot{V}_1 \dot{V}_2 \rangle \frac{1}{4\pi r^2},
-    \label{eq:bjerknes_classical}
-\end{equation}
-where $r$ is their separation.  For two objects pulsating \emph{in
-phase}, $\langle\dot{V}_1\dot{V}_2\rangle > 0$ and the force is
-\emph{attractive}.  This force has three properties that match
-gravity exactly:
-\begin{itemize}
-    \item \textbf{Inverse-square}: the $1/(4\pi r^2)$ factor is
-          purely geometric --- spherical wave dilution in three
-          dimensions.
-    \item \textbf{Universal}: it acts on any object that pulsates in
-          the medium, regardless of internal structure or composition.
-    \item \textbf{Long-range}: the $1/r^2$ scaling holds at all
-          separations for in-phase oscillators; the time-averaged
-          force does not decay faster than $1/r^2$ at any distance.
-\end{itemize}
+A single potential $\Phi(\mathbf{x})$ summarises the delay: the acceleration
+of free fall is $-\nabla\Phi$, and the fractional slowing of clocks is
+$\Phi/c^2$.  The present section establishes gravity as the fourth
+force-sector mode and fixes Newton's constant from the medium; the full
+development of the mechanism --- the chain from interference to path
+bending, and the gravitational consequences that follow --- is the subject
+of Paper~IV.
 
 \subsection{The Proton as a Pulsating Breather}
 
-In Paper~I, the proton is a spherical breather mode --- a
-periodically oscillating, localised density perturbation of the
-superfluid vacuum. Its eigenfrequency is the Compton frequency:
+The source of the radiated wave is the breather itself.  In
+Paper~I the proton is a spherical breather mode --- a periodically
+oscillating, localised density perturbation of the superfluid vacuum,
+sustained by its own knotted vortex skeleton and not by any external
+driving.  Its eigenfrequency is the Compton frequency:
 \begin{equation}
     f_p = \frac{m_p c^2}{h} \approx 2.27\times 10^{23}\,\mathrm{Hz},
     \label{eq:proton_freq}
 \end{equation}
 with corresponding wavelength $\lambda_p = c/f_p \approx
-1.3\times10^{-15}\,\mathrm{m}$.  The proton radiates an acoustic
-density wave into the superfluid at this frequency; the amplitude
-falls as $1/r$ from spherical dilution.
+1.3\times10^{-15}\,\mathrm{m}$.  The breather radiates a longitudinal
+density wave into the medium at this frequency; the fractional density
+modulation $x(\mathbf{x},t) \equiv \delta\rho/\rho_0$ falls as $1/r$ from
+spherical dilution.  Every massive defect does the same, scaled by its
+mass-energy.  Gravity is the interference of these radiated waves, and the
+next subsection computes it.
 
-\subsection{Deriving Newton's Law}
+\subsection{The Interference Cross-Term}
+\label{sec:interference}
+
+The mechanism is contained in the LogSE.  Where the radiated waves of
+several breathers overlap, the local density is $\rho/\rho_0 = 1 + \sum_i
+x_i$ with $x_i \equiv \delta\rho_i/\rho_0$, and the medium's logarithmic
+energy term expands as
+\begin{equation}
+    \ln\!\Big(1 + \sum_i x_i\Big)
+      = \sum_i x_i - \frac{1}{2}\sum_i x_i^2
+      - \sum_{i<j} x_i x_j + \cdots
+    \label{eq:log_expansion}
+\end{equation}
+The single-wave terms are each breather's own self-energy; the interaction
+between two breathers $A$ and $B$ is carried by the cross term
+\begin{equation}
+    u_{AB} \;=\; -\,b\,\rho_0\,x_A\,x_B ,
+    \label{eq:cross_term}
+\end{equation}
+an \emph{interference} term --- the product of two waves.  Three properties
+fix the character of gravity.  Its time average $\langle u_{AB}\rangle =
+-b\rho_0\langle x_A x_B\rangle$ survives only for phase-correlated waves, so
+coherent breathers gravitate and incoherent disturbances do not.  Its sign
+is fixed negative by the concavity of the logarithm: \emph{gravity is
+attractive because the medium's nonlinearity is logarithmic}.  And it is
+bilinear --- with $x_A \propto m_A/r$ diluted to $B$'s location and $x_B
+\propto m_B$ --- so $\langle u_{AB}\rangle \propto -m_A m_B/r$, the
+Newtonian potential, with the inverse-square force its gradient.  The
+coefficient is fixed by the breather's acoustic output in
+\S\ref{sec:Newton}; the full development is given in Paper~IV.
+
+\subsection{The Bjerknes Mechanism}
+
+This time-averaged interference of pulsating waves is, classically, the
+Bjerknes interaction~\cite{Bjerknes1906}.  For two bodies pulsating in a
+compressible medium with volume rates $\dot V_1$ and $\dot V_2$, Bjerknes
+obtained a time-averaged force
+\begin{equation}
+    \langle F \rangle
+      = -\,\rho_0\,\langle \dot{V}_1 \dot{V}_2 \rangle\,\frac{1}{4\pi r^2},
+    \label{eq:bjerknes_classical}
+\end{equation}
+with $r$ the separation.  The cross-correlation $\langle \dot V_1 \dot
+V_2\rangle$ is exactly the interference term $\langle x_A x_B\rangle$ of
+\S\ref{sec:interference} written in volume-velocity variables, and the
+geometric $1/(4\pi r^2)$ is the spherical dilution of a wave in three
+dimensions --- not an independently postulated force law.  We use Bjerknes'
+result and his volume-velocity form below to compute $G$; ``force'' is
+retained only as shorthand for the gradient of the interference.  Its
+reinterpretation --- why this is not a force across an inert gap, and why
+the breathers, as self-sustaining eigenmodes of $\Psi$, need no external
+driving --- is developed in Paper~IV.
+
+\subsection{Newton's Constant from the Medium}
 \label{sec:Newton}
 
-\paragraph{Step 1: Acoustic field of a pulsating breather.}
+The quantitative interference calculation uses the breather's acoustic
+output to fix the coefficient of $\Phi$ left open in \S\ref{sec:interference}.
+It proceeds in four steps: the wave a breather radiates, the
+cross-term a second breather feels in it, the sub-grain suppression that
+makes that coupling weak, and the value of $G$ that results.
+
+\paragraph{Step 1: Acoustic wave of a pulsating breather.}
 The proton pulsates at angular frequency $\omega_p = m_p c^2/\hbar$
 with volume oscillation $V(t) = V_0 + \delta V_p\sin(\omega_p t)$,
 so $\dot{V}(t) = \omega_p\delta V_p\cos(\omega_p t)$.  Both the static
@@ -1877,10 +1788,11 @@ nevertheless retains its $1/r^2$ form at all distances for in-phase
 oscillators, because the static component of the time-averaged force
 is independent of zone.
 
-\paragraph{Step 2: Force on a second breather.}
+\paragraph{Step 2: The interference cross-term.}
 A second identical proton at separation $r$ is a resonant oscillator
-at $\omega_p$, driven in phase by the same medium.  Averaging over
-one cycle:
+at $\omega_p$, driven in phase by the same medium.  The time-averaged
+cross-term of \S\ref{sec:interference}, in volume-velocity variables, is
+the average over one cycle:
 \begin{equation}
     \langle \mathbf{F}_{12} \rangle
       = -\frac{\rho_0}{4\pi r^2}
@@ -1921,7 +1833,7 @@ the mass ratio
     \label{eq:subgrain}
 \end{equation}
 The medium cannot resolve structure below $\xi$; consequently the
-proton couples to the long-range density field with a suppressed
+proton couples to the long-range density wave with a suppressed
 \emph{acoustic monopole moment} $Q_p$.  For a sub-grain spherical
 oscillator, coupling to wavelengths $\lambda \gg \xi$ is suppressed
 by the ratio of source volume to grain volume:
@@ -2010,169 +1922,17 @@ mode of the medium that mediates the static near-field Coulomb interaction
 between vortices (\S\ref{sec:EM_open_issue}); it is not the carrier of any
 astrophysical radiation.
 
-\subsection{Universal Coupling: Why Everything Falls}
+\subsection{Scope: the Full Treatment in Paper~IV}
 
-The Bjerknes mechanism is universal because every object in the
-medium --- regardless of internal structure, charge, or topology ---
-is set into volume oscillation by an incoming acoustic density wave.
-The pulsation amplitude is $\delta V \propto m/\rho_0$
-(equation~\ref{eq:epsilon_def}), depending only on mass-energy.
-Hence the Bjerknes force scales as $m_1 m_2/r^2$ for any pair of
-objects.
-
-This is the mechanical origin of the equivalence principle: the same
-quantity (mass-energy) determines both the inertial response to
-acceleration and the coupling to the gravitational density field,
-because both are manifestations of the object's acoustic cross-section
-in the medium.  Every other force is selective --- electromagnetism
-couples to chirality, the strong force to topological charge, the
-weak force to core overlap --- but gravity couples to the one property
-all defects share: they displace the medium.
-
-\subsection{Gravity Without a Graviton}
-\label{sec:no_graviton}
-
-The SSV framework does not require a graviton.  The gravitational
-potential $\Phi = b\ln(\rho/\rho_0)$ is a property of the classical
-density field $\rho(\mathbf{x})$; the $1/r$ behaviour at long range
-is the static Green's function of the Laplace equation, arising from
-spherical symmetry alone.  What conventional quantum field theory
-calls graviton exchange corresponds here to the transfer of
-acoustic momentum through the medium --- a collective
-hydrodynamic process, not a particle interaction.
-
-This is structurally consistent with the treatment of the other
-forces: electromagnetism emerges from the transverse flow field of
-chiral vortices without postulating a separate photon field, and
-gravity emerges from the acoustic density field without
-postulating a separate graviton field.  Both are modes of the single
-medium $\Psi$.
-
-\paragraph{The ultraviolet problem dissolves.}
-Conventional perturbative quantum gravity is non-renormalisable: when
-gravity is treated as a quantum field theory in the standard way, the
-loop integrals diverge at short distances and the infinities cannot
-be removed by redefining a finite number of parameters.  The theory
-has no built-in short-distance cutoff and breaks down at the Planck
-scale, requiring replacement by an unknown theory of quantum gravity.
-
-In SSV this problem does not arise --- not because we solve it, but
-because the framework's domain of validity makes it impossible to
-state.  SSV is a continuum effective theory valid down to the scale
-of the heaviest stable defect,
-\begin{equation}
-    \ell_{\rm grain} \equiv a_p = \frac{\hbar}{m_p c}
-    \approx 2.10\times10^{-16}\,\mathrm{m}.
-    \label{eq:lgrain_cutoff}
-\end{equation}
-Below $\ell_{\rm grain}$, the LogSE continuum description ceases to
-be self-consistent: no new stable structures exist, and the medium
-supports only transient denting events (\S\ref{sec:higgs}).  Momentum
-modes with $k \gg 1/\ell_{\rm grain}$ are outside the framework's
-domain of validity --- not regulated away by hand, but simply absent
-from the theory, in the same sense that Navier--Stokes has no
-sub-molecular eddies.  The divergent integrals of perturbative quantum
-gravity never appear because the modes that would generate them are
-outside the scope of the description.
-
-This is worth pausing on.  The ultraviolet catastrophe of quantum
-gravity is usually treated as one of the deepest unsolved problems in
-physics, motivating decades of work on string theory, loop quantum
-gravity, and related programmes.  In SSV it is not solved --- it
-simply does not arise.  The cutoff $\ell_{\rm grain}$ is not a new
-postulate introduced to tame divergences; it is the healing length of
-the heaviest stable defect, fixed by the proton mass alone.  The
-same physical reasoning that gives Navier--Stokes its molecular
-cutoff gives SSV its cutoff at $a_p$: at scales finer than the
-smallest stable structure, the continuum description is silent.
-
-Note the distinction from the electron healing length $\xi =
-\hbar/(m_e c) \approx 3.86\times 10^{-13}\,\mathrm{m}$, which is
-the natural scale for electron-defect physics and atomic calculations
-but is \emph{not} the medium's UV boundary.  The true domain-of-validity
-boundary is $\ell_{\rm grain} \approx \xi/1836$, set by the proton,
-not the electron.  The two scales differ by $m_p/m_e \approx 1836$
-and must not be conflated (see Table~\ref{tab:symbols}).
-
-The absence of a graviton and the absence of UV divergences are the
-same fact stated two ways: SSV has no gravitational field to quantise,
-and therefore no quantisation problem to solve.
-
-\subsection{General Relativity as Emergent Hydrodynamics}
-
-The full curved-spacetime formulation of gravity emerges from the
-Madelung equations in the hydrodynamic limit~\cite{Volovik,Barcelo}.
-The acoustic metric
-\begin{equation}
-    g_{\mu\nu}^{\rm eff}
-      = \frac{\rho_0}{m_0 c}
-        \begin{pmatrix}
-          -(c^2 - v^2) & -v_j \\
-          -v_i         & \delta_{ij}
-        \end{pmatrix}
-    \label{eq:acoustic_metric}
-\end{equation}
-reduces to Minkowski when the background flow vanishes.
-Gravitational time dilation follows from the density depression:
-where $\rho < \rho_0$ near a mass, the healing length $\xi \propto
-\rho^{-1/2}$ grows, the local vacuum interaction rate $c/\xi$ falls,
-and clocks run slower.  Gravitational lensing follows automatically,
-since photons (transverse phonons) are equally deflected by density
-gradients in the acoustic metric.  No separate gravitational field is
-postulated at any point.
-
-\subsection{Forward Connection: Gravity in a Medium That Remembers}
-\label{sec:gravity_forward}
-
-The gravity treatment above is the mean-field story.  Two specific places in
-the derivation depend on operations that the irreversibility framework of
-Paper~III will revisit at finer resolution; they are flagged here so that the
-present scope is honest.
-
-\paragraph{Time-averaging the Bjerknes force.}
-Newton's law was derived in \S\ref{sec:Newton} from the time-averaged Bjerknes
-force $\langle F\rangle = -\rho_0 \langle \dot V_1 \dot V_2\rangle/(4\pi r^2)$.
-The averaging brackets perform a classical operation: integrate over many
-cycles of the proton breather oscillation at $\omega_p = m_p c^2/\hbar$ to
-extract the static component.  In a featureless medium this is unproblematic.
-In a medium that records, what gets averaged is itself history-dependent:
-each cycle deposits a small amount of acoustic energy into the medium, and
-the breather of cycle $n+1$ propagates through a slightly different background
-than the breather of cycle $n$.  The leading-order static result survives
-this refinement --- the recoil of one cycle on the next is suppressed by the
-proton's sub-grain coupling factor $(m_e/m_p)^3$, the same factor that makes
-$G$ small in the first place --- but the corrections are non-zero and
-carry information about the source's pulsation history.  These corrections
-are the gravitational-wave memory effect (Christodoulou) read in this
-framework: not as a peculiar property of asymptotic spacetimes, but as the
-direct consequence of a medium that literally remembers.
-
-\paragraph{The static density depression as a long-time average.}
-The static potential $\Phi = b\ln(\rho/\rho_0)$ is the long-time-averaged
-envelope of the dynamical pulsation field.  In the framework's deeper picture,
-$\rho(\vec x, t)$ is not a smooth deterministic function but a coarse-grained
-description of an evolving record; the smoothness emerges because reconnection
-events and their acoustic wakes are dense enough to wash out at scales
-relevant to the equivalence-principle tests we currently perform.  At
-sufficiently high precision and sufficiently short timescales, this smoothing
-must fail: the gravitational potential at a point will fluctuate around its
-mean value at a rate set by the local rate of reconnection events.  No
-calculation of this fluctuation spectrum is given here.  It is identified as
-the natural Paper~III follow-up to the present mean-field gravity treatment.
-
-\paragraph{What this does not change.}
-\begin{sloppypar}
-The Newton's-constant consistency check
-($G = \alpha_G \hbar c \alpha^2/(N_p^2 m_e^2)$, 0.6\% accurate) is unaffected:
-it relates time-averaged quantities, all defined at the same level of coarse
-graining.  The graviton-free argument is unaffected: there is still no
-gravitational field to quantise.  The argument that $\xi$ supplies the
-natural ultraviolet cutoff is unaffected: $\xi$ remains the medium's
-minimum length.  What the forward connection makes explicit is only that
-the time-averaging step inherits the medium's accumulated history at a level
-Paper~II does not yet resolve --- and that this is not an obstacle to the
-mean-field claims, only a scoping of where Paper~III takes over.
-\end{sloppypar}
+The present section has established gravity as the fourth force-sector mode
+--- the interference of breather pressure waves, building a time-delay
+gradient that bends trajectories --- and has fixed Newton's constant from
+the medium.  The conceptual development of the mechanism is carried out in
+Paper~IV: the formal account of update capacity, the four gravitational
+consequences (free fall, time dilation, light deflection, redshift), the
+universality of the coupling, the absence of a graviton, the bridge to
+emergent geometry (Paper~VII-b), and the connection to the recording medium
+of Paper~III.
 
 % ═══════════════════════════════════════════════════════════════════════
 \section{Unified Picture: One Medium, Four Modes}
@@ -2195,7 +1955,7 @@ itself oscillating, not an interaction between defects.}
 Electromagnetism & Transverse flow    & Chirality ($\pm$)      & Transverse phonon         & $\infty$        \\
 Strong           & Surface tension    & Topological charge     & Phase oscillation         & $\sim a/\alpha$ \\
 Weak             & Reconnection       & Core overlap           & Amplitude mode ($W,Z$)    & $\sim \xi$      \\
-Gravity          & Density depression & Mass-energy (breather) & Longitudinal density wave & $\infty$        \\
+Gravity          & Pressure-wave interference & Mass-energy (breather) & Longitudinal density wave & $\infty$        \\
 \midrule
 Higgs            & Amplitude mode     & The medium itself      & $\delta\rho$ oscillation  & $\sim \xi_{\rm EW}$ \\
 \bottomrule
@@ -2295,7 +2055,7 @@ clear which experiments would test which structural claims.
   (a permanent shift in detector test-mass separation following the passage of
   a strong GW signal) is predicted to be present at the Christodoulou level
   --- not as a peculiar property of asymptotic spacetimes but as a direct
-  consequence of a medium that records (\S\ref{sec:gravity_forward}).  The
+  consequence of a medium that records (Paper~IV).  The
   framework sets the same magnitude as conventional GR; the structural claim
   is that memory is the natural state of affairs in SSV, not an exotic
   signal.  Distinguishing SSV from GR on this point requires precision
@@ -2430,16 +2190,14 @@ quantitatively close to GR/Standard-Model expectations and would require
 precision improvements beyond current capability to discriminate.
 
 % ═══════════════════════════════════════════════════════════════════════
-\section{Bridge to Thermodynamics and Large-Scale Structure}
+\section{Bridge to Thermodynamics and Irreversible Time}
 \label{sec:outlook}
 % ═══════════════════════════════════════════════════════════════════════
 
 The same superfluid order parameter $\Psi$ that underlies the four forces also
-governs irreversible thermodynamics and the large-scale structure of the
-universe.  Two connections to subsequent papers in this series are worth
-flagging here, beyond the forward-pointers already given in
-\S\ref{sec:CP} (CP and memory) and \S\ref{sec:gravity_forward} (gravity in a
-recording medium).
+governs irreversible thermodynamics.  One further connection to a subsequent
+paper is worth flagging here, beyond the forward-pointer already given in
+\S\ref{sec:CP} (CP and memory).
 
 \paragraph{Time and entropy (Paper III).}
 The two flagged places where the present paper meets the irreversibility
@@ -2453,19 +2211,6 @@ statement that the medium accumulates record monotonically; the CMB thermal
 spectrum is the acoustic noise integrated from all reconnection events since
 the seeding.  The force-sector mean-field treatment of the present paper is
 the static envelope of that fuller dynamics.
-
-\paragraph{Galaxy-scale Bjerknes resonances (Paper IV).}
-The Bjerknes mechanism that produces gravity between protons operates also
-at macroscopic scales when a central black-hole breather --- a macroscopic
-oscillating density perturbation at $f_{\rm BH} = f_p (m_p/M_{\rm BH})$ ---
-sets up a cylindrical standing wave across the galactic disc.  This standing
-wave has the density profile of a planar soliton $\Sigma(r) =
-\Sigma_0(r_0/r)$ (the Mestel profile) beyond the aggregation radius
-$r_0 \approx 1.13\,\mathrm{kpc}$, producing flat rotation curves from
-baryonic matter alone --- no dark matter required.  The same hydrodynamics
-that fixes the electron mass through the $\alpha$-harmonic ladder of Paper~I
-also determines the Milky Way's rotation curve.  This is the load-bearing
-content of Paper~IV.
 
 % ═══════════════════════════════════════════════════════════════════════
 \section{Discussion and Open Problems}
@@ -2595,7 +2340,7 @@ of the present paper.
 
 \begin{enumerate}\setcounter{enumi}{8}
 \item \textbf{Time-averaging in a recording medium
-  (\S\ref{sec:gravity_forward}).}  The Bjerknes time-averaging that produces
+  (Paper~IV).}  The Bjerknes time-averaging that produces
   Newton's law is a classical operation; in a medium that accumulates a
   record of every reconnection event, the corrections to the leading-order
   static result carry information about pulsation history, and reproduce
@@ -2727,9 +2472,7 @@ about sub-molecular structure.  The mean-field force-sector treatment of
 the present paper is the static envelope of a fuller picture in which the
 medium accumulates a record of every reconnection event.  Paper~III treats
 that record directly, identifying irreversible time and entropy with the
-growth of topological complexity.  Paper~IV extends the Bjerknes mechanism
-to galactic scales, producing flat rotation curves from baryonic matter
-alone.
+growth of topological complexity.
 
 %------------------------------------------------------------------
 \section{Acknowledgments}

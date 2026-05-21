@@ -9,6 +9,12 @@
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{setspace}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{gapbox}[1][]{enhanced,breakable,
+  colback=orange!6!white,colframe=orange!60!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
 
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
 \setstretch{1.1}
@@ -22,56 +28,531 @@ Gravity as Update-Capacity Gradient}
 \maketitle
 
 \begin{abstract}
-This paper develops gravity in the Saturated Superfluid Vacuum (SSV) framework as a
-mechanical consequence of gradients in local update capacity. The central idea is that motion
-and interaction are not independent processes imposed on an inert background, but competing
-uses of the same local dynamical bandwidth of the vacuum medium. Where matter loads the
-medium with internal interaction, less update capacity remains for free propagation. Spatial
-gradients in this remaining capacity bend trajectories and appear as gravitational attraction.
-
-The aim of the paper is to state this mechanism clearly and narrowly. We focus on the relation
-between local change-rate, time-dilation gradients, pressure gradients, and path bending. We
-do not attempt here a full black-hole ontology, cosmology, or galactic phenomenology.
+This paper develops gravity in the Saturated Superfluid Vacuum (SSV)
+framework as the bending of motion through gradients of local time delay.
+It builds on Paper~II, where gravity enters the force sector as the
+interference of the pressure waves that every massive breather radiates into
+the vacuum, and on Paper~III, where physical time is identified with the
+local rate of change of the order parameter $\Psi$ --- the medium's local
+\emph{update capacity}.  The chain is short: the interference of radiated
+waves consumes update capacity and so slows local time; that slowing is
+uneven and therefore has a gradient; and any motion through the gradient is
+bent toward the region of greatest delay.  That bending is gravity.  From a
+single interference potential $\Phi$ follow free fall, gravitational time
+dilation, light deflection, and redshift, each at leading order in
+$\Phi/c^2$.  The treatment is weak-field throughout; recovery of the full
+curved-spacetime description is left to Paper~VII-b.  Two sections --- the
+formal account of update capacity and the quantitative refraction geometry
+--- are marked as under development.
 \end{abstract}
 
+\newpage
+\tableofcontents
+\newpage
+
 \section{Introduction}
+\label{sec:intro}
 
-This paper develops gravity in SSV as a mechanical consequence of local update-capacity
-gradients. The main question is not how to quantize a pre-existing gravitational field, but how
-gravitational behavior arises if the vacuum is a real medium whose local rate of change is
-finite and load-dependent.
+Gravity is usually approached either as a field to be quantised or as the
+curvature of a spacetime taken as fundamental.  This paper takes neither
+route.  In the Saturated Superfluid Vacuum (SSV) the vacuum is a real
+medium --- a saturated compressible superfluid described by an order
+parameter $\Psi$ --- and the question is not how to quantise a pre-existing
+gravitational field, but how gravitational behaviour arises at all if the
+medium's local rate of change is finite and depends on how heavily the
+medium is loaded.
 
-\section{Local Change-Rate and Dynamical Bandwidth}
+Two earlier papers supply the foundation.  Paper~II places gravity in the
+force sector: every massive defect is a breather, a localised oscillation of
+$\Psi$, and it radiates a longitudinal pressure wave into the medium; the
+time-averaged interference of two such waves is the gravitational
+interaction, and matching it to the observed inverse-square law fixes
+Newton's constant $G$ from the medium parameters.  Paper~III identifies
+physical time with the local rate of change of $\Psi$: time is not a
+backdrop but a measure of how fast the medium is updating.  The present
+paper takes the mechanism introduced in Paper~II and develops it in its own
+right, on the footing Paper~III provides.
 
-Introduce the idea that proper time corresponds to local change-rate and that internal
-interaction and translational propagation are two uses of the same local dynamical capacity.
+The thesis is a single chain.  The interference of radiated waves slows the
+local rate of change of $\Psi$ --- it imposes a time delay.  The delay is
+uneven, strongest near a mass and fading with distance, so across space it
+is a gradient.  Any motion through that gradient is bent toward the side
+where time runs slower.  That bending is gravity.  A single potential
+$\Phi$ summarises the delay, and from it follow free fall, gravitational
+time dilation, light deflection, and redshift.
 
-\section{Gravity as Refraction Through Loaded Vacuum}
+The treatment here is weak-field, exact at leading order in $\Phi/c^2$.  The
+recovery of the full curved-spacetime description --- the effective metric,
+the post-Newtonian coefficients, the dissolution of the quantum-gravity
+problem --- is the subject of Paper~VII-b, to which \S\ref{sec:geometry}
+hands off.  Galactic-scale applications of the same mechanism are treated in
+Papers~VI-a and~VI-b.  Section~\ref{sec:capacity} formalises update
+capacity; \S\ref{sec:picture} sets out the physical picture;
+\S\S\ref{sec:interference}--\ref{sec:consequences} make it quantitative;
+\S\ref{sec:refraction} develops the refraction geometry of path bending;
+and \S\S\ref{sec:universal}--\ref{sec:remembers} treat universality, the
+absence of a graviton, the bridge to emergent geometry, and the connection
+to the recording medium of Paper~III.  Sections~\ref{sec:capacity}
+and~\ref{sec:refraction} are still under development.
 
-Develop the core mechanical picture: matter loads the medium, reduces available propagation
-capacity nearby, and creates a gradient through which wavefronts and trajectories bend.
+\section{Update Capacity and Local Change-Rate}
+\label{sec:capacity}
 
-\section{Time-Dilation Gradients}
+\emph{[Section under development --- to be written.]}  This section will
+formalise the notion of \emph{update capacity}: the vacuum medium has a
+finite local rate of change, and internal interaction and translational
+propagation draw on the same budget.  Proper time is identified with local
+change-rate (Paper~III); where the medium is loaded with interaction, less
+capacity remains for free propagation, local time runs slow, and the
+resulting spatial gradient in capacity is what the rest of the paper
+develops as gravity.
 
-Connect the gravity mechanism to time-dilation language and clarify how reduced update
-capacity appears as slower local change.
+\section{The Physical Picture}
+\label{sec:picture}
 
-\section{Consequences}
+Gravity is the gradient of a time delay --- and that delay is built
+by the interfering pressure waves that every mass radiates into the vacuum.
+Three steps connect those two statements: the interference of waves slows
+local time; that slowing is uneven, so across space it is a gradient; and
+any motion through that gradient is bent toward the slower side.  The
+bending is gravity.  This section sets out the chain;
+\S\S\ref{sec:interference}--\ref{sec:refraction} make each step
+quantitative.
 
-Discuss the intended scope of the mechanism for:
+In Paper~I every massive defect is a breather: a localised region of $\Psi$
+oscillating at its Compton frequency.  A breather does not sit inertly in the
+medium.  It radiates a longitudinal pressure wave --- a travelling density
+modulation $\delta\rho(\mathbf{x},t)$ --- outward at the medium's sound speed
+$c$, with amplitude falling as $1/r$ from spherical dilution.  The region
+surrounding a mass is therefore not a patch of medium with some altered
+static property; it is a region permeated by that radiated wave.
+
+\emph{Interference slows local time.}
+In SSV, time is not a backdrop through which things move; it is the local
+rate at which $\Psi$ changes (Paper~III; \S\ref{sec:capacity}).  Any process
+--- a clock, a particle's internal oscillation, a light wave --- advances by
+changing $\Psi$, and in undisturbed vacuum it advances at the medium's full
+rate.  A process embedded in a breather's radiated wave is not alone: the
+medium around it is already oscillating with that wave, and the process must
+run \emph{through} it.  The two interfere.  Through the medium's logarithmic
+nonlinearity this interference has a definite, one-signed effect
+(\S\ref{sec:interference}): it lowers the embedded process's rate of
+advance, so that fewer of its cycles complete per unit coordinate time.
+Because physical time \emph{is} that rate of advance, the process runs slow
+--- and the more intense the radiated wave, the greater the slowing.  This
+is the time delay.
+
+\emph{The delay is uneven, so it has a gradient.}
+The radiated wave dilutes as $1/r$, so the interference is most intense at
+the mass and fades with distance.  Local time therefore runs slowest at the
+mass and recovers the full vacuum rate far away.  The delay is not a uniform
+offset added everywhere alike; it varies smoothly from place to place, and a
+quantity that varies across space has a gradient --- here one that points
+toward the mass and steepens as the mass is approached.
+
+\emph{The gradient bends motion, and that is gravity.}
+A gradient of time delay deflects everything that crosses it.  Anything that
+moves is a wave or an oscillation advancing through the medium --- a light
+ray carrying its front forward, a body carrying its Compton oscillation.
+Where local time is uneven, the side of that advance nearer the mass keeps
+slower pace than the side farther away; the front pivots, wheeling toward
+the slow side, exactly as a wavefront refracts toward a slower medium or a
+rank of marchers wheels toward the flank taking shorter steps.  The
+trajectory curves toward the region of greatest time delay --- toward the
+mass.  A light ray grazing the Sun bends this way: not by passing through
+``denser matter'' but by advancing through the Sun's radiated wave, which
+runs its near side slow.  Even a body at rest is internally a pulsating
+breather, and its oscillation runs slow on the side facing the mass; that
+tilt of its internal phase is itself momentum directed toward the slow side,
+and the body falls.  An object never feels the distant mass --- it responds
+only to the local slope of the time delay where it sits.  That slope, not
+the mass, is the source of gravity; the mass merely shapes it.
+
+The time-averaged interference is summarised by a single potential
+$\Phi(\mathbf{x})$, and from it follow the four observed gravitational
+phenomena, derived in turn below:
 \begin{itemize}
-  \item free fall,
-  \item light bending,
-  \item gravitational redshift.
+  \item \textbf{free fall} --- a test mass drifts down the potential
+        gradient (\S\ref{sec:refraction});
+  \item \textbf{time dilation} --- a clock deeper in the potential ticks
+        slow (\S\ref{sec:consequences});
+  \item \textbf{light deflection} --- a light wave's front pivots in the
+        potential gradient (\S\ref{sec:consequences},~\ref{sec:refraction});
+  \item \textbf{gravitational redshift} --- a wave climbing out of the
+        potential loses frequency (\S\ref{sec:consequences}).
 \end{itemize}
+The acceleration of free fall is $-\nabla\Phi$ and the fractional slowing of
+clocks is $\Phi/c^2$.  The interference cross-term of
+\S\ref{sec:interference} builds $\Phi$ from the radiated waves; the sections
+after it read off the consequences.
+
+\section{The Interference Cross-Term}
+\label{sec:interference}
+
+The mechanism is already contained in the LogSE.  The medium's nonlinear
+self-interaction is the logarithmic term $b\ln(\rho/\rho_0)$ of the Paper~I
+Lagrangian.  Consider a point of the medium reached by the radiated waves
+of several breathers.  The local density is the saturation value
+modulated by each wave,
+\begin{equation}
+    \frac{\rho(\mathbf{x},t)}{\rho_0} = 1 + \sum_i x_i(\mathbf{x},t),
+    \qquad x_i \equiv \frac{\delta\rho_i}{\rho_0},
+\end{equation}
+and the logarithmic energy the medium carries there is governed by
+$\ln(\rho/\rho_0)$.  Expanding,
+\begin{equation}
+    \ln\!\Big(1 + \sum_i x_i\Big)
+      = \sum_i x_i
+      - \frac{1}{2}\Big(\sum_i x_i\Big)^{\!2}
+      + \cdots
+      = \sum_i x_i
+      - \frac{1}{2}\sum_i x_i^2
+      - \sum_{i<j} x_i x_j
+      + \cdots
+    \label{eq:log_expansion}
+\end{equation}
+The single-wave terms $x_i$ and $x_i^2$ are each breather's own
+self-energy.  The interaction between two distinct breathers $A$ and $B$ is
+carried entirely by the cross term
+\begin{equation}
+    u_{AB} \;=\; -\,b\,\rho_0\,x_A\,x_B .
+    \label{eq:cross_term}
+\end{equation}
+This is an \emph{interference} term: the product of two waves, not a
+property of either alone.  Three features of \eqref{eq:cross_term} fix the
+character of gravity.
+
+\paragraph{It survives averaging only for coherent waves.}
+Each $x_i$ oscillates at its breather's Compton frequency.  The observable
+interaction is the time average $\langle u_{AB}\rangle = -b\rho_0\langle x_A
+x_B\rangle$, and $\langle x_A x_B\rangle$ vanishes unless the two waves are
+phase-correlated.  Incoherent waves do not gravitate toward one another;
+coherent ones do.  All matter breathers are eigenmodes of the one medium and
+lock in phase through it (a resonance condition; see Paper~II), so
+$\langle x_A x_B\rangle > 0$ generically.
+
+\paragraph{Its sign is fixed by the concavity of the logarithm.}
+The cross term carries the minus sign of the $-\tfrac12(\sum x)^2$
+expansion --- a direct consequence of $\ln$ being concave.  For
+phase-correlated waves $\langle x_A x_B\rangle > 0$, so $\langle
+u_{AB}\rangle < 0$: the interaction energy is lowered where the waves
+overlap in phase.  \emph{Gravity is attractive because the medium's
+nonlinearity is logarithmic, and the logarithm is concave.}
+
+\paragraph{It is bilinear, so the potential goes as $1/r$.}
+Equation~\eqref{eq:cross_term} is linear in each wave.  Breather $B$, in
+its own localised volume, couples to breather $A$'s wave evaluated at $B$'s
+location, where spherical dilution has reduced it to $x_A \propto m_A/r$;
+its own wave has $x_B \propto m_B$.  The time-averaged interaction energy
+is therefore
+\begin{equation}
+    \langle u_{AB}\rangle \;\propto\; -\,\frac{m_A m_B}{r},
+\end{equation}
+the Newtonian form.  The gravitational potential $\Phi$ is this interference
+energy per unit test mass; the force is $-\nabla\Phi \propto m_A m_B/r^2$.
+The inverse square is the gradient of a diluted wave, not a separately
+postulated law.
+
+The expansion fixes the \emph{structure} of $\Phi$ --- interference only,
+attractive, $1/r$.  Its coefficient is fixed by the breather's acoustic
+output; matching the result to the observed inverse-square law yields
+Newton's constant, computed from the medium in Paper~II.
+
+The same time-averaged interference of pulsating waves was first analysed
+classically by Bjerknes~\cite{Bjerknes1906}, who obtained it as a
+time-averaged force $\langle F\rangle = -\rho_0\langle\dot V_1\dot
+V_2\rangle/(4\pi r^2)$ between two bodies pulsating in a compressible
+medium.  Paper~II gives the historical credit, shows that $\langle\dot V_1
+\dot V_2\rangle$ is exactly the cross-correlation $\langle x_A x_B\rangle$
+above written in volume-velocity variables, and carries the result through
+to $G$.  The derivation here is LogSE-native and needs no external
+pulsator: the breathers are self-sustaining eigenmodes of $\Psi$.
+
+\section{Time Dilation, Deflection, and Redshift}
+\label{sec:consequences}
+
+Paper~II fixes the interference potential of a source mass $M$,
+\begin{equation}
+    \Phi(r) = -\,\frac{GM}{r},
+    \label{eq:Phi_newton}
+\end{equation}
+with $G$ computed from the medium; its gradient $-\nabla\Phi$ is free fall.
+The same $\Phi$ --- with no further parameter --- gives the three remaining
+gravitational phenomena.  Each is the interference cross-term of
+\S\ref{sec:interference} read for a different probe.
+
+\paragraph{Time dilation.}
+A clock is an oscillator: any periodic physical process carries a rest
+energy $mc^2$ and runs at $\omega = mc^2/\hbar$.  Placed in the wave
+of a source mass, the clock's oscillation acquires the interference
+cross-term with that wave; its energy is shifted by the interaction energy
+$m\Phi$.  The fractional change in tick rate is therefore
+\begin{equation}
+    \frac{d\tau}{dt} = 1 + \frac{m\Phi}{mc^2} = 1 + \frac{\Phi}{c^2},
+    \label{eq:time_dilation}
+\end{equation}
+the standard weak-field result; with $\Phi < 0$ in a well, the clock runs
+slow.  This is not an independent derivation --- it is
+\eqref{eq:Phi_newton} divided by $c^2$.  The slow clock is the time delay
+of \S\ref{sec:picture}: each oscillation completes less physical change per
+unit coordinate time where the interference is strong, and gravity,
+$-\nabla\Phi$, is the gradient of that delay.
+
+\paragraph{Light deflection.}
+A light ray is itself a wave in $\Psi$.  Passing a source mass, it
+propagates through the source's wave and interferes with it; the
+cross-term makes its local phase velocity depend on position through
+$\Phi$.  A transverse gradient of $\Phi$ pivots the wavefront, deflecting
+the ray toward the mass --- the same gradient that accelerates a test mass
+in free fall.  Light bends because a wave, like a clock, carries the
+interference cross-term.  The refraction geometry is developed in
+\S\ref{sec:refraction}.
+
+\paragraph{Gravitational redshift.}
+Redshift is time dilation read along a ray.  A wave emitted at radius
+$r_1$, where the potential is $\Phi_1$, and received at $r_2$, where it is
+$\Phi_2$, carries the emitter's tick rate to the receiver; the fractional
+frequency change is
+\begin{equation}
+    \frac{\Delta\nu}{\nu} = \frac{\Phi_1 - \Phi_2}{c^2}.
+\end{equation}
+A wave climbing out of a well ($\Phi_1 < \Phi_2$) loses frequency.  No new
+mechanism is invoked --- only \eqref{eq:time_dilation} applied at the two
+ends of a path.
+
+\begin{gapbox}[Open: extension beyond leading order]
+Equations \eqref{eq:Phi_newton}--\eqref{eq:time_dilation} are exact at
+$O(\Phi/c^2)$, the order at which the interference cross-term
+\eqref{eq:cross_term} is the leading contribution.  Extension to higher
+orders requires keeping the cubic and higher terms of the logarithmic
+expansion \eqref{eq:log_expansion} --- treating the LogSE fully nonlinearly
+rather than at quadratic order --- and confirming that the result
+reproduces the parametrised post-Newtonian expansion of general relativity
+(the PPN coefficients $\beta$, $\gamma$).  This is a clean test: SSV makes a
+definite prediction at each order, and any departure from
+$\beta = \gamma = 1$ would be a structural prediction distinct from GR.
+The calculation is non-trivial but finite, and is carried out in
+Paper~VII-b.
+\end{gapbox}
+
+\section{Path Bending and the Refraction Picture}
+\label{sec:refraction}
+
+\emph{[Section under development --- to be written.]}  This section will
+treat the path-bending geometry in full: wavefront refraction in a graded
+time delay, the bending of a trajectory toward greatest delay as a
+quantitative statement, the lensing integral for light grazing a mass, and
+the relation between the refraction picture and the potential gradient
+$-\nabla\Phi$.
+
+\section{Universal Coupling and the Absence of a Graviton}
+\label{sec:universal}
+
+\subsection{Universal Coupling: Why Everything Falls}
+
+The interference mechanism is universal because every defect in the
+medium --- regardless of internal structure, charge, or topology ---
+radiates a wave, and any wave interferes with any other.  The amplitude of
+that wave is set by the breather's mass-energy alone --- the fractional
+volume excursion is $\delta V \propto m/\rho_0$ (Paper~II) --- so the
+interference force scales as $m_1 m_2/r^2$ for any pair of objects.
+
+This is the mechanical origin of the equivalence principle: the same
+quantity (mass-energy) determines both the inertial response to
+acceleration and the coupling to gravity itself, because both are
+manifestations of the object's acoustic cross-section in the medium.  Every
+other force is selective --- electromagnetism couples to chirality, the
+strong force to topological charge, the weak force to core overlap --- but
+gravity couples to the one property all defects share: they displace the
+medium.
+
+\subsection{Gravity Without a Graviton}
+
+The SSV framework does not require a graviton.  The gravitational
+potential $\Phi$ is the time-averaged interference of
+\S\ref{sec:interference}; its $1/r$ long-range form is the spherical
+dilution of a radiated wave, equivalently the Green's function of the
+Laplacian.  What conventional quantum field theory calls graviton exchange
+corresponds here to the interference of waves in the medium --- a collective
+hydrodynamic process, not a particle interaction.
+
+This is structurally consistent with the treatment of the other forces in
+Paper~II: electromagnetism emerges from the transverse flow of chiral
+vortices without postulating a separate photon field, and gravity emerges
+from longitudinal density waves without postulating a separate graviton
+field.  Both are modes of the single medium $\Psi$.
+
+\paragraph{The ultraviolet problem dissolves.}
+Conventional perturbative quantum gravity is non-renormalisable: when
+gravity is treated as a quantum field theory in the standard way, the
+loop integrals diverge at short distances and the infinities cannot
+be removed by redefining a finite number of parameters.  The theory
+has no built-in short-distance cutoff and breaks down at the Planck
+scale, requiring replacement by an unknown theory of quantum gravity.
+
+In SSV this problem does not arise --- not because we solve it, but
+because the framework's domain of validity makes it impossible to
+state.  SSV is a continuum effective theory valid down to the scale
+of the heaviest stable defect,
+\begin{equation}
+    \ell_{\rm grain} \equiv a_p = \frac{\hbar}{m_p c}
+    \approx 2.10\times10^{-16}\,\mathrm{m}.
+    \label{eq:lgrain_cutoff}
+\end{equation}
+Below $\ell_{\rm grain}$, the LogSE continuum description ceases to
+be self-consistent: no new stable structures exist, and the medium
+supports only transient denting events (Paper~II).  Momentum
+modes with $k \gg 1/\ell_{\rm grain}$ are outside the framework's
+domain of validity --- not regulated away by hand, but simply absent
+from the theory, in the same sense that Navier--Stokes has no
+sub-molecular eddies.  The divergent integrals of perturbative quantum
+gravity never appear because the modes that would generate them are
+outside the scope of the description.
+
+This is worth pausing on.  The ultraviolet catastrophe of quantum
+gravity is usually treated as one of the deepest unsolved problems in
+physics, motivating decades of work on string theory, loop quantum
+gravity, and related programmes.  In SSV it is not solved --- it
+simply does not arise.  The cutoff $\ell_{\rm grain}$ is not a new
+postulate introduced to tame divergences; it is the healing length of
+the heaviest stable defect, fixed by the proton mass alone.  The
+same physical reasoning that gives Navier--Stokes its molecular
+cutoff gives SSV its cutoff at $a_p$: at scales finer than the
+smallest stable structure, the continuum description is silent.
+
+Note the distinction from the electron healing length $\xi =
+\hbar/(m_e c) \approx 3.86\times 10^{-13}\,\mathrm{m}$, the natural
+scale for electron-defect physics but not the medium's ultraviolet
+boundary: the true domain-of-validity boundary is $\ell_{\rm grain}
+\approx \xi/1836$, set by the proton.
+
+The absence of a graviton and the absence of UV divergences are the
+same fact stated two ways: SSV has no gravitational field to quantise,
+and therefore no quantisation problem to solve.
+
+\section{From Update-Capacity Gradients to Emergent Geometry}
+\label{sec:geometry}
+
+The time-delay gradient of the preceding sections is the weak-field face of
+a deeper statement: that geometry itself is a macroscopic limit of the
+medium.  This section sketches the bridge; its full development --- the
+effective metric to all orders, the post-Newtonian coefficients, and why
+the standard quantum-gravity problem is mis-posed in SSV --- is the subject
+of Paper~VII-b.
+
+The curved-spacetime formulation of gravity emerges from the
+Madelung equations in the hydrodynamic limit~\cite{Volovik,Barcelo}.
+The acoustic metric
+\begin{equation}
+    g_{\mu\nu}^{\rm eff}
+      = \frac{\rho_0}{m_0 c}
+        \begin{pmatrix}
+          -(c^2 - v^2) & -v_j \\
+          -v_i         & \delta_{ij}
+        \end{pmatrix}
+    \label{eq:acoustic_metric}
+\end{equation}
+reduces to Minkowski when the background flow vanishes.  A single
+interference potential $\Phi$ governs the metric: it sets both the
+time-dilation factor $1+\Phi/c^2$ of \eqref{eq:time_dilation} and the
+deflection of wave propagation.  That one potential does both --- the force
+$-\nabla\Phi$ and the clock rate $1+\Phi/c^2$ --- is precisely the
+weak-field structure of general relativity.  Gravitational lensing follows
+automatically: light is a wave in the same $\Psi$, deflected by the same
+interference gradient that bends the path of a test mass.  No separate
+gravitational field is postulated at any point.
+
+\section{Gravity in a Medium That Remembers}
+\label{sec:remembers}
+
+The treatment above is the mean-field story.  Two specific places in
+the derivation depend on operations that the irreversibility framework of
+Paper~III will revisit at finer resolution; they are flagged here so that
+the present scope is honest.
+
+\paragraph{Time-averaging the interference.}
+Newton's constant was derived in Paper~II from the time-averaged
+interference cross-term $\langle F\rangle = -\rho_0 \langle \dot V_1 \dot
+V_2\rangle/(4\pi r^2)$.  The averaging brackets perform a classical
+operation: integrate over many cycles of the proton breather oscillation at
+$\omega_p = m_p c^2/\hbar$ to extract the static component.  In a
+featureless medium this is unproblematic.  In a medium that records, what
+gets averaged is itself history-dependent: each cycle deposits a small
+amount of acoustic energy into the medium, and the breather of cycle $n+1$
+propagates through a slightly different background than the breather of
+cycle $n$.  The leading-order static result survives this refinement ---
+the recoil of one cycle on the next is suppressed by the proton's sub-grain
+coupling factor $(m_e/m_p)^3$, the same factor that makes $G$ small in the
+first place --- but the corrections are non-zero and carry information about
+the source's pulsation history.  These corrections are the
+gravitational-wave memory effect (Christodoulou) read in this framework:
+not as a peculiar property of asymptotic spacetimes, but as the direct
+consequence of a medium that literally remembers.
+
+\paragraph{The interference pattern as a long-time average.}
+The static potential $\Phi$ is the long-time-averaged envelope of the
+interfering pulsation waves.  In the framework's deeper picture,
+$\rho(\vec x, t)$ is not a smooth deterministic function but a
+coarse-grained description of an evolving record; the smoothness emerges
+because reconnection events and their acoustic wakes are dense enough to
+wash out at scales relevant to the equivalence-principle tests we currently
+perform.  At sufficiently high precision and sufficiently short timescales,
+this smoothing must fail: the gravitational potential at a point will
+fluctuate around its mean value at a rate set by the local rate of
+reconnection events.  No calculation of this fluctuation spectrum is given
+here.  It is identified as the natural Paper~III follow-up to the present
+mean-field gravity treatment.
+
+\paragraph{What this does not change.}
+\begin{sloppypar}
+The Newton's-constant consistency check of Paper~II is unaffected: it
+relates time-averaged quantities, all defined at the same level of coarse
+graining.  The graviton-free argument is unaffected: there is still no
+gravitational field to quantise.  The argument that $\ell_{\rm grain}$
+supplies the natural ultraviolet cutoff is unaffected: it remains the
+medium's minimum length.  What the forward connection makes explicit is only
+that the time-averaging step inherits the medium's accumulated history at a
+level the present treatment does not resolve --- and that this is not an
+obstacle to the mean-field claims, only a scoping of where Paper~III takes
+over.
+\end{sloppypar}
 
 \section{Discussion and Open Problems}
+\label{sec:discussion}
 
-Clarify what is derived, what is heuristic, and what still needs formal development.
+The mechanism set out here is complete at leading order and introduces no
+parameter beyond those fixed in Paper~I.  Gravity is the interference of the
+pressure waves that breathers radiate into the one medium; the interference
+slows local time; its gradient bends motion.  From the single potential
+$\Phi$ the four classical gravitational phenomena follow without further
+assumption, and the same logarithmic nonlinearity that makes the medium a
+medium also makes gravity attractive and inverse-square.
 
-\section{Conclusion}
+What is established: the interference cross-term \eqref{eq:cross_term} and
+its three structural properties; the four corollaries of
+\S\ref{sec:consequences} at $O(\Phi/c^2)$; the absence of a graviton and of
+an ultraviolet divergence.  What is deferred: the first-principles value of
+the gravitational coupling --- the sub-grain factor that fixes $G$ ---
+remains the open computation of Paper~II; the extension beyond leading
+order, and with it the post-Newtonian coefficients and the full emergent
+metric, is Paper~VII-b.  Two sections of the present paper are themselves
+still open: \S\ref{sec:capacity}, the formal account of update capacity, and
+\S\ref{sec:refraction}, the quantitative refraction geometry of path
+bending.  Both are flagged in place and are the next drafting tasks.
 
-Gravity in SSV is treated as the bending of motion through gradients in the local update
-capacity of the vacuum medium.
+\begin{thebibliography}{9}
+
+\bibitem{Bjerknes1906}
+V.~F.~K.~Bjerknes, \textit{Fields of Force}, Columbia University Press, 1906.
+
+\bibitem{Volovik}
+G.~E.~Volovik, \textit{The Universe in a Helium Droplet}, Oxford University
+Press, 2003.
+
+\bibitem{Barcelo}
+C.~Barcel\'{o}, S.~Liberati, and M.~Visser, ``Analogue gravity,''
+\textit{Living Rev.~Relativity} \textbf{14}, 3 (2011).
+
+\end{thebibliography}
 
 \end{document}
