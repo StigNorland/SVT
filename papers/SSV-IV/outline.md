@@ -62,7 +62,9 @@ gravity.
    order-unity factor. Proper time is the count of updates. One budget, two
    uses: the internal/translation split in quadrature gives the
    special-relativistic factor `sqrt(1 - v^2/c^2)` (stated honestly -- the
-   quadrature rule is the SR invariant recast, not a fresh derivation).
+   quadrature is the kinematic face of the emergent Lorentz invariance of
+   the medium's excitations; the plain LogSE is Galilean, so SR must emerge,
+   and deriving it is one open problem shared with VII-b's acoustic metric).
    Loading by interference reduces the budget: the §4 cross-term shifts an
    embedded clock's energy by `m*Phi`, and since update rate is energy/hbar
    the availability `A = dtau/dt = 1 + Phi/c^2` is computed (via §5), not
