@@ -4,9 +4,11 @@ Working title: `Gravity as Update-Capacity Gradient`
 
 ## Status
 
-Full draft in `main.tex` (10 pages, compiles). Eight of the ten sections are
-written; **§2 (Update Capacity)** and **§6 (Path Bending and the Refraction
-Picture)** are stubs still to be developed. Most of the drafted material was
+Full draft in `main.tex` (compiles). All ten sections are drafted, with no
+stubs remaining. The open items are the flagged gapboxes: the
+first-principles value of `G` (deferred to Paper II), the spatial half of
+light deflection (Paper VII-b), and the order-unity factor in the §2
+ceiling. Most of the drafted material was
 worked out in Paper II §7 during the gravity rewrite and ported here when §7
 was trimmed back to a foundation-level summary. Paper IV is now the dedicated
 gravity paper of the series; Paper II §7 only states the mechanism compactly
@@ -41,6 +43,9 @@ gravity.
 6. Gravity is attractive because the medium's nonlinearity is logarithmic:
    the interaction cross-term `-b rho_0 x_A x_B` is sign-fixed by the
    concavity of `ln`.
+7. Kinematic and gravitational time dilation are one phenomenon -- the
+   update budget split between internal oscillation and translation
+   (motion), or reduced by interference loading.
 
 ## Section structure (as built)
 
@@ -48,14 +53,21 @@ gravity.
    `G`) and Paper III (time as change-rate); what is deferred to VII-b and
    to VI-a/VI-b; roadmap.
 
-2. **Update Capacity and Local Change-Rate** -- *STUB.* To formalise:
-   - the medium has a finite local rate of change (finite update capacity);
-   - internal interaction and translational propagation are competing uses
-     of the one budget;
-   - proper time = local change-rate (Paper III link; `R[Psi]`);
-   - loading the medium leaves less capacity, so local time runs slow;
-   - the spatial gradient of remaining capacity is what the later sections
-     develop as gravity.
+2. **Update Capacity and Local Change-Rate** -- drafted (rebuilt for
+   rigour). Updates are the wake-writing events of Paper III; an update must
+   be grain-sized (a sub-grain change writes no wake, on the footing of the
+   zero-point fluctuations Paper III excludes) and cannot beat the grain's
+   light-crossing time -- so the ceiling `N_0 = c/a_p = m_p c^2/hbar`
+   (`~1.4e24` per second) is argued, not assumed; a gapbox flags the
+   order-unity factor. Proper time is the count of updates. One budget, two
+   uses: the internal/translation split in quadrature gives the
+   special-relativistic factor `sqrt(1 - v^2/c^2)` (stated honestly -- the
+   quadrature rule is the SR invariant recast, not a fresh derivation).
+   Loading by interference reduces the budget: the §4 cross-term shifts an
+   embedded clock's energy by `m*Phi`, and since update rate is energy/hbar
+   the availability `A = dtau/dt = 1 + Phi/c^2` is computed (via §5), not
+   asserted; the mass cancels, so it is universal. Kinematic and
+   gravitational time dilation are unified as the one budget diminished.
 
 3. **The Physical Picture** -- drafted (ported from Paper II §7.1). The
    three-link chain: interference slows local time, the delay is uneven
@@ -76,13 +88,21 @@ gravity.
    redshift. Gapbox: extension beyond leading order / PPN deferred to
    Paper VII-b.
 
-6. **Path Bending and the Refraction Picture** -- *STUB.* To develop:
-   - wavefront refraction in a graded time delay (the mechanical picture);
-   - trajectory bending toward greatest delay as a quantitative statement;
-   - the lensing integral for light grazing a mass;
-   - the relation between the refraction picture and the potential gradient
-     `-grad Phi`;
-   - link the pressure-gradient and time-dilation language cleanly.
+6. **Path Bending and the Refraction Picture** -- drafted. The wavefront
+   construction: the ocean-swell-around-an-island analogy for refraction,
+   then the correction that is the section's thesis -- the refracting agent
+   is a gradient of the *rate of time* `A`, not a material/density step (no
+   static density blob). Particle and wave bend alike -- SSV has no point
+   particles, so every moving thing is extended, the near/far-side picture
+   is literal, and the defect's size cancels from the path curvature (so
+   bending stays universal). Quantitative refraction: effective index
+   `n = 1/A`, ray curvature from the front-tilt, and the deflection
+   integral `alpha = 2GM/bc^2` for light -- exactly half the GR value
+   (Einstein's 1911 result; the spatial half deferred to VII-b in a
+   gapbox). Free fall is recovered from the same construction -- the
+   internal oscillation's phase tilts across the extended defect, giving
+   `F = -m grad Phi` -- unifying the refraction picture with the
+   `-grad Phi` picture of §5.
 
 7. **Universal Coupling and the Absence of a Graviton** -- drafted (ported
    from §7.7-7.8). Equivalence principle as the universality of
@@ -111,13 +131,9 @@ gravity.
 
 ## Open drafting tasks
 
-- Write §2: formalise the update-capacity concept (competing uses of one
-  finite local change-rate; tie to Paper III's `R[Psi]`).
-- Write §6: the quantitative refraction geometry of path bending; link the
-  pressure-gradient and time-dilation language cleanly.
 - Decide, section by section, what is claimed as a derivation versus a
   mechanical interpretation.
-- Once §2 and §6 land, revisit the Introduction and Discussion so they
-  reference the completed sections.
+- All ten sections now drafted: revisit the Introduction and Discussion for
+  consistency with the completed §2 and §6.
 - Optional: convert the plain `Paper II` / `Paper III` text references to
   proper citations with an SSV-series bibliography.
