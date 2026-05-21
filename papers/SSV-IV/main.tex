@@ -40,10 +40,10 @@ uneven and therefore has a gradient; and any motion through the gradient is
 bent toward the region of greatest delay.  That bending is gravity.  From a
 single interference potential $\Phi$ follow free fall, gravitational time
 dilation, light deflection, and redshift, each at leading order in
-$\Phi/c^2$.  The treatment is weak-field throughout; recovery of the full
-curved-spacetime description is left to Paper~VII-b.  Two sections --- the
-formal account of update capacity and the quantitative refraction geometry
---- are marked as under development.
+$\Phi/c^2$.  The treatment is weak-field throughout: it delivers the time
+sector of gravity in full --- including the time-delay (Einstein 1911) half
+of light deflection --- with the spatial sector and the recovery of full
+general relativity left to Paper~VII-b.
 \end{abstract}
 
 \newpage
@@ -81,19 +81,23 @@ where time runs slower.  That bending is gravity.  A single potential
 $\Phi$ summarises the delay, and from it follow free fall, gravitational
 time dilation, light deflection, and redshift.
 
-The treatment here is weak-field, exact at leading order in $\Phi/c^2$.  The
-recovery of the full curved-spacetime description --- the effective metric,
-the post-Newtonian coefficients, the dissolution of the quantum-gravity
-problem --- is the subject of Paper~VII-b, to which \S\ref{sec:geometry}
-hands off.  Galactic-scale applications of the same mechanism are treated in
+The treatment here is weak-field, exact at leading order in $\Phi/c^2$, and
+deliberately confined to one sector.  It delivers the \emph{time} sector of
+gravity in full: gravitational time dilation, redshift, free fall, and the
+time-delay part of light deflection --- the last equal to Einstein's 1911
+value $2GM/(bc^2)$.  Light deflection draws equally on a second, spatial
+sector; that sector, the effective metric to all orders, the post-Newtonian
+coefficients, and the dissolution of the quantum-gravity problem are the
+subject of Paper~VII-b, to which \S\ref{sec:geometry} hands off.  This is a
+division of labour, not a gap --- the present paper is complete for what it
+claims.  Galactic-scale applications of the same mechanism are treated in
 Papers~VI-a and~VI-b.  Section~\ref{sec:capacity} formalises update
 capacity; \S\ref{sec:picture} sets out the physical picture;
 \S\S\ref{sec:interference}--\ref{sec:consequences} make it quantitative;
 \S\ref{sec:refraction} develops the refraction geometry of path bending;
 and \S\S\ref{sec:universal}--\ref{sec:remembers} treat universality, the
 absence of a graviton, the bridge to emergent geometry, and the connection
-to the recording medium of Paper~III.  Sections~\ref{sec:capacity}
-and~\ref{sec:refraction} are still under development.
+to the recording medium of Paper~III.
 
 \section{Update Capacity and Local Change-Rate}
 \label{sec:capacity}
@@ -215,14 +219,23 @@ slow by exactly the special-relativistic factor, and slow for a mechanical
 reason: updates spent on getting somewhere are updates not spent on ticking.
 
 Honesty requires naming what \eqref{eq:quadrature} is.  The fixed-magnitude,
-quadrature rule is not derived here from anything deeper; it \emph{is} the
-invariant of special relativity --- that every worldline runs through
-spacetime at the one speed $c$ --- rewritten in update-rate variables.
-Equation~\eqref{eq:sr} is therefore not a fresh derivation of time dilation.
-What it establishes is an identification: the invariant total that special
-relativity holds fixed is the update budget.  That identification is the
-content of this subsection, and the next one collects the dividend, because
-the same budget can be diminished a second way.
+quadrature rule is not derived here from the medium's dynamics; it is the
+kinematic face of the \emph{emergent} Lorentz invariance of the medium's
+excitations.  This is not a weakness peculiar to update counting.  The
+logarithmic Schr\"odinger equation is first order in time --- it is
+Galilean-invariant --- so special relativity is not native to it and cannot
+be: it must emerge, exactly as Lorentz invariance emerges for the
+quasiparticles of the analogue-gravity systems on which this framework draws
+\cite{Volovik,Barcelo}, with the medium's signal speed $c$ as the invariant.
+Equation~\eqref{eq:quadrature} states that the update budget is the
+invariant total this emergent structure holds fixed --- the same structure
+that \S\ref{sec:geometry} expresses geometrically as the acoustic metric.
+The quadrature and the acoustic metric are one emergent object; deriving it
+from the LogSE is a single open problem, shared with the emergent-geometry
+programme of Paper~VII-b.  What \S\ref{sec:kinematic} establishes is the
+identification: kinematic time dilation and the update budget are the same
+thing.  The next subsection collects the dividend, because the same budget
+can be diminished a second way.
 
 \subsection{Loading, availability, and gravitational time dilation}
 \label{sec:availability}
@@ -784,14 +797,32 @@ The acoustic metric
         \end{pmatrix}
     \label{eq:acoustic_metric}
 \end{equation}
-reduces to Minkowski when the background flow vanishes.  A single
-interference potential $\Phi$ governs the metric: it sets both the
-time-dilation factor $1+\Phi/c^2$ of \eqref{eq:time_dilation} and the
-deflection of wave propagation.  That one potential does both --- the force
-$-\nabla\Phi$ and the clock rate $1+\Phi/c^2$ --- is precisely the
-weak-field structure of general relativity.  Gravitational lensing follows
-automatically: light is a wave in the same $\Psi$, deflected by the same
-interference gradient that bends the path of a test mass.  No separate
+reduces to Minkowski when the background flow vanishes.
+
+Its time component is fixed by the results of this paper.  The availability
+$A$ of \S\ref{sec:availability} is the rate of proper time, $d\tau/dt = A$;
+since a clock at rest measures $d\tau = \sqrt{-g_{00}}\;dt$, the time--time
+component of the weak-field metric is
+\begin{equation}
+    -g_{00} = A^2 = \left(1 + \frac{\Phi}{c^2}\right)^{2}
+      \approx 1 + \frac{2\Phi}{c^2},
+    \label{eq:g00}
+\end{equation}
+the standard weak-field $g_{00}$ --- its factor of two present in full, read
+straight off the update budget rather than postulated.  The time sector of
+the metric is thus delivered complete.  What this paper does \emph{not}
+reach is the spatial sector $g_{ij}$: it is the geometrical face of the
+emergent Lorentz structure of \S\ref{sec:kinematic}, and its derivation ---
+which supplies the spatial half of light deflection and so completes
+\eqref{eq:lightdeflection} to the full $4GM/(bc^2)$ --- is the work of
+Paper~VII-b.
+
+A single potential $\Phi$ governs both sectors: it sets the clock rate
+$1+\Phi/c^2$ through $g_{00}$ and the remaining wave deflection through
+$g_{ij}$.  That one potential does both --- the force $-\nabla\Phi$ and the
+clock rate --- is precisely the weak-field structure of general relativity.
+Gravitational lensing follows: light is a wave in the same $\Psi$, deflected
+by the same gradient that bends the path of a test mass.  No separate
 gravitational field is postulated at any point.
 
 \section{Gravity in a Medium That Remembers}
@@ -816,7 +847,12 @@ cycle $n$.  The leading-order static result survives this refinement ---
 the recoil of one cycle on the next is suppressed by the proton's sub-grain
 coupling factor $(m_e/m_p)^3$, the same factor that makes $G$ small in the
 first place --- but the corrections are non-zero and carry information about
-the source's pulsation history.  These corrections are the
+the source's pulsation history.  At laboratory scales the suppression is
+severe: $(m_e/m_p)^3 \approx 1.6\times10^{-10}$, so the history-dependent
+corrections stand ten orders of magnitude below the leading gravitational
+effect --- far beneath the precision of any gravity measurement now
+conceivable, and safely inside the mean-field treatment of this paper.
+These corrections are the
 gravitational-wave memory effect (Christodoulou) read in this framework:
 not as a peculiar property of asymptotic spacetimes, but as the direct
 consequence of a medium that literally remembers.
@@ -867,10 +903,15 @@ an ultraviolet divergence.  What is deferred: the first-principles value of
 the gravitational coupling --- the sub-grain factor that fixes $G$ ---
 remains the open computation of Paper~II; the extension beyond leading
 order, and with it the post-Newtonian coefficients and the full emergent
-metric, is Paper~VII-b.  Two sections of the present paper are themselves
-still open: \S\ref{sec:capacity}, the formal account of update capacity, and
-\S\ref{sec:refraction}, the quantitative refraction geometry of path
-bending.  Both are flagged in place and are the next drafting tasks.
+metric, is Paper~VII-b.  Sections~\ref{sec:capacity} and~\ref{sec:refraction} --- the formal account
+of update capacity and the refraction geometry --- are now complete, so the
+paper delivers the time sector of gravity in full at $O(\Phi/c^2)$.  Its one
+half-strength result, light deflection, is half-strength by design: light
+draws equally on the time and spatial sectors, and the spatial sector is
+Paper~VII-b, not a gap in the present argument.  The decisive next step is
+numerical --- a direct simulation of a wavefront, or of a defect, refracting
+in a graded availability would turn this mechanical account into a tested
+one.
 
 \begin{thebibliography}{9}
 

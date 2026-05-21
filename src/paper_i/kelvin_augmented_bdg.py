@@ -15,7 +15,7 @@ from direct_bdg_projection import (
 from restricted_bdg_matrix import build_background, i_mode
 from restricted_bdg_three_mode import gram_schmidt
 from toroidal_background import ToroidalBackground
-from toroidal_projection_integrals import ProjectionConfig
+from toroidal_projection_integrals import ProjectionConfig, projection_window_weight
 
 
 ComplexField = Callable[[float, float], complex]
@@ -105,6 +105,69 @@ def normalize_by_phi_modes(bg: ToroidalBackground, modes: list[AzimuthalMode], c
     return normalized
 
 
+def make_complex_linear_combination(terms: list[tuple[complex, ComplexField]]) -> ComplexField:
+    def mode(r: float, z: float) -> complex:
+        return sum(coeff * fn(r, z) for coeff, fn in terms)
+
+    return mode
+
+
+def complex_inner_meridional(bg: ToroidalBackground, a: ComplexField, b: ComplexField, cfg: ProjectionConfig) -> complex:
+    total = 0.0j
+    r_min = bg.r_e - cfg.half_width
+    z_min = -cfg.half_width
+    for i in range(cfg.n):
+        r = r_min + (i + 0.5) * cfg.dr
+        if r <= 0.0:
+            continue
+        for j in range(cfg.n):
+            z = z_min + (j + 0.5) * cfg.dz
+            total += (
+                2.0
+                * math.pi
+                * r
+                * cfg.dr
+                * cfg.dz
+                * projection_window_weight(bg, r, z, cfg)
+                * a(r, z).conjugate()
+                * b(r, z)
+            )
+    return total
+
+
+def orthonormalize_azimuthal_modes(
+    bg: ToroidalBackground,
+    modes: list[AzimuthalMode],
+    cfg: ProjectionConfig,
+    norm_tol: float = 1.0e-10,
+) -> list[AzimuthalMode]:
+    by_m: dict[int, list[AzimuthalMode]] = {}
+    for mode in modes:
+        by_m.setdefault(mode.m_phi, []).append(mode)
+
+    out: list[AzimuthalMode] = []
+    for m_phi in sorted(by_m):
+        orthogonal: list[ComplexField] = []
+        for mode in by_m[m_phi]:
+            terms: list[tuple[complex, ComplexField]] = [(1.0 + 0.0j, mode.field)]
+            for prev in orthogonal:
+                denom = complex_inner_meridional(bg, prev, prev, cfg)
+                if abs(denom) < norm_tol:
+                    continue
+                trial = make_complex_linear_combination(terms)
+                projection = complex_inner_meridional(bg, prev, trial, cfg) / denom
+                terms.append((-projection, prev))
+            candidate = make_complex_linear_combination(terms)
+            norm = complex_inner_meridional(bg, candidate, candidate, cfg).real
+            if norm <= norm_tol:
+                continue
+            scale = 1.0 / math.sqrt(norm)
+            normalized = make_complex_linear_combination([(scale + 0.0j, candidate)])
+            out.append(AzimuthalMode(f"K_combined_m{m_phi:+d}_{len(orthogonal)}", normalized, m_phi))
+            orthogonal.append(normalized)
+    return out
+
+
 def build_modes(
     bg: ToroidalBackground,
     cfg: ProjectionConfig,
@@ -150,6 +213,26 @@ def build_modes(
                 AzimuthalMode("K_helicity_minus_minus", k_helicity(-1), -1),
             ]
         )
+    elif kelvin_seed == "combined":
+        def k_helicity(helicity: int) -> ComplexField:
+            def field(r: float, z: float) -> complex:
+                return (bg.phi_kelvin_radial(r, z) + 1j * helicity * bg.phi_kelvin_vertical(r, z)) / math.sqrt(2.0)
+
+            return field
+
+        kelvin_candidates = [
+            AzimuthalMode("K_plus", bg.phi_R, 1),
+            AzimuthalMode("K_rad_plus", bg.phi_kelvin_radial, 1),
+            AzimuthalMode("K_z_plus", bg.phi_kelvin_vertical, 1),
+            AzimuthalMode("K_helicity_plus_plus", k_helicity(1), 1),
+            AzimuthalMode("K_helicity_plus_minus", k_helicity(-1), 1),
+            AzimuthalMode("K_minus", bg.phi_R, -1),
+            AzimuthalMode("K_rad_minus", bg.phi_kelvin_radial, -1),
+            AzimuthalMode("K_z_minus", bg.phi_kelvin_vertical, -1),
+            AzimuthalMode("K_helicity_minus_plus", k_helicity(1), -1),
+            AzimuthalMode("K_helicity_minus_minus", k_helicity(-1), -1),
+        ]
+        modes.extend(orthonormalize_azimuthal_modes(bg, kelvin_candidates, cfg))
     return normalize_by_phi_modes(bg, modes, cfg)
 
 
@@ -182,6 +265,7 @@ def build_bdg(
     kelvin_dispersion: str = "local",
     kelvin_phi_n: int = 512,
     kelvin_core_radius: float = 1.0,
+    current_curl_model: str = "linear",
 ) -> ComplexMatrix:
     n = len(modes)
     size = 2 * n
@@ -217,7 +301,13 @@ def build_bdg(
                 else:
                     l_ij += chiral_mix * chiral_bridge_overlap(bg, bra, ket, cfg)
             if lambda_perp != 0.0:
-                l_corr, m_corr = hermitian_current_curl_bdg_blocks(bg, bra, ket, cfg)
+                l_corr, m_corr = hermitian_current_curl_bdg_blocks(
+                    bg,
+                    bra,
+                    ket,
+                    cfg,
+                    current_curl_model=current_curl_model,
+                )
                 l_ij += lambda_perp * l_corr
                 m_ij += lambda_perp * m_corr
             h[i][j] = l_ij
@@ -232,6 +322,7 @@ def hermitian_current_curl_bdg_blocks(
     bra: AzimuthalMode,
     ket: AzimuthalMode,
     cfg: ProjectionConfig,
+    current_curl_model: str = "linear",
 ) -> tuple[complex, complex]:
     # Treat delta psi and delta psi* as independent Nambu coordinates. The
     # curl-curl energy then gives a Hermitian normal block L from u/u and a
@@ -240,7 +331,21 @@ def hermitian_current_curl_bdg_blocks(
     uu_ba = current_curl_component_overlap(bg, ket, "u", bra, "u", cfg).conjugate()
     uv_ab = current_curl_component_overlap(bg, bra, "u", ket, "v", cfg)
     uv_ba = current_curl_component_overlap(bg, ket, "u", bra, "v", cfg)
-    return 0.5 * (uu_ab + uu_ba), 0.5 * (uv_ab + uv_ba)
+    l_block = 0.5 * (uu_ab + uu_ba)
+    m_block = 0.5 * (uv_ab + uv_ba)
+    if current_curl_model == "full":
+        # Full second variation of E_perp = (lambda/2) int |curl j|^2 adds
+        # int curl(j0) . curl(j2). The linear model above keeps only the
+        # |curl(j1)|^2 part.
+        l_bg_ab = background_second_current_curl_overlap(bg, bra, ket, cfg, pair_type="normal")
+        l_bg_ba = background_second_current_curl_overlap(bg, ket, bra, cfg, pair_type="normal").conjugate()
+        m_bg_ab = background_second_current_curl_overlap(bg, bra, ket, cfg, pair_type="anomalous")
+        m_bg_ba = background_second_current_curl_overlap(bg, ket, bra, cfg, pair_type="anomalous")
+        l_block += 0.5 * (l_bg_ab + l_bg_ba)
+        m_block += 0.5 * (m_bg_ab + m_bg_ba)
+    elif current_curl_model != "linear":
+        raise ValueError(f"unknown current_curl_model: {current_curl_model}")
+    return l_block, m_block
 
 
 def current_variation_component_m(
@@ -327,8 +432,142 @@ def current_curl_component_overlap(
             ca = curl_current_component_m(bg, a, component_a, r, z, cfg)
             cb = curl_current_component_m(bg, b, component_b, r, z, cfg)
             dot = ca[0].conjugate() * cb[0] + ca[1].conjugate() * cb[1] + ca[2].conjugate() * cb[2]
-            weight = 2.0 * math.pi * r * cfg.dr * cfg.dz
+            weight = 2.0 * math.pi * r * cfg.dr * cfg.dz * projection_window_weight(bg, r, z, cfg)
             total += weight * dot
+    return total
+
+
+def background_current_component(
+    bg: ToroidalBackground,
+    r: float,
+    z: float,
+    cfg: ProjectionConfig,
+) -> tuple[complex, complex, complex]:
+    from chiral_bridge_projection import central_gradient
+
+    psi = bg.psi0(r, z)
+    grad_psi = central_gradient(bg.psi0, r, z, cfg.dr)
+    prefactor = 1.0 / (2.0j)
+    j_r = prefactor * (psi.conjugate() * grad_psi[0] - psi * grad_psi[0].conjugate())
+    j_z = prefactor * (psi.conjugate() * grad_psi[1] - psi * grad_psi[1].conjugate())
+    return j_r, 0.0j, j_z
+
+
+def curl_background_current(
+    bg: ToroidalBackground,
+    r: float,
+    z: float,
+    cfg: ProjectionConfig,
+) -> tuple[complex, complex, complex]:
+    h = cfg.dr
+
+    def jr(rr: float, zz: float) -> complex:
+        return background_current_component(bg, rr, zz, cfg)[0]
+
+    def jz(rr: float, zz: float) -> complex:
+        return background_current_component(bg, rr, zz, cfg)[2]
+
+    d_jr_dz = (jr(r, z + h) - jr(r, z - h)) / (2.0 * h)
+    d_jz_dr = (jz(r + h, z) - jz(r - h, z)) / (2.0 * h)
+    return 0.0j, d_jr_dz - d_jz_dr, 0.0j
+
+
+def second_current_component_m(
+    a: AzimuthalMode,
+    b: AzimuthalMode,
+    pair_type: str,
+    r: float,
+    z: float,
+    cfg: ProjectionConfig,
+) -> tuple[complex, complex, complex]:
+    from chiral_bridge_projection import central_gradient
+
+    fa = a.field(r, z)
+    fb = b.field(r, z)
+    grad_a = central_gradient(a.field, r, z, cfg.dr)
+    grad_b = central_gradient(b.field, r, z, cfg.dr)
+    prefactor = 1.0 / (2.0j)
+    if pair_type == "normal":
+        # Bilinear current from delta psi_a^* and delta psi_b. The envelope
+        # carries azimuthal phase exp(i (m_b - m_a) varphi).
+        j_r = prefactor * (fa.conjugate() * grad_b[0] - fb * grad_a[0].conjugate())
+        j_z = prefactor * (fa.conjugate() * grad_b[1] - fb * grad_a[1].conjugate())
+        j_phi = ((a.m_phi + b.m_phi) * fa.conjugate() * fb) / (2.0 * max(r, 1.0e-12))
+        return j_r, j_phi, j_z
+    if pair_type == "anomalous":
+        # Complex-symmetric particle-particle partner. The envelope carries
+        # azimuthal phase exp(i (m_a + m_b) varphi).
+        j_r = prefactor * (fa * grad_b[0] - fb * grad_a[0])
+        j_z = prefactor * (fa * grad_b[1] - fb * grad_a[1])
+        j_phi = ((b.m_phi - a.m_phi) * fa * fb) / (2.0 * max(r, 1.0e-12))
+        return j_r, j_phi, j_z
+    raise ValueError(f"unknown pair_type: {pair_type}")
+
+
+def curl_second_current_component_m(
+    a: AzimuthalMode,
+    b: AzimuthalMode,
+    pair_type: str,
+    r: float,
+    z: float,
+    cfg: ProjectionConfig,
+) -> tuple[complex, complex, complex]:
+    if pair_type == "normal":
+        m_pair = b.m_phi - a.m_phi
+    elif pair_type == "anomalous":
+        m_pair = a.m_phi + b.m_phi
+    else:
+        raise ValueError(f"unknown pair_type: {pair_type}")
+    h = cfg.dr
+
+    def jr(rr: float, zz: float) -> complex:
+        return second_current_component_m(a, b, pair_type, rr, zz, cfg)[0]
+
+    def jphi(rr: float, zz: float) -> complex:
+        return second_current_component_m(a, b, pair_type, rr, zz, cfg)[1]
+
+    def jz(rr: float, zz: float) -> complex:
+        return second_current_component_m(a, b, pair_type, rr, zz, cfg)[2]
+
+    j_r, _, _ = second_current_component_m(a, b, pair_type, r, z, cfg)
+    d_jphi_dz = (jphi(r, z + h) - jphi(r, z - h)) / (2.0 * h)
+    d_jz_dvarphi = 1j * m_pair * jz(r, z)
+    curl_r = (d_jz_dvarphi - r * d_jphi_dz) / max(r, 1.0e-12)
+
+    d_jr_dz = (jr(r, z + h) - jr(r, z - h)) / (2.0 * h)
+    d_jz_dr = (jz(r + h, z) - jz(r - h, z)) / (2.0 * h)
+    curl_phi = d_jr_dz - d_jz_dr
+
+    d_rjphi_dr = ((r + h) * jphi(r + h, z) - (r - h) * jphi(r - h, z)) / (2.0 * h)
+    d_jr_dvarphi = 1j * m_pair * j_r
+    curl_z = (d_rjphi_dr - d_jr_dvarphi) / max(r, 1.0e-12)
+    return curl_r, curl_phi, curl_z
+
+
+def background_second_current_curl_overlap(
+    bg: ToroidalBackground,
+    a: AzimuthalMode,
+    b: AzimuthalMode,
+    cfg: ProjectionConfig,
+    pair_type: str,
+) -> complex:
+    if pair_type == "normal" and a.m_phi != b.m_phi:
+        return 0.0j
+    if pair_type == "anomalous" and a.m_phi + b.m_phi != 0:
+        return 0.0j
+    total = 0.0j
+    r_min = bg.r_e - cfg.half_width
+    z_min = -cfg.half_width
+    for i in range(cfg.n):
+        r = r_min + (i + 0.5) * cfg.dr
+        if r <= 0.0:
+            continue
+        for j in range(cfg.n):
+            z = z_min + (j + 0.5) * cfg.dz
+            omega0 = curl_background_current(bg, r, z, cfg)
+            omega2 = curl_second_current_component_m(a, b, pair_type, r, z, cfg)
+            dot = omega0[0] * omega2[0] + omega0[1] * omega2[1] + omega0[2] * omega2[2]
+            total += 2.0 * math.pi * r * cfg.dr * cfg.dz * projection_window_weight(bg, r, z, cfg) * dot
     return total
 
 
@@ -355,7 +594,7 @@ def chiral_bridge_overlap(
                 handed = math.cos(theta)
             elif "K_z" in ket.name or "K_z" in bra.name:
                 handed = math.sin(theta)
-            weight = 2.0 * math.pi * r * cfg.dr * cfg.dz
+            weight = 2.0 * math.pi * r * cfg.dr * cfg.dz * projection_window_weight(bg, r, z, cfg)
             total += weight * core_weight * handed * bra.field(r, z).conjugate() * ket.field(r, z)
     return total
 
@@ -367,11 +606,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--profile", choices=("toy", "numerical"), default="numerical")
     parser.add_argument("--profile-n", type=int, default=1200)
     parser.add_argument("--profile-x-max", type=float, default=20.0)
+    parser.add_argument("--projection-window", choices=("hard", "smooth"), default="hard")
+    parser.add_argument("--window-radius", type=float, default=0.0)
+    parser.add_argument("--window-taper", type=float, default=0.0)
     parser.add_argument("--operator-model", choices=("profile-logse", "provisional"), default="profile-logse")
     parser.add_argument("--core-basis", choices=("two", "four"), default="four")
     parser.add_argument(
         "--kelvin-seed",
-        choices=("breathing", "displacement", "helicity"),
+        choices=("breathing", "displacement", "helicity", "combined"),
         default="displacement",
         help="Kelvin seed shape: breathing=Phi_R e^imphi, displacement=-grad Psi0 e^imphi, helicity=K_rad +/- i K_z.",
     )
@@ -401,6 +643,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--kelvin-phi-n", type=int, default=512, help="Azimuthal quadrature points for self-induction Kelvin dispersion.")
     parser.add_argument("--kelvin-core-radius", type=float, default=1.0, help="Regularization core radius for self-induction Kelvin dispersion.")
+    parser.add_argument("--current-curl-model", choices=("linear", "full"), default="linear")
     return parser.parse_args()
 
 
@@ -413,6 +656,9 @@ def main() -> None:
         profile_n=args.profile_n,
         profile_x_max=args.profile_x_max,
         chi_parity="sin",
+        projection_window=args.projection_window,
+        window_radius=args.window_radius,
+        window_taper=args.window_taper,
     )
     bg = build_background(cfg.profile, cfg.profile_n, cfg.profile_x_max, (), ())
     modes = build_modes(
@@ -432,6 +678,7 @@ def main() -> None:
         kelvin_dispersion=args.kelvin_dispersion,
         kelvin_phi_n=args.kelvin_phi_n,
         kelvin_core_radius=args.kelvin_core_radius,
+        current_curl_model=args.current_curl_model,
     )
     eigs, eigensolver = dense_eigenvalues(h)
     positive = sorted(value.real for value in eigs if value.real > 1.0e-5 and abs(value.imag) < 1.0e-5)
@@ -442,12 +689,16 @@ def main() -> None:
     print(f"half_width               = {cfg.half_width}")
     print(f"profile                  = {cfg.profile}")
     print(f"profile_n                = {cfg.profile_n}")
+    print(f"projection_window        = {cfg.projection_window}")
+    print(f"window_radius            = {cfg.window_radius:.9e}")
+    print(f"window_taper             = {cfg.window_taper:.9e}")
     print(f"operator_model           = {args.operator_model}")
     print(f"core_basis               = {args.core_basis}")
     print(f"kelvin_seed              = {args.kelvin_seed}")
     print(f"chiral_mix               = {args.chiral_mix:.9e}")
     print(f"bridge_model             = {args.bridge_model}")
     print(f"lambda_perp              = {args.lambda_perp:.9e}")
+    print(f"current_curl_model       = {args.current_curl_model}")
     print(f"kelvin_dispersion        = {args.kelvin_dispersion}")
     if args.kelvin_dispersion == "self-induction":
         print(f"kelvin_phi_n             = {args.kelvin_phi_n}")

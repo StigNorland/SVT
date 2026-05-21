@@ -8,7 +8,7 @@ from typing import Callable
 
 from muon_mode_prototype import SSVScales
 from restricted_bdg_matrix import build_background, i_mode
-from toroidal_projection_integrals import ProjectionConfig, integrate_pair
+from toroidal_projection_integrals import ProjectionConfig, integrate_pair, projection_window_weight
 
 
 ComplexField = Callable[[float, float], complex]
@@ -125,7 +125,7 @@ def complex_inner(bg, a: ComplexField, b: ComplexField, cfg: ProjectionConfig) -
             continue
         for j in range(cfg.n):
             z = z_min + (j + 0.5) * cfg.dz
-            weight = 2.0 * math.pi * r * cfg.dr * cfg.dz
+            weight = 2.0 * math.pi * r * cfg.dr * cfg.dz * projection_window_weight(bg, r, z, cfg)
             total += weight * a(r, z).conjugate() * b(r, z)
     return total
 
@@ -170,6 +170,9 @@ def stiffness_matrix(bg, modes: list[ComplexField], cfg: ProjectionConfig, kio_r
         curvature_coeffs=cfg.curvature_coeffs,
         phase_coeffs=cfg.phase_coeffs,
         inner_outer_stiffness=0.0,
+        projection_window=cfg.projection_window,
+        window_radius=cfg.window_radius,
+        window_taper=cfg.window_taper,
     )
     for i in range(n_modes):
         for j in range(i, n_modes):

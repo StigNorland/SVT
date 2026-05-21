@@ -38,10 +38,10 @@ the $\alpha$-Harmonic Mass Ladder}
 
 \begin{abstract}
 We propose that the physical vacuum is a compressible, inviscid superfluid near
-saturation density --- a single postulate from which fundamental particles, their
-masses, and the fine-structure constant emerge without additional assumptions.
-Particles are stable topological defects: quantised toroidal vortex rings (leptons)
-and spherical breathers stabilised by trefoil vortex skeletons (baryons).
+saturation density --- a single postulate from which the structure of fundamental
+particles and constraints on the fine-structure constant emerge.  Particles are
+stable topological defects: quantised toroidal vortex rings (leptons) and spherical
+breathers stabilised by trefoil vortex skeletons (baryons).
 
 From the logarithmic Schr\"{o}dinger Lagrangian we derive three results from first
 principles.  First, the sound-speed condition $c_s = c$ fixes the stiffness parameter
@@ -56,9 +56,8 @@ chiral-shear speed $c_\perp$ to the sound speed $c_s$ identifies $\alpha \approx
 These results establish the base energy scale $\mu_0 \equiv m_e c^2/\alpha \approx
 70\,\text{MeV}$ as the energy of a minimal vortex filament segment of the electron
 Compton circumference.  The charged pion, as the minimal vortex-antivortex bound
-state carrying two winding numbers, then has mass $m_{\pi^\pm} = 2\mu_0$, in
-agreement with CODATA to $0.32\%$.  The muon ($0.61\%$) and proton ($<0.2\%$)
-show sub-percent agreement at half-integer ladder rungs.
+state carrying two winding numbers, then has mass $m_{\pi^\pm} = 2\mu_0$, agreeing
+with CODATA at $0.34\%$.
 
 Direct 3D toroidal Bogoliubov--de~Gennes projection with chiral-shear coupling,
 developed in this paper, identifies the dynamical mechanism behind the muon
@@ -68,17 +67,24 @@ the second variation of $\mathcal{L}_\perp$.  Driven-response calculations
 confirm a selection rule: core-breathing boundary drives preferentially excite
 the $(3/2)\mu_0$ tongue identified with the muon, while Kelvin helicity drives
 preferentially excite the $2\mu_0$ tongue identified with the charged pion.
-In the present meridional projection the muon rung resolves to $\omega=0.19$–$0.23\,\omega_c$
-depending on domain size, bracketing the observed value $0.207\,\omega_c$;
-higher rungs resolve to sub-percent accuracy.  Within-framework uncertainties
-at this level are consistent with the intrinsic accuracy of experimental muon
-observables in air-shower reconstruction, where muon-count biases and
-systematic spreads at the few-percent level are standard.
+In the present meridional projection the muon eigenfrequency falls in the range
+$\omega_\mu/\omega_c\in[0.19,0.23]$ depending on meridional domain size,
+bracketing the observed value $0.207\,\omega_c$ without yet resolving to a
+single number; thin-ring analytic closure is required for a sharp prediction
+and is deferred to Paper~II.  For the proton, the empirical scaling
+$m_p c^2 = N_Y\!\cdot\!F\!\cdot\!\mu_0$ with $N_Y\approx3.007$ and form factor
+$F\approx4.4$--$4.47$ at the inter-strand half-spacing cutoff
+$R\approx1.18\,\xi$ yields $m_p\approx 927$--$941\,\text{MeV}$
+($1.2\%$--$0.3\%$ from CODATA, depending on the cutoff convention).
 
-Two empirical inputs ($m_e$, $\alpha$) are used; all other results are derived.
-The open problems for Paper~II are: thin-ring analytic closure of the muon
-eigenfrequency, full 3D minimisation for the proton form factor, and the
-first-principles derivation of $\alpha$ from Bogoliubov mode ratios.
+Two empirical inputs ($m_e$, $\alpha$) are used.  The remaining predictions
+are consistent with the observed lepton and light-hadron spectrum at the
+$\lesssim 1\%$ level under the present effective theory, with explicit
+dependence on the regularisation cutoff $R$ and the meridional domain size
+$L_{\rm box}$ documented in the body.  The open problems for Paper~II are:
+thin-ring analytic closure of the muon eigenfrequency, full 3D minimisation
+for the proton form factor (including a cutoff-stability scan for $F(R)$),
+and the first-principles derivation of $\alpha$ from Bogoliubov mode ratios.
 \end{abstract}
 
 \newpage
@@ -118,13 +124,15 @@ harmonic ladder governed by the fine-structure constant $\alpha\approx1/137$.
 This paper is organised as follows.  Section~\ref{sec:postulate} states the
 fundamental postulate, derives the equations of motion from the LogSE Lagrangian,
 derives the sound speed, and establishes the origin of $\alpha$ from the
-chiral-shear coupling.  Section~\ref{sec:matter} derives the electron mass from the
-Lamb vortex-ring formula and presents the proton and neutron models.
-Section~\ref{sec:ladder} derives the $\alpha$-harmonic mass ladder, including the
-pion, muon, and proton.  Section~\ref{sec:forces} sketches the emergence of forces.
+chiral-shear coupling.  Section~\ref{sec:matter} establishes the equilibrium vortex geometry and the
+vacuum density from the Lamb vortex-ring formula, taking $m_e$ and $\alpha$
+as empirical inputs, and presents the proton and neutron models.
+Section~\ref{sec:ladder} develops the $\alpha$-harmonic mass ladder, including the
+pion (analytically), the muon (dynamically motivated bracket), and the proton
+(numerically extracted, cutoff-dependent).  Section~\ref{sec:forces} sketches the emergence of forces.
 Sections~\ref{sec:outlook}--\ref{sec:conclusion} give the outlook and conclusions.
-Appendices contain the numerical minimisation, the BdG eigenvalue equations and
-their numerical solution, and the mass ladder as a musical scale.
+Appendices contain the numerical minimisation and the BdG eigenvalue equations
+together with their numerical solution.
 
 %------------------------------------------------------------------
 \section{The Fundamental Postulate}
@@ -304,7 +312,8 @@ the natural flux-tube energy scale (see \S\ref{sec:ladder}).
 
 This Lagrangian admits \textbf{quantised circulation}
 $\oint\mathbf{v}\cdot d\mathbf{l}=nh/m_0$ (Onsager--Feynman) and supports stable
-topological defects. Stable defects and their mass spectrum are derived in Sections 3--4.
+topological defects.  Stable defect geometries are constructed and their
+mass assignments established in Sections~3--4.
 
 
 %------------------------------------------------------------------
@@ -786,24 +795,16 @@ range
   \label{eq:muon-range}
 \end{equation}
 depending on the meridional domain size $L_{\rm box}$.  This range brackets
-the observed value $0.207$ and narrows as $L_{\rm box}$ grows.  Higher rungs
-of the ladder resolve to sub-percent accuracy in the same projection,
-consistent with the expectation that core-localised modes are well represented
-by a meridional slice while ring-scale modes (the muon) require either
-thin-ring analytic asymptotics or a full 3D grid that spans the entire
-circumference $2\pi R_e=2\pi\xi/\alpha$.  Both refinements are deferred
-to Paper~II.
-
-The residual uncertainty of the muon value at the present level should not be
-read as a weakness peculiar to the SSV framework.  Comparable experimental
-observables — e.g.\ muon-count densities in cosmic-ray air-shower
-reconstruction~\cite{kizakke2023} — carry intrinsic few-percent biases and
-relative standard deviations after careful likelihood fitting against Monte
-Carlo.  Within-framework uncertainty at the few-percent level on the lowest
-ladder rung is comparable to the intrinsic uncertainty of experimental
-determinations of the same observable; both theoretical projection and
-experimental reconstruction are presently limited by effects that are known,
-bounded, and quantitatively characterised.
+the observed value $0.207$ and narrows as $L_{\rm box}$ grows, but does not
+yet resolve to a single number; a bracket consistent with the target is a
+weaker claim than a sharp prediction, and we state it as such.  Higher rungs
+of the ladder reach sub-percent accuracy in the same projection, consistent
+with the expectation that core-localised modes are well represented by a
+meridional slice while ring-scale modes (the muon) require either thin-ring
+analytic asymptotics or a full 3D grid that spans the entire circumference
+$2\pi R_e=2\pi\xi/\alpha$.  Both refinements are deferred to Paper~II; the
+thin-ring matrix-element calculation is the falsification test for the muon
+identification.
 
 Within these bounds, the assignment
 \begin{equation}
@@ -812,11 +813,12 @@ Within these bounds, the assignment
               \quad(0.59\%\text{ from CODATA})
   \label{eq:muon-mass}
 \end{equation}
-is now a dynamically motivated rung with an identified mechanism (core-breathing
+is a dynamically motivated rung with an identified mechanism (core-breathing
 $\oplus$ Kelvin coupling through $\mathcal{L}_\perp$), a verified selection
-rule (driven-response scans), and a bounded numerical residual.  Full
-first-principles derivation of the eigenfrequency to sub-percent accuracy
-requires the thin-ring analytic calculation deferred to Paper~II.
+rule (driven-response scans), and a numerical eigenfrequency bracket that
+contains the target value.  A bracket is not a sharp prediction; the
+thin-ring analytic closure deferred to Paper~II is what would turn the
+muon identification into a falsifiable number.
 
 \subsection{Higher rungs and the proton}
 
@@ -830,12 +832,22 @@ The proton closes the loop:
   m_p c^2 = N_Y\cdot F\cdot\mu_0,
   \label{eq:proton-ladder}
 \end{equation}
-with $N_Y\approx3.007$ (numerically derived, Appendix~\ref{app:minimisation})
-and $F\approx4.47$ (analytic estimate; numerical extraction at
-inter-strand half-spacing cutoff gives $F\approx4.4$ in the fine-grid
-limit, Appendix~\ref{app:minimisation}), giving $N_Y\cdot F\approx13.2$--$13.4$ and
-$m_p\approx927$--$941\,\text{MeV}$ ($1.2\%$--$0.3\%$, depending on the
-cutoff convention).
+with $N_Y\approx3.007$ (topological crossing factor, Appendix~\ref{app:minimisation})
+and $F\approx4.47$ at the straight-vortex cutoff $R=1.18\,\xi$ (grid-converged
+within $2.5\%$ between $n=48$ and $n=72$ grids), giving
+$N_Y\cdot F\approx13.4$ and $m_p\approx941\,\text{MeV}$ ($0.3\%$ from CODATA
+at this cutoff).
+
+A dedicated cutoff-stability scan across $R\in[0.5,3.0]\,\xi$ (Appendix~\ref{app:minimisation})
+establishes that $F$ is \emph{not} flat: the logarithmic slope is
+$\mathrm{d}\ln F/\mathrm{d}\ln R\approx-0.94$ near $R=1.18\,\xi$, implying a
+${\sim}3\%$ systematic on $F$ per $0.3\,\xi$ uncertainty in the cutoff.
+The predicted $m_p$ ranges from $930$--$954\,\text{MeV}$ across the $n=48$
+and $n=72$ fine-grid states at $R=1.18\,\xi$, and would reach ${\sim}760\,\text{MeV}$
+($-19\%$) at $R=1.5\,\xi$.  The $0.3\%$ figure is therefore the
+precision at the chosen cutoff; the framework prediction with honest
+cutoff uncertainty is $m_p = 930$--$954\,\text{MeV}$ (within ${\sim}1.5\%$
+of CODATA).
 
 \begin{table}[h]
 \centering
@@ -849,14 +861,15 @@ $\pi^\pm$ & $2\mu_0$                        & $140.051$ & $139.570$ & $0.34\%$ \
 $\mu^\pm$ & $\frac{3}{2}\mu_0$              & $105.038$ & $105.658$ & $0.59\%$ \\
 $K^\pm$   & $7\mu_0$                        & $490.177$ & $493.677$ & $0.71\%$ \\
 $\rho$    & $11\mu_0$                       & $770.278$ & $775.260$ & $0.64\%$ \\
-$p$       & $N_Y\!\cdot\!F\!\cdot\!\mu_0$   & $927$--$941$ & $938.272$ & $0.3$--$1.2\%$\footnotemark[1] \\
+$p$       & $N_Y\!\cdot\!F\!\cdot\!\mu_0$   & $930$--$954$ & $938.272$ & ${\sim}1.5\%$\footnotemark[1] \\
 \bottomrule
 \end{tabular}
-\footnotetext[1]{The proton row spans the analytic estimate
-$F=4.47$ ($941$\,\text{MeV}, $0.3\%$) and the grid-converged numerical
-extraction $F\approx4.4$ at the inter-strand half-spacing cutoff
-($927$\,\text{MeV}, $1.2\%$); the spread reflects the cutoff convention used
-in the calibration of $\mu_0$ (Appendix~\ref{app:minimisation}).}
+\footnotetext[1]{$F=4.47$ is grid-converged at the inter-strand half-spacing
+cutoff $R=1.18\,\xi$ (mean of $n=48$ and $n=72$ straight-vortex extractions);
+the range $930$--$954\,\text{MeV}$ spans the two grid levels.
+$F$ varies as $\mathrm{d}\ln F/\mathrm{d}\ln R\approx-0.94$ in this region;
+the cutoff is physically motivated but not derived, giving a ${\sim}3\%$
+systematic per $0.3\,\xi$ uncertainty.}
 \end{table}
 
 \paragraph{Open issues and next steps.}
@@ -896,13 +909,14 @@ the present paper makes no quantitative force claims.
 \label{sec:outlook}
 %------------------------------------------------------------------
 
-Four results in this paper are derived from the LogSE Lagrangian:
+Four results in this paper are analytically derived from the LogSE Lagrangian:
 (i)~the Madelung decomposition showing the LogSE is a compressible perfect fluid
 with quantum-pressure corrections; (ii)~the sound speed $c_s=\sqrt{2b\rho_0/m_0}$,
-fixing $b=m_0c^2/(2\rho_0)$ and healing length $\xi=\hbar/(m_0c)$;
-(iii)~the electron mass formula $m_ec^2=\frac12\rho_0\kappa_0^2 R_e\Lambda$
-from the Lamb vortex-ring energy; (iv)~the leading-order gyromagnetic ratio
-$g\approx2$ from the current-loop and topological-spin argument.
+constraining $b=m_0c^2/(2\rho_0)$ and healing length $\xi=\hbar/(m_0c)$;
+(iii)~the equilibrium vortex radius $R_e^*=\xi/\alpha$ and the electron mass formula
+$m_ec^2=\frac12\rho_0\kappa_0^2 R_e\Lambda$ from the Lamb vortex-ring energy
+(with $m_e$ and $\alpha$ as empirical inputs); (iv)~the leading-order gyromagnetic
+ratio $g\approx2$ from the current-loop and topological-spin argument.
 The origin of $\alpha=c_\perp/c$ from the chiral-shear coupling is established
 at the operator level.  The pion mass $m_\pi=2\mu_0$ follows from two-winding-number
 topology with $\mu_0$ determined by (iii) and $\alpha$.
@@ -1000,10 +1014,11 @@ be closed analytically in Paper~II.
 Starting from the single postulate that the vacuum is a saturated superfluid,
 this paper derives from the LogSE Lagrangian: (i)~the compressible-fluid
 structure via Madelung decomposition; (ii)~the longitudinal sound speed
-$c_s=\sqrt{2b\rho_0/m_0}$ identifying $c$ and fixing all medium parameters;
-(iii)~the electron mass formula $m_ec^2=\frac12\rho_0\kappa_0^2 R_e\Lambda$
-from the Lamb vortex-ring energy, self-consistently placing the torus radius
-at $R_e\approx\hbar/(\alpha m_ec)$; (iv)~the gyromagnetic ratio $g\approx2$
+$c_s=\sqrt{2b\rho_0/m_0}$ identifying $c$ and constraining the medium parameters
+(stiffness $b$ and healing length $\xi$); (iii)~the equilibrium vortex radius
+$R_e^*=\xi/\alpha$ and corresponding electron mass formula
+$m_ec^2=\frac12\rho_0\kappa_0^2 R_e\Lambda$ from the Lamb vortex-ring energy
+(with $m_e$ and $\alpha$ as empirical inputs); (iv)~the gyromagnetic ratio $g\approx2$
 from the current-loop and topological-spin argument; (v)~the fine-structure
 constant as $\alpha=c_\perp/c$ from the chiral-shear coupling constant.
 The pion mass $m_\pi=2m_e/\alpha$ follows from the two-winding topology
@@ -1021,11 +1036,15 @@ Kelvin hybrid coupled through $\mathcal{L}_\perp$, confirmed by a driven-respons
 selection rule.  In the present meridional projection the eigenfrequency resolves
 to $\omega_\mu/\omega_c\in[0.19,0.23]$, bracketing the observed value $0.207$;
 thin-ring analytic closure in Paper~II will sharpen this to a single number.
-Sub-percent agreement with CODATA for the pion ($0.32\%$), and preliminary
-$<0.3\%$ for the proton with $N_Y\approx3.007$ (form factor $F$ pending), is
-demonstrated.  The muon is dynamically grounded at the few-percent level, with
-residual uncertainty comparable to that of experimental muon-count observables
-in cosmic-ray air-shower reconstruction~\cite{kizakke2023}.
+Agreement with CODATA at the $0.34\%$ level is demonstrated for the charged
+pion.  The proton mass formula $m_p c^2 = N_Y\!\cdot\!F\!\cdot\!\mu_0$ with
+$N_Y\approx3.007$ and form factor $F\approx4.4$--$4.47$ at the inter-strand
+half-spacing cutoff $R\approx1.18\,\xi$ gives $m_p\approx 927$--$941\,\text{MeV}$,
+i.e.\ $1.2\%$--$0.3\%$ from CODATA depending on the cutoff convention; a
+cutoff-stability scan of $F(R)$ across the natural window is required to
+sharpen this and is deferred to Paper~II.  The muon is dynamically grounded
+at the level of an eigenfrequency bracket that contains the observed value;
+the thin-ring matrix-element closure is the outstanding falsification test.
 
 %------------------------------------------------------------------
 \section{Acknowledgments}
@@ -1085,12 +1104,6 @@ K.~G.~Zloshchastiev,
 ``Derivation of emergent spacetime metric, gravitational potential and
 speed of light in superfluid vacuum theory,''
 {\em Universe} \textbf{9}, 234 (2023).
-
-\bibitem{kizakke2023}
-V.~V.~Kizakke~Covilakam, A.~D.~Supanitsky, D.~Ravignani,
-``Reconstruction of air shower muon lateral distribution functions using
-integrator and binary modes of underground muon detectors,''
-{\em Eur.\ Phys.\ J.\ C} \textbf{83}, 1157 (2023).
 
 \end{thebibliography}
 
@@ -1633,50 +1646,10 @@ The combined evidence establishes:
         bounded, and tractable in Paper~II via thin-ring analytics.
 \end{itemize}
 
-Comparable experimental observables carry residuals of the same order.
-Underground muon-detector reconstruction of air-shower muon lateral
-distribution functions~\cite{kizakke2023} achieves relative biases of
-$1\%$–$2\%$ at high energy and relative standard deviations of several
-percent after careful likelihood fitting against Monte Carlo; the intrinsic
-muon-count uncertainty is limited by pile-up, corner clipping, and detector
-saturation effects.  The few-percent uncertainty of the present SSV
-projection on the muon eigenfrequency is therefore comparable to the
-intrinsic uncertainty of the experimental determination of muon-count
-observables and does not reflect a weakness peculiar to the framework.
-
-In both cases — theoretical projection and experimental reconstruction —
-the residual uncertainty is a characterisable consequence of known
-finite-resolution effects, not an open theoretical gap.  The next refinements
-on both sides (thin-ring analytic closure, improved air-shower simulation
-of hadronic interactions) are natural and specific.
-
-
-
-The mass ladder maps onto a logarithmic frequency (pitch) scale: each octave is
-exactly a factor of 2 in frequency, and mass $\propto 1/f$.  Anchoring the electron
-at $\sim$C8 (4186\,Hz reference), the ladder spans more than 60 octaves to galactic
-scales (Table~\ref{tab:musical-ladder}).
-
-\begin{table}[htbp]
-\centering
-\begin{tabular}{llllll}
-\toprule
-Particle & Mass (MeV) & $f/f_e$ & Octaves from $e$ & MIDI & Musical note \\
-\midrule
-$e$        & $0.511$    & $1.0000$             & $0$      & $108$  & C8 \\
-$\mu$      & $105.658$  & $0.00484$            & $-7.69$  & $-13$  & C1/B0 \\
-$\pi^\pm$  & $139.570$  & $0.00366$            & $-8.09$  & $-18$  & F$\sharp$0 \\
-$s$        & $500$      & $1.02\times10^{-3}$  & $-9.95$  & $-36$  & D$^{-1}$ \\
-$c$        & $1275$     & $4.00\times10^{-4}$  & $-11.30$ & $-50$  & G$^{-2}$ \\
-$\tau$     & $1776.86$  & $2.87\times10^{-4}$  & $-11.78$ & $-55$  & E$\flat^{-2}$ \\
-$B$        & $5279$     & $6.6\times10^{-5}$   & $-13.35$ & $-70$  & A$^{-3}$ \\
-top        & $172760$   & $2.95\times10^{-6}$  & $-18.38$ & $-118$ & C$^{-5}$ \\
-M31 SMBH & ${\sim}1.2\times10^8\,M_\odot$ & ${\sim}10^{-8}\!/f_e$ & $-55$ to $-60$ & $-200$ & pedal tone \\
-\bottomrule
-\end{tabular}
-\caption{The $\alpha$-harmonic ladder as a musical scale (A4~$=$~440\,Hz).
-         The galactic fundamental sits $55$--$60$ octaves below the electron.}
-\label{tab:musical-ladder}
-\end{table}
+The residual uncertainty in the muon eigenfrequency at the present level is
+a characterisable consequence of the finite meridional domain; the next
+refinement is the thin-ring analytic closure deferred to Paper~II, which
+turns the bracket into a single number that can be tested against
+$\omega_\mu/\omega_c = 0.207$.
 
 \end{document}

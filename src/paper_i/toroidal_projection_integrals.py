@@ -41,6 +41,9 @@ class ProjectionConfig:
     curvature_coeffs: tuple[float, ...] = ()
     phase_coeffs: tuple[float, ...] = ()
     inner_outer_stiffness: float = 0.0
+    projection_window: str = "hard"
+    window_radius: float = 0.0
+    window_taper: float = 0.0
 
     @property
     def dr(self) -> float:
@@ -49,6 +52,30 @@ class ProjectionConfig:
     @property
     def dz(self) -> float:
         return self.dr
+
+
+def projection_window_weight(
+    bg: ToroidalBackground,
+    r: float,
+    z: float,
+    cfg: ProjectionConfig,
+) -> float:
+    if cfg.projection_window == "hard":
+        return 1.0
+    if cfg.projection_window != "smooth":
+        raise ValueError(f"unknown projection_window: {cfg.projection_window}")
+    if cfg.window_radius <= 0.0:
+        return 1.0
+    s = math.hypot(r - bg.r_e, z)
+    if s <= cfg.window_radius:
+        return 1.0
+    if cfg.window_taper <= 0.0:
+        return 0.0
+    edge = cfg.window_radius + cfg.window_taper
+    if s >= edge:
+        return 0.0
+    x = (s - cfg.window_radius) / cfg.window_taper
+    return 0.5 * (1.0 + math.cos(math.pi * x))
 
 
 @dataclass(frozen=True)
@@ -234,7 +261,7 @@ def integrate_pair(
             continue
         for j in range(cfg.n):
             z = z_min + (j + 0.5) * cfg.dz
-            weight = 2.0 * math.pi * r * cfg.dr * cfg.dz
+            weight = 2.0 * math.pi * r * cfg.dr * cfg.dz * projection_window_weight(bg, r, z, cfg)
             k0 += weight * logse_stiffness_integrand(bg, mode_a, mode_b, r, z, cfg)
             kp += weight * chiral_stiffness_integrand(bg, mode_a, mode_b, r, z, cfg)
             if mode_a == bg.phi_R and mode_b == bg.phi_R:
@@ -409,7 +436,7 @@ def integrate_pair_row(args: tuple[ToroidalBackground, ProjectionConfig, str, st
     norm = 0.0
     for j in range(cfg.n):
         z = z_min + (j + 0.5) * cfg.dz
-        weight = 2.0 * math.pi * r * cfg.dr * cfg.dz
+        weight = 2.0 * math.pi * r * cfg.dr * cfg.dz * projection_window_weight(bg, r, z, cfg)
         k0 += weight * logse_stiffness_integrand_mode(
             bg, mode_a, mode_b, projection_a, projection_b, r, z, cfg
         )

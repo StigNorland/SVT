@@ -127,6 +127,11 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 - `kelvin_branch_tracking.py` tracks mode branches under chiral coupling.
 - `kelvin_self_induction.py` estimates vortex-ring Kelvin self-induction.
 - `chiral_bridge_projection.py`, `chiral_kelvin_sweep.py`, `arnold_tongue_scan.py`, and `harmonic_ladder_spectrum.py` explore chiral/Kelvin coupling structure.
+- `thin_ring_alpha_correction.py` checks the angular parity of finite-`\alpha` thin-ring corrections to the helicity current-curl bridge.
+- `thin_ring_delta_relax_sweep.py` feeds curved-torus relaxation coefficients through the finite-`\alpha` bridge scan to estimate the relaxed-background correction to `\lambda_\perp`.
+- `muon_lambda_band_sweep.py` propagates a corrected `\lambda_\perp` band through the Kelvin-augmented reduced BdG branch tracker.
+- `muon_branch_identity_tracking.py` continues the reduced BdG hybrid branches by eigenvector overlap and Krein signature instead of target proximity.
+- `kelvin_augmented_bdg.py` supports `--current-curl-model full` to include the background-vorticity part of the `L_\perp` second variation.
 
 ## Smoke Checks
 

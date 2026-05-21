@@ -8,7 +8,7 @@ from typing import Callable
 
 from restricted_bdg_three_mode import complex_inner, gram_schmidt
 from toroidal_background import ToroidalBackground
-from toroidal_projection_integrals import ProjectionConfig, integrate_pair
+from toroidal_projection_integrals import ProjectionConfig, integrate_pair, projection_window_weight
 from vortex_profile import VortexProfile
 
 
@@ -101,7 +101,7 @@ def project_operator(
             continue
         for j in range(cfg.n):
             z = z_min + (j + 0.5) * cfg.dz
-            weight = 2.0 * math.pi * r * cfg.dr * cfg.dz
+            weight = 2.0 * math.pi * r * cfg.dr * cfg.dz * projection_window_weight(bg, r, z, cfg)
             total += weight * bra(r, z).conjugate() * op_field(r, z)
     return total
 
