@@ -463,7 +463,8 @@ predicts.  Beyond a wavelength the time-averaged force oscillates in sign
 with separation, the long-known retardation behaviour of the Bjerknes
 force between widely separated pulsators; the near-zone regime, in which
 the cross-term derivation is framed, is the one tested here, and it is
-cleanly attractive.
+cleanly attractive.  Appendix~\ref{app:numerics} records the run
+parameters and the convergence tests behind these numbers.
 
 \section{Time Dilation, Deflection, and Redshift}
 \label{sec:consequences}
@@ -721,7 +722,8 @@ samples a convex gradient and deflects a little more than a point at its
 centroid.  Throughout the crossing the transverse phase tilt that
 develops across the packet tracks its transverse momentum, which is the
 mechanism of~\eqref{eq:freefall} itself: a phase gradient \emph{is} a
-momentum.
+momentum.  The run parameters and convergence tests are collected in
+Appendix~\ref{app:numerics}.
 
 \section{Universal Coupling and the Absence of a Graviton}
 \label{sec:universal}
@@ -950,6 +952,166 @@ logarithmic medium recovers the bilinear, sign-fixed interference
 cross-term of \S\ref{sec:interference}, attractive for phase-correlated
 waves.  At leading order the mechanical account set out here is now a
 tested one.
+
+\appendix
+
+\section{Numerical Methods and Convergence}
+\label{app:numerics}
+
+The two numerical checks of \S\ref{sec:interference} and
+\S\ref{sec:refraction} share a method: a two-dimensional split-step
+Fourier integrator with Strang operator splitting --- a half-step of the
+potential, a full kinetic step applied exactly in Fourier space, then a
+second half-step of the potential --- in units $\hbar=m=1$.  This
+appendix records the parameters of each run and the grid- and
+timestep-convergence behind the numbers quoted in the text.  The solvers
+are \texttt{wave\_deflection.py} and \texttt{breather\_interaction.py};
+each carries a \texttt{conv} mode that reproduces the convergence tables
+below.
+
+\subsection{The wave-deflection check (\S\ref{sec:refraction})}
+
+The solver propagates a Gaussian wave packet across the softened well
+$V=-\alpha/\sqrt{r^2+\epsilon^2}$ under
+$i\,\partial_t\psi=-\tfrac12\nabla^2\psi+V\psi$, and reads the deflection
+off the momentum expectation $\langle\mathbf{p}\rangle$ evaluated in
+Fourier space.  The classical $\mathbf{F}=-\nabla\Phi$ trajectory through
+the same well, integrated by velocity-Verlet, is the reference.
+Table~\ref{tab:wd_params} lists the parameters.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lll}
+\hline
+Quantity & Symbol & Value \\
+\hline
+Grid points per axis         & $N$        & $512$ \\
+Box size                     & $L$        & $200$ \\
+Grid spacing                 & $\Delta x$ & $0.39$ \\
+Timestep                     & $\Delta t$ & $0.025$ \\
+Packet width                 & $\sigma$   & $4$ \\
+Packet speed (carrier $k=v$) & $v$        & $2.5$ \\
+Well depth                   & $\alpha$   & $2$ \\
+Well softening               & $\epsilon$ & $4$ \\
+Initial centroid offset      & $x_0$      & $-65$ \\
+Impact parameters            & $b$        & $16,\;24,\;36,\;52$ \\
+Classical reference          & ---        & velocity-Verlet, $4\times10^4$ steps \\
+\hline
+\end{tabular}
+\caption{Wave-deflection solver parameters.  The packet is carried from
+$x=x_0$ to $x=-x_0$, a propagation time $T=2|x_0|/v$.}
+\label{tab:wd_params}
+\end{table}
+
+The point-limit result of \S\ref{sec:refraction} --- the relative error
+between the measured deflection and the classical value falling from
+$6.5\%$ to $1.3\%$ as $b/\sigma$ grows from $4$ to $13$ --- is a
+\emph{physical} convergence: a finite-width packet samples a convex
+gradient and deflects slightly more than a point at its centroid.  That
+this is physics, not discretisation error, is shown by
+Table~\ref{tab:wd_conv}: at the fixed case $b/\sigma=6$ the measured
+deflection does not move in any printed digit under a threefold grid
+refinement or a fourfold timestep reduction.  The residual $4.81\%$ at
+this case is entirely the finite-width effect, and the \texttt{run\_case}
+defaults ($N=512$, $\Delta t=0.025$) sit well inside the converged
+regime.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{llll}
+\hline
+\multicolumn{2}{l}{Refinement} & Measured deflection & Rel.\ error \\
+\hline
+Grid ($\Delta t=0.025$) & $N=256$           & $-0.02557$ & $4.81\%$ \\
+                        & $N=384$           & $-0.02557$ & $4.81\%$ \\
+                        & $N=512$           & $-0.02557$ & $4.81\%$ \\
+                        & $N=768$           & $-0.02557$ & $4.81\%$ \\
+Timestep ($N=512$)      & $\Delta t=0.0500$ & $-0.02557$ & $4.81\%$ \\
+                        & $\Delta t=0.0250$ & $-0.02557$ & $4.81\%$ \\
+                        & $\Delta t=0.0125$ & $-0.02557$ & $4.81\%$ \\
+\hline
+\end{tabular}
+\caption{Wave-deflection convergence at the fixed case $b=24$,
+$\sigma=4$.  The classical $-\nabla\Phi$ reference is $-0.02439$; the
+measured deflection is invariant to all printed digits.}
+\label{tab:wd_conv}
+\end{table}
+
+\subsection{The breather-interaction check (\S\ref{sec:interference})}
+
+The solver integrates the logarithmic-Schr\"odinger equation
+$i\,\partial_t\psi=-\tfrac12\nabla^2\psi+b\ln|\psi|^2\,\psi
++V(\mathbf{x},t)\,\psi$ on the uniform background $\psi=1$.  Two
+localised drives,
+$V(\mathbf{x},t)=V_0\,\mathrm{ramp}(t)\sin(\omega t)\,[W_A+s\,W_B]$ with
+$s=\pm1$, pulse the medium; the time-averaged force on source $A$,
+$\langle F_{A,x}\rangle=\langle\int\rho\,\partial_xV_A\,d\mathbf{x}\rangle$,
+is accumulated over an integer number of drive periods.  A relaxation
+absorber, $\psi\to1+(\psi-1)\,e^{-\Gamma\Delta t}$ in a layer at the box
+edges, removes outgoing waves so the measurement is of radiation, not of
+box modes.  The nonlinearity $b=1$ fixes the sound speed
+$c_s=\sqrt{b}=1$ and hence the wavelength $\lambda=2\pi c_s/\omega$.
+Table~\ref{tab:bi_params} lists the parameters.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lll}
+\hline
+Quantity & Symbol & Value \\
+\hline
+Grid points per axis  & $N$             & $160$ \\
+Box size              & $L$             & $100$ \\
+Grid spacing          & $\Delta x$      & $0.625$ \\
+Timestep              & $\Delta t$      & $0.025$ \\
+Nonlinearity          & $b$             & $1$ \\
+Sound speed           & $c_s=\sqrt{b}$  & $1$ \\
+Drive amplitude       & $V_0$           & $0.25$ \\
+Source width          & $w$             & $1.6$ \\
+Drive frequency, headline / sweep & $\omega$ & $0.7$ \;\;($\lambda\approx9$) \\
+Drive frequency, near-zone        & $\omega$ & $0.15$ \;($\lambda\approx42$) \\
+Absorber width        & ---             & $18$ \\
+Absorber strength     & $\Gamma_{\max}$ & $1.5$ \\
+Transient before averaging & ---        & $70$ \\
+Averaging window      & ---             & $8$ drive periods \\
+\hline
+\end{tabular}
+\caption{Breather-interaction solver parameters.  The near-zone sweep
+lowers $\omega$ to push $\lambda$ well beyond the separation; its ramp,
+transient and averaging window are scaled to the longer drive period.}
+\label{tab:bi_params}
+\end{table}
+
+The headline run reports an isolated source feeling a residual force of
+$3.6\times10^{-5}$ --- three orders below the in-phase forces of order
+$3\times10^{-2}$ --- an in-phase to anti-phase ratio of $-1$ to within
+$1\%$ at every separation, near-zone attraction, and a radiation-zone
+force that oscillates in sign with period $\lambda$ under an envelope
+$\sim1/\sqrt{d}$, the two-dimensional cylindrical-wave law.
+Table~\ref{tab:bi_conv} gives the convergence: at the fixed in-phase
+case $d=20$ the measured force agrees to four significant figures across
+grids from $N=128$ to $N=256$ and under a halving of the timestep, so
+the $N=160$, $\Delta t=0.025$ defaults of the sweeps are firmly in the
+converged regime.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lll}
+\hline
+\multicolumn{2}{l}{Refinement} & $\langle F_{A,x}\rangle$ \\
+\hline
+Grid ($\Delta t=0.025$) & $N=128$           & $+3.28685\times10^{-2}$ \\
+                        & $N=160$           & $+3.28675\times10^{-2}$ \\
+                        & $N=192$           & $+3.28681\times10^{-2}$ \\
+                        & $N=256$           & $+3.28683\times10^{-2}$ \\
+Timestep ($N=160$)      & $\Delta t=0.0250$ & $+3.28675\times10^{-2}$ \\
+                        & $\Delta t=0.0125$ & $+3.28728\times10^{-2}$ \\
+\hline
+\end{tabular}
+\caption{Breather-interaction convergence at the fixed in-phase case
+$d=20$, $\omega=0.7$.  The force is stable in its fourth significant
+figure under both refinements.}
+\label{tab:bi_conv}
+\end{table}
 
 \begin{thebibliography}{9}
 

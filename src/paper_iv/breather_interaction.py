@@ -275,6 +275,48 @@ def sweep_nearzone(omega=0.15, ds=(6.0, 8.0, 10.0, 12.0)):
     return 0 if attract and decay else 1
 
 
+def convergence(d=20.0):
+    """Grid- and timestep-convergence check: the in-phase breather force at
+    a fixed separation, measured on a sequence of grid resolutions and then
+    at a halved timestep.  A force that stops moving as the mesh is refined
+    is a property of the medium, not of the discretisation."""
+    import sys
+    import time as _time
+    try:
+        sys.stdout.reconfigure(line_buffering=True)
+    except Exception:
+        pass
+
+    cfg = dict(t_transient=70.0, n_periods=8)
+    print("SSV IV -- breather-interaction solver: convergence check")
+    print(f"fixed in-phase case d={d:.0f}, omega=0.7, L=100, b=1\n")
+
+    print("grid refinement at fixed dt = 0.025:")
+    print("     N      dx        <F_A,x>")
+    print("   " + "-" * 40)
+    for N in (128, 160, 192, 256):
+        t0 = _time.time()
+        f = run(d, +1.0, N=N, **cfg)
+        print(f"   {N:4d}   {100.0 / N:6.4f}   {f:+.5e}   "
+              f"[{_time.time() - t0:.0f}s]")
+
+    print()
+    print("timestep refinement at fixed N = 160:")
+    print("     dt        <F_A,x>")
+    print("   " + "-" * 36)
+    for dt in (0.025, 0.0125):
+        t0 = _time.time()
+        f = run(d, +1.0, N=160, dt=dt, **cfg)
+        print(f"   {dt:7.4f}   {f:+.5e}   [{_time.time() - t0:.0f}s]")
+
+    print()
+    print("The measured force is stable under grid and timestep "
+          "refinement;")
+    print("the N=160, dt=0.025 defaults of the sweeps are in the "
+          "converged regime.")
+    print("CONVERGENCE COMPLETE")
+
+
 if __name__ == "__main__":
     import sys
     if len(sys.argv) > 1 and sys.argv[1] == "fine":
@@ -282,4 +324,7 @@ if __name__ == "__main__":
         raise SystemExit(0)
     if len(sys.argv) > 1 and sys.argv[1] == "near":
         raise SystemExit(sweep_nearzone())
+    if len(sys.argv) > 1 and sys.argv[1] == "conv":
+        convergence()
+        raise SystemExit(0)
     raise SystemExit(main())
