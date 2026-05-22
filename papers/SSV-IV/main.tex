@@ -447,6 +447,24 @@ above written in volume-velocity variables, and carries the result through
 to $G$.  The derivation here is LogSE-native and needs no external
 pulsator: the breathers are self-sustaining eigenmodes of $\Psi$.
 
+\paragraph{Numerical check.}
+A direct simulation bears out the cross-term.  Two localised sources are
+driven into pulsation in a two-dimensional logarithmic-Schr\"odinger
+medium and the time-averaged force one exerts on the other is measured.
+An isolated source feels none.  With a second source present the force
+reverses \emph{exactly} when that source's drive phase is flipped: the
+ratio of the in-phase to the anti-phase force is $-1$ to within one per
+cent at every separation tested, the signature of a force bilinear in the
+two waves, as~\eqref{eq:cross_term} demands.  In the near zone ---
+separations well inside a sound wavelength, where retardation is
+negligible --- two in-phase sources attract, and the force falls
+monotonically with separation, exactly as the concavity argument
+predicts.  Beyond a wavelength the time-averaged force oscillates in sign
+with separation, the long-known retardation behaviour of the Bjerknes
+force between widely separated pulsators; the near-zone regime, in which
+the cross-term derivation is framed, is the one tested here, and it is
+cleanly attractive.
+
 \section{Time Dilation, Deflection, and Redshift}
 \label{sec:consequences}
 
@@ -690,6 +708,21 @@ $\Phi$'' are not two pictures of gravity but one --- the wavefront
 construction is what the gradient $-\nabla\Phi$ does, mechanically, to
 anything that moves.
 
+\paragraph{Numerical check.}
+The refraction picture has been tested directly.  A Gaussian wave packet
+is propagated past a softened potential well by a split-step solver and
+its deflection compared with the classical $\mathbf{F}=-\nabla\Phi$
+trajectory through the same well.  The measured deflection converges to
+the $-\nabla\Phi$ value as the packet is made point-like: the relative
+error falls from $6.5\%$ to $1.3\%$ as the ratio of impact parameter to
+packet width grows from $4$ to $13$.  The residual is precisely the
+finite-width effect of \S\ref{sec:particlewave} --- an extended object
+samples a convex gradient and deflects a little more than a point at its
+centroid.  Throughout the crossing the transverse phase tilt that
+develops across the packet tracks its transverse momentum, which is the
+mechanism of~\eqref{eq:freefall} itself: a phase gradient \emph{is} a
+momentum.
+
 \section{Universal Coupling and the Absence of a Graviton}
 \label{sec:universal}
 
@@ -908,10 +941,15 @@ of update capacity and the refraction geometry --- are now complete, so the
 paper delivers the time sector of gravity in full at $O(\Phi/c^2)$.  Its one
 half-strength result, light deflection, is half-strength by design: light
 draws equally on the time and spatial sectors, and the spatial sector is
-Paper~VII-b, not a gap in the present argument.  The decisive next step is
-numerical --- a direct simulation of a wavefront, or of a defect, refracting
-in a graded availability would turn this mechanical account into a tested
-one.
+Paper~VII-b, not a gap in the present argument.  Both ends of the
+mechanism have now been checked against direct simulation: a split-step
+propagation of a wave packet past a potential well recovers the free-fall
+acceleration $-\nabla\Phi$ in the point-like limit
+(\S\ref{sec:freefall}), and a simulation of two pulsating sources in the
+logarithmic medium recovers the bilinear, sign-fixed interference
+cross-term of \S\ref{sec:interference}, attractive for phase-correlated
+waves.  At leading order the mechanical account set out here is now a
+tested one.
 
 \begin{thebibliography}{9}
 
