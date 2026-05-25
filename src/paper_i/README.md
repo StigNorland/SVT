@@ -132,6 +132,8 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 - `muon_lambda_band_sweep.py` propagates a corrected `\lambda_\perp` band through the Kelvin-augmented reduced BdG branch tracker.
 - `muon_branch_identity_tracking.py` continues the reduced BdG hybrid branches by eigenvector overlap and Krein signature instead of target proximity.
 - `kelvin_augmented_bdg.py` supports `--current-curl-model full` to include the background-vorticity part of the `L_\perp` second variation.
+- Reduced muon branch tools support `--projection-window smooth` with `--window-radius` / `--window-taper` to decouple the physical projection tube from the numerical box.
+- Reduced muon branch tools support `--reduced-operator-form weak` for the self-adjoint weak-form boundary/operator prototype.
 
 ## Smoke Checks
 

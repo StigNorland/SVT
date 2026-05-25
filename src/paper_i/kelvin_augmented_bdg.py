@@ -89,6 +89,47 @@ def project_pair(
     return project_operator(bg, bra.field, op_field, cfg)
 
 
+def self_adjoint_l_overlap_m(
+    bg: ToroidalBackground,
+    bra: AzimuthalMode,
+    ket: AzimuthalMode,
+    cfg: ProjectionConfig,
+    operator_model: str,
+    effective_m_phi: int | None = None,
+) -> complex:
+    if bra.m_phi != ket.m_phi:
+        return 0.0j
+    from chiral_bridge_projection import central_gradient
+
+    m_phi = ket.m_phi if effective_m_phi is None else effective_m_phi
+    total = 0.0j
+    r_min = bg.r_e - cfg.half_width
+    z_min = -cfg.half_width
+    for i in range(cfg.n):
+        r = r_min + (i + 0.5) * cfg.dr
+        if r <= 0.0:
+            continue
+        for j in range(cfg.n):
+            z = z_min + (j + 0.5) * cfg.dz
+            psi = bg.psi0(r, z)
+            amp_sq = max(abs(psi) ** 2, 1.0e-12)
+            if operator_model == "provisional":
+                potential = 2.0 * (1.0 - amp_sq)
+            else:
+                potential = math.log(amp_sq) + 1.0
+            grad_bra = central_gradient(bra.field, r, z, cfg.dr)
+            grad_ket = central_gradient(ket.field, r, z, cfg.dr)
+            kinetic = 0.5 * (
+                grad_bra[0].conjugate() * grad_ket[0]
+                + grad_bra[1].conjugate() * grad_ket[1]
+                + (m_phi * m_phi) * bra.field(r, z).conjugate() * ket.field(r, z) / max(r * r, 1.0e-12)
+            )
+            local = potential * bra.field(r, z).conjugate() * ket.field(r, z)
+            weight = 2.0 * math.pi * r * cfg.dr * cfg.dz * projection_window_weight(bg, r, z, cfg)
+            total += weight * (kinetic + local)
+    return total
+
+
 def normalize_by_phi_modes(bg: ToroidalBackground, modes: list[AzimuthalMode], cfg: ProjectionConfig) -> list[AzimuthalMode]:
     normalized = []
     for mode in modes:
@@ -266,6 +307,7 @@ def build_bdg(
     kelvin_phi_n: int = 512,
     kelvin_core_radius: float = 1.0,
     current_curl_model: str = "linear",
+    reduced_operator_form: str = "strong",
 ) -> ComplexMatrix:
     n = len(modes)
     size = 2 * n
@@ -280,7 +322,13 @@ def build_bdg(
             def m_ket(r: float, z: float, mode=ket) -> complex:
                 return m_operator_m(bg, mode, r, z, cfg, operator_model)
 
-            l_ij = project_pair(bg, bra, l_ket, ket.m_phi, cfg)
+            if reduced_operator_form == "weak":
+                effective_m = 0 if kelvin_dispersion == "self-induction" and is_kelvin_mode(ket) else None
+                l_ij = self_adjoint_l_overlap_m(bg, bra, ket, cfg, operator_model, effective_m_phi=effective_m)
+            elif reduced_operator_form == "strong":
+                l_ij = project_pair(bg, bra, l_ket, ket.m_phi, cfg)
+            else:
+                raise ValueError(f"unknown reduced_operator_form: {reduced_operator_form}")
             m_ij = project_pair(bg, bra, m_ket, ket.m_phi, cfg)
             if kelvin_dispersion == "self-induction" and is_kelvin_mode(bra) and is_kelvin_mode(ket):
                 # Kelvin waves are filament modes of the ring centerline. In the
@@ -644,6 +692,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--kelvin-phi-n", type=int, default=512, help="Azimuthal quadrature points for self-induction Kelvin dispersion.")
     parser.add_argument("--kelvin-core-radius", type=float, default=1.0, help="Regularization core radius for self-induction Kelvin dispersion.")
     parser.add_argument("--current-curl-model", choices=("linear", "full"), default="linear")
+    parser.add_argument("--reduced-operator-form", choices=("strong", "weak"), default="strong")
     return parser.parse_args()
 
 
@@ -679,6 +728,7 @@ def main() -> None:
         kelvin_phi_n=args.kelvin_phi_n,
         kelvin_core_radius=args.kelvin_core_radius,
         current_curl_model=args.current_curl_model,
+        reduced_operator_form=args.reduced_operator_form,
     )
     eigs, eigensolver = dense_eigenvalues(h)
     positive = sorted(value.real for value in eigs if value.real > 1.0e-5 and abs(value.imag) < 1.0e-5)
@@ -699,6 +749,7 @@ def main() -> None:
     print(f"bridge_model             = {args.bridge_model}")
     print(f"lambda_perp              = {args.lambda_perp:.9e}")
     print(f"current_curl_model       = {args.current_curl_model}")
+    print(f"reduced_operator_form    = {args.reduced_operator_form}")
     print(f"kelvin_dispersion        = {args.kelvin_dispersion}")
     if args.kelvin_dispersion == "self-induction":
         print(f"kelvin_phi_n             = {args.kelvin_phi_n}")

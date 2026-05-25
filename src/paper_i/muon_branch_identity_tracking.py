@@ -8,7 +8,7 @@ from pathlib import Path
 
 import numpy as np
 
-from kelvin_augmented_bdg import build_bdg, build_modes, kelvin_self_induction_shift
+from kelvin_augmented_bdg import build_bdg, build_modes, complex_inner_meridional, kelvin_self_induction_shift
 from kelvin_branch_tracking import TrackingPoint, branch_weights, parse_points
 from muon_mode_prototype import SSVScales
 from restricted_bdg_matrix import build_background
@@ -37,6 +37,8 @@ class PointSnapshot:
     half_width: float
     profile_n: int
     kelvin_scale: float
+    gram_min_eigenvalue: float
+    gram_condition: float
     branches: list[BranchSnapshot]
 
 
@@ -82,12 +84,13 @@ def eig_hybrid_vectors(
     core_basis: str,
     kelvin_seed: str,
     current_curl_model: str,
+    reduced_operator_form: str,
     projection_window: str,
     window_radius: float,
     window_taper: float,
     hybrid_lower: float,
     hybrid_upper: float,
-) -> tuple[list[BranchVector], float]:
+) -> tuple[list[BranchVector], float, float, float]:
     cfg = ProjectionConfig(
         n=point.n,
         half_width=point.half_width,
@@ -114,6 +117,7 @@ def eig_hybrid_vectors(
         kelvin_phi_n=kelvin_phi_n,
         kelvin_core_radius=kelvin_core_radius,
         current_curl_model=current_curl_model,
+        reduced_operator_form=reduced_operator_form,
     )
     values, vectors = np.linalg.eig(np.array(h, dtype=complex))
     branches: list[BranchVector] = []
@@ -139,7 +143,27 @@ def eig_hybrid_vectors(
         )
     branches.sort(key=lambda branch: branch.omega)
     kelvin_scale = kelvin_self_induction_shift(bg, kelvin_phi_n, kelvin_core_radius)
-    return branches, kelvin_scale
+    gram_min, gram_condition = mode_gram_diagnostics(bg, modes, cfg)
+    return branches, kelvin_scale, gram_min, gram_condition
+
+
+def mode_gram_diagnostics(
+    bg: object,
+    modes: list[object],
+    cfg: ProjectionConfig,
+) -> tuple[float, float]:
+    gram = np.zeros((len(modes), len(modes)), dtype=complex)
+    for i, mode_i in enumerate(modes):
+        for j, mode_j in enumerate(modes):
+            if mode_i.m_phi != mode_j.m_phi:
+                continue
+            gram[i, j] = complex_inner_meridional(bg, mode_i.field, mode_j.field, cfg)
+    hermitian = 0.5 * (gram + gram.conjugate().T)
+    eigs = np.linalg.eigvalsh(hermitian)
+    positive = [float(value) for value in eigs if value > 1.0e-12]
+    if not positive:
+        return 0.0, float("inf")
+    return min(positive), max(positive) / min(positive)
 
 
 def overlap_metrics(previous: BranchVector, candidate: BranchVector) -> tuple[float, float, float]:
@@ -164,6 +188,7 @@ def continue_labels(
     core_basis: str,
     kelvin_seed: str,
     current_curl_model: str,
+    reduced_operator_form: str,
     projection_window: str,
     window_radius: float,
     window_taper: float,
@@ -174,7 +199,7 @@ def continue_labels(
     labelled_previous: dict[str, BranchVector] = {}
 
     for point_index, point in enumerate(points):
-        branches, kelvin_scale = eig_hybrid_vectors(
+        branches, kelvin_scale, gram_min, gram_condition = eig_hybrid_vectors(
             point,
             lambda_perp=lambda_perp,
             kelvin_phi_n=kelvin_phi_n,
@@ -182,6 +207,7 @@ def continue_labels(
             core_basis=core_basis,
             kelvin_seed=kelvin_seed,
             current_curl_model=current_curl_model,
+            reduced_operator_form=reduced_operator_form,
             projection_window=projection_window,
             window_radius=window_radius,
             window_taper=window_taper,
@@ -210,7 +236,9 @@ def continue_labels(
                 for label, branch in current.items()
             ]
             labelled_previous = current
-            snapshots.append(PointSnapshot(point.n, point.half_width, point.profile_n, kelvin_scale, rows))
+            snapshots.append(
+                PointSnapshot(point.n, point.half_width, point.profile_n, kelvin_scale, gram_min, gram_condition, rows)
+            )
             continue
 
         unused = list(range(len(branches)))
@@ -265,7 +293,9 @@ def continue_labels(
             )
         labelled_previous = current
         rows.sort(key=lambda row: row.branch_id)
-        snapshots.append(PointSnapshot(point.n, point.half_width, point.profile_n, kelvin_scale, rows))
+        snapshots.append(
+            PointSnapshot(point.n, point.half_width, point.profile_n, kelvin_scale, gram_min, gram_condition, rows)
+        )
 
     return snapshots
 
@@ -280,6 +310,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--core-basis", choices=("two", "four"), default="two")
     parser.add_argument("--kelvin-seed", choices=("helicity", "displacement", "breathing", "combined"), default="helicity")
     parser.add_argument("--current-curl-model", choices=("linear", "full"), default="linear")
+    parser.add_argument("--reduced-operator-form", choices=("strong", "weak"), default="strong")
     parser.add_argument("--projection-window", choices=("hard", "smooth"), default="hard")
     parser.add_argument("--window-radius", type=float, default=0.0)
     parser.add_argument("--window-taper", type=float, default=0.0)
@@ -302,6 +333,7 @@ def main() -> None:
         core_basis=args.core_basis,
         kelvin_seed=args.kelvin_seed,
         current_curl_model=args.current_curl_model,
+        reduced_operator_form=args.reduced_operator_form,
         projection_window=args.projection_window,
         window_radius=args.window_radius,
         window_taper=args.window_taper,
@@ -316,14 +348,16 @@ def main() -> None:
     print(f"core_basis              = {args.core_basis}")
     print(f"kelvin_seed             = {args.kelvin_seed}")
     print(f"current_curl_model      = {args.current_curl_model}")
+    print(f"reduced_operator_form   = {args.reduced_operator_form}")
     print(f"projection_window       = {args.projection_window}")
     print(f"window_radius           = {args.window_radius:.9e}")
     print(f"window_taper            = {args.window_taper:.9e}")
     print(f"kelvin_phi_n            = {args.kelvin_phi_n}")
     print(f"kelvin_core_radius      = {args.kelvin_core_radius:.9e}")
     print(
-        "n half_width profile_n branch_id omega abs_error rel_error core_weight kelvin_weight "
-        "krein_norm krein_sign match_score euclidean_overlap krein_overlap frequency_step"
+        "n half_width profile_n gram_min gram_condition branch_id omega abs_error rel_error "
+        "core_weight kelvin_weight krein_norm krein_sign match_score euclidean_overlap "
+        "krein_overlap frequency_step"
     )
     for snapshot in snapshots:
         for branch in snapshot.branches:
@@ -333,7 +367,8 @@ def main() -> None:
                 return "none" if value is None else f"{value:.9e}"
 
             print(
-                f"{snapshot.n} {snapshot.half_width:.3f} {snapshot.profile_n} {branch.branch_id} "
+                f"{snapshot.n} {snapshot.half_width:.3f} {snapshot.profile_n} "
+                f"{snapshot.gram_min_eigenvalue:.9e} {snapshot.gram_condition:.9e} {branch.branch_id} "
                 f"{branch.omega:.9e} {abs_error:.9e} {rel_error:.9e} "
                 f"{branch.core_weight:.9e} {branch.kelvin_weight:.9e} "
                 f"{branch.krein_norm:.9e} {branch.krein_sign:+d} "
@@ -348,6 +383,7 @@ def main() -> None:
             "core_basis": args.core_basis,
             "kelvin_seed": args.kelvin_seed,
             "current_curl_model": args.current_curl_model,
+            "reduced_operator_form": args.reduced_operator_form,
             "projection_window": args.projection_window,
             "window_radius": args.window_radius,
             "window_taper": args.window_taper,

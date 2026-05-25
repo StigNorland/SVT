@@ -17,7 +17,9 @@ thin-ring order, then quantify the finite-alpha and relaxed-torus corrections.
 ```
 
 This moves the memo from "is there any nonzero coupling?" to "is the existing
-leading-order helicity bridge robust enough to become a derivation?"
+leading-order helicity bridge robust enough to become a derivation?" The latest
+self-adjoint weak-form boundary audit is encouraging: the reduced route is back
+in play as a controlled prototype, though not yet as a final quoted muon number.
 
 ---
 
@@ -597,6 +599,83 @@ reduced projection ansatz itself. The muon eigenfrequency now needs either a
 deliberate boundary-condition redesign or the full circumferential BdG grid.
 ```
 
+The first boundary redesign was also tested. A smooth projection window now
+separates the physical projection tube from the numerical square box:
+
+```text
+projection_window = smooth
+window_radius     = R
+window_taper      = T
+```
+
+This weight is used in Gram-Schmidt, normalization, operator projection, the
+current-curl block, and the full second-variation background-vorticity term.
+With `R=4`, `T=1`, and matched spacing:
+
+| point | smooth-window target branch |
+|-------|-----------------------------|
+| `hw=5,n=31` | `0.207768` |
+| `hw=6,n=37` | `0.207505` |
+| `hw=7,n=43` | identity instability; new `0.194252` negative-Krein branch |
+
+A tighter `R=3.5`, `T=1` window gives the same structure:
+
+| point | smooth-window target branch |
+|-------|-----------------------------|
+| `hw=5,n=31` | `0.210151` |
+| `hw=6,n=37` | `0.209879` |
+| `hw=7,n=43` | identity instability; new `0.199098` negative-Krein branch |
+
+The window therefore fixes much of the artificial `hw=5/hw=6` mismatch, but it
+does not close the calculation. Fixed-box smooth-window refinement still drifts:
+
+| fixed box | tracked branch |
+|-----------|----------------|
+| `hw=5` | `0.207768 -> 0.222995 -> 0.234855` |
+| `hw=6` | `0.190886 -> 0.207505 -> 0.220576` |
+
+The smooth-window boundary redesign is useful and should stay in the diagnostic
+tooling, but by itself it does not produce a closure-grade muon eigenfrequency.
+It motivated the more fundamental self-adjoint reduced boundary operator tested
+next.
+
+The self-adjoint prototype replaces the strong-form projected Laplacian in the
+normal BdG block by a weak energy bilinear form:
+
+```math
+\langle a,Lb\rangle_W =
+\int W\,2\pi r\left[
+{1\over2}\left(\partial_r a^*\partial_r b+\partial_z a^*\partial_z b
+             + {m^2\over r^2}a^*b\right)+V a^*b
+\right]\,dr\,dz.
+```
+
+This was run with the same combined Kelvin basis, four-core chiral sector,
+full current-curl second variation, smooth `R=4`, `T=1` projection window, and
+central `\delta_{\rm relax}=0.038`. The high-resolution weak-form checkpoints
+are:
+
+| point | weak-form tracked branch | miss vs `0.207` |
+|-------|--------------------------|-----------------|
+| `hw=5,n=49`, `kelvin_phi_n=128` | `0.206278` | `0.35%` low |
+| `hw=6,n=59`, `kelvin_phi_n=128` | `0.207313` | `0.15%` high |
+| `hw=7,n=69`, `kelvin_phi_n=128` | `0.207762` | `0.37%` high |
+| `hw=6,n=59`, `kelvin_phi_n=256` | `0.206035` | `0.47%` low |
+
+The Gram diagnostics remain benign at the high-resolution points: minimum Gram
+eigenvalues are about `0.51`, condition numbers are about `3.9`, and the
+continued branch has positive Krein signature with clean overlap continuation.
+This is the first reduced-boundary audit that simultaneously fixes the
+strong-form overshoot, tames fixed-box refinement drift, and restores matched-box
+agreement across `hw=5,6,7`.
+
+The reduced route is therefore no longer exhausted. The next low-hanging checks
+are uncertainty/refinement checks rather than an immediate full circumferential
+grid: Kelvin quadrature convergence, one more matched-spacing refinement if it
+fits the runtime budget, and propagation of the
+`\delta_{\rm relax}=0.038\pm0.005` band through the weak-form high-resolution
+points.
+
 ## 8. Recommendation
 
 The original memo was right to be suspicious of the naive `R-K` overlap and the
@@ -605,9 +684,10 @@ positive:
 
 ```text
 Thin-ring analytic closure is worth pursuing, but only through the helicity
-current-curl bridge. The leading coefficient is pi/4; the remaining task is
-to prove that curvature, relaxed-background, and full-second-variation
-corrections do not destroy it.
+current-curl bridge. The leading coefficient is pi/4; the relaxed-background
+correction is a stable few-percent shift, and the self-adjoint weak-form reduced
+boundary prototype now gives target-adjacent matched-box muon branches. The
+remaining task is to turn that prototype into a controlled uncertainty estimate.
 ```
 
 That is a much cheaper and sharper programme than a blind 3D grid search, while

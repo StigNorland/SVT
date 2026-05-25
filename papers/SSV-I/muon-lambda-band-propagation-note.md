@@ -625,3 +625,226 @@ The reduced model remains useful as a diagnostic, but it is not closure-grade
 for the muon eigenfrequency. The next calculation with real authority is the
 full circumferential BdG grid, or a deliberate boundary-condition redesign of
 the reduced projection model.
+
+## Windowed Projection Redesign
+
+The first boundary redesign decouples the physical projection tube from the
+numerical square box. The reduced projection metric now supports:
+
+```powershell
+--projection-window smooth --window-radius R --window-taper T
+```
+
+with full weight for `s <= R`, a cosine taper over `R < s < R+T`, and zero
+outside. This weight is used consistently in the reduced BdG projection,
+Gram-Schmidt/normalization, current-curl blocks, and full second-variation
+background-vorticity blocks. New tracker runs also report Gram minimum
+eigenvalue and condition number for the reduced basis.
+
+### Smooth window, fixed physical support
+
+```powershell
+python src/paper_i/muon_branch_identity_tracking.py `
+  --points "31,5,1200;37,6,1400;43,7,1600" `
+  --delta-relax 0.038 `
+  --core-basis four `
+  --kelvin-seed combined `
+  --current-curl-model full `
+  --projection-window smooth `
+  --window-radius 4.0 `
+  --window-taper 1.0 `
+  --kelvin-phi-n 128 `
+  --output papers/SSV-I/data/muon-window-smooth-r4-t1-constant-dr-2026-05-21.json
+
+python src/paper_i/muon_branch_identity_tracking.py `
+  --points "31,5,1200;37,6,1400;43,7,1600" `
+  --delta-relax 0.038 `
+  --core-basis four `
+  --kelvin-seed combined `
+  --current-curl-model full `
+  --projection-window smooth `
+  --window-radius 3.5 `
+  --window-taper 1.0 `
+  --kelvin-phi-n 128 `
+  --output papers/SSV-I/data/muon-window-smooth-r3p5-t1-constant-dr-2026-05-21.json
+```
+
+| window | `hw=5,n=31` | `hw=6,n=37` | `hw=7,n=43` |
+|--------|------------:|------------:|------------:|
+| `R=4,T=1` | `0.207768` | `0.207505` | identity instability; new `0.194252` negative-Krein branch |
+| `R=3.5,T=1` | `0.210151` | `0.209879` | identity instability; new `0.199098` negative-Krein branch |
+
+This is the best evidence that the old `hw=5 -> hw=6` split was largely a
+boundary/projection artifact: with fixed smooth support, those two boxes agree
+to about `3e-4`. But extending to `hw=7` still destabilizes the reduced branch
+identity and introduces a negative-Krein near-window branch.
+
+### Smooth-window fixed-box refinement
+
+```powershell
+python src/paper_i/muon_branch_identity_tracking.py `
+  --points "31,5,1200;37,5,1400;43,5,1600" `
+  --delta-relax 0.038 `
+  --core-basis four `
+  --kelvin-seed combined `
+  --current-curl-model full `
+  --projection-window smooth `
+  --window-radius 4.0 `
+  --window-taper 1.0 `
+  --kelvin-phi-n 128 `
+  --output papers/SSV-I/data/muon-window-smooth-r4-t1-hw5-refinement-2026-05-21.json
+
+python src/paper_i/muon_branch_identity_tracking.py `
+  --points "31,6,1200;37,6,1400;43,6,1600" `
+  --delta-relax 0.038 `
+  --core-basis four `
+  --kelvin-seed combined `
+  --current-curl-model full `
+  --projection-window smooth `
+  --window-radius 4.0 `
+  --window-taper 1.0 `
+  --kelvin-phi-n 128 `
+  --output papers/SSV-I/data/muon-window-smooth-r4-t1-hw6-refinement-2026-05-21.json
+```
+
+| fixed box | smooth-window tracked branch | conclusion |
+|-----------|------------------------------|------------|
+| `hw=5` | `0.207768 -> 0.222995 -> 0.234855` | monotone upward drift |
+| `hw=6` | `0.190886 -> 0.207505 -> 0.220576` | monotone upward drift |
+
+The smooth window fixes much of the box mismatch at matched spacing, but it does
+not remove fixed-box refinement drift. The target-adjacent values are still
+crossings, not plateaus.
+
+## Boundary-Redesign Verdict
+
+The smooth projection window is a useful improvement and should stay in the
+tooling. It proves that the previous `hw=5/hw=6` split was partly artificial.
+But the reduced boundary/projection redesign does not close the muon frequency:
+
+1. `hw=5` and `hw=6` agree when the same physical window and spacing are used.
+2. Fixed-box refinement still drifts upward.
+3. `hw=7` introduces branch-identity/Krein instability even with a compact
+   physical projection window.
+4. The remaining issue is not a low-hanging parameter choice in the current
+   reduced ansatz.
+
+The reduced model is now a strong diagnostic for the bridge, but not a final
+muon eigenfrequency calculation. The next meaningful step is either a more
+fundamental boundary-condition redesign with an explicitly self-adjoint
+truncated operator, or the full circumferential BdG grid.
+
+## Self-Adjoint Weak-Form Boundary Operator
+
+The self-adjoint reduced-boundary prototype replaces the strong-form projected
+Laplacian in the normal BdG block by the weak energy bilinear form:
+
+```math
+\langle a,Lb\rangle_W
+= \int W\,2\pi r\left[
+{1\over2}\left(\partial_r a^*\partial_r b
++\partial_z a^*\partial_z b
++{m^2\over r^2}a^*b\right)
++V a^*b\right]\,dr\,dz .
+```
+
+This removes artificial boundary-flux dependence from applying a strong
+Laplacian inside a truncated projection region. The CLI switch is:
+
+```powershell
+--reduced-operator-form weak
+```
+
+### Weak-form matched-spacing and refinement audit
+
+```powershell
+python src/paper_i/muon_branch_identity_tracking.py `
+  --points "31,5,1200;37,6,1400;43,7,1600" `
+  --delta-relax 0.038 `
+  --core-basis four `
+  --kelvin-seed combined `
+  --current-curl-model full `
+  --reduced-operator-form weak `
+  --projection-window smooth `
+  --window-radius 4.0 `
+  --window-taper 1.0 `
+  --kelvin-phi-n 128 `
+  --output papers/SSV-I/data/muon-weak-window-r4-t1-constant-dr-2026-05-22.json
+
+python src/paper_i/muon_branch_identity_tracking.py `
+  --points "31,5,1200;37,5,1400;43,5,1600" `
+  --delta-relax 0.038 `
+  --core-basis four `
+  --kelvin-seed combined `
+  --current-curl-model full `
+  --reduced-operator-form weak `
+  --projection-window smooth `
+  --window-radius 4.0 `
+  --window-taper 1.0 `
+  --kelvin-phi-n 128 `
+  --output papers/SSV-I/data/muon-weak-window-r4-t1-hw5-refinement-2026-05-22.json
+
+python src/paper_i/muon_branch_identity_tracking.py `
+  --points "31,6,1200;37,6,1400;43,6,1600" `
+  --delta-relax 0.038 `
+  --core-basis four `
+  --kelvin-seed combined `
+  --current-curl-model full `
+  --reduced-operator-form weak `
+  --projection-window smooth `
+  --window-radius 4.0 `
+  --window-taper 1.0 `
+  --kelvin-phi-n 128 `
+  --output papers/SSV-I/data/muon-weak-window-r4-t1-hw6-refinement-2026-05-22.json
+```
+
+The weak form changes the picture substantially. The branch is now monotone
+from below instead of overshooting:
+
+| audit | tracked lower branch |
+|-------|----------------------|
+| `hw=5`: `n=31 -> 37 -> 43 -> 49` | `0.182721 -> 0.192618 -> 0.200600 -> 0.206278` |
+| `hw=6`: `n=31 -> 37 -> 43 -> 49 -> 59` | `0.172514 -> 0.182634 -> 0.191067 -> 0.197056 -> 0.207313` |
+| matched spacing: `hw=5,n=49`; `hw=6,n=59`; `hw=7,n=69` | `0.206278`, `0.207313`, `0.207762` |
+
+The Gram diagnostics are benign throughout the high-resolution weak-form runs:
+minimum Gram eigenvalues are about `0.51` and condition numbers are about `3.9`.
+The branch continuation scores remain `>0.999` on the tracked lower branch.
+
+### Kelvin quadrature check
+
+```powershell
+python src/paper_i/muon_branch_identity_tracking.py `
+  --points "59,6,2000" `
+  --delta-relax 0.038 `
+  --core-basis four `
+  --kelvin-seed combined `
+  --current-curl-model full `
+  --reduced-operator-form weak `
+  --projection-window smooth `
+  --window-radius 4.0 `
+  --window-taper 1.0 `
+  --kelvin-phi-n 256 `
+  --output papers/SSV-I/data/muon-weak-window-r4-t1-hw6-n59-phi256-2026-05-22.json
+```
+
+Increasing `kelvin_phi_n` from `128` to `256` at the representative
+`hw=6,n=59` point shifts the lower branch from `0.207313` to `0.206035`. The
+branch remains within `0.47%` of target, so quadrature is now an uncertainty,
+not a failure mode.
+
+## Updated Reduced-Basis Verdict
+
+The self-adjoint weak-form boundary redesign succeeds as a reduced model
+prototype. It removes the strong-form overshoot, tames the fixed-box refinement
+trend, restores matched-box agreement across `hw=5,6,7`, and keeps the Gram
+matrix well-conditioned.
+
+This is not yet a publication-grade final muon number, but the reduced route is
+back in play. The next meaningful checks are now refinement/uncertainty
+quantification, not a wholesale jump to the full circumferential grid:
+
+1. `kelvin_phi_n` convergence at one or two high-resolution points.
+2. One more matched-spacing refinement level if affordable.
+3. Propagate the `delta_relax = 0.038 +/- 0.005` band through the weak-form
+   high-resolution points.
