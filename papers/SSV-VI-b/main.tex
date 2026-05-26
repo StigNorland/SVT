@@ -1,68 +1,60 @@
-\documentclass[12pt,a4paper]{article}
-
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{amsmath,amssymb,amsfonts,physics}
-\usepackage{geometry}
-\usepackage{hyperref}
-\usepackage{graphicx}
+\usepackage{amsmath,amssymb,physics}
 \usepackage{booktabs}
-\usepackage{caption}
 \usepackage{float}
+\usepackage{graphicx}
+\usepackage{hyperref}
 \usepackage{enumitem}
-\usepackage{xcolor}
+\usepackage{caption}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
 
-\geometry{margin=2.5cm}
+\newtcolorbox{resultbox}[1][]{enhanced,breakable,
+  colback=blue!4!white,colframe=blue!40!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+\newtcolorbox{gapbox}[1][]{enhanced,breakable,
+  colback=orange!6!white,colframe=orange!60!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
 
 \title{\textbf{Saturated Superfluid Vacuum~VI-b}\\[0.4em]
-\textbf{Galactic Morphology as the Overtone Spectrum\\
-of the Central Black Hole Resonance}\\[0.6em]
-\large Flat Rotation Curves, Spiral Arms, and the Hubble Sequence\\
-from a Saturated Superfluid Vacuum}
-
+\large Galactic Morphology as Overtone Structure}
 \author{Stig Norland\\
-\small Independent Researcher, Bergen, Norway\\
-\small \texttt{stigNorland@[contact]}}
-
-\date{April 2026\\[0.3em]
-\small\textit{Saturated Superfluid Vacuum series, Paper~VI-b.
-Companion to Paper~VI-a in the scoped SSV programme.}}
+\small Independent Researcher, Bergen, Norway}
+\date{Draft}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-We propose that every spiral galaxy disc is a resonant cavity driven by its central
-black hole (CBH) at eigenfrequency $f_\mathrm{BH} = f_p\,m_p/M_\mathrm{BH}$,
-where $f_p = m_p c^2/h$ is the proton Compton frequency.
-This is Paper~VI-b of the Saturated Superfluid Vacuum (SSV) series, which builds
-on the single postulate that the physical vacuum is a compressible inviscid superfluid
-at saturation density~\cite{ssv1}.
-Papers~I--III established fundamental particles as topological vortex defects,
-all four forces as pressure-gradient modes, and irreversible time as
-hydrodynamic wake evolution~\cite{ssv1,ssv2,ssv3}.
-Paper~IV-a derived flat rotation curves and the Andromeda satellite
-plane~\cite{ssv4a}; the present paper extends that treatment to the full
-two-dimensional disc and galactic morphology.
-The resulting Bessel-function standing wave produces:
-(i)~flat rotation curves as the energy-minimising surface density of the
-disc soliton, without dark matter;
-(ii)~quasi-periodic velocity wiggles at node spacing
-$\Delta r = \mathcal{C}/M_\mathrm{BH}$ and amplitude
-$\delta v = \sqrt{G\pi/\mathcal{C}}\cdot M_\mathrm{BH}$,
-both fixed by the independently measured black hole mass and universal constant
-$\mathcal{C}$, with no free parameters;
-and (iii)~a morphological sequence in which the azimuthal modes
-$m = 0,1,2,3,\ldots$ of the same wave, wound by differential rotation,
-reproduce the full Hubble classification --- ring galaxies, grand design
-spirals, three-armed systems, and flocculent multi-arm discs ---
-from a single equation.
-The corotation radius $r_c = m\mathcal{C}/(\pi M_\mathrm{BH})$
-predicts the observed anti-correlation between pitch angle and black hole mass.
-Azimuthal averaging over the 2D disc wave explains why 1D rotation curves
-appear smooth in low-resolution surveys despite the underlying Bessel structure.
-The framework is a no-particle alternative to superfluid dark matter.
+This paper is the morphology companion to Paper~VI-a~\cite{SSV-VIa}.  Paper~VI-a
+established that a spiral galaxy disc is a coherent planar soliton in the vacuum order
+parameter $\Psi$, phase-locked to the central black hole (CBH) at eigenfrequency
+$f_\mathrm{BH} = f_p\,m_p/M_\mathrm{BH}$, and that this soliton produces exactly flat
+rotation curves via the Mestel surface density $\Sigma \propto 1/r$, with node spacing
+$\Delta r = \mathcal{C}/M_\mathrm{BH}$.  The present paper extends that treatment to the
+full two-dimensional disc and derives galactic morphology.
+
+The central result is that the Hubble morphological sequence is the azimuthal overtone
+spectrum of the CBH resonance.  The axisymmetric $m=0$ mode produces ring galaxies; the
+$m=2$ mode, wound by differential rotation, produces grand-design two-arm spirals; higher
+modes produce three-arm systems and flocculent discs.  The corotation radius
+$r_c = m\mathcal{C}/(\pi M_\mathrm{BH})$ is a zero-free-parameter prediction, and the
+anti-correlation of pitch angle with black-hole mass follows directly from it.
+
+A secondary result explains why one-dimensional rotation curves appear smooth despite the
+underlying Bessel structure: azimuthal averaging over the 2D disc wave reduces the
+$\sim12\;\mathrm{km/s}$ wiggle amplitude to $\sim2\;\mathrm{km/s}$, below typical survey
+noise.  The wave is, however, visible in 2D velocity fields and HI surface-density maps as
+concentric overdense rings at the predicted antinode radii.
+
+The scope is the 2D extension of the flat-curve mechanism and the resulting morphology.
+The flat-curve derivation itself, the Mestel profile, and the multi-galaxy calibration of
+$\mathcal{C}$ are inherited from Paper~VI-a without repetition.
 \end{abstract}
 
 \newpage
@@ -74,540 +66,324 @@ The framework is a no-particle alternative to superfluid dark matter.
 \label{sec:intro}
 %%──────────────────────────────────────────────────────────────────────────────
 
-The flat rotation curves of spiral galaxies have been interpreted since the 1970s
-as evidence for extended dark matter haloes~\cite{rubin1980}. Despite decades of
-direct-detection experiments, no dark matter particle has been found.
-This has motivated alternative frameworks ranging from Modified Newtonian
-Dynamics~\cite{milgrom1983} to superfluid dark matter~\cite{berezhiani2015},
-in which galactic-scale dark matter condenses into a superfluid phase whose phonons
-mediate a MOND-like force on baryons.
+Paper~VI-a~\cite{SSV-VIa} established three results that the present paper inherits
+without re-derivation:
+\begin{enumerate}
+  \item the disc is a coherent planar soliton of the LogSE with energy-minimising Mestel
+    surface density $\Sigma(r) \propto 1/r$, which yields exactly flat rotation curves;
+  \item the CBH drives a cylindrical standing wave across the disc with node spacing
+    $\Delta r = \mathcal{C}/M_\mathrm{BH}$, $\mathcal{C} = 1.8\times10^9\;\mathrm{kpc}
+    \cdot M_\odot$, producing quasi-periodic velocity wiggles;
+  \item the wiggle amplitude $\delta v = \sqrt{G\pi/\mathcal{C}}\cdot M_\mathrm{BH}$
+    is fixed by the independently measured $M_\mathrm{BH}$ alone.
+\end{enumerate}
+Paper~VI-a treats only the axisymmetric $m=0$ mode, which is sufficient for flat rotation
+curves and radial node spacing.  The present paper asks what the non-axisymmetric $m>0$
+modes produce and why the 2D wave appears smooth in 1D rotation-curve surveys.
 
-This paper is part of the Saturated Superfluid Vacuum (SSV) series, built on
-a single postulate: \emph{the vacuum is a real, physical substance --- a saturated
-compressible superfluid --- and all phenomena are emergent features of its dynamics.}
-Papers~I--III of the series established:
-(I)~fundamental particles as stable topological defects with masses organised
-on an $\alpha$-harmonic ladder~\cite{ssv1};
-(II)~all four forces as pressure-gradient modes of the same medium, with gravity
-as the acoustic Bjerknes force between vibrating breather modes~\cite{ssv2};
-(III)~time as the irreversible evolution of the hydrodynamic wake, entropy
-as turbulent complexity~\cite{ssv3}.
-Paper~IV-a derived flat rotation curves from the disc soliton and the Andromeda
-satellite plane as a standing-wave nodal surface~\cite{ssv4a}.
+\subsection*{Scope and limits}
 
-The present paper, IV-b, extends the treatment to the full two-dimensional disc
-and derives galactic morphology from the azimuthal mode structure of the
-same wave. The central result is:
-\begin{quote}
-\emph{Every spiral galaxy disc carries a Bessel-function density modulation
-at node spacing $\Delta r = \mathcal{C}/M_\mathrm{BH}$, with velocity
-wiggle amplitude $\delta v = \sqrt{G\pi/\mathcal{C}}\cdot M_\mathrm{BH}$,
-both fixed by the independently measured black hole mass and the universal
-constant $\mathcal{C} = 1.8\times10^9\;\mathrm{kpc}\cdot M_\odot$.
-Different azimuthal overtones of this wave, wound by differential rotation,
-produce the observed Hubble morphological sequence.}
-\end{quote}
-This prediction has two independent components: the radial structure
-(node spacing and wiggle amplitude) and the azimuthal structure (Hubble type).
-Both follow from a single constant $\mathcal{C}$ and the observed $M_\mathrm{BH}$,
-with no parameters adjusted to fit the rotation curves or morphology.
-The paper is self-contained; the SSV postulate and CBH eigenfrequency are
-re-derived here so that the galactic results can be read independently
-of Papers~I--IV-a.
+This paper focuses on the 2D extension of the disc resonance and the resulting morphology.
+The following are outside scope: any re-derivation of the flat-curve mechanism, dark-energy
+arguments, broad cosmology, and cluster-lensing phenomenology.  The derivation of the
+disc soliton and the Mestel profile are in Paper~VI-a~\cite{SSV-VIa}; the first-principles
+derivation of $\mathcal{C}$ is deferred to a companion BdG calculation~\cite{SSV-VIa}.
 
-The paper is organised as follows.
-Section~\ref{sec:framework} introduces the SSV postulate and derives
-the CBH eigenfrequency.
-Section~\ref{sec:disc} establishes the disc soliton and its rotation curve.
-Section~\ref{sec:wiggles} presents the wiggle predictions and the NGC~224 fit.
-Section~\ref{sec:2d} shows why the 2D wave appears smooth in azimuthally
-averaged rotation curves.
-Section~\ref{sec:morphology} derives the Hubble sequence from the azimuthal
-mode structure.
-Section~\ref{sec:predictions} states falsifiable predictions.
-Section~\ref{sec:discussion} discusses the relation to superfluid dark matter
-and open problems.
+\subsection*{Roadmap}
+
+Section~\ref{sec:2d} introduces the full 2D disc resonance and presents the beam-convolved
+NGC~224 fit.  Section~\ref{sec:modes} derives the azimuthal modes and their coupling to
+CBH spin.  Section~\ref{sec:morphology} shows how the overtone spectrum generates the
+Hubble sequence.  Section~\ref{sec:smooth} explains why 1D rotation curves appear smooth.
+Section~\ref{sec:predictions} states testable predictions and limits.
 
 %%──────────────────────────────────────────────────────────────────────────────
-\section{The Saturated Superfluid Vacuum and CBH Eigenfrequency}
-\label{sec:framework}
+\section{2D Disc Resonance}
+\label{sec:2d}
 %%──────────────────────────────────────────────────────────────────────────────
 
-\subsection{One Postulate}
+\subsection{From axisymmetric to 2D}
 
-\textbf{Postulate.} \emph{The physical vacuum is a continuous, compressible,
-inviscid superfluid at saturation density $\rho_0$, described by a macroscopic
-order parameter $\Psi(\mathbf{x},t)$ obeying a logarithmic Schr\"{o}dinger
-equation (LogSE):}
+Paper~VI-a uses the $m=0$ Bessel mode $\Psi_\mathrm{wave}(r) = A\,J_0(kr)$ with
+$k = \pi/\Delta r$.  The full 2D density field, including azimuthal overtones, is
 \begin{equation}
-    i\hbar\,\partial_t\Psi \;=\;
-    -\frac{\hbar^2}{2m_0}\nabla^2\Psi
-    \;+\; b\ln\!\left(\frac{|\Psi|^2}{\rho_0}\right)\Psi,
-    \qquad b = m_0 c^2.
-    \label{eq:logse}
+  \rho(r,\phi) \;\propto\;
+  1 \;+\; \varepsilon\,J_0(kr)
+  \;+\; \sum_{m\geq1} \varepsilon_m\,J_m(kr)\cos m\phi,
+  \label{eq:density2d}
 \end{equation}
-Everything else — particles, forces, and the galactic structure derived in
-this paper — emerges from the dynamics of $\Psi$.
-The LogSE admits exact Gaussian soliton solutions and has been studied in the
-context of quantum gravity and analogue systems~\cite{zloshchastiev2011,volovik2003}.
-No dark matter particle is introduced.
-The derivation of fundamental particles from topological defects of $\Psi$
-and the force sector are treated in SSV~I and II~\cite{ssv1,ssv2};
-the thermodynamic and temporal consequences in SSV~III~\cite{ssv3}.
-This section summarises only what is needed for the galactic results.
+where $\varepsilon_m$ are mode amplitudes that depend on the CBH spin parameter
+$a_\mathrm{BH}$ (Section~\ref{sec:modes}).  At $\varepsilon_m = 0$ this reduces to the
+axisymmetric case of Paper~VI-a.
 
-\subsection{CBH as a Macroscopic Breather}
+\subsection{Beam-convolved rotation curve fit}
 
-Within the SSV, fundamental particles are topological defects of $\Psi$
-(vortex rings for leptons, knotted breathers for baryons~\cite{ssv1}).
-The proton is a spherical breather mode oscillating at its Compton frequency:
+The model velocity field used in Paper~VI-a is
 \begin{equation}
-    f_p \;=\; \frac{m_p c^2}{h} \;\approx\; 2.27\times10^{23}\;\mathrm{Hz}.
-    \label{eq:fp}
+  v^2(r) \;=\; v_\mathrm{bar}^2(r)
+  \;+\; v_\mathrm{flat}^2\,\bigl(1 + \varepsilon\,J_0(kr)\bigr),
+  \qquad r > r_0,
+  \label{eq:vmodel}
 \end{equation}
-A supermassive central black hole is, in this framework, a macroscopic
-condensate of mass $M_\mathrm{BH}$.
-By the universal SSV frequency--mass relation $f \propto 1/M$
-(a more massive condensate oscillates more slowly~\cite{ssv1}),
-its eigenfrequency is:
-\begin{equation}
-    \boxed{f_\mathrm{BH} \;=\; f_p\,\frac{m_p}{M_\mathrm{BH}}
-        \;=\; \frac{m_p^2 c^2}{h\,M_\mathrm{BH}}.}
-    \label{eq:fBH}
-\end{equation}
-This is the driving frequency imprinted on the galactic disc.
-Gravity as the Bjerknes pressure force between breathers is derived in
-SSV~II~\cite{ssv2}; the disc soliton geometry is treated in
-SSV~IV-a~\cite{ssv4a} and reproduced here for completeness.
+where $v_\mathrm{bar}$ is the standard baryonic component (BH + bulge + disc + gas),
+$\varepsilon$ is fixed by $M_\mathrm{BH}$ via equation (3) of Paper~VI-a, and $k$ is
+fixed by $\Delta r$.  Applied to the 625-point NGC~224 rotation curve~\cite{chemin2009}
+with a 0.5~kpc Gaussian beam convolution matching the survey resolution, the model
+achieves:
 
-%%──────────────────────────────────────────────────────────────────────────────
-\section{The Disc Soliton and Flat Rotation Curves}
-\label{sec:disc}
-%%──────────────────────────────────────────────────────────────────────────────
-
-\subsection{Standing Wave in the Disc Cavity}
-
-The CBH oscillation at $f_\mathrm{BH}$ propagates radially at $c_s \approx v_\mathrm{flat}$
-(the sound speed of the superfluid equals the observed flat velocity).
-In the cylindrical geometry of the galactic disc, the lowest axisymmetric
-eigenfunction is the zeroth-order Bessel function:
-\begin{equation}
-    \Psi_\mathrm{wave}(r) \;=\; A\,J_0(k r),
-    \qquad k \;=\; \frac{\pi}{\Delta r},
-    \label{eq:bessel}
-\end{equation}
-where $\Delta r$ is the node spacing.
-Anchoring to the observed wiggle structure in M31 ($\Delta r \approx 12.9\;\mathrm{kpc}$
-for $M_\mathrm{BH} = 1.4\times10^8\,M_\odot$) yields:
-\begin{equation}
-    \boxed{\Delta r \;=\; \frac{\mathcal{C}}{M_\mathrm{BH}},
-    \qquad \mathcal{C} \;=\; 1.8\times10^9\;\mathrm{kpc}\cdot M_\odot.}
-    \label{eq:dr}
-\end{equation}
-The constant $\mathcal{C}$ has a first-principles dimensional form
-$\mathcal{C} \sim \hbar^2\alpha^{-16}(m_p/m_e)^7 / (2Gm_e^2)$,
-matching the observed value at integer exponents~\cite{norland4}.
-Five-galaxy calibration gives $\mathcal{C} = 1.808\pm0.012\times10^9\;\mathrm{kpc}\cdot M_\odot$
-with $<1\%$ scatter, confirming it as a physical constant of the medium.
-
-\subsection{Mestel Surface Density from Energy Minimisation}
-
-The disc soliton is the radially energy-minimising solution of the LogSE.
-Beyond the inner aggregation core $r_0 \approx 1.13\;\mathrm{kpc}$
-(fixed by the healing length of the vacuum), the energy-minimising surface
-density is uniquely the Mestel profile:
-\begin{equation}
-    \Sigma(r) \;=\; \Sigma_0\,\frac{r_0}{r}, \qquad r > r_0,
-    \label{eq:mestel}
-\end{equation}
-with $\Sigma_0 = v_\mathrm{flat}^2/(2\pi G r_0)$.
-Poisson's equation for this profile gives exactly:
-\begin{equation}
-    v_c(r) \;=\; v_\mathrm{flat} \;=\; \mathrm{const},
-    \label{eq:flat}
-\end{equation}
-independent of radius.
-Flat rotation curves are a structural consequence of the LogSE
-equation of state — not a fitted halo.
-
-\subsection{Wave Amplitude from the Acoustic Radius}
-
-The wave amplitude $\varepsilon$ is the fractional density modulation.
-The CBH drives the disc at its acoustic radius
-$r_\mathrm{ac} = \Delta r/\pi$, where the Keplerian velocity equals
-$v_\mathrm{flat}$.
-The ratio of the driving velocity to the flat velocity gives:
-\begin{equation}
-    \boxed{\varepsilon \;=\; \frac{\sqrt{G\pi/\mathcal{C}}\cdot M_\mathrm{BH}}
-    {v_\mathrm{flat}},
-    \qquad
-    \delta v \;=\; \varepsilon\cdot v_\mathrm{flat}
-             \;=\; \sqrt{\frac{G\pi}{\mathcal{C}}}\cdot M_\mathrm{BH}.}
-    \label{eq:eps}
-\end{equation}
-The velocity wiggle amplitude $\delta v$ depends \emph{only on $M_\mathrm{BH}$}
-— not on $v_\mathrm{flat}$.
-Both $\Delta r$ and $\delta v$ are fully determined once
-$M_\mathrm{BH}$ is known from independent dynamical measurement.
-
-%%──────────────────────────────────────────────────────────────────────────────
-\section{Wiggle Predictions and the NGC~224 Rotation Curve}
-\label{sec:wiggles}
-%%──────────────────────────────────────────────────────────────────────────────
-
-\subsection{Ten-Galaxy Prediction Table}
-
-Table~\ref{tab:predict} gives $\Delta r$ and $\delta v$ for ten galaxies
-spanning six decades in $M_\mathrm{BH}$.
-For galaxies in the ``sweet spot'' $M_\mathrm{BH}\sim10^7$--$10^8\,M_\odot$,
-$\Delta r$ is 10--65~kpc — detectable in high-resolution HI surveys.
-For the Milky Way ($M_\mathrm{BH}=4.3\times10^6\,M_\odot$),
-$\delta v = 0.4\;\mathrm{km/s}$ — below current survey precision,
-explaining why the Milky Way rotation curve appears smooth.
-
-\begin{table}[H]
-\centering
-\caption{Zero-free-parameter predictions for node spacing and wiggle amplitude.
-Both follow from $M_\mathrm{BH}$ and $\mathcal{C}$ alone.
-Detectable: $\Delta r$ within HI-mapped disc and $\delta v > 2\;\mathrm{km/s}$.}
-\label{tab:predict}
-\begin{tabular}{@{}lllll@{}}
-\toprule
-Galaxy & $M_\mathrm{BH}\;(M_\odot)$ & $\Delta r$ (kpc) & $\delta v$ (km/s) & Status \\
-\midrule
-Milky Way       & $4.3\times10^{6}$ & $419$   & $0.4$  & Undetectable \\
-NGC~4736        & $1.0\times10^{7}$ & $180$   & $0.9$  & Marginal \\
-NGC~2841        & $1.4\times10^{7}$ & $129$   & $1.2$  & Marginal \\
-Centaurus~A     & $5.5\times10^{7}$ & $32.7$  & $4.8$  & \textbf{Detectable} \\
-NGC~3198        & $2.8\times10^{7}$ & $64.3$  & $2.4$  & \textbf{Detectable} \\
-NGC~224 (M31)   & $1.4\times10^{8}$ & $12.9$  & $12.1$ & \textbf{Detected} \\
-NGC~1052        & $1.5\times10^{8}$ & $12.0$  & $13.0$ & \textbf{Detectable} \\
-Sombrero (M104) & $1.0\times10^{9}$ & $1.8$   & $86.6$ & Sub-kpc \\
-M87 (Virgo~A)   & $6.5\times10^{9}$ & $0.28$  & $563$  & Jet-dominated \\
-NGC~4889        & $2.1\times10^{10}$ & $0.086$ & $1820$ & Jet-dominated \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\subsection{NGC~224 Fit}
-
-The model velocity field is:
-\begin{equation}
-    v^2(r) \;=\; v_\mathrm{bar}^2(r)
-    \;+\; v_\mathrm{flat}^2\,\bigl(1 + \varepsilon\,J_0(kr)\bigr),
-    \qquad r > r_0,
-    \label{eq:vmodel}
-\end{equation}
-where $v_\mathrm{bar}$ is the standard baryonic enclosed-mass term
-(BH + Hernquist bulge + Freeman disk + gas), the wave amplitude $\varepsilon$
-is fixed by equation~\eqref{eq:eps}, and $k = \pi/\Delta r$ is fixed by
-$M_\mathrm{BH}$ through $\mathcal{C}$.
-Free parameters: $v_\mathrm{flat}$ and $M/L$ (two, same as NFW).
-
-Applied to the 625-point NGC~224 rotation curve (0.05~kpc steps,
-Chemin et al.~\cite{chemin2009}), with a 0.5~kpc Gaussian beam convolution
-applied to the model before comparison (matching the survey beam),
-the model achieves RMS~$\approx14\;\mathrm{km/s}$ versus
-$\approx57\;\mathrm{km/s}$ for a best-fit NFW halo at equal parameter count
-(Figure~\ref{fig:rc}).
-The higher RMS compared to the unconvolved fit in SSV~IV-a~\cite{ssv4a}
-($\approx7.5\;\mathrm{km/s}$) reflects the inclusion of beam smearing:
-the convolution appropriately washes out the sharp inner peak, and the
-residual 14~km/s is dominated by the observed velocity asymmetry between
-the NE and SW halves of the disc, not by systematic model error.
+\begin{resultbox}[NGC~224 beam-convolved fit]
+RMS $\approx 14\;\mathrm{km/s}$ (SSV, two free parameters: $v_\mathrm{flat}$, $M/L$)
+versus RMS $\approx 57\;\mathrm{km/s}$ for best-fit NFW at equal parameter count.
+The residual 14~km/s is dominated by the observed NE/SW velocity asymmetry of the disc,
+not by systematic model error.  The unconvolved fit of Paper~VI-a ($\approx7.5$~km/s)
+is the upper bound before beam smearing is applied.
+\end{resultbox}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.88\textwidth]{figures/fig1_rotation_curve.jpg}
-\caption{NGC~224 (M31) rotation curve.
-\emph{Black dots}: 625-point observed data.
-\emph{Blue}: SSV model~\eqref{eq:vmodel} with $\varepsilon$ and $k$ fixed
-from $M_\mathrm{BH}$ alone; two free parameters ($v_\mathrm{flat}$, $M/L$);
-beam-convolved at 0.5~kpc (RMS $= 14\;\mathrm{km/s}$).
-\emph{Red dashed}: best-fit NFW halo with the same two free parameters
-($\rho_s$, $r_s$; $M/L$ fixed to SSV value) (RMS $= 57\;\mathrm{km/s}$).
-\emph{Dotted verticals}: predicted Bessel node positions $j_{0,n}/k$,
-not fitted.
-\emph{Lower panel}: residuals; dominant scatter is NE/SW disc asymmetry.}
+\caption{NGC~224 beam-convolved rotation curve.  \emph{Black dots}: 625-point data.
+\emph{Blue}: SSV model~\eqref{eq:vmodel}, beam-convolved at 0.5~kpc; two free parameters.
+\emph{Red dashed}: best-fit NFW, same parameter count.
+\emph{Dotted verticals}: predicted Bessel node positions, not fitted.
+\emph{Lower panel}: residuals; dominant scatter is disc NE/SW asymmetry.}
 \label{fig:rc}
 \end{figure}
-
-%%──────────────────────────────────────────────────────────────────────────────
-\section{Why 1D Rotation Curves Appear Smooth: the 2D Disc}
-\label{sec:2d}
-%%──────────────────────────────────────────────────────────────────────────────
-
-The rotation curve is an azimuthally averaged observable.
-For a pure $m=0$ (axisymmetric) wave, azimuthal averaging reduces the
-predicted 12.1~km/s wiggle amplitude by a factor of approximately 5,
-to $\sim2\;\mathrm{km/s}$ — below the typical HI measurement uncertainty
-of 3--5~km/s (Figure~\ref{fig:2d}, bottom-right).
-
-This explains why most observed rotation curves appear smooth
-despite the underlying Bessel structure.
-\emph{The apparent smoothness is not evidence against the wave
-— it is the expected observational signature of a disc wave after
-azimuthal averaging.}
-
-Critically, the wave is visible in the \emph{2D velocity field} and in
-\emph{HI surface density maps} as concentric overdense rings
-at the predicted antinode radii.
-M31's well-known star-formation ring at $\approx 10\;\mathrm{kpc}$ and
-second ring at $\approx 20$--$25\;\mathrm{kpc}$ sit near the first and
-second $J_0$ antinodes ($r_1 \approx 15.7\;\mathrm{kpc}$,
-$r_2 \approx 28.7\;\mathrm{kpc}$), within the uncertainties of the
-ring positions.
-
-Independent support: a wavelet analysis of 73 spiral galaxy rotation
-curves~\cite{kuassivi2011} found regular patterns consistent
-with large-scale disc modes, attributed to mergers but consistent
-with the SSV standing-wave prediction.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.92\textwidth]{figures/fig_2d_disc_model.jpg}
 \caption{The 2D disc wave for M31 parameters.
 \emph{Top-left}: face-on density $\rho \propto 1 + \varepsilon J_0(kr)
-+ \varepsilon_2 J_2(kr)\cos 2\phi$ showing concentric density rings and
-the $m=2$ arm perturbation.
++ \varepsilon_2 J_2(kr)\cos 2\phi$, showing concentric density rings and an $m=2$ arm
+perturbation.
 \emph{Top-right}: face-on circular velocity.
-\emph{Bottom-left}: projected line-of-sight velocity at $i=77°$, $\mathrm{PA}=38°$
-(M31 geometry) with predicted node ellipses.
+\emph{Bottom-left}: projected line-of-sight velocity at $i=77°$, PA$=38°$ (M31 geometry)
+with predicted node ellipses.
 \emph{Bottom-right}: azimuthal averaging reduces the 12.1~km/s wiggle to
-$\sim2.3\;\mathrm{km/s}$ — below survey noise. The 1D rotation curve hides
-the wave.}
+$\sim2.3\;\mathrm{km/s}$---below survey noise.}
 \label{fig:2d}
 \end{figure}
 
 %%──────────────────────────────────────────────────────────────────────────────
-\section{Galactic Morphology from Azimuthal Modes}
+\section{Azimuthal Modes}
+\label{sec:modes}
+%%──────────────────────────────────────────────────────────────────────────────
+
+\subsection{CBH spin as the mode driver}
+
+A non-spinning CBH drives only the axisymmetric $m=0$ mode.  Each unit of angular
+momentum couples preferentially to the next azimuthal harmonic, so by dimensional analysis
+and the standard multipole decomposition of a rotating source the leading-order mode
+amplitude scaling is
+\begin{equation}
+  \varepsilon_m \;\propto\; a_\mathrm{BH}^m,
+  \label{eq:mode_amp}
+\end{equation}
+where $a_\mathrm{BH} \in [0,1]$ is the dimensionless CBH spin parameter.  Low-spin black
+holes activate only the ring ($m=0$) mode; high-spin black holes progressively excite
+$m=1,2,3,\ldots$
+
+\begin{gapbox}[Deferred: quantitative $\varepsilon_m(a_\mathrm{BH})$]
+The derivation of the mode amplitudes as a function of spin requires a normal-mode analysis
+of the spinning disc soliton under the LogSE---the analogue of the Lin--Shu dispersion
+relation for the SSV equation of state.  This is a well-defined calculation and is deferred
+to a companion BdG calculation.  The qualitative scaling~\eqref{eq:mode_amp} and the
+resulting morphological sequence do not depend on the precise amplitude coefficients.
+\end{gapbox}
+
+\subsection{Corotation radius}
+
+Each azimuthal mode $m$ has a corotation radius at which the pattern speed equals the
+local orbital frequency.  From the standing-wave structure of Paper~VI-a, the corotation
+radius is
+\begin{equation}
+  r_c \;=\; \frac{m\mathcal{C}}{\pi M_\mathrm{BH}},
+  \label{eq:rc}
+\end{equation}
+a zero-free-parameter prediction once $M_\mathrm{BH}$ and $m$ are known.  Since
+$r_c \propto M_\mathrm{BH}^{-1}$, more massive black holes have smaller corotation radii:
+the disc completes more orbital periods at $r_c$ per unit time, winding arms more tightly
+and producing earlier Hubble types.
+
+\subsection{The winding problem}
+
+The classical winding problem asks why spiral arms persist for many Gyr despite
+differential rotation winding them to $\lesssim1°$ pitch within $\lesssim1\;\mathrm{Gyr}$.
+The Lin--Shu density-wave theory treats arms as quasi-stationary waves rather than material
+streams.  In SSV the mechanism is more explicit: the azimuthal modes are soliton modes of
+the disc order parameter $\Psi$, continuously refreshed by the CBH driving at
+$f_\mathrm{BH}$.  The pattern persists as long as the CBH oscillates---indefinitely in the
+superfluid limit---resolving the winding problem without a separate pattern-maintenance
+mechanism.
+
+%%──────────────────────────────────────────────────────────────────────────────
+\section{Morphology Sequence}
 \label{sec:morphology}
 %%──────────────────────────────────────────────────────────────────────────────
 
-\subsection{The Hubble Sequence as the Overtone Spectrum}
+\subsection{The Hubble sequence as the overtone spectrum}
 
-The CBH spin excites azimuthal modes $m > 0$ of the disc wave.
-The full density field is:
+Differential rotation at $\Omega(r) = v_\mathrm{flat}/r$ winds the $m$-th azimuthal mode
+into a logarithmic spiral.  The geometric winding formula gives pitch angle
 \begin{equation}
-    \rho(r,\phi) \;\propto\;
-    1 \;+\; \varepsilon\,J_0(kr)
-    \;+\; \sum_{m\geq1} \varepsilon_m\,J_m(kr)\cos m\phi,
-    \label{eq:density2d}
+  \tan\alpha_m \;=\; \frac{m}{2\pi N_\mathrm{rot}},
+  \label{eq:pitch}
 \end{equation}
-where the mode amplitudes $\varepsilon_m$ depend on the CBH spin parameter
-$a_\mathrm{BH}$.
-The physical motivation is straightforward: a non-spinning CBH drives only
-the axisymmetric $m=0$ mode; each unit of angular momentum couples
-preferentially to the next azimuthal harmonic.
-By dimensional analysis and the standard decomposition of a rotating source
-into multipole moments, the leading-order scaling is
-$\varepsilon_m \propto a_\mathrm{BH}^m$,
-suppressing higher modes for slowly spinning black holes and activating them
-as spin increases.
-The quantitative derivation of $\varepsilon_m(a_\mathrm{BH})$ requires
-a normal-mode analysis of the spinning disc soliton and is deferred to a
-companion calculation (see Section~\ref{sec:openproblems}).
+where $N_\mathrm{rot}$ is the number of orbital periods at $r_c$ since the mode was
+established.  For $N_\mathrm{rot}\approx1$ and $m=2$ this gives
+$\alpha \approx 18°$, consistent with the observed median pitch angle of grand-design
+spirals ($\sim15°$--$20°$~\cite{davis2012}).
 
-Differential rotation at $\Omega(r) = v_\mathrm{flat}/r$ winds the
-$m$-th azimuthal mode into a logarithmic spiral.
-The geometric winding formula gives pitch angle:
-\begin{equation}
-    \tan\alpha_m \;=\; \frac{m}{2\pi N_\mathrm{rot}},
-    \label{eq:pitch}
-\end{equation}
-where $N_\mathrm{rot}$ is the number of orbital periods completed at the
-corotation radius $r_c = m\mathcal{C}/(\pi M_\mathrm{BH})$ since
-the spiral mode was established.
-This is the geometric winding formula, not the full SSV dispersion relation.
-A proper derivation of pitch angle from the LogSE equation of state is
-an open problem (Section~\ref{sec:openproblems}); equation~\eqref{eq:pitch}
-gives the correct qualitative trend and the right order of magnitude,
-with $N_\mathrm{rot} \approx 1$ reproducing the observed median pitch
-angle of $\approx 17°$ for grand design $m=2$ spirals.
+\begin{gapbox}[Deferred: SSV dispersion relation for pitch angle]
+Equation~\eqref{eq:pitch} is the geometric winding formula, not an SSV-specific derivation.
+The proper pitch angle requires solving the LogSE analogue of the Lin--Shu dispersion
+relation, which fixes $N_\mathrm{rot}$ from medium parameters rather than treating it as
+an input.  This is deferred to the same companion BdG calculation as the mode amplitudes.
+The qualitative trend---heavier BH $\Rightarrow$ smaller $r_c$ $\Rightarrow$ tighter arms
+$\Rightarrow$ earlier Hubble type---is structural and does not depend on the
+dispersion-relation derivation.
+\end{gapbox}
 
-The morphological consequences are:
+The morphological consequences of different mode superpositions are:
+
 \begin{itemize}
-    \item $m=0$ only (low/zero spin): ring galaxy — concentric density rings,
-    no spiral arms. M31's star-formation rings are the axisymmetric SSV prediction.
-    \item $m=2$ (moderate spin): grand design two-armed spiral (SA/SAB).
-    \item $m=3$ (higher spin): three-armed grand design.
-    \item $m=2+3+4$ superposition: flocculent multi-arm spiral (Sc/Sd).
-    \item $m=2$, $N_\mathrm{rot} < 1$: open arms / bar (winding not yet complete).
+  \item $m=0$ only (low/zero spin): ring galaxy.  Concentric density rings, no spiral arms.
+    M31's star-formation rings at $\approx10$ and $\approx20$--$25\;\mathrm{kpc}$ sit near
+    the first and second $J_0$ antinodes (predicted at $\approx15.7$ and
+    $28.7\;\mathrm{kpc}$).
+  \item $m=2$ (moderate spin): grand-design two-armed spiral (SA/SAB).
+  \item $m=3$ (higher spin): three-armed grand-design spiral.
+  \item $m=2+3+4$ superposition: flocculent multi-arm spiral (Sc/Sd).
+  \item $m=2$ with $N_\mathrm{rot}<1$ (pitch not yet wound tight): open arms / bar (SB).
 \end{itemize}
-
-Figure~\ref{fig:morphology} shows the density field for each case,
-generated from equation~\eqref{eq:density2d} with the pitch angle set by
-equation~\eqref{eq:pitch}.
-The entire Hubble sequence emerges from one equation and two observables:
-$M_\mathrm{BH}$ (sets $k$ and $\varepsilon$) and $a_\mathrm{BH}$
-(sets which modes are active).
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.96\textwidth]{figures/fig_galaxy_morphology.jpg}
-\caption{The SSV galaxy morphology zoo.
-Each panel shows the 2D density $\rho(r,\phi)$ from
-equation~\eqref{eq:density2d} with differential rotation applied.
-\emph{Top row, left to right}: ring galaxy ($m=0$, no spin);
-grand design two-arm spiral ($m=2$, pitch $15°$);
+\caption{The SSV morphology zoo from equation~\eqref{eq:density2d} with differential
+rotation applied.
+\emph{Top row}: ring ($m=0$, no spin); grand-design two-arm ($m=2$, pitch $15°$);
 tightly wound Sa ($m=2$, pitch $7°$).
 \emph{Bottom row}: bar + two arms ($m=2$, large pitch, small $M_\mathrm{BH}$);
-three-arm spiral ($m=3$, pitch $18°$);
+three-arm ($m=3$, pitch $18°$);
 flocculent multi-arm ($m=2+3+4$, pitch $12°$).
-All cases use $\mathcal{C} = 1.8\times10^9\;\mathrm{kpc}\cdot M_\odot$
-and $M_\mathrm{BH}$ from the panel title.
-No dark matter, no free structural parameters.}
+All cases use $\mathcal{C}=1.8\times10^9\;\mathrm{kpc}\cdot M_\odot$.
+No dark matter; no free structural parameters.}
 \label{fig:morphology}
 \end{figure}
 
-\subsection{Corotation Radius and the Hubble--BH Mass Relation}
+\subsection{Pitch angle--BH mass anti-correlation}
 
-The corotation radius $r_c = m\mathcal{C}/(\pi M_\mathrm{BH})$ is predicted
-with zero free parameters.
-Since $r_c \propto M_\mathrm{BH}^{-1}$, more massive black holes have
-\emph{smaller} corotation radii, meaning the disc completes more rotations
-per unit time at $r_c$, winding the spiral more tightly:
-\begin{align}
-    \text{larger } M_\mathrm{BH}
-    &\;\Longrightarrow\; \text{smaller } r_c
-    \;\Longrightarrow\; \text{more rotations at } r_c \notag\\
-    &\;\Longrightarrow\; \text{smaller pitch angle } \alpha
-    \;\Longrightarrow\; \text{earlier Hubble type.}
-    \label{eq:hubble_chain}
-\end{align}
-This is consistent with the observed anti-correlation between pitch angle
-and black hole mass found by Seigar et al.~\cite{seigar2008},
-who measured pitch angles for a sample of spirals with dynamically determined
-$M_\mathrm{BH}$ and found exactly this trend.
-
-For a sample of eight galaxies with known $M_\mathrm{BH}$ and published pitch
-angles~\cite{seigar2008,davis2012}, the implied number of corotation orbits
-$N_\mathrm{rot}$ ranges from 0.5 to 2.0, with a mean of $1.0\pm0.5$.
-The mean pitch angle for $m=2$ spirals with $N_\mathrm{rot}=1$ is:
+From \eqref{eq:rc}, more massive black holes have smaller corotation radii, completing more
+orbital periods there per unit time, winding arms more tightly:
 \begin{equation}
-    \alpha \;=\; \arctan\!\left(\frac{2}{2\pi}\right)
-    \;\approx\; 17.7°,
-    \label{eq:alpha17}
+  \text{larger } M_\mathrm{BH}
+  \;\Longrightarrow\; \text{smaller } r_c
+  \;\Longrightarrow\; \text{more rotations at } r_c
+  \;\Longrightarrow\; \text{smaller } \alpha
+  \;\Longrightarrow\; \text{earlier Hubble type.}
+  \label{eq:chain}
 \end{equation}
-consistent with the observed median pitch angle of grand design spirals
-($\sim15°$--$20°$~\cite{davis2012}).
-
-The quantitative derivation of pitch angle from the SSV disc dispersion
-relation is an open problem deferred to a companion calculation.
+This is consistent with the anti-correlation between pitch angle and black-hole mass
+measured by Seigar et al.~\cite{seigar2008} and extended in Davis et al.~\cite{davis2012}.
+For a sample of eight galaxies with known $M_\mathrm{BH}$ and published pitch angles, the
+implied $N_\mathrm{rot}$ ranges from 0.5 to 2.0, with mean $1.0\pm0.5$, consistent with
+one corotation orbit since the mode was established.
 
 %%──────────────────────────────────────────────────────────────────────────────
-\section{Falsifiable Predictions}
+\section{Why 1D Rotation Curves Appear Smooth}
+\label{sec:smooth}
+%%──────────────────────────────────────────────────────────────────────────────
+
+For a pure $m=0$ wave, azimuthal averaging over the full disc face reduces the predicted
+$\delta v \approx 12.1\;\mathrm{km/s}$ wiggle amplitude for M31 by a factor of
+approximately five, to $\sim2.3\;\mathrm{km/s}$---below the typical HI measurement
+uncertainty of 3--5~km/s (Figure~\ref{fig:2d}, bottom-right panel).
+
+This explains the empirical observation that most published rotation curves appear smooth
+despite the underlying Bessel structure:
+\begin{quote}
+  \emph{The apparent smoothness is not evidence against the wave; it is the expected
+  observational signature of a disc wave after azimuthal averaging.}
+\end{quote}
+
+The wave remains visible in:
+\begin{itemize}
+  \item \emph{2D velocity fields}: the line-of-sight velocity map retains elliptical
+    isovelocity contours that deviate from the tilted-ring model at the predicted node
+    radii (Figure~\ref{fig:2d}, bottom-left panel).
+  \item \emph{HI surface-density maps}: concentric overdense rings at the antinode radii
+    $r_n = j_{0,n}/k$.  For M31: rings at $\approx9.8$, $22.6$, $35.4\;\mathrm{kpc}$.
+    The observed star-formation rings at $\approx10$ and $\approx20$--$25\;\mathrm{kpc}$
+    are consistent with the first two predicted antinodes.
+  \item \emph{Wavelet analysis}: a wavelet study of 73 spiral galaxy rotation
+    curves~\cite{kuassivi2011} found regular patterns consistent with large-scale disc
+    modes, attributed to mergers but equally consistent with the SSV standing-wave
+    prediction.
+\end{itemize}
+
+%%──────────────────────────────────────────────────────────────────────────────
+\section{Predictions and Limits}
 \label{sec:predictions}
 %%──────────────────────────────────────────────────────────────────────────────
 
+\subsection{Testable predictions}
+
 \begin{enumerate}
+  \item \textbf{HI density rings at predicted antinode radii.}
+    In moderately inclined galaxies, HI surface-density maps should show concentric
+    overdense rings at $r_n = j_{0,n}/k = j_{0,n}\,\mathcal{C}/(\pi M_\mathrm{BH})$,
+    independent of the azimuthal arm structure.  Non-detection in face-on systems at the
+    predicted radii for M81 and NGC~4736 would falsify the wave picture.
 
-\item \textbf{Node spacing scales as $M_\mathrm{BH}^{-1}$.}
-High-resolution ($\lesssim2\;\mathrm{kpc}$) HI surveys of galaxies with
-$M_\mathrm{BH} \sim 10^7$--$10^8\,M_\odot$ should reveal quasi-periodic
-velocity undulations with spacings matching Table~\ref{tab:predict} to
-within $\pm20\%$.
-Non-detection at predicted spacings in Centaurus~A and NGC~3198 would falsify
-the model.
+  \item \textbf{Hubble type anti-correlates with $M_\mathrm{BH}$ at fixed spin.}
+    In a volume-limited sample of late-type galaxies with measured $M_\mathrm{BH}$,
+    galaxies with more massive black holes should show tighter spiral arms (earlier Hubble
+    type) independent of other galaxy properties, extending the Seigar et
+    al.~\cite{seigar2008} trend to a statistical sample.
 
-\item \textbf{Wiggle amplitude scales as $M_\mathrm{BH}$.}
-The velocity wiggle $\delta v = \sqrt{G\pi/\mathcal{C}}\cdot M_\mathrm{BH}$
-predicts $\delta v = 12.1\;\mathrm{km/s}$ for M31 and $4.8\;\mathrm{km/s}$
-for Centaurus~A.
-Measured amplitudes in 2D velocity residual maps (after tilted-ring subtraction)
-should follow this scaling.
+  \item \textbf{Corotation radius scales as $M_\mathrm{BH}^{-1}$.}
+    The corotation radius $r_c = m\mathcal{C}/(\pi M_\mathrm{BH})$ is a zero-free-parameter
+    prediction.  Measured corotation radii from Tremaine--Weinberg or Fourier methods should
+    follow this scaling for the dominant $m$ mode identified from morphology.
 
-\item \textbf{HI density rings at predicted antinode radii.}
-In face-on or moderately inclined galaxies, the HI surface density map should
-show concentric overdense rings at $r = j_{0,n}/k$
-($n = 1, 2, 3, \ldots$), independent of the azimuthal arm structure.
-For M31: rings at $\approx 9.8, 22.6, 35.4\;\mathrm{kpc}$.
+  \item \textbf{Wiggle amplitude visible in 2D velocity residuals.}
+    After tilted-ring subtraction, 2D velocity-residual maps of galaxies in the
+    $M_\mathrm{BH}\sim10^7$--$10^8\,M_\odot$ sweet spot should show elliptical
+    residual contours at the predicted node radii with amplitude
+    $\delta v = \sqrt{G\pi/\mathcal{C}}\cdot M_\mathrm{BH}$.
 
-\item \textbf{Hubble type anti-correlates with $M_\mathrm{BH}$ at fixed spin.}
-In a volume-limited sample of late-type galaxies with measured $M_\mathrm{BH}$,
-galaxies with more massive black holes should show tighter spiral arms
-(earlier Hubble type) independent of other galaxy properties.
-This extends the Seigar et al.~\cite{seigar2008} result to a statistical sample.
-
-\item \textbf{Andromeda satellite plane.}
-The 30 co-rotating dwarf satellites of M31 lie on the first nodal surface of
-the $m=0$ wave at $\approx 9.8\;\mathrm{kpc}$ above the disc plane,
-with thickness $h \approx 14\;\mathrm{kpc}$ set by the vacuum healing length
-(no free parameters).
-\textit{Gaia}-class proper-motion surveys should confirm co-rotation and
-perpendicular velocity dispersion $\sigma_\perp \approx 12\;\mathrm{km/s}$.
-
+  \item \textbf{Andromeda satellite plane.}
+    The co-rotating dwarf satellites of M31 lie on the first nodal surface of the $m=0$
+    wave.  \textit{Gaia}-class proper-motion surveys should confirm co-rotation and
+    perpendicular velocity dispersion $\sigma_\perp \approx 12\;\mathrm{km/s}$.
 \end{enumerate}
 
-%%──────────────────────────────────────────────────────────────────────────────
-\section{Discussion}
-\label{sec:discussion}
-%%──────────────────────────────────────────────────────────────────────────────
-
-\subsection{Relation to Superfluid Dark Matter}
-
-The superfluid dark matter (SFDM) programme~\cite{berezhiani2015,khoury2015}
-correctly identifies that a superfluid equation of state is needed on galactic
-scales. The SSV shares this mathematical structure but differs in one crucial
-respect: the superfluid is the vacuum, not a new particle.
-
-SFDM has encountered observational difficulties: the model is in tension with
-weak gravitational lensing at large radii~\cite{mistele2023} and produces
-unnatural mass-to-light ratio trends across the galaxy size
-distribution~\cite{mistele2022}.
-These tensions arise because SFDM must simultaneously explain cosmological
-structure (requiring cold dark matter behaviour) and galactic structure
-(requiring superfluid behaviour) with the same particle. The present paper does
-not make a replacement cosmology claim. It only uses the comparison to separate
-the local galactic mechanism studied here from particle-halo models.
-
-The comparison is therefore used only as galactic phenomenology, not as a
-cosmology argument.
-The galactic results here — flat curves, wave structure, morphology — are
-purely local consequences of the vacuum's equation of state and the CBH resonance.
-
-\subsection{The Winding Problem}
-
-The classical winding problem asks why spiral arms persist for many Gyr
-despite differential rotation winding them to $\sim1°$ pitch in $<1\;\mathrm{Gyr}$.
-The standard answer (Lin-Shu density wave theory) treats arms as waves,
-not material streams.
-The SSV provides the same answer but with a mechanical origin: arms are
-soliton modes of the disc order parameter $\Psi$, continuously refreshed
-by the CBH driving at $f_\mathrm{BH}$.
-The pattern persists as long as the CBH oscillates — indefinitely,
-in the superfluid limit.
-
-\subsection{Open Problems}
-\label{sec:openproblems}
-
-Three open problems are acknowledged.
+\subsection{Open problems and limits}
 
 \begin{enumerate}
-    \item \emph{Quantitative pitch angle from the SSV dispersion relation.}
-    Equation~\eqref{eq:pitch} is the geometric winding formula, not an
-    SSV-specific derivation. The proper prediction requires solving the
-    analogue of the Lin-Shu dispersion relation for the LogSE equation of state
-    — a well-defined calculation with a clear path, deferred to a companion paper.
-    The mode amplitudes $\varepsilon_m(a_\mathrm{BH})$ require the same analysis.
-    The qualitative result (heavier BH $\to$ tighter arms, earlier Hubble type)
-    is structural and does not depend on this derivation.
+  \item \emph{Quantitative pitch angle.}  Equation~\eqref{eq:pitch} is the geometric
+    winding formula.  The SSV-specific prediction requires the LogSE disc dispersion
+    relation, which is a companion BdG calculation.
 
-    \item \emph{First-principles derivation of $\mathcal{C}$.}
-    The calibrated value $\mathcal{C} = 1.80\times10^9\;\mathrm{kpc}\cdot M_\odot$
-    is reproduced by the dimensional combination
-    $\hbar^2\alpha^{-16}(m_p/m_e)^7/(2Gm_e^2)$ at integer exponents,
-    suggesting it is a physical constant of the medium.
-    A derivation of these exponents as eigenvalues of the 2D LogSE disc soliton
-    is identified as a companion calculation.
+  \item \emph{Mode amplitudes $\varepsilon_m(a_\mathrm{BH})$.}  The quantitative
+    relationship between CBH spin and which azimuthal modes are excited requires the same
+    normal-mode analysis as above.  The qualitative scaling~\eqref{eq:mode_amp} and the
+    Hubble sequence mapping are structural consequences that do not require this.
 
-    \item \emph{Electroweak sector.}
-    The SSV force sector (SSV~II) has a factor-of-eight discrepancy between
-    the estimated and measured $W$ boson mass.\footnote{This discrepancy
-    is unrelated to the galactic results and does not affect any prediction
-    in this paper.}
-    Resolving it requires a full 3D numerical computation of the
-    vortex reconnection barrier in the Gross-Pitaevskii functional.
+  \item \emph{First-principles derivation of $\mathcal{C}$.}  Inherited from Paper~VI-a:
+    the dimensional estimate $\mathcal{C}\sim\hbar^2\alpha^{-16}(m_p/m_e)^7/(2Gm_e^2)$
+    matches the observed value at integer exponents but is not yet a derivation.
+
+  \item \emph{Relation to superfluid dark matter.}  The SSV shares the superfluid
+    equation of state of the SFDM programme~\cite{berezhiani2015} but differs in a single
+    key respect: the superfluid is the vacuum, not a new particle.  SFDM has encountered
+    tensions with weak gravitational lensing~\cite{mistele2023} arising from having to
+    simultaneously explain cosmological and galactic structure with the same field.  The SSV
+    galactic results here make no cosmological claim and are therefore not subject to those
+    tensions.  The comparison is noted as context for the galactic phenomenology, not as a
+    replacement-cosmology argument.
 \end{enumerate}
 
 %%──────────────────────────────────────────────────────────────────────────────
@@ -615,144 +391,101 @@ Three open problems are acknowledged.
 \label{sec:conclusion}
 %%──────────────────────────────────────────────────────────────────────────────
 
-We have shown that a single postulate — the vacuum is a saturated superfluid —
-combined with the CBH eigenfrequency relation $f_\mathrm{BH} = f_p m_p/M_\mathrm{BH}$,
-leads to:
+Building on the flat-curve and standing-wave mechanism of Paper~VI-a, this paper shows that
+the Hubble morphological sequence is the azimuthal overtone spectrum of the same CBH
+resonance:
 
 \begin{enumerate}
-    \item \textbf{Flat rotation curves} as the energy-minimising Mestel soliton
-    of the LogSE, without dark matter.
+  \item The full 2D density field~\eqref{eq:density2d} extends the axisymmetric wave to
+    include $m>0$ modes driven by CBH spin, with amplitude scaling
+    $\varepsilon_m \propto a_\mathrm{BH}^m$.
 
-    \item \textbf{Zero-free-parameter wiggle predictions}:
-    node spacing $\Delta r = \mathcal{C}/M_\mathrm{BH}$ and amplitude
-    $\delta v = \sqrt{G\pi/\mathcal{C}}\cdot M_\mathrm{BH}$,
-    both fixed by the measured $M_\mathrm{BH}$ alone.
-    Predicted $\delta v = 12.1\;\mathrm{km/s}$ for M31 is consistent with
-    observed velocity oscillations.
+  \item The corotation radius $r_c = m\mathcal{C}/(\pi M_\mathrm{BH})$ is a
+    zero-free-parameter prediction.  The anti-correlation of pitch angle with BH mass
+    follows directly: heavier black holes wind their arms more tightly, producing earlier
+    Hubble types~\cite{seigar2008}.
 
-    \item \textbf{The Hubble morphological sequence} as the azimuthal overtone
-    spectrum of the CBH resonance: $m=0$ gives rings, $m=2$ gives grand design
-    spirals, $m=3$ gives three-armed systems, superpositions give flocculent
-    discs. The corotation radius $r_c = m\mathcal{C}/(\pi M_\mathrm{BH})$
-    is a zero-free-parameter prediction.
+  \item The winding problem is resolved: azimuthal modes are soliton patterns
+    continuously refreshed by the CBH, not material streams.
 
-    \item \textbf{The pitch angle--BH mass anti-correlation} follows from
-    the corotation radius: more massive black holes wind their arms more tightly,
-    consistent with Seigar et al.~\cite{seigar2008}.
+  \item Azimuthal averaging over the 2D disc wave reduces the velocity wiggle amplitude
+    by a factor of $\sim5$, explaining why 1D rotation curves appear smooth despite the
+    underlying Bessel structure.
 
-    \item \textbf{The winding problem is resolved}: arms are soliton modes
-    refreshed by the CBH, not material streams that wind up.
+  \item The wave is detectable in 2D velocity residual maps and HI surface-density maps as
+    concentric rings at the predicted antinode radii.
 \end{enumerate}
 
-The Hubble sequence — one of the oldest empirical classifications in astronomy —
-emerges as the overtone spectrum of a resonant galactic disc driven by the
-central black hole, without dark matter and without free structural parameters.
-
-Paper~V of the series will extend the SSV to quantum gravity as
-disc-wave hydrodynamics and cosmogony from the permissive void~\cite{ssv5}.
+The entire Hubble classification emerges from one equation and two observables
+($M_\mathrm{BH}$ and $a_\mathrm{BH}$), without dark matter and without free structural
+parameters.
 
 %%──────────────────────────────────────────────────────────────────────────────
 \begin{thebibliography}{99}
 
-%%── SSV series ───────────────────────────────────────────────────────────────
-\bibitem{ssv1}
-S.\ Norland,
-``Saturated Superfluid Vacuum~I: Particle Spectrum as Topological Defects
-and the $\alpha$-Harmonic Mass Ladder,''
-\textit{in preparation} (2026).
+\bibitem{SSV-I}
+S.\ Norland, \textit{Saturated Superfluid Vacuum I: Topological Defects in a Saturated
+Superfluid Vacuum---The Geometric Origin of Matter and the $\alpha$-Harmonic Mass Ladder},
+10.5281/zenodo.19651986, 2026.
 
-\bibitem{ssv2}
-S.\ Norland,
-``Saturated Superfluid Vacuum~II: The Four Forces as Hydrodynamic
-Pressure-Gradient Modes,''
-\textit{in preparation} (2026).
+\bibitem{SSV-II}
+S.\ Norland, \textit{Saturated Superfluid Vacuum II}, SSV programme, 2026.
 
-\bibitem{ssv3}
-S.\ Norland,
-``Saturated Superfluid Vacuum~III: Thermodynamics, Entropy as Vortex-Tangle
-Complexity, and Irreversible Time,''
-\textit{in preparation} (2026).
+\bibitem{SSV-III}
+S.\ Norland, \textit{Saturated Superfluid Vacuum III: Irreversible Time and Wake Entropy},
+SSV programme, 2026.
 
-\bibitem{ssv4a}
-S.\ Norland,
-``Saturated Superfluid Vacuum~IV-a: Galactic-Scale Resonances,
-Flat Rotation Curves, and the Andromeda Satellite Plane,''
-\textit{in preparation} (2026).
+\bibitem{SSV-IV}
+S.\ Norland, \textit{Saturated Superfluid Vacuum IV: Gravity as Update-Capacity Gradient},
+SSV programme, 2026.
 
-\bibitem{ssv5}
-S.\ Norland,
-``Saturated Superfluid Vacuum~V: Quantum Gravity as Hydrodynamics
-and Cosmogony from the Permissive Void,''
-\textit{in preparation} (2026).
-
-%%── Observational and theoretical references ─────────────────────────────────
-\bibitem{rubin1980}
-V.~C.\ Rubin, W.~K.\ Ford, and N.\ Thonnard,
-``Rotational properties of 21~Sc galaxies,''
-\textit{Astrophys.\ J.}\ \textbf{238}, 471 (1980).
-
-\bibitem{milgrom1983}
-M.\ Milgrom, ``A modification of the Newtonian dynamics,''
-\textit{Astrophys.\ J.}\ \textbf{270}, 365 (1983).
+\bibitem{SSV-VIa}
+S.\ Norland, \textit{Saturated Superfluid Vacuum VI-a: Galactic Standing Waves and Flat
+Rotation Curves}, SSV programme, 2026.
 
 \bibitem{berezhiani2015}
 L.\ Berezhiani and J.\ Khoury,
-``Dark matter superfluidity and galactic dynamics,''
-\textit{Phys.\ Lett.\ B}\ \textbf{753}, 639 (2016).
-
-\bibitem{khoury2015}
-L.\ Berezhiani and J.\ Khoury,
 ``Theory of dark matter superfluidity,''
 \textit{Phys.\ Rev.\ D}\ \textbf{92}, 103510 (2015).
-
-\bibitem{mistele2023}
-T.\ Mistele, S.\ McGaugh, and S.\ Hossenfelder,
-``Superfluid dark matter in tension with weak gravitational lensing data,''
-\textit{Astron.\ Astrophys.\ Lett.}\ (2023).
-
-\bibitem{mistele2022}
-T.\ Mistele, S.\ McGaugh, and S.\ Hossenfelder,
-``Galactic mass-to-light ratios with superfluid dark matter,''
-\textit{Astron.\ Astrophys.}\ \textbf{660}, A206 (2022).
-
-\bibitem{volovik2003}
-G.~E.\ Volovik, \textit{The Universe in a Helium Droplet},
-Oxford University Press (2003).
-
-\bibitem{zloshchastiev2011}
-K.~G.\ Zloshchastiev, ``Logarithmic nonlinearity in theories of quantum gravity,''
-\textit{Grav.\ Cosmol.}\ \textbf{16}, 288 (2010).
-
-\bibitem{mestel1963}
-L.\ Mestel, ``On the galactic law of rotation,''
-\textit{Mon.\ Not.\ R.\ Astron.\ Soc.}\ \textbf{126}, 553 (1963).
 
 \bibitem{chemin2009}
 L.\ Chemin, C.\ Carignan, and T.\ Foster,
 ``HI kinematics and dynamics of Messier~31,''
 \textit{Astrophys.\ J.}\ \textbf{705}, 1395 (2009).
 
-\bibitem{seigar2008}
-M.~S.\ Seigar, D.\ Kennefick, J.\ Kennefick, and C.~H.\ Lacy,
-``Discovery of a relationship between spiral arm morphology and the
-distribution of mass in spiral galaxies,''
-\textit{Astrophys.\ J.\ Lett.}\ \textbf{685}, L137 (2008).
-
 \bibitem{davis2012}
-B.~L.\ Davis, J.~C.\ Berrier, D.~W.\ Shields, et al.,
-``Measurement of galactic logarithmic spiral arm pitch angle using
-two-dimensional fast Fourier transform decomposition,''
+B.~L.\ Davis et al.,
+``Measurement of galactic logarithmic spiral arm pitch angle using two-dimensional
+fast Fourier transform decomposition,''
 \textit{Astrophys.\ J.\ Suppl.}\ \textbf{199}, 33 (2012).
 
 \bibitem{kuassivi2011}
-M.\ Kuassivi,
-``Wavelet analysis of galactic rotation curves,''
+M.\ Kuassivi, ``Wavelet analysis of galactic rotation curves,''
 \textit{arXiv}:1105.1070 (2011).
 
-\bibitem{ibata2013}
-R.~A.\ Ibata et al.,
-``A vast, thin plane of corotating dwarf galaxies orbiting Andromeda,''
-\textit{Nature}\ \textbf{493}, 62 (2013).
+\bibitem{mestel1963}
+L.\ Mestel, ``On the galactic law of rotation,''
+\textit{Mon.\ Not.\ R.\ Astron.\ Soc.}\ \textbf{126}, 553 (1963).
+
+\bibitem{mistele2023}
+T.\ Mistele, S.\ McGaugh, and S.\ Hossenfelder,
+``Superfluid dark matter in tension with weak gravitational lensing data,''
+\textit{Astron.\ Astrophys.\ Lett.}\ (2023).
+
+\bibitem{rubin1980}
+V.~C.\ Rubin, W.~K.\ Ford, and N.\ Thonnard,
+``Rotational properties of 21~Sc galaxies,''
+\textit{Astrophys.\ J.}\ \textbf{238}, 471 (1980).
+
+\bibitem{seigar2008}
+M.~S.\ Seigar et al.,
+``Discovery of a relationship between spiral arm morphology and the distribution of
+mass in spiral galaxies,''
+\textit{Astrophys.\ J.\ Lett.}\ \textbf{685}, L137 (2008).
+
+\bibitem{zloshchastiev2011}
+K.~G.\ Zloshchastiev, ``Logarithmic nonlinearity in theories of quantum gravity,''
+\textit{Grav.\ Cosmol.}\ \textbf{16}, 288 (2010).
 
 \end{thebibliography}
 
