@@ -255,6 +255,57 @@ by integrating the k⁴ dispersion over the vortex core profile:
 
 ---
 
+## 5. L_⊥ Core Integral: Bending Stiffness Check
+
+**Script:** `src/paper_ii/lperp_core_integral.py`
+**Method:** Numerically integrates I_curl, J_bend, K_bend from the planar vortex
+profile (Paper I, b=1 convention, reliable up to r < 15 ξ).
+
+### Core integrals
+
+| Integral | Definition | Value (b=1) |
+|---|---|---|
+| `I_curl` | `∫ (2ff′/r)² 2πr dr` | 5.02 |
+| `J_bend` | `∫ r² [∂_r(2ff′/r)]² 2πr dr` | 7.81 |
+| `K_bend` | `∫ (2ff′/r)² r² 2πr dr` | 2.20 |
+
+**Tail convergence:** All integrands fall as `~1/r⁷` for large r. The analytic tail from r > 15 ξ contributes < 10⁻⁶ of the total.
+
+### Bending formula result
+
+The local curvature correction to L_⊥ gives:
+
+```
+λ_bend(local) = λ_⊥ × (J_bend + K_bend) / 4
+```
+
+With `λ_⊥ = α⁻²` (natural SSV scale):
+
+| Quantity | Value |
+|---|---|
+| `λ_⊥ = α⁻²` | 1.878 × 10⁴ |
+| `λ_bend(local) = λ_⊥ (J+K)/4` | 4.70 × 10⁴ |
+| `λ_bend(required) = φ³/α³` | 1.09 × 10⁷ |
+| **Gap factor** | **232×** |
+
+### Conclusion
+
+The local curvature-of-core correction to L_⊥ is **232× too small** to reproduce
+λ_bend = φ³/α³. The 2πλ_bend/R energy term therefore does NOT arise from local
+vortex core bending. The physical mechanism must be non-local:
+
+- **Candidate**: The cap is the Seifert surface of the trefoil knot. Its chiral-shear
+  energy may be quantized at λ_bend = φ³/α³ from the knot invariant structure
+  (non-perturbative topological origin).
+- **Candidate**: The chiral-mode vacuum energy of the reconnection region (analog of
+  the Casimir effect between parallel plates, here applied to the ring boundary).
+
+**Status: Open gapbox confirmed.** The variational identification λ_bend = φ³/α³
+(from `chiral_cap_equilibrium.py`) is correct; the derivation from the SSV Lagrangian
+requires non-local physics not captured by the vortex core profile.
+
+---
+
 ## Summary table
 
 | Sector | Observable | SSV result | CODATA/PDG | Status |
@@ -264,4 +315,4 @@ by integrating the k⁴ dispersion over the vortex core profile:
 | Electroweak | `m_W` | 78.93 GeV | 80.38 GeV | −1.81% |
 | Electroweak | `m_Z` (tree) | 90.02 GeV | 91.19 GeV | −1.29% |
 | Electroweak | `sin²(θ_W)` | open gapbox | 0.231 | Requires `λ_⊥` calculation |
-| Electroweak | `R_cap = φ/α` | λ_bend = φ³/α³ ✓ | identification only | Derive from core integral |
+| Electroweak | `R_cap = φ/α` | λ_bend = φ³/α³ ✓ | identification only | Core integral: 232× gap → non-local origin |

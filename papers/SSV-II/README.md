@@ -19,6 +19,7 @@ This directory contains numerical support material for Paper II.
 | `reconnection_barrier.py` | W/Z saddle (3D GPE, analytic cap formula) | Analytic ✓, 3D grid too small |
 | `reconnection_supplement.py` | Topology + chiral-shear sweep | Structural checks only |
 | `chiral_cap_equilibrium.py` | R_cap = φ/α from λ_bend = φ³/α³ | Complete |
+| `lperp_core_integral.py` | L_⊥ core bending check — 232× gap, non-local origin | Complete |
 
 ## Key results
 
