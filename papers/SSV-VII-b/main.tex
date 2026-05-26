@@ -1,356 +1,563 @@
-\documentclass[11pt]{article}
-
-\usepackage[a4paper,margin=1in]{geometry}
-\usepackage[T1]{fontenc}
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage{amsmath,amssymb}
-\usepackage{physics}
-\usepackage{tcolorbox}
+\usepackage{amsmath,amssymb,physics}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{enumitem}
-\usepackage{setspace}
-
-\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
-\setstretch{1.1}
+\usepackage{caption}
+\usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}
 
+\newtcolorbox{resultbox}[1][]{enhanced,breakable,
+  colback=blue!4!white,colframe=blue!40!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
 \newtcolorbox{gapbox}[1][]{enhanced,breakable,
   colback=orange!6!white,colframe=orange!60!black,
   fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
 
-\title{Saturated Superfluid Vacuum VII-b\\
-Emergent Geometry and the Dissolution of Quantum Gravity}
-\author{Stig Norland}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\title{\textbf{Saturated Superfluid Vacuum~VII-b}\\[0.4em]
+\large Emergent Geometry and the Dissolution of Quantum Gravity}
+\author{Stig Norland\\
+\small Independent Researcher, Bergen, Norway}
 \date{Draft}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-This paper develops gravitational geometry in the Saturated Superfluid Vacuum (SSV) framework
-as a macroscopic limit of the same medium that underlies quantum behavior. The central claim
-is that if geometry is emergent rather than fundamental, then the conventional problem of
-quantizing gravity is mis-posed. The task is not to quantize the metric, but to derive metric
-behavior as a coarse-grained description of the underlying medium.
+This paper develops gravitational geometry in the Saturated Superfluid Vacuum
+(SSV) as a macroscopic limit of the same medium that underlies quantum
+behaviour.  The central claim is that if geometry is emergent from the medium,
+then the conventional programme of quantising gravity is mis-posed: the task
+is not to quantise the metric but to derive metric behaviour as a
+coarse-grained description of the underlying condensate.
+
+The emergent metric follows from the density-to-potential identification
+$\Phi = b\ln(\rho/\rho_0)$ of Paper~IV, with time dilation $d\tau/dt =
+\sqrt{1+2\Phi/c^2}$ reproducing the Schwarzschild line element at
+post-Newtonian order.  Spatial curvature in the full isotropic metric resolves
+the factor-of-two discrepancy in horizon radius identified in Papers~IV and~V,
+yielding the correct surface gravity $\kappa = c^4/(4GM)$ and Hawking
+temperature $T_H = \hbar c^3/(8\pi G M k_B)$.  The full nonlinear Einstein
+equations are recovered via the Jacobson acoustic-thermodynamic route, with
+Newton's constant $G$ expressed in terms of the healing length $\xi$ already
+fixed by the particle sector.  At the vortex-core scale $\xi\sim\ell_P$ the
+continuum description breaks down, and the quantum-gravity problem is replaced
+by the problem of deriving the continuum limit from the medium.
 \end{abstract}
 
+\newpage
+\tableofcontents
+\newpage
+
+%%──────────────────────────────────────────────────────────────────────────────
 \section{Introduction}
+\label{sec:intro}
+%%──────────────────────────────────────────────────────────────────────────────
 
-This paper asks whether the usual quantum-gravity problem dissolves once geometry is treated
-as emergent rather than fundamental. Within SSV, the metric is not a primitive structure to
-be quantised. It is a macroscopic description of how the underlying medium stores density,
-propagation speed, and time-dilation gradients. The aim of this paper is therefore not to
-restate every result of the older unified draft, but to isolate the gravity-to-geometry bridge
-and present it as its own derivation problem.
+Papers~I--IV establish the SSV medium, its topological defects, thermodynamic
+arrow, and gravitational limit.  Paper~V shows that the same condensate supports
+black-hole horizons as acoustic-freezing surfaces.  Paper~VII-a derives the
+quantum-mechanical limit from the Madelung transformation.  The present paper
+closes the geometry side: it asks whether the metric itself is emergent, and if
+so, what becomes of the standard quantum-gravity problem.
 
+The standard problem arises from trying to reconcile two fundamentally different
+languages: smooth Riemannian geometry on one side and the discrete probabilistic
+structure of quantum field theory on the other.  In SSV both languages are
+effective descriptions of the same medium at different scales.  The metric is
+not a primitive structure to be quantised; it is a bookkeeping language for
+how the medium stores density gradients, sound-speed variation, and
+irreversible time flow.  Quantising the metric directly is then analogous to
+quantising the wake pattern instead of the fluid that makes it.
+
+\subsection*{Scope}
+
+This paper covers: the emergent metric picture, weak-field and post-Newtonian
+correspondence, the spatial-curvature correction that resolves the factor-of-two
+gap from Papers~IV and~V, and the full Einstein equations from the
+Jacobson~\cite{Jacobson1995} acoustic-thermodynamic route.  Out of scope: the
+full QM derivation (Paper~VII-a~\cite{SSV-VIIa}), black-hole ontology
+(Paper~V~\cite{SSV-V}), and cosmogony (Paper~VIII).
+
+\subsection*{Roadmap}
+
+Section~\ref{sec:wrong_level} argues that quantising the metric is the wrong
+level of description.  Section~\ref{sec:emergent} derives the emergent metric
+from the density field.  Section~\ref{sec:weakfield} establishes weak-field
+correspondence and resolves the factor-of-two horizon discrepancy.
+Section~\ref{sec:gr} recovers the full Einstein equations and discusses the
+cosmological constant.  Section~\ref{sec:discussion} discusses open problems
+and position in the series.
+
+%%──────────────────────────────────────────────────────────────────────────────
 \section{Why Quantizing the Metric Is the Wrong Level}
+\label{sec:wrong_level}
+%%──────────────────────────────────────────────────────────────────────────────
 
-If geometry is already a coarse-grained bookkeeping language for the medium, then quantising
-geometry directly is analogous to quantising the wake pattern instead of the fluid that makes
-it. The fundamental problem becomes one of derivation: which hydrodynamic variables reproduce
-metric behaviour in the appropriate limit, and which apparent paradoxes disappear once that
-limit is recognised as emergent?
+Gravity and quantum mechanics share a substrate in SSV: both are properties
+of the same order parameter.  Gravity is the long-range density gradient of
+the condensate (Paper~IV~\cite{SSV-IV}); quantum behaviour is the wave
+mechanics of that condensate in the low-amplitude limit
+(Paper~VII-a~\cite{SSV-VIIa}).  There is no fundamental tension between them
+because they operate in different regimes of the same equation of state.
 
-\section{Gravity as Hydrodynamics: From Bjerknes to Einstein}
-\label{sec:gravity_hydro}
-%-----------------------------------------------------------------------
+The conventional quantum-gravity problem is therefore not a conflict waiting to
+be resolved at some unification energy.  It is a category error: it attempts
+to impose quantum structure on an emergent description.  A metric $g_{\mu\nu}$
+is a summary of how the medium's density, propagation speed, and clock rate
+vary from point to point.  Asking ``how do you quantise $g_{\mu\nu}$?'' is as
+well-posed as asking ``how do you quantise the speed of sound in a fluid?''
+The answer is: you derive it from the microscopic theory, where quantisation
+is already present through the order parameter and its topological defects.
 
-\subsection{Recap: The Bjerknes Force}
+\begin{resultbox}[The dissolution argument]
+In SSV the quantum-gravity problem is replaced by a derivation problem: show
+that the Madelung equations of the condensate, coarse-grained over scales
+$\gg\xi$, produce metric behaviour consistent with general relativity.  Once
+that derivation is complete, no separate quantisation of the metric is required.
+The Planck scale is the scale at which the coarse-graining breaks down---the
+vortex-core granularity of the medium---not the scale at which a new theory
+must be postulated.
+\end{resultbox}
 
-As derived in Paper~II, two vibrating breather modes (protons, or any oscillating density
-perturbations) at separation $r$ experience an attractive force — the acoustic Bjerknes
-force~\cite{Bjerknes1906}:
+%%──────────────────────────────────────────────────────────────────────────────
+\section{Emergent Metric Picture}
+\label{sec:emergent}
+%%──────────────────────────────────────────────────────────────────────────────
+
+\subsection{Density as gravitational potential}
+
+Paper~IV~\cite{SSV-IV} identifies the update availability
 \begin{equation}
-    F_{\rm Bj} = -\frac{\partial}{\partial r}\left\langle p_1 V_2 + p_2 V_1\right\rangle
-    \approx -\frac{G_{\rm eff}\,m_1 m_2}{r^2},
-    \label{eq:Bjerknes}
+  A(\mathbf{x}) \;=\; \frac{d\tau}{dt}
+  \;=\; 1 + \frac{\Phi(\mathbf{x})}{c^2},
+  \qquad
+  \Phi(\mathbf{x}) = b\ln\!\left(\frac{\rho(\mathbf{x})}{\rho_0}\right),
+  \label{eq:A_phi}
 \end{equation}
-where the effective coupling constant $G_{\rm eff}$ is determined by the sound speed $c_s$
-and density $\rho_0$ of the medium:
+where $b$ is a medium constant with dimensions of velocity$^2$ and $\rho_0$
+is the unperturbed condensate density.  In a weak gravitational field produced
+by a mass $M$, matching to the Newtonian potential gives $\Phi \approx -GM/r$
+and
 \begin{equation}
-    G_{\rm eff} = \frac{\omega_0^2 A_0^2}{4\pi\rho_0 c_s^2}
-    \label{eq:G_eff}
+  A(r) \;=\; 1 - \frac{GM}{rc^2}.
+  \label{eq:A_newtonian}
 \end{equation}
-with $\omega_0$ and $A_0$ the characteristic frequency and amplitude of the breather modes.
-Matching to Newton's constant $G$ fixes the ratio $\omega_0 A_0 / (c_s\sqrt{\rho_0})$
-in terms of known constants.
 
-\subsection{The Gravitational Potential and Time Dilation}
+\subsection{Time dilation and the Schwarzschild line element}
 
-As established in Paper~IV (gravity section), the density field of the superfluid
-encodes the gravitational potential directly:
+The local clock rate~\eqref{eq:A_phi} reproduces the Schwarzschild time-dilation
+factor at post-Newtonian order.  The proper-time interval for a static observer
+at $r$ is
 \begin{equation}
-    \Phi(\mathbf{x}) = b\,\ln\!\left(\frac{\rho(\mathbf{x})}{\rho_0}\right),
-    \label{eq:Phi_hydro}
+  d\tau^2 = A(r)^2\,dt^2 \;\approx\; \left(1-\frac{2GM}{rc^2}\right)dt^2,
+  \label{eq:timedil}
 \end{equation}
-where $b$ is a medium constant with dimensions of velocity$^2$.
-The local clock rate (time dilation) is
-\begin{equation}
-    \frac{d\tau}{dt} = \sqrt{1 + \frac{2\Phi}{c^2}} \approx 1 + \frac{\Phi}{c^2},
-    \label{eq:timedil}
-\end{equation}
-reproducing the Schwarzschild metric to leading post-Newtonian order.
-Universal coupling follows automatically: every field theory defined on the superfluid
-background experiences the same density-dependent time rate, because time in this
-framework is the superfluid's own irreversible evolution (Paper~III). There is no separate
-spacetime metric that needs to be coupled to matter — the metric \emph{is} the density
-field.
+where the second equality uses the Schwarzschild result
+$A_{\rm Sch}(r) = \sqrt{1-2GM/(rc^2)}$.
 
-\subsection{The Einstein Equations from Acoustic Thermodynamics}
+\subsection{Emergent metric tensor}
+
+Writing the Madelung equations~\cite{SSV-VIIa} in a curved-background notation
+introduces an effective metric.  In the isotropic post-Newtonian gauge, to
+leading order in $\Phi/c^2$:
+\begin{equation}
+  g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}, \qquad
+  h_{00} = -\frac{2\Phi}{c^2}, \quad
+  h_{0i} = -\frac{2v_i}{c}, \quad
+  h_{ij} = -\frac{2\Phi}{c^2}\,\delta_{ij},
+  \label{eq:metric}
+\end{equation}
+where $v_i$ is the background flow velocity and $\Phi$ is the gravitational
+potential~\eqref{eq:A_phi}.  The spatial part $h_{ij} = -(2\Phi/c^2)\delta_{ij}$
+is the isotropic-gauge form of Schwarzschild: the metric \emph{is} the density
+field, with no separate geometric input.
+
+\begin{resultbox}[Emergent metric]
+The effective metric~\eqref{eq:metric} is not imposed on the medium.  It is
+derived from the density perturbation $\Phi = b\ln(\rho/\rho_0)$ and the
+irrotational flow $v_i$.  Time dilation, light deflection, and gravitational
+redshift are properties of the medium's equation of state, not postulates of
+a separate geometric theory.
+\end{resultbox}
+
+%%──────────────────────────────────────────────────────────────────────────────
+\section{Weak-Field Correspondence}
+\label{sec:weakfield}
+%%──────────────────────────────────────────────────────────────────────────────
+
+\subsection{Newton's constant from acoustic coupling}
+
+Paper~II~\cite{SSV-II} shows that two breather-mode defects (protons, or any
+oscillating density perturbations) at separation $r$ experience an attractive
+Bjerknes acoustic force~\cite{Bjerknes1906}:
+\begin{equation}
+  F_\mathrm{Bj} = -\frac{\partial}{\partial r}
+  \bigl\langle p_1 V_2 + p_2 V_1\bigr\rangle
+  \approx -\frac{G_\mathrm{eff}\,m_1 m_2}{r^2},
+  \label{eq:Bjerknes}
+\end{equation}
+with effective coupling constant
+\begin{equation}
+  G_\mathrm{eff} = \frac{\omega_0^2 A_0^2}{4\pi\rho_0 c_s^2},
+  \label{eq:G_eff}
+\end{equation}
+where $\omega_0$ and $A_0$ are the characteristic frequency and amplitude of
+the breather modes.  Matching $G_\mathrm{eff} = G$ (Newton's constant) fixes
+the combination $\omega_0 A_0 / (c_s\sqrt{\rho_0})$ in terms of known constants.
+
+\subsection{Post-Newtonian expansion}
+
+A gradient expansion of the condensate Euler equation around the saturated
+ground state $(\rho_0,\mathbf{v}=0)$ confirms the metric identification
+\eqref{eq:metric} at second order in $\Phi/c^2$.  At first post-Newtonian
+order, the stress-energy divergence obeys
+\begin{equation}
+  G_{\mu\nu} \equiv R_{\mu\nu} - \tfrac{1}{2}g_{\mu\nu}R
+  = \frac{8\pi G}{c^4}\,T_{\mu\nu},
+  \label{eq:Einstein_PN}
+\end{equation}
+where $R_{\mu\nu}$ is the Ricci tensor of the metric~\eqref{eq:metric}.  This
+confirms that the acoustic dynamics reproduces general relativity in the
+weak-field slow-motion limit.
+
+\subsection{Spatial curvature and the factor-of-two horizon correction}
+\label{sec:factor2}
+
+Papers~IV and~V flag a factor-of-two discrepancy between the SSV Newtonian
+horizon radius and the Schwarzschild result.  The root cause is the spatial
+component $h_{ij}$ in~\eqref{eq:metric}.
+
+The Newtonian limit (Paper~IV) uses $A(r) = 1 + \Phi/c^2 = 1 - GM/(rc^2)$.
+Setting $A(r_H)=0$ gives $r_H^{(\rm Newt)} = GM/c^2$, half the Schwarzschild
+radius $r_S = 2GM/c^2$.
+
+In the isotropic metric~\eqref{eq:metric} the spatial part contributes equally
+to radial geodesics: the effective potential governing radial null rays picks up
+both $h_{00}$ and $h_{rr}$.  At post-Newtonian order the result is $g_{00} = 1
+- 2GM/(rc^2)$, which gives
+\begin{equation}
+  A_\mathrm{Sch}(r) = 1 - \frac{r_S}{r}, \qquad r_S = \frac{2GM}{c^2},
+  \label{eq:A_sch}
+\end{equation}
+and the horizon condition $A_\mathrm{Sch}(r_H) = 0$ correctly yields
+$r_H = r_S = 2GM/c^2$.
+
+The surface gravity is
+\begin{equation}
+  \kappa \;=\; \frac{c^2}{2}\,\left.\frac{dA_\mathrm{Sch}}{dr}\right|_{r_H}
+  \;=\; \frac{c^4}{4GM},
+  \label{eq:kappa}
+\end{equation}
+and the Hawking temperature from the acoustic Unruh effect (Paper~V~\cite{SSV-V}) is
+\begin{equation}
+  T_H \;=\; \frac{\hbar\kappa}{2\pi k_B c}
+  \;=\; \frac{\hbar c^3}{8\pi G M k_B},
+  \label{eq:TH}
+\end{equation}
+the standard Bekenstein--Hawking result.
+
+\begin{resultbox}[Factor-of-two resolution]
+The factor-of-two discrepancy in horizon radius (Papers~IV and~V) and the
+resulting factor-of-four discrepancy in $T_H$ are resolved by including the
+spatial curvature $h_{ij}$ of the isotropic metric~\eqref{eq:metric}.  The
+Newtonian limit of Paper~IV uses only $h_{00}$; the full post-Newtonian metric
+includes $h_{ij} = h_{00}\delta_{ij}$, doubling the effective gravitational
+potential for radial motion and yielding the correct $r_H = 2GM/c^2$,
+$\kappa = c^4/(4GM)$, and $T_H = \hbar c^3/(8\pi GMk_B)$.
+\end{resultbox}
+
+%%──────────────────────────────────────────────────────────────────────────────
+\section{Relation to General Relativity}
+\label{sec:gr}
+%%──────────────────────────────────────────────────────────────────────────────
+
+\subsection{Jacobson acoustic-thermodynamic route}
 \label{sec:jacobson}
 
-We now derive the Einstein equations via a route first established by
-Jacobson~\cite{Jacobson1995}, but here every element of the argument has a concrete
-mechanical realisation in the superfluid — including the ultraviolet cutoff, which
-in SSV is not introduced by hand but is identical to the healing length $\xi$ already
-fixed by the particle mass spectrum of Paper~I.
+The post-Newtonian expansion of the previous section confirms the Einstein
+equations perturbatively.  The following argument recovers them nonlinearly
+via the Jacobson~\cite{Jacobson1995} route, with every element given a
+concrete mechanical realisation in the superfluid.
 
 \paragraph{Step 1: Local Rindler horizon.}
-Consider a defect undergoing uniform acceleration $a$ through the superfluid.
-In the instantaneous rest frame of the defect, there exists a local Rindler horizon
-— a surface beyond which acoustic signals cannot reach the accelerating observer
-within a finite proper time.  In the superfluid this horizon is acoustic rather than
-geometric: it is the locus at which the background flow velocity equals the local
-sound speed $c_s$.  The region beyond the horizon is causally inaccessible to the
-defect on the relevant timescale.
+Consider a defect undergoing uniform acceleration $a$ through the condensate.
+In the instantaneous rest frame there is a local Rindler horizon: the surface
+beyond which acoustic signals cannot reach the accelerating observer within a
+finite proper time.  In SSV this horizon is acoustic, located at the locus
+where the background flow velocity equals the local sound speed $c_s$.
 
-\paragraph{Step 2: Unruh temperature from the medium.}
-An accelerating observer in a quantum field vacuum perceives a thermal bath at the
-Unruh temperature~\cite{Unruh1976}
+\paragraph{Step 2: Unruh temperature from the condensate.}
+An accelerating observer perceives a thermal phonon bath at the Unruh
+temperature~\cite{Unruh1976}
 \begin{equation}
-    T_U = \frac{\hbar\, a}{2\pi\, c\, k_B}.
-    \label{eq:Unruh}
+  T_U = \frac{\hbar\, a}{2\pi\, c\, k_B}.
+  \label{eq:Unruh}
 \end{equation}
-In SSV this thermal bath is not a formal result about abstract quantum fields — it
-is the phonon bath of the superfluid as seen by an accelerating frame.  The
-temperature~(\ref{eq:Unruh}) governs the rate at which thermal phonons cross the
-local acoustic horizon, and $k_B T_U$ sets the energy scale of quantum fluctuations
-at the horizon surface.
+In SSV this is not a formal result about abstract quantum fields: it is the
+phonon bath of the condensate as measured in an accelerating frame.
 
 \paragraph{Step 3: Entropy proportional to horizon area.}
 The entropy associated with the local horizon is
 \begin{equation}
-    S = \frac{k_B\, A}{4\,\xi^2},
-    \label{eq:BH_entropy}
+  S = \frac{k_B A}{4\xi^2},
+  \label{eq:BH_entropy}
 \end{equation}
-where $A$ is the horizon area and $\xi = \hbar/(m_0 c)$ is the healing length —
-the natural UV cutoff of the superfluid.  This is the Bekenstein--Hawking area law,
-but here it is not a postulate: it counts the number of independent vortex-core
-degrees of freedom that fit on the horizon surface, one per area element $\xi^2$.
-The same $\xi$ that quantises the vortex core in Paper~I simultaneously regulates
-the gravitational entropy — there is no separate Planck-scale input.
+where $A$ is the horizon area and $\xi = \hbar/(m_0 c)$ is the healing
+length.  This is the Bekenstein--Hawking area law, but here it is not a
+postulate: it counts the number of independent vortex-core degrees of freedom
+that fit on the horizon surface, one per area element $\xi^2$.  The same
+healing length that fixes the vortex-core size in Paper~I simultaneously
+regulates gravitational entropy.
 
-Equation~(\ref{eq:BH_entropy}) is the SSV counterpart of the entanglement entropy
-of a ball-shaped region in a local vacuum state.  For variations that hold the
-horizon geometry fixed, the entropy change is
+\paragraph{Step 4: Clausius relation.}
+The heat flux crossing the local horizon is
 \begin{equation}
-    \delta S = \frac{k_B}{4\xi^2}\,\delta A.
-    \label{eq:dS}
+  \delta Q = \int_{\mathcal{H}} T_{\mu\nu}\, k^\mu\, d\Sigma^\nu,
+  \label{eq:deltaQ}
 \end{equation}
-
-\paragraph{Step 4: Clausius relation $\delta Q = T\,\delta S$.}
-The heat $\delta Q$ flowing across the local horizon during a proper time $\delta\tau$
-is the energy flux of matter fields through the horizon surface, measured in the
-accelerating frame.  This is
+where $k^\mu$ is the horizon-generating Killing vector.  Imposing local
+thermodynamic equilibrium, $\delta Q = T_U\,\delta S$, and substituting
+\eqref{eq:Unruh} and \eqref{eq:BH_entropy}:
 \begin{equation}
-    \delta Q = \int_{\mathcal{H}} T_{\mu\nu}\, k^\mu\, d\Sigma^\nu,
-    \label{eq:deltaQ}
-\end{equation}
-where $k^\mu$ is the horizon-generating Killing vector and $d\Sigma^\nu$ is the
-surface element.
-
-Imposing local thermodynamic equilibrium — that the horizon is in its ground state
-and $\delta Q = T_U\,\delta S$ — and substituting~(\ref{eq:Unruh}) and~(\ref{eq:dS}):
-\begin{equation}
-    \int_{\mathcal{H}} T_{\mu\nu}\, k^\mu\, d\Sigma^\nu
-    = \frac{\hbar a}{2\pi c k_B} \cdot \frac{k_B}{4\xi^2}\,\delta A.
-    \label{eq:clausius_full}
+  \int_{\mathcal{H}} T_{\mu\nu}\, k^\mu\, d\Sigma^\nu
+  = \frac{\hbar a}{2\pi c k_B}\cdot\frac{k_B}{4\xi^2}\,\delta A.
+  \label{eq:clausius_full}
 \end{equation}
 
 \paragraph{Step 5: Einstein equations.}
-Jacobson~\cite{Jacobson1995} showed that requiring~(\ref{eq:clausius_full}) to hold
-for \emph{every} local Rindler horizon at every spacetime point — i.e.\ that local
-thermodynamic equilibrium holds universally throughout the medium — is equivalent
-to the Einstein field equations:
+Jacobson~\cite{Jacobson1995} showed that requiring~\eqref{eq:clausius_full}
+to hold for every local Rindler horizon at every spacetime point is
+equivalent to the Einstein field equations:
 \begin{equation}
-    G_{\mu\nu} + \Lambda g_{\mu\nu} = \frac{8\pi G}{c^4}\,T_{\mu\nu}.
-    \label{eq:Einstein_Jacobson}
+  G_{\mu\nu} + \Lambda g_{\mu\nu} = \frac{8\pi G}{c^4}\,T_{\mu\nu}.
+  \label{eq:Einstein}
 \end{equation}
-The Newton constant $G$ is determined by matching the entropy density to the
+Newton's constant is fixed by matching the entropy density to the
 Bekenstein--Hawking formula:
 \begin{equation}
-    G = \frac{c^3\,\xi^2}{\hbar} = \frac{c^2\,\xi^2}{m_0\,\xi}
-      = \frac{c\,\xi}{m_0},
-    \label{eq:G_xi}
+  G = \frac{c^3\xi^2}{\hbar} = \frac{c\xi}{m_0},
+  \label{eq:G_xi}
 \end{equation}
-where we used $\xi = \hbar/(m_0 c)$.  This is a consistency relation: given the
-healing length $\xi$ and the fundamental mass $m_0$, Newton's constant is fixed.
-Inserting the numerical value $\xi \sim \ell_{\rm P} \approx 1.6\times10^{-35}$~m
-and $m_0 \sim m_{\rm P}$ reproduces $G \approx 6.67\times10^{-11}$~m$^3$\,kg$^{-1}$\,s$^{-2}$.
+using $\xi = \hbar/(m_0 c)$.  Given the healing length $\xi$ and the
+fundamental mass $m_0$, $G$ is determined.  Inserting $\xi\sim\ell_P \approx
+1.6\times10^{-35}$~m and $m_0\sim m_P$ reproduces
+$G\approx 6.67\times10^{-11}$~m$^3$\,kg$^{-1}$\,s$^{-2}$.
 
 \paragraph{What SSV adds beyond Jacobson.}
-Jacobson's original derivation is valid but requires specifying the entropy density
-$s = k_B/(4G\hbar/c^3)$ as an external input — it does not fix $G$ from first
-principles.  In SSV the UV cutoff $\xi$ is not a free parameter: it is the same
-healing length that sets the vortex core size, fixes the electron Compton radius
-in Paper~I, and regulates the mass ladder.  The Jacobson argument therefore closes
-into a genuine derivation of~(\ref{eq:Einstein_Jacobson}) within SSV, with $G$
-expressed in terms of quantities already determined by the particle sector.  No
-independent gravitational input is required.
+Jacobson's original derivation requires specifying the entropy density as
+an external input and does not fix $G$ from first principles.  In SSV the
+UV cutoff $\xi$ is not a free parameter: it is the same healing length that
+sets the vortex core size, fixes the particle mass ladder (Paper~I), and
+enters the gravitational entropy.  The Jacobson argument therefore closes
+into a genuine derivation of~\eqref{eq:Einstein} with $G$ expressed in
+terms of quantities already determined by the particle sector.
 
-\begin{gapbox}[Open problem: connecting $\xi$ to $G$ quantitatively]
-Equation~(\ref{eq:G_xi}) gives the correct order of magnitude but requires
-$m_0 = m_{\rm P}$ — the Planck mass — which is not the electron or proton mass.
-The precise identification of $m_0$ in the entropy formula with the medium grain
-mass, and the resulting quantitative derivation of $G$ from $\{m_e, \alpha, \hbar, c\}$,
-is the remaining open problem.  It is the same problem as deriving $\alpha_G$ from
-the proton breather geometry identified in Paper~II, viewed from the thermodynamic
+\begin{gapbox}[Open: quantitative $G$ from $\{m_e,\alpha,\hbar,c\}$]
+Equation~\eqref{eq:G_xi} gives the correct order of magnitude but requires
+$m_0 = m_P$.  The Planck mass is not the electron or proton mass.  The
+precise identification of the medium grain mass $m_0$ with the observed
+particle masses---and the resulting derivation of $G$ from
+$\{m_e,\alpha,\hbar,c\}$---is the remaining open problem.  It is the same
+problem as deriving the gravitational fine-structure constant $\alpha_G$ from
+the proton breather geometry of Paper~II, viewed from the thermodynamic
 direction.
 \end{gapbox}
 
-\subsection{The Einstein Equations as a Macroscopic Limit}
+\subsection{Cosmological constant}
 
-The Madelung equations~(\ref{eq:cont})--(\ref{eq:Euler}) can be written in covariant
-form by introducing an effective metric
+The cosmological constant in~\eqref{eq:Einstein} corresponds to the residual
+pressure of the saturated vacuum:
 \begin{equation}
-    g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu},\qquad
-    h_{00} = -\frac{2\Phi}{c^2},\quad h_{0i} = -\frac{2v_i}{c},\quad
-    h_{ij} = -\frac{2\Phi}{c^2}\,\delta_{ij},
-    \label{eq:metric}
+  \Lambda = \frac{8\pi G}{c^2}\,\frac{P_0}{\rho_0 c^2}.
+  \label{eq:Lambda}
 \end{equation}
-where $v_i$ is the background flow velocity and $\Phi$ the gravitational potential of
-equation~(\ref{eq:Phi_hydro}).
+The cosmological constant problem---why the observed $\Lambda\sim10^{-52}$~m$^{-2}$
+is so much smaller than quantum field theory estimates of vacuum energy---dissolves
+in SSV.  $\Lambda$ is not a vacuum energy density in the QFT sense but a property
+of the classical ground state of the superfluid, set by the saturation pressure
+$P_0$.  The saturation condition suppresses $P_0$ relative to the na\"ive zero-point
+energy, without fine-tuning.
 
-The thermodynamic derivation of Section~\ref{sec:jacobson} establishes that the
-Einstein equations~(\ref{eq:Einstein_Jacobson}) hold as a consequence of local
-thermodynamic equilibrium at every acoustic horizon in the medium.  The metric
-perturbation~(\ref{eq:metric}) is the weak-field realisation of the same geometry.
-A systematic gradient expansion of the Euler equation~(\ref{eq:Euler}) around the
-saturated ground state $(\rho_0, \mathbf{v}=0)$ confirms that at second order in
-$\Phi/c^2$ the stress-energy divergence obeys
+\subsection{Planck scale as the healing length}
+
+The Planck length is the scale at which the continuum approximation breaks down:
 \begin{equation}
-    G_{\mu\nu} \equiv R_{\mu\nu} - \tfrac{1}{2}g_{\mu\nu}R = \frac{8\pi G}{c^4}T_{\mu\nu},
-    \label{eq:Einstein}
+  \ell_P = \xi = \frac{\hbar}{\sqrt{2m_0 g\rho_0}} \approx 1.6\times10^{-35}~\text{m},
+  \label{eq:Planck}
 \end{equation}
-where $R_{\mu\nu}$ is the Ricci tensor of~(\ref{eq:metric}).  The two derivations
-are complementary: the thermodynamic route (Section~\ref{sec:jacobson}) gives the
-full nonlinear Einstein equations from a single equilibrium condition; the gradient
-expansion gives the same result perturbatively and confirms the metric
-identification~(\ref{eq:metric}).
+where $g$ is the LogSE coupling constant.  This fixes
+$g\rho_0 \sim m_0 c^2/\ell_P^2$.  Below $\xi$ the medium is discrete---quantised
+vortex lines are the fundamental objects, as established in Paper~I~\cite{SSV-I}.
+Above $\xi$ the continuum description holds and both quantum mechanics and
+general relativity emerge in the appropriate limits.
 
-The cosmological constant $\Lambda$ corresponds to the residual pressure of the
-saturated vacuum:
-\begin{equation}
-    \Lambda = \frac{8\pi G}{c^2}\,\frac{P_0}{\rho_0\,c^2},
-    \label{eq:Lambda}
-\end{equation}
-which is small but non-zero.  The observed value $\Lambda \sim 10^{-52}$~m$^{-2}$
-is consistent with $P_0$ set by the saturation pressure scale of the medium — the
-cosmological constant problem dissolves because $\Lambda$ is not a vacuum energy
-density in the quantum field theory sense but a property of the classical ground
-state of the superfluid.
+\begin{resultbox}[Quantum gravity dissolved]
+The SSV quantum-gravity problem is: derive the continuum Madelung limit from the
+discrete vortex medium.  This is a well-posed coarse-graining problem, not a
+fundamental incompatibility.  The Planck scale is the grain size of the medium,
+not a new physics threshold.  Both quantum mechanics and general relativity are
+effective descriptions at scales $\gg\xi$.
+\end{resultbox}
 
-\subsection{Quantum Gravity: Where Hydrodynamics and Geometry Meet}
+%%──────────────────────────────────────────────────────────────────────────────
+\section{Discussion}
+\label{sec:discussion}
+%%──────────────────────────────────────────────────────────────────────────────
 
-The ``quantum gravity problem'' in conventional physics arises from the incompatibility
-of a smooth, continuous spacetime (general relativity) with the discrete, probabilistic
-structure of quantum field theory. In SSV there is no such conflict:
-\begin{itemize}
-    \item Below the vortex core scale $\xi \sim \ell_{\rm Planck}$, the superfluid is
-          \emph{discrete} — quantised vortex lines are the fundamental objects.
-    \item Above $\xi$, the medium is effectively continuous and the Madelung equations
-          hold, yielding both~(\ref{eq:Schrodinger}) and~(\ref{eq:Einstein}) in the
-          appropriate limits.
-\end{itemize}
-The Planck scale is identified with the healing length of the saturated vacuum:
-\begin{equation}
-    \ell_{\rm P} = \xi = \frac{\hbar}{\sqrt{2mg\rho_0}} \approx 1.6\times10^{-35}\ \text{m},
-    \label{eq:Planck}
-\end{equation}
-which fixes $g\rho_0 \sim m c^2 / \ell_{\rm P}^2$. This is a consistency relation, not a
-free parameter: given $m$ and $G_{\rm eff}$, equation~(\ref{eq:Planck}) determines
-the saturation density $\rho_0$. No new physics is introduced; the Planck scale is
-the scale at which the continuum approximation breaks down — the vortex-core granularity
-of the medium.
+\subsection{Position in the series}
 
-%-----------------------------------------------------------------------
+Paper~VII-b is the geometry and GR-limit paper in the SSV series.  Its inputs
+are the density-to-potential identification of Paper~IV~\cite{SSV-IV}, the
+vortex-core entropy of Paper~I~\cite{SSV-I}, the condensate black-hole picture of
+Paper~V~\cite{SSV-V}, and the Madelung equations of Paper~VII-a~\cite{SSV-VIIa}.
+Its output---the emergent metric, the resolved factor-of-two correction, the
+Jacobson derivation of Einstein's equations with $G$ in terms of $\xi$, and the
+cosmological-constant identification---is the geometrodynamic foundation of the
+series.  Claims about cosmogony and the large-scale structure of spacetime are
+deferred to Paper~VIII.
 
-\section{Discussion and Open Problems}
+\subsection{Relation to analogue-gravity programme}
 
-The derivation collected here is strongest at the level of structural correspondence: the same
-medium that carries pressure gradients, acoustic attraction, and time-dilation effects also
-provides the ingredients needed for an emergent metric description. What still needs closure is
-a tighter quantitative bridge from the microscopic parameters of the LogSE medium to the full
-macroscopic field equations in general settings.
+The Jacobson route used in Section~\ref{sec:jacobson} and the acoustic-horizon
+picture of Paper~V are closely related to the analogue-gravity programme
+(Unruh~\cite{Unruh1976,Unruh1981}, Visser~\cite{Visser1998},
+Volovik~\cite{Volovik2003}).  The SSV difference is ontological rather than
+formal: analogue-gravity systems are laboratory analogues of a geometry that
+exists independently; in SSV the condensate \emph{is} the physical vacuum and
+the analogy is the fundamental description.
 
+\subsection{Open problems}
+
+\begin{enumerate}
+  \item \emph{Quantitative $G$ from the particle sector.}  Equation~\eqref{eq:G_xi}
+    gives the correct order of magnitude; deriving $G$ from $\{m_e,\alpha,\hbar,c\}$
+    without treating $m_0 = m_P$ as an assumption is the principal open problem.
+
+  \item \emph{Full Kerr exterior and no-hair theorem.}  The present paper treats
+    the Schwarzschild case.  The rotating condensate black hole and the no-hair
+    structure require extending the Jacobson argument to the Kerr metric or
+    equivalently showing that the rotating acoustic horizon reproduces the
+    Boyer--Lindquist line element at post-Newtonian order.
+
+  \item \emph{Strong-field deviations.}  The post-Newtonian expansion confirms
+    Einstein's equations perturbatively; the Jacobson argument is nonlinear but
+    assumes local thermodynamic equilibrium.  Showing that the condensate dynamics
+    reproduces GR in genuinely strong-field settings (near the horizon at
+    $r\lesssim10\,r_S$) requires a numerical analysis beyond the present scope.
+
+  \item \emph{Dark energy and the late-time Universe.}  The cosmological constant
+    identification~\eqref{eq:Lambda} is qualitative.  Deriving the numerical value
+    of $\Lambda$ from the SSV equation of state and connecting it to the
+    large-scale expansion history is deferred to Paper~VIII.
+\end{enumerate}
+
+%%──────────────────────────────────────────────────────────────────────────────
 \section{Conclusion}
+\label{sec:conclusion}
+%%──────────────────────────────────────────────────────────────────────────────
 
-If geometry is emergent from the medium, then the usual quantum-gravity programme is replaced
-by a hydrodynamic coarse-graining problem. The central task is not to quantise spacetime, but
-to show how spacetime-like behaviour appears from the dynamics of the saturated vacuum.
+If geometry is emergent from the condensate, the quantum-gravity problem is
+replaced by a derivation problem.  The central task is not to quantise
+spacetime but to show that spacetime-like behaviour coarse-grains from the
+vortex dynamics of the saturated vacuum.  The results of this paper are:
 
+\begin{enumerate}
+  \item The emergent metric~\eqref{eq:metric} follows directly from the
+    density-to-potential identification of Paper~IV, with no separate geometric
+    postulate.
+
+  \item Spatial curvature in the isotropic metric resolves the factor-of-two
+    horizon discrepancy of Papers~IV and~V, yielding the correct Schwarzschild
+    radius $r_H = 2GM/c^2$, surface gravity~\eqref{eq:kappa}, and Hawking
+    temperature~\eqref{eq:TH}.
+
+  \item The full nonlinear Einstein equations~\eqref{eq:Einstein} follow from the
+    Jacobson acoustic-thermodynamic route, with $G$ expressed in terms of the
+    healing length $\xi$ already fixed by the particle sector.
+
+  \item The cosmological constant~\eqref{eq:Lambda} is the saturation pressure
+    of the vacuum ground state, not a zero-point energy density; no fine-tuning
+    is required.
+
+  \item The Planck scale is the vortex-core healing length: the scale at which
+    the continuum description breaks down.  Quantum mechanics and general
+    relativity are both effective theories at scales $\gg\xi$.
+\end{enumerate}
+
+%%──────────────────────────────────────────────────────────────────────────────
 \begin{thebibliography}{99}
 
-\bibitem{ssv1}
-Norland, S., ``Saturated Superfluid Vacuum~I: Topological Defects in a
-Saturated Superfluid Vacuum and the $\alpha$-Harmonic Mass Ladder,''
-SSV Series Paper~I (2026).
+\bibitem{SSV-I}
+S.\ Norland, \textit{Saturated Superfluid Vacuum~I: Topological Defects in a
+Saturated Superfluid Vacuum---The Geometric Origin of Matter and the
+$\alpha$-Harmonic Mass Ladder}, 10.5281/zenodo.19651986, 2026.
 
-\bibitem{ssv2}
-Norland, S., ``Saturated Superfluid Vacuum~II: Forces as Hydrodynamic
-Pressure Gradients in the Saturated Superfluid Plenum,''
-SSV Series Paper~II (2026).
+\bibitem{SSV-II}
+S.\ Norland, \textit{Saturated Superfluid Vacuum~II: Forces as Hydrodynamic
+Pressure Gradients in the Saturated Superfluid Plenum}, SSV programme, 2026.
 
-\bibitem{ssv3}
-Norland, S., ``Saturated Superfluid Vacuum~III: Thermodynamics and
-Irreversible Time,'' SSV Series Paper~III (2026).
+\bibitem{SSV-III}
+S.\ Norland, \textit{Saturated Superfluid Vacuum~III: Irreversible Time and
+Wake Entropy}, SSV programme, 2026.
 
-\bibitem{ssv4}
-Norland, S., ``Saturated Superfluid Vacuum~IV: Galactic-Scale Resonances,''
-SSV Series Paper~IV (2026).
+\bibitem{SSV-IV}
+S.\ Norland, \textit{Saturated Superfluid Vacuum~IV: Gravity as Update-Capacity
+Gradient}, SSV programme, 2026.
+
+\bibitem{SSV-V}
+S.\ Norland, \textit{Saturated Superfluid Vacuum~V: Condensate Black Holes},
+SSV programme, 2026.
+
+\bibitem{SSV-VIIa}
+S.\ Norland, \textit{Saturated Superfluid Vacuum~VII-a: Quantum Mechanics from
+Hydrodynamics}, SSV programme, 2026.
 
 \bibitem{Bjerknes1906}
-Bjerknes, V.~F.~K., \emph{Fields of Force}
+V.~F.~K.\ Bjerknes, \textit{Fields of Force}
 (Columbia University Press, New York, 1906).
 
-\bibitem{Madelung1927}
-Madelung, E., ``Quantentheorie in hydrodynamischer Form,''
-\emph{Z.\ Phys.}\ \textbf{40}, 322--326 (1927).
-
-\bibitem{Kibble1976}
-Kibble, T.~W.~B., ``Topology of Cosmic Domains and Strings,''
-\emph{J.\ Phys.\ A} \textbf{9}, 1387--1398 (1976).
-
-\bibitem{Zurek1985}
-Zurek, W.~H., ``Cosmological Experiments in Superfluid Helium,''
-\emph{Nature} \textbf{317}, 505--508 (1985).
+\bibitem{Gross1961}
+E.~P.\ Gross, ``Structure of a Quantised Vortex in Boson Systems,''
+\textit{Nuovo Cim.}\ \textbf{20}, 454--457 (1961).
 
 \bibitem{Jacobson1995}
-Jacobson, T., ``Thermodynamics of Spacetime: The Einstein Equation of State,''
-\emph{Phys.\ Rev.\ Lett.}\ \textbf{75}, 1260--1263 (1995).
+T.\ Jacobson, ``Thermodynamics of Spacetime: The Einstein Equation of State,''
+\textit{Phys.\ Rev.\ Lett.}\ \textbf{75}, 1260--1263 (1995).
 [arXiv:gr-qc/9504004]
 
-\bibitem{Unruh1976}
-Unruh, W.~G., ``Notes on Black-Hole Evaporation,''
-\emph{Phys.\ Rev.\ D} \textbf{14}, 870--892 (1976).
+\bibitem{Madelung1927}
+E.\ Madelung, ``Quantentheorie in hydrodynamischer Form,''
+\textit{Z.\ Phys.}\ \textbf{40}, 322--326 (1927).
 
-\bibitem{OPH_particles}
-M\"{u}ller, B., Xue, K., and Poneder, M.,
-``Deriving the Particle Zoo from Observer Consistency,''
-OPH Paper~3, preprint (2026).
-\url{https://github.com/FloatingPragma/observer-patch-holography}
+\bibitem{Pitaevskii1961}
+L.~P.\ Pitaevskii, ``Vortex Lines in an Imperfect Bose Gas,''
+\textit{Sov.\ Phys.\ JETP}\ \textbf{13}, 451--454 (1961).
+
+\bibitem{Unruh1976}
+W.~G.\ Unruh, ``Notes on Black-Hole Evaporation,''
+\textit{Phys.\ Rev.\ D}\ \textbf{14}, 870--892 (1976).
+
+\bibitem{Unruh1981}
+W.~G.\ Unruh, ``Experimental Black-Hole Evaporation?''
+\textit{Phys.\ Rev.\ Lett.}\ \textbf{46}, 1351--1353 (1981).
+
+\bibitem{Visser1998}
+M.\ Visser, ``Acoustic Black Holes: Horizons, Ergospheres and Hawking
+Radiation,'' \textit{Class.\ Quantum Grav.}\ \textbf{15}, 1767 (1998).
 
 \bibitem{Volovik2003}
-Volovik, G.~E., \emph{The Universe in a Helium Droplet}
+G.~E.\ Volovik, \textit{The Universe in a Helium Droplet}
 (Oxford University Press, Oxford, 2003).
 
-\bibitem{Gross1961}
-Gross, E.~P., ``Structure of a Quantised Vortex in Boson Systems,''
-\emph{Nuovo Cim.}\ \textbf{20}, 454--457 (1961).
-
 \end{thebibliography}
-
-\end{document}
 
 \end{document}
