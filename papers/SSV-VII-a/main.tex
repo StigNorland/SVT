@@ -1,305 +1,453 @@
-\documentclass[11pt]{article}
-
-\usepackage[a4paper,margin=1in]{geometry}
-\usepackage[T1]{fontenc}
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage{amsmath,amssymb}
-\usepackage{physics}
+\usepackage{amsmath,amssymb,physics}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{enumitem}
-\usepackage{setspace}
+\usepackage{caption}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{resultbox}[1][]{enhanced,breakable,
+  colback=blue!4!white,colframe=blue!40!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+\newtcolorbox{gapbox}[1][]{enhanced,breakable,
+  colback=orange!6!white,colframe=orange!60!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
 
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
-\setstretch{1.1}
 
-\title{Saturated Superfluid Vacuum VII-a\\
-Quantum Mechanics from Hydrodynamics}
-\author{Stig Norland}
+\title{\textbf{Saturated Superfluid Vacuum~VII-a}\\[0.4em]
+\large Quantum Mechanics from Hydrodynamics}
+\author{Stig Norland\\
+\small Independent Researcher, Bergen, Norway}
 \date{Draft}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-This paper develops the quantum-mechanical limit of the Saturated Superfluid
-Vacuum (SSV) framework. Its scope is deliberately narrow: the Madelung
-transformation, the linear Schrodinger limit, uncertainty as a hydraulic
-localisation bound, and measurement as a physical reconnection channel. The
-formal result is the recovery of the Schrodinger equation from the low-amplitude
-hydrodynamic regime. The interpretive result is a proposed physical reading of
-quantisation, localisation limits, and measurement in the same medium. Claims
-about emergent geometry, Einstein equations, cosmogony, and full-series synthesis
-are left to companion papers.
+This paper derives the quantum-mechanical limit of the Saturated Superfluid
+Vacuum (SSV) framework.  The scope is deliberately narrow: the Madelung
+transformation, the linear Schr\"odinger limit, uncertainty as a hydraulic
+localisation bound, and measurement as a physical reconnection channel.
+
+The formal result is the recovery of the Schr\"odinger equation from the
+low-amplitude hydrodynamic regime of the SSV medium.  Quantisation enters as
+the single-valuedness condition on the order-parameter phase, tying discrete
+winding numbers to circulation topology rather than to a separate quantisation
+rule.  Uncertainty is interpreted as the hydraulic cost of localising the
+order parameter.  Measurement is modelled as an irreversible reconnection or
+wake-writing event in the medium.
+
+Claims about emergent geometry, Einstein equations, cosmogony, and full-series
+synthesis are left to companion papers.
 \end{abstract}
 
-\section{Introduction}
+\newpage
+\tableofcontents
+\newpage
 
-The SSV programme treats the vacuum as a saturated superfluid order parameter
-rather than as an empty background. In earlier papers, the same medium supports
-topological defects, hydrodynamic forces, and irreversible wake formation. The
+%%──────────────────────────────────────────────────────────────────────────────
+\section{Introduction}
+\label{sec:intro}
+%%──────────────────────────────────────────────────────────────────────────────
+
+The SSV programme treats the vacuum as a saturated superfluid described by a
+complex order parameter $\Psi$.  Papers~I--IV establish the medium, its
+topological defects, thermodynamic arrow, and gravitational limit.  Paper~V
+extends the same picture to strong gravity and condensate black holes.  The
 present paper asks a narrower question: under what conditions does ordinary
-quantum mechanics appear as the low-amplitude hydrodynamic limit of that medium?
+quantum mechanics appear as the low-amplitude hydrodynamic limit of this medium?
 
 The working thesis is that quantum behaviour is not an additional foundational
-axiom. It is the wave-mechanical regime of the order parameter when perturbations
-are small, gradients are gentle, and defects can be treated through an effective
-potential. In that regime the Madelung variables map the complex wave equation
-to continuity plus Euler-type flow equations, and the inverse map recovers the
-Schrodinger equation for a slowly varying envelope.
+axiom.  It is the wave-mechanical regime of the order parameter when
+perturbations are small, gradients are gentle, and defects can be treated
+through an effective potential.  In that regime the Madelung variables map the
+complex wave equation to continuity plus Euler-type flow equations, and the
+inverse map recovers the Schr\"odinger equation for a slowly varying envelope.
 
-This paper separates three claim levels.
+This paper separates three claim levels explicitly.
 
 \begin{enumerate}[label=\textbf{C\arabic*.}]
-    \item \textbf{Formal derivation.} The Madelung transformation and its inverse
-    show how a Schrodinger-type equation is equivalent to hydrodynamic flow with
-    a quantum-pressure term.
+  \item \textbf{Formal derivation.}  The Madelung transformation and its inverse
+    show how a Schr\"odinger-type equation is equivalent to hydrodynamic flow
+    with a quantum-pressure term.  This is an exact algebraic equivalence, not
+    an approximation.
 
-    \item \textbf{Controlled limit.} In the low-amplitude, long-wavelength regime,
+  \item \textbf{Controlled limit.}  In the low-amplitude, long-wavelength regime,
     the nonlinear medium terms can be absorbed into background phase and
-    effective potentials, leaving the ordinary linear Schrodinger equation.
+    effective potentials, leaving the ordinary linear Schr\"odinger equation.
+    This is the limit that makes SSV contact with standard quantum mechanics.
 
-    \item \textbf{Physical interpretation.} Quantisation, uncertainty, and
+  \item \textbf{Physical interpretation.}  Quantisation, uncertainty, and
     measurement are read as circulation topology, localisation stiffness, and
-    irreversible reconnection respectively. These are model commitments rather
-    than independent mathematical theorems.
+    irreversible reconnection respectively.  These are model commitments that
+    arise naturally from the medium picture; they are not independent mathematical
+    theorems.
 \end{enumerate}
 
-\section{Madelung Form of the Medium}
+\subsection*{Roadmap}
+
+Section~\ref{sec:madelung} carries out the Madelung transformation and derives
+the hydrodynamic equations.  Section~\ref{sec:schrodinger} takes the
+Schr\"odinger limit and shows how quantisation follows from phase topology.
+Section~\ref{sec:uncertainty} interprets the uncertainty relation as a hydraulic
+localisation bound.  Section~\ref{sec:measurement} models measurement as a
+reconnection event and discusses Born weights.  Section~\ref{sec:discussion}
+places the results in the context of the series and lists open calculations.
+
+%%──────────────────────────────────────────────────────────────────────────────
+\section{Madelung Transformation}
 \label{sec:madelung}
+%%──────────────────────────────────────────────────────────────────────────────
 
-Let the local state of the saturated medium be represented by a complex order
-parameter
+\subsection{Polar decomposition}
+
+Let the local state of the saturated medium be the complex order parameter
 \begin{equation}
-    \Psi(\mathbf{x},t)=\sqrt{\rho(\mathbf{x},t)}\,e^{iS(\mathbf{x},t)/\hbar},
-    \label{eq:polar}
+  \Psi(\mathbf{x},t) = \sqrt{\rho(\mathbf{x},t)}\,e^{iS(\mathbf{x},t)/\hbar},
+  \label{eq:polar}
 \end{equation}
-where $\rho$ is the density and $S$ is the phase action. The associated velocity
-field is
+where $\rho$ is the mass density and $S$ is the phase action.  The associated
+irrotational velocity field is
 \begin{equation}
-    \mathbf{v}=\frac{1}{m}\nabla S.
-    \label{eq:velocity}
+  \mathbf{v} = \frac{1}{m}\nabla S.
+  \label{eq:velocity}
 \end{equation}
 
-For a Gross--Pitaevskii/logarithmic-Schrodinger-type medium, the local envelope
-obeys a wave equation of the schematic form
+For the logarithmic-Schr\"odinger (LogSE) medium of Papers~I--IV~\cite{SSV-I,SSV-IV},
+the order parameter obeys
 \begin{equation}
-    i\hbar\,\partial_t\Psi =
-    \left[-\frac{\hbar^2}{2m}\nabla^2 + V_{\rm ext} + U(\rho)\right]\Psi,
-    \label{eq:medium_wave}
+  i\hbar\,\partial_t\Psi =
+  \left[-\frac{\hbar^2}{2m}\nabla^2 + V_\mathrm{ext} + U(\rho)\right]\Psi,
+  \label{eq:medium_wave}
 \end{equation}
-where $V_{\rm ext}$ is a slowly varying effective potential and $U(\rho)$ is the
-medium self-interaction. The specific equation of state belongs to the earlier
-SSV papers; the present paper needs only the hydrodynamic structure common to
-this class of order-parameter equations.
+where $V_\mathrm{ext}$ is a slowly varying effective potential and $U(\rho)$
+is the medium self-interaction.  The specific equation of state is fixed in
+earlier papers; the present paper uses only the hydrodynamic structure common
+to this class of order-parameter equations.
 
-Substituting Eq.~(\ref{eq:polar}) into Eq.~(\ref{eq:medium_wave}) and separating
-real and imaginary parts gives
+\subsection{Hydrodynamic form}
+
+Substituting \eqref{eq:polar} into \eqref{eq:medium_wave} and separating real
+and imaginary parts gives the Madelung pair
 \begin{align}
-    \partial_t\rho+\nabla\cdot(\rho\mathbf{v}) &= 0,
-    \label{eq:continuity}\\
-    \partial_t S+\frac{(\nabla S)^2}{2m}+V_{\rm ext}+U(\rho)+Q &= 0,
-    \label{eq:hamilton_jacobi}
+  \partial_t\rho + \nabla\cdot(\rho\mathbf{v}) &= 0,
+  \label{eq:continuity}\\
+  \partial_t S + \frac{(\nabla S)^2}{2m} + V_\mathrm{ext} + U(\rho) + Q &= 0,
+  \label{eq:hamilton_jacobi}
 \end{align}
-with
+with the quantum pressure
 \begin{equation}
-    Q(\mathbf{x},t)=
-    -\frac{\hbar^2}{2m}\frac{\nabla^2\sqrt{\rho}}{\sqrt{\rho}}.
-    \label{eq:Q}
+  Q(\mathbf{x},t) = -\frac{\hbar^2}{2m}\frac{\nabla^2\sqrt{\rho}}{\sqrt{\rho}}.
+  \label{eq:Q}
 \end{equation}
-Equivalently, taking a gradient of Eq.~(\ref{eq:hamilton_jacobi}) gives an
-Euler equation for the flow:
+Taking a gradient of \eqref{eq:hamilton_jacobi} gives the Euler equation
 \begin{equation}
-    m\left(\partial_t+\mathbf{v}\cdot\nabla\right)\mathbf{v}
-    =-\nabla\left(V_{\rm ext}+U(\rho)+Q\right).
-    \label{eq:euler}
+  m\bigl(\partial_t + \mathbf{v}\cdot\nabla\bigr)\mathbf{v}
+  = -\nabla\bigl(V_\mathrm{ext} + U(\rho) + Q\bigr).
+  \label{eq:euler}
 \end{equation}
 
-Equations~(\ref{eq:continuity})--(\ref{eq:euler}) are the Madelung equations:
-compressible hydrodynamics with an additional quantum-pressure contribution.
-This is the formal bridge used in both directions. Starting from the wave
-equation gives hydrodynamics; starting from the hydrodynamic pair plus the
-irrotational velocity condition reconstructs the wave equation.
+\begin{resultbox}[Madelung equivalence]
+Equations~\eqref{eq:continuity}--\eqref{eq:euler} are the Madelung equations:
+compressible irrotational hydrodynamics with an additional quantum-pressure
+contribution $Q$.  The transformation is exact and bidirectional: starting from
+the wave equation \eqref{eq:medium_wave} yields the hydrodynamic pair; starting
+from the hydrodynamic pair with the irrotationality condition~\eqref{eq:velocity}
+reconstructs the wave equation.
+\end{resultbox}
 
-\section{Schrodinger Limit}
+%%──────────────────────────────────────────────────────────────────────────────
+\section{Schr\"odinger Limit}
 \label{sec:schrodinger}
+%%──────────────────────────────────────────────────────────────────────────────
 
-Write the density as $\rho=\rho_0+\delta\rho$, with
-$|\delta\rho|\ll\rho_0$, and assume gradients are long compared with the core or
-healing scale of the medium. In this regime the self-interaction can be expanded
-around the saturated background:
+\subsection{Low-amplitude long-wavelength limit}
+
+Write the density as $\rho = \rho_0 + \delta\rho$, with $|\delta\rho|\ll\rho_0$,
+and assume gradients are long compared with the healing length of the medium.
+Expand the self-interaction around the saturated background:
 \begin{equation}
-    U(\rho)=U(\rho_0)+U'(\rho_0)\delta\rho+\cdots .
-    \label{eq:U_expand}
+  U(\rho) = U(\rho_0) + U'(\rho_0)\,\delta\rho + \cdots
+  \label{eq:U_expand}
 \end{equation}
-The constant term shifts the global phase. The linear term is either negligible
-for a sufficiently weak perturbation or can be collected into an effective
-potential. The slowly varying envelope $\psi$ then obeys
+The constant term shifts the global phase; the linear term is either negligible
+for a sufficiently weak perturbation or is absorbed into an effective potential.
+The slowly varying envelope $\psi$ then obeys
 \begin{equation}
-    i\hbar\,\partial_t\psi =
-    \left[-\frac{\hbar^2}{2m}\nabla^2+V_{\rm eff}\right]\psi,
-    \label{eq:schrodinger}
+  i\hbar\,\partial_t\psi =
+  \left[-\frac{\hbar^2}{2m}\nabla^2 + V_\mathrm{eff}\right]\psi,
+  \label{eq:schrodinger}
 \end{equation}
-which is the ordinary Schrodinger equation for the effective degree of freedom
-under study.
+the ordinary Schr\"odinger equation for the effective degree of freedom.
 
-The controlled claim is therefore not that all quantum theory has been derived
-in one step. The claim is narrower: whenever the SSV medium is in a
-low-amplitude, long-wavelength regime with a well-defined envelope, the same
-hydrodynamic variables reduce to the linear Schrodinger dynamics used in
-ordinary quantum mechanics.
+\begin{resultbox}[Schr\"odinger limit]
+The SSV medium in its low-amplitude, long-wavelength regime reduces exactly to
+linear Schr\"odinger dynamics.  The claim is not that all of quantum theory is
+derived in one step; it is that whenever the conditions above hold, the same
+hydrodynamic variables reduce to the linear dynamics used in standard quantum
+mechanics.
+\end{resultbox}
 
-\section{Quantisation as Circulation Topology}
-\label{sec:quantisation}
+\begin{gapbox}[Deferred: bound-state spectra from LogSE]
+Equation~\eqref{eq:schrodinger} recovers the Schr\"odinger form, but the
+effective potential $V_\mathrm{eff}$ must be computed from the full LogSE
+background for each physical situation.  Deriving the hydrogen-like bound-state
+spectrum directly from the LogSE---without invoking $V_\mathrm{eff}$ as an
+external input---is part of the Paper~I numerical programme~\cite{SSV-I}.
+\end{gapbox}
 
-The phase in Eq.~(\ref{eq:polar}) must be single-valued around any closed loop
-that does not cross a zero of $\Psi$. Therefore
+\subsection{Quantisation as circulation topology}
+
+The phase in \eqref{eq:polar} must be single-valued around any closed loop
+that does not cross a zero of $\Psi$.  Therefore
 \begin{equation}
-    \oint_C \nabla S\cdot d\mathbf{l}=2\pi n\hbar,
-    \qquad n\in\mathbb{Z}.
-    \label{eq:phase_quantisation}
+  \oint_C \nabla S\cdot d\mathbf{l} = 2\pi n\hbar, \qquad n\in\mathbb{Z}.
+  \label{eq:phase_quantisation}
 \end{equation}
-Using Eq.~(\ref{eq:velocity}), this becomes the circulation condition
+Using \eqref{eq:velocity}, this is the circulation condition
 \begin{equation}
-    \oint_C \mathbf{v}\cdot d\mathbf{l}=\frac{2\pi n\hbar}{m}.
-    \label{eq:circulation}
+  \oint_C \mathbf{v}\cdot d\mathbf{l} = \frac{2\pi n\hbar}{m}.
+  \label{eq:circulation}
 \end{equation}
-
-In this reading, quantisation is tied to the topology of the phase field. It is
-not inserted as a separate rule for allowed orbits; it is the consequence of a
+Quantisation is therefore tied to the topology of the phase field.  It is not
+inserted as a separate rule for allowed orbits; it is the consequence of a
 single-valued order parameter with vortex cores acting as excluded phase
-singularities. The detailed spectrum of any bound system still depends on its
+singularities.  The detailed spectrum of any bound system depends on its
 effective potential and boundary conditions, but the origin of discrete winding
-numbers is hydrodynamic.
+numbers is hydrodynamic.  This is consistent with the topological spin derivation
+of Paper~V~\cite{SSV-V} and the vortex-defect picture of Paper~I~\cite{SSV-I}.
 
-\section{Uncertainty as a Hydraulic Bound}
+%%──────────────────────────────────────────────────────────────────────────────
+\section{Uncertainty as Hydraulic Bound}
 \label{sec:uncertainty}
+%%──────────────────────────────────────────────────────────────────────────────
 
-The usual uncertainty relation follows mathematically from Fourier analysis of
-wave packets:
+The standard uncertainty relation follows from Fourier analysis of wave packets:
 \begin{equation}
-    \Delta x\,\Delta p\geq\frac{\hbar}{2}.
-    \label{eq:uncertainty}
+  \Delta x\,\Delta p \geq \frac{\hbar}{2}.
+  \label{eq:uncertainty}
 \end{equation}
-SSV adds a physical interpretation of the same relation. A perturbation
-localised to a short length scale must include large gradients of
-$\sqrt{\rho}$ and phase. Through Eq.~(\ref{eq:Q}), those gradients carry a
-quantum-pressure cost. Pushing $\Delta x$ downward therefore forces a larger
-spread in momentum modes and a larger hydraulic stiffness penalty.
+SSV adds a physical interpretation of the same relation.  A perturbation
+localised to a short length scale must include large gradients of $\sqrt{\rho}$
+and phase.  Through \eqref{eq:Q}, those gradients carry a quantum-pressure cost
+$\Delta E_Q \sim \hbar^2/(2m\,\Delta x^2)$.  Pushing $\Delta x$ downward
+therefore forces a larger spread in momentum modes and a larger hydraulic
+stiffness penalty, arriving at \eqref{eq:uncertainty}.
 
-This section should not be read as a replacement proof of the uncertainty
-principle. The proof remains the standard wave-packet theorem. The SSV claim is
-that the theorem has a medium-level interpretation: localisation is limited
-because the order parameter cannot be squeezed arbitrarily without exciting the
-pressure and phase-gradient channels of the fluid.
+This section does not replace the standard proof.  The proof remains the
+wave-packet Fourier theorem.  The SSV claim is that the theorem has a
+medium-level interpretation: localisation is limited because the order parameter
+cannot be squeezed arbitrarily without exciting the pressure and phase-gradient
+channels of the fluid.  The uncertainty principle is the hydraulic stiffness of
+the vacuum medium made quantitative.
 
+\begin{gapbox}[Deferred: precise $\hbar/2$ prefactor from LogSE]
+The hydraulic-stiffness argument recovers the form of \eqref{eq:uncertainty} and
+the $\hbar$ scaling, but deriving the precise prefactor $1/2$ from the LogSE
+equation of state---without importing it from the standard wave-packet
+calculation---requires computing the minimum uncertainty product for a LogSE
+coherent state.  This is a tractable calculation deferred to the Paper~I
+programme~\cite{SSV-I}.
+\end{gapbox}
+
+%%──────────────────────────────────────────────────────────────────────────────
 \section{Measurement as Reconnection}
 \label{sec:measurement}
+%%──────────────────────────────────────────────────────────────────────────────
 
-The measurement argument is deliberately kept narrow. A measurement is treated
-as a physical interaction that correlates a microscopic degree of freedom with a
-macroscopic apparatus by driving some part of the combined medium into an
-irreversible reconnection or wake-writing event.
+\subsection{Irreversibility from topology change}
+
+The measurement argument is kept narrow.  A measurement is a physical interaction
+that correlates a microscopic degree of freedom with a macroscopic apparatus by
+driving some part of the combined medium into an irreversible reconnection or
+wake-writing event.
 
 Before measurement, a superposition is represented by a coherent field
 configuration,
 \begin{equation}
-    \Psi=\sum_k c_k\psi_k .
-    \label{eq:superposition}
+  \Psi = \sum_k c_k\psi_k.
+  \label{eq:superposition}
 \end{equation}
 As long as the relevant branches remain phase-coherent, interference terms are
-available. A measurement interaction is the regime in which the probe, apparatus,
+available.  A measurement interaction is the regime in which the probe, apparatus,
 and surrounding medium cross a threshold where topology changes, phonons are
-emitted, or persistent wake degrees of freedom are written. Reversing the event
-would require restoring the original phase relation across all of those
-channels, not merely evolving a small isolated wave packet backward.
+emitted, or persistent wake degrees of freedom are written---the same
+irreversibility mechanism described for time in Paper~III~\cite{SSV-III}.
+Reversing the event would require restoring the original phase relation across
+all of those channels, not merely evolving a small isolated wave packet backward.
 
-\subsection{Born Weights as a Working Model}
+\subsection{Born weights as a working model}
 
-The natural branch weights in Eq.~(\ref{eq:superposition}) are $|c_k|^2$ because
+The natural branch weights in \eqref{eq:superposition} are $|c_k|^2$ because
 the local energy and intensity available to drive an apparatus response are
-quadratic in the wave amplitude. This gives the usual Born form
+quadratic in the wave amplitude.  This gives the usual Born form
 \begin{equation}
-    P_k=|c_k|^2.
-    \label{eq:born}
+  P_k = |c_k|^2.
+  \label{eq:born}
 \end{equation}
-At the present stage this is best stated as a consistency argument, not a full
-derivation. The missing calculation is a reconnection-threshold model showing
-that the basin volume for outcome $k$ is proportional to the incoming branch
-intensity under realistic apparatus coupling.
+At the present stage this is a consistency argument, not a full derivation.
 
-\subsection{What This Does and Does Not Claim}
+\begin{gapbox}[Deferred: Born-rule basin calculation]
+The missing calculation is a reconnection-threshold model showing that the
+basin volume for outcome $k$ is proportional to the incoming branch intensity
+$|c_k|^2$ under realistic apparatus coupling.  This would promote the Born-rule
+argument from physical interpretation to formal derivation.  It requires a
+reduced model of a two-channel apparatus coupled to the SSV medium and is
+deferred to a companion analysis.
+\end{gapbox}
+
+\subsection{What this does and does not claim}
 
 This picture does not require consciousness, an external classical realm, or a
-new postulate of collapse. It also does not yet derive a complete theory of
-detector statistics. Its useful claim is more modest: SSV supplies a candidate
+new postulate of collapse.  It also does not yet derive a complete theory of
+detector statistics.  Its useful claim is more modest: SSV supplies a candidate
 physical channel for irreversibility during measurement, namely topology change
-and wake formation in the medium.
+and wake formation in the medium.  This is consistent with, but not identical
+to, decoherence programmes that source irreversibility from environmental
+entanglement; the SSV version sources it from physical medium events.
 
-\section{Focused Predictions and Open Calculations}
+%%──────────────────────────────────────────────────────────────────────────────
+\section{Discussion}
+\label{sec:discussion}
+%%──────────────────────────────────────────────────────────────────────────────
 
-The present paper leaves two near-term checks.
+\subsection{Position in the series}
+
+Paper~VII-a is the QM-limit paper in the SSV series.  Its inputs are the
+Madelung structure of the LogSE (Papers~I--IV) and the topological defect picture
+(Paper~I, Paper~V).  Its output---the Schr\"odinger limit, circulation
+quantisation, hydraulic uncertainty, and reconnection measurement---is passed
+forward as a standing result.  Claims about emergent geometry and the
+Einstein-equation limit are in Paper~VII-b; cosmogony is in Paper~VIII.
+
+\subsection{Relation to the Madelung and pilot-wave literature}
+
+The Madelung~\cite{Madelung1927} representation is well-established; this is not
+a new mathematical result.  The SSV contribution is the physical identification
+of the medium: the Madelung fluid is not an abstract probability fluid but the
+actual vacuum condensate, with the same medium that supports topological defects,
+irreversible wakes, and gravitational gradients.  The difference from the de
+Broglie--Bohm pilot-wave interpretation is that SSV does not introduce a guiding
+wave on top of classical trajectories; the order parameter IS the physical medium
+in which all dynamics occurs.
+
+\subsection{Testable consequences}
+
+Two near-term checks follow from the reconnection model.
 
 \begin{enumerate}[label=\textbf{Q\arabic*.}]
-    \item \textbf{Reconnection signatures in controlled measurement systems.}
+  \item \textbf{Reconnection signatures in controlled measurement systems.}
     If detector clicks are accompanied by irreversible medium events, then
     sufficiently sensitive optomechanical or superconducting measurement
     platforms should show excess correlated acoustic, thermal, or phase-noise
     signatures at the transition from reversible coupling to recorded outcome.
 
-    \item \textbf{Born-rule basin calculation.}
+  \item \textbf{Born-rule basin scaling.}
     A reduced reconnection-threshold model should test whether branch basin
-    volumes scale as $|c_k|^2$ for simple two-channel apparatus couplings. This
-    is the calculation needed before the measurement section can be promoted
-    from physical interpretation to formal derivation.
+    volumes scale as $|c_k|^2$ for simple two-channel apparatus couplings.
+    This is the calculation needed before the measurement section can be
+    promoted from physical interpretation to formal derivation.
 \end{enumerate}
 
+\subsection{Open problems}
+
+\begin{enumerate}
+  \item \emph{Bound-state spectra.}  Deriving the hydrogen-like spectrum directly
+    from the LogSE, without treating $V_\mathrm{eff}$ as an external input, is
+    part of the Paper~I programme.
+
+  \item \emph{Precise uncertainty prefactor.}  The $1/2$ in \eqref{eq:uncertainty}
+    should emerge from the LogSE coherent-state minimum; the calculation is
+    deferred to the Paper~I programme.
+
+  \item \emph{Multi-particle states.}  The present treatment addresses
+    single-order-parameter modes.  Multi-particle states and exchange statistics
+    require a field-theoretic extension of the Madelung picture, not developed
+    here.
+
+  \item \emph{Spin-1/2 and Fermi statistics.}  The order parameter $\Psi$ is a
+    scalar; half-integer spin and fermion anti-symmetry require an extension to
+    spinor order parameters or a separate topological argument.  This is noted as
+    a gap, not filled here.
+\end{enumerate}
+
+%%──────────────────────────────────────────────────────────────────────────────
 \section{Conclusion}
+\label{sec:conclusion}
+%%──────────────────────────────────────────────────────────────────────────────
 
-SSV VII-a isolates the quantum-mechanics claim from the geometry and cosmogony
-claims elsewhere in the series. The paper's formal core is the Madelung bridge
-and the Schrodinger limit. Its interpretive core is that quantisation reflects
-phase topology, uncertainty reflects hydraulic localisation stiffness, and
-measurement reflects irreversible reconnection or wake-writing in the medium.
-That is enough to make the paper standalone without asking it to carry the
-Einstein-equation or cosmogony arguments.
+SSV~VII-a isolates the quantum-mechanics limit from the geometry and cosmogony
+claims elsewhere in the series.  The paper's formal core is the Madelung bridge
+and the Schr\"odinger limit.  Its interpretive core has three parts:
 
+\begin{enumerate}
+  \item Quantisation reflects phase topology: discrete winding numbers follow
+    from the single-valuedness of the order parameter, not from a separate
+    quantisation axiom.
+
+  \item Uncertainty reflects hydraulic localisation stiffness: the quantum
+    pressure~\eqref{eq:Q} penalises tight localisation, recovering the
+    Heisenberg bound from the equation of state.
+
+  \item Measurement reflects irreversible reconnection or wake-writing in the
+    medium, sourcing irreversibility from topology change rather than from an
+    external classical realm.
+\end{enumerate}
+
+That is sufficient to make the paper standalone without requiring it to carry
+the Einstein-equation or cosmogony arguments.
+
+%%──────────────────────────────────────────────────────────────────────────────
 \begin{thebibliography}{99}
 
-\bibitem{ssv1}
-Norland, S., ``Saturated Superfluid Vacuum~I: Topological Defects in a
-Saturated Superfluid Vacuum and the $\alpha$-Harmonic Mass Ladder,''
-SSV Series Paper~I (2026).
+\bibitem{SSV-I}
+S.\ Norland, \textit{Saturated Superfluid Vacuum~I: Topological Defects in a
+Saturated Superfluid Vacuum---The Geometric Origin of Matter and the
+$\alpha$-Harmonic Mass Ladder}, 10.5281/zenodo.19651986, 2026.
 
-\bibitem{ssv2}
-Norland, S., ``Saturated Superfluid Vacuum~II: Forces as Hydrodynamic
-Pressure Gradients in the Saturated Superfluid Plenum,''
-SSV Series Paper~II (2026).
+\bibitem{SSV-II}
+S.\ Norland, \textit{Saturated Superfluid Vacuum~II: Forces as Hydrodynamic
+Pressure Gradients in the Saturated Superfluid Plenum}, SSV programme, 2026.
 
-\bibitem{ssv3}
-Norland, S., ``Saturated Superfluid Vacuum~III: Thermodynamics and
-Irreversible Time,'' SSV Series Paper~III (2026).
+\bibitem{SSV-III}
+S.\ Norland, \textit{Saturated Superfluid Vacuum~III: Irreversible Time and
+Wake Entropy}, SSV programme, 2026.
 
-\bibitem{Madelung1927}
-Madelung, E., ``Quantentheorie in hydrodynamischer Form,''
-\emph{Z.\ Phys.}\ \textbf{40}, 322--326 (1927).
+\bibitem{SSV-IV}
+S.\ Norland, \textit{Saturated Superfluid Vacuum~IV: Gravity as Update-Capacity
+Gradient}, SSV programme, 2026.
+
+\bibitem{SSV-V}
+S.\ Norland, \textit{Saturated Superfluid Vacuum~V: Condensate Black Holes},
+SSV programme, 2026.
 
 \bibitem{Gross1961}
-Gross, E.~P., ``Structure of a Quantised Vortex in Boson Systems,''
-\emph{Nuovo Cim.}\ \textbf{20}, 454--457 (1961).
+E.~P.\ Gross, ``Structure of a Quantised Vortex in Boson Systems,''
+\textit{Nuovo Cim.}\ \textbf{20}, 454--457 (1961).
 
-\bibitem{Pitaevskii1961}
-Pitaevskii, L.~P., ``Vortex Lines in an Imperfect Bose Gas,''
-\emph{Sov.\ Phys.\ JETP}\ \textbf{13}, 451--454 (1961).
+\bibitem{Madelung1927}
+E.\ Madelung, ``Quantentheorie in hydrodynamischer Form,''
+\textit{Z.\ Phys.}\ \textbf{40}, 322--326 (1927).
 
 \bibitem{Onsager1949}
-Onsager, L., ``Statistical Hydrodynamics,''
-\emph{Nuovo Cim. Suppl.}\ \textbf{6}, 279--287 (1949).
+L.\ Onsager, ``Statistical Hydrodynamics,''
+\textit{Nuovo Cim.\ Suppl.}\ \textbf{6}, 279--287 (1949).
 
-\bibitem{Feynman1955}
-Feynman, R.~P., ``Application of Quantum Mechanics to Liquid Helium,''
-in \emph{Progress in Low Temperature Physics}, Vol.~1, edited by C.~J. Gorter
-(North-Holland, Amsterdam, 1955), pp.~17--53.
+\bibitem{Pitaevskii1961}
+L.~P.\ Pitaevskii, ``Vortex Lines in an Imperfect Bose Gas,''
+\textit{Sov.\ Phys.\ JETP}\ \textbf{13}, 451--454 (1961).
+
+\bibitem{Zloshchastiev2011}
+K.~G.\ Zloshchastiev, ``Logarithmic nonlinearity in theories of quantum
+gravity,'' \textit{Grav.\ Cosmol.}\ \textbf{16}, 288 (2010).
 
 \end{thebibliography}
 
