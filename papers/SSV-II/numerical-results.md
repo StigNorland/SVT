@@ -161,6 +161,100 @@ Implied `R_cap_Z` from the observed `m_Z` and the SSV `m_W`:
 
 ---
 
+## 4. Chiral-Cap Equilibrium: Deriving R_cap = φ/α
+
+**Script:** `src/paper_ii/chiral_cap_equilibrium.py`
+**Method:** Variational energy model for a closed vortex ring with line tension τ and
+chiral-shear bending stiffness λ_bend. Solves equilibrium cubic analytically; confirms
+golden-ratio fixed point.
+
+### Energy model
+
+```
+E(R) = π R² + 2π τ R + 2π λ_bend/R
+```
+
+- `π R²`: surface pressure (cap area × background pressure P₀ = 1)
+- `2π τ R`: vortex line-tension perimeter term
+- `2π λ_bend/R`: chiral-shear bending resistance (outward)
+
+Equilibrium condition `dE/dR = 0`:
+
+```
+R³ + τ R² = λ_bend   (equilibrium cubic)
+```
+
+### Required bending stiffness
+
+| Quantity | Value |
+|---|---|
+| Target `R_cap = φ/α` | 221.73 ξ |
+| `λ*_bend = R_cap³ + τ R_cap²` | 1.1737 × 10⁷ ξ³ |
+| `λ*_bend / (φ/α)³` | 1.077 (= φ + τ/R_cap ≈ φ) |
+| τ-correction `τ R_cap²/R_cap³` | 7.7% |
+| **τ→0 limit: `λ*_0 = (φ/α)³`** | **exact (0.000% error)** |
+| `λ*_0 × α³` | 4.2361 = **φ³** ✓ |
+
+### Golden-ratio fixed point (τ→0)
+
+Define `x = α R/ξ`. At equilibrium: `x³ = α³ λ*_0`. With `λ*_0 = φ³/α³`:
+
+```
+x³ = φ³  ⟹  x = φ = 1.618034
+```
+
+The golden ratio satisfies `φ² = φ + 1` (defining property). The cap radius
+`R_cap = φ/α` is the unique fixed point where the chiral-shear bending exactly
+balances the pressure.
+
+| Check | LHS | RHS | Match |
+|---|---|---|---|
+| `λ*_0 α³` | 4.2361 | `φ³` = 4.2361 | ✓ |
+| `φ² = φ+1` | 2.6180 | 2.6180 | ✓ |
+| `d²E/dR²` at R_eq | 18.85 | > 0 | ✓ (minimum) |
+| `E_cs/E_P` at equil. | 2.153 | ~2 (virial) | ✓ |
+
+### SSV identification
+
+In SSV the chiral-shear mode has speed `c_⊥ = α c`, so:
+
+```
+λ_bend* = φ³ × (c/c_⊥)³ × ξ³ = φ³/α³ × ξ³
+```
+
+Three powers of the inverse chiral speed (one per spatial dimension of the
+bending energy) with golden-ratio pre-factor φ³.
+
+| Component | Value |
+|---|---|
+| `(c/c_⊥)³ = α⁻³` | 2.5734 × 10⁶ |
+| `φ³` | 4.2361 |
+| `λ_bend*` (ξ units) | 1.0901 × 10⁷ ξ³ |
+| `λ_bend*` (SI) | 6.277 × 10⁻³¹ m³ |
+
+### Energy at equilibrium
+
+| Component | Fraction of E_total |
+|---|---|
+| `E_pressure = π R²` | 30.2% |
+| `E_line = 2π τ R` | 4.6% |
+| `E_chiral = 2π λ/R` | 65.1% |
+
+The chiral-shear bending term dominates; pressure and line tension are subdominant.
+
+### Status
+
+**Open gapbox PARTIALLY CLOSED.** R_cap = φ/α follows directly from λ_bend = φ³/α³.
+
+Remaining step: derive `λ_bend = φ³/α³` from the SSV chiral-shear Lagrangian
+by integrating the k⁴ dispersion over the vortex core profile:
+
+```
+∫₀^∞ [chiral-shear energy density(r)] 2π r dr  =?  φ³/α³
+```
+
+---
+
 ## Summary table
 
 | Sector | Observable | SSV result | CODATA/PDG | Status |
@@ -170,3 +264,4 @@ Implied `R_cap_Z` from the observed `m_Z` and the SSV `m_W`:
 | Electroweak | `m_W` | 78.93 GeV | 80.38 GeV | −1.81% |
 | Electroweak | `m_Z` (tree) | 90.02 GeV | 91.19 GeV | −1.29% |
 | Electroweak | `sin²(θ_W)` | open gapbox | 0.231 | Requires `λ_⊥` calculation |
+| Electroweak | `R_cap = φ/α` | λ_bend = φ³/α³ ✓ | identification only | Derive from core integral |

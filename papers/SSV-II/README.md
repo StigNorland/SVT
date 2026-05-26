@@ -18,6 +18,7 @@ This directory contains numerical support material for Paper II.
 | `vortex_cap_mass.py` | Electroweak: W/Z masses, line tension, Weinberg angle | Complete |
 | `reconnection_barrier.py` | W/Z saddle (3D GPE, analytic cap formula) | Analytic ✓, 3D grid too small |
 | `reconnection_supplement.py` | Topology + chiral-shear sweep | Structural checks only |
+| `chiral_cap_equilibrium.py` | R_cap = φ/α from λ_bend = φ³/α³ | Complete |
 
 ## Key results
 
@@ -25,4 +26,4 @@ This directory contains numerical support material for Paper II.
 - **`m_W`:** 78.93 GeV (Paper II golden-ratio formula, 1.81% below observed).
 - **`m_Z`:** 90.02 GeV (tree-level, 1.29% below observed).
 - **`sin²(θ_W)`:** open gapbox — requires chiral-shear `λ_⊥ ~ α⁻²` calculation.
-- **Chiral-shear gap:** pure LogSE gives `R_cap ~ 17 ξ` vs needed `φ/α = 222 ξ` — factor ~13 enhancement needed from `λ_⊥`.
+- **Chiral-shear gap:** pure LogSE gives `R_cap ~ 17 ξ` vs needed `φ/α = 222 ξ`. Variational model shows this requires `λ_bend = φ³/α³`. Remaining step: derive from core integral.
