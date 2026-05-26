@@ -308,7 +308,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--delta-relax", type=float, default=0.038)
     parser.add_argument("--lambda-perp", type=float, help="override lambda_perp directly")
     parser.add_argument("--core-basis", choices=("two", "four"), default="two")
-    parser.add_argument("--kelvin-seed", choices=("helicity", "displacement", "breathing", "combined"), default="helicity")
+    parser.add_argument("--kelvin-seed", choices=("helicity", "displacement", "breathing", "combined", "enriched"), default="helicity")
     parser.add_argument("--current-curl-model", choices=("linear", "full"), default="linear")
     parser.add_argument("--reduced-operator-form", choices=("strong", "weak"), default="strong")
     parser.add_argument("--projection-window", choices=("hard", "smooth"), default="hard")

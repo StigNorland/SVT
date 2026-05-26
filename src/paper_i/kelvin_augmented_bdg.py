@@ -274,6 +274,48 @@ def build_modes(
             AzimuthalMode("K_helicity_minus_minus", k_helicity(-1), -1),
         ]
         modes.extend(orthonormalize_azimuthal_modes(bg, kelvin_candidates, cfg))
+    elif kelvin_seed == "enriched":
+        # Modest extension of the "combined" Kelvin basis: keep the same
+        # base seeds but add an x-weighted variant for the two strongest
+        # ones (phi_R and the helicity h=+1 combination). Also add two new
+        # m=0 core modes (x-weighted R and chi). This keeps the
+        # gram-Schmidt closure-chain depth bounded so basis build stays fast.
+        def k_helicity(helicity: int) -> ComplexField:
+            def field(r: float, z: float) -> complex:
+                return (bg.phi_kelvin_radial(r, z) + 1j * helicity * bg.phi_kelvin_vertical(r, z)) / math.sqrt(2.0)
+
+            return field
+
+        def with_factor(base: ComplexField, factor: Callable[[float, float], float]) -> ComplexField:
+            def field(r: float, z: float, base=base, factor=factor) -> complex:
+                return factor(r, z) * base(r, z)
+            return field
+
+        def x_weight(r: float, z: float, bg=bg) -> float:
+            return bg.s(r, z) / bg.xi
+
+        kelvin_candidates: list[AzimuthalMode] = []
+        for sign in (1, -1):
+            # Same base seeds as combined
+            kelvin_candidates.append(AzimuthalMode(f"K_plus" if sign == 1 else "K_minus", bg.phi_R, sign))
+            kelvin_candidates.append(AzimuthalMode(f"K_rad_{'plus' if sign==1 else 'minus'}", bg.phi_kelvin_radial, sign))
+            kelvin_candidates.append(AzimuthalMode(f"K_z_{'plus' if sign==1 else 'minus'}", bg.phi_kelvin_vertical, sign))
+            kelvin_candidates.append(AzimuthalMode(f"K_h+_s{sign:+d}", k_helicity(1), sign))
+            kelvin_candidates.append(AzimuthalMode(f"K_h-_s{sign:+d}", k_helicity(-1), sign))
+            # Two new variants per sign
+            kelvin_candidates.append(AzimuthalMode(f"Ke_xR_s{sign:+d}", with_factor(bg.phi_R, x_weight), sign))
+            kelvin_candidates.append(AzimuthalMode(f"Ke_xh+_s{sign:+d}", with_factor(k_helicity(1), x_weight), sign))
+        modes.extend(orthonormalize_azimuthal_modes(bg, kelvin_candidates, cfg))
+
+        # Enrich the m=0 core block: pool existing core modes with
+        # 2 new x-weighted candidates and re-orthogonalise.
+        m0_extra_candidates: list[AzimuthalMode] = [
+            AzimuthalMode("Cx_R", with_factor(bg.phi_R, x_weight), 0),
+            AzimuthalMode("Cx_chi", with_factor(bg.phi_chi_sin, x_weight), 0),
+        ]
+        pooled_m0 = [m for m in modes if m.m_phi == 0] + m0_extra_candidates
+        kept_other = [m for m in modes if m.m_phi != 0]
+        modes = kept_other + orthonormalize_azimuthal_modes(bg, pooled_m0, cfg)
     return normalize_by_phi_modes(bg, modes, cfg)
 
 
