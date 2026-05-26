@@ -9,9 +9,13 @@
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{setspace}
+\usepackage{mdframed}
 
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
 \setstretch{1.1}
+
+\newmdenv[linewidth=0.8pt,innertopmargin=5pt,innerbottommargin=5pt,%
+  innerleftmargin=8pt,innerrightmargin=8pt]{gapbox}
 
 \title{Saturated Superfluid Vacuum V\\
 Condensate Black Holes}
@@ -22,157 +26,648 @@ Condensate Black Holes}
 \maketitle
 
 \begin{abstract}
-This paper treats black holes in the Saturated Superfluid Vacuum (SSV) framework as coherent
-condensate objects rather than singular endpoints of collapse. In SSV, collapse terminates in a
-finite condensate state of the vacuum medium. The horizon is interpreted as an acoustic
-freezing surface: outward progress relative to the exterior tends to zero, but this does not
-imply that the object is pinned or that angular momentum must vanish. Spin is treated as a
-topological property of the condensate rather than as ordinary internal material rotation.
+This paper develops the ontology of black holes in the Saturated Superfluid Vacuum (SSV)
+framework.  In SSV, the physical vacuum is a real medium described by a macroscopic order
+parameter $\Psi$.  Matter consists of topological defects in $\Psi$; gravity arises from the
+interference cross-term among those defects, depleting local update capacity and bending every
+trajectory that crosses the resulting gradient (Paper IV).  The present paper asks what
+happens at the extreme end of gravitational collapse.
 
-The paper also develops the claim that information is not destroyed in a singularity, because
-there is no singularity in the first place. Instead, horizon structure functions as the
-memory-bearing boundary of the condensate.
+The central argument proceeds in four steps.  First, because matter is made of vortex defects
+with finite core size $\xi$, collapse terminates at the close-packing density of those cores
+rather than at an infinite-density singularity.  Second, the surface at which outward acoustic
+progress relative to the exterior vanishes --- the acoustic-freezing surface --- is identified
+as the black-hole horizon.  It is a real physical surface of the medium, not a coordinate
+artifact: at $r = r_H$, where the update availability $A(r) = 0$, every outward-directed
+excitation is frozen in coordinate time.  Third, spin is a topological property of the
+condensate rather than ordinary material rotation.  The circulation integral
+$\oint\nabla\theta\cdot d\mathbf{l} = 2\pi n$ is a homotopy invariant; acoustic freezing of the
+interior does not erase it, and angular momentum is conserved as topological winding.  Fourth,
+because there is no singularity, information is not destroyed.  Infalling structure modifies
+the condensate state and its boundary; the information is redistributed into present-state
+wake complexity in the sense of Paper III, not annihilated.
+
+A fifth result connects to Paper III's update-capacity language: the condensate's acoustic
+horizon has a definite surface gravity $\kappa$, and a stationary observer near it must
+accelerate to remain in place.  By the Unruh effect, such an observer registers thermal
+radiation at temperature $T \propto \hbar c^3/(GM k_B)$, recovering the form of the Hawking
+temperature.  The numerical coefficient carries a known factor-of-four gap, of the same origin
+as the light-deflection gap in Paper IV: the leading-order Newtonian potential misses the
+spatial-curvature contribution, which is deferred to Paper VII-b.
+
+The paper claims the ontology and the mechanism.  It does not claim a full Kerr derivation,
+an exact Bekenstein--Hawking coefficient, a black-hole population model, or galaxy-scale or
+cosmological applications.
 \end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
 
 \section{Introduction}
 
-This paper treats black holes in SSV as coherent condensate objects with frozen interiors,
-topological spin, and finite structure.
+This paper treats black holes in SSV as coherent condensate objects with finite interiors,
+acoustic-freezing horizons, topological spin, and information-storing boundary structure.
 
-The purpose is intentionally narrow. We do not attempt a full Kerr derivation, a galaxy-scale
-standing-wave model, or a cosmological synthesis. Those belong to later or separate papers.
-Here the question is ontological: what is a black hole if the vacuum is a saturated superfluid
-medium rather than empty spacetime?
+The purpose is deliberately narrow.  The question is ontological: what is a black hole if the
+vacuum is a saturated superfluid medium rather than an empty spacetime background?
 
-The answer proposed here is that gravitational collapse does not end in an infinite-density
-singularity. It ends in a finite coherent condensate state of the vacuum medium. The horizon is
-then not a material wall and not merely a coordinate artifact. It is the surface at which
-outward acoustic progress relative to the exterior becomes frozen. This freezing constrains
-propagating change; it does not erase topology, angular momentum, or horizon memory.
+The SSV answer, developed in the following sections, is that gravitational collapse does not
+end at an infinite-density singularity.  It ends at a finite-density coherent state of the
+vacuum medium, bounded by a surface at which outward acoustic progress tends to zero.  This
+surface---the acoustic-freezing horizon---is not a coordinate artifact but a real physical
+feature of the medium.  Spin is preserved as topological winding of the condensate phase.
+Information is not annihilated; it is written into the present-state complexity of the
+condensate and its boundary.
 
-\section{Black Holes as Condensates}
+\subsection*{Dependencies}
 
-In the condensate picture, a black hole is a finite saturated state of the same medium that
-supports particles, phonons, and vortex structure elsewhere in the SSV program. Collapse
-pushes the medium into an extreme coherent phase rather than into a mathematical point of
-infinite density.
+This paper draws on Papers I--IV in the SSV series.  From Paper~I~\cite{SSV-I}: the LogSE
+field equation, the vortex-defect ontology, and the healing length $\xi$.  From
+Paper~II~\cite{SSV-II}: the gravitational potential $\Phi$ as an interference cross-term and
+the fixed value of $G$.  From Paper~III~\cite{SSV-III}: proper time as the local change-rate
+of $\Psi$, and entropy as wake-complexity.  From Paper~IV~\cite{SSV-IV}: the update
+availability $A = d\tau/dt = 1 + \Phi/c^2$ and the derivation of gravitational time dilation,
+deflection, and redshift from the one potential $\Phi$.
 
-This distinction matters because it changes what must be explained. A classical singularity
-asks how physical structure can survive at a point where curvature and density diverge. The
-condensate picture instead asks what coherent state the medium approaches when ordinary
-outward acoustic response is no longer available.
+\subsection*{What this paper does not claim}
 
-On this reading, the low average density of very massive black holes is not paradoxical. A
-supermassive object need not be locally Planck-dense throughout its volume. Its defining
-feature is not infinite density, but the formation of a horizon-scale coherent state whose
-interior update channels are causally frozen relative to the exterior.
+\begin{itemize}
+  \item No full Kerr metric derivation.  Angular momentum in SSV is
+  identified as topological winding; the exterior metric at all orders is deferred to
+  Paper~VII-b~\cite{SSV-VIIb}.
+  \item No exact Bekenstein--Hawking coefficient.  The area entropy is derived in form; the
+  numerical prefactor requires the spatial-curvature correction and the identification
+  $\xi = l_P$, both deferred.
+  \item No black-hole population model, no claims about astrophysical near-extremal spin
+  clustering.
+  \item No galaxy-scale standing-wave applications and no broad cosmology.
+\end{itemize}
 
-The claim is therefore modest but sharp:
+\subsection*{Roadmap}
+
+Section~2 fixes the minimal SSV background needed for strong-gravity analysis.
+Section~3 argues that collapse terminates at finite density.  Section~4 derives the horizon
+as an acoustic-freezing surface.  Section~5 establishes spin as topological winding.
+Section~6 connects horizon structure to the wake-entropy framework of Paper~III.
+Section~7 derives the Hawking temperature as an acoustic Unruh effect.
+Section~8 collects open problems.
+
+\section{SSV Setting for Strong Gravity}\label{sec:setting}
+
+Only the parts of the SSV framework required for strong-gravity analysis are recalled here.
+The full derivations are in Papers I--IV.
+
+The vacuum order parameter is
+\begin{equation}
+  \Psi(\mathbf{x},t) = \sqrt{\rho(\mathbf{x},t)}\,e^{i\theta(\mathbf{x},t)},
+\end{equation}
+with density $\rho$, phase $\theta$, and superfluid velocity $\mathbf{v}_s = (\hbar/m)\nabla\theta$
+away from vortex cores.  The field equation is the logarithmic Schr\"odinger equation
+(LogSE)~\cite{SSV-I}
+\begin{equation}\label{eq:logse}
+  i\hbar\,\partial_t\Psi =
+  \left[-\frac{\hbar^2}{2m}\nabla^2 + b\hbar\ln\!\left(\frac{|\Psi|^2}{\rho_0}\right)\right]\Psi,
+\end{equation}
+with coupling constant $b$ and background density $\rho_0$.  The Madelung decomposition of
+\eqref{eq:logse} gives a continuity equation
+\begin{equation}
+  \partial_t\rho + \nabla\cdot(\rho\,\mathbf{v}_s) = 0,
+\end{equation}
+and a Bernoulli equation whose nonlinear potential $b\hbar\ln(\rho/\rho_0)$ sets the bulk
+sound speed
+\begin{equation}\label{eq:cs}
+  c_s = \sqrt{\frac{b\hbar}{m}}
+\end{equation}
+and the healing length
+\begin{equation}\label{eq:xi}
+  \xi = \frac{\hbar}{mc_s} = \sqrt{\frac{\hbar}{mb}}.
+\end{equation}
+
+\subsection{Update capacity and the gravitational potential}
+
+Paper~IV introduces the update availability $A(\mathbf{x},t)$, defined as the local rate of
+proper-time advance per unit coordinate time,
+\begin{equation}\label{eq:A}
+  A = \frac{d\tau}{dt} = 1 + \frac{\Phi}{c^2},
+\end{equation}
+where $\Phi$ is the gravitational potential derived from the interference cross-term among
+embedded defects.  For a spherically symmetric mass $M$ at $r \gg \xi$,
+\begin{equation}\label{eq:phi}
+  \Phi(r) = -\frac{GM}{r}
+\end{equation}
+to leading order~\cite{SSV-II,SSV-IV}.  Substituting into \eqref{eq:A},
+\begin{equation}\label{eq:A_r}
+  A(r) = 1 - \frac{GM}{rc^2}.
+\end{equation}
+This expression has the Schwarzschild structure: $A$ decreases from unity at $r\to\infty$ to
+zero at a finite radius, and turns negative for smaller $r$.
+
+\subsection{Outward acoustic propagation}
+
+An acoustic mode emitted radially outward from position $r$ has, to leading order in
+$\Phi/c^2$, a coordinate velocity
+\begin{equation}\label{eq:vout}
+  v_{\text{out}}(r) = c_s\cdot A(r).
+\end{equation}
+For long-wavelength excitations of the condensate, $c_s \to c$ (the Bogoliubov modes
+propagate at $c$ in the long-wavelength limit~\cite{SSV-I}), so \eqref{eq:vout} becomes
+\begin{equation}\label{eq:voutc}
+  v_{\text{out}}(r) = c\cdot A(r).
+\end{equation}
+The sign and magnitude of $v_{\text{out}}$ track $A$: positive for $r > r_H$, zero at $r = r_H$,
+and negative inside.  The acoustic horizon is therefore the surface $A(r_H) = 0$.
+
+\section{Gravitational Collapse Without Singularity}\label{sec:collapse}
+
+The Penrose singularity theorem~\cite{Penrose1965} establishes, within general relativity,
+that gravitational collapse of ordinary matter must terminate in a geodesic-incompleteness
+singularity once a trapped surface has formed.  SSV departs from this conclusion not by
+evading the theorem but by operating outside its domain.  The medium described by the LogSE
+is not a classical or quantum-field-theory matter source embedded in a fixed spacetime; it is
+the spacetime-generating medium itself.  The singularity theorems do not apply.
+
+\subsection{Close-packing of vortex cores}
+
+In SSV, all matter consists of topological vortex defects in $\Psi$.  Each defect has a core
+of radius $\sim\xi$ at which $|\Psi|\to 0$ with nonzero phase winding.  Two defects of the
+same winding sign repel when their cores approach within $\sim\xi$: the energy cost of
+overlapping density minima diverges as the cores overlap, because the phase-gradient kinetic
+energy grows as the inter-core separation shrinks below $\xi$.
+
+The maximum defect density is therefore set by close packing of cores,
+\begin{equation}\label{eq:rhomax}
+  \rho_{\max} \sim \frac{E_{\text{core}}}{\xi^3},
+\end{equation}
+where $E_{\text{core}} \sim \hbar c_s/\xi$ is the core energy per unit length times $\xi$.
+Once the medium reaches $\rho_{\max}$, further compression would require overlapping cores,
+which is topologically forbidden.  Collapse therefore terminates at finite density.
+
+\begin{gapbox}
+\textbf{Gap (Paper I program):} The exact value of $\rho_{\max}$, the threshold density
+at which repulsion arrests collapse, requires a full 3D static minimisation of the LogSE with
+defect close-packing boundary conditions.  This is the open computation of the Paper~I
+programme~\cite{SSV-I}.  The qualitative claim---finite termination density---does not
+depend on that number.
+\end{gapbox}
+
+\subsection{The condensate endpoint}
+
+The endpoint of collapse is a finite-density coherent condensate state of the medium.  Its
+defining properties are:
+\begin{enumerate}
+  \item Interior density $\rho_{\text{int}}$ finite and $\lesssim \rho_{\max}$.
+  \item Phase $\theta(\mathbf{x})$ and density $\rho(\mathbf{x})$ well-defined throughout the
+    interior.
+  \item A causal boundary---the acoustic-freezing horizon---separating interior from exterior.
+\end{enumerate}
+
+The condensate picture resolves the apparent paradox of supermassive black holes.  A black
+hole of mass $M = 10^9\,M_\odot$ has Schwarzschild radius
+$r_S = 2GM/c^2 \approx 3\times 10^{12}$~m and average density
+\begin{equation}
+  \bar\rho = \frac{3M}{4\pi r_S^3} \approx 10^{-5}\;\text{kg}\,\text{m}^{-3},
+\end{equation}
+far below nuclear density.  There is no requirement that the condensate be locally
+Planck-dense throughout its volume; the defining feature is not local density but the
+formation of a horizon-scale acoustic-freezing surface.
+
+\section{Horizon as Acoustic-Freezing Surface}\label{sec:horizon}
+
+\subsection{The freezing condition}
+
+Setting $A(r_H) = 0$ in \eqref{eq:A_r}:
+\begin{equation}\label{eq:rH}
+  r_H = \frac{GM}{c^2}.
+\end{equation}
+At $r = r_H$, every outward acoustic mode has $v_{\text{out}} = 0$: the acoustic horizon.
+For $r < r_H$, $A < 0$, so $v_{\text{out}} < 0$: even nominally outward-directed modes are
+dragged inward in coordinate time.  The region $r < r_H$ is causally disconnected from the
+exterior.
+
+\begin{gapbox}
+\textbf{Gap (Paper VII-b):} The Newtonian potential \eqref{eq:phi} misses the spatial
+curvature contribution to $\Phi$, which is the same factor deferred in Paper~IV~\S6.  The
+full GR result is $r_S = 2GM/c^2$, a factor of two larger than \eqref{eq:rH}.  The mechanism
+and qualitative structure are unaffected; the exact coefficient is established once
+Paper~VII-b~\cite{SSV-VIIb} derives the spatial half of the metric.
+\end{gapbox}
+
+\subsection{Freezing versus pinning}
+
+The acoustic-freezing condition has a specific meaning.  It does not assert that the
+condensate interior is spatially immobile in any absolute sense.  It asserts that
+\emph{outward signal propagation relative to the exterior observer} tends to zero.
+
+The distinction is essential:
+\begin{itemize}
+  \item \emph{Freezing}: the failure of outward acoustic propagation, measured in coordinate
+    time.  This is what the horizon imposes.
+  \item \emph{Pinning}: absolute spatial immobility.  This is not claimed.
+\end{itemize}
+
+A frozen condensate can still translate as a whole (its centre of mass can move), can carry
+angular momentum (Section~\ref{sec:spin}), and can store information at its boundary
+(Section~\ref{sec:entropy}).  These are global and topological properties that are not
+ordinary outward sound pulses escaping from the interior.
+
+\subsection{Coordinate time and proper time at the horizon}
+
+From Paper~III, proper time is the local change-rate of $\Psi$.  At $r = r_H$, $A = 0$: the
+interior clock advances at zero rate relative to the exterior coordinate.  In the language of
+Paper~III, the interior update-rate $\mathcal{R}[\Psi]$, as observed from outside, is zero.
+
+Interior evolution does continue in the condensate's own local time.  The condensate medium
+has definite $\Psi$ at every interior point; it is not static in any intrinsic sense.  The
+freezing is a causal isolation, not a cessation of interior change.
+
+\subsection{Summary statement}
+
+The claim of this section is therefore:
 \begin{quote}
-A black hole is a finite condensate of the vacuum medium bounded by an acoustic-freezing
-surface.
+  The black-hole horizon is the surface at which the medium's update availability $A(r)$
+  vanishes.  Outward acoustic progress freezes at this surface, causally isolating the
+  interior condensate from the exterior.  The surface is real and physical: it is a
+  topographic feature of the update-capacity field $A(\mathbf{x})$, not a choice of
+  coordinates.
 \end{quote}
 
-\section{Horizon as Acoustic-Freezing Surface}
+\section{Spin Without Acoustic Time}\label{sec:spin}
 
-The word ``freezing'' can be misleading if it is read as ordinary mechanical pinning. In this
-paper it has a specific meaning. The horizon is an acoustic-freezing surface because outward
-propagating change, measured relative to exterior observers, loses the ability to carry
-information back out.
+The most immediate objection to the condensate picture is: if time freezes at the horizon,
+why does a black hole spin?
 
-This is not the claim that the condensate is nailed to space, nor that all internal structure
-is literally motionless in an absolute sense. It is a claim about available outward update
-channels. The horizon marks the boundary where escape-directed acoustic progress tends to
-zero.
+The answer is that spin in SSV is not modeled as ordinary internal material rotation
+requiring freely propagating acoustic time through the interior.  It is a topological
+property of the condensate phase field.
 
-Thus:
+\subsection{Circulation and winding number}
+
+The superfluid velocity is $\mathbf{v}_s = (\hbar/m)\nabla\theta$.  The circulation around
+a closed loop $\mathcal{C}$ is
+\begin{equation}\label{eq:circulation}
+  \Gamma_\mathcal{C} = \oint_\mathcal{C}\mathbf{v}_s\cdot d\mathbf{l}
+  = \frac{\hbar}{m}\oint_\mathcal{C}\nabla\theta\cdot d\mathbf{l}
+  = \frac{2\pi\hbar}{m}\,n_\mathcal{C},
+\end{equation}
+where $n_\mathcal{C}\in\mathbb{Z}$ is the winding number of the phase around $\mathcal{C}$.
+This is quantised and topologically protected: $n_\mathcal{C}$ is a homotopy invariant that
+changes only when a vortex line crosses $\mathcal{C}$.
+
+\subsection{Angular momentum as topological winding}
+
+For a condensate with axial symmetry and winding number $n$ around the symmetry axis, the
+angular momentum is
+\begin{equation}\label{eq:angmom}
+  J = \int_V \rho\,(\mathbf{r}\times\mathbf{v}_s)\,d^3x
+  = \frac{\hbar\,n}{m}\,M_{\text{cond}},
+\end{equation}
+where $M_{\text{cond}} = \int\rho\,d^3x$ is the condensate mass.  The dimensionless spin
+parameter
+\begin{equation}
+  a \equiv \frac{Jc}{GM^2} = \frac{\hbar nc^2}{Gm M_{\text{cond}}^2}\cdot M_{\text{cond}}
+  = \frac{\hbar nc^2}{Gm M_{\text{cond}}}
+\end{equation}
+is a topological label of the condensate state.
+
+\subsection{Topological protection through the horizon}
+
+The winding number $n_\mathcal{C}$ for any loop $\mathcal{C}$ threading the condensate can
+change only if a vortex line crosses $\mathcal{C}$.  For a loop encircling the condensate at
+$r > r_H$, the relevant mechanism would be expulsion of a vortex filament through the
+acoustic-freezing surface.
+
+A vortex filament crossing the acoustic horizon must carry energy from the interior to the
+exterior.  But the horizon is precisely the surface from which no acoustic energy propagates
+outward.  A filament terminating at the horizon or expelled through it requires the medium
+to move outward across $r_H$---which the acoustic-freezing condition forbids for ordinary
+dynamical modes.
+
+\begin{gapbox}
+\textbf{Precision remark:} This argument applies to spontaneous vortex expulsion driven by
+the condensate's own dynamics.  Whether angular momentum can be extracted by external
+perturbations (the analogue of the Penrose process or superradiance~\cite{Penrose1971}) is
+not settled here.  The qualitative claim---angular momentum is topologically protected and
+need not vanish because of acoustic freezing---does not depend on the outcome of that
+analysis.
+\end{gapbox}
+
+\subsection{Separation of two claims}
+
+Two claims that can be conflated should be kept separate:
 \begin{itemize}
-  \item freezing means the failure of outward signal propagation relative to the exterior,
-  \item pinning would mean absolute spatial immobilization,
-  \item the SSV black-hole ontology requires freezing, not pinning.
+  \item \emph{Spin persistence:} a condensate black hole carries angular momentum as
+    topological winding.  This is the claim of the present paper.
+  \item \emph{Population claim:} astrophysical black holes cluster near particular spin
+    values.  This requires separate observational and dynamical support and is explicitly
+    outside the scope of this paper.
 \end{itemize}
 
-This distinction is essential for avoiding an apparent contradiction. If the horizon freezes
-outward acoustic time, it does not follow that the black hole cannot move, carry spin, or store
-boundary structure. Those are global and topological properties of the condensate, not ordinary
-outward sound pulses escaping from the interior.
+\section{Horizon Entropy and Information Storage}\label{sec:entropy}
 
-\section{Spin Without Acoustic Time}
+\subsection{From wake complexity to horizon entropy}
 
-A common objection is immediate: if time stops at the horizon, why does a black hole spin?
+Paper~III establishes that entropy in SSV is the irreducible wake-complexity of the present
+state of $\Psi$:
+\begin{equation}
+  S_{\text{wake}} = k_B\,W[\Psi(t)],
+\end{equation}
+where $W[\Psi]$ measures the amount of present-state structure required to encode the
+surviving wake of prior events.  For an isolated black-hole condensate, the relevant present
+structure is the condensate interior plus its horizon boundary.
 
-The answer is that spin is not being treated here as ordinary internal material rotation
-requiring freely propagating acoustic time through the interior. In SSV, spin is a topological
-property of the condensate state. It is carried by winding, circulation, and boundary
-structure. A frozen horizon can suppress outward acoustic progress while still preserving
-global angular momentum.
+Infalling matter modifies the condensate state.  From the exterior, this modification is
+written into the boundary structure of the condensate at $r \approx r_H$, because that is the
+last surface at which incoming information can leave a physical impression before being
+causally isolated.  The information is not destroyed; it is redistributed into the wake
+complexity of the horizon-scale boundary.
 
-An analogy is a vortex in a superfluid. The circulation is not a little bead orbiting a track.
-It is a topological organization of the phase field. Likewise, the spin of a condensate black
-hole is not modeled as ordinary matter rotating inside a classical cavity after all local
-clocks have stopped. It is the persistence of topological winding in a coherent medium state.
+\subsection{Area entropy from condensate surface counting}
 
-This also separates two claims that should not be conflated:
+The surface gravity argument of Section~\ref{sec:hawking} will establish that the relevant
+physical scale at the horizon is the healing length $\xi$.  The horizon surface of area
+$A_H$ can be partitioned into cells of size $\xi^2$ (the smallest independent region of the
+condensate surface).  The number of independent configurational states of the condensate
+boundary is, schematically,
+\begin{equation}\label{eq:omega}
+  \Omega_H \sim \exp\!\left(\frac{A_H}{\xi^2}\right).
+\end{equation}
+From the Boltzmann entropy,
+\begin{equation}\label{eq:SH}
+  S_H = k_B\ln\Omega_H \sim k_B\,\frac{A_H}{\xi^2}.
+\end{equation}
+The Bekenstein--Hawking area law~\cite{Bekenstein1973,Hawking1975} is
+$S_{\text{BH}} = k_B c^3 A_H/(4G\hbar) = k_B A_H/(4l_P^2)$, with
+$l_P = \sqrt{\hbar G/c^3}$ the Planck length.  Equation~\eqref{eq:SH} reproduces the
+area dependence.  The coefficient requires $\xi = l_P$, which holds when the constituent
+boson mass equals the Planck mass:
+\begin{equation}\label{eq:mP}
+  \xi = l_P \;\iff\; \frac{\hbar}{mc_s} = \sqrt{\frac{\hbar G}{c^3}}
+  \;\iff\; m = \sqrt{\frac{\hbar c}{G}} = m_P.
+\end{equation}
+
+\begin{gapbox}
+\textbf{Gap (Paper I program):}  The identification $m = m_P$---and hence the exact
+coefficient in~\eqref{eq:SH}---requires deriving the constituent boson mass of the
+fundamental SSV condensate from the LogSE.  This is part of the open computation of the
+Paper~I programme.  The area dependence of $S_H$ is established without it.
+\end{gapbox}
+
+\begin{gapbox}
+\textbf{Gap (Paper VII-b):}  The horizon area $A_H$ also carries the factor-of-four
+correction from the spatial-curvature contribution to the horizon radius:
+$A_H^{\text{GR}} = 4\pi r_S^2 = 4\pi(2GM/c^2)^2$ versus
+$A_H^{\text{SSV}} = 4\pi r_H^2 = 4\pi(GM/c^2)^2$.  The exact Bekenstein--Hawking
+coefficient absorbs both this factor and~\eqref{eq:mP}; both are deferred to Papers I and
+VII-b.
+\end{gapbox}
+
+\subsection{No information destruction}
+
+The condensate picture dissolves the information-loss problem rather than solving it.  The
+problem assumes that collapse terminates at a singularity where physical structure is
+destroyed.  In SSV, there is no such endpoint.  The condensate retains a definite $\Psi$
+everywhere inside $r_H$.  Infalling structure changes the condensate state; the exterior
+loses \emph{access} to the fine interior organisation, but access loss is not physical
+annihilation.
+
+This is consistent with the wake-entropy framework of Paper~III.  The distinction between
+``information inaccessible to the exterior'' and ``information destroyed'' is the distinction
+between high coarse-grained entropy (the exterior observer cannot resolve the fine wake
+structure) and literal erasure of the structure from $\Psi$.  The medium keeps its records;
+the observer simply cannot read them from outside.
+
+\section{Thermal Emission from the Acoustic Horizon}\label{sec:hawking}
+
+\subsection{The acoustic Unruh effect}
+
+Unruh~\cite{Unruh1976,Unruh1981} showed that an observer with proper acceleration $a$ in
+flat spacetime registers thermal radiation at temperature
+\begin{equation}\label{eq:Tunruh}
+  T_U = \frac{\hbar a}{2\pi k_B c}.
+\end{equation}
+The same effect arises at any acoustic horizon in a medium where the flow velocity equals the
+local sound speed~\cite{Unruh1981,BLV2005}: a stationary observer just outside the sonic
+horizon must accelerate to maintain position against the flow, and registers thermal phonons
+at the temperature set by its acceleration.
+
+In SSV, the acoustic-freezing surface at $r = r_H$ plays the exact role of the sonic horizon.
+An observer who remains stationary at $r$ slightly above $r_H$ must sustain a proper
+acceleration to resist the infall tendency of the medium.  This acceleration is set by the
+gradient of the update availability.
+
+\subsection{Surface gravity and Hawking temperature}
+
+A stationary observer at radius $r$ must accelerate with proper acceleration
+\begin{equation}\label{eq:a_r}
+  a(r) = c^2\left|\frac{dA}{dr}\right| = c^2\,\frac{GM}{r^2 c^2} = \frac{GM}{r^2}
+\end{equation}
+to remain at fixed $r$ in the potential $\Phi = -GM/r$.  This is the Newtonian
+gravitational acceleration, confirmed from the same $A(r)$ that yields the time dilation of
+Paper~IV.
+
+At the horizon $r = r_H = GM/c^2$:
+\begin{equation}\label{eq:surface_gravity}
+  \kappa \equiv c^2\left|\frac{dA}{dr}\right|_{r_H}
+  = c^2\cdot\frac{GM}{r_H^2 c^2} = \frac{c^4}{GM}.
+\end{equation}
+The surface gravity $\kappa$ is the coordinate acceleration needed to hover at the horizon.
+Substituting into~\eqref{eq:Tunruh},
+\begin{equation}\label{eq:TH_SSV}
+  T_H^{\text{SSV}} = \frac{\hbar\kappa}{2\pi k_B c} = \frac{\hbar c^3}{2\pi k_B GM}.
+\end{equation}
+The standard Hawking temperature~\cite{Hawking1974,Hawking1975} is
+\begin{equation}\label{eq:TH_GR}
+  T_H^{\text{GR}} = \frac{\hbar c^3}{8\pi k_B GM}.
+\end{equation}
+The two expressions agree in their dependence on $\hbar$, $c$, $G$, $M$, and $k_B$.  The
+numerical factor differs by four.
+
+\begin{gapbox}
+\textbf{Gap (Paper VII-b):}  The factor-of-four discrepancy has the same origin as the
+light-deflection and horizon-location gaps: the leading-order potential $\Phi = -GM/r$ places
+the horizon at $r_H = GM/c^2$ instead of the GR value $r_S = 2GM/c^2$, and the GR surface
+gravity includes the redshift factor at the horizon.  Both corrections are recovered once the
+spatial-curvature contribution to the metric is derived in Paper~VII-b.
+\end{gapbox}
+
+\subsection{Qualitative consequences}
+
+Even without the numerical coefficient, the SSV derivation establishes three points.
+
+\textit{Hawking radiation is not a quantum-gravity phenomenon in SSV.}  It is the acoustic
+Unruh effect of a condensate with a real physical horizon---the same effect that has been
+observed in analogue acoustic black holes in Bose--Einstein condensates~\cite{Steinhauer2016}.
+No new physics beyond the LogSE and the update-capacity framework is needed.
+
+\textit{The temperature is set by the horizon gradient.}  From~\eqref{eq:TH_SSV},
+$T_H \propto c^4/(GM)$.  Smaller (lighter) black holes have higher Hawking temperatures.
+As the condensate radiates, $M$ decreases, $r_H$ decreases, and $T_H$ increases---the
+well-known Hawking evaporation runaway.
+
+\textit{The endpoint of evaporation is not a naked singularity.}  As $r_H\to\xi$, the
+condensate reaches the Planck scale.  At this point the close-packing regime of
+Section~\ref{sec:collapse} is reached and the condensate cannot compress further.  The
+evaporation terminates at a Planck-scale remnant rather than a singularity.
+
+\begin{gapbox}
+\textbf{Gap (open):}  The final state of Planck-scale evaporation---whether the condensate
+dissolves completely into the medium or stabilises as a Planck-scale defect---requires
+knowing the detailed equation of state in the close-packing regime, which is part of the
+Paper~I numerical programme.
+\end{gapbox}
+
+\section{Discussion and Open Problems}\label{sec:discussion}
+
+\subsection{Correspondence with general relativity}
+
+The condensate picture reproduces the following features of GR black holes:
 \begin{itemize}
-  \item spin persistence: a black-hole condensate can carry angular momentum as topology,
-  \item population claims: astrophysical black holes may or may not cluster near particular
-  spin values.
+  \item A causal horizon that prevents outward signal propagation.
+  \item Gravitational time dilation growing without bound as $r\to r_H$ (since $A\to 0$).
+  \item Hawking radiation with the correct parametric dependence on $\hbar$, $c$, $G$, $M$.
+  \item Angular momentum as a conserved parameter characterising the exterior field.
+  \item Horizon entropy proportional to surface area.
 \end{itemize}
 
-Only the first claim belongs to this paper. Any claim about near-extremal spin populations
-requires separate observational and dynamical support and is intentionally not used here.
-
-\section{Information and Horizon Structure}
-
-The information-loss problem is sharpened by singularity language. If collapse ends at a
-point where ordinary physical structure is destroyed, then one must explain how information is
-either preserved, emitted, or lost.
-
-In the SSV condensate picture, there is no singular endpoint at which structure must vanish.
-The horizon is instead a memory-bearing boundary of a finite coherent object. Infalling
-structure changes the condensate and its boundary state. The exterior may lose access to the
-fine interior organization, but that is not the same as physical annihilation of information.
-
-This paper does not claim a completed microscopic entropy formula for the horizon. It claims a
-different ontology for the storage problem:
-\begin{quote}
-Information is not destroyed in a singularity, because the black hole is not a singularity.
-It is redistributed into condensate and horizon structure.
-\end{quote}
-
-This is consistent with the broader SSV view of entropy as wake-complexity: events are written
-into present structure. For black holes, the relevant present structure is the horizon-scale
-condensate boundary.
-
-\section{Discussion and Open Problems}
-
-The condensate picture is not a replacement for every successful calculation in general
-relativity. It is an ontology and mechanism proposal that must reproduce the appropriate GR
-limits where those limits are tested.
-
-The correspondence claimed here is qualitative:
+The correspondence not claimed here:
 \begin{itemize}
-  \item horizons are retained as real causal boundaries,
-  \item escape-directed propagation fails at the horizon,
-  \item black holes carry mass, angular momentum, and horizon memory,
-  \item singularities are replaced by finite coherent condensate interiors.
+  \item No Kerr metric derivation.  The exterior field of a spinning condensate is
+    characterised by $M$ and $J$, but the exact spacetime geometry (including
+    frame-dragging) requires the full emergent-metric treatment of Paper~VII-b.
+  \item No exact Bekenstein--Hawking coefficient.  This requires $m = m_P$ and the
+    spatial-curvature correction to $r_H$, both deferred.
+  \item No PPN extension beyond leading order.
 \end{itemize}
 
-The correspondence not claimed here is equally important:
-\begin{itemize}
-  \item no full Kerr metric derivation is provided,
-  \item no black-hole population model is asserted,
-  \item no galaxy-scale standing-wave application is made,
-  \item no broad cosmology follows from this paper alone.
-\end{itemize}
+\subsection{The no-hair structure}
 
-The next technical tasks are to derive the exterior metric limit, specify the horizon entropy
-functional in SSV variables, and connect topological spin to the familiar angular-momentum
-parameters used in relativistic black-hole phenomenology.
+In GR, the no-hair theorem states that the exterior of a stationary black hole is completely
+characterised by mass $M$, angular momentum $J$, and electric charge $Q$.  In SSV, the
+exterior acoustic field generated by the interference cross-term is determined by the same
+three quantities:
+\begin{itemize}
+  \item $M$ from the total condensate mass (integrated interference cross-term, Paper~II).
+  \item $J$ from the topological winding number $n$, via \eqref{eq:angmom}.
+  \item $Q$ from a global $U(1)$ phase of $\Psi$, if the condensate carries charge.
+\end{itemize}
+Any other structure of the condensate interior would need to appear in the exterior field as
+a multipole moment above the monopole and dipole---but the LogSE cross-term in the
+far-field limit gives only a monopole (the Newtonian $1/r$ potential) and a dipole
+(the frame-dragging-like term from the axial circulation).  Higher multipoles are
+exponentially suppressed at $r\gg r_H$.
+
+\begin{gapbox}
+\textbf{Gap (Paper VII-b):}  A formal proof that the exterior field has only $M$, $J$, $Q$
+to all orders, and the derivation of the full Kerr-like exterior metric, are deferred to
+Paper~VII-b.
+\end{gapbox}
+
+\subsection{Relation to analogue-gravity programme}
+
+The identification of the SSV horizon as an acoustic-freezing surface is not merely an
+analogy.  In SSV, the acoustic horizon \emph{is} the physical black-hole horizon.  The
+condensate medium that produces gravity is the same medium whose excitations propagate at $c$
+and whose phonon spectrum terminates at the acoustic-freezing surface.  The analogue-gravity
+programme~\cite{BLV2005} provides the mathematical tools for the acoustic Hawking effect;
+SSV provides the physical ontology that makes the correspondence exact rather than
+approximate.
+
+\subsection{Open problems}
+
+The following technical tasks remain for later work:
+\begin{enumerate}
+  \item \textbf{Close-packing density:} Numerical determination of $\rho_{\max}$ from the
+    3D static minimisation of the LogSE with vortex close-packing boundary conditions
+    (Paper~I programme).
+  \item \textbf{Boson mass:} Derivation of $m = m_P$ (or the corresponding $\xi = l_P$)
+    from the fundamental condensate specification (Paper~I programme).
+  \item \textbf{Spatial curvature:} The factor-of-two correction to $r_H$ and the
+    factor-of-four correction to $T_H$ and $S_H$, from the full emergent metric
+    (Paper~VII-b).
+  \item \textbf{Kerr exterior:} The exterior metric of a spinning condensate, including
+    frame-dragging and the exact no-hair result (Paper~VII-b).
+  \item \textbf{Evaporation endpoint:} The final state of Hawking evaporation as $r_H\to\xi$
+    (Paper~I programme + Paper~VII-b).
+  \item \textbf{Superradiance:} Whether angular momentum can be extracted from the condensate
+    by external perturbations, and whether a Kerr-like superradiance instability exists.
+\end{enumerate}
 
 \section{Conclusion}
 
-In SSV, black holes are finite coherent condensates whose horizons freeze outward progress but
-do not erase topology, motion, or information-bearing boundary structure.
+In SSV, black holes are finite coherent condensates of the vacuum medium.  Collapse
+terminates not at a singularity but at the close-packing density of topological vortex cores.
+The horizon is the acoustic-freezing surface $A(r_H) = 0$, a real topographic feature of the
+medium's update-capacity field.  Spin is topological winding of the condensate phase,
+protected by homotopy against acoustic freezing.  Information is written into the
+present-state wake complexity of the condensate and its boundary rather than destroyed.  The
+horizon emits thermal phonons at the acoustic Unruh temperature $T_H \propto \hbar c^3/(GMk_B)$,
+recovering Hawking radiation as an ordinary consequence of the medium's acoustic structure.
+
+Three gapboxes carry forward the same spatial-curvature correction deferred in Paper~IV:
+the exact horizon radius, the Bekenstein--Hawking coefficient, and the Hawking temperature
+prefactor each require the emergent-metric treatment of Paper~VII-b.  Two further gapboxes
+are inside the Paper~I numerical programme: the close-packing density and the identification
+$m = m_P$.  Nothing in the present paper depends on those numbers for its qualitative claims.
+
+\begin{thebibliography}{99}
+
+\bibitem{SSV-I}
+S.~Norland, \textit{Saturated Superfluid Vacuum I: Topological Defects in a Saturated
+Superfluid Vacuum---The Geometric Origin of Matter and the $\alpha$-Harmonic Mass Ladder},
+10.5281/zenodo.19651986, 2026.
+
+\bibitem{SSV-II}
+S.~Norland, \textit{Saturated Superfluid Vacuum II}, SSV programme, 2026.
+
+\bibitem{SSV-III}
+S.~Norland, \textit{Saturated Superfluid Vacuum III: Irreversible Time and Wake Entropy},
+SSV programme, 2026.
+
+\bibitem{SSV-IV}
+S.~Norland, \textit{Saturated Superfluid Vacuum IV: Gravity as Update-Capacity Gradient},
+SSV programme, 2026.
+
+\bibitem{SSV-VIIb}
+S.~Norland, \textit{Saturated Superfluid Vacuum VII-b: Emergent Geometry and the Dissolution
+of Quantum Gravity}, SSV programme, forthcoming.
+
+\bibitem{Penrose1965}
+R.~Penrose, ``Gravitational collapse and space-time singularities,''
+\textit{Phys.~Rev.~Lett.}~\textbf{14}, 57--59 (1965).
+
+\bibitem{Bekenstein1973}
+J.~D.~Bekenstein, ``Black holes and entropy,''
+\textit{Phys.~Rev.~D}~\textbf{7}, 2333--2346 (1973).
+
+\bibitem{Hawking1974}
+S.~W.~Hawking, ``Black hole explosions?,''
+\textit{Nature}~\textbf{248}, 30--31 (1974).
+
+\bibitem{Hawking1975}
+S.~W.~Hawking, ``Particle creation by black holes,''
+\textit{Commun.~Math.~Phys.}~\textbf{43}, 199--220 (1975).
+
+\bibitem{Unruh1976}
+W.~G.~Unruh, ``Notes on black-hole evaporation,''
+\textit{Phys.~Rev.~D}~\textbf{14}, 870--892 (1976).
+
+\bibitem{Unruh1981}
+W.~G.~Unruh, ``Experimental black-hole evaporation?,''
+\textit{Phys.~Rev.~Lett.}~\textbf{46}, 1351--1353 (1981).
+
+\bibitem{BLV2005}
+C.~Barcel\'o, S.~Liberati, and M.~Visser, ``Analogue gravity,''
+\textit{Living Rev.~Rel.}~\textbf{8}, 12 (2005).
+
+\bibitem{Penrose1971}
+R.~Penrose, ``Extraction of rotational energy from a black hole,''
+\textit{Nat.~Phys.~Sci.}~\textbf{229}, 177--179 (1971).
+
+\bibitem{Steinhauer2016}
+J.~Steinhauer, ``Observation of quantum Hawking radiation and its entanglement in an analogue
+black hole,'' \textit{Nat.~Phys.}~\textbf{12}, 959--965 (2016).
+
+\end{thebibliography}
 
 \end{document}
