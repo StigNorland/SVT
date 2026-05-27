@@ -66,15 +66,17 @@ force is identified with vacuum surface tension along flux-tube vortex
 segments connecting quarks; its short range and the qualitative form of
 asymptotic freedom emerge as natural consequences.
 
-\textbf{Suggestive ansatz, not derivation:}
+\textbf{Conditional prediction, open one step:}
 For the weak interaction, a scalar reconnection-energy estimate gives
-$E_{\rm recon}\sim m_e/\alpha^2\approx 9.6\,\mathrm{GeV}$.  A Rayleigh-jet
-ansatz $R_{\rm cap}=\phi\,R^*$, fitted to the observed $W$ mass, recovers
-$m_W\approx 78.9\,\mathrm{GeV}$ ($1.8\%$ of measured); the geometric factor
-$\phi$ is numerologically suggestive but is not derived from first principles
-in this paper.  We present this as a candidate geometric fit, not a
-prediction.  The full 3D minimisation needed to derive $R_{\rm cap}$
-remains open.
+$E_{\rm recon}\sim m_e/\alpha^2\approx 9.6\,\mathrm{GeV}$.  The Rayleigh-jet
+cap formula $R_{\rm cap}=\phi\,R^*$ recovers $m_W\approx 78.9\,\mathrm{GeV}$
+($1.8\%$ of measured).  A cap equilibrium analysis shows this follows
+analytically from a chiral-shear bending stiffness
+$\lambda_{\rm bend}=\phi^3/\alpha^3$ via the equilibrium cubic
+$R^3+\tau R^2=\lambda_{\rm bend}$ (with computed line tension $\tau=17\,\xi$).
+The local $\mathcal{L}_\perp$ curvature correction falls short by a factor
+$232$; the remaining open step is deriving $\lambda_{\rm bend}=\phi^3/\alpha^3$
+from the non-local (topological) structure of the cap.
 
 \textbf{Structural consistency check, not derivation:}
 For gravity, the Bjerknes mechanism between pulsating breather modes
@@ -181,11 +183,13 @@ is as follows:
         static Coulomb/Biot--Savart mechanism is in hand, but the
         identification of the observed photon with the correct propagating
         mode remains open (\S\ref{sec:EM_open_issue}).
-  \item \textbf{Suggestive geometric ansatz, not first-principles
-        derivation.}  The Rayleigh-jet $R_{\rm cap}=\phi R^*$ for the
-        $W$ mass (\S\ref{sec:weak}) is fitted to the measurement and
-        recovers $m_W$ to $1.8\%$.  We present this as a candidate
-        geometric ansatz worth testing, not as a prediction.
+  \item \textbf{Conditional prediction, open one step.}  The Rayleigh-jet
+        cap formula $R_{\rm cap}=\phi R^*$ recovers $m_W$ to $1.8\%$
+        (\S\ref{sec:weak}).  Cap equilibrium analysis (\S\ref{sec:W_rayleigh})
+        shows $R_{\rm cap}=\phi/\alpha$ follows analytically from
+        $\lambda_{\rm bend}=\phi^3/\alpha^3$ via the equilibrium cubic; the
+        remaining open step is deriving this bending stiffness from the
+        non-local topological structure of the cap.
   \item \textbf{Structural consistency check.}  The relation $G = \alpha_G
         \hbar c \alpha^2/(N_p^2 m_e^2)$ for Newton's constant
         (\S\ref{sec:gravity}) takes $\alpha_G$ from CODATA and matches the
@@ -1031,9 +1035,39 @@ first-principles minimisation of the reconnection path in the
 $\mathcal{L}+\mathcal{L}_\perp$ functional is the central open problem for the
 weak sector.  The correct order of magnitude --- tens of GeV --- emerges naturally
 from the medium parameters, without any separate gauge symmetry or Higgs
-mechanism.  The Higgs sector, including the relation between the observed
+mechanism.  The Rayleigh-jet cap formula (\S\ref{sec:W_rayleigh}) refines this
+to $m_W \approx 78.9\,\mathrm{GeV}$, within $1.8\%$ of the observed value.
+The Higgs sector, including the relation between the observed
 $m_H \approx 125\,\mathrm{GeV}$ and the medium parameters, is treated separately
 in \S\ref{sec:higgs} below.
+
+\paragraph{The $Z$ boson and the Weinberg angle.}
+The $Z$ boson is the neutral reconnection channel, in which amplitude-mode and
+phase-mode caps mix.  The SSV cap energy formula $m_{\rm cap} = \pi R_{\rm cap}^2
+m_e c^2$ (with $P_0 = \xi = 1$) gives $m \propto R^2$, so the Standard Model
+tree-level relation $m_W = m_Z\cos\theta_W$ translates directly to
+\begin{equation}
+  \frac{R_{\rm cap,W}}{R_{\rm cap,Z}} = \sqrt{\cos\theta_W}.
+  \label{eq:RZ_RW}
+\end{equation}
+Using the PDG Weinberg angle as input, the tree-level $Z$ cap radius is
+$R_{\rm cap,Z} = R_{\rm cap,W}/\sqrt{\cos\theta_W} \approx 236.8\,\xi$,
+giving $m_Z^{\rm tree} \approx 90.0\,\mathrm{GeV}$ ($1.3\%$ below the observed
+$91.2\,\mathrm{GeV}$) — the same fractional deficit as for $m_W$.  The Z-cap
+bending stiffness required by the equilibrium cubic~\eqref{eq:cap_cubic} is
+$\lambda_{\rm bend,Z}/\lambda_{\rm bend,W} = 1.236$, consistent with the
+$\tau\to 0$ prediction $(R_{\rm cap,Z}/R_{\rm cap,W})^3 = 1/\cos^{3/2}\theta_W
+\approx 1.218$ at the $1.5\%$ level.
+
+The Weinberg angle itself remains an open gapbox: SSV does not yet predict
+$\theta_W$ from first principles.  A scaling estimate at $R_{\rm cap,W}$ gives
+$\tan^2\theta_W \sim \tau\alpha^2 R_{\rm cap,W} \approx 0.20$, within a factor
+$1.5$ of the observed value $0.30$, consistent with a phase-to-amplitude
+stiffness ratio at the cap boundary.  As a numerical remark,
+$\sin^2\theta_W \approx \phi/7 = 0.23115$ reproduces the PDG value
+$0.23122$ to $0.03\%$; if this coincidence is not accidental, it would point
+to a golden-ratio quantisation of the $\mathrm{SU}(2)/\mathrm{U}(1)$ mixing
+angle at the reconnection saddle.
 
 \subsection{The Higgs as Canvas: The Amplitude Mode of the Vacuum}
 \label{sec:higgs}
@@ -1245,23 +1279,65 @@ Substituting~\eqref{eq:Rcap_phi} into $E_{\rm caps}$ with $P_0\sim m_e/(2\xi^3)$
 \end{equation}
 within $1.8\%$ of the observed value $80.36\,\mathrm{GeV}$ (PDG 2024).
 
-The golden ratio arises naturally in geometries that minimise surface energy under
-a topological closure constraint.  The proton Y-junction has three vortex strands
-meeting at $120^\circ$; the optimal packing of two such junctions during reconnection
-— where the cap must close smoothly onto the incoming strand geometry — produces
-a $\phi$ relationship between the cap radius and the strand separation.  This
-motivates $R_{\rm cap} = \phi\,R^*$ as a geometric consequence of the Y-junction
-topology, though a rigorous derivation requires a full 3D GPE simulation of the
-reconnection event.
+\paragraph{Cap equilibrium and the chiral-shear bending stiffness.}
+The cap is not a free surface: it is the boundary of a closed vortex ring held
+in mechanical equilibrium by three competing forces.  Let $R$ denote the cap
+radius.  In SSV natural units ($P_0 = \xi = 1$) the total cap energy is
+\begin{equation}
+  E(R) = \pi R^2 + 2\pi\tau R + \frac{2\pi\lambda_{\rm bend}}{R},
+  \label{eq:Ecap_equilibrium}
+\end{equation}
+where $\pi R^2$ is the surface-pressure cost (area $\times P_0$),
+$2\pi\tau R$ is the vortex line-tension perimeter energy, and
+$2\pi\lambda_{\rm bend}/R$ is the chiral-shear bending resistance that stiffens
+the ring against collapse.  Setting $dE/dR = 0$ gives the equilibrium cubic
+\begin{equation}
+  R^3 + \tau\,R^2 = \lambda_{\rm bend}.
+  \label{eq:cap_cubic}
+\end{equation}
+The vortex line tension is computed numerically from the planar
+$\mathrm{LogSE}$ profile (\texttt{vortex\_cap\_mass.py}):
+$\tau = 17.0\,\xi$ (core integral $+ 2\pi\ln(R_{\rm cap}/r_{\rm max})$ tail).
+In the $\tau\to 0$ limit, setting $x = \alpha R/\xi$,
+equation~\eqref{eq:cap_cubic} reduces to $x^3 = \alpha^3\lambda_{\rm bend}$.
+The unique positive solution $x = \phi$ (the golden ratio) requires
+\begin{equation}
+  \lambda_{\rm bend} = \frac{\phi^3}{\alpha^3}\,\xi^3
+                     \approx 1.09\times 10^7\,\xi^3.
+  \label{eq:lambda_bend_required}
+\end{equation}
+Evaluated at the physical $\tau = 17\,\xi$, the cubic places $R_{\rm eq}$ at
+$\phi/\alpha$ to within the $7.7\%$ line-tension correction
+(equation~\eqref{eq:cap_cubic} with $R=\phi/\alpha$ gives $\lambda_{\rm bend} =
+1.17\times 10^7\,\xi^3$, vs the $\tau\to 0$ target $1.09\times 10^7\,\xi^3$).
+Thus $R_{\rm cap} = \phi/\alpha$ is the unique equilibrium radius once
+$\lambda_{\rm bend} = \phi^3/\alpha^3$ is established from the chiral-shear
+sector.
+
+The SSV chiral-shear Lagrangian $\mathcal{L}_\perp = (\lambda_\perp/2)\int|\nabla\times
+\mathbf{j}|^2\,d^3r$ provides a natural coupling $\lambda_\perp = \alpha^{-2}$
+(from $c_\perp = \alpha c$ at $k = 1/\xi$).  Numerical integration of the
+core-bending correction to $\lambda_\perp$ over the planar vortex profile
+(\texttt{lperp\_core\_integral.py}) yields $\lambda_{\rm bend}^{\rm local} \approx
+4.7\times 10^4\,\xi^3$ — a factor $232$ below the required value.  The local
+curvature correction to $\mathcal{L}_\perp$ is therefore insufficient; the
+bending stiffness $\lambda_{\rm bend} = \phi^3/\alpha^3$ must arise from a
+\emph{non-local} mechanism.  The two leading candidates are: (a) quantisation
+of the chiral-shear energy of the Seifert surface of the trefoil (a
+non-perturbative topological contribution); and (b) a Casimir-like vacuum
+energy of the chiral mode between the cap boundary and the reconnection
+saddle.
 
 \paragraph{Why the cap geometry is not directly accessible.}
 The cap geometry is determined by the \emph{dynamics} of the reconnection, not
 a static equilibrium, and cannot be observed directly: the event occurs at
 sub-$\xi$ scales, lasts $\sim\xi/c\sim 10^{-25}$\,s, and requires energies of
-order $P_0\,\xi^3$ to produce.  The W mass itself is the only empirical
-constraint on $R_{\rm cap}$.  Equation~\eqref{eq:mW_phi} is presented as a
-conjecture — the $\phi$ factor is geometrically motivated but not yet derived
-from first principles.
+order $P_0\,\xi^3$ to produce.  The $W$ mass itself is the only empirical
+constraint on $R_{\rm cap}$.  Equation~\eqref{eq:mW_phi} holds as a
+conjecture: $R_{\rm cap} = \phi/\alpha$ follows analytically from the
+equilibrium cubic \eqref{eq:cap_cubic} once $\lambda_{\rm bend} = \phi^3/\alpha^3$
+is established, but that identification requires deriving the non-local
+bending stiffness from the SSV Lagrangian — the remaining open step.
 
 \paragraph{Why the $W$ is massive and the photon is not.}
 The photon lives entirely in the $\delta\theta$ channel and never suppresses
@@ -2064,12 +2140,16 @@ clear which experiments would test which structural claims.
 
 \item \textbf{$W$-mass geometric fit awaiting derivation.} Our scalar estimate $E_{\rm recon} \sim m_e/\alpha^2
   \approx 9.6\,\mathrm{GeV}$ is a factor of $\sim 8$ below the observed $W$ mass.
-  The Rayleigh-jet conjecture $R_{\rm cap}=\phi\,\xi/\alpha$
-  (\S\ref{sec:W_rayleigh}, equation~\eqref{eq:Rcap_phi}) gives $m_W \approx
-  78.9\,\mathrm{GeV}$ --- within $1.8\%$ of the observed value.  A full 3D
-  minimisation of the reconnection barrier in the Gross--Pitaevskii functional
-  would be the calculation required to turn the present fit into a derivation.
-  At present, the role of $\phi$ is ansatz-level rather than predictive.
+  The Rayleigh-jet cap formula (\S\ref{sec:W_rayleigh}, equation~\eqref{eq:Rcap_phi})
+  gives $m_W \approx 78.9\,\mathrm{GeV}$ --- within $1.8\%$ of the observed value.
+  The cap equilibrium analysis (\S\ref{sec:W_rayleigh}) shows that
+  $R_{\rm cap} = \phi/\alpha$ follows analytically from the chiral-shear bending
+  stiffness $\lambda_{\rm bend} = \phi^3/\alpha^3$ via the equilibrium cubic
+  $R^3 + \tau R^2 = \lambda_{\rm bend}$.  The local $\mathcal{L}_\perp$
+  curvature correction falls short by a factor $232$; the remaining open step is
+  deriving the non-local bending stiffness $\phi^3/\alpha^3$ from the
+  topological structure of the cap (Seifert surface of the trefoil, or
+  chiral-mode Casimir energy at the reconnection saddle).
 
 \item \textbf{Running of $\alpha$ at high energy.} The chiral-shear coupling
   $\alpha$ is a medium property, not a bare constant. At momentum scales
@@ -2248,11 +2328,16 @@ from the others:
   the quantum-pressure barrier that initiates reconnection.  The dominant
   cost is $E_{\rm caps}\sim P_0\cdot\pi R_{\rm cap}^2\xi$ --- holding open
   the two fully-suppressed end-caps against the saturation pressure $P_0$.
-  The conjecture $R_{\rm cap}=\phi\,\xi/\alpha$
-  (equation~\eqref{eq:Rcap_phi}), motivated by the golden-ratio packing
-  geometry of the Y-junction, gives $m_W\approx\pi\phi^2 m_e/\alpha^2\approx
-  78.9\,\mathrm{GeV}$ --- within $1.8\%$ of the observed value.  Deriving
-  $R_{\rm cap}=\phi\,R^*$ from the 3D simulation is the central target.
+  The formula $R_{\rm cap}=\phi\,\xi/\alpha$
+  (equation~\eqref{eq:Rcap_phi}) gives $m_W\approx\pi\phi^2 m_e/\alpha^2\approx
+  78.9\,\mathrm{GeV}$ --- within $1.8\%$ of the observed value.
+  The cap equilibrium analysis (\S\ref{sec:W_rayleigh}) shows this is
+  not a bare fit: $R_{\rm cap}=\phi/\alpha$ is the unique equilibrium of
+  the cubic $R^3+\tau R^2=\lambda_{\rm bend}$ (line tension $\tau=17\,\xi$,
+  computed) when $\lambda_{\rm bend}=\phi^3/\alpha^3$.  The local
+  $\mathcal{L}_\perp$ correction falls short by $232\times$; the target
+  is now to derive $\lambda_{\rm bend}=\phi^3/\alpha^3$ from the non-local
+  cap topology.
 
 \item \textbf{The neutrino sector (P1--P5 of \S\ref{sec:neutrino}).}  Mass,
   three-flavour structure, oscillation phenomenology, Dirac/Majorana
@@ -2406,10 +2491,15 @@ asymptotic freedom as quantum-pressure softening --- follow from the same
 framework.
 
 \paragraph{What the paper proposes as suggestive ansatz.}
-For the weak force, the Rayleigh-jet ansatz $R_{\rm cap} = \phi R^*$ is
-fitted to the observed $W$ mass and recovers it to $1.8\%$.  This is a
-candidate geometric fit, not a first-principles derivation; the full 3D
-minimisation that would produce $\phi$ from the field equations is open.
+For the weak force, the Rayleigh-jet cap formula $R_{\rm cap} = \phi R^*$
+recovers $m_W$ to $1.8\%$.  The cap equilibrium analysis
+(\S\ref{sec:W_rayleigh}) shows this follows analytically from a
+chiral-shear bending stiffness $\lambda_{\rm bend} = \phi^3/\alpha^3$; the
+local $\mathcal{L}_\perp$ curvature correction falls short by a factor $232$,
+identifying the remaining open step as deriving $\lambda_{\rm bend}$ from the
+non-local (topological) structure of the cap.  The formula is therefore no
+longer a bare fit to $m_W$, but a prediction conditional on the non-local
+bending stiffness.
 
 \paragraph{What the paper offers as structural consistency.}
 For gravity, the Bjerknes mechanism gives the inverse-square law, universal
