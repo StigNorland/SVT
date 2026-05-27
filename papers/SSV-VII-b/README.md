@@ -15,7 +15,7 @@ Structure matches the outline exactly:
 3. **Emergent Metric Picture** — density as gravitational potential $\Phi = b\ln(\rho/\rho_0)$; time dilation; isotropic post-Newtonian metric $g_{\mu\nu}$ with $h_{ij} = h_{00}\delta_{ij}$; emergent metric resultbox.
 4. **Weak-Field Correspondence** — Bjerknes force recap (Newton's constant from acoustic coupling); post-Newtonian gradient expansion; **factor-of-two horizon correction** resolved: spatial curvature $h_{ij}$ doubles effective potential, yields $r_H = 2GM/c^2$, $\kappa = c^4/(4GM)$, $T_H = \hbar c^3/(8\pi GMk_B)$; resultbox.
 5. **Relation to General Relativity** — Jacobson 5-step acoustic-thermodynamic route; $G = c\xi/m_0$ from entropy density; cosmological constant as saturation pressure (no fine-tuning); Planck scale = healing length; gapbox for quantitative $G$.
-6. **Discussion** — position in series; analogue-gravity comparison; four open problems (quantitative $G$, Kerr exterior, strong-field deviations, dark energy → VIII).
+6. **Discussion** — position in series; analogue-gravity comparison; four open problems (quantitative $G$, Kerr exterior, strong-field deviations, dark energy → VIII); **Success criteria for this paper** (§6.4): five positive criteria the paper meets within its stated scope, plus the explicit closure-grade upgrade condition for each open problem.
 - **Conclusion** — five numbered results.
 
 ## Changes from previous draft
