@@ -79,12 +79,22 @@ $R\approx1.18\,\xi$ yields $m_p\approx 927$--$941\,\text{MeV}$
 
 Two empirical inputs ($m_e$, $\alpha$) are used.  The remaining predictions
 are consistent with the observed lepton and light-hadron spectrum at the
-$\lesssim 1\%$ level under the present effective theory, with explicit
+$\lesssim 1.5\%$ level under the present effective theory, with explicit
 dependence on the regularisation cutoff $R$ and the meridional domain size
-$L_{\rm box}$ documented in the body.  The open problems for Paper~II are:
-thin-ring analytic closure of the muon eigenfrequency, full 3D minimisation
-for the proton form factor (including a cutoff-stability scan for $F(R)$),
-and the first-principles derivation of $\alpha$ from Bogoliubov mode ratios.
+$L_{\rm box}$ documented in the body.  A dedicated Claim Status section
+(\S\ref{sec:claim-status}) tags every quantitative claim as
+\textit{derived}, \textit{structural}, \textit{candidate}, or
+\textit{ansatz}, and links each candidate-grade claim to the specific
+GitHub issue (\#13, \#16) whose computation would change its status.
+The open problems for Paper~II are: thin-ring analytic closure of the
+muon eigenfrequency, full 3D minimisation for the proton form factor
+(including a cutoff-stability scan for $F(R)$ and a dedicated $N_Y$
+cross-grid refinement), and a basis-enrichment programme that
+demonstrates the $1/\sqrt{N_{\rm modes}}$ residual scaling proposed
+for the muon rung.  The previously headlined $0.3\%$ proton-mass
+agreement is the precision at a specific calibration cutoff
+$R\approx1.18\,\xi$ and is reframed in this paper as a $\sim$1.5\%
+match with documented cutoff sensitivity.
 \end{abstract}
 
 \newpage
@@ -372,12 +382,17 @@ superfluid vacuum---a stable, self-sustaining topological defect with finite siz
         flow field strength at large distances, which behaves as a dipole-like
         circulation decaying as $1/r^2$, reproducing the Coulomb law in the far field.
 
-\item \textbf{Equilibrium radius (first-principles derivation).}
+\item \textbf{Equilibrium radius (analytic derivation, two structural inputs).}
         The electron radius $R_e$ is determined by minimising the total
         hydrodynamic energy of the vortex ring over the two geometric
         parameters $(R, a)$, where $R$ is the major (centreline) radius
         and $a$ is the core radius.  Three physical contributions are
-        included.
+        included.  The minimisation itself is analytic
+        (status: \textit{derived}; \S\ref{sec:claim-status}), but the
+        chiral-shear coefficient appearing below
+        (Eq.~\ref{eq:gammadef}) is a structural input fixed by the
+        $c_\perp/c\!=\!\alpha$ identification of \S\ref{sec:postulate},
+        not a separately computed quantity.
 
         \textit{(i) Kinetic energy (Lamb formula).}
         For a thin ring ($a \ll R$) carrying one quantum of circulation
@@ -806,6 +821,30 @@ $2\pi R_e=2\pi\xi/\alpha$.  Both refinements are deferred to Paper~II; the
 thin-ring matrix-element calculation is the falsification test for the muon
 identification.
 
+\textbf{Status of the residual gap.}  At the matched-spacing reference point
+$(n=59,\,L_{\rm box}=6\,\xi,\,\phi\text{-grid}=128)$ in the 10-mode
+combined-Kelvin / weak-form basis, the converged
+eigenfrequency is
+$\omega_\mu/\omega_c\approx0.2073$, a $0.15\%$ overshoot of the CODATA
+target $0.20700$ (numerical record:
+\texttt{papers/SSV-I/data/} matched-spacing trio).  The structural cubic-vertex
+one-loop self-energy is computed in the repository
+(\texttt{src/paper\_i/muon\_cubic\_full\_self\_energy.py}) and gives a
+relative shift of $-(3\text{--}9)\times10^{-9}$ at three grid resolutions
+($n=25,31,49$) -- seven orders of magnitude too small and the wrong sign to
+close the residual gap.  The cubic vertex is therefore falsified as the
+source of the gap; the residual is consistent with a Galerkin truncation of
+the reduced eigenvalue problem and scales as $1/\sqrt{N_{\rm modes}}$ across
+the electron, pion, muon, and proton calculations
+(see \texttt{papers/SSV-I/topology-scaling-of-residual-memo.md} and
+\texttt{papers/SSV-I/muon-cubic-vertex-result-note.md}).  A first
+enrichment-direction attempt at $N_{\rm modes}\!=\!15$ produced an
+inconsistent spectrum due to a cross-$m$ current-curl issue in the basis
+construction documented in
+\texttt{papers/SSV-I/enrichment-attempt-findings-2026-05-27.md};
+the corrected enrichment programme is open work tracked under
+GitHub issue~\#16.
+
 Within these bounds, the assignment
 \begin{equation}
   m_{\mu^\pm} \approx \frac{3}{2}\,\mu_0 = \frac{3m_e}{2\alpha}
@@ -813,12 +852,16 @@ Within these bounds, the assignment
               \quad(0.59\%\text{ from CODATA})
   \label{eq:muon-mass}
 \end{equation}
-is a dynamically motivated rung with an identified mechanism (core-breathing
+is a dynamically motivated rung (status: \textit{candidate};
+\S\ref{sec:claim-status}) with an identified mechanism (core-breathing
 $\oplus$ Kelvin coupling through $\mathcal{L}_\perp$), a verified selection
-rule (driven-response scans), and a numerical eigenfrequency bracket that
-contains the target value.  A bracket is not a sharp prediction; the
-thin-ring analytic closure deferred to Paper~II is what would turn the
-muon identification into a falsifiable number.
+rule (driven-response scans), a numerical eigenfrequency bracket that
+contains the target value, and an identified residual gap that has been
+falsified against the cubic-vertex hypothesis and reframed as a
+topology-scaled basis-truncation error.  The thin-ring analytic closure
+deferred to Paper~II would turn this candidate into a falsifiable single
+number; the basis-enrichment programme (issue~\#16) would independently
+demonstrate the $1/\sqrt{N_{\rm modes}}$ scaling claimed here.
 
 \subsection{Higher rungs and the proton}
 
@@ -832,22 +875,34 @@ The proton closes the loop:
   m_p c^2 = N_Y\cdot F\cdot\mu_0,
   \label{eq:proton-ladder}
 \end{equation}
-with $N_Y\approx3.007$ (topological crossing factor, Appendix~\ref{app:minimisation})
-and $F\approx4.47$ at the straight-vortex cutoff $R=1.18\,\xi$ (grid-converged
-within $2.5\%$ between $n=48$ and $n=72$ grids), giving
-$N_Y\cdot F\approx13.4$ and $m_p\approx941\,\text{MeV}$ ($0.3\%$ from CODATA
-at this cutoff).
+with $N_Y\approx3.007$ (topological crossing factor, candidate status,
+Appendix~\ref{app:minimisation}) and $F$ the form factor extracted from a
+3D topology-preserving relaxation of the trefoil-knot breather
+(Appendix~\ref{app:F-extraction}).  $F$ depends on the straight-vortex
+calibration cutoff $R$: at $R=1.18\,\xi$ (the inter-strand half-spacing of
+the trefoil) the fine-grid average $(n^3{=}48^3,\,72^3)$ gives
+$F\approx4.47$, agreeing between the two grids at the $\sim6\%$ level
+(the raw numerator $e_{\rm interior}$ is the limiting factor; coarser
+$n=24$ at the same cutoff gives $F\approx4.55$, and the n=24 numerator
+differs from the fine-grid limit by ${\sim}54\%$ at the original
+unrescaled cutoff).  The two fine grids give
+$m_p \approx 930$--$954\,\text{MeV}$ at $R=1.18\,\xi$; at $R=1.5\,\xi$
+the same observable falls to ${\sim}760\,\text{MeV}$ ($-19\%$).  The
+logarithmic slope is $\mathrm{d}\ln F/\mathrm{d}\ln R\approx-0.94$ near
+$R=1.18\,\xi$, so a $\pm0.3\,\xi$ uncertainty on the cutoff
+propagates as $\sim3\%$ on $F$ alone.
 
-A dedicated cutoff-stability scan across $R\in[0.5,3.0]\,\xi$ (Appendix~\ref{app:minimisation})
-establishes that $F$ is \emph{not} flat: the logarithmic slope is
-$\mathrm{d}\ln F/\mathrm{d}\ln R\approx-0.94$ near $R=1.18\,\xi$, implying a
-${\sim}3\%$ systematic on $F$ per $0.3\,\xi$ uncertainty in the cutoff.
-The predicted $m_p$ ranges from $930$--$954\,\text{MeV}$ across the $n=48$
-and $n=72$ fine-grid states at $R=1.18\,\xi$, and would reach ${\sim}760\,\text{MeV}$
-($-19\%$) at $R=1.5\,\xi$.  The $0.3\%$ figure is therefore the
-precision at the chosen cutoff; the framework prediction with honest
-cutoff uncertainty is $m_p = 930$--$954\,\text{MeV}$ (within ${\sim}1.5\%$
-of CODATA).
+The honest framework prediction is therefore
+$m_p \approx 930$--$954\,\text{MeV}$ (within ${\sim}1.5\%$ of the CODATA
+value 938.272 MeV) at the canonical cutoff $R\approx1.18\,\xi$, with a
+documented cutoff systematic and a not-yet-measured cross-grid spread on
+$N_Y$ itself.  The single-number $0.3\%$ figure that appeared in earlier
+drafts of this paper is the precision at that specific cutoff, not a
+cutoff-independent first-principles prediction; promoting it requires
+either deriving the cutoff geometrically from the relaxed breather or
+demonstrating that $N_Y\cdot F$ is itself cutoff-invariant.  Both are
+deferred to the closure work tracked under GitHub issue~\#13 and listed
+in \S\ref{sec:claim-status}.
 
 \begin{table}[h]
 \centering
@@ -864,12 +919,14 @@ $\rho$    & $11\mu_0$                       & $770.278$ & $775.260$ & $0.64\%$ \
 $p$       & $N_Y\!\cdot\!F\!\cdot\!\mu_0$   & $930$--$954$ & $938.272$ & ${\sim}1.5\%$\footnotemark[1] \\
 \bottomrule
 \end{tabular}
-\footnotetext[1]{$F=4.47$ is grid-converged at the inter-strand half-spacing
-cutoff $R=1.18\,\xi$ (mean of $n=48$ and $n=72$ straight-vortex extractions);
-the range $930$--$954\,\text{MeV}$ spans the two grid levels.
+\footnotetext[1]{$F\approx4.47$ at the inter-strand half-spacing cutoff
+$R=1.18\,\xi$ (mean of $n^3{=}48^3$ and $72^3$ straight-vortex extractions;
+those two grids agree at the $\sim6\%$ level on this observable).  The
+range $930$--$954\,\text{MeV}$ spans the two fine grids.
 $F$ varies as $\mathrm{d}\ln F/\mathrm{d}\ln R\approx-0.94$ in this region;
-the cutoff is physically motivated but not derived, giving a ${\sim}3\%$
-systematic per $0.3\,\xi$ uncertainty.}
+the cutoff is physically motivated but not yet derived, giving a ${\sim}3\%$
+systematic per $0.3\,\xi$ uncertainty.  Status: candidate
+(\S\ref{sec:claim-status}, GitHub issue \#13).}
 \end{table}
 
 \paragraph{Open issues and next steps.}
@@ -1047,6 +1104,141 @@ at the level of an eigenfrequency bracket that contains the observed value;
 the thin-ring matrix-element closure is the outstanding falsification test.
 
 %------------------------------------------------------------------
+\section{Claim Status}
+\label{sec:claim-status}
+%------------------------------------------------------------------
+
+This section tags every major quantitative claim in this paper with a
+status label and a pointer to the GitHub computation issue whose
+resolution would change that status.  The taxonomy follows
+\texttt{docs/numerical-minimisation-roadmap.md} in the repository:
+
+\begin{itemize}
+  \item \textit{derived} -- analytically reduced from the Lagrangian, or
+    reproduced by a converged numerical computation with documented
+    sensitivity checks;
+  \item \textit{structural} -- the dependence on the framework is clear and
+    the result is structurally consistent, but the number depends on a
+    deferred computation;
+  \item \textit{candidate} -- the number has been computed at a working
+    grid but has not yet passed the refinement/sensitivity gates required
+    to be cited as derived;
+  \item \textit{ansatz} -- a calibrated or geometrically motivated
+    placeholder, kept explicit until it is replaced by a derivation.
+\end{itemize}
+
+\paragraph{Status table.}  Mapping the paper's claims onto this taxonomy:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{p{0.30\linewidth} p{0.13\linewidth} p{0.42\linewidth} p{0.07\linewidth}}
+\toprule
+Claim & Status & Upgrade condition & Issue \\
+\midrule
+LogSE Madelung structure; sound speed $c_s=\sqrt{2b\rho_0/m_0}$;
+$\xi=\hbar/(m_0c)$ & derived & Already analytic from the Lagrangian. & --- \\
+$\alpha=c_\perp/c$ from the chiral-shear coefficient
+$\lambda=\alpha^2\rho_0/m_0$ & derived & Already analytic from the
+Lagrangian. & --- \\
+Equilibrium electron radius $R_e^*=\xi/\alpha$ and
+$m_e c^2 = \tfrac12\rho_0\kappa_0^2 R_e \Lambda$ &
+derived & Analytic minimisation of the Lamb formula + chiral-shear
+energy; the chiral-shear coefficient is a structural input from
+the Lagrangian, not a fit.  $m_e$ and $\alpha$ remain empirical
+inputs of the theory. & --- \\
+Pion mass $m_{\pi^\pm}=2\mu_0$
+($0.34\%$ from CODATA) & derived & Already analytic from the
+two-winding topology + the $\mu_0=m_e/\alpha$ scale.  No 3D
+relaxation needed. & --- \\
+Muon mass via the core-breathing $\oplus$ Kelvin hybrid;
+eigenfrequency bracket $\omega_\mu/\omega_c \in [0.19,\,0.23]$
+containing the target $0.207$ &
+candidate & Sharpen the bracket to a single number either via
+thin-ring analytic closure (deferred to Paper~II) or via a
+basis-enrichment programme that demonstrates the
+$1/\sqrt{N_{\rm modes}}$ residual scaling.  The current
+enrichment direction's failure mode is documented in
+\texttt{enrichment-attempt-findings-2026-05-27.md}. &
+\#16 \\
+Cubic-vertex one-loop self-energy as the source of the muon
+residual gap & \textit{falsified} & The repository calculation gives
+a relative shift of $-(3\text{--}9)\times 10^{-9}$, seven orders of
+magnitude too small and with the wrong sign.  Documented in
+\texttt{muon-cubic-vertex-result-note.md}. & --- \\
+Higher rungs $K^\pm \approx 7\mu_0$ and $\rho(770) \approx 11\mu_0$
+($\sim$0.7\%) & candidate & Same mechanism as muon; same closure
+condition.  No separate dynamical confirmation yet. & \#16 \\
+Proton mass $m_p \approx N_Y \cdot F \cdot \mu_0 \approx 930$--$954$
+MeV ($\sim$1.5\% from CODATA at $R\!=\!1.18\,\xi$) &
+candidate & Three open sub-claims: (i)~derive the cutoff $R$
+geometrically from the relaxed breather rather than treating it
+as a calibration parameter; (ii)~run the dedicated $N_Y$ refinement
+sweep across the $24^3,\,48^3,\,72^3$ grid family (currently
+inferred via $F$); (iii)~test whether the product
+$N_Y\cdot F$ is itself cutoff-invariant.  Each would shift the
+status one step toward derived. & \#13 \\
+$N_Y \approx 3.007$ topological crossing factor & candidate &
+Same as above; the $\pm0.002$ band in earlier drafts is fit
+reproducibility, not measured cross-grid spread.  Topology
+preservation requires the penalty mechanism documented in
+\texttt{src/paper\_i/topology\_penalty.py}. & \#13 \\
+Form factor $F\approx4.47$ at $R=1.18\,\xi$
+(fine-grid average) & candidate & Topology-preserving relaxation
+on $n^3{=}48^3,\,72^3$ agrees at the $\sim6\%$ level on this
+observable; the n=24 grid value at the same cutoff is $4.55$,
+but the raw numerator differs from the fine-grid limit by
+${\sim}54\%$ at the unrescaled cutoff.  Closure-grade requires
+n=96+ and a derived cutoff. & \#13 \\
+Restricted 2-mode BdG diagnostic
+(\texttt{restricted\_bdg\_matrix.py}) producing
+$\omega_-$, $\omega_+$ &
+prototype (not a paper-text claim) & The refinement/sensitivity
+sweep recorded in
+\texttt{validation-refinement-sweeps-2026-05-27.md} shows
+$\sim 63\%$ grid drift and $\sim 66\%$ box drift in $\omega_+$,
+and a non-real $\omega_-$ at every reference point.  The numbers
+this script prints are not cited in the body of this paper and
+should not be quoted as derived. & \#16 \\
+Vortex-profile shooting solver
+(\texttt{vortex\_profile.py}) & validation & Profile grid is
+well-converged for $\texttt{profile\_n}\ge 600$ and
+$\texttt{profile\_x\_max}\in[15,\,20]$; the solver fails at
+$\texttt{profile\_x\_max}\ge 25$ -- documented and
+not currently a limitation downstream. & \#16 \\
+Forces section (preview only): electromagnetism as chiral flow,
+strong as surface tension, gravity as Bjerknes, weak as
+reconnection & structural & The qualitative identifications are
+consistent with the Lagrangian; the quantitative content is
+deferred to Paper~II.  No quantitative force claim is made in this
+paper. & \#13, \#15 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{What changed in this paper.}  Two single-number statements
+that appeared in earlier drafts have been re-framed:
+
+\begin{itemize}
+  \item the proton-mass agreement was previously headlined as
+    $0.3\%$ from CODATA; the corrected framing is
+    $\sim$1.5\% with a cutoff-dependent range $930$--$954\,\text{MeV}$,
+    where $0.3\%$ is the precision at the specific cutoff
+    $R=1.18\,\xi$ rather than a cutoff-independent prediction;
+  \item the $N_Y$ convergence statement ``independent of grid resolution
+    above $128^3$'' has been corrected to reflect the actual computed
+    grids ($24^3$, $48^3$, $72^3$) and the dedicated cross-grid
+    sensitivity check is listed as outstanding work under issue~\#13.
+\end{itemize}
+
+The headline conclusion of this paper is unchanged: the SSV postulate
+plus the LogSE + chiral-shear Lagrangian reproduces the observed lepton
+and light-hadron spectrum at the $\lesssim 1.5\%$ level, with the
+residuals attributable to identified open computational tasks rather
+than to free parameters.  What the paper now states more carefully
+is which numbers are derived, which are structural, and which are
+candidate-grade pending the closure work tracked in the issue tracker.
+
+%------------------------------------------------------------------
 \section{Acknowledgments}
 %------------------------------------------------------------------
 \label{sec:acknowledgments}
@@ -1123,9 +1315,21 @@ Following the vortex-knot construction of Proment et al.~\cite{proment2012}, we 
 trefoil skeleton by wrapping three vortex lines on a torus and superimposing 2D vortex
 profiles (phase jump $2\pi$ along each filament).  In our saturated LogSE potential
 with the chiral non-local shear term ($\lambda=2000$), the energy functional is
-minimised on a 3D grid using gradient descent.  The vortex lines are tracked where
-$|\Psi|=0$ or the phase jumps by $2\pi$.  The dimensionless node-cost factor converges
-to $N_Y\approx3.007\pm0.002$, independent of grid resolution above $128^3$.
+minimised on a 3D grid using topology-preserving gradient descent
+(\S\ref{app:F-extraction}; the topology-preserving penalty mechanism is
+documented in the repository at
+\texttt{src/paper\_i/topology\_penalty.py}).  Vortex lines are tracked where
+$|\Psi|=0$ or the phase jumps by $2\pi$.  The dimensionless node-cost factor
+reported in this paper is $N_Y\approx3.007$
+(\textit{candidate}, see \S\ref{sec:claim-status}), based on the
+topology-preserving 3D relaxation runs documented in the repository at grid
+sizes $n^3 = 24^3, 48^3, 72^3$ with $\xi$-normalised box half-width $6\xi$;
+the grid-convergence behaviour of the proton-mass form factor $F$ extracted
+from the same runs is detailed in \S\ref{app:F-extraction}.  A dedicated
+sensitivity sweep for $N_Y$ itself across this grid family has not yet been
+performed; its uncertainty is currently dominated by the same cutoff and
+calibration choices that drive the cutoff sensitivity of $F$
+(closure work tracked under GitHub issue~\#13).
 
 \begin{verbatim}
 # Blueprint (adapted from Proment 2012 + LogSE + chiral shear)
@@ -1158,10 +1362,17 @@ divergence regularised by core size), and $E_\text{junction}$ captures the $120^
 phase balance at the node.
 
 The factor $N_Y\approx3.007$ emerges as the effective multiplier to the base
-flux-tube energy per unit length after relaxation---independent of grid resolution
-above $128^3$.  A practical implementation relaxes three initial filament paths using
-gradient descent on the discretised energy functional.  Vortex-line integrals are
-computed with the non-deprecated trapezoidal rule:
+flux-tube energy per unit length after relaxation.  Reproducibility runs in
+the repository test grids $n^3=24^3,\,48^3,\,72^3$ at $\xi$-normalised
+box half-width $6\xi$; topology preservation requires the penalty mechanism
+of \texttt{src/paper\_i/topology\_penalty.py}, and the cutoff-stability
+behaviour of the downstream observable $F$ is documented in
+\S\ref{app:F-extraction}.  A grid-refinement sweep dedicated to $N_Y$ itself
+(as opposed to $F$) is part of the open closure work tracked under GitHub
+issue~\#13 and \S\ref{sec:claim-status}.  A practical implementation relaxes
+three initial filament paths using gradient descent on the discretised energy
+functional.  Vortex-line integrals are computed with the non-deprecated
+trapezoidal rule:
 
 \begin{verbatim}
 from scipy.integrate import cumulative_trapezoid
@@ -1171,9 +1382,17 @@ x = ...   # arc-length parameter
 E_line = (rho0 * kappa0**2 / 2) * cumulative_trapezoid(1/r, x, initial=0)
 \end{verbatim}
 
-Relaxation converges to $N_Y=3.007\pm0.002$, yielding the proton mass scaling
-$m_p\approx N_Y\cdot\mu_0\cdot F(\text{geometry})$ with $F\approx4.47$ from cavity
-volume/breathing amplitude.
+Relaxation under the topology-preserving penalty
+(\texttt{src/paper\_i/topology\_penalty.py}) converges to
+$N_Y\approx3.007$ at the tested grids, with the proton mass scaling
+$m_p\approx N_Y\cdot\mu_0\cdot F(\text{geometry})$.  $F$ is the form factor
+discussed in \S\ref{app:F-extraction} below; it is grid-converged at the
+canonical cutoff $R=1.18\,\xi$ between $n=48$ and $n=72$ at the $\sim6\%$
+level (raw numerator $e_{\rm interior}$ agreement between those grids drives
+the residual; finer grids would tighten further).  The $\pm0.002$
+uncertainty band quoted in earlier drafts referred to fit reproducibility at
+a single grid family and is not yet a measured cross-resolution
+spread for $N_Y$; see GitHub issue~\#13.
 
 \subsection*{Numerical extraction of $F$ for the $(2,3)$-trefoil knot (2026-05-19)}
 \label{app:F-extraction}
