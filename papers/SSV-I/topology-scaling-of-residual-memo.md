@@ -105,6 +105,20 @@ This memo's central claim is testable in two clean ways:
 
    If it lands in `[0.25\%, 0.35\%]`, the truncation diagnosis is confirmed.
 
+   **2026-05-27 attempt:** An enriched basis (15 modes: 5 Kelvin/sign with
+   x-weighted extra modes, plus 2 extra m=0 core modes) was tested at
+   n=59/hw=6.  The result (omega=0.104) was completely wrong.  The root
+   cause was identified as a cross-m current-curl coupling issue: the
+   `current_curl_component_overlap` function does not enforce the azimuthal
+   selection rule, producing O(0.12) spurious cross-m elements.  The
+   calibrated combined result (delta_relax=0.038 → omega=0.207313) relies
+   on these cross-m terms as a stabilising mechanism.  Enforcing the
+   selection rule removes the stabilisation and the Kelvin eigenvalue drifts
+   downward with domain size.  A physically complete model revision is
+   required before this enrichment test can be executed.  See
+   [`enrichment-attempt-findings-2026-05-27.md`](enrichment-attempt-findings-2026-05-27.md)
+   for the full diagnosis.
+
 2. **Refine the proton, predict the residual reduction.** Build a
    three-filament reduced basis with localised Y-junction modes and
    inter-filament chiral couplings. With `N_used ~ 30` instead of 10:
