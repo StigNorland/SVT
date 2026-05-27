@@ -306,6 +306,76 @@ requires non-local physics not captured by the vortex core profile.
 
 ---
 
+## 6. Weinberg Angle: sin²(θ_W) from Cap Structure
+
+**Script:** `src/paper_ii/weinberg_angle.py`
+**Method:** Cap energy formula E = π R² m_e c² applied to W and Z caps; equilibrium cubic for Z; golden-ratio coincidence check.
+
+### Mass formula and tree-level structure
+
+In SSV, m_cap = π R_cap² m_e c² (P₀ = ξ = 1), so m ∝ R². The SM tree-level relation
+m_W = m_Z cos(θ_W) translates to R_cap_W / R_cap_Z = √cos(θ_W).
+
+| Quantity | SSV result | PDG | Gap |
+|---|---|---|---|
+| `m_W` | 78.925 GeV | 80.377 GeV | −1.81% |
+| `m_Z` (tree, PDG θ_W input) | 90.015 GeV | 91.188 GeV | −1.29% |
+| `sin²(θ_W)` from SSV m_W/m_Z | 0.23122 | 0.23122 | = PDG (by SM input) |
+| `sin²(θ_W)` PDG tree-level | 0.22306 | 0.23122 | Δ = 0.00816 (rad. corr.) |
+
+Both SSV masses are ~1.3–1.8% below PDG; their ratio preserves the SM relation by construction when PDG θ_W is used as input.
+
+### Z cap radius
+
+| Estimate | `R_cap_Z` |
+|---|---|
+| From PDG m_Z | 238.33 ξ |
+| SSV tree-level: R_W/√cos(θ_W) | 236.79 ξ |
+| Gap | 0.65% (= same 1.29% mass gap) |
+
+Note: the correct SSV relation is R_cap_Z = R_cap_W/√cos(θ_W), NOT R_cap_W/cos(θ_W),
+because the mass formula is m ∝ R² (not m ∝ R).
+
+### Equilibrium cubic for Z
+
+| Quantity | Value |
+|---|---|
+| `λ_bend_W = φ³/α³` | 1.09 × 10⁷ ξ³ |
+| `λ_bend_Z` (cubic, PDG R_cap_Z) | 1.45 × 10⁷ ξ³ |
+| `λ_bend_Z / λ_bend_W` | 1.2357 |
+| `1/cos^(3/2)(θ_W)` (τ→0 prediction) | 1.2180 |
+| Agreement with τ→0 limit | +1.46% |
+
+The τ→0 limit (R_Z/R_W)³ = 1/cos^(3/2)(θ_W) holds to within the τ-correction level.
+
+### Golden-ratio coincidences
+
+| Formula | Value | Δ from PDG |
+|---|---|---|
+| `φ/7` | 0.23115 | −0.031% |
+| `3/(8φ)` | 0.23176 | +0.235% |
+
+**Best lead:** φ/7 ≈ sin²(θ_W) to 0.03%. If exact, implies:
+cos(θ_W) = √((7−φ)/7) = 0.876842 vs PDG 0.876801 (Δ = 0.005%).
+
+### Isospin mixing scaling argument
+
+At R_cap_W: phase-mode stiffness ~ τ = 17 ξ (line tension);
+amplitude-mode stiffness ~ λ_⊥/R_cap = α⁻²/R_cap.
+
+tan²(θ_W) ~ τ/(λ_⊥/R_cap) = τ α² R_cap = 17 × α² × 221.7 = **0.200**
+
+vs tan²(θ_W) = 0.301. Factor ~1.5 off — correct order of magnitude.
+
+### Status
+
+**Open gapbox.** Two routes remain:
+1. Derive cos(θ_W) = √((7−φ)/7) from the SSV chiral-shear amplitude-phase mixing
+   (requires identifying the factor-7 in the R_cap_W = φ/α formula).
+2. Derive the exact coefficient in tan²(θ_W) ~ τ α² R_cap from the SSV Lagrangian.
+
+---
+
 ## Summary table
 
 | Sector | Observable | SSV result | CODATA/PDG | Status |
@@ -314,5 +384,6 @@ requires non-local physics not captured by the vortex core profile.
 | Metric | Time dilation | longitudinal mode ✓ | GR `1+Φ/c²` | Confirmed symbolically |
 | Electroweak | `m_W` | 78.93 GeV | 80.38 GeV | −1.81% |
 | Electroweak | `m_Z` (tree) | 90.02 GeV | 91.19 GeV | −1.29% |
-| Electroweak | `sin²(θ_W)` | open gapbox | 0.231 | Requires `λ_⊥` calculation |
+| Electroweak | `sin²(θ_W)` tree (SSV) | 0.23122 | 0.23122 | = PDG by SM input; tree deficit 0.008 same as SM |
+| Electroweak | `sin²(θ_W)` open lead | φ/7 = 0.23115 | 0.23122 | 0.031% — no derivation yet |
 | Electroweak | `R_cap = φ/α` | λ_bend = φ³/α³ ✓ | identification only | Core integral: 232× gap → non-local origin |

@@ -20,11 +20,12 @@ This directory contains numerical support material for Paper II.
 | `reconnection_supplement.py` | Topology + chiral-shear sweep | Structural checks only |
 | `chiral_cap_equilibrium.py` | R_cap = φ/α from λ_bend = φ³/α³ | Complete |
 | `lperp_core_integral.py` | L_⊥ core bending check — 232× gap, non-local origin | Complete |
+| `weinberg_angle.py` | sin²(θ_W): Z cap radius, λ_bend_Z, φ/7 coincidence, open gapbox | Complete |
 
 ## Key results
 
 - **`α_G` (1D spherical):** 1.60 × 10⁻³³ vs CODATA 5.91 × 10⁻³⁹ — factor ~3×10⁵ gap → open for 3D trefoil.
 - **`m_W`:** 78.93 GeV (Paper II golden-ratio formula, 1.81% below observed).
 - **`m_Z`:** 90.02 GeV (tree-level, 1.29% below observed).
-- **`sin²(θ_W)`:** open gapbox — requires chiral-shear `λ_⊥ ~ α⁻²` calculation.
+- **`sin²(θ_W)`:** tree-level = PDG by SM input; best lead: φ/7 = 0.23115 (0.03% from PDG) — no SSV derivation yet.
 - **Chiral-shear gap:** pure LogSE gives `R_cap ~ 17 ξ` vs needed `φ/α = 222 ξ`. Variational model shows this requires `λ_bend = φ³/α³`. Remaining step: derive from core integral.
