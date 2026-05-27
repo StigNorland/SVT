@@ -376,6 +376,124 @@ vs tan²(θ_W) = 0.301. Factor ~1.5 off — correct order of magnitude.
 
 ---
 
+## 7. 232× Gap Investigation — Three Steps
+
+Three targeted checks to identify the origin of the 232× gap between
+`λ_bend(local) = 4.70 × 10⁴` and the required `λ_bend* = φ³/α³ = 1.09 × 10⁷`.
+
+### Step 1: b=1/2 physical vortex profile
+
+**Script:** `src/paper_ii/lperp_bphys_check.py`
+
+The Paper I solver uses the b=1 LogSE convention. The physical convention is b=1/2
+(f'' + f'/r − f/r² = f ln f²). Under the rescaling f_phys(r) = f_b1(r/√2):
+J_bend_phys = J_bend_b1/2, K_bend_phys = K_bend_b1.
+
+| Quantity | b=1 | b=1/2 | Target |
+|---|---|---|---|
+| J_bend | 7.810 | 3.907 | — |
+| K_bend | 2.201 | 2.203 | — |
+| (J+K)/4 | 2.503 | 1.527 | φ² = 2.618 |
+| Gap factor | 232× | 380× | 1× |
+
+**Analytic rescaling confirmed to 0.04%.** The physical b=1/2 convention makes
+the gap **larger** (380× vs 232×). The gap is not a convention artifact.
+
+### Step 2: J_bend(r_max) convergence sweep
+
+**Script:** `src/paper_ii/jbend_ring_scaling.py`
+
+Sweeps the integral upper limit r_max from 1 to 15 ξ to check for an IR tail.
+
+| r_max/ξ | J_bend | K_bend | (J+K)/4 |
+|---|---|---|---|
+| 1 | 4.113 | 1.172 | 1.321 |
+| 3 | 7.771 | 2.174 | 2.486 |
+| 5 | 7.808 | 2.199 | 2.502 |
+| 8 | 7.809 | 2.201 | 2.502 |
+| 12 | 7.809 | 2.201 | 2.503 |
+| 15 | 7.811 | 2.202 | 2.503 |
+
+**Change from r_max = 5 to r_max = 15: +0.07%.** The integrals saturate within
+the vortex core (~5 ξ). There is no IR tail from extending the integration to
+larger radii. The gap is UV-local, not IR.
+
+Note: the b=1 LogSE has an e^{2r} growing mode — numerical integration beyond
+~15 ξ is unstable. The convergence within r ≤ 15 ξ is decisive.
+
+### Step 3: Kelvin wave renormalization
+
+**Script:** `src/paper_ii/kelvin_wave_renorm.py`
+
+Two mechanisms checked:
+
+**(A) Classical LIA (Local Induction Approximation):**
+```
+λ_bend_LIA(R) = (κ²/4π) R ln(R/ξ)
+```
+At R_cap = φ/α: λ_bend_LIA = 3.76 × 10³ — only 8% of the core contribution
+and 0.03% of the target. The LIA scales as R ln(R/ξ), not linearly.
+
+**(B) One-loop Kelvin wave integral:**
+
+Integrating out Kelvin modes from k = 1/R to k = 1/ξ with LIA dispersion
+ω_K ~ k² ln(1/kξ):
+
+| R/ξ | I_dlnk | ln(R/ξ) |
+|---|---|---|
+| 10 | 1.33 | 2.30 |
+| 50 | 3.83 | 3.91 |
+| 100 | 5.30 | 4.61 |
+| R_cap = 221.7 | 7.29 | 5.40 |
+
+Fit: I_dlnk = 1.750 × ln(R/ξ) − 2.63. The one-loop correction scales as
+**ln(R/ξ)**, not linearly.
+
+**(C) Power-law running λ_⊥(R) = λ_⊥(ξ) × (R/ξ)^p:**
+
+| p | λ_bend at R_cap | gap |
+|---|---|---|
+| 0 (constant) | 4.70 × 10⁴ | 232× |
+| 1/2 | 7.00 × 10⁵ | 15.6× |
+| **1 (linear)** | **1.04 × 10⁷** | **1.046×** |
+| 3/2 | 1.55 × 10⁸ | 0.070× |
+
+For **p = 1 (linear running)**: λ_bend = 1.04 × 10⁷, within **4.4% of target**
+(consistent with the earlier scale-dependent hypothesis from §5).
+
+### Gap anatomy
+
+The gap decomposes as:
+```
+Gap = φ²/(J+K)/4 × (φ/α)/(1) = φ³/(α × (J+K)/4)
+```
+
+The factor R_cap/ξ = φ/α ≈ 222 is an IR scale (the cap radius), while (J+K)/4 ≈ 2.50
+is a UV core integral. The gap is the product of an IR factor (222) and a small
+UV shortfall (φ²/2.503 ≈ 1.046).
+
+### Conclusions
+
+| Mechanism | Enhancement | Sufficient? |
+|---|---|---|
+| b=1/2 convention | × (worsens gap) | No |
+| Extended core integral (tail) | <0.1% | No |
+| Classical LIA | R ln(R/ξ) ≈ 1.2 × 10³ | No (0.03% of target) |
+| Kelvin wave one-loop | O(ln R/ξ) ≈ 5.4× | No (insufficient by 41×) |
+| **Linear running (p=1)** | **R/ξ ≈ 222×** | **Yes (4.4% residual)** |
+
+The 232× gap requires either:
+1. **Linear anomalous running** of λ_⊥ with R — λ_⊥(R) ∝ R, requiring anomalous
+   dimension 1 for the chiral-shear coupling (non-perturbative). The 4.4% residual
+   is then (J+K)/4 vs φ².
+2. **Non-local topological contribution** — e.g., Seifert disk flux or knot invariant
+   quantization at λ_bend = φ³/α³ (non-perturbative, topological).
+
+All local perturbative mechanisms (core integrals, LIA, Kelvin waves) are
+insufficient by 1–2 orders of magnitude.
+
+---
+
 ## Summary table
 
 | Sector | Observable | SSV result | CODATA/PDG | Status |
