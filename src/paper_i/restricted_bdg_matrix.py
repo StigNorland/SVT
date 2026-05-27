@@ -1,3 +1,33 @@
+"""Restricted 2-mode BdG diagnostic for the Paper I static branch.
+
+Status: prototype / validation asset (not derived)
+Problem type: static
+Nondimensionalisation: xi = 1, background density rho0 = 1
+Primary observables: restricted BdG eigenvalues omega_minus, omega_plus from
+the projected (R, chi) Hessian
+Primary role: small-basis sanity check for the projected-Hessian formulation;
+NOT a source of derived numbers for the paper text
+
+Validation status (see papers/SSV-I/validation-refinement-sweeps-2026-05-27.md
+for the full sensitivity table):
+
+- omega_minus is non-real at every tested grid (n=21..81) and box-size
+  (hw=3..8) point. The restricted 2-mode subspace does not contain the
+  lower BdG branch. Treat printed omega_minus as a diagnostic flag, not a
+  frequency.
+- omega_plus drifts ~62.7% across the grid-refinement sweep and ~66.5% across
+  the box-size sweep. It is NOT converged at any single (n, hw) checkpoint.
+- The background profile (profile_n, profile_x_max) is well-converged within
+  profile_n in [600, 4800] and profile_x_max in [15, 20].
+- vortex_profile.solve fails at profile_x_max >= 25.
+
+The derived muon-mass predictions for Paper I come from
+kelvin_augmented_bdg.py / muon_branch_identity_tracking.py, which use an
+enlarged basis (10-mode combined: 4 core + 3 Kelvin per sign) and the
+differential L/M operator. The numbers printed by this script are not the
+numbers in the paper text.
+"""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

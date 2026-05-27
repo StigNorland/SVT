@@ -1,3 +1,25 @@
+"""Planar LogSE vortex profile by shooting.
+
+Status: validation (cheap building block)
+Problem type: static, 1D
+Nondimensionalisation: xi = 1, density rho0 = 1
+Primary observables: vortex amplitude f(x) and derivative on [x_min, x_max]
+Primary role: builds the background profile consumed by every Paper I
+reduced-BdG / curved-torus / chiral-bridge calculation
+
+Validation status (see papers/SSV-I/validation-refinement-sweeps-2026-05-27.md
+for the full sensitivity table):
+
+- Profile-grid convergence: profile_n in [600, 4800] gives less than 0.05%
+  drift in downstream restricted-BdG observables. profile_n = 2400 is a safe
+  default.
+- Profile-extent stability boundary: solve(x_max=20) succeeds, but the
+  bisection shooting solver FAILS at x_max >= 25 with
+  "Could not bracket the vortex shooting slope". Downstream callers must
+  not request x_max > 22 without hardening the shooter (wider initial slope
+  bracket, refined RK4 step near the far-field, or a different ODE scheme).
+"""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

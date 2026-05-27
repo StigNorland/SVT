@@ -23,6 +23,31 @@ The later flow-based follow-up is now more specific too. Broad topology-flow, ph
 3. The planar amplitude channel alone does not produce the muon as a simple bound breathing mode; toroidal geometry and chiral transverse coupling are required.
 4. The reduced BdG and Kelvin/chiral scripts are exploratory tools for identifying which finite-dimensional truncations carry the right mode structure.
 
+## Validation Status of Reduced-Problem Scripts (issue #16)
+
+The reduced-problem scripts in `src/paper_i/` are not all of the same
+maturity. The table below classifies each one so the paper text and
+discussion can cite them at the correct confidence level. **Prototype**
+scripts are exploratory checkpoints; the numbers they print are not
+predictions. **Validation** scripts are robust building blocks whose
+output the paper depends on but does not directly cite as a result.
+**Derived** scripts produce the actual paper numbers.
+
+| script | status | sensitivity verdict | notes |
+|---|---|---|---|
+| `vortex_profile.py` | validation | profile_n>=600 stable; **shooting fails at x_max>=25** | see `validation-refinement-sweeps-2026-05-27.md` |
+| `restricted_bdg_matrix.py` | **prototype** | `omega_plus` drifts ~63% in `n`, ~66% in `hw`; `omega_minus` is `nan` at every reference point | see `validation-refinement-sweeps-2026-05-27.md` |
+| `curved_torus_relaxation.py` | validation | small-basis ansatz only — pre-existing module header notes this | small-basis validation asset for issue #12 |
+| `kelvin_augmented_bdg.py` / `muon_branch_identity_tracking.py` | derived | matched-spacing-trio addresses hw, weak-form + lru_cache fixes in `4b869bd`; outstanding cross-m current-curl issue identified in `enrichment-attempt-findings-2026-05-27.md` | source of the muon-mass predictions actually used in Paper I |
+
+**Headline finding from the static-branch sweep:** the restricted 2-mode
+diagnostic in `restricted_bdg_matrix.py` is NOT converged in grid `n` or
+box `half_width` — neither axis shows a plateau within the swept range,
+and the lower BdG branch is outside the 2-mode subspace (`omega_minus` is
+`nan` at every sampled point). Any historical citation of
+`restricted_bdg_matrix` numbers as derived predictions must be re-framed
+as diagnostic checkpoints for the projected-Hessian formulation.
+
 ## Reproduction Commands
 
 From the repository root:
