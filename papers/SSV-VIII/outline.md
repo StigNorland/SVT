@@ -18,23 +18,40 @@ The present saturated, defect-bearing vacuum can be described as the end state o
 4. Nonlinear growth leads to saturation.
 5. Topological defects nucleate once the medium forms.
 
-## Candidate section structure
+## Section structure (as drafted)
+
+The five stages are kept as subsections under a single Cosmogony section
+rather than being promoted to top-level sections; the unified-narrative
+flow reads better than five short top-level chunks.
 
 1. Introduction
-2. The Permissive Void
-3. Primordial Perturbation
-4. Interference and Seed Pattern
-5. Growth to Saturation
-6. Defect Nucleation
-7. Discussion
+2. Cosmogony: From the Permissive Void to the Resonant Cosmos
+   - Stage 1 — The Permissive Void
+   - Stage 2 — The Primordial Photon: First Perturbation
+   - Stage 3 — Interference and the Seed Pattern
+   - Stage 4 — Nonlinear Growth to Saturation
+   - Stage 5 — Vortex Nucleation: The First Particles
+3. Synthesis and interpretive context
+   - Synthesis table (with per-row status column)
+   - Cosmogony as candidate self-consistency picture (interpretive only)
+   - Cosmological constant and dark energy (deferred to VII-b §5.2)
+4. Focused Predictions (C1 candidate; C2 structural)
+5. Discussion: scope, status, and what would count as support
+   - Claim taxonomy
+   - Per-section status of this paper
+   - What observational/theoretical support would matter
+   - What this paper is not
+6. Conclusion
 
 ## Keep out
 
-- Full QM derivation
-- Full gravity derivation
+- Full QM derivation (Paper VII-a)
+- Full gravity / Λ derivation (Paper VII-b)
 - Detailed CMB commitments unless they are separately supported
+- Manifesto-style claims about α, fine-tuning, or self-tuning resolved
+  at this paper's level
 
-## Immediate drafting tasks
+## Status
 
-- Keep ontology and mechanism clearly separated
-- State where the account is interpretive versus derived
+Issue #9 closure work complete: see README.md "Changes from previous
+draft (issue #9 closure)" and the new §5 Discussion in main.tex.
