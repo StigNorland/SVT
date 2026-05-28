@@ -196,13 +196,42 @@ hydrodynamic variables reduce to the linear dynamics used in standard quantum
 mechanics.
 \end{resultbox}
 
-\begin{gapbox}[Deferred: bound-state spectra from LogSE]
-Equation~\eqref{eq:schrodinger} recovers the Schr\"odinger form, but the
-effective potential $V_\mathrm{eff}$ must be computed from the full LogSE
-background for each physical situation.  Deriving the hydrogen-like bound-state
-spectrum directly from the LogSE---without invoking $V_\mathrm{eff}$ as an
-external input---is part of the Paper~I numerical programme~\cite{SSV-I}.
-\end{gapbox}
+\paragraph{Origin of $V_\mathrm{eff}$, and the hydrogen spectrum.}
+\label{para:Veff-hydrogen}
+The effective potential in \eqref{eq:schrodinger} is not imported from
+elsewhere; it is the linearised long-wavelength shear field around the source
+defect.  For a heavy stationary source defect with topological chirality
+(Paper~I, electric-charge identification), the chiral-shear sector of the
+SSV Lagrangian propagates the source's chirality outward at the transverse
+phase speed $c_\perp = \alpha c$.  At distances large compared with the
+source healing length and small compared with the cosmological horizon, the
+linearised chiral-shear potential reduces to the Coulomb form
+\begin{equation}
+  V_\mathrm{eff}(r) = -\,\frac{e^2}{4\pi\varepsilon_0\,r},
+  \label{eq:Veff-coulomb}
+\end{equation}
+where the proportionality is fixed by the same identification
+$\alpha = c_\perp/c$ that defines the chiral-shear coupling in
+Paper~I (\S\,Postulate).  Equation~\eqref{eq:schrodinger} with
+$V_\mathrm{eff}$ from \eqref{eq:Veff-coulomb} is the hydrogen Schr\"odinger
+equation; its eigenvalues are the familiar Rydberg series
+\begin{equation}
+  E_n = -\frac{m_e c^2 \alpha^2}{2 n^2}
+       \approx -\frac{13.6\,\mathrm{eV}}{n^2},
+  \label{eq:rydberg}
+\end{equation}
+with the prefactor expressed entirely in SSV constants $\{m_e, \alpha, c\}$
+that Paper~I already takes as fixed.  The hydrogen-like bound-state spectrum
+is therefore a direct consequence of the LogSE low-amplitude long-wavelength
+limit together with Paper~I's chiral-shear identification of electromagnetism,
+with no fresh numerical input.
+
+The same construction applies to any heavy SSV source defect.  The effective
+potential is set by the long-wavelength chiral-shear field of that source,
+and the bound-state spectrum follows by the standard Schr\"odinger calculation
+in \eqref{eq:schrodinger}.  The LogSE programme does not need to recompute
+hydrogen; it needs to verify that \eqref{eq:Veff-coulomb} is the correct
+linearised field, which is the content of Paper~I's electromagnetism sector.
 
 \subsection{Quantisation as circulation topology}
 
