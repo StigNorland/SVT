@@ -10,10 +10,35 @@ corresponding `resultbox`.
 
 | Issue | Paper          | What was closed                                           | Reproduces |
 |-------|----------------|-----------------------------------------------------------|------------|
+| #37   | SSV-II §Tau    | Tau identified as Hopf-linked trefoil pair bound by a muon quantum | `src/paper_ii/tau_identification.py` |
 | #42   | SSV-VI-a §4.4  | First-principles closed form for $\mathcal{C}$            | `src/paper_vi_a/derive_C.py` |
 | #43   | SSV-VI-b §3.2  | Quantitative $\varepsilon_m(a_{\rm BH})$ table            | `src/paper_vi_b/epsilon_m_table.py` |
 | #44   | SSV-VI-b §4.1  | SSV-specific Lin–Shu dispersion → pitch-angle table       | `src/paper_vi_b/pitch_angle_table.py` |
 | #50   | SSV-VIII §C1   | Kibble–Zurek GPE simulation of the void→saturation quench | `src/paper_viii/kibble_zurek_gpe.py` |
+
+## #37 — Tau identification
+
+The deferred "ladder coincidence only" status of the tau is closed by
+identifying it with the lowest **Hopf-linked pair of trefoil-skeleton
+baryon breathers bound by a shared muon-class core-breathing quantum**
+— equivalently a $(2,3)\oplus(2,3)$ two-component vortex link with one
+muon-mass binding energy at the linkage region. The leading-order mass:
+
+$$m_\tau \;=\; 2 m_p - m_\mu \;=\; 1770.89\,\mathrm{MeV}\quad(-0.34\%),$$
+
+or, isospin-averaged,
+
+$$m_\tau \;=\; (m_p + m_n) - m_\mu \;=\; 1772.18\,\mathrm{MeV}\quad(-0.26\%),$$
+
+both **tighter than** the bare ladder coincidence
+$25\tfrac{1}{2}\,\mu_0 = 1785.6\,\mathrm{MeV}$ ($+0.49\%$). The full
+eigenmode verification requires the $\mathcal{L}+\mathcal{L}_\perp$
+minimisation on the two-component link (Borromean-class extension of
+the trefoil computation already in Paper I), the same workstream that
+closes the muon eigenfrequency (Paper I open problem 2).
+
+`src/paper_ii/tau_identification.py` reproduces the three predictions
+and their discrepancies.
 
 ## #42 — Galactic coupling constant $\mathcal{C}$
 
@@ -107,6 +132,9 @@ the remaining gap to *derived*.
 ## Reproducing locally
 
 ```bash
+# Tau identification (#37)
+python3 src/paper_ii/tau_identification.py
+
 # C derivation (#42)
 python3 src/paper_vi_a/derive_C.py
 
