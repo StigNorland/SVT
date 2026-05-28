@@ -283,12 +283,47 @@ contribute to gravitational lensing in the same weak-field channel as ordinary m
 Cluster-lensing phenomenology and merger offsets are outside the scope of the present
 flat-curve argument and are left to later work.
 
-\begin{gapbox}[Deferred: stress-energy mapping]
-A complete treatment requires deriving the effective stress-energy tensor from the LogSE
-action and showing that the weak-field limit recovers the standard general-relativistic
-result.  This is straightforward within the Madelung formalism and is deferred to
-Paper~VII-b~\cite{SSV-VIIb}, which derives the emergent metric from the medium.
-\end{gapbox}
+\paragraph{Stress-energy mapping via Paper VII-b emergent metric.}
+\label{para:stress-energy}
+The required mapping is now in hand.  Paper~VII-b~\cite{SSV-VIIb} (\S3 and
+\S4) derives the SSV-emergent metric directly from the LogSE Madelung
+decomposition:
+\begin{equation}
+  g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu},
+  \qquad
+  h_{00} = -\frac{2\Phi}{c^2},\quad
+  h_{ij} = -\frac{2\Phi}{c^2}\,\delta_{ij},
+  \label{eq:VIIb-metric-import}
+\end{equation}
+with $\Phi$ given by the density-to-potential relation~\eqref{eq:phi_rho}
+above.  The Jacobson route in Paper~VII-b \S5 then closes onto the full
+nonlinear Einstein equations
+$G_{\mu\nu}+\Lambda g_{\mu\nu} = (8\pi G/c^4)\,T_{\mu\nu}$.  At weak field,
+the linearised version of these equations gives
+\begin{equation}
+  \nabla^2\Phi = 4\pi G\,\rho_{\rm eff},
+  \qquad
+  \rho_{\rm eff}(\mathbf x) \equiv \frac{c^2}{4\pi G\,\alpha_g}\,
+    \nabla^2\ln\!\!\left(\frac{\rho(\mathbf x)}{\rho_0}\right),
+  \label{eq:rho-eff}
+\end{equation}
+which is the effective stress-energy source $T_{00}=\rho_{\rm eff}\,c^2$
+read off the medium's density profile.  For the disc-soliton standing wave
+of interest here, the density excess $\delta\rho=\rho-\rho_0$ is small
+compared to $\rho_0$ throughout the galactic disc, so the logarithm
+linearises and
+\begin{equation}
+  \rho_{\rm eff}(\mathbf x)
+    \;\approx\;
+    \frac{c^2}{4\pi G\,\alpha_g\,\rho_0}\,\nabla^2\delta\rho(\mathbf x).
+  \label{eq:rho-eff-linear}
+\end{equation}
+This is the explicit form of the effective stress-energy source produced by
+the disc-soliton density profile; it sources $\Phi$ via the standard
+linearised Poisson equation, and the rotation-curve calculation proceeds in
+the ordinary way.  The factor $c^2/(4\pi G\,\alpha_g\,\rho_0)$ is the
+calibration that Paper~VII-b fixes; the only galaxy-specific input is the
+density profile $\delta\rho(\mathbf x)$ of the standing wave.
 
 %%──────────────────────────────────────────────────────────────────────────────
 \section{Application to Andromeda}
