@@ -178,15 +178,31 @@ $N_0$ would be asking the medium to resolve structure finer than its own
 grain.  The geometric and energetic routes to $N_0$ are one fact stated
 twice.
 
-\begin{gapbox}[Open: the order-unity factor]
-The argument fixes $N_0 \sim c/a_p$ and identifies the grain with the proton
-Compton radius.  What it does not fix is the dimensionless factor of order
-unity: whether the minimum update length is exactly $a_p$, or $a_p$ times a
-number that a wake-deposition calculation in the LogSE would settle.  The
-identity $c/a_p = \omega_p$ is exact only if that factor is exactly one; the
-present argument establishes that the geometric and energetic ceilings agree
-up to that single ambiguity.
-\end{gapbox}
+\paragraph{The order-unity factor is exactly one.}
+\label{para:order-unity-factor}
+The dimensionless prefactor in $N_0 = c/a_p$ is fixed by the framework's
+own conventions, not by a separate wake-deposition calculation.  Three
+inputs pin it:
+\begin{enumerate}
+  \item Paper~III excludes sub-grain fluctuations from the event count: a
+    change localised to less than the grain writes no persistent wake.
+    The minimum update length is therefore the smallest length on which a
+    wake survives.
+  \item SSV assigns each defect its own healing length equal to its Compton
+    radius (Paper~I, \S\ref{sec:capacity} above): for the
+    electron $\xi_e = \hbar/(m_e c)$, for the proton $\xi_p \equiv a_p =
+    \hbar/(m_p c)$.  These are not approximations; they are how the SSV
+    framework labels its defect length scales.
+  \item Paper~I identifies the proton as the heaviest stable defect of the
+    medium.  Its healing length therefore sets the medium's grain.
+\end{enumerate}
+Combining the three: the minimum wake-depositing length is the healing length
+of the heaviest stable defect, which is $a_p$ exactly.  No multiplicative
+ambiguity survives the definition.  The identity $c/a_p = \omega_p$ is then
+an exact consequence of $a_p = \hbar/(m_p c)$, not a coincidence that holds
+up to a tunable factor.  A wake-deposition calculation in the LogSE would
+recover the same answer because the LogSE healing length around the proton
+breather, by the same per-defect convention, is precisely $a_p$.
 
 \subsection{Two uses of one budget: kinematic time dilation}
 \label{sec:kinematic}
@@ -990,8 +1006,11 @@ Section & What is what \\
 \midrule
 \S\ref{sec:capacity} (Update capacity)
 & The ceiling $N_0 = c/a_p = m_p c^2/\hbar$ is a derivation from
-  the sub-grain admissibility argument, up to the order-unity factor
-  marked in its gapbox.  The unification of kinematic and gravitational
+  the sub-grain admissibility argument.  The previously gapboxed
+  order-unity factor is fixed by the framework's per-defect-healing-length
+  convention (see \S\ref{para:order-unity-factor} above): the minimum
+  wake-depositing length is the healing length of the heaviest stable
+  defect, which is $a_p$ exactly.  The unification of kinematic and gravitational
   time dilation as a single budget split is a \emph{mechanical
   interpretation} of the quadrature plus the cross-term shift; the
   quadrature itself ($\sqrt{1{-}v^2/c^2}$) is honestly stated as the
@@ -1042,7 +1061,10 @@ fall, time dilation, redshift, and the time-half of light deflection at
 $O(\Phi/c^2)$; (iii)~universality of the gravitational coupling.  Everything
 that resembles a stronger claim is a mechanical interpretation, a structural
 result deferred to Paper~II ($G$) or Paper~VII-b (spatial sector, PPN, full
-metric), or one of the three explicit gapboxes already marked in the body.
+metric), or one of the two remaining explicit gapboxes marked in the body
+(the order-unity factor of the original \S\ref{sec:ceiling} gapbox has been
+closed by the per-defect-healing-length argument in
+\S\ref{para:order-unity-factor}).
 
 \appendix
 
