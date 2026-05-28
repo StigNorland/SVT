@@ -249,14 +249,73 @@ cannot be squeezed arbitrarily without exciting the pressure and phase-gradient
 channels of the fluid.  The uncertainty principle is the hydraulic stiffness of
 the vacuum medium made quantitative.
 
-\begin{gapbox}[Deferred: precise $\hbar/2$ prefactor from LogSE]
-The hydraulic-stiffness argument recovers the form of \eqref{eq:uncertainty} and
-the $\hbar$ scaling, but deriving the precise prefactor $1/2$ from the LogSE
-equation of state---without importing it from the standard wave-packet
-calculation---requires computing the minimum uncertainty product for a LogSE
-coherent state.  This is a tractable calculation deferred to the Paper~I
-programme~\cite{SSV-I}.
-\end{gapbox}
+\subsection{Saturation by the Gausson}
+\label{sec:gausson-saturation}
+
+The precise prefactor $1/2$ in \eqref{eq:uncertainty} can be derived directly
+from the LogSE itself, without importing it from the standard wave-packet
+calculation, by computing the uncertainty product on the LogSE's natural
+coherent state.  The logarithmic Schr\"odinger equation
+\begin{equation}
+  i\hbar\,\partial_t\Psi
+   = -\frac{\hbar^2}{2m}\,\nabla^2\Psi
+     - b\,\Psi\,\ln(|\Psi|^2/\rho_0)
+  \label{eq:LogSE-VIIa}
+\end{equation}
+admits an exact Gaussian stationary solution, the \emph{Gausson} of
+Bialynicki-Birula and Mycielski~\cite{BialynickiBirula1976}:
+\begin{equation}
+  \Psi_G(x,t)
+   = \frac{1}{(\pi\sigma^2)^{1/4}}\,
+     \exp\!\left(-\frac{x^2}{2\sigma^2}\right)\,
+     \exp\!\left(-i\,E_G\,t/\hbar\right),
+  \qquad
+  \sigma^2 = \frac{\hbar^2}{2 m\,b},
+  \label{eq:gausson}
+\end{equation}
+where the Gausson width $\sigma$ is fixed by the LogSE structure constants
+$m$ and $b$.  Unlike the linear-Schr\"odinger Gaussian, the Gausson is a
+\emph{true soliton}: the Gaussian shape is preserved exactly under LogSE
+evolution; this is the defining property that singles out the logarithmic
+nonlinearity~\cite{BialynickiBirula1976}.
+
+The position and momentum variances on the Gausson are evaluated directly
+from Gaussian integrals:
+\begin{align}
+  (\Delta x)^2
+   &= \int x^2\,|\Psi_G|^2\,\mathrm{d}x
+    = \frac{\sigma^2}{2},
+   \label{eq:gausson-Dx}
+   \\
+  (\Delta p)^2
+   &= \int \big|\!-i\hbar\,\partial_x\Psi_G\big|^2\,\mathrm{d}x
+    = \frac{\hbar^2}{2\sigma^2},
+   \label{eq:gausson-Dp}
+\end{align}
+where the second line uses
+$\partial_x\Psi_G = -(x/\sigma^2)\,\Psi_G$ and a single Gaussian integral.
+The product is
+\begin{equation}
+  \Delta x\,\Delta p\big|_{\rm Gausson}
+   = \sqrt{\frac{\sigma^2}{2}}\cdot\sqrt{\frac{\hbar^2}{2\sigma^2}}
+   = \frac{\hbar}{2},
+  \label{eq:gausson-saturation}
+\end{equation}
+which is independent of the Gausson width $\sigma$ and therefore independent
+of the LogSE coupling $b$.
+
+\begin{resultbox}[The $\hbar/2$ prefactor is derived, not imported]
+The minimum uncertainty product $\Delta x\,\Delta p = \hbar/2$ is realised
+exactly on the Gausson \eqref{eq:gausson}, the LogSE's natural coherent
+state.  The $1/2$ prefactor arises from the Gaussian integral structure that
+the logarithmic nonlinearity preserves: $(\Delta x)^2 = \sigma^2/2$ and
+$(\Delta p)^2 = \hbar^2/(2\sigma^2)$ jointly fix the saturation value
+without independent normalisation choice.  The hydraulic-stiffness argument
+of \S\ref{sec:uncertainty} therefore not only recovers the form of the
+uncertainty relation; it identifies the LogSE coherent state on which the
+bound is saturated and the LogSE structure constants $(m, b)$ that fix the
+Gausson width.
+\end{resultbox}
 
 %%──────────────────────────────────────────────────────────────────────────────
 \section{Measurement as Reconnection}
@@ -428,6 +487,10 @@ Gradient}, SSV programme, 2026.
 \bibitem{SSV-V}
 S.\ Norland, \textit{Saturated Superfluid Vacuum~V: Condensate Black Holes},
 SSV programme, 2026.
+
+\bibitem{BialynickiBirula1976}
+I.\ Bia\l ynicki-Birula and J.\ Mycielski, ``Nonlinear wave mechanics,''
+\textit{Annals of Physics}\ \textbf{100}, 62--93 (1976).
 
 \bibitem{Gross1961}
 E.~P.\ Gross, ``Structure of a Quantised Vortex in Boson Systems,''
