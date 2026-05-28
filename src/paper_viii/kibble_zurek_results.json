@@ -1,0 +1,49 @@
+{
+  "grid": {
+    "N": 160,
+    "L": 160.0
+  },
+  "seeds": 6,
+  "scan": [
+    {
+      "tau_Q": 20.0,
+      "mean_count": 13.166666666666666,
+      "std": 2.034425935955617,
+      "density": 0.0005143229166666666
+    },
+    {
+      "tau_Q": 40.0,
+      "mean_count": 9.5,
+      "std": 2.8136571693556887,
+      "density": 0.00037109375
+    },
+    {
+      "tau_Q": 80.0,
+      "mean_count": 10.5,
+      "std": 2.6299556396765835,
+      "density": 0.00041015625
+    },
+    {
+      "tau_Q": 160.0,
+      "mean_count": 7.333333333333333,
+      "std": 2.4267032964268394,
+      "density": 0.00028645833333333333
+    },
+    {
+      "tau_Q": 320.0,
+      "mean_count": 6.666666666666667,
+      "std": 1.7950549357115015,
+      "density": 0.00026041666666666666
+    }
+  ],
+  "fitted_alpha_2D": 0.2337163702106929,
+  "meanfield_alpha_2D": 0.5,
+  "meanfield_alpha_3D": 0.75,
+  "XY_alpha_3D": 0.8599044123922506,
+  "eta_observed": 6e-10,
+  "tau_Q_over_tau_0_required_MF": 1976051835827.8096,
+  "tau_Q_over_tau_0_required_XY": 52999518844.03012,
+  "cosmological_tau_Q_over_tau_0": 1.3e+41,
+  "eta_predicted_MF": 1.4606376323968784e-31,
+  "eta_predicted_XY": 4.425259066172309e-36
+}
