@@ -4,14 +4,17 @@ Working title: `Gravity as Update-Capacity Gradient`
 
 ## Status
 
-Full draft in `main.tex` (compiles). All ten sections are drafted, with no
-stubs remaining. The open items are the flagged gapboxes: the
-first-principles value of `G` (deferred to Paper II), the spatial half of
-light deflection (Paper VII-b), and the order-unity factor in the §2
-ceiling. Most of the drafted material was
-worked out in Paper II §7 during the gravity rewrite and ported here when §7
-was trimmed back to a foundation-level summary. Paper IV is now the dedicated
-gravity paper of the series; Paper II §7 only states the mechanism compactly
+Full draft in `main.tex` (compiles, 20 pages, two-pass clean, zero
+warnings). All ten sections plus a numerical-methods appendix are
+drafted, with no stubs remaining. Issue #7 closed; all four task
+checkboxes addressed (see "Issue #7 closure" below). The open items
+are the three flagged gapboxes: the first-principles value of `G`
+(deferred to Paper II), the spatial half of light deflection
+(Paper VII-b), and the order-unity factor in the §2 ceiling. Most
+of the drafted material was worked out in Paper II §7 during the
+gravity rewrite and ported here when §7 was trimmed back to a
+foundation-level summary. Paper IV is now the dedicated gravity
+paper of the series; Paper II §7 only states the mechanism compactly
 and fixes `G`.
 
 ## Scope line
@@ -131,11 +134,37 @@ gravity.
 - First-principles value of `G` / `alpha_G` -> remains the open computation
   of Paper II
 
-## Open drafting tasks
+## Issue #7 closure
 
-- Decide, section by section, what is claimed as a derivation versus a
-  mechanical interpretation.
-- All ten sections now drafted: revisit the Introduction and Discussion for
-  consistency with the completed §2 and §6.
-- Optional: convert the plain `Paper II` / `Paper III` text references to
-  proper citations with an SSV-series bibliography.
+All four issue tasks now addressed:
+
+- [x] **Formalize the update-capacity concept** — §2 carries the
+  rigorous formulation: updates as wake-writing events of Paper III,
+  the grain-sized argument for the ceiling
+  $N_0 = c/a_p = m_pc^2/\hbar$, the budget split for kinematic time
+  dilation, and the loading argument for gravitational time dilation.
+  The remaining order-unity factor is explicitly gapboxed.
+- [x] **Connect time-dilation language to pressure-gradient language**
+  — §2.4 "Loading, availability, and gravitational time dilation"
+  derives the availability $A = 1 + \Phi/c^2$ from the §4 cross-term
+  energy shift; §4 itself derives the cross-term from the LogSE
+  expansion; §5 carries the four corollaries from the same $\Phi$.
+- [x] **State clearly what is derivation versus mechanical
+  interpretation** — new §10.1 "Derivation versus mechanical
+  interpretation: per-section status" tags every section. The
+  taxonomy matches `docs/numerical-minimisation-roadmap.md`
+  (derivation / mechanical interpretation / structural / numerical),
+  and the closing summary lists the three derivations the paper
+  actually carries.
+- [x] **Write a narrow abstract and introduction** — abstract and
+  intro are scoped to the time sector of weak-field gravity, with
+  the spatial sector and full GR recovery explicitly handed off to
+  Paper VII-b. "This is a division of labour, not a gap" stated
+  inline.
+
+## Optional follow-up (not blocking #7)
+
+- Convert plain `Paper II` / `Paper III` text references to proper
+  citations with a shared SSV-series bibliography.
+- Revisit the Introduction and Discussion once Paper II §7 closure
+  lands the first-principles value of $G$.

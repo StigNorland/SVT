@@ -6,6 +6,7 @@
 \usepackage{lmodern}
 \usepackage{amsmath,amssymb}
 \usepackage{physics}
+\usepackage{booktabs}
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{setspace}
@@ -952,6 +953,96 @@ logarithmic medium recovers the bilinear, sign-fixed interference
 cross-term of \S\ref{sec:interference}, attractive for phase-correlated
 waves.  At leading order the mechanical account set out here is now a
 tested one.
+
+\subsection{Derivation versus mechanical interpretation: per-section status}
+\label{sec:claim-status}
+
+The body of this paper mixes two registers: mathematically deduced
+results from the LogSE Lagrangian plus the inputs of Papers~II and~III,
+and fluid-mechanics restatements of the same content in physical-picture
+language.  The two registers are not in conflict; they say the same
+thing in different idioms.  But the issue's task list asks them to be
+separated, so the reader can tell at a glance whether a given claim is
+\emph{deduced} or \emph{re-expressed}.  The taxonomy used here matches the
+roadmap in \texttt{docs/numerical-minimisation-roadmap.md}:
+
+\begin{itemize}
+  \item \textbf{derivation}: a mathematical deduction from the LogSE
+    Lagrangian or from the inputs of Papers~I--III, holding at the stated
+    order in $\Phi/c^2$.
+  \item \textbf{mechanical interpretation}: a physical-picture
+    restatement of a derivation, in fluid- or wave-mechanics language,
+    that does not by itself add new mathematical content.
+  \item \textbf{structural}: the result follows from the framework's
+    logical structure but the number depends on a computation tracked
+    elsewhere (Paper~II for $G$, Paper~VII-b for the spatial sector).
+  \item \textbf{numerical}: a direct simulation check of a derivation
+    above, run against the same equations the derivation uses.
+\end{itemize}
+
+\paragraph{Per-section content.}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{p{0.30\linewidth} p{0.62\linewidth}}
+\toprule
+Section & What is what \\
+\midrule
+\S\ref{sec:capacity} (Update capacity)
+& The ceiling $N_0 = c/a_p = m_p c^2/\hbar$ is a derivation from
+  the sub-grain admissibility argument, up to the order-unity factor
+  marked in its gapbox.  The unification of kinematic and gravitational
+  time dilation as a single budget split is a \emph{mechanical
+  interpretation} of the quadrature plus the cross-term shift; the
+  quadrature itself ($\sqrt{1{-}v^2/c^2}$) is honestly stated as the
+  kinematic face of an emergent Lorentz invariance, not separately
+  re-derived here. \\
+\S\ref{sec:picture} (Physical picture)
+& Mechanical interpretation throughout: the three-link
+  ``interference $\to$ delay $\to$ bending'' chain restates the
+  Sections~\ref{sec:interference}--\ref{sec:consequences} mathematics in
+  wavefront language. \\
+\S\ref{sec:interference} (Interference cross-term)
+& Derivation of $u_{AB} = -b\rho_0 x_A x_B$ from the LogSE expansion;
+  the three structural properties (coherence-only survival, attractive
+  sign from concavity of $\ln$, bilinear $1/r$ falloff) are corollaries
+  of the same derivation.  Numerical check in \S\ref{app:numerics}.
+  The match to Newton's $G$ is \textit{structural} and cited to
+  Paper~II. \\
+\S\ref{sec:consequences} (Time dilation, deflection, redshift)
+& Each of the four corollaries (free fall, time dilation, light
+  deflection at Einstein-1911 strength, redshift) is a derivation at
+  $O(\Phi/c^2)$ from $\Phi$.  Extension beyond leading order is
+  gapboxed and \textit{structural} via Paper~VII-b. \\
+\S\ref{sec:refraction} (Refraction picture)
+& Mechanical interpretation of the wavefront geometry, plus a
+  derivation that the corresponding deflection integral reproduces the
+  Einstein-1911 value $2GM/(bc^2)$ for light and $-m\nabla\Phi$ for a
+  massive defect.  The spatial half of light deflection is gapboxed and
+  \textit{structural} via Paper~VII-b. \\
+\S\ref{sec:universal} (Universal coupling, no graviton)
+& Universality is a derivation: the cross-term depends on the breather
+  amplitude $x_A$ only through the universal time delay it produces, so
+  every breather feels the same gradient.  ``Gravity without a graviton''
+  is a mechanical interpretation of the absence of a separate
+  quantised force-carrier field in the LogSE Lagrangian. \\
+\S\ref{sec:geometry} (Emergent geometry handoff)
+& A pointer, not a derivation: the acoustic-metric content and the
+  full curved-spacetime structure live in Paper~VII-b. \\
+\S\ref{sec:remembers} (Recording medium)
+& Mechanical interpretation that connects the gravitational-wave memory
+  effect to Paper~III's recording-medium framing.  No new derivation. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Summary.}  The derivations carried by this paper are
+(i)~the cross-term $u_{AB}$ and its three structural properties; (ii)~free
+fall, time dilation, redshift, and the time-half of light deflection at
+$O(\Phi/c^2)$; (iii)~universality of the gravitational coupling.  Everything
+that resembles a stronger claim is a mechanical interpretation, a structural
+result deferred to Paper~II ($G$) or Paper~VII-b (spatial sector, PPN, full
+metric), or one of the three explicit gapboxes already marked in the body.
 
 \appendix
 
