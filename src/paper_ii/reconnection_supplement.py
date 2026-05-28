@@ -1,9 +1,18 @@
 """Paper II reconnection-barrier numerical supplement.
 
-This script is a compact reproduction harness for the Paper II W/Z
-reconnection-barrier checks.  It intentionally targets structural tests rather
-than a physical-scale production calculation: the real SSV scale separation
-requires a petascale 3D grid.
+Status: prototype
+Problem type: dynamic
+Nondimensionalisation: xi = 1, rho0 = 1.  The longitudinal speed is
+NOT c = 1 in the canonical-conventions sense: the LogSE coupling enters
+as ``log_pressure`` (default 8.0), so the effective sound speed is
+``c_eff = sqrt(2 * log_pressure)`` in dimensionless units.  This is a
+known convention mismatch with the static branch's c = 1 default; closure-
+grade dynamic runs (issue #15) should reconcile this.
+
+Primary observables: saddle_index, saddle_excess, cap_radius, cos_phi
+Primary role: structural reproduction harness for the Paper II W/Z
+reconnection-barrier checks.  Not a physical-scale production calculation;
+the real SSV scale separation requires a petascale 3D grid (issue #15).
 
 The implemented model:
 - initializes two vortex rings with configurable topology,
@@ -14,7 +23,7 @@ The implemented model:
 - writes CSV rows for opposite and same topology sweeps.
 
 Example:
-    python src/paper_ii_reconnection_supplement.py --n 32 --length 18 \
+    python src/paper_ii/reconnection_supplement.py --n 32 --length 18 \
         --lambda-perp 0 --lambda-perp 1 --lambda-perp 10 --lambda-perp 100 \
         --output papers/SSV-II/data/example_sweep.csv
 """
@@ -24,10 +33,37 @@ from __future__ import annotations
 import argparse
 import csv
 import math
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
+
+SRC_ROOT = Path(__file__).resolve().parents[1]
+if str(SRC_ROOT) not in sys.path:
+    sys.path.append(str(SRC_ROOT))
+
+from shared_numerics import OutputStatus, ScriptMetadata
+
+
+SCRIPT_METADATA = ScriptMetadata(
+    problem_type="dynamic",
+    status=OutputStatus.PROTOTYPE,
+    nondimensionalisation="xi = 1, rho0 = 1, c_eff = sqrt(2*log_pressure) (non-canonical)",
+    observables=("saddle_index", "saddle_excess", "cap_radius", "cos_phi"),
+    diagnostics=(
+        "split_step_energy_drift",
+        "norm_drift",
+        "cap_extraction_method",
+    ),
+    issue_refs=("#15", "#16"),
+    limitations=(
+        "Structural reproduction harness only; not a physical-scale production reconnection solver.",
+        "Sound-speed convention diverges from the static-branch canonical c = 1 by the factor sqrt(2*log_pressure).",
+        "Timestep / resolution / initial-condition sensitivity sweeps are open work under issue #16 (dynamic side).",
+        "Cap radius extracted by volume-based or radial-slice method; both rely on a fixed cap_threshold cutoff.",
+    ),
+)
 
 
 @dataclass(frozen=True)
