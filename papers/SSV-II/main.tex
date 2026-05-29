@@ -1177,14 +1177,98 @@ not yet predict this ratio from first principles: it requires the full 3D
 minimisation of the vortex-ring and knotted-breather energy functionals over
 $\mathcal{L}+\mathcal{L}_\perp$.
 
-\begin{gapbox}[Open problem: the defect spectrum hierarchy]
-Why does the toroidal vortex ring have an equilibrium radius
-$R^* \approx 137\,\xi$ while the knotted breather's core is
-$a_p \approx \xi/1836$?  Both are solutions to the same field equations.
-The ratio $m_p/m_e \approx 1836$ is the framework's defect spectrum width;
-its derivation from the topology of the two defect types is the central open
-calculation.  The same 3D minimisation is expected to fix the $W$ mass scale,
-the lepton generations, and the CP observables.
+\paragraph{Structural composite mass ratio.}
+The defect spectrum hierarchy of the previous paragraph is the SSV
+counterpart of the Standard Model Yukawa hierarchy: the ratio
+$m_p/m_e \approx 1836$ is determined by the relative scaling of two
+topology classes (the toroidal vortex ring and the knotted breather)
+under the same $\mathcal{L}+\mathcal{L}_\perp$ functional.  Although the
+\emph{individual} masses are at mixed status (Paper~I tags $m_e$ and
+$m_{\pi^\pm}$ as derived and $m_p$ as candidate, issue~\#13), the
+framework already supplies one composite \emph{mass-ratio} prediction
+whose structural form is fixed without further computation: the
+proton-to-pion mass ratio.
+
+From the Paper~I identifications
+\begin{equation}
+  m_{\pi^\pm} \;=\; 2\mu_0, \qquad
+  m_p \;=\; N_Y\,F\,\mu_0,
+  \label{eq:proton-pion-individual}
+\end{equation}
+where $\mu_0 \equiv m_e/\alpha \approx 70\,\text{MeV}$ is the
+electron-derived flux-tube mass scale, $N_Y$ is the topological crossing
+factor of the trefoil Y-junction, and $F$ is the 3D breather form
+factor, the ratio
+\begin{equation}
+  \boxed{\;
+    \frac{m_p}{m_{\pi^\pm}} \;=\; \frac{N_Y\,F}{2}\;
+  }
+  \label{eq:mp-over-mpi}
+\end{equation}
+follows immediately, with the empirical input $\mu_0$ cancelling.  At
+the current candidate-grade values $N_Y \approx 3.007$, $F \approx 4.47$,
+\begin{equation}
+  \frac{m_p}{m_{\pi^\pm}} \;\approx\; 6.72,
+  \label{eq:mp-over-mpi-numeric}
+\end{equation}
+within $0.1\%$ of the observed ratio
+$m_p/m_{\pi^\pm} = 938.272/139.570 \approx 6.722$.
+
+\paragraph{Cross-link to $m_p/m_e$.}
+The same product $N_Y\,F$ also controls the proton--electron ratio
+through the definition $\mu_0 = m_e/\alpha$.  Eliminating $\mu_0$ from
+Eq.~\eqref{eq:proton-pion-individual} gives the identity
+\begin{equation}
+  2\,\frac{m_p}{m_{\pi^\pm}} \;=\; \alpha\,\frac{m_p}{m_e}
+                              \;=\; N_Y\,F.
+  \label{eq:hierarchy-identity}
+\end{equation}
+This is a sharper statement than ``the spectrum has a hierarchy''.
+Three experimentally distinct dimensionless ratios ($m_p/m_{\pi^\pm}$,
+$m_p/m_e$, and $\alpha^{-1}$) reduce to one structural quantity $N_Y\,F$
+in the framework.  Numerically, $2\times 6.722 = 13.444$ and
+$(1/137.036)\times 1836.15 = 13.398$ --- agreement at the $0.3\%$ level,
+matching the present candidate-grade precision of $N_Y$ and $F$.
+Eq.~\eqref{eq:hierarchy-identity} is therefore an internal consistency
+\emph{prediction}: any future first-principles computation of $N_Y$ and
+$F$ must reproduce both the $1836$ and $6.72$ ratios with the same
+single number.
+
+\begin{resultbox}[Structural composite mass ratio]
+\begin{itemize}\setlength\itemsep{2pt}
+  \item \textbf{Structural form:}
+        $m_p/m_{\pi^\pm} = N_Y F/2$ (Eq.~\eqref{eq:mp-over-mpi}).
+  \item \textbf{Numerical value:}
+        $6.72$ at present candidate-grade values, $0.1\%$ below the
+        observed $6.722$.
+  \item \textbf{Consistency identity:}
+        $2(m_p/m_{\pi^\pm}) = \alpha(m_p/m_e) = N_Y F$
+        (Eq.~\eqref{eq:hierarchy-identity}), reducing three observed
+        dimensionless ratios to a single framework quantity at the
+        $0.3\%$ level.
+  \item \textbf{Status:} structural --- the form is fixed by the
+        Paper~I topology assignments (electron $=$ toroidal vortex of
+        radius $\xi/\alpha$; pion $=$ two-winding link; proton $=$
+        trefoil Y-junction breather).  The numerical values of $N_Y$
+        and $F$ inherit the candidate-grade status of the proton
+        derivation (Paper~I, issue~\#13).  Closure of issue~\#13
+        promotes the ratio from structural to derived.
+\end{itemize}
+\end{resultbox}
+
+\begin{gapbox}[Residual gap: the broader composite spectrum]
+The structural ratio above covers the lightest meson against the
+lightest baryon, plus the $m_p/m_e$ consistency identity.  Mass ratios
+within the larger spectrum --- $m_K/m_{\pi^\pm}$ (kaon/pion),
+$m_\rho/m_{\pi^\pm}$ (vector meson/pion), $m_\Delta/m_p$ (delta
+resonance/nucleon), and the heavier-meson ladder --- depend on
+$\alpha$-harmonic placements (Paper~I Table) that are themselves
+candidate-grade.  A structural derivation for this larger sector
+requires identifying the specific surface-mode or Kelvin-wave
+excitation of the proton-trefoil breather and the pion-vortex link
+that each heavier state corresponds to.  This is the natural
+continuation of \S\ref{sec:leptons} on the charged-lepton
+breathing-mode programme, applied to the baryon and meson sectors.
 \end{gapbox}
 
 \paragraph{Connection to the $W$ end-caps.}
