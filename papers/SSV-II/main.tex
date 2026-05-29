@@ -1184,7 +1184,8 @@ $m_p/m_e \approx 1836$ is determined by the relative scaling of two
 topology classes (the toroidal vortex ring and the knotted breather)
 under the same $\mathcal{L}+\mathcal{L}_\perp$ functional.  Although the
 \emph{individual} masses are at mixed status (Paper~I tags $m_e$ and
-$m_{\pi^\pm}$ as derived and $m_p$ as candidate, issue~\#13), the
+$m_{\pi^\pm}$ as derived and $m_p$ as candidate; the proton-mass status
+is tracked under issue~\#30), the
 framework already supplies one composite \emph{mass-ratio} prediction
 whose structural form is fixed without further computation: the
 proton-to-pion mass ratio.
@@ -1251,8 +1252,14 @@ single number.
         radius $\xi/\alpha$; pion $=$ two-winding link; proton $=$
         trefoil Y-junction breather).  The numerical values of $N_Y$
         and $F$ inherit the candidate-grade status of the proton
-        derivation (Paper~I, issue~\#13).  Closure of issue~\#13
-        promotes the ratio from structural to derived.
+        derivation (Paper~I).  Promotion of the ratio from structural
+        to derived requires the dedicated $N_Y$ cross-grid sweep,
+        geometric derivation of the cutoff $R\approx 1.18\,\xi$, and
+        recovery of the converged values from at least one
+        non-trefoil initial condition; the three concrete runs are
+        itemised in
+        \texttt{papers/SSV-I/static-3d-closure-status-2026-05-28.md}
+        and tracked under issue~\#30.
 \end{itemize}
 \end{resultbox}
 
@@ -1568,14 +1575,15 @@ transition; it was the seeding event of the medium's record itself.
 The observed baryon-to-photon ratio $n_B/n_\gamma \sim 6\times 10^{-10}$ is
 therefore not a number to be derived from a small CP-violating phase in an
 otherwise symmetric theory.  It is the surviving recorded chirality of the
-seeding event: the part of the initial asymmetry that crystallised into
-stable defects (matter) rather than annihilating against its partner (the
-near-equally-stable antimatter component).  Why this number takes the value
-it does is open and properly belongs to Paper~V's treatment of cosmogony, but
-the framework's reading of the question is sharp: the universe has matter
-because the medium remembers having been chirally seeded, and the small
-fraction $n_B/n_\gamma$ measures how much of that initial chirality survived
-the early annihilation epoch.
+seeding event: the fraction of the initial asymmetry that crystallised into
+stable topological defects.  Whether the antimatter sector was ever a
+primordial partner of equal stability or only a possible reconnection
+product downstream of seeding --- and why this ratio takes the value it
+does --- is open and properly belongs to Paper~VIII's treatment of
+cosmogony.  The framework's reading of the question is sharp: the universe
+has matter because the medium remembers having been chirally seeded, and the
+small fraction $n_B/n_\gamma$ measures how much of that initial chirality
+survived into stable defect form.
 
 \subsubsection*{Reconnection-memory derivation: the neutron EDM at leading
 order}
@@ -1634,8 +1642,12 @@ $\partial^2V_\perp/\partial r^2$ at the surface-mode minimum places
 $\kappa_\chi$ at $\mathcal{O}(\alpha^n)$ for some $n\in\{1,2\}$ depending
 on whether the chiral-shear vertex enters linearly or at the one-loop
 self-energy of the surface mode.  The numerical value of $\kappa_\chi$
-requires the converged 3D minimisation of issue~\#15; the
-\emph{structural form} of Eq.~\eqref{eq:dr-edm} does not.
+requires the converged 3D $\mathcal{L}+\mathcal{L}_\perp$
+reconnection-barrier minimisation (current cross-grid status documented
+in
+\texttt{papers/SSV-II/validation-refinement-sweeps-reconnection-2026-05-28.md};
+tracked under issue~\#30); the \emph{structural form} of
+Eq.~\eqref{eq:dr-edm} does not.
 
 \paragraph{Identifying $\langle\chi\rangle_{R_n}$.}
 The neutron at rest in a quiet laboratory has no internal flavour
@@ -1707,17 +1719,18 @@ $d_n\propto e\,R_n\,(n_B/n_\gamma)$ has three consequences:
         are \emph{structural}: the functional dependence on
         $(e,\,R_n,\,n_B/n_\gamma)$ is fixed by the framework; the
         dimensionless coupling $\kappa_\chi$ requires the converged 3D
-        $\mathcal{L}+\mathcal{L}_\perp$ surface-mode calculation tracked
-        under issue~\#15.  This subsection therefore closes the
-        ``reconnection-memory to CP observables'' gap (issue~\#35) for
-        at least one observable; the residual gapbox below lists the
+        $\mathcal{L}+\mathcal{L}_\perp$ surface-mode calculation
+        (tracked under issue~\#30).  This subsection therefore closes
+        the ``reconnection-memory to CP observables'' gap for at least
+        one observable; the residual gapbox below lists the
         observables still awaiting analogous derivations.
 \end{itemize}
 
 \begin{gapbox}[Residual gap: other CP observables]
 The reconnection-memory mechanism has now been applied to one CP observable
 (the neutron EDM, structural form fixed; numerical prefactor $\kappa_\chi$
-deferred to issue~\#15).  The remaining CP-sector observables are not
+deferred to the converged 3D reconnection-barrier minimisation,
+issue~\#30).  The remaining CP-sector observables are not
 addressed at this level:
 \begin{itemize}
   \item the CKM phase $\delta_{\rm CKM}\approx 1.20\,\text{rad}$ as the
@@ -1746,7 +1759,7 @@ something that emerges from a reversible substrate, it is the consequence of
 a medium that records, and the same logic that breaks T-symmetry at the
 process level breaks CP at the process level.  The cosmological reading of
 the baryon asymmetry as recorded chirality of the seeding event connects to
-Paper~V's treatment of cosmogony, where the universe's history is the
+Paper~VIII's treatment of cosmogony, where the universe's history is the
 medium's accumulated tangle and the question ``what existed before?'' becomes
 a question about the medium prior to its first records.  The same whole-state
 coherence of the medium that breaks process-symmetries also underlies the
@@ -1896,7 +1909,8 @@ ways, each of which constitutes an open problem for the SSV programme:
           specifically, a precision-determined $\delta_{\rm PMNS}$ from
           DUNE~\cite{DUNE2020} or Hyper-Kamiokande~\cite{HK2018} that lies
           outside the SSV-predicted relation to $\delta_{\rm CKM}$ once the
-          \#15 chirality-memory calculation is in hand --- would falsify the
+          converged 3D chirality-memory calculation is in hand
+          (issue~\#30) --- would falsify the
           unified-chirality reading.  Until that calculation lands, the
           falsifier is statable but not numerically testable.
     \item \textbf{Dirac vs.\ Majorana.} A torsional pulse and its
@@ -1927,7 +1941,7 @@ ways, each of which constitutes an open problem for the SSV programme:
           theory; in SSV $g_W$ comes from the chiral-shear vertex strength
           and $m_W$ from the cap geometry of \S\ref{sec:W_rayleigh}.  Both
           are fixed by the same 3D reconnection-barrier minimisation tracked
-          under issue~\#15.  A measured precision $G_F$ at low energy
+          under issue~\#30.  A measured precision $G_F$ at low energy
           incompatible with the framework's predicted relation between the
           cap-geometry coupling and the chiral-shear coupling, once that
           calculation lands, would falsify the reconnection identification
@@ -2577,7 +2591,7 @@ clear which experiments would test which structural claims.
        \;\approx\; \kappa_\chi\,\times\,5\times 10^{-23}\,e\!\cdot\!\text{cm},
   \end{equation*}
   with $\kappa_\chi$ a dimensionless chiral-shear coupling deferred to
-  issue~\#15.  At the natural scale $\kappa_\chi\sim\alpha^2/\pi$ this
+  the converged 3D reconnection-barrier minimisation (issue~\#30).  At the natural scale $\kappa_\chi\sim\alpha^2/\pi$ this
   gives $d_n\sim 10^{-27}\,e\!\cdot\!\text{cm}$, one decade below the
   present bound $|d_n|<1.8\times 10^{-26}\,e\!\cdot\!\text{cm}$
   \cite{Abel2020} and within reach of nEDM/n2EDM at
