@@ -1677,10 +1677,44 @@ outside the propagation-speed analysis of \S\ref{sec:EM} and
 \subsection{Neutrinos as Torsional Radiation}
 \label{sec:neutrino}
 
-\begin{gapbox}[Speculative subsection: motivated geometry, no derived spectrum]
-The treatment below identifies a candidate hydrodynamic object for the neutrino,
-but does not derive its mass, flavour structure, or oscillation phenomenology.
-Five open problems are listed at the end; none is addressed in this paper.
+\begin{gapbox}[Subsection status: speculative spectrum, with falsifiers]
+\textbf{Claim-status taxonomy for this subsection} (following Paper~I
+\S Claim~Status).  The treatment below mixes four levels of claim, each
+flagged explicitly:
+\begin{itemize}\setlength\itemsep{2pt}
+  \item \textit{Structural} (framework-determined, deferred prefactor only):
+        the neutrino has charge zero, is produced only in topology-changing
+        events, propagates as a torsional pulse in the longitudinal channel,
+        and carries the chirality of its parent reconnection.  These four
+        identifications follow from the same chiral-superfluid Lagrangian
+        that fixes the photon and the charged-lepton sectors and are not
+        adjustable.
+  \item \textit{Structural prediction, sharply falsifiable}: neutrinos are
+        \emph{Dirac}, not Majorana --- the medium's preferred chirality
+        breaks C, so a self-conjugate state cannot be a stable mode of the
+        chiral channel.  Falsifier: positive observation of neutrinoless
+        double-beta decay ($0\nu\beta\beta$) at any experiment
+        (CUORE~\cite{CUORE2022}, KamLAND-Zen~\cite{KamLANDZen2023},
+        LEGEND~\cite{LEGEND2021}) directly contradicts this prediction.
+  \item \textit{Speculative} (no derivation in the present framework): the
+        non-zero mass spectrum, the threefold flavour count, the
+        oscillation pattern, the PMNS angles and CP phase, the
+        $G_F$ normalisation.  Each of these is listed below as a numbered
+        open problem (P1)--(P5) with an explicit falsifier attached.
+  \item \textit{Cross-link to Paper~I}: the antineutrino is identified
+        with the torsional recoil pulse released when the surface-locked
+        electron of the neutron composite
+        ($\mathcal{N}=\mathcal{T}\cup_{\Sigma_p}\mathcal{E}$,
+        Paper~I~\S Neutron) unwraps into a bulk defect during $\beta$-decay.
+        The decay endpoint is the surface-unbinding energy of that lock
+        (\S\ref{sec:CP}, Eq.~\eqref{eq:chi-def} ff., and Paper~I).
+\end{itemize}
+The body below identifies the geometric object, develops the structural
+identifications, and lists the (P1)--(P5) problems with attached
+falsification conditions sharp enough to retire the subsection if any
+single experiment returns the wrong answer.  Closure of (P1)--(P5)
+\emph{as derivations} (rather than as falsifiers) is deferred to a
+subsequent paper in the series.
 \end{gapbox}
 
 \subsubsection{Geometric identification}
@@ -1732,7 +1766,17 @@ ways, each of which constitutes an open problem for the SSV programme:
           resolution is that the pulse is weakly self-localising in the chiral
           channel, acquiring a small effective mass from the same chiral-shear
           coupling $\lambda$ that sets $\alpha$ --- but no calculation
-          currently exists.
+          currently exists.\\
+          \textbf{Falsifier.}  The self-localisation route gives a mass scale
+          tied to $\alpha^n$ times a structural energy; a measured sum
+          $\sum m_\nu \gtrsim 1\,\mathrm{eV}$ at KATRIN~\cite{KATRIN2022} or
+          from cosmology~\cite{Planck2020}, taken with the framework's
+          structural ratios, cannot be accommodated by any reasonable
+          chiral-shear suppression and would falsify the torsional-pulse
+          identification.  The present bounds $\sum m_\nu < 0.45\,\mathrm{eV}$
+          (KATRIN) and $\sum m_\nu < 0.12\,\mathrm{eV}$ (cosmology) leave the
+          identification viable but already constrain the self-localisation
+          mechanism more tightly than its leading-order natural scale.
     \item \textbf{Three flavours.} The Standard Model has $\nu_e, \nu_\mu,
           \nu_\tau$, paired with the three charged-lepton generations.  In the
           present geometry a torsional pulse is characterised by its twist rate
@@ -1740,31 +1784,81 @@ ways, each of which constitutes an open problem for the SSV programme:
           structure.  This is plausibly the same threefold-generation problem
           that affects the charged leptons (the muon and tau remain
           unidentified as specific breathing modes; see \S\ref{sec:leptons}); a
-          unified resolution of both would be desirable.
+          unified resolution of both would be desirable.\\
+          \textbf{Falsifier.}  Discovery of a fourth active neutrino flavour
+          --- whether as a fourth oscillation channel beyond
+          $(\nu_e,\nu_\mu,\nu_\tau)$ in long-baseline or atmospheric data
+          \cite{MicroBooNE2022}, or as a fourth eV-scale state at reactor
+          experiments --- would falsify the unified eigenmode identification:
+          the SSV framework ties the neutrino count to the charged-lepton
+          breathing-mode count, so a fourth $\nu$ requires a fourth
+          breathing-mode charged lepton, which is independently constrained
+          by precision electroweak fits.  Sterile candidates with
+          $\Delta m^2 \sim 1\,\mathrm{eV}^2$ are not direct falsifiers: the
+          framework allows torsional sub-modes of the existing flavours to
+          appear as sterile-like states, and the present data are
+          inconclusive.
     \item \textbf{Oscillations.} Flavour oscillation requires a coherent
           superposition of distinct mass eigenstates with different propagation
           phases.  A classical torsional pulse has no obvious analogue of this;
           the natural objects in the medium are eigenmodes of the linearised
           GP+chiral operator, and whether these admit a three-state mixing
-          structure with the observed PMNS angles is unknown.
-    \item \textbf{Dirac vs.\ Majorana.} The framework offers no current
-          discriminator between $\nu = \bar\nu$ and $\nu \neq \bar\nu$.  A
-          torsional pulse and its parity-conjugate differ only in the sign of
-          the twist; whether this constitutes a genuine particle/antiparticle
-          distinction or a Majorana-like self-conjugacy depends on the global
-          topology of the chiral medium and is not settled.
+          structure with the observed PMNS angles is unknown.\\
+          \textbf{Falsifier.}  The PMNS matrix and the CKM matrix should both
+          arise from the same chirality-memory mechanism that produces the
+          neutron EDM (\S\ref{sec:neutron-edm}, Eq.~\eqref{eq:chi-def}).  A
+          measured statistical \emph{independence} of the PMNS Dirac CP phase
+          $\delta_{\rm PMNS}$ from the CKM phase $\delta_{\rm CKM}$ ---
+          specifically, a precision-determined $\delta_{\rm PMNS}$ from
+          DUNE~\cite{DUNE2020} or Hyper-Kamiokande~\cite{HK2018} that lies
+          outside the SSV-predicted relation to $\delta_{\rm CKM}$ once the
+          \#15 chirality-memory calculation is in hand --- would falsify the
+          unified-chirality reading.  Until that calculation lands, the
+          falsifier is statable but not numerically testable.
+    \item \textbf{Dirac vs.\ Majorana.} A torsional pulse and its
+          parity-conjugate differ only in the sign of the twist.  In a chiral
+          medium the two are not related by~$C$: the medium's preferred
+          chirality (\S\ref{sec:parity}) breaks $C$ explicitly, so a
+          self-conjugate state cannot be a stable eigenmode of the chiral
+          channel.\\
+          \textbf{Structural prediction.}  Neutrinos are \emph{Dirac}, not
+          Majorana.  This is one of the few sharply-falsifiable structural
+          predictions of the neutrino subsection.\\
+          \textbf{Falsifier.}  A positive observation of neutrinoless
+          double-beta decay ($0\nu\beta\beta$) at CUORE~\cite{CUORE2022},
+          KamLAND-Zen~\cite{KamLANDZen2023}, LEGEND~\cite{LEGEND2021}, or any
+          successor experiment falsifies the Dirac prediction.  Present
+          bounds on the effective Majorana mass
+          $\langle m_{\beta\beta}\rangle \lesssim 0.04$--$0.2\,\mathrm{eV}$
+          (KamLAND-Zen) are consistent with the SSV prediction $\langle
+          m_{\beta\beta}\rangle = 0$; the half-life lower bounds will tighten
+          in the next decade.
     \item \textbf{Cross-section normalisation.} The Fermi constant
           $G_F = 1.166\times 10^{-5}\,\mathrm{GeV}^{-2}$ should follow from the
           same reconnection-barrier calculation that fixes the $W$ mass.  Until
           that calculation is in hand (see \S\ref{sec:weak}), the predicted
-          neutrino interaction cross-section is unconstrained.
+          neutrino interaction cross-section is unconstrained.\\
+          \textbf{Falsifier.}  The structural relation
+          $G_F/\sqrt{2} = g_W^2/(8 m_W^2)$ is inherited from electroweak
+          theory; in SSV $g_W$ comes from the chiral-shear vertex strength
+          and $m_W$ from the cap geometry of \S\ref{sec:W_rayleigh}.  Both
+          are fixed by the same 3D reconnection-barrier minimisation tracked
+          under issue~\#15.  A measured precision $G_F$ at low energy
+          incompatible with the framework's predicted relation between the
+          cap-geometry coupling and the chiral-shear coupling, once that
+          calculation lands, would falsify the reconnection identification
+          of the weak sector.  Until then, the falsifier is structural rather
+          than numerical.
 \end{enumerate}
 
 The neutrino subsection is therefore presented as a geometric \emph{hypothesis}
 in the same spirit as the neutron section of Paper~I: a motivated identification
-that defers all quantitative claims to the full 3D reconnection computation.
-Problems (P1)--(P5) are flagged as deliverables for a subsequent paper in this
-series. 
+that defers most quantitative claims to the full 3D reconnection computation.
+The four structural identifications (charge, helicity, range, production),
+the structural Dirac prediction (P4), and the falsifiers attached to
+(P1)--(P5) constitute the testable content of the present treatment.
+Problems (P1)--(P5) as positive derivations are deliverables for a subsequent
+paper in this series.
 
 % ═══════════════════════════════════════════════════════════════════════
 \section{Charged Leptons: Higher Breather Modes}
@@ -2783,6 +2877,51 @@ K.~G.~Zloshchastiev,
 C.~Abel \textit{et al.} (nEDM collaboration),
 ``Measurement of the permanent electric dipole moment of the neutron,''
 \textit{Phys.~Rev.~Lett.} \textbf{124}, 081803 (2020).
+
+\bibitem{KATRIN2022}
+M.~Aker \textit{et al.} (KATRIN collaboration),
+``Direct neutrino-mass measurement with sub-electronvolt sensitivity,''
+\textit{Nature Phys.} \textbf{18}, 160 (2022).
+
+\bibitem{Planck2020}
+N.~Aghanim \textit{et al.} (Planck collaboration),
+``Planck 2018 results. VI. Cosmological parameters,''
+\textit{Astron.\ Astrophys.} \textbf{641}, A6 (2020).
+
+\bibitem{MicroBooNE2022}
+P.~Abratenko \textit{et al.} (MicroBooNE collaboration),
+``Search for an anomalous excess of charged-current $\nu_e$ interactions
+without pions in MicroBooNE,''
+\textit{Phys.\ Rev.\ D} \textbf{105}, 112004 (2022).
+
+\bibitem{DUNE2020}
+B.~Abi \textit{et al.} (DUNE collaboration),
+``Long-baseline neutrino oscillation physics potential of the DUNE
+experiment,''
+\textit{Eur.\ Phys.\ J.\ C} \textbf{80}, 978 (2020).
+
+\bibitem{HK2018}
+K.~Abe \textit{et al.} (Hyper-Kamiokande proto-collaboration),
+``Hyper-Kamiokande design report,''
+arXiv:1805.04163 (2018).
+
+\bibitem{CUORE2022}
+D.~Q.~Adams \textit{et al.} (CUORE collaboration),
+``Search for Majorana neutrinos exploiting millikelvin cryogenics with
+CUORE,''
+\textit{Nature} \textbf{604}, 53 (2022).
+
+\bibitem{KamLANDZen2023}
+S.~Abe \textit{et al.} (KamLAND-Zen collaboration),
+``Search for the Majorana nature of neutrinos in the inverted mass
+ordering region with KamLAND-Zen,''
+\textit{Phys.\ Rev.\ Lett.} \textbf{130}, 051801 (2023).
+
+\bibitem{LEGEND2021}
+N.~Abgrall \textit{et al.} (LEGEND collaboration),
+``The Large Enriched Germanium Experiment for Neutrinoless $\beta\beta$
+Decay: LEGEND-1000 preconceptual design report,''
+arXiv:2107.11462 (2021).
 
 \end{thebibliography}
 
