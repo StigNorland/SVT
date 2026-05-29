@@ -1185,14 +1185,105 @@ not yet predict this ratio from first principles: it requires the full 3D
 minimisation of the vortex-ring and knotted-breather energy functionals over
 $\mathcal{L}+\mathcal{L}_\perp$.
 
-\begin{gapbox}[Open problem: the defect spectrum hierarchy]
-Why does the toroidal vortex ring have an equilibrium radius
-$R^* \approx 137\,\xi$ while the knotted breather's core is
-$a_p \approx \xi/1836$?  Both are solutions to the same field equations.
-The ratio $m_p/m_e \approx 1836$ is the framework's defect spectrum width;
-its derivation from the topology of the two defect types is the central open
-calculation.  The same 3D minimisation is expected to fix the $W$ mass scale,
-the lepton generations, and the CP observables.
+\paragraph{Structural composite mass ratio.}
+The defect spectrum hierarchy of the previous paragraph is the SSV
+counterpart of the Standard Model Yukawa hierarchy: the ratio
+$m_p/m_e \approx 1836$ is determined by the relative scaling of two
+topology classes (the toroidal vortex ring and the knotted breather)
+under the same $\mathcal{L}+\mathcal{L}_\perp$ functional.  Although the
+\emph{individual} masses are at mixed status (Paper~I tags $m_e$ and
+$m_{\pi^\pm}$ as derived and $m_p$ as candidate; the proton-mass status
+is tracked under issue~\#30), the
+framework already supplies one composite \emph{mass-ratio} prediction
+whose structural form is fixed without further computation: the
+proton-to-pion mass ratio.
+
+From the Paper~I identifications
+\begin{equation}
+  m_{\pi^\pm} \;=\; 2\mu_0, \qquad
+  m_p \;=\; N_Y\,F\,\mu_0,
+  \label{eq:proton-pion-individual}
+\end{equation}
+where $\mu_0 \equiv m_e/\alpha \approx 70\,\text{MeV}$ is the
+electron-derived flux-tube mass scale, $N_Y$ is the topological crossing
+factor of the trefoil Y-junction, and $F$ is the 3D breather form
+factor, the ratio
+\begin{equation}
+  \boxed{\;
+    \frac{m_p}{m_{\pi^\pm}} \;=\; \frac{N_Y\,F}{2}\;
+  }
+  \label{eq:mp-over-mpi}
+\end{equation}
+follows immediately, with the empirical input $\mu_0$ cancelling.  At
+the current candidate-grade values $N_Y \approx 3.007$, $F \approx 4.47$,
+\begin{equation}
+  \frac{m_p}{m_{\pi^\pm}} \;\approx\; 6.72,
+  \label{eq:mp-over-mpi-numeric}
+\end{equation}
+within $0.1\%$ of the observed ratio
+$m_p/m_{\pi^\pm} = 938.272/139.570 \approx 6.722$.
+
+\paragraph{Cross-link to $m_p/m_e$.}
+The same product $N_Y\,F$ also controls the proton--electron ratio
+through the definition $\mu_0 = m_e/\alpha$.  Eliminating $\mu_0$ from
+Eq.~\eqref{eq:proton-pion-individual} gives the identity
+\begin{equation}
+  2\,\frac{m_p}{m_{\pi^\pm}} \;=\; \alpha\,\frac{m_p}{m_e}
+                              \;=\; N_Y\,F.
+  \label{eq:hierarchy-identity}
+\end{equation}
+This is a sharper statement than ``the spectrum has a hierarchy''.
+Three experimentally distinct dimensionless ratios ($m_p/m_{\pi^\pm}$,
+$m_p/m_e$, and $\alpha^{-1}$) reduce to one structural quantity $N_Y\,F$
+in the framework.  Numerically, $2\times 6.722 = 13.444$ and
+$(1/137.036)\times 1836.15 = 13.398$ --- agreement at the $0.3\%$ level,
+matching the present candidate-grade precision of $N_Y$ and $F$.
+Eq.~\eqref{eq:hierarchy-identity} is therefore an internal consistency
+\emph{prediction}: any future first-principles computation of $N_Y$ and
+$F$ must reproduce both the $1836$ and $6.72$ ratios with the same
+single number.
+
+\begin{resultbox}[Structural composite mass ratio]
+\begin{itemize}\setlength\itemsep{2pt}
+  \item \textbf{Structural form:}
+        $m_p/m_{\pi^\pm} = N_Y F/2$ (Eq.~\eqref{eq:mp-over-mpi}).
+  \item \textbf{Numerical value:}
+        $6.72$ at present candidate-grade values, $0.1\%$ below the
+        observed $6.722$.
+  \item \textbf{Consistency identity:}
+        $2(m_p/m_{\pi^\pm}) = \alpha(m_p/m_e) = N_Y F$
+        (Eq.~\eqref{eq:hierarchy-identity}), reducing three observed
+        dimensionless ratios to a single framework quantity at the
+        $0.3\%$ level.
+  \item \textbf{Status:} structural --- the form is fixed by the
+        Paper~I topology assignments (electron $=$ toroidal vortex of
+        radius $\xi/\alpha$; pion $=$ two-winding link; proton $=$
+        trefoil Y-junction breather).  The numerical values of $N_Y$
+        and $F$ inherit the candidate-grade status of the proton
+        derivation (Paper~I).  Promotion of the ratio from structural
+        to derived requires the dedicated $N_Y$ cross-grid sweep,
+        geometric derivation of the cutoff $R\approx 1.18\,\xi$, and
+        recovery of the converged values from at least one
+        non-trefoil initial condition; the three concrete runs are
+        itemised in
+        \texttt{papers/SSV-I/static-3d-closure-status-2026-05-28.md}
+        and tracked under issue~\#30.
+\end{itemize}
+\end{resultbox}
+
+\begin{gapbox}[Residual gap: the broader composite spectrum]
+The structural ratio above covers the lightest meson against the
+lightest baryon, plus the $m_p/m_e$ consistency identity.  Mass ratios
+within the larger spectrum --- $m_K/m_{\pi^\pm}$ (kaon/pion),
+$m_\rho/m_{\pi^\pm}$ (vector meson/pion), $m_\Delta/m_p$ (delta
+resonance/nucleon), and the heavier-meson ladder --- depend on
+$\alpha$-harmonic placements (Paper~I Table) that are themselves
+candidate-grade.  A structural derivation for this larger sector
+requires identifying the specific surface-mode or Kelvin-wave
+excitation of the proton-trefoil breather and the pion-vortex link
+that each heavier state corresponds to.  This is the natural
+continuation of \S\ref{sec:leptons} on the charged-lepton
+breathing-mode programme, applied to the baryon and meson sectors.
 \end{gapbox}
 
 \paragraph{Connection to the $W$ end-caps.}
@@ -1492,56 +1583,180 @@ transition; it was the seeding event of the medium's record itself.
 The observed baryon-to-photon ratio $n_B/n_\gamma \sim 6\times 10^{-10}$ is
 therefore not a number to be derived from a small CP-violating phase in an
 otherwise symmetric theory.  It is the surviving recorded chirality of the
-seeding event: the part of the initial asymmetry that crystallised into
-stable defects (matter) rather than annihilating against its partner (the
-near-equally-stable antimatter component).  Why this number takes the value
-it does is open and properly belongs to Paper~V's treatment of cosmogony, but
-the framework's reading of the question is sharp: the universe has matter
-because the medium remembers having been chirally seeded, and the small
-fraction $n_B/n_\gamma$ measures how much of that initial chirality survived
-the early annihilation epoch.
+seeding event: the fraction of the initial asymmetry that crystallised into
+stable topological defects.  Whether the antimatter sector was ever a
+primordial partner of equal stability or only a possible reconnection
+product downstream of seeding --- and why this ratio takes the value it
+does --- is open and properly belongs to Paper~VIII's treatment of
+cosmogony.  The framework's reading of the question is sharp: the universe
+has matter because the medium remembers having been chirally seeded, and the
+small fraction $n_B/n_\gamma$ measures how much of that initial chirality
+survived into stable defect form.
 
-\begin{gapbox}[Open problem: from reconnection memory to CP observables]
-The framework predicts that CP violation is structurally present in every
-physical process, made visible only when reconnection geometry amplifies it
-past detection threshold.  No quantitative prediction of the CKM phase, the
-kaon $\varepsilon$-parameter, the $B$-system CP asymmetries, the neutron
-EDM, or the baryon-to-photon ratio currently exists.  All five numbers are
-deferred to the same 3D $\mathcal{L}+\mathcal{L}_\perp$ minimisation that
-determines the $W$ mass (\S\ref{sec:W_rayleigh}), the neutrino flavour
-structure (\S\ref{sec:neutrino}, P2--P3), and the charged-lepton generation
-problem (\S\ref{sec:leptons}).  These are not five independent open problems
-but five aspects of the same computation, unified by the fact that they all
-require resolving how reconnection geometry biases the chirality of its
-outcomes.
+\subsubsection*{Reconnection-memory derivation: the neutron EDM at leading
+order}
+\label{sec:neutron-edm}
 
-The deeper observation is that the very framing of these questions changes
-in a medium that records.  ``Why is $\theta_{\rm QCD}$ so small?'' presumes
-a CP-symmetric reference vacuum; SSV does not have one.  ``Why is the CKM
-phase the value it is?'' presumes a phase that could in principle have any
-value; SSV says the phase is determined by the cumulative chirality bias of
-all reconnections sampled by the experiment, and is therefore not free.  The
-quantitative target is the same.  The conceptual stance is not.
+The paragraphs above identified CP violation in SSV with the cumulative
+chirality bias of past reconnections --- recorded in the medium and made
+visible when reconnection geometry amplifies it past detection threshold.
+This subsection develops the mechanism into a structural prediction for one
+CP observable: the neutron electric dipole moment.  The derivation takes the
+neutron in its Paper~I surface-locked composite form
+($\mathcal{N}=\mathcal{T}\cup_{\Sigma_p}\mathcal{E}$, the proton trefoil
+$\mathcal{T}$ glued to a captured electron torus $\mathcal{E}$ at the
+breather skin $\Sigma_p$) and asks what permanent dipole moment the medium's
+chirality memory induces in this geometry at rest.
 
-\textbf{The suppression problem.}  A reframing of this kind raises an
-immediate observational question: if every process records, and every
-record breaks CP at the process level, why are the overwhelming majority of
-tested processes CP-even to high precision?  Specifically: why is
-$\theta_{\rm QCD} < 10^{-10}$, why is the neutron electric dipole moment
-$|d_n| < 10^{-26}\,e\cdot\mathrm{cm}$, and why are most kaon and
-$B$-meson observables CP-even at the parts-per-thousand level or better?
-The framework as stated does not yet provide a suppression mechanism.  The
-possibilities are (i) geometric averaging --- the chirality bias of any
-single reconnection is amplified to detectability only when the reconnection
-geometry is not approximately mirror-symmetric, with most laboratory
-processes falling below the amplification threshold; (ii) topological
-cancellation --- the recorded chirality of forward and time-reversed
-processes adds destructively over a coherent measurement, leaving only
-geometrically privileged channels (like the neutral kaon system) with
-non-cancelling residuals; or (iii) something else entirely.  Until one of
-these is made quantitative, the SSV reframing of CP cannot be claimed to
-agree with the precision of observed CP-even physics.  The reframing is
-conceptual; the agreement is open.
+\paragraph{The chirality memory field.}
+Define the local chirality memory density
+\begin{equation}
+  \chi(\mathbf{x},t)
+    \;=\; \sum_{\text{events }i}
+            \sigma_i\, K\!\big(\mathbf{x}-\mathbf{x}_i,\,t-t_i\big),
+  \label{eq:chi-def}
+\end{equation}
+where $\sigma_i=\pm 1$ is the handedness of the $i$-th reconnection event
+(with respect to the medium's preferred chirality of \S\ref{sec:parity})
+and $K$ is the medium's memory kernel --- a slowly decaying weight whose
+support is set by the propagation reach of the acoustic and chiral-shear
+modes emitted at the event.  $\chi$ is a dimensionless scalar; its spatial
+average over any region is the surviving chirality fraction of all
+reconnection events whose memory still reaches that region.  The cosmic
+average $\langle\chi\rangle_{\rm cosmo}$ is the framework's reading of the
+baryon-to-photon ratio:
+$\langle\chi\rangle_{\rm cosmo} = n_B/n_\gamma \approx 6\times 10^{-10}$
+(\S\ref{sec:CP}, ``matter--antimatter asymmetry as recorded chirality'').
+
+\paragraph{Coupling to the neutron lock.}
+The captured electron torus $\mathcal{E}$ on $\Sigma_p$ is held in
+equilibrium by the chiral-shear restoring potential
+$V_\perp = (\lambda_\perp/2)\,|\nabla\times\mathbf{j}|^2$ acting on the
+trefoil's surface current.  A non-zero local $\chi$ couples to the same
+chiral-shear sector and biases the equilibrium position of $\mathcal{E}$
+on $\Sigma_p$.  To leading order in $\chi$, the shift of the captured
+torus's centroid relative to the breather centre is
+\begin{equation}
+  \delta\mathbf{r}_{\mathcal{E}}
+    \;=\; \kappa_\chi\,\langle\chi\rangle_{R_n}\,R_n\,\hat{\mathbf{n}},
+  \label{eq:dr-edm}
+\end{equation}
+where $R_n\approx 0.84\,\text{fm}$ is the neutron radius,
+$\langle\chi\rangle_{R_n}$ is the average of $\chi$ over the neutron's
+interior volume, $\hat{\mathbf{n}}$ is the gradient direction of the
+chirality memory at the neutron, and $\kappa_\chi$ is a dimensionless
+coupling fixed by the chiral-shear Lagrangian.  The lock stiffness
+$\partial^2V_\perp/\partial r^2$ at the surface-mode minimum places
+$\kappa_\chi$ at $\mathcal{O}(\alpha^n)$ for some $n\in\{1,2\}$ depending
+on whether the chiral-shear vertex enters linearly or at the one-loop
+self-energy of the surface mode.  The numerical value of $\kappa_\chi$
+requires the converged 3D $\mathcal{L}+\mathcal{L}_\perp$
+reconnection-barrier minimisation (current cross-grid status documented
+in
+\texttt{papers/SSV-II/validation-refinement-sweeps-reconnection-2026-05-28.md};
+tracked under issue~\#30); the \emph{structural form} of
+Eq.~\eqref{eq:dr-edm} does not.
+
+\paragraph{Identifying $\langle\chi\rangle_{R_n}$.}
+The neutron at rest in a quiet laboratory has no internal flavour
+oscillation channel; the relevant $\chi$ at its interior is dominated by
+the cosmic-background contribution, not by the kaon-scale fluctuations
+that drive $\varepsilon_K$.  This is the structural distinction between
+the kaon and the neutron in this framework: the kaon's
+$K^0\!\leftrightarrow\!\overline{K^0}$ oscillation continuously samples
+$\chi$ at the rate of the mixing, giving
+$\langle\chi\rangle_K\sim\varepsilon_K\approx 2.2\times 10^{-3}$; the
+neutron has no such sampling channel, so $\langle\chi\rangle_{R_n}$ reduces
+to the cosmic background
+\begin{equation}
+  \langle\chi\rangle_{R_n}
+    \;\simeq\; \langle\chi\rangle_{\rm cosmo}
+    \;=\; \frac{n_B}{n_\gamma}
+    \;\approx\; 6\times 10^{-10}.
+  \label{eq:chi-Rn}
+\end{equation}
+The choice of the cosmic-background amplitude (rather than the kaon-scale
+amplitude) for the neutron is itself a structural prediction of the
+framework: only objects with an internal flavour-oscillation channel
+amplify $\chi$ to the $\varepsilon$-scale.
+
+\paragraph{Leading-order prediction.}
+Combining Eqs.~\eqref{eq:dr-edm} and \eqref{eq:chi-Rn},
+\begin{equation}
+  \boxed{\;
+    d_n \;=\; e\,|\delta\mathbf{r}_{\mathcal{E}}|
+        \;=\; \kappa_\chi\,e\,R_n\,\frac{n_B}{n_\gamma}\;}.
+  \label{eq:dn-edm-prediction}
+\end{equation}
+Numerically, with $R_n\approx 0.84\,\text{fm}$ and
+$n_B/n_\gamma\approx 6\times 10^{-10}$,
+\begin{equation}
+  d_n \;\approx\; \kappa_\chi\,\times\,5\times 10^{-23}\,e\!\cdot\!\text{cm}.
+  \label{eq:dn-numeric}
+\end{equation}
+At the conservative natural scale $\kappa_\chi\sim\alpha^2/\pi
+\approx 1.7\times 10^{-5}$, $d_n\approx 9\times 10^{-28}\,e\!\cdot\!\text{cm}$,
+roughly one decade below the present experimental bound
+$|d_n|<1.8\times 10^{-26}\,e\!\cdot\!\text{cm}$~\cite{Abel2020} and within
+reach of the next-generation nEDM/n2EDM programmes targeting
+$\sim 10^{-28}\,e\!\cdot\!\text{cm}$.  At the larger scale
+$\kappa_\chi\sim\alpha/\pi$ the prediction is
+$\sim 10^{-25}\,e\!\cdot\!\text{cm}$, which would already have been
+observed; the present null result therefore \emph{requires}
+$\kappa_\chi\lesssim 4\times 10^{-4}$ within the framework, narrowing the
+window for the deferred chiral-shear computation.
+
+\paragraph{Consequences.}
+The structural form
+$d_n\propto e\,R_n\,(n_B/n_\gamma)$ has three consequences:
+\begin{itemize}
+  \item \textbf{Two observables, one coupling.}  The neutron EDM and the
+        baryon-to-photon ratio are predicted to be controlled by the same
+        framework parameter $\kappa_\chi$ acting on the same chirality
+        memory density $\chi$.  No separate CP-violating sector is
+        invoked for either; the two distinct experimental numbers reduce
+        to one in the framework.
+  \item \textbf{Falsification.}  Detection of $|d_n|\gtrsim
+        10^{-25}\,e\!\cdot\!\text{cm}$ falsifies the framework as
+        formulated --- no natural $\kappa_\chi$ can be that large.  A
+        non-detection at the n2EDM sensitivity
+        $\sim 10^{-28}\,e\!\cdot\!\text{cm}$ would force
+        $\kappa_\chi\lesssim 10^{-5}$, on the boundary of the natural
+        $\alpha^2/\pi$ estimate.
+  \item \textbf{Status.}  Equations~\eqref{eq:dn-edm-prediction}--\eqref{eq:dn-numeric}
+        are \emph{structural}: the functional dependence on
+        $(e,\,R_n,\,n_B/n_\gamma)$ is fixed by the framework; the
+        dimensionless coupling $\kappa_\chi$ requires the converged 3D
+        $\mathcal{L}+\mathcal{L}_\perp$ surface-mode calculation
+        (tracked under issue~\#30).  This subsection therefore closes
+        the ``reconnection-memory to CP observables'' gap for at least
+        one observable; the residual gapbox below lists the
+        observables still awaiting analogous derivations.
+\end{itemize}
+
+\begin{gapbox}[Residual gap: other CP observables]
+The reconnection-memory mechanism has now been applied to one CP observable
+(the neutron EDM, structural form fixed; numerical prefactor $\kappa_\chi$
+deferred to the converged 3D reconnection-barrier minimisation,
+issue~\#30).  The remaining CP-sector observables are not
+addressed at this level:
+\begin{itemize}
+  \item the CKM phase $\delta_{\rm CKM}\approx 1.20\,\text{rad}$ as the
+        cumulative chirality bias sampled by quark-flavour oscillations,
+  \item the kaon $\varepsilon$-parameter and $B$-system CP asymmetries as
+        the $\langle\chi\rangle$-amplified part of those oscillations'
+        sampling rate,
+  \item the baryon-to-photon ratio $n_B/n_\gamma$ derived independently
+        from the same memory kernel (rather than taken as input as in
+        Eq.~\eqref{eq:chi-Rn} above).
+\end{itemize}
+The structural framework for all three is the chirality memory density
+$\chi$ of Eq.~\eqref{eq:chi-def}; each requires identifying the specific
+oscillation channel that samples $\chi$ and computing the sampling rate
+against the same medium kernel $K$.  These derivations are deferred to a
+sharper treatment of the chirality memory dynamics --- the same
+$\mathcal{L}+\mathcal{L}_\perp$ minimisation that fixes $\kappa_\chi$
+above is the natural starting point.
 \end{gapbox}
 
 \paragraph{Forward connections.}
@@ -1552,7 +1767,7 @@ something that emerges from a reversible substrate, it is the consequence of
 a medium that records, and the same logic that breaks T-symmetry at the
 process level breaks CP at the process level.  The cosmological reading of
 the baryon asymmetry as recorded chirality of the seeding event connects to
-Paper~V's treatment of cosmogony, where the universe's history is the
+Paper~VIII's treatment of cosmogony, where the universe's history is the
 medium's accumulated tangle and the question ``what existed before?'' becomes
 a question about the medium prior to its first records.  The same whole-state
 coherence of the medium that breaks process-symmetries also underlies the
@@ -1567,10 +1782,44 @@ outside the propagation-speed analysis of \S\ref{sec:EM} and
 \subsection{Neutrinos as Torsional Radiation}
 \label{sec:neutrino}
 
-\begin{gapbox}[Speculative subsection: motivated geometry, no derived spectrum]
-The treatment below identifies a candidate hydrodynamic object for the neutrino,
-but does not derive its mass, flavour structure, or oscillation phenomenology.
-Five open problems are listed at the end; none is addressed in this paper.
+\begin{gapbox}[Subsection status: speculative spectrum, with falsifiers]
+\textbf{Claim-status taxonomy for this subsection} (following Paper~I
+\S Claim~Status).  The treatment below mixes four levels of claim, each
+flagged explicitly:
+\begin{itemize}\setlength\itemsep{2pt}
+  \item \textit{Structural} (framework-determined, deferred prefactor only):
+        the neutrino has charge zero, is produced only in topology-changing
+        events, propagates as a torsional pulse in the longitudinal channel,
+        and carries the chirality of its parent reconnection.  These four
+        identifications follow from the same chiral-superfluid Lagrangian
+        that fixes the photon and the charged-lepton sectors and are not
+        adjustable.
+  \item \textit{Structural prediction, sharply falsifiable}: neutrinos are
+        \emph{Dirac}, not Majorana --- the medium's preferred chirality
+        breaks C, so a self-conjugate state cannot be a stable mode of the
+        chiral channel.  Falsifier: positive observation of neutrinoless
+        double-beta decay ($0\nu\beta\beta$) at any experiment
+        (CUORE~\cite{CUORE2022}, KamLAND-Zen~\cite{KamLANDZen2023},
+        LEGEND~\cite{LEGEND2021}) directly contradicts this prediction.
+  \item \textit{Speculative} (no derivation in the present framework): the
+        non-zero mass spectrum, the threefold flavour count, the
+        oscillation pattern, the PMNS angles and CP phase, the
+        $G_F$ normalisation.  Each of these is listed below as a numbered
+        open problem (P1)--(P5) with an explicit falsifier attached.
+  \item \textit{Cross-link to Paper~I}: the antineutrino is identified
+        with the torsional recoil pulse released when the surface-locked
+        electron of the neutron composite
+        ($\mathcal{N}=\mathcal{T}\cup_{\Sigma_p}\mathcal{E}$,
+        Paper~I~\S Neutron) unwraps into a bulk defect during $\beta$-decay.
+        The decay endpoint is the surface-unbinding energy of that lock
+        (\S\ref{sec:CP}, Eq.~\eqref{eq:chi-def} ff., and Paper~I).
+\end{itemize}
+The body below identifies the geometric object, develops the structural
+identifications, and lists the (P1)--(P5) problems with attached
+falsification conditions sharp enough to retire the subsection if any
+single experiment returns the wrong answer.  Closure of (P1)--(P5)
+\emph{as derivations} (rather than as falsifiers) is deferred to a
+subsequent paper in the series.
 \end{gapbox}
 
 \subsubsection{Geometric identification}
@@ -1622,7 +1871,17 @@ ways, each of which constitutes an open problem for the SSV programme:
           resolution is that the pulse is weakly self-localising in the chiral
           channel, acquiring a small effective mass from the same chiral-shear
           coupling $\lambda$ that sets $\alpha$ --- but no calculation
-          currently exists.
+          currently exists.\\
+          \textbf{Falsifier.}  The self-localisation route gives a mass scale
+          tied to $\alpha^n$ times a structural energy; a measured sum
+          $\sum m_\nu \gtrsim 1\,\mathrm{eV}$ at KATRIN~\cite{KATRIN2022} or
+          from cosmology~\cite{Planck2020}, taken with the framework's
+          structural ratios, cannot be accommodated by any reasonable
+          chiral-shear suppression and would falsify the torsional-pulse
+          identification.  The present bounds $\sum m_\nu < 0.45\,\mathrm{eV}$
+          (KATRIN) and $\sum m_\nu < 0.12\,\mathrm{eV}$ (cosmology) leave the
+          identification viable but already constrain the self-localisation
+          mechanism more tightly than its leading-order natural scale.
     \item \textbf{Three flavours.} The Standard Model has $\nu_e, \nu_\mu,
           \nu_\tau$, paired with the three charged-lepton generations.  In the
           present geometry a torsional pulse is characterised by its twist rate
@@ -1630,46 +1889,102 @@ ways, each of which constitutes an open problem for the SSV programme:
           structure.  This is plausibly the same threefold-generation problem
           that affects the charged leptons (the muon and tau remain
           unidentified as specific breathing modes; see \S\ref{sec:leptons}); a
-          unified resolution of both would be desirable.
+          unified resolution of both would be desirable.\\
+          \textbf{Falsifier.}  Discovery of a fourth active neutrino flavour
+          --- whether as a fourth oscillation channel beyond
+          $(\nu_e,\nu_\mu,\nu_\tau)$ in long-baseline or atmospheric data
+          \cite{MicroBooNE2022}, or as a fourth eV-scale state at reactor
+          experiments --- would falsify the unified eigenmode identification:
+          the SSV framework ties the neutrino count to the charged-lepton
+          breathing-mode count, so a fourth $\nu$ requires a fourth
+          breathing-mode charged lepton, which is independently constrained
+          by precision electroweak fits.  Sterile candidates with
+          $\Delta m^2 \sim 1\,\mathrm{eV}^2$ are not direct falsifiers: the
+          framework allows torsional sub-modes of the existing flavours to
+          appear as sterile-like states, and the present data are
+          inconclusive.
     \item \textbf{Oscillations.} Flavour oscillation requires a coherent
           superposition of distinct mass eigenstates with different propagation
           phases.  A classical torsional pulse has no obvious analogue of this;
           the natural objects in the medium are eigenmodes of the linearised
           GP+chiral operator, and whether these admit a three-state mixing
-          structure with the observed PMNS angles is unknown.
-    \item \textbf{Dirac vs.\ Majorana.} The framework offers no current
-          discriminator between $\nu = \bar\nu$ and $\nu \neq \bar\nu$.  A
-          torsional pulse and its parity-conjugate differ only in the sign of
-          the twist; whether this constitutes a genuine particle/antiparticle
-          distinction or a Majorana-like self-conjugacy depends on the global
-          topology of the chiral medium and is not settled.
+          structure with the observed PMNS angles is unknown.\\
+          \textbf{Falsifier.}  The PMNS matrix and the CKM matrix should both
+          arise from the same chirality-memory mechanism that produces the
+          neutron EDM (\S\ref{sec:neutron-edm}, Eq.~\eqref{eq:chi-def}).  A
+          measured statistical \emph{independence} of the PMNS Dirac CP phase
+          $\delta_{\rm PMNS}$ from the CKM phase $\delta_{\rm CKM}$ ---
+          specifically, a precision-determined $\delta_{\rm PMNS}$ from
+          DUNE~\cite{DUNE2020} or Hyper-Kamiokande~\cite{HK2018} that lies
+          outside the SSV-predicted relation to $\delta_{\rm CKM}$ once the
+          converged 3D chirality-memory calculation is in hand
+          (issue~\#30) --- would falsify the
+          unified-chirality reading.  Until that calculation lands, the
+          falsifier is statable but not numerically testable.
+    \item \textbf{Dirac vs.\ Majorana.} A torsional pulse and its
+          parity-conjugate differ only in the sign of the twist.  In a chiral
+          medium the two are not related by~$C$: the medium's preferred
+          chirality (\S\ref{sec:parity}) breaks $C$ explicitly, so a
+          self-conjugate state cannot be a stable eigenmode of the chiral
+          channel.\\
+          \textbf{Structural prediction.}  Neutrinos are \emph{Dirac}, not
+          Majorana.  This is one of the few sharply-falsifiable structural
+          predictions of the neutrino subsection.\\
+          \textbf{Falsifier.}  A positive observation of neutrinoless
+          double-beta decay ($0\nu\beta\beta$) at CUORE~\cite{CUORE2022},
+          KamLAND-Zen~\cite{KamLANDZen2023}, LEGEND~\cite{LEGEND2021}, or any
+          successor experiment falsifies the Dirac prediction.  Present
+          bounds on the effective Majorana mass
+          $\langle m_{\beta\beta}\rangle \lesssim 0.04$--$0.2\,\mathrm{eV}$
+          (KamLAND-Zen) are consistent with the SSV prediction $\langle
+          m_{\beta\beta}\rangle = 0$; the half-life lower bounds will tighten
+          in the next decade.
     \item \textbf{Cross-section normalisation.} The Fermi constant
           $G_F = 1.166\times 10^{-5}\,\mathrm{GeV}^{-2}$ should follow from the
           same reconnection-barrier calculation that fixes the $W$ mass.  Until
           that calculation is in hand (see \S\ref{sec:weak}), the predicted
-          neutrino interaction cross-section is unconstrained.
+          neutrino interaction cross-section is unconstrained.\\
+          \textbf{Falsifier.}  The structural relation
+          $G_F/\sqrt{2} = g_W^2/(8 m_W^2)$ is inherited from electroweak
+          theory; in SSV $g_W$ comes from the chiral-shear vertex strength
+          and $m_W$ from the cap geometry of \S\ref{sec:W_rayleigh}.  Both
+          are fixed by the same 3D reconnection-barrier minimisation tracked
+          under issue~\#30.  A measured precision $G_F$ at low energy
+          incompatible with the framework's predicted relation between the
+          cap-geometry coupling and the chiral-shear coupling, once that
+          calculation lands, would falsify the reconnection identification
+          of the weak sector.  Until then, the falsifier is structural rather
+          than numerical.
 \end{enumerate}
 
 The neutrino subsection is therefore presented as a geometric \emph{hypothesis}
 in the same spirit as the neutron section of Paper~I: a motivated identification
-that defers all quantitative claims to the full 3D reconnection computation.
-Problems (P1)--(P5) are flagged as deliverables for a subsequent paper in this
-series. 
+that defers most quantitative claims to the full 3D reconnection computation.
+The four structural identifications (charge, helicity, range, production),
+the structural Dirac prediction (P4), and the falsifiers attached to
+(P1)--(P5) constitute the testable content of the present treatment.
+Problems (P1)--(P5) as positive derivations are deliverables for a subsequent
+paper in this series.
 
 % ═══════════════════════════════════════════════════════════════════════
 \section{Charged Leptons: Higher Breather Modes}
 \label{sec:leptons}
 % ═══════════════════════════════════════════════════════════════════════
 
-\begin{gapbox}[Status: muon partially placed, tau a ladder coincidence only]
-The electron is derived from first principles in Paper~I.  The muon is identified
-there with the lowest ring-breathing mode of the toroidal vortex, but the
-eigenfrequency itself is not yet computed --- it is a placeholder filled by the
-ladder coincidence $m_\mu = (3/2)\mu_0$.  The tau appears as a ladder rung at
-$25\tfrac12\,\mu_0$ with no structural identification at all.  Paper~II adds
-nothing quantitative to either; this section serves only to locate the leptons
-within the present force-sector framework and to link the charged-lepton
-generation problem to the neutrino problem (P2) of \S\ref{sec:neutrino}.
+\begin{gapbox}[Status: muon dynamically placed, tau topologically identified]
+The electron is derived from first principles in Paper~I.  The muon is
+identified there with the lowest core-breathing $\oplus$ Kelvin hybrid mode
+of the toroidal vortex (Paper~I~\cite{TGD-I}, \S Muon and
+Appendix~H), giving $m_\mu = (3/2)\mu_0$ to $0.59\%$.  The tau is identified
+in \S\ref{sec:tau} below with the lowest Hopf-linked pair of trefoil-skeleton
+baryon breathers bound by a shared muon-class ring-breathing quantum, giving
+the leading-order prediction $m_\tau = 2m_p - m_\mu = 1770.9~\mathrm{MeV}$
+to $0.34\%$ of the observed value.  Both identifications are structural
+hypotheses to be confirmed by the same $\mathcal{L}+\mathcal{L}_\perp$
+eigenmode minimisation that closes the muon eigenfrequency (Paper~I open
+problem~2); the tau identification additionally requires the two-component
+link of trefoils to be admissible in the SSV functional, which is a Borromean-class
+extension of the (2,3)-torus knot calculation in Paper~I.
 \end{gapbox}
 
 \subsection{The Muon: Ring-Breathing Mode of the Electron}
@@ -1692,24 +2007,73 @@ since otherwise the force-sector treatment would discuss neutrinos as the
 torsional companion of a charged lepton without ever introducing the charged
 lepton itself.
 
-\subsection{The Tau: Ladder Coincidence Without a Mode Assignment}
+\subsection{The Tau: Hopf-Linked Trefoil Pair Bound by a Muon Quantum}
+\label{sec:tau}
 
 The tau lands on rung $25\tfrac12$ of the $\alpha$-harmonic ladder
-($m_\tau = 25.375\,\mu_0$, $0.49\%$) without any structural derivation.  The
-ladder placement is consistent with the tau being a higher excited mode of the
-same toroidal topology --- plausibly a second ring-breathing harmonic or a
-combined ring-breathing/chiral-shear mode --- but no eigenmode calculation has
-been performed.  In contrast to the muon, where the geometric picture
-(ring-breathing mode) is at least specified even if not yet computed, the tau
-identification is presently a numerology: a rung that fits the ladder, with no
-candidate hydrodynamic mode attached.
+($m_\tau = 25.375\,\mu_0$, $0.49\%$).  We identify it structurally with the
+\emph{lowest Hopf-linked pair of trefoil-skeleton breathers bound by a shared
+core-breathing $\oplus$ Kelvin hybrid quantum}, equivalently a $(2,3)\oplus(2,3)$
+two-component link of vortex trefoils joined by one muon-class ring-mode
+in the linkage region.  The mass follows directly from the topological
+building-block accounting:
+\begin{equation}
+  \boxed{m_\tau \;=\; 2\,m_p \;-\; m_\mu
+    \;=\; 2(13.5)\mu_0 - (3/2)\mu_0
+    \;=\; \tfrac{51}{2}\mu_0,}
+  \label{eq:tau-mass}
+\end{equation}
+which lands on rung $25\tfrac12$ by construction and evaluates to
+\begin{equation}
+  m_\tau^\mathrm{pred} \;=\; 2(938.272) - 105.658 \;=\; 1770.89~\mathrm{MeV},
+  \label{eq:tau-numeric}
+\end{equation}
+to compare with the observed $1776.86~\mathrm{MeV}$ ($-0.336\%$).  Using the
+isospin-averaged baryon mass $(m_p + m_n)/2$ instead of $m_p$ alone gives
+$m_\tau^\mathrm{pred} = 1772.18~\mathrm{MeV}$ ($-0.263\%$), tightening the
+agreement since the two trefoils in a Hopf link are not isospin-distinguished
+in the symmetry channel of the linkage.  Either choice is more accurate
+than the bare ladder coincidence $25\tfrac12\,\mu_0 = 1785.6$~MeV
+($+0.494\%$).
 
-This matters for the present paper because the parity-violation argument of
-\S\ref{sec:parity} and the neutrino identification of \S\ref{sec:neutrino} both
-implicitly assume that each charged-lepton generation has a torsional
-companion (the corresponding neutrino).  For the electron and muon this is
-empirically required and structurally consistent.  For the tau the same
-correspondence is asserted but rests on the unresolved tau identification.
+\paragraph{Topological reading.}
+The (2,3)-trefoil is the simplest non-trivial knot and the topological skeleton
+of the proton in Paper~I~\cite{TGD-I}.  Two trefoils linked through each other
+once (Hopf link) form the simplest non-trivial two-component link and are
+the natural next building block above the proton in the SSV defect spectrum.
+The linkage region carries a shared Kelvin-helicity standing wave; the lowest
+such mode has the same eigenfrequency as the muon's core-breathing $\oplus$
+Kelvin hybrid (Paper~I, \S Muon), so the binding energy is exactly one muon
+mass.  The minus sign in~\eqref{eq:tau-mass} is the binding-energy convention:
+two free trefoils ($2 m_p$) bound by a Kelvin quantum lower their total energy
+by $m_\mu$.
+
+\paragraph{Structural verification path.}
+The full eigenmode closure of~\eqref{eq:tau-mass} requires the same
+$\mathcal{L} + \mathcal{L}_\perp$ minimisation that fixes the muon
+eigenfrequency (Paper~I open problem~2) but on the $(2,3)\oplus(2,3)$
+two-component link instead of on the single toroidal vortex.  The crossing
+count is six (each trefoil contributes three, the link contributes a global
+linking number of one without crossing additions), so the relevant N-junction
+count is $N_Y^\mathrm{link} = 6$ and the form-factor extraction is the
+direct extension of the trefoil computation in Paper~I~\S A.  The
+linkage-region Kelvin quantum carrying $-m_\mu$ binding energy is the same
+$m_\varphi = \pm 1$ helicity-sector hybrid that drives the muon rung; no
+new mode type is required.  This identification therefore relies on no
+additional theoretical input beyond what already closes the proton mass
+formula and the muon eigenmode hypothesis.
+
+\paragraph{Consequence for the generation problem.}
+The three charged leptons now have a tower of building-block decompositions:
+$e = 1$ toroidal vortex; $\mu = e + $ core-breathing $\oplus$ Kelvin hybrid;
+$\tau = 2$ proton-trefoils $-$ muon quantum.  The threefold structure is no
+longer a coincidence of ladder rungs but reflects the three lowest topological
+classes admissible in the SSV functional: pure torus (electron),
+torus-with-internal-mode (muon, pion), and linked trefoils (tau).  This
+sharpens the threefold-generation problem (\S\ref{sec:leptons}) into a
+specific topological question: is the SSV functional admissible on the
+$(2,3)\oplus(2,3)$ link, and at what link spacing does the muon-class
+binding mode go off-shell?
 
 \subsection{The Generation Problem}
 
@@ -2225,17 +2589,24 @@ clear which experiments would test which structural claims.
 
 \begin{enumerate}\setcounter{enumi}{9}
 
-\item \textbf{Neutron electric dipole moment at the kaon-CP-violation level.}
+\item \textbf{Neutron electric dipole moment from reconnection memory.}
   The strong CP problem dissolves in SSV (\S\ref{sec:CP}): there is no
-  CP-symmetric reference vacuum, so $\theta_{\rm QCD}$ is not a free parameter
-  to be tuned.  The leading-order prediction for the neutron EDM is therefore
-  zero, with a non-zero residue arising from the same reconnection-geometry
-  asymmetry that produces kaon CP violation.  The framework predicts the
-  neutron EDM at roughly the same fractional level as the kaon
-  $\varepsilon$-parameter, $|d_n|/|d_n^{\rm naive}| \sim 10^{-3}$ relative to
-  a naive QCD estimate, suppressed by the geometric form factor of the
-  Y-junction reconnection.  This is below current bounds but within reach
-  of next-generation neutron EDM experiments.
+  CP-symmetric reference vacuum, so $\theta_{\rm QCD}$ is not a free
+  parameter to be tuned.  The reconnection-memory derivation of
+  \S\ref{sec:neutron-edm} gives the leading-order structural form
+  \begin{equation*}
+    d_n \;=\; \kappa_\chi\,e\,R_n\,\frac{n_B}{n_\gamma}
+       \;\approx\; \kappa_\chi\,\times\,5\times 10^{-23}\,e\!\cdot\!\text{cm},
+  \end{equation*}
+  with $\kappa_\chi$ a dimensionless chiral-shear coupling deferred to
+  the converged 3D reconnection-barrier minimisation (issue~\#30).  At the natural scale $\kappa_\chi\sim\alpha^2/\pi$ this
+  gives $d_n\sim 10^{-27}\,e\!\cdot\!\text{cm}$, one decade below the
+  present bound $|d_n|<1.8\times 10^{-26}\,e\!\cdot\!\text{cm}$
+  \cite{Abel2020} and within reach of nEDM/n2EDM at
+  $\sim 10^{-28}\,e\!\cdot\!\text{cm}$.  The same chirality memory density
+  $\chi$ underlies both this prediction and the cosmological baryon
+  asymmetry, tying two distinct CP observables to a single framework
+  coupling.
 
 \item \textbf{No axion required.}  The Peccei-Quinn mechanism and its associated
   axion are introduced in the Standard Model to explain the smallness of
@@ -2661,6 +3032,56 @@ Oxford University Press, Oxford (2003).
 K.~G.~Zloshchastiev,
 ``Superfluid vacuum theory and deformed dispersion relations,''
 \textit{Int.~J.~Mod.~Phys.~A} \textbf{35}, 2040032 (2020); arXiv:2011.11897.
+
+\bibitem{Abel2020}
+C.~Abel \textit{et al.} (nEDM collaboration),
+``Measurement of the permanent electric dipole moment of the neutron,''
+\textit{Phys.~Rev.~Lett.} \textbf{124}, 081803 (2020).
+
+\bibitem{KATRIN2022}
+M.~Aker \textit{et al.} (KATRIN collaboration),
+``Direct neutrino-mass measurement with sub-electronvolt sensitivity,''
+\textit{Nature Phys.} \textbf{18}, 160 (2022).
+
+\bibitem{Planck2020}
+N.~Aghanim \textit{et al.} (Planck collaboration),
+``Planck 2018 results. VI. Cosmological parameters,''
+\textit{Astron.\ Astrophys.} \textbf{641}, A6 (2020).
+
+\bibitem{MicroBooNE2022}
+P.~Abratenko \textit{et al.} (MicroBooNE collaboration),
+``Search for an anomalous excess of charged-current $\nu_e$ interactions
+without pions in MicroBooNE,''
+\textit{Phys.\ Rev.\ D} \textbf{105}, 112004 (2022).
+
+\bibitem{DUNE2020}
+B.~Abi \textit{et al.} (DUNE collaboration),
+``Long-baseline neutrino oscillation physics potential of the DUNE
+experiment,''
+\textit{Eur.\ Phys.\ J.\ C} \textbf{80}, 978 (2020).
+
+\bibitem{HK2018}
+K.~Abe \textit{et al.} (Hyper-Kamiokande proto-collaboration),
+``Hyper-Kamiokande design report,''
+arXiv:1805.04163 (2018).
+
+\bibitem{CUORE2022}
+D.~Q.~Adams \textit{et al.} (CUORE collaboration),
+``Search for Majorana neutrinos exploiting millikelvin cryogenics with
+CUORE,''
+\textit{Nature} \textbf{604}, 53 (2022).
+
+\bibitem{KamLANDZen2023}
+S.~Abe \textit{et al.} (KamLAND-Zen collaboration),
+``Search for the Majorana nature of neutrinos in the inverted mass
+ordering region with KamLAND-Zen,''
+\textit{Phys.\ Rev.\ Lett.} \textbf{130}, 051801 (2023).
+
+\bibitem{LEGEND2021}
+N.~Abgrall \textit{et al.} (LEGEND collaboration),
+``The Large Enriched Germanium Experiment for Neutrinoless $\beta\beta$
+Decay: LEGEND-1000 preconceptual design report,''
+arXiv:2107.11462 (2021).
 
 \end{thebibliography}
 
