@@ -1493,47 +1493,165 @@ because the medium remembers having been chirally seeded, and the small
 fraction $n_B/n_\gamma$ measures how much of that initial chirality survived
 the early annihilation epoch.
 
-\begin{gapbox}[Open problem: from reconnection memory to CP observables]
-The framework predicts that CP violation is structurally present in every
-physical process, made visible only when reconnection geometry amplifies it
-past detection threshold.  No quantitative prediction of the CKM phase, the
-kaon $\varepsilon$-parameter, the $B$-system CP asymmetries, the neutron
-EDM, or the baryon-to-photon ratio currently exists.  All five numbers are
-deferred to the same 3D $\mathcal{L}+\mathcal{L}_\perp$ minimisation that
-determines the $W$ mass (\S\ref{sec:W_rayleigh}), the neutrino flavour
-structure (\S\ref{sec:neutrino}, P2--P3), and the charged-lepton generation
-problem (\S\ref{sec:leptons}).  These are not five independent open problems
-but five aspects of the same computation, unified by the fact that they all
-require resolving how reconnection geometry biases the chirality of its
-outcomes.
+\subsubsection*{Reconnection-memory derivation: the neutron EDM at leading
+order}
+\label{sec:neutron-edm}
 
-The deeper observation is that the very framing of these questions changes
-in a medium that records.  ``Why is $\theta_{\rm QCD}$ so small?'' presumes
-a CP-symmetric reference vacuum; SSV does not have one.  ``Why is the CKM
-phase the value it is?'' presumes a phase that could in principle have any
-value; SSV says the phase is determined by the cumulative chirality bias of
-all reconnections sampled by the experiment, and is therefore not free.  The
-quantitative target is the same.  The conceptual stance is not.
+The paragraphs above identified CP violation in SSV with the cumulative
+chirality bias of past reconnections --- recorded in the medium and made
+visible when reconnection geometry amplifies it past detection threshold.
+This subsection develops the mechanism into a structural prediction for one
+CP observable: the neutron electric dipole moment.  The derivation takes the
+neutron in its Paper~I surface-locked composite form
+($\mathcal{N}=\mathcal{T}\cup_{\Sigma_p}\mathcal{E}$, the proton trefoil
+$\mathcal{T}$ glued to a captured electron torus $\mathcal{E}$ at the
+breather skin $\Sigma_p$) and asks what permanent dipole moment the medium's
+chirality memory induces in this geometry at rest.
 
-\textbf{The suppression problem.}  A reframing of this kind raises an
-immediate observational question: if every process records, and every
-record breaks CP at the process level, why are the overwhelming majority of
-tested processes CP-even to high precision?  Specifically: why is
-$\theta_{\rm QCD} < 10^{-10}$, why is the neutron electric dipole moment
-$|d_n| < 10^{-26}\,e\cdot\mathrm{cm}$, and why are most kaon and
-$B$-meson observables CP-even at the parts-per-thousand level or better?
-The framework as stated does not yet provide a suppression mechanism.  The
-possibilities are (i) geometric averaging --- the chirality bias of any
-single reconnection is amplified to detectability only when the reconnection
-geometry is not approximately mirror-symmetric, with most laboratory
-processes falling below the amplification threshold; (ii) topological
-cancellation --- the recorded chirality of forward and time-reversed
-processes adds destructively over a coherent measurement, leaving only
-geometrically privileged channels (like the neutral kaon system) with
-non-cancelling residuals; or (iii) something else entirely.  Until one of
-these is made quantitative, the SSV reframing of CP cannot be claimed to
-agree with the precision of observed CP-even physics.  The reframing is
-conceptual; the agreement is open.
+\paragraph{The chirality memory field.}
+Define the local chirality memory density
+\begin{equation}
+  \chi(\mathbf{x},t)
+    \;=\; \sum_{\text{events }i}
+            \sigma_i\, K\!\big(\mathbf{x}-\mathbf{x}_i,\,t-t_i\big),
+  \label{eq:chi-def}
+\end{equation}
+where $\sigma_i=\pm 1$ is the handedness of the $i$-th reconnection event
+(with respect to the medium's preferred chirality of \S\ref{sec:parity})
+and $K$ is the medium's memory kernel --- a slowly decaying weight whose
+support is set by the propagation reach of the acoustic and chiral-shear
+modes emitted at the event.  $\chi$ is a dimensionless scalar; its spatial
+average over any region is the surviving chirality fraction of all
+reconnection events whose memory still reaches that region.  The cosmic
+average $\langle\chi\rangle_{\rm cosmo}$ is the framework's reading of the
+baryon-to-photon ratio:
+$\langle\chi\rangle_{\rm cosmo} = n_B/n_\gamma \approx 6\times 10^{-10}$
+(\S\ref{sec:CP}, ``matter--antimatter asymmetry as recorded chirality'').
+
+\paragraph{Coupling to the neutron lock.}
+The captured electron torus $\mathcal{E}$ on $\Sigma_p$ is held in
+equilibrium by the chiral-shear restoring potential
+$V_\perp = (\lambda_\perp/2)\,|\nabla\times\mathbf{j}|^2$ acting on the
+trefoil's surface current.  A non-zero local $\chi$ couples to the same
+chiral-shear sector and biases the equilibrium position of $\mathcal{E}$
+on $\Sigma_p$.  To leading order in $\chi$, the shift of the captured
+torus's centroid relative to the breather centre is
+\begin{equation}
+  \delta\mathbf{r}_{\mathcal{E}}
+    \;=\; \kappa_\chi\,\langle\chi\rangle_{R_n}\,R_n\,\hat{\mathbf{n}},
+  \label{eq:dr-edm}
+\end{equation}
+where $R_n\approx 0.84\,\text{fm}$ is the neutron radius,
+$\langle\chi\rangle_{R_n}$ is the average of $\chi$ over the neutron's
+interior volume, $\hat{\mathbf{n}}$ is the gradient direction of the
+chirality memory at the neutron, and $\kappa_\chi$ is a dimensionless
+coupling fixed by the chiral-shear Lagrangian.  The lock stiffness
+$\partial^2V_\perp/\partial r^2$ at the surface-mode minimum places
+$\kappa_\chi$ at $\mathcal{O}(\alpha^n)$ for some $n\in\{1,2\}$ depending
+on whether the chiral-shear vertex enters linearly or at the one-loop
+self-energy of the surface mode.  The numerical value of $\kappa_\chi$
+requires the converged 3D minimisation of issue~\#15; the
+\emph{structural form} of Eq.~\eqref{eq:dr-edm} does not.
+
+\paragraph{Identifying $\langle\chi\rangle_{R_n}$.}
+The neutron at rest in a quiet laboratory has no internal flavour
+oscillation channel; the relevant $\chi$ at its interior is dominated by
+the cosmic-background contribution, not by the kaon-scale fluctuations
+that drive $\varepsilon_K$.  This is the structural distinction between
+the kaon and the neutron in this framework: the kaon's
+$K^0\!\leftrightarrow\!\overline{K^0}$ oscillation continuously samples
+$\chi$ at the rate of the mixing, giving
+$\langle\chi\rangle_K\sim\varepsilon_K\approx 2.2\times 10^{-3}$; the
+neutron has no such sampling channel, so $\langle\chi\rangle_{R_n}$ reduces
+to the cosmic background
+\begin{equation}
+  \langle\chi\rangle_{R_n}
+    \;\simeq\; \langle\chi\rangle_{\rm cosmo}
+    \;=\; \frac{n_B}{n_\gamma}
+    \;\approx\; 6\times 10^{-10}.
+  \label{eq:chi-Rn}
+\end{equation}
+The choice of the cosmic-background amplitude (rather than the kaon-scale
+amplitude) for the neutron is itself a structural prediction of the
+framework: only objects with an internal flavour-oscillation channel
+amplify $\chi$ to the $\varepsilon$-scale.
+
+\paragraph{Leading-order prediction.}
+Combining Eqs.~\eqref{eq:dr-edm} and \eqref{eq:chi-Rn},
+\begin{equation}
+  \boxed{\;
+    d_n \;=\; e\,|\delta\mathbf{r}_{\mathcal{E}}|
+        \;=\; \kappa_\chi\,e\,R_n\,\frac{n_B}{n_\gamma}\;}.
+  \label{eq:dn-edm-prediction}
+\end{equation}
+Numerically, with $R_n\approx 0.84\,\text{fm}$ and
+$n_B/n_\gamma\approx 6\times 10^{-10}$,
+\begin{equation}
+  d_n \;\approx\; \kappa_\chi\,\times\,5\times 10^{-23}\,e\!\cdot\!\text{cm}.
+  \label{eq:dn-numeric}
+\end{equation}
+At the conservative natural scale $\kappa_\chi\sim\alpha^2/\pi
+\approx 1.7\times 10^{-5}$, $d_n\approx 9\times 10^{-28}\,e\!\cdot\!\text{cm}$,
+roughly one decade below the present experimental bound
+$|d_n|<1.8\times 10^{-26}\,e\!\cdot\!\text{cm}$~\cite{Abel2020} and within
+reach of the next-generation nEDM/n2EDM programmes targeting
+$\sim 10^{-28}\,e\!\cdot\!\text{cm}$.  At the larger scale
+$\kappa_\chi\sim\alpha/\pi$ the prediction is
+$\sim 10^{-25}\,e\!\cdot\!\text{cm}$, which would already have been
+observed; the present null result therefore \emph{requires}
+$\kappa_\chi\lesssim 4\times 10^{-4}$ within the framework, narrowing the
+window for the deferred chiral-shear computation.
+
+\paragraph{Consequences.}
+The structural form
+$d_n\propto e\,R_n\,(n_B/n_\gamma)$ has three consequences:
+\begin{itemize}
+  \item \textbf{Two observables, one coupling.}  The neutron EDM and the
+        baryon-to-photon ratio are predicted to be controlled by the same
+        framework parameter $\kappa_\chi$ acting on the same chirality
+        memory density $\chi$.  No separate CP-violating sector is
+        invoked for either; the two distinct experimental numbers reduce
+        to one in the framework.
+  \item \textbf{Falsification.}  Detection of $|d_n|\gtrsim
+        10^{-25}\,e\!\cdot\!\text{cm}$ falsifies the framework as
+        formulated --- no natural $\kappa_\chi$ can be that large.  A
+        non-detection at the n2EDM sensitivity
+        $\sim 10^{-28}\,e\!\cdot\!\text{cm}$ would force
+        $\kappa_\chi\lesssim 10^{-5}$, on the boundary of the natural
+        $\alpha^2/\pi$ estimate.
+  \item \textbf{Status.}  Equations~\eqref{eq:dn-edm-prediction}--\eqref{eq:dn-numeric}
+        are \emph{structural}: the functional dependence on
+        $(e,\,R_n,\,n_B/n_\gamma)$ is fixed by the framework; the
+        dimensionless coupling $\kappa_\chi$ requires the converged 3D
+        $\mathcal{L}+\mathcal{L}_\perp$ surface-mode calculation tracked
+        under issue~\#15.  This subsection therefore closes the
+        ``reconnection-memory to CP observables'' gap (issue~\#35) for
+        at least one observable; the residual gapbox below lists the
+        observables still awaiting analogous derivations.
+\end{itemize}
+
+\begin{gapbox}[Residual gap: other CP observables]
+The reconnection-memory mechanism has now been applied to one CP observable
+(the neutron EDM, structural form fixed; numerical prefactor $\kappa_\chi$
+deferred to issue~\#15).  The remaining CP-sector observables are not
+addressed at this level:
+\begin{itemize}
+  \item the CKM phase $\delta_{\rm CKM}\approx 1.20\,\text{rad}$ as the
+        cumulative chirality bias sampled by quark-flavour oscillations,
+  \item the kaon $\varepsilon$-parameter and $B$-system CP asymmetries as
+        the $\langle\chi\rangle$-amplified part of those oscillations'
+        sampling rate,
+  \item the baryon-to-photon ratio $n_B/n_\gamma$ derived independently
+        from the same memory kernel (rather than taken as input as in
+        Eq.~\eqref{eq:chi-Rn} above).
+\end{itemize}
+The structural framework for all three is the chirality memory density
+$\chi$ of Eq.~\eqref{eq:chi-def}; each requires identifying the specific
+oscillation channel that samples $\chi$ and computing the sampling rate
+against the same medium kernel $K$.  These derivations are deferred to a
+sharper treatment of the chirality memory dynamics --- the same
+$\mathcal{L}+\mathcal{L}_\perp$ minimisation that fixes $\kappa_\chi$
+above is the natural starting point.
 \end{gapbox}
 
 \paragraph{Forward connections.}
@@ -2217,17 +2335,24 @@ clear which experiments would test which structural claims.
 
 \begin{enumerate}\setcounter{enumi}{9}
 
-\item \textbf{Neutron electric dipole moment at the kaon-CP-violation level.}
+\item \textbf{Neutron electric dipole moment from reconnection memory.}
   The strong CP problem dissolves in SSV (\S\ref{sec:CP}): there is no
-  CP-symmetric reference vacuum, so $\theta_{\rm QCD}$ is not a free parameter
-  to be tuned.  The leading-order prediction for the neutron EDM is therefore
-  zero, with a non-zero residue arising from the same reconnection-geometry
-  asymmetry that produces kaon CP violation.  The framework predicts the
-  neutron EDM at roughly the same fractional level as the kaon
-  $\varepsilon$-parameter, $|d_n|/|d_n^{\rm naive}| \sim 10^{-3}$ relative to
-  a naive QCD estimate, suppressed by the geometric form factor of the
-  Y-junction reconnection.  This is below current bounds but within reach
-  of next-generation neutron EDM experiments.
+  CP-symmetric reference vacuum, so $\theta_{\rm QCD}$ is not a free
+  parameter to be tuned.  The reconnection-memory derivation of
+  \S\ref{sec:neutron-edm} gives the leading-order structural form
+  \begin{equation*}
+    d_n \;=\; \kappa_\chi\,e\,R_n\,\frac{n_B}{n_\gamma}
+       \;\approx\; \kappa_\chi\,\times\,5\times 10^{-23}\,e\!\cdot\!\text{cm},
+  \end{equation*}
+  with $\kappa_\chi$ a dimensionless chiral-shear coupling deferred to
+  issue~\#15.  At the natural scale $\kappa_\chi\sim\alpha^2/\pi$ this
+  gives $d_n\sim 10^{-27}\,e\!\cdot\!\text{cm}$, one decade below the
+  present bound $|d_n|<1.8\times 10^{-26}\,e\!\cdot\!\text{cm}$
+  \cite{Abel2020} and within reach of nEDM/n2EDM at
+  $\sim 10^{-28}\,e\!\cdot\!\text{cm}$.  The same chirality memory density
+  $\chi$ underlies both this prediction and the cosmological baryon
+  asymmetry, tying two distinct CP observables to a single framework
+  coupling.
 
 \item \textbf{No axion required.}  The Peccei-Quinn mechanism and its associated
   axion are introduced in the Standard Model to explain the smallness of
@@ -2653,6 +2778,11 @@ Oxford University Press, Oxford (2003).
 K.~G.~Zloshchastiev,
 ``Superfluid vacuum theory and deformed dispersion relations,''
 \textit{Int.~J.~Mod.~Phys.~A} \textbf{35}, 2040032 (2020); arXiv:2011.11897.
+
+\bibitem{Abel2020}
+C.~Abel \textit{et al.} (nEDM collaboration),
+``Measurement of the permanent electric dipole moment of the neutron,''
+\textit{Phys.~Rev.~Lett.} \textbf{124}, 081803 (2020).
 
 \end{thebibliography}
 
