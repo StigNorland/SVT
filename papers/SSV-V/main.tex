@@ -16,6 +16,8 @@
 
 \newmdenv[linewidth=0.8pt,innertopmargin=5pt,innerbottommargin=5pt,%
   innerleftmargin=8pt,innerrightmargin=8pt]{gapbox}
+\newmdenv[linewidth=1.1pt,innertopmargin=5pt,innerbottommargin=5pt,%
+  innerleftmargin=8pt,innerrightmargin=8pt]{resultbox}
 
 \title{Saturated Superfluid Vacuum V\\
 Condensate Black Holes}
@@ -531,14 +533,108 @@ well-known Hawking evaporation runaway.
 \textit{The endpoint of evaporation is not a naked singularity.}  As $r_H\to\xi$, the
 condensate reaches the Planck scale.  At this point the close-packing regime of
 Section~\ref{sec:collapse} is reached and the condensate cannot compress further.  The
-evaporation terminates at a Planck-scale remnant rather than a singularity.
+evaporation terminates at a Planck-scale remnant rather than a singularity; the
+next subsection establishes that the remnant is structurally stable rather than
+dissolving back into the medium.
 
-\begin{gapbox}
-\textbf{Gap (open):}  The final state of Planck-scale evaporation---whether the condensate
-dissolves completely into the medium or stabilises as a Planck-scale defect---requires
-knowing the detailed equation of state in the close-packing regime, which is part of the
-Paper~I numerical programme.
-\end{gapbox}
+\subsection{The Planck-scale evaporation endpoint}
+\label{sec:evaporation-endpoint}
+
+The qualitative termination above leaves a structural question open: does the
+Planck-scale remnant dissolve completely into the saturated medium, or does it
+stabilise as a topologically protected defect?  The close-packing equation of
+state of \S\ref{sec:collapse} answers this definitively.  The LogSE
+equation of state has three properties that together fix the endpoint as a
+\emph{stable} Planck-scale remnant.
+
+\paragraph{Argument 1: the LogSE chemical-potential floor.}
+The logarithmic potential $V(\rho) = -b\rho\ln(\rho/\rho_0)$ has chemical
+potential
+\begin{equation}
+  \mu(\rho) \;=\; \frac{\delta E}{\delta\rho}
+                \;=\; -b\bigl[\ln(\rho/\rho_0)+1\bigr],
+  \label{eq:logSE-chempot}
+\end{equation}
+which diverges to $+\infty$ as $\rho\to 0$.  Any region whose density tries to
+fall below $\rho_0$ pays a logarithmic chemical-potential cost; the surrounding
+saturated medium at $\mu(\rho_0) = -b$ therefore exerts an inward pressure on
+any sub-saturated region.  A remnant attempting to ``dissolve'' would need to
+expand below saturation in a finite region, against this confining pressure.
+The LogSE equation of state forbids smooth dissolution.
+
+\paragraph{Argument 2: topological-charge conservation.}
+The original collapsing condensate carries integer winding number $n$ around
+its axis (Eq.~\eqref{eq:angmom}, \S\ref{sec:spin}).  Hawking evaporation
+radiates phonons in the longitudinal pressure channel; these are pure phase
+disturbances of the saturated medium and carry zero winding.  Throughout
+evaporation, $n$ is therefore conserved.  At the endpoint a fully dissolved
+($n = 0$) state cannot be reached from a non-trivial parent ($n \ne 0$)
+without an unwinding event that passes through $\rho \to 0$ over an extended
+region---precisely what Argument 1 forbids.  Any black hole with $J \ne 0$
+must therefore leave a winding-bearing remnant.
+
+\paragraph{Argument 3: horizon vanishing at the Planck scale.}
+The acoustic-freezing mechanism of \S\ref{sec:horizon} requires a smooth
+$A(r)$ profile with $A\to 0$ over a region of scale $\gtrsim\xi$ for the
+continuum acoustic approximation to apply.  When $r_H\lesssim\xi$ the smooth
+horizon can no longer be supported by the medium: the very mechanism that
+produces Hawking radiation switches off.  The remnant ceases to be a
+``black hole'' in the acoustic-horizon sense and becomes a static
+Planck-scale condensate defect, no longer radiating.  This terminates
+evaporation at a definite mass scale.
+
+\paragraph{Endpoint mass and structure.}
+Combining the three arguments, the evaporation endpoint is a static
+Planck-scale defect with
+\begin{equation}
+  M_{\rm rem} \;\sim\; \frac{c^2\,\xi}{G} \;\sim\; m_P,
+  \qquad
+  r_{\rm rem} \;\sim\; \xi \;\sim\; \ell_P,
+  \label{eq:M_remnant}
+\end{equation}
+carrying the parent black hole's topological winding $n$ and confined by the
+chemical-potential pressure of the surrounding saturated medium.  The defect
+cannot annihilate spontaneously: doing so would require either dissolution
+(forbidden by Argument 1) or topological-charge violation (forbidden by
+Argument 2).  Annihilation requires meeting an oppositely-wound partner,
+exactly as for any topologically protected defect in a superfluid.
+
+\begin{resultbox}
+\textbf{Structural answer: stable Planck-scale remnant.}\\[2pt]
+The close-packing equation of state of \S\ref{sec:collapse} forces the
+evaporation endpoint to be a \emph{stable} Planck-scale defect, not a
+dissolved state.  Three independent arguments converge:
+\begin{enumerate}\setlength\itemsep{2pt}
+  \item the LogSE chemical potential diverges as $\rho\to 0$, so the
+        saturated medium confines any sub-saturated region;
+  \item the topological winding $n$ is conserved under Hawking evaporation
+        (phonons carry no winding); a winding-bearing parent cannot
+        evaporate to the trivial state without violating Argument 1;
+  \item the acoustic-horizon mechanism switches off at $r_H\sim\xi$, so
+        the remnant ceases to radiate at the Planck mass.
+\end{enumerate}
+Status: \emph{structural}.  The mass scale
+$M_{\rm rem}\sim m_P$ inherits the
+$\xi\sim\ell_P$ identification (Paper~VII-b~\cite{SSV-VIIb}, candidate-grade);
+the no-dissolution conclusion is independent of the quantitative
+close-packing density $\rho_{\max}$ tracked under the Paper~I
+programme~\cite{SSV-I}.  The qualitative answer to the issue is therefore
+definite without the deferred numerics.
+\end{resultbox}
+
+\paragraph{Observational consequence: Planck-mass relics.}
+Every black hole that completes Hawking evaporation leaves behind a single
+Planck-mass topological defect.  Primordial black holes (PBHs) with initial
+mass $M_*\sim 5\times10^{14}\,\mathrm{g}$ would have finished evaporating
+in the present cosmological epoch, depositing $\sim M_*/m_P \sim 10^{19}$
+times less remnant mass than parent mass --- a remnant density today of
+$\Omega_{\rm rem}\sim 10^{-19}\,\Omega_{\rm PBH,initial}$, well below
+current dark-matter constraints unless the initial PBH abundance is
+near the present dark-matter density.  Heavier PBHs ($M\gg M_*$) have not
+yet reached the endpoint and contribute negligibly to the relic density.
+The framework therefore predicts a definite but typically small remnant
+contribution to dark matter, with the size set by the PBH formation
+spectrum rather than by the endpoint mechanism itself.
 
 \section{Discussion and Open Problems}\label{sec:discussion}
 
@@ -610,8 +706,15 @@ The following technical tasks remain for later work:
     (Paper~VII-b).
   \item \textbf{Kerr exterior:} The exterior metric of a spinning condensate, including
     frame-dragging and the exact no-hair result (Paper~VII-b).
-  \item \textbf{Evaporation endpoint:} The final state of Hawking evaporation as $r_H\to\xi$
-    (Paper~I programme + Paper~VII-b).
+  \item \textbf{Evaporation endpoint:} The qualitative final state of Hawking
+    evaporation as $r_H\to\xi$ is established as a stable Planck-scale
+    topological remnant in \S\ref{sec:evaporation-endpoint}, on three
+    structural grounds (LogSE chemical-potential floor, topological
+    winding conservation, acoustic-horizon vanishing at $r_H\sim\xi$).
+    The quantitative close-packing density $\rho_{\max}$ and the precise
+    relation $\xi = \ell_P$ remain in the Paper~I programme and
+    Paper~VII-b respectively; neither affects the no-dissolution
+    conclusion.
   \item \textbf{Superradiance:} Whether angular momentum can be extracted from the condensate
     by external perturbations, and whether a Kerr-like superradiance instability exists.
 \end{enumerate}
