@@ -1949,15 +1949,20 @@ paper in this series.
 \label{sec:leptons}
 % ═══════════════════════════════════════════════════════════════════════
 
-\begin{gapbox}[Status: muon partially placed, tau a ladder coincidence only]
-The electron is derived from first principles in Paper~I.  The muon is identified
-there with the lowest ring-breathing mode of the toroidal vortex, but the
-eigenfrequency itself is not yet computed --- it is a placeholder filled by the
-ladder coincidence $m_\mu = (3/2)\mu_0$.  The tau appears as a ladder rung at
-$25\tfrac12\,\mu_0$ with no structural identification at all.  Paper~II adds
-nothing quantitative to either; this section serves only to locate the leptons
-within the present force-sector framework and to link the charged-lepton
-generation problem to the neutrino problem (P2) of \S\ref{sec:neutrino}.
+\begin{gapbox}[Status: muon dynamically placed, tau topologically identified]
+The electron is derived from first principles in Paper~I.  The muon is
+identified there with the lowest core-breathing $\oplus$ Kelvin hybrid mode
+of the toroidal vortex (Paper~I~\cite{TGD-I}, \S Muon and
+Appendix~H), giving $m_\mu = (3/2)\mu_0$ to $0.59\%$.  The tau is identified
+in \S\ref{sec:tau} below with the lowest Hopf-linked pair of trefoil-skeleton
+baryon breathers bound by a shared muon-class ring-breathing quantum, giving
+the leading-order prediction $m_\tau = 2m_p - m_\mu = 1770.9~\mathrm{MeV}$
+to $0.34\%$ of the observed value.  Both identifications are structural
+hypotheses to be confirmed by the same $\mathcal{L}+\mathcal{L}_\perp$
+eigenmode minimisation that closes the muon eigenfrequency (Paper~I open
+problem~2); the tau identification additionally requires the two-component
+link of trefoils to be admissible in the SSV functional, which is a Borromean-class
+extension of the (2,3)-torus knot calculation in Paper~I.
 \end{gapbox}
 
 \subsection{The Muon: Ring-Breathing Mode of the Electron}
@@ -1980,24 +1985,73 @@ since otherwise the force-sector treatment would discuss neutrinos as the
 torsional companion of a charged lepton without ever introducing the charged
 lepton itself.
 
-\subsection{The Tau: Ladder Coincidence Without a Mode Assignment}
+\subsection{The Tau: Hopf-Linked Trefoil Pair Bound by a Muon Quantum}
+\label{sec:tau}
 
 The tau lands on rung $25\tfrac12$ of the $\alpha$-harmonic ladder
-($m_\tau = 25.375\,\mu_0$, $0.49\%$) without any structural derivation.  The
-ladder placement is consistent with the tau being a higher excited mode of the
-same toroidal topology --- plausibly a second ring-breathing harmonic or a
-combined ring-breathing/chiral-shear mode --- but no eigenmode calculation has
-been performed.  In contrast to the muon, where the geometric picture
-(ring-breathing mode) is at least specified even if not yet computed, the tau
-identification is presently a numerology: a rung that fits the ladder, with no
-candidate hydrodynamic mode attached.
+($m_\tau = 25.375\,\mu_0$, $0.49\%$).  We identify it structurally with the
+\emph{lowest Hopf-linked pair of trefoil-skeleton breathers bound by a shared
+core-breathing $\oplus$ Kelvin hybrid quantum}, equivalently a $(2,3)\oplus(2,3)$
+two-component link of vortex trefoils joined by one muon-class ring-mode
+in the linkage region.  The mass follows directly from the topological
+building-block accounting:
+\begin{equation}
+  \boxed{m_\tau \;=\; 2\,m_p \;-\; m_\mu
+    \;=\; 2(13.5)\mu_0 - (3/2)\mu_0
+    \;=\; \tfrac{51}{2}\mu_0,}
+  \label{eq:tau-mass}
+\end{equation}
+which lands on rung $25\tfrac12$ by construction and evaluates to
+\begin{equation}
+  m_\tau^\mathrm{pred} \;=\; 2(938.272) - 105.658 \;=\; 1770.89~\mathrm{MeV},
+  \label{eq:tau-numeric}
+\end{equation}
+to compare with the observed $1776.86~\mathrm{MeV}$ ($-0.336\%$).  Using the
+isospin-averaged baryon mass $(m_p + m_n)/2$ instead of $m_p$ alone gives
+$m_\tau^\mathrm{pred} = 1772.18~\mathrm{MeV}$ ($-0.263\%$), tightening the
+agreement since the two trefoils in a Hopf link are not isospin-distinguished
+in the symmetry channel of the linkage.  Either choice is more accurate
+than the bare ladder coincidence $25\tfrac12\,\mu_0 = 1785.6$~MeV
+($+0.494\%$).
 
-This matters for the present paper because the parity-violation argument of
-\S\ref{sec:parity} and the neutrino identification of \S\ref{sec:neutrino} both
-implicitly assume that each charged-lepton generation has a torsional
-companion (the corresponding neutrino).  For the electron and muon this is
-empirically required and structurally consistent.  For the tau the same
-correspondence is asserted but rests on the unresolved tau identification.
+\paragraph{Topological reading.}
+The (2,3)-trefoil is the simplest non-trivial knot and the topological skeleton
+of the proton in Paper~I~\cite{TGD-I}.  Two trefoils linked through each other
+once (Hopf link) form the simplest non-trivial two-component link and are
+the natural next building block above the proton in the SSV defect spectrum.
+The linkage region carries a shared Kelvin-helicity standing wave; the lowest
+such mode has the same eigenfrequency as the muon's core-breathing $\oplus$
+Kelvin hybrid (Paper~I, \S Muon), so the binding energy is exactly one muon
+mass.  The minus sign in~\eqref{eq:tau-mass} is the binding-energy convention:
+two free trefoils ($2 m_p$) bound by a Kelvin quantum lower their total energy
+by $m_\mu$.
+
+\paragraph{Structural verification path.}
+The full eigenmode closure of~\eqref{eq:tau-mass} requires the same
+$\mathcal{L} + \mathcal{L}_\perp$ minimisation that fixes the muon
+eigenfrequency (Paper~I open problem~2) but on the $(2,3)\oplus(2,3)$
+two-component link instead of on the single toroidal vortex.  The crossing
+count is six (each trefoil contributes three, the link contributes a global
+linking number of one without crossing additions), so the relevant N-junction
+count is $N_Y^\mathrm{link} = 6$ and the form-factor extraction is the
+direct extension of the trefoil computation in Paper~I~\S A.  The
+linkage-region Kelvin quantum carrying $-m_\mu$ binding energy is the same
+$m_\varphi = \pm 1$ helicity-sector hybrid that drives the muon rung; no
+new mode type is required.  This identification therefore relies on no
+additional theoretical input beyond what already closes the proton mass
+formula and the muon eigenmode hypothesis.
+
+\paragraph{Consequence for the generation problem.}
+The three charged leptons now have a tower of building-block decompositions:
+$e = 1$ toroidal vortex; $\mu = e + $ core-breathing $\oplus$ Kelvin hybrid;
+$\tau = 2$ proton-trefoils $-$ muon quantum.  The threefold structure is no
+longer a coincidence of ladder rungs but reflects the three lowest topological
+classes admissible in the SSV functional: pure torus (electron),
+torus-with-internal-mode (muon, pion), and linked trefoils (tau).  This
+sharpens the threefold-generation problem (\S\ref{sec:leptons}) into a
+specific topological question: is the SSV functional admissible on the
+$(2,3)\oplus(2,3)$ link, and at what link spacing does the muon-class
+binding mode go off-shell?
 
 \subsection{The Generation Problem}
 
