@@ -84,7 +84,7 @@ from boundary-framed vs bulk-framed defect classification, and the mass
 splitting decomposes as $\Delta E = m_e c^2 + \Delta E_{\rm surf}$ with
 $\Delta E_{\rm surf}$ identified as the $\beta$-decay endpoint
 $0.782\,\text{MeV}$; quantitative pinning of $\Delta E_{\rm surf}$ inherits the
-proton-closure work and is tracked under issue~\#13.
+proton-closure work and is tracked under issue~\#30.
 
 Two empirical inputs ($m_e$, $\alpha$) are used.  The remaining predictions
 are consistent with the observed lepton and light-hadron spectrum at the
@@ -93,8 +93,8 @@ dependence on the regularisation cutoff $R$ and the meridional domain size
 $L_{\rm box}$ documented in the body.  A dedicated Claim Status section
 (\S\ref{sec:claim-status}) tags every quantitative claim as
 \textit{derived}, \textit{structural}, \textit{candidate}, or
-\textit{ansatz}, and links each candidate-grade claim to the specific
-GitHub issue (\#13, \#16) whose computation would change its status.
+\textit{ansatz}, and links each candidate-grade claim to the consolidated tracking
+issue~\#30, whose computations would change its status.
 The open problems for Paper~II are: thin-ring analytic closure of the
 muon eigenfrequency, full 3D minimisation for the proton form factor
 (including a cutoff-stability scan for $F(R)$ and a dedicated $N_Y$
@@ -630,7 +630,7 @@ and (iii)~its dispersion is quadratic rather than linear in the wavenumber.
 Each of the quantum numbers, the spin-statistics composition, and the
 qualitative form of the mass splitting follows from these three points without
 fitting.  The quantitative value of the splitting requires the same converged
-trefoil-breather geometry tracked under issue~\#13 plus a surface-mode
+trefoil-breather geometry tracked under issue~\#30 plus a surface-mode
 eigenvalue calculation deferred to Paper~II.
 
 \paragraph{Topology and quantum numbers.}
@@ -724,7 +724,7 @@ $\sim 4$; the structural decomposition Eq.~\eqref{eq:neutron-split} attributes
 the difference to the unresolved surface-binding energy
 $E_{\rm bind}=\Delta E_{\rm Kelvin}-\Delta E_{\rm surf}$.  Pinning these two
 contributions separately, rather than the difference, requires the converged
-trefoil-breather geometry of issue~\#13.
+trefoil-breather geometry of issue~\#30.
 
 \begin{resultbox}[Neutron: structural derivation]
 Fusion product $\mathcal{N}=\mathcal{T}\cup_{\Sigma_p}\mathcal{E}$ of the
@@ -744,7 +744,7 @@ proton trefoil and a surface-locked electron torus:
         of the unresolved binding term.
 \end{itemize}
 Quantitative pinning of $\Delta E_{\rm surf}$ requires the converged
-trefoil-breather geometry of issue~\#13 plus the surface-mode eigenvalue
+trefoil-breather geometry of issue~\#30 plus the surface-mode eigenvalue
 calculation deferred to Paper~II.
 \end{resultbox}
 
@@ -957,7 +957,7 @@ inconsistent spectrum due to a cross-$m$ current-curl issue in the basis
 construction documented in
 \texttt{papers/SSV-I/enrichment-attempt-findings-2026-05-27.md};
 the corrected enrichment programme is open work tracked under
-GitHub issue~\#16.
+issue~\#30.
 
 Within these bounds, the assignment
 \begin{equation}
@@ -974,7 +974,7 @@ contains the target value, and an identified residual gap that has been
 falsified against the cubic-vertex hypothesis and reframed as a
 topology-scaled basis-truncation error.  The thin-ring analytic closure
 deferred to Paper~II would turn this candidate into a falsifiable single
-number; the basis-enrichment programme (issue~\#16) would independently
+number; the basis-enrichment programme (issue~\#30) would independently
 demonstrate the $1/\sqrt{N_{\rm modes}}$ scaling claimed here.
 
 \subsection{Higher rungs and the proton}
@@ -1015,7 +1015,7 @@ drafts of this paper is the precision at that specific cutoff, not a
 cutoff-independent first-principles prediction; promoting it requires
 either deriving the cutoff geometrically from the relaxed breather or
 demonstrating that $N_Y\cdot F$ is itself cutoff-invariant.  Both are
-deferred to the closure work tracked under GitHub issue~\#13 and listed
+deferred to the closure work tracked under issue~\#30 and listed
 in \S\ref{sec:claim-status}.
 
 \begin{table}[h]
@@ -1040,7 +1040,7 @@ range $930$--$954\,\text{MeV}$ spans the two fine grids.
 $F$ varies as $\mathrm{d}\ln F/\mathrm{d}\ln R\approx-0.94$ in this region;
 the cutoff is physically motivated but not yet derived, giving a ${\sim}3\%$
 systematic per $0.3\,\xi$ uncertainty.  Status: candidate
-(\S\ref{sec:claim-status}, GitHub issue \#13).}
+(\S\ref{sec:claim-status}, issue~\#30).}
 \end{table}
 
 \paragraph{Open issues and next steps.}
@@ -1248,8 +1248,10 @@ the thin-ring matrix-element closure is the outstanding falsification test.
 %------------------------------------------------------------------
 
 This section tags every major quantitative claim in this paper with a
-status label and a pointer to the GitHub computation issue whose
-resolution would change that status.  The taxonomy follows
+status label and a pointer to the GitHub tracking issue whose resolution
+would change that status; the outstanding computations are currently
+consolidated under issue~\#30 (\textit{Calculations required to close
+Paper~I and Paper~II}).  The taxonomy follows
 \texttt{docs/numerical-minimisation-roadmap.md} in the repository:
 
 \begin{itemize}
@@ -1272,7 +1274,7 @@ resolution would change that status.  The taxonomy follows
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{p{0.30\linewidth} p{0.13\linewidth} p{0.42\linewidth} p{0.07\linewidth}}
 \toprule
-Claim & Status & Upgrade condition & Issue \\
+Claim & Status & Upgrade condition & Tracked \\
 \midrule
 LogSE Madelung structure; sound speed $c_s=\sqrt{2b\rho_0/m_0}$;
 $\xi=\hbar/(m_0c)$ & derived & Already analytic from the Lagrangian. & --- \\
@@ -1298,7 +1300,7 @@ basis-enrichment programme that demonstrates the
 $1/\sqrt{N_{\rm modes}}$ residual scaling.  The current
 enrichment direction's failure mode is documented in
 \texttt{enrichment-attempt-findings-2026-05-27.md}. &
-\#16 \\
+\#30 \\
 Cubic-vertex one-loop self-energy as the source of the muon
 residual gap & \textit{falsified} & The repository calculation gives
 a relative shift of $-(3\text{--}9)\times 10^{-9}$, seven orders of
@@ -1306,7 +1308,7 @@ magnitude too small and with the wrong sign.  Documented in
 \texttt{muon-cubic-vertex-result-note.md}. & --- \\
 Higher rungs $K^\pm \approx 7\mu_0$ and $\rho(770) \approx 11\mu_0$
 ($\sim$0.7\%) & candidate & Same mechanism as muon; same closure
-condition.  No separate dynamical confirmation yet. & \#16 \\
+condition.  No separate dynamical confirmation yet. & \#30 \\
 Proton mass $m_p \approx N_Y \cdot F \cdot \mu_0 \approx 930$--$954$
 MeV ($\sim$1.5\% from CODATA at $R\!=\!1.18\,\xi$) &
 candidate & Three open sub-claims: (i)~derive the cutoff $R$
@@ -1315,19 +1317,19 @@ as a calibration parameter; (ii)~run the dedicated $N_Y$ refinement
 sweep across the $24^3,\,48^3,\,72^3$ grid family (currently
 inferred via $F$); (iii)~test whether the product
 $N_Y\cdot F$ is itself cutoff-invariant.  Each would shift the
-status one step toward derived. & \#13 \\
+status one step toward derived. & \#30 \\
 $N_Y \approx 3.007$ topological crossing factor & candidate &
 Same as above; the $\pm0.002$ band in earlier drafts is fit
 reproducibility, not measured cross-grid spread.  Topology
 preservation requires the penalty mechanism documented in
-\texttt{src/paper\_i/topology\_penalty.py}. & \#13 \\
+\texttt{src/paper\_i/topology\_penalty.py}. & \#30 \\
 Form factor $F\approx4.47$ at $R=1.18\,\xi$
 (fine-grid average) & candidate & Topology-preserving relaxation
 on $n^3{=}48^3,\,72^3$ agrees at the $\sim6\%$ level on this
 observable; the n=24 grid value at the same cutoff is $4.55$,
 but the raw numerator differs from the fine-grid limit by
 ${\sim}54\%$ at the unrescaled cutoff.  Closure-grade requires
-n=96+ and a derived cutoff. & \#13 \\
+n=96+ and a derived cutoff. & \#30 \\
 Restricted 2-mode BdG diagnostic
 (\texttt{restricted\_bdg\_matrix.py}) producing
 $\omega_-$, $\omega_+$ &
@@ -1337,13 +1339,13 @@ sweep recorded in
 $\sim 63\%$ grid drift and $\sim 66\%$ box drift in $\omega_+$,
 and a non-real $\omega_-$ at every reference point.  The numbers
 this script prints are not cited in the body of this paper and
-should not be quoted as derived. & \#16 \\
+should not be quoted as derived. & \#30 \\
 Vortex-profile shooting solver
 (\texttt{vortex\_profile.py}) & validation & Profile grid is
 well-converged for $\texttt{profile\_n}\ge 600$ and
 $\texttt{profile\_x\_max}\in[15,\,20]$; the solver fails at
 $\texttt{profile\_x\_max}\ge 25$ -- documented and
-not currently a limitation downstream. & \#16 \\
+not currently a limitation downstream. & --- \\
 Neutron as surface-locked composite
 $\mathcal{N}=\mathcal{T}\cup_{\Sigma_p}\mathcal{E}$:
 $Q=0$, $J=\tfrac{1}{2}$, $B=1$, $L=0$ (bound); mass split
@@ -1355,13 +1357,13 @@ bulk-framed defect classification.  The Kelvin-mode order-of-magnitude
 estimate $\sim 3.5\,\text{MeV}$ is consistent with the splitting only
 through the unresolved surface-binding term; pinning the two
 contributions separately requires the converged trefoil-breather
-geometry. & \#13 \\
+geometry. & \#30 \\
 Forces section (preview only): electromagnetism as chiral flow,
 strong as surface tension, gravity as Bjerknes, weak as
 reconnection & structural & The qualitative identifications are
 consistent with the Lagrangian; the quantitative content is
 deferred to Paper~II.  No quantitative force claim is made in this
-paper. & \#13, \#15 \\
+paper. & \#30 \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -1378,7 +1380,7 @@ that appeared in earlier drafts have been re-framed:
   \item the $N_Y$ convergence statement ``independent of grid resolution
     above $128^3$'' has been corrected to reflect the actual computed
     grids ($24^3$, $48^3$, $72^3$) and the dedicated cross-grid
-    sensitivity check is listed as outstanding work under issue~\#13.
+    sensitivity check is listed as outstanding work under issue~\#30.
 \end{itemize}
 
 The headline conclusion of this paper is unchanged: the SSV postulate
@@ -1480,7 +1482,7 @@ from the same runs is detailed in \S\ref{app:F-extraction}.  A dedicated
 sensitivity sweep for $N_Y$ itself across this grid family has not yet been
 performed; its uncertainty is currently dominated by the same cutoff and
 calibration choices that drive the cutoff sensitivity of $F$
-(closure work tracked under GitHub issue~\#13).
+(closure work tracked under issue~\#30).
 
 \begin{verbatim}
 # Blueprint (adapted from Proment 2012 + LogSE + chiral shear)
@@ -1519,8 +1521,8 @@ box half-width $6\xi$; topology preservation requires the penalty mechanism
 of \texttt{src/paper\_i/topology\_penalty.py}, and the cutoff-stability
 behaviour of the downstream observable $F$ is documented in
 \S\ref{app:F-extraction}.  A grid-refinement sweep dedicated to $N_Y$ itself
-(as opposed to $F$) is part of the open closure work tracked under GitHub
-issue~\#13 and \S\ref{sec:claim-status}.  A practical implementation relaxes
+(as opposed to $F$) is part of the open closure work tracked under
+issue~\#30 and \S\ref{sec:claim-status}.  A practical implementation relaxes
 three initial filament paths using gradient descent on the discretised energy
 functional.  Vortex-line integrals are computed with the non-deprecated
 trapezoidal rule:
@@ -1543,7 +1545,7 @@ level (raw numerator $e_{\rm interior}$ agreement between those grids drives
 the residual; finer grids would tighten further).  The $\pm0.002$
 uncertainty band quoted in earlier drafts referred to fit reproducibility at
 a single grid family and is not yet a measured cross-resolution
-spread for $N_Y$; see GitHub issue~\#13.
+spread for $N_Y$; see issue~\#30.
 
 \subsection*{Numerical extraction of $F$ for the $(2,3)$-trefoil knot (2026-05-19)}
 \label{app:F-extraction}
