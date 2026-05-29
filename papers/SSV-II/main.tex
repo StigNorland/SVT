@@ -585,48 +585,56 @@ returns to it.  The ``anomalous'' correction is not anomalous at all — it is t
 back-reaction of the medium on the ring, calculable from classical superfluid
 mechanics supplemented by the quantisation of the ring's topology.
 
-\paragraph{Finite ring correction.}
-The vortex ring has a physical size $R^* = \xi/\alpha$ (the equilibrium ring radius
-from Paper~I).  At loop momenta $k \gg 1/R^*$ the ring is not point-like, and
-the vertex acquires a form factor:
-\begin{equation}
-    F(kR^*) = J_0(kR^*) \approx 1 - \tfrac{1}{4}(kR^*)^2 + \cdots,
-    \label{eq:form_factor}
-\end{equation}
-where $J_0$ is the Bessel function arising from the Fourier transform of a circular
-current loop.  The form factor suppresses the loop integrand for $k \gtrsim 1/R^*$,
-cutting off contributions above the inverse ring radius.  The natural dimensionless
-expansion parameter at the leading-order correction is
-\begin{equation}
-    \varepsilon \equiv \left(\frac{\bar\lambda_e}{R^*}\right)^2
-    = \left(\frac{\xi}{\xi/\alpha}\right)^2 = \alpha^2 \approx 5.3\times 10^{-5},
-    \label{eq:ring_epsilon}
-\end{equation}
-since $\bar\lambda_e = \xi$ and $R^* = \xi/\alpha$.  The ring-size correction to
-the magnetic moment is therefore parametrically of order
-\begin{equation}
-    \delta\!\left(\frac{g-2}{2}\right)_{\rm ring}
-    \sim -\frac{\alpha}{4\pi}\,\alpha^2
-    = -\frac{\alpha^3}{4\pi}
-    \approx -6.2\times 10^{-9},
-    \label{eq:ring_correction}
-\end{equation}
-which lies some four orders of magnitude below the current experimental sensitivity
-of $\sim 10^{-13}$ in $(g-2)/2$ --- consistent with the SSV prediction being
-indistinguishable from QED at all accessible precision levels, but far above the
-$\sim 10^{-44}$ estimate that appeared in earlier drafts of this section through an
-erroneous identification $\xi \sim \ell_P$ (see units audit, 2026).
+\paragraph{Contact vertex; no classical ring-size correction.}
+The $\psi$-phonon coupling of the LogSE$+\mathcal{L}_\perp$ Lagrangian is a
+contact term: it carries no length scale of its own and no momentum-dependent
+form factor.  The one-loop integral built from this bare vertex is therefore
+identical to the Schwinger calculation, and~\eqref{eq:schwinger} holds
+\emph{exactly} at this order — there is no classical ring-size correction to
+$(g-2)/2$ from SSV.
 
-\begin{gapbox}[Open calculation: toroidal form-factor loop integral]
-The estimate~\eqref{eq:ring_correction} is parametric: it uses the correct
-expansion variable $\varepsilon = \alpha^2$ but does not perform the loop integral
-with the full toroidal-vortex form factor $F(kR^*)$.  The rigorous calculation
-requires integrating the Schwinger integrand weighted by $F(kR^*)^2$ over the
-full loop-momentum range, with the toroidal geometry of the ring (rather than a
-circular-loop approximation) entering the form factor.  Until this integral is
-evaluated, the coefficient in front of $\alpha^3/(4\pi)$ is unknown at order unity.
-The parametric suppression by $\alpha^2$ is robust; the numerical prefactor is not.
-\end{gapbox}
+The point is worth spelling out because the classical-electrodynamics analogy
+suggests otherwise.  The electron's equilibrium ring has spatial extent
+$R^* = \xi/\alpha$ (Paper~I), so one is tempted to assign the loop vertex a
+geometric form factor $F(kR^*) = J_0(kR^*)$ — the Fourier transform of a
+circular current loop — and treat $(kR^*)^{-1}\sim\alpha$ as a small
+correction parameter.  Closing this construction as an explicit calculation
+(numerical reduction and integration in
+\texttt{papers/SSV-II/g2-form-factor-results.md}; family scan and analysis in
+\texttt{topological-vertex-exploration.md}) shows that the $J_0(kR^*)$
+insertion at $R^* = \xi/\alpha$ removes $99.5\%$ of Schwinger's $\alpha/(2\pi)$
+— not a small correction at all, but a $\sim 10^9\sigma$ disagreement with
+the measured $a_e$.  The same suppression appears for any geometric vertex
+form factor of comparable scale (Gaussian, Yukawa, dipole), so the failure
+is structural rather than specific to $J_0$.
+
+The diagnosis is a category mismatch.  The form factor $J_0(kR^*)$ describes
+the \emph{dressed}, assembled electron as seen from outside: it is the
+Fourier transform of the collective ring configuration at length scales
+$\gtrsim R^*$, and it correctly underwrites Paper~I's classical-extent
+observables (Bohr magneton, W and Z cap radii, hadron mass scaling), where
+the observable is genuinely the assembled object's classical response.  The
+Schwinger loop, by contrast, is built from the \emph{bare} contact coupling
+in the Lagrangian, which has no extent and no form factor.  Identifying the
+emergent ring radius with the bare vertex scale puts an extended-object
+Fourier transform where a fundamental contact coupling lives — two different
+kinds of object in the same calculation.  The numerical receipt above is
+what makes the mismatch visible at the level of $a_e$.
+
+With the contact-term vertex used consistently, the first SSV-specific
+deviation from QED at this order would have to come from \emph{intrinsic}
+structure of the bare sector — chiral-shear vertex insertions in
+$\mathcal{L}_\perp$, BdG mode-decomposition of the $\psi$-phonon kernel, or
+higher-genus defect topology entering the propagator — none of which takes
+the form $J_0(kR^*)$.  Whether any of these produces a numerically resolvable
+deviation from the QED $\alpha^2/\pi^2$ series is a separate calculation,
+and a much subtler one.
+
+The take-away for the rest of the corpus: $R^* = \xi/\alpha$ is the right
+scale for observables that probe the assembled vortex ring as a classical
+current distribution, and continues to underwrite Paper~I's successful uses.
+It is the wrong scale for any momentum-space form factor attached to a
+vertex of the underlying Lagrangian.
 
 \subsection{Magnetic Field, Faraday Induction, and the Impossibility of Monopoles}
 \label{sec:B_derivation}
