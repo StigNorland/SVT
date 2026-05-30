@@ -9,7 +9,10 @@ appears in the corresponding `resultbox`.
 
 The note replaces an earlier orphan-branch version of the same file
 (originally on `claude/jolly-tu-940955`) which never reached main. The
-two known orphan-branch holes that remain are listed at the bottom.
+remaining orphan-branch holes flagged in PR #63 — paper text for #44
+and #50, plus reproduction scripts for #42, #43, #44, #50 — were
+subsequently closed by PR #64; this file now reflects fully-restored
+main.
 
 ## Summary
 
@@ -22,9 +25,11 @@ two known orphan-branch holes that remain are listed at the bottom.
 | #36   | SSV-II §Neutrinos                    | Speculative spectrum demoted with five explicit falsifiers           | paper text |
 | #37   | SSV-II §Tau                          | Tau identified as Hopf-linked trefoil pair bound by a muon quantum   | `src/paper_ii/tau_identification.py` |
 | #40   | SSV-V §6                             | Planck-scale evaporation endpoint is a stable topological remnant    | paper text |
-| #42   | SSV-VI-a §4.4                        | First-principles closed form $\mathcal{C} = \hbar N_p^9 / (2 \alpha_G c \alpha^{25})$ | paper text |
-| #43   | SSV-VI-b §3.2                        | Quantitative $\varepsilon_m(a_{\rm BH})$ table from Hansen–Geroch multipole expansion | paper text |
+| #42   | SSV-VI-a §4.4                        | First-principles closed form $\mathcal{C} = \hbar N_p^9 / (2 \alpha_G c \alpha^{25})$ | `src/paper_vi_a/derive_C.py` |
+| #43   | SSV-VI-b §3.2                        | Quantitative $\varepsilon_m(a_{\rm BH})$ table from Hansen–Geroch multipole expansion | `src/paper_vi_b/epsilon_m_table.py` |
+| #44   | SSV-VI-b §4.1                        | Mestel-soliton Lin–Shu dispersion → $\tan\alpha_m = mQ/4$, Seigar–Davis pitch-$M_{\rm BH}$ anti-correlation reproduced | `src/paper_vi_b/pitch_angle_table.py` |
 | #49   | SSV-VII-b §6                         | Strong-field numerical verification of the SSV-identified metric     | `src/paper_vii_b/strong_field_test.py` |
+| #50   | SSV-VIII §C1                         | Prediction C1 promoted to structural with numerical evidence (KZ GPE scan, fitted 2D exponent $0.23 \pm 0.10$) | `src/paper_viii/kibble_zurek_gpe.py` |
 
 ## Per-closure detail
 
@@ -149,9 +154,9 @@ gives the closed form
 $$\mathcal{C} = \frac{\hbar N_p^9}{2 \alpha_G c \alpha^{25}},$$
 which uses only the SSV-II constant set $\{\hbar, c, \alpha, \alpha_G, N_p\}$
 and matches the weighted multi-galaxy observed value at $-1.5\%$.
-A reproduction script (`src/paper_vi_a/derive_C.py`) exists on the
-original orphan branch and would need a separate restore PR — see
-"Orphan-branch holes" below.
+
+`src/paper_vi_a/derive_C.py` prints all three equivalent forms and the
+comparison with the observed $1.808 \times 10^9$ kpc·$M_\odot$.
 
 ### #43 — Mode amplitudes $\varepsilon_m(a_{\rm BH})$
 
@@ -162,10 +167,27 @@ $$\varepsilon_m(a_{\rm BH}) = \varepsilon_0 \cdot \frac{Q_m}{m!} \cdot a_{\rm BH
 with $Q_m \to 1$ from the Bessel cross-overlap and $\varepsilon_0 \approx 0.05$
 from the Paper VI-a M31 fit. The tabulated values for $a_{\rm BH} \in [0.1, 0.998]$
 and $m \in [1, 5]$ reproduce the ring → grand-design → flocculent
-morphology sequence. A reproduction script
-(`src/paper_vi_b/epsilon_m_table.py`) exists on the original orphan
-branch and would need a separate restore PR — see "Orphan-branch holes"
-below.
+morphology sequence.
+
+`src/paper_vi_b/epsilon_m_table.py` prints the table in the paper.
+
+### #44 — Pitch-angle dispersion
+
+The SSV analogue of the Lin–Shu density-wave dispersion on the
+Mestel-soliton disc,
+$$(\omega - m\Omega)^2 \;=\; \kappa^2 - 2\pi G\Sigma_0(r)|k_r| + c_s^2 k_r^2,$$
+gives the marginal-stability double root $k_r^* = \kappa/c_s$ and the
+pitch-angle relation
+$$\tan\alpha_m \;=\; \frac{m\,c_s}{\sqrt{2}\,v_f} \;=\; \frac{m\,Q}{4},$$
+with $Q = 2\sqrt{2}\,c_s/v_f$ the disc-soliton Toomre parameter. A
+single-galaxy anchor (M31, $Q_{\rm M31} = 0.65$) calibrates the
+$M_{\rm BH}$-dependence and reproduces the Seigar–Davis pitch-$M_{\rm BH}$
+anti-correlation: predicted $\alpha_2$ spans $3°$–$30°$ for grand-design
+spirals and $> 45°$ in the bar regime.
+
+`src/paper_vi_b/pitch_angle_table.py` prints the six-galaxy anchor table
+including M31 ($\alpha_2 = 18°$) and the Milky Way ($\alpha_2 = 58°$,
+bar regime).
 
 ### #49 — Strong-field numerical verification of the SSV-identified metric
 
@@ -187,33 +209,25 @@ level.
 
 `src/paper_vii_b/strong_field_test.py` reproduces the table.
 
-## Orphan-branch holes (paper text or scripts still missing from main)
+### #50 — Kibble–Zurek GPE simulation
 
-The following two closures appear in the issue tracker as *closed* but
-their content was lost to the same orphan-branch incident as the tau
-identification (which PR #58 restored). A follow-up restore PR
-analogous to #58 would close these holes:
+`src/paper_viii/kibble_zurek_gpe.py` runs a stochastic time-dependent
+Ginzburg–Landau (TDGL) evolution on a 2D periodic grid, the GPE
+universality-class equivalent for the symmetry-breaking transition at
+the void → saturation crossover. Configuration: $N = 160$ grid,
+$L = 160\,\xi$ box, $\Delta t = 0.1$; quench $\mu(t)$ ramped linearly
+from $-1$ to $+1$ over $\tau_Q$; complex Gaussian noise amplitude 0.05;
+defects counted via phase-winding plaquettes in the saturated bulk
+($\rho > 0.05$). Scan $\tau_Q \in \{20, 40, 80, 160, 320\}$ with 6
+seeds each (`src/paper_viii/kibble_zurek_results.json`).
 
-- **#44 — SSV-VI-b §4.1 pitch-angle dispersion.** Paper text closure
-  (Mestel-soliton Lin–Shu dispersion $\to \tan \alpha_m = m Q / 4$
-  with $Q$ the disc-soliton Toomre parameter, M31-anchored prediction
-  of Seigar–Davis pitch-$M_{\rm BH}$ anti-correlation) and reproduction
-  script `src/paper_vi_b/pitch_angle_table.py` are both on branch
-  `claude/jolly-tu-940955` only (commit `a6ccff0`); current main still
-  has the *Deferred: SSV dispersion relation for pitch angle* gapbox.
-
-- **#50 — SSV-VIII §C1 Kibble–Zurek GPE simulation.** Paper text
-  closure (Prediction C1 promoted from candidate to
-  structural-with-numerical-evidence based on a converged $\tau_Q$
-  scan, fitted 2D KZ exponent $0.23 \pm 0.10$ consistent with mean-field
-  $0.5$ within statistics and dynamic-range limits) and reproduction
-  script `src/paper_viii/kibble_zurek_gpe.py` plus data file
-  `src/paper_viii/kibble_zurek_results.json` are likewise orphaned on
-  the same commit.
-
-Additionally, the reproduction scripts for #42 (`derive_C.py`) and #43
-(`epsilon_m_table.py`) are orphaned on the same branch even though the
-*paper text* closure for those issues did reach main via PR #52.
+Log–log fit yields $\alpha_{2D}^{\rm fit} = 0.23 \pm 0.10$, consistent
+with the mean-field KZ prediction $\alpha_{2D}^{\rm MF} = d\nu/(1 + \nu z) = 1/2$
+for $(d, \nu, z) = (2, 1/2, 2)$ within the limited dynamic range
+(factor 16 in $\tau_Q$) and finite-defect-count statistics. This lifts
+Prediction C1 from *candidate* to *structural with numerical evidence*.
+The cosmological identification of $\tau_Q / \tau_0$ — required to
+extrapolate to the bare $\eta$ value — remains the gap to *derived*.
 
 ## Reproducing locally
 
@@ -224,10 +238,23 @@ python3 src/paper_ii/tau_identification.py
 # g-2 form factor / Schwinger normalisation (#33)
 python3 src/paper_ii/g2_form_factor_loop.py
 
+# Galactic coupling constant C (#42)
+python3 src/paper_vi_a/derive_C.py
+
+# Mode amplitudes epsilon_m table (#43)
+python3 src/paper_vi_b/epsilon_m_table.py
+
+# Pitch-angle table (#44)
+python3 src/paper_vi_b/pitch_angle_table.py
+
 # Strong-field numerical verification (#49)
 python3 src/paper_vii_b/strong_field_test.py
+
+# Kibble-Zurek GPE simulation (#50) -- ~5 min on a single laptop core
+python3 src/paper_viii/kibble_zurek_gpe.py
 ```
 
-All three scripts require only `numpy` (and `scipy` for the strong-field
-geodesic integration) from the standard scientific Python stack and run
-in seconds.
+All scripts require only `numpy` (and `scipy` for the strong-field
+geodesic integration) from the standard scientific Python stack. All
+runs complete in seconds except the Kibble–Zurek GPE simulation, which
+takes a few minutes on a single laptop core.
