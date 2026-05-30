@@ -545,6 +545,31 @@ is deferred to Paper~II.
 The proton is a spherical breather mode---a stable, oscillating cavity in the
 superfluid vacuum, prevented from collapse by an internal trefoil vortex skeleton.
 
+\begin{gapbox}[Status (2026-05): form factor $F$ is a cutoff-dependent calibration]
+The proton mass below is written as $m_p c^2 = N_Y\,F\,\mu_0$.  $N_Y\approx
+3.007$ is a topological factor with candidate status from independent grid
+sweeps (Appendix~\ref{app:minimisation}).  $F$, however, is not yet a
+derivation: it is extracted from the relaxed-breather energy integral against
+a straight-vortex calibration at cutoff $R$, and varies as
+$\mathrm{d}\ln F/\mathrm{d}\ln R\approx -0.94$ near the canonical
+$R\approx 1.18\,\xi$ (\S\ref{app:F-extraction}).  The two fine grids agree at
+the $\sim 6\%$ level at this cutoff; the same observable falls by $19\%$ at
+$R=1.5\,\xi$.  The reduced-ansatz $Q_p$ family of scripts that attempted to
+calibrate this cutoff away (the \texttt{q\_p\_two\_factor\_*} probes and the
+\texttt{eta} calibration trio) was quarantined to
+\texttt{src/\_fitted\_quarantine/} after the Path~B null exposed how readily
+calibrated inputs flatter derived results; their own docstrings already
+labelled them ``provisional consistency-based calibration rather than a
+derived physical constant.''  The honest framework prediction at the canonical
+cutoff is therefore $m_p\approx 930$--$954\,\text{MeV}$ ($\sim 1.5\%$ of
+CODATA) with a documented cutoff systematic, \emph{not} the single-number
+$0.3\%$ figure that appeared in earlier drafts.  Promoting this to a
+cutoff-independent first-principles prediction requires either (i) deriving
+$R$ geometrically from the relaxed breather or (ii) demonstrating
+$N_Y\!\cdot\!F$ is itself cutoff-invariant.  Tracked under issue~\#66
+(linked from \#30).
+\end{gapbox}
+
 The simplest three-dimensional structure that can stabilize a spherical void against
 the immense background pressure $P_0$ is a Y-junction~\cite{faddeev1997} of three quantized vortex
 filaments meeting at a single central node (topologically a trefoil knot projected
@@ -879,6 +904,24 @@ in the LogSE + chiral-shear theory and is deferred to Paper~II.
 The muon is tentatively identified with the first oscillatory mode of the
 electron toroidal vortex.
 
+\begin{gapbox}[Status (2026-05): muon eigenmode not basis-converged]
+The toroidal-breather eigenvalue test (``Path~B'') applied to the operator
+constructed in this section was pre-registered and run; full record in
+\texttt{papers/SSV-I/path-b-eigenvalue-result.md}.  Outcome: at the claimed
+parameter-free coupling $\lambda_\perp=\pi/4$, the muon hits
+$\omega/\omega_c=0.207$ in the single published basis (\texttt{helicity}
+Kelvin seed) and within $3.7\%$ at face value (within $0.09\%$ in the
+relaxed-background variant of Appendix~\ref{app:helicity-bridge}), but the
+lowest physical mode drifts $\pm 13\%$ across four basis choices and leaves
+the muon window empty in two of them.  The charged-pion rung $2\mu_0$ is
+empty in every basis tested.  The spectrum is not evenly spaced.  The muon
+identification therefore remains a candidate carried by the empirical
+agreement on the $m_e/\alpha$ scale, not by a basis-converged eigenfrequency.
+The mechanical text below is retained as the structural setup; readers should
+treat its claims of ``convergence'', ``selection rule'', and ``residual gap''
+in the light of this null.  Tracking: issue~\#66.
+\end{gapbox}
+
 \textbf{BdG setup.}
 Write small perturbations around the static torus solution $\Psi_0$:
 \begin{equation}
@@ -923,77 +966,80 @@ projection canonicalises the Kelvin sector, the Hermitian current-curl second
 variation of $\mathcal{L}_\perp$ supplies the bridge, and the full
 construction is documented in Appendix~\ref{app:helicity-bridge}.
 
-The calculation confirms the identification: the muon corresponds to the lowest
-hybrid between the $m_\varphi=0$ core-breathing sector and the $m_\varphi=\pm1$
-Kelvin sector.  Driven-response scans on the projected BdG matrix support this
-identification by a selection rule: core-breathing boundary drives
-preferentially excite the $(3/2)\mu_0$ tongue (muon), while Kelvin-helicity
-drives preferentially excite the $2\mu_0$ tongue (charged pion).  Both drives
-produce secondary responses at the other tongue through the chiral bridge, so
-the rule is a strong bias rather than a strict selection; this is the expected
-signature of a coupled system in which $\mathcal{L}_\perp$ mixes sectors
-non-trivially.
+In the published basis (2 core modes $\Phi_R,\Phi_\chi$ plus 4 Kelvin
+helicity seeds), the lowest stable eigenfrequency at $\lambda_\perp=\pi/4$
+falls at $\omega/\omega_c=0.2148$, within $3.7\%$ of the muon target $0.207$
+($0.09\%$ in the relaxed-background variant of
+Appendix~\ref{app:helicity-bridge}).  Driven-response scans on this basis
+appeared to support a selection-rule reading (core-breathing drives at
+$(3/2)\mu_0$, Kelvin drives at $2\mu_0$).  However, the pre-registered
+basis-enrichment test (gapbox above; full record in
+\texttt{papers/SSV-I/path-b-eigenvalue-result.md}) shows that the muon
+agreement is not basis-robust and the $2\mu_0$ ``pion tongue'' is absent in
+every basis tested.  The selection-rule reading is therefore a property of
+the truncation, not of the operator.
 
-\textbf{Current accuracy and bounded uncertainty.}
-In the present meridional projection the muon eigenfrequency converges to a
-range
+\textbf{Current accuracy and basis non-convergence.}
+In the published meridional projection the lowest stable eigenfrequency in
+the muon window varies over
 \begin{equation}
-  \omega_\mu/\omega_c \in [0.19,\,0.23]
+  \omega/\omega_c \in [0.175,\,0.228] \quad (\pm 13\%)
   \label{eq:muon-range}
 \end{equation}
-depending on the meridional domain size $L_{\rm box}$.  This range brackets
-the observed value $0.207$ and narrows as $L_{\rm box}$ grows, but does not
-yet resolve to a single number; a bracket consistent with the target is a
-weaker claim than a sharp prediction, and we state it as such.  Higher rungs
-of the ladder reach sub-percent accuracy in the same projection, consistent
-with the expectation that core-localised modes are well represented by a
-meridional slice while ring-scale modes (the muon) require either thin-ring
-analytic asymptotics or a full 3D grid that spans the entire circumference
-$2\pi R_e=2\pi\xi/\alpha$.  Both refinements are deferred to Paper~II; the
-thin-ring matrix-element calculation is the falsification test for the muon
-identification.
+across four basis choices spanning 5--9 distinct stable modes; the muon
+window $[0.197,0.217]$ is empty in two of the four bases (\texttt{combined}
+and \texttt{core\_enriched}), populated in the other two (\texttt{helicity}
+with 2-core and 4-core).  This is not the convergence of a single eigenmode
+under refinement; it is basis dependence.  The earlier $[0.19,0.23]$
+bracket, reported here in prior drafts as a meridional-domain-size
+convergence, is recovered only because the published basis (\texttt{helicity},
+2-core) happens to land near $0.207$; basis enrichment in the standard
+Galerkin sense does not sharpen the result.  Higher rungs of the ladder
+reach sub-percent accuracy against half-integer multiples of $\mu_0$ in the
+same projection, but that classification ruler is dense enough above
+$\omega\approx 1.4$ that the apparent hits at rungs $8.5$ and $32.5$ are
+guaranteed by ruler density rather than spectrum structure (see
+\texttt{papers/SSV-I/path-b-eigenvalue-result.md}).  The thin-ring
+matrix-element calculation deferred to Paper~II remains the natural
+falsification test for the muon identification.
 
-\textbf{Status of the residual gap.}  At the matched-spacing reference point
-$(n=59,\,L_{\rm box}=6\,\xi,\,\phi\text{-grid}=128)$ in the 10-mode
-combined-Kelvin / weak-form basis, the converged
-eigenfrequency is
-$\omega_\mu/\omega_c\approx0.2073$, a $0.15\%$ overshoot of the CODATA
-target $0.20700$ (numerical record:
-\texttt{papers/SSV-I/data/} matched-spacing trio).  The structural cubic-vertex
-one-loop self-energy is computed in the repository
-(\texttt{src/paper\_i/muon\_cubic\_full\_self\_energy.py}) and gives a
-relative shift of $-(3\text{--}9)\times10^{-9}$ at three grid resolutions
-($n=25,31,49$) -- seven orders of magnitude too small and the wrong sign to
-close the residual gap.  The cubic vertex is therefore falsified as the
-source of the gap; the residual is consistent with a Galerkin truncation of
-the reduced eigenvalue problem and scales as $1/\sqrt{N_{\rm modes}}$ across
-the electron, pion, muon, and proton calculations
-(see \texttt{papers/SSV-I/topology-scaling-of-residual-memo.md} and
-\texttt{papers/SSV-I/muon-cubic-vertex-result-note.md}).  A first
-enrichment-direction attempt at $N_{\rm modes}\!=\!15$ produced an
-inconsistent spectrum due to a cross-$m$ current-curl issue in the basis
-construction documented in
-\texttt{papers/SSV-I/enrichment-attempt-findings-2026-05-27.md};
-the corrected enrichment programme is open work tracked under
-issue~\#30.
+\textbf{Status of the residual gap.}  The matched-spacing reference figure
+$\omega_\mu/\omega_c\approx0.2073$ ($0.15\%$ overshoot of CODATA) holds in
+the published basis only.  The previously-claimed $1/\sqrt{N_{\rm modes}}$
+topology-scaled Galerkin residual was falsified by the Path~B basis-enrichment
+test: the lowest physical mode does not converge, it drifts $\pm 13\%$
+across bases and exits the muon window entirely in two of them (gapbox
+above).  The structural cubic-vertex one-loop self-energy is computed in
+the quarantined script
+\texttt{src/\_fitted\_quarantine/paper\_i/muon\_cubic\_full\_self\_energy.py}
+and gives a relative shift of $-(3\text{--}9)\times10^{-9}$ at three grid
+resolutions ($n=25,31,49$) -- seven orders of magnitude too small and the
+wrong sign to close any gap, but the prior framing of ``residual gap'' was
+itself ill-defined because the underlying eigenfrequency is not
+basis-converged.  Closing the muon identification therefore requires either
+(i) a genuinely basis-converged 3D toroidal solve, or (ii) the thin-ring
+analytic asymptotic deferred to Paper~II.  Tracked under issue~\#66.
 
-Within these bounds, the assignment
+The assignment
 \begin{equation}
   m_{\mu^\pm} \approx \frac{3}{2}\,\mu_0 = \frac{3m_e}{2\alpha}
               \approx 105.038\,\text{MeV}
               \quad(0.59\%\text{ from CODATA})
   \label{eq:muon-mass}
 \end{equation}
-is a dynamically motivated rung (status: \textit{candidate};
-\S\ref{sec:claim-status}) with an identified mechanism (core-breathing
-$\oplus$ Kelvin coupling through $\mathcal{L}_\perp$), a verified selection
-rule (driven-response scans), a numerical eigenfrequency bracket that
-contains the target value, and an identified residual gap that has been
-falsified against the cubic-vertex hypothesis and reframed as a
-topology-scaled basis-truncation error.  The thin-ring analytic closure
-deferred to Paper~II would turn this candidate into a falsifiable single
-number; the basis-enrichment programme (issue~\#30) would independently
-demonstrate the $1/\sqrt{N_{\rm modes}}$ scaling claimed here.
+is one of the two sub-percent rungs of the ladder (the other is
+$m_{\pi^\pm}=2\mu_0$) and remains a candidate identification
+(\S\ref{sec:claim-status}) carried, on present evidence, by the empirical
+agreement on the $m_e/\alpha$ scale rather than by a basis-converged
+eigenmode.  The status is therefore weaker than the previous draft stated:
+the ``identified mechanism'' (core-breathing $\oplus$ Kelvin via
+$\mathcal{L}_\perp$) is the \emph{target} of the open derivation, not its
+result; the ``verified selection rule'' from driven-response scans does not
+survive basis enrichment; and the ``numerical eigenfrequency bracket'' is
+basis variation, not Galerkin convergence.  The thin-ring analytic closure
+deferred to Paper~II and the basis-enrichment programme (issue~\#66) are
+now the two routes that would convert this candidate into either a sharp
+prediction or a clean falsification.
 
 \subsection{Higher rungs and the proton}
 
