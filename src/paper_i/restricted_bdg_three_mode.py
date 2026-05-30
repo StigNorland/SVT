@@ -6,7 +6,9 @@ import math
 from dataclasses import dataclass
 from typing import Callable
 
-from muon_mode_prototype import SSVScales
+# Note (2026-05-30 cleanup): import of SSVScales removed; it was used only for
+# the fitted muon target `muon_ratio_draft = 0.207` (now quarantined in
+# src/_fitted_quarantine/). See papers/SSV-I/path-b-eigenvalue-result.md.
 from restricted_bdg_matrix import build_background, i_mode
 from toroidal_projection_integrals import ProjectionConfig, integrate_pair, projection_window_weight
 
@@ -264,7 +266,6 @@ def main() -> None:
         inner_outer_stiffness=args.inner_outer_stiffness,
     )
     result = compute_three_mode_bdg(cfg)
-    scales = SSVScales()
     print("Restricted three-mode BdG diagnostic: R, chi, P")
     print(f"grid n                   = {cfg.n}")
     print(f"half_width               = {cfg.half_width}")
@@ -282,11 +283,6 @@ def main() -> None:
     print("BdG omega")
     for i, value in enumerate(result.omega):
         print(f"omega[{i}]               = {value:.9e}")
-    print(f"target omega_mu/omega_c  = {scales.muon_ratio_draft:.9e}")
-    finite = [value for value in result.omega if math.isfinite(value)]
-    if finite:
-        closest = min(finite, key=lambda value: abs(value - scales.muon_ratio_draft))
-        print(f"closest/target           = {closest / scales.muon_ratio_draft:.9e}")
 
 
 if __name__ == "__main__":
