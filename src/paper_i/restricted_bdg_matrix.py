@@ -35,7 +35,11 @@ import argparse
 import math
 from typing import Callable
 
-from muon_mode_prototype import SSVScales
+# Note (2026-05-30 cleanup): import of SSVScales removed. The only thing this
+# script used from it was the fitted muon target `muon_ratio_draft = 0.207`,
+# which the main() printed an "omega/target" ratio against. That target is now
+# quarantined in src/_fitted_quarantine/ (see papers/path-b-eigenvalue-result.md
+# for the basis-non-robustness null that drove the quarantine).
 from toroidal_background import CurvedToroidalBackground, ToroidalBackground
 from toroidal_projection_integrals import ProjectionConfig, integrate_pair
 from vortex_profile import VortexProfile
@@ -294,7 +298,6 @@ def main() -> None:
         inner_outer_stiffness=args.inner_outer_stiffness,
     )
     result = compute_restricted_bdg(cfg)
-    scales = SSVScales()
     print("Restricted two-mode BdG diagnostic")
     print(f"grid n                   = {cfg.n}")
     print(f"half_width               = {cfg.half_width}")
@@ -328,14 +331,6 @@ def main() -> None:
     print(f"omega_plus_sq            = {result.omega_plus_sq:.9e}")
     print(f"omega_minus              = {result.omega_minus:.9e}")
     print(f"omega_plus               = {result.omega_plus:.9e}")
-    print("")
-    print("Muon target comparison")
-    print(f"target omega_mu/omega_c  = {scales.muon_ratio_draft:.9e}")
-    if math.isfinite(result.omega_minus):
-        print(f"omega_minus / target     = {result.omega_minus / scales.muon_ratio_draft:.9e}")
-    else:
-        print("omega_minus / target     = non-real lower branch")
-    print(f"omega_plus / target      = {result.omega_plus / scales.muon_ratio_draft:.9e}")
     print("")
     print("Caveat")
     print("This is a restricted BdG diagnostic from projected quadrature Hessians.")
