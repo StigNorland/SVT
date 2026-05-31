@@ -72,10 +72,22 @@ From the Paper I identifications $m_{\pi^\pm} = 2\mu_0$ and
 $m_p = N_Y F \mu_0$, the empirical $\mu_0 = m_e/\alpha$ scale cancels
 and
 $$\frac{m_p}{m_{\pi^\pm}} = \frac{N_Y F}{2} \approx 6.72 \quad (\text{observed } 6.722, 0.1\%)$$
-follows without fitting. The consistency identity
-$2(m_p/m_{\pi^\pm}) = \alpha(m_p/m_e) = N_Y F$ collapses three
-experimentally distinct ratios to a single framework quantity at the
-$0.3\%$ level.
+follows without further fitting beyond the $F$ input itself. The
+consistency identity $2(m_p/m_{\pi^\pm}) = \alpha(m_p/m_e) = N_Y F$
+collapses three experimentally distinct ratios to a single framework
+quantity at the $0.3\%$ level.
+
+*Note (2026-05-30 cleanup, issue #66):* the SSV-I §Proton gapbox now
+records that $F \approx 4.47$ is a cutoff-dependent calibration
+($\mathrm{d}\ln F/\mathrm{d}\ln R \approx -0.94$, $19\%$ variation
+between $R=1.18\,\xi$ and $R=1.5\,\xi$); the `q_p_two_factor_*`
+scripts that attempted to calibrate the cutoff away are now in
+`src/_fitted_quarantine/`. The structural form $N_Y F / 2$ is
+unchanged, but the numerical $6.72$ and the $13.44$ in the consistency
+identity inherit this calibration and are not yet cutoff-independent
+first-principles values. The earlier wording "without fitting" was
+correct in the sense that no further free parameter is fit beyond $F$
+itself, but $F$ is itself a calibration, not a derivation.
 
 ### #35 — Neutron EDM from reconnection memory
 
@@ -129,6 +141,18 @@ closes the muon eigenfrequency (Paper I open problem 2).
 
 `src/paper_ii/tau_identification.py` reproduces the three predictions
 and their discrepancies.
+
+*Note (2026-05-30 cleanup, issue #66):* `tau_identification.py` uses
+PDG masses, so the arithmetic $2 m_p - m_\mu = 1770.89$ MeV is correct.
+The *structural* identification however depends on (i) the muon as the
+$3/2\,\mu_0$ core-breathing $\oplus$ Kelvin hybrid, which the Path B
+eigenvalue test (Paper I §The Muon gapbox; `papers/SSV-I/path-b-eigenvalue-result.md`)
+showed is not basis-converged, and (ii) the proton mass formula
+$m_p = N_Y F \mu_0$, where $F$ is a cutoff-dependent calibration
+(Paper I §The Proton gapbox; see #34 note above). The Hopf-link
+binding-energy argument therefore stands or falls with the muon
+eigenmode and proton form-factor derivations; it is not an independent
+identification.
 
 ### #40 — Planck-scale evaporation endpoint
 
@@ -228,6 +252,13 @@ for $(d, \nu, z) = (2, 1/2, 2)$ within the limited dynamic range
 Prediction C1 from *candidate* to *structural with numerical evidence*.
 The cosmological identification of $\tau_Q / \tau_0$ — required to
 extrapolate to the bare $\eta$ value — remains the gap to *derived*.
+
+*Note (2026-05-30 cleanup, issue #66):* the fitted exponent
+$0.23 \pm 0.10$ is the *output* of a least-squares log–log fit to the
+defect-count scan and is correctly labelled "fit" above. It is not in
+scope for the issue #66 cleanup (which targets *inputs* that were
+back-solved to known experimental targets); this entry is annotated
+only to confirm reviewers can see the distinction.
 
 ## Reproducing locally
 
