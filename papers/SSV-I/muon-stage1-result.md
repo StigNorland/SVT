@@ -55,47 +55,90 @@ modes "disappear": the Kelvin self-induction pair at 0.005, and the mode at
 One new mode appears at 0.153. The two persistent low modes (0.214 and the
 new 0.153) bracket the muon target 0.207 from above and below.
 
-## Provisional sector identification (Stage 2 to verify)
+## Eigenvector sector decomposition (the sanity check)
 
-The cross-m coupling that the fix removed was 40-65% of the legitimate
-diagonal between m_phi=0 core modes and m_phi=+/-1 Kelvin helicity modes
-(measured in
-`papers/SSV-I/enrichment-attempt-findings-2026-05-27.md`, now bannered as
-superseded but still useful for this diagnostic). Without that coupling, the
-m=0 and m=+/-1 sectors are **nearly decoupled**: only the (+1, -1) M-block
-Nambu coupling remains nonzero between distinct-m modes.
+A direct decomposition of each eigenvector onto the three m_phi sub-sectors
+(reproducer: `src/paper_i/muon_stage1_eigvec_check.py`) overturns the
+provisional identifications I conjectured from the spectrum alone:
 
-Provisional sector identifications (to verify in Stage 2 by inspecting
-eigenvectors):
+| omega/omega_c | dominant sector | m=0 amplitude | structure |
+|---------------|-----------------|---------------|-----------|
+| **0.1528**    | m=+1 Kelvin (93%) | **zero**    | (+1, -1) Nambu doublet |
+| **0.2139**    | m=-1 Kelvin (81%) | **zero**    | (+1, -1) Nambu doublet |
+| 1.0867        | m=0 core (100%)   | full        | pure core breathing-chiral |
+| 4.3880        | m=0 core (100%)   | full        | pure core breathing-chiral (excited) |
 
-- **omega/omega_c = 0.153** -- likely the m_phi=+/-1 Kelvin sector eigenmode.
-  Consistent with the prior author's selection-rule-enforced Kelvin values
-  0.147 at hw=4, 0.131 at hw=6 (decreasing with domain size, suggesting an
-  outer-torus Kelvin contribution not yet captured).
-- **omega/omega_c = 0.214** -- likely the m_phi=0 core breathing-chiral hybrid
-  eigenmode at lambda_perp = pi/4. Its value barely shifted from the broken
-  operator's 0.2148.
+Two findings are forced by this table:
 
-If those identifications hold, an interesting structural consequence follows:
-the broken operator's $0.215$ was NOT a hybrid eigenmode of $\hat L \oplus
-\hat L_\perp$ as previous drafts claimed. It was already (to within $\sim
-0.5\%$) the pure m=0 core mode at lambda_perp = pi/4; the cross-m coupling
-was only dressing it slightly. The "core-breathing oplus Kelvin hybrid"
-story in §The Muon was an artifact of the cross-m mixing.
+1. **The m=0 core sector at lambda_perp = pi/4 has NO low eigenmode near
+   the muon target.** Its lowest mode is 1.087, five times higher than 0.207.
+   The previously-conjectured "0.214 is the pure m=0 core mode" was wrong:
+   0.214 has zero m=0 amplitude.
 
-The Kelvin sector eigenfrequency 0.153 has no obvious particle identification
-on the alpha-harmonic ladder ruler 0.5 mu_0 = 0.069: it's rung 2.21, neither
-a half-integer nor an integer.
+2. **The 0.214 eigenmode is purely in the m_phi=+/-1 Kelvin sector** with
+   (+1, -1) Nambu-doublet structure (it mixes m=+1 and m=-1 via the M-block
+   that the corrected selection rule allows). There is also a sister mode at
+   0.153, same sector, different Nambu structure. No core breathing-chiral
+   amplitude in either.
+
+## Direct structural consequence
+
+The previously-published §The Muon mechanism is wrong, not merely demoted:
+
+> "The calculation confirms the identification: the muon corresponds to the
+> lowest hybrid between the m_phi=0 core-breathing sector and the
+> m_phi=+/-1 Kelvin sector."  (SSV-I main.tex L908-915 on main)
+
+The selection-rule-correct operator shows the muon-value eigenmode is
+**pure-Kelvin with zero core amplitude**. There is no hybrid; the broken
+operator's "hybrid" eigenmode was created by the spurious cross-m terms
+the prior text claimed were physical bridging. The broken operator's 0.215
+was always a pure Kelvin Nambu mode; the cross-m terms only dressed it
+~0.5% above its true value 0.214.
+
+The "core-breathing oplus Kelvin coupling through L_perp" mechanism that
+SSV-I §The Muon presents as the muon's physical origin is therefore not
+supported by the operator itself. The m=0 core sector at lambda_perp = pi/4
+does not produce a muon-scale mode; only the Kelvin sector does.
+
+## Two readings of the 0.214 = muon coincidence
+
+After this decomposition, the 0.214 = muon identification has two readings,
+neither flattering:
+
+**Reading A: the muon IS a pure-Kelvin Nambu mode.** The numerical agreement
+is real, but the mechanism is not "ring-breathing hybridised with the chiral
+sector"; it is a pure m=+/-1 Kelvin Nambu doublet at lambda_perp = pi/4.
+The §Muon text needs the mechanism rewritten -- the references to "major
+radius breathing", "ring-breathing mode", and "coupling to the transverse
+chiral channel must bridge this gap" are wrong: the bridge does not happen
+because the operator doesn't couple the sectors that way.
+
+**Reading B: 0.214 = muon is a numerical coincidence.** The Kelvin sector
+has at least two eigenmodes in the window [0.15, 0.22] (0.153 and 0.214).
+Hitting any target in that window to a few percent carries no information.
+The sister mode 0.153 has no particle identification on the alpha-harmonic
+ladder; if 0.214 = muon is meaningful then 0.153 should also correspond to
+something, and it does not.
+
+Stage 2 (basis-convergence study) will help discriminate but cannot
+definitively pick one reading; that may need an independent physical
+argument identifying the Kelvin sector with the lepton hierarchy.
 
 ## What Stage 1 DOES say
 
 1. The selection-rule violation is real, large (40-65% of diagonal), and the
-   fix removes it cleanly.
+   fix removes it cleanly. All 8 pre-registered receipts pass.
 2. The fixed operator at the Path B reference point has a basis-truncation
-   spectrum dominated by two low modes at $0.153$ and $0.214$, separated by
-   ~30%. Neither was the right object to call ``the muon'' in the broken
-   operator -- if either is, it's the $0.214$ one, by accident of value.
+   spectrum dominated by **two Kelvin Nambu-doublet modes** at $0.153$ and
+   $0.214$, plus two m=0 core modes at $1.087$ and $4.388$. The previous
+   "core $\oplus$ Kelvin hybrid" identification of the muon is wrong: no
+   eigenmode has both m=0 and m=+/-1 amplitude.
 3. The pre-registered expected-window check passes: $0.153 \in [0.10, 0.18]$.
+4. The §Muon paragraph claiming the muon eigenmode hybridises core-breathing
+   with Kelvin via $\mathcal{L}_\perp$ is mechanistically wrong, not merely
+   basis-non-converged. The mechanism text in SSV-I §The Muon (L908-935 on
+   main) needs revision, not just demotion.
 
 ## What Stage 1 does NOT say
 
