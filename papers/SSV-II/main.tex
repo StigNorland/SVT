@@ -1275,6 +1275,24 @@ single number.
 \end{itemize}
 \end{resultbox}
 
+\begin{gapbox}[Status (2026-05): $6.72$ and the $N_Y F$ identity inherit the F calibration]
+The structural form $m_p/m_{\pi^\pm} = N_Y F/2$
+(Eq.~\eqref{eq:mp-over-mpi}) is unchanged.  Its numerical value $6.72$
+and the consistency identity $2(m_p/m_{\pi^\pm}) = \alpha(m_p/m_e) =
+N_Y F \approx 13.44$ both inherit the Paper~I §Proton gapbox: $F$ is
+a cutoff-dependent calibration ($\mathrm{d}\ln F/\mathrm{d}\ln R
+\approx -0.94$, $19\%$ variation between $R=1.18\,\xi$ and $R=1.5\,\xi$),
+not yet a cutoff-independent first-principles derivation.  The
+\texttt{q\_p\_two\_factor\_*} scripts that attempted to calibrate the
+cutoff away are now in \texttt{src/\_fitted\_quarantine/} after the
+Path~B null exposed how readily fitted inputs flatter derived
+results.  The $0.1\%$--$0.3\%$ agreements quoted above are therefore
+consistency at the published cutoff, not a finished derivation;
+promotion paths are the same as for the proton mass (derive $R$
+geometrically, or show $N_Y\!\cdot\!F$ is cutoff-invariant).
+Tracking: issues~\#30 (closure) and~\#66 (cleanup record).
+\end{gapbox}
+
 \begin{gapbox}[Residual gap: the broader composite spectrum]
 The structural ratio above covers the lightest meson against the
 lightest baryon, plus the $m_p/m_e$ consistency identity.  Mass ratios
@@ -2014,6 +2032,22 @@ lepton itself.
 \subsection{The Tau: Hopf-Linked Trefoil Pair Bound by a Muon Quantum}
 \label{sec:tau}
 
+\begin{gapbox}[Status (2026-05): identification inherits both the muon ladder and the proton F calibration]
+The mass relation $m_\tau = 2 m_p - m_\mu$ derived below uses the
+\emph{measured} muon mass (PDG) as a numerical input, so the predicted
+$1770.89$~MeV is arithmetically correct.  The \emph{structural}
+identification however imports two demoted claims: (i) the muon as the
+$3/2\,\mu_0$ ladder rung carried by a core-breathing $\oplus$ Kelvin
+hybrid (Paper~I §The Muon gapbox: this hybrid mode is not basis-converged
+under the Path~B null; the muon is a candidate carried by empirical
+agreement on $m_e/\alpha$, not by a derived eigenmode), and
+(ii) the proton mass $m_p = N_Y F \mu_0$ (Paper~I §The Proton gapbox:
+$F$ is a cutoff-dependent calibration).  The Hopf-link binding-energy
+argument therefore stands or falls with the muon eigenmode and proton
+form-factor derivations; it is not an independent identification.
+Tracking: issue~\#66.
+\end{gapbox}
+
 The tau lands on rung $25\tfrac12$ of the $\alpha$-harmonic ladder
 ($m_\tau = 25.375\,\mu_0$, $0.49\%$).  We identify it structurally with the
 \emph{lowest Hopf-linked pair of trefoil-skeleton breathers bound by a shared
@@ -2347,7 +2381,13 @@ The remaining open problem is computing the sub-grain suppression
 factor $(a_p/\xi)^n$ from the 3D proton breather profile, which
 would yield $\alpha_G$ without empirical input.  The $0.6\%$
 structural agreement is evidence of framework consistency, not a
-completed derivation.
+completed derivation.  Two further dependencies that the $0.6\%$
+figure inherits, not visible from this expression alone:
+(i) the proton mass $m_p = N_p\,m_e/\alpha$ with $N_p = N_Y F \approx
+13.44$ inherits the SSV-I §Proton F-cutoff calibration (issue~\#66);
+(ii) any tightening of $\alpha_G$ via the sub-grain suppression
+will need the same basis-converged 3D toroidal solve that the
+Path~B null (\S Muon, Paper~I) showed has not yet been achieved.
 \end{gapbox}
 
 \paragraph{Gravitational and electromagnetic radiation share the Goldstone channel.}
