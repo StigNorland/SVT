@@ -451,37 +451,49 @@ def hermitian_current_curl_bdg_blocks(
     cfg: ProjectionConfig,
     current_curl_model: str = "linear",
 ) -> tuple[complex, complex]:
-    # NOTE (2026-05-27): The azimuthal selection rule states that cross-m
-    # current-curl elements should be exactly zero for a phi-symmetric
-    # background (int exp(i*(m_b-m_a)*phi) dphi = 2*pi*delta_{m_a,m_b}).
-    # However, current_curl_component_overlap does NOT enforce this rule --
-    # it computes only the meridional part and multiplies by 2*pi, yielding
-    # O(0.12) spurious cross-m elements (about 60% of the Kelvin diagonal).
-    # Enforcing the selection rule (adding `if bra.m_phi != ket.m_phi: return
-    # 0,0`) gives domain-size-dependent Kelvin eigenvalues that do NOT
-    # converge to the physical target, because the cross-m coupling was
-    # inadvertently compensating for a domain-size drift in the Kelvin block.
-    # The current implementation therefore RELIES on these cross-m terms for
-    # the calibrated result (omega~0.207 at n=59/hw=6 with delta_relax=0.038).
-    # Fixing this requires a physically complete model revision, not just a
-    # flag.  Until that revision, the cross-m terms are left in place and the
-    # existing delta_relax tuning remains valid.  Any basis-enrichment study
-    # that adds modes in a different m sector will inherit this issue and
-    # cannot be interpreted as a clean Galerkin convergence test.
+    # Azimuthal selection rule.  For a phi-symmetric background psi_0(r,z),
+    # the only nonzero current-curl matrix elements are those whose total
+    # phi-phase integrates over [0, 2pi] to nonzero.  For the L-block (normal,
+    # u/u pair) the integrand carries phase exp(i*(m_b - m_a)*phi), giving
+    # delta_{m_a, m_b}.  For the M-block (anomalous, u/v pair) the integrand
+    # carries phase exp(-i*(m_a + m_b)*phi), giving delta_{m_a + m_b, 0}.
+    # current_curl_component_overlap below evaluates only the meridional
+    # integral and multiplies by 2*pi -- it does NOT enforce these rules.
+    # The two selection rules are therefore enforced here, separately for the
+    # L and M blocks.  This is the correct generalisation of the prior
+    # `if bra.m_phi != ket.m_phi: return 0, 0` (which conflated the rules and
+    # would have wrongly zeroed the (+1, -1) M-block).  History note: the
+    # earlier code RELIED on the unenforced cross-m terms (40-65% of the
+    # legitimate diagonal) to land the calibrated result omega ~ 0.207 at
+    # n=59/hw=6 with delta_relax=0.038; that calibration was demoted in
+    # PR #67 / issue #66 and delta_relax is no longer wired into the live
+    # operator path.  See papers/SSV-I/muon-stage1-prereg.md and the
+    # corresponding result note.
     #
     # Treat delta psi and delta psi* as independent Nambu coordinates. The
     # curl-curl energy then gives a Hermitian normal block L from u/u and a
     # complex-symmetric anomalous block M from u/v.
-    uu_ab = current_curl_component_overlap(bg, bra, "u", ket, "u", cfg)
-    uu_ba = current_curl_component_overlap(bg, ket, "u", bra, "u", cfg).conjugate()
-    uv_ab = current_curl_component_overlap(bg, bra, "u", ket, "v", cfg)
-    uv_ba = current_curl_component_overlap(bg, ket, "u", bra, "v", cfg)
-    l_block = 0.5 * (uu_ab + uu_ba)
-    m_block = 0.5 * (uv_ab + uv_ba)
+    same_m = (bra.m_phi == ket.m_phi)
+    pair_anomalous = (bra.m_phi + ket.m_phi == 0)
+    if same_m:
+        uu_ab = current_curl_component_overlap(bg, bra, "u", ket, "u", cfg)
+        uu_ba = current_curl_component_overlap(bg, ket, "u", bra, "u", cfg).conjugate()
+        l_block = 0.5 * (uu_ab + uu_ba)
+    else:
+        l_block = 0.0j
+    if pair_anomalous:
+        uv_ab = current_curl_component_overlap(bg, bra, "u", ket, "v", cfg)
+        uv_ba = current_curl_component_overlap(bg, ket, "u", bra, "v", cfg)
+        m_block = 0.5 * (uv_ab + uv_ba)
+    else:
+        m_block = 0.0j
     if current_curl_model == "full":
         # Full second variation of E_perp = (lambda/2) int |curl j|^2 adds
         # int curl(j0) . curl(j2). The linear model above keeps only the
-        # |curl(j1)|^2 part.
+        # |curl(j1)|^2 part.  background_second_current_curl_overlap already
+        # enforces the two selection rules internally (L699-L702 of this
+        # file), so the additions below safely contribute zero in the
+        # selection-rule-forbidden cases.
         l_bg_ab = background_second_current_curl_overlap(bg, bra, ket, cfg, pair_type="normal")
         l_bg_ba = background_second_current_curl_overlap(bg, ket, bra, cfg, pair_type="normal").conjugate()
         m_bg_ab = background_second_current_curl_overlap(bg, bra, ket, cfg, pair_type="anomalous")
