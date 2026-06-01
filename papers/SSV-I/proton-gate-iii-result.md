@@ -58,24 +58,52 @@ them to REF's F is apples-to-oranges. The pre-registered FAIL-A clause
 ("catastrophic topology loss, final_vortex_links < 5") fires for both. The
 energy/F spreads (~160-180%) independently exceed the 10% FAIL threshold.
 
-## What this actually establishes (corrected reading)
+## What this actually establishes (honest reading — with confounds)
 
-The honest, verified finding — stronger than the literal "seeds disagree":
+The verdict (FAIL-A) is solid. The interpretation requires more care.
 
-**The relaxer destroys trefoil topology for every seed except the exact
-reference one.** This is not a resolution artifact: REPARAM and PERTURB both
-started from valid, well-resolved knots (348 and 156 vortex links
-respectively — REPARAM actually started with *more* links than REF's 166).
-The relaxer drove both to zero links. Only REF (the seed all existing saved
-states use) retained a knot, and it still lost 84% of its links (166 -> 26).
+**Arithmetic fact:** REPARAM (348 init → 0 final links) and PERTURB (156 init →
+0 final links) both lost all topology; REF retained 26 of 166 (84% lost). Only
+REF ended in a knot state.
+
+**Three confounds that limit what can be concluded beyond FAIL-A:**
+
+1. **REPARAM's initial link count is anomalous.** REF started with 166 links;
+   PERTURB with 156; REPARAM with 348 — more than double. A consistent trefoil
+   seed at this geometry and grid should land near 166. The excess suggests the
+   (3,2) parameterisation may produce a self-approaching curve on the coarse
+   n=24 grid, registering spurious plaquette links at seed time. If so, REPARAM
+   may not have been a "valid trefoil seed" at all — the relaxer may have been
+   untangling a tangle rather than destroying a knot. The seed-link count is not
+   a reliable topology certificate.
+
+2. **PERTURB's geometry is confounded with its core resolution.** PERTURB uses
+   r_m = 0.70 ξ at n=24 (grid spacing 0.5 ξ), giving ~1.4 grid cells across the
+   vortex core. An earlier draft of this note dismissed this as "not a resolution
+   artifact" — that was overclaiming. PERTURB differs from REF *exactly* by a
+   thinner core alongside the geometric change, so its topology loss could
+   plausibly be a grid-resolution effect as much as a basin-of-attraction result.
+   A clean resolution test would need a finer grid.
+
+3. **Only endpoints are available.** We have initial and final link counts, not
+   step-by-step trajectories. REF stopped early (763 steps, step-size floor)
+   while REPARAM and PERTURB ran the full 800. Different stopping conditions make
+   direct comparisons imprecise.
+
+**What can honestly be said:** the soft penalty at mu=400 is not robustly
+sufficient to preserve trefoil topology across different seed parameterisations
+and geometries at n=24. Whether this is "the pipeline is seed-locked" (a strong
+claim) or "these particular non-reference seeds have confounds that prevent a
+clean comparison" (weaker) is not resolvable from this data alone. A clean test
+would require: a finer grid (n≥48) to resolve r_m=0.70 cores; initial link counts
+verified to be in the same ~150-180 range; and ideally step-by-step link
+tracking.
 
 This corroborates the relaxer's own documented limitation (from its
 SCRIPT_METADATA): "Krylov steps destroy ~20% of vortex links per step;
 rejection-based guards cannot prevent this... Topology enforcement requires a
-penalty term, projected gradient, or constrained method." The present result
-shows the soft penalty (mu=400) is only marginally sufficient even for the
-reference seed and fails entirely for a re-parameterised (3,2) or perturbed
-(2,3) seed.
+penalty term, projected gradient, or constrained method." The FAIL-A verdict
+stands; the mechanism is more ambiguous than the earlier formulation suggested.
 
 REPARAM is especially telling: T(2,3) and T(3,2) are *the same knot type*
 (torus knots are symmetric under p<->q), so REPARAM is genuinely the same
