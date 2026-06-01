@@ -41,7 +41,7 @@ class ProjectionConfig:
     curvature_coeffs: tuple[float, ...] = ()
     phase_coeffs: tuple[float, ...] = ()
     inner_outer_stiffness: float = 0.0
-    projection_window: str = "hard"
+    projection_window: str = "none"
     window_radius: float = 0.0
     window_taper: float = 0.0
 
@@ -60,12 +60,15 @@ def projection_window_weight(
     z: float,
     cfg: ProjectionConfig,
 ) -> float:
-    if cfg.projection_window == "hard":
+    if cfg.projection_window == "none":
         return 1.0
-    if cfg.projection_window != "smooth":
-        raise ValueError(f"unknown projection_window: {cfg.projection_window}")
     if cfg.window_radius <= 0.0:
         return 1.0
+    if cfg.projection_window == "hard":
+        s = math.hypot(r - bg.r_e, z)
+        return 1.0 if s <= cfg.window_radius else 0.0
+    if cfg.projection_window != "smooth":
+        raise ValueError(f"unknown projection_window: {cfg.projection_window}")
     s = math.hypot(r - bg.r_e, z)
     if s <= cfg.window_radius:
         return 1.0

@@ -763,7 +763,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--profile", choices=("toy", "numerical"), default="numerical")
     parser.add_argument("--profile-n", type=int, default=1200)
     parser.add_argument("--profile-x-max", type=float, default=20.0)
-    parser.add_argument("--projection-window", choices=("hard", "smooth"), default="hard")
+    parser.add_argument("--projection-window", choices=("none", "hard", "smooth"), default="none")
     parser.add_argument("--window-radius", type=float, default=0.0)
     parser.add_argument("--window-taper", type=float, default=0.0)
     parser.add_argument("--operator-model", choices=("profile-logse", "provisional"), default="profile-logse")
