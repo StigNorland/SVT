@@ -85,6 +85,108 @@ carry over cleanly. The spectral mechanism does not.**
 
 ---
 
+## Lepton generation ladder: the closed-shell hypothesis
+
+### Numerical finding (2026-06-02)
+
+Inverting the Lamb vortex-ring self-energy formula
+
+```
+E(R) = π R [ln(8R/ξ) − C]     (C ≈ 2, thin-ring approximation)
+```
+
+with known lepton masses as input gives (see `src/paper_i/vortex_ring_mass_inversion.py`):
+
+| generation | R/ξ (best-fit) | R/ξ (8^n rule) | mass error (8^n) |
+|---|---:|---:|---:|
+| e (n=0) | 1.01 | 1 | — |
+| μ (n=1) | 8.59 | 8 | +5% |
+| τ (n=2) | 73.7 | 64 | −2% |
+
+The best-fit geometric series has R_e ≈ 1ξ and generation ratio q ≈ 8.59.
+The simple rule R_n = 8^n ξ reproduces the lepton mass spectrum to within 5%.
+
+### The atomic-shell analogy
+
+In atomic physics the electron shell structure has magic numbers **2, 8, 18, 32, ...** = 2n².
+The second shell closes at **8** because there are 4 spatial modes (1 s + 3 p) × 2 spin states.
+Each closed shell is a stable, inert configuration; the next electron must start a new shell.
+
+The direct SSV analog:
+
+| atomic concept | SSV vortex ring analog |
+|---|---|
+| Principal quantum number n | Generation index (e=0, μ=1, τ=2) |
+| Shell radius R_n = n² a₀ | Ring radius R_n ≈ 8^n ξ |
+| Magic number 8 (2nd shell) | Generation ratio q ≈ 8 |
+| Closed shell = stable noble gas | Stable lepton = closed mode shell on ring |
+| Orbital degeneracy 2(2l+1) | Kelvin-mode degeneracy of the torus |
+
+The key question is: **what mode structure of a toroidal vortex ring has degeneracy 8?**
+
+### Kelvin modes on a thin ring and the torus symmetry
+
+A thin vortex ring supports Kelvin-wave oscillations labelled by two integers:
+- m_φ = azimuthal mode (around the big ring axis, period 2πR)
+- m_θ = poloidal mode (around the core cross-section, period 2πa, a ≈ ξ)
+
+The symmetry group of the torus is U(1) × U(1), with irreps labelled by (m_φ, m_θ) ∈ Z².
+
+For the ring to be "stable" in the sense of carrying no net Kelvin-wave excitation,
+all modes up to some maximum must be occupied (as in a Fermi sea) or equivalently
+the ring must sit at a local minimum of the mode-energy landscape with the lowest
+complete multiplet fully filled.
+
+The first complete multiplet with total mode number |m_φ| + |m_θ| ≤ 1:
+- (0, 0): 1 state
+- (±1, 0): 2 states
+- (0, ±1): 2 states
+- Total: **5 states**
+
+With two chirality orientations (left- and right-handed circulation around the core):
+- 5 × 2 = **10 states** — close but not 8.
+
+Alternative counting using |m_φ|² + |m_θ|² ≤ 1 (L² ≤ 1 on the torus):
+- Same 5 modes × 2 chiralities = 10. Still not 8.
+
+The exactly-8 counting that matches atomic physics (1s + 3p = 4 orbitals × 2 spin):
+- The ring has one "s-like" breathing mode (m_φ = 0, m_θ = 0) → 1 state × 2 = 2
+- Three "p-like" dipole modes (m_φ = ±1, 0; or the three rigid-body translations) → 3 × 2 = 6
+- Total: **2 + 6 = 8**
+
+This matches the atomic second shell exactly if the relevant "spin-like" quantum number
+for the vortex ring is the core chirality (the two orientations of the helical twist).
+
+### Physical interpretation
+
+If this is correct, the lepton generations are the **closed-shell radii** of the toroidal
+vortex ring: the discrete values of R/ξ at which all Kelvin modes up to a given angular
+order are simultaneously in their ground state. The generation step q = 8 = (1s + 3p) × 2
+is the same closed-shell degeneracy as the second period of the periodic table.
+
+The tau lepton is the third generation (R = 64ξ) because the third "shell"
+(1s + 3p + 5d modes × 2 = 18 states — but only up to the first two contribute to
+the ring's stable radius) closes at that scale.
+
+**The 8 in q is the same 8 in ln(8R/ξ):** the Lamb formula's geometric factor 8 = 2³
+arises from the same vortex-core geometry that determines the mode degeneracy.
+Both the energy formula and the generation step carry the same number because they
+are both encoding the same underlying torus mode structure.
+
+### Next steps
+
+1. Compute C from the LogSE vortex profile (replacing the thin-ring approximation):
+   check whether the best-fit q collapses from 8.59 to exactly 8.
+
+2. Enumerate the Kelvin-mode spectrum of the LogSE vortex ring explicitly:
+   compute the normal-mode frequencies and degeneracies from the linearised LogSE
+   around a thin vortex ring, and verify the counting gives 8 for the first closed shell.
+
+3. If confirmed: the lepton mass ratios become a first-principles SSV prediction,
+   derived from the Kelvin-mode degeneracy of the torus geometry.
+
+---
+
 ## Summary table
 
 | SSV object | Volovik analog | Section | Clean? |
