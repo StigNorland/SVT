@@ -37,7 +37,7 @@ import json
 import math
 import sys
 import time
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, fields
 from pathlib import Path
 
 import numpy as np
@@ -302,14 +302,14 @@ def _save_state(
         psi_real=psi.real,
         psi_imag=psi.imag,
         x=x, y=y, z=z,
-        config=np.array(cfg_dict, dtype=object),
-        controls=np.array({}, dtype=object),
-        lperp=np.array({"lambda_perp": lambda_perp}, dtype=object),
-        summary=np.array({
+        config=json.dumps(cfg_dict),
+        controls=json.dumps({}),
+        lperp=json.dumps({"lambda_perp": lambda_perp}),
+        summary=json.dumps({
             "steps": len(records),
             "final_energy": records[-1].energy if records else float("nan"),
             "final_links": records[-1].n_links if records else 0,
-        }, dtype=object),
+        }),
     )
 
 
