@@ -74,7 +74,8 @@ SCRIPT_METADATA = ScriptMetadata(
         "gives c_eff=4, a known convention mismatch (issue #15).",
         "Timestep / resolution / initial-condition sensitivity sweeps are open work under issue #16 (dynamic side).",
         "Cap radius extracted by volume-based or radial-slice method; both rely on a fixed cap_threshold cutoff.",
-        "Radiated-mode spectrum not yet implemented (issue #15 task 4).",
+        "Radiated-mode spectrum is a basic radial-power-spectrum of delta_psi (first vs last snapshot), "
+        "not a mode-decomposition into physical Bogoliubov branches (issue #15 task 4 partial).",
     ),
 )
 
@@ -127,6 +128,8 @@ class AnalyseResult:
     cos_phi: float
     energy_drift_pct: float
     norm_drift_pct: float
+    radiated_k: np.ndarray = field(default_factory=lambda: np.array([]))
+    radiated_power: np.ndarray = field(default_factory=lambda: np.array([]))
 
     def as_tuple(self) -> tuple[int, float, float, float]:
         """Legacy 4-tuple for callers that still unpack (saddle_index, excess, radius, cos_phi)."""
@@ -268,6 +271,58 @@ def norm_sq(psi: np.ndarray, cfg: Config) -> float:
     return float(np.sum(np.abs(psi) ** 2) * cfg.dx**3)
 
 
+def radiated_mode_spectrum(
+    psi_before: np.ndarray,
+    psi_after: np.ndarray,
+    cfg: Config,
+    n_bins: int = 20,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Power spectrum of the deviation emitted during a reconnection event.
+
+    Computes the radial power spectrum of (psi_after - psi_before) in Fourier
+    space, binned by |k|.  This measures which wavenumbers receive energy during
+    the event — i.e. which modes are "radiated".
+
+    Parameters
+    ----------
+    psi_before : ndarray (n,n,n) complex
+        Field before the event (e.g. first snapshot).
+    psi_after : ndarray (n,n,n) complex
+        Field after the event (e.g. last snapshot or first post-saddle snapshot).
+    cfg : Config
+    n_bins : int
+        Number of radial k bins.
+
+    Returns
+    -------
+    k_centres : ndarray (n_bins,)
+        Bin-centre wavenumbers (in units of 1/xi, since xi=1).
+    power : ndarray (n_bins,)
+        Mean |delta_psi_hat|^2 per mode in each bin, scaled by dx^3.
+    """
+    delta = psi_after - psi_before
+    delta_hat = np.fft.fftn(delta) * cfg.dx**3
+    power_3d = np.abs(delta_hat) ** 2
+
+    k = 2.0 * math.pi * np.fft.fftfreq(cfg.n, d=cfg.dx)
+    kx, ky, kz = np.meshgrid(k, k, k, indexing="ij")
+    k_mag = np.sqrt(kx**2 + ky**2 + kz**2).ravel()
+    power_flat = power_3d.ravel()
+
+    k_max_grid = math.pi * cfg.n / cfg.length  # Nyquist
+    k_edges = np.linspace(0.0, k_max_grid, n_bins + 1)
+    k_centres = 0.5 * (k_edges[:-1] + k_edges[1:])
+    power_bins = np.zeros(n_bins)
+    counts = np.zeros(n_bins, dtype=int)
+    for i in range(n_bins):
+        mask = (k_mag >= k_edges[i]) & (k_mag < k_edges[i + 1])
+        if np.any(mask):
+            power_bins[i] = float(np.mean(power_flat[mask]))
+            counts[i] = int(np.sum(mask))
+
+    return k_centres, power_bins
+
+
 def cap_radius_and_volume(psi: np.ndarray, cfg: Config) -> tuple[float, float]:
     """Return (cap_radius, cap_volume) for the depleted cap."""
     depleted = np.abs(psi) < cfg.cap_threshold
@@ -383,11 +438,16 @@ def analyse(path: np.ndarray, cfg: Config) -> AnalyseResult:
         )
     mode = projected_hessian_mode(path, saddle_index, cfg)
     cp = cos_phi(mode, path[saddle_index], cfg)
+
+    # Radiated-mode spectrum: energy deposited in k-modes from first to last snapshot
+    k_bins, power_bins = radiated_mode_spectrum(path[0], path[-1], cfg)
+
     return AnalyseResult(
         saddle_index=saddle_index, saddle_excess=excess,
         cap_radius=radius, cap_volume=cap_vol,
         cos_phi=cp,
         energy_drift_pct=energy_drift_pct, norm_drift_pct=norm_drift_pct,
+        radiated_k=k_bins, radiated_power=power_bins,
     )
 
 
