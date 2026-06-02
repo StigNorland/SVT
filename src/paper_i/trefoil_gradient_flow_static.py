@@ -182,7 +182,9 @@ def run_gradient_flow(
     )
 
     apply_boundary_anchor(psi, cfg)
+    # Normalize once at start; NOT inside the gradient loop (would break descent)
     psi = normalize_bulk(psi, cfg)
+    apply_boundary_anchor(psi, cfg)
 
     energy = full_energy(psi, cfg, lambda_perp, **pen_kw)
     n_links = count_vortex_links(psi)
@@ -202,13 +204,13 @@ def run_gradient_flow(
         grad_norm_sq = float(np.real(np.vdot(grad, grad)))
 
         # Backtracking line search: find largest alpha that decreases energy
-        # and preserves topology.
+        # and preserves topology.  Do NOT normalize inside the loop — normalization
+        # can increase energy and would break the descent guarantee.
         alpha_try = alpha
         rejected = True
         for _bt in range(MAX_BACKTRACK):
             candidate = psi - alpha_try * grad
             apply_boundary_anchor(candidate, cfg)
-            candidate = normalize_bulk(candidate, cfg)
 
             n_links_candidate = count_vortex_links(candidate)
             topo_ok = (n_links_candidate >= n_links - topo_drop_tol)
@@ -272,10 +274,17 @@ def run_gradient_flow(
 # ---------------------------------------------------------------------------
 
 def load_state_npz(path: Path) -> tuple[np.ndarray, dict]:
-    """Load psi and cfg dict from a saved .npz."""
+    """Load psi and cfg dict from a saved .npz (supports both JSON-string and object-array formats)."""
     d = np.load(path, allow_pickle=True)
     psi = d["psi_real"] + 1j * d["psi_imag"]
-    cfg_dict = dict(d["config"].item()) if "config" in d else dict(d["cfg"].item())
+    key = "config" if "config" in d else "cfg"
+    raw = d[key]
+    # JSON string format (saved by this script and the Krylov solver)
+    raw_val = raw.item() if raw.ndim == 0 else str(raw)
+    if isinstance(raw_val, str):
+        cfg_dict = json.loads(raw_val)
+    else:
+        cfg_dict = dict(raw_val)
     return psi, cfg_dict
 
 
