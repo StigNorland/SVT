@@ -32,7 +32,7 @@ if str(SRC_ROOT) not in sys.path:
     sys.path.append(str(SRC_ROOT))
 
 from shared_numerics import OutputStatus, ScriptMetadata
-from paper_ii.reconnection_supplement import Config, AnalyseResult, analyse, evolve_path
+from paper_ii.reconnection_supplement import Config, AnalyseResult, analyse, evolve_path, stability_dt_max
 
 warnings.filterwarnings("ignore")
 
@@ -76,13 +76,20 @@ def run_one(n: int, lam: float, topology: str, lower: float, upper: float) -> di
         n=n, length=LENGTH, dt=DT, steps=STEPS, snapshots=SNAPSHOTS,
         log_pressure=LOG_PRESSURE, lambda_perp=lam,
     )
+    # Use stability-limited dt for lambda_perp != 0 to avoid integrator instability
+    eff_dt: float | None = None
+    if lam != 0.0:
+        dt_stable = stability_dt_max(cfg)
+        if dt_stable < DT:
+            eff_dt = dt_stable
     t0 = time.perf_counter()
     try:
-        path = evolve_path(cfg, lower, upper)
+        path = evolve_path(cfg, lower, upper, effective_dt=eff_dt)
         res: AnalyseResult = analyse(path, cfg)
         elapsed = time.perf_counter() - t0
+        actual_dt = eff_dt if eff_dt is not None else DT
         return {
-            "n": n, "length": LENGTH, "dt": DT, "log_pressure": LOG_PRESSURE,
+            "n": n, "length": LENGTH, "dt": actual_dt, "log_pressure": LOG_PRESSURE,
             "lambda_perp": lam, "topology": topology,
             "saddle_index": res.saddle_index,
             "saddle_excess": res.saddle_excess,
@@ -97,8 +104,9 @@ def run_one(n: int, lam: float, topology: str, lower: float, upper: float) -> di
     except Exception as exc:
         elapsed = time.perf_counter() - t0
         nan = float("nan")
+        actual_dt = eff_dt if eff_dt is not None else DT
         return {
-            "n": n, "length": LENGTH, "dt": DT, "log_pressure": LOG_PRESSURE,
+            "n": n, "length": LENGTH, "dt": actual_dt, "log_pressure": LOG_PRESSURE,
             "lambda_perp": lam, "topology": topology,
             "saddle_index": -1,
             "saddle_excess": nan, "cap_radius": nan, "cap_volume": nan,
