@@ -88,7 +88,10 @@ class SweepRow:
     saddle_index: int
     saddle_excess: float
     cap_radius: float
+    cap_volume: float
     cos_phi: float
+    energy_drift_pct: float
+    norm_drift_pct: float
     error: str = ""
 
 
@@ -110,24 +113,28 @@ def run_point(sweep: str, value: float, label: str, lower: float, upper: float, 
     t0 = time.perf_counter()
     try:
         path = evolve_path(cfg, lower, upper)
-        saddle_index, excess, radius, channel_cos = analyse(path, cfg)
+        res = analyse(path, cfg)
         elapsed = time.perf_counter() - t0
         return SweepRow(
             sweep=sweep,
             value=value,
             topology=label,
             elapsed_s=elapsed,
-            saddle_index=saddle_index,
-            saddle_excess=excess,
-            cap_radius=radius,
-            cos_phi=channel_cos,
+            saddle_index=res.saddle_index,
+            saddle_excess=res.saddle_excess,
+            cap_radius=res.cap_radius,
+            cap_volume=res.cap_volume,
+            cos_phi=res.cos_phi,
+            energy_drift_pct=res.energy_drift_pct,
+            norm_drift_pct=res.norm_drift_pct,
         )
     except Exception as exc:  # noqa: BLE001
         elapsed = time.perf_counter() - t0
         nan = float("nan")
         return SweepRow(
             sweep=sweep, value=value, topology=label, elapsed_s=elapsed,
-            saddle_index=-1, saddle_excess=nan, cap_radius=nan, cos_phi=nan,
+            saddle_index=-1, saddle_excess=nan, cap_radius=nan, cap_volume=nan,
+            cos_phi=nan, energy_drift_pct=nan, norm_drift_pct=nan,
             error=f"{type(exc).__name__}: {exc}",
         )
 
@@ -138,13 +145,16 @@ def write_csv(rows: list[SweepRow], path: Path) -> None:
         writer = csv.writer(handle)
         writer.writerow([
             "sweep", "value", "topology", "elapsed_s",
-            "saddle_index", "saddle_excess", "cap_radius", "cos_phi", "error",
+            "saddle_index", "saddle_excess", "cap_radius", "cap_volume",
+            "cos_phi", "energy_drift_pct", "norm_drift_pct", "error",
         ])
         for r in rows:
             writer.writerow([
                 r.sweep, f"{r.value:.6g}", r.topology, f"{r.elapsed_s:.3f}",
                 r.saddle_index, f"{r.saddle_excess:.9e}",
-                f"{r.cap_radius:.9e}", f"{r.cos_phi:.9e}", r.error,
+                f"{r.cap_radius:.9e}", f"{r.cap_volume:.9e}",
+                f"{r.cos_phi:.9e}", f"{r.energy_drift_pct:.6g}",
+                f"{r.norm_drift_pct:.6g}", r.error,
             ])
 
 

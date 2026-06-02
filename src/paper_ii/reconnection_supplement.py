@@ -6,10 +6,12 @@ Nondimensionalisation: xi = 1, rho0 = 1.  The longitudinal speed is
 NOT c = 1 in the canonical-conventions sense: the LogSE coupling enters
 as ``log_pressure`` (default 8.0), so the effective sound speed is
 ``c_eff = sqrt(2 * log_pressure)`` in dimensionless units.  This is a
-known convention mismatch with the static branch's c = 1 default; closure-
-grade dynamic runs (issue #15) should reconcile this.
+known convention mismatch with the static branch's c = 1 default.  Use
+``--log-pressure 0.5`` for closure-grade runs compatible with the static
+branch (issue #15).
 
-Primary observables: saddle_index, saddle_excess, cap_radius, cos_phi
+Primary observables: saddle_index, saddle_excess, cap_radius, cap_volume,
+                     cos_phi, energy_drift_pct, norm_drift_pct
 Primary role: structural reproduction harness for the Paper II W/Z
 reconnection-barrier checks.  Not a physical-scale production calculation;
 the real SSV scale separation requires a petascale 3D grid (issue #15).
@@ -34,7 +36,8 @@ import argparse
 import csv
 import math
 import sys
-from dataclasses import dataclass
+import warnings
+from dataclasses import dataclass, field
 from pathlib import Path
 
 import numpy as np
@@ -49,8 +52,16 @@ from shared_numerics import OutputStatus, ScriptMetadata
 SCRIPT_METADATA = ScriptMetadata(
     problem_type="dynamic",
     status=OutputStatus.PROTOTYPE,
-    nondimensionalisation="xi = 1, rho0 = 1, c_eff = sqrt(2*log_pressure) (non-canonical)",
-    observables=("saddle_index", "saddle_excess", "cap_radius", "cos_phi"),
+    nondimensionalisation="xi = 1, rho0 = 1, c_eff = sqrt(2*log_pressure)",
+    observables=(
+        "saddle_index",
+        "saddle_excess",
+        "cap_radius",
+        "cap_volume",
+        "cos_phi",
+        "energy_drift_pct",
+        "norm_drift_pct",
+    ),
     diagnostics=(
         "split_step_energy_drift",
         "norm_drift",
@@ -59,9 +70,11 @@ SCRIPT_METADATA = ScriptMetadata(
     issue_refs=("#15", "#16"),
     limitations=(
         "Structural reproduction harness only; not a physical-scale production reconnection solver.",
-        "Sound-speed convention diverges from the static-branch canonical c = 1 by the factor sqrt(2*log_pressure).",
+        "Use --log-pressure 0.5 for static-branch-compatible runs (canonical c=1); default log_pressure=8.0 "
+        "gives c_eff=4, a known convention mismatch (issue #15).",
         "Timestep / resolution / initial-condition sensitivity sweeps are open work under issue #16 (dynamic side).",
         "Cap radius extracted by volume-based or radial-slice method; both rely on a fixed cap_threshold cutoff.",
+        "Radiated-mode spectrum not yet implemented (issue #15 task 4).",
     ),
 )
 
@@ -77,7 +90,7 @@ class Config:
     dt: float = 0.001
     steps: int = 200
     snapshots: int = 17
-    log_pressure: float = 8.0
+    log_pressure: float = 8.0   # default kept for backwards compat; use 0.5 for c=1
     lambda_perp: float = 0.0
     cap_threshold: float = 0.25
     cap_method: str = "volume"
@@ -86,6 +99,10 @@ class Config:
     @property
     def dx(self) -> float:
         return self.length / self.n
+
+    @property
+    def c_eff(self) -> float:
+        return math.sqrt(2.0 * self.log_pressure)
 
     @property
     def effective_ring_radius(self) -> float:
@@ -98,6 +115,22 @@ class Config:
     @property
     def effective_separation(self) -> float:
         return 0.34 * self.length if self.separation is None else self.separation
+
+
+@dataclass
+class AnalyseResult:
+    """Full diagnostics returned by analyse().  Replaces the bare 4-tuple."""
+    saddle_index: int
+    saddle_excess: float
+    cap_radius: float
+    cap_volume: float
+    cos_phi: float
+    energy_drift_pct: float
+    norm_drift_pct: float
+
+    def as_tuple(self) -> tuple[int, float, float, float]:
+        """Legacy 4-tuple for callers that still unpack (saddle_index, excess, radius, cos_phi)."""
+        return self.saddle_index, self.saddle_excess, self.cap_radius, self.cos_phi
 
 
 def coordinate_grid(cfg: Config) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
@@ -201,19 +234,33 @@ def energy(psi: np.ndarray, cfg: Config) -> float:
     return float(np.sum(grad + pot + chiral) * cfg.dx**3)
 
 
-def cap_radius(psi: np.ndarray, cfg: Config) -> float:
+def norm_sq(psi: np.ndarray, cfg: Config) -> float:
+    """Integrated |psi|^2 (particle number proxy)."""
+    return float(np.sum(np.abs(psi) ** 2) * cfg.dx**3)
+
+
+def cap_radius_and_volume(psi: np.ndarray, cfg: Config) -> tuple[float, float]:
+    """Return (cap_radius, cap_volume) for the depleted cap."""
     depleted = np.abs(psi) < cfg.cap_threshold
     volume = float(np.count_nonzero(depleted) * cfg.dx**3)
     if volume == 0.0:
-        return 0.0
+        return 0.0, 0.0
     if cfg.cap_method == "radial-slice":
         axis = (np.arange(cfg.n) + 0.5) * cfg.dx - 0.5 * cfg.length
         x, y = np.meshgrid(axis, axis, indexing="ij")
         r = np.sqrt(x * x + y * y)
         z_index = int(np.argmax(np.count_nonzero(depleted, axis=(0, 1))))
         mask = depleted[:, :, z_index]
-        return float(np.max(r[mask])) if np.any(mask) else 0.0
-    return math.sqrt(volume / (math.pi * cfg.xi))
+        radius = float(np.max(r[mask])) if np.any(mask) else 0.0
+    else:
+        radius = math.sqrt(volume / (math.pi * cfg.xi))
+    return radius, volume
+
+
+def cap_radius(psi: np.ndarray, cfg: Config) -> float:
+    """Return cap radius only (backwards-compatible wrapper)."""
+    r, _ = cap_radius_and_volume(psi, cfg)
+    return r
 
 
 def real_inner(a: np.ndarray, b: np.ndarray, cfg: Config) -> float:
@@ -275,19 +322,44 @@ def cos_phi(delta: np.ndarray, psi0: np.ndarray, cfg: Config) -> float:
     return phase_norm / max(math.sqrt(amp_norm * amp_norm + phase_norm * phase_norm), 1.0e-300)
 
 
-def analyse(path: np.ndarray, cfg: Config) -> tuple[int, float, float, float]:
-    raw = [(energy(psi, cfg), cap_radius(psi, cfg)) for psi in path]
+def analyse(path: np.ndarray, cfg: Config) -> AnalyseResult:
+    """Full analysis of a reconnection path: saddle, cap, energy/norm drift, cos_phi."""
+    energies = [energy(psi, cfg) for psi in path]
+    norms = [norm_sq(psi, cfg) for psi in path]
+    caps = [cap_radius_and_volume(psi, cfg) for psi in path]
+
+    # Energy drift (total, not relative to baseline used for saddle detection)
+    e0 = energies[0]
+    energy_drift_pct = (energies[-1] - e0) / max(abs(e0), 1e-300) * 100.0
+
+    # Norm drift (should be exactly zero for a unitary integrator, small drift = numerical error)
+    n0 = norms[0]
+    norm_drift_pct = (norms[-1] - n0) / max(abs(n0), 1e-300) * 100.0
+
+    # Saddle: maximum of energy above the linear baseline connecting first and last frames
     diagnostics = []
-    denom = max(len(raw) - 1, 1)
-    for i, (value, radius) in enumerate(raw):
+    denom = max(len(energies) - 1, 1)
+    for i, (value, (radius, volume)) in enumerate(zip(energies, caps)):
         t = i / denom
-        baseline = (1.0 - t) * raw[0][0] + t * raw[-1][0]
-        diagnostics.append((i, value - baseline, radius))
-    saddle_index, excess, radius = max(diagnostics[1:-1], key=lambda item: item[1])
+        baseline = (1.0 - t) * energies[0] + t * energies[-1]
+        diagnostics.append((i, value - baseline, radius, volume))
+    saddle_index, excess, radius, cap_vol = max(diagnostics[1:-1], key=lambda item: item[1])
+
     if saddle_index - cfg.saddle_window < 0 or saddle_index + cfg.saddle_window >= len(path):
-        return saddle_index, excess, radius, float("nan")
+        return AnalyseResult(
+            saddle_index=saddle_index, saddle_excess=excess,
+            cap_radius=radius, cap_volume=cap_vol,
+            cos_phi=float("nan"),
+            energy_drift_pct=energy_drift_pct, norm_drift_pct=norm_drift_pct,
+        )
     mode = projected_hessian_mode(path, saddle_index, cfg)
-    return saddle_index, excess, radius, cos_phi(mode, path[saddle_index], cfg)
+    cp = cos_phi(mode, path[saddle_index], cfg)
+    return AnalyseResult(
+        saddle_index=saddle_index, saddle_excess=excess,
+        cap_radius=radius, cap_volume=cap_vol,
+        cos_phi=cp,
+        energy_drift_pct=energy_drift_pct, norm_drift_pct=norm_drift_pct,
+    )
 
 
 def parse_args() -> argparse.Namespace:
@@ -301,6 +373,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--steps", type=int, default=200)
     parser.add_argument("--snapshots", type=int, default=17)
     parser.add_argument("--dt", type=float, default=0.001)
+    parser.add_argument(
+        "--log-pressure", type=float, default=8.0,
+        help="LogSE log-pressure coupling (default 8.0 for backwards compat; "
+             "use 0.5 for static-branch-canonical c=1 runs, issue #15).",
+    )
     parser.add_argument("--cap-method", choices=("volume", "radial-slice"), default="volume")
     parser.add_argument("--output", type=Path, default=Path("paper_ii_reconnection_sweep.csv"))
     return parser.parse_args()
@@ -308,11 +385,25 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+    if abs(args.log_pressure - 8.0) < 1e-9:
+        warnings.warn(
+            "log_pressure=8.0 (c_eff=4): not compatible with static-branch c=1. "
+            "Use --log-pressure 0.5 for closure-grade runs (issue #15).",
+            stacklevel=1,
+        )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     cases = (("opposite", 1.0, -1.0), ("same", 1.0, 1.0))
+    header = [
+        "label", "lambda_perp",
+        "saddle_index", "saddle_excess",
+        "cap_radius", "cap_volume",
+        "cos_phi",
+        "energy_drift_pct", "norm_drift_pct",
+        "n", "length", "log_pressure", "c_eff",
+    ]
     with args.output.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.writer(handle)
-        writer.writerow(["label", "lambda_perp", "saddle_index", "saddle_excess", "cap_radius", "cos_phi"])
+        writer.writerow(header)
         for lam in args.lambda_perp:
             for label, lower, upper in cases:
                 cfg = Config(
@@ -324,13 +415,27 @@ def main() -> None:
                     steps=args.steps,
                     snapshots=args.snapshots,
                     dt=args.dt,
+                    log_pressure=args.log_pressure,
                     lambda_perp=lam,
                     cap_method=args.cap_method,
                 )
                 path = evolve_path(cfg, lower, upper)
-                saddle_index, excess, radius, channel_cos = analyse(path, cfg)
-                writer.writerow([label, f"{lam:.12g}", saddle_index, f"{excess:.12g}", f"{radius:.12g}", f"{channel_cos:.12g}"])
-                print(label, lam, saddle_index, radius, channel_cos)
+                res = analyse(path, cfg)
+                writer.writerow([
+                    label, f"{lam:.12g}",
+                    res.saddle_index, f"{res.saddle_excess:.12g}",
+                    f"{res.cap_radius:.12g}", f"{res.cap_volume:.12g}",
+                    f"{res.cos_phi:.12g}",
+                    f"{res.energy_drift_pct:.6g}", f"{res.norm_drift_pct:.6g}",
+                    args.n, args.length, args.log_pressure, f"{cfg.c_eff:.6g}",
+                ])
+                print(
+                    label, lam,
+                    f"saddle={res.saddle_index}  excess={res.saddle_excess:.4g}  "
+                    f"cap_r={res.cap_radius:.4g}  cap_vol={res.cap_volume:.4g}  "
+                    f"cos_phi={res.cos_phi:.4g}  "
+                    f"dE={res.energy_drift_pct:.3g}%  dN={res.norm_drift_pct:.3g}%"
+                )
 
 
 if __name__ == "__main__":
