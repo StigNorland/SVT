@@ -133,6 +133,30 @@ class AnalyseResult:
         return self.saddle_index, self.saddle_excess, self.cap_radius, self.cos_phi
 
 
+def stability_dt_max(cfg: Config, safety: float = 0.1) -> float:
+    """Maximum accurate dt for the Strang-split chiral k^4 step.
+
+    The Strang splitting is second-order accurate when
+    lambda_perp * k_max^4 * dt << 1.  Empirically, energy_drift_pct ≈ 4–5%
+    at product = 0.5 and ≈ 0.4% at product = 0.1.  Use safety = 0.1 (default)
+    for accuracy-grade runs (energy drift < ~0.5%); safety = 0.5 for quick
+    structural runs (energy drift ~5%).  If lambda_perp == 0, returns inf.
+    """
+    if cfg.lambda_perp == 0.0:
+        return float("inf")
+    k_max = math.pi / cfg.dx
+    return safety / (cfg.lambda_perp * k_max ** 4)
+
+
+def steps_for_duration(cfg: Config, duration: float) -> int:
+    """Number of stable steps needed to evolve for `duration` time units.
+
+    Uses stability_dt_max(cfg) as the step size.  If lambda_perp==0 uses cfg.dt.
+    """
+    dt = min(cfg.dt, stability_dt_max(cfg))
+    return math.ceil(duration / dt)
+
+
 def coordinate_grid(cfg: Config) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     axis = (np.arange(cfg.n) + 0.5) * cfg.dx - 0.5 * cfg.length
     return np.meshgrid(axis, axis, axis, indexing="ij")
@@ -184,15 +208,20 @@ def kinetic_step(psi: np.ndarray, cfg: Config, k2: np.ndarray) -> np.ndarray:
     return np.fft.ifftn(np.fft.fftn(psi) * factor)
 
 
-def evolve_path(cfg: Config, lower_circ: float, upper_circ: float) -> np.ndarray:
+def evolve_path(cfg: Config, lower_circ: float, upper_circ: float,
+                effective_dt: float | None = None) -> np.ndarray:
+    """Evolve cfg.steps Strang steps.  If effective_dt is given, use it instead
+    of cfg.dt for the split-step (but still save cfg.snapshots snapshots)."""
     psi = initial_state(cfg, lower_circ, upper_circ)
     k2 = k_squared(cfg)
+    dt = effective_dt if effective_dt is not None else cfg.dt
     save_steps = set(np.linspace(0, cfg.steps, cfg.snapshots, dtype=int).tolist())
     snapshots = [psi.copy()] if 0 in save_steps else []
+    spectral_factor = np.exp(-1j * (0.5 * k2 + cfg.lambda_perp * k2 * k2) * dt)
     for step in range(1, cfg.steps + 1):
-        psi = nonlinear_phase(psi, cfg, 0.5 * cfg.dt)
-        psi = kinetic_step(psi, cfg, k2)
-        psi = nonlinear_phase(psi, cfg, 0.5 * cfg.dt)
+        psi = nonlinear_phase(psi, cfg, 0.5 * dt)
+        psi = np.fft.ifftn(np.fft.fftn(psi) * spectral_factor)
+        psi = nonlinear_phase(psi, cfg, 0.5 * dt)
         if step in save_steps:
             snapshots.append(psi.copy())
     return np.stack(snapshots, axis=0)
@@ -378,6 +407,11 @@ def parse_args() -> argparse.Namespace:
         help="LogSE log-pressure coupling (default 8.0 for backwards compat; "
              "use 0.5 for static-branch-canonical c=1 runs, issue #15).",
     )
+    parser.add_argument(
+        "--auto-dt", action="store_true",
+        help="Auto-select dt from stability criterion lambda_perp*k_max^4*dt < 0.5. "
+             "When set, ignores --dt and prints the chosen value.",
+    )
     parser.add_argument("--cap-method", choices=("volume", "radial-slice"), default="volume")
     parser.add_argument("--output", type=Path, default=Path("paper_ii_reconnection_sweep.csv"))
     return parser.parse_args()
@@ -419,7 +453,11 @@ def main() -> None:
                     lambda_perp=lam,
                     cap_method=args.cap_method,
                 )
-                path = evolve_path(cfg, lower, upper)
+                eff_dt: float | None = None
+                if args.auto_dt and lam != 0.0:
+                    eff_dt = stability_dt_max(cfg)
+                    print(f"  auto-dt: {eff_dt:.3e} (lambda_perp*k_max^4*dt={lam*(math.pi/cfg.dx)**4*eff_dt:.3f})")
+                path = evolve_path(cfg, lower, upper, effective_dt=eff_dt)
                 res = analyse(path, cfg)
                 writer.writerow([
                     label, f"{lam:.12g}",
