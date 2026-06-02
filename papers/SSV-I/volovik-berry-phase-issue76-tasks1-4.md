@@ -34,7 +34,7 @@ change it to \(-1\).
 The requested Task 3 matrix element
 
 \[
-\langle K_{L,\pm}|(\nabla\times\delta j)^\dagger
+\langle K_{\sigma,\pm}|(\nabla\times\delta j)^\dagger
 (\nabla\times\delta j)|\Phi_R\rangle
 \]
 

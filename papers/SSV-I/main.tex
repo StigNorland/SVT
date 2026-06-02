@@ -808,22 +808,31 @@ leptons from the PDG.  The mean fractional deviation from the nearest half-integ
 multiple of $\mu_0$ is $0.096$, compared to $0.25$ expected for masses distributed
 uniformly at random.  The ladder is not a statistical fluke.
 
-\begin{gapbox}[Status (2026-05): empirical coincidence, not a derived spectrum]
-The pattern above is real, but it is carried by very few rungs.  A
-pre-registered re-analysis of the 14-particle table (Path~A) found that
-removing either the muon ($3/2$) or the charged pion ($2$) collapses the
-specialness of $\mu_0$ from top-$3\%$ to top-$10$-$11\%$ of nearby scales;
-the other twelve rows do not independently support the rung structure.  A
-pre-registered eigenvalue test (Path~B) then attempted to obtain the muon
-and pion rungs as genuine eigenfrequencies of the
-$\mathcal{L}+\mathcal{L}_\perp$ toroidal-breather BdG operator and failed
-its own decision rule: the muon reaches $\omega/\omega_c=0.207$ only in one
-truncated basis and drifts $\pm13\%$ (or vanishes) under Galerkin
-enrichment, the pion rung is absent in every basis tested, and the
-resulting spectrum is not evenly spaced.  The two sub-percent rungs
-($\mu^\pm,\pi^\pm$) should therefore be read as a two-coincidence numerology
-in $m_e/\alpha$, pending a basis-converged eigenvalue calculation.  Full
-record: \texttt{papers/SSV-I/path-b-eigenvalue-result.md}.
+\begin{gapbox}[Status (2026-06): empirical pattern, not yet a derived spectrum]
+The pattern above is real, but its derivation has not been closed.  Three
+pre-registered attempts have been completed:
+\begin{itemize}
+\item \textbf{Path~A (statistical):} removing either the muon ($3/2$) or the
+  pion ($2$) collapses the significance of $\mu_0$ from top-$3\%$ to
+  top-$10$-$11\%$; the ladder is a two-coincidence numerology on present
+  statistical evidence alone.
+\item \textbf{Path~B (BdG eigenvalue):} the muon and pion rungs were not
+  recovered as basis-converged eigenfrequencies of the
+  $\mathcal{L}+\mathcal{L}_\perp$ toroidal-breather BdG operator.  The muon
+  drifts $\pm13\%$ across bases and the pion is absent in every basis.
+  Full record: \texttt{papers/SSV-I/path-b-eigenvalue-result.md}.
+\item \textbf{Berry-phase audit (issue~\#76):} Volovik's CdGM framework was
+  applied to the SSV scalar BdG operator in the thin-ring limit.  The pure
+  LogSE sector gives trivial azimuthal holonomy ($\gamma_B=0$, integer
+  rungs); the $\mathcal{L}_\perp$ current-curl block does not convert this
+  to $\gamma_B=\pi$ because the bridge matrix element vanishes by the
+  $m_a{=}m_b$ / $m_a{+}m_b{=}0$ azimuthal selection rules.  Full record:
+  \texttt{papers/SSV-I/volovik-berry-phase-issue76-tasks1-4.md}.
+\end{itemize}
+The pion and muon rungs remain candidates.  A positive topological derivation
+would require either a basis-converged 3D solve or a changed microscopic
+structure that supplies a genuine half-integer Berry holonomy (spinorial order
+parameter, or derived half-winding Nambu mass).
 \end{gapbox}
 
 \begin{table}[htbp]
@@ -897,6 +906,12 @@ per unit winding is motivated by the string tension argument above.  The full
 soliton-energy derivation of the coefficient requires the two-winding profile
 in the LogSE + chiral-shear theory and is deferred to Paper~II.
 
+The integer rung assignment ($n=2$) is consistent with the Berry-phase audit
+of issue~\#76: the pure LogSE scalar BdG operator on the electron torus gives
+trivial azimuthal holonomy ($\gamma_B=0$) and an integer spectrum
+$E_n=n\omega_0$.  The pion, as a two-winding topological object without a BdG
+pseudospin coupling, falls naturally in this integer sector.
+
 %------------------------------------------------------------------
 \subsection{The Muon ($\mu^\pm$)}
 \label{sec:muon}
@@ -904,22 +919,33 @@ in the LogSE + chiral-shear theory and is deferred to Paper~II.
 The muon is tentatively identified with the first oscillatory mode of the
 electron toroidal vortex.
 
-\begin{gapbox}[Status (2026-05): muon eigenmode not basis-converged]
-The toroidal-breather eigenvalue test (``Path~B'') applied to the operator
-constructed in this section was pre-registered and run; full record in
-\texttt{papers/SSV-I/path-b-eigenvalue-result.md}.  Outcome: at the claimed
-parameter-free coupling $\lambda_\perp=\pi/4$, the muon hits
-$\omega/\omega_c=0.207$ in the single published basis (\texttt{helicity}
-Kelvin seed) and within $3.7\%$ at face value (within $0.09\%$ in the
-relaxed-background variant of Appendix~\ref{app:helicity-bridge}), but the
-lowest physical mode drifts $\pm 13\%$ across four basis choices and leaves
-the muon window empty in two of them.  The charged-pion rung $2\mu_0$ is
-empty in every basis tested.  The spectrum is not evenly spaced.  The muon
-identification therefore remains a candidate carried by the empirical
-agreement on the $m_e/\alpha$ scale, not by a basis-converged eigenfrequency.
-The mechanical text below is retained as the structural setup; readers should
-treat its claims of ``convergence'', ``selection rule'', and ``residual gap''
-in the light of this null.  Tracking: issue~\#66.
+\begin{gapbox}[Status (2026-06): muon identification not closed; three null results]
+Three pre-registered tests have been completed without closing the muon
+identification:
+\begin{itemize}
+\item \textbf{Path~B (BdG eigenvalue):} at $\lambda_\perp=\pi/4$ the lowest
+  mode hits $\omega/\omega_c\approx0.207$ in the single helicity basis but
+  drifts $\pm13\%$ across four bases and leaves the muon window empty in two.
+  Full record: \texttt{papers/SSV-I/path-b-eigenvalue-result.md}.
+\item \textbf{Issue~\#73 (phi-discretised BdG):} a direct $m_\varphi=\pm1$
+  grid-sector solve finds no stable low branch near the muon target; the
+  lowest direct-sector mode sits at $\omega/\omega_c\approx0.50$--$0.59$.
+  Full record: \texttt{papers/SSV-I/muon-issue73-phi-bdg-result.md}.
+\item \textbf{Issue~\#76 (Berry-phase audit):} Volovik's topological CdGM
+  framework applied to the scalar SSV BdG operator gives trivial azimuthal
+  holonomy ($\gamma_B=0$) for both the pure LogSE sector and the
+  $\mathcal{L}_\perp$ current-curl block.  The bridge matrix element
+  $\langle K_{\sigma,\pm}|(\nabla{\times}\delta j)^\dagger
+  (\nabla{\times}\delta j)|\Phi_R\rangle$ vanishes by selection rules.
+  Full record:
+  \texttt{papers/SSV-I/volovik-berry-phase-issue76-tasks1-4.md}.
+\end{itemize}
+The muon assignment $m_{\mu^\pm}=\frac{3}{2}\mu_0$ remains a candidate
+supported by the empirical $0.59\%$ agreement.  A positive derivation would
+require a basis-converged 3D solve or a changed microscopic structure
+(spinorial order parameter, or derived half-winding Nambu mass).
+The mechanical text below is retained as structural setup.  Tracking:
+issues~\#66, \#73, \#76.
 \end{gapbox}
 
 \textbf{BdG setup.}
@@ -1030,16 +1056,15 @@ The assignment
 is one of the two sub-percent rungs of the ladder (the other is
 $m_{\pi^\pm}=2\mu_0$) and remains a candidate identification
 (\S\ref{sec:claim-status}) carried, on present evidence, by the empirical
-agreement on the $m_e/\alpha$ scale rather than by a basis-converged
-eigenmode.  The status is therefore weaker than the previous draft stated:
-the ``identified mechanism'' (core-breathing $\oplus$ Kelvin via
-$\mathcal{L}_\perp$) is the \emph{target} of the open derivation, not its
-result; the ``verified selection rule'' from driven-response scans does not
-survive basis enrichment; and the ``numerical eigenfrequency bracket'' is
-basis variation, not Galerkin convergence.  The thin-ring analytic closure
-deferred to Paper~II and the basis-enrichment programme (issue~\#66) are
-now the two routes that would convert this candidate into either a sharp
-prediction or a clean falsification.
+agreement on the $m_e/\alpha$ scale.  Three distinct analytic and numerical
+routes have been completed without closing the identification (Path~B,
+issue~\#73, issue~\#76; see gapbox above).  The scalar SSV BdG operator and
+the implemented $\mathcal{L}_\perp$ block do not supply the half-integer Berry
+holonomy required to protect the $n=1$ rung.  A positive identification
+requires either a basis-converged 3D toroidal solve or a changed microscopic
+ingredient --- spinorial order parameter or derived half-winding Nambu mass
+--- that does not appear in the current theory.  Tracking: issues~\#66, \#73,
+\#76.
 
 \subsection{Higher rungs and the proton}
 
