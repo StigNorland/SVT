@@ -59,19 +59,14 @@ Compton circumference.  The charged pion, as the minimal vortex-antivortex bound
 state carrying two winding numbers, then has mass $m_{\pi^\pm} = 2\mu_0$, agreeing
 with CODATA at $0.34\%$.
 
-Direct 3D toroidal Bogoliubov--de~Gennes projection with chiral-shear coupling,
-developed in this paper, identifies the dynamical mechanism behind the muon
-rung: the lowest hybrid of the $m_\varphi=0$ core-breathing mode with the
-$m_\varphi=\pm1$ Kelvin centerline sector in the helicity basis, coupled through
-the second variation of $\mathcal{L}_\perp$.  Driven-response calculations
-confirm a selection rule: core-breathing boundary drives preferentially excite
-the $(3/2)\mu_0$ tongue identified with the muon, while Kelvin helicity drives
-preferentially excite the $2\mu_0$ tongue identified with the charged pion.
-In the present meridional projection the muon eigenfrequency falls in the range
-$\omega_\mu/\omega_c\in[0.19,0.23]$ depending on meridional domain size,
-bracketing the observed value $0.207\,\omega_c$ without yet resolving to a
-single number; thin-ring analytic closure is required for a sharp prediction
-and is deferred to Paper~II.  For the proton, the empirical scaling
+Direct 3D toroidal Bogoliubov--de~Gennes projection with chiral-shear coupling
+is developed as a diagnostic for the muon rung, but the present scalar
+operator does not close the identification.  The reduced helicity-basis hit
+near $(3/2)\mu_0$ is not Galerkin-robust, a direct $m_\varphi=\pm1$ grid-sector
+solve finds no corresponding low branch, and a Volovik-style Berry-phase audit
+finds trivial holonomy for the implemented $\mathcal{L}_\perp$ block.  The
+muon therefore remains a candidate empirical rung rather than a derived
+eigenfrequency.  For the proton, the empirical scaling
 $m_p c^2 = N_Y\!\cdot\!F\!\cdot\!\mu_0$ with $N_Y\approx3.007$ and form factor
 $F\approx4.4$--$4.47$ at the inter-strand half-spacing cutoff
 $R\approx1.18\,\xi$ yields $m_p\approx 927$--$941\,\text{MeV}$
@@ -93,14 +88,12 @@ dependence on the regularisation cutoff $R$ and the meridional domain size
 $L_{\rm box}$ documented in the body.  A dedicated Claim Status section
 (\S\ref{sec:claim-status}) tags every quantitative claim as
 \textit{derived}, \textit{structural}, \textit{candidate}, or
-\textit{ansatz}, and links each candidate-grade claim to the consolidated tracking
-issue~\#30, whose computations would change its status.
-The open problems for Paper~II are: thin-ring analytic closure of the
-muon eigenfrequency, full 3D minimisation for the proton form factor
-(including a cutoff-stability scan for $F(R)$ and a dedicated $N_Y$
-cross-grid refinement), and a basis-enrichment programme that
-demonstrates the $1/\sqrt{N_{\rm modes}}$ residual scaling proposed
-for the muon rung.  The previously headlined $0.3\%$ proton-mass
+\textit{ansatz}, and records the issue~\#30 closure ledger for the
+candidate-grade branches.  The remaining open problems for future work are:
+a changed microscopic ladder ingredient if the muon rung is to be derived,
+topology-preserving static infrastructure for the proton branch, and a
+closure-grade dynamic reconnection simulator for Paper~II.  The previously
+headlined $0.3\%$ proton-mass
 agreement is the precision at a specific calibration cutoff
 $R\approx1.18\,\xi$ and is reframed in this paper as a $\sim$1.5\%
 match with documented cutoff sensitivity.
@@ -1164,13 +1157,13 @@ topology with $\mu_0$ determined by (iii) and $\alpha$.
 
 The BdG analysis (Appendix~\ref{app:bdg}) establishes analytically that
 $V_{\rm eff}=4(1-f_0^2)\geq0$, so the standard LogSE has \emph{no}
-$s$-wave amplitude mode.  The muon must arise from a ring-breathing mode
-coupled to the chiral-shear channel; the ring-breathing frequency alone gives
-$\omega_{\rm ring}\approx0.016\,\omega_c$ (Eq.~\ref{eq:omega-ring-exact}),
-a factor ${\sim}13$ below the muon scale, quantifying the gap to be bridged.
-The present paper closes this mechanism numerically via helicity-basis Kelvin
-coupling (Appendix~\ref{app:helicity-bridge}); the remaining task for Paper~II
-is analytic closure of the eigenfrequency in the thin-ring limit.
+$s$-wave amplitude mode.  The reduced helicity-basis Kelvin calculation
+originally suggested a muon-side branch, but the subsequent Path~B,
+issue~\#73, and issue~\#76 audits show that this branch is not a
+basis-converged or Berry-protected feature of the current scalar operator.
+The muon problem is therefore no longer a numerical closure item under
+issue~\#30; it requires a changed microscopic ingredient or a genuinely new
+full-operator result.
 
 The following open problems define the programme for Paper~II.  Each is a
 specific computation whose output would either confirm or falsify the
@@ -1213,25 +1206,26 @@ $L_{\rm min}(\mathrm{lk}=1) = 2R_e$ is therefore established at the level of
 the rigid-ring approximation, with sub-leading corrections suppressed by the
 same $\alpha^2$ that controls the ring-size expansion of \eqref{eq:Ekin}.
 
-\begin{gapbox}[Open Problem 2 — Muon: thin-ring analytic closure of the eigenfrequency]
-The muon identification $m_{\mu^\pm}=(3/2)\mu_0$ has been dynamically grounded
-in this paper (§\ref{sec:muon}, Appendix~\ref{app:helicity-bridge}) as the
-lowest hybrid of the core-breathing mode with the helicity-basis Kelvin
-centerline sector, coupled through $\mathcal{L}_\perp$.  Driven-response
-scans confirm a selection rule matching the topological identification of the
-rung.  In the present meridional projection the eigenfrequency resolves to
-$\omega_\mu/\omega_c\in[0.19,0.23]$ with the target $0.207$ inside this range
-and the uncertainty dominated by finite-domain effects on ring-scale modes.
+\begin{gapbox}[Open Problem 2 — Muon: current scalar-BdG closure paths failed]
+The muon identification $m_{\mu^\pm}=(3/2)\mu_0$ remains a candidate
+assignment carried by the empirical $m_e/\alpha$ scale, not a derived
+eigenfrequency.  Three closure attempts now give null results.  The
+pre-registered Path~B basis-enrichment test shows that the reduced
+helicity-basis BdG hit at $\omega/\omega_c\simeq0.207$ is not
+Galerkin-robust.  The direct $m_\varphi=\pm1$ grid-sector check of
+issue~\#73 finds no stable low branch near the muon target.  The
+Volovik/Berry-phase audit of issue~\#76 shows that the scalar SSV BdG
+operator has trivial azimuthal holonomy and that the bridge matrix element
+$\langle K_{\sigma,\pm}|(\nabla\times\delta j)^\dagger
+(\nabla\times\delta j)|\Phi_R\rangle$ vanishes by the
+$m_a=m_b$ / $m_a+m_b=0$ selection rules.
 
-\emph{What remains}: thin-ring analytic closure.  The matrix element
-$\langle K_{L,\pm}|(\nabla\times\delta j)^\dagger(\nabla\times\delta j)|\Phi_R\rangle$
-can be evaluated in closed form in the thin-ring limit $R_e/\xi=1/\alpha\gg1$,
-yielding a specific number times $\alpha^{-2}$ that fixes the bridge coefficient
-without the meridional-domain uncertainty of the numerical projection.  The
-corresponding calculation would reduce the muon mass to a single first-principles
-number without free parameters beyond $m_e$ and $\alpha$.  Alternatively, a full
-3D grid spanning the entire ring circumference would resolve the same question
-numerically; both paths are tractable and mutually cross-checking.
+\emph{What remains}: a positive muon derivation requires a changed
+microscopic ingredient not present in the current scalar formulation, such
+as a spinorial order parameter, a derived half-winding Nambu mass, or a
+future full 3D operator whose eigenbundle genuinely carries holonomy $-1$.
+The existing helicity-bridge numerics are retained as historical diagnostics
+but no longer close the rung.
 \end{gapbox}
 
 \begin{gapbox}[Open Problem 3 — Proton: form factor $F$ partially closed]
@@ -1263,15 +1257,12 @@ the observed value).  What remains open:
 
 Following the 2026-05-19 numerical extraction of $F$ at the inter-strand
 cutoff (Open Problem 3 above and Appendix~\ref{app:minimisation}), the
-proton assignment is now a $1$--$2\%$ prediction rather than a hypothesis;
-closing the remaining gap requires either a derivation of the chiral scale
-$\mu_0$ from SSV parameters or grid refinement to $n=96$+ to tighten the
-residual numerical convergence error.  The pion is on stronger footing:
-its two-winding topology is topologically forced, and the remaining gap is the
-stability proof for $L=2R_e$.  The muon has been upgraded in this paper from
-empirical coincidence to dynamically motivated rung with verified selection-rule
-structure; its numerical value carries a bounded residual uncertainty that will
-be closed analytically in Paper~II.
+proton assignment is a candidate $1$--$2\%$ estimate rather than a closed
+derivation; later issue~\#30 closure gates show that the current static
+pipeline is not topology-robust or cutoff-derived.  The pion is on stronger
+footing: its two-winding topology is topologically forced, and the remaining
+gap is the stability proof for $L=2R_e$.  The muon remains a candidate
+empirical rung after the Path~B, issue~\#73, and issue~\#76 null results.
 
 %------------------------------------------------------------------
 \section{Conclusion and Next Steps}
@@ -1293,24 +1284,17 @@ with $\mu_0=m_e/\alpha$ identified as the natural vortex energy scale.
 BdG analysis proves analytically that no $s$-wave amplitude bound mode
 exists in the standard LogSE — the effective potential
 $V_{\rm eff}=4(1-f_0^2)\geq0$ is purely repulsive.  The muon scale
-requires the ring-breathing mode; its bare frequency $\omega_{\rm ring}
-\approx0.016\,\omega_c$ lies a factor $\sim13$ below $\omega_\mu$,
-quantifying the gap that must be bridged by chiral coupling.  Direct 3D
-BdG projection in the helicity-basis Kelvin sector (Appendix~\ref{app:helicity-bridge})
-closes this mechanism: the muon emerges as the lowest core-breathing $\oplus$
-Kelvin hybrid coupled through $\mathcal{L}_\perp$, confirmed by a driven-response
-selection rule.  In the present meridional projection the eigenfrequency resolves
-to $\omega_\mu/\omega_c\in[0.19,0.23]$, bracketing the observed value $0.207$;
-thin-ring analytic closure in Paper~II will sharpen this to a single number.
-Agreement with CODATA at the $0.34\%$ level is demonstrated for the charged
-pion.  The proton mass formula $m_p c^2 = N_Y\!\cdot\!F\!\cdot\!\mu_0$ with
-$N_Y\approx3.007$ and form factor $F\approx4.4$--$4.47$ at the inter-strand
-half-spacing cutoff $R\approx1.18\,\xi$ gives $m_p\approx 927$--$941\,\text{MeV}$,
-i.e.\ $1.2\%$--$0.3\%$ from CODATA depending on the cutoff convention; a
-cutoff-stability scan of $F(R)$ across the natural window is required to
-sharpen this and is deferred to Paper~II.  The muon is dynamically grounded
-at the level of an eigenfrequency bracket that contains the observed value;
-the thin-ring matrix-element closure is the outstanding falsification test.
+therefore cannot arise from the planar amplitude potential.  Subsequent
+closure work also rules out the current reduced helicity-basis route, the
+direct $m_\varphi=\pm1$ scalar BdG sector, and the proposed Volovik
+Berry-phase rescue for the implemented $\mathcal{L}_\perp$ block.  The
+assignment $m_{\mu^\pm}=(3/2)\mu_0$ remains an empirical/candidate rung
+pending a changed microscopic ingredient.  Agreement with CODATA at the
+$0.34\%$ level is demonstrated for the charged pion.  The proton mass formula
+$m_p c^2 = N_Y\!\cdot\!F\!\cdot\!\mu_0$ with $N_Y\approx3.007$ and form
+factor $F$ at the inter-strand cutoff remains candidate-grade: issue~\#30
+records that cutoff-invariance, simple geometric-$R$ extraction, and
+same-topology recovery all failed under the current static pipeline.
 
 %------------------------------------------------------------------
 \section{Claim Status}
@@ -1364,42 +1348,43 @@ relaxation needed. & --- \\
 Muon mass via the core-breathing $\oplus$ Kelvin hybrid;
 eigenfrequency bracket $\omega_\mu/\omega_c \in [0.19,\,0.23]$
 containing the target $0.207$ &
-candidate & Sharpen the bracket to a single number either via
-thin-ring analytic closure (deferred to Paper~II) or via a
-basis-enrichment programme that demonstrates the
-$1/\sqrt{N_{\rm modes}}$ residual scaling.  The current
-enrichment direction's failure mode is documented in
-\texttt{enrichment-attempt-findings-2026-05-27.md}. &
-\#30 \\
+candidate & Current closure paths are null: Path~B basis enrichment
+drifts $\pm13\%$, issue~\#73 finds no direct low
+$m_\varphi=\pm1$ branch, and issue~\#76 finds no half-integer
+Berry holonomy in the scalar SSV BdG operator.  A positive
+derivation requires a changed microscopic ingredient or a future
+basis-converged full 3D operator not yet present. &
+\#66,\#73,\#76 \\
 Cubic-vertex one-loop self-energy as the source of the muon
 residual gap & \textit{falsified} & The repository calculation gives
 a relative shift of $-(3\text{--}9)\times 10^{-9}$, seven orders of
 magnitude too small and with the wrong sign.  Documented in
 \texttt{muon-cubic-vertex-result-note.md}. & --- \\
 Higher rungs $K^\pm \approx 7\mu_0$ and $\rho(770) \approx 11\mu_0$
-($\sim$0.7\%) & candidate & Same mechanism as muon; same closure
-condition.  No separate dynamical confirmation yet. & \#30 \\
+($\sim$0.7\%) & candidate & Same ladder mechanism as the muon,
+so the present scalar-BdG nulls also block a derived ladder
+interpretation.  No separate dynamical confirmation yet. & \#66,\#76 \\
 Proton mass $m_p \approx N_Y \cdot F \cdot \mu_0 \approx 930$--$954$
 MeV ($\sim$1.5\% from CODATA at $R\!=\!1.18\,\xi$) &
-candidate & Three open sub-claims: (i)~derive the cutoff $R$
-geometrically from the relaxed breather rather than treating it
-as a calibration parameter; (ii)~run the dedicated $N_Y$ refinement
-sweep across the $24^3,\,48^3,\,72^3$ grid family (currently
-inferred via $F$); (iii)~test whether the product
-$N_Y\cdot F$ is itself cutoff-invariant.  Each would shift the
-status one step toward derived. & \#30 \\
+candidate & Issue~\#30 closure gates were negative: cutoff
+invariance of $N_YF$ is falsified; simple geometric-$R$ extraction
+fails; gate (iii-a) is seed-locked/topology-losing under the
+current soft-penalty pipeline.  Promotion requires new
+topology-preserving static infrastructure or a derived cutoff
+observable, not another tuning of the present pipeline. & closed \#30 \\
 $N_Y \approx 3.007$ topological crossing factor & candidate &
 Same as above; the $\pm0.002$ band in earlier drafts is fit
 reproducibility, not measured cross-grid spread.  Topology
-preservation requires the penalty mechanism documented in
-\texttt{src/paper\_i/topology\_penalty.py}. & \#30 \\
+preservation is not robust under the current soft-penalty relaxer,
+as recorded in \texttt{proton-gate-iii-result.md}. & closed \#30 \\
 Form factor $F\approx4.47$ at $R=1.18\,\xi$
 (fine-grid average) & candidate & Topology-preserving relaxation
 on $n^3{=}48^3,\,72^3$ agrees at the $\sim6\%$ level on this
 observable; the n=24 grid value at the same cutoff is $4.55$,
 but the raw numerator differs from the fine-grid limit by
 ${\sim}54\%$ at the unrescaled cutoff.  Closure-grade requires
-n=96+ and a derived cutoff. & \#30 \\
+a derived cutoff and a topology-preserving solver; the current
+cutoff-invariance and simple geometric-$R$ routes failed. & closed \#30 \\
 Restricted 2-mode BdG diagnostic
 (\texttt{restricted\_bdg\_matrix.py}) producing
 $\omega_-$, $\omega_+$ &
@@ -1409,7 +1394,7 @@ sweep recorded in
 $\sim 63\%$ grid drift and $\sim 66\%$ box drift in $\omega_+$,
 and a non-real $\omega_-$ at every reference point.  The numbers
 this script prints are not cited in the body of this paper and
-should not be quoted as derived. & \#30 \\
+should not be quoted as derived. & closed \#30 \\
 Vortex-profile shooting solver
 (\texttt{vortex\_profile.py}) & validation & Profile grid is
 well-converged for $\texttt{profile\_n}\ge 600$ and
@@ -1926,10 +1911,13 @@ result $R_e^* = \xi/\alpha$.
 \label{app:helicity-bridge}
 %------------------------------------------------------------------
 
-This appendix documents the numerical 3D BdG projection that dynamically grounds
-the muon identification $m_{\mu^\pm}\approx(3/2)\mu_0$, together with the
-driven-response selection rule that distinguishes muon-type and pion-type
-ladder rungs by their drive symmetry.
+This appendix documents the historical numerical 3D BdG projection that first
+motivated the muon identification $m_{\mu^\pm}\approx(3/2)\mu_0$, together
+with the driven-response diagnostic that appeared to distinguish muon-type and
+pion-type ladder rungs by drive symmetry.  It is retained as a useful record of
+the reduced-basis calculation, but its ladder interpretation is superseded by
+the Path~B null, the direct phi-sector BdG null of issue~\#73, and the
+Berry-phase audit of issue~\#76.
 
 \subsection{Projection basis}
 
@@ -1988,7 +1976,10 @@ cylindrical volume integral over the meridional projection domain.
 
 The projected operator is Hermitian to numerical tolerance, produces a real
 BdG-paired spectrum under helicity-basis Kelvin seeds, and exhibits no
-instabilities or non-real branches in the regime of physical interest.
+instabilities or non-real branches in the regime of physical interest.  This
+does not make the projected branch basis-converged; the selection-rule-correct
+enrichment and direct-sector checks show that the target-adjacent branch is a
+reduced-basis feature rather than a derived eigenfrequency of the operator.
 
 \subsection{Driven-response selection rule}
 
@@ -2006,7 +1997,7 @@ specific mode symmetry.  The response amplitude as a function of $\omega$
 reveals resonance peaks whose positions, widths, and selection rules carry
 more information than eigenvalue proximity.
 
-\paragraph{Result.}
+\paragraph{Historical reduced-basis result.}
 At $n=31$, $L_{\rm box}=5\xi$, $\lambda_\perp^{\rm code} = \pi/4$,
 $\gamma = 0.005$, scanning $0.15\le\omega/\omega_c\le0.35$:
 
@@ -2042,9 +2033,12 @@ $4.0513$ & $29.5$ & $4.071$ & $0.5\%$ \\
 \end{tabular}
 \end{center}
 
-The pion and higher rungs resolve to sub-percent accuracy.  The lowest rung
-(muon) sits at $6.1\%$ below the target on this grid, reflecting the
-finite-meridional-domain limitation on ring-scale Kelvin modes.
+In this reduced basis the pion-side and higher target windows resolve to
+sub-percent proximity.  Later controls show that this proximity is not a
+derived ladder: the half-integer/integer classifier is dense at high
+frequency, the pion rung is absent in the Path~B basis-enrichment test, and
+the muon-side branch is not stable under either basis enrichment or direct
+$m_\varphi=\pm1$ discretisation.
 
 \subsection{Box-size dependence and residual uncertainty}
 
@@ -2067,31 +2061,32 @@ $6$ & $0.200$ & $-3.4\%$ \\
 \end{tabular}
 \end{center}
 
-The muon peak brackets the observed value and narrows as the box grows,
-consistent with $L_{\rm box}\to\infty$ convergence to $\omega_\mu/\omega_c=0.207$.
-Higher rungs, which are core-localised, do not show this box dependence and
-retain their sub-percent accuracy across $L_{\rm box}\in[5,8]$.
+In the reduced helicity basis the muon-side peak brackets the observed value
+as the box grows.  This was the original motivation for the closure programme,
+but it is not sufficient evidence for convergence: standard Galerkin
+enrichment moves or removes the branch, and the direct phi-sector solve finds
+no corresponding low direct-sector mode.
 
 \subsection{Interpretation and comparison to experimental precision}
 
-The combined evidence establishes:
+The combined evidence from this reduced calculation suggested:
 \begin{itemize}
-  \item The muon is dynamically identified with the lowest core-breathing
+  \item a possible muon identification with the lowest core-breathing
         $\oplus$ Kelvin hybrid coupled through $\mathcal{L}_\perp$, not merely
         a numerical coincidence.
-  \item Driven-response selection rules confirm the identification by
+  \item driven-response selection rules appeared to support the identification by
         symmetry: core drive $\leftrightarrow$ muon rung, Kelvin drive
         $\leftrightarrow$ pion rung.
-  \item The eigenfrequency brackets the observed value
+  \item the eigenfrequency bracketed the observed value
         $\omega_\mu/\omega_c\in[0.19,0.23]$ with residual uncertainty
-        dominated by finite-meridional-domain effects that are known,
-        bounded, and tractable in Paper~II via thin-ring analytics.
+        that was initially attributed to finite-meridional-domain effects.
 \end{itemize}
 
-The residual uncertainty in the muon eigenfrequency at the present level is
-a characterisable consequence of the finite meridional domain; the next
-refinement is the thin-ring analytic closure deferred to Paper~II, which
-turns the bracket into a single number that can be tested against
-$\omega_\mu/\omega_c = 0.207$.
+The later closure programme changed this interpretation.  Path~B showed that
+the branch is not basis-robust, issue~\#73 showed that it is not reproduced by
+a direct $m_\varphi=\pm1$ grid sector, and issue~\#76 showed that the current
+scalar $\mathcal{L}+\mathcal{L}_\perp$ operator does not supply the missing
+half-integer Berry holonomy.  The reduced-basis response remains a diagnostic,
+not a derivation of $m_{\mu^\pm}$.
 
 \end{document}
