@@ -252,6 +252,7 @@ def run_gradient_flow(
     penalty_mu: float = 0.0,
     penalty_rho_target: float = 0.05,
     use_numba: bool = True,
+    energy_gate: bool = True,
     verbose: bool = True,
 ) -> tuple[np.ndarray, list[StepRecord]]:
     """Pure gradient descent with adaptive topology guard.
@@ -315,41 +316,66 @@ def run_gradient_flow(
     for step in range(1, max_steps + 1):
         grad = _grad(psi)
 
-        # Adaptive backtracking line search with warm start: try to grow the
-        # step by 2x from the last accepted alpha, then halve until the step
-        # both decreases energy and preserves topology. The accepted alpha is
-        # carried forward (NOT reset to alpha_init each step) so the search can
-        # ride a small step size through stiff regions and grow back out of
-        # them — resetting to alpha_init each step stalls the descent.
-        alpha_try = min(alpha * 2.0, alpha_max)
-        rejected = True
-        for _bt in range(MAX_BACKTRACK):
-            candidate = psi - alpha_try * grad
-            apply_boundary_anchor(candidate, cfg)
+        if energy_gate:
+            # Adaptive backtracking line search with warm start: try to grow the
+            # step by 2x from the last accepted alpha, then halve until the step
+            # both decreases energy and preserves topology. The accepted alpha is
+            # carried forward (NOT reset to alpha_init each step) so the search can
+            # ride a small step size through stiff regions and grow back out of
+            # them — resetting to alpha_init each step stalls the descent.
+            alpha_try = min(alpha * 2.0, alpha_max)
+            rejected = True
+            for _bt in range(MAX_BACKTRACK):
+                candidate = psi - alpha_try * grad
+                apply_boundary_anchor(candidate, cfg)
+                n_links_candidate = _count(candidate)
+                topo_ok = (n_links_candidate >= n_links - topo_drop_tol)
+                e_candidate = _energy(candidate)
+                if topo_ok and e_candidate < energy:
+                    rejected = False
+                    break
+                alpha_try /= 2.0
 
-            n_links_candidate = _count(candidate)
-            topo_ok = (n_links_candidate >= n_links - topo_drop_tol)
-            e_candidate = _energy(candidate)
-            energy_ok = (e_candidate < energy)
-
-            if topo_ok and energy_ok:
-                rejected = False
-                break
-            alpha_try /= 2.0
-
-        if not rejected:
-            psi = candidate
-            energy = e_candidate
-            n_links = n_links_candidate
-            alpha = alpha_try
-            rejected_streak = 0
+            if not rejected:
+                psi = candidate
+                energy = e_candidate
+                n_links = n_links_candidate
+                alpha = alpha_try
+                rejected_streak = 0
+            else:
+                rejected_streak += 1
+                if alpha_try < alpha_min:
+                    if verbose:
+                        print(f"  step {step}: alpha below minimum ({alpha_min:.1e}), stopping.")
+                    break
+                alpha = alpha_try
         else:
-            rejected_streak += 1
-            if alpha_try < alpha_min:
-                if verbose:
-                    print(f"  step {step}: alpha below minimum ({alpha_min:.1e}), stopping.")
-                break
-            alpha = alpha_try
+            # Pure imaginary-time flow: fixed sub-stability step, accept every
+            # topology-preserving step regardless of energy. This is genuine
+            # gradient flow (psi -= dt*grad) and cannot stall — the strict
+            # energy-decrease gate is what causes alpha-collapse stalls. The
+            # topology guard only reverts the rare step that would break links.
+            alpha_try = alpha
+            rejected = True
+            for _bt in range(MAX_BACKTRACK):
+                candidate = psi - alpha_try * grad
+                apply_boundary_anchor(candidate, cfg)
+                n_links_candidate = _count(candidate)
+                if n_links_candidate >= n_links - topo_drop_tol:
+                    rejected = False
+                    break
+                alpha_try /= 2.0
+            if not rejected:
+                psi = candidate
+                n_links = n_links_candidate
+                energy = _energy(candidate)
+                rejected_streak = 0
+            else:
+                rejected_streak += 1
+                if alpha_try < alpha_min:
+                    if verbose:
+                        print(f"  step {step}: topology cannot be preserved, stopping.")
+                    break
 
         elapsed = time.perf_counter() - t0
         records.append(StepRecord(step, energy, alpha, n_links, rejected, elapsed))
@@ -472,6 +498,10 @@ def parse_args() -> argparse.Namespace:
                         "building a fresh trefoil.  Avoids sharp-feature artefacts at fine grids.")
     p.add_argument("--no-numba", action="store_true",
                    help="Disable numba-accelerated kernels (use pure numpy).")
+    p.add_argument("--no-energy-gate", action="store_true",
+                   help="Pure imaginary-time flow: fixed step, accept every "
+                        "topology-preserving step (no strict energy-decrease "
+                        "gate). Robust against fresh-start stalls.")
     return p.parse_args()
 
 
@@ -556,6 +586,7 @@ def main() -> None:
         penalty_mu=args.penalty_mu,
         penalty_rho_target=args.penalty_rho_target,
         use_numba=not args.no_numba,
+        energy_gate=not args.no_energy_gate,
     )
 
     save_path.parent.mkdir(parents=True, exist_ok=True)
