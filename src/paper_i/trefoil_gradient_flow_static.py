@@ -112,6 +112,63 @@ def full_energy(
     return float(e)
 
 
+def _nearest_curve_chunked(
+    points: np.ndarray,
+    curve: np.ndarray,
+) -> np.ndarray:
+    """Find nearest curve-sample index for each grid point, one z-slice at a time.
+
+    Replaces the monolithic (S, n, n, n, 3) offset array with S × (n, n, 3)
+    slices.  Peak memory: S × n² × 3 × 8 bytes (e.g. 100 × 128² × 24 = 40 MB)
+    regardless of n, vs the naive approach which uses S × n³ × 3 × 8 bytes
+    (5 GB at n=128, S=100).
+    """
+    nx, ny, nz = points.shape[:3]
+    nearest = np.empty((nx, ny, nz), dtype=np.int32)
+    for iz in range(nz):
+        pts = points[:, :, iz, :]                             # (nx, ny, 3)
+        offsets = pts[np.newaxis, :, :, :] - curve[:, np.newaxis, np.newaxis, :]  # (S, nx, ny, 3)
+        dist_sq = np.einsum("sijk,sijk->sij", offsets, offsets)   # (S, nx, ny)
+        nearest[:, :, iz] = np.argmin(dist_sq, axis=0)
+    return nearest
+
+
+def chunked_initial_state(cfg: TrefoilConfig) -> np.ndarray:
+    """Memory-efficient version of trefoil_breather_static.initial_state.
+
+    Uses _nearest_curve_chunked so peak RAM scales as O(frame_samples × n²)
+    rather than O(frame_samples × n³).
+    """
+    from trefoil_breather_static import trefoil_curve, coordinate_grid
+
+    x, y, z = coordinate_grid(cfg)
+    points = np.stack((x, y, z), axis=-1)
+    curve, _tangent, normal, binormal = trefoil_curve(
+        cfg.frame_samples,
+        major_radius=cfg.major_radius,
+        minor_radius=cfg.minor_radius,
+    )
+
+    nearest = _nearest_curve_chunked(points, curve)
+
+    nearest_curve    = curve[nearest]
+    nearest_normal   = normal[nearest]
+    nearest_binormal = binormal[nearest]
+    nearest_offset   = points - nearest_curve
+
+    radial_n  = np.sum(nearest_offset * nearest_normal,   axis=-1)
+    radial_b  = np.sum(nearest_offset * nearest_binormal, axis=-1)
+    distance  = np.sqrt(np.maximum(radial_n**2 + radial_b**2, 0.0))
+    theta     = np.arctan2(radial_b, radial_n)
+
+    amplitude = np.tanh(distance / (math.sqrt(2.0) * cfg.xi))
+    phase     = np.exp(1j * theta)
+
+    radius_sq = x**2 + y**2 + z**2
+    seed = 1.0 - 0.25 * np.exp(-radius_sq / max(cfg.smoothing_radius**2, 1e-12))
+    return (amplitude * phase * seed).astype(np.complex128)
+
+
 def normalize_bulk(psi: np.ndarray, cfg: TrefoilConfig) -> np.ndarray:
     """Rescale psi so the mean density in the outer quarter-shell is rho0=1."""
     n = psi.shape[0]
@@ -389,8 +446,8 @@ def main() -> None:
             log_pressure=args.log_pressure,
             frame_samples=_frame_samples(n),
         )
-        psi = initial_state(cfg)
-        print(f"Starting from fresh trefoil: n={cfg.n}, frame_samples={cfg.frame_samples}")
+        psi = chunked_initial_state(cfg)
+        print(f"Starting from fresh trefoil: n={cfg.n}, frame_samples={cfg.frame_samples} (chunked)")
 
     save_path = args.save_state
     if save_path is None:
