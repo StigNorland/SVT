@@ -1,72 +1,67 @@
-# #77 follow-up: trefoil geometry (R, a) scan — rugged landscape (2026-06-03)
+# #77 follow-up: trefoil geometry (R, a) scan + landscape diagnosis (2026-06-03)
 
 **Goal:** N_Y×F was grid-converged at the fixed reference geometry (R=2.8 ξ,
 a=0.85 ξ). Find the energy-minimising (R, a) — the physical proton geometry.
 
-**Script:** `src/paper_i/trefoil_geometry_scan.py`
-**Data:** `papers/SSV-I/data/geometry-scan-n96-v2-2026-06-03.json`,
-`geometry-scan-n96-fine-2026-06-03.json`
+**Scripts:** `trefoil_geometry_scan.py`, `peierls_nabarro_test.py`
+**Data:** `geometry-scan-n96-{v2,fine}-2026-06-03.json`,
+`peierls-nabarro-2026-06-03.json`
 
-## Result: the energy is NOT a clean single-valued function of (R, a)
+## First pass looked rugged — but that was a relaxation artifact
 
-The topology-constrained gradient flow has a **rugged, multi-basin energy
-landscape**. The relaxed energy depends not only on (R, a) but on the initial
-curve discretisation and the grid resolution — different choices land in
-different local minima. Evidence:
+The fresh-start geometry scan produced wildly scattered energies: the same
+geometry (2.5, 0.80) gave E=592 at n=96 but E≈1426 at n=128; many points
+"stalled" at high energy in ~20 steps. This *looked* like a rugged multi-basin
+landscape (a "glassy / foam-like vacuum"). **Two diagnostics show it is not.**
 
-| geometry | n | frame_samples | E_final | note |
-|---|---|---|---|---|
-| (2.8, 0.85) | 128 | 100  | 656 | resolution-ladder seed |
-| (2.8, 0.85) | 128 | 1024 | 733 | finer initial curve → different basin |
-| (2.5, 0.80) | 96  | 768  | 592 | scan minimum |
-| (2.5, 0.80) | 128 | 1024 | 1389 (gated) / 1426 (fixed-dt) | same geometry, ~2.3× higher at finer grid |
+### Diagnostic 1 — Peierls-Nabarro lattice-pinning test
+Translate a single straight LogSE vortex across the grid in sub-cell steps;
+the energy oscillation is the lattice pinning barrier. Result (box=8, lp=0.5):
 
-The (2.5, 0.80) "minimum" found at n=96 (E=592) does **not** reproduce at n=128
-(E≈1400). A fixed-dt imaginary-time flow without the energy gate confirms this
-is genuine multi-basin behaviour (energy decreases smoothly to ≈1426, not a
-solver stall).
+| n | dx | PN barrier (abs) | ratio per dx-halving |
+|---|---|---|---|
+| 64  | 0.125  | 6.34e-2 | — |
+| 128 | 0.0625 | 3.11e-2 | 0.49 |
+| 256 | 0.0313 | 1.54e-2 | 0.50 |
+| 512 | 0.0156 | 7.65e-3 | 0.50 |
+| 1024| 0.0078 | 3.82e-3 | 0.50 |
 
-## Why
+Barrier ∝ dx¹ (relative ∝ dx²) → **vanishes as dx→0: a lattice artifact.**
+But its magnitude (~0.06 at the trefoil's dx) is **4 orders of magnitude
+smaller** than the ~800-unit energy spread seen in the scan. Lattice pinning
+is far too small to cause the apparent ruggedness.
 
-The (2,3) torus-knot vortex has many nearby topology-preserving configurations
-separated by small barriers. The relaxer descends into whichever basin the
-initial discretisation seeds. For stiff initial geometries (large a, or certain
-R) the local energy gradient points toward vortex reconnection, which the
-topology guard correctly blocks — leaving the field in a high-lying basin.
+### Diagnostic 2 — regrid (continuation) test
+Relax (2.5, 0.80) at n=96 (E=592, converged), spectrally regrid to n=128, and
+relax again: settles at **E=577** — close to the n=96 value, NOT 1426. The
+high fresh-start energy was simply **incomplete relaxation** (stiff initial
+imprint, descent stuck in the transient), not a distinct physical basin.
 
-## What is robust
+## Corrected conclusion
 
-1. **Within-basin grid convergence** (the posted Track 2 result): starting from
-   ONE converged seed and refining via spectral regrid (n=96→128→160→192) stays
-   in a single basin and gives **N_Y×F → 54** (consecutive spreads < 2.5%).
-   This is solid: for a fixed relaxed trefoil basin, the observable is
-   grid-converged.
+The continuum landscape is **smooth, single-basin** for a given geometry. The
+apparent ruggedness was a fresh-start optimisation artifact. Therefore:
 
-2. **Geometric spread:** across the converged n=96 scan points (the shallow
-   basin R≈2.5–2.8, a≈0.80–0.85, E≈590–620, ~4% energy spread), N_Y×F ranges
-   46–53. So even setting basin ambiguity aside, the observable carries ~±8%
-   geometric uncertainty.
+- **Increasing resolution does not change the physics** — lattice pinning was
+  already negligible. The trefoil is relaxation-limited, not grid-limited.
+- The robust value at the reference geometry stands: regrid ladder n=96→192
+  gives **N_Y×F → 54** (<2.5% spread), single basin.
+- The (2.5, 0.80) and (2.8, 0.85) geometries both relax cleanly when properly
+  converged (E=577 and ~619 at n=128); a fair geometry comparison needs
+  guaranteed convergence per point (regrid/continuation or large step budgets),
+  which the first scan did not enforce.
 
-## Honest status of the proton N_Y×F
+## Status of the proton N_Y×F
 
-**N_Y×F ≈ 50 ± 5**, limited by (a) multi-basin landscape ruggedness and
-(b) shallow geometric dependence — NOT by grid resolution, which is now
-controlled. More grid refinement will not tighten this.
+Grid-convergence (the wall that blocked #13) is solved. The earlier "N_Y×F ≈
+50 ± 5 from landscape ruggedness" claim is **withdrawn** — there is no physical
+ruggedness. The remaining task is a properly-converged (R, a) scan to locate
+the single energy minimum; preliminary converged points put it near
+R≈2.5–2.8, a≈0.80–0.85 with N_Y×F in the low 50s.
 
-## What pinning the geometry would require
+## Methodology lesson
 
-Energy-minimisation by fresh-start relaxation is the wrong tool for a rugged
-landscape. Options:
-- A global minimiser over the knot moduli (R, a) — e.g. basin-hopping or
-  simulated annealing over geometries, each relaxed by continuation (morph
-  (R, a) in small steps, regrid+relax at each) to stay in a consistent basin.
-- A physical selection principle for (R, a) from the SSV action, rather than
-  bare energy minimisation of the relaxed field.
-- Accept (2.8, 0.85) as a representative geometry and quote N_Y×F = 54 with the
-  ±geometric-spread caveat.
-
-## Implication for #14 (α_G)
-
-Feed N_Y×F ≈ 50 ± 5 with the explicit caveat that the geometry is not uniquely
-pinned. The grid-convergence problem that blocked #13 is solved; the remaining
-uncertainty is physical/landscape, not numerical.
+A converged-looking fresh-start run is not proof of a basin: confirm with a
+regrid/continuation from an independently-converged seed before interpreting
+energy differences as physical. The "quantum-foam-like" reading of the first
+scan was an artifact, caught by the PN + regrid checks.
