@@ -303,7 +303,7 @@ def _save_state(
         "minor_radius": cfg.minor_radius,
         "log_pressure": cfg.log_pressure,
         "lambda_perp": lambda_perp,
-        "frame_samples": 600,
+        "frame_samples": cfg.frame_samples,
         "density_floor": cfg.density_floor,
     }
     np.savez_compressed(
@@ -350,34 +350,47 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--penalty-rho-target", type=float, default=0.05)
     p.add_argument("--save-state", type=Path, default=None)
     p.add_argument("--output", type=Path, default=None)
+    p.add_argument("--frame-samples", type=int, default=None,
+                   help="Curve sample count for initial_state (default: auto, 100 for n>=96)")
     return p.parse_args()
 
 
 def main() -> None:
     args = parse_args()
 
+    # Auto-reduce frame_samples for large n to avoid the (frame_samples × n³ × 3)
+    # distance array OOMing. At n=96+, 100 samples (arc spacing ~0.4 xi) is ample.
+    def _frame_samples(n: int) -> int:
+        if args.frame_samples is not None:
+            return args.frame_samples
+        return 100 if n >= 96 else 600
+
     if args.load_state is not None:
         print(f"Loading initial state from {args.load_state.name}...")
         psi, cfg_dict = load_state_npz(args.load_state)
+        n = int(cfg_dict.get("n", args.n))
         cfg = TrefoilConfig(
-            n=int(cfg_dict.get("n", args.n)),
+            n=n,
             half_width=float(cfg_dict.get("half_width", args.half_width)),
             major_radius=float(cfg_dict.get("major_radius", args.major_radius)),
             minor_radius=float(cfg_dict.get("minor_radius", args.minor_radius)),
             log_pressure=float(cfg_dict.get("log_pressure", args.log_pressure)),
+            frame_samples=_frame_samples(n),
         )
         print(f"  loaded n={cfg.n}, major_radius={cfg.major_radius}, "
-              f"minor_radius={cfg.minor_radius}")
+              f"minor_radius={cfg.minor_radius}, frame_samples={cfg.frame_samples}")
     else:
+        n = args.n
         cfg = TrefoilConfig(
-            n=args.n,
+            n=n,
             half_width=args.half_width,
             major_radius=args.major_radius,
             minor_radius=args.minor_radius,
             log_pressure=args.log_pressure,
+            frame_samples=_frame_samples(n),
         )
         psi = initial_state(cfg)
-        print(f"Starting from fresh trefoil: n={cfg.n}")
+        print(f"Starting from fresh trefoil: n={cfg.n}, frame_samples={cfg.frame_samples}")
 
     save_path = args.save_state
     if save_path is None:
