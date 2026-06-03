@@ -62,6 +62,12 @@ from topology_penalty import (
     topology_penalty_energy,
     topology_penalty_gradient,
 )
+from gradient_flow_numba import (
+    NUMBA_AVAILABLE,
+    count_links_numba,
+    energy_total_numba,
+    logse_gradient_numba,
+)
 
 SCRIPT_METADATA = ScriptMetadata(
     problem_type="static",
@@ -112,24 +118,57 @@ def full_energy(
     return float(e)
 
 
+def spectral_regrid(psi: np.ndarray, n_target: int) -> np.ndarray:
+    """Upsample or downsample a 3D complex field via FFT zero-padding.
+
+    Preserves all frequencies below min(n_src, n_target) / 2.
+    This is the standard smooth interpolation for periodic/Dirichlet fields.
+    """
+    import numpy.fft as nf
+    n_src = psi.shape[0]
+    if n_src == n_target:
+        return psi.copy()
+    psi_k = nf.fftn(psi)
+    # Shift zero-frequency to centre, crop/pad symmetrically, shift back
+    psi_k = nf.fftshift(psi_k)
+    half_t = n_target // 2
+    half_s = n_src // 2
+    out_k = np.zeros((n_target, n_target, n_target), dtype=np.complex128)
+    # Copy the low-frequency block
+    sl_s = slice(half_s - min(half_s, half_t), half_s + min(half_s, half_t))
+    sl_t = slice(half_t - min(half_s, half_t), half_t + min(half_s, half_t))
+    out_k[sl_t, sl_t, sl_t] = psi_k[sl_s, sl_s, sl_s]
+    out_k = nf.ifftshift(out_k)
+    # Scale to preserve RMS amplitude
+    psi_out = nf.ifftn(out_k) * (n_target / n_src) ** 3
+    return psi_out.astype(np.complex128)
+
+
 def _nearest_curve_chunked(
     points: np.ndarray,
     curve: np.ndarray,
+    n_workers: int = 4,
 ) -> np.ndarray:
-    """Find nearest curve-sample index for each grid point, one z-slice at a time.
+    """Find nearest curve-sample index for each grid point, processing z-slices
+    in parallel batches.
 
-    Replaces the monolithic (S, n, n, n, 3) offset array with S × (n, n, 3)
-    slices.  Peak memory: S × n² × 3 × 8 bytes (e.g. 100 × 128² × 24 = 40 MB)
-    regardless of n, vs the naive approach which uses S × n³ × 3 × 8 bytes
-    (5 GB at n=128, S=100).
+    Peak memory per batch: batch_size × S × n² × 3 × 8 bytes.
+    At n=128, S=100, batch_size=8: 8 × 100 × 128² × 24 = 320 MB.
     """
+    from concurrent.futures import ThreadPoolExecutor
+
     nx, ny, nz = points.shape[:3]
     nearest = np.empty((nx, ny, nz), dtype=np.int32)
-    for iz in range(nz):
-        pts = points[:, :, iz, :]                             # (nx, ny, 3)
-        offsets = pts[np.newaxis, :, :, :] - curve[:, np.newaxis, np.newaxis, :]  # (S, nx, ny, 3)
-        dist_sq = np.einsum("sijk,sijk->sij", offsets, offsets)   # (S, nx, ny)
+
+    def process_slice(iz: int) -> None:
+        pts = points[:, :, iz, :]                                         # (nx, ny, 3)
+        offsets = pts[np.newaxis] - curve[:, np.newaxis, np.newaxis, :]   # (S, nx, ny, 3)
+        dist_sq = np.einsum("sijk,sijk->sij", offsets, offsets)
         nearest[:, :, iz] = np.argmin(dist_sq, axis=0)
+
+    with ThreadPoolExecutor(max_workers=n_workers) as pool:
+        list(pool.map(process_slice, range(nz)))
+
     return nearest
 
 
@@ -212,6 +251,7 @@ def run_gradient_flow(
     save_path: Path | None = None,
     penalty_mu: float = 0.0,
     penalty_rho_target: float = 0.05,
+    use_numba: bool = True,
     verbose: bool = True,
 ) -> tuple[np.ndarray, list[StepRecord]]:
     """Pure gradient descent with adaptive topology guard.
@@ -238,40 +278,56 @@ def run_gradient_flow(
         penalty_rho_target=penalty_rho_target,
     )
 
+    # Fast path: numba kernels for the per-step hot functions. Only valid when
+    # there is no L_perp term and no penalty (the kernels implement pure LogSE).
+    # Otherwise fall back to the numpy implementations.
+    fast = use_numba and NUMBA_AVAILABLE and lambda_perp == 0.0 and penalty_mu == 0.0
+    if fast:
+        df = cfg.density_floor
+        lp = cfg.log_pressure
+        _count = lambda f: count_links_numba(f)
+        _energy = lambda f: energy_total_numba(f, dx, lp, df)
+        _grad = lambda f: logse_gradient_numba(f, dx, lp, df)
+    else:
+        _count = count_vortex_links
+        _energy = lambda f: full_energy(f, cfg, lambda_perp, **pen_kw)
+        _grad = lambda f: full_gradient(f, cfg, lambda_perp, **pen_kw)
+
     apply_boundary_anchor(psi, cfg)
     # Normalize once at start; NOT inside the gradient loop (would break descent)
     psi = normalize_bulk(psi, cfg)
     apply_boundary_anchor(psi, cfg)
 
-    energy = full_energy(psi, cfg, lambda_perp, **pen_kw)
-    n_links = count_vortex_links(psi)
+    energy = _energy(psi)
+    n_links = _count(psi)
     initial_links = n_links
     records: list[StepRecord] = []
     t0 = time.perf_counter()
 
     if verbose:
-        print(f"  initial: E={energy:.6f}  links={n_links}")
+        backend = "numba (parallel)" if fast else "numpy"
+        print(f"  initial: E={energy:.6f}  links={n_links}  [{backend}]")
 
     energies_window: list[float] = []
-    MAX_BACKTRACK = 20
+    MAX_BACKTRACK = 40   # more halvings → finer minimum step
     rejected_streak = 0
 
     for step in range(1, max_steps + 1):
-        grad = full_gradient(psi, cfg, lambda_perp, **pen_kw)
-        grad_norm_sq = float(np.real(np.vdot(grad, grad)))
+        grad = _grad(psi)
 
-        # Backtracking line search: find largest alpha that decreases energy
-        # and preserves topology.  Do NOT normalize inside the loop — normalization
-        # can increase energy and would break the descent guarantee.
-        alpha_try = alpha
+        # Always start backtracking from alpha_init so the search is fresh
+        # each step and alpha never permanently collapses.  The last accepted
+        # alpha is kept as a warm hint but we reset to alpha_init if it is
+        # smaller than the hint (avoids getting stuck after one bad step).
+        alpha_try = max(alpha, alpha_init)
         rejected = True
         for _bt in range(MAX_BACKTRACK):
             candidate = psi - alpha_try * grad
             apply_boundary_anchor(candidate, cfg)
 
-            n_links_candidate = count_vortex_links(candidate)
+            n_links_candidate = _count(candidate)
             topo_ok = (n_links_candidate >= n_links - topo_drop_tol)
-            e_candidate = full_energy(candidate, cfg, lambda_perp, **pen_kw)
+            e_candidate = _energy(candidate)
             energy_ok = (e_candidate < energy)
 
             if topo_ok and energy_ok:
@@ -409,6 +465,11 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--output", type=Path, default=None)
     p.add_argument("--frame-samples", type=int, default=None,
                    help="Curve sample count for initial_state (default: auto, 100 for n>=96)")
+    p.add_argument("--regrid-from", type=Path, default=None,
+                   help="Spectrally interpolate a coarser saved .npz state to --n instead of "
+                        "building a fresh trefoil.  Avoids sharp-feature artefacts at fine grids.")
+    p.add_argument("--no-numba", action="store_true",
+                   help="Disable numba-accelerated kernels (use pure numpy).")
     return p.parse_args()
 
 
@@ -422,7 +483,24 @@ def main() -> None:
             return args.frame_samples
         return 100 if n >= 96 else 600
 
-    if args.load_state is not None:
+    if args.regrid_from is not None:
+        print(f"Regriding from {args.regrid_from.name} to n={args.n}...")
+        psi_coarse, cfg_dict_coarse = load_state_npz(args.regrid_from)
+        n_coarse = int(cfg_dict_coarse.get("n", psi_coarse.shape[0]))
+        n = args.n
+        cfg = TrefoilConfig(
+            n=n,
+            half_width=float(cfg_dict_coarse.get("half_width", args.half_width)),
+            major_radius=float(cfg_dict_coarse.get("major_radius", args.major_radius)),
+            minor_radius=float(cfg_dict_coarse.get("minor_radius", args.minor_radius)),
+            log_pressure=float(cfg_dict_coarse.get("log_pressure", args.log_pressure)),
+            frame_samples=_frame_samples(n),
+        )
+        psi = spectral_regrid(psi_coarse, n)
+        del psi_coarse
+        print(f"  spectral regrid: n={n_coarse} → n={n}, frame_samples={cfg.frame_samples}")
+
+    elif args.load_state is not None:
         print(f"Loading initial state from {args.load_state.name}...")
         psi, cfg_dict = load_state_npz(args.load_state)
         n = int(cfg_dict.get("n", args.n))
@@ -472,6 +550,7 @@ def main() -> None:
         save_path=save_path,
         penalty_mu=args.penalty_mu,
         penalty_rho_target=args.penalty_rho_target,
+        use_numba=not args.no_numba,
     )
 
     save_path.parent.mkdir(parents=True, exist_ok=True)

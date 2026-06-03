@@ -200,10 +200,19 @@ def extract(state: dict, ec: ExtractionConfig) -> ExtractionSummary:
     s_cum, l_curve_geometric = cumulative_arc_length_closed(curve)
 
     points = np.stack((x, y, z), axis=-1)
-    offsets = points[None, ...] - curve[:, None, None, None, :]
-    dist_sq = np.sum(offsets * offsets, axis=-1)
-    nearest_idx = np.argmin(dist_sq, axis=0)
-    d_curve = np.sqrt(np.take_along_axis(dist_sq, nearest_idx[None, ...], axis=0)[0])
+    # Chunked nearest-point search (one z-slice at a time) to avoid the
+    # monolithic (frame_samples, n, n, n, 3) offset array, which is ~17 GB at
+    # n=192. Peak per slice is frame_samples * n^2 * 3 * 8 bytes (~90 MB).
+    nz = points.shape[2]
+    nearest_idx = np.empty(points.shape[:3], dtype=np.int64)
+    d_curve = np.empty(points.shape[:3], dtype=np.float64)
+    for iz in range(nz):
+        pts = points[:, :, iz, :]                                       # (nx, ny, 3)
+        off = pts[np.newaxis] - curve[:, np.newaxis, np.newaxis, :]      # (S, nx, ny, 3)
+        dsq = np.einsum("sijk,sijk->sij", off, off)                      # (S, nx, ny)
+        idx = np.argmin(dsq, axis=0)                                     # (nx, ny)
+        nearest_idx[:, :, iz] = idx
+        d_curve[:, :, iz] = np.sqrt(np.take_along_axis(dsq, idx[np.newaxis], axis=0)[0])
     s_at_cell = s_cum[nearest_idx]
 
     radius = np.sqrt(x * x + y * y + z * z)
