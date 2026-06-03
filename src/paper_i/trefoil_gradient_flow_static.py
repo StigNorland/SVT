@@ -315,11 +315,13 @@ def run_gradient_flow(
     for step in range(1, max_steps + 1):
         grad = _grad(psi)
 
-        # Always start backtracking from alpha_init so the search is fresh
-        # each step and alpha never permanently collapses.  The last accepted
-        # alpha is kept as a warm hint but we reset to alpha_init if it is
-        # smaller than the hint (avoids getting stuck after one bad step).
-        alpha_try = max(alpha, alpha_init)
+        # Adaptive backtracking line search with warm start: try to grow the
+        # step by 2x from the last accepted alpha, then halve until the step
+        # both decreases energy and preserves topology. The accepted alpha is
+        # carried forward (NOT reset to alpha_init each step) so the search can
+        # ride a small step size through stiff regions and grow back out of
+        # them — resetting to alpha_init each step stalls the descent.
+        alpha_try = min(alpha * 2.0, alpha_max)
         rejected = True
         for _bt in range(MAX_BACKTRACK):
             candidate = psi - alpha_try * grad
@@ -476,12 +478,15 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
 
-    # Auto-reduce frame_samples for large n to avoid the (frame_samples × n³ × 3)
-    # distance array OOMing. At n=96+, 100 samples (arc spacing ~0.4 xi) is ample.
+    # Curve sample count for the fresh initial state. The vortex curve must be
+    # sampled finer than the grid (spacing < dx/2) or the initial trefoil is
+    # bumpy and the relaxation stalls at high energy. With the chunked
+    # nearest-point search, memory is O(frame_samples * n^2) so we can afford a
+    # generous count: ~8*n gives curve spacing ~dx/2 (arc length ~39 xi, box 12 xi).
     def _frame_samples(n: int) -> int:
         if args.frame_samples is not None:
             return args.frame_samples
-        return 100 if n >= 96 else 600
+        return max(600, 8 * n)
 
     if args.regrid_from is not None:
         print(f"Regriding from {args.regrid_from.name} to n={args.n}...")

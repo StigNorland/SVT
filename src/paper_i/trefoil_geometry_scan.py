@@ -58,7 +58,7 @@ def relax_geometry(
         major_radius=major_radius,
         minor_radius=minor_radius,
         log_pressure=0.5,
-        frame_samples=100 if n >= 96 else 600,
+        frame_samples=max(600, 8 * n),  # fine curve → smooth initial state (chunked, cheap)
     )
     psi0 = chunked_initial_state(cfg)
     t0 = time.perf_counter()
