@@ -173,17 +173,29 @@ arises from the same vortex-core geometry that determines the mode degeneracy.
 Both the energy formula and the generation step carry the same number because they
 are both encoding the same underlying torus mode structure.
 
-### Next steps
+### REFUTED (2026-06-05, issue #78 Task D)
 
-1. Compute C from the LogSE vortex profile (replacing the thin-ring approximation):
-   check whether the best-fit q collapses from 8.59 to exactly 8.
+Both predicted tests were run and **both came back negative** — see
+`papers/SSV-I/route-d-kelvin-degeneracy-result.md`. The closed-shell hypothesis
+above does **not** hold:
 
-2. Enumerate the Kelvin-mode spectrum of the LogSE vortex ring explicitly:
-   compute the normal-mode frequencies and degeneracies from the linearised LogSE
-   around a thin vortex ring, and verify the counting gives 8 for the first closed shell.
+1. **C does not collapse q to 8.** With the real LogSE core constant
+   `C_LogSE = 1.880` (`vortex_ring_core_constant.py`), the best-fit generation
+   ratio is still `q = 8.587` — it is fixed by the lepton mass ratios alone and
+   is *independent of C* (C only sets the absolute R_e). The 7.3% gap from 8 does
+   not close.
 
-3. If confirmed: the lepton mass ratios become a first-principles SSV prediction,
-   derived from the Kelvin-mode degeneracy of the torus geometry.
+2. **The ring has no magic number 8.** The straight-vortex Bogoliubov spectrum
+   (`vortex_core_mode_spectrum.py`) has U(1)_azimuthal symmetry: modes are `±m`
+   doublets, tower `(1,2,2,2,…)`, cumulative `(1,3,5,7,…)` — the odd numbers,
+   never 8. The atomic magic 8 = (1s+3p)×2 is an **SO(3)** degeneracy (3-fold
+   p-orbitals); a vortex ring has no SO(3), so the "(1s+3p)" counting above is
+   geometrically invalid. Even a ×2 chirality factor gives `(2,6,10,…)`, not 8.
+
+**Conclusion:** the `8ⁿ` ladder is a ~5–7% numerical curiosity, not a
+first-principles Kelvin-mode degeneracy law. The atomic-shell analogy is
+**retired**. Lepton generations, if derivable at all, are not closed mode-shells
+of the singly-wound ring.
 
 ---
 
