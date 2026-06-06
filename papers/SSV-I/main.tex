@@ -130,8 +130,14 @@ The present work pursues a specific realisation of this programme: a logarithmic
 nonlinear Schr\"{o}dinger (LogSE) field theory for the vacuum order parameter,
 supplemented by a chiral-shear term.  Stable topological defects of this
 field---toroidal vortex rings and spherical breathers---are identified with
-fundamental particles.  The mass spectrum of these defects organises into a
-harmonic ladder governed by the fine-structure constant $\alpha\approx1/137$.
+fundamental particles.  The masses that the framework actually \emph{derives}
+are topological: the charged pion at $2\mu_0$ (two-winding) and the proton at
+$N_Y F\mu_0$ with the node factor $N_Y=3$ fixed by the trefoil crossing number,
+where $\mu_0=m_e/\alpha$.  A broader empirical observation---that many light
+hadron and lepton masses cluster near half-integer multiples of $\mu_0$ to
+$\lesssim0.7\%$---is recorded as a numerical coincidence, \emph{not} a derived
+spectrum: pre-registered dynamical tests (Paper~I \S\ref{sec:ladder}; issues
+\#76, \#91) failed to produce the higher rungs as eigenfrequencies.
 
 This paper is organised as follows.  Section~\ref{sec:postulate} states the
 fundamental postulate, derives the equations of motion from the LogSE Lagrangian,
@@ -139,9 +145,11 @@ derives the sound speed, and establishes the origin of $\alpha$ from the
 chiral-shear coupling.  Section~\ref{sec:matter} establishes the equilibrium vortex geometry and the
 vacuum density from the Lamb vortex-ring formula, taking $m_e$ and $\alpha$
 as empirical inputs, and presents the proton and neutron models.
-Section~\ref{sec:ladder} develops the $\alpha$-harmonic mass ladder, including the
-pion (analytically), the muon (dynamically motivated bracket), and the proton
-(numerically extracted, cutoff-dependent).  Section~\ref{sec:forces} sketches the emergence of forces.
+Section~\ref{sec:ladder} presents the derived topological masses---the pion
+(analytically, two-winding) and the proton (node factor $N_Y=3$ from the
+trefoil crossing number, times the breather form factor)---and records the
+broader $\alpha$-harmonic mass clustering as an explicitly-flagged numerical
+coincidence rather than a derived spectrum.  Section~\ref{sec:forces} sketches the emergence of forces.
 Sections~\ref{sec:outlook}--\ref{sec:conclusion} give the outlook and conclusions.
 Appendices contain the numerical minimisation and the BdG eigenvalue equations
 together with their numerical solution.
@@ -802,7 +810,7 @@ and we showed in \S\ref{sec:lagrangian} that $\alpha=c_\perp/c$ and in
 \S\ref{sec:electron} that $\mu_0$ is the natural energy scale of a minimal
 vortex excitation.  The observation is then:
 
-\begin{resultbox}[Empirical ladder (CODATA, no free parameters)]
+\begin{resultbox}[Empirical mass clustering (CODATA) --- a recorded coincidence]
 \begin{equation}
   m_{\pi^\pm} = 2\mu_0 \times (1+0.0032),\quad
   m_{\mu^\pm} = \tfrac{3}{2}\mu_0 \times (1+0.0059),\quad
@@ -810,7 +818,11 @@ vortex excitation.  The observation is then:
   \label{eq:empirical-ladder}
 \end{equation}
 These three relations are independent statements about three particles with
-very different internal structure.  All agree with CODATA to better than $0.7\%$.
+very different internal structure; all agree with CODATA to better than
+$0.7\%$.  Only the first is \emph{derived} (the pion's $2$ is the two-winding
+number, \S\ref{sec:pion}); the muon $\tfrac32$ and kaon $7$ have no deriving
+mechanism (issues~\#76, \#91, \#93) and are recorded here as a numerical
+coincidence, not a derived ladder.
 \end{resultbox}
 
 Table~\ref{tab:full-ladder} extends the survey to the lightest 14 hadrons and
@@ -908,6 +920,7 @@ quantum for vortex excitations.
 
 %------------------------------------------------------------------
 \subsection{The Charged Pion ($\pi^\pm$)}
+\label{sec:pion}
 %------------------------------------------------------------------
 The charged pion is modelled as the minimal bound state of a vortex-antivortex
 pair in the saturated superfluid vacuum.
@@ -1140,11 +1153,18 @@ calibration caveat and the cutoff dependence.  Status: candidate
 \end{table}
 
 \paragraph{Open issues and next steps.}
-The empirical ladder is robust regardless of the dynamical mechanism.  What
-remains to be derived is \emph{why} particle masses cluster at half-integer
-multiples of $\mu_0$: this requires the two-winding soliton profile (pion),
-the coupled ring-breathing + chiral mode (muon), and the 3D breather energy
-integral (proton $F$), all deferred to Paper~II.
+The numerical \emph{closeness} of the $\alpha$-harmonic clustering is robust as
+an observation, but it is \emph{not} a derived spectrum and is no longer
+presented as one (issue~\#93).  The two masses the framework genuinely derives
+are topological---the pion ($2\mu_0$, two-winding) and the proton node factor
+($N_Y=3$, the trefoil crossing number)---and these stand on their own,
+independent of any ladder.  The higher half-integer rungs (muon $\tfrac32$,
+kaon $7$, $\rho$ at $11$) have \emph{no} deriving mechanism: pre-registered
+dynamical tests (Path~A/B, issues~\#76, \#91) found the scalar/IQV-spinor BdG
+spectrum is not an even ladder and does not produce these as eigenfrequencies,
+so they are recorded as numerical coincidences.  The muon's only surviving route
+is the half-quantum-vortex topology of issue~\#94; absent that, the ladder
+beyond the two topological anchors is numerology.
 
 %------------------------------------------------------------------
 \section{Forces: Hydrodynamic Emergence (Preview)}
@@ -1426,9 +1446,11 @@ a relative shift of $-(3\text{--}9)\times 10^{-9}$, seven orders of
 magnitude too small and with the wrong sign.  Documented in
 \texttt{muon-cubic-vertex-result-note.md}. & --- \\
 Higher rungs $K^\pm \approx 7\mu_0$ and $\rho(770) \approx 11\mu_0$
-($\sim$0.7\%) & candidate & Same ladder mechanism as the muon,
-so the present scalar-BdG nulls also block a derived ladder
-interpretation.  No separate dynamical confirmation yet. & \#66,\#76 \\
+($\sim$0.7\%) & coincidence & \textbf{Demoted (issue~\#93, 2026-06):} no
+deriving mechanism.  Path~A/B and the issue~\#76/\#91 BdG nulls show the
+spectrum is not an even ladder and does not produce these as
+eigenfrequencies; unlike the muon they have no half-winding/HQV route.
+Recorded as a numerical coincidence, not a candidate rung. & \#76,\#91,\#93 \\
 Proton mass $m_p \approx N_Y \cdot F \cdot \mu_0 \approx 924$--$954$
 MeV ($\sim$1.5\% from CODATA) &
 candidate & \textbf{Update (\#92):} the node factor is now derived,
