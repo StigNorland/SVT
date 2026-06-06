@@ -60,7 +60,7 @@ The core computation is a 3D static minimiser for topological defects in the Log
 
 Result notes, pre-registrations, and checkpoints live under `papers/SSV-I/`. Key recent files:
 
-- `papers/SSV-I/geometry-minimum-result-2026-06-03.md` — #77 final result
+- `papers/SSV-I/results/proton/geometry-minimum-result-2026-06-03.md` — #77 final result
 - `papers/SSV-I/notes/muon-two-mode-symbolic-reduction.md` — two-mode symbolic model
 - `papers/SSV-I/volovik-berry-phase-issue76-tasks1-4.md` — Berry-phase no-go
 - `notes/volovik-mapping.md` — full Volovik analogy map + lepton closed-shell hypothesis
