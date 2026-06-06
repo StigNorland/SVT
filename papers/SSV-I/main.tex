@@ -130,8 +130,14 @@ The present work pursues a specific realisation of this programme: a logarithmic
 nonlinear Schr\"{o}dinger (LogSE) field theory for the vacuum order parameter,
 supplemented by a chiral-shear term.  Stable topological defects of this
 field---toroidal vortex rings and spherical breathers---are identified with
-fundamental particles.  The mass spectrum of these defects organises into a
-harmonic ladder governed by the fine-structure constant $\alpha\approx1/137$.
+fundamental particles.  The masses that the framework actually \emph{derives}
+are topological: the charged pion at $2\mu_0$ (two-winding) and the proton at
+$N_Y F\mu_0$ with the node factor $N_Y=3$ fixed by the trefoil crossing number,
+where $\mu_0=m_e/\alpha$.  A broader empirical observation---that many light
+hadron and lepton masses cluster near half-integer multiples of $\mu_0$ to
+$\lesssim0.7\%$---is recorded as a numerical coincidence, \emph{not} a derived
+spectrum: pre-registered dynamical tests (Paper~I \S\ref{sec:ladder}; issues
+\#76, \#91) failed to produce the higher rungs as eigenfrequencies.
 
 This paper is organised as follows.  Section~\ref{sec:postulate} states the
 fundamental postulate, derives the equations of motion from the LogSE Lagrangian,
@@ -139,9 +145,11 @@ derives the sound speed, and establishes the origin of $\alpha$ from the
 chiral-shear coupling.  Section~\ref{sec:matter} establishes the equilibrium vortex geometry and the
 vacuum density from the Lamb vortex-ring formula, taking $m_e$ and $\alpha$
 as empirical inputs, and presents the proton and neutron models.
-Section~\ref{sec:ladder} develops the $\alpha$-harmonic mass ladder, including the
-pion (analytically), the muon (dynamically motivated bracket), and the proton
-(numerically extracted, cutoff-dependent).  Section~\ref{sec:forces} sketches the emergence of forces.
+Section~\ref{sec:ladder} presents the derived topological masses---the pion
+(analytically, two-winding) and the proton (node factor $N_Y=3$ from the
+trefoil crossing number, times the breather form factor)---and records the
+broader $\alpha$-harmonic mass clustering as an explicitly-flagged numerical
+coincidence rather than a derived spectrum.  Section~\ref{sec:forces} sketches the emergence of forces.
 Sections~\ref{sec:outlook}--\ref{sec:conclusion} give the outlook and conclusions.
 Appendices contain the numerical minimisation and the BdG eigenvalue equations
 together with their numerical solution.
@@ -565,11 +573,19 @@ labelled them ``provisional consistency-based calibration rather than a
 derived physical constant.''  The honest framework prediction at the canonical
 cutoff is therefore $m_p\approx 930$--$954\,\text{MeV}$ ($\sim 1.5\%$ of
 CODATA) with a documented cutoff systematic, \emph{not} the single-number
-$0.3\%$ figure that appeared in earlier drafts.  Promoting this to a
-cutoff-independent first-principles prediction requires either (i) deriving
-$R$ geometrically from the relaxed breather or (ii) demonstrating
-$N_Y\!\cdot\!F$ is itself cutoff-invariant.  Tracked under issue~\#66
-(linked from \#30).
+$0.3\%$ figure that appeared in earlier drafts.  \textbf{Update (issue~\#92,
+2026-06):} the node factor $N_Y$ is now \emph{derived} --- it is the trefoil
+crossing number $N_Y=3$ (equivalently the thin-core writhe, or the braid-word
+exponent $\sigma_1^3$); the $3.007$ is this $3$ plus a small finite-thickness
+writhe correction, and the alternative $l_{\rm curve}/(4\pi)$ proxy is rejected
+as non-invariant (it floats $2.0$--$3.1$ with geometry).  The cutoff $R$ is the
+inter-strand spacing ($=2a$, a geometric property of the relaxed knot, set by
+the energy-minimum $a\approx0.85\,\xi$), so route~(i) holds in principle;
+route~(ii) ($N_Y\!\cdot\!F$ cutoff-invariant) was falsified (\#77).  A
+$\sim 6\%$ $F$-systematic remains from the shallow geometric minimum, and
+$\mu_0=m_e/\alpha$ stays empirical.  Full record:
+\texttt{results/proton/ny-trefoil-derivation-result.md}.  Tracked under
+issues~\#66, \#92.
 \end{gapbox}
 
 The simplest three-dimensional structure that can stabilize a spherical void against
@@ -794,7 +810,7 @@ and we showed in \S\ref{sec:lagrangian} that $\alpha=c_\perp/c$ and in
 \S\ref{sec:electron} that $\mu_0$ is the natural energy scale of a minimal
 vortex excitation.  The observation is then:
 
-\begin{resultbox}[Empirical ladder (CODATA, no free parameters)]
+\begin{resultbox}[Empirical mass clustering (CODATA) --- a recorded coincidence]
 \begin{equation}
   m_{\pi^\pm} = 2\mu_0 \times (1+0.0032),\quad
   m_{\mu^\pm} = \tfrac{3}{2}\mu_0 \times (1+0.0059),\quad
@@ -802,7 +818,11 @@ vortex excitation.  The observation is then:
   \label{eq:empirical-ladder}
 \end{equation}
 These three relations are independent statements about three particles with
-very different internal structure.  All agree with CODATA to better than $0.7\%$.
+very different internal structure; all agree with CODATA to better than
+$0.7\%$.  Only the first is \emph{derived} (the pion's $2$ is the two-winding
+number, \S\ref{sec:pion}); the muon $\tfrac32$ and kaon $7$ have no deriving
+mechanism (issues~\#76, \#91, \#93) and are recorded here as a numerical
+coincidence, not a derived ladder.
 \end{resultbox}
 
 Table~\ref{tab:full-ladder} extends the survey to the lightest 14 hadrons and
@@ -831,19 +851,27 @@ pre-registered attempts have been completed:
   $m_a{=}m_b$ / $m_a{+}m_b{=}0$ azimuthal selection rules.  Full record:
   \texttt{papers/SSV-I/results/muon/volovik-berry-phase-issue76-tasks1-4.md}.
 \end{itemize}
-As of 2026-06 the five probes above have converged on a single no-go: a scalar
-U(1) order parameter admits no half-integer Berry holonomy, and the
-$\mathcal{L}_\perp$ bridge that could generate one vanishes by the azimuthal
-selection rules.  Consolidated record:
-\texttt{papers/SSV-I/results/muon/muon-bdg-nogo-summary.md}.  Consequently the muon rung
-$(3/2)\mu_0$ is \textbf{demoted from candidate rung to numerical coincidence}
-pending Route~C (generations as distinct static minima, issue~\#78): it matches
-the PDG mass to $0.59\%$, but the present scalar operator supplies no mechanism
-that selects $3/2$.  The pion rung ($n=2$, integer) is unaffected --- it lives
-in the integer sector the pure-LogSE holonomy does support.  A positive muon
-derivation would require new microscopic structure (spinorial order parameter,
-or a derived half-winding Nambu mass), not another pass through the reduced
-basis.
+The five probes above converged on a single no-go for the \emph{scalar} U(1)
+order parameter: no half-integer Berry holonomy, and the $\mathcal{L}_\perp$
+bridge vanishes by azimuthal selection rules.  Consolidated record:
+\texttt{results/muon/muon-bdg-nogo-summary.md}.
+
+\textbf{CP$^1$/spinor extension (\#83, \#87 B1):} The SU(2)-covariant
+$\mathcal{L}_\perp$ in principle allows the bridge by total-$J_\varphi$
+conservation.  However, issue~\#91 (2026-06) shows the spin--orbit lock
+amplitude $|V|=0$ exactly for the IQV electron with uniform $\hat n$: the
+spin channels decouple; Fourier orthogonality kills the coupling; the scalar
+selection rule is reproduced.  The muon rung $(3/2)\mu_0$ therefore remains
+a \textbf{numerical coincidence} ($0.59\%$) with no deriving mechanism for
+the IQV.  The pion ($n=2$, integer sector) is unaffected.  The last
+theoretical route, a half-quantum vortex (HQV) electron, was examined and
+\textbf{rejected (issue~\#94):} the HQV half-winding is meridional --- it links
+the core and \emph{is} the electron's spin-$\tfrac12$ (the $\mathbb{Z}_2$ framing
+of \S\ref{sec:electron}, \#87 B2) --- not azimuthal, so it cannot supply the
+muon's major-ring Berry phase ($A_\varphi=0$, reproducing \#91); and a free HQV
+carries half charge, excluded by integer circulation.  The muon
+$(3/2)\mu_0$ is therefore a \textbf{numerical coincidence} with no surviving
+derivation; $m_{\pi^\pm}=2\mu_0$ stands (electron integer-winding).
 \end{gapbox}
 
 \begin{table}[htbp]
@@ -898,6 +926,7 @@ quantum for vortex excitations.
 
 %------------------------------------------------------------------
 \subsection{The Charged Pion ($\pi^\pm$)}
+\label{sec:pion}
 %------------------------------------------------------------------
 The charged pion is modelled as the minimal bound state of a vortex-antivortex
 pair in the saturated superfluid vacuum.
@@ -951,12 +980,20 @@ identification:
   Full record:
   \texttt{papers/SSV-I/results/muon/volovik-berry-phase-issue76-tasks1-4.md}.
 \end{itemize}
-The muon assignment $m_{\mu^\pm}=\frac{3}{2}\mu_0$ remains a candidate
-supported by the empirical $0.59\%$ agreement.  A positive derivation would
-require a basis-converged 3D solve or a changed microscopic structure
-(spinorial order parameter, or derived half-winding Nambu mass).
-The mechanical text below is retained as structural setup.  Tracking:
-issues~\#66, \#73, \#76.
+The muon assignment $m_{\mu^\pm}=\frac{3}{2}\mu_0$ is a \textbf{numerical
+coincidence} ($0.59\%$) with no deriving mechanism in the current theory.
+Three attempts with the scalar operator gave null results (above).  The
+CP$^1$/spinor extension (\#83, \#87 B1) showed the bridge is symmetry-allowed
+by total $J_\varphi$ conservation, but issue~\#91 (2026-06) established that
+the SU(2)-covariant $\mathcal{L}_\perp$ gives zero lock amplitude $|V|=0$
+on the IQV electron with uniform $\hat n$: the scalar issue~\#76 null is reproduced.
+The last route, a half-quantum vortex (HQV) electron, was examined and rejected
+(issue~\#94): its half-winding is meridional --- it \emph{is} the electron's
+spin-$\tfrac12$ ($\mathbb{Z}_2$ framing, \#87 B2) --- not azimuthal, so it gives
+$A_\varphi=0$ (no muon Berry phase), and a free HQV has half charge (excluded).
+The muon is therefore a numerical coincidence with no surviving derivation; every
+$\gamma_B=\pi$ route is closed.  The mechanical text below is retained as
+structural setup.  Tracking: issues~\#66, \#73, \#76, \#91, \#94.
 \end{gapbox}
 
 \textbf{BdG setup.}
@@ -1125,11 +1162,21 @@ calibration caveat and the cutoff dependence.  Status: candidate
 \end{table}
 
 \paragraph{Open issues and next steps.}
-The empirical ladder is robust regardless of the dynamical mechanism.  What
-remains to be derived is \emph{why} particle masses cluster at half-integer
-multiples of $\mu_0$: this requires the two-winding soliton profile (pion),
-the coupled ring-breathing + chiral mode (muon), and the 3D breather energy
-integral (proton $F$), all deferred to Paper~II.
+The numerical \emph{closeness} of the $\alpha$-harmonic clustering is robust as
+an observation, but it is \emph{not} a derived spectrum and is no longer
+presented as one (issue~\#93).  The two masses the framework genuinely derives
+are topological---the pion ($2\mu_0$, two-winding) and the proton node factor
+($N_Y=3$, the trefoil crossing number)---and these stand on their own,
+independent of any ladder.  The higher half-integer rungs (muon $\tfrac32$,
+kaon $7$, $\rho$ at $11$) have \emph{no} deriving mechanism: pre-registered
+dynamical tests found the scalar/IQV-spinor BdG spectrum is not an even ladder
+and does not produce these as eigenfrequencies (Path~A/B, issues~\#76, \#91),
+and the half-quantum-vortex route for the muon was examined and rejected
+(issue~\#94: the HQV half-winding is the electron's spin-$\tfrac12$, on the
+meridional circle, not the azimuthal one the muon needs; a free HQV is
+charge-excluded).  So the muon, kaon and $\rho$ are recorded as numerical
+coincidences; the ladder beyond the two topological anchors (pion, proton) is
+numerology.
 
 %------------------------------------------------------------------
 \section{Forces: Hydrodynamic Emergence (Preview)}
@@ -1238,12 +1285,18 @@ $\langle K_{\sigma,\pm}|(\nabla\times\delta j)^\dagger
 (\nabla\times\delta j)|\Phi_R\rangle$ vanishes by the
 $m_a=m_b$ / $m_a+m_b=0$ selection rules.
 
-\emph{What remains}: a positive muon derivation requires a changed
-microscopic ingredient not present in the current scalar formulation, such
-as a spinorial order parameter, a derived half-winding Nambu mass, or a
-future full 3D operator whose eigenbundle genuinely carries holonomy $-1$.
-The existing helicity-bridge numerics are retained as historical diagnostics
-but no longer close the rung.
+\emph{What remains (2026-06 update):}  The CP$^1$/spinor extension (\#83)
+was adopted, and issue~\#91 tested whether the SU(2)-covariant
+$\mathcal{L}_\perp$ supplies a nonzero spin--orbit lock on the IQV electron.
+Result: CLEAN NO.  $|V|=0$ exactly; $\gamma_B=0$; scalar null reproduced.
+The muon stays a numerical coincidence for the IQV.  The last route, a
+half-quantum vortex (HQV) electron, was examined and \textbf{rejected
+(issue~\#94)}: the HQV half-winding is meridional (it \emph{is} the electron's
+spin-$\tfrac12$, \#87 B2), not azimuthal, so $A_\varphi=0$ and it gives no muon
+Berry phase; a free HQV is charge-excluded.  Every $\gamma_B=\pi$ route is now
+closed; the muon $(3/2)\mu_0$ is a numerical coincidence with no surviving
+derivation.  The existing helicity-bridge numerics are retained as historical
+diagnostics.
 \end{gapbox}
 
 \begin{gapbox}[Open Problem 3 — Proton: form factor $F$ partially closed]
@@ -1260,16 +1313,26 @@ to define the per-length vortex tension $\mu_0(R)$.  At the natural physical
 cutoff $R\approx1.18\,\xi$ (the inter-strand half-spacing of the trefoil
 with minor radius $0.85\,\xi$), the fine-grid value $F\approx4.4$ reproduces
 the analytic estimate, giving $m_p\approx 927\,\text{MeV}$ ($1.2\%$ below
-the observed value).  What remains open:
+the observed value).
+
+\textbf{Update (issue~\#92, 2026-06): $N_Y$ is now derived.}  $N_Y$ is the
+trefoil \emph{crossing number} $=3$ --- the defining topological invariant of
+the $(2,3)$ torus knot (braid word $\sigma_1^3$, three positive crossings).
+Equivalently it is the self-linking number (writhe), which converges to exactly
+$3.000$ as the core radius $a\to0$ ($a=0.05\,\xi$ gives $3.0009$); finite
+thickness adds $\mathrm{Wr}=3+O(a^2)$, so the $3.007$ is this small correction,
+not a separate digit.  The alternative $L_{\rm curve}/(4\pi\xi)$ proxy is
+\emph{rejected}: it is not an invariant (it floats $2.0$--$3.1$ across geometries;
+the value $3.086$ was a coincidence of the $R=2.8\,\xi$ embedding).  Verified in
+\texttt{src/paper\_i/trefoil\_ny\_derivation.py}.  What remains open:
 \begin{itemize}
-  \item Whether the chiral scale $\mu_0=m_e/\alpha\approx 70\,\text{MeV}$
-        can itself be derived from the SSV parameters (rather than fit),
-        which would close the remaining $\sim 1\%$ uncertainty.
-  \item Whether $N_Y\approx3.007$ admits a closed-form derivation from the
-        $(2,3)$-trefoil topology.  The empirical value is suggestive of
-        $3$ self-crossings plus a small geometric correction, or equivalently
-        $L_{\rm curve}/(4\pi\xi)\approx3.086$ for the canonical trefoil
-        embedding used in the minimisation.
+  \item The chiral scale $\mu_0=m_e/\alpha\approx 70\,\text{MeV}$ still takes
+        $m_e,\alpha$ as empirical inputs; deriving it from SSV vacuum parameters
+        is the precision-bearing test (the remaining $\sim 1\%$).
+  \item A residual $\sim 6\%$ systematic in $F$ from the shallow geometric
+        minimum (the cutoff $R=$ inter-strand spacing $=2a$ is geometric, but
+        $\mathrm{d}\ln F/\mathrm{d}\ln R\approx-0.94$ propagates the
+        $a$-uncertainty into $F$).
 \end{itemize}
 \end{gapbox}
 
@@ -1374,41 +1437,56 @@ from assumed to derived: intrinsic to the CP$^1$/spinor order parameter
 Finkelstein--Rubinstein route, which \#29 showed does not deliver the
 $\mathbb{Z}_2$ for a scalar field. & \#29,\#83,\#87 \\
 Muon mass $m_{\mu^\pm}=(3/2)\mu_0$ ($0.59\%$ from CODATA) &
-topological-sector (cond.) & \textbf{Demoted 2026-06} from candidate to
+coincidence & \textbf{Demoted 2026-06} from candidate to
 numerical coincidence: five probes (Path~B, \#73, \#76, App.~B potential,
 two-mode reduction) converged on a no-go for the \emph{scalar} U(1) order
-parameter (no half-integer Berry holonomy; the $\mathcal{L}_\perp$ bridge
+parameter (no half-integer Berry holonomy; $\mathcal{L}_\perp$ bridge
 vanishes by selection rules, \texttt{muon-bdg-nogo-summary.md}).
-\textbf{Re-promoted 2026-06 (\#87 B1)} under the CP$^1$/spinor extension
-(\#83): the spin--orbit-locked spinor BdG operator gives a protected
-half-integer Berry phase $\gamma_B=\pi$ (a $\mathbb{Z}_2$ invariant of the
-Nambu eigenbundle), so $E_n=(n+\tfrac12)\omega_0$ and the muon is the
-$3/2$ rung --- TOPOLOGICAL-SECTOR.  Conditional on showing the physical
-torus eigenbundle is in the winding regime (\texttt{results/spinor/b1-
-muon-berry-phase.md}). & \#66,\#76,\#78,\#87 \\
+\textbf{Re-promoted (\#87 B1)} to TOPOLOGICAL-SECTOR (conditional) under
+the CP$^1$/spinor extension: the $\mathbb{Z}_2$-protected Berry phase $\gamma_B=\pi$
+is possible \emph{if} the SU(2)-covariant $\mathcal{L}_\perp$ supplies a
+nonzero spin--orbit lock on the electron torus.
+\textbf{Conditional closed (issue~\#91, 2026-06): CLEAN NO for the IQV.}
+The SU(2)-covariant $\mathcal{L}_\perp$ on the integer-quantum-vortex (IQV)
+electron with uniform $\hat n$ gives exactly zero bridge amplitude
+$|V|=0$ (spin channels decouple; Fourier orthogonality kills the kernel;
+same scalar $\Delta m_\varphi=0$ selection rule applies). $|m|\to\infty$,
+$\gamma_B=0$, issue~\#76 null reproduced. The last route (half-quantum vortex
+electron) was \textbf{rejected (issue~\#94):} the HQV half-winding is meridional
+(= the electron's spin-$\tfrac12$, \#87 B2), not azimuthal, so $A_\varphi=0$
+(no muon Berry phase), and a free HQV is charge-excluded. \textbf{All
+$\gamma_B=\pi$ routes are now closed; the muon is a numerical coincidence,
+final.} Full records: \texttt{results/spinor/b1-winding-regime-result.md},
+\texttt{hqv-muon-verdict.md}. & \#76,\#87,\#91,\#94 \\
 Cubic-vertex one-loop self-energy as the source of the muon
 residual gap & \textit{falsified} & The repository calculation gives
 a relative shift of $-(3\text{--}9)\times 10^{-9}$, seven orders of
 magnitude too small and with the wrong sign.  Documented in
 \texttt{muon-cubic-vertex-result-note.md}. & --- \\
 Higher rungs $K^\pm \approx 7\mu_0$ and $\rho(770) \approx 11\mu_0$
-($\sim$0.7\%) & candidate & Same ladder mechanism as the muon,
-so the present scalar-BdG nulls also block a derived ladder
-interpretation.  No separate dynamical confirmation yet. & \#66,\#76 \\
-Proton mass $m_p \approx N_Y \cdot F \cdot \mu_0 \approx 930$--$954$
-MeV ($\sim$1.5\% from CODATA at $R\!=\!1.18\,\xi$) &
-candidate & Issue~\#30 closure attempts: cutoff invariance
-falsified; geometric-$R$ route fails; gate (iii-a) seed-locked;
-self-consistent $R_{\rm sc}=0.923\,\xi$ gives $60\%$ spread
-(\texttt{static-closure-self-consistent-r-result.md}).
-Active: first matched cross-grid test at $n^3=96^3$ vs $72^3$
-(same penalty, in progress~2026-06-02,
-\texttt{static-closure-n96-prereg.md}). & \#30 \\
-$N_Y \approx 3.007$ topological crossing factor & candidate &
-Same as above; the $\pm0.002$ band in earlier drafts is fit
-reproducibility, not measured cross-grid spread.  Topology
-preservation is not robust under the current soft-penalty relaxer,
-as recorded in \texttt{proton-gate-iii-result.md}. & \#30 \\
+($\sim$0.7\%) & coincidence & \textbf{Demoted (issue~\#93, 2026-06):} no
+deriving mechanism.  Path~A/B and the issue~\#76/\#91 BdG nulls show the
+spectrum is not an even ladder and does not produce these as
+eigenfrequencies; unlike the muon they have no half-winding/HQV route.
+Recorded as a numerical coincidence, not a candidate rung. & \#76,\#91,\#93 \\
+Proton mass $m_p \approx N_Y \cdot F \cdot \mu_0 \approx 924$--$954$
+MeV ($\sim$1.5\% from CODATA) &
+candidate & \textbf{Update (\#92):} the node factor is now derived,
+$N_Y=3$ (crossing number; see row below).  The cutoff $R$ is the
+geometric inter-strand spacing ($=2a$, set by the energy-minimum
+$a\approx0.85\,\xi$), so the cutoff is not free; a $\sim6\%$ $F$-systematic
+remains from the shallow geometric minimum ($\mathrm{d}\ln F/\mathrm{d}\ln
+R\approx-0.94$).  Cutoff-invariance route falsified (\#77).  Remaining
+free input: $\mu_0=m_e/\alpha$ (still empirical, the precision-bearing
+test).  $m_p=3\times4.4\times70\approx924$\,MeV.
+\texttt{results/proton/ny-trefoil-derivation-result.md}. & \#30,\#92 \\
+$N_Y = 3$ topological crossing factor & derived &
+\textbf{Derived (issue~\#92, 2026-06):} $N_Y$ is the trefoil crossing
+number $=3$ (braid word $\sigma_1^3$; equivalently the thin-core writhe,
+$\to3.000$ as $a\to0$).  The $3.007$ is a finite-thickness writhe
+correction; the $L_{\rm curve}/(4\pi)$ proxy is rejected as non-invariant.
+Zero-parameter topological constant.
+\texttt{results/proton/ny-trefoil-derivation-result.md}. & \#92 \\
 Form factor $F\approx4.47$ at $R=1.18\,\xi$
 (fine-grid average) & candidate & Topology-preserving relaxation
 on $n^3{=}48^3,\,72^3$ agrees at $\sim6\%$ at this
@@ -1769,15 +1847,20 @@ required the analytic $F=4.47$ at the same cutoff exactly; the
 numerical $F$ at this cutoff sits $\sim 1.5\%$ below, hence the
 $\sim 1\%$ residual discrepancy.
 
-\paragraph{Topological status of $N_Y$.}  Two interpretations of the
-empirical value $N_Y\approx 3.007$ are consistent with the numerics:
-(i)~a topological reading, $N_Y=$ (number of self-crossings of the
-$(2,3)$-trefoil projection)~$+\,$small geometric correction
-$=3+0.007$; and (ii)~a normalised-length reading,
-$N_Y=L_{\rm curve}/(4\pi\xi)=3.086$ for the canonical trefoil
-embedding used here ($L_{\rm curve}\approx 38.79\,\xi$).  The two
-agree to better than $3\%$; settling between them is a topological
-question rather than a numerical one.
+\paragraph{Topological status of $N_Y$ (settled, issue~\#92).}  $N_Y$ is the
+\emph{crossing number of the $(2,3)$-trefoil}, $N_Y=3$: the minimal number of
+self-crossings of the simplest nontrivial knot (braid word $\sigma_1^3$, three
+positive crossings).  Equivalently it is the self-linking number (writhe) of the
+canonical embedding, which converges to exactly $3.000$ as the core radius
+$a\to0$ (numerically $3.0009$ at $a=0.05\,\xi$); finite core thickness adds
+$\mathrm{Wr}=3+O(a^2)$, so the empirical $3.007$ is this small geometric
+correction rather than a separately-derived digit.  The normalised-length
+reading $N_Y=L_{\rm curve}/(4\pi\xi)$ is \emph{rejected}: $L_{\rm curve}/(4\pi\xi)$
+is not a topological invariant --- it floats from $2.0$ to $3.1$ across the
+stable geometry domain, and its apparent $3.086$ was a coincidence of the
+$R=2.8\,\xi$ embedding.  Thus $N_Y=3$ is a zero-parameter topological constant.
+Verified in \texttt{src/paper\_i/trefoil\_ny\_derivation.py};
+record \texttt{results/proton/ny-trefoil-derivation-result.md}.
 
 Full code, saved states ($\sim\!100$\,MB across all grids),
 density-slice plots, and sensitivity analyses are catalogued in
