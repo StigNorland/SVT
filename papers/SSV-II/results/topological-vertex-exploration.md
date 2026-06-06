@@ -1,11 +1,25 @@
 # Topological vertex amplitude for the SSV $g-2$: can the numbers come out right?
 
-Status: exploration only — no paper edits yet.
+Status: resolved into Paper II's contact-vertex section; kept as the
+numerical/falsification note for issue #33.
 Issue: #33 (depends conceptually on #29).
-Date: 2026-05-28.
+Date: 2026-05-28; updated 2026-06-03.
 Companion script: `src/paper_ii/g2_form_factor_loop.py` (§6 output).
+Regression tests: `src/paper_ii/test_g2_form_factor_loop.py`.
 Prior result: `papers/SSV-II/g2-form-factor-results.md` (the $F = J_0(kR^\*)$
 calculation killing 99.5 % of Schwinger).
+
+## Closure note
+
+#29 supplies the needed topology-language guardrail: an $R_1$ twist is a
+filament/framing operation, not the Fourier transform of the assembled
+electron torus.  Paper II therefore closes #33 by using the bare
+LogSE$+\mathcal{L}_\perp$ contact vertex for the one-loop calculation.
+That contact vertex has $F(k)=1$, recovers Schwinger's $\alpha/(2\pi)$
+exactly at this order, and avoids inserting the dressed ring radius
+$R^\*=\bar\lambda_e/\alpha$ into the loop vertex.  The classical
+$J_0(kR^\*)$ calculation remains here as the falsifier showing why the
+dressed form factor cannot be used at the bare vertex.
 
 ## Goal
 
@@ -154,10 +168,9 @@ resolution of #33 is falsified and one of the other resolutions
 (separate vertex radius, compensating diagrams, sub-leading insertion)
 must be pursued instead.
 
-## Tentative recommendation for the §3 gapbox
+## §3 gapbox resolution
 
-Do not edit yet. The honest text — which can be drafted once #29
-provides at least item (1) — would say:
+The §3 text has now been rewritten in this direction:
 
 1. The classical-Fourier-transform reading $F = J_0(kR^\*)$ is now
    computed and ruled out at ~$10^9\sigma$ against CODATA.
