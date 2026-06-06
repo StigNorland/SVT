@@ -151,6 +151,9 @@ Meaning:
 Current repo state:
 
 - most `src/paper_i/` outputs are `prototype`
+- the #77 trefoil continuation result is `candidate`: it gives reproducible
+  `N_Y×F=54` at `(R,a)=(2.5,0.85)ξ`, but does not by itself close the separate
+  `Q_p` / `\alpha_G` map
 - current reconnection supplement outputs are `prototype` to `validation`
 - no current result should yet be treated as `closure-grade`
 

@@ -16,7 +16,7 @@ All sections drafted. No stubs remaining. The structure is:
 2. **SSV Setting for Strong Gravity** — LogSE, healing length, update availability `A(r)`, outward acoustic velocity.
 3. **Gravitational Collapse Without Singularity** — close-packing of vortex cores terminates collapse at finite density. Gapbox: exact `ρ_max` deferred to Paper I numerical programme.
 4. **Horizon as Acoustic-Freezing Surface** — horizon condition `A(r_H) = 0`, freezing vs. pinning, proper-time picture. Gapbox: horizon location factor-of-two deferred to Paper VII-b (same as Paper IV §6).
-5. **Spin Without Acoustic Time** — circulation integral, angular momentum as topological winding, homotopy protection through the horizon. Gapbox: superradiance question left open.
+5. **Spin Without Acoustic Time** — circulation integral, angular momentum as topological winding, homotopy protection through the horizon. Superradiance / Penrose process answered structurally: externally driven extraction via the SSV-emergent Kerr exterior is allowed; spontaneous winding expulsion is forbidden.
 6. **Horizon Entropy and Information Storage** — wake-complexity picture from Paper III, area entropy from condensate surface counting, no-information-destruction argument. Gapboxes: `m = m_P` identification (→ Paper I) and area-law coefficient (→ Paper VII-b).
 7. **Thermal Emission from the Acoustic Horizon** — Unruh effect, surface gravity `κ = c⁴/(GM)`, Hawking temperature `T ∝ ħc³/(GMk_B)`, evaporation endpoint as Planck-scale remnant. Gapbox: factor-of-four coefficient deferred to Paper VII-b.
 8. **Discussion and Open Problems** — GR correspondence table, no-hair structure, relation to analogue-gravity programme, six open problems listed.

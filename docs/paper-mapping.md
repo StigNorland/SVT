@@ -85,7 +85,7 @@ manuscript.
 
 ### SSV IX (CMB and Primordial Phonon Bath)
 
-New paper — no current draft to map from.
+New paper — scoped outline exists, but no `main.tex` draft yet.
 
 Content drawn from material deferred out of other papers:
 - Primordial phonon bath (deferred from SSV III)

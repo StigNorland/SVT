@@ -2,6 +2,14 @@
 
 This document turns the recurring "deferred to the 3D `\mathcal{L}+\mathcal{L}_\perp` minimisation" language into an actual work program.
 
+**Bookkeeping status (2026-06-06):** Workstream 0 is implemented as the thin
+`src/shared_numerics/` layer (#12). The static trefoil-breather branch has a
+candidate-grade closure result via #77: `(R,a)=(2.5,0.85)ξ` and `N_Y×F=54`,
+grid-converged over the tested continuation ladder and route-independent. This
+upgrades the proton geometry row from "missing computation" to "candidate
+static result." The static gravity extraction and dynamic reconnection branches
+remain candidate/structural rather than closure-grade.
+
 The main point is simple:
 
 - there is not one open numerical problem, but two closely related ones
@@ -24,9 +32,9 @@ This is the ground-state problem for the proton-like trefoil Y-junction breather
 
 Primary outputs:
 
-- relaxed 3D field configuration for the trefoil breather
-- converged node-cost factor `N_Y`
-- converged geometric form factor `F`
+- relaxed 3D field configuration for the trefoil breather (#77 candidate result)
+- converged node-cost factor `N_Y` folded into the reported product `N_Y×F = 54`
+- converged geometric form factor `F` folded into the reported product `N_Y×F = 54`
 - acoustic monopole / far-field suppression data needed for `\alpha_G`
 - stable linearisation background for later BdG work
 
@@ -237,35 +245,42 @@ Exit gate:
 
 | Observable | Depends first on | Current status | Upgrade condition |
 |------|------|------|------|
-| Proton mass closure | Static breather | structural + scalar factors | converged `N_Y` and `F` |
+| Proton mass closure | Static breather | candidate static result: #77 gives `N_Y×F=54` at `(R,a)=(2.5,0.85)ξ`; residual physical shallow-minimum uncertainty remains | separate `N_Y`/`F` decomposition and final paper propagation if needed |
 | `\alpha_G` | Static breather far field | CODATA consistency check + provisional monopole estimator | predicted from relaxed breather through documented `Q_p` map |
 | `W` mass | Dynamic reconnection | `\phi` ansatz | measured cap geometry |
 | Neutrino spectrum | Event-background linearisation | structural hypothesis | computed mode spectrum |
 | PMNS / CP observables | Event-background linearisation + chirality statistics | speculative | reproducible asymmetry and phase extraction |
-| Lepton generations | Toroidal / event spectra | partial ladder heuristics | computed harmonic structure |
+| Lepton generations | Toroidal / event spectra | scalar-SSV routes C/D failed; `8^n` is a numerical curiosity, not a first-principles degeneracy | new half-quantum-vortex or spinorial-order-parameter branch |
 
 ## Immediate Repo Tasks
 
 These are the next concrete steps the repository should track.
 
-1. Write down one canonical numerical conventions note.
-2. Mark which existing scripts are prototype-only and which are validation baselines.
-3. Add a computation issue for the static breather minimisation.
-4. Add a separate computation issue for the dynamic reconnection minimisation.
-5. Add a validation issue for sensitivity tests on reduced problems.
-6. Add a claim-status issue to replace "derived" language where the computation is still missing.
+1. [x] Write down one canonical numerical conventions note.
+2. [x] Mark which existing scripts are prototype-only and which are validation baselines.
+3. [x] Add a computation issue for the static breather minimisation.
+4. [x] Add a separate computation issue for the dynamic reconnection minimisation.
+5. [x] Add a validation issue for sensitivity tests on reduced problems.
+6. [x] Add a claim-status issue to replace "derived" language where the computation is still missing.
+
+All six seed tasks have corresponding closed issues (#12, #13/#77, #15, #16,
+#17). The closures do not mean every physical observable is derived:
+`N_Y×F` is candidate-grade from #77, `\alpha_G` remains candidate/blocked on the
+`Q_p` map, and dynamic reconnection remains structural.
 
 ## Recommended Paper Discipline
 
 ### Paper I
 
 - keep the qualitative trefoil breather picture
-- treat `N_Y` and `F` as provisional unless backed by reproducible code and diagnostics
+- cite #77 for the candidate-grade `N_Y×F=54` proton-geometry result
+- avoid promoting separate `N_Y` and `F` values beyond the diagnostics actually reported
 
 ### Paper II
 
 - present `W`, neutrino, CP, and generation claims as downstream targets of the reconnection computation
 - keep `\alpha_G` explicitly on the static-breather branch, not mixed into the reconnection branch
+- keep scalar-SSV lepton generation routes C/D marked failed unless a new HQV/spinorial branch is opened
 
 ### Later Papers
 

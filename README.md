@@ -24,14 +24,14 @@ forces, gravity, time, and black-hole ontology from the structure of that medium
 | SSV I | Topological Defects — Geometric Origin of Matter & α-Harmonic Mass Ladder | Published (Zenodo) |
 | SSV II | Forces as Hydrodynamic Modes | Published |
 | SSV III | Irreversible Time and Wake Entropy | **Complete draft** (9 sections) |
-| SSV IV | Gravity as Update-Capacity Gradient | Planned |
+| SSV IV | Gravity as Update-Capacity Gradient | **Complete draft** (10 sections + appendix) |
 | SSV V | Condensate Black Holes | **Complete draft** (9 sections) |
-| SSV VI-a | Galactic Standing Waves and Flat Rotation Curves | Planned |
-| SSV VI-b | Galactic Morphology as Overtone Structure | Planned |
-| SSV VII-a | Quantum Mechanics from Hydrodynamics | Planned |
-| SSV VII-b | Emergent Geometry and the Dissolution of Quantum Gravity | Planned |
-| SSV VIII | Cosmogony from the Permissive Void | Planned |
-| SSV IX | CMB and Primordial Phonon Bath | Planned |
+| SSV VI-a | Galactic Standing Waves and Flat Rotation Curves | Draft aligned to outline |
+| SSV VI-b | Galactic Morphology as Overtone Structure | Draft aligned to outline |
+| SSV VII-a | Quantum Mechanics from Hydrodynamics | Draft aligned to outline |
+| SSV VII-b | Emergent Geometry and the Dissolution of Quantum Gravity | Draft aligned to outline |
+| SSV VIII | Cosmogony from the Permissive Void | Draft aligned to outline |
+| SSV IX | CMB and Primordial Phonon Bath | Scoped outline; `main.tex` not yet written |
 | SSV Alpha | Fine-Structure Constant from Toroidal Vortex Geometry | Draft |
 | SSV Goldstone | Electromagnetic Propagation and the Goldstone Mode | Draft |
 
@@ -54,7 +54,7 @@ The core computation is a 3D static minimiser for topological defects in the Log
 
 **Milestone (issue #77, 2026-06-03):** geometry minimum found at (R, a) = (2.5, 0.85) ξ, giving **N_Y×F = 54**, grid-converged to <2.5% over n=96→192 and route-independent. The grid-convergence wall that blocked the programme since #13 is removed.
 
-**Active track (issue #78):** retire the BdG muon programme (no-go confirmed across 5 independent probes — scalar Ψ has no half-integer Berry phase); test lepton generations as distinct static minima using the #77 pipeline (Route C) and compute Kelvin-mode spectrum (Route D).
+**Recent track (issue #78, closed 2026-06-05):** the BdG muon programme is retired (no-go confirmed across 5 independent probes — scalar Ψ has no half-integer Berry phase). Route C and Route D also returned negative: distinct static ring minima give an energy ratio `3.71`, not `206.77`, and the Kelvin-mode degeneracy does not produce an exact `8^n` generation rule. Remaining lepton-generation escape hatches are structural only: half-quantum-vortex or spinorial-order-parameter extensions.
 
 ## Paper I Supplemental Notes
 
@@ -62,8 +62,8 @@ Result notes, pre-registrations, and checkpoints live under `papers/SSV-I/`. Key
 
 - `papers/SSV-I/results/proton/geometry-minimum-result-2026-06-03.md` — #77 final result
 - `papers/SSV-I/notes/muon-two-mode-symbolic-reduction.md` — two-mode symbolic model
-- `papers/SSV-I/volovik-berry-phase-issue76-tasks1-4.md` — Berry-phase no-go
-- `notes/volovik-mapping.md` — full Volovik analogy map + lepton closed-shell hypothesis
+- `papers/SSV-I/results/muon/volovik-berry-phase-issue76-tasks1-4.md` — Berry-phase no-go
+- `notes/volovik-mapping.md` — full Volovik analogy map; closed-shell lepton hypothesis now refuted by #78
 
 ## Roadmap and Docs
 
