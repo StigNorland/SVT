@@ -64,7 +64,10 @@ intrinsic structure of the bare sector, not from a classical extent.
 
 `src/paper_ii/g2_form_factor_loop.py` reduces the one-loop integral
 numerically, verifies the Schwinger normalisation to $3 \times 10^{-10}$,
-and scans five form-factor families to confirm robustness.
+and scans five form-factor families to confirm robustness.  The regression
+tests in `src/paper_ii/test_g2_form_factor_loop.py` pin the three closure
+claims: contact vertex equals Schwinger, $J_0(kR^*)$ removes almost all of
+Schwinger, and the constant/topological vertex is scale-independent.
 
 ### #34 — Structural composite mass ratio $m_p/m_{\pi^\pm}$
 
