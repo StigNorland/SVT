@@ -565,11 +565,19 @@ labelled them ``provisional consistency-based calibration rather than a
 derived physical constant.''  The honest framework prediction at the canonical
 cutoff is therefore $m_p\approx 930$--$954\,\text{MeV}$ ($\sim 1.5\%$ of
 CODATA) with a documented cutoff systematic, \emph{not} the single-number
-$0.3\%$ figure that appeared in earlier drafts.  Promoting this to a
-cutoff-independent first-principles prediction requires either (i) deriving
-$R$ geometrically from the relaxed breather or (ii) demonstrating
-$N_Y\!\cdot\!F$ is itself cutoff-invariant.  Tracked under issue~\#66
-(linked from \#30).
+$0.3\%$ figure that appeared in earlier drafts.  \textbf{Update (issue~\#92,
+2026-06):} the node factor $N_Y$ is now \emph{derived} --- it is the trefoil
+crossing number $N_Y=3$ (equivalently the thin-core writhe, or the braid-word
+exponent $\sigma_1^3$); the $3.007$ is this $3$ plus a small finite-thickness
+writhe correction, and the alternative $l_{\rm curve}/(4\pi)$ proxy is rejected
+as non-invariant (it floats $2.0$--$3.1$ with geometry).  The cutoff $R$ is the
+inter-strand spacing ($=2a$, a geometric property of the relaxed knot, set by
+the energy-minimum $a\approx0.85\,\xi$), so route~(i) holds in principle;
+route~(ii) ($N_Y\!\cdot\!F$ cutoff-invariant) was falsified (\#77).  A
+$\sim 6\%$ $F$-systematic remains from the shallow geometric minimum, and
+$\mu_0=m_e/\alpha$ stays empirical.  Full record:
+\texttt{results/proton/ny-trefoil-derivation-result.md}.  Tracked under
+issues~\#66, \#92.
 \end{gapbox}
 
 The simplest three-dimensional structure that can stabilize a spherical void against
@@ -1269,16 +1277,26 @@ to define the per-length vortex tension $\mu_0(R)$.  At the natural physical
 cutoff $R\approx1.18\,\xi$ (the inter-strand half-spacing of the trefoil
 with minor radius $0.85\,\xi$), the fine-grid value $F\approx4.4$ reproduces
 the analytic estimate, giving $m_p\approx 927\,\text{MeV}$ ($1.2\%$ below
-the observed value).  What remains open:
+the observed value).
+
+\textbf{Update (issue~\#92, 2026-06): $N_Y$ is now derived.}  $N_Y$ is the
+trefoil \emph{crossing number} $=3$ --- the defining topological invariant of
+the $(2,3)$ torus knot (braid word $\sigma_1^3$, three positive crossings).
+Equivalently it is the self-linking number (writhe), which converges to exactly
+$3.000$ as the core radius $a\to0$ ($a=0.05\,\xi$ gives $3.0009$); finite
+thickness adds $\mathrm{Wr}=3+O(a^2)$, so the $3.007$ is this small correction,
+not a separate digit.  The alternative $L_{\rm curve}/(4\pi\xi)$ proxy is
+\emph{rejected}: it is not an invariant (it floats $2.0$--$3.1$ across geometries;
+the value $3.086$ was a coincidence of the $R=2.8\,\xi$ embedding).  Verified in
+\texttt{src/paper\_i/trefoil\_ny\_derivation.py}.  What remains open:
 \begin{itemize}
-  \item Whether the chiral scale $\mu_0=m_e/\alpha\approx 70\,\text{MeV}$
-        can itself be derived from the SSV parameters (rather than fit),
-        which would close the remaining $\sim 1\%$ uncertainty.
-  \item Whether $N_Y\approx3.007$ admits a closed-form derivation from the
-        $(2,3)$-trefoil topology.  The empirical value is suggestive of
-        $3$ self-crossings plus a small geometric correction, or equivalently
-        $L_{\rm curve}/(4\pi\xi)\approx3.086$ for the canonical trefoil
-        embedding used in the minimisation.
+  \item The chiral scale $\mu_0=m_e/\alpha\approx 70\,\text{MeV}$ still takes
+        $m_e,\alpha$ as empirical inputs; deriving it from SSV vacuum parameters
+        is the precision-bearing test (the remaining $\sim 1\%$).
+  \item A residual $\sim 6\%$ systematic in $F$ from the shallow geometric
+        minimum (the cutoff $R=$ inter-strand spacing $=2a$ is geometric, but
+        $\mathrm{d}\ln F/\mathrm{d}\ln R\approx-0.94$ propagates the
+        $a$-uncertainty into $F$).
 \end{itemize}
 \end{gapbox}
 
@@ -1411,20 +1429,24 @@ Higher rungs $K^\pm \approx 7\mu_0$ and $\rho(770) \approx 11\mu_0$
 ($\sim$0.7\%) & candidate & Same ladder mechanism as the muon,
 so the present scalar-BdG nulls also block a derived ladder
 interpretation.  No separate dynamical confirmation yet. & \#66,\#76 \\
-Proton mass $m_p \approx N_Y \cdot F \cdot \mu_0 \approx 930$--$954$
-MeV ($\sim$1.5\% from CODATA at $R\!=\!1.18\,\xi$) &
-candidate & Issue~\#30 closure attempts: cutoff invariance
-falsified; geometric-$R$ route fails; gate (iii-a) seed-locked;
-self-consistent $R_{\rm sc}=0.923\,\xi$ gives $60\%$ spread
-(\texttt{static-closure-self-consistent-r-result.md}).
-Active: first matched cross-grid test at $n^3=96^3$ vs $72^3$
-(same penalty, in progress~2026-06-02,
-\texttt{static-closure-n96-prereg.md}). & \#30 \\
-$N_Y \approx 3.007$ topological crossing factor & candidate &
-Same as above; the $\pm0.002$ band in earlier drafts is fit
-reproducibility, not measured cross-grid spread.  Topology
-preservation is not robust under the current soft-penalty relaxer,
-as recorded in \texttt{proton-gate-iii-result.md}. & \#30 \\
+Proton mass $m_p \approx N_Y \cdot F \cdot \mu_0 \approx 924$--$954$
+MeV ($\sim$1.5\% from CODATA) &
+candidate & \textbf{Update (\#92):} the node factor is now derived,
+$N_Y=3$ (crossing number; see row below).  The cutoff $R$ is the
+geometric inter-strand spacing ($=2a$, set by the energy-minimum
+$a\approx0.85\,\xi$), so the cutoff is not free; a $\sim6\%$ $F$-systematic
+remains from the shallow geometric minimum ($\mathrm{d}\ln F/\mathrm{d}\ln
+R\approx-0.94$).  Cutoff-invariance route falsified (\#77).  Remaining
+free input: $\mu_0=m_e/\alpha$ (still empirical, the precision-bearing
+test).  $m_p=3\times4.4\times70\approx924$\,MeV.
+\texttt{results/proton/ny-trefoil-derivation-result.md}. & \#30,\#92 \\
+$N_Y = 3$ topological crossing factor & derived &
+\textbf{Derived (issue~\#92, 2026-06):} $N_Y$ is the trefoil crossing
+number $=3$ (braid word $\sigma_1^3$; equivalently the thin-core writhe,
+$\to3.000$ as $a\to0$).  The $3.007$ is a finite-thickness writhe
+correction; the $L_{\rm curve}/(4\pi)$ proxy is rejected as non-invariant.
+Zero-parameter topological constant.
+\texttt{results/proton/ny-trefoil-derivation-result.md}. & \#92 \\
 Form factor $F\approx4.47$ at $R=1.18\,\xi$
 (fine-grid average) & candidate & Topology-preserving relaxation
 on $n^3{=}48^3,\,72^3$ agrees at $\sim6\%$ at this
@@ -1785,15 +1807,20 @@ required the analytic $F=4.47$ at the same cutoff exactly; the
 numerical $F$ at this cutoff sits $\sim 1.5\%$ below, hence the
 $\sim 1\%$ residual discrepancy.
 
-\paragraph{Topological status of $N_Y$.}  Two interpretations of the
-empirical value $N_Y\approx 3.007$ are consistent with the numerics:
-(i)~a topological reading, $N_Y=$ (number of self-crossings of the
-$(2,3)$-trefoil projection)~$+\,$small geometric correction
-$=3+0.007$; and (ii)~a normalised-length reading,
-$N_Y=L_{\rm curve}/(4\pi\xi)=3.086$ for the canonical trefoil
-embedding used here ($L_{\rm curve}\approx 38.79\,\xi$).  The two
-agree to better than $3\%$; settling between them is a topological
-question rather than a numerical one.
+\paragraph{Topological status of $N_Y$ (settled, issue~\#92).}  $N_Y$ is the
+\emph{crossing number of the $(2,3)$-trefoil}, $N_Y=3$: the minimal number of
+self-crossings of the simplest nontrivial knot (braid word $\sigma_1^3$, three
+positive crossings).  Equivalently it is the self-linking number (writhe) of the
+canonical embedding, which converges to exactly $3.000$ as the core radius
+$a\to0$ (numerically $3.0009$ at $a=0.05\,\xi$); finite core thickness adds
+$\mathrm{Wr}=3+O(a^2)$, so the empirical $3.007$ is this small geometric
+correction rather than a separately-derived digit.  The normalised-length
+reading $N_Y=L_{\rm curve}/(4\pi\xi)$ is \emph{rejected}: $L_{\rm curve}/(4\pi\xi)$
+is not a topological invariant --- it floats from $2.0$ to $3.1$ across the
+stable geometry domain, and its apparent $3.086$ was a coincidence of the
+$R=2.8\,\xi$ embedding.  Thus $N_Y=3$ is a zero-parameter topological constant.
+Verified in \texttt{src/paper\_i/trefoil\_ny\_derivation.py};
+record \texttt{results/proton/ny-trefoil-derivation-result.md}.
 
 Full code, saved states ($\sim\!100$\,MB across all grids),
 density-slice plots, and sensitivity analyses are catalogued in
