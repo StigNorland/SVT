@@ -31,7 +31,7 @@ forces, gravity, time, and black-hole ontology from the structure of that medium
 | SSV VII-a | Quantum Mechanics from Hydrodynamics | Draft aligned to outline |
 | SSV VII-b | Emergent Geometry and the Dissolution of Quantum Gravity | Draft aligned to outline |
 | SSV VIII | Cosmogony from the Permissive Void | Draft aligned to outline |
-| SSV IX | CMB and Primordial Phonon Bath | Scoped outline; `main.tex` not yet written |
+| SSV IX | CMB and Primordial Phonon Bath | Scoped outline; `main.tex` not yet written (#100) |
 | SSV Alpha | Fine-Structure Constant from Toroidal Vortex Geometry | Draft |
 | SSV Goldstone | Electromagnetic Propagation and the Goldstone Mode | Draft |
 
@@ -56,6 +56,8 @@ The core computation is a 3D static minimiser for topological defects in the Log
 
 **Recent track (issue #78, closed 2026-06-05):** the BdG muon programme is retired (no-go confirmed across 5 independent probes — scalar Ψ has no half-integer Berry phase). Route C and Route D also returned negative: distinct static ring minima give an energy ratio `3.71`, not `206.77`, and the Kelvin-mode degeneracy does not produce an exact `8^n` generation rule. Remaining lepton-generation escape hatches are structural only: half-quantum-vortex or spinorial-order-parameter extensions.
 
+**Open follow-ups (2026-06-07):** #97 upgrades dynamic reconnection cap geometry, #98 maps the #77 static trefoil result into `Q_p` / `\alpha_G`, #99 decides the post-#78 lepton-generation branch, and #100 drafts SSV IX.
+
 ## Paper I Supplemental Notes
 
 Result notes, pre-registrations, and checkpoints live under `papers/SSV-I/`. Key recent files:
@@ -70,6 +72,7 @@ Result notes, pre-registrations, and checkpoints live under `papers/SSV-I/`. Key
 - [docs/roadmap.md](docs/roadmap.md) — paper plan and current priorities
 - [docs/numerical-minimisation-roadmap.md](docs/numerical-minimisation-roadmap.md) — numerical programme plan
 - [docs/numerical-conventions.md](docs/numerical-conventions.md) — units, conventions
+- [docs/claim-status.md](docs/claim-status.md) — compact claim/gapbox status index
 - [docs/issue-workflow.md](docs/issue-workflow.md) — how issues, pre-registrations, and result notes are used
 
 ## Issue-Driven Workflow

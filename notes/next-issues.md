@@ -10,14 +10,14 @@ this file now records what remains worth opening next.
 - [x] Extract black-hole material into `SSV V`
 - [x] Trim `SSV VI-a` to flat curves and Andromeda
 - [x] Keep `SSV VI-b` focused on morphology only
-- [ ] Draft `SSV IX` once `SSV VIII` is stable enough to supply the cosmogony input
+- [x] Open `SSV IX` drafting issue once `SSV VIII` is stable enough to supply the cosmogony input — [#100](https://github.com/StigNorland/SVT/issues/100)
 
 ## Derivation tasks
 
 - [x] Rework entropy formulation away from bare event counting
 - [x] Formalize local update-capacity as a usable concept in the gravity paper
 - [x] Clarify the relation between freezing, outward progress, and local light speed at the horizon
-- [ ] Decide whether lepton-generation work moves to a half-quantum-vortex branch, a spinorial-order-parameter branch, or is retired after #78
+- [x] Open decision issue for whether lepton-generation work moves to a half-quantum-vortex branch, a spinorial-order-parameter branch, or is retired after #78 — [#99](https://github.com/StigNorland/SVT/issues/99)
 
 ## Computation tasks
 
@@ -26,8 +26,15 @@ this file now records what remains worth opening next.
 - [x] Separate `\alpha_G` closure from the reconnection-geometry programme
 - [x] Turn the Paper II reconnection story into a real 3D time-dependent structural harness
 - [x] Add sensitivity gates for reduced problems before promoting full 3D claims
-- [ ] Upgrade dynamic reconnection from structural harness to grid-converged cap-geometry run
-- [ ] Build the next `Q_p`/`\alpha_G` map from the #77 static result
+- [x] Open issue to upgrade dynamic reconnection from structural harness to grid-converged cap-geometry run — [#97](https://github.com/StigNorland/SVT/issues/97)
+- [x] Open issue to build the next `Q_p`/`\alpha_G` map from the #77 static result — [#98](https://github.com/StigNorland/SVT/issues/98)
+
+## Open follow-up issues
+
+- [#97](https://github.com/StigNorland/SVT/issues/97) — dynamic reconnection cap geometry to grid-converged candidate
+- [#98](https://github.com/StigNorland/SVT/issues/98) — #77 static trefoil output to `Q_p` / `\alpha_G`
+- [#99](https://github.com/StigNorland/SVT/issues/99) — post-#78 lepton-generation branch decision
+- [#100](https://github.com/StigNorland/SVT/issues/100) — SSV IX drafting from VIII input
 
 ## Claim-status tasks
 

@@ -176,7 +176,7 @@ are both encoding the same underlying torus mode structure.
 ### REFUTED (2026-06-05, issue #78 Task D)
 
 Both predicted tests were run and **both came back negative** — see
-`papers/SSV-I/route-d-kelvin-degeneracy-result.md`. The closed-shell hypothesis
+`papers/SSV-I/results/muon/route-d-kelvin-degeneracy-result.md`. The closed-shell hypothesis
 above does **not** hold:
 
 1. **C does not collapse q to 8.** With the real LogSE core constant

@@ -65,12 +65,12 @@ operator does not close the identification.  The reduced helicity-basis hit
 near $(3/2)\mu_0$ is not Galerkin-robust, a direct $m_\varphi=\pm1$ grid-sector
 solve finds no corresponding low branch, and a Volovik-style Berry-phase audit
 finds trivial holonomy for the implemented $\mathcal{L}_\perp$ block.  The
-muon therefore remains a candidate empirical rung rather than a derived
-eigenfrequency.  For the proton, the empirical scaling
-$m_p c^2 = N_Y\!\cdot\!F\!\cdot\!\mu_0$ with $N_Y\approx3.007$ and form factor
-$F\approx4.4$--$4.47$ at the inter-strand half-spacing cutoff
-$R\approx1.18\,\xi$ yields $m_p\approx 927$--$941\,\text{MeV}$
-($1.2\%$--$0.3\%$ from CODATA, depending on the cutoff convention).
+scalar muon route is therefore retired rather than carried as a pending
+candidate rung; post-\#78 lepton-generation work requires a new HQV or
+spinorial branch.  For the proton, the candidate static-geometry scaling
+$m_p c^2 = N_Y\!\cdot\!F\!\cdot\!\mu_0$ now uses the #77 continuation result
+$N_Y\!\cdot\!F\simeq54$ at $(R,a)=(2.5,0.85)\xi$, while the separate
+$Q_p/\alpha_G$ map remains open.
 The neutron is given a structural derivation as the surface-locked composite
 $\mathcal{N}=\mathcal{T}\cup_{\Sigma_p}\mathcal{E}$ of the proton trefoil and
 an electron torus compressed onto the breather skin: charge, spin,
@@ -573,19 +573,20 @@ labelled them ``provisional consistency-based calibration rather than a
 derived physical constant.''  The honest framework prediction at the canonical
 cutoff is therefore $m_p\approx 930$--$954\,\text{MeV}$ ($\sim 1.5\%$ of
 CODATA) with a documented cutoff systematic, \emph{not} the single-number
-$0.3\%$ figure that appeared in earlier drafts.  \textbf{Update (issue~\#92,
-2026-06):} the node factor $N_Y$ is now \emph{derived} --- it is the trefoil
-crossing number $N_Y=3$ (equivalently the thin-core writhe, or the braid-word
-exponent $\sigma_1^3$); the $3.007$ is this $3$ plus a small finite-thickness
-writhe correction, and the alternative $l_{\rm curve}/(4\pi)$ proxy is rejected
-as non-invariant (it floats $2.0$--$3.1$ with geometry).  The cutoff $R$ is the
-inter-strand spacing ($=2a$, a geometric property of the relaxed knot, set by
-the energy-minimum $a\approx0.85\,\xi$), so route~(i) holds in principle;
-route~(ii) ($N_Y\!\cdot\!F$ cutoff-invariant) was falsified (\#77).  A
-$\sim 6\%$ $F$-systematic remains from the shallow geometric minimum, and
-$\mu_0=m_e/\alpha$ stays empirical.  Full record:
-\texttt{results/proton/ny-trefoil-derivation-result.md}.  Tracked under
-issues~\#66, \#92.
+$0.3\%$ figure that appeared in earlier drafts.  \textbf{Update
+(issues~\#92 and \#77, 2026-06):} the topological node factor $N_Y=3$ is now
+derived as the trefoil crossing number (equivalently the thin-core writhe, or
+the braid-word exponent $\sigma_1^3$); the $3.007$ is this $3$ plus a small
+finite-thickness writhe correction, and the alternative $l_{\rm curve}/(4\pi)$
+proxy is rejected as non-invariant.  The later #77 continuation scan upgrades
+the combined proton-geometry observable to a \emph{candidate} static result:
+$(R,a)=(2.5,0.85)\xi$ and $N_Y\!\cdot\!F\simeq54$, grid-converged over the
+tested ladder and route-independent.  This does not by itself make the separate
+$F$ extraction or the static-gravity map closure-grade; $\mu_0=m_e/\alpha$
+stays empirical and the $Q_p/\alpha_G$ map is tracked separately.  Full records:
+\texttt{results/proton/ny-trefoil-derivation-result.md} and
+\texttt{results/proton/geometry-minimum-result-2026-06-03.md}.  Tracked under
+issues~\#66, \#92, \#77, and \#98.
 \end{gapbox}
 
 The simplest three-dimensional structure that can stabilize a spherical void against
@@ -1315,7 +1316,7 @@ with minor radius $0.85\,\xi$), the fine-grid value $F\approx4.4$ reproduces
 the analytic estimate, giving $m_p\approx 927\,\text{MeV}$ ($1.2\%$ below
 the observed value).
 
-\textbf{Update (issue~\#92, 2026-06): $N_Y$ is now derived.}  $N_Y$ is the
+\textbf{Update (issues~\#92 and \#77, 2026-06):}  $N_Y$ is the
 trefoil \emph{crossing number} $=3$ --- the defining topological invariant of
 the $(2,3)$ torus knot (braid word $\sigma_1^3$, three positive crossings).
 Equivalently it is the self-linking number (writhe), which converges to exactly
@@ -1329,21 +1330,22 @@ the value $3.086$ was a coincidence of the $R=2.8\,\xi$ embedding).  Verified in
   \item The chiral scale $\mu_0=m_e/\alpha\approx 70\,\text{MeV}$ still takes
         $m_e,\alpha$ as empirical inputs; deriving it from SSV vacuum parameters
         is the precision-bearing test (the remaining $\sim 1\%$).
-  \item A residual $\sim 6\%$ systematic in $F$ from the shallow geometric
-        minimum (the cutoff $R=$ inter-strand spacing $=2a$ is geometric, but
-        $\mathrm{d}\ln F/\mathrm{d}\ln R\approx-0.94$ propagates the
-        $a$-uncertainty into $F$).
+  \item The #77 geometry scan gives a candidate combined observable
+        $N_Y\!\cdot\!F\simeq54$ at $(R,a)=(2.5,0.85)\xi$, but the separate
+        $F$ extraction and its propagation into $Q_p/\alpha_G$ remain
+        lower-status bookkeeping for issue~\#98.
 \end{itemize}
 \end{gapbox}
 
-Following the 2026-05-19 numerical extraction of $F$ at the inter-strand
-cutoff (Open Problem 3 above and Appendix~\ref{app:minimisation}), the
-proton assignment is a candidate $1$--$2\%$ estimate rather than a closed
-derivation; later issue~\#30 closure gates show that the current static
-pipeline is not topology-robust or cutoff-derived.  The pion is on stronger
-footing: its two-winding topology is topologically forced, and the remaining
-gap is the stability proof for $L=2R_e$.  The muon remains a candidate
-empirical rung after the Path~B, issue~\#73, and issue~\#76 null results.
+Following the #77 continuation scan, the proton assignment has a candidate
+static-geometry anchor, $N_Y\!\cdot\!F\simeq54$, but remains short of a closed
+first-principles derivation because $\mu_0=m_e/\alpha$ and the
+$Q_p/\alpha_G$ map are still external to the candidate geometry result.  The
+pion is on stronger footing: its two-winding topology is topologically forced,
+and the remaining gap is the stability proof for $L=2R_e$.  The scalar-SSV muon
+and generation routes are no longer pending candidate mechanisms after #78:
+the BdG route is retired, Route C/D failed, and any future lepton-generation
+claim must pass through the HQV/spinorial decision tracked by issue~\#99.
 
 %------------------------------------------------------------------
 \section{Conclusion and Next Steps}
@@ -1471,15 +1473,16 @@ eigenfrequencies; unlike the muon they have no half-winding/HQV route.
 Recorded as a numerical coincidence, not a candidate rung. & \#76,\#91,\#93 \\
 Proton mass $m_p \approx N_Y \cdot F \cdot \mu_0 \approx 924$--$954$
 MeV ($\sim$1.5\% from CODATA) &
-candidate & \textbf{Update (\#92):} the node factor is now derived,
-$N_Y=3$ (crossing number; see row below).  The cutoff $R$ is the
-geometric inter-strand spacing ($=2a$, set by the energy-minimum
-$a\approx0.85\,\xi$), so the cutoff is not free; a $\sim6\%$ $F$-systematic
-remains from the shallow geometric minimum ($\mathrm{d}\ln F/\mathrm{d}\ln
-R\approx-0.94$).  Cutoff-invariance route falsified (\#77).  Remaining
+candidate & \textbf{Update (\#77):} the static geometry now has a
+candidate combined observable, $N_Y\!\cdot\!F\simeq54$, at
+$(R,a)=(2.5,0.85)\xi$, grid-converged over the tested continuation ladder
+and route-independent.  The node factor $N_Y=3$ is separately derived as
+the trefoil crossing number (\#92; see row below), but the separate $F$
+decomposition and the $Q_p/\alpha_G$ map are not closure-grade.  Remaining
 free input: $\mu_0=m_e/\alpha$ (still empirical, the precision-bearing
-test).  $m_p=3\times4.4\times70\approx924$\,MeV.
-\texttt{results/proton/ny-trefoil-derivation-result.md}. & \#30,\#92 \\
+test).  Records:
+\texttt{results/proton/ny-trefoil-derivation-result.md};
+\texttt{results/proton/geometry-minimum-result-2026-06-03.md}. & \#77,\#92,\#98 \\
 $N_Y = 3$ topological crossing factor & derived &
 \textbf{Derived (issue~\#92, 2026-06):} $N_Y$ is the trefoil crossing
 number $=3$ (braid word $\sigma_1^3$; equivalently the thin-core writhe,
@@ -1487,15 +1490,12 @@ $\to3.000$ as $a\to0$).  The $3.007$ is a finite-thickness writhe
 correction; the $L_{\rm curve}/(4\pi)$ proxy is rejected as non-invariant.
 Zero-parameter topological constant.
 \texttt{results/proton/ny-trefoil-derivation-result.md}. & \#92 \\
-Form factor $F\approx4.47$ at $R=1.18\,\xi$
-(fine-grid average) & candidate & Topology-preserving relaxation
-on $n^3{=}48^3,\,72^3$ agrees at $\sim6\%$ at this
-observable; the no-penalty value ($F\approx4.47$) is from
-topologically trivial states.  Penalty-valid $F\in[10,\,17]$
-is not yet grid-converged.  Three cutoff approaches
-(cutoff-invariance, geometric-$R$, self-consistent $R_{\rm sc}$)
-have been tested and all give large spread.  See \#30 for active
-$n=96$ cross-grid run. & \#30 \\
+Form factor $F$ and product $N_Y\!\cdot\!F$ & candidate &
+The separately reported $F$ value remains bookkeeping-sensitive to the
+chosen decomposition and calibration convention.  The promoted #77 output is
+the combined candidate observable $N_Y\!\cdot\!F\simeq54$ at the energy-minimum
+geometry, not a closure-grade standalone $F$.  The next upgrade is the
+documented $Q_p/\alpha_G$ map. & \#77,\#98 \\
 Restricted 2-mode BdG diagnostic
 (\texttt{restricted\_bdg\_matrix.py}) producing
 $\omega_-$, $\omega_+$ &

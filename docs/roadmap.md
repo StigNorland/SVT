@@ -64,7 +64,7 @@ These are treated as fixed foundation papers. Later work may refine or supersede
    - Primordial phonon bath
    - CMB interpretation
    - Entropy-budget cosmology
-   - Status: scoped outline only; no `main.tex` yet
+   - Status: scoped outline only; no `main.tex` yet; drafting tracked by #100
 
 10. `SSV Alpha: Fine-Structure Constant from Toroidal Vortex Geometry`
     - Core claim: `R*/ξ = α⁻¹`
@@ -95,9 +95,15 @@ Use [docs/numerical-minimisation-roadmap.md](docs/numerical-minimisation-roadmap
 - the dynamic 3D reconnection minimisation
 - the validation gates that decide when a claim moves from estimate to derivation
 
+Use [docs/claim-status.md](claim-status.md) as the compact index of claim labels,
+gapboxes, and follow-up issues.
+
 **Current status (2026-06):**
 - Issue #77 **closed**: trefoil geometry minimum (R,a)=(2.5, 0.85)ξ, N_Y×F=54, grid-converged and route-independent. The grid-convergence wall that blocked #13 for the entire programme is removed.
 - Issue #78 **closed**: BdG muon program retired; Route C static minima failed (`E_8/E_1 = 3.71`, not `206.77`); Route D Kelvin degeneracy refuted the exact `8^n` rule. Remaining lepton-generation options are structural extensions only, not scalar-SSV results. See `notes/volovik-mapping.md`.
+- Issue #97 **open**: upgrade dynamic reconnection cap geometry from structural harness to grid-converged candidate.
+- Issue #98 **open**: map the #77 static trefoil output into a documented `Q_p` / `\alpha_G` pipeline.
+- Issue #99 **open**: decide whether post-#78 lepton generations move to HQV, spinorial `Psi`, or retirement.
 
 ## Working Rule
 

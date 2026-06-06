@@ -2,7 +2,7 @@
 
 These began as ready-to-paste issue bodies for the first computation tasks on the numerical closure track.
 
-**Bookkeeping status (2026-06-06):** the seed issues listed here have been opened
+**Bookkeeping status (2026-06-07):** the seed issues listed here have been opened
 and closed in GitHub. The checkboxes below now reflect repository status rather
 than pristine issue-template text. Closed issue does not always mean
 closure-grade physics; see the per-section status note.
@@ -105,7 +105,8 @@ Once a converged static breather exists, what pipeline turns its far-field densi
 - [x] Rewrite the relevant Paper II language according to the measured result
 
 Status: issue #14 is closed as a candidate/status-cleanup branch, not as a
-first-principles `\alpha_G` derivation. The `Q_p` map remains the upgrade gate.
+first-principles `\alpha_G` derivation. The `Q_p` map remains the upgrade gate
+and is now tracked by follow-up issue [#98](https://github.com/StigNorland/SVT/issues/98).
 
 ## 4. Dynamic Reconnection Closure
 
@@ -141,7 +142,8 @@ Can we replace the current structural reconnection harness with a real 3D event 
 Status: issue #15 is closed as structural/prototype work. The reconnection
 harness confirms a chiral-shear barrier and cap formation at physical
 `lambda_perp`, but cap geometry is not grid-converged and does not support a
-derived `W` mass.
+derived `W` mass. The cap-geometry upgrade is now tracked by follow-up issue
+[#97](https://github.com/StigNorland/SVT/issues/97).
 
 ## 5. Reduced-Problem Validation
 
@@ -205,4 +207,5 @@ Which quantitative statements in Papers I and II should currently be labelled as
 
 Status: issue #17 is closed. Later updates should keep this taxonomy synchronized
 with #77 and #78: proton `N_Y×F` is candidate static geometry; scalar lepton
-generation routes C/D are failed, not pending.
+generation routes C/D are failed, not pending. The post-#78 lepton branch
+decision is tracked by [#99](https://github.com/StigNorland/SVT/issues/99).

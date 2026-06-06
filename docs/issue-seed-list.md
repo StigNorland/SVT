@@ -23,7 +23,7 @@ folded into later closure issues unless marked otherwise.
 
 Follow-up seeds after the first pass:
 
-1. [ ] `[numerics] Upgrade dynamic reconnection cap geometry to grid-converged candidate`
-2. [ ] `[numerics] Map #77 static trefoil output into a documented Q_p / alpha_G pipeline`
-3. [ ] `[derivation] Decide the post-#78 lepton-generation branch: HQV, spinorial Ψ, or retirement`
-4. [ ] `[paper] Draft SSV IX from the VIII cosmogony input`
+1. [x] `[numerics] Upgrade dynamic reconnection cap geometry to grid-converged candidate` — opened as [#97](https://github.com/StigNorland/SVT/issues/97)
+2. [x] `[numerics] Map #77 static trefoil output into a documented Q_p / alpha_G pipeline` — opened as [#98](https://github.com/StigNorland/SVT/issues/98)
+3. [x] `[derivation] Decide the post-#78 lepton-generation branch: HQV, spinorial Ψ, or retirement` — opened as [#99](https://github.com/StigNorland/SVT/issues/99)
+4. [x] `[paper] Draft SSV IX from the VIII cosmogony input` — opened as [#100](https://github.com/StigNorland/SVT/issues/100)

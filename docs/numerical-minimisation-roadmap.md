@@ -2,13 +2,15 @@
 
 This document turns the recurring "deferred to the 3D `\mathcal{L}+\mathcal{L}_\perp` minimisation" language into an actual work program.
 
-**Bookkeeping status (2026-06-06):** Workstream 0 is implemented as the thin
+**Bookkeeping status (2026-06-07):** Workstream 0 is implemented as the thin
 `src/shared_numerics/` layer (#12). The static trefoil-breather branch has a
 candidate-grade closure result via #77: `(R,a)=(2.5,0.85)ξ` and `N_Y×F=54`,
 grid-converged over the tested continuation ladder and route-independent. This
 upgrades the proton geometry row from "missing computation" to "candidate
 static result." The static gravity extraction and dynamic reconnection branches
-remain candidate/structural rather than closure-grade.
+remain candidate/structural rather than closure-grade and are now tracked by
+follow-up issues #98 and #97, respectively. The post-#78 lepton branch decision
+is tracked by #99.
 
 The main point is simple:
 
@@ -246,11 +248,11 @@ Exit gate:
 | Observable | Depends first on | Current status | Upgrade condition |
 |------|------|------|------|
 | Proton mass closure | Static breather | candidate static result: #77 gives `N_Y×F=54` at `(R,a)=(2.5,0.85)ξ`; residual physical shallow-minimum uncertainty remains | separate `N_Y`/`F` decomposition and final paper propagation if needed |
-| `\alpha_G` | Static breather far field | CODATA consistency check + provisional monopole estimator | predicted from relaxed breather through documented `Q_p` map |
-| `W` mass | Dynamic reconnection | `\phi` ansatz | measured cap geometry |
+| `\alpha_G` | Static breather far field | CODATA consistency check + provisional monopole estimator; follow-up #98 | predicted from relaxed breather through documented `Q_p` map |
+| `W` mass | Dynamic reconnection | `\phi` ansatz; cap-geometry upgrade #97 | measured cap geometry |
 | Neutrino spectrum | Event-background linearisation | structural hypothesis | computed mode spectrum |
 | PMNS / CP observables | Event-background linearisation + chirality statistics | speculative | reproducible asymmetry and phase extraction |
-| Lepton generations | Toroidal / event spectra | scalar-SSV routes C/D failed; `8^n` is a numerical curiosity, not a first-principles degeneracy | new half-quantum-vortex or spinorial-order-parameter branch |
+| Lepton generations | Toroidal / event spectra | scalar-SSV routes C/D failed; `8^n` is a numerical curiosity, not a first-principles degeneracy; branch decision #99 | new half-quantum-vortex or spinorial-order-parameter branch, or retirement |
 
 ## Immediate Repo Tasks
 
