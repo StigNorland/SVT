@@ -3,11 +3,11 @@
 Status: resolved into Paper II's contact-vertex section; kept as the
 numerical/falsification note for issue #33.
 Issue: #33 (depends conceptually on #29).
-Date: 2026-05-28; updated 2026-06-03.
+Date: 2026-05-28; updated 2026-06-06.
 Companion script: `src/paper_ii/g2_form_factor_loop.py` (§6 output).
 Regression tests: `src/paper_ii/test_g2_form_factor_loop.py`.
-Prior result: `papers/SSV-II/g2-form-factor-results.md` (the $F = J_0(kR^\*)$
-calculation killing 99.5 % of Schwinger).
+Prior result: `papers/SSV-II/results/g2-form-factor-results.md` (the
+$F = J_0(kR^\*)$ calculation killing 99.54 % of Schwinger).
 
 ## Closure note
 
@@ -21,6 +21,15 @@ $R^\*=\bar\lambda_e/\alpha$ into the loop vertex.  The classical
 $J_0(kR^\*)$ calculation remains here as the falsifier showing why the
 dressed form factor cannot be used at the bare vertex.
 
+The later #79/#80/#86 context does not reopen this loop integral.  #79 shows
+that scalar Y-junction topology supplies Cartan/Weyl skeletons rather than full
+non-abelian gauge dynamics; #80 moves any continuous non-abelian/internal
+correction into the multi-component Pati-Salam/SU(4) programme; and #86 records
+the #29 partial-import closure with this #33 result as the U(1)/vertex
+guardrail.  Thus #33's one-loop conclusion remains: dressed geometric torus
+form factors are ruled out at the bare vertex, while the contact/topological
+vertex recovers Schwinger.
+
 ## Goal
 
 Decide whether the user-preferred resolution of #33 — *borrow Schiller's
@@ -32,7 +41,7 @@ invoking any sub-$\bar\lambda_e$ scale.
 The test is purely numerical: assume a 1-loop vertex amplitude with shape
 $F(k)$ and effective scale $R_v$ (whatever the imported algebra ends up
 producing), feed it into the loop integral derived in
-`g2-form-factor-results.md`, and read off the constraint on $(F, R_v)$.
+`results/g2-form-factor-results.md`, and read off the constraint on $(F, R_v)$.
 
 ## Reduction (recap)
 

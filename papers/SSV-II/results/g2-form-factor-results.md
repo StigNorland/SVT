@@ -1,6 +1,6 @@
 # Toroidal form-factor loop integral — numerical results (issue #33)
 
-Date: 2026-05-28
+Date: 2026-05-28; closure context updated 2026-06-06
 Script: `src/paper_ii/g2_form_factor_loop.py`
 
 ## Reduction
@@ -99,9 +99,10 @@ catastrophic falsification at the level of this calculation.
 
 ## Interpretation — what this means for Paper II
 
-The calculation, *as set up in the paper* (form factor F = J_0(|k_spatial|R*)
-on each vertex, with R* = ξ/α = ƛ_e/α), is incompatible with experiment.  The
-gapbox at line 620 hides this fact behind a parametric estimate.
+The dressed-geometric calculation (form factor F = J_0(|k_spatial|R*) on each
+vertex, with R* = ξ/α = ƛ_e/α) is incompatible with experiment.  Paper II now
+uses this result as the falsifier for attaching the assembled torus form factor
+to the bare vertex.
 
 Possible resolutions (none chosen by this calculation; each requires a
 separate physical argument):
@@ -126,6 +127,17 @@ separate physical argument):
    internal vertex.  E.g., one F² instead of two, or F² appearing as a
    multiplicative correction to a separately-derived Schwinger term.
 
-The gapbox should be replaced with an *honest* statement of this result and
-a flag that resolving (1)–(4) is required to make Paper II's g−2 prediction
-robust.  This is bigger than just "evaluate the integral."
+## Closure update (2026-06-06)
+
+Paper II's contact-vertex section now implements the resolution: the
+LogSE$+\mathcal{L}_\perp$ bare vertex is a contact/topological coupling with
+`F(k)=1`, so the one-loop integral recovers Schwinger's α/(2π) exactly.  The
+`J_0(kR*)` calculation above remains the numerical falsifier showing why the
+dressed, assembled electron torus cannot be inserted as the bare loop vertex.
+
+The related #79/#80/#86 results sharpen the boundary: continuous non-abelian or
+internal-structure corrections, if they exist, belong to the later
+multi-component/Pati-Salam programme, not to this classical torus form factor.
+#33 is therefore closed at one-loop precision by the contact/topological vertex
+interpretation; future deviations must come from intrinsic vertex structure,
+not from `J_0(kR*)`.
