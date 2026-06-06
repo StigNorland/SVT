@@ -371,11 +371,19 @@ superfluid vacuum---a stable, self-sustaining topological defect with finite siz
         continuum effective theory extends to $\ell_{\rm grain} \equiv a_p$;
         below this scale the LogSE description is silent, in the same sense
         that Navier--Stokes is silent about sub-molecular flow (see Paper~II
-        \S2).  Spin $s = \hbar/2$ follows when the circulation quantum is
-        combined with the half-quantum topology of the ring; the detailed
-        Finkelstein--Rubinstein argument ($\pi_1$ of the configuration space
-        is $\mathbb{Z}_2$, placing the torus in the fermionic sector) will be
-        given in Paper~II.
+        \S2).  Spin $s = \hbar/2$ follows from the order parameter
+        being a two-component spinor (the CP$^1$ extension adopted in
+        issue~\#83; Paper~II).  The internal direction
+        $\hat n = z^\dagger\boldsymbol\sigma z \in S^2$ ($z$ the normalised
+        spinor, $z^\dagger z = 1$) carries the defining spinor property that a
+        $2\pi$ rotation returns $\Psi \to -\Psi$ ($\pi_1(SO(3)) = \mathbb{Z}_2$),
+        so the toroidal defect lies in the fermionic sector \emph{intrinsically}
+        rather than by assumption.  This supersedes the earlier scalar
+        Finkelstein--Rubinstein route: the strand-model import (issue~\#29)
+        confirmed that a scalar $\pi_1(U(1)) = \mathbb{Z}$ does \emph{not}
+        deliver the half-integer label for free, which is one of the reasons the
+        CP$^1$ order parameter was adopted.  (Derivation note:
+        \texttt{papers/SSV-I/results/spinor/b2-lepton-spin-half.md}.)
 
   \item \textbf{Charge.}
         Electric charge emerges from the \emph{chirality} (handedness) of the toroidal
@@ -507,8 +515,9 @@ but the core persists.
 
 \textbf{Gyromagnetic ratio.}
 The electron vortex ring carries angular momentum $S$ from two sources: the
-topological winding number ($S_{\rm topo}=\hbar/2$, from the fermionic sector
-of the configuration space, cf.\ Paper~II) and the orbital flow ($L_{\rm orb}$).
+topological winding number ($S_{\rm topo}=\hbar/2$, the intrinsic spin-$\tfrac12$
+of the CP$^1$ spinor order parameter; see the spin item in \S\ref{sec:electron}
+and Paper~II) and the orbital flow ($L_{\rm orb}$).
 The magnetic moment of a current loop is $\mu=I\cdot\pi R_e^2$, where the
 effective current is $I = (e/h)\kappa_0$ (one unit of charge completing one
 circulation quantum per unit time).  Using $\kappa_0=h/m_e$:
@@ -1356,17 +1365,27 @@ inputs of the theory. & --- \\
 Pion mass $m_{\pi^\pm}=2\mu_0$
 ($0.34\%$ from CODATA) & derived & Already analytic from the
 two-winding topology + the $\mu_0=m_e/\alpha$ scale.  No 3D
-relaxation needed. & --- \\
+relaxation needed.  Survives the CP$^1$/spinor extension unchanged
+(spin-$0$ $\Rightarrow$ uniform $\hat n$, \#87 A1). & --- \\
+Lepton spin $s=\tfrac12$ & derived & \textbf{Promoted 2026-06 (\#87 B2)}
+from assumed to derived: intrinsic to the CP$^1$/spinor order parameter
+(\#83), where a $2\pi$ frame rotation returns $\Psi\to-\Psi$
+($\pi_1(SO(3))=\mathbb{Z}_2$).  Supersedes the scalar
+Finkelstein--Rubinstein route, which \#29 showed does not deliver the
+$\mathbb{Z}_2$ for a scalar field. & \#29,\#83,\#87 \\
 Muon mass $m_{\mu^\pm}=(3/2)\mu_0$ ($0.59\%$ from CODATA) &
-coincidence & \textbf{Demoted 2026-06} from candidate to numerical
-coincidence: five probes (Path~B, \#73, \#76, App.~B potential,
-two-mode reduction) converge on a no-go --- a scalar U(1) order
-parameter has no half-integer Berry holonomy and the
-$\mathcal{L}_\perp$ bridge vanishes by selection rules
-(\texttt{muon-bdg-nogo-summary.md}).  The BdG-breathing programme is
-retired.  Upgrade requires Route~C (generations as distinct static
-minima) or new microscopic structure (spinor / half-winding sector). &
-\#66,\#73,\#76,\#78 \\
+topological-sector (cond.) & \textbf{Demoted 2026-06} from candidate to
+numerical coincidence: five probes (Path~B, \#73, \#76, App.~B potential,
+two-mode reduction) converged on a no-go for the \emph{scalar} U(1) order
+parameter (no half-integer Berry holonomy; the $\mathcal{L}_\perp$ bridge
+vanishes by selection rules, \texttt{muon-bdg-nogo-summary.md}).
+\textbf{Re-promoted 2026-06 (\#87 B1)} under the CP$^1$/spinor extension
+(\#83): the spin--orbit-locked spinor BdG operator gives a protected
+half-integer Berry phase $\gamma_B=\pi$ (a $\mathbb{Z}_2$ invariant of the
+Nambu eigenbundle), so $E_n=(n+\tfrac12)\omega_0$ and the muon is the
+$3/2$ rung --- TOPOLOGICAL-SECTOR.  Conditional on showing the physical
+torus eigenbundle is in the winding regime (\texttt{results/spinor/b1-
+muon-berry-phase.md}). & \#66,\#76,\#78,\#87 \\
 Cubic-vertex one-loop self-energy as the source of the muon
 residual gap & \textit{falsified} & The repository calculation gives
 a relative shift of $-(3\text{--}9)\times 10^{-9}$, seven orders of
