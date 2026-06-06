@@ -18,36 +18,17 @@ Time is local change in `Psi`, the past survives only as wake structure in the p
 4. Physical time reversal is unavailable because no local process can globally unwrite the wake.
 5. Entropy should be formulated as wake-complexity, not as a bare event counter.
 
-## Candidate section structure
+## Actual section structure (9 sections — draft complete)
 
-1. Introduction
-   - Why the standard treatment of time is unsatisfying
-   - What this paper does and does not attempt
-
-2. Ontology of Time in SSV
-   - Time as change, not dimension
-   - Present-only ontology
-   - The past as present wake
-
-3. Wake Production in `Psi`
-   - Events as wake-writing processes
-   - Phonons, Kelvin waves, distortions, altered future reconnection opportunities
-
-4. Entropy as Wake-Complexity
-   - [x] Replace event counting with structural complexity
-   - [x] Candidate entropy functional
-   - [x] Why monotonicity is not tautological
-   - [x] Local cancellation versus global unwriting
-   - [x] Reconnection as one wake-writing channel, not the entropy definition
-   - [x] Remaining dimensional and formal gaps flagged explicitly
-
-5. Formal Time Reversal vs Physical Reversal
-   - Equations versus available operations
-   - Why time-travel paradoxes are category errors
-
-6. Discussion and Open Problems
-   - What still needs derivation
-   - Relation to thermodynamics and black holes
+1. **Introduction** — scope, roadmap
+2. **Minimal SSV Setting** — `Psi`, events, wake criterion, present-state notation `P(t)`
+3. **Time as Change, Not Dimension** — relational time, present-only ontology, causal ordering, time-travel paradoxes as category errors
+4. **Wake Production in Psi** — distributed wake, five channels, reconnection as one channel
+5. **Entropy as Wake-Complexity** — `W[Psi]`, five-channel schematic, monotonicity argument, initial-condition question, two-quantities distinction, empirical signatures
+6. **Channel-wise Reductions** — [x] all five channels (phonon, Kelvin, vortex tangle, correlation, soliton density) defined, calibrated to `k_B`, reduced to recognizable thermodynamic entropies; common coefficient `α_i = k_B` derived
+7. **Subleading Structure, Unified Flow, Reconnection Quantum** — [x] subleading terms closed form; [x] five coarse-grainings unified as one RG flow; [x] reconnection quantum reproduces Vinen law
+8. **Formal Time Reversal and Physical Reversal** — [x] formal vs. physical distinction; Loschmidt/Poincaré absorbed; CTCs and Deutsch's quantum CTCs addressed
+9. **Discussion and Open Problems** — two remaining items (cell constants; coupling to later papers)
 
 ## Keep out
 
@@ -57,18 +38,22 @@ Time is local change in `Psi`, the past survives only as wake structure in the p
 - Detailed cosmology
 - Broad prediction lists not needed for the time argument
 
-## Immediate drafting tasks
+## Drafting tasks
 
 - [x] Rewrite abstract around wake-complexity
 - [x] Replace entropy-as-count language
 - [x] Add section separating formal and physical reversal
 - [x] Move black-hole material to `papers/SSV-V`
 - [x] Move CMB material to `papers/SSV-IX`
+- [x] Work out all five channels concretely (§6)
+- [x] Unify coarse-grainings as one RG flow (§7.2)
+- [x] Price reconnection as a discrete quantum (§7.3)
+- [x] Address CTCs and quantum CTCs (§8)
 
 ## Issue `#1` Status
 
-The current `main.tex` is a narrow SSV III draft that can stand on its own as the time paper for the series. The remaining open items are not scope-rebuild tasks; they are follow-on derivation tasks around the computable wake functional, coarse-graining, and links to later gravity / black-hole papers.
+Done. SSV III is a complete 9-section paper that stands on its own as the time paper for the series.
 
 ## Issue `#4` Status
 
-The entropy section no longer depends on event-count language. It states entropy as persistent wake-complexity of the present `Psi` state, provides schematic `W[Psi]` and `Omega_wake[Psi]` forms, explains why monotonicity is a physical inverse-process claim, and flags the remaining formal derivation gaps.
+Done. The wake functional is carried to closed form: all five channels defined with concrete dimensionless functionals, all calibration coefficients fixed to `k_B`, subleading structure in closed form, five coarse-grainings unified as one RG flow, reconnection priced as a discrete quantum. The two remaining open items (cell constants, coupling to gravity/cosmology papers) are computations, not conceptual gaps.

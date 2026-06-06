@@ -71,11 +71,11 @@ These are treated as fixed foundation papers. Later work may refine or supersede
 
 ## Immediate Priorities
 
-1. Rebuild `SSV III` as the cleanest conceptual paper in the series.
-2. Split current `SSV V` into narrower manuscripts.
+1. ~~Rebuild `SSV III` as the cleanest conceptual paper in the series.~~ **Done (2026-06).** 9-section draft complete: wake functional in closed form, all 5 channels calibrated to k_B, unified RG flow, reconnection quantum. See `papers/SSV-III/README.md`.
+2. ~~Split current `SSV V` into narrower manuscripts.~~ **Done (2026-06).** SSV V = "Condensate Black Holes" (9 sections, structurally complete). QM → SSV-VII-a, geometry → SSV-VII-b, cosmogony → SSV-VIII. See `papers/SSV-V/README.md`.
 3. Refocus the galactic papers so they are phenomenology papers, not cosmology manifestos.
-4. Turn the deferred `\mathcal{L}+\mathcal{L}_\perp` minimisation into an explicit numerical roadmap.
-5. Track objections and open derivations in issues instead of burying them inside draft prose.
+4. ~~Turn the deferred `\mathcal{L}+\mathcal{L}_\perp` minimisation into an explicit numerical roadmap.~~ **Done.** See `docs/numerical-minimisation-roadmap.md`.
+5. Track objections and open derivations in issues instead of burying them inside draft prose. **Ongoing** — issues #76, #77, #78 follow this discipline.
 
 ## Numerical Closure Track
 
@@ -86,6 +86,10 @@ Use [docs/numerical-minimisation-roadmap.md](docs/numerical-minimisation-roadmap
 - the static 3D proton-breather minimisation
 - the dynamic 3D reconnection minimisation
 - the validation gates that decide when a claim moves from estimate to derivation
+
+**Current status (2026-06):**
+- Issue #77 **closed**: trefoil geometry minimum (R,a)=(2.5, 0.85)ξ, N_Y×F=54, grid-converged and route-independent. The grid-convergence wall that blocked #13 for the entire programme is removed.
+- Issue #78 **open**: retire BdG muon program (no-go confirmed across 5 independent probes); primary next test is lepton generations as distinct static minima (Route C, reuses #77 pipeline) and Kelvin-mode degeneracy (Route D). See `papers/SSV-I/notes/volovik-mapping.md`.
 
 ## Working Rule
 

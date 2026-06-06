@@ -27,5 +27,9 @@ All sections drafted. No stubs remaining. The structure is:
 - Factor-of-two in horizon radius, factor-of-four in `T_H` and `S_H` coefficient → Paper VII-b (spatial curvature, same as Paper IV §6)
 - Full Kerr exterior and no-hair proof → Paper VII-b
 - Identification `m = m_P` (constituent boson mass = Planck mass) → Paper I programme
-- Close-packing density `ρ_max` → Paper I programme
-- Evaporation endpoint equation of state → Paper I programme + Paper VII-b
+- Close-packing density `ρ_max` (quantitative) → Paper I programme
+
+## Structurally closed in this draft
+
+- **Evaporation endpoint** (§7.4): qualitative answer settled by three independent arguments — LogSE chemical-potential floor forbids dissolution, topological winding conservation forbids trivial endpoint from non-trivial parent, acoustic-horizon mechanism switches off at `r_H ~ ξ`. Result: **stable Planck-scale topological remnant**. Quantitative mass scale `M_rem ~ m_P` inherits the `ξ ~ l_P` identification (Paper VII-b); the no-dissolution conclusion is independent of that.
+- **Superradiance / Penrose process** (§5): answered cleanly — both occur by the standard Kerr-exterior mechanism (SSV-emergent metric is Kerr at leading order, Paper VII-b §6.3). Spontaneous winding expulsion is forbidden; externally driven extraction via the ergoregion is permitted and transfers condensate winding to the external defect. The two claims (spin persistence vs. population clustering) are explicitly separated.
