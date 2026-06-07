@@ -101,7 +101,7 @@ gapboxes, and follow-up issues.
 **Current status (2026-06):**
 - Issue #77 **closed**: trefoil geometry minimum (R,a)=(2.5, 0.85)ξ, N_Y×F=54, grid-converged and route-independent. The grid-convergence wall that blocked #13 for the entire programme is removed.
 - Issue #78 **closed**: BdG muon program retired; Route C static minima failed (`E_8/E_1 = 3.71`, not `206.77`); Route D Kelvin degeneracy refuted the exact `8^n` rule. Remaining lepton-generation options are structural extensions only, not scalar-SSV results. See `notes/volovik-mapping.md`.
-- Issue #97 **open**: upgrade dynamic reconnection cap geometry from structural harness to grid-converged candidate.
+- Issue #97 **open** / #108 **open**: smooth-weighted cap observables are in place; a short-cap tube-pinch ansatz passes the event gate on `n=24..48` and an optional `n=64` check. The actual radius-peak diagnostic is `3.85%` across `n=24..48`, but event-gated lambda scaling falsifies pure `R_cap \propto \sqrt{\lambda_\perp}` in this desktop harness (combined through-origin RMS `20.46%`).
 - Issue #98 **open**: map the #77 static trefoil output into a documented `Q_p` / `\alpha_G` pipeline.
 - Issue #99 **open**: decide whether post-#78 lepton generations move to HQV, spinorial `Psi`, or retirement.
 

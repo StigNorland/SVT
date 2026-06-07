@@ -1,0 +1,42 @@
+{
+  "issue": "#108",
+  "date": "2026-06-07",
+  "script": "instruments/paper_ii/tube_pinch_cap_harness.py",
+  "command": "python - <<'PY' ... TubePinchConfig(n=64, lambda_perp=2.0, kappa=3.0, tube_half_length_factor=0.08, edge_width=0.5, pinch_kick=1.5, duration=0.025, snapshots=17, fft_workers=8) ... PY",
+  "config": {
+    "n": 64,
+    "lambda_perp": 2.0,
+    "kappa": 3.0,
+    "tube_half_length_factor": 0.08,
+    "edge_width": 0.5,
+    "pinch_kick": 1.5,
+    "duration": 0.025,
+    "snapshots": 17,
+    "fft_workers": 8,
+    "log_pressure": 0.5
+  },
+  "runtime": {
+    "elapsed_s": 297.3361020088196,
+    "steps": 7784,
+    "effective_dt": 3.2117419039241762e-06
+  },
+  "decision": {
+    "cap_exists": true,
+    "reason": "pass",
+    "peak_radius": 7.85916197364716,
+    "opening_fraction": 0.7308910821853518,
+    "closing_fraction": 0.21609456487315773,
+    "localization_fraction": 0.1549814037760259
+  },
+  "combined_refinement": {
+    "n_values": [24, 32, 40, 48, 64],
+    "peak_radii": [
+      7.819449077316066,
+      8.019225878282795,
+      7.6189017560501835,
+      7.661410459728818,
+      7.85916197364716
+    ],
+    "spread_pct": 5.135237703862428
+  }
+}

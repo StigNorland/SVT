@@ -67,13 +67,13 @@ SCRIPT_METADATA = ScriptMetadata(
         "norm_drift",
         "cap_extraction_method",
     ),
-    issue_refs=("#15", "#16"),
+    issue_refs=("#15", "#16", "#97", "#108"),
     limitations=(
         "Structural reproduction harness only; not a physical-scale production reconnection solver.",
         "Use --log-pressure 0.5 for static-branch-compatible runs (canonical c=1); default log_pressure=8.0 "
         "gives c_eff=4, a known convention mismatch (issue #15).",
         "Timestep / resolution / initial-condition sensitivity sweeps are open work under issue #16 (dynamic side).",
-        "Cap radius extracted by volume-based or radial-slice method; both rely on a fixed cap_threshold cutoff.",
+        "Use cap_method='moment' for the threshold-free cap-radius observable; volume and radial-slice are legacy diagnostics.",
         "Radiated-mode spectrum is a basic radial-power-spectrum of delta_psi (first vs last snapshot), "
         "not a mode-decomposition into physical Bogoliubov branches (issue #15 task 4 partial).",
     ),
@@ -496,7 +496,7 @@ def parse_args() -> argparse.Namespace:
         help="Auto-select dt from stability criterion lambda_perp*k_max^4*dt < 0.5. "
              "When set, ignores --dt and prints the chosen value.",
     )
-    parser.add_argument("--cap-method", choices=("volume", "radial-slice"), default="volume")
+    parser.add_argument("--cap-method", choices=("volume", "radial-slice", "moment"), default="volume")
     parser.add_argument(
         "--output",
         type=Path,
