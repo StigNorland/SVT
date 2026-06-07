@@ -10,9 +10,15 @@ Issue References* appendix (see "Provenance" below).
 ## Layout
 
 ```
-instruments/
-  paper_i/  paper_ii/  paper_iv/  paper_v/        scripts grouped by paper
-  paper_vi_a/  paper_vi_b/  paper_vii_b/  paper_viii/
+instruments/              scripts grouped by paper
+  paper_i/
+  paper_ii/
+  paper_iv/
+  paper_v/        
+  paper_vi_a/
+  paper_vi_b/
+  paper_vii_b/
+  paper_viii/
   shared_numerics/        helpers shared across papers
   tools/                  repo tooling (e.g. gen_provenance.py)
   _fitted_quarantine/     retired scripts that used fitted/calibrated inputs;
