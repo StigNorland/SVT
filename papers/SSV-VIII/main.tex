@@ -24,6 +24,7 @@ Cosmogony from the Permissive Void}
 \date{Draft}
 
 \providecommand{\ssvissue}[1]{\hyperref[issue:#1]{\##1}}% in-text issue ref -> Code & Issue References appendix
+\providecommand{\ssvfile}[1]{\hyperref[file:#1]{\texttt{\detokenize{#1}}}}% in-text code/report ref -> Code & Issue References appendix
 \begin{document}
 \maketitle
 
@@ -277,7 +278,7 @@ performed}, rather than as derived results of this paper.
     Gross--Pitaevskii (or equivalently TDGL) symmetry-breaking transition.
     Status: \textit{structural with numerical evidence}; the calculation
     has been performed in
-    \texttt{instruments/paper\_viii/kibble\_zurek\_gpe.py} and the converged
+    \ssvfile{kibble_zurek_gpe} and the converged
     results are summarised below.
 
 \begin{resultbox}[Numerical Kibble--Zurek evidence (Prediction C1)]
@@ -352,7 +353,7 @@ $\tau_Q/\tau_0$ from a Paper~VII-b emergent-metric input.
 
 \subsection{Claim taxonomy used in this paper}
 
-Following \texttt{docs/numerical-minimisation-roadmap.md} in the repository,
+Following \ssvfile{numerical-minimisation-roadmap} in the repository,
 each claim in this paper is one of:
 
 \begin{itemize}
@@ -403,7 +404,7 @@ each claim in this paper is one of:
 \begin{enumerate}
     \item \emph{A GPE simulation of the void-to-saturation transition.}
         Performed in
-        \texttt{instruments/paper\_viii/kibble\_zurek\_gpe.py}: TDGL evolution on a
+        \ssvfile{kibble_zurek_gpe}: TDGL evolution on a
         $160\times160$ periodic grid produces phase-winding defects in
         the saturated regime, with the count scaling monotonically with the
         inverse quench rate at fitted exponent
