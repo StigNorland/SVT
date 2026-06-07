@@ -53,6 +53,62 @@ artefacts, swinging 60–78% with the box. This matches and sharpens the existin
 (`C_Q`) but a box/boundary-converged source charge, which does not exist in the
 current static branch.
 
+## Radial decay diagnostic — the moment is formally divergent
+
+After the box-convergence gate, the radial power-law of the outer deficit was
+measured by fitting `log(deficit_mean(r)) vs log(r)` in the outer 30–80% of the
+half-width:
+
+| State | exponent s (deficit ~ r^s) | convergence requirement |
+|---|---|---|
+| gradient-flow-n128-hw6-5000steps (best #77 ref) | **−2.88** | need s < −3 |
+| trefoil-state-n48-hw7-400steps | **−1.78** | need s < −3 |
+
+For `Q_p = ∫ r² · deficit(r) dr` to converge, the integrand `r² · r^s = r^(s+2)`
+must be integrable, i.e. `s+2 < −1`, i.e. `s < −3`. Neither state satisfies this:
+the LogSE algebraic healing tail `1−f(r) ~ 1/(4r²)` gives `s ≈ −2` by construction,
+so the monopole charge integral **diverges**. This means **no box size yields a
+finite, box-independent `Q_p`** — the quantity grows with the box regardless of
+resolution. The 60–78% box swings and the pedestal fraction ≥ 1 are therefore
+inevitable, not a numerical artefact.
+
+This sharpens the "unblock" requirement: not a bigger computer, but a
+**convergent source observable**. The carrier operator `C_Q` (flagged in #14 as
+unresolved) must physically suppress the 1/r² tail to produce a convergent
+source; `q_p_kernel_integral.py`'s `(a_p/ξ)³` suppression is a candidate but
+must be derived, not fitted. Until then, `∫(1−|ψ|²) dV` and its Green's-fn
+projection are structurally divergent quantities.
+
+Implementation: `radial_decay_exponent()` in
+`instruments/paper_i/q_p_box_convergence.py`; pinned in
+`instruments/test/paper_i/test_q_p_box_convergence.py` (asserts s > −3, i.e. the
+integral diverges, for the n24-hw6 state).
+
+## Ruled out — Madelung centrifugal subtraction does not restore box-stability
+
+A natural rescue (the ADM-style move) is to split the deficit into a **centrifugal**
+part (the circulation depletion from the phase field, `~½|v|²` with `v = ∇θ`, which
+should *not* source the long-range acoustic potential) and a **compressional** part
+(the genuine density healing, the gravitating source). The hope: the compressional
+residual is localized + exponentially decaying, hence box-stable even in a small box.
+
+Tested on the trefoil `hw5,6,7` family:
+
+| quantity | hw5 | hw6 | hw7 | box spread |
+|---|---|---|---|---|
+| raw deficit | 115.7 | 90.7 | 61.5 | 60.7% |
+| compressional residual (`deficit − ½|v|²`) | 67.2 | 57.6 | 37.4 | **55.1%** |
+| residual, far shell `[0.4,0.8]·hw` | 42.0 | 32.8 | 20.2 | **68.9%** |
+
+The subtraction removes magnitude but **none of the box-dependence** — the residual
+tracks the box at 55% (far shell 69%), essentially the same as the raw 61%/73%. At
+`hw ≤ 7ξ` against a `~2.5ξ` loop there is no region simultaneously far from every
+vortex strand *and* inside the box, so the local GP balance `½|v|²` is core-
+contaminated (its volume integral, 1536 for n128, exceeds the raw deficit) and has no
+clean regime to act in. **Confirms the obstruction is scale separation, not the choice
+of observable**: no local exterior/interior projector recovers a box-stable `Q_p` at
+achievable resolutions. (Prototype only; not promoted to a committed driver.)
+
 ## What would unblock it (not pursued here)
 
 Either (a) a **background-subtracting source isolation** (extract the localized charge

@@ -82,6 +82,37 @@ def state_observables(path: str | Path, probe_radii=(8, 10, 12, 16, 20),
     }
 
 
+def radial_decay_exponent(path: str | Path, r_lo_frac: float = 0.3,
+                           r_hi_frac: float = 0.8, n_bins: int = 20) -> float:
+    """Fit the outer-region power-law deficit ~ r^s via log-log regression.
+
+    For Q_p = ∫r²·deficit dr to converge, need s < -3.  The LogSE algebraic
+    healing tail gives deficit ~ 1/(4r²), so s ≈ -2 → integral diverges.
+    Measured: gradient-flow-n128-hw6 → s=-2.88; trefoil-n48-hw7 → s=-1.78.
+    """
+    import json
+    d = np.load(Path(path), allow_pickle=False)
+    psi = d["psi_real"] + 1j * d["psi_imag"]
+    x, y, z = d["x"], d["y"], d["z"]
+    hw = float(json.loads(str(d["config"]))["half_width"])
+    deficit = np.clip(1.0 - np.abs(psi) ** 2, 0.0, None)
+    rad = np.sqrt(x * x + y * y + z * z)
+    edges = np.linspace(r_lo_frac * hw, r_hi_frac * hw, n_bins + 1)
+    r_mid, d_mean = [], []
+    for i in range(n_bins):
+        mask = (rad >= edges[i]) & (rad < edges[i + 1])
+        if mask.any():
+            r_mid.append(0.5 * (edges[i] + edges[i + 1]))
+            d_mean.append(float(deficit[mask].mean()))
+    r_mid = np.array(r_mid)
+    d_mean = np.array(d_mean)
+    pos = d_mean > 0
+    if pos.sum() < 2:
+        return float("nan")
+    coeffs = np.polyfit(np.log(r_mid[pos]), np.log(d_mean[pos]), 1)
+    return float(coeffs[0])
+
+
 def spread_pct(values) -> float:
     v = np.asarray(values, float)
     return float((v.max() - v.min()) / max(abs(v.mean()), 1e-12) * 100.0)
