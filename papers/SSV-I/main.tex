@@ -2,6 +2,7 @@
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{amsmath,amssymb,physics}
 \usepackage{booktabs}
+\usepackage{longtable}
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{caption}
@@ -1431,12 +1432,21 @@ Paper~I and Paper~II}).  The taxonomy follows
 
 \paragraph{Status table.}  Mapping the paper's claims onto this taxonomy:
 
-\begin{center}
 \renewcommand{\arraystretch}{1.2}
-\begin{tabular}{p{0.32\linewidth} p{0.15\linewidth} p{0.49\linewidth}}
+\begin{longtable}{p{0.32\linewidth} p{0.15\linewidth} p{0.49\linewidth}}
 \toprule
 Claim & Status & Upgrade condition \\
 \midrule
+\endfirsthead
+\toprule
+Claim & Status & Upgrade condition \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\footnotesize\itshape continued on next page}\\
+\endfoot
+\bottomrule
+\endlastfoot
 LogSE Madelung structure; sound speed $c_s=\sqrt{2b\rho_0/m_0}$;
 $\xi=\hbar/(m_0c)$ & derived & Already analytic from the Lagrangian. \\
 $\alpha=c_\perp/c$ from the chiral-shear coefficient
@@ -1551,9 +1561,7 @@ reconnection & structural & The qualitative identifications are
 consistent with the Lagrangian; the quantitative content is
 deferred to Paper~II.  No quantitative force claim is made in this
 paper. \\
-\bottomrule
-\end{tabular}
-\end{center}
+\end{longtable}
 
 \paragraph{Parameter count of the mass sector (issue~\ssvissue{95}).}  Every particle
 mass derived here has the form $m_X = N_X\,\mu_0$ with $\mu_0 = m_e/\alpha$ and
