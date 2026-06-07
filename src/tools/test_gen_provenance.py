@@ -38,14 +38,14 @@ def test_normalise_path_joins_line_wraps_and_unescapes():
 def test_render_contains_permalink_and_issue_url():
     # use a real tracked script so it resolves to a pinned commit
     out = gp.render("SSV-I", [92], ["src/paper_i/trefoil_ny_derivation.py"],
-                    "StigNorland/SVT", "abc1234")
+                    "StigNorland/SVT")
     assert "https://github.com/StigNorland/SVT/issues/92" in out
     assert r"\section{Code and Issue References}" in out
     assert "/blob/" in out                   # a pinned permalink was emitted
 
 
 def test_render_empty_paper_is_graceful():
-    out = gp.render("SSV-X", [], [], "StigNorland/SVT", "abc1234")
+    out = gp.render("SSV-X", [], [], "StigNorland/SVT")
     assert "no external code or issue references" in out
 
 
