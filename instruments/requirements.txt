@@ -1,0 +1,8 @@
+# Python dependencies for the SSV instruments (verified on Python 3.12).
+# Floors are the versions the project is developed against; newer is usually fine.
+numpy>=2.0
+scipy>=1.13
+sympy>=1.13
+numba>=0.60
+matplotlib>=3.8
+pytest>=8.0
