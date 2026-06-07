@@ -76,7 +76,7 @@ def extract_refs(tex: str) -> tuple[list[int], list[str]]:
     paths = set()
     for raw in TEXTTT_RE.findall(tex):
         p = _normalise_path(raw)
-        if p.startswith("src/") and p.endswith(".py"):
+        if p.startswith("instruments/") and p.endswith(".py"):
             paths.add(p)
     return issues, sorted(paths)
 

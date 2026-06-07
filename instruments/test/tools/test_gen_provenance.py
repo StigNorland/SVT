@@ -23,21 +23,21 @@ def test_extract_issue_numbers():
 
 
 def test_extract_script_paths_only_src_py():
-    tex = (r"\texttt{src/paper\_i/foo.py} and \texttt{src/paper\_i/bar.py}, but not "
-           r"\texttt{papers/SSV-I/results/note.md} nor \texttt{src/\_q/dir/}.")
+    tex = (r"\texttt{instruments/paper\_i/foo.py} and \texttt{instruments/paper\_i/bar.py}, but not "
+           r"\texttt{papers/SSV-I/results/note.md} nor \texttt{instruments/\_q/dir/}.")
     _, paths = gp.extract_refs(tex)
-    assert paths == ["src/paper_i/bar.py", "src/paper_i/foo.py"]
+    assert paths == ["instruments/paper_i/bar.py", "instruments/paper_i/foo.py"]
 
 
 def test_normalise_path_joins_line_wraps_and_unescapes():
     # a \texttt path split across a LaTeX line break, with escaped underscores
-    raw = "src/paper\\_i/trefoil\\_ny\\_\n        derivation.py"
-    assert gp._normalise_path(raw) == "src/paper_i/trefoil_ny_derivation.py"
+    raw = "instruments/paper\\_i/trefoil\\_ny\\_\n        derivation.py"
+    assert gp._normalise_path(raw) == "instruments/paper_i/trefoil_ny_derivation.py"
 
 
 def test_render_contains_permalink_and_issue_url():
     # use a real tracked script so it resolves to a pinned commit
-    out = gp.render("SSV-I", [92], ["src/paper_i/trefoil_ny_derivation.py"],
+    out = gp.render("SSV-I", [92], ["instruments/paper_i/trefoil_ny_derivation.py"],
                     "StigNorland/SVT")
     assert "https://github.com/StigNorland/SVT/issues/92" in out
     assert r"\section{Code and Issue References}" in out
