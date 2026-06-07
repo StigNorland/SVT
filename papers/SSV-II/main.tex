@@ -68,17 +68,17 @@ force is identified with vacuum surface tension along flux-tube vortex
 segments connecting quarks; its short range and the qualitative form of
 asymptotic freedom emerge as natural consequences.
 
-\textbf{Conditional prediction, open one step:}
-For the weak interaction, a scalar reconnection-energy estimate gives
-$E_{\rm recon}\sim m_e/\alpha^2\approx 9.6\,\mathrm{GeV}$.  The Rayleigh-jet
-cap formula $R_{\rm cap}=\phi\,R^*$ recovers $m_W\approx 78.9\,\mathrm{GeV}$
-($1.8\%$ of measured).  A cap equilibrium analysis shows this follows
-analytically from a chiral-shear bending stiffness
-$\lambda_{\rm bend}=\phi^3/\alpha^3$ via the equilibrium cubic
-$R^3+\tau R^2=\lambda_{\rm bend}$ (with computed line tension $\tau=17\,\xi$).
-The local $\mathcal{L}_\perp$ curvature correction falls short by a factor
-$232$; the remaining open step is deriving $\lambda_{\rm bend}=\phi^3/\alpha^3$
-from the non-local (topological) structure of the cap.
+\textbf{Derived scale, $\mathcal{O}(1)$ prefactor open:}
+For the weak interaction, the reconnection cap inherits the electron ring scale
+$R^*=\xi/\alpha$ (Paper~I), so the $W$ mass \emph{scale}
+$m_W\sim m_e/\alpha^2\approx 9.6\,\mathrm{GeV}$ is derived.  The Rayleigh-jet
+cap radius $R_{\rm cap}=\phi\,R^*$ then recovers $m_W\approx 78.9\,\mathrm{GeV}$
+($1.8\%$ of measured), with $\phi$ an $\mathcal{O}(1)$ cap-aspect coincidence
+($0.9\%$).  An earlier attempt to fix $R_{\rm cap}$ from a local chiral-shear
+bending equilibrium is retired: a local $\mathcal{L}_\perp$ curvature correction
+is structurally $\alpha^{-2}$ and undershoots the ring scale by one power of
+$1/\alpha$ (the ``factor $232$''), confirming that the cap scale is set by ring
+inheritance, not bending.
 
 \textbf{Structural consistency check, not derivation:}
 For gravity, the Bjerknes mechanism between pulsating breather modes
@@ -191,13 +191,14 @@ is as follows:
         static Coulomb/Biot--Savart mechanism is in hand, but the
         identification of the observed photon with the correct propagating
         mode remains open (\S\ref{sec:EM_open_issue}).
-  \item \textbf{Conditional prediction, open one step.}  The Rayleigh-jet
-        cap formula $R_{\rm cap}=\phi R^*$ recovers $m_W$ to $1.8\%$
-        (\S\ref{sec:weak}).  Cap equilibrium analysis (\S\ref{sec:W_rayleigh})
-        shows $R_{\rm cap}=\phi/\alpha$ follows analytically from
-        $\lambda_{\rm bend}=\phi^3/\alpha^3$ via the equilibrium cubic; the
-        remaining open step is deriving this bending stiffness from the
-        non-local topological structure of the cap.
+  \item \textbf{Derived scale, $\mathcal{O}(1)$ prefactor open.}  The
+        reconnection cap inherits the electron ring scale $R^*=\xi/\alpha$, so
+        the $W$ mass scale $m_W\sim m_e/\alpha^2$ is derived; the Rayleigh-jet
+        cap radius $R_{\rm cap}=\phi R^*$ then recovers $m_W$ to $1.8\%$
+        (\S\ref{sec:weak}, \S\ref{sec:W_rayleigh}), with $\phi$ an
+        $\mathcal{O}(1)$ coincidence.  The earlier local-bending-equilibrium
+        route to $R_{\rm cap}$ is retired (it is structurally $\alpha^{-2}$,
+        short of the ring scale by one power of $1/\alpha$).
   \item \textbf{Structural consistency check.}  The relation $G = \alpha_G
         \hbar c \alpha^2/(N_p^2 m_e^2)$ for Newton's constant
         (\S\ref{sec:gravity}) takes $\alpha_G$ from CODATA and matches the
@@ -1389,15 +1390,15 @@ naturally accounts for the missing factor of $\sim 8$.
 \paragraph{The cap radius and the golden ratio.}
 The cap volume $V_{\rm cap} = \pi R_{\rm cap}^2\,\xi$ is set by the radius
 $R_{\rm cap}$ over which $|\Psi|$ is suppressed at each end of the W tube.
-Working backwards from the observed $m_W = 80.36\,\mathrm{GeV}$ fixes
-$R_{\rm cap} \approx 1.70\,\xi/\alpha$.  This is tantalizingly close to
+Working backwards from the observed $m_W = 80.37\,\mathrm{GeV}$ fixes
+$R_{\rm cap} \approx 1.633\,\xi/\alpha$.  This is strikingly close to
 \begin{equation}
   R_{\rm cap} = \phi\,\frac{\xi}{\alpha}, \qquad
   \phi = \tfrac{1+\sqrt{5}}{2} \approx 1.618,
   \label{eq:Rcap_phi}
 \end{equation}
-the golden ratio times the electron ring radius $R^* = \xi/\alpha$.
-Substituting~\eqref{eq:Rcap_phi} into $E_{\rm caps}$ with $P_0\sim m_e/(2\xi^3)$:
+the golden ratio times the electron ring radius $R^* = \xi/\alpha$ (within
+$0.9\%$).  Substituting~\eqref{eq:Rcap_phi} into $E_{\rm caps}$ with $P_0\sim m_e/(2\xi^3)$:
 \begin{equation}
   m_W \approx \frac{\pi\phi^2\,m_e}{\alpha^2}
        = \pi\phi^2 \times 9.60\,\mathrm{GeV}
@@ -1406,65 +1407,75 @@ Substituting~\eqref{eq:Rcap_phi} into $E_{\rm caps}$ with $P_0\sim m_e/(2\xi^3)$
 \end{equation}
 within $1.8\%$ of the observed value $80.36\,\mathrm{GeV}$ (PDG 2024).
 
-\paragraph{Cap equilibrium and the chiral-shear bending stiffness.}
-The cap is not a free surface: it is the boundary of a closed vortex ring held
-in mechanical equilibrium by three competing forces.  Let $R$ denote the cap
-radius.  In SSV natural units ($P_0 = \xi = 1$) the total cap energy is
+\paragraph{What sets the cap radius: the inherited ring scale, not a bending
+equilibrium.}
+One might try to fix $R_{\rm cap}$ from a mechanical equilibrium of the cap rim.
+Treating the cap as a closed vortex ring of radius $R$, in SSV natural units
+($P_0 = \xi = 1$) the candidate cap energy is
 \begin{equation}
   E(R) = \pi R^2 + 2\pi\tau R + \frac{2\pi\lambda_{\rm bend}}{R},
   \label{eq:Ecap_equilibrium}
 \end{equation}
-where $\pi R^2$ is the surface-pressure cost (area $\times P_0$),
-$2\pi\tau R$ is the vortex line-tension perimeter energy, and
-$2\pi\lambda_{\rm bend}/R$ is the chiral-shear bending resistance that stiffens
-the ring against collapse.  Setting $dE/dR = 0$ gives the equilibrium cubic
+(surface-pressure area cost, vortex line-tension perimeter, and a chiral-shear
+bending resistance), with line tension $\tau = 17.0\,\xi$ computed from the
+planar $\mathrm{LogSE}$ profile (\ssvfile{vortex_cap_mass}).  Minimising gives
+the cubic
 \begin{equation}
-  R^3 + \tau\,R^2 = \lambda_{\rm bend}.
+  R^3 + \tau\,R^2 = \lambda_{\rm bend},
   \label{eq:cap_cubic}
 \end{equation}
-The vortex line tension is computed numerically from the planar
-$\mathrm{LogSE}$ profile (\ssvfile{vortex_cap_mass}):
-$\tau = 17.0\,\xi$ (core integral $+ 2\pi\ln(R_{\rm cap}/r_{\rm max})$ tail).
-In the $\tau\to 0$ limit, setting $x = \alpha R/\xi$,
-equation~\eqref{eq:cap_cubic} reduces to $x^3 = \alpha^3\lambda_{\rm bend}$.
-The unique positive solution $x = \phi$ (the golden ratio) requires
+so an equilibrium at $R_{\rm cap} = \phi/\alpha$ would require
 \begin{equation}
   \lambda_{\rm bend} = \frac{\phi^3}{\alpha^3}\,\xi^3
                      \approx 1.09\times 10^7\,\xi^3.
   \label{eq:lambda_bend_required}
 \end{equation}
-Evaluated at the physical $\tau = 17\,\xi$, the cubic places $R_{\rm eq}$ at
-$\phi/\alpha$ to within the $7.7\%$ line-tension correction
-(equation~\eqref{eq:cap_cubic} with $R=\phi/\alpha$ gives $\lambda_{\rm bend} =
-1.17\times 10^7\,\xi^3$, vs the $\tau\to 0$ target $1.09\times 10^7\,\xi^3$).
-Thus $R_{\rm cap} = \phi/\alpha$ is the unique equilibrium radius once
-$\lambda_{\rm bend} = \phi^3/\alpha^3$ is established from the chiral-shear
-sector.
+This route does \emph{not} work, and the way it fails is informative.  The
+chiral-shear Lagrangian $\mathcal{L}_\perp = (\lambda_\perp/2)\int|\nabla\times
+\mathbf{j}|^2\,d^3r$ has coupling $\lambda_\perp = \alpha^{-2}$ (from
+$c_\perp = \alpha c$ at $k = 1/\xi$), and its curvature correction is
+$\lambda_{\rm bend}^{\rm local} = \lambda_\perp (J{+}K)/4$ with
+$(J{+}K)/4 = 2.50$ an $\mathcal{O}(1)$ core integral
+(\ssvfile{lperp_core_integral}).  A local curvature correction is therefore
+\emph{structurally} $\alpha^{-2}$, never $\alpha^{-3}$:
+$\lambda_{\rm bend}^{\rm local} \approx 4.7\times 10^4\,\xi^3$, short of
+\eqref{eq:lambda_bend_required} by exactly one power of $1/\alpha = R^*/\xi$ (the
+ring/core ratio), $232 = (\phi^3/2.50)\,\alpha^{-1}$.  Fed back into
+\eqref{eq:cap_cubic}, this honest stiffness places the equilibrium at
+$R_{\rm eq} \approx 31\,\xi \sim \alpha^{-2/3}$ --- not the ring scale
+$\xi/\alpha \approx 137\,\xi$ --- i.e.\ $m_W \approx 1.6\,\mathrm{GeV}$.  A local
+bending equilibrium simply does not set the cap at the ring scale.
 
-The SSV chiral-shear Lagrangian $\mathcal{L}_\perp = (\lambda_\perp/2)\int|\nabla\times
-\mathbf{j}|^2\,d^3r$ provides a natural coupling $\lambda_\perp = \alpha^{-2}$
-(from $c_\perp = \alpha c$ at $k = 1/\xi$).  Numerical integration of the
-core-bending correction to $\lambda_\perp$ over the planar vortex profile
-(\ssvfile{lperp_core_integral}) yields $\lambda_{\rm bend}^{\rm local} \approx
-4.7\times 10^4\,\xi^3$ — a factor $232$ below the required value.  The local
-curvature correction to $\mathcal{L}_\perp$ is therefore insufficient; the
-bending stiffness $\lambda_{\rm bend} = \phi^3/\alpha^3$ must arise from a
-\emph{non-local} mechanism.  The two leading candidates are: (a) quantisation
-of the chiral-shear energy of the Seifert surface of the trefoil (a
-non-perturbative topological contribution); and (b) a Casimir-like vacuum
-energy of the chiral mode between the cap boundary and the reconnection
-saddle.
+The resolution is that it need not.  $R_{\rm cap}$ is the \emph{inherited} scale
+of the reconnecting defects: those defects are electron-scale rings of radius
+$R^* = \xi/\alpha$ (derived in Paper~I from the Lamb energy), and a reconnection
+cap cannot be smaller than the ring throats it joins, so $R_{\rm cap} \sim R^*$.
+Then $m_W \sim P_0\,R_{\rm cap}^2\,\xi \sim m_e\,(R^*/\xi)^2 = m_e/\alpha^2$:
+\textbf{the $1/\alpha^2$ scale of the $W$ mass is derived}, being the same
+ring/core ratio that fixes the electron in Paper~I, and the $232\times$
+``shortfall'' was an artefact of the equilibrium sub-model, not a missing
+physical energy.  What remains is the $\mathcal{O}(1)$ prefactor
+$\pi\phi^2 \approx 8.2$ (two caps, $\times\pi$, $\times$ the cap aspect
+$\phi^2$); only $\phi$ is coincidence-grade, matching the back-solved cap radius
+$1.633\,\xi/\alpha$ to $0.9\%$ (\ssvfile{wmass_cap_scale_resolution},
+issue~\ssvissue{105}).  As a recorded aside, retaining the equilibrium picture
+would require $\lambda_\perp$ evaluated at the \emph{cap} scale with a linear
+running $\lambda_\perp(k) \sim 1/k$, giving
+$\lambda_{\rm bend} = (J{+}K)/4\cdot\phi/\alpha^3$ within $4.4\%$ of
+\eqref{eq:lambda_bend_required} --- the same statement that the relevant scale is
+the ring, not the core.
 
 \paragraph{Why the cap geometry is not directly accessible.}
 The cap geometry is determined by the \emph{dynamics} of the reconnection, not
 a static equilibrium, and cannot be observed directly: the event occurs at
 sub-$\xi$ scales, lasts $\sim\xi/c\sim 10^{-25}$\,s, and requires energies of
 order $P_0\,\xi^3$ to produce.  The $W$ mass itself is the only empirical
-constraint on $R_{\rm cap}$.  Equation~\eqref{eq:mW_phi} holds as a
-conjecture: $R_{\rm cap} = \phi/\alpha$ follows analytically from the
-equilibrium cubic \eqref{eq:cap_cubic} once $\lambda_{\rm bend} = \phi^3/\alpha^3$
-is established, but that identification requires deriving the non-local
-bending stiffness from the SSV Lagrangian — the remaining open step.
+constraint on the precise $R_{\rm cap}$.  Equation~\eqref{eq:mW_phi} draws its
+\emph{derived} $1/\alpha^2$ dependence from the inherited ring scale
+$R_{\rm cap} \sim R^* = \xi/\alpha$ (\S above); the exact cap aspect
+$R_{\rm cap} = \phi R^*$ --- hence the $\mathcal{O}(1)$ prefactor --- is fixed
+only to the $0.9\%$ at which $\phi$ matches the back-solved value, and deriving
+$\phi$ from the pinch-off dynamics is the remaining open step.
 
 \paragraph{Why the $W$ is massive and the photon is not.}
 The photon lives entirely in the $\delta\theta$ channel and never suppresses
@@ -2584,18 +2595,20 @@ clear which experiments would test which structural claims.
   detection of the fluctuation spectrum around the memory mean, which is
   beyond current sensitivity.
 
-\item \textbf{$W$-mass geometric fit awaiting derivation.} Our scalar estimate $E_{\rm recon} \sim m_e/\alpha^2
-  \approx 9.6\,\mathrm{GeV}$ is a factor of $\sim 8$ below the observed $W$ mass.
-  The Rayleigh-jet cap formula (\S\ref{sec:W_rayleigh}, equation~\eqref{eq:Rcap_phi})
-  gives $m_W \approx 78.9\,\mathrm{GeV}$ --- within $1.8\%$ of the observed value.
-  The cap equilibrium analysis (\S\ref{sec:W_rayleigh}) shows that
-  $R_{\rm cap} = \phi/\alpha$ follows analytically from the chiral-shear bending
-  stiffness $\lambda_{\rm bend} = \phi^3/\alpha^3$ via the equilibrium cubic
-  $R^3 + \tau R^2 = \lambda_{\rm bend}$.  The local $\mathcal{L}_\perp$
-  curvature correction falls short by a factor $232$; the remaining open step is
-  deriving the non-local bending stiffness $\phi^3/\alpha^3$ from the
-  topological structure of the cap (Seifert surface of the trefoil, or
-  chiral-mode Casimir energy at the reconnection saddle).
+\item \textbf{$W$-mass scale derived; $\mathcal{O}(1)$ prefactor open.}  The
+  reconnection cap inherits the electron ring scale $R^* = \xi/\alpha$
+  (Paper~I), so the cap energy $m_W \sim P_0 R_{\rm cap}^2 \xi \sim m_e/\alpha^2$
+  has a \emph{derived} $1/\alpha^2$ scale ($\approx 9.6\,\mathrm{GeV}$).  The
+  Rayleigh-jet cap radius $R_{\rm cap} = \phi R^*$ (\S\ref{sec:W_rayleigh},
+  equation~\eqref{eq:Rcap_phi}) then gives $m_W \approx 78.9\,\mathrm{GeV}$ ---
+  within $1.8\%$ --- with the prefactor $\pi\phi^2$ an $\mathcal{O}(1)$
+  coincidence ($\phi$ matches the cap aspect to $0.9\%$).  An earlier attempt to
+  derive $R_{\rm cap}$ from a local chiral-shear bending equilibrium
+  (\S\ref{sec:W_rayleigh}, equation~\eqref{eq:cap_cubic}) is retired: a local
+  $\mathcal{L}_\perp$ curvature correction is structurally $\alpha^{-2}$ and
+  undershoots the ring scale by exactly one power of $1/\alpha$ (the ``factor
+  $232$''), confirming that the cap scale is set by ring inheritance, not
+  bending (issue~\ssvissue{105}).
 
 \item \textbf{Running of $\alpha$ at high energy.} The chiral-shear coupling
   $\alpha$ is a medium property, not a bare constant. At momentum scales
@@ -2788,13 +2801,12 @@ from the others:
   The formula $R_{\rm cap}=\phi\,\xi/\alpha$
   (equation~\eqref{eq:Rcap_phi}) gives $m_W\approx\pi\phi^2 m_e/\alpha^2\approx
   78.9\,\mathrm{GeV}$ --- within $1.8\%$ of the observed value.
-  The cap equilibrium analysis (\S\ref{sec:W_rayleigh}) shows this is
-  not a bare fit: $R_{\rm cap}=\phi/\alpha$ is the unique equilibrium of
-  the cubic $R^3+\tau R^2=\lambda_{\rm bend}$ (line tension $\tau=17\,\xi$,
-  computed) when $\lambda_{\rm bend}=\phi^3/\alpha^3$.  The local
-  $\mathcal{L}_\perp$ correction falls short by $232\times$; the target
-  is now to derive $\lambda_{\rm bend}=\phi^3/\alpha^3$ from the non-local
-  cap topology.
+  This is not a bare fit: the cap inherits the electron ring scale
+  $R^*=\xi/\alpha$ (Paper~I), so the scale $m_W\sim m_e/\alpha^2$ is derived,
+  and $R_{\rm cap}=\phi R^*$ fixes the $\mathcal{O}(1)$ prefactor with $\phi$ a
+  $0.9\%$ coincidence.  The local $\mathcal{L}_\perp$ bending equilibrium that
+  would have set $R_{\rm cap}$ is retired (structurally $\alpha^{-2}$, the
+  ``$232\times$'' undershoot is one power of $1/\alpha$).
 
 \item \textbf{The neutrino sector (P1--P5 of \S\ref{sec:neutrino}).}  Mass,
   three-flavour structure, oscillation phenomenology, Dirac/Majorana
@@ -2948,16 +2960,16 @@ force --- short range, confinement of vortex strand endpoints, and
 asymptotic freedom as quantum-pressure softening --- follow from the same
 framework.
 
-\paragraph{What the paper proposes as suggestive ansatz.}
-For the weak force, the Rayleigh-jet cap formula $R_{\rm cap} = \phi R^*$
-recovers $m_W$ to $1.8\%$.  The cap equilibrium analysis
-(\S\ref{sec:W_rayleigh}) shows this follows analytically from a
-chiral-shear bending stiffness $\lambda_{\rm bend} = \phi^3/\alpha^3$; the
-local $\mathcal{L}_\perp$ curvature correction falls short by a factor $232$,
-identifying the remaining open step as deriving $\lambda_{\rm bend}$ from the
-non-local (topological) structure of the cap.  The formula is therefore no
-longer a bare fit to $m_W$, but a prediction conditional on the non-local
-bending stiffness.
+\paragraph{What the paper derives, and what stays coincidence.}
+For the weak force, the reconnection cap inherits the electron ring scale
+$R^* = \xi/\alpha$ (Paper~I), so the $W$ mass scale $m_W \sim m_e/\alpha^2$ is
+\emph{derived}; the Rayleigh-jet cap radius $R_{\rm cap} = \phi R^*$ then
+recovers $m_W$ to $1.8\%$, with $\phi$ an $\mathcal{O}(1)$ cap-aspect
+coincidence ($0.9\%$).  The earlier local-chiral-shear bending-equilibrium route
+to $R_{\rm cap}$ is retired: a local $\mathcal{L}_\perp$ curvature correction is
+structurally $\alpha^{-2}$ and undershoots the ring scale by one power of
+$1/\alpha$ (the ``factor $232$''), which confirms that the cap scale is set by
+ring inheritance rather than bending.
 
 \paragraph{What the paper offers as structural consistency.}
 For gravity, the Bjerknes mechanism gives the inverse-square law, universal
