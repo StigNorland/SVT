@@ -4,7 +4,7 @@ This note records the first topology-facing diagnostic added to the static trefo
 
 ## Added Diagnostic
 
-[trefoil_breather_static.py](../../src/paper_i/trefoil_breather_static.py) now measures local winding retention around the seeded trefoil centerline.
+[trefoil_breather_static.py](../../instruments/paper_i/trefoil_breather_static.py) now measures local winding retention around the seeded trefoil centerline.
 
 For a small set of sample locations along the trefoil curve, the script:
 

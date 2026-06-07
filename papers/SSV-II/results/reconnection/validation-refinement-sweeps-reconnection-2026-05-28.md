@@ -2,10 +2,10 @@
 
 **Status:** validation result for issue [#16] (dynamic side).
 **Branch:** dynamic (Paper II / reconnection supplement).
-**Baseline:** `src/paper_ii/reconnection_supplement.py` — the
+**Baseline:** `instruments/paper_ii/reconnection_supplement.py` — the
 prototype split-step LogSE/GPE harness for the W/Z reconnection-barrier
 checks.
-**Sweep harness:** `src/paper_ii/validation_sweep_reconnection_supplement.py`.
+**Sweep harness:** `instruments/paper_ii/validation_sweep_reconnection_supplement.py`.
 **Raw data:** `papers/SSV-II/data/validation-refinement-reconnection-2026-05-28.csv`.
 
 This completes the dynamic side of issue [#16]; the static side

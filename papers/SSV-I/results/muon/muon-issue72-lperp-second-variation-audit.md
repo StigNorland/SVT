@@ -64,7 +64,7 @@ second term is the extra background-current term in the `full` model.
 
 ## Code map
 
-The relevant implementation is in `src/paper_i/kelvin_augmented_bdg.py`.
+The relevant implementation is in `instruments/paper_i/kelvin_augmented_bdg.py`.
 
 | mathematical object | implementation | status |
 |---|---|---|

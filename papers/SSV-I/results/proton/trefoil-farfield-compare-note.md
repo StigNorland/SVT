@@ -11,7 +11,7 @@ Artifacts:
 Command used:
 
 ```bash
-python src/paper_i/trefoil_farfield_compare.py \
+python instruments/paper_i/trefoil_farfield_compare.py \
   papers/SSV-I/data/example-trefoil-farfield-profile.json \
   papers/SSV-I/data/example-trefoil-farfield-profile-hw6.json \
   --output papers/SSV-I/data/example-trefoil-farfield-compare-hw5-vs-hw6.json

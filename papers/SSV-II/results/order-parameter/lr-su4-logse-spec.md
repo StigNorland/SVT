@@ -223,19 +223,19 @@ phase coupling on/off, and (ii) at least one alternative natural value of `λ_cw
 
 | need | reuse |
 |---|---|
-| gradient-flow relaxer + topology guard + regrid | `src/paper_i/trefoil_gradient_flow_static.py` |
-| JIT kernels (links, logse_gradient, energy) | `src/paper_i/gradient_flow_numba.py` |
-| scalar energy density (skeleton to lift) | `src/paper_i/trefoil_observables.energy_density` |
-| `L_perp` current/curl/energy/gradient | `src/paper_i/lperp_helpers.py` |
-| ring/loop imprint + grid | `src/paper_i/trefoil_breather_static.{initial_state,coordinate_grid}` |
-| bit→charge + `(P_c,P_w)`→16 oracle | `src/paper_ii/cp1_logse_16_assembly.py`, `pati_salam_16_unification.py` |
-| junction Cartan/Weyl (SU(4)) | `src/paper_ii/su4_junction_chirality_closure.py` |
+| gradient-flow relaxer + topology guard + regrid | `instruments/paper_i/trefoil_gradient_flow_static.py` |
+| JIT kernels (links, logse_gradient, energy) | `instruments/paper_i/gradient_flow_numba.py` |
+| scalar energy density (skeleton to lift) | `instruments/paper_i/trefoil_observables.energy_density` |
+| `L_perp` current/curl/energy/gradient | `instruments/paper_i/lperp_helpers.py` |
+| ring/loop imprint + grid | `instruments/paper_i/trefoil_breather_static.{initial_state,coordinate_grid}` |
+| bit→charge + `(P_c,P_w)`→16 oracle | `instruments/paper_ii/cp1_logse_16_assembly.py`, `pati_salam_16_unification.py` |
+| junction Cartan/Weyl (SU(4)) | `instruments/paper_ii/su4_junction_chirality_closure.py` |
 
 ## Reproducer
 
 This is a spec; nothing to run yet. Group-theory oracle (unchanged from #80):
 
 ```bash
-.venv/bin/python src/paper_ii/pati_salam_16_unification.py
-.venv/bin/python -m pytest src/paper_ii/test_pati_salam_16_unification.py -q
+.venv/bin/python instruments/paper_ii/pati_salam_16_unification.py
+.venv/bin/python -m pytest instruments/paper_ii/test_pati_salam_16_unification.py -q
 ```

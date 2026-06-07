@@ -9,7 +9,7 @@ Data file:
 Command used:
 
 ```bash
-python src/paper_i/trefoil_breather_refinement.py \
+python instruments/paper_i/trefoil_breather_refinement.py \
   --n-values 20,24 \
   --half-width-values 5.0 \
   --max-steps 20 \

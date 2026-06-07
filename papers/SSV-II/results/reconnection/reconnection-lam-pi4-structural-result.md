@@ -1,7 +1,7 @@
 # Issue #15: Physical lambda_perp = pi/4 Reconnection — Structural Result (2026-06-02)
 
 **Status:** structural result, canonical c=1.
-**Script:** `src/paper_ii/reconnection_supplement.py` with `--auto-dt`
+**Script:** `instruments/paper_ii/reconnection_supplement.py` with `--auto-dt`
 **Data:** `papers/SSV-II/data/reconnection-lam-pi4-structural-lp05-2026-06-02.csv`
 
 ## Setup

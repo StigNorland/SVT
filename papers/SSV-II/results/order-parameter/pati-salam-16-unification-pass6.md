@@ -6,7 +6,7 @@ minimal LogSE that can carry one generation is forced into a sharp, falsifiable
 shape — left–right-symmetric **Pati–Salam SU(4)_c × SU(2)_L × SU(2)_R** — with
 B−L *inside* colour and chirality = a single ℤ₂. Nothing tuned per fermion.
 
-**Script:** `src/paper_ii/pati_salam_16_unification.py` · **tests:**
+**Script:** `instruments/paper_ii/pati_salam_16_unification.py` · **tests:**
 `test_pati_salam_16_unification.py` (6); 32 pass across the #80/#79 suite.
 
 ## The question Pass 5 left
@@ -82,6 +82,6 @@ reachable, but only as one left–right-symmetric SU(4) object.**
 ## Reproducer
 
 ```bash
-.venv/bin/python src/paper_ii/pati_salam_16_unification.py
-.venv/bin/python -m pytest src/paper_ii/test_pati_salam_16_unification.py -q
+.venv/bin/python instruments/paper_ii/pati_salam_16_unification.py
+.venv/bin/python -m pytest instruments/paper_ii/test_pati_salam_16_unification.py -q
 ```

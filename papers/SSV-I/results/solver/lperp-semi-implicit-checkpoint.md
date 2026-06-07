@@ -8,9 +8,9 @@ combining the stabilised relaxation with L_perp.
 
 Artifacts:
 
-- `src/paper_i/lperp_implicit_helpers.py` (FFT-based semi-implicit step)
-- `src/paper_i/trefoil_y_junction_closed_asym_lperp_implicit_static.py`
-- `src/paper_i/trefoil_breather_lperp_implicit_static.py`
+- `instruments/paper_i/lperp_implicit_helpers.py` (FFT-based semi-implicit step)
+- `instruments/paper_i/trefoil_y_junction_closed_asym_lperp_implicit_static.py`
+- `instruments/paper_i/trefoil_breather_lperp_implicit_static.py`
 - `papers/SSV-I/data/trefoil-lperp-implicit-lambda2000-n24-hw6-800steps-2026-05-17.npz`
 - `papers/SSV-I/data/trefoil-lperp-implicit-lambda2000-n24-hw6-800steps-2026-05-17.json`
 - `papers/SSV-I/data/trefoil-lperp-implicit-lambda2000-observables-n24-hw6-2026-05-17.json`

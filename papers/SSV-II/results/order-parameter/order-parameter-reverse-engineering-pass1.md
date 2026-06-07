@@ -1,7 +1,7 @@
 # Reverse-engineering the SSV order parameter from the SM targets — Pass 1–3 (2026-06-05)
 
 **Issue:** [#80](https://github.com/StigNorland/SVT/issues/80).
-**Script:** `src/paper_ii/order_parameter_manifold_scan.py`.
+**Script:** `instruments/paper_ii/order_parameter_manifold_scan.py`.
 **Verdict: the order-parameter *manifold* alone cannot over-constrain the answer.
 The genuine over-constraint is anomaly cancellation, a representation-theory fact
 of a unifying group — not a homotopy fact.** This sets the bar that separates a
@@ -96,5 +96,5 @@ falsifiable question: **does an SSV defect carry the SO(10) 16?**
 ## Reproducer
 
 ```bash
-.venv/bin/python src/paper_ii/order_parameter_manifold_scan.py
+.venv/bin/python instruments/paper_ii/order_parameter_manifold_scan.py
 ```

@@ -3,7 +3,7 @@
 This document turns the recurring "deferred to the 3D `\mathcal{L}+\mathcal{L}_\perp` minimisation" language into an actual work program.
 
 **Bookkeeping status (2026-06-07):** Workstream 0 is implemented as the thin
-`src/shared_numerics/` layer (#12). The static trefoil-breather branch has a
+`instruments/shared_numerics/` layer (#12). The static trefoil-breather branch has a
 candidate-grade closure result via #77: `(R,a)=(2.5,0.85)ξ` and `N_Y×F=54`,
 grid-converged over the tested continuation ladder and route-independent. This
 upgrades the proton geometry row from "missing computation" to "candidate
@@ -97,7 +97,7 @@ Required pieces:
 
 Suggested repo direction:
 
-- keep exploratory scripts in `src/paper_i/` and `src/paper_ii/`
+- keep exploratory scripts in `instruments/paper_i/` and `instruments/paper_ii/`
 - add a shared numerical core only after conventions are stable enough to reuse
 
 Exit gate:

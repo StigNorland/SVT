@@ -2,7 +2,7 @@
 
 **Issue:** [#87](https://github.com/StigNorland/SVT/issues/87) Part B, task B3.
 **Status: DONE — chirality ℤ₂ promoted from POSTULATE to DERIVED FROM SPIN
-FRAMING.** Verification: `src/paper_ii/chirality_spin_framing_b3.py`,
+FRAMING.** Verification: `instruments/paper_ii/chirality_spin_framing_b3.py`,
 `test_chirality_spin_framing_b3.py` (5 tests). Builds on
 [#81](https://github.com/StigNorland/SVT/issues/81)
 (`lr-su4-cp-parity-verdict.md`).

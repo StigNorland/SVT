@@ -19,8 +19,8 @@ Artifacts:
 
 Tooling:
 
-- `src/paper_i/trefoil_breather_static.py` now supports `--load-state`
-- `src/paper_i/trefoil_state_continuation_sweep.py` continues saved states in step chunks, or in plateau mode, and tracks `delta V_p`, shell density, residual norm, and the asymptotic static `Q_p` coefficient
+- `instruments/paper_i/trefoil_breather_static.py` now supports `--load-state`
+- `instruments/paper_i/trefoil_state_continuation_sweep.py` continues saved states in step chunks, or in plateau mode, and tracks `delta V_p`, shell density, residual norm, and the asymptotic static `Q_p` coefficient
 
 ## Relaxer improvement
 

@@ -10,8 +10,8 @@ forces, gravity, time, and black-hole ontology from the structure of that medium
 
 | Path | Contents |
 |------|----------|
-| `src/paper_i/` | Paper I numerical pipeline: gradient-flow static minimiser, spectral regrid, Numba kernels, BdG / muon probes |
-| `src/` | Legacy galactic / BH scripts |
+| `instruments/paper_i/` | Paper I numerical pipeline: gradient-flow static minimiser, spectral regrid, Numba kernels, BdG / muon probes |
+| `instruments/` | All computational scripts grouped by paper, plus `tools/` (provenance) and the `test/` suite — see `instruments/README.md` |
 | `papers/` | Manuscript drafts, supplemental notes, checkpoint files |
 | `notes/` | Working notes, objections log, Volovik mapping, lepton-ladder note |
 | `docs/` | Roadmap, numerical roadmap, conventions, issue-workflow |
@@ -45,12 +45,12 @@ The core computation is a 3D static minimiser for topological defects in the Log
 
 | File | Role |
 |------|------|
-| `src/paper_i/gradient_flow_numba.py` | Main static relaxer — imaginary-time gradient flow with Numba kernels (~6× speedup) |
-| `src/paper_i/trefoil_geometry_scan.py` | (R, a) geometry scan for the trefoil breather |
-| `src/paper_i/trefoil_state_continuation_sweep.py` | Coarse→fine spectral regrid continuation |
-| `src/paper_i/trefoil_observables.py` | N_Y, F, link-count readouts |
-| `src/paper_i/vortex_ring_mass_inversion.py` | Lepton mass ladder: Lamb formula inversion, 8ⁿ generation fit |
-| `src/paper_i/vortex_profile.py` | LogSE radial vortex profile |
+| `instruments/paper_i/gradient_flow_numba.py` | Main static relaxer — imaginary-time gradient flow with Numba kernels (~6× speedup) |
+| `instruments/paper_i/trefoil_geometry_scan.py` | (R, a) geometry scan for the trefoil breather |
+| `instruments/paper_i/trefoil_state_continuation_sweep.py` | Coarse→fine spectral regrid continuation |
+| `instruments/paper_i/trefoil_observables.py` | N_Y, F, link-count readouts |
+| `instruments/paper_i/vortex_ring_mass_inversion.py` | Lepton mass ladder: Lamb formula inversion, 8ⁿ generation fit |
+| `instruments/paper_i/vortex_profile.py` | LogSE radial vortex profile |
 
 **Milestone (issue #77, 2026-06-03):** geometry minimum found at (R, a) = (2.5, 0.85) ξ, giving **N_Y×F = 54**, grid-converged to <2.5% over n=96→192 and route-independent. The grid-convergence wall that blocked the programme since #13 is removed.
 

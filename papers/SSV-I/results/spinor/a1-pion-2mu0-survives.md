@@ -2,8 +2,8 @@
 
 **Issue:** [#87](https://github.com/StigNorland/SVT/issues/87) Part A, task A1 (the
 gate). **Status: PASS — `m_{π±} = 2μ₀` is unchanged; claim stays DERIVED.**
-Verification: `src/paper_i/cp1_safety_checks.py` (identities I2′, I3′),
-`src/paper_i/test_cp1_safety_checks.py`.
+Verification: `instruments/paper_i/cp1_safety_checks.py` (identities I2′, I3′),
+`instruments/paper_i/test_cp1_safety_checks.py`.
 
 ## The claim under test
 

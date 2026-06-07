@@ -4,7 +4,7 @@ This note records the first arc-aware `N_Y` / `F` extractor and an unexpected st
 
 Artifacts:
 
-- `src/paper_i/trefoil_y_junction_closed_observables.py`
+- `instruments/paper_i/trefoil_y_junction_closed_observables.py`
 - `papers/SSV-I/data/y-junction-closed-observables-n24-hw6-200steps-2026-05-17.json`
 
 ## What The Extractor Does

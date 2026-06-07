@@ -10,7 +10,7 @@ issue #72 drift diagnostic and current-curl second-variation audit:
 Reproducer:
 
 ```bash
-.venv/bin/python src/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9,11,13 --half-width 8 --window hard --window-radius 4 --profile-n 500
+.venv/bin/python instruments/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9,11,13 --half-width 8 --window hard --window-radius 4 --profile-n 500
 ```
 
 ## Verdict
@@ -36,7 +36,7 @@ through the current reduced basis.
 The diagnostic solver is:
 
 ```bash
-src/paper_i/muon_issue73_phi_bdg_probe.py
+instruments/paper_i/muon_issue73_phi_bdg_probe.py
 ```
 
 It keeps the fixed toroidal background from `restricted_bdg_matrix.py` and
@@ -79,14 +79,14 @@ larger phi-discretized programme is justified.
 Compile check:
 
 ```bash
-.venv/bin/python -m py_compile src/paper_i/muon_issue73_phi_bdg_probe.py
+.venv/bin/python -m py_compile instruments/paper_i/muon_issue73_phi_bdg_probe.py
 ```
 
 Baseline reproduction:
 
 ```bash
 OPENBLAS_NUM_THREADS=16 OMP_NUM_THREADS=16 MKL_NUM_THREADS=16 \
-  .venv/bin/python src/paper_i/muon_issue73_phi_bdg_probe.py \
+  .venv/bin/python instruments/paper_i/muon_issue73_phi_bdg_probe.py \
   --n-values 9 --half-width 8 --window hard --window-radius 4 --profile-n 500
 ```
 
@@ -94,7 +94,7 @@ Refinement ladder:
 
 ```bash
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
-  .venv/bin/python src/paper_i/muon_issue73_phi_bdg_probe.py \
+  .venv/bin/python instruments/paper_i/muon_issue73_phi_bdg_probe.py \
   --n-values 9,11,13 --half-width 8 --window hard --window-radius 4 --profile-n 500
 ```
 
@@ -102,11 +102,11 @@ Window checks:
 
 ```bash
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
-  .venv/bin/python src/paper_i/muon_issue73_phi_bdg_probe.py \
+  .venv/bin/python instruments/paper_i/muon_issue73_phi_bdg_probe.py \
   --n-values 9,11 --half-width 8 --window hard --window-radius 3 --profile-n 500
 
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
-  .venv/bin/python src/paper_i/muon_issue73_phi_bdg_probe.py \
+  .venv/bin/python instruments/paper_i/muon_issue73_phi_bdg_probe.py \
   --n-values 9,11 --half-width 8 --window hard --window-radius 5 --profile-n 500
 ```
 
@@ -114,12 +114,12 @@ Current-curl model and no-`L_perp` checks:
 
 ```bash
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
-  .venv/bin/python src/paper_i/muon_issue73_phi_bdg_probe.py \
+  .venv/bin/python instruments/paper_i/muon_issue73_phi_bdg_probe.py \
   --n-values 7,9 --half-width 8 --window hard --window-radius 4 \
   --profile-n 500 --current-curl-model full
 
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
-  .venv/bin/python src/paper_i/muon_issue73_phi_bdg_probe.py \
+  .venv/bin/python instruments/paper_i/muon_issue73_phi_bdg_probe.py \
   --n-values 11 --half-width 8 --window hard --window-radius 4 \
   --profile-n 500 --skip-lperp
 ```
@@ -128,11 +128,11 @@ Extra timed checks:
 
 ```bash
 /usr/bin/time -p env OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
-  .venv/bin/python src/paper_i/muon_issue73_phi_bdg_probe.py \
+  .venv/bin/python instruments/paper_i/muon_issue73_phi_bdg_probe.py \
   --n-values 9 --half-width 6 --window hard --window-radius 3 --profile-n 500
 
 /usr/bin/time -p env OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
-  .venv/bin/python src/paper_i/muon_issue73_phi_bdg_probe.py \
+  .venv/bin/python instruments/paper_i/muon_issue73_phi_bdg_probe.py \
   --n-values 15 --half-width 8 --window hard --window-radius 4 --profile-n 500
 ```
 

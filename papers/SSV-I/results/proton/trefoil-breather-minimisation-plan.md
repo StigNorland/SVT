@@ -30,10 +30,10 @@ Those belong to the dynamic branch of the numerical roadmap.
 
 Closest current ingredients:
 
-- `src/paper_i/vortex_profile.py`
-- `src/paper_i/toroidal_background.py`
-- `src/paper_i/curved_torus_relaxation.py`
-- `src/paper_i/toroidal_projection_integrals.py`
+- `instruments/paper_i/vortex_profile.py`
+- `instruments/paper_i/toroidal_background.py`
+- `instruments/paper_i/curved_torus_relaxation.py`
+- `instruments/paper_i/toroidal_projection_integrals.py`
 
 These are enough to define a first background family, but not yet enough to claim full 3D closure.
 
@@ -144,8 +144,8 @@ First candidate far-field extraction exists for the later `\alpha_G` issue.
 
 Likely next code additions:
 
-- `src/paper_i/trefoil_breather_static.py`
-- `src/paper_i/trefoil_observables.py`
-- optional helper reuse from `src/shared_numerics/`
+- `instruments/paper_i/trefoil_breather_static.py`
+- `instruments/paper_i/trefoil_observables.py`
+- optional helper reuse from `instruments/shared_numerics/`
 
 This should happen only after the script header and status conventions are in place.

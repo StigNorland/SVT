@@ -4,7 +4,7 @@
 [issue #72](https://github.com/StigNorland/SVT/issues/72). Reproducer:
 
 ```bash
-python src/paper_i/muon_issue72_drift_probe.py
+python instruments/paper_i/muon_issue72_drift_probe.py
 ```
 
 This note is not a new muon prediction. It tests whether the Stage 3
@@ -30,7 +30,7 @@ does not create a converged muon branch in this Diagnostic V1 sweep.
 - `projection_window = "hard"` is now a real radial step cutoff when
   `window_radius > 0`.
 - `projection_window = "smooth"` preserves the previous cosine taper.
-- `src/paper_i/muon_issue72_drift_probe.py` adds the issue-specific diagnostic:
+- `instruments/paper_i/muon_issue72_drift_probe.py` adds the issue-specific diagnostic:
   smooth/hard radial-window sweeps, overlap-tracked Kelvin branches, and a
   small `linear` versus `full` current-curl comparison.
 
@@ -178,7 +178,7 @@ prediction.
 
 - Window-weight helper sanity check: passed.
 - Reduced smoke run:
-  `python src/paper_i/muon_issue72_drift_probe.py --n 21 --half-width 4 --profile-n 600 --window-radii 1.0,2.0 --window-kinds smooth,hard --kelvin-phi-n 256 --compare-n 21 --compare-half-width 4 --compare-radii 1.0,2.0 --skip-current-curl-comparison`
+  `python instruments/paper_i/muon_issue72_drift_probe.py --n 21 --half-width 4 --profile-n 600 --window-radii 1.0,2.0 --window-kinds smooth,hard --kelvin-phi-n 256 --compare-n 21 --compare-half-width 4 --compare-radii 1.0,2.0 --skip-current-curl-comparison`
 - Canonical Diagnostic V1 run:
-  `python src/paper_i/muon_issue72_drift_probe.py`
+  `python instruments/paper_i/muon_issue72_drift_probe.py`
 - Canonical runtime: 1204 s.

@@ -2,7 +2,7 @@
 
 **Date:** 2026-05-30. Outcome of the pre-registered test in
 `papers/SSV-I/proton-geometric-r-prereg.md`. Reproducer:
-`python src/paper_i/proton_geometric_r_probe.py`.
+`python instruments/paper_i/proton_geometric_r_probe.py`.
 
 ## One-line verdict
 
@@ -106,7 +106,7 @@ initial conditions, or (c) showing $N_Y \cdot F$ is cutoff-invariant
 ## Files
 
 - Pre-registration: `papers/SSV-I/proton-geometric-r-prereg.md`
-- Probe: `src/paper_i/proton_geometric_r_probe.py` (reproducible in seconds)
+- Probe: `instruments/paper_i/proton_geometric_r_probe.py` (reproducible in seconds)
 - State files used (all topology-preserving at hw=6 per closure memo):
   - `penalty-mu400-rho0p01-n24-hw6-1600steps-2026-05-18.npz`
   - `penalty-best-n48-hw6-800steps-2026-05-19.npz`

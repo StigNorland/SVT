@@ -92,7 +92,7 @@ plausible.  This was not a coarse-grid coincidence.
 ## Production extractor usage
 
 ```bash
-python src/paper_i/trefoil_breather_observables.py STATE.npz \
+python instruments/paper_i/trefoil_breather_observables.py STATE.npz \
     --anchor-thickness-xi 1.0 \
     --straight-vortex-r-max 1.18    # gives F ~ 4.47 (paper match)
 # Or other R for different regularizations

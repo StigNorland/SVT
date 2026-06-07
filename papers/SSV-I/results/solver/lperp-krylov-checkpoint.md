@@ -9,8 +9,8 @@ paper's quoted range.
 
 Artifacts:
 
-- `src/paper_i/lperp_krylov_helpers.py` (matrix-free GMRES + FFT left-preconditioner)
-- `src/paper_i/trefoil_breather_lperp_krylov_static.py`
+- `instruments/paper_i/lperp_krylov_helpers.py` (matrix-free GMRES + FFT left-preconditioner)
+- `instruments/paper_i/trefoil_breather_lperp_krylov_static.py`
 - `papers/SSV-I/data/trefoil-lperp-krylov-lambda2000-n24-hw6-800steps-2026-05-17.npz`
 - `papers/SSV-I/data/trefoil-lperp-krylov-lambda2000-n24-hw6-800steps-2026-05-17.json`
 - `papers/SSV-I/data/trefoil-lperp-krylov-lambda2000-observables-n24-hw6-2026-05-17.json`

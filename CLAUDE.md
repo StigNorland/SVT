@@ -1,7 +1,8 @@
 # Working rules for the SSV repository
 
 This is the Saturated Superfluid Vacuum (SSV) theoretical-physics programme:
-a multi-paper series (`papers/SSV-*`) with supporting computation (`src/`) and
+a multi-paper series (`papers/SSV-*`) with supporting computation (`instruments/`,
+with tests under `instruments/test/<paper>/`; env setup via `instruments/setup_env.{sh,ps1}`) and
 result notes (`papers/*/results/`). Work is organised around GitHub issues
 (StigNorland/SVT). Background and current status live in the auto-memory
 (`MEMORY.md` and the `project-*` notes).
@@ -30,7 +31,8 @@ result notes (`papers/*/results/`). Work is organised around GitHub issues
    decision rule in the issue *before* computing; post the result as a comment;
    close the issue with links to the commits. (Extends rule 2.)
 7. **Back analytic claims with a tested computation** where feasible — a script
-   in `src/` plus a `pytest` test plus a result note in `papers/*/results/`.
+   in `instruments/` plus a `pytest` test under `instruments/test/<paper>/` plus
+   a result note in `papers/*/results/`.
 8. **LaTeX hygiene.** Escape `#` as `\#` in prose (a raw `#` is a macro-parameter
    character and breaks the build). Before committing a paper, confirm a clean
    2-pass `pdflatex` build: 0 errors and no *new* undefined references. Then
@@ -42,10 +44,12 @@ result notes (`papers/*/results/`). Work is organised around GitHub issues
     spectrum; the muon/tau as derived breather modes are closed no-gos). Check
     the auto-memory before reusing old terminology.
 11. **Provenance is generated, not hand-written.** Every paper's "Code and Issue
-    References" appendix is produced by `src/tools/gen_provenance.py` (it pins
-    each `\#NN` issue to its URL and each `\texttt{src/...py}` to a GitHub
-    permalink at the commit that last modified it). Regenerate before building a
-    paper: `python src/tools/gen_provenance.py <PAPER>` (or `--all`); the result
+    References" appendix is produced by `instruments/tools/gen_provenance.py` (it pins
+    each `\#NN` issue to its URL and each `\texttt{instruments/...py}` script and
+    result-note report to a GitHub permalink at the commit that last modified it;
+    in-text `\#NN` is rewritten to `\ssvissue{NN}` so it hyperlinks to the
+    appendix entry). Regenerate before building a
+    paper: `python instruments/tools/gen_provenance.py <PAPER>` (or `--all`); the result
     is `papers/<PAPER>/provenance.tex`, `\input` in an appendix. The test
-    `src/tools/test_gen_provenance.py` enforces that every cited script path
+    `instruments/test/tools/test_gen_provenance.py` enforces that every cited script path
     exists, so a reference can never silently break.

@@ -6,7 +6,7 @@ selection rule** — unlike the #76 `L_perp` Berry-phase bridge. The chirality
 question therefore reduces to the *sign* of one coupling, not to whether the
 mechanism exists.
 
-**Script:** `src/paper_ii/lr_su4_cross_term_audit.py` · **tests:**
+**Script:** `instruments/paper_ii/lr_su4_cross_term_audit.py` · **tests:**
 `test_lr_su4_cross_term_audit.py` (5 pass). **Spec:** `lr-su4-logse-spec.md`.
 
 ## What was tested
@@ -90,6 +90,6 @@ predicts.
 ## Reproducer
 
 ```bash
-.venv/bin/python src/paper_ii/lr_su4_cross_term_audit.py
-.venv/bin/python -m pytest src/paper_ii/test_lr_su4_cross_term_audit.py -q
+.venv/bin/python instruments/paper_ii/lr_su4_cross_term_audit.py
+.venv/bin/python -m pytest instruments/paper_ii/test_lr_su4_cross_term_audit.py -q
 ```

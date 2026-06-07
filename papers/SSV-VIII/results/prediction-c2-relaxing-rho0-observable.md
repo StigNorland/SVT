@@ -118,7 +118,7 @@ The helper script is:
 
 ```bash
 PYTHONPATH=src python -m paper_viii.relaxing_rho0_cosmology \
-  --output src/paper_viii/relaxing_rho0_cosmology_results.json
+  --output instruments/paper_viii/relaxing_rho0_cosmology_results.json
 ```
 
 It uses a Planck-2018-like flat baseline

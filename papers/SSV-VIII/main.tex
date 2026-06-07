@@ -23,6 +23,7 @@ Cosmogony from the Permissive Void}
 \author{Stig Norland}
 \date{Draft}
 
+\providecommand{\ssvissue}[1]{\hyperref[issue:#1]{\##1}}% in-text issue ref -> Code & Issue References appendix
 \begin{document}
 \maketitle
 
@@ -247,7 +248,7 @@ $\rho_0$ at cosmological timescales rather than to an independent
 dark-energy sector; this is the qualitative statement.  The quantitative
 value of $\Lambda$ and any quantitative connection to the present-day
 Hubble rate $H_0$ are open and not carried by this paper.  The follow-up
-closure note for issue~\#51 shows why the numerical route is blocked by the
+closure note for issue~\ssvissue{51} shows why the numerical route is blocked by the
 missing absolute saturation pressure $P_0$, and identifies the observational
 discriminator
 \[
@@ -276,7 +277,7 @@ performed}, rather than as derived results of this paper.
     Gross--Pitaevskii (or equivalently TDGL) symmetry-breaking transition.
     Status: \textit{structural with numerical evidence}; the calculation
     has been performed in
-    \texttt{src/paper\_viii/kibble\_zurek\_gpe.py} and the converged
+    \texttt{instruments/paper\_viii/kibble\_zurek\_gpe.py} and the converged
     results are summarised below.
 
 \begin{resultbox}[Numerical Kibble--Zurek evidence (Prediction C1)]
@@ -402,7 +403,7 @@ each claim in this paper is one of:
 \begin{enumerate}
     \item \emph{A GPE simulation of the void-to-saturation transition.}
         Performed in
-        \texttt{src/paper\_viii/kibble\_zurek\_gpe.py}: TDGL evolution on a
+        \texttt{instruments/paper\_viii/kibble\_zurek\_gpe.py}: TDGL evolution on a
         $160\times160$ periodic grid produces phase-winding defects in
         the saturated regime, with the count scaling monotonically with the
         inverse quench rate at fitted exponent
@@ -421,7 +422,7 @@ each claim in this paper is one of:
         or (ii) fixing the cosmological $\tau_Q/\tau_0$ identification
         from a Paper~VII-b emergent-metric input.
 
-    \item \emph{The issue~\#51 relaxing-$\rho_0$ observable programme.}
+    \item \emph{The issue~\ssvissue{51} relaxing-$\rho_0$ observable programme.}
         The numerical value of $\Lambda$ remains underdetermined until
         VII-b / Paper~IV derive the absolute saturation pressure
         $P_0(\rho_0)$, but C2 now has a concrete empirical discriminator:
@@ -524,7 +525,7 @@ Gross, E.~P., ``Structure of a Quantised Vortex in Boson Systems,''
 
 \appendix
 % Auto-generated provenance (issue URLs + pinned script permalinks).
-% Regenerate: python src/tools/gen_provenance.py SSV-VIII
+% Regenerate: python instruments/tools/gen_provenance.py SSV-VIII
 \input{provenance.tex}
 
 \end{document}

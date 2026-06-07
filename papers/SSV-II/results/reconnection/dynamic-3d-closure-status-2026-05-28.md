@@ -14,7 +14,7 @@ blocked items.
 
 | # | Task | Status | Where |
 |---|---|---|---|
-| 1 | Define incoming defect geometry and event setup clearly enough to reproduce | **addressed** | `src/paper_ii/reconnection_supplement.py`'s `Config` dataclass + `initial_state()` exposes ring_radius, core_radius, separation, ring circulations (opposite/same), phase kick, and box length. Reproducible from CLI flags; CSV row format documented in `SCRIPT_METADATA.observables`. |
+| 1 | Define incoming defect geometry and event setup clearly enough to reproduce | **addressed** | `instruments/paper_ii/reconnection_supplement.py`'s `Config` dataclass + `initial_state()` exposes ring_radius, core_radius, separation, ring circulations (opposite/same), phase kick, and box length. Reproducible from CLI flags; CSV row format documented in `SCRIPT_METADATA.observables`. |
 | 2 | Choose the first production-grade time-evolution scheme | **partial / prototype-grade** | Split-step Strang integrator in `evolve_path()` (Fourier kinetic step, real-space nonlinear potential, chiral-shear added spectrally as `λ_perp · k⁴`). Production-grade means: convergence verified at the target precision. The #16 dt-sweep (commit `a375acb`) shows the integrator is ~4% converged in dt for the opposite-circulation case at the current grid; the grid itself is far from converged (see task 5). The integrator choice is appropriate; the production-grade status is gated by the grid. |
 | 3 | Define event diagnostics: energy drift, norm drift, onset/completion markers | **partial** | `energy()` and `potential_u()` exist; `analyse()` extracts saddle_index from the discrete time axis. Energy-drift and norm-drift telemetry are **not currently recorded** in the CSV outputs — they need to be added to the `analyse()` return path or to a dedicated diagnostics dataclass. Onset/completion markers are implicit in `saddle_index` (the peak of the excess curve) but not separately tracked. `shared_numerics.DynamicDiagnostics` (added under #12) gives the standard slot for advertising these. |
 | 4 | Define observables: barrier height, cap radius, cap volume, emitted mode content | **partial** | Barrier height = `saddle_excess` (in `analyse()`); cap radius via volume or radial-slice extraction in `cap_radius()`; **cap volume** is computed inside `cap_radius()` but not separately returned; **emitted mode content** is not extracted — the projected-Hessian `cos_phi` is a related but distinct quantity (amplitude vs phase channel measure at the saddle, not a radiated-mode spectrum). `shared_numerics.DynamicObservables` (added under #12) is currently `(saddle_index, saddle_excess, cap_radius, cos_phi)` — extending it to include cap volume and a radiated-mode spectrum is the next observable-side work. |
@@ -107,10 +107,10 @@ refinement at the existing pipeline, not a redesign.
 
 ## Cross-references
 
-- `src/paper_ii/reconnection_supplement.py` (the prototype harness)
-- `src/paper_ii/validation_sweep_reconnection_supplement.py` (#16 sweep harness)
+- `instruments/paper_ii/reconnection_supplement.py` (the prototype harness)
+- `instruments/paper_ii/validation_sweep_reconnection_supplement.py` (#16 sweep harness)
 - `papers/SSV-II/validation-refinement-sweeps-reconnection-2026-05-28.md` (sweep findings)
-- `src/shared_numerics/dynamic_branch.py` (shared dataclasses, #12)
+- `instruments/shared_numerics/dynamic_branch.py` (shared dataclasses, #12)
 - `docs/numerical-minimisation-roadmap.md` Workstream 4 (dynamic reconnection closure)
 - `papers/SSV-I/static-3d-closure-status-2026-05-28.md` (static-side parallel for #13)
 - `papers/SSV-I/alpha-g-extraction-closure-status-2026-05-28.md` (the α_G branch, blocked on both #13 and #15)

@@ -16,7 +16,7 @@ fall out of a dynamical eigenvalue solve without hand-insertion.
 ## The operator (no new freedom introduced)
 
 The toroidal breather BdG operator already implemented in
-`src/paper_i/kelvin_augmented_bdg.py::build_bdg`:
+`instruments/paper_i/kelvin_augmented_bdg.py::build_bdg`:
 
     H = [[ L,  M ], [ -M*, -L* ]]
 
@@ -24,7 +24,7 @@ with L = -1/2 nabla^2_cyl + (log|psi0|^2 + 1) (profile-logse model), plus the
 projected current-curl block scaled by lambda_perp, plus the Kelvin
 self-induction shift. Background psi0 from `restricted_bdg_matrix.build_background`.
 
-I will run it through `src/paper_i/harmonic_ladder_spectrum.py` with its
+I will run it through `instruments/paper_i/harmonic_ladder_spectrum.py` with its
 **committed default parameters** and will NOT adjust lambda_perp, delta_relax,
 kelvin_core_radius, kelvin_phi_n, the grid, or any other knob to improve the
 result. If I vary anything it is only to test convergence/robustness, reported

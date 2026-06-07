@@ -7,7 +7,7 @@ once five binary bits exist, but two specific correlations the 16 imposes are
 **not** supplied by SSV's independent topological sectors. Hitting the 16 is not
 easy — it must be *arranged*, via two concrete new demands.
 
-**Script:** `src/paper_ii/cp1_logse_16_assembly.py` · **tests:**
+**Script:** `instruments/paper_ii/cp1_logse_16_assembly.py` · **tests:**
 `test_cp1_logse_16_assembly.py` (10), with `test_so10_generation_embedding.py`
 (8) + `test_su3_y_junction.py` (8) — 26 pass.
 
@@ -92,6 +92,6 @@ patching — and we will know which, decidably.
 ## Reproducer
 
 ```bash
-.venv/bin/python src/paper_ii/cp1_logse_16_assembly.py
-.venv/bin/python -m pytest src/paper_ii/test_cp1_logse_16_assembly.py -q
+.venv/bin/python instruments/paper_ii/cp1_logse_16_assembly.py
+.venv/bin/python -m pytest instruments/paper_ii/test_cp1_logse_16_assembly.py -q
 ```

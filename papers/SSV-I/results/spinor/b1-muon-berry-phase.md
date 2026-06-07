@@ -6,7 +6,7 @@ Task-3 Berry-phase calculation for the CP¹/spinor BdG operator.
 **Verdict: CONDITIONAL-POSITIVE — the #76 no-go is LIFTED.** The muon is promoted
 from **NUMERICAL COINCIDENCE** to **TOPOLOGICAL-SECTOR (protected half-integer
 ladder)**, conditional on one quantitative check (the spin–orbit lock strength).
-Verification: `src/paper_i/spinor_berry_phase_b1.py`,
+Verification: `instruments/paper_i/spinor_berry_phase_b1.py`,
 `test_spinor_berry_phase_b1.py` (7 tests).
 
 ## Pre-registered hypothesis and decision rule (stated before computing)

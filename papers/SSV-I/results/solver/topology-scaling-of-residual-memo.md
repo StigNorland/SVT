@@ -1,6 +1,6 @@
 # Topology-Scaling of the Reduced-Basis Residual (2026-05-26)
 
-> **Status (2026-05-30): superseded by Path B null.** Numerical claims in this note about the muon eigenfrequency reaching $\omega/\omega_c = 0.207$, the $\delta_{\rm relax}$ calibration, the $\alpha$-harmonic ladder identification, or the $1/\sqrt{N_{\rm modes}}$ basis-truncation residual are now governed by `papers/SSV-I/path-b-eigenvalue-result.md`: that test showed the muon agreement is not basis-robust (drifts $\pm 13\%$ across 4 bases, empty window in 2 of 4) and the pion rung is absent in every basis. Structural sub-results that stand on their own (operator algebra, analytic derivations, the cubic-vertex one-loop result, dimensional setup) remain valid in isolation; what is superseded is their use as evidence for the ladder identification or as a closure path to it. Quarantined inputs: `src/_fitted_quarantine/`. Tracking: issue #66.
+> **Status (2026-05-30): superseded by Path B null.** Numerical claims in this note about the muon eigenfrequency reaching $\omega/\omega_c = 0.207$, the $\delta_{\rm relax}$ calibration, the $\alpha$-harmonic ladder identification, or the $1/\sqrt{N_{\rm modes}}$ basis-truncation residual are now governed by `papers/SSV-I/path-b-eigenvalue-result.md`: that test showed the muon agreement is not basis-robust (drifts $\pm 13\%$ across 4 bases, empty window in 2 of 4) and the pion rung is absent in every basis. Structural sub-results that stand on their own (operator algebra, analytic derivations, the cubic-vertex one-loop result, dimensional setup) remain valid in isolation; what is superseded is their use as evidence for the ladder identification or as a closure path to it. Quarantined inputs: `instruments/_fitted_quarantine/`. Tracking: issue #66.
 
 **Status:** structural observation tying together the electron, muon, pion,
 and proton mass-prediction residuals from the SSV reduced-BdG programme.
@@ -131,7 +131,7 @@ This memo's central claim is testable in two clean ways:
 
    With further enrichment to `N_used ~ 50`, the residual should be
    `0.5\%`. The `trefoil_y_junction_*` family of prototype scripts in
-   `src/paper_i/` is aimed at exactly this calculation track and has
+   `instruments/paper_i/` is aimed at exactly this calculation track and has
    not yet been pushed beyond first-prototype status.
 
 If either prediction fails -- the residual does *not* shrink with

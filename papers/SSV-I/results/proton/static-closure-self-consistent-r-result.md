@@ -2,7 +2,7 @@
 
 **Status:** result note for
 [issue #13](https://github.com/StigNorland/SVT/issues/13), Run 3 (self-consistent R).
-Reproducer: `python src/paper_i/static_closure_self_consistent_r.py`
+Reproducer: `python instruments/paper_i/static_closure_self_consistent_r.py`
 Data: `papers/SSV-I/data/static-closure-self-consistent-r-2026-06-02.json`
 
 ## Design

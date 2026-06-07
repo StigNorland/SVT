@@ -4,8 +4,8 @@ Status: resolved into Paper II's contact-vertex section; kept as the
 numerical/falsification note for issue #33.
 Issue: #33 (depends conceptually on #29).
 Date: 2026-05-28; updated 2026-06-06.
-Companion script: `src/paper_ii/g2_form_factor_loop.py` (§6 output).
-Regression tests: `src/paper_ii/test_g2_form_factor_loop.py`.
+Companion script: `instruments/paper_ii/g2_form_factor_loop.py` (§6 output).
+Regression tests: `instruments/paper_ii/test_g2_form_factor_loop.py`.
 Prior result: `papers/SSV-II/results/g2-form-factor-results.md` (the
 $F = J_0(kR^\*)$ calculation killing 99.54 % of Schwinger).
 

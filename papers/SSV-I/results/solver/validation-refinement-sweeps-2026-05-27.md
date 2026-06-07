@@ -2,9 +2,9 @@
 
 **Status:** validation result for issue [#16].
 **Branch:** static (Paper I).
-**Baseline:** `src/paper_i/restricted_bdg_matrix.py` — the restricted 2-mode BdG
+**Baseline:** `instruments/paper_i/restricted_bdg_matrix.py` — the restricted 2-mode BdG
 diagnostic from projected quadrature Hessians.
-**Sweep harness:** `src/paper_i/validation_sweep_restricted_bdg.py`.
+**Sweep harness:** `instruments/paper_i/validation_sweep_restricted_bdg.py`.
 **Raw data:** `papers/SSV-I/data/validation-refinement-restricted-bdg-2026-05-27.csv`.
 
 ## What was tested
@@ -127,12 +127,12 @@ source of derived numbers.
 
 ## Recommendations
 
-1. **Labelling.** Update `src/paper_i/restricted_bdg_matrix.py` with a
+1. **Labelling.** Update `instruments/paper_i/restricted_bdg_matrix.py` with a
    module-level docstring matching the format already used in
-   `src/paper_i/curved_torus_relaxation.py`
+   `instruments/paper_i/curved_torus_relaxation.py`
    (`Status: validation; Problem type: static; Primary observables: ...;
    Primary role: small-basis prototype, not closure-grade evidence`).
-   Similarly for `src/paper_i/vortex_profile.py`.
+   Similarly for `instruments/paper_i/vortex_profile.py`.
 
 2. **Prototypes summary.** Add a "validation status" line for each
    reduced-problem script in
@@ -163,7 +163,7 @@ checkpoint, not derived prediction) is consistent with the data.
 
 ## Out of scope for this memo
 
-- The dynamic branch baseline (`src/paper_ii/reconnection_supplement.py`)
+- The dynamic branch baseline (`instruments/paper_ii/reconnection_supplement.py`)
   is left as follow-up work under issue #16. Scope was static-only this
   session.
 - Sensitivity of `kelvin_augmented_bdg.py` to the same axes is partially

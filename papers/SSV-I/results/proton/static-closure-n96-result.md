@@ -1,7 +1,7 @@
 # Issue #13: n=96 cross-grid result — FAIL-A (2026-06-02)
 
 **Status:** FAIL-A (pre-registered decision rule triggered).
-**Script:** `src/paper_i/static_closure_n96_result.py`
+**Script:** `instruments/paper_i/static_closure_n96_result.py`
 **Data:** `papers/SSV-I/data/static-closure-n96-result-2026-06-02.json`
 **NPZ:** `papers/SSV-I/data/penalty-n96-mu2000-rho0p05-400steps-2026-06-02.npz` (12 MB)
 

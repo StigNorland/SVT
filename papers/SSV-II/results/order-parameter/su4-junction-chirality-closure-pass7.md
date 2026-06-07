@@ -7,7 +7,7 @@ follows from a single SSV defect once *one* identification — "chirality = the 
 framing" — is adopted. Everything else (SU(4) colour, B−L, weak doublets,
 multiplicities, anomaly) falls out.
 
-**Script:** `src/paper_ii/su4_junction_chirality_closure.py` · **tests:**
+**Script:** `instruments/paper_ii/su4_junction_chirality_closure.py` · **tests:**
 `test_su4_junction_chirality_closure.py` (8); 40 pass across the #80/#79 suite.
 
 ## The two requirements Pass 6 left
@@ -78,6 +78,6 @@ Either way, the group-theoretic skeleton of a generation is now fully accounted 
 ## Reproducer
 
 ```bash
-.venv/bin/python src/paper_ii/su4_junction_chirality_closure.py
-.venv/bin/python -m pytest src/paper_ii/test_su4_junction_chirality_closure.py -q
+.venv/bin/python instruments/paper_ii/su4_junction_chirality_closure.py
+.venv/bin/python -m pytest instruments/paper_ii/test_su4_junction_chirality_closure.py -q
 ```

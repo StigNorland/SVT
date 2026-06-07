@@ -8,7 +8,7 @@ demand* — and three of the five Cartan charges have genuine homes SSV did not 
 to invent. This is embedding-consistency, **not** a derivation; the derivation is
 the falsifiable Pass 5.
 
-**Script:** `src/paper_ii/so10_generation_embedding.py` · **tests:**
+**Script:** `instruments/paper_ii/so10_generation_embedding.py` · **tests:**
 `test_so10_generation_embedding.py` (8) + `test_su3_y_junction.py` (8), all pass.
 
 ## Rigorous layer — the 16 is one anomaly-free generation (no SSV input)
@@ -109,6 +109,6 @@ its bar honestly. Either way it is decidable.
 ## Reproducer
 
 ```bash
-.venv/bin/python src/paper_ii/so10_generation_embedding.py
-.venv/bin/python -m pytest src/paper_ii/test_so10_generation_embedding.py -q
+.venv/bin/python instruments/paper_ii/so10_generation_embedding.py
+.venv/bin/python -m pytest instruments/paper_ii/test_so10_generation_embedding.py -q
 ```

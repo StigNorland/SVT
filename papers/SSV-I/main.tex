@@ -31,6 +31,7 @@ The Geometric Origin of Matter}
 \author{Stig Norland \\ Independent Researcher \\ Bergen, April 2026}
 \date{}
 
+\providecommand{\ssvissue}[1]{\hyperref[issue:#1]{\##1}}% in-text issue ref -> Code & Issue References appendix
 \begin{document}
 
 \maketitle
@@ -65,9 +66,9 @@ near $(3/2)\mu_0$ is not Galerkin-robust, a direct $m_\varphi=\pm1$ grid-sector
 solve finds no corresponding low branch, and a Volovik-style Berry-phase audit
 finds trivial holonomy for the implemented $\mathcal{L}_\perp$ block.  The
 scalar muon route is therefore retired rather than carried as a pending
-candidate rung; post-\#78 lepton-generation work requires a new HQV or
+candidate rung; post-\ssvissue{78} lepton-generation work requires a new HQV or
 spinorial branch.  For the proton, the candidate static-geometry scaling
-$m_p c^2 = N_Y\!\cdot\!F\!\cdot\!\mu_0$ now uses the \#77 continuation result
+$m_p c^2 = N_Y\!\cdot\!F\!\cdot\!\mu_0$ now uses the \ssvissue{77} continuation result
 $N_Y\!\cdot\!F\simeq54$ at $(R,a)=(2.5,0.85)\xi$, while the separate
 $Q_p/\alpha_G$ map remains open.
 The neutron is given a structural derivation as the surface-locked composite
@@ -78,7 +79,7 @@ from boundary-framed vs bulk-framed defect classification, and the mass
 splitting decomposes as $\Delta E = m_e c^2 + \Delta E_{\rm surf}$ with
 $\Delta E_{\rm surf}$ identified as the $\beta$-decay endpoint
 $0.782\,\text{MeV}$; quantitative pinning of $\Delta E_{\rm surf}$ inherits the
-proton-closure work and is tracked under issue~\#30.
+proton-closure work and is tracked under issue~\ssvissue{30}.
 
 Two empirical inputs ($m_e$, $\alpha$) are used.  The remaining predictions
 are consistent with the observed lepton and light-hadron spectrum at the
@@ -87,12 +88,12 @@ dependence on the regularisation cutoff $R$ and the meridional domain size
 $L_{\rm box}$ documented in the body.  A dedicated Claim Status section
 (\S\ref{sec:claim-status}) tags every quantitative claim as
 \textit{derived}, \textit{structural}, \textit{candidate}, or
-\textit{ansatz}, and records the issue~\#30 closure ledger for the
+\textit{ansatz}, and records the issue~\ssvissue{30} closure ledger for the
 candidate-grade branches.  The remaining open problems for future work are
 topology-preserving static infrastructure for the proton branch and a
 closure-grade dynamic reconnection simulator for Paper~II; the charged-lepton
 masses (muon, tau) remain numerical coincidences, every $\gamma_B=\pi$
-derivation route having been closed (issues~\#91, \#94).  The previously
+derivation route having been closed (issues~\ssvissue{91}, \ssvissue{94}).  The previously
 headlined $0.3\%$ proton-mass
 agreement is the precision at a specific calibration cutoff
 $R\approx1.18\,\xi$ and is reframed in this paper as a $\sim$1.5\%
@@ -137,7 +138,7 @@ where $\mu_0=m_e/\alpha$.  A broader empirical observation---that many light
 hadron and lepton masses cluster near half-integer multiples of $\mu_0$ to
 $\lesssim0.7\%$---is recorded as a numerical coincidence, \emph{not} a derived
 spectrum: pre-registered dynamical tests (Paper~I \S\ref{sec:ladder}; issues
-\#76, \#91) failed to produce the higher rungs as eigenfrequencies.
+\ssvissue{76}, \ssvissue{91}) failed to produce the higher rungs as eigenfrequencies.
 
 This paper is organised as follows.  Section~\ref{sec:postulate} states the
 fundamental postulate, derives the equations of motion from the LogSE Lagrangian,
@@ -381,13 +382,13 @@ superfluid vacuum---a stable, self-sustaining topological defect with finite siz
         that Navier--Stokes is silent about sub-molecular flow (see Paper~II
         \S2).  Spin $s = \hbar/2$ follows from the order parameter
         being a two-component spinor (the CP$^1$ extension adopted in
-        issue~\#83; Paper~II).  The internal direction
+        issue~\ssvissue{83}; Paper~II).  The internal direction
         $\hat n = z^\dagger\boldsymbol\sigma z \in S^2$ ($z$ the normalised
         spinor, $z^\dagger z = 1$) carries the defining spinor property that a
         $2\pi$ rotation returns $\Psi \to -\Psi$ ($\pi_1(SO(3)) = \mathbb{Z}_2$),
         so the toroidal defect lies in the fermionic sector \emph{intrinsically}
         rather than by assumption.  This supersedes the earlier scalar
-        Finkelstein--Rubinstein route: the strand-model import (issue~\#29)
+        Finkelstein--Rubinstein route: the strand-model import (issue~\ssvissue{29})
         confirmed that a scalar $\pi_1(U(1)) = \mathbb{Z}$ does \emph{not}
         deliver the half-integer label for free, which is one of the reasons the
         CP$^1$ order parameter was adopted.  (Derivation note:
@@ -567,18 +568,18 @@ the $\sim 6\%$ level at this cutoff; the same observable falls by $19\%$ at
 $R=1.5\,\xi$.  The reduced-ansatz $Q_p$ family of scripts that attempted to
 calibrate this cutoff away (the \texttt{q\_p\_two\_factor\_*} probes and the
 \texttt{eta} calibration trio) was quarantined to
-\texttt{src/\_fitted\_quarantine/} after the Path~B null exposed how readily
+\texttt{instruments/\_fitted\_quarantine/} after the Path~B null exposed how readily
 calibrated inputs flatter derived results; their own docstrings already
 labelled them ``provisional consistency-based calibration rather than a
 derived physical constant.''  The honest framework prediction at the canonical
 cutoff is therefore $m_p\approx 930$--$954\,\text{MeV}$ ($\sim 1.5\%$ of
 CODATA) with a documented cutoff systematic, \emph{not} the single-number
 $0.3\%$ figure that appeared in earlier drafts.  \textbf{Update
-(issues~\#92 and \#77, 2026-06):} the topological node factor $N_Y=3$ is now
+(issues~\ssvissue{92} and \ssvissue{77}, 2026-06):} the topological node factor $N_Y=3$ is now
 derived as the trefoil crossing number (equivalently the thin-core writhe, or
 the braid-word exponent $\sigma_1^3$); the $3.007$ is this $3$ plus a small
 finite-thickness writhe correction, and the alternative $l_{\rm curve}/(4\pi)$
-proxy is rejected as non-invariant.  The later \#77 continuation scan upgrades
+proxy is rejected as non-invariant.  The later \ssvissue{77} continuation scan upgrades
 the combined proton-geometry observable to a \emph{candidate} static result:
 $(R,a)=(2.5,0.85)\xi$ and $N_Y\!\cdot\!F\simeq54$, grid-converged over the
 tested ladder and route-independent.  This does not by itself make the separate
@@ -586,7 +587,7 @@ $F$ extraction or the static-gravity map closure-grade; $\mu_0=m_e/\alpha$
 stays empirical and the $Q_p/\alpha_G$ map is tracked separately.  Full records:
 \texttt{results/proton/ny-trefoil-derivation-result.md} and
 \texttt{results/proton/geometry-minimum-result-2026-06-03.md}.  Tracked under
-issues~\#66, \#92, \#77, and \#98.
+issues~\ssvissue{66}, \ssvissue{92}, \ssvissue{77}, and \ssvissue{98}.
 \end{gapbox}
 
 The simplest three-dimensional structure that can stabilize a spherical void against
@@ -674,7 +675,7 @@ and (iii)~its dispersion is quadratic rather than linear in the wavenumber.
 Each of the quantum numbers, the spin-statistics composition, and the
 qualitative form of the mass splitting follows from these three points without
 fitting.  The quantitative value of the splitting requires the same converged
-trefoil-breather geometry tracked under issue~\#30 plus a surface-mode
+trefoil-breather geometry tracked under issue~\ssvissue{30} plus a surface-mode
 eigenvalue calculation deferred to Paper~II.
 
 \paragraph{Topology and quantum numbers.}
@@ -768,7 +769,7 @@ $\sim 4$; the structural decomposition Eq.~\eqref{eq:neutron-split} attributes
 the difference to the unresolved surface-binding energy
 $E_{\rm bind}=\Delta E_{\rm Kelvin}-\Delta E_{\rm surf}$.  Pinning these two
 contributions separately, rather than the difference, requires the converged
-trefoil-breather geometry of issue~\#30.
+trefoil-breather geometry of issue~\ssvissue{30}.
 
 \begin{resultbox}[Neutron: structural derivation]
 Fusion product $\mathcal{N}=\mathcal{T}\cup_{\Sigma_p}\mathcal{E}$ of the
@@ -788,7 +789,7 @@ proton trefoil and a surface-locked electron torus:
         of the unresolved binding term.
 \end{itemize}
 Quantitative pinning of $\Delta E_{\rm surf}$ requires the converged
-trefoil-breather geometry of issue~\#30 plus the surface-mode eigenvalue
+trefoil-breather geometry of issue~\ssvissue{30} plus the surface-mode eigenvalue
 calculation deferred to Paper~II.
 \end{resultbox}
 
@@ -802,11 +803,11 @@ This section separates what the framework \emph{derives} from what it merely
 \emph{observes}.  Two masses are genuine topological derivations: the charged
 pion at $2\mu_0$ (the two-winding number, \S\ref{sec:pion}) and the proton, whose
 node factor $N_Y=3$ is the trefoil crossing number (\S\ref{app:minimisation},
-issue~\#92).  The broader observation --- that many light lepton and hadron
+issue~\ssvissue{92}).  The broader observation --- that many light lepton and hadron
 masses cluster near half-integer multiples of the single scale
 $\mu_0=m_e/\alpha$ to $\lesssim0.7\%$ --- is a \emph{numerical coincidence}, not
 a derived spectrum: pre-registered dynamical tests found no mechanism that
-selects the muon, kaon or $\rho$ values (issues~\#76, \#91, \#94).  We state the
+selects the muon, kaon or $\rho$ values (issues~\ssvissue{76}, \ssvissue{91}, \ssvissue{94}).  We state the
 empirical pattern first because it motivates the scale $\mu_0$, then give the two
 derivations, then record the coincidental masses honestly.
 
@@ -834,7 +835,7 @@ These three relations are independent statements about three particles with
 very different internal structure; all agree with CODATA to better than
 $0.7\%$.  Only the first is \emph{derived} (the pion's $2$ is the two-winding
 number, \S\ref{sec:pion}); the muon $\tfrac32$ and kaon $7$ have no deriving
-mechanism (issues~\#76, \#91, \#93) and are recorded here as a numerical
+mechanism (issues~\ssvissue{76}, \ssvissue{91}, \ssvissue{93}) and are recorded here as a numerical
 coincidence, not a derived ladder.
 \end{resultbox}
 
@@ -856,7 +857,7 @@ pre-registered attempts have been completed:
   $\mathcal{L}+\mathcal{L}_\perp$ toroidal-breather BdG operator.  The muon
   drifts $\pm13\%$ across bases and the pion is absent in every basis.
   Full record: \texttt{papers/SSV-I/results/muon/path-b-eigenvalue-result.md}.
-\item \textbf{Berry-phase audit (issue~\#76):} Volovik's CdGM framework was
+\item \textbf{Berry-phase audit (issue~\ssvissue{76}):} Volovik's CdGM framework was
   applied to the SSV scalar BdG operator in the thin-ring limit.  The pure
   LogSE sector gives trivial azimuthal holonomy ($\gamma_B=0$, integer
   rungs); the $\mathcal{L}_\perp$ current-curl block does not convert this
@@ -869,19 +870,19 @@ order parameter: no half-integer Berry holonomy, and the $\mathcal{L}_\perp$
 bridge vanishes by azimuthal selection rules.  Consolidated record:
 \texttt{results/muon/muon-bdg-nogo-summary.md}.
 
-\textbf{CP$^1$/spinor extension (\#83, \#87 B1):} The SU(2)-covariant
+\textbf{CP$^1$/spinor extension (\ssvissue{83}, \ssvissue{87} B1):} The SU(2)-covariant
 $\mathcal{L}_\perp$ in principle allows the bridge by total-$J_\varphi$
-conservation.  However, issue~\#91 (2026-06) shows the spin--orbit lock
+conservation.  However, issue~\ssvissue{91} (2026-06) shows the spin--orbit lock
 amplitude $|V|=0$ exactly for the IQV electron with uniform $\hat n$: the
 spin channels decouple; Fourier orthogonality kills the coupling; the scalar
 selection rule is reproduced.  The muon rung $(3/2)\mu_0$ therefore remains
 a \textbf{numerical coincidence} ($0.59\%$) with no deriving mechanism for
 the IQV.  The pion ($n=2$, integer sector) is unaffected.  The last
 theoretical route, a half-quantum vortex (HQV) electron, was examined and
-\textbf{rejected (issue~\#94):} the HQV half-winding is meridional --- it links
+\textbf{rejected (issue~\ssvissue{94}):} the HQV half-winding is meridional --- it links
 the core and \emph{is} the electron's spin-$\tfrac12$ (the $\mathbb{Z}_2$ framing
-of \S\ref{sec:electron}, \#87 B2) --- not azimuthal, so it cannot supply the
-muon's major-ring Berry phase ($A_\varphi=0$, reproducing \#91); and a free HQV
+of \S\ref{sec:electron}, \ssvissue{87} B2) --- not azimuthal, so it cannot supply the
+muon's major-ring Berry phase ($A_\varphi=0$, reproducing \ssvissue{91}); and a free HQV
 carries half charge, excluded by integer circulation.  The muon
 $(3/2)\mu_0$ is therefore a \textbf{numerical coincidence} with no surviving
 derivation; $m_{\pi^\pm}=2\mu_0$ stands (electron integer-winding).
@@ -961,7 +962,7 @@ soliton-energy derivation of the coefficient requires the two-winding profile
 in the LogSE + chiral-shear theory and is deferred to Paper~II.
 
 The integer rung assignment ($n=2$) is consistent with the Berry-phase audit
-of issue~\#76: the pure LogSE scalar BdG operator on the electron torus gives
+of issue~\ssvissue{76}: the pure LogSE scalar BdG operator on the electron torus gives
 trivial azimuthal holonomy ($\gamma_B=0$) and an integer spectrum
 $E_n=n\omega_0$.  The pion, as a two-winding topological object without a BdG
 pseudospin coupling, falls naturally in this integer sector.
@@ -981,11 +982,11 @@ identification:
   mode hits $\omega/\omega_c\approx0.207$ in the single helicity basis but
   drifts $\pm13\%$ across four bases and leaves the muon window empty in two.
   Full record: \texttt{papers/SSV-I/results/muon/path-b-eigenvalue-result.md}.
-\item \textbf{Issue~\#73 (phi-discretised BdG):} a direct $m_\varphi=\pm1$
+\item \textbf{Issue~\ssvissue{73} (phi-discretised BdG):} a direct $m_\varphi=\pm1$
   grid-sector solve finds no stable low branch near the muon target; the
   lowest direct-sector mode sits at $\omega/\omega_c\approx0.50$--$0.59$.
   Full record: \texttt{papers/SSV-I/results/muon/muon-issue73-phi-bdg-result.md}.
-\item \textbf{Issue~\#76 (Berry-phase audit):} Volovik's topological CdGM
+\item \textbf{Issue~\ssvissue{76} (Berry-phase audit):} Volovik's topological CdGM
   framework applied to the scalar SSV BdG operator gives trivial azimuthal
   holonomy ($\gamma_B=0$) for both the pure LogSE sector and the
   $\mathcal{L}_\perp$ current-curl block.  The bridge matrix element
@@ -997,17 +998,17 @@ identification:
 The muon assignment $m_{\mu^\pm}=\frac{3}{2}\mu_0$ is a \textbf{numerical
 coincidence} ($0.59\%$) with no deriving mechanism in the current theory.
 Three attempts with the scalar operator gave null results (above).  The
-CP$^1$/spinor extension (\#83, \#87 B1) showed the bridge is symmetry-allowed
-by total $J_\varphi$ conservation, but issue~\#91 (2026-06) established that
+CP$^1$/spinor extension (\ssvissue{83}, \ssvissue{87} B1) showed the bridge is symmetry-allowed
+by total $J_\varphi$ conservation, but issue~\ssvissue{91} (2026-06) established that
 the SU(2)-covariant $\mathcal{L}_\perp$ gives zero lock amplitude $|V|=0$
-on the IQV electron with uniform $\hat n$: the scalar issue~\#76 null is reproduced.
+on the IQV electron with uniform $\hat n$: the scalar issue~\ssvissue{76} null is reproduced.
 The last route, a half-quantum vortex (HQV) electron, was examined and rejected
-(issue~\#94): its half-winding is meridional --- it \emph{is} the electron's
-spin-$\tfrac12$ ($\mathbb{Z}_2$ framing, \#87 B2) --- not azimuthal, so it gives
+(issue~\ssvissue{94}): its half-winding is meridional --- it \emph{is} the electron's
+spin-$\tfrac12$ ($\mathbb{Z}_2$ framing, \ssvissue{87} B2) --- not azimuthal, so it gives
 $A_\varphi=0$ (no muon Berry phase), and a free HQV has half charge (excluded).
 The muon is therefore a numerical coincidence with no surviving derivation; every
 $\gamma_B=\pi$ route is closed.  The mechanical text below is retained as
-structural setup.  Tracking: issues~\#66, \#73, \#76, \#91, \#94.
+structural setup.  Tracking: issues~\ssvissue{66}, \ssvissue{73}, \ssvissue{76}, \ssvissue{91}, \ssvissue{94}.
 \end{gapbox}
 
 \textbf{BdG setup.}
@@ -1099,14 +1100,14 @@ test: the lowest physical mode does not converge, it drifts $\pm 13\%$
 across bases and exits the muon window entirely in two of them (gapbox
 above).  The structural cubic-vertex one-loop self-energy is computed in
 the quarantined script
-\texttt{src/\_fitted\_quarantine/paper\_i/muon\_cubic\_full\_self\_energy.py}
+\texttt{instruments/\_fitted\_quarantine/paper\_i/muon\_cubic\_full\_self\_energy.py}
 and gives a relative shift of $-(3\text{--}9)\times10^{-9}$ at three grid
 resolutions ($n=25,31,49$) -- seven orders of magnitude too small and the
 wrong sign to close any gap, but the prior framing of ``residual gap'' was
 itself ill-defined because the underlying eigenfrequency is not
 basis-converged.  Closing the muon identification therefore requires either
 (i) a genuinely basis-converged 3D toroidal solve, or (ii) the thin-ring
-analytic asymptotic deferred to Paper~II.  Tracked under issue~\#66.
+analytic asymptotic deferred to Paper~II.  Tracked under issue~\ssvissue{66}.
 
 The assignment
 \begin{equation}
@@ -1120,12 +1121,12 @@ other is the pion $m_{\pi^\pm}=2\mu_0$), but it is a \textbf{numerical
 coincidence}, not a derived mass (\S\ref{sec:claim-status}): it is carried only
 by the empirical agreement on the $m_e/\alpha$ scale.  Every route to the
 half-integer Berry holonomy that would be required to derive it has now been
-closed --- Path~B, issue~\#73, the issue~\#76 scalar null, the issue~\#91 spinor
-lock ($|V|=0$), and the issue~\#94 half-quantum-vortex audit (wrong circle plus
+closed --- Path~B, issue~\ssvissue{73}, the issue~\ssvissue{76} scalar null, the issue~\ssvissue{91} spinor
+lock ($|V|=0$), and the issue~\ssvissue{94} half-quantum-vortex audit (wrong circle plus
 charge quantization).  The scalar \emph{and} CP$^1$/spinor BdG operators do not
 supply the $\gamma_B=\pi$ holonomy, and the half-quantum route is excluded, so
 no derivation of the muon mass survives in the framework.  Tracking:
-issues~\#73, \#76, \#91, \#94.
+issues~\ssvissue{73}, \ssvissue{76}, \ssvissue{91}, \ssvissue{94}.
 
 \subsection{The proton (derived), and the higher-mass coincidences}
 
@@ -1136,7 +1137,7 @@ The proton is the second genuine topological derivation:
 \end{equation}
 with the node factor $N_Y=3$ \emph{derived} as the trefoil crossing number
 (the $(2,3)$-torus-knot minimal crossing number; equivalently the thin-core
-writhe, issue~\#92; Appendix~\ref{app:minimisation}) and $F$ the form factor
+writhe, issue~\ssvissue{92}; Appendix~\ref{app:minimisation}) and $F$ the form factor
 extracted from a
 3D topology-preserving relaxation of the trefoil-knot breather
 (Appendix~\ref{app:F-extraction}).  $F\approx 4.47$ at the canonical cutoff
@@ -1146,21 +1147,21 @@ $R\approx 1.18\,\xi$ gives $m_p \approx 930$--$954\,\text{MeV}$
 $R=1.18\,\xi$ and $R=1.5\,\xi$) and is not yet a cutoff-independent
 first-principles prediction; the §Proton gapbox above lays out the full
 calibration caveat and what closure would require.  Closure tracked under
-issue~\#30; demotion record under issue~\#66.
+issue~\ssvissue{30}; demotion record under issue~\ssvissue{66}.
 
 \textbf{The higher-mass coincidences.}  The charged kaon
 ($m_{K^\pm}=493.677\,\text{MeV}=7.05\,\mu_0$, $0.71\%$) and the $\rho(770)$
 ($11.07\,\mu_0$, $0.65\%$) sit close to half-integer multiples of $\mu_0$, but
 ---unlike the pion and proton---the framework supplies \emph{no} deriving
-mechanism for them (issues~\#76, \#91, \#93): they are recorded as numerical
+mechanism for them (issues~\ssvissue{76}, \ssvissue{91}, \ssvissue{93}): they are recorded as numerical
 coincidences, not derived masses.
 
 \begin{table}[h]
 \centering
 \caption{Particle masses vs.\ CODATA. Only the pion ($2$, two-winding) and the
 proton ($N_Y=3$, crossing number) are derived; the muon, kaon and $\rho$ entries
-are numerical coincidences (no selecting mechanism, issues~\#76, \#91, \#93,
-\#94).}
+are numerical coincidences (no selecting mechanism, issues~\ssvissue{76}, \ssvissue{91}, \ssvissue{93},
+\ssvissue{94}).}
 \label{tab:ladder}
 \begin{tabular}{lcccc}
 \toprule
@@ -1178,21 +1179,21 @@ $R=1.18\,\xi$ (mean of $n^3{=}48^3$ and $72^3$ straight-vortex
 extractions, agreeing at $\sim 6\%$).  The $930$--$954\,\text{MeV}$ range
 spans the two fine grids.  See the §Proton gapbox for the full
 calibration caveat and the cutoff dependence.  Status: candidate
-(\S\ref{sec:claim-status}, issues~\#30 and~\#66).}
+(\S\ref{sec:claim-status}, issues~\ssvissue{30} and~\ssvissue{66}).}
 \end{table}
 
 \paragraph{Open issues and next steps.}
 The numerical \emph{closeness} of the $\alpha$-harmonic clustering is robust as
 an observation, but it is \emph{not} a derived spectrum and is no longer
-presented as one (issue~\#93).  The two masses the framework genuinely derives
+presented as one (issue~\ssvissue{93}).  The two masses the framework genuinely derives
 are topological---the pion ($2\mu_0$, two-winding) and the proton node factor
 ($N_Y=3$, the trefoil crossing number)---and these stand on their own,
 independent of any ladder.  The higher half-integer rungs (muon $\tfrac32$,
 kaon $7$, $\rho$ at $11$) have \emph{no} deriving mechanism: pre-registered
 dynamical tests found the scalar/IQV-spinor BdG spectrum is not an even ladder
-and does not produce these as eigenfrequencies (Path~A/B, issues~\#76, \#91),
+and does not produce these as eigenfrequencies (Path~A/B, issues~\ssvissue{76}, \ssvissue{91}),
 and the half-quantum-vortex route for the muon was examined and rejected
-(issue~\#94: the HQV half-winding is the electron's spin-$\tfrac12$, on the
+(issue~\ssvissue{94}: the HQV half-winding is the electron's spin-$\tfrac12$, on the
 meridional circle, not the azimuthal one the muon needs; a free HQV is
 charge-excluded).  So the muon, kaon and $\rho$ are recorded as numerical
 coincidences; the ladder beyond the two topological anchors (pion, proton) is
@@ -1244,10 +1245,10 @@ The BdG analysis (Appendix~\ref{app:bdg}) establishes analytically that
 $V_{\rm eff}=4(1-f_0^2)\geq0$, so the standard LogSE has \emph{no}
 $s$-wave amplitude mode.  The reduced helicity-basis Kelvin calculation
 originally suggested a muon-side branch, but the subsequent Path~B,
-issue~\#73, and issue~\#76 audits show that this branch is not a
+issue~\ssvissue{73}, and issue~\ssvissue{76} audits show that this branch is not a
 basis-converged or Berry-protected feature of the current scalar operator.
 The muon problem is therefore no longer a numerical closure item under
-issue~\#30; it requires a changed microscopic ingredient or a genuinely new
+issue~\ssvissue{30}; it requires a changed microscopic ingredient or a genuinely new
 full-operator result.
 
 The following open problems define the programme for Paper~II.  Each is a
@@ -1298,21 +1299,21 @@ eigenfrequency.  Every closure attempt has given a null result.  The
 pre-registered Path~B basis-enrichment test shows that the reduced
 helicity-basis BdG hit at $\omega/\omega_c\simeq0.207$ is not
 Galerkin-robust.  The direct $m_\varphi=\pm1$ grid-sector check of
-issue~\#73 finds no stable low branch near the muon target.  The
-Volovik/Berry-phase audit of issue~\#76 shows that the scalar SSV BdG
+issue~\ssvissue{73} finds no stable low branch near the muon target.  The
+Volovik/Berry-phase audit of issue~\ssvissue{76} shows that the scalar SSV BdG
 operator has trivial azimuthal holonomy and that the bridge matrix element
 $\langle K_{\sigma,\pm}|(\nabla\times\delta j)^\dagger
 (\nabla\times\delta j)|\Phi_R\rangle$ vanishes by the
 $m_a=m_b$ / $m_a+m_b=0$ selection rules.
 
-\emph{What remains (2026-06 update):}  The CP$^1$/spinor extension (\#83)
-was adopted, and issue~\#91 tested whether the SU(2)-covariant
+\emph{What remains (2026-06 update):}  The CP$^1$/spinor extension (\ssvissue{83})
+was adopted, and issue~\ssvissue{91} tested whether the SU(2)-covariant
 $\mathcal{L}_\perp$ supplies a nonzero spin--orbit lock on the IQV electron.
 Result: CLEAN NO.  $|V|=0$ exactly; $\gamma_B=0$; scalar null reproduced.
 The muon stays a numerical coincidence for the IQV.  The last route, a
 half-quantum vortex (HQV) electron, was examined and \textbf{rejected
-(issue~\#94)}: the HQV half-winding is meridional (it \emph{is} the electron's
-spin-$\tfrac12$, \#87 B2), not azimuthal, so $A_\varphi=0$ and it gives no muon
+(issue~\ssvissue{94})}: the HQV half-winding is meridional (it \emph{is} the electron's
+spin-$\tfrac12$, \ssvissue{87} B2), not azimuthal, so $A_\varphi=0$ and it gives no muon
 Berry phase; a free HQV is charge-excluded.  Every $\gamma_B=\pi$ route is now
 closed; the muon $(3/2)\mu_0$ is a numerical coincidence with no surviving
 derivation.  The existing helicity-bridge numerics are retained as historical
@@ -1335,7 +1336,7 @@ with minor radius $0.85\,\xi$), the fine-grid value $F\approx4.4$ reproduces
 the analytic estimate, giving $m_p\approx 927\,\text{MeV}$ ($1.2\%$ below
 the observed value).
 
-\textbf{Update (issues~\#92 and \#77, 2026-06):}  $N_Y$ is the
+\textbf{Update (issues~\ssvissue{92} and \ssvissue{77}, 2026-06):}  $N_Y$ is the
 trefoil \emph{crossing number} $=3$ --- the defining topological invariant of
 the $(2,3)$ torus knot (braid word $\sigma_1^3$, three positive crossings).
 Equivalently it is the self-linking number (writhe), which converges to exactly
@@ -1344,27 +1345,27 @@ thickness adds $\mathrm{Wr}=3+O(a^2)$, so the $3.007$ is this small correction,
 not a separate digit.  The alternative $L_{\rm curve}/(4\pi\xi)$ proxy is
 \emph{rejected}: it is not an invariant (it floats $2.0$--$3.1$ across geometries;
 the value $3.086$ was a coincidence of the $R=2.8\,\xi$ embedding).  Verified in
-\texttt{src/paper\_i/trefoil\_ny\_derivation.py}.  What remains open:
+\texttt{instruments/paper\_i/trefoil\_ny\_derivation.py}.  What remains open:
 \begin{itemize}
   \item The chiral scale $\mu_0=m_e/\alpha\approx 70\,\text{MeV}$ still takes
         $m_e,\alpha$ as empirical inputs; deriving it from SSV vacuum parameters
         is the precision-bearing test (the remaining $\sim 1\%$).
-  \item The \#77 geometry scan gives a candidate combined observable
+  \item The \ssvissue{77} geometry scan gives a candidate combined observable
         $N_Y\!\cdot\!F\simeq54$ at $(R,a)=(2.5,0.85)\xi$, but the separate
         $F$ extraction and its propagation into $Q_p/\alpha_G$ remain
-        lower-status bookkeeping for issue~\#98.
+        lower-status bookkeeping for issue~\ssvissue{98}.
 \end{itemize}
 \end{gapbox}
 
-Following the \#77 continuation scan, the proton assignment has a candidate
+Following the \ssvissue{77} continuation scan, the proton assignment has a candidate
 static-geometry anchor, $N_Y\!\cdot\!F\simeq54$, but remains short of a closed
 first-principles derivation because $\mu_0=m_e/\alpha$ and the
 $Q_p/\alpha_G$ map are still external to the candidate geometry result.  The
 pion is on stronger footing: its two-winding topology is topologically forced,
 and the remaining gap is the stability proof for $L=2R_e$.  The scalar-SSV muon
-and generation routes are no longer pending candidate mechanisms after \#78:
+and generation routes are no longer pending candidate mechanisms after \ssvissue{78}:
 the BdG route is retired, Route C/D failed, and any future lepton-generation
-claim must pass through the HQV/spinorial decision tracked by issue~\#99.
+claim must pass through the HQV/spinorial decision tracked by issue~\ssvissue{99}.
 
 %------------------------------------------------------------------
 \section{Conclusion and Next Steps}
@@ -1394,7 +1395,7 @@ assignment $m_{\mu^\pm}=(3/2)\mu_0$ remains an empirical/candidate rung
 pending a changed microscopic ingredient.  Agreement with CODATA at the
 $0.34\%$ level is demonstrated for the charged pion.  The proton mass formula
 $m_p c^2 = N_Y\!\cdot\!F\!\cdot\!\mu_0$ with $N_Y\approx3.007$ and form
-factor $F$ at the inter-strand cutoff remains candidate-grade: issue~\#30
+factor $F$ at the inter-strand cutoff remains candidate-grade: issue~\ssvissue{30}
 records that cutoff-invariance, simple geometric-$R$ extraction, and
 same-topology recovery all failed under the current static pipeline.
 
@@ -1406,7 +1407,7 @@ same-topology recovery all failed under the current static pipeline.
 This section tags every major quantitative claim in this paper with a
 status label and a pointer to the GitHub tracking issue whose resolution
 would change that status; the outstanding computations are currently
-consolidated under issue~\#30 (\textit{Calculations required to close
+consolidated under issue~\ssvissue{30} (\textit{Calculations required to close
 Paper~I and Paper~II}).  The taxonomy follows
 \texttt{docs/numerical-minimisation-roadmap.md} in the repository:
 
@@ -1450,71 +1451,71 @@ Pion mass $m_{\pi^\pm}=2\mu_0$
 ($0.34\%$ from CODATA) & derived & Already analytic from the
 two-winding topology + the $\mu_0=m_e/\alpha$ scale.  No 3D
 relaxation needed.  Survives the CP$^1$/spinor extension unchanged
-(spin-$0$ $\Rightarrow$ uniform $\hat n$, \#87 A1). & --- \\
-Lepton spin $s=\tfrac12$ & derived & \textbf{Promoted 2026-06 (\#87 B2)}
+(spin-$0$ $\Rightarrow$ uniform $\hat n$, \ssvissue{87} A1). & --- \\
+Lepton spin $s=\tfrac12$ & derived & \textbf{Promoted 2026-06 (\ssvissue{87} B2)}
 from assumed to derived: intrinsic to the CP$^1$/spinor order parameter
-(\#83), where a $2\pi$ frame rotation returns $\Psi\to-\Psi$
+(\ssvissue{83}), where a $2\pi$ frame rotation returns $\Psi\to-\Psi$
 ($\pi_1(SO(3))=\mathbb{Z}_2$).  Supersedes the scalar
-Finkelstein--Rubinstein route, which \#29 showed does not deliver the
-$\mathbb{Z}_2$ for a scalar field. & \#29,\#83,\#87 \\
+Finkelstein--Rubinstein route, which \ssvissue{29} showed does not deliver the
+$\mathbb{Z}_2$ for a scalar field. & \ssvissue{29},\ssvissue{83},\ssvissue{87} \\
 Muon mass $m_{\mu^\pm}=(3/2)\mu_0$ ($0.59\%$ from CODATA) &
 coincidence & \textbf{Demoted 2026-06} from candidate to
-numerical coincidence: five probes (Path~B, \#73, \#76, App.~B potential,
+numerical coincidence: five probes (Path~B, \ssvissue{73}, \ssvissue{76}, App.~B potential,
 two-mode reduction) converged on a no-go for the \emph{scalar} U(1) order
 parameter (no half-integer Berry holonomy; $\mathcal{L}_\perp$ bridge
 vanishes by selection rules, \texttt{muon-bdg-nogo-summary.md}).
-\textbf{Re-promoted (\#87 B1)} to TOPOLOGICAL-SECTOR (conditional) under
+\textbf{Re-promoted (\ssvissue{87} B1)} to TOPOLOGICAL-SECTOR (conditional) under
 the CP$^1$/spinor extension: the $\mathbb{Z}_2$-protected Berry phase $\gamma_B=\pi$
 is possible \emph{if} the SU(2)-covariant $\mathcal{L}_\perp$ supplies a
 nonzero spin--orbit lock on the electron torus.
-\textbf{Conditional closed (issue~\#91, 2026-06): CLEAN NO for the IQV.}
+\textbf{Conditional closed (issue~\ssvissue{91}, 2026-06): CLEAN NO for the IQV.}
 The SU(2)-covariant $\mathcal{L}_\perp$ on the integer-quantum-vortex (IQV)
 electron with uniform $\hat n$ gives exactly zero bridge amplitude
 $|V|=0$ (spin channels decouple; Fourier orthogonality kills the kernel;
 same scalar $\Delta m_\varphi=0$ selection rule applies). $|m|\to\infty$,
-$\gamma_B=0$, issue~\#76 null reproduced. The last route (half-quantum vortex
-electron) was \textbf{rejected (issue~\#94):} the HQV half-winding is meridional
-(= the electron's spin-$\tfrac12$, \#87 B2), not azimuthal, so $A_\varphi=0$
+$\gamma_B=0$, issue~\ssvissue{76} null reproduced. The last route (half-quantum vortex
+electron) was \textbf{rejected (issue~\ssvissue{94}):} the HQV half-winding is meridional
+(= the electron's spin-$\tfrac12$, \ssvissue{87} B2), not azimuthal, so $A_\varphi=0$
 (no muon Berry phase), and a free HQV is charge-excluded. \textbf{All
 $\gamma_B=\pi$ routes are now closed; the muon is a numerical coincidence,
 final.} Full records: \texttt{results/spinor/b1-winding-regime-result.md},
-\texttt{hqv-muon-verdict.md}. & \#76,\#87,\#91,\#94 \\
+\texttt{hqv-muon-verdict.md}. & \ssvissue{76},\ssvissue{87},\ssvissue{91},\ssvissue{94} \\
 Cubic-vertex one-loop self-energy as the source of the muon
 residual gap & \textit{falsified} & The repository calculation gives
 a relative shift of $-(3\text{--}9)\times 10^{-9}$, seven orders of
 magnitude too small and with the wrong sign.  Documented in
 \texttt{muon-cubic-vertex-result-note.md}. & --- \\
 Higher rungs $K^\pm \approx 7\mu_0$ and $\rho(770) \approx 11\mu_0$
-($\sim$0.7\%) & coincidence & \textbf{Demoted (issue~\#93, 2026-06):} no
-deriving mechanism.  Path~A/B and the issue~\#76/\#91 BdG nulls show the
+($\sim$0.7\%) & coincidence & \textbf{Demoted (issue~\ssvissue{93}, 2026-06):} no
+deriving mechanism.  Path~A/B and the issue~\ssvissue{76}/\ssvissue{91} BdG nulls show the
 spectrum is not an even ladder and does not produce these as
 eigenfrequencies; unlike the muon they have no half-winding/HQV route.
-Recorded as a numerical coincidence, not a candidate rung. & \#76,\#91,\#93 \\
+Recorded as a numerical coincidence, not a candidate rung. & \ssvissue{76},\ssvissue{91},\ssvissue{93} \\
 Proton mass $m_p \approx N_Y \cdot F \cdot \mu_0 \approx 924$--$954$
 MeV ($\sim$1.5\% from CODATA) &
-candidate & \textbf{Update (\#77):} the static geometry now has a
+candidate & \textbf{Update (\ssvissue{77}):} the static geometry now has a
 candidate combined observable, $N_Y\!\cdot\!F\simeq54$, at
 $(R,a)=(2.5,0.85)\xi$, grid-converged over the tested continuation ladder
 and route-independent.  The node factor $N_Y=3$ is separately derived as
-the trefoil crossing number (\#92; see row below), but the separate $F$
+the trefoil crossing number (\ssvissue{92}; see row below), but the separate $F$
 decomposition and the $Q_p/\alpha_G$ map are not closure-grade.  Remaining
 free input: $\mu_0=m_e/\alpha$ (still empirical, the precision-bearing
 test).  Records:
 \texttt{results/proton/ny-trefoil-derivation-result.md};
-\texttt{results/proton/geometry-minimum-result-2026-06-03.md}. & \#77,\#92,\#98 \\
+\texttt{results/proton/geometry-minimum-result-2026-06-03.md}. & \ssvissue{77},\ssvissue{92},\ssvissue{98} \\
 $N_Y = 3$ topological crossing factor & derived &
-\textbf{Derived (issue~\#92, 2026-06):} $N_Y$ is the trefoil crossing
+\textbf{Derived (issue~\ssvissue{92}, 2026-06):} $N_Y$ is the trefoil crossing
 number $=3$ (braid word $\sigma_1^3$; equivalently the thin-core writhe,
 $\to3.000$ as $a\to0$).  The $3.007$ is a finite-thickness writhe
 correction; the $L_{\rm curve}/(4\pi)$ proxy is rejected as non-invariant.
 Zero-parameter topological constant.
-\texttt{results/proton/ny-trefoil-derivation-result.md}. & \#92 \\
+\texttt{results/proton/ny-trefoil-derivation-result.md}. & \ssvissue{92} \\
 Form factor $F$ and product $N_Y\!\cdot\!F$ & candidate &
 The separately reported $F$ value remains bookkeeping-sensitive to the
-chosen decomposition and calibration convention.  The promoted \#77 output is
+chosen decomposition and calibration convention.  The promoted \ssvissue{77} output is
 the combined candidate observable $N_Y\!\cdot\!F\simeq54$ at the energy-minimum
 geometry, not a closure-grade standalone $F$.  The next upgrade is the
-documented $Q_p/\alpha_G$ map. & \#77,\#98 \\
+documented $Q_p/\alpha_G$ map. & \ssvissue{77},\ssvissue{98} \\
 Restricted 2-mode BdG diagnostic
 (\texttt{restricted\_bdg\_matrix.py}) producing
 $\omega_-$, $\omega_+$ &
@@ -1524,7 +1525,7 @@ sweep recorded in
 $\sim 63\%$ grid drift and $\sim 66\%$ box drift in $\omega_+$,
 and a non-real $\omega_-$ at every reference point.  The numbers
 this script prints are not cited in the body of this paper and
-should not be quoted as derived. & closed \#30 \\
+should not be quoted as derived. & closed \ssvissue{30} \\
 Vortex-profile shooting solver
 (\texttt{vortex\_profile.py}) & validation & Profile grid is
 well-converged for $\texttt{profile\_n}\ge 600$ and
@@ -1542,18 +1543,18 @@ bulk-framed defect classification.  The Kelvin-mode order-of-magnitude
 estimate $\sim 3.5\,\text{MeV}$ is consistent with the splitting only
 through the unresolved surface-binding term; pinning the two
 contributions separately requires the converged trefoil-breather
-geometry. & \#30 \\
+geometry. & \ssvissue{30} \\
 Forces section (preview only): electromagnetism as chiral flow,
 strong as surface tension, gravity as Bjerknes, weak as
 reconnection & structural & The qualitative identifications are
 consistent with the Lagrangian; the quantitative content is
 deferred to Paper~II.  No quantitative force claim is made in this
-paper. & \#30 \\
+paper. & \ssvissue{30} \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\paragraph{Parameter count of the mass sector (issue~\#95).}  Every particle
+\paragraph{Parameter count of the mass sector (issue~\ssvissue{95}).}  Every particle
 mass derived here has the form $m_X = N_X\,\mu_0$ with $\mu_0 = m_e/\alpha$ and
 $N_X$ a pure number fixed by topology (pion $N=2$, two-winding; proton
 $N=N_Y F=3F$, the trefoil crossing number).  Hence the mass \emph{ratios}
@@ -1590,10 +1591,10 @@ appeared in earlier drafts have been re-framed:
     The dominant cause is the penalty parameters influencing the
     converged state geometry.  A first matched cross-grid test
     ($n^3=96^3$ vs $72^3$ at fixed penalty) is in progress
-    (2026-06-02, issue~\#30);
+    (2026-06-02, issue~\ssvissue{30});
   \item the muon identification has been tested by three independent
-    null results (Path~B, issue~\#73, issue~\#76 Berry-phase audit), and the
-    CP$^1$/spinor (\#91) and half-quantum-vortex (\#94) routes are likewise
+    null results (Path~B, issue~\ssvissue{73}, issue~\ssvissue{76} Berry-phase audit), and the
+    CP$^1$/spinor (\ssvissue{91}) and half-quantum-vortex (\ssvissue{94}) routes are likewise
     closed.  No half-integer Berry holonomy is available, so the muon and the
     higher masses are numerical coincidences, not candidate rungs.
 \end{itemize}
@@ -1686,7 +1687,7 @@ with the chiral non-local shear term ($\lambda=2000$), the energy functional is
 minimised on a 3D grid using topology-preserving gradient descent
 (\S\ref{app:F-extraction}; the topology-preserving penalty mechanism is
 documented in the repository at
-\texttt{src/paper\_i/topology\_penalty.py}).  Vortex lines are tracked where
+\texttt{instruments/paper\_i/topology\_penalty.py}).  Vortex lines are tracked where
 $|\Psi|=0$ or the phase jumps by $2\pi$.  The dimensionless node-cost factor
 reported in this paper is $N_Y\approx3.007$
 (\textit{candidate}, see \S\ref{sec:claim-status}), based on the
@@ -1697,9 +1698,9 @@ from the same runs is detailed in \S\ref{app:F-extraction}.  A dedicated
 sensitivity sweep for $N_Y$ itself across this grid family has not yet been
 performed; its uncertainty is currently dominated by the same cutoff and
 calibration choices that drive the cutoff sensitivity of $F$
-(closure work tracked under issue~\#30).
+(closure work tracked under issue~\ssvissue{30}).
 
-A reference implementation lives under \texttt{src/paper\_i/}: the initial
+A reference implementation lives under \texttt{instruments/paper\_i/}: the initial
 trefoil state and bare-LogSE relaxation are built by
 \texttt{trefoil\_breather\_static.py}, and the topology-preserving 3D
 minimisation under the full $\mathrm{LogSE}+\mathcal{L}_\perp$ functional is
@@ -1734,11 +1735,11 @@ The factor $N_Y\approx3.007$ emerges as the effective multiplier to the base
 flux-tube energy per unit length after relaxation.  Reproducibility runs in
 the repository test grids $n^3=24^3,\,48^3,\,72^3$ at $\xi$-normalised
 box half-width $6\xi$; topology preservation requires the penalty mechanism
-of \texttt{src/paper\_i/topology\_penalty.py}, and the cutoff-stability
+of \texttt{instruments/paper\_i/topology\_penalty.py}, and the cutoff-stability
 behaviour of the downstream observable $F$ is documented in
 \S\ref{app:F-extraction}.  A grid-refinement sweep dedicated to $N_Y$ itself
 (as opposed to $F$) is part of the open closure work tracked under
-issue~\#30 and \S\ref{sec:claim-status}.  \paragraph{Reference implementation.}
+issue~\ssvissue{30} and \S\ref{sec:claim-status}.  \paragraph{Reference implementation.}
 The repository pipeline does \emph{not} use the 1D filament line-integral form
 schematically shown in Eq.~\eqref{eq:vortex-energy}; instead the full
 $\mathrm{LogSE}+\mathcal{L}_\perp$ energy density is integrated on a 3D Cartesian
@@ -1748,11 +1749,11 @@ tubular neighbourhood around the relaxed vortex curve plus a central cavity
 ball, normalised by a self-calibrated per-arc-length energy.  The two pictures
 agree only in the dilute-filament limit.  The \emph{topological} value of the
 node factor, $N_Y = 3$ (the $(2,3)$-trefoil crossing number), is derived in
-issue~\#92; the $3.007$ used as the dilute-limit estimate is that $3$ plus a
+issue~\ssvissue{92}; the $3.007$ used as the dilute-limit estimate is that $3$ plus a
 small finite-thickness writhe correction.
 
 Relaxation under the topology-preserving penalty
-(\texttt{src/paper\_i/topology\_penalty.py}) converges to
+(\texttt{instruments/paper\_i/topology\_penalty.py}) converges to
 $N_Y\approx3.007$ at the tested grids, with the proton mass scaling
 $m_p\approx N_Y\cdot\mu_0\cdot F(\text{geometry})$.  $F$ is the form factor
 discussed in \S\ref{app:F-extraction} below; it is grid-converged at the
@@ -1761,7 +1762,7 @@ level (raw numerator $e_{\rm interior}$ agreement between those grids drives
 the residual; finer grids would tighten further).  The $\pm0.002$
 uncertainty band quoted in earlier drafts referred to fit reproducibility at
 a single grid family and is not yet a measured cross-resolution
-spread for $N_Y$; see issue~\#30.
+spread for $N_Y$; see issue~\ssvissue{30}.
 
 \subsection*{Numerical extraction of $F$ for the $(2,3)$-trefoil knot (2026-05-19)}
 \label{app:F-extraction}
@@ -1772,8 +1773,8 @@ functional (LogSE + chiral non-local shear $\mathcal{L}_\perp$ at
 $\lambda_\perp=2000$) on the $(2,3)$-trefoil-knot initial condition
 (major radius $2.8\,\xi$, minor radius $0.85\,\xi$).  The implementation,
 saved states, and reproducibility commands are documented in the source
-tree at \texttt{src/paper\_i/trefoil\_breather\_lperp\_krylov\_static.py}
-and \texttt{src/paper\_i/trefoil\_breather\_observables.py}, with all
+tree at \texttt{instruments/paper\_i/trefoil\_breather\_lperp\_krylov\_static.py}
+and \texttt{instruments/paper\_i/trefoil\_breather\_observables.py}, with all
 checkpoints under \texttt{papers/SSV-I/}.
 
 \paragraph{Three numerical issues had to be solved before $F$ became
@@ -1884,7 +1885,7 @@ required the analytic $F=4.47$ at the same cutoff exactly; the
 numerical $F$ at this cutoff sits $\sim 1.5\%$ below, hence the
 $\sim 1\%$ residual discrepancy.
 
-\paragraph{Topological status of $N_Y$ (settled, issue~\#92).}  $N_Y$ is the
+\paragraph{Topological status of $N_Y$ (settled, issue~\ssvissue{92}).}  $N_Y$ is the
 \emph{crossing number of the $(2,3)$-trefoil}, $N_Y=3$: the minimal number of
 self-crossings of the simplest nontrivial knot (braid word $\sigma_1^3$, three
 positive crossings).  Equivalently it is the self-linking number (writhe) of the
@@ -1896,7 +1897,7 @@ reading $N_Y=L_{\rm curve}/(4\pi\xi)$ is \emph{rejected}: $L_{\rm curve}/(4\pi\x
 is not a topological invariant --- it floats from $2.0$ to $3.1$ across the
 stable geometry domain, and its apparent $3.086$ was a coincidence of the
 $R=2.8\,\xi$ embedding.  Thus $N_Y=3$ is a zero-parameter topological constant.
-Verified in \texttt{src/paper\_i/trefoil\_ny\_derivation.py};
+Verified in \texttt{instruments/paper\_i/trefoil\_ny\_derivation.py};
 record \texttt{results/proton/ny-trefoil-derivation-result.md}.
 
 Full code, saved states ($\sim\!100$\,MB across all grids),
@@ -2082,8 +2083,8 @@ motivated the muon identification $m_{\mu^\pm}\approx(3/2)\mu_0$, together
 with the driven-response diagnostic that appeared to distinguish muon-type and
 pion-type ladder rungs by drive symmetry.  It is retained as a useful record of
 the reduced-basis calculation, but its ladder interpretation is superseded by
-the Path~B null, the direct phi-sector BdG null of issue~\#73, and the
-Berry-phase audit of issue~\#76.
+the Path~B null, the direct phi-sector BdG null of issue~\ssvissue{73}, and the
+Berry-phase audit of issue~\ssvissue{76}.
 
 \subsection{Projection basis}
 
@@ -2249,15 +2250,15 @@ The combined evidence from this reduced calculation suggested:
 \end{itemize}
 
 The later closure programme changed this interpretation.  Path~B showed that
-the branch is not basis-robust, issue~\#73 showed that it is not reproduced by
-a direct $m_\varphi=\pm1$ grid sector, and issue~\#76 showed that the current
+the branch is not basis-robust, issue~\ssvissue{73} showed that it is not reproduced by
+a direct $m_\varphi=\pm1$ grid sector, and issue~\ssvissue{76} showed that the current
 scalar $\mathcal{L}+\mathcal{L}_\perp$ operator does not supply the missing
 half-integer Berry holonomy.  The reduced-basis response remains a diagnostic,
 not a derivation of $m_{\mu^\pm}$.
 
 %------------------------------------------------------------------
 % Auto-generated provenance appendix (issues + pinned script permalinks).
-% Regenerate with: python src/tools/gen_provenance.py SSV-I
+% Regenerate with: python instruments/tools/gen_provenance.py SSV-I
 \input{provenance.tex}
 %------------------------------------------------------------------
 

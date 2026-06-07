@@ -4,7 +4,7 @@ This note records the first concrete extractor for the Paper I closure quantitie
 
 Artifacts:
 
-- `src/paper_i/trefoil_y_junction_observables.py`
+- `instruments/paper_i/trefoil_y_junction_observables.py`
 - `papers/SSV-I/data/y-junction-observables-n24-hw6-200steps-2026-05-17.json` (canonical run)
 - `papers/SSV-I/data/y-junction-observables-sensitivity-n24-hw6-200steps-2026-05-17.json` (sensitivity scan)
 

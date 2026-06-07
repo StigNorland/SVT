@@ -25,7 +25,7 @@ The later flow-based follow-up is now more specific too. Broad topology-flow, ph
 
 ## Validation Status of Reduced-Problem Scripts (issue #16)
 
-The reduced-problem scripts in `src/paper_i/` are not all of the same
+The reduced-problem scripts in `instruments/paper_i/` are not all of the same
 maturity. The table below classifies each one so the paper text and
 discussion can cite them at the correct confidence level. **Prototype**
 scripts are exploratory checkpoints; the numbers they print are not
@@ -53,16 +53,16 @@ as diagnostic checkpoints for the projected-Hessian formulation.
 From the repository root:
 
 ```bash
-python src/paper_i/vortex_profile.py --n 400 --x-max 12
-python src/paper_i/muon_mode_prototype.py
-python src/paper_i/kelvin_self_induction.py --phi-n 64
+python instruments/paper_i/vortex_profile.py --n 400 --x-max 12
+python instruments/paper_i/muon_mode_prototype.py
+python instruments/paper_i/kelvin_self_induction.py --phi-n 64
 ```
 
 For heavier projection checks, use the lower grid sizes first:
 
 ```bash
-python src/paper_i/restricted_bdg_matrix.py --n 21 --profile numerical --profile-n 400
-python src/paper_i/chiral_bridge_projection.py --n 11 --profile-n 400
+python instruments/paper_i/restricted_bdg_matrix.py --n 21 --profile numerical --profile-n 400
+python instruments/paper_i/chiral_bridge_projection.py --n 11 --profile-n 400
 ```
 
 ## Interpretation
@@ -282,8 +282,8 @@ The GMRES tuning pass (improved preconditioner + restarted GMRES) is recorded in
 
 ```text
 papers/SSV-I/gmres-tuning-checkpoint.md
-src/paper_i/lperp_krylov_helpers.py   (k^2+k^4 preconditioner, gmres_restarted)
-src/paper_i/test_lperp_krylov.py      (17 unit tests, all passing)
+instruments/paper_i/lperp_krylov_helpers.py   (k^2+k^4 preconditioner, gmres_restarted)
+instruments/paper_i/test_lperp_krylov.py      (17 unit tests, all passing)
 ```
 
 Smoke-test comparison at `(n=16, hw=5, lambda=2000, 50 steps)`:
@@ -306,8 +306,8 @@ The topology-penalty breakthrough (first run with preserved trefoil topology) is
 
 ```text
 papers/SSV-I/topology-penalty-checkpoint.md
-src/paper_i/topology_penalty.py
-src/paper_i/test_topology_penalty.py
+instruments/paper_i/topology_penalty.py
+instruments/paper_i/test_topology_penalty.py
 papers/SSV-I/data/trefoil-lperp-krylov-penalty-mu1000-n24-hw6-800steps-2026-05-18.json
 papers/SSV-I/data/trefoil-lperp-krylov-penalty-mu1000-n24-hw6-800steps-2026-05-18.npz
 ```

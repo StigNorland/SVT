@@ -95,7 +95,7 @@ Inverting the Lamb vortex-ring self-energy formula
 E(R) = π R [ln(8R/ξ) − C]     (C ≈ 2, thin-ring approximation)
 ```
 
-with known lepton masses as input gives (see `src/paper_i/vortex_ring_mass_inversion.py`):
+with known lepton masses as input gives (see `instruments/paper_i/vortex_ring_mass_inversion.py`):
 
 | generation | R/ξ (best-fit) | R/ξ (8^n rule) | mass error (8^n) |
 |---|---:|---:|---:|

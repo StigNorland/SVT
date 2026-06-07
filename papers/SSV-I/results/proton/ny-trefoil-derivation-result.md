@@ -5,7 +5,7 @@ tractable parts of the proton mass formula `m_p c² = N_Y · F · μ₀`.
 **Sub-problem B (N_Y): SOLVED — `N_Y = 3` is a zero-parameter topological
 constant. Sub-problem A (F cutoff): PARTIAL — the cutoff R is geometric, but a
 ~6% F-systematic remains. Sub-problem C (μ₀): deferred (hardest, lower priority).**
-Verification: `src/paper_i/trefoil_ny_derivation.py`,
+Verification: `instruments/paper_i/trefoil_ny_derivation.py`,
 `test_trefoil_ny_derivation.py` (8 tests).
 
 ## Sub-problem B — N_Y = 3, derived

@@ -711,8 +711,8 @@ Short closure version:
 ## Executable checks
 
 Lightweight bookkeeping checks for the #29 import now live in
-`src/paper_ii/topology_import_checks.py`, with tests in
-`src/paper_ii/test_topology_import_checks.py`.  They cover:
+`instruments/paper_ii/topology_import_checks.py`, with tests in
+`instruments/paper_ii/test_topology_import_checks.py`.  They cover:
 
 - $e/3$ chiral-crossing charge arithmetic;
 - synthetic projected-curve crossing counts (circle = 0 crossings,

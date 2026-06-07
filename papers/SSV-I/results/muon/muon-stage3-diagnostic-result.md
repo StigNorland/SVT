@@ -2,7 +2,7 @@
 
 **Date:** 2026-05-30. Outcome of the pre-registered test in
 `papers/SSV-I/muon-stage3-diagnostic-prereg.md`. Reproduction:
-`python src/paper_i/muon_stage3_radial_window_probe.py` (~15 min total).
+`python instruments/paper_i/muon_stage3_radial_window_probe.py` (~15 min total).
 
 ## One-line verdict
 
@@ -144,5 +144,5 @@ correction term from a careful second variation) would change that.
 ## Files
 
 - Pre-registration: `papers/SSV-I/muon-stage3-diagnostic-prereg.md` (commit at this stage)
-- Probe: `src/paper_i/muon_stage3_radial_window_probe.py`
+- Probe: `instruments/paper_i/muon_stage3_radial_window_probe.py`
 - Total compute: 938 s for the full smooth + hard sweep (20 spectrum solves)

@@ -6,7 +6,7 @@ the **maximal torus U(1)² and Weyl group S₃ of SU(3)** — but **not** the si
 off-diagonal generators. SSV's colour phase-balance is the Cartan + Weyl skeleton
 of SU(3), not the full continuous group.
 
-**Script:** `src/paper_ii/su3_y_junction.py` · **tests:** `test_su3_y_junction.py`
+**Script:** `instruments/paper_ii/su3_y_junction.py` · **tests:** `test_su3_y_junction.py`
 (8 pass, incl. the control that the full Gell-Mann set closes to dim-8 su(3)).
 
 ## Task 1 — state space
@@ -111,6 +111,6 @@ itself awaits the non-abelian order-parameter extension.
 ## Reproducer
 
 ```bash
-.venv/bin/python src/paper_ii/su3_y_junction.py
-.venv/bin/python -m pytest src/paper_ii/test_su3_y_junction.py -q
+.venv/bin/python instruments/paper_ii/su3_y_junction.py
+.venv/bin/python -m pytest instruments/paper_ii/test_su3_y_junction.py -q
 ```

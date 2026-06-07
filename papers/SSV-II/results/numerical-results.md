@@ -1,13 +1,13 @@
 # Paper II — Numerical Results
 
-This file records results from the three calculation scripts in `src/paper_ii/`.
+This file records results from the three calculation scripts in `instruments/paper_ii/`.
 See `reconnection-barrier-results.md` for the 3D GPE reconnection-barrier checks.
 
 ---
 
 ## 1. Proton Breather Profile (1D Spherical)
 
-**Script:** `src/paper_ii/proton_breather_1d.py`
+**Script:** `instruments/paper_ii/proton_breather_1d.py`
 **Method:** Backward shooting on the radial dimensionless LogSE exterior to a
 hard-sphere proton core at `r_core = a_p/xi = m_e/m_p`.
 
@@ -49,13 +49,13 @@ CODATA: `α_G = 5.906 × 10⁻³⁹`.
 
 The Paper II formula with `δV = V₀` gives `α_G ≈ 1.6 × 10⁻³³`, a factor **~3 × 10⁵**
 above CODATA. This residual factor is attributed to the 3D trefoil geometry
-(open calculation: `src/paper_i/`).
+(open calculation: `instruments/paper_i/`).
 
 ---
 
 ## 2. Time Dilation Check (Symbolic)
 
-**Script:** `src/paper_ii/time_dilation_check.py`
+**Script:** `instruments/paper_ii/time_dilation_check.py`
 **Method:** SymPy — exact symbolic verification using Paper I conventions.
 
 ### Result
@@ -85,7 +85,7 @@ The photon must be a longitudinal Goldstone phase mode, not a chiral-shear mode.
 
 ## 3. Vortex Cap Mass: W/Z Masses and Weinberg Angle
 
-**Script:** `src/paper_ii/vortex_cap_mass.py`
+**Script:** `instruments/paper_ii/vortex_cap_mass.py`
 **Method:** Imports Paper I `VortexProfile` solver; numerical line tension
 integral + analytic Paper II golden-ratio cap formula.
 
@@ -163,7 +163,7 @@ Implied `R_cap_Z` from the observed `m_Z` and the SSV `m_W`:
 
 ## 4. Chiral-Cap Equilibrium: Deriving R_cap = φ/α
 
-**Script:** `src/paper_ii/chiral_cap_equilibrium.py`
+**Script:** `instruments/paper_ii/chiral_cap_equilibrium.py`
 **Method:** Variational energy model for a closed vortex ring with line tension τ and
 chiral-shear bending stiffness λ_bend. Solves equilibrium cubic analytically; confirms
 golden-ratio fixed point.
@@ -257,7 +257,7 @@ by integrating the k⁴ dispersion over the vortex core profile:
 
 ## 5. L_⊥ Core Integral: Bending Stiffness Check
 
-**Script:** `src/paper_ii/lperp_core_integral.py`
+**Script:** `instruments/paper_ii/lperp_core_integral.py`
 **Method:** Numerically integrates I_curl, J_bend, K_bend from the planar vortex
 profile (Paper I, b=1 convention, reliable up to r < 15 ξ).
 
@@ -308,7 +308,7 @@ requires non-local physics not captured by the vortex core profile.
 
 ## 6. Weinberg Angle: sin²(θ_W) from Cap Structure
 
-**Script:** `src/paper_ii/weinberg_angle.py`
+**Script:** `instruments/paper_ii/weinberg_angle.py`
 **Method:** Cap energy formula E = π R² m_e c² applied to W and Z caps; equilibrium cubic for Z; golden-ratio coincidence check.
 
 ### Mass formula and tree-level structure
@@ -383,7 +383,7 @@ Three targeted checks to identify the origin of the 232× gap between
 
 ### Step 1: b=1/2 physical vortex profile
 
-**Script:** `src/paper_ii/lperp_bphys_check.py`
+**Script:** `instruments/paper_ii/lperp_bphys_check.py`
 
 The Paper I solver uses the b=1 LogSE convention. The physical convention is b=1/2
 (f'' + f'/r − f/r² = f ln f²). Under the rescaling f_phys(r) = f_b1(r/√2):
@@ -401,7 +401,7 @@ the gap **larger** (380× vs 232×). The gap is not a convention artifact.
 
 ### Step 2: J_bend(r_max) convergence sweep
 
-**Script:** `src/paper_ii/jbend_ring_scaling.py`
+**Script:** `instruments/paper_ii/jbend_ring_scaling.py`
 
 Sweeps the integral upper limit r_max from 1 to 15 ξ to check for an IR tail.
 
@@ -423,7 +423,7 @@ Note: the b=1 LogSE has an e^{2r} growing mode — numerical integration beyond
 
 ### Step 3: Kelvin wave renormalization
 
-**Script:** `src/paper_ii/kelvin_wave_renorm.py`
+**Script:** `instruments/paper_ii/kelvin_wave_renorm.py`
 
 Two mechanisms checked:
 

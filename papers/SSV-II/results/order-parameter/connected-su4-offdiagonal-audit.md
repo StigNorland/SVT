@@ -7,7 +7,7 @@ multiplet realisation the *natural* chiral-shear term is automatically SU(4)-inv
 so the 12 off-diagonal generators survive **for free** — no extra term, unlike
 chirality (#81).
 
-**Script:** `src/paper_ii/connected_su4_offdiagonal_audit.py` · **tests:**
+**Script:** `instruments/paper_ii/connected_su4_offdiagonal_audit.py` · **tests:**
 `test_connected_su4_offdiagonal_audit.py` (6 pass).
 
 ## The question
@@ -111,6 +111,6 @@ degrees.
 ## Reproducer
 
 ```bash
-.venv/bin/python src/paper_ii/connected_su4_offdiagonal_audit.py
-.venv/bin/python -m pytest src/paper_ii/test_connected_su4_offdiagonal_audit.py -q
+.venv/bin/python instruments/paper_ii/connected_su4_offdiagonal_audit.py
+.venv/bin/python -m pytest instruments/paper_ii/test_connected_su4_offdiagonal_audit.py -q
 ```

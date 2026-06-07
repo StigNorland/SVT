@@ -3,7 +3,7 @@
 
 **Date:** 2026-05-30. Outcome of the pre-registered test in
 `papers/SSV-I/muon-stage1-prereg.md`. Reproduction:
-`python src/paper_i/muon_stage1_probe.py` (committed defaults, no tuning).
+`python instruments/paper_i/muon_stage1_probe.py` (committed defaults, no tuning).
 
 ## One-line verdict
 
@@ -58,7 +58,7 @@ new 0.153) bracket the muon target 0.207 from above and below.
 ## Eigenvector sector decomposition (the sanity check)
 
 A direct decomposition of each eigenvector onto the three m_phi sub-sectors
-(reproducer: `src/paper_i/muon_stage1_eigvec_check.py`) overturns the
+(reproducer: `instruments/paper_i/muon_stage1_eigvec_check.py`) overturns the
 provisional identifications I conjectured from the spectrum alone:
 
 | omega/omega_c | dominant sector | m=0 amplitude | structure |
@@ -155,10 +155,10 @@ argument identifying the Kelvin sector with the lepton hierarchy.
 
 ## Files
 
-- Operator change: `src/paper_i/kelvin_augmented_bdg.py`
+- Operator change: `instruments/paper_i/kelvin_augmented_bdg.py`
   function `hermitian_current_curl_bdg_blocks` (selection rule split between
   L-block and M-block; new comment block replaces the long historical note).
-- Probe: `src/paper_i/muon_stage1_probe.py` (reproduces this result end-to-end).
+- Probe: `instruments/paper_i/muon_stage1_probe.py` (reproduces this result end-to-end).
 - Pre-registration: `papers/SSV-I/muon-stage1-prereg.md`.
 
 ## Next step

@@ -13,7 +13,7 @@ narrowed by the result.
 
 ## Run executed: cutoff-invariance + cross-grid sweep
 
-**Script:** `src/paper_i/static_closure_cutoff_invariance_sweep.py`
+**Script:** `instruments/paper_i/static_closure_cutoff_invariance_sweep.py`
 (committed today).
 **Data:** `papers/SSV-I/data/static-closure-cutoff-sweep-2026-05-28.csv`
 (42 rows: 6 topology-preserving NPZ states × 7 cutoff values

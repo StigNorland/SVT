@@ -1,8 +1,8 @@
 # Muon Lambda-Band Propagation Note (2026-05-20)
 
-> **Status (2026-05-30): superseded by Path B null.** Numerical claims in this note about the muon eigenfrequency reaching $\omega/\omega_c = 0.207$, the $\delta_{\rm relax}$ calibration, the $\alpha$-harmonic ladder identification, or the $1/\sqrt{N_{\rm modes}}$ basis-truncation residual are now governed by `papers/SSV-I/path-b-eigenvalue-result.md`: that test showed the muon agreement is not basis-robust (drifts $\pm 13\%$ across 4 bases, empty window in 2 of 4) and the pion rung is absent in every basis. Structural sub-results that stand on their own (operator algebra, analytic derivations, the cubic-vertex one-loop result, dimensional setup) remain valid in isolation; what is superseded is their use as evidence for the ladder identification or as a closure path to it. Quarantined inputs: `src/_fitted_quarantine/`. Tracking: issue #66.
+> **Status (2026-05-30): superseded by Path B null.** Numerical claims in this note about the muon eigenfrequency reaching $\omega/\omega_c = 0.207$, the $\delta_{\rm relax}$ calibration, the $\alpha$-harmonic ladder identification, or the $1/\sqrt{N_{\rm modes}}$ basis-truncation residual are now governed by `papers/SSV-I/path-b-eigenvalue-result.md`: that test showed the muon agreement is not basis-robust (drifts $\pm 13\%$ across 4 bases, empty window in 2 of 4) and the pion rung is absent in every basis. Structural sub-results that stand on their own (operator algebra, analytic derivations, the cubic-vertex one-loop result, dimensional setup) remain valid in isolation; what is superseded is their use as evidence for the ladder identification or as a closure path to it. Quarantined inputs: `instruments/_fitted_quarantine/`. Tracking: issue #66.
 
-Script: `src/paper_i/muon_lambda_band_sweep.py`
+Script: `instruments/paper_i/muon_lambda_band_sweep.py`
 
 Question: after the relaxed-background bridge correction,
 
@@ -25,7 +25,7 @@ and `kelvin_core_radius=1.0`.
 Equivalent command:
 
 ```powershell
-python src/paper_i/muon_lambda_band_sweep.py `
+python instruments/paper_i/muon_lambda_band_sweep.py `
   --points "31,5,1200" `
   --deltas "0.0,0.033,0.038,0.043" `
   --kelvin-phi-n 512
@@ -80,21 +80,21 @@ The broad grid/core-radius sweep was too expensive for a single PC turn, so the
 probe was decomposed into smaller runs:
 
 ```powershell
-python src/paper_i/muon_lambda_band_sweep.py `
+python instruments/paper_i/muon_lambda_band_sweep.py `
   --points "21,4,800" `
   --deltas "0.038" `
   --kelvin-core-radius 1.0 `
   --kelvin-phi-n 256 `
   --output papers/SSV-I/data/muon-lambda-band-n21-corrected-2026-05-20.json
 
-python src/paper_i/muon_lambda_band_sweep.py `
+python instruments/paper_i/muon_lambda_band_sweep.py `
   --points "13,4,400" `
   --deltas "0.038" `
   --kelvin-core-radii "0.75,1.0,1.25" `
   --kelvin-phi-n 256 `
   --output papers/SSV-I/data/muon-lambda-band-n13-core-radius-2026-05-20.json
 
-python src/paper_i/muon_lambda_band_sweep.py `
+python instruments/paper_i/muon_lambda_band_sweep.py `
   --points "21,4,800" `
   --deltas "0.038" `
   --kelvin-core-radii "0.75,1.25" `
@@ -130,14 +130,14 @@ The next diagnostic recorded all hybrid branches instead of only the
 nearest-to-target selected branch.
 
 ```powershell
-python src/paper_i/muon_lambda_band_sweep.py `
+python instruments/paper_i/muon_lambda_band_sweep.py `
   --points "13,4,400;17,4,600;21,4,800;25,4,1000;31,4,1200" `
   --deltas "0.0,0.038" `
   --kelvin-core-radius 1.0 `
   --kelvin-phi-n 256 `
   --output papers/SSV-I/data/muon-lambda-band-grid-ladder-hw4-2026-05-20.json
 
-python src/paper_i/muon_lambda_band_sweep.py `
+python instruments/paper_i/muon_lambda_band_sweep.py `
   --points "21,5,800;25,5,1000;31,5,1200" `
   --deltas "0.038" `
   --kelvin-core-radius 1.0 `
@@ -192,19 +192,19 @@ grid's hybrids by frequency order, and then matches each subsequent grid by
 coefficient-vector overlap with a Krein-overlap/sign guard.
 
 ```powershell
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "13,4,400;17,4,600;21,4,800;25,4,1000;31,4,1200" `
   --delta-relax 0.038 `
   --kelvin-phi-n 256 `
   --output papers/SSV-I/data/muon-branch-identity-hw4-2026-05-20.json
 
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "21,5,800;25,5,1000;31,5,1200" `
   --delta-relax 0.038 `
   --kelvin-phi-n 256 `
   --output papers/SSV-I/data/muon-branch-identity-hw5-2026-05-20.json
 
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "21,6,800;25,6,1000;31,6,1200" `
   --delta-relax 0.038 `
   --kelvin-phi-n 256 `
@@ -260,7 +260,7 @@ All runs below use the corrected central coefficient `delta_relax=0.038`,
 `n={21,25,31}` with `profile_n={800,1000,1200}`.
 
 ```powershell
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "21,5,800;25,5,1000;31,5,1200" `
   --delta-relax 0.038 `
   --core-basis two `
@@ -268,7 +268,7 @@ python src/paper_i/muon_branch_identity_tracking.py `
   --kelvin-phi-n 128 `
   --output papers/SSV-I/data/muon-branch-identity-basis-two-helicity-hw5-2026-05-20.json
 
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "21,5,800;25,5,1000;31,5,1200" `
   --delta-relax 0.038 `
   --core-basis four `
@@ -276,7 +276,7 @@ python src/paper_i/muon_branch_identity_tracking.py `
   --kelvin-phi-n 128 `
   --output papers/SSV-I/data/muon-branch-identity-basis-four-helicity-hw5-2026-05-20.json
 
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "21,5,800;25,5,1000;31,5,1200" `
   --delta-relax 0.038 `
   --core-basis two `
@@ -284,7 +284,7 @@ python src/paper_i/muon_branch_identity_tracking.py `
   --kelvin-phi-n 128 `
   --output papers/SSV-I/data/muon-branch-identity-basis-two-displacement-hw5-2026-05-20.json
 
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "21,5,800;25,5,1000;31,5,1200" `
   --delta-relax 0.038 `
   --core-basis two `
@@ -344,7 +344,7 @@ with angular selection rules for the normal and anomalous Nambu blocks.
 Commands:
 
 ```powershell
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "21,5,800;25,5,1000;31,5,1200" `
   --delta-relax 0.038 `
   --core-basis two `
@@ -353,7 +353,7 @@ python src/paper_i/muon_branch_identity_tracking.py `
   --kelvin-phi-n 128 `
   --output papers/SSV-I/data/muon-branch-full-second-variation-two-helicity-hw5-2026-05-20.json
 
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "21,5,800;25,5,1000;31,5,1200" `
   --delta-relax 0.038 `
   --core-basis four `
@@ -362,7 +362,7 @@ python src/paper_i/muon_branch_identity_tracking.py `
   --kelvin-phi-n 128 `
   --output papers/SSV-I/data/muon-branch-full-second-variation-four-helicity-hw5-2026-05-20.json
 
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "21,5,800;25,5,1000;31,5,1200" `
   --delta-relax 0.038 `
   --core-basis two `
@@ -371,7 +371,7 @@ python src/paper_i/muon_branch_identity_tracking.py `
   --kelvin-phi-n 128 `
   --output papers/SSV-I/data/muon-branch-full-second-variation-two-displacement-hw5-2026-05-20.json
 
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "21,5,800;25,5,1000;31,5,1200" `
   --delta-relax 0.038 `
   --core-basis two `
@@ -414,7 +414,7 @@ so the helicity candidates do not duplicate the radial/vertical span. This tests
 whether the previous seed dependence was just an incomplete ansatz space.
 
 ```powershell
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "21,5,800;25,5,1000;31,5,1200" `
   --delta-relax 0.038 `
   --core-basis four `
@@ -423,7 +423,7 @@ python src/paper_i/muon_branch_identity_tracking.py `
   --kelvin-phi-n 128 `
   --output papers/SSV-I/data/muon-branch-full-second-variation-four-combined-hw5-2026-05-21.json
 
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "21,6,800;25,6,1000;31,6,1200" `
   --delta-relax 0.038 `
   --core-basis four `
@@ -480,7 +480,7 @@ Thus `hw=5,n=31` has `dr=0.323`, while `hw=6,n=31` has the coarser
 (`dr=0.324`) and also checked a higher-resolution `hw=5,n=37` point.
 
 ```powershell
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "25,6,1000;31,6,1200;37,6,1400" `
   --delta-relax 0.038 `
   --core-basis four `
@@ -489,7 +489,7 @@ python src/paper_i/muon_branch_identity_tracking.py `
   --kelvin-phi-n 128 `
   --output papers/SSV-I/data/muon-branch-full-second-variation-four-combined-hw6-n37-2026-05-21.json
 
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "25,5,1000;31,5,1200;37,5,1400" `
   --delta-relax 0.038 `
   --core-basis four `
@@ -532,7 +532,7 @@ four-hour-per-calculation limit.
 ### Constant-spacing box sequence
 
 ```powershell
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "31,5,1200;37,6,1400;43,7,1600" `
   --delta-relax 0.038 `
   --core-basis four `
@@ -555,7 +555,7 @@ flag, not a mere target-selection issue.
 ### Fixed-box refinement
 
 ```powershell
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "31,5,1200;37,5,1400;43,5,1600" `
   --delta-relax 0.038 `
   --core-basis four `
@@ -564,7 +564,7 @@ python src/paper_i/muon_branch_identity_tracking.py `
   --kelvin-phi-n 128 `
   --output papers/SSV-I/data/muon-branch-full-second-variation-four-combined-hw5-refinement-2026-05-21.json
 
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "31,6,1200;37,6,1400;43,6,1600" `
   --delta-relax 0.038 `
   --core-basis four `
@@ -573,7 +573,7 @@ python src/paper_i/muon_branch_identity_tracking.py `
   --kelvin-phi-n 128 `
   --output papers/SSV-I/data/muon-branch-full-second-variation-four-combined-hw6-refinement-2026-05-21.json
 
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "37,7,1400;43,7,1600" `
   --delta-relax 0.038 `
   --core-basis four `
@@ -596,7 +596,7 @@ upward.
 ### Kelvin self-induction quadrature
 
 ```powershell
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "31,5,1200;37,6,1400" `
   --delta-relax 0.038 `
   --core-basis four `
@@ -646,7 +646,7 @@ eigenvalue and condition number for the reduced basis.
 ### Smooth window, fixed physical support
 
 ```powershell
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "31,5,1200;37,6,1400;43,7,1600" `
   --delta-relax 0.038 `
   --core-basis four `
@@ -658,7 +658,7 @@ python src/paper_i/muon_branch_identity_tracking.py `
   --kelvin-phi-n 128 `
   --output papers/SSV-I/data/muon-window-smooth-r4-t1-constant-dr-2026-05-21.json
 
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "31,5,1200;37,6,1400;43,7,1600" `
   --delta-relax 0.038 `
   --core-basis four `
@@ -684,7 +684,7 @@ identity and introduces a negative-Krein near-window branch.
 ### Smooth-window fixed-box refinement
 
 ```powershell
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "31,5,1200;37,5,1400;43,5,1600" `
   --delta-relax 0.038 `
   --core-basis four `
@@ -696,7 +696,7 @@ python src/paper_i/muon_branch_identity_tracking.py `
   --kelvin-phi-n 128 `
   --output papers/SSV-I/data/muon-window-smooth-r4-t1-hw5-refinement-2026-05-21.json
 
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "31,6,1200;37,6,1400;43,6,1600" `
   --delta-relax 0.038 `
   --core-basis four `
@@ -760,7 +760,7 @@ Laplacian inside a truncated projection region. The CLI switch is:
 ### Weak-form matched-spacing and refinement audit
 
 ```powershell
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "31,5,1200;37,6,1400;43,7,1600" `
   --delta-relax 0.038 `
   --core-basis four `
@@ -773,7 +773,7 @@ python src/paper_i/muon_branch_identity_tracking.py `
   --kelvin-phi-n 128 `
   --output papers/SSV-I/data/muon-weak-window-r4-t1-constant-dr-2026-05-22.json
 
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "31,5,1200;37,5,1400;43,5,1600" `
   --delta-relax 0.038 `
   --core-basis four `
@@ -786,7 +786,7 @@ python src/paper_i/muon_branch_identity_tracking.py `
   --kelvin-phi-n 128 `
   --output papers/SSV-I/data/muon-weak-window-r4-t1-hw5-refinement-2026-05-22.json
 
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "31,6,1200;37,6,1400;43,6,1600" `
   --delta-relax 0.038 `
   --core-basis four `
@@ -816,7 +816,7 @@ The branch continuation scores remain `>0.999` on the tracked lower branch.
 ### Kelvin quadrature check
 
 ```powershell
-python src/paper_i/muon_branch_identity_tracking.py `
+python instruments/paper_i/muon_branch_identity_tracking.py `
   --points "59,6,2000" `
   --delta-relax 0.038 `
   --core-basis four `
