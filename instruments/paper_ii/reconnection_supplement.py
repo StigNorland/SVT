@@ -325,6 +325,30 @@ def radiated_mode_spectrum(
 
 def cap_radius_and_volume(psi: np.ndarray, cfg: Config) -> tuple[float, float]:
     """Return (cap_radius, cap_volume) for the depleted cap."""
+    if cfg.cap_method == "moment":
+        # Threshold-free, sub-grid cap radius: the depletion-weighted transverse
+        # second moment.  Rings lie in (x,y) separated along z (initial_state),
+        # so the cap radius is the transverse (rho) extent of the depletion
+        # weight w = (1 - |psi|^2)_+.  For a uniform disk <rho^2> = R^2/2, hence
+        # R_cap = sqrt(2 <rho^2>_w).  Being an integral of the smooth field
+        # rather than a hard cell count, this converges with grid; the smooth
+        # depletion mass also replaces the threshold-counted volume.
+        x, y, _z = coordinate_grid(cfg)
+        w = np.clip(1.0 - np.abs(psi) ** 2, 0.0, None)
+        # Locate the cap plane as the transverse slice of maximum depletion
+        # (smooth-weighted, not a hard count), isolating the reconnection cap
+        # from the off-midplane ring cores; take the transverse moment there.
+        z_idx = int(np.argmax(w.sum(axis=(0, 1))))
+        ws = w[:, :, z_idx]
+        w_tot = float(ws.sum())
+        if w_tot <= 0.0:
+            return 0.0, 0.0
+        rho2 = x[:, :, z_idx] ** 2 + y[:, :, z_idx] ** 2
+        rho2_mean = float(np.sum(ws * rho2) / w_tot)
+        radius = math.sqrt(2.0 * rho2_mean)
+        volume = float(w.sum()) * cfg.dx ** 3
+        return radius, volume
+
     depleted = np.abs(psi) < cfg.cap_threshold
     volume = float(np.count_nonzero(depleted) * cfg.dx**3)
     if volume == 0.0:
