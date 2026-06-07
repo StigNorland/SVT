@@ -1699,15 +1699,16 @@ performed; its uncertainty is currently dominated by the same cutoff and
 calibration choices that drive the cutoff sensitivity of $F$
 (closure work tracked under issue~\#30).
 
-\begin{verbatim}
-# Blueprint (adapted from Proment 2012 + LogSE + chiral shear)
-import numpy as np
-from scipy.integrate import cumulative_trapezoid
-
-# Full 3D grid + energy minimisation
-# Vortex line tracking: phase jump or |Psi| < threshold
-# Isosurface: marching cubes on |Psi|
-\end{verbatim}
+A reference implementation lives under \texttt{src/paper\_i/}: the initial
+trefoil state and bare-LogSE relaxation are built by
+\texttt{trefoil\_breather\_static.py}, and the topology-preserving 3D
+minimisation under the full $\mathrm{LogSE}+\mathcal{L}_\perp$ functional is
+performed by \texttt{trefoil\_gradient\_flow\_static.py} (pure imaginary-time
+gradient flow, which replaced the earlier Krylov-penalty solver and preserves
+the knot topology exactly). The node-cost factor and form factor are then
+extracted by volume integration in arc-tubes and node-balls
+(\texttt{trefoil\_breather\_observables.py}) --- not by a 1D filament line
+integral.
 
 %------------------------------------------------------------------
 \section{Numerical Minimisation of the Trefoil Y-Junction Energy}
@@ -1737,18 +1738,18 @@ of \texttt{src/paper\_i/topology\_penalty.py}, and the cutoff-stability
 behaviour of the downstream observable $F$ is documented in
 \S\ref{app:F-extraction}.  A grid-refinement sweep dedicated to $N_Y$ itself
 (as opposed to $F$) is part of the open closure work tracked under
-issue~\#30 and \S\ref{sec:claim-status}.  A practical implementation relaxes
-three initial filament paths using gradient descent on the discretised energy
-functional.  Vortex-line integrals are computed with the non-deprecated
-trapezoidal rule:
-
-\begin{verbatim}
-from scipy.integrate import cumulative_trapezoid
-
-r = ...   # radial distance array along filament path
-x = ...   # arc-length parameter
-E_line = (rho0 * kappa0**2 / 2) * cumulative_trapezoid(1/r, x, initial=0)
-\end{verbatim}
+issue~\#30 and \S\ref{sec:claim-status}.  \paragraph{Reference implementation.}
+The repository pipeline does \emph{not} use the 1D filament line-integral form
+schematically shown in Eq.~\eqref{eq:vortex-energy}; instead the full
+$\mathrm{LogSE}+\mathcal{L}_\perp$ energy density is integrated on a 3D Cartesian
+grid (\texttt{trefoil\_gradient\_flow\_static.py}), and the node-cost factor is
+extracted by \texttt{trefoil\_breather\_observables.py} as the energy in a
+tubular neighbourhood around the relaxed vortex curve plus a central cavity
+ball, normalised by a self-calibrated per-arc-length energy.  The two pictures
+agree only in the dilute-filament limit.  The \emph{topological} value of the
+node factor, $N_Y = 3$ (the $(2,3)$-trefoil crossing number), is derived in
+issue~\#92; the $3.007$ used as the dilute-limit estimate is that $3$ plus a
+small finite-thickness writhe correction.
 
 Relaxation under the topology-preserving penalty
 (\texttt{src/paper\_i/topology\_penalty.py}) converges to
