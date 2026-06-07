@@ -25,6 +25,7 @@ Gravity as Update-Capacity Gradient}
 \author{Stig Norland}
 \date{Draft}
 
+\providecommand{\ssvfile}[1]{\hyperref[file:#1]{\texttt{\detokenize{#1}}}}% in-text code/report ref -> Code & Issue References appendix
 \begin{document}
 \maketitle
 
@@ -980,7 +981,7 @@ language.  The two registers are not in conflict; they say the same
 thing in different idioms.  But the issue's task list asks them to be
 separated, so the reader can tell at a glance whether a given claim is
 \emph{deduced} or \emph{re-expressed}.  The taxonomy used here matches the
-roadmap in \texttt{docs/numerical-minimisation-roadmap.md}:
+roadmap in \ssvfile{numerical-minimisation-roadmap}:
 
 \begin{itemize}
   \item \textbf{derivation}: a mathematical deduction from the LogSE
@@ -1078,7 +1079,7 @@ potential, a full kinetic step applied exactly in Fourier space, then a
 second half-step of the potential --- in units $\hbar=m=1$.  This
 appendix records the parameters of each run and the grid- and
 timestep-convergence behind the numbers quoted in the text.  The solvers
-are \texttt{wave\_deflection.py} and \texttt{breather\_interaction.py};
+are \ssvfile{wave_deflection} and \ssvfile{breather_interaction};
 each carries a \texttt{conv} mode that reproduces the convergence tables
 below.
 

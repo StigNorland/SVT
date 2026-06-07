@@ -47,8 +47,9 @@ result notes (`papers/*/results/`). Work is organised around GitHub issues
     References" appendix is produced by `instruments/tools/gen_provenance.py` (it pins
     each `\#NN` issue to its URL and each `\texttt{instruments/...py}` script and
     result-note report to a GitHub permalink at the commit that last modified it;
-    in-text `\#NN` is rewritten to `\ssvissue{NN}` so it hyperlinks to the
-    appendix entry). Regenerate before building a
+    in-text `\#NN` is rewritten to `\ssvissue{NN}`, and inline script/report
+    refs to `\ssvfile{stem}` — both hyperlink to their appendix entry; the
+    generator resolves a bare `stem` to its repo file by glob). Regenerate before building a
     paper: `python instruments/tools/gen_provenance.py <PAPER>` (or `--all`); the result
     is `papers/<PAPER>/provenance.tex`, `\input` in an appendix. The test
     `instruments/test/tools/test_gen_provenance.py` enforces that every cited script path

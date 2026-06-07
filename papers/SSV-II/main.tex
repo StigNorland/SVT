@@ -41,6 +41,7 @@
 % ────────────────────────────────────────────────────────────────────────────
 
 \providecommand{\ssvissue}[1]{\hyperref[issue:#1]{\##1}}% in-text issue ref -> Code & Issue References appendix
+\providecommand{\ssvfile}[1]{\hyperref[file:#1]{\texttt{\detokenize{#1}}}}% in-text code/report ref -> Code & Issue References appendix
 \begin{document}
 
 \maketitle
@@ -607,8 +608,8 @@ geometric form factor $F(kR^*) = J_0(kR^*)$ — the Fourier transform of a
 circular current loop — and treat $(kR^*)^{-1}\sim\alpha$ as a small
 correction parameter.  Closing this construction as an explicit calculation
 (numerical reduction and integration in
-\texttt{papers/SSV-II/results/g2-form-factor-results.md}; family scan and analysis in
-\texttt{topological-vertex-exploration.md}) shows that the $J_0(kR^*)$
+\ssvfile{g2-form-factor-results}; family scan and analysis in
+\ssvfile{topological-vertex-exploration}) shows that the $J_0(kR^*)$
 insertion at $R^* = \xi/\alpha$ removes $99.5\%$ of Schwinger's $\alpha/(2\pi)$
 — not a small correction at all, but a $\sim 10^9\sigma$ disagreement with
 the measured $a_e$.  The same suppression appears for any geometric vertex
@@ -1275,7 +1276,7 @@ single number.
         recovery of the converged value from at least one
         non-trefoil initial condition; the concrete runs are
         itemised in
-        \texttt{papers/SSV-I/static-3d-closure-status-2026-05-28.md}
+        \ssvfile{static-3d-closure-status-2026-05-28}
         and tracked under issue~\ssvissue{30}.
 \end{itemize}
 \end{resultbox}
@@ -1422,7 +1423,7 @@ the ring against collapse.  Setting $dE/dR = 0$ gives the equilibrium cubic
   \label{eq:cap_cubic}
 \end{equation}
 The vortex line tension is computed numerically from the planar
-$\mathrm{LogSE}$ profile (\texttt{vortex\_cap\_mass.py}):
+$\mathrm{LogSE}$ profile (\ssvfile{vortex_cap_mass}):
 $\tau = 17.0\,\xi$ (core integral $+ 2\pi\ln(R_{\rm cap}/r_{\rm max})$ tail).
 In the $\tau\to 0$ limit, setting $x = \alpha R/\xi$,
 equation~\eqref{eq:cap_cubic} reduces to $x^3 = \alpha^3\lambda_{\rm bend}$.
@@ -1444,7 +1445,7 @@ The SSV chiral-shear Lagrangian $\mathcal{L}_\perp = (\lambda_\perp/2)\int|\nabl
 \mathbf{j}|^2\,d^3r$ provides a natural coupling $\lambda_\perp = \alpha^{-2}$
 (from $c_\perp = \alpha c$ at $k = 1/\xi$).  Numerical integration of the
 core-bending correction to $\lambda_\perp$ over the planar vortex profile
-(\texttt{lperp\_core\_integral.py}) yields $\lambda_{\rm bend}^{\rm local} \approx
+(\ssvfile{lperp_core_integral}) yields $\lambda_{\rm bend}^{\rm local} \approx
 4.7\times 10^4\,\xi^3$ — a factor $232$ below the required value.  The local
 curvature correction to $\mathcal{L}_\perp$ is therefore insufficient; the
 bending stiffness $\lambda_{\rm bend} = \phi^3/\alpha^3$ must arise from a
@@ -1504,7 +1505,7 @@ same parity-odd slot $\ssvissue{81}$ required, with the handedness fixed by the 
 $\pi_1(SO(3))=\mathbb{Z}_2$ that gives lepton spin-$\tfrac12$ (Paper~I, \ssvissue{87} B2).
 Chirality is thus \emph{derived from the spin framing}; only one global choice of
 orientation (the definition of ``left'') remains conventional.  Derivation note:
-\texttt{papers/SSV-II/results/order-parameter/b3-chirality-from-spin-framing.md}.
+\ssvfile{b3-chirality-from-spin-framing}.
 
 \subsection{CP and the Strong CP Problem in a Medium That Remembers}
 \label{sec:CP}
@@ -1697,7 +1698,7 @@ self-energy of the surface mode.  The numerical value of $\kappa_\chi$
 requires the converged 3D $\mathcal{L}+\mathcal{L}_\perp$
 reconnection-barrier minimisation (current cross-grid status documented
 in
-\texttt{papers/SSV-II/results/reconnection/validation-refinement-sweeps-reconnection-2026-05-28.md};
+\ssvfile{validation-refinement-sweeps-reconnection-2026-05-28};
 tracked under issue~\ssvissue{30}); the \emph{structural form} of
 Eq.~\eqref{eq:dr-edm} does not.
 

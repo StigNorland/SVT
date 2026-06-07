@@ -28,6 +28,7 @@
 \small Independent Researcher, Bergen, Norway}
 \date{Draft}
 
+\providecommand{\ssvfile}[1]{\hyperref[file:#1]{\texttt{\detokenize{#1}}}}% in-text code/report ref -> Code & Issue References appendix
 \begin{document}
 \maketitle
 
@@ -414,7 +415,7 @@ consistency check ensuring the orbit-equation reproduces the standard
 1PN result in its regime of validity.
 
 The numerical results, computed by
-\texttt{instruments/paper\_vii\_b/strong\_field\_test.py}, are summarised in
+\ssvfile{strong_field_test}, are summarised in
 Table~\ref{tab:strong-field-tests}.
 
 \begin{table}[h]
@@ -551,7 +552,7 @@ the analogy is the fundamental description.
     precision at $r = 1.5\,r_S$ and $r = 3\,r_S$, and the leading 1PN
     formula at the $0.8\%$ residual expected from the next post-Newtonian
     correction in the weak-field regime (\S\ref{sec:strong-field-numeric},
-    \texttt{instruments/paper\_vii\_b/strong\_field\_test.py}).  This closes the
+    \ssvfile{strong_field_test}).  This closes the
     problem at the \emph{consistency-verification level}: the SSV emergent
     metric, as identified by the Jacobson route, reproduces classical
     strong-field GR phenomenology with no observable deviation.  A

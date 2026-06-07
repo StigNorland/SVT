@@ -20,6 +20,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import glob
 import re
 import subprocess
 import sys
@@ -29,7 +30,8 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 PAPERS = REPO_ROOT / "papers"
 
 ISSUE_RE = re.compile(r"\\#(\d+)")
-SSVISSUE_RE = re.compile(r"\\ssvissue\{(\d+)\}")   # body refs after cross-ref wiring
+SSVISSUE_RE = re.compile(r"\\ssvissue\{(\d+)\}")    # in-text issue cross-ref
+FILEREF_RE = re.compile(r"\\ssvfile\{([^{}]+)\}")   # in-text code/report cross-ref
 TEXTTT_RE = re.compile(r"\\texttt\{([^{}]*)\}", re.DOTALL)
 
 
@@ -71,35 +73,77 @@ def _normalise_path(raw: str) -> str:
     return p.replace("\\_", "_").replace("\\#", "#").replace("\\%", "%").replace("\\&", "&")
 
 
-def _resolve_report(p: str, paper: str | None) -> str | None:
-    """Resolve a cited .md report path to a repo-relative path that exists.
-    Refs may be repo-root-relative (papers/SSV-I/results/x.md) or paper-relative
-    (results/x.md, relative to papers/<PAPER>/). Returns None if it doesn't exist."""
-    if (REPO_ROOT / p).is_file():
-        return p
-    if paper:
-        rel = f"papers/{paper}/{p}"
-        if (REPO_ROOT / rel).is_file():
-            return rel
+def _glob_stem(stem: str) -> list[str]:
+    """Repo-relative paths of code/report files whose basename stem matches."""
+    hits = (glob.glob(str(REPO_ROOT / f"instruments/**/{stem}.py"), recursive=True)
+            + glob.glob(str(REPO_ROOT / f"papers/**/{stem}.md"), recursive=True)
+            + glob.glob(str(REPO_ROOT / f"docs/**/{stem}.md"), recursive=True))
+    return sorted({str(Path(h).relative_to(REPO_ROOT)) for h in hits})
+
+
+def _paper_module_dir(paper: str | None) -> str | None:
+    """Map a paper name to its instruments module dir, e.g. SSV-VI-a -> paper_vi_a."""
+    if not paper:
+        return None
+    return "paper_" + paper.removeprefix("SSV-").lower().replace("-", "_")
+
+
+def resolve_ref(ref: str, paper: str | None) -> str | None:
+    """Resolve a code/report reference to a unique repo-relative path, or None.
+
+    `ref` may be a full path (instruments/.../x.py, papers/.../x.md), a
+    paper-relative path (results/.../x.md), or a bare stem (`x`). Bare stems and
+    bare basenames are resolved by globbing instruments/ (.py) and papers//docs/
+    (.md). When several files share a stem, the one in the citing paper's own
+    module dir (paper_i, paper_vi_a, ...) wins; otherwise the match is ambiguous
+    and resolves to None."""
+    ref = ref.replace("\\_", "_").strip()
+    if "/" in ref or ref.endswith((".py", ".md")):
+        if (REPO_ROOT / ref).is_file():
+            return ref
+        if paper and (REPO_ROOT / f"papers/{paper}/{ref}").is_file():
+            return f"papers/{paper}/{ref}"
+        hits = _glob_stem(Path(ref).stem)            # bare basename with extension
+    else:
+        hits = _glob_stem(ref)                        # bare stem
+    if len(hits) == 1:
+        return hits[0]
+    if len(hits) > 1:
+        moddir = _paper_module_dir(paper)
+        if moddir:
+            preferred = [h for h in hits if f"/{moddir}/" in f"/{h}"]
+            if len(preferred) == 1:
+                return preferred[0]
     return None
 
 
-def extract_refs(tex: str, paper: str | None = None) -> tuple[list[int], list[str], list[str]]:
-    """Return (issue numbers, instruments/*.py paths, result-note report paths)
-    cited, each sorted and de-duplicated. Issues match both `\\#NN` and the
-    cross-ref macro `\\ssvissue{NN}`. Report paths are repo-relative and resolved."""
+def extract_refs(tex: str, paper: str | None = None):
+    """Return (issues, code paths, report paths, broken refs).
+
+    Issues match `\\#NN` and `\\ssvissue{NN}`. Code (instruments/*.py) and report
+    (*.md) references are gathered from both `\\texttt{...}` paths and the in-text
+    cross-ref macro `\\ssvfile{stem}`, each resolved to a unique repo path; refs
+    that look like files but don't resolve are returned in `broken`."""
     issues = sorted({int(n) for n in ISSUE_RE.findall(tex)}
                     | {int(n) for n in SSVISSUE_RE.findall(tex)})
-    code, reports = set(), set()
+    code, reports, broken = set(), set(), set()
+
+    def _add(ref: str):
+        rp = resolve_ref(ref, paper)
+        if rp is None:
+            broken.add(ref)
+        elif rp.startswith("instruments/") and rp.endswith(".py"):
+            code.add(rp)
+        elif rp.endswith(".md"):
+            reports.add(rp)
+
     for raw in TEXTTT_RE.findall(tex):
         p = _normalise_path(raw)
-        if p.startswith("instruments/") and p.endswith(".py"):
-            code.add(p)
-        elif p.endswith(".md"):
-            rp = _resolve_report(p, paper)
-            if rp:
-                reports.add(rp)
-    return issues, sorted(code), sorted(reports)
+        if p.endswith(".py") or p.endswith(".md"):
+            _add(p)
+    for stem in FILEREF_RE.findall(tex):
+        _add(stem)
+    return issues, sorted(code), sorted(reports), sorted(broken)
 
 
 def missing_code_paths(paths: list[str]) -> list[str]:
@@ -130,12 +174,15 @@ def _tex_path(path: str) -> str:
 
 
 def _pinned_item(repo_relpath: str, base: str) -> list[str]:
-    """An \\item for a file pinned to the commit that last modified it."""
+    """An \\item for a file pinned to the commit that last modified it. Carries
+    \\label{file:<stem>} so in-text \\ssvfile{<stem>} hyperlinks resolve here."""
+    stem = Path(repo_relpath).stem
+    lab = f"\\label{{file:{stem}}}"
     sha = last_commit(repo_relpath)
     if sha:
-        return [f"  \\item \\texttt{{{_tex_path(repo_relpath)}}} @\\,\\texttt{{{sha}}} ---\\\\",
+        return [f"  \\item{lab} \\texttt{{{_tex_path(repo_relpath)}}} @\\,\\texttt{{{sha}}} ---\\\\",
                 f"        {{\\small\\url{{{base}/blob/{sha}/{repo_relpath}}}}}"]
-    return [f"  \\item \\texttt{{{_tex_path(repo_relpath)}}} --- "
+    return [f"  \\item{lab} \\texttt{{{_tex_path(repo_relpath)}}} --- "
             r"\textbf{[untracked --- not found in the repository]}"]
 
 
@@ -195,8 +242,7 @@ def generate(paper: str, slug: str, check: bool) -> dict:
     main_tex = PAPERS / paper / "main.tex"
     if not main_tex.is_file():
         raise FileNotFoundError(main_tex)
-    issues, paths, reports = extract_refs(main_tex.read_text(encoding="utf-8"), paper)
-    missing = missing_code_paths(paths)
+    issues, paths, reports, broken = extract_refs(main_tex.read_text(encoding="utf-8"), paper)
     prov = PAPERS / paper / "provenance.tex"
     skipped = not issues and not paths and not reports
     if not check:
@@ -205,7 +251,7 @@ def generate(paper: str, slug: str, check: bool) -> dict:
         else:
             prov.write_text(render(paper, issues, paths, reports, slug), encoding="utf-8")
     return {"paper": paper, "issues": issues, "paths": paths, "reports": reports,
-            "missing": missing, "skipped": skipped}
+            "missing": broken, "skipped": skipped}
 
 
 def main() -> None:
@@ -239,7 +285,7 @@ def main() -> None:
         msg = (f"{tag} {paper}: {len(r['issues'])} issues, {len(r['paths'])} scripts, "
                f"{len(r['reports'])} reports")
         if r["missing"]:
-            msg += f"  ⚠ MISSING scripts: {r['missing']}"
+            msg += f"  ⚠ UNRESOLVED file refs: {r['missing']}"
         if bad_issues:
             msg += f"  ⚠ UNRESOLVED issues: {bad_issues}"
         print(msg)
