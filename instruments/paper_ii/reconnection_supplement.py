@@ -473,7 +473,11 @@ def parse_args() -> argparse.Namespace:
              "When set, ignores --dt and prints the chosen value.",
     )
     parser.add_argument("--cap-method", choices=("volume", "radial-slice"), default="volume")
-    parser.add_argument("--output", type=Path, default=Path("paper_ii_reconnection_sweep.csv"))
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=Path("papers/SSV-II/data/paper_ii_reconnection_sweep.csv"),
+    )
     return parser.parse_args()
 
 
