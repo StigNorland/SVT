@@ -6,7 +6,7 @@ Both sub-tests come back negative.
 
 ## Part (b): does the generation ratio collapse 8.59 → 8 with the real C?
 
-**No.** Script: `src/paper_i/vortex_ring_core_constant.py`.
+**No.** Script: `instruments/paper_i/vortex_ring_core_constant.py`.
 
 The Lamb ring-energy formula `E(R) = πR[ln(8R/ξ) − C]` was inverted against the
 lepton masses with the core constant `C` taken from the *real* LogSE vortex
@@ -28,7 +28,7 @@ the muon mass to only −56% (because the implied `R_e` shifts to 0.90 ξ).
 
 ## Part (a): does the first closed shell have degeneracy 8 = (1s+3p)×2?
 
-**No.** Script: `src/paper_i/vortex_core_mode_spectrum.py`.
+**No.** Script: `instruments/paper_i/vortex_core_mode_spectrum.py`.
 
 Linearising the LogSE about the straight singly-wound vortex `Ψ₀ = f(r)e^{iθ}`
 and solving the radial Bogoliubov-de Gennes problem per azimuthal index `m`:

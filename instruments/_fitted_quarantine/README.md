@@ -9,7 +9,7 @@ spectrum in `papers/SSV-I/path-b-eigenvalue-result.md`.
 
 Moved here 2026-05-30 per the approved audit `papers/fitting-cleanup-audit.md`.
 History is preserved (`git mv`), so past results remain reproducible by
-checking out earlier commits or copying a script back into `src/paper_i/`.
+checking out earlier commits or copying a script back into `instruments/paper_i/`.
 Tracking issue: GitHub #66.
 
 ## Why these are not derivations
@@ -52,9 +52,9 @@ were KEPT live (their reusable helpers are used by `direct_bdg_projection.py`
 and the Path B probe), with the `muon_ratio_draft`-dependent print blocks
 stripped from their `main()`:
 
-- `src/paper_i/restricted_bdg_matrix.py` -- the "Muon target comparison"
+- `instruments/paper_i/restricted_bdg_matrix.py` -- the "Muon target comparison"
   block in `main()` was removed; everything else unchanged.
-- `src/paper_i/restricted_bdg_three_mode.py` -- the closing
+- `instruments/paper_i/restricted_bdg_three_mode.py` -- the closing
   `target omega_mu/omega_c` / `closest/target` lines in `main()` were
   removed; everything else unchanged.
 
@@ -77,7 +77,7 @@ consistency-based calibration rather than a derived physical constant").
   `q_p_cumulative_curve_compare.py`, `q_p_halo_window_scan.py`,
   `q_p_source_mechanism_probe.py`, `q_p_preboundary_plateau_check.py`.
 
-## What stayed in `src/paper_i/` (and why)
+## What stayed in `instruments/paper_i/` (and why)
 
 Genuine validation / diagnostics that report honest error bars and do NOT set
 a constant by fitting were kept live: `f_vs_r_cutoff_scan.py` (exposes the
@@ -97,6 +97,6 @@ and the shared operator machinery (`kelvin_augmented_bdg.py`,
 
 Scripts that import shared operator machinery (e.g. `kelvin_augmented_bdg`)
 will not run from this folder as-is, because that machinery stays in
-`src/paper_i/`. To reproduce a past fitted number, either `git checkout` the
+`instruments/paper_i/`. To reproduce a past fitted number, either `git checkout` the
 commit before the move (2026-05-30), or copy the script back into
-`src/paper_i/` temporarily. They are kept for provenance, not for live use.
+`instruments/paper_i/` temporarily. They are kept for provenance, not for live use.

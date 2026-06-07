@@ -1,6 +1,6 @@
 # #77 Track 2: gradient flow result — PASS (N_Y_per_curve) (2026-06-03)
 
-**Script:** `src/paper_i/trefoil_gradient_flow_static.py`
+**Script:** `instruments/paper_i/trefoil_gradient_flow_static.py`
 **Method:** Imaginary-time gradient flow (pure steepest descent) with backtracking
 line search and topology guard. No GMRES, no penalty — topology preserved by
 small step sizes only.

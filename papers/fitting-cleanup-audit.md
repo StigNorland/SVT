@@ -35,14 +35,14 @@ point to the Path B null.
 
 | Script | Why it's ladder/fit | Note |
 |--------|---------------------|------|
-| `src/paper_i/muon_mode_prototype.py` | hardcodes `muon_ratio_draft = 0.207`; contains `coupling_for_target_lower_root` / `_upper_root` — explicit back-solvers of the coupling G to the muon target | core of the ladder claim |
-| `src/paper_i/harmonic_ladder_spectrum.py` | classifies BdG spectrum against half-integer rungs of the muon-derived `mu0_ratio`; `nearest_half_integer_rung` is look-elsewhere snapping | Path B driver |
-| `src/paper_i/projected_two_mode_eigen.py` | prints `omega/target` against `muon_ratio_draft` | diagnostic of the same target |
-| `src/paper_i/thin_ring_delta_relax_sweep.py` | produces `delta_relax = +0.038`, the tuning that pulls lambda_perp so the muon lands on 0.207 | calibration feeding the ladder |
-| `src/paper_i/muon_lambda_band_sweep.py` | sweeps lambda band around the muon target | ladder-support |
-| `src/paper_i/muon_branch_identity_tracking.py` | tracks the muon eigen-branch | ladder-support |
-| `src/paper_i/muon_cubic_self_energy.py`, `muon_cubic_full_self_energy.py` | muon self-energy toward the target | ladder-support |
-| `src/paper_i/kelvin_branch_tracking.py`, `chiral_kelvin_sweep.py` | track/sweep the Kelvin hybrid branch used to reach 0.207 | ladder-support |
+| `instruments/paper_i/muon_mode_prototype.py` | hardcodes `muon_ratio_draft = 0.207`; contains `coupling_for_target_lower_root` / `_upper_root` — explicit back-solvers of the coupling G to the muon target | core of the ladder claim |
+| `instruments/paper_i/harmonic_ladder_spectrum.py` | classifies BdG spectrum against half-integer rungs of the muon-derived `mu0_ratio`; `nearest_half_integer_rung` is look-elsewhere snapping | Path B driver |
+| `instruments/paper_i/projected_two_mode_eigen.py` | prints `omega/target` against `muon_ratio_draft` | diagnostic of the same target |
+| `instruments/paper_i/thin_ring_delta_relax_sweep.py` | produces `delta_relax = +0.038`, the tuning that pulls lambda_perp so the muon lands on 0.207 | calibration feeding the ladder |
+| `instruments/paper_i/muon_lambda_band_sweep.py` | sweeps lambda band around the muon target | ladder-support |
+| `instruments/paper_i/muon_branch_identity_tracking.py` | tracks the muon eigen-branch | ladder-support |
+| `instruments/paper_i/muon_cubic_self_energy.py`, `muon_cubic_full_self_energy.py` | muon self-energy toward the target | ladder-support |
+| `instruments/paper_i/kelvin_branch_tracking.py`, `chiral_kelvin_sweep.py` | track/sweep the Kelvin hybrid branch used to reach 0.207 | ladder-support |
 
 Dependent paper text (governed by Path B null, to be rewritten, not recomputed):
 - `papers/SSV-I/main.tex` §leptons / mass-ladder lines ~102, 147–148 ("muon mass
@@ -61,9 +61,9 @@ This is the part your instruction targets: "all calculations that have used them
 
 | Script | Why it's a fit | Self-flagged? |
 |--------|----------------|---------------|
-| `src/paper_i/q_p_two_factor_eta_calibration.py` | "choose a provisional eta ... does not derive a physical coupling constant" | yes, in docstring |
-| `src/paper_i/q_p_two_factor_eta_shape_calibration.py` | shape-calibration of the same eta | by name |
-| `src/paper_i/q_p_two_factor_calibrated_checkpoint.py` | "eta remains a provisional consistency-based calibration rather than a derived physical constant" | yes, in docstring |
+| `instruments/paper_i/q_p_two_factor_eta_calibration.py` | "choose a provisional eta ... does not derive a physical coupling constant" | yes, in docstring |
+| `instruments/paper_i/q_p_two_factor_eta_shape_calibration.py` | shape-calibration of the same eta | by name |
+| `instruments/paper_i/q_p_two_factor_calibrated_checkpoint.py` | "eta remains a provisional consistency-based calibration rather than a derived physical constant" | yes, in docstring |
 
 Exploratory scans of the same **non-derived** two-factor Q_p ansatz (they do not
 themselves fit, but they exist only to explore the un-derived ansatz family and
@@ -101,24 +101,24 @@ constant by fitting. Justification given so you can overrule any.
 
 | Script | Why it is validation, not fitting |
 |--------|-----------------------------------|
-| `src/paper_i/f_vs_r_cutoff_scan.py` | quantifies F's cutoff sensitivity *to put an honest error bar on the proton mass* — this is the diagnostic that EXPOSES the F calibration, keep it as evidence |
-| `src/paper_i/q_p_convergence_audit.py` | "audits saved states only; does not improve the solver" — pure convergence audit |
-| `src/paper_i/static_closure_cutoff_invariance_sweep.py` | Issue #13 cutoff-invariance post-processing |
-| `src/paper_i/validation_sweep_restricted_bdg.py` | "Status: validation" — grid/box refinement stability |
-| `src/paper_i/q_p_static_potential.py` | static-source diagnostic from saved states (Green's function), no fit |
-| `src/paper_i/q_p_convergence_audit.py`, `trefoil_state_continuation_sweep.py` | convergence of delta V_p / Q_p |
-| `src/paper_i/q_p_constraint_sensitivity.py`, `q_p_kernel_integral.py` | sensitivity / kernel diagnostics |
-| `src/paper_ii/*` (g2_form_factor_loop, tau_identification, vortex_cap_mass, proton_breather_1d, chiral_cap_equilibrium, reconnection_*) | structural/loop calculations and identifications; none back-solve a free constant. tau uses the *ladder* mu_mu as an input though — see Q3 |
-| `src/paper_v/`, `vi_a/`, `vi_b/`, `vii_b/`, `viii/`, `iv/` | galaxy/BH/KZ/deflection; `calibration_analysis.py` *verifies* an empirical constant across galaxies (anchor, not a fit of SSV theory) — but flag Q4 |
+| `instruments/paper_i/f_vs_r_cutoff_scan.py` | quantifies F's cutoff sensitivity *to put an honest error bar on the proton mass* — this is the diagnostic that EXPOSES the F calibration, keep it as evidence |
+| `instruments/paper_i/q_p_convergence_audit.py` | "audits saved states only; does not improve the solver" — pure convergence audit |
+| `instruments/paper_i/static_closure_cutoff_invariance_sweep.py` | Issue #13 cutoff-invariance post-processing |
+| `instruments/paper_i/validation_sweep_restricted_bdg.py` | "Status: validation" — grid/box refinement stability |
+| `instruments/paper_i/q_p_static_potential.py` | static-source diagnostic from saved states (Green's function), no fit |
+| `instruments/paper_i/q_p_convergence_audit.py`, `trefoil_state_continuation_sweep.py` | convergence of delta V_p / Q_p |
+| `instruments/paper_i/q_p_constraint_sensitivity.py`, `q_p_kernel_integral.py` | sensitivity / kernel diagnostics |
+| `instruments/paper_ii/*` (g2_form_factor_loop, tau_identification, vortex_cap_mass, proton_breather_1d, chiral_cap_equilibrium, reconnection_*) | structural/loop calculations and identifications; none back-solve a free constant. tau uses the *ladder* mu_mu as an input though — see Q3 |
+| `instruments/paper_v/`, `vi_a/`, `vi_b/`, `vii_b/`, `viii/`, `iv/` | galaxy/BH/KZ/deflection; `calibration_analysis.py` *verifies* an empirical constant across galaxies (anchor, not a fit of SSV theory) — but flag Q4 |
 
 ---
 
 ## Proposed execution (after your approval)
 
-1. Create `src/_fitted_quarantine/` (keeps imports findable; out of the live
+1. Create `instruments/_fitted_quarantine/` (keeps imports findable; out of the live
    tree). Move all Tier FIT + Tier LADDER scripts there, preserving
    subpaths (`paper_i/...`). Use `git mv` so history follows.
-2. Write `src/_fitted_quarantine/README.md`: what each script fit, what target,
+2. Write `instruments/_fitted_quarantine/README.md`: what each script fit, what target,
    why it is not a derivation, and the pointer to Path B + this audit.
 3. Mark dependent claims in the papers:
    - LADDER claims: rewrite to the Path B null wording (muon = lowest mode of one
@@ -136,7 +136,7 @@ constant by fitting. Justification given so you can overrule any.
 ## Open questions for you (before I execute)
 
 - **Q1 — quarantine vs delete.** You said "move to a separate folder." Confirm
-  `src/_fitted_quarantine/` (reversible, keeps reproducibility of past claims) vs
+  `instruments/_fitted_quarantine/` (reversible, keeps reproducibility of past claims) vs
   a hard delete.
 - **Q2 — the ~12 `q_p_two_factor_*` scan scripts.** Quarantine them with the
   calibration trio (my recommendation, since they only explore the un-derived

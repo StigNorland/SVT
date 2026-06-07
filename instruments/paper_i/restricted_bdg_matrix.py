@@ -38,7 +38,7 @@ from typing import Callable
 # Note (2026-05-30 cleanup): import of SSVScales removed. The only thing this
 # script used from it was the fitted muon target `muon_ratio_draft = 0.207`,
 # which the main() printed an "omega/target" ratio against. That target is now
-# quarantined in src/_fitted_quarantine/ (see papers/path-b-eigenvalue-result.md
+# quarantined in instruments/_fitted_quarantine/ (see papers/path-b-eigenvalue-result.md
 # for the basis-non-robustness null that drove the quarantine).
 from toroidal_background import CurvedToroidalBackground, ToroidalBackground
 from toroidal_projection_integrals import ProjectionConfig, integrate_pair

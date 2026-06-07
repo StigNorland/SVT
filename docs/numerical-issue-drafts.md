@@ -25,8 +25,8 @@ What is the minimum reusable numerical layer the repository needs so that the st
 
 - `docs/numerical-minimisation-roadmap.md`
 - `docs/numerical-conventions.md`
-- `src/paper_i/`
-- `src/paper_ii_reconnection_supplement.py`
+- `instruments/paper_i/`
+- `instruments/paper_ii_reconnection_supplement.py`
 
 **Tasks**
 
@@ -37,7 +37,7 @@ What is the minimum reusable numerical layer the repository needs so that the st
 - [x] Decide whether the first shared layer should live as a helper module or remain a documentation-only contract for one more iteration
 - [x] Summarize what later computations will import from this shared layer
 
-Status: closed by issue #12; implemented as the thin `src/shared_numerics/` contract layer.
+Status: closed by issue #12; implemented as the thin `instruments/shared_numerics/` contract layer.
 
 ## 2. Static Trefoil-Breather Closure
 
@@ -58,9 +58,9 @@ Can we turn the current trefoil Y-junction blueprint into a reproducible 3D rela
 - `docs/numerical-minimisation-roadmap.md`
 - `docs/numerical-conventions.md`
 - `papers/SSV-I/main.tex`
-- `src/paper_i/toroidal_background.py`
-- `src/paper_i/curved_torus_relaxation.py`
-- `src/paper_i/toroidal_projection_integrals.py`
+- `instruments/paper_i/toroidal_background.py`
+- `instruments/paper_i/curved_torus_relaxation.py`
+- `instruments/paper_i/toroidal_projection_integrals.py`
 
 **Tasks**
 
@@ -126,7 +126,7 @@ Can we replace the current structural reconnection harness with a real 3D event 
 
 - `docs/numerical-minimisation-roadmap.md`
 - `docs/numerical-conventions.md`
-- `src/paper_ii_reconnection_supplement.py`
+- `instruments/paper_ii_reconnection_supplement.py`
 - `papers/SSV-II/main.tex`
 
 **Tasks**
@@ -161,10 +161,10 @@ Before attempting closure-grade 3D runs, can the existing reduced problems repro
 
 **Inputs / scripts**
 
-- `src/paper_i/vortex_profile.py`
-- `src/paper_i/curved_torus_relaxation.py`
-- `src/paper_i/restricted_bdg_matrix.py`
-- `src/paper_ii_reconnection_supplement.py`
+- `instruments/paper_i/vortex_profile.py`
+- `instruments/paper_i/curved_torus_relaxation.py`
+- `instruments/paper_i/restricted_bdg_matrix.py`
+- `instruments/paper_ii_reconnection_supplement.py`
 
 **Tasks**
 

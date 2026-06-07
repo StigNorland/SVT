@@ -5,7 +5,7 @@ m_e/α is NOT independently predicted — it *is* m_e/α. The SSV mass sector ha
 exactly TWO irreducible inputs: α (dimensionless structure, = c⊥/c) and one mass
 scale (m_e). Given those, the entire mass *spectrum* follows parameter-free; α =
 1/137 is irreducible (identified, not predicted).** Verification:
-`src/paper_i/mass_sector_parameter_count.py`, `test_mass_sector_parameter_count.py`
+`instruments/paper_i/mass_sector_parameter_count.py`, `test_mass_sector_parameter_count.py`
 (6 tests).
 
 ## The question, sharpened

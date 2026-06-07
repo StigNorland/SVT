@@ -140,48 +140,48 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 Run from the repository root:
 
 ```bash
-python src/paper_i/vortex_profile.py --n 400 --x-max 12
-python src/paper_i/trefoil_breather_static.py --n 40 --max-steps 100
-python src/paper_i/trefoil_breather_static.py --load-state papers/SSV-I/data/trefoil-state-n48-hw7-400steps-2026-05-06.npz --max-steps 100
-python src/paper_i/trefoil_breather_refinement.py --n-values 24,32 --half-width-values 5,6 --max-steps 30
-python src/paper_i/trefoil_farfield_profile.py papers/SSV-I/data/example-trefoil-state.npz --bins 16
-python src/paper_i/trefoil_farfield_compare.py papers/SSV-I/data/profile-a.json papers/SSV-I/data/profile-b.json
-python src/paper_i/alpha_g_proxy.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-2026-05-06.json
-python src/paper_i/cq_geometry_proxy.py papers/SSV-I/data/trefoil-state-n24-hw5-200steps-2026-05-06.npz
-python src/paper_i/cq_geometry_compare.py papers/SSV-I/data/cq-geometry-n24-hw5-200steps-2026-05-06.json papers/SSV-I/data/cq-geometry-n48-hw7-400steps-2026-05-06.json
-python src/paper_i/q_p_two_factor_reexpress_scan.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
-python src/paper_i/q_p_two_factor_local_scale_scan.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
-python src/paper_i/q_p_two_factor_pure_additive_local_scan.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
-python src/paper_i/trefoil_y_junction_static.py --n 24 --half-width 6 --max-steps 200
-python src/paper_i/trefoil_y_junction_observables.py papers/SSV-I/data/y-junction-state-n24-hw6-200steps-2026-05-16.npz
-python src/paper_i/trefoil_y_junction_refinement.py --n-values "24,32" --half-width-values "5,6"
-python src/paper_i/trefoil_y_junction_closed_static.py --n 24 --half-width 6 --max-steps 200
-python src/paper_i/trefoil_y_junction_closed_observables.py papers/SSV-I/data/y-junction-closed-state-n24-hw6-200steps-2026-05-17.npz
-python src/paper_i/trefoil_breather_observables.py papers/SSV-I/data/trefoil-state-n48-hw5-400steps-2026-05-06.npz
-python src/paper_i/trefoil_y_junction_closed_asym_static.py --n 24 --half-width 6 --max-steps 200
-python src/paper_i/trefoil_y_junction_closed_asym_refinement.py --n-values "24,32" --half-width-values "5,6"
-python src/paper_i/trefoil_y_junction_closed_asym_lperp_static.py --n 24 --half-width 6 --max-steps 200 --lambda-perp 10 --step-size 0.002
-python src/paper_i/trefoil_breather_lperp_static.py --n 24 --half-width 6 --max-steps 400 --lambda-perp 10 --step-size 0.002
-python src/paper_i/trefoil_y_junction_closed_asym_lperp_implicit_static.py --n 24 --half-width 6 --max-steps 200 --lambda-perp 2000
-python src/paper_i/trefoil_breather_lperp_implicit_static.py --n 24 --half-width 6 --max-steps 800 --lambda-perp 2000
-python src/paper_i/trefoil_breather_lperp_krylov_static.py --n 24 --half-width 6 --max-steps 200 --lambda-perp 2000
-python src/paper_i/q_p_two_factor_local_additive_scan.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
-python src/paper_i/q_p_two_factor_local_modulated_scan.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
-python src/paper_i/q_p_two_factor_eta_calibration.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
-python src/paper_i/q_p_two_factor_eta_shape_calibration.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
-python src/paper_i/q_p_two_factor_calibrated_checkpoint.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json --eta 0.5
-python src/paper_i/q_p_convergence_audit.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
-python src/paper_i/q_p_kernel_integral.py papers/SSV-I/data/trefoil-state-n24-hw5-200steps-2026-05-06.npz papers/SSV-I/data/trefoil-state-n48-hw7-400steps-2026-05-06.npz
-python src/paper_i/q_p_static_potential.py papers/SSV-I/data/trefoil-state-n24-hw5-200steps-2026-05-06.npz papers/SSV-I/data/trefoil-state-n48-hw7-400steps-2026-05-06.npz
-python src/paper_i/q_p_source_mechanism_probe.py papers/SSV-I/data/continuations-projected-hw6-2026-05-17/trefoil-state-n48-hw6-400steps-2026-05-06-continued-total1304.npz papers/SSV-I/data/continuations-constrained-plateau-2026-05-17/trefoil-state-n48-hw7-400steps-2026-05-06-continued-total700.npz papers/SSV-I/data/continuations-hw8-n64-2026-05-17/trefoil-state-n64-hw8-400steps-2026-05-17-continued-total700.npz --probe-radius 12 --region-edges 2,5
-python src/paper_i/q_p_halo_window_scan.py papers/SSV-I/data/continuations-projected-hw6-2026-05-17/trefoil-state-n48-hw6-400steps-2026-05-06-continued-total1304.npz papers/SSV-I/data/continuations-constrained-plateau-2026-05-17/trefoil-state-n48-hw7-400steps-2026-05-06-continued-total700.npz papers/SSV-I/data/continuations-hw8-n64-2026-05-17/trefoil-state-n64-hw8-400steps-2026-05-17-continued-total700.npz --cutoffs 2,3,4,5,6,7,8,9,10 --probe-radius 12
-python src/paper_i/q_p_preboundary_plateau_check.py papers/SSV-I/data/continuations-projected-hw6-2026-05-17/trefoil-state-n48-hw6-400steps-2026-05-06-continued-total1304.npz papers/SSV-I/data/continuations-constrained-plateau-2026-05-17/trefoil-state-n48-hw7-400steps-2026-05-06-continued-total700.npz papers/SSV-I/data/continuations-hw8-n64-2026-05-17/trefoil-state-n64-hw8-400steps-2026-05-17-continued-total700.npz --bins 40 --probe-radius 12
-python src/paper_i/q_p_cumulative_curve_compare.py papers/SSV-I/data/continuations-projected-hw6-2026-05-17/trefoil-state-n48-hw6-400steps-2026-05-06-continued-total1304.npz papers/SSV-I/data/continuations-constrained-plateau-2026-05-17/trefoil-state-n48-hw7-400steps-2026-05-06-continued-total700.npz papers/SSV-I/data/continuations-hw8-n64-2026-05-17/trefoil-state-n64-hw8-400steps-2026-05-17-continued-total700.npz --sample-radii 1,2,3,4,5,6,7,8 --probe-radius 12
-python src/paper_i/q_p_constraint_sensitivity.py papers/SSV-I/data/trefoil-state-n48-hw7-400steps-2026-05-06.npz papers/SSV-I/data/trefoil-state-n64-hw8-400steps-2026-05-17.npz --extra-steps 100 --sample-radii 2,4,6,8 --probe-radius 12 --output-dir papers/SSV-I/data/constraint-sensitivity-demo
-python src/paper_i/trefoil_state_continuation_sweep.py papers/SSV-I/data/trefoil-state-n48-hw5-400steps-2026-05-06.npz papers/SSV-I/data/trefoil-state-n48-hw6-400steps-2026-05-06.npz papers/SSV-I/data/trefoil-state-n48-hw7-400steps-2026-05-06.npz --step-chunks 100 --output-dir papers/SSV-I/data/continuations-demo
-python src/paper_i/trefoil_state_continuation_sweep.py papers/SSV-I/data/trefoil-state-n48-hw5-400steps-2026-05-06.npz papers/SSV-I/data/trefoil-state-n48-hw6-400steps-2026-05-06.npz papers/SSV-I/data/trefoil-state-n48-hw7-400steps-2026-05-06.npz --until-plateau --plateau-chunk-size 100 --max-chunks 4 --output-dir papers/SSV-I/data/continuations-plateau-demo
-python src/paper_i/muon_mode_prototype.py
-python src/paper_i/kelvin_self_induction.py --phi-n 64
+python instruments/paper_i/vortex_profile.py --n 400 --x-max 12
+python instruments/paper_i/trefoil_breather_static.py --n 40 --max-steps 100
+python instruments/paper_i/trefoil_breather_static.py --load-state papers/SSV-I/data/trefoil-state-n48-hw7-400steps-2026-05-06.npz --max-steps 100
+python instruments/paper_i/trefoil_breather_refinement.py --n-values 24,32 --half-width-values 5,6 --max-steps 30
+python instruments/paper_i/trefoil_farfield_profile.py papers/SSV-I/data/example-trefoil-state.npz --bins 16
+python instruments/paper_i/trefoil_farfield_compare.py papers/SSV-I/data/profile-a.json papers/SSV-I/data/profile-b.json
+python instruments/paper_i/alpha_g_proxy.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-2026-05-06.json
+python instruments/paper_i/cq_geometry_proxy.py papers/SSV-I/data/trefoil-state-n24-hw5-200steps-2026-05-06.npz
+python instruments/paper_i/cq_geometry_compare.py papers/SSV-I/data/cq-geometry-n24-hw5-200steps-2026-05-06.json papers/SSV-I/data/cq-geometry-n48-hw7-400steps-2026-05-06.json
+python instruments/paper_i/q_p_two_factor_reexpress_scan.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
+python instruments/paper_i/q_p_two_factor_local_scale_scan.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
+python instruments/paper_i/q_p_two_factor_pure_additive_local_scan.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
+python instruments/paper_i/trefoil_y_junction_static.py --n 24 --half-width 6 --max-steps 200
+python instruments/paper_i/trefoil_y_junction_observables.py papers/SSV-I/data/y-junction-state-n24-hw6-200steps-2026-05-16.npz
+python instruments/paper_i/trefoil_y_junction_refinement.py --n-values "24,32" --half-width-values "5,6"
+python instruments/paper_i/trefoil_y_junction_closed_static.py --n 24 --half-width 6 --max-steps 200
+python instruments/paper_i/trefoil_y_junction_closed_observables.py papers/SSV-I/data/y-junction-closed-state-n24-hw6-200steps-2026-05-17.npz
+python instruments/paper_i/trefoil_breather_observables.py papers/SSV-I/data/trefoil-state-n48-hw5-400steps-2026-05-06.npz
+python instruments/paper_i/trefoil_y_junction_closed_asym_static.py --n 24 --half-width 6 --max-steps 200
+python instruments/paper_i/trefoil_y_junction_closed_asym_refinement.py --n-values "24,32" --half-width-values "5,6"
+python instruments/paper_i/trefoil_y_junction_closed_asym_lperp_static.py --n 24 --half-width 6 --max-steps 200 --lambda-perp 10 --step-size 0.002
+python instruments/paper_i/trefoil_breather_lperp_static.py --n 24 --half-width 6 --max-steps 400 --lambda-perp 10 --step-size 0.002
+python instruments/paper_i/trefoil_y_junction_closed_asym_lperp_implicit_static.py --n 24 --half-width 6 --max-steps 200 --lambda-perp 2000
+python instruments/paper_i/trefoil_breather_lperp_implicit_static.py --n 24 --half-width 6 --max-steps 800 --lambda-perp 2000
+python instruments/paper_i/trefoil_breather_lperp_krylov_static.py --n 24 --half-width 6 --max-steps 200 --lambda-perp 2000
+python instruments/paper_i/q_p_two_factor_local_additive_scan.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
+python instruments/paper_i/q_p_two_factor_local_modulated_scan.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
+python instruments/paper_i/q_p_two_factor_eta_calibration.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
+python instruments/paper_i/q_p_two_factor_eta_shape_calibration.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
+python instruments/paper_i/q_p_two_factor_calibrated_checkpoint.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json --eta 0.5
+python instruments/paper_i/q_p_convergence_audit.py papers/SSV-I/data/trefoil-boxsize-sweep-n24-softbc-200steps-geom-2026-05-06.json papers/SSV-I/data/trefoil-boxsize-sweep-n48-softbc-400steps-geom-2026-05-06.json
+python instruments/paper_i/q_p_kernel_integral.py papers/SSV-I/data/trefoil-state-n24-hw5-200steps-2026-05-06.npz papers/SSV-I/data/trefoil-state-n48-hw7-400steps-2026-05-06.npz
+python instruments/paper_i/q_p_static_potential.py papers/SSV-I/data/trefoil-state-n24-hw5-200steps-2026-05-06.npz papers/SSV-I/data/trefoil-state-n48-hw7-400steps-2026-05-06.npz
+python instruments/paper_i/q_p_source_mechanism_probe.py papers/SSV-I/data/continuations-projected-hw6-2026-05-17/trefoil-state-n48-hw6-400steps-2026-05-06-continued-total1304.npz papers/SSV-I/data/continuations-constrained-plateau-2026-05-17/trefoil-state-n48-hw7-400steps-2026-05-06-continued-total700.npz papers/SSV-I/data/continuations-hw8-n64-2026-05-17/trefoil-state-n64-hw8-400steps-2026-05-17-continued-total700.npz --probe-radius 12 --region-edges 2,5
+python instruments/paper_i/q_p_halo_window_scan.py papers/SSV-I/data/continuations-projected-hw6-2026-05-17/trefoil-state-n48-hw6-400steps-2026-05-06-continued-total1304.npz papers/SSV-I/data/continuations-constrained-plateau-2026-05-17/trefoil-state-n48-hw7-400steps-2026-05-06-continued-total700.npz papers/SSV-I/data/continuations-hw8-n64-2026-05-17/trefoil-state-n64-hw8-400steps-2026-05-17-continued-total700.npz --cutoffs 2,3,4,5,6,7,8,9,10 --probe-radius 12
+python instruments/paper_i/q_p_preboundary_plateau_check.py papers/SSV-I/data/continuations-projected-hw6-2026-05-17/trefoil-state-n48-hw6-400steps-2026-05-06-continued-total1304.npz papers/SSV-I/data/continuations-constrained-plateau-2026-05-17/trefoil-state-n48-hw7-400steps-2026-05-06-continued-total700.npz papers/SSV-I/data/continuations-hw8-n64-2026-05-17/trefoil-state-n64-hw8-400steps-2026-05-17-continued-total700.npz --bins 40 --probe-radius 12
+python instruments/paper_i/q_p_cumulative_curve_compare.py papers/SSV-I/data/continuations-projected-hw6-2026-05-17/trefoil-state-n48-hw6-400steps-2026-05-06-continued-total1304.npz papers/SSV-I/data/continuations-constrained-plateau-2026-05-17/trefoil-state-n48-hw7-400steps-2026-05-06-continued-total700.npz papers/SSV-I/data/continuations-hw8-n64-2026-05-17/trefoil-state-n64-hw8-400steps-2026-05-17-continued-total700.npz --sample-radii 1,2,3,4,5,6,7,8 --probe-radius 12
+python instruments/paper_i/q_p_constraint_sensitivity.py papers/SSV-I/data/trefoil-state-n48-hw7-400steps-2026-05-06.npz papers/SSV-I/data/trefoil-state-n64-hw8-400steps-2026-05-17.npz --extra-steps 100 --sample-radii 2,4,6,8 --probe-radius 12 --output-dir papers/SSV-I/data/constraint-sensitivity-demo
+python instruments/paper_i/trefoil_state_continuation_sweep.py papers/SSV-I/data/trefoil-state-n48-hw5-400steps-2026-05-06.npz papers/SSV-I/data/trefoil-state-n48-hw6-400steps-2026-05-06.npz papers/SSV-I/data/trefoil-state-n48-hw7-400steps-2026-05-06.npz --step-chunks 100 --output-dir papers/SSV-I/data/continuations-demo
+python instruments/paper_i/trefoil_state_continuation_sweep.py papers/SSV-I/data/trefoil-state-n48-hw5-400steps-2026-05-06.npz papers/SSV-I/data/trefoil-state-n48-hw6-400steps-2026-05-06.npz papers/SSV-I/data/trefoil-state-n48-hw7-400steps-2026-05-06.npz --until-plateau --plateau-chunk-size 100 --max-chunks 4 --output-dir papers/SSV-I/data/continuations-plateau-demo
+python instruments/paper_i/muon_mode_prototype.py
+python instruments/paper_i/kelvin_self_induction.py --phi-n 64
 ```
 
 These scripts are exploratory or reduced-validation support code, not final production simulations.

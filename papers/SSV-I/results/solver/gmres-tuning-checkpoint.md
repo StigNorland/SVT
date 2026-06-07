@@ -39,7 +39,7 @@ reduction of the outer residual: `inner_tol = tol * ||b|| / ||r||`.
 
 ### Unit tests
 
-`src/paper_i/test_lperp_krylov.py` — 17 tests covering:
+`instruments/paper_i/test_lperp_krylov.py` — 17 tests covering:
 
 | Group | Tests |
 |---|---|

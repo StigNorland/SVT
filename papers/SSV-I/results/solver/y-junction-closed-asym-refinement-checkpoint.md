@@ -7,7 +7,7 @@ observables.
 
 Artifacts:
 
-- `src/paper_i/trefoil_y_junction_closed_asym_refinement.py`
+- `instruments/paper_i/trefoil_y_junction_closed_asym_refinement.py`
 - `papers/SSV-I/data/y-junction-closed-asym-refinement-2026-05-17.json`
 - per-run states `y-junction-closed-asym-state-n{n}-hw{hw}-{steps}steps-2026-05-17.npz`
 

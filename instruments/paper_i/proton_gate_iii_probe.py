@@ -23,7 +23,7 @@ v2 fixes (v1 was invalid -- see papers/SSV-I/proton-gate-iii-bug-note.md):
     the relaxer's initial_vortex_links so a silent "all seeds identical"
     failure cannot recur undetected.
 
-Run: python proton_gate_iii_probe.py  (from src/paper_i).
+Run: python proton_gate_iii_probe.py  (from instruments/paper_i).
 """
 from __future__ import annotations
 

@@ -5,7 +5,7 @@ vortex (HQV) was the only remaining route to a muon `γ_B = π` after #91 closed
 the IQV spin–orbit lock. **Verdict: HQV REJECTED. The electron is an
 integer-winding (IQV) object; the muon `(3/2)μ₀` is a NUMERICAL COINCIDENCE,
 final; `pion = 2μ₀` survives unchanged.** Verification:
-`src/paper_i/hqv_muon_audit.py`, `test_hqv_muon_audit.py` (8 tests).
+`instruments/paper_i/hqv_muon_audit.py`, `test_hqv_muon_audit.py` (8 tests).
 
 ## Two independent reasons the HQV does not rescue the muon
 

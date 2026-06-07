@@ -6,7 +6,7 @@ symmetric closed seed.
 
 Artifacts:
 
-- `src/paper_i/trefoil_y_junction_closed_asym_static.py`
+- `instruments/paper_i/trefoil_y_junction_closed_asym_static.py`
 - `papers/SSV-I/data/y-junction-closed-asym-checkpoint-n24-hw6-200steps-2026-05-17.json`
 - `papers/SSV-I/data/y-junction-closed-asym-state-n24-hw6-200steps-2026-05-17.npz`
 - `papers/SSV-I/data/y-junction-closed-asym-checkpoint-n24-hw6-600steps-2026-05-17.json`

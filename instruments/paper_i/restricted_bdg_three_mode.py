@@ -8,7 +8,7 @@ from typing import Callable
 
 # Note (2026-05-30 cleanup): import of SSVScales removed; it was used only for
 # the fitted muon target `muon_ratio_draft = 0.207` (now quarantined in
-# src/_fitted_quarantine/). See papers/SSV-I/path-b-eigenvalue-result.md.
+# instruments/_fitted_quarantine/). See papers/SSV-I/path-b-eigenvalue-result.md.
 from restricted_bdg_matrix import build_background, i_mode
 from toroidal_projection_integrals import ProjectionConfig, integrate_pair, projection_window_weight
 

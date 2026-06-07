@@ -25,7 +25,7 @@ For each state and each R_geom definition, we report:
     1.18/0.85, applied to the per-state R_geom_profile)
   - Per-state n_y_straight, f_factor, mu_0_straight at each R
 
-Run: python proton_geometric_r_probe.py (from src/paper_i).
+Run: python proton_geometric_r_probe.py (from instruments/paper_i).
 """
 from __future__ import annotations
 

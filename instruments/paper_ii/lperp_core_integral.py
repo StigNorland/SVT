@@ -58,7 +58,7 @@ import sys
 
 import numpy as np
 
-sys.path.insert(0, "src/paper_i")
+sys.path.insert(0, "instruments/paper_i")
 from vortex_profile import VortexProfile  # noqa: E402 (path insert above)
 
 

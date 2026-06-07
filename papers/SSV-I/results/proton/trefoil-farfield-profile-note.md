@@ -10,14 +10,14 @@ Artifacts:
 Commands used:
 
 ```bash
-python src/paper_i/trefoil_breather_static.py \
+python instruments/paper_i/trefoil_breather_static.py \
   --n 20 \
   --half-width 5 \
   --max-steps 20 \
   --step-size 0.005 \
   --save-state papers/SSV-I/data/example-trefoil-state.npz
 
-python src/paper_i/trefoil_farfield_profile.py \
+python instruments/paper_i/trefoil_farfield_profile.py \
   papers/SSV-I/data/example-trefoil-state.npz \
   --bins 12 \
   --output papers/SSV-I/data/example-trefoil-farfield-profile.json

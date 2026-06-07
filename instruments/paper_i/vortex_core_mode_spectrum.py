@@ -5,7 +5,7 @@ and solves the radial Bogoliubov-de Gennes problem per azimuthal perturbation
 index m. Goal: enumerate the low-lying normal modes and their degeneracies, to
 test the "closed-shell, magic-number-8" hypothesis for lepton generations.
 
-Convention (matches src/paper_i/vortex_profile.py):
+Convention (matches instruments/paper_i/vortex_profile.py):
   EOM  i dt Psi = -1/2 lap Psi + ln(|Psi|^2) Psi      (mu = 0)
   profile: f'' + f'/r - f/r^2 - 2 f ln(f^2) = 0   (solved by VortexProfile)
 

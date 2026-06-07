@@ -1,6 +1,6 @@
 # Cubic-Vertex One-Loop Self-Energy: Result Note (2026-05-26)
 
-> **Status (2026-05-30): superseded by Path B null.** Numerical claims in this note about the muon eigenfrequency reaching $\omega/\omega_c = 0.207$, the $\delta_{\rm relax}$ calibration, the $\alpha$-harmonic ladder identification, or the $1/\sqrt{N_{\rm modes}}$ basis-truncation residual are now governed by `papers/SSV-I/path-b-eigenvalue-result.md`: that test showed the muon agreement is not basis-robust (drifts $\pm 13\%$ across 4 bases, empty window in 2 of 4) and the pion rung is absent in every basis. Structural sub-results that stand on their own (operator algebra, analytic derivations, the cubic-vertex one-loop result, dimensional setup) remain valid in isolation; what is superseded is their use as evidence for the ladder identification or as a closure path to it. Quarantined inputs: `src/_fitted_quarantine/`. Tracking: issue #66.
+> **Status (2026-05-30): superseded by Path B null.** Numerical claims in this note about the muon eigenfrequency reaching $\omega/\omega_c = 0.207$, the $\delta_{\rm relax}$ calibration, the $\alpha$-harmonic ladder identification, or the $1/\sqrt{N_{\rm modes}}$ basis-truncation residual are now governed by `papers/SSV-I/path-b-eigenvalue-result.md`: that test showed the muon agreement is not basis-robust (drifts $\pm 13\%$ across 4 bases, empty window in 2 of 4) and the pion rung is absent in every basis. Structural sub-results that stand on their own (operator algebra, analytic derivations, the cubic-vertex one-loop result, dimensional setup) remain valid in isolation; what is superseded is their use as evidence for the ladder identification or as a closure path to it. Quarantined inputs: `instruments/_fitted_quarantine/`. Tracking: issue #66.
 
 **Status:** prototype calculation complete, result is robust at small n.
 
@@ -9,7 +9,7 @@
 Building on the scoping memo
 [`muon-cubic-vertex-self-energy-memo.md`](muon-cubic-vertex-self-energy-memo.md),
 the script
-[`src/paper_i/muon_cubic_full_self_energy.py`](../../src/paper_i/muon_cubic_full_self_energy.py)
+[`instruments/paper_i/muon_cubic_full_self_energy.py`](../../instruments/paper_i/muon_cubic_full_self_energy.py)
 implements the full one-loop diagram from the LogSE cubic vertex:
 
   - Build the BdG matrix at the converged weak-form / combined-Kelvin /

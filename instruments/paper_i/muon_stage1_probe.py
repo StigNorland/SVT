@@ -19,7 +19,7 @@ Performs exactly the three pre-registered mechanical checks:
 No tuning. No parameter sweeps. No re-calibration. The output is the input to
 Stage 2 (separate pre-registration).
 
-Run: python muon_stage1_probe.py  (from src/paper_i)
+Run: python muon_stage1_probe.py  (from instruments/paper_i)
 """
 from __future__ import annotations
 

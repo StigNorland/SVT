@@ -8,7 +8,7 @@ the claimed parameter-free coupling; every other knob is the committed default.
 Result: the muon mode is basis-robust (0.2148 in every basis); the pion window
 is empty in every basis. See the result note for the full discussion.
 
-Run: python path_b_spectrum_probe.py   (from src/paper_i)
+Run: python path_b_spectrum_probe.py   (from instruments/paper_i)
 """
 from __future__ import annotations
 

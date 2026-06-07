@@ -4,7 +4,7 @@
 open conditional from [#87 B1](b1-muon-berry-phase.md): does the physical
 electron-torus eigenbundle sit in the winding regime (`|m| < 1`)?
 **Verdict: NO — the spin–orbit coupling |V| = 0 exactly for the IQV electron.
-Muon reverts to NUMERICAL COINCIDENCE.** Verification: `src/paper_i/
+Muon reverts to NUMERICAL COINCIDENCE.** Verification: `instruments/paper_i/
 spinor_bdg_coupling_audit.py`, `test_spinor_bdg_coupling_audit.py` (7 tests).
 
 ## Pre-registered decision rule (#91)

@@ -2,7 +2,7 @@
 
 **Date:** 2026-05-30. Outcome of the pre-registered test in
 `papers/SSV-I/proton-gate-iii-prereg.md` (scope reduced to iii-a per the
-2026-05-30 decision). Reproducer: `python src/paper_i/proton_gate_iii_probe.py`
+2026-05-30 decision). Reproducer: `python instruments/paper_i/proton_gate_iii_probe.py`
 (v2; v1 was invalid — see `proton-gate-iii-bug-note.md`). Authoritative raw
 data: `papers/SSV-I/data/gate-iii-results.json` (probe-level, valid) and the
 three `gate-iii-<label>-summary.json` files (relaxer-level diagnostics).
@@ -155,11 +155,11 @@ recalled numbers are unreliable; the file is the source of truth.
 
 - Pre-registration: `papers/SSV-I/proton-gate-iii-prereg.md`
 - Bug note (v1 invalid): `papers/SSV-I/proton-gate-iii-bug-note.md`
-- Probe (v2): `src/paper_i/proton_gate_iii_probe.py`
+- Probe (v2): `instruments/paper_i/proton_gate_iii_probe.py`
 - Raw data (ALL gitignored under `papers/SSV-I/data/`, regenerable by re-running
   the probe — not committed): `gate-iii-{REF,REPARAM,PERTURB}-summary.json`
   (relaxer output, authoritative) and `gate-iii-{REF,REPARAM,PERTURB}.npz`
   (relaxed fields). The probe's aggregate `gate-iii-results.json` was a
   transient artifact and is not retained.
-- Reproduce: `python src/paper_i/proton_gate_iii_probe.py` regenerates all of
+- Reproduce: `python instruments/paper_i/proton_gate_iii_probe.py` regenerates all of
   the above (~12 min at n=24).

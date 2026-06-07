@@ -23,7 +23,7 @@ Status: prototype.
 
 Run example:
 
-  python src/paper_i/muon_cubic_full_self_energy.py \
+  python instruments/paper_i/muon_cubic_full_self_energy.py \
       --n 31 --half-width 5 --profile-n 800 --kelvin-phi-n 128 --phi-samples 16
 """
 

@@ -55,7 +55,7 @@ off the formula.
 ## Reproducer
 
 ```bash
-.venv/bin/python src/paper_i/lepton_ring_static.py \
+.venv/bin/python instruments/paper_i/lepton_ring_static.py \
     --radii 1.0,8.0 --tube 0.85 --dx 0.125 --max-steps 8000 \
     --output papers/SSV-I/data/route-c-generation-minima-2026-06-05.json
 ```

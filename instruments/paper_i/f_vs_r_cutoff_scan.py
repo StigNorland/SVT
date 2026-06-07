@@ -14,10 +14,10 @@ Two acceptable outcomes:
 
 Usage
 -----
-python src/paper_i/f_vs_r_cutoff_scan.py  STATE [STATE ...]  [options]
+python instruments/paper_i/f_vs_r_cutoff_scan.py  STATE [STATE ...]  [options]
 
 Typical call:
-  python src/paper_i/f_vs_r_cutoff_scan.py  \\
+  python instruments/paper_i/f_vs_r_cutoff_scan.py  \\
     papers/SSV-I/data/penalty-mu400-rho0p01-n24-hw6-1600steps-2026-05-18.npz \\
     papers/SSV-I/data/penalty-best-n48-hw6-800steps-2026-05-19.npz \\
     papers/SSV-I/data/penalty-n72-mu2000-rho0p05-2026-05-19.npz \\

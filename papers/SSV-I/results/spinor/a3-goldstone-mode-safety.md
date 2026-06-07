@@ -5,7 +5,7 @@
 are electrically neutral, decouple from the U(1)/chiral-shear EM channel at
 linear order, and propagate no faster than `c⊥ = αc ≪ c`; the photon remains the
 unique massless transverse mode of the EM channel. Verification:
-`src/paper_i/cp1_safety_checks.py` (identity I4), `test_cp1_safety_checks.py`.
+`instruments/paper_i/cp1_safety_checks.py` (identity I4), `test_cp1_safety_checks.py`.
 
 ## The concern
 

@@ -8,8 +8,8 @@ The answer is **no**.
 
 Artifacts:
 
-- `src/paper_i/trefoil_breather_lperp_static.py`
-- `src/paper_i/lperp_helpers.py` (shared L_perp helpers)
+- `instruments/paper_i/trefoil_breather_lperp_static.py`
+- `instruments/paper_i/lperp_helpers.py` (shared L_perp helpers)
 - `papers/SSV-I/data/trefoil-lperp-lambda10-n24-hw6-800steps-2026-05-17.json`
 - `papers/SSV-I/data/trefoil-lperp-lambda10-n24-hw6-800steps-2026-05-17.npz`
 - `papers/SSV-I/data/trefoil-lperp-dissolution-sweep-n24-hw6-2026-05-17.json`

@@ -14,7 +14,7 @@ is correctly implemented.
 Both smooth and hard windows are swept to ensure the result is not a
 property of the window shape.
 
-Run: python muon_stage3_radial_window_probe.py  (from src/paper_i).
+Run: python muon_stage3_radial_window_probe.py  (from instruments/paper_i).
 ~10 spectrum solves per window type, ~minutes each.
 """
 from __future__ import annotations

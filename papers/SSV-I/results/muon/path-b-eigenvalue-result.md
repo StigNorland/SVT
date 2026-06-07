@@ -2,8 +2,8 @@
 
 **Date:** 2026-05-30. Outcome of the pre-registered test in
 `path-b-eigenvalue-prereg.md`. Authoritative drivers: the committed
-`src/paper_i/harmonic_ladder_spectrum.py` (`--show-all` / `--all-eigs`, no
-tuning) and `src/paper_i/path_b_spectrum_probe.py` (basis-robustness sweep).
+`instruments/paper_i/harmonic_ladder_spectrum.py` (`--show-all` / `--all-eigs`, no
+tuning) and `instruments/paper_i/path_b_spectrum_probe.py` (basis-robustness sweep).
 The probe result below was reproduced by four independent runs in agreement.
 
 > Correction log (full transparency, since this whole exercise is about not

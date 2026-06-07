@@ -6,7 +6,7 @@ the stabilisation of `N_Y = 3.007` and `F = 4.47` to.
 
 Artifacts:
 
-- `src/paper_i/trefoil_y_junction_closed_asym_lperp_static.py`
+- `instruments/paper_i/trefoil_y_junction_closed_asym_lperp_static.py`
 - `papers/SSV-I/data/y-junction-closed-asym-lperp-lambda10-n24-hw6-200steps-2026-05-17.npz`
 - `papers/SSV-I/data/y-junction-closed-asym-lperp-lambda10-n24-hw6-200steps-2026-05-17.json`
 - `papers/SSV-I/data/y-junction-closed-asym-lperp-sweep-n24-hw6-200steps-2026-05-17.json`

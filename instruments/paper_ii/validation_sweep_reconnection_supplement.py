@@ -3,7 +3,7 @@
 Status: validation
 Problem type: dynamic
 Primary role: issue #16 dynamic-side baseline -- sweep grid n, box length,
-and timestep dt for src/paper_ii/reconnection_supplement.py at fixed
+and timestep dt for instruments/paper_ii/reconnection_supplement.py at fixed
 lambda_perp and topology, and record which of {saddle_excess, cap_radius,
 cos_phi} are stable and which drift materially under each axis.
 

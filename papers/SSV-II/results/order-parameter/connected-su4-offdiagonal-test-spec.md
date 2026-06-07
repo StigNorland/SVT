@@ -39,7 +39,7 @@ question:
      **PARTIAL** — report which subgroup is realised.
 
 These reuse, not reinvent: `lie_closure` (already returns 3 for the kinematic case),
-and the #76 `chiral_overlap` bridge pattern (`src/paper_i/chiral_bridge_projection.py`),
+and the #76 `chiral_overlap` bridge pattern (`instruments/paper_i/chiral_bridge_projection.py`),
 which already encodes how a dynamical operator's matrix element between two modes
 either survives or vanishes by an azimuthal selection rule.
 
@@ -111,7 +111,7 @@ recurring fork.
 |---|---|
 | Lie-algebra dimension of realised generators | `lie_closure` (`su3_y_junction` / re-exported) |
 | off-diagonal generators, Cartan, B−L | `su4_junction_chirality_closure.{su4_cartan_generators,b_minus_L_direction}` |
-| dynamical bridge matrix element + selection-rule structure | `src/paper_i/chiral_bridge_projection.py` (`chiral_overlap`, `current_variation_m`) |
+| dynamical bridge matrix element + selection-rule structure | `instruments/paper_i/chiral_bridge_projection.py` (`chiral_overlap`, `current_variation_m`) |
 | multi-component shared-ρ functional + L_perp lift | `lr-su4-logse-spec.md`; `lperp_helpers.py` |
 | 3D relaxer (only if the cheap route is positive/inconclusive) | `trefoil_gradient_flow_static.py`, `gradient_flow_numba.py` |
 

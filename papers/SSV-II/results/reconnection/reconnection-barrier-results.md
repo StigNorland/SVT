@@ -7,7 +7,7 @@ This note records the current 3D LogSE/GPE reconnection-barrier checks for Paper
 The reproducible supplement script is:
 
 ```bash
-python src/paper_ii_reconnection_supplement.py --lambda-perp 0 --lambda-perp 1 --lambda-perp 10 --lambda-perp 100 --output papers/SSV-II/data/example_sweep.csv
+python instruments/paper_ii_reconnection_supplement.py --lambda-perp 0 --lambda-perp 1 --lambda-perp 10 --lambda-perp 100 --output papers/SSV-II/data/example_sweep.csv
 ```
 
 It generates opposite-topology and same-topology vortex-ring reconnection paths, evolves them with a split-step LogSE/GPE solver, includes the chiral-shear stiffness as a spectral `lambda_perp * k^4` term, and extracts:

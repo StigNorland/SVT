@@ -202,5 +202,5 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.path.insert(0, "src/paper_i")
+    sys.path.insert(0, "instruments/paper_i")
     main()

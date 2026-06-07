@@ -1,6 +1,6 @@
 # #77 Track 2: resolution convergence ladder n=96–192 (2026-06-03)
 
-**Script:** `src/paper_i/trefoil_gradient_flow_static.py` (numba-accelerated)
+**Script:** `instruments/paper_i/trefoil_gradient_flow_static.py` (numba-accelerated)
 **Method:** Gradient flow at n=96, 128 from fresh start; n=160, 192 via spectral
 regrid from the next-coarser converged state (`--regrid-from`).
 **Extraction:** `trefoil_breather_observables` at R_cutoff = 1.18 ξ,

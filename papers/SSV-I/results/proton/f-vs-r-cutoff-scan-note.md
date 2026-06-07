@@ -1,6 +1,6 @@
 # F-vs-R Cutoff Scan: No Plateau, Honest Systematic (2026-05-19)
 
-Script: `src/paper_i/f_vs_r_cutoff_scan.py`
+Script: `instruments/paper_i/f_vs_r_cutoff_scan.py`
 States: n=24 (hw=6), n=48 (hw=6), n=72 (hw=6)
 Calibration: straight-vortex tension, `anchor_thickness_xi = 1.0`
 

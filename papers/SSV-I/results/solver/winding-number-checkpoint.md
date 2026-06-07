@@ -8,7 +8,7 @@ depressions can persist without any phase winding around them.
 
 ## What was implemented
 
-`src/paper_i/topology_helpers.py` — `count_vortex_links(psi)`:
+`instruments/paper_i/topology_helpers.py` — `count_vortex_links(psi)`:
 lattice plaquette phase-winding counter (|W| > pi on each xy/xz/yz face).
 12 unit tests, all passing (incl. clean single straight vortex giving exactly
 N_z links at n=24, dx=0.5xi — so the method works correctly at this resolution

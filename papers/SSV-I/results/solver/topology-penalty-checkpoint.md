@@ -7,7 +7,7 @@ few steps; the deep `min_rho` was a density inhomogeneity, not a vortex.
 
 ## The penalty term
 
-`src/paper_i/topology_penalty.py`:
+`instruments/paper_i/topology_penalty.py`:
 
 ```
 E_penalty(psi) = mu * sum_i mask_i * max(rho_i - rho_target, 0)^2 * dx^3
@@ -28,7 +28,7 @@ Variational gradient (matches the existing per-cell convention):
 delta E / delta psi^*(x) = 2 * mu * mask * max(rho - rho_target, 0) * psi
 ```
 
-Unit tests: `src/paper_i/test_topology_penalty.py` (10 tests, all passing),
+Unit tests: `instruments/paper_i/test_topology_penalty.py` (10 tests, all passing),
 including a numerical finite-difference gradient check vs the analytical form.
 
 ## Headline result

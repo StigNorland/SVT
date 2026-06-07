@@ -5,7 +5,7 @@ silently mistaken for data.
 
 ## What happened
 
-The first version of `src/paper_i/proton_gate_iii_probe.py` was intended to
+The first version of `instruments/paper_i/proton_gate_iii_probe.py` was intended to
 relax the trefoil-breather from five differently-seeded initial conditions
 (REF (2,3), REPARAM (3,2), PERTURB (2,3 perturbed), FIVEKNOT (2,5),
 SEVENKNOT (2,7)) and compare the converged states. The run completed with

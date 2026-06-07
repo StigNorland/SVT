@@ -9,7 +9,7 @@ This directory contains numerical support material for Paper II.
 - `reconnection-barrier-results.md` — 3D GPE reconnection-barrier checks (W/Z topology).
 - `data/` — curated CSV tables referenced by the reconnection-barrier note.
 
-## Scripts (`src/paper_ii/`)
+## Scripts (`instruments/paper_ii/`)
 
 | Script | Topic | Status |
 |---|---|---|

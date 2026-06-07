@@ -1,6 +1,6 @@
 # Thin-Ring Muon Matrix Element: Feasibility Memo (revised 2026-05-19)
 
-> **Status (2026-05-30): superseded by Path B null.** Numerical claims in this note about the muon eigenfrequency reaching $\omega/\omega_c = 0.207$, the $\delta_{\rm relax}$ calibration, the $\alpha$-harmonic ladder identification, or the $1/\sqrt{N_{\rm modes}}$ basis-truncation residual are now governed by `papers/SSV-I/path-b-eigenvalue-result.md`: that test showed the muon agreement is not basis-robust (drifts $\pm 13\%$ across 4 bases, empty window in 2 of 4) and the pion rung is absent in every basis. Structural sub-results that stand on their own (operator algebra, analytic derivations, the cubic-vertex one-loop result, dimensional setup) remain valid in isolation; what is superseded is their use as evidence for the ladder identification or as a closure path to it. Quarantined inputs: `src/_fitted_quarantine/`. Tracking: issue #66.
+> **Status (2026-05-30): superseded by Path B null.** Numerical claims in this note about the muon eigenfrequency reaching $\omega/\omega_c = 0.207$, the $\delta_{\rm relax}$ calibration, the $\alpha$-harmonic ladder identification, or the $1/\sqrt{N_{\rm modes}}$ basis-truncation residual are now governed by `papers/SSV-I/path-b-eigenvalue-result.md`: that test showed the muon agreement is not basis-robust (drifts $\pm 13\%$ across 4 bases, empty window in 2 of 4) and the pion rung is absent in every basis. Structural sub-results that stand on their own (operator algebra, analytic derivations, the cubic-vertex one-loop result, dimensional setup) remain valid in isolation; what is superseded is their use as evidence for the ladder identification or as a closure path to it. Quarantined inputs: `instruments/_fitted_quarantine/`. Tracking: issue #66.
 
 **Purpose.** This memo records the feasibility status of the thin-ring analytic
 closure of the muon eigenfrequency. The original version asked whether the
@@ -174,7 +174,7 @@ The important distinction is:
 ### 6.1 PC-sized first checks
 
 The first finite-alpha diagnostics have now been added as
-[`../../src/paper_i/thin_ring_alpha_correction.py`](../../src/paper_i/thin_ring_alpha_correction.py).
+[`../../instruments/paper_i/thin_ring_alpha_correction.py`](../../instruments/paper_i/thin_ring_alpha_correction.py).
 The script checks two PC-sized pieces of the finite-alpha problem:
 
 1. the angular part of straight-core metric/Jacobian corrections of the form
@@ -191,7 +191,7 @@ The script checks two PC-sized pieces of the finite-alpha problem:
 It also has an optional finite-alpha scan:
 
 ```powershell
-python src/paper_i/thin_ring_alpha_correction.py --finite-alpha-scan
+python instruments/paper_i/thin_ring_alpha_correction.py --finite-alpha-scan
 ```
 
 This reuses the existing normalized current-curl overlap machinery and varies
@@ -200,15 +200,15 @@ scan uses the toy profile; the aligned scan uses the numerical LogSE vortex
 profile:
 
 ```powershell
-python src/paper_i/thin_ring_alpha_correction.py --finite-alpha-scan --scan-profile numerical --scan-profile-n 800
+python instruments/paper_i/thin_ring_alpha_correction.py --finite-alpha-scan --scan-profile numerical --scan-profile-n 800
 ```
 
 The same command can deliberately turn on the repository's curved-background
 ansatz, for example:
 
 ```powershell
-python src/paper_i/thin_ring_alpha_correction.py --finite-alpha-scan --scan-curvature-coeffs "1,0,0"
-python src/paper_i/thin_ring_alpha_correction.py --finite-alpha-scan --scan-phase-coeffs "1,0,0"
+python instruments/paper_i/thin_ring_alpha_correction.py --finite-alpha-scan --scan-curvature-coeffs "1,0,0"
+python instruments/paper_i/thin_ring_alpha_correction.py --finite-alpha-scan --scan-phase-coeffs "1,0,0"
 ```
 
 The result is:
@@ -319,21 +319,21 @@ coefficient set was fed through the finite-alpha bridge scan with the numerical
 BdG radial profile.
 
 ```powershell
-python src/paper_i/thin_ring_delta_relax_sweep.py `
+python instruments/paper_i/thin_ring_delta_relax_sweep.py `
   --grids 25 31 `
   --half-widths 5 6 `
   --profile-ns 800 `
   --fd-steps 0.25 `
   --output papers/SSV-I/data/delta-relax-sweep-numerical-profile-smoke-2026-05-20.json
 
-python src/paper_i/thin_ring_delta_relax_sweep.py `
+python instruments/paper_i/thin_ring_delta_relax_sweep.py `
   --grids 31 `
   --half-widths 5 6 `
   --profile-ns 800 1200 `
   --fd-steps 0.20 0.25 0.30 `
   --output papers/SSV-I/data/delta-relax-sweep-numerical-profile-fd-profile-2026-05-20.json
 
-python src/paper_i/thin_ring_delta_relax_sweep.py `
+python instruments/paper_i/thin_ring_delta_relax_sweep.py `
   --grids 37 `
   --half-widths 5 6 `
   --profile-ns 800 `

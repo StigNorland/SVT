@@ -2,7 +2,7 @@
 
 **Date:** 2026-05-30. Outcome of the pre-registered test in
 `papers/SSV-I/muon-stage2-prereg.md`. Reproduction:
-`python src/paper_i/muon_stage2_probe.py` (committed defaults, no tuning,
+`python instruments/paper_i/muon_stage2_probe.py` (committed defaults, no tuning,
 ~15 min total).
 
 ## One-line verdict
@@ -146,6 +146,6 @@ done now without further computation.
 ## Files
 
 - Pre-registration: `papers/SSV-I/muon-stage2-prereg.md` (commit 2441e2e)
-- Probe: `src/paper_i/muon_stage2_probe.py` (commit 2441e2e)
+- Probe: `instruments/paper_i/muon_stage2_probe.py` (commit 2441e2e)
 - Sweep output: 857 seconds of compute time on the local machine
   (4 + 5 + 4 = 13 spectrum solves, each ~30-170 s depending on n)

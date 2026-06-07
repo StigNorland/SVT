@@ -185,7 +185,7 @@ def main() -> None:
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("src/paper_viii/relaxing_rho0_cosmology_results.json"),
+        default=Path("instruments/paper_viii/relaxing_rho0_cosmology_results.json"),
     )
     args = parser.parse_args()
 

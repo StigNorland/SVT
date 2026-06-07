@@ -25,7 +25,7 @@ The implemented model:
 - writes CSV rows for opposite and same topology sweeps.
 
 Example:
-    python src/paper_ii/reconnection_supplement.py --n 32 --length 18 \
+    python instruments/paper_ii/reconnection_supplement.py --n 32 --length 18 \
         --lambda-perp 0 --lambda-perp 1 --lambda-perp 10 --lambda-perp 100 \
         --output papers/SSV-II/data/example_sweep.csv
 """

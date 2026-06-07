@@ -32,7 +32,7 @@ was "inadvertently compensating" for that drift.
 Status on the live branch (after PR #67 merge to main):
 
 - The selection-rule violation is still present in
-  `src/paper_i/kelvin_augmented_bdg.py` (see the long honest comment at
+  `instruments/paper_i/kelvin_augmented_bdg.py` (see the long honest comment at
   L454-L470 of that file).
 - The previous calibration $\delta_{\rm relax} = +0.038$ that pulled
   $\lambda_\perp = (\pi/4)(1+\delta_{\rm relax})$ to land near $0.207$ is NOT
@@ -45,7 +45,7 @@ Status on the live branch (after PR #67 merge to main):
 
 ## The one operator change
 
-In `src/paper_i/kelvin_augmented_bdg.py`, function
+In `instruments/paper_i/kelvin_augmented_bdg.py`, function
 `hermitian_current_curl_bdg_blocks` (around L447): add an early return at
 function entry when the two modes carry different azimuthal quantum numbers:
 

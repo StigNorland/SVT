@@ -40,7 +40,7 @@ those workstreams move to closure-grade runs, they should import:
 - ``Nondimensionalisation`` -- to declare the run's unit system and so
   catch unit mismatches between collaborating scripts;
 - ``GridSpec`` -- the basic Cartesian grid description used by every
-  static-branch prototype script in ``src/paper_i/``;
+  static-branch prototype script in ``instruments/paper_i/``;
 - ``RelaxationControls`` -- the static gradient-flow controls including
   the topology-preservation knobs that were the key #13 development;
 - ``StaticDiagnostics`` / ``DynamicDiagnostics`` -- to advertise which

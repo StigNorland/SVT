@@ -6,7 +6,7 @@ existing `(2,3)`-trefoil-knot relaxed states produced by
 
 Artifacts:
 
-- `src/paper_i/trefoil_breather_observables.py`
+- `instruments/paper_i/trefoil_breather_observables.py`
 - `papers/SSV-I/data/trefoil-breather-observables-n48-hw5-400steps-2026-05-17.json`
 
 ## What The Extractor Does

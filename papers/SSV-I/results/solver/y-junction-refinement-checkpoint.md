@@ -4,7 +4,7 @@ This note records the first grid + box sensitivity sweep for the open three-pron
 
 Artifacts:
 
-- `src/paper_i/trefoil_y_junction_refinement.py` (sweep harness)
+- `instruments/paper_i/trefoil_y_junction_refinement.py` (sweep harness)
 - `papers/SSV-I/data/y-junction-refinement-2026-05-17.json` (main 3x3 sweep)
 - `papers/SSV-I/data/y-junction-refinement-n48-hw8-2026-05-17.json` (hw=8 box-extension run)
 - `papers/SSV-I/data/y-junction-refinement-fixedcal-2026-05-17.json` (fixed-slab re-extraction for cross-box calibration sanity check)

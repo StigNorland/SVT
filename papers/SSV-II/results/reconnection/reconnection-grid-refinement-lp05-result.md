@@ -2,7 +2,7 @@
 
 **Status:** result note for
 [issue #15](https://github.com/StigNorland/SVT/issues/15), closure items 1–3.
-Reproducer: `python src/paper_ii/reconnection_grid_refinement.py`
+Reproducer: `python instruments/paper_ii/reconnection_grid_refinement.py`
 Data: `papers/SSV-II/data/reconnection-grid-refinement-lp05-2026-06-02.json`
 
 ## What was done

@@ -17,7 +17,7 @@ at r_core = a_p = m_e/m_p (in units of xi). Produces two results:
 
    The calculation shows that the Paper II analytical estimate gives
    alpha_G ~ 1.6e-33, a factor ~3e5 above CODATA (5.9e-39).  This residual
-   factor is the open problem for the 3D trefoil calculation (src/paper_i/).
+   factor is the open problem for the 3D trefoil calculation (instruments/paper_i/).
 
 Paper II reference: §Gravity, eqs. (G_from_medium), (Qp), (G_ladder).
 
@@ -234,7 +234,7 @@ def main() -> None:
     print(f"  The Paper II analytical estimate overestimates alpha_G by")
     print(f"  {resB['ratio']:.2e} (factor ~{resB['ratio']:.0e}).")
     print(f"  This is the geometric form-factor gap that the 3D trefoil")
-    print(f"  profile (src/paper_i/) must supply.")
+    print(f"  profile (instruments/paper_i/) must supply.")
     print()
 
     # ── 4. Summary table ──────────────────────────────────────────────────
@@ -262,7 +262,7 @@ def main() -> None:
     print(f"  V0 = (4/3)pi a_p^3.  The 3D trefoil topology concentrates the")
     print(f"  knotted core into a smaller effective acoustic cross-section,")
     print(f"  providing the missing geometric suppression.")
-    print(f"  Open calculation: 3D proton breather profile -> src/paper_i/.")
+    print(f"  Open calculation: 3D proton breather profile -> instruments/paper_i/.")
 
 
 if __name__ == "__main__":

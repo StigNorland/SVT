@@ -12,7 +12,7 @@ than treating the current timing limits as a numerical conclusion.
 New probe:
 
 ```bash
-python src/paper_i/muon_issue73_phi_bdg_probe.py
+python instruments/paper_i/muon_issue73_phi_bdg_probe.py
 ```
 
 The probe implements the narrow issue #73 diagnostic:
@@ -37,7 +37,7 @@ larger basis refinement.
 ### Compile
 
 ```bash
-python -m py_compile src/paper_i/muon_issue73_phi_bdg_probe.py
+python -m py_compile instruments/paper_i/muon_issue73_phi_bdg_probe.py
 ```
 
 Passed.
@@ -45,7 +45,7 @@ Passed.
 ### No-`L_perp` smoke
 
 ```bash
-python src/paper_i/muon_issue73_phi_bdg_probe.py --n-values 7 --half-width 8 --window hard --window-radius 3 --profile-n 300 --skip-lperp
+python instruments/paper_i/muon_issue73_phi_bdg_probe.py --n-values 7 --half-width 8 --window hard --window-radius 3 --profile-n 300 --skip-lperp
 ```
 
 Output:
@@ -69,7 +69,7 @@ Receipts:
 ### Tiny `L_perp` smoke
 
 ```bash
-python src/paper_i/muon_issue73_phi_bdg_probe.py --n-values 7 --half-width 8 --window hard --window-radius 3 --profile-n 300
+python instruments/paper_i/muon_issue73_phi_bdg_probe.py --n-values 7 --half-width 8 --window hard --window-radius 3 --profile-n 300
 ```
 
 Output:
@@ -83,7 +83,7 @@ Receipts again pass at machine precision.
 ### Matched issue #72-style point
 
 ```bash
-python src/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9 --half-width 8 --window hard --window-radius 4 --profile-n 500
+python instruments/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9 --half-width 8 --window hard --window-radius 4 --profile-n 500
 ```
 
 Completed in roughly 135 seconds on the i5.
@@ -107,7 +107,7 @@ Receipts:
 ### Resolution/window companion points
 
 ```bash
-python src/paper_i/muon_issue73_phi_bdg_probe.py --n-values 7 --half-width 8 --window hard --window-radius 4 --profile-n 500
+python instruments/paper_i/muon_issue73_phi_bdg_probe.py --n-values 7 --half-width 8 --window hard --window-radius 4 --profile-n 500
 ```
 
 | `n` | `hw` | `r_w` | cells | matrix | lowest | second | third |
@@ -115,7 +115,7 @@ python src/paper_i/muon_issue73_phi_bdg_probe.py --n-values 7 --half-width 8 --w
 | 7 | 8 | 4 | 9 | 36 | 0.563063 | 0.580579 | 0.679763 |
 
 ```bash
-python src/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9 --half-width 8 --window hard --window-radius 3 --profile-n 500
+python instruments/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9 --half-width 8 --window hard --window-radius 3 --profile-n 500
 ```
 
 | `n` | `hw` | `r_w` | cells | matrix | lowest | second | third |
@@ -123,7 +123,7 @@ python src/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9 --half-width 8 --w
 | 9 | 8 | 3 | 9 | 36 | 0.702954 | 0.752617 | 0.859164 |
 
 ```bash
-python src/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9 --half-width 8 --window hard --window-radius 4 --profile-n 500 --skip-lperp
+python instruments/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9 --half-width 8 --window hard --window-radius 4 --profile-n 500 --skip-lperp
 ```
 
 | `n` | `hw` | `r_w` | cells | matrix | lowest | second | third |
@@ -135,13 +135,13 @@ python src/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9 --half-width 8 --w
 These were too expensive on the old i5:
 
 ```bash
-python src/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9,11,13 --half-width 8 --window hard --window-radius 4 --profile-n 500
+python instruments/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9,11,13 --half-width 8 --window hard --window-radius 4 --profile-n 500
 ```
 
 Timed out after 5 minutes before printing results.
 
 ```bash
-python src/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9 --half-width 6 --window hard --window-radius 3 --profile-n 500
+python instruments/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9 --half-width 6 --window hard --window-radius 3 --profile-n 500
 ```
 
 Timed out at 2 minutes and was later stopped.
@@ -173,29 +173,29 @@ this remains true after modest refinement.
 Start with the same exact commands to confirm reproducibility:
 
 ```bash
-python -m py_compile src/paper_i/muon_issue73_phi_bdg_probe.py
-python src/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9 --half-width 8 --window hard --window-radius 4 --profile-n 500
+python -m py_compile instruments/paper_i/muon_issue73_phi_bdg_probe.py
+python instruments/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9 --half-width 8 --window hard --window-radius 4 --profile-n 500
 ```
 
 Then run a practical refinement ladder:
 
 ```bash
-python src/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9,11,13 --half-width 8 --window hard --window-radius 4 --profile-n 500
-python src/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9,11 --half-width 8 --window hard --window-radius 3 --profile-n 500
-python src/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9,11 --half-width 8 --window hard --window-radius 5 --profile-n 500
+python instruments/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9,11,13 --half-width 8 --window hard --window-radius 4 --profile-n 500
+python instruments/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9,11 --half-width 8 --window hard --window-radius 3 --profile-n 500
+python instruments/paper_i/muon_issue73_phi_bdg_probe.py --n-values 9,11 --half-width 8 --window hard --window-radius 5 --profile-n 500
 ```
 
 Then test the current-curl model sensitivity:
 
 ```bash
-python src/paper_i/muon_issue73_phi_bdg_probe.py --n-values 7,9 --half-width 8 --window hard --window-radius 4 --profile-n 500 --current-curl-model full
-python src/paper_i/muon_issue73_phi_bdg_probe.py --n-values 11 --half-width 8 --window hard --window-radius 4 --profile-n 500 --skip-lperp
+python instruments/paper_i/muon_issue73_phi_bdg_probe.py --n-values 7,9 --half-width 8 --window hard --window-radius 4 --profile-n 500 --current-curl-model full
+python instruments/paper_i/muon_issue73_phi_bdg_probe.py --n-values 11 --half-width 8 --window hard --window-radius 4 --profile-n 500 --skip-lperp
 ```
 
 If `n=13` is practical on the i7, try one higher point:
 
 ```bash
-python src/paper_i/muon_issue73_phi_bdg_probe.py --n-values 15 --half-width 8 --window hard --window-radius 4 --profile-n 500
+python instruments/paper_i/muon_issue73_phi_bdg_probe.py --n-values 15 --half-width 8 --window hard --window-radius 4 --profile-n 500
 ```
 
 ## Implementation cautions for the next session

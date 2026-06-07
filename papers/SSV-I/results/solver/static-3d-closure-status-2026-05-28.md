@@ -12,7 +12,7 @@ the static branch of Paper II.
 
 The static-branch pipeline consumes the trefoil-knot relaxation state
 produced by `trefoil_breather_lperp_krylov_static.py` (with the topology
-penalty enabled, `src/paper_i/topology_penalty.py`) and reports the
+penalty enabled, `instruments/paper_i/topology_penalty.py`) and reports the
 following observables. Each is computed by an identified script and
 saved to a state or checkpoint file under `papers/SSV-I/data/`.
 
@@ -29,9 +29,9 @@ saved to a state or checkpoint file under `papers/SSV-I/data/`.
 | Solver diagnostics | grid / box sensitivity flags | `trefoil_breather_refinement.py` | refinement-sweep JSONs |
 
 Machine-readable spec lives in
-`src/paper_i/trefoil_breather_observables.py` :: `ExtractionSummary`
+`instruments/paper_i/trefoil_breather_observables.py` :: `ExtractionSummary`
 (31 fields) and in the shared `StaticDiagnostics` dataclass from
-`src/shared_numerics/static_branch.py`.
+`instruments/shared_numerics/static_branch.py`.
 
 ## 2. Convergence and tolerance status
 

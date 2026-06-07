@@ -1,7 +1,7 @@
 # Toroidal form-factor loop integral — numerical results (issue #33)
 
 Date: 2026-05-28; closure context updated 2026-06-06
-Script: `src/paper_ii/g2_form_factor_loop.py`
+Script: `instruments/paper_ii/g2_form_factor_loop.py`
 
 ## Reduction
 

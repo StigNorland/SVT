@@ -25,7 +25,7 @@ Usage
 Default sweep is a 12-point representative grid; use --grids / --half-widths
 / --profile-ns / --fd-steps to customize.
 
-  python src/paper_i/thin_ring_delta_relax_sweep.py \\
+  python instruments/paper_i/thin_ring_delta_relax_sweep.py \\
       --output papers/SSV-I/data/delta-relax-sweep.json
 """
 

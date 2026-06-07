@@ -19,17 +19,17 @@ main.
 | Issue | Paper                                | What was closed                                                      | Receipts |
 |-------|--------------------------------------|----------------------------------------------------------------------|----------|
 | #31   | SSV-I §The Neutron                   | Neutron as surface-locked composite $\mathcal{N} = \mathcal{T} \cup_{\Sigma_p} \mathcal{E}$, structural | paper text |
-| #33   | SSV-II §3                            | Toroidal form-factor reduced to contact-term vertex; Schwinger $\alpha/(2\pi)$ recovered exactly at one loop | `src/paper_ii/g2_form_factor_loop.py` |
+| #33   | SSV-II §3                            | Toroidal form-factor reduced to contact-term vertex; Schwinger $\alpha/(2\pi)$ recovered exactly at one loop | `instruments/paper_ii/g2_form_factor_loop.py` |
 | #34   | SSV-II §Higgs                        | $m_p/m_{\pi^\pm} = N_Y F / 2$ structural composite mass ratio        | paper text |
 | #35   | SSV-II §CP                           | Neutron EDM derived from reconnection-memory mechanism, structural   | paper text |
 | #36   | SSV-II §Neutrinos                    | Speculative spectrum demoted with five explicit falsifiers           | paper text |
-| #37   | SSV-II §Tau                          | Tau identified as Hopf-linked trefoil pair bound by a muon quantum   | `src/paper_ii/tau_identification.py` |
+| #37   | SSV-II §Tau                          | Tau identified as Hopf-linked trefoil pair bound by a muon quantum   | `instruments/paper_ii/tau_identification.py` |
 | #40   | SSV-V §6                             | Planck-scale evaporation endpoint is a stable topological remnant    | paper text |
-| #42   | SSV-VI-a §4.4                        | First-principles closed form $\mathcal{C} = \hbar N_p^9 / (2 \alpha_G c \alpha^{25})$ | `src/paper_vi_a/derive_C.py` |
-| #43   | SSV-VI-b §3.2                        | Quantitative $\varepsilon_m(a_{\rm BH})$ table from Hansen–Geroch multipole expansion | `src/paper_vi_b/epsilon_m_table.py` |
-| #44   | SSV-VI-b §4.1                        | Mestel-soliton Lin–Shu dispersion → $\tan\alpha_m = mQ/4$, Seigar–Davis pitch-$M_{\rm BH}$ anti-correlation reproduced | `src/paper_vi_b/pitch_angle_table.py` |
-| #49   | SSV-VII-b §6                         | Strong-field numerical verification of the SSV-identified metric     | `src/paper_vii_b/strong_field_test.py` |
-| #50   | SSV-VIII §C1                         | Prediction C1 promoted to structural with numerical evidence (KZ GPE scan, fitted 2D exponent $0.23 \pm 0.10$) | `src/paper_viii/kibble_zurek_gpe.py` |
+| #42   | SSV-VI-a §4.4                        | First-principles closed form $\mathcal{C} = \hbar N_p^9 / (2 \alpha_G c \alpha^{25})$ | `instruments/paper_vi_a/derive_C.py` |
+| #43   | SSV-VI-b §3.2                        | Quantitative $\varepsilon_m(a_{\rm BH})$ table from Hansen–Geroch multipole expansion | `instruments/paper_vi_b/epsilon_m_table.py` |
+| #44   | SSV-VI-b §4.1                        | Mestel-soliton Lin–Shu dispersion → $\tan\alpha_m = mQ/4$, Seigar–Davis pitch-$M_{\rm BH}$ anti-correlation reproduced | `instruments/paper_vi_b/pitch_angle_table.py` |
+| #49   | SSV-VII-b §6                         | Strong-field numerical verification of the SSV-identified metric     | `instruments/paper_vii_b/strong_field_test.py` |
+| #50   | SSV-VIII §C1                         | Prediction C1 promoted to structural with numerical evidence (KZ GPE scan, fitted 2D exponent $0.23 \pm 0.10$) | `instruments/paper_viii/kibble_zurek_gpe.py` |
 
 ## Per-closure detail
 
@@ -62,10 +62,10 @@ momentum-space form factor. Schwinger's $\alpha/(2\pi)$ is recovered
 exactly at one loop; SSV-specific deviations would have to come from
 intrinsic structure of the bare sector, not from a classical extent.
 
-`src/paper_ii/g2_form_factor_loop.py` reduces the one-loop integral
+`instruments/paper_ii/g2_form_factor_loop.py` reduces the one-loop integral
 numerically, verifies the Schwinger normalisation to $3 \times 10^{-10}$,
 and scans five form-factor families to confirm robustness.  The regression
-tests in `src/paper_ii/test_g2_form_factor_loop.py` pin the three closure
+tests in `instruments/paper_ii/test_g2_form_factor_loop.py` pin the three closure
 claims: contact vertex equals Schwinger, $J_0(kR^*)$ removes almost all of
 Schwinger, and the constant/topological vertex is scale-independent.
 
@@ -85,7 +85,7 @@ records that $F \approx 4.47$ is a cutoff-dependent calibration
 ($\mathrm{d}\ln F/\mathrm{d}\ln R \approx -0.94$, $19\%$ variation
 between $R=1.18\,\xi$ and $R=1.5\,\xi$); the `q_p_two_factor_*`
 scripts that attempted to calibrate the cutoff away are now in
-`src/_fitted_quarantine/`. The structural form $N_Y F / 2$ is
+`instruments/_fitted_quarantine/`. The structural form $N_Y F / 2$ is
 unchanged, but the numerical $6.72$ and the $13.44$ in the consistency
 identity inherit this calibration and are not yet cutoff-independent
 first-principles values. The earlier wording "without fitting" was
@@ -142,7 +142,7 @@ minimisation on the two-component link (Borromean-class extension of
 the trefoil computation already in Paper I), the same workstream that
 closes the muon eigenfrequency (Paper I open problem 2).
 
-`src/paper_ii/tau_identification.py` reproduces the three predictions
+`instruments/paper_ii/tau_identification.py` reproduces the three predictions
 and their discrepancies.
 
 *Note (2026-05-30 cleanup, issue #66):* `tau_identification.py` uses
@@ -182,7 +182,7 @@ $$\mathcal{C} = \frac{\hbar N_p^9}{2 \alpha_G c \alpha^{25}},$$
 which uses only the SSV-II constant set $\{\hbar, c, \alpha, \alpha_G, N_p\}$
 and matches the weighted multi-galaxy observed value at $-1.5\%$.
 
-`src/paper_vi_a/derive_C.py` prints all three equivalent forms and the
+`instruments/paper_vi_a/derive_C.py` prints all three equivalent forms and the
 comparison with the observed $1.808 \times 10^9$ kpc·$M_\odot$.
 
 ### #43 — Mode amplitudes $\varepsilon_m(a_{\rm BH})$
@@ -196,7 +196,7 @@ from the Paper VI-a M31 fit. The tabulated values for $a_{\rm BH} \in [0.1, 0.99
 and $m \in [1, 5]$ reproduce the ring → grand-design → flocculent
 morphology sequence.
 
-`src/paper_vi_b/epsilon_m_table.py` prints the table in the paper.
+`instruments/paper_vi_b/epsilon_m_table.py` prints the table in the paper.
 
 ### #44 — Pitch-angle dispersion
 
@@ -212,7 +212,7 @@ $M_{\rm BH}$-dependence and reproduces the Seigar–Davis pitch-$M_{\rm BH}$
 anti-correlation: predicted $\alpha_2$ spans $3°$–$30°$ for grand-design
 spirals and $> 45°$ in the bar regime.
 
-`src/paper_vi_b/pitch_angle_table.py` prints the six-galaxy anchor table
+`instruments/paper_vi_b/pitch_angle_table.py` prints the six-galaxy anchor table
 including M31 ($\alpha_2 = 18°$) and the Milky Way ($\alpha_2 = 58°$,
 bar regime).
 
@@ -234,11 +234,11 @@ $0.8\%$ residual expected from the next post-Newtonian correction.
 Closes Open Problem 3 of the paper at the consistency-verification
 level.
 
-`src/paper_vii_b/strong_field_test.py` reproduces the table.
+`instruments/paper_vii_b/strong_field_test.py` reproduces the table.
 
 ### #50 — Kibble–Zurek GPE simulation
 
-`src/paper_viii/kibble_zurek_gpe.py` runs a stochastic time-dependent
+`instruments/paper_viii/kibble_zurek_gpe.py` runs a stochastic time-dependent
 Ginzburg–Landau (TDGL) evolution on a 2D periodic grid, the GPE
 universality-class equivalent for the symmetry-breaking transition at
 the void → saturation crossover. Configuration: $N = 160$ grid,
@@ -246,7 +246,7 @@ $L = 160\,\xi$ box, $\Delta t = 0.1$; quench $\mu(t)$ ramped linearly
 from $-1$ to $+1$ over $\tau_Q$; complex Gaussian noise amplitude 0.05;
 defects counted via phase-winding plaquettes in the saturated bulk
 ($\rho > 0.05$). Scan $\tau_Q \in \{20, 40, 80, 160, 320\}$ with 6
-seeds each (`src/paper_viii/kibble_zurek_results.json`).
+seeds each (`instruments/paper_viii/kibble_zurek_results.json`).
 
 Log–log fit yields $\alpha_{2D}^{\rm fit} = 0.23 \pm 0.10$, consistent
 with the mean-field KZ prediction $\alpha_{2D}^{\rm MF} = d\nu/(1 + \nu z) = 1/2$
@@ -267,25 +267,25 @@ only to confirm reviewers can see the distinction.
 
 ```bash
 # Tau identification (#37)
-python3 src/paper_ii/tau_identification.py
+python3 instruments/paper_ii/tau_identification.py
 
 # g-2 form factor / Schwinger normalisation (#33)
-python3 src/paper_ii/g2_form_factor_loop.py
+python3 instruments/paper_ii/g2_form_factor_loop.py
 
 # Galactic coupling constant C (#42)
-python3 src/paper_vi_a/derive_C.py
+python3 instruments/paper_vi_a/derive_C.py
 
 # Mode amplitudes epsilon_m table (#43)
-python3 src/paper_vi_b/epsilon_m_table.py
+python3 instruments/paper_vi_b/epsilon_m_table.py
 
 # Pitch-angle table (#44)
-python3 src/paper_vi_b/pitch_angle_table.py
+python3 instruments/paper_vi_b/pitch_angle_table.py
 
 # Strong-field numerical verification (#49)
-python3 src/paper_vii_b/strong_field_test.py
+python3 instruments/paper_vii_b/strong_field_test.py
 
 # Kibble-Zurek GPE simulation (#50) -- ~5 min on a single laptop core
-python3 src/paper_viii/kibble_zurek_gpe.py
+python3 instruments/paper_viii/kibble_zurek_gpe.py
 ```
 
 All scripts require only `numpy` (and `scipy` for the strong-field

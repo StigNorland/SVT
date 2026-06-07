@@ -12,7 +12,7 @@ At each point: full spectrum, eigenvector sector decomposition of the two
 lowest Kelvin Nambu modes (per Stage 1 finding), and tracking of how they
 move.
 
-Run: python muon_stage2_probe.py  (from src/paper_i). Slow -- a few minutes
+Run: python muon_stage2_probe.py  (from instruments/paper_i). Slow -- a few minutes
 per spectrum solve, ~15 minutes total at the n-sweep top end.
 """
 from __future__ import annotations

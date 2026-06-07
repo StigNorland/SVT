@@ -4,7 +4,7 @@ This note records the first concrete 3D realisation of the open three-prong Y-ju
 
 Artifacts:
 
-- `src/paper_i/trefoil_y_junction_static.py`
+- `instruments/paper_i/trefoil_y_junction_static.py`
 - `papers/SSV-I/data/y-junction-checkpoint-n24-hw6-200steps-2026-05-16.json`
 - `papers/SSV-I/data/y-junction-state-n24-hw6-200steps-2026-05-16.npz`
 - `papers/SSV-I/data/y-junction-checkpoint-n24-hw6-600steps-2026-05-16.json`

@@ -8,7 +8,7 @@ chirality ℤ₂ ("chirality = the spin framing") remains SSV's one irreducible
 fermion-sector postulate — and we now know *why no parity-conserving dynamics can
 derive it.*
 
-**Script:** `src/paper_ii/lr_su4_cp_parity_audit.py` · **tests:**
+**Script:** `instruments/paper_ii/lr_su4_cp_parity_audit.py` · **tests:**
 `test_lr_su4_cp_parity_audit.py` (9 pass). **Builds on:** `lr-su4-cross-term-audit.md`
 (which it corrects), `lr-su4-logse-spec.md`, and the #80 Pass 5/6 bit structure.
 
@@ -114,6 +114,6 @@ its quantitative consequences — a separate, much larger programme.)
 ## Reproducer
 
 ```bash
-.venv/bin/python src/paper_ii/lr_su4_cp_parity_audit.py
-.venv/bin/python -m pytest src/paper_ii/test_lr_su4_cp_parity_audit.py -q
+.venv/bin/python instruments/paper_ii/lr_su4_cp_parity_audit.py
+.venv/bin/python -m pytest instruments/paper_ii/test_lr_su4_cp_parity_audit.py -q
 ```

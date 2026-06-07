@@ -14,8 +14,8 @@ This is not yet a final theory note. It is a working agreement for code in the r
 
 These conventions apply first to:
 
-- `src/paper_i/`
-- `src/paper_ii_reconnection_supplement.py`
+- `instruments/paper_i/`
+- `instruments/paper_ii_reconnection_supplement.py`
 - any later static-breather or dynamic-reconnection solver
 
 They should be updated before large production code is added, not after.
@@ -150,7 +150,7 @@ Meaning:
 
 Current repo state:
 
-- most `src/paper_i/` outputs are `prototype`
+- most `instruments/paper_i/` outputs are `prototype`
 - the #77 trefoil continuation result is `candidate`: it gives reproducible
   `N_Y×F=54` at `(R,a)=(2.5,0.85)ξ`, but does not by itself close the separate
   `Q_p` / `\alpha_G` map
@@ -199,14 +199,14 @@ In practice this means:
 
 ## Near-Term Repo Tasks
 
-1. Add status labels to the major existing scripts in `src/paper_i/`.
-2. Mark `src/paper_ii/reconnection_supplement.py` as a reduced structural harness, not a production reconnection solver.
+1. Add status labels to the major existing scripts in `instruments/paper_i/`.
+2. Mark `instruments/paper_ii/reconnection_supplement.py` as a reduced structural harness, not a production reconnection solver.
 3. When the first shared solver utilities appear, move these conventions into code comments and reusable helpers.
 
 ## Shared-Layer Status (Issue #12)
 
 The conventions above are crystallised in the `shared_numerics` Python
-package under `src/shared_numerics/`. That package is the artifact of
+package under `instruments/shared_numerics/`. That package is the artifact of
 issue #12 and is intentionally a thin layer: dataclasses for canonical
 nondimensionalisation, grid spec, relaxation / time-step controls,
 minimum diagnostics for each branch, and machine-readable script
@@ -221,7 +221,7 @@ dynamic reconnection minimisation) should import the following from
 | Import                  | Use                                                              |
 |-------------------------|------------------------------------------------------------------|
 | `Nondimensionalisation` | Declare the run's unit system; catch mismatches between scripts. |
-| `GridSpec`              | Cartesian grid description shared with `src/paper_i/` prototypes.|
+| `GridSpec`              | Cartesian grid description shared with `instruments/paper_i/` prototypes.|
 | `RelaxationControls`    | Static gradient-flow controls including topology-preservation knobs.|
 | `TimeStepControls`      | Split-step time-integration controls.                            |
 | `StaticDiagnostics`     | Advertise which minimum static checks were run.                  |
@@ -232,11 +232,11 @@ dynamic reconnection minimisation) should import the following from
 
 New scripts on either branch should import these instead of redefining
 equivalents. The longer-form contract and rationale live in the
-`shared_numerics` package docstring (`src/shared_numerics/__init__.py`).
+`shared_numerics` package docstring (`instruments/shared_numerics/__init__.py`).
 
 ### Known convention mismatch (dynamic branch)
 
-`src/paper_ii/reconnection_supplement.py` uses
+`instruments/paper_ii/reconnection_supplement.py` uses
 `c_eff = sqrt(2 * log_pressure)` (with `log_pressure = 8` by default)
 where the canonical static-branch convention is `c = 1`. The mismatch
 is flagged in that script's `SCRIPT_METADATA.limitations`. Closure-grade

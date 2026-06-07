@@ -3,7 +3,7 @@
 **Issue:** [#87](https://github.com/StigNorland/SVT/issues/87) Part A, tasks A2 and
 A4. **Status: PASS** — all three foundational results are inert under the CP¹
 extension to leading order; the spin stiffness is fixed by couplings already in
-the theory. Verification: `src/paper_i/cp1_safety_checks.py`,
+the theory. Verification: `instruments/paper_i/cp1_safety_checks.py`,
 `test_cp1_safety_checks.py` (identities I2, I2′, I3, I3′, I4).
 
 ## What must survive (scalar derivations, `papers/SSV-I/main.tex`)

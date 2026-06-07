@@ -154,12 +154,12 @@ counting, which is a separate algorithmic task.
 ## Reproduction
 
 ```bash
-python src/paper_i/trefoil_breather_lperp_krylov_static.py \
+python instruments/paper_i/trefoil_breather_lperp_krylov_static.py \
     --n 24 --half-width 6 --lambda-perp 2000 \
     --max-steps 800 \
     --penalty-mu 400 --penalty-rho-target 0.01 \
     --output run.json --save-state run.npz
 
-python src/paper_i/trefoil_breather_observables.py run.npz
+python instruments/paper_i/trefoil_breather_observables.py run.npz
 # expect: f_factor_interior ~ 4.55
 ```

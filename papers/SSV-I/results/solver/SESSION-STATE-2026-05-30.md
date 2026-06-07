@@ -6,7 +6,7 @@ Two open PRs + this branch, all flowing from the Path A/Path B muon-ladder null
 and the PR #67 cleanup (merged to main as #68 merge commit da355f6).
 
 - **PR #67 (MERGED)**: cleanup — quarantined 27 fitted/ladder scripts to
-  `src/_fitted_quarantine/`, demoted ladder claims in SSV-I/SSV-II, added
+  `instruments/_fitted_quarantine/`, demoted ladder claims in SSV-I/SSV-II, added
   gapboxes. Issue #66 tracks it (now substantively complete).
 - **PR #69 (OPEN)**: branch `claude/muon-selection-rule-stage1`. Muon Stages
   1-3, three pre-registered nulls. Selection-rule fix in
@@ -67,8 +67,8 @@ parallel batch. v2 fixed all 3 + added seed-difference guard. 4th bug
   rule — bytes are intact (sha256 verified). Spawned a separate task for the
   .gitattributes fix. Do NOT commit .npz "modifications" — they're line-ending
   phantoms. git checkout HEAD -- <npz> to clear.
-- pycache churn: always `git checkout -- src/paper_i/__pycache__/
-  src/shared_numerics/__pycache__/` before commit.
+- pycache churn: always `git checkout -- instruments/paper_i/__pycache__/
+  instruments/shared_numerics/__pycache__/` before commit.
 
 ## NEXT STEPS (in order)
 1. Commit the gate-iii result note + result.md edit + (optionally) the
