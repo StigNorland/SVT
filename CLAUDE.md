@@ -41,3 +41,11 @@ result notes (`papers/*/results/`). Work is organised around GitHub issues
     the "α-harmonic mass ladder" is a numerical coincidence, not a derived
     spectrum; the muon/tau as derived breather modes are closed no-gos). Check
     the auto-memory before reusing old terminology.
+11. **Provenance is generated, not hand-written.** Every paper's "Code and Issue
+    References" appendix is produced by `src/tools/gen_provenance.py` (it pins
+    each `\#NN` issue to its URL and each `\texttt{src/...py}` to a GitHub
+    permalink at the commit that last modified it). Regenerate before building a
+    paper: `python src/tools/gen_provenance.py <PAPER>` (or `--all`); the result
+    is `papers/<PAPER>/provenance.tex`, `\input` in an appendix. The test
+    `src/tools/test_gen_provenance.py` enforces that every cited script path
+    exists, so a reference can never silently break.
