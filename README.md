@@ -11,7 +11,7 @@ forces, gravity, time, and black-hole ontology from the structure of that medium
 | Path | Contents |
 |------|----------|
 | `instruments/paper_i/` | Paper I numerical pipeline: gradient-flow static minimiser, spectral regrid, Numba kernels, BdG / muon probes |
-| `src/` | Legacy galactic / BH scripts |
+| `instruments/` | All computational scripts grouped by paper, plus `tools/` (provenance) and the `test/` suite — see `instruments/README.md` |
 | `papers/` | Manuscript drafts, supplemental notes, checkpoint files |
 | `notes/` | Working notes, objections log, Volovik mapping, lepton-ladder note |
 | `docs/` | Roadmap, numerical roadmap, conventions, issue-workflow |

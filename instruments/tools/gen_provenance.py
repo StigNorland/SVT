@@ -1,6 +1,6 @@
 """Generate the "Code and Issue References" provenance appendix for SSV papers.
 
-Every paper cites GitHub issues (`\\#NN`) and Python scripts (`\\texttt{src/...}`).
+Every paper cites GitHub issues (`\\#NN`) and Python scripts (`\\texttt{instruments/...}`).
 This tool makes each reference *checkable*: it scans a paper's `main.tex`, resolves
 each issue to its GitHub URL and each script to a permalink pinned at the commit
 that last modified it, and writes `papers/<PAPER>/provenance.tex` for the paper to

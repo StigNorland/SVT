@@ -3,7 +3,7 @@
 This note is the index of paper-closure tasks completed via merged PRs.
 For each closure it points to the receipts: a paper section/equation
 where the closure lives, and (where applicable) a self-contained
-verification script under `src/`. The scripts run in seconds (with one
+verification script under `instruments/`. The scripts run in seconds (with one
 exception flagged below) and print the table or numerical claim that
 appears in the corresponding `resultbox`.
 
