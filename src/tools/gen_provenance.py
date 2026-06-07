@@ -165,11 +165,15 @@ def generate(paper: str, slug: str, head: str, check: bool) -> dict:
         raise FileNotFoundError(main_tex)
     issues, paths = extract_refs(main_tex.read_text(encoding="utf-8"))
     missing = missing_code_paths(paths)
+    prov = PAPERS / paper / "provenance.tex"
+    skipped = not issues and not paths
     if not check:
-        (PAPERS / paper / "provenance.tex").write_text(
-            render(paper, issues, paths, slug, head), encoding="utf-8"
-        )
-    return {"paper": paper, "issues": issues, "paths": paths, "missing": missing}
+        if skipped:
+            prov.unlink(missing_ok=True)     # no refs ⇒ no appendix, no stale file
+        else:
+            prov.write_text(render(paper, issues, paths, slug, head), encoding="utf-8")
+    return {"paper": paper, "issues": issues, "paths": paths,
+            "missing": missing, "skipped": skipped}
 
 
 def main() -> None:
@@ -194,7 +198,12 @@ def main() -> None:
     for paper in papers:
         r = generate(paper, slug, head, args.check)
         bad_issues = unresolved_issues(r["issues"], slug) if args.verify_issues else []
-        tag = "CHECK" if args.check else "wrote"
+        if r["skipped"]:
+            tag = "skip "
+        elif args.check:
+            tag = "CHECK"
+        else:
+            tag = "wrote"
         msg = f"{tag} {paper}: {len(r['issues'])} issues, {len(r['paths'])} scripts"
         if r["missing"]:
             msg += f"  ⚠ MISSING scripts: {r['missing']}"
