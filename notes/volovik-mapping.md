@@ -73,15 +73,28 @@ pairing. Consequently:
    forbid the bridge matrix element that would produce half-integer rungs.
    Volovik's result does not transfer to scalar SSV.
 
-2. **Muon null results:** All three routes (Path B, #73, #76) return null.
+2. **Muon null results:** All scalar routes (Path B, #73, #76) return null.
    This is consistent: Volovik's sub-gap rung structure is a *fermionic*
    mechanism. SSV's scalar vacuum cannot generate it by construction.
-   The muon mass gap requires either a spinorial order parameter or a
-   derived half-winding Nambu mechanism — neither is present in current
-   scalar SSV.
+
+   **Post-#78 resolution (2026-06-06, issue #99 decision — FINAL).** The two
+   structural escape hatches were not just scoped; they were opened and **closed
+   negatively**. The CP¹/spinor order parameter *was* adopted (#83/#87) — it
+   derives the lepton spin-½ (meridional ℤ₂), chirality, and SU(4) — but the
+   spinor-BdG muon bridge gives `|V| = 0` exactly on the uniform-n̂ IQV electron
+   (#91), so `γ_B = 0` and the muon is **not** derived. The half-quantum vortex
+   (#94) carries its `γ_B = π` on the *meridional* circle that links the core —
+   that π *is* the electron's spin-½, the wrong circle for the muon's azimuthal
+   phase — and a free HQV is charge-excluded. So neither a spinorial order
+   parameter nor a half-winding rescues the muon: both were tried and are closed,
+   **not pending**. The charged-lepton generations carry **no SSV derivation
+   claim**; the muon `(3/2)μ₀` and tau `25½ μ₀` are recorded numerical
+   coincidences. See `papers/SSV-I/results/muon/issue-99-lepton-generation-branch-decision.md`.
 
 **The geometric/topological analogies (vorton, skyrmion, soliton composite)
-carry over cleanly. The spectral mechanism does not.**
+carry over cleanly. The spectral mechanism does not — and the CP¹ upgrade that
+restores the fermionic Berry phase delivers spin and chirality, but still not the
+muon mass.**
 
 ---
 
