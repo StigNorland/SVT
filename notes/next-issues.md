@@ -33,8 +33,10 @@ this file now records what remains worth opening next.
 
 - [#97](https://github.com/StigNorland/SVT/issues/97) — dynamic reconnection cap geometry to grid-converged candidate
 - [#98](https://github.com/StigNorland/SVT/issues/98) — #77 static trefoil output to `Q_p` / `\alpha_G`
-- [#99](https://github.com/StigNorland/SVT/issues/99) — post-#78 lepton-generation branch decision
 - [#100](https://github.com/StigNorland/SVT/issues/100) — SSV IX drafting from VIII input
+
+Closed:
+- [#99](https://github.com/StigNorland/SVT/issues/99) — post-#78 lepton-generation branch decision: **retired** (outcome 3); HQV (#94) and spinor (#91) branches both closed negatively
 
 ## Claim-status tasks
 
