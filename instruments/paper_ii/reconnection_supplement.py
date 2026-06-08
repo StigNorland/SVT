@@ -24,10 +24,26 @@ The implemented model:
 - extracts a projected-Hessian amplitude/phase channel measure cos_phi,
 - writes CSV rows for opposite and same topology sweeps.
 
+GPU support (--gpu flag):
+    Pass --gpu to run the time evolution on an NVIDIA GPU via CuPy.
+    CuPy must be installed matching the local CUDA toolkit, e.g.:
+        pip install cupy-cuda12x   # for CUDA 12.x
+        pip install cupy-cuda11x   # for CUDA 11.x
+    All array-heavy functions (evolve_path, energy, cap extraction, mode
+    spectrum) run on the GPU.  The Hessian eigenvalue solve (2x2 matrix,
+    called only on snapshots) stays on CPU.  Snapshots are transferred
+    back to CPU only for the analyse() diagnostics step.
+    Without --gpu the code behaves exactly as before (NumPy, CPU only).
+
 Example:
     python instruments/paper_ii/reconnection_supplement.py --n 32 --length 18 \
         --lambda-perp 0 --lambda-perp 1 --lambda-perp 10 --lambda-perp 100 \
         --output papers/SSV-II/data/example_sweep.csv
+
+    # GPU run:
+    python instruments/paper_ii/reconnection_supplement.py --n 96 --length 18 \
+        --lambda-perp 0.785 --log-pressure 0.5 --auto-dt --gpu \
+        --output papers/SSV-II/data/example_gpu.csv
 """
 
 from __future__ import annotations
@@ -47,6 +63,44 @@ if str(SRC_ROOT) not in sys.path:
     sys.path.append(str(SRC_ROOT))
 
 from shared_numerics import OutputStatus, ScriptMetadata
+
+# ---------------------------------------------------------------------------
+# GPU / array-library selector
+# xp  = the active array module (numpy or cupy)
+# _on_gpu = True when CuPy is active
+# Call init_gpu(True) before any computation to activate GPU mode.
+# ---------------------------------------------------------------------------
+xp = np
+_on_gpu: bool = False
+
+
+def init_gpu(use_gpu: bool) -> None:
+    """Switch the active array module to CuPy (use_gpu=True) or NumPy (False).
+
+    Must be called before any array is allocated.  Prints the selected device.
+    Raises ImportError with install instructions if CuPy is not available.
+    """
+    global xp, _on_gpu
+    if not use_gpu:
+        xp = np
+        _on_gpu = False
+        return
+    try:
+        import cupy as cp  # noqa: PLC0415
+    except ImportError as exc:
+        raise ImportError(
+            "CuPy is not installed.  Install it matching your CUDA version, e.g.:\n"
+            "  pip install cupy-cuda12x   # CUDA 12.x\n"
+            "  pip install cupy-cuda11x   # CUDA 11.x\n"
+            "See https://docs.cupy.dev/en/stable/install.html"
+        ) from exc
+    xp = cp
+    _on_gpu = True
+    dev = cp.cuda.Device(0)
+    props = cp.cuda.runtime.getDeviceProperties(dev.id)
+    name = props["name"].decode() if isinstance(props["name"], bytes) else props["name"]
+    mem_gb = props["totalGlobalMem"] / 1024**3
+    print(f"GPU: {name}  ({mem_gb:.1f} GB)  CuPy {cp.__version__}")
 
 
 SCRIPT_METADATA = ScriptMetadata(
@@ -76,6 +130,9 @@ SCRIPT_METADATA = ScriptMetadata(
         "Use cap_method='moment' for the threshold-free cap-radius observable; volume and radial-slice are legacy diagnostics.",
         "Radiated-mode spectrum is a basic radial-power-spectrum of delta_psi (first vs last snapshot), "
         "not a mode-decomposition into physical Bogoliubov branches (issue #15 task 4 partial).",
+        "GPU mode (--gpu): requires CuPy installed for the local CUDA toolkit. "
+        "Only the time evolution (evolve_path) runs on GPU; analysis (energy, cap, Hessian) is CPU. "
+        "Snapshots are transferred CPU<->GPU only at snapshot save points.",
     ),
 )
 
@@ -161,8 +218,8 @@ def steps_for_duration(cfg: Config, duration: float) -> int:
 
 
 def coordinate_grid(cfg: Config) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-    axis = (np.arange(cfg.n) + 0.5) * cfg.dx - 0.5 * cfg.length
-    return np.meshgrid(axis, axis, axis, indexing="ij")
+    axis = (xp.arange(cfg.n) + 0.5) * cfg.dx - 0.5 * cfg.length
+    return xp.meshgrid(axis, axis, axis, indexing="ij")
 
 
 def ring_factor(
@@ -174,11 +231,11 @@ def ring_factor(
     circulation: float,
     core_radius: float,
 ) -> np.ndarray:
-    rho = np.sqrt(x * x + y * y)
-    s = np.sqrt((rho - radius) ** 2 + (z - z0) ** 2)
-    theta = np.arctan2(z - z0, rho - radius)
-    amp = np.tanh(s / (math.sqrt(2.0) * core_radius))
-    return amp * np.exp(1j * circulation * theta)
+    rho = xp.sqrt(x * x + y * y)
+    s = xp.sqrt((rho - radius) ** 2 + (z - z0) ** 2)
+    theta = xp.arctan2(z - z0, rho - radius)
+    amp = xp.tanh(s / (math.sqrt(2.0) * core_radius))
+    return amp * xp.exp(1j * circulation * theta)
 
 
 def initial_state(cfg: Config, lower_circ: float, upper_circ: float) -> np.ndarray:
@@ -189,44 +246,52 @@ def initial_state(cfg: Config, lower_circ: float, upper_circ: float) -> np.ndarr
     psi = ring_factor(x, y, z, radius, -0.5 * sep, lower_circ, core)
     psi *= ring_factor(x, y, z, radius, 0.5 * sep, upper_circ, core)
     # Phase kick drives the rings toward the midplane.
-    psi *= np.exp(-1j * 0.9 * np.tanh(z / max(cfg.xi, 1.0e-12)) * z)
-    return psi.astype(np.complex128)
+    psi *= xp.exp(-1j * 0.9 * xp.tanh(z / max(cfg.xi, 1.0e-12)) * z)
+    return psi.astype(xp.complex128)
 
 
 def k_squared(cfg: Config) -> np.ndarray:
-    k = 2.0 * math.pi * np.fft.fftfreq(cfg.n, d=cfg.dx)
-    kx, ky, kz = np.meshgrid(k, k, k, indexing="ij")
+    k = 2.0 * math.pi * xp.fft.fftfreq(cfg.n, d=cfg.dx)
+    kx, ky, kz = xp.meshgrid(k, k, k, indexing="ij")
     return kx * kx + ky * ky + kz * kz
 
 
 def nonlinear_phase(psi: np.ndarray, cfg: Config, half_dt: float) -> np.ndarray:
-    rho = np.maximum(np.abs(psi) ** 2, 1.0e-300)
-    chemical = cfg.log_pressure * np.log(rho)
-    return psi * np.exp(-1j * chemical * half_dt)
+    rho = xp.maximum(xp.abs(psi) ** 2, 1.0e-300)
+    chemical = cfg.log_pressure * xp.log(rho)
+    return psi * xp.exp(-1j * chemical * half_dt)
 
 
 def kinetic_step(psi: np.ndarray, cfg: Config, k2: np.ndarray) -> np.ndarray:
     spectral_energy = 0.5 * k2 + cfg.lambda_perp * k2 * k2
-    factor = np.exp(-1j * spectral_energy * cfg.dt)
-    return np.fft.ifftn(np.fft.fftn(psi) * factor)
+    factor = xp.exp(-1j * spectral_energy * cfg.dt)
+    return xp.fft.ifftn(xp.fft.fftn(psi) * factor)
 
 
 def evolve_path(cfg: Config, lower_circ: float, upper_circ: float,
                 effective_dt: float | None = None) -> np.ndarray:
     """Evolve cfg.steps Strang steps.  If effective_dt is given, use it instead
-    of cfg.dt for the split-step (but still save cfg.snapshots snapshots)."""
+    of cfg.dt for the split-step (but still save cfg.snapshots snapshots).
+
+    Returns snapshots as a NumPy array regardless of whether GPU was used
+    (GPU arrays are transferred to CPU at snapshot time so analyse() works
+    without knowing about the backend).
+    """
     psi = initial_state(cfg, lower_circ, upper_circ)
     k2 = k_squared(cfg)
     dt = effective_dt if effective_dt is not None else cfg.dt
     save_steps = set(np.linspace(0, cfg.steps, cfg.snapshots, dtype=int).tolist())
-    snapshots = [psi.copy()] if 0 in save_steps else []
-    spectral_factor = np.exp(-1j * (0.5 * k2 + cfg.lambda_perp * k2 * k2) * dt)
+    # Always store snapshots as numpy arrays so analyse() is backend-agnostic.
+    def _to_numpy(arr: np.ndarray) -> np.ndarray:
+        return xp.asnumpy(arr) if _on_gpu else arr
+    snapshots = [_to_numpy(psi.copy())] if 0 in save_steps else []
+    spectral_factor = xp.exp(-1j * (0.5 * k2 + cfg.lambda_perp * k2 * k2) * dt)
     for step in range(1, cfg.steps + 1):
         psi = nonlinear_phase(psi, cfg, 0.5 * dt)
-        psi = np.fft.ifftn(np.fft.fftn(psi) * spectral_factor)
+        psi = xp.fft.ifftn(xp.fft.fftn(psi) * spectral_factor)
         psi = nonlinear_phase(psi, cfg, 0.5 * dt)
         if step in save_steps:
-            snapshots.append(psi.copy())
+            snapshots.append(_to_numpy(psi.copy()))
     return np.stack(snapshots, axis=0)
 
 
@@ -496,6 +561,12 @@ def parse_args() -> argparse.Namespace:
         help="Auto-select dt from stability criterion lambda_perp*k_max^4*dt < 0.5. "
              "When set, ignores --dt and prints the chosen value.",
     )
+    parser.add_argument(
+        "--gpu", action="store_true",
+        help="Run the time evolution on GPU via CuPy.  Requires CuPy installed "
+             "matching the local CUDA toolkit (e.g. pip install cupy-cuda12x). "
+             "Analysis (energy, cap, Hessian) is always performed on CPU.",
+    )
     parser.add_argument("--cap-method", choices=("volume", "radial-slice", "moment"), default="volume")
     parser.add_argument(
         "--output",
@@ -507,6 +578,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+    init_gpu(args.gpu)
     if abs(args.log_pressure - 8.0) < 1e-9:
         warnings.warn(
             "log_pressure=8.0 (c_eff=4): not compatible with static-branch c=1. "
