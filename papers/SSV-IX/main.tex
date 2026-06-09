@@ -1,0 +1,454 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\newtcolorbox{resultbox}[1][]{enhanced,breakable,
+  colback=blue!4!white,colframe=blue!40!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+\newtcolorbox{gapbox}[1][]{enhanced,breakable,
+  colback=orange!6!white,colframe=orange!60!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+\setstretch{1.1}
+
+\title{Saturated Superfluid Vacuum IX\\
+CMB and the Primordial Phonon Bath}
+\author{Stig Norland}
+\date{Draft}
+
+\providecommand{\ssvissue}[1]{\hyperref[issue:#1]{\##1}}% in-text issue ref -> Code & Issue References appendix
+\providecommand{\ssvfile}[1]{\hyperref[file:#1]{\texttt{\detokenize{#1}}}}% in-text code/report ref -> Code & Issue References appendix
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This paper offers a single, deliberately narrow reading of the cosmic microwave
+background (CMB) within the Saturated Superfluid Vacuum (SSV) framework: that the
+CMB is acoustic noise integrated from the reconnection events of the
+void-to-saturation transition (Stages~4--5 of Paper~VIII~\cite{ssv8}), rather than
+a separately postulated radiation-era relic. The medium that survives that
+transition is not quiet; it carries a residual bath of phonons --- the Goldstone
+sound modes of the saturated condensate~\cite{ssvG} --- whose present-day,
+red-shifted spectrum is what an observer reads as the CMB.
+
+The paper is explicitly \emph{interpretive} in its central claim and honest about
+what it does \emph{not} establish. It does \emph{not} derive the CMB temperature
+$T_0 = 2.725$~K, does \emph{not} derive the blackbody form of the spectrum, and
+does \emph{not} compute the spectral distortions; each of those is marked with an
+explicit gap box and tied to the same missing input --- the absolute saturation
+pressure $P_0(\rho_0)$ --- that blocks the cosmological-constant value in
+Paper~VIII. What the paper \emph{does} inherit quantitatively is the
+Kibble--Zurek defect statistics of Paper~VIII's Stage~5, which is
+\textit{structural with numerical evidence}. Every claim is tagged
+\textit{derived}, \textit{structural}, \textit{candidate}, \textit{interpretive},
+or \textit{deferred} in the Discussion (\S\ref{sec:discussion}), with explicit
+criteria for what observational or theoretical work would change its status. The
+purpose is to state the phonon-bath reading of the CMB cleanly and to fix the
+support conditions for it --- not to present a quantitative CMB cosmology.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+The cosmic microwave background is, in the standard account, a relic of a hot
+radiation era: a thermal photon gas that decoupled from baryonic matter at
+recombination and has since free-streamed and cooled with the expansion. The SSV
+framework does not have a separate photon gas to begin with --- photons are
+transverse Goldstone/Bogoliubov modes of the condensate~\cite{ssvG}, and the
+``radiation era'' is not an independent postulate but the turbulent aftermath of
+the saturation transition described in Paper~VIII~\cite{ssv8}. This paper asks the
+narrow question that follows: \emph{if the saturating vacuum necessarily produces a
+bath of sound modes, what does that bath look like today, and is it consistent with
+being read as the CMB?}
+
+The scope is deliberately small. This paper consumes Paper~VIII's cosmogonic
+sequence as input and does not reopen it; it borrows the entropy / arrow-of-time
+machinery of Paper~III~\cite{ssv3} for the irreversibility of the integrated noise;
+and it uses the equation-of-state language of Paper~II~\cite{ssv2} for the medium's
+acoustic response. It does \emph{not} address inflationary phenomenology, structure
+formation (galactic scales live in Papers~VI-a/VI-b), late-time acceleration
+(deferred to Paper~VII-b and to Paper~VIII's prediction~C2), or any particle and
+force-sector content (Papers~I--IV). The material developed here is the CMB and
+primordial-phonon content that issue~\ssvissue{10} moved out of Paper~III; this
+draft is its destination, written under issue~\ssvissue{100}.
+
+Every claim below is tagged in the Discussion (\S\ref{sec:discussion}). The reader
+should treat the central reading --- CMB as integrated reconnection noise --- as
+\textit{interpretive}, and should read the temperature, blackbody character, and
+distortion content as \textit{deferred} (gap-boxed), not as results.
+
+\section{The Primordial Phonon Bath}
+\label{sec:phononbath}
+
+Paper~VIII, Stage~4, ends with the saturation fronts colliding and the binding
+energy released into the kinetic energy of the flow field, ``driving turbulence.''
+Stage~5 then nucleates the first topological defects wherever the phase mosaic of
+the saturating vacuum forced a mismatch. Two things are produced together at
+saturation: \emph{defects} (the matter content, counted by Kibble--Zurek) and
+\emph{radiation} (the sound field shed by the violent relaxation of the flow).
+This paper is about the second product.
+
+In a saturated superfluid the low-energy excitations above the ground state
+$\rho_0$ are phonons: linear sound modes with dispersion $\omega = c_s k$ in the
+long-wavelength limit, where $c_s$ is the medium's sound speed fixed by the
+equation of state $P(\rho)$ of Paper~II~\cite{ssv2}. The saturation transition is
+not adiabatic --- it is an exothermic quench --- so it leaves the condensate in an
+excited state populated by these modes. We call this population the
+\emph{primordial phonon bath}. Its existence is a structural consequence of having
+a saturation transition at all: any quench of a medium with a Goldstone sector
+deposits energy into that sector.
+
+\begin{quote}
+\textit{Claim (\S\ref{sec:phononbath}).} The saturated vacuum is left, after the
+Stage~4--5 transition, with a residual bath of phonon (sound) modes carrying the
+energy shed by the relaxing flow field. Status: \textit{interpretive} (the
+existence of the bath follows structurally from the quench; its spectrum is not
+derived here).
+\end{quote}
+
+The bath is the radiation counterpart of the Kibble--Zurek defect count: defects
+freeze in where the phase cannot be combed smooth, and phonons carry off the energy
+difference between the turbulent saturating state and the relaxed ground state. The
+\emph{ratio} of the two --- defects to phonons --- is, in cosmological language, the
+baryon-to-photon ratio $\eta$, and it is exactly the quantity Paper~VIII computes
+from the Kibble--Zurek mechanism (\S\ref{sec:viii}).
+
+\section{The CMB as Integrated Reconnection Noise}
+\label{sec:integrated}
+
+The central reading of this paper is the following identification.
+
+\begin{quote}
+\textit{Central claim (\S\ref{sec:integrated}, interpretive).} The cosmic microwave
+background is the present-day, red-shifted image of the primordial phonon bath:
+acoustic noise integrated over all the reconnection and relaxation events of the
+void-to-saturation transition, propagated forward through the expanding saturated
+medium.
+\end{quote}
+
+Three features of the picture are worth stating precisely, because they are what a
+supporting computation would have to reproduce.
+
+\paragraph{Integration, not a single surface.} In the standard account the CMB
+comes from a single last-scattering surface. Here the noise is \emph{integrated}:
+each reconnection event during Stage~5 radiates a sound pulse, and the bath is the
+superposition of an enormous number of such pulses with random phases. This is the
+sense in which the spectrum is expected to be smooth --- it is the central-limit
+sum of many independent emitters --- but smoothness of a noise spectrum is not the
+same as a Planck (blackbody) spectrum, a distinction we are careful about in
+\S\ref{sec:spectrum}.
+
+\paragraph{Irreversibility.} The integrated noise is irreversible: it is the wake
+entropy of Paper~III~\cite{ssv3} read at cosmological scale. The arrow of time that
+Paper~III attributes to the growth of wake complexity is, here, the statement that
+the phonon bath cannot un-radiate back into coherent flow. The CMB is, in this
+language, the largest single reservoir of the universe's wake entropy.
+
+\paragraph{Redshift as medium relaxation.} The cooling of the bath is the slow
+relaxation of the background $\rho_0$ and the corresponding stretching of mode
+wavelengths, the same background-relaxation channel that Paper~VIII's prediction~C2
+ties to late-time acceleration. We do \emph{not} import a metric expansion here; we
+note only that the qualitative redshift of the bath and the qualitative late-time
+relaxation are the same effect viewed at different epochs, and we defer the
+quantitative expansion history to Paper~VII-b.
+
+This section is the reason the paper exists, and it is entirely \textit{interpretive}.
+It reads a known observable (a near-isotropic microwave bath) as a known SSV object
+(the Goldstone sound field of a quenched condensate). It does not, by itself,
+predict any number.
+
+\section{Spectrum, Temperature, and the Equation of State}
+\label{sec:spectrum}
+
+The interpretive reading of \S\ref{sec:integrated} becomes physics only if the bath
+can be shown to carry the right spectrum and temperature. This is where the paper is
+most honest about its limits.
+
+\subsection{Why a thermal spectrum is plausible but not derived}
+
+A blackbody (Planck) spectrum is the equilibrium distribution of a bosonic field
+that has had time to thermalise through mode--mode interactions. Phonons in a
+superfluid do interact (the GPE nonlinearity couples modes), so a saturated medium
+left in an excited phonon state will tend toward a thermal distribution. That is the
+plausibility argument. But ``tends toward thermal'' is not ``is Planckian to one part
+in $10^{5}$,'' which is what the measured CMB demands. Establishing the blackbody
+form requires a thermalisation (ergodicity) argument for the phonon bath that this
+paper does not provide.
+
+\begin{gapbox}[Gap: blackbody character of the bath is not derived]
+The Planck form of the CMB spectrum is, here, \textit{deferred}. It would follow
+from a demonstration that the primordial phonon bath thermalises --- i.e.\ that the
+GPE phonon--phonon interactions drive the mode-occupation numbers to a
+Bose--Einstein distribution on a timescale short compared with the saturation-epoch
+expansion time. No such thermalisation calculation has been performed. Until it is,
+the ``integrated reconnection noise'' is established only as a \emph{smooth} noise
+spectrum (central-limit superposition of many emitters), not as a \emph{Planck}
+spectrum. Support criterion: a phonon-Boltzmann or wave-turbulence calculation in
+the saturated GPE showing relaxation to Bose--Einstein occupation.
+\end{gapbox}
+
+\subsection{Why the temperature is not derived}
+
+Even granting a thermal form, the absolute temperature $T_0 = 2.725$~K is set by the
+energy density deposited in the bath at saturation and by the subsequent dilution.
+The energy density at saturation is fixed by the depth of the equation of state ---
+specifically by the absolute saturation pressure $P_0(\rho_0)$ --- which is the
+\emph{same} quantity that Paper~VIII flags as the missing input blocking a numerical
+value of $\Lambda$, and that Papers~II/IV/VII-b track as an open closure problem.
+
+\begin{gapbox}[Gap: CMB temperature $T_0 = 2.725$~K is not derived]
+The present CMB temperature is \textit{deferred}, and it is blocked by exactly the
+input that blocks $\Lambda$ in Paper~VIII~\cite{ssv8} and the absolute energy scale
+in Papers~II/IV: the absolute saturation pressure $P_0(\rho_0)$. Schematically the
+bath energy density at saturation is $u_{\rm sat}\sim P_0$, and $T_0$ follows from
+$u_{\rm sat}$ diluted by the expansion factor between the saturation epoch and now;
+neither $P_0$ nor the SSV expansion factor is derived in the series yet. We
+therefore make \emph{no} prediction for $T_0$. Support criterion: a derivation of
+$P_0(\rho_0)$ from the saturation equation of state (the Paper~II/IV/VII-b closure
+item), \emph{plus} the Paper~VII-b emergent-expansion factor, which together would
+turn $T_0$ into a falsifiable SSV number.
+\end{gapbox}
+
+\subsection{What the equation of state does fix (structurally)}
+
+What the medium's equation of state \emph{does} fix, without the absolute scale, is
+the \emph{shape} relations: the sound speed $c_s(\rho)$, the dispersion's departure
+from linearity at the healing scale $\xi$ (the Bogoliubov ``roton-like'' bend), and
+hence the wavelength at which the bath's spectrum must roll over relative to its
+peak. These are ratios, independent of $P_0$, and they are inherited directly from
+Paper~II. They are \textit{structural}: the framework fixes them in principle, but
+the present paper does not evaluate them numerically.
+
+\section{Statistical Departures from Blackbody}
+\label{sec:distortions}
+
+If the CMB is integrated reconnection noise rather than an equilibrium relic, the
+\emph{departures} from a perfect blackbody are where the two pictures could be
+distinguished. In the SSV reading the distortions are not separately postulated
+mechanisms (energy injection, Silk damping, etc.) but signatures of the
+topological-defect statistics frozen in at saturation.
+
+\begin{quote}
+\textit{Claim (\S\ref{sec:distortions}, candidate).} Spectral distortions of the CMB
+away from a pure Planck form encode the Kibble--Zurek defect statistics of Stage~5:
+the defect-density variance and correlation structure imprint a calculable, small,
+non-Planckian component on the integrated phonon spectrum.
+\end{quote}
+
+This is a \textit{candidate} claim with a definite falsification condition but no
+performed computation. Concretely, the spectrum should carry $\mu$-type and
+$y$-type distortions whose amplitudes are tied to the same defect-density variance
+that sets $\eta$; the present observational bounds
+($|\mu|\lesssim 9\times10^{-5}$, $|y|\lesssim 1.5\times10^{-5}$ from
+COBE/FIRAS~\cite{Fixsen1996}) are the falsification gate.
+
+\begin{gapbox}[Gap: distortion amplitudes are not computed]
+The $\mu$- and $y$-distortion amplitudes implied by the defect statistics are
+\textit{deferred}. Computing them requires (i) the defect-density two-point
+statistics from a Kibble--Zurek simulation (the Paper~VIII Stage~5 computation,
+already begun in \ssvfile{kibble_zurek_gpe}) carried to the level of correlation
+functions, and (ii) a map from those statistics to the phonon-bath occupation
+spectrum. Falsification condition: predicted $|\mu|,|y|$ exceeding the COBE/FIRAS
+bounds~\cite{Fixsen1996} would rule out the integrated-noise reading; predicted
+values far below current sensitivity would make the reading consistent but not yet
+testable. Support criterion: a defect-correlation $\to$ distortion-spectrum
+calculation with an explicit numerical $\mu,y$.
+\end{gapbox}
+
+\section{Connection to SSV VIII Cosmogony}
+\label{sec:viii}
+
+The one quantitative anchor this paper inherits is Paper~VIII's Kibble--Zurek
+result. Stage~5 of Paper~VIII nucleates defects with number density
+\begin{equation}
+    n_{\rm defect} \sim \frac{1}{\xi^3}
+        \left(\frac{\tau_0}{\tau_Q}\right)^{d\nu/(1+\nu z)},
+    \label{eq:kz}
+\end{equation}
+with $\tau_0 = \xi/c$ the microscopic time and $\tau_Q$ the quench time of the
+saturation epoch. Paper~VIII reports a stochastic time-dependent Ginzburg--Landau
+simulation (\ssvfile{kibble_zurek_gpe}) that confirms this scaling in the correct
+universality class, lifting the prediction to \textit{structural with numerical
+evidence}; the single dimensionless unknown $\tau_Q/\tau_0$ that fixes the
+baryon-to-photon ratio $\eta = 6\times10^{-10}$ lies in the natural SSV window
+$\tau_Q/\tau_0 \in [10^{10},10^{13}]$.
+
+For the present paper the same simulation fixes the \emph{ratio} of the two products
+of saturation --- defects to phonons --- because $\eta$ is precisely the
+defect-to-photon number ratio. The phonon-bath number density is therefore not an
+independent quantity: it is $n_{\rm defect}/\eta$, with $n_{\rm defect}$ from
+Eq.~\eqref{eq:kz}. This is the cleanest structural link between IX and VIII.
+
+\begin{quote}
+\textit{Claim (\S\ref{sec:viii}, structural with numerical evidence).} The
+phonon-bath number density is tied to the Kibble--Zurek defect density of
+Paper~VIII Stage~5 through the baryon-to-photon ratio $\eta$; the defect side of
+this link carries the numerical evidence reported in Paper~VIII.
+\end{quote}
+
+\begin{gapbox}[Gap: the entropy budget is not closed]
+The cosmological entropy budget --- the photon (phonon-bath) entropy per baryon,
+$\sim\eta^{-1}$ in dimensionless terms --- is \textit{structurally} fixed by
+$\eta$ but \emph{numerically} open, because the \emph{absolute} photon entropy
+needs the bath temperature $T_0$, which is gap-boxed in \S\ref{sec:spectrum}. The
+arrow-of-time reading of Paper~III~\cite{ssv3} identifies this bath as the dominant
+wake-entropy reservoir, but the present paper does not evaluate the budget in
+physical units. Support criterion: the same $P_0(\rho_0) + T_0$ closure required
+for the temperature.
+\end{gapbox}
+
+\section{Discussion: scope, status, and what would count as support}
+\label{sec:discussion}
+
+\subsection{Claim taxonomy used in this paper}
+
+Following \ssvfile{numerical-minimisation-roadmap} in the repository, each claim is
+one of:
+\begin{itemize}
+    \item \textit{derived} --- analytically reduced from the SSV Lagrangian and/or a
+        converged numerical computation and \emph{reused} here;
+    \item \textit{structural} --- the dependence on the framework is clear and the
+        result is structurally consistent, but the number depends on a computation
+        deferred to another paper or workstream;
+    \item \textit{candidate} --- a prediction stated here with a definite
+        falsification condition but no supporting computation yet performed;
+    \item \textit{interpretive} --- a synthesis or ontological statement that
+        organises SSV results into a single picture without new quantitative content;
+    \item \textit{deferred} --- a quantity that the picture requires but that is
+        explicitly not evaluated here and is gap-boxed, with the blocking input named.
+\end{itemize}
+
+\subsection{Claim status of this paper's content}
+\begin{itemize}
+    \item The primordial phonon bath (\S\ref{sec:phononbath}):
+        \textit{interpretive} --- its \emph{existence} follows structurally from a
+        non-adiabatic saturation quench of a Goldstone sector; its spectrum is not
+        derived.
+    \item CMB as integrated reconnection noise (\S\ref{sec:integrated}):
+        \textit{interpretive} --- the central reading; predicts no number by itself.
+    \item Blackbody character (\S\ref{sec:spectrum}): \textit{deferred}
+        (gap-boxed) --- needs a phonon-thermalisation argument.
+    \item CMB temperature $T_0$ (\S\ref{sec:spectrum}): \textit{deferred}
+        (gap-boxed) --- blocked by the absolute saturation pressure $P_0(\rho_0)$,
+        the same input that blocks $\Lambda$ in Paper~VIII.
+    \item Equation-of-state shape relations (\S\ref{sec:spectrum}):
+        \textit{structural} --- ratios inherited from Paper~II, not evaluated here.
+    \item Spectral distortions (\S\ref{sec:distortions}): \textit{candidate} ---
+        definite FIRAS falsification gate, amplitudes gap-boxed.
+    \item Phonon-bath / defect link via $\eta$ (\S\ref{sec:viii}):
+        \textit{structural with numerical evidence} --- inherits Paper~VIII's
+        Kibble--Zurek simulation.
+    \item Entropy budget (\S\ref{sec:viii}): \textit{deferred} (gap-boxed) ---
+        structurally fixed by $\eta$, numerically blocked by $T_0$.
+\end{itemize}
+
+\subsection{What observational or theoretical support would matter}
+\begin{enumerate}
+    \item \emph{A phonon-thermalisation calculation} in the saturated GPE (wave
+        turbulence / phonon Boltzmann) showing relaxation to a Bose--Einstein
+        occupation would lift the blackbody character from \textit{deferred} to
+        \textit{structural} and is the single most important theoretical-support item.
+    \item \emph{A derivation of the absolute saturation pressure $P_0(\rho_0)$}
+        (the shared Paper~II/IV/VII-b closure item), together with the Paper~VII-b
+        emergent-expansion factor, would turn $T_0$ into a falsifiable SSV number ---
+        the decisive observational-support item.
+    \item \emph{A defect-correlation $\to$ distortion-spectrum computation} giving
+        numerical $\mu,y$ would make \S\ref{sec:distortions} testable against
+        COBE/FIRAS~\cite{Fixsen1996} and is the cleanest near-term falsification route.
+    \item \emph{Extending the Kibble--Zurek dynamic range} of
+        \ssvfile{kibble_zurek_gpe} (the Paper~VIII Stage~5 simulation) to tighten the
+        exponent and the $\tau_Q/\tau_0$ window would sharpen the $\eta$ anchor that
+        ties the phonon bath to the defect count.
+\end{enumerate}
+
+\subsection{What this paper is not}
+
+This paper does not derive: the CMB temperature; the blackbody form of the spectrum;
+the spectral-distortion amplitudes; the angular power spectrum or its acoustic peaks;
+a recombination or last-scattering treatment; a primordial gravitational-wave
+background; or any inflationary, structure-formation, or dark-energy phenomenology.
+Each belongs to another paper or to a future computation. The paper is a scoped
+interpretive reading of the CMB as the relaxed primordial phonon bath, plus an
+explicit ledger of what would be required to make that reading quantitative.
+Treating it as a complete CMB cosmology would re-introduce exactly the catch-all
+manifesto drift that the split of the late-series papers was designed to avoid.
+
+\section{Conclusion}
+
+Within the scoped SSV programme, this paper carries one claim: the cosmic microwave
+background is the present, red-shifted image of the primordial phonon bath shed by
+the void-to-saturation transition of Paper~VIII --- integrated reconnection noise,
+not a separately postulated radiation relic. The reading is interpretive, its one
+quantitative anchor (the defect/phonon ratio $\eta$) is inherited from Paper~VIII's
+Kibble--Zurek result, and its central physical quantities --- the temperature, the
+blackbody form, and the distortions --- are explicitly deferred to the named closure
+inputs rather than claimed.
+
+\begin{thebibliography}{99}
+
+\bibitem{ssv1}
+Norland, S., ``Saturated Superfluid Vacuum~I: Topological Defects in a
+Saturated Superfluid Vacuum: The Geometric Origin of Matter,''
+SSV Series Paper~I (2026).
+
+\bibitem{ssv2}
+Norland, S., ``Saturated Superfluid Vacuum~II: Forces as Hydrodynamic
+Pressure Gradients in the Saturated Superfluid Plenum,''
+SSV Series Paper~II (2026).
+
+\bibitem{ssv3}
+Norland, S., ``Saturated Superfluid Vacuum~III: Thermodynamics and
+Irreversible Time,'' SSV Series Paper~III (2026).
+
+\bibitem{ssv8}
+Norland, S., ``Saturated Superfluid Vacuum~VIII: Cosmogony from the
+Permissive Void,'' SSV Series Paper~VIII (2026).
+
+\bibitem{ssvG}
+Norland, S., ``Saturated Superfluid Vacuum (Goldstone supplement):
+Electromagnetic Propagation Speed and the Photon as a Goldstone Mode,''
+SSV Series (2026).
+
+\bibitem{SSV-VIIb}
+Norland, S., ``Saturated Superfluid Vacuum~VII-b: Emergent Geometry and
+the Dissolution of Quantum Gravity,'' SSV Series Paper~VII-b (2026).
+
+\bibitem{Kibble1976}
+Kibble, T.~W.~B., ``Topology of Cosmic Domains and Strings,''
+\emph{J.\ Phys.\ A} \textbf{9}, 1387--1398 (1976).
+
+\bibitem{Zurek1985}
+Zurek, W.~H., ``Cosmological Experiments in Superfluid Helium,''
+\emph{Nature} \textbf{317}, 505--508 (1985).
+
+\bibitem{Fixsen1996}
+Fixsen, D.~J., \emph{et al.}, ``The Cosmic Microwave Background Spectrum
+from the Full COBE/FIRAS Data Set,''
+\emph{Astrophys.\ J.}\ \textbf{473}, 576--587 (1996).
+
+\bibitem{Volovik2003}
+Volovik, G.~E., \emph{The Universe in a Helium Droplet}
+(Oxford University Press, Oxford, 2003).
+
+\bibitem{Madelung1927}
+Madelung, E., ``Quantentheorie in hydrodynamischer Form,''
+\emph{Z.\ Phys.}\ \textbf{40}, 322--326 (1927).
+
+\end{thebibliography}
+
+\appendix
+% Auto-generated provenance (issue URLs + pinned script permalinks).
+% Regenerate: python instruments/tools/gen_provenance.py SSV-IX
+\input{provenance.tex}
+
+\end{document}
