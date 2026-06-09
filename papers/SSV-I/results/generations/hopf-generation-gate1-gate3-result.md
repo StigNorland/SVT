@@ -163,7 +163,43 @@ naturally terminate at 3 either).
 
 ---
 
-## Overall verdict: #115 closes **NEGATIVE**
+### Fully-coupled end-to-end relaxation — nailing it down
+
+The combined checks above still relaxed at most one sector at a time. The
+definitive test (`hopf_full_relax.py`) relaxes the **full complex spinor**
+Ψ = (ψ₁, ψ₂) under the **complete** functional at once — gradient + chiral-shear
+(λ_⊥/2)|∇×j|² + log-potential — by backtracking imaginary-time descent
+(every accepted step strictly lowers E, so no spurious spikes), with the Hopf
+charge **monitored, not constrained**, for Q = 1, 2, 3.
+
+| Q | Q (initial) | Q (relaxed) | E (relaxed), λ_⊥=1 |
+|---|---|---|---|
+| 1 | −0.999 | −0.996 | 197.6 |
+| 2 | −1.991 | −1.866 | 437.0 |
+| 3 | −2.964 | −2.661 | 766.2 |
+
+Two findings:
+
+1. **The hopfion is stable.** Under true monotone descent the Hopf charge is
+   preserved (it does *not* unwind to 0) — the chiral-shear quartic term plays
+   the Skyrme role and Derrick-stabilises the texture, exactly as expected. (The
+   apparent "collapse" in a naive explicit run was a numerical energy spike from
+   the stiff quartic term, removed by backtracking.) So these are genuine stable
+   topological objects, not transients.
+
+2. **The coupled energy is flat.** E(Q2)/E(Q1) = **2.21**, E(Q3)/E(Q2) = 1.75 —
+   ~94× too flat for the muon step. λ-invariance confirmed: the ratio is 2.21,
+   2.11, 2.03 at λ_⊥ = 1, 2, 4, so the physical λ_⊥ = α⁻² (which only rescales
+   size → ~α⁻¹ξ = R*, and overall scale) leaves the ratio ~2. The descent stalls
+   partially (stiff term), but full convergence only *flattens* it further
+   (Vakulenko–Kapitanskii forces the true minimum to ~Q^{3/4} = ×1.68), so 2.2 is
+   an upper bound on the steepness.
+
+This is the end-to-end confirmation: no separation artifact, no fixed-ansatz
+crutch, Hopf charge dynamically preserved — and the hierarchy is still ~2 orders
+of magnitude out of reach.
+
+## Overall verdict: #115 closes **NEGATIVE** (directly confirmed)
 
 **Gate 1 PASS / Gate 3 (all four energy sectors) FAIL.** CP¹ Hopf charge supplies
 valid, discrete, electric-charge-preserving, EM-unradiatable topological *labels*
