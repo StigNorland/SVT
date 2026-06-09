@@ -123,6 +123,32 @@ refinement) — ~136× too flat. Even the saturation-only piece (E_pot) steps ju
 ×2.5. Decision rule (step stays O(1)) → **the energetic hierarchy is
 unreachable.**
 
+### Combined test — were the sectors only tested separately?
+
+A fair objection: Gates 3 evaluated E₂/E₄/chiral-shear on *fixed* ansätze, and
+G3′ relaxed only the amplitude with the chiral-shear term *outside* the
+minimised functional. Could combining them — in particular the dominant
+λ_⊥ = α⁻² chiral-shear term *with* a varying amplitude — produce a steep step
+that the separate tests miss?
+
+No. Evaluating the chiral-shear current with the relaxed amplitude, j = ρ·a
+(ρ = A²):
+
+| step | chiral-shear, ρ varies (combined) | chiral-shear, ρ = 1 (separate) | required |
+|---|---|---|---|
+| Q1 → Q2 | **1.39** | 2.33 | 206.8 |
+| Q2 → Q3 | **1.20** | 1.96 | 16.8 |
+
+Coupling makes it **flatter**, not steeper: where the core depletes, the current
+ρ·a is suppressed, so the combined step (×1.39) is *below* the separate one
+(×2.33). This is the general rule — energies are additive, so a fixed-config
+total ratio is bounded by the steepest term's ratio (≈ 2.3 even with λ_⊥
+weighting all of it), and relaxing more degrees of freedom only lowers energies
+toward the rigorously *sublinear* Faddeev minimum (Vakulenko–Kapitanskii
+E ≳ Q^{3/4}). The combined, fully-relaxed result is therefore squeezed between a
+flat ansatz ceiling and a sublinear floor — it cannot be Q⁷. Separate testing
+was conservative.
+
 **Root cause (why all four sectors fail together).** In a *static* topological
 texture every energy term — gradient, Skyrme, chiral-shear, and the
 log-potential's depletion response — is ultimately sourced by the texture

@@ -36,7 +36,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from hopf_generation_audit import make_grid
+from hopf_generation_audit import make_grid, berry_connection
 
 LOG_PRESSURE = 0.5
 FLOOR = 1e-12
@@ -103,15 +103,46 @@ def energy_components(A, G, K, dx):
     return e_grad, e_tex, e_pot, e_grad + e_tex + e_pot
 
 
+def coupled_chiral_shear(A, n, m, X, Y, Z, K, dx):
+    """∫|∇×j|² with the FULL current j = ρ·a (ρ = A², a = Berry connection),
+    i.e. the chiral-shear term evaluated *with* the relaxed amplitude — the
+    combined (not separate) test.  Returns (E_coupled, E_bare) where E_bare uses
+    ρ = 1 (the separate chiral-shear of hopf_generation_audit)."""
+    KX, KY, KZ = K
+    r2 = X * X + Y * Y + Z * Z
+    denom = r2 + 1.0
+    Z1 = ((r2 - 1.0) + 2j * Z) / denom
+    Z2 = (2.0 * (X + 1j * Y)) / denom
+    Z2 = np.where(np.abs(Z2) < 1e-12, 1e-12 + 0j, Z2)
+    a = berry_connection(Z1 ** n, Z2 ** m, K)
+
+    def d(f, k_i):
+        return np.real(np.fft.ifftn(1j * k_i * np.fft.fftn(f)))
+
+    def curl_sq(vec):
+        vx, vy, vz = vec
+        bx = d(vz, KY) - d(vy, KZ)
+        by = d(vx, KZ) - d(vz, KX)
+        bz = d(vy, KX) - d(vx, KY)
+        return float(np.sum(bx * bx + by * by + bz * bz)) * dx ** 3
+
+    rho = A * A
+    e_coupled = curl_sq([rho * a[i] for i in range(3)])
+    e_bare = curl_sq(a)
+    return e_coupled, e_bare
+
+
 def run_saturation(n, m, grid_n=96, half_width=8.0):
     X, Y, Z, dx, K = make_grid(grid_n, half_width)
     G = texture_gradient_potential(X, Y, Z, n, m, K)
     A = relax_amplitude(G, K)
     e_grad, e_tex, e_pot, e_tot = energy_components(A, G, K, dx)
+    e_chi_coupled, e_chi_bare = coupled_chiral_shear(A, n, m, X, Y, Z, K, dx)
     return {
         "n": n, "m": m, "Q": n * m,
         "A_min": float(A.min()), "A_max": float(A.max()),
         "E_grad": e_grad, "E_tex": e_tex, "E_pot": e_pot, "E_total": e_tot,
+        "E_chi_coupled": e_chi_coupled, "E_chi_bare": e_chi_bare,
     }
 
 
@@ -120,6 +151,7 @@ def summary(grid_n=96, half_width=8.0):
             for (n, m) in [(1, 1), (2, 1), (3, 1)]]
     Et = [r["E_total"] for r in rows]
     Ep = [r["E_pot"] for r in rows]
+    Ecc = [r["E_chi_coupled"] for r in rows]
     return {
         "rows": rows,
         "E_total": Et,
@@ -127,6 +159,10 @@ def summary(grid_n=96, half_width=8.0):
         "Etot_ratio_2_1": Et[1] / Et[0],
         "Etot_ratio_3_2": Et[2] / Et[1],
         "Epot_ratio_2_1": Ep[1] / Ep[0],
+        # Combined test: chiral-shear evaluated WITH the relaxed amplitude.
+        "Echi_coupled": Ecc,
+        "Echi_coupled_ratio_2_1": Ecc[1] / Ecc[0],
+        "Echi_coupled_ratio_3_2": Ecc[2] / Ecc[1],
         "required_mu_over_e": 206.768,
         "required_tau_over_mu": 16.817,
     }
@@ -146,3 +182,8 @@ if __name__ == "__main__":
           f"vs required m_τ/m_μ = {s['required_tau_over_mu']:.1f}")
     print(f"E_pot(Q2)/E_pot(Q1)     = {s['Epot_ratio_2_1']:.3f}   "
           f"(saturation-only step)")
+    print()
+    print("Combined (chiral-shear WITH relaxed amplitude, j = ρ·a):")
+    print(f"  Echi_coupled(Q2)/(Q1) = {s['Echi_coupled_ratio_2_1']:.3f}   "
+          f"vs required {s['required_mu_over_e']:.1f}  "
+          f"(amplitude depletion flattens it further)")

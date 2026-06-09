@@ -36,3 +36,16 @@ def test_g3prime_saturation_engaged_but_too_flat():
     assert s["Etot_ratio_2_1"] < 0.05 * s["required_mu_over_e"]
     # Even the saturation-only (E_pot) step falls far short.
     assert s["Epot_ratio_2_1"] < 0.1 * s["required_mu_over_e"]
+
+
+def test_g3prime_combined_chiral_shear_is_not_steeper():
+    """Combined test (answers 'did you test them together?'): the dominant
+    chiral-shear term evaluated WITH the relaxed amplitude scales no steeper than
+    separately — coupling flattens it (depletion suppresses the current), so the
+    negative is robust to combining the sectors, not an artifact of separation."""
+    s = summary(GRID_N, HALF)
+    assert s["Echi_coupled_ratio_2_1"] < 5.0, s["Echi_coupled_ratio_2_1"]
+    assert s["Echi_coupled_ratio_2_1"] < 0.05 * s["required_mu_over_e"]
+    # Coupling (ρ varies) is not steeper than the separate bare (ρ=1) step.
+    bare_2_1 = s["rows"][1]["E_chi_bare"] / s["rows"][0]["E_chi_bare"]
+    assert s["Echi_coupled_ratio_2_1"] <= bare_2_1 + 1e-9, (s["Echi_coupled_ratio_2_1"], bare_2_1)
