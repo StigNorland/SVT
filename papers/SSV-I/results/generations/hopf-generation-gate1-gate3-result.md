@@ -101,24 +101,60 @@ none scales steeper than ~Q^{1.6}, against the ~Q⁷ the masses demand. The
 "SSV ≠ Faddeev–Niemi" hatch is shut — the chiral-shear term is the Skyrme
 structure up to the constant ¼.
 
-**The one surviving route is the amplitude / log-potential (saturation) sector —
-which is exactly the original physical picture** ("load energy into a confined
-core; the saturated vacuum resists"). That sector is *not* tested here: every
-energy above holds ρ = ρ₀ fixed. The mass of a loaded core could instead live in
-the LogSE saturation term b(ρ ln ρ − ρ + 1) when the amplitude is driven away
-from ρ₀ at the core, with the Hopf charge acting only as the discrete, pinning
-*label* (not the energy source). The next gate is therefore:
+### Gate 3′ — the saturation / log-potential sector: **FAIL**
 
-> **G3′ (saturation):** relax ρ (not just the texture) for the Q = 1, 2, 3
-> hopfions under the full LogSE + chiral-shear functional. Does the log-potential
-> energy of a Hopf-pinned core scale steeply enough to span ×207? Decision rule:
-> step ≳ ×50 and grid-stable → the saturation route is viable; step stays O(1) →
-> the energetic hierarchy is unreachable and #115 closes negative.
+This was the last surviving route and the original physical picture ("load
+energy into a confined core; the saturated vacuum resists"). Test
+(`hopf_saturation_relax.py`): write Ψ = A·z, hold the Hopf texture z fixed, and
+**relax the amplitude** A by imaginary-time flow under the full LogSE energy
+½[(∇A)² + A²|∂z|²] + ½(A² ln A² − A² + 1). The texture forces a core notch and
+the log-potential pays for it.
 
-The texture-only gates (spin-statistics part of G1, selection-rule G2, neutrino
-G4) stay **behind** G3′: if the saturation sector cannot carry the hierarchy,
-they are moot.
+| Q | A_min (core depth) | E_pot (saturation) | E_total |
+|---|---|---|---|
+| 1 | 0.223 | 46.0 | 303.9 |
+| 2 | 0.090 | 115.6 | 462.3 |
+| 3 | 0.042 | 190.0 | 585.2 |
 
-Status of the generation claim is **unchanged** by this pass: generations remain
-recorded coincidences (#99). #115 stays open on the saturation-sector energetics
-(G3′) only.
+The mechanism is genuinely engaged — the core depletes deeper at higher Q
+(A_min 0.22 → 0.09 → 0.04). But the energy step is **E(Q2)/E(Q1) = 1.52**
+(grid-stable: 1.63 at N=64, 1.52 at N=96, drifting *away* from the target with
+refinement) — ~136× too flat. Even the saturation-only piece (E_pot) steps just
+×2.5. Decision rule (step stays O(1)) → **the energetic hierarchy is
+unreachable.**
+
+**Root cause (why all four sectors fail together).** In a *static* topological
+texture every energy term — gradient, Skyrme, chiral-shear, and the
+log-potential's depletion response — is ultimately sourced by the texture
+gradient |∂z|², which scales sublinearly (~Q^{0.1–0.75}). The log potential can
+only *respond* by depleting ρ, and depletion is **bounded** (ρ ≥ 0 caps the
+density at ½ per unit volume — the "saturation"). A bounded response cannot
+amplify a ~Q^{0.7} source into a ~Q⁷ step. The unbounded branch (ρ ≫ ρ₀, the
+balloon *overfilling*) is never reached by a static texture; accessing it needs
+active driving, i.e. a non-stationary state — which is not a stable particle
+(and the lifetime/quasiparticle cutoff that would govern such a state does not
+naturally terminate at 3 either).
+
+---
+
+## Overall verdict: #115 closes **NEGATIVE**
+
+**Gate 1 PASS / Gate 3 (all four energy sectors) FAIL.** CP¹ Hopf charge supplies
+valid, discrete, electric-charge-preserving, EM-unradiatable topological *labels*
+(exactly the profile the hypothesis wanted), **but it cannot source the lepton
+mass hierarchy in any static sector.** No static CP¹ configuration makes Q = 1, 2,
+3 differ by ×207, ×17 — the texture-gradient source is too flat and the
+saturation response is bounded.
+
+Because G3/G3′ are the binding constraint and fail, the texture-only gates parked
+behind them — spin-statistics (rest of G1), selection-rule G2, neutrino G4 — are
+**moot** (per the pre-registration). The 3D burst-threshold solver is **not**
+built: it was gated behind a PASS here.
+
+This is a clean negative that *strengthens* #99: not only is there no derived
+generation mass, the most natural topological candidate (Hopf charge) is
+**excluded as the mass mechanism** by a root-cause argument, not merely unproven.
+Generations remain recorded coincidences. Reopening would now require structure
+beyond *both* CP¹ and a static energy functional — e.g. a genuinely dynamical
+(driven, non-stationary) state, which then faces the lifetime/quasiparticle
+problem documented in the issue thread.
