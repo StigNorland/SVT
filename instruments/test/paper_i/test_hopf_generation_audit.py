@@ -57,3 +57,20 @@ def test_g3_energy_far_too_flat_for_hierarchy():
     assert s["E_ratio_2_1"] < 0.05 * s["required_mu_over_e"]
     # Sanity: the energy does at least increase with Q (not collapsing).
     assert s["Etot"][2] > s["Etot"][1] > s["Etot"][0]
+
+
+def test_g3_chiral_shear_is_skyrme_and_also_too_flat():
+    """SSV chiral-shear |∇×j|² on a bare texture (j ∝ a) IS the Skyrme structure
+    (∫|∇×a|²/E4 Q-independent) and scales just as flatly — closing the
+    'maybe chiral-shear is steeper than Faddeev–Niemi' escape hatch."""
+    s = summary(GRID_N, HALF)
+    cr = s["chi_over_E4"]
+    # Ratio ≈ ¼ and roughly Q-independent ⇒ same structure as the Skyrme term.
+    # (Spread is grid-limited: ~7% at N=64, ~1% at N=96; the structural point is
+    # that it is a single O(1) constant, not a Q-growing factor.)
+    mean = sum(cr) / len(cr)
+    assert 0.2 < mean < 0.3, cr
+    assert max(cr) - min(cr) < 0.15 * mean, cr
+    # And therefore equally too flat: e→μ step ≪ 207.
+    assert s["Echi_ratio_2_1"] < 5.0, s["Echi_ratio_2_1"]
+    assert s["Echi_ratio_2_1"] < 0.05 * s["required_mu_over_e"]
