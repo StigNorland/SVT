@@ -4,11 +4,13 @@ Working title: `CMB and Primordial Phonon Bath`
 
 ## Status
 
-Future queue. README scope defined; `main.tex` not yet written. This paper
-is the destination for the CMB and primordial-phonon material that was
-moved out of SSV III in issue #10. Development is deliberately deferred
-until SSV VIII (cosmogony from the permissive void) is substantially
-settled — IX consumes VIII's cosmogonic sequence as input.
+First `main.tex` draft written under issue #100 (compiles clean, 8 pages). This
+paper is the destination for the CMB and primordial-phonon material that was
+moved out of SSV III in issue #10; it consumes SSV VIII's cosmogonic sequence
+(Stage 4–5, Kibble–Zurek) as input. The draft follows the section structure
+below, with an explicit per-section claim taxonomy and gap boxes for every
+quantity (T_0, blackbody form, μ/y distortions, entropy budget) that is not
+derived inside it.
 
 ## Scope line
 

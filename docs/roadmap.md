@@ -64,7 +64,7 @@ These are treated as fixed foundation papers. Later work may refine or supersede
    - Primordial phonon bath
    - CMB interpretation
    - Entropy-budget cosmology
-   - Status: scoped outline only; no `main.tex` yet; drafting tracked by #100
+   - Status: first `main.tex` draft (#100); CMB read as integrated reconnection noise (interpretive); T_0, blackbody form, and distortions explicitly gap-boxed (blocked on P_0); KZ defect/phonon link inherited from VIII
 
 10. `SSV Alpha: Fine-Structure Constant from Toroidal Vortex Geometry`
     - Core claim: `R*/ξ = α⁻¹`
