@@ -137,6 +137,32 @@ def hopf_invariant(bvec, K):
     return integrand
 
 
+def berry_connection(zeta1, zeta2, K):
+    """a_i = −i z†∂_i z for the normalised CP¹ spinor z = (ζ₁,ζ₂)/|ζ| (real)."""
+    KX, KY, KZ = K
+    norm = np.sqrt(np.abs(zeta1) ** 2 + np.abs(zeta2) ** 2)
+    z1, z2 = zeta1 / norm, zeta2 / norm
+
+    def dz(z, k_i):
+        return np.fft.ifftn(1j * k_i * np.fft.fftn(z))
+
+    a = []
+    for k_i in (KX, KY, KZ):
+        s = np.conj(z1) * dz(z1, k_i) + np.conj(z2) * dz(z2, k_i)
+        a.append(np.real(-1j * s))   # z†∂z is pure imaginary ⇒ a real
+    return a
+
+
+def chiral_shear_density(a_vec, K):
+    """|∇×a|²: the SSV chiral-shear density |∇×j|² for a pure texture (j ∝ a)."""
+    KX, KY, KZ = K
+    ax, ay, az = a_vec
+    bx = d_spectral(az, KY) - d_spectral(ay, KZ)
+    by = d_spectral(ax, KZ) - d_spectral(az, KX)
+    bz = d_spectral(ay, KX) - d_spectral(ax, KY)
+    return bx * bx + by * by + bz * bz
+
+
 def faddeev_niemi_energy(nhat, dn):
     """E₂ = ∫ Σ_i|∂_i n̂|², E₄ = ∫ Σ_{i<j} F_ij²  (densities; caller scales by dx³)."""
     e2 = sum(_dot(dn[i], dn[i]) for i in range(3))
@@ -158,11 +184,20 @@ def run_hopf_charge(n: int, m: int, grid_n: int = 96, half_width: float = 8.0):
     bvec, dn = pullback_b(nhat, K)
     H = float(np.sum(hopf_invariant(bvec, K)) * dx ** 3 / (4 * np.pi) ** 2)
     e2, e4 = faddeev_niemi_energy(nhat, dn)
+    # Chiral-shear energy of the bare texture, ∫|∇×a|² (j ∝ a, θ=0, ρ=ρ₀).
+    r2 = X * X + Y * Y + Z * Z
+    denom = r2 + 1.0
+    Z1 = ((r2 - 1.0) + 2j * Z) / denom
+    Z2 = (2.0 * (X + 1j * Y)) / denom
+    Z2 = np.where(np.abs(Z2) < 1e-12, 1e-12 + 0j, Z2)
+    a_vec = berry_connection(Z1 ** n, Z2 ** m, K)
+    e_chi = float(np.sum(chiral_shear_density(a_vec, K)) * dx ** 3)
     return {
         "n": n, "m": m, "Q_target": n * m,
         "H": H,
         "E2": float(np.sum(e2) * dx ** 3),
         "E4": float(np.sum(e4) * dx ** 3),
+        "E_chi": e_chi,
     }
 
 
@@ -203,12 +238,20 @@ def summary(grid_n: int = 96, half_width: float = 8.0):
             for (n, m) in [(1, 1), (2, 1), (3, 1)]]
     H1 = rows[0]["H"]
     Etot = [r["E2"] + r["E4"] for r in rows]
+    Echi = [r["E_chi"] for r in rows]
     out = {
         "rows": rows,
         "H_ratios": [r["H"] / H1 for r in rows],          # expect ≈ 1, 2, 3
         "Etot": Etot,
         "E_ratio_2_1": Etot[1] / Etot[0],                 # observed needs 207
         "E_ratio_3_2": Etot[2] / Etot[1],                 # observed needs 17
+        # Chiral-shear (= SSV |∇×j|² on a bare texture).
+        "Echi": Echi,
+        "Echi_ratio_2_1": Echi[1] / Echi[0],              # observed needs 207
+        "Echi_ratio_3_2": Echi[2] / Echi[1],              # observed needs 17
+        # If chiral-shear and Skyrme are the same structure, this ratio is
+        # Q-independent (a constant), confirming j ∝ a ⇒ |∇×j|² ∝ |b|².
+        "chi_over_E4": [r["E_chi"] / r["E4"] for r in rows],
         "required_mu_over_e": 206.768,
         "required_tau_over_mu": 16.817,
         "charge_orthogonality_dmax": electric_charge_orthogonality(),
@@ -232,3 +275,12 @@ if __name__ == "__main__":
           f"vs required m_μ/m_e = {s['required_mu_over_e']:.1f}")
     print(f"  E(Q3)/E(Q2) = {s['E_ratio_3_2']:.3f}   "
           f"vs required m_τ/m_μ = {s['required_tau_over_mu']:.1f}")
+    print()
+    print("G3 chiral-shear ∫|∇×a|²  (SSV |∇×j|² on a bare texture):")
+    print(f"  Echi(Q2)/Echi(Q1) = {s['Echi_ratio_2_1']:.3f}   "
+          f"vs required {s['required_mu_over_e']:.1f}")
+    print(f"  Echi(Q3)/Echi(Q2) = {s['Echi_ratio_3_2']:.3f}   "
+          f"vs required {s['required_tau_over_mu']:.1f}")
+    cr = s["chi_over_E4"]
+    print(f"  ∫|∇×a|² / E4 = {cr[0]:.4f}, {cr[1]:.4f}, {cr[2]:.4f}  "
+          f"(Q-independent ⇒ chiral-shear ≡ Skyrme structure)")
