@@ -1,13 +1,28 @@
 # Issue #119 — falsification record and the bath-driven candidate
 
-**Status: Phase 1 (falsification of the mutual mechanism) COMPLETE and
-decisive; Phase 2 (bath-driven candidate) numerically delicate and in
-progress.**  Headline: the mutual-radiation mechanism of SSV-II/SSV-IV is
-**falsified** — H1a (retardation sign-oscillation) and H1c (static
-screening) are both confirmed negatives, and H1b (unequal-frequency null) is
-supported.  The bath-driven redesign is so far **untested**, not confirmed:
-the first attempt was contaminated by nonlinear defect coupling, and the
-clean linear-regime measurement is still being pushed above its noise floor.
+**Status: Phase 1 (mutual mechanism) FALSIFIED; Phase 2 (bath-driven force)
+gives the right sign but the wrong range; Phase 3 (time-dilation field, the
+correct observable) reframes the whole problem — the literal SSV-IV potential
+is a box artifact, but the robust phase-blind field is the isothermal
+(flat-rotation-curve) profile, not the Newtonian one.**
+
+Headline chain:
+- **The mechanical force is the wrong observable.** H1a/H1b falsify the
+  two-body Bjerknes *force* (it oscillates in sign with retardation and
+  vanishes for unequal frequencies).  But gravity in SSV-IV is the gradient
+  of the *time-dilation field*, not a pressure force — so the force being
+  falsified does not by itself settle gravity.  (Owner's correction,
+  recurring; acted on in Phase 3.)
+- **The time-dilation field is phase-blind** — it does NOT oscillate in sign
+  and does NOT vanish for unequal frequencies, escaping H1a/H1b.  This
+  vindicates the time-dilation framing over the force framing.
+- **But its range is wrong for Newtonian gravity.**  The literal potential
+  Φ ∝ ⟨δρ⟩ is a box-dependent standing-wave artifact (sign flips L=200↔L=400,
+  Phase 3).  The robust, box-independent field is the wave **intensity**
+  (energy density), ~r⁻¹ in 2D ⇒ **~r⁻² in 3D** by flux conservation.  As a
+  *potential* that is too steep (1/r³ force); as a Poisson *source* it is the
+  **isothermal ρ ∝ 1/r² halo that gives flat rotation curves** — tying this
+  result directly to Paper VI-a.
 
 Pre-registered in issue [#119](https://github.com/StigNorland/SVT/issues/119).
 Solver: `instruments/paper_iv/bath_driven_interaction.py` (reuses the
@@ -67,32 +82,31 @@ the monotone 1/r² Newtonian force.  This **falsifies the SSV-II "independent
 of zone" claim** and promotes the negative result Appendix A of SSV-IV had
 only glimpsed to a quantitative, retardation-matched falsification.
 
-### H1b — unequal-frequency null — **supported; clean rerun in progress**
+### H1b — unequal-frequency null — **CONFIRMED (negative)**
 
 Pre-registration: `⟨cos ω₁t · cos ω₂t⟩ = 0` for `ω₁ ≠ ω₂`, so the
 time-averaged bilinear force between sources of unequal drive frequency must
 be consistent with the isolated-source residual, while the equal-frequency
 control at the same separation is large and attractive.
 
-First run (near zone, ω_A = 0.15, d = 10):
+Strong-coupling run (ω_A = 0.7, d = 10, GPU):
 
-| case | ⟨F_A⟩ |
-|---|---|
-| isolated source (residual) | −8.74×10⁻⁴ |
-| equal-frequency control | +2.23×10⁻³ |
-| unequal ω_B = 2× | −1.25×10⁻³ |
-| unequal ω_B = 4× | −8.84×10⁻⁴ |
-| unequal ω_B = 8× | −8.57×10⁻⁴ |
+| case | ⟨F_A⟩ | verdict |
+|---|---|---|
+| isolated source (residual) | +3.68×10⁻⁵ | — |
+| equal-frequency control | +4.46×10⁻² | 1211× residual |
+| unequal ω_B = 2× | −6.62×10⁻⁴ | NULL |
+| unequal ω_B = 3× | +9.50×10⁻⁵ | NULL |
+| unequal ω_B = 4× | +3.75×10⁻⁵ | NULL (= residual) |
 
-All three unequal-frequency forces sit essentially **at the residual**
-(−8.7×10⁻⁴), i.e. there is no genuine mutual force — exactly the predicted
-null.  The equal-frequency control is attractive and nonzero.  **Caveat:**
-at this near-zone setting the control is only ≈ 3× the residual, too weak a
-separation to be decisive, so the script returns INCONCLUSIVE on its own
-strict rule.  A strong-coupling rerun (ω_A = 0.7, where the control is ~10³×
-the residual; the null is exact and zone-independent because it comes from
-time-averaging, not retardation) is running on GPU to make the separation
-unambiguous.  **Table to be replaced with the strong-coupling run.**
+The equal-frequency control is **1211× the residual** — a clean separation.
+Every unequal-frequency force is below the null threshold; the ω_B = 4× case
+lands *exactly* on the isolated-source residual.  There is **no
+time-averaged mutual force between sources of unequal Compton frequency**:
+the as-written mechanism gives no electron–proton gravity and fails mass
+(∝ N) extensivity for composite bodies.  (The earlier near-zone run, ω_A =
+0.15, gave the same nulls but with only a 3× control/residual separation —
+superseded by this run.)
 
 ### H1c — static screening — **CONFIRMED (negative)**
 
@@ -185,24 +199,85 @@ case, and consistent with the H1c screening result).
 | 0.040 | 2.41e−2 | −3.25e−5 | +1.78e−7 |
 
 In the linear regime the bath response is clean (amp ∝ ε; F_single ∝ ε²,
-the primary radiation force), but the *interaction* F_int is **below the
-pair-minus-single subtraction noise floor** (~10⁻⁷): it does not scale as
-ε², so the genuine secondary force (∝ U²ε²) is too weak to resolve at
-U = 0.03.  A boosted-but-linear configuration (larger U with δρ still ≪ 1,
-closer defects, long averaging) is under test on GPU to bring the secondary
-force above the floor.  **Verdict so far: the bath-driven candidate is
-neither confirmed nor falsified — it is numerically delicate, and the clean
-test is in progress.**  This is reported as-is per rule 1; no positive spin.
+the primary radiation force), but at U = 0.03 the *interaction* F_int is
+below the subtraction noise floor (~10⁻⁷).  Boosting to U = 0.12 (still
+linear, δρ ≈ −0.10) and applying the double subtraction resolves the
+secondary force cleanly.
 
-### H2b — factorisation and bath-amplitude exponent
+**Production sweep (GPU, U = 0.12, ε = 0.03, ω_b = 0.1, double subtraction,
+all points verified linear):**
 
-Did not run: the driver chained H2b after H2a, and H2a's contaminated run
-returned a non-pass exit code.  H2b is deferred to the linear-regime
-redesign (it is only meaningful once H2a yields a resolved secondary force).
-The coarse-grid pytest probe returned an amplitude exponent p ≈ −2.1
-(tracked as issue #119 task), now understood as the same contamination:
-with an over-strong bath the medium is driven nonlinear/chaotic and the
-ε²-scaling is destroyed.
+| d | F_sec | note |
+|---|---|---|
+| 5  | +6.41×10⁻⁶ | attractive |
+| 6  | +3.50×10⁻⁶ | attractive |
+| 7  | +1.84×10⁻⁶ | attractive |
+| 8  | +1.02×10⁻⁶ | attractive |
+| 10 | +3.58×10⁻⁷ | attractive |
+| 12 | −4.8×10⁻⁹  | **at noise floor (≈ 0)** |
+
+Two findings, one encouraging and one likely fatal:
+
+1. **Right sign (encouraging).** The bath-driven secondary force is
+   **attractive and monotone** across d = 5→10 — unlike the mutual
+   mechanism, it does *not* oscillate in sign.  The lone negative point
+   (d = 12, −4.8×10⁻⁹) is two orders below the d = 5 value and consistent
+   with zero at the ~10⁻⁷ floor; it is signal decaying into noise, not a
+   genuine reversal.
+
+2. **Short range (likely fatal).** The force decays far too fast to be
+   gravity.  A fit to d = 5–10 gives **F_sec ∝ exp(−d/1.73)** (RMS residual
+   0.045) or equivalently **∝ d⁻⁴·²** (RMS 0.071) — the exponential fits
+   better, indicating **evanescent mediation**.  Long-range gravity needs a
+   force ∝ 1/r (2D) / 1/r² (3D); this is *vastly* steeper.  The bath-driven
+   secondary force is **short-ranged**.
+
+**Interpretation — the trilemma reasserts itself.**  Across the three
+regimes now tested, the LogSE medium offers a force that is either
+long-range *or* sign-definite, never both:
+- ω = 0 (static, H1c): sign-definite but screened (range 1/κ = 0.5);
+- ω_b = 0.1 (sub-gap bath, H2a): sign-definite (attractive) but evanescent
+  (range ≈ 1.7);
+- ω ≳ gap (radiation zone, H1a): long-range but sign-oscillating (period
+  λ/2).
+
+The obstruction is the medium's **mass gap** κ = √(4b): bath modes below the
+gap are evanescent (short-range), modes above it propagate but carry the
+retardation sign-flip.  A long-range, sign-definite force appears to require
+operating *at* a regime the gapped LogSE does not provide.  **Verdict: the
+bath-driven candidate gives the right sign but the wrong range; on this
+evidence it does not deliver long-range gravity any more than the mutual
+mechanism did.**  Reported straight, per rule 1 — this is a negative
+indication, not a setback to be smoothed over.
+
+**Decisive next test (pre-registered for the next pass):** sweep ω_b from
+sub-gap to above-gap and measure the decay length of F_sec versus its
+sign-definiteness.  If short-range↔sign-definite and long-range↔oscillating
+holds across the sweep, the trilemma is confirmed for the bath-driven case
+and the candidate is falsified.  The one escape — a propagating *and*
+sign-definite window — would have to appear there; the analytic expectation
+(H2c) is that it does not, because the static attractive sign comes
+precisely from the evanescent/concave regime.
+
+### H2b — factorisation and bath-amplitude exponent — **factorisation PASSES**
+
+Production run (GPU, d = 6, U ∈ {0.12, 0.24}, ε = 0.03, double subtraction,
+all linear):
+
+| case | F_sec |
+|---|---|
+| F(0.12, 0.12) | +3.4962×10⁻⁶ |
+| F(0.24, 0.24) | +1.3060×10⁻⁵ |
+| F(0.12, 0.24) | +6.7506×10⁻⁶ |
+
+**Factorisation** F(lo,hi)² / [F(lo,lo)·F(hi,hi)] = **0.998** — the secondary
+force obeys the m₁m₂ (bilinear) law to 0.2%.  So *where it is resolved*, the
+bath-driven secondary force is a clean bilinear bath-driven interaction; the
+defect "charge" is its well depth.  (The coarse pytest p ≈ −2.1 anomaly is
+now understood as the over-strong-bath nonlinear contamination, resolved by
+the linear regime.)  This does not rescue the candidate: H2a already showed
+the force is **short-ranged**, and a factorising short-range force is still
+short-range.
 
 ### H2c — analytic: the driven response and what carries the m₁m₂ law
 
@@ -296,21 +371,103 @@ does not dilute) is now **the** open derivation of the gravity sector.
 
 ---
 
+## Phase 3 — the TIME-DILATION field (the correct observable)
+
+**Motivation (owner's recurring correction).**  Phases 1–2 measure the
+two-body *mechanical force*.  But in SSV-IV gravity is the gradient of the
+*time-dilation field* Φ(r) = α_g ln(ρ(r)/ρ₀): the "pull" is −∇(time delay),
+not a pressure force.  The force is phase-sensitive (hence the H1a/H1b
+failures); the time-dilation field is the time-averaged density well around
+a *single* source — a one-body quantity, with no phase-correlation between
+unlike clocks to spoil it.  Mode `hdil`; `run_dilation` measures the
+time-averaged ⟨δρ(r)⟩ and the wave intensity ⟨δρ²_AC⟩(r) around one
+oscillating source.
+
+**Result — box-convergence is decisive.**  Two observables, two fates
+(GPU, ω = 0.6, λ ≈ 10.5; boxes L = 200/N = 320 and L = 400/N = 640):
+
+| quantity | L = 200 | L = 400 | status |
+|---|---|---|---|
+| intensity ⟨δρ²_AC⟩ tail | r⁻¹·⁰⁰ | r⁻⁰·⁹⁹⁹ | **box-independent (robust)** |
+| DC well ⟨δρ⟩ plateau | +1.1×10⁻⁴ | −8.8×10⁻⁵ | **sign FLIPS → box artifact** |
+
+1. **Phase-blindness CONFIRMED (vindicates the framing).**  Both fields are
+   built from time-averaged |ψ|² — they carry no propagation-phase factor, so
+   unlike the force they **do not oscillate in sign with r** and **do not
+   vanish for unequal frequencies**.  The time-dilation observable genuinely
+   escapes the H1a and H1b falsifications.  This is the real content of the
+   owner's correction: the *force* was the wrong thing to compute.
+
+2. **The literal potential is a box artifact (negative).**  The rectified DC
+   density ⟨δρ⟩ — which is literally Φ/α_g in SSV-IV eq. (phi_rho) — has a
+   plateau whose **sign reverses** between the two box sizes (+1.1×10⁻⁴ →
+   −8.8×10⁻⁵).  That is a standing-wave/absorber pedestal (cf. the #98 box
+   pedestal, the H1c far field), not a converged gravitational well.  The
+   first single-box run's "PASS — long-range" was fitting this pedestal and
+   is **retracted**.
+
+3. **The robust field is isothermal, not Newtonian (the real result).**  The
+   wave **intensity** (energy density) is clean and box-independent at
+   **r⁻¹·⁰⁰ in 2D**.  By energy-flux conservation (intensity ∝ 1/r^{D−1})
+   this is **1/r² in 3D**.  Two mutually inconsistent SSV-IV readings then
+   fork sharply:
+   - **(a) density = potential** (Φ = α_g⟨δρ⟩): 3D field ~1/r² ⇒ force ~1/r³
+     — far too steep to be Newtonian gravity.
+   - **(b) density = Poisson source** (∇²Φ = 4πG ρ_eff, SSV-IV §3 import):
+     ρ_eff ∝ 1/r² ⇒ M(r) = ∫ρ_eff 4πr² dr ∝ r ⇒ v² = GM/r = **const ⇒ flat
+     rotation curve.**  This is exactly the isothermal-halo profile.
+
+**Verdict.**  The time-dilation framing **defeats the sign and
+unequal-frequency objections** (real progress), but on this evidence it does
+**not** produce a Newtonian 1/r potential: the literal potential is a box
+artifact, and the robust energy-density field is the **isothermal 1/r²
+(flat-rotation-curve) profile**, not the 1/r Newtonian one.  Whether that is
+a feature (Paper VI-a's flat curves emerge for free) or a fatal bug (the
+solar system must be Keplerian, not flat) hinges on the unresolved SSV-IV
+ambiguity *(a) vs (b)* — density as potential vs density as source.  **This
+ambiguity is now the central open question of the gravity sector**, and it is
+the same conflation flagged in the very first SSV-IV review (§7.1 "ρ, c_s
+unchanged" vs the acoustic-metric source term).
+
+**Decisive next tests (pre-registered):**
+- accumulate ⟨ln ρ⟩ directly (the faithful Φ) instead of ⟨δρ⟩, and re-test
+  box convergence — does the −½⟨δρ²⟩ intensity term survive as the dominant,
+  sign-definite, box-stable part?
+- a 3D run (now affordable on the upgraded GPU) to confirm intensity ~1/r²
+  directly rather than by 2D→3D flux argument;
+- resolve reading (a) vs (b) at the level of the LogSE Madelung equations:
+  is the time-averaged log-density the potential, or the source of the
+  potential?  Paper VII-b's metric derivation must answer this.
+
+---
+
 ## Verdict table (to be completed)
 
 | Hypothesis | Decision rule | Outcome |
 |---|---|---|
 | H1a | crossings spaced λ/2 | **CONFIRMED neg.** — 8 crossings, mean spacing 4.73 vs λ/2 = 4.49; mutual force sign-indefinite |
-| H1b | unequal-ω force ≈ residual, control large | **supported** — unequal forces at residual; clean strong-coupling rerun in progress |
+| H1b | unequal-ω force ≈ residual, control large | **CONFIRMED neg.** — control 1211× residual; all unequal forces NULL (ω_B=4× sits on residual) |
 | H1c | static tail screened, no power law | **CONFIRMED neg.** — decay rate 2.03 vs κ = 2.0; far field a sign-changing box pedestal |
-| H2a | sign-definite + monotone at d ≪ λ | **untested** — first run contaminated (nonlinear defects); linear-regime test in progress |
-| H2b | factorisation ±10%; p = 2 ± 0.3 | deferred to linear-regime H2a |
+| H2a | sign-definite, attractive, AND long-range | **sign OK, RANGE FAILS** — attractive & monotone but short-ranged (∝ e^{−d/1.7} ≈ d⁻⁴·²); cannot be long-range gravity |
+| H2b | factorisation ±10%; p = 2 ± 0.3 | **factorisation PASS** (0.998, m₁m₂ law) — but a factorising short-range force is still short-range |
 | H2c | response ∝ m without new postulate | **met (analytic)** — inherits Paper-II δV ∝ m; sub-resonance protects EP |
 | H2d | \|Ġ/G\| vs 1.5×10⁻¹³/yr | freely-redshifting driver excluded (−6H₀); needs pinned zero-mode |
+| H3-dil | time-dilation field long-range & sign-definite | **phase-blind YES; literal Φ a box artifact; robust field ~1/r² (3D) = isothermal, not Newtonian** |
 
-**Net:** the mutual-radiation mechanism is falsified (H1a, H1c, H1b). The
-bath-driven candidate survives analytically (H2c) but its central numerical
-claim — a sign-definite near-zone secondary force (H2a) — is not yet
-established; it is numerically delicate and under active test, and both
-H2a-numeric and H2d point to the same open requirement: an infrared,
-pinned, sector-blind condensate zero-mode as the gravity driver.
+**Net.**  Three layers, one conclusion:
+1. The mutual-radiation **force** is falsified (H1a sign-oscillation, H1b
+   unequal-frequency null, H1c static screening).
+2. The bath-driven **force** has the right sign and factorises (H2b) but is
+   **short-ranged** (H2a) — it cannot be long-range gravity either.
+3. The **time-dilation field** (the correct observable, H3-dil) is
+   phase-blind and so escapes the sign/frequency objections — genuine
+   progress — but the literal potential ⟨δρ⟩ is a **box artifact**, and the
+   robust energy-density field scales as **1/r² in 3D**: the
+   **isothermal/flat-rotation-curve profile, not the Newtonian 1/r one**.
+
+The gravity sector therefore hinges on one unresolved theoretical fork:
+**is the time-averaged log-density the potential, or the Poisson source of
+the potential?**  Reading (b) (source) yields flat rotation curves for free
+and links to Paper VI-a; reading (a) (potential) gives a force too steep to
+be Newtonian.  SSV-IV currently asserts both.  Resolving (a) vs (b) at the
+LogSE/Madelung level (Paper VII-b) is now the central open problem.
