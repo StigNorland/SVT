@@ -268,6 +268,200 @@ def save_figure(runs, fname):
     print(f"  figure -> {fname}")
 
 
+# --------------------------------------------------------------------------
+# 3D: real three-dimensional gravity (PM on a 3D grid), disc with thickness
+# --------------------------------------------------------------------------
+class PMGravity3D:
+    """3D FFT particle-mesh with isolated (zero-padded) boundaries.
+    float32 throughout for GPU memory/speed.  Kernel -G/sqrt(r^2+eps^2)."""
+
+    def __init__(self, Ng=128, L=16.0, eps=0.15, G=1.0):
+        self.Ng, self.L, self.eps, self.G = Ng, L, eps, G
+        self.h = L / Ng
+        n2 = 2 * Ng
+        ax = np.arange(n2) * self.h
+        ax = np.minimum(ax, n2 * self.h - ax).astype(np.float32)
+        XX, YY, ZZ = np.meshgrid(ax, ax, ax, indexing="ij")
+        ker = (-G / np.sqrt(XX * XX + YY * YY + ZZ * ZZ
+                            + eps * eps)).astype(np.float32)
+        self.ker_hat = _to(np.fft.rfftn(ker))
+        self.n2 = n2
+
+    def accel(self, pos, mass):
+        """CIC deposit -> isolated Poisson -> central-difference accel,
+        gathered back to the particles.  Returns (ax, ay, az)."""
+        Ng, h, L = self.Ng, self.h, self.L
+        gi = (pos[:, 0] + L / 2.0) / h
+        gj = (pos[:, 1] + L / 2.0) / h
+        gk = (pos[:, 2] + L / 2.0) / h
+        i0 = xp.floor(gi).astype(xp.int32)
+        j0 = xp.floor(gj).astype(xp.int32)
+        k0 = xp.floor(gk).astype(xp.int32)
+        fx = (gi - i0).astype(xp.float32)
+        fy = (gj - j0).astype(xp.float32)
+        fz = (gk - k0).astype(xp.float32)
+        ok = ((i0 >= 0) & (i0 < Ng - 1) & (j0 >= 0) & (j0 < Ng - 1)
+              & (k0 >= 0) & (k0 < Ng - 1))
+        i0 = xp.where(ok, i0, 0)
+        j0 = xp.where(ok, j0, 0)
+        k0 = xp.where(ok, k0, 0)
+        w = xp.where(ok, mass, 0.0).astype(xp.float32)
+        # cupyx.scatter_add supports multi-index tuples:
+        rho = xp.zeros((Ng, Ng, Ng), dtype=xp.float32)
+        for di, wx in ((0, 1 - fx), (1, fx)):
+            for dj, wy in ((0, 1 - fy), (1, fy)):
+                for dk, wz in ((0, 1 - fz), (1, fz)):
+                    if _GPU:
+                        import cupyx
+                        cupyx.scatter_add(rho, (i0 + di, j0 + dj, k0 + dk),
+                                          w * wx * wy * wz)
+                    else:
+                        np.add.at(rho, (i0 + di, j0 + dj, k0 + dk),
+                                  w * wx * wy * wz)
+        pad = xp.zeros((self.n2, self.n2, self.n2), dtype=xp.float32)
+        pad[:Ng, :Ng, :Ng] = rho
+        phi = xp.fft.irfftn(xp.fft.rfftn(pad) * self.ker_hat,
+                            s=(self.n2, self.n2, self.n2))[:Ng, :Ng, :Ng]
+        del pad
+        acc = []
+        for axis in range(3):
+            g = xp.zeros_like(phi)
+            sl_p = [slice(None)] * 3
+            sl_m = [slice(None)] * 3
+            sl_c = [slice(None)] * 3
+            sl_p[axis] = slice(2, None)
+            sl_m[axis] = slice(0, -2)
+            sl_c[axis] = slice(1, -1)
+            g[tuple(sl_c)] = -(phi[tuple(sl_p)] - phi[tuple(sl_m)]) / (2 * h)
+            # gather
+            val = xp.zeros(pos.shape[0], dtype=xp.float32)
+            for di, wx in ((0, 1 - fx), (1, fx)):
+                for dj, wy in ((0, 1 - fy), (1, fy)):
+                    for dk, wz in ((0, 1 - fz), (1, fz)):
+                        val += g[i0 + di, j0 + dj, k0 + dk] * wx * wy * wz
+            acc.append(xp.where(ok, val, 0.0))
+        return acc[0], acc[1], acc[2]
+
+
+def run_disc3d(v_halo=0.45, Q=1.2, n_part=200_000, Ng=128, L=16.0,
+               t_end=40.0, dt=0.005, hz=0.15, snap_every=2.0,
+               n_snap_sub=30_000, seed=11, tag="3d"):
+    """Full 3D run; saves subsampled snapshots for animation.  Returns
+    (snaps, times, pos_final, vel_final)."""
+    rng = np.random.default_rng(seed)
+    pm = PMGravity3D(Ng=Ng, L=L)
+    r = rng.gamma(2.0, 1.0, n_part)
+    r = np.where(r > 6.0, rng.uniform(0.2, 6.0, n_part), r)
+    th = rng.uniform(0, 2 * np.pi, n_part)
+    z = (hz * np.arctanh(rng.uniform(-0.96, 0.96, n_part))).clip(-1.2, 1.2)
+    pos = np.stack([r * np.cos(th), r * np.sin(th), z],
+                   axis=1).astype(np.float32)
+    mass = np.full(n_part, 1.0 / n_part, dtype=np.float32)
+    pos_d = _to(pos)
+    mass_d = _to(mass)
+
+    ax, ay, az = pm.accel(pos_d, mass_d)
+    r_d = _to(r.astype(np.float32))
+    th_d = _to(th.astype(np.float32))
+    a_r = -(ax * xp.cos(th_d) + ay * xp.sin(th_d))
+    a_r = a_r + (v_halo ** 2) / xp.maximum(r_d, 0.05)
+    vc = xp.sqrt(xp.maximum(r_d * a_r, 1e-6))
+    Sigma = _to((np.exp(-r) / (2 * np.pi)).astype(np.float32))
+    kappa = xp.sqrt(2.0) * vc / xp.maximum(r_d, 0.05)
+    sig_r = xp.minimum(Q * 3.36 * Sigma / xp.maximum(kappa, 1e-3), 0.5 * vc)
+    nz = _to(rng.standard_normal((n_part, 3)).astype(np.float32))
+    vr = nz[:, 0] * sig_r
+    vt = vc + nz[:, 1] * sig_r * 0.71
+    sig_z = xp.sqrt(xp.maximum(np.float32(np.pi) * Sigma * hz, 1e-8))
+    vel = xp.stack([vr * xp.cos(th_d) - vt * xp.sin(th_d),
+                    vr * xp.sin(th_d) + vt * xp.cos(th_d),
+                    nz[:, 2] * sig_z], axis=1).astype(xp.float32)
+
+    sub = rng.choice(n_part, n_snap_sub, replace=False)
+    snaps, times = [], []
+    nsteps = int(round(t_end / dt))
+    snap_steps = max(1, int(round(snap_every / dt)))
+    print(f"  [{tag}] 3D: v_halo={v_halo}, Q={Q}, N={n_part}, Ng={Ng}^3, "
+          f"t_end={t_end}")
+    t0 = _time.time()
+    for n in range(nsteps):
+        ax, ay, az = pm.accel(pos_d, mass_d)
+        if v_halo > 0:
+            rr = xp.sqrt(xp.maximum(pos_d[:, 0] ** 2 + pos_d[:, 1] ** 2,
+                                    0.0025))
+            ax = ax - (v_halo ** 2) * pos_d[:, 0] / (rr * rr)
+            ay = ay - (v_halo ** 2) * pos_d[:, 1] / (rr * rr)
+        vel[:, 0] += ax * dt
+        vel[:, 1] += ay * dt
+        vel[:, 2] += az * dt
+        pos_d += vel * dt
+        if n % snap_steps == 0 or n == nsteps - 1:
+            snaps.append(_host(pos_d[sub]).copy())
+            times.append(n * dt)
+            if len(times) % 5 == 1:
+                rc, vv = rotation_curve(pos_d[:, :2], vel[:, :2])
+                amps, pitch = fourier_modes(pos_d[:, :2])
+                inner = vv[(rc > 1.0) & (rc < 2.0)].mean()
+                outer = vv[(rc > 4.0) & (rc < 5.5)].mean()
+                print(f"    t={n * dt:5.1f}: v_in={inner:.3f} v_out={outer:.3f} "
+                      f"ratio={outer / inner:.2f} A2={amps[2]:.3f} "
+                      f"[{_time.time() - t0:.0f}s]")
+    return snaps, times, pos_d, vel
+
+
+def save_gif(snaps, times, fname):
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.animation import FuncAnimation, PillowWriter
+    fig, (axf, axe) = plt.subplots(
+        1, 2, figsize=(11, 5.5),
+        gridspec_kw={"width_ratios": [1, 1]})
+    fig.patch.set_facecolor("black")
+    for a in (axf, axe):
+        a.set_facecolor("black")
+        a.set_xticks([])
+        a.set_yticks([])
+    s = snaps[0]
+    scf = axf.scatter(s[:, 0], s[:, 1], s=0.25, c="white", alpha=0.35,
+                      linewidths=0)
+    sce = axe.scatter(s[:, 0], s[:, 2], s=0.25, c="white", alpha=0.35,
+                      linewidths=0)
+    axf.set_xlim(-7, 7); axf.set_ylim(-7, 7)
+    axe.set_xlim(-7, 7); axe.set_ylim(-2.5, 2.5)
+    axf.set_title("face-on", color="white")
+    axe.set_title("edge-on", color="white")
+    txt = fig.suptitle("", color="white")
+
+    def update(i):
+        scf.set_offsets(snaps[i][:, :2])
+        sce.set_offsets(snaps[i][:, ::2])
+        txt.set_text(f"real 3D gravity + SSV circulation halo    "
+                     f"t = {times[i]:.0f}")
+        return scf, sce, txt
+
+    anim = FuncAnimation(fig, update, frames=len(snaps), blit=False)
+    anim.save(fname, writer=PillowWriter(fps=7), dpi=85)
+    plt.close(fig)
+    print(f"  gif -> {fname}")
+
+
+def main3d():
+    try:
+        sys.stdout.reconfigure(line_buffering=True)
+    except Exception:
+        pass
+    print(f"3D N-body galaxy, REAL 3D gravity, backend {backend_name()}\n")
+    snaps, times, pos, vel = run_disc3d()
+    out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_logs")
+    os.makedirs(out, exist_ok=True)
+    np.savez_compressed(os.path.join(out, "disc3d_snaps.npz"),
+                        snaps=np.array(snaps), times=np.array(times))
+    save_gif(snaps, times, os.path.join(out, "disc3d.gif"))
+    print("\nDISC3D COMPLETE")
+    return 0
+
+
 def main():
     try:
         sys.stdout.reconfigure(line_buffering=True)
@@ -292,4 +486,6 @@ def main():
 
 
 if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "3d":
+        raise SystemExit(main3d())
     raise SystemExit(main())
