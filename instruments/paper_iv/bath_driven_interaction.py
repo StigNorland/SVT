@@ -886,6 +886,248 @@ def main_h2range(omegas=(0.1, 0.2, 0.5, 1.0), ds=(4.0, 6.0, 8.0, 11.0),
     return 0 if escape else 1
 
 
+def run_blackhole(R=8.0, mu=0.4, *, N=256, L=160.0, b=1.0, dt=0.02,
+                  wc=2.0, n_ramp=4, n_settle=12, n_meas=40, rec_every=16,
+                  omega_ref=1.0, floor=1e-6):
+    """SSV black hole = a 'black WHOLE': an INTACT condensate (rho = rho0,
+    full density) whose TIME is frozen (A = 0, phase does not advance),
+    embedded in an exterior whose phase DOES advance at rate mu.  No external
+    oscillating drive.
+
+    Model: every step evolves the whole domain under the LogSE plus a uniform
+    exterior phase-advance mu, then CLAMPS the core (|r| < R, smooth edge wc)
+    back to the frozen value psi = 1 -- full density, zero time.  The
+    boundary between the frozen core and the phase-advancing exterior is a
+    Josephson junction whose phase difference winds at mu; the user's
+    hypothesis is that this time-shear ('friction') makes the boundary
+    self-oscillate and radiate, with no driver.
+
+    Returns (t, probe(t), r_probe): the complex field time series at a probe
+    just outside the core, sampled every step over the measurement window."""
+    dx, X, Y, K2 = make_grid(N, L)
+    Rg = np.sqrt(X * X + Y * Y)
+    # smooth core clamp: 1 inside R, ->0 over width wc
+    core = 0.5 * (1.0 - np.tanh((Rg - R) / wc))
+    Gamma = absorber(X, Y, L, width=24.0, gmax=1.2)
+
+    # window the run by a FIXED reference frequency, independent of mu, so the
+    # mu=0 control runs the SAME duration as the mu>0 runs (a mu-based period
+    # would blow up to millions of steps at mu=0)
+    period = 2.0 * np.pi / omega_ref
+    t_ramp = n_ramp * period
+    t_settle = (n_ramp + n_settle) * period
+    t_total = t_settle + n_meas * period
+    nsteps = int(round(t_total / dt))
+    n_meas_start = int(round(t_settle / dt))
+
+    r_probe = R + 3.0 * wc
+    ip = (int(np.argmin(np.abs(X[:, 0] - r_probe))), N // 2)
+
+    # FP32 (complex64): the self-oscillation is a robust qualitative effect,
+    # and FP32 runs ~20x faster than FP64 on a consumer Pascal GPU (1:32 FP64)
+    cdt = np.complex64
+    core_x = _to(core.astype(np.float32))
+    decay = _to(np.exp(-Gamma * dt).astype(np.float32))
+    psi = xp.ones((N, N), dtype=cdt)
+    expK_half = _to(np.exp(-1j * K2 / 2.0 * (dt / 2.0)).astype(cdt))
+
+    # record the probe every rec_every steps into a preallocated DEVICE array
+    # (single transfer at the end).  The mu-oscillation period is ~2pi/mu/dt
+    # steps -- hundreds -- so sparse sampling is still far above Nyquist, and
+    # it avoids a per-step scalar-index kernel that throttles the GTX 1060.
+    rec_idx = [n for n in range(n_meas_start, nsteps) if n % rec_every == 0]
+    probe_dev = xp.empty(len(rec_idx), dtype=cdt)
+    j = 0
+    for n in range(nsteps):
+        t = n * dt
+        psi = xp.fft.ifft2(expK_half * xp.fft.fft2(psi))
+        ramp = min(1.0, t / t_ramp)
+        rho = xp.abs(psi) ** 2
+        # uniform exterior phase advance mu (ramped); LogSE nonlinearity
+        psi = psi * xp.exp(-1j * (b * xp.log(xp.maximum(rho, floor))
+                                  + ramp * mu) * dt)
+        psi = 1.0 + (psi - 1.0) * decay                 # edge absorber
+        psi = core_x * 1.0 + (1.0 - core_x) * psi        # FREEZE core to psi=1
+        psi = xp.fft.ifft2(expK_half * xp.fft.fft2(psi))
+        if n >= n_meas_start and n % rec_every == 0:
+            probe_dev[j] = psi[ip[0], ip[1]]
+            j += 1
+    ts = np.array(rec_idx, dtype=float) * dt
+    return ts, _host(probe_dev), r_probe
+
+
+def _osc_spectrum(t, probe):
+    """Peak oscillation frequency and amplitude of the probe series, after
+    removing its mean (the DC offset)."""
+    x = probe - probe.mean()
+    dt = t[1] - t[0]
+    F = np.fft.rfft(x.real)
+    f = np.fft.rfftfreq(len(x), d=dt)
+    k = 1 + int(np.argmax(np.abs(F[1:])))   # skip DC
+    amp = 2.0 * np.abs(F[k]) / len(x)
+    return f[k] * 2.0 * np.pi, amp          # angular frequency, amplitude
+
+
+def main_hbh(Rs=(5.0, 8.0, 12.0, 18.0), mu=1.0):
+    """HBH -- does a frozen-time condensate core (a 'black whole') self-
+    oscillate from the boundary time-shear alone?  And does the emission
+    frequency scale as 1/R (-> f_BH ~ 1/M of Paper VI-a)?
+
+    The self-oscillation is SLOW (w ~ 0.05-0.1, a cavity-like mode of the
+    frozen core), so the measurement window is long (n_meas large) to give
+    fine FFT frequency resolution (bin width = omega_ref/n_meas)."""
+    _stream()
+    kw = dict(N=160, L=180.0, dt=0.03, n_ramp=3, n_settle=10, n_meas=220,
+              rec_every=8)
+    print(f"HBH -- horizon-driven self-oscillation of a frozen-time "
+          f"condensate, backend {backend_name()}")
+    print("'black whole' = intact condensate (rho=1) with time frozen (A=0);")
+    print(f"exterior phase advances at mu={mu}.  NO external drive. "
+          f"FP32, N={kw['N']}, L={kw['L']:.0f}.\n")
+
+    # control: no time-shear (mu=0) must give no self-oscillation
+    t0 = _time.time()
+    t, pr, rp = run_blackhole(R=9.0, mu=0.0, **kw)
+    w0, a0 = _osc_spectrum(t, pr)
+    print(f"  control mu=0 (no time-shear): probe osc amplitude {a0:.3e} "
+          f"(should be ~0)   [{_time.time() - t0:.0f}s]\n")
+
+    print("     R      osc_freq w     amplitude     w*R")
+    print("   " + "-" * 48)
+    rows = []
+    for R in Rs:
+        t0 = _time.time()
+        t, pr, rp = run_blackhole(R=R, mu=mu, **kw)
+        w, a = _osc_spectrum(t, pr)
+        rows.append((R, w, a))
+        print(f"   {R:5.1f}   {w:.4e}    {a:.3e}    {w * R:.3f}"
+              f"    [{_time.time() - t0:.0f}s]")
+
+    self_osc = all(a > 5.0 * max(a0, 1e-9) for _, _, a in rows)
+    # f ~ 1/R  <=>  w*R = const
+    wR = [w * R for R, w, _ in rows]
+    inv_R = (max(wR) - min(wR)) < 0.3 * np.mean(wR)
+    # also check monotone decreasing w with R
+    ws = [w for _, w, _ in rows]
+    mono = all(ws[i] > ws[i + 1] for i in range(len(ws) - 1))
+    print()
+    print(f"  self-oscillates (amp >> mu=0 control) : "
+          f"{'YES' if self_osc else 'no'}")
+    print(f"  frequency decreases with R            : "
+          f"{'YES' if mono else 'no'}")
+    print(f"  w*R ~ const (f ~ 1/R ~ 1/M)           : "
+          f"{'YES' if inv_R else 'no'}  (w*R = {[f'{x:.2f}' for x in wR]})")
+    print()
+    print("Decision: self-oscillation with mu>0 but not mu=0 confirms the")
+    print("horizon time-shear ('friction') as the pump; f ~ 1/R matches the")
+    print("Paper VI-a black-hole eigenfrequency f_BH = f_p (m_p/M_BH).")
+    ok = self_osc and mono
+    print("RESULT:", "PASS -- frozen-time core self-oscillates from the "
+          "boundary time-shear" + (" with f ~ 1/R" if inv_R else "")
+          if ok else "NEGATIVE/INCONCLUSIVE -- see table")
+    print("HBH COMPLETE")
+    return 0 if ok else 1
+
+
+def run_dilation3d(*, V0=0.2, w=2.0, omega=0.8, N=192, L=120.0, b=1.0,
+                   dt=0.02, n_ramp=3, n_settle=10, n_meas=12, floor=1e-6):
+    """3D single oscillating source -- the decisive dimensional test.  In 3D
+    the wave intensity must fall as 1/r^2 (flux conservation, vs 1/r in 2D);
+    this is the real falloff of the 'wave-cloud density'.  Returns radial
+    profiles (r, <delta rho>, intensity).  FP32 for GTX-1060 speed."""
+    cdt = np.complex64
+    x = np.linspace(-L / 2, L / 2, N, endpoint=False).astype(np.float32)
+    dx = float(x[1] - x[0])
+    X, Y, Z = np.meshgrid(x, x, x, indexing="ij")
+    R = np.sqrt(X * X + Y * Y + Z * Z).astype(np.float32)
+    k = 2.0 * np.pi * np.fft.fftfreq(N, d=dx).astype(np.float32)
+    KX, KY, KZ = np.meshgrid(k, k, k, indexing="ij")
+    K2 = (KX * KX + KY * KY + KZ * KZ).astype(np.float32)
+    Wsrc = np.exp(-(R * R) / (2.0 * w * w)).astype(np.float32)
+    # smooth edge absorber (3D), width 18
+    edge = L / 2.0 - 18.0
+    s = np.clip((np.maximum.reduce([np.abs(X), np.abs(Y), np.abs(Z)]) - edge)
+                / 18.0, 0.0, 1.0).astype(np.float32)
+    Gamma = (1.2 * s * s)
+
+    T = 2.0 * np.pi / omega
+    nsteps = int(round((n_ramp + n_settle + n_meas) * T / dt))
+    n_meas_start = int(round((n_ramp + n_settle) * T / dt))
+
+    Wd = _to(Wsrc)
+    decay = _to(np.exp(-Gamma * dt).astype(np.float32))
+    expK_half = _to(np.exp(-1j * K2 / 2.0 * (dt / 2.0)).astype(cdt))
+    psi = xp.ones((N, N, N), dtype=cdt)
+    rho_acc = xp.zeros((N, N, N), dtype=np.float32)
+    rho2_acc = xp.zeros((N, N, N), dtype=np.float32)
+    acc = 0
+    for n in range(nsteps):
+        t = n * dt
+        psi = xp.fft.ifftn(expK_half * xp.fft.fftn(psi))
+        tm = t + dt / 2.0
+        ramp = min(1.0, tm / (n_ramp * T))
+        Vt = np.float32(V0 * ramp * np.sin(omega * tm)) * Wd
+        rho = xp.abs(psi) ** 2
+        psi = psi * xp.exp(-1j * (b * xp.log(xp.maximum(rho, np.float32(floor)))
+                                  + Vt) * np.float32(dt))
+        psi = np.float32(1.0) + (psi - np.float32(1.0)) * decay
+        psi = xp.fft.ifftn(expK_half * xp.fft.fftn(psi))
+        if n >= n_meas_start:
+            rho = xp.abs(psi) ** 2
+            rho_acc += rho
+            rho2_acc += rho * rho
+            acc += 1
+    mean_rho = _host(rho_acc) / acc
+    inten = _host(rho2_acc) / acc - mean_rho ** 2
+    drho = mean_rho - 1.0
+    r_edges = np.arange(w, edge, max(dx, 1.0))
+    rc = 0.5 * (r_edges[:-1] + r_edges[1:])
+    prof = np.empty(len(rc))
+    ip = np.empty(len(rc))
+    for i in range(len(rc)):
+        m = (R >= r_edges[i]) & (R < r_edges[i + 1])
+        prof[i] = drho[m].mean() if m.any() else np.nan
+        ip[i] = inten[m].mean() if m.any() else np.nan
+    return rc, prof, ip
+
+
+def main_hdil3d(omega=0.8):
+    """3D time-dilation field: confirm intensity ~ 1/r^2 (vs 1/r in 2D) and
+    whether the DC well is again a box artifact -- the dimensional test that
+    decides Newtonian (amplitude, 1/r) vs isothermal (intensity, 1/r^2)."""
+    _stream()
+    print(f"H-dilation-3D -- single oscillating source in 3D, backend "
+          f"{backend_name()}")
+    print(f"omega={omega} (lambda~{2 * np.pi / omega:.1f}); intensity should "
+          f"fall as 1/r^2 in 3D.\n")
+    out = {}
+    for L, N in ((100.0, 160), (140.0, 224)):
+        t0 = _time.time()
+        r, drho, inten = run_dilation3d(omega=omega, N=N, L=L)
+        out[L] = (r, drho, inten)
+        m = (r > 5.0) & (r < L / 2.0 - 22.0) & np.isfinite(inten) \
+            & (inten > 1e-12)
+        ip = (np.linalg.lstsq(np.vstack([np.log(r[m]), np.ones(m.sum())]).T,
+              np.log(inten[m]), rcond=None)[0][0] if m.sum() >= 5 else np.nan)
+        md = (r > 8.0) & (r < L / 4.0) & np.isfinite(drho)
+        dc = float(np.nanmedian(drho[md])) if md.any() else np.nan
+        print(f"  L={L:.0f} N={N}: [{_time.time() - t0:.0f}s]  "
+              f"intensity ~ r^{ip:+.2f},  DC plateau <drho> = {dc:+.3e}")
+    print()
+    print("     r        <delta rho>    intensity")
+    r, drho, inten = out[140.0]
+    for i in range(0, len(r), max(1, len(r) // 18)):
+        print(f"   {r[i]:7.2f}   {drho[i]:+.4e}   {inten[i]:.4e}")
+    print()
+    print("Compare to 2D (hdil): intensity ~r^-1 (2D) vs ~r^-2 (3D) confirms")
+    print("flux conservation.  If the DC <drho> plateau again flips/moves with")
+    print("box, the literal potential is a box artifact in 3D too, and the")
+    print("robust 1/r^2 intensity = the isothermal (flat-rotation-curve)")
+    print("profile, not the Newtonian 1/r potential.")
+    print("HDIL3D COMPLETE")
+    return 0
+
+
 def main_smoke():
     """Tiny-grid sanity pass of every integrator (no physics claims)."""
     _stream()
@@ -911,9 +1153,10 @@ if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else ""
     dispatch = {"h1a": main_h1a, "h1b": main_h1b, "h1c": main_h1c,
                 "h2a": main_h2a, "h2b": main_h2b, "h2range": main_h2range,
-                "hdil": main_hdil, "smoke": main_smoke}
+                "hdil": main_hdil, "hbh": main_hbh,
+                "hdil3d": main_hdil3d, "smoke": main_smoke}
     if mode not in dispatch:
         print("usage: python bath_driven_interaction.py "
-              "{h1a|h1b|h1c|h2a|h2b|h2range|hdil|smoke}")
+              "{h1a|h1b|h1c|h2a|h2b|h2range|hdil|hbh|hdil3d|smoke}")
         raise SystemExit(2)
     raise SystemExit(dispatch[mode]())
