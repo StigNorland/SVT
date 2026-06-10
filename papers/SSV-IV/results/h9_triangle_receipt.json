@@ -1,0 +1,82 @@
+{
+  "issue": 119,
+  "hypothesis": "H9 circulation-halo G triangle vs BTFR",
+  "reference_point": {
+    "M_b_Msun": 60000000000.0,
+    "v_btfr_km_s": 189.0224326648158
+  },
+  "saturation_dials": {
+    "a_p_m": 2.103089102066989e-16,
+    "rho_grain_kg_m3": 1.7981452335985384e+20,
+    "rho_planck_kg_m3": 5.154847925212565e+96,
+    "rho_nuclear_kg_m3": 2.3e+17
+  },
+  "rule_a_magnitude": {
+    "grain (m_p/a_p^3, primary)": {
+      "Gamma_m2_per_s": 2.7584253971519646e+26,
+      "G_solved": 1.4746899439240675e-45,
+      "alpha_G_solved": 1.3049666861225934e-73,
+      "alpha_G_target": 5.906149417423905e-39,
+      "orders_off": -34.65570500490131,
+      "pass_within_1e2": false
+    },
+    "Planck (Sakharov corner)": {
+      "Gamma_m2_per_s": 2.7584253971519646e+26,
+      "G_solved": 5.14410266253085e-122,
+      "alpha_G_solved": 4.5520637285521096e-150,
+      "alpha_G_target": 5.906149417423905e-39,
+      "orders_off": -111.1130960962988,
+      "pass_within_1e2": false
+    },
+    "nuclear saturation (reference)": {
+      "Gamma_m2_per_s": 2.7584253971519646e+26,
+      "G_solved": 1.1529159537838078e-42,
+      "alpha_G_solved": 1.0202259246331397e-70,
+      "alpha_G_target": 5.906149417423905e-39,
+      "orders_off": -31.762608074765765,
+      "pass_within_1e2": false
+    }
+  },
+  "rule_b_slope": {
+    "prereg J~M^{5/3}": {
+      "beta": 0.6666666666666666,
+      "implied_btfr_slope": 1.5,
+      "observed_slope": [
+        3.98,
+        0.06
+      ],
+      "pass_4p0_pm_0p5": false
+    },
+    "empirical j~M^{0.55}": {
+      "beta": 0.55,
+      "implied_btfr_slope": 1.8181818181818181,
+      "observed_slope": [
+        3.98,
+        0.06
+      ],
+      "pass_4p0_pm_0p5": false
+    },
+    "inverse_requirement": {
+      "Gamma_exponent_required": 0.25,
+      "J_exponent_required": 1.25,
+      "J_exponent_fall": 1.6666666666666667,
+      "exponent_gap": 0.41666666666666674
+    }
+  },
+  "inversions": {
+    "rho0_required_for_real_G_on_fall_chain_kg_m3": 3.9730109430243745e-15,
+    "Gamma_required_with_grain_rho0_real_G_m2_s": 1296608129.767887,
+    "Gamma_fall_chain_m2_s": 2.7584253971519646e+26,
+    "Gamma_ratio_fall_over_required": 2.1274163980799392e+17,
+    "N_required_m_p": 3273033842366514.5,
+    "N_required_m_e": 1782549942448.1626,
+    "N_fall_m_p": 6.963105867721113e+32,
+    "medium_flow_at_10kpc_required_m_s": 6.687723771801838e-13,
+    "halo_mass_density_at_10kpc_required_kg_m3": 4.474144623443879e-22
+  },
+  "verdict": {
+    "rule_a_magnitude": "FAIL",
+    "rule_b_slope": "FAIL",
+    "route": "circulation-halo G route on the natural chain FALSIFIED"
+  }
+}
