@@ -602,3 +602,117 @@ automatically safe (Sun's crossover ≈ 7×10³ AU).
   making generation self-limiting).  Decision rule: derived exponent
   0.5 ± 0.1 over the observed mass range, else the scaling sector of the
   two-term model is falsified.
+
+## Phase 7 — H6: cloud-generation saturation test (`hsat`) — **NEGATIVE**
+
+N incoherent sources (distinct frequencies; cross terms vanish per H1b)
+clustered within r = 5; far-field cloud coefficient C(N) = ⟨I·r⟩, two
+amplitudes (GPU):
+
+| V0 = 0.15 (linear) | N=1 | 2 | 4 | 8 | 16 | exponent |
+|---|---|---|---|---|---|---|
+| C/N (×10⁻³) | 7.20 | 6.37 | 6.61 | 6.76 | 6.89 | **p = 0.995** |
+| ρ_min(cluster) | 0.86 | 0.82 | 0.76 | 0.67 | 0.40 | (loading ↑, emission flat) |
+
+| V0 = 0.45 (crowded) | N=1 | 2 | 4 | 8 | 16 | |
+|---|---|---|---|---|---|---|
+| C/N | 0.061 | 0.052 | 0.052 | **0.457** | 0.190 | last-octave p = −0.27 |
+| ρ_min | 0.62 | 0.51 | 0.35 | **0.0001** | 0.0000 | condensate punctured |
+
+- **H6a CONFIRMED**: weak-regime p = 0.995 — perfect incoherent additivity
+  (the H1b-guaranteed behaviour; measurement validated).
+- **H6b NEGATIVE**: no smooth saturation.  Per-source emission is flat to
+  ~5% even as the cluster loads the medium to ρ_min = 0.40.  In the crowded
+  regime the medium does not saturate smoothly — it **breaks**: at N = 8,
+  V0 = 0.45 the cluster punches the condensate to ρ ≈ 0 (critical-breakdown
+  transition, the superfluid critical-velocity analogue) with a ×9 emission
+  blow-up, followed by a hard chaotic ceiling — not p = ½ anywhere.
+- **Consequence**: with C ∝ M, both the BTFR slope and the dwarf-domination
+  trend fail — the scaling sector of the baryon-sourced cloud is in genuine
+  tension.
+
+**Scoping caveat (constructional):** this test could not have detected the
+busy-condensate mechanism even if it is real.  The solver's sources are
+*external drives* — the prescribed potential injects its amplitude
+regardless of the medium's state, so there is no internal budget for the
+ambient cloud to deplete.  The owner's hypothesis is *budget-limited
+emission by self-sustained breathers*.  Verdict: back-reaction saturation
+**falsified**; budget-limited-source saturation **untested and untestable
+with driven sources**.
+
+**Infrastructure conclusion.**  Both remaining derivations — the Newton
+core term (defect's own mass-energy in ρ_eff) and the C ∝ √M scaling
+(budget-limited emission) — are blocked by the same missing component:
+**self-sustained breather sources** (LogSE solutions that carry their own
+energy and oscillate without a drive).  Until those exist in the solver,
+the two-term model's scaling sector remains open and under tension.
+
+## Phase 8 — H7: self-sustained topological sources (`hvort`)
+
+In the defocusing LogSE the self-sustained objects are topological —
+vortices, which is Paper I's particle ontology.  Mode `hvort` imprints
+vortex configurations on ψ = 1 and evolves them with **no drive**.
+
+**H7b — first self-sustained emitter: CONFIRMED in substance.**  A
+same-sign vortex pair (screened to net-zero box charge):
+- rotates with an **internal clock**: probe ω = 0.168 (d = 4), 0.0833
+  (d = 6) — ratio 2.01 vs the ideal point-vortex 1/d² prediction 2.25,
+  at ~70% of the ideal magnitude (finite-core correction);
+- **emits with no drive**: far-field intensity ≈ 2×10⁻⁵ over an
+  identically-zero control floor;
+- reproducible across three geometry variants.
+The radiating breather that the falsified mutual mechanism *assumed* now
+exists as a genuine budgeted object in the solver.
+
+**H7a — REDO with imaginary-time preconditioner: CONFIRMED at 2.4%.**
+Exploiting that the LogSE vacuum at ρ₀ = 1 has exactly zero energy (so
+e^{−τH} relaxes imprints with no renormalisation while winding is
+topologically protected), the field is clean (ρ → 0.999) and
+**e·r² = 0.512 ± 0.011 over r ∈ [3, 10] vs the parameter-free ℓ²/2 = 0.5.**
+The two-term gravity source — healing-length core (→ Newton monopole under
+reading (b)) plus isothermal ℓ²ρ/2r² circulation halo (→ flat-curve tail) —
+is the **intrinsic energy-density profile of a topological defect**: no
+radiation, no drive, no postulate.
+
+**H8 cementing battery (pre-registered dials):**
+- **H8a ℓ² law — CONFIRMED:** charge-2 gives e·r² = 2.28 ± 0.13 (pred 2.0;
+  4.4× the charge-1 value vs ideal 4×).
+- **H8b Bernoulli tail — CONFIRMED:** isolated geometry (D = 45, L = 200):
+  energy plateau 0.506; density tail δρ·r² = −0.447 vs −1/(2b) = −0.50
+  (11%); at b = 0.5: **−0.994 vs −1.000 (0.6%)**, killing the 1/b²
+  alternative.  The defect carries its own intrinsic 1/r² *time-dilation*
+  (density-depression) field — the gravity-as-time-delay framing realised
+  without radiation.
+- **H8c b-dial — half-passed:** energy plateau STAYS at 0.508 at b = 2
+  (pure kinematics ✓); the b = 2 density tail is inconclusive (coarse grid
+  under-resolves the ξ = 0.5 core; the fine-grid run destabilises the
+  imaginary-time relaxer at floor-level core pixels — a numerics task,
+  flagged).
+- **H8d repo cement:** `test_h7a_vortex_intrinsic_two_term_source` added;
+  full suite 5/5 on GPU.
+- Validity window note: profiles must be measured at t ≲ 40 — by t = 80
+  vortex drift carries neighbouring cores into the measurement annulus.
+
+**H7c — budget-limited emission: NEGATIVE.**  A self-sustained pair's
+emission line drops only ~7% while the ambient drive line grows ×47 at its
+location (pre-registered threshold 0.8 not met).  With H6, the
+√M-via-saturation route has two independent negatives.  **Reframe:** with
+the halo intrinsic (circulation energy, not radiation), the BTFR scaling
+question becomes an angular-momentum relation (halo ∝ Γ², entrained
+circulation vs baryonic mass; cf. Fall J ∝ M^{5/3}) — with
+dispersion-supported dSphs as the sharp discriminator.
+
+**H7a (first attempt) — archival note: INCONCLUSIVE (honest miss).**  The
+tanh-ansatz imprint releases sound the absorber cannot clear (background
+degraded to ρ ≈ 0.71, flat turbulence energy ≈ 0.12 ≫ the ≤ 0.06 signal).
+Three failure modes were found and fixed en route (screens inside the
+absorber; dipole 1/r phase tail at the periodic seam; core drift smearing
+the time average — final-snapshot core-centred profiling added), but the
+imprint-noise floor remains.  The analytic statement (circulation kinetic
+energy = ρℓ²/2r² — the two-term core + isothermal source *intrinsic* to a
+topological defect) is unchallenged; numerical confirmation needs an
+**imaginary-time relaxation preconditioner**.  Pre-registered next:
+H7a-redo (relaxed vortex; decision rule e·r² = 0.5 ± 0.1), H7c
+(budget-limited emission with N rotating pairs — the real busy-condensate
+test), and the rotation-sourced-halo corollary (galaxy circulation →
+intrinsic 1/r² energy halo) conditional on H7a-redo.

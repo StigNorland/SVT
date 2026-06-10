@@ -1128,6 +1128,550 @@ def main_hdil3d(omega=0.8):
     return 0
 
 
+def run_cloud(n_src, *, V0=0.2, w=1.6, N=320, L=200.0, b=1.0, dt=0.02,
+              r_clust=5.0, omega_lo=0.5, omega_hi=0.8, n_ramp=3,
+              n_settle=12, n_avg=15, floor=1e-6, seed=7):
+    """H6 -- N incoherent oscillating sources (DISTINCT frequencies, so the
+    time-averaged cross terms vanish exactly, per H1b) clustered within
+    r_clust, far from the measurement annulus.  Measures the far-field
+    intensity profile of the combined wave cloud.  Returns
+    (r_centers, intensity(r), rho_min_at_cluster) -- the last is the
+    linearity/crowding diagnostic (how far the cluster drives the medium
+    from rho = 1)."""
+    rng = np.random.default_rng(seed)
+    dx, X, Y, K2 = make_grid(N, L)
+    Gamma = absorber(X, Y, L, width=28.0, gmax=1.2)
+    R = np.sqrt(X * X + Y * Y)
+
+    if n_src == 1:
+        pos = [(0.0, 0.0)]
+        omegas = np.array([0.65])
+    else:
+        ang = 2.0 * np.pi * np.arange(n_src) / n_src + rng.uniform(0, 1)
+        rad = r_clust * np.sqrt(rng.uniform(0.2, 1.0, n_src))
+        pos = list(zip(rad * np.cos(ang), rad * np.sin(ang)))
+        omegas = np.linspace(omega_lo, omega_hi, n_src)
+
+    Wstack = np.stack([np.exp(-(((X - xs) ** 2 + (Y - ys) ** 2))
+                              / (2.0 * w * w)) for xs, ys in pos])
+    Wstack = _to(Wstack)
+    decay = _to(np.exp(-Gamma * dt))
+    psi = xp.ones((N, N), dtype=complex)
+    expK_half = _to(np.exp(-1j * K2 / 2.0 * (dt / 2.0)))
+    clust_mask = _to((R < r_clust + 2.0 * w).astype(float))
+
+    base_T = 2.0 * np.pi / omegas.min()
+    nsteps = int(round((n_ramp + n_settle + n_avg) * base_T / dt))
+    n_meas_start = int(round((n_ramp + n_settle) * base_T / dt))
+
+    rho_acc = xp.zeros((N, N))
+    rho2_acc = xp.zeros((N, N))
+    rho_min_clust = xp.full((), np.inf)
+    acc = 0
+    for n in range(nsteps):
+        t = n * dt
+        psi = xp.fft.ifft2(expK_half * xp.fft.fft2(psi))
+        tm = t + dt / 2.0
+        ramp = min(1.0, tm / (n_ramp * base_T))
+        sins = _to(np.sin(omegas * tm).astype(float))
+        Vt = V0 * ramp * xp.tensordot(sins, Wstack, axes=1)
+        rho = xp.abs(psi) ** 2
+        psi = psi * xp.exp(-1j * (b * xp.log(xp.maximum(rho, floor)) + Vt) * dt)
+        psi = 1.0 + (psi - 1.0) * decay
+        psi = xp.fft.ifft2(expK_half * xp.fft.fft2(psi))
+        if n >= n_meas_start:
+            rho = xp.abs(psi) ** 2
+            rho_acc += rho
+            rho2_acc += rho * rho
+            rho_min_clust = xp.minimum(
+                rho_min_clust,
+                xp.min(xp.where(clust_mask > 0, rho, xp.inf)))
+            acc += 1
+    mean_rho = _host(rho_acc) / acc
+    inten = _host(rho2_acc) / acc - mean_rho ** 2
+
+    edge = L / 2.0 - 28.0
+    r_edges = np.arange(2.0, edge, 2.0)
+    rc = 0.5 * (r_edges[:-1] + r_edges[1:])
+    ip = np.empty(len(rc))
+    for i in range(len(rc)):
+        m = (R >= r_edges[i]) & (R < r_edges[i + 1])
+        ip[i] = inten[m].mean() if m.any() else np.nan
+    return rc, ip, float(rho_min_clust)
+
+
+def main_hsat(Ns=(1, 2, 4, 8, 16), V0s=(0.15, 0.45)):
+    """H6 -- does cloud generation SATURATE?  C(N) = far-field <I*r> for N
+    incoherent clustered sources.  H6a: weak regime p = dlnC/dlnN = 1
+    (incoherent additivity -- consistency).  H6b: crowded regime p < 1
+    (busy-medium emission suppression).  BTFR ultimately needs an effective
+    p = 1/2; this run establishes whether saturation EXISTS, not the
+    asymptotic exponent."""
+    _stream()
+    print(f"H6 -- cloud-generation saturation test, backend {backend_name()}")
+    print("N incoherent sources (distinct frequencies; cross terms vanish "
+          "per H1b),")
+    print("far-field cloud coefficient C = <I*r> over r in [16, 60].\n")
+
+    for V0 in V0s:
+        print(f"  per-source amplitude V0 = {V0}:")
+        print("     N      C=<I*r>      rho_min(cluster)   C/N")
+        print("   " + "-" * 56)
+        rows = []
+        for n_src in Ns:
+            t0 = _time.time()
+            r, ip, rmin = run_cloud(n_src, V0=V0)
+            m = (r > 16.0) & (r < 60.0) & np.isfinite(ip) & (ip > 0)
+            C = float(np.mean(ip[m] * r[m]))
+            rows.append((n_src, C, rmin))
+            print(f"   {n_src:3d}   {C:.4e}   {rmin:13.4f}     "
+                  f"{C / n_src:.4e}   [{_time.time() - t0:.0f}s]")
+        ns = np.array([x[0] for x in rows], dtype=float)
+        Cs = np.array([x[1] for x in rows])
+        p = np.linalg.lstsq(np.vstack([np.log(ns), np.ones(len(ns))]).T,
+                            np.log(Cs), rcond=None)[0][0]
+        # local exponent between the last two points (most crowded)
+        p_hi = (np.log(Cs[-1] / Cs[-2]) / np.log(ns[-1] / ns[-2])
+                if len(Cs) >= 2 else np.nan)
+        print(f"   -> global p = dlnC/dlnN = {p:+.3f}   "
+              f"(last-octave p = {p_hi:+.3f})")
+        print(f"      [H6a expects p = 1 in the linear regime; "
+              f"H6b saturation = p < 1 when crowded]\n")
+    print("Decision: p = 1.00 +/- 0.10 weak-regime validates additivity "
+          "(H6a);")
+    print("p < 1 in the crowded regime = saturation EXISTS (H6b); p = 1 "
+          "everywhere")
+    print("= saturation ABSENT in this regime (negative for the sqrt(M) "
+          "route).")
+    print("HSAT COMPLETE")
+    return 0
+
+
+def run_vortex(charges, *, N=256, L=100.0, b=1.0, dt=0.02, xi=None,
+               t_total=300.0, t_avg=60.0, probe_r=None, relax_tau=0.0,
+               floor=1e-6):
+    """H7 -- SELF-SUSTAINED topological sources: imprint vortices on the
+    psi = 1 background and evolve with NO drive.  charges is a list of
+    (x, y, ell) winding numbers.  Energy is carried by the defects
+    themselves (core depletion + circulation kinetic energy); whatever they
+    radiate, they pay for -- the budgeted sources the driven-potential
+    modes cannot provide.
+
+    Returns (r_centers, e_profile, rho_profile, inten_profile, probe_series,
+    dt_probe): the time-averaged radial profiles of energy density
+    e = (1/2)|grad psi|^2 + b(rho ln rho - rho + 1), density, and intensity
+    (AC variance of rho), plus a probe time series at radius probe_r for
+    rotation/emission frequency measurement."""
+    xi = xi if xi is not None else 1.0 / np.sqrt(2.0 * b)
+    dx, X, Y, K2 = make_grid(N, L)
+    R = np.sqrt(X * X + Y * Y)
+    Gamma = absorber(X, Y, L, width=20.0, gmax=1.2)
+
+    # imprint: product of tanh-core vortices with phase winding ell each
+    psi0 = np.ones((N, N), dtype=complex)
+    for (xs, ys, ell) in charges:
+        rr = np.sqrt((X - xs) ** 2 + (Y - ys) ** 2)
+        th = np.arctan2(Y - ys, X - xs)
+        psi0 *= (np.tanh(rr / xi) ** abs(ell)) * np.exp(1j * ell * th)
+
+    KX = 2.0 * np.pi * np.fft.fftfreq(N, d=dx)
+    KXg, KYg = np.meshgrid(KX, KX, indexing="ij")
+
+    psi = _to(psi0)
+    decay = _to(np.exp(-Gamma * dt))
+    expK_half = _to(np.exp(-1j * K2 / 2.0 * (dt / 2.0)))
+    iKX = _to(1j * KXg)
+    iKY = _to(1j * KYg)
+
+    # ---- imaginary-time relaxation preconditioner ----
+    # For the LogSE with rho0 = 1 the vacuum has exactly zero energy
+    # (b ln 1 = 0), so e^{-tau H} relaxes the imprint toward the true vortex
+    # profile with NO renormalisation: the winding is topologically
+    # protected (the zeros cannot unwind) while the imprint's sound decays.
+    if relax_tau > 0.0:
+        dtau = 0.02
+        relK_half = _to(np.exp(-K2 / 2.0 * (dtau / 2.0)))
+        for _ in range(int(round(relax_tau / dtau))):
+            psi = xp.fft.ifft2(relK_half * xp.fft.fft2(psi))
+            rho = xp.abs(psi) ** 2
+            psi = psi * xp.exp(-(b * xp.log(xp.maximum(rho, floor))) * dtau)
+            psi = xp.fft.ifft2(relK_half * xp.fft.fft2(psi))
+
+    nsteps = int(round(t_total / dt))
+    n_avg_start = int(round((t_total - t_avg) / dt))
+    probe_r = probe_r if probe_r is not None else 12.0
+    ip = (int(np.argmin(np.abs(X[:, 0] - probe_r))), N // 2)
+    rec_every = 4
+    rec_idx = [n for n in range(nsteps) if n % rec_every == 0]
+    probe_dev = xp.empty(len(rec_idx), dtype=complex)
+
+    rho_acc = xp.zeros((N, N))
+    rho2_acc = xp.zeros((N, N))
+    e_acc = xp.zeros((N, N))
+    acc = 0
+    j = 0
+    for n in range(nsteps):
+        psi = xp.fft.ifft2(expK_half * xp.fft.fft2(psi))
+        rho = xp.abs(psi) ** 2
+        psi = psi * xp.exp(-1j * (b * xp.log(xp.maximum(rho, floor))) * dt)
+        psi = 1.0 + (psi - 1.0) * decay
+        psi = xp.fft.ifft2(expK_half * xp.fft.fft2(psi))
+        if n % rec_every == 0:
+            probe_dev[j] = psi[ip[0], ip[1]]
+            j += 1
+        if n >= n_avg_start:
+            rho = xp.abs(psi) ** 2
+            rho_acc += rho
+            rho2_acc += rho * rho
+            ft = xp.fft.fft2(psi)
+            gx = xp.fft.ifft2(iKX * ft)
+            gy = xp.fft.ifft2(iKY * ft)
+            ekin = 0.5 * (xp.abs(gx) ** 2 + xp.abs(gy) ** 2)
+            rs = xp.maximum(rho, floor)
+            epot = b * (rs * xp.log(rs) - rs + 1.0)
+            e_acc += ekin + epot
+            acc += 1
+    mean_rho = _host(rho_acc) / acc
+    inten = _host(rho2_acc) / acc - mean_rho ** 2
+    e_mean = _host(e_acc) / acc
+
+    # FINAL-SNAPSHOT fields (drift-robust: a quasi-stationary defect's
+    # profile needs no time average, and time-averaging smears a slowly
+    # drifting core over the bins)
+    rho_f = xp.abs(psi) ** 2
+    ft = xp.fft.fft2(psi)
+    gx = xp.fft.ifft2(iKX * ft)
+    gy = xp.fft.ifft2(iKY * ft)
+    rs = xp.maximum(rho_f, floor)
+    e_f = _host(0.5 * (xp.abs(gx) ** 2 + xp.abs(gy) ** 2)
+                + b * (rs * xp.log(rs) - rs + 1.0))
+    rho_fin = _host(rho_f)
+
+    edge = L / 2.0 - 20.0
+    r_edges = np.arange(1.0, edge, 1.0)
+    rc = 0.5 * (r_edges[:-1] + r_edges[1:])
+    eprof = np.empty(len(rc))
+    rprof = np.empty(len(rc))
+    iprof = np.empty(len(rc))
+    for i in range(len(rc)):
+        m = (R >= r_edges[i]) & (R < r_edges[i + 1])
+        eprof[i] = e_mean[m].mean() if m.any() else np.nan
+        rprof[i] = mean_rho[m].mean() if m.any() else np.nan
+        iprof[i] = inten[m].mean() if m.any() else np.nan
+    return (rc, eprof, rprof, iprof, _host(probe_dev), rec_every * dt,
+            e_f, rho_fin, X, Y)
+
+
+def main_hvort():
+    """H7 -- self-sustained vortex sources: intrinsic two-term energy
+    profile (H7a) and undriven rotating-pair emission (H7b)."""
+    _stream()
+    print(f"H7 -- self-sustained topological sources (vortices), backend "
+          f"{backend_name()}")
+    print("NO drive anywhere: the defects carry their own energy.\n")
+
+    # geometry: ALL charges must sit well inside the live region (the
+    # absorber starts 20 from the edge and destroys any winding it touches
+    # -- the first run's screening charges were inside it, releasing free
+    # branch cuts that wrecked the field)
+    box = dict(N=320, L=140.0)          # live region |x| < 50
+
+    # --- background control (floor) ---
+    t0 = _time.time()
+    out = run_vortex([], t_total=120.0, t_avg=40.0, **box)
+    r, e0, rho0, i0 = out[0], out[1], out[2], out[3]
+    far = (r > 35.0) & (r < 45.0)
+    floor_I = float(np.nanmean(i0[far]))
+    print(f"  control (no vortex): far-field intensity floor "
+          f"{floor_I:.3e}   [{_time.time() - t0:.0f}s]\n")
+
+    # --- H7a: vortex measured inside a CHECKERBOARD QUADRUPOLE (net zero
+    # charge AND quadrupole far field ~ 1/r^2, so the periodic seam carries
+    # no phase mismatch -- a bare dipole's 1/r phase tail injects energy at
+    # the seam and degrades the whole box, which broke the first two runs).
+    # The 1/r^2 regime of the origin vortex lives at r << D. ---
+    D = 30.0
+    t0 = _time.time()
+    out = run_vortex(
+        [(0.0, 0.0, 1), (D, 0.0, -1), (D, D, 1), (0.0, D, -1)],
+        t_total=40.0, t_avg=10.0, relax_tau=8.0, **box)
+    e_f, rho_f, X, Y = out[6], out[7], out[8], out[9]
+    # locate the (drifted) origin-vortex core: density minimum within r < 15
+    Rg = np.sqrt(X * X + Y * Y)
+    msk = Rg < 15.0
+    idx = np.unravel_index(np.argmin(np.where(msk, rho_f, np.inf)),
+                           rho_f.shape)
+    xc, yc = float(X[idx]), float(Y[idx])
+    Rc = np.sqrt((X - xc) ** 2 + (Y - yc) ** 2)
+    r_edges = np.arange(1.0, 16.0, 1.0)
+    rcen = 0.5 * (r_edges[:-1] + r_edges[1:])
+    e1 = np.empty(len(rcen))
+    rho1 = np.empty(len(rcen))
+    for i in range(len(rcen)):
+        mm = (Rc >= r_edges[i]) & (Rc < r_edges[i + 1])
+        e1[i] = e_f[mm].mean()
+        rho1[i] = rho_f[mm].mean()
+    er2 = e1 * rcen * rcen
+    m = (rcen > 3.0) & (rcen < 10.0)   # core << r << D
+    plateau = float(np.nanmean(er2[m]))
+    scat = float(np.nanstd(er2[m]))
+    print(f"  H7a vortex (ell=1) in checkerboard quadrupole, D={D:.0f};")
+    print(f"  FINAL-SNAPSHOT profile centred on the core "
+          f"(found at ({xc:+.1f},{yc:+.1f})):")
+    print("     r      e(r)         e*r^2     rho")
+    for i in range(len(rcen)):
+        print(f"   {rcen[i]:5.1f}   {e1[i]:.4e}   {er2[i]:.3f}   "
+              f"{rho1[i]:.4f}")
+    print(f"   -> e*r^2 plateau (r in 3-10) = {plateau:.3f} +/- {scat:.3f}  "
+          f"(prediction l^2/2 = 0.5; quadrupole correction ~ (r/D)^2)"
+          f"   [{_time.time() - t0:.0f}s]")
+    h7a = abs(plateau - 0.5) < 0.15
+    print(f"   H7a (intrinsic 1/r^2 halo): "
+          f"{'CONFIRMED' if h7a else 'FAIL'}\n")
+
+    # --- H7b: same-sign pair (screened by distant anticharges so total
+    # winding is zero and box-compatible), rotation + emission ---
+    for d in (4.0, 6.0):
+        t0 = _time.time()
+        Om_pred = 2.0 / d ** 2
+        T_rot = 2.0 * np.pi / Om_pred
+        Dscr = 28.0
+        out = run_vortex(
+            [(-d / 2, 0.0, 1), (d / 2, 0.0, 1),
+             (0.0, Dscr, -1), (0.0, -Dscr, -1)],
+            t_total=max(300.0, 4.0 * T_rot), t_avg=2.0 * T_rot,
+            probe_r=d, **box)
+        r, i2, pr, dtp = out[0], out[3], out[4], out[5]
+        # rotation frequency from the probe density oscillation
+        x = np.abs(pr) ** 2
+        x = x - x.mean()
+        F = np.fft.rfft(x)
+        fr = np.fft.rfftfreq(len(x), d=dtp)
+        k = 1 + int(np.argmax(np.abs(F[1:])))
+        w_meas = 2.0 * np.pi * fr[k]
+        emit = float(np.nanmean(i2[far]))
+        ratio = emit / floor_I if floor_I > 1e-12 else float("inf")
+        rtxt = f"x{ratio:.1f}" if np.isfinite(ratio) else "floor ~ 0"
+        print(f"  H7b pair d={d:.0f}: probe osc w = {w_meas:.4f} "
+              f"(2*Omega pred = {2 * Om_pred:.4f}); far-field I = {emit:.3e} "
+              f"(floor {floor_I:.3e}, {rtxt})"
+              f"   [{_time.time() - t0:.0f}s]")
+    print()
+    print("Decision rules: H7a e*r^2 = 0.5 +/- 0.1 => the two-term source")
+    print("(core + isothermal 1/r^2 halo) is the INTRINSIC energy profile of")
+    print("a topological defect, no radiation needed.  H7b probe oscillation")
+    print("at ~2*Omega with far-field I >> floor => first SELF-SUSTAINED")
+    print("emitter (internal clock, pays from its own energy).")
+    print("HVORT COMPLETE")
+    return 0
+
+
+def run_pair_in_bath(d=4.0, *, drive_V0=0.0, drive_omega=0.6,
+                     drive_pos=(40.0, 0.0), N=320, L=140.0, b=1.0,
+                     dt=0.02, xi=None, t_total=400.0, probe_r=20.0,
+                     relax_tau=6.0, floor=1e-6):
+    """H7c -- a self-sustained rotating vortex pair embedded in an ambient
+    wave bath from an external driven source at drive_pos.  The pair emits
+    at its own line (~2*Omega ~ 0.17 for d = 4); the drive radiates at
+    drive_omega = 0.6 -- spectrally separable at a far probe.  Question: does
+    ambient intensity suppress the pair's emission line (budget-limited
+    emission)?  Returns (probe complex series, dt_probe)."""
+    xi = xi if xi is not None else 1.0 / np.sqrt(2.0 * b)
+    dx, X, Y, K2 = make_grid(N, L)
+    Gamma = absorber(X, Y, L, width=20.0, gmax=1.2)
+    Dscr = 28.0
+    charges = [(-d / 2, 0.0, 1), (d / 2, 0.0, 1),
+               (0.0, Dscr, -1), (0.0, -Dscr, -1)]
+    psi0 = np.ones((N, N), dtype=complex)
+    for (xs, ys, ell) in charges:
+        rr = np.sqrt((X - xs) ** 2 + (Y - ys) ** 2)
+        th = np.arctan2(Y - ys, X - xs)
+        psi0 *= (np.tanh(rr / xi) ** abs(ell)) * np.exp(1j * ell * th)
+    Wd, _ = window(X, Y, drive_pos[0], 1.6)   # drive at (x0, 0)
+
+    psi = _to(psi0)
+    Wd = _to(Wd)
+    decay = _to(np.exp(-Gamma * dt))
+    expK_half = _to(np.exp(-1j * K2 / 2.0 * (dt / 2.0)))
+
+    if relax_tau > 0.0:
+        dtau = 0.02
+        relK_half = _to(np.exp(-K2 / 2.0 * (dtau / 2.0)))
+        for _ in range(int(round(relax_tau / dtau))):
+            psi = xp.fft.ifft2(relK_half * xp.fft.fft2(psi))
+            rho = xp.abs(psi) ** 2
+            psi = psi * xp.exp(-(b * xp.log(xp.maximum(rho, floor))) * dtau)
+            psi = xp.fft.ifft2(relK_half * xp.fft.fft2(psi))
+
+    nsteps = int(round(t_total / dt))
+    ipb = (int(np.argmin(np.abs(X[:, 0] + probe_r))), N // 2)  # probe at -x
+    rec_every = 4
+    rec_idx = [n for n in range(nsteps) if n % rec_every == 0]
+    probe_dev = xp.empty(len(rec_idx), dtype=complex)
+    j = 0
+    t_ramp = 30.0
+    for n in range(nsteps):
+        t = n * dt
+        psi = xp.fft.ifft2(expK_half * xp.fft.fft2(psi))
+        tm = t + dt / 2.0
+        ramp = min(1.0, tm / t_ramp)
+        Vt = drive_V0 * ramp * np.sin(drive_omega * tm) * Wd
+        rho = xp.abs(psi) ** 2
+        psi = psi * xp.exp(-1j * (b * xp.log(xp.maximum(rho, floor)) + Vt)
+                           * dt)
+        psi = 1.0 + (psi - 1.0) * decay
+        psi = xp.fft.ifft2(expK_half * xp.fft.fft2(psi))
+        if n % rec_every == 0:
+            probe_dev[j] = psi[ipb[0], ipb[1]]
+            j += 1
+    return _host(probe_dev), rec_every * dt
+
+
+def _line_amp(series, dtp, w_target, halfwidth=0.02, t_skip_frac=0.3):
+    """Spectral amplitude of |psi|^2 oscillation near angular frequency
+    w_target (max bin within +/- halfwidth), skipping initial transients."""
+    x = np.abs(series) ** 2
+    x = x[int(len(x) * t_skip_frac):]
+    x = x - x.mean()
+    F = np.abs(np.fft.rfft(x)) / len(x) * 2.0
+    w = 2.0 * np.pi * np.fft.rfftfreq(len(x), d=dtp)
+    m = (w > w_target - halfwidth) & (w < w_target + halfwidth)
+    return float(F[m].max()) if m.any() else np.nan
+
+
+def main_h7c(drives=(0.0, 0.06, 0.12, 0.2)):
+    """H7c -- budget-limited emission: does ambient wave intensity suppress
+    a self-sustained pair's emission line?  Decision rule: pair-line
+    amplitude decreasing with drive amplitude => budget-limited emission
+    exists (foundation for the sqrt(M) saturation); flat => the medium does
+    not throttle budgeted emitters either (negative)."""
+    _stream()
+    w_pair = 0.1676            # measured pair line (H7b, d=4)
+    w_drive = 0.6
+    print(f"H7c -- budget-limited emission test, backend {backend_name()}")
+    print("self-sustained pair (d=4) + external drive at (40,0), "
+          f"omega={w_drive}; probe at (-20,0).")
+    print("pair line ~0.168 vs drive line 0.6: spectrally separated.\n")
+    print("   drive_V0    A(pair line)    A(drive line)    pair/quiet")
+    print("   " + "-" * 56)
+    A0 = None
+    rows = []
+    for V0 in drives:
+        t0 = _time.time()
+        pr, dtp = run_pair_in_bath(drive_V0=V0)
+        Ap = _line_amp(pr, dtp, w_pair)
+        Ad = _line_amp(pr, dtp, w_drive)
+        if A0 is None:
+            A0 = Ap
+        rows.append((V0, Ap, Ad))
+        print(f"   {V0:7.2f}    {Ap:.4e}      {Ad:.4e}      "
+              f"{Ap / A0:.3f}   [{_time.time() - t0:.0f}s]")
+    print()
+    ratios = [Ap / A0 for _, Ap, _ in rows]
+    suppressed = ratios[-1] < 0.8
+    enhanced = ratios[-1] > 1.25
+    if suppressed:
+        verdict = ("SUPPRESSION -- ambient intensity throttles the "
+                   "budgeted emitter: budget-limited emission EXISTS "
+                   "(foundation for sqrt(M) saturation)")
+    elif enhanced:
+        verdict = ("ENHANCEMENT -- ambient bath amplifies the pair line "
+                   "(stimulated emission-like); opposite of saturation")
+    else:
+        verdict = ("FLAT -- no measurable throttling at these intensities "
+                   "(negative for the saturation foundation at this level)")
+    print("RESULT:", verdict)
+    print("H7C COMPLETE")
+    return 0
+
+
+def _core_profile(out, rmax=16.0, search_r=15.0):
+    """Final-snapshot radial profiles of e and rho centred on the deepest
+    core within search_r of the origin.  Returns (r_centers, e, rho)."""
+    e_f, rho_f, X, Y = out[6], out[7], out[8], out[9]
+    Rg = np.sqrt(X * X + Y * Y)
+    msk = Rg < search_r
+    idx = np.unravel_index(np.argmin(np.where(msk, rho_f, np.inf)),
+                           rho_f.shape)
+    xc, yc = float(X[idx]), float(Y[idx])
+    Rc = np.sqrt((X - xc) ** 2 + (Y - yc) ** 2)
+    r_edges = np.arange(1.0, rmax, 1.0)
+    rc = 0.5 * (r_edges[:-1] + r_edges[1:])
+    e1 = np.empty(len(rc))
+    rho1 = np.empty(len(rc))
+    for i in range(len(rc)):
+        mm = (Rc >= r_edges[i]) & (Rc < r_edges[i + 1])
+        e1[i] = e_f[mm].mean()
+        rho1[i] = rho_f[mm].mean()
+    return rc, e1, rho1
+
+
+def main_h8():
+    """H8 -- cementing battery for the intrinsic two-term source:
+    H8a ell^2 law (charge-2 -> e*r^2 = 2.0); H8b Bernoulli density tail
+    (drho*r^2 -> -1/(2b)); H8c b-dial (b=2: energy plateau unchanged,
+    density tail halved)."""
+    _stream()
+    print(f"H8 -- cementing battery, backend {backend_name()}\n")
+
+    # --- H8a: charge-2 vortex (quadrupole of ell = +/-2), measure beyond
+    # any core splitting ---
+    D = 30.0
+    t0 = _time.time()
+    out = run_vortex(
+        [(0.0, 0.0, 2), (D, 0.0, -2), (D, D, 2), (0.0, D, -2)],
+        t_total=30.0, t_avg=8.0, relax_tau=8.0, N=320, L=140.0)
+    rc, e2, rho2 = _core_profile(out)
+    m = (rc > 4.0) & (rc < 10.0)   # beyond split separation, << D
+    pl2 = float(np.nanmean(e2[m] * rc[m] ** 2))
+    sc2 = float(np.nanstd(e2[m] * rc[m] ** 2))
+    print(f"  H8a charge-2: e*r^2 (r 4-10) = {pl2:.3f} +/- {sc2:.3f}  "
+          f"(prediction l^2/2 = 2.0)   [{_time.time() - t0:.0f}s]")
+    h8a = abs(pl2 - 2.0) < 0.3
+    print(f"  H8a (l^2 law): {'CONFIRMED' if h8a else 'FAIL'}\n")
+
+    # --- H8b: isolated-dominant vortex (D = 45 in a large box), density
+    # tail vs Bernoulli -1/(2b) ---
+    b_ = 1.0
+    t0 = _time.time()
+    out = run_vortex(
+        [(0.0, 0.0, 1), (45.0, 0.0, -1), (45.0, 45.0, 1), (0.0, 45.0, -1)],
+        t_total=40.0, t_avg=10.0, relax_tau=10.0, N=448, L=200.0, b=b_)
+    rc, e1, rho1 = _core_profile(out, rmax=22.0)
+    drr2 = (rho1 - 1.0) * rc * rc
+    er2 = e1 * rc * rc
+    print(f"  H8b isolated vortex (D=45, L=200), b={b_}:")
+    print("     r      e*r^2     drho*r^2")
+    for i in range(2, len(rc), 2):
+        print(f"   {rc[i]:5.1f}   {er2[i]:.3f}    {drr2[i]:+.3f}")
+    m = (rc > 8.0) & (rc < 18.0)
+    tail = float(np.nanmean(drr2[m]))
+    epl = float(np.nanmean(er2[(rc > 3.0) & (rc < 12.0)]))
+    print(f"   -> energy plateau = {epl:.3f} (pred 0.5); density tail "
+          f"drho*r^2 (r 8-18) = {tail:+.3f} (naive Bernoulli -1/(2b) = "
+          f"{-1.0 / (2.0 * b_):+.2f})   [{_time.time() - t0:.0f}s]\n")
+
+    # --- H8c: b-dial at b = 2 ---
+    t0 = _time.time()
+    out = run_vortex(
+        [(0.0, 0.0, 1), (45.0, 0.0, -1), (45.0, 45.0, 1), (0.0, 45.0, -1)],
+        t_total=40.0, t_avg=10.0, relax_tau=10.0, N=448, L=200.0, b=2.0)
+    rc, e1b, rho1b = _core_profile(out, rmax=22.0)
+    epl_b2 = float(np.nanmean((e1b * rc * rc)[(rc > 3.0) & (rc < 12.0)]))
+    tail_b2 = float(np.nanmean(((rho1b - 1.0) * rc * rc)[m]))
+    print(f"  H8c b=2: energy plateau = {epl_b2:.3f} (must STAY ~0.5); "
+          f"density tail = {tail_b2:+.3f} (must HALVE vs b=1: "
+          f"{tail / 2.0:+.3f})   [{_time.time() - t0:.0f}s]")
+    h8c_e = abs(epl_b2 - 0.5) < 0.15
+    h8c_d = abs(tail_b2 - tail / 2.0) < 0.4 * abs(tail / 2.0) \
+        if np.isfinite(tail) and tail != 0 else False
+    print(f"  H8c (kinetic/potential separation): energy "
+          f"{'OK' if h8c_e else 'FAIL'}, density-halving "
+          f"{'OK' if h8c_d else 'FAIL'}")
+    print("H8 COMPLETE")
+    return 0
+
+
 def main_smoke():
     """Tiny-grid sanity pass of every integrator (no physics claims)."""
     _stream()
@@ -1154,9 +1698,12 @@ if __name__ == "__main__":
     dispatch = {"h1a": main_h1a, "h1b": main_h1b, "h1c": main_h1c,
                 "h2a": main_h2a, "h2b": main_h2b, "h2range": main_h2range,
                 "hdil": main_hdil, "hbh": main_hbh,
-                "hdil3d": main_hdil3d, "smoke": main_smoke}
+                "hdil3d": main_hdil3d, "hsat": main_hsat,
+                "hvort": main_hvort, "h7c": main_h7c, "h8": main_h8,
+                "smoke": main_smoke}
     if mode not in dispatch:
         print("usage: python bath_driven_interaction.py "
-              "{h1a|h1b|h1c|h2a|h2b|h2range|hdil|hbh|hdil3d|smoke}")
+              "{h1a|h1b|h1c|h2a|h2b|h2range|hdil|hbh|hdil3d|hsat|hvort|"
+              "smoke}")
         raise SystemExit(2)
     raise SystemExit(dispatch[mode]())
