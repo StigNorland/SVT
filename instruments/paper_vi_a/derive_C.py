@@ -18,8 +18,8 @@ alpha_G = G m_p^2 / (hbar c) approx 5.91e-39 is the proton gravitational
 coupling.
 
 This script reproduces all three forms and compares them with the
-weighted multi-galaxy observation C_obs = 1.808e9 kpc * M_sun from
-Table 1 of SSV-VI-a.
+multi-galaxy listed-value mean C_obs = 1.8064e9 kpc * M_sun from
+Table 2 of SSV-VI-a.
 """
 
 from __future__ import annotations
@@ -77,11 +77,11 @@ def main() -> None:
     print(f"    = {fmt(C_form_Np9_alpha25)} kg m")
     print(f"    = {fmt(C_form_Np9_alpha25/(kpc*M_sun))} kpc M_sun")
     print()
-    # Comparison with observation
-    C_obs = 1.808e9 * kpc * M_sun
-    print(f"Observed (Table 1 weighted mean):")
+    # Comparison with the central values listed in the manuscript table.
+    C_obs = 1.8064e9 * kpc * M_sun
+    print(f"Observed (Table 2 listed-value mean):")
     print(f"    = {fmt(C_obs)} kg m")
-    print(f"    = 1.808e+09 kpc M_sun")
+    print(f"    = 1.8064e+09 kpc M_sun")
     rel = (C_form_Np9_alpha25 - C_obs) / C_obs
     print()
     print(f"Relative discrepancy: {rel*100:+.2f}%  (within N_p uncertainty)")

@@ -12,6 +12,16 @@ History is preserved (`git mv`), so past results remain reproducible by
 checking out earlier commits or copying a script back into `instruments/paper_i/`.
 Tracking issue: GitHub #66.
 
+Additional SSV-VI-a exploratory material was moved here on 2026-06-09 after the
+Paper VI-a calculation audit.  The live calculation is
+`instruments/paper_vi_a/derive_C.py`; the quarantined
+`paper_vi_a/calibration_analysis_failed_exploration.py` contains older
+flat-velocity, healing-length, and acoustic-matching routes that miss the
+observed calibration constant by many orders of magnitude.  The quarantined
+`paper_vi_a/calculate_velocity_profile_toy_vortex.py` is a toy vortex-drag
+plotter and is not the SSV-VI-a rotation-curve model.  Neither should be cited
+as support for the manuscript.
+
 ## Why these are not derivations
 
 ### Ladder / muon (falsified by Path B)

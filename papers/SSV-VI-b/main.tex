@@ -128,26 +128,26 @@ The model velocity field used in Paper~VI-a is
 \end{equation}
 where $v_\mathrm{bar}$ is the standard baryonic component (BH + bulge + disc + gas),
 $\varepsilon$ is fixed by $M_\mathrm{BH}$ via equation (3) of Paper~VI-a, and $k$ is
-fixed by $\Delta r$.  Applied to the 625-point NGC~224 rotation curve~\cite{chemin2009}
-with a 0.5~kpc Gaussian beam convolution matching the survey resolution, the model
-achieves:
+fixed by $\Delta r$.  The current repository receipt in Paper~VI-a fits the
+Chemin et al.~\cite{chemin2009} Table~4 H\,I rotation curve directly, without a 2D
+beam-convolution model, and obtains RMS $\approx9.27\;\mathrm{km/s}$ for
+$r\ge4$~kpc.  A closure-grade beam-convolved 2D fit remains to be added.
 
-\begin{resultbox}[NGC~224 beam-convolved fit]
-RMS $\approx 14\;\mathrm{km/s}$ (SSV, two free parameters: $v_\mathrm{flat}$, $M/L$)
-versus RMS $\approx 57\;\mathrm{km/s}$ for best-fit NFW at equal parameter count.
-The residual 14~km/s is dominated by the observed NE/SW velocity asymmetry of the disc,
-not by systematic model error.  The unconvolved fit of Paper~VI-a ($\approx7.5$~km/s)
-is the upper bound before beam smearing is applied.
-\end{resultbox}
+\begin{gapbox}[Beam-convolved receipt needed]
+The axisymmetric receipt from Paper~VI-a supports the radial Bessel term, but the
+beam-convolved two-dimensional velocity-field comparison has not yet been reproduced as a
+live repository calculation.  The figure below should therefore be read as a morphology
+schematic until the projected-disc fit is rebuilt with the Chemin et al. data cube or an
+equivalent public velocity-field product.
+\end{gapbox}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.88\textwidth]{figures/fig1_rotation_curve.jpg}
-\caption{NGC~224 beam-convolved rotation curve.  \emph{Black dots}: 625-point data.
-\emph{Blue}: SSV model~\eqref{eq:vmodel}, beam-convolved at 0.5~kpc; two free parameters.
-\emph{Red dashed}: best-fit NFW, same parameter count.
+\caption{NGC~224 rotation-curve schematic.  \emph{Blue}: SSV model~\eqref{eq:vmodel}.
+\emph{Red dashed}: smooth halo-style comparison.
 \emph{Dotted verticals}: predicted Bessel node positions, not fitted.
-\emph{Lower panel}: residuals; dominant scatter is disc NE/SW asymmetry.}
+\emph{Lower panel}: residuals.  A closure-grade beam-convolved reproduction is deferred.}
 \label{fig:rc}
 \end{figure}
 

@@ -14,7 +14,7 @@ Structure matches the outline exactly:
 2. **The Central Black-Hole Scale** — BH eigenfrequency, de Broglie scale, node spacing, six-galaxy table.
 3. **Disc Soliton and Standing Wave** — LogSE planar soliton, Mestel surface density, wiggle modulation model.
 4. **Rotation-Curve Mechanism** — why Mestel → flat; universal coupling via update-capacity field (Paper IV); stress-energy gapbox → Paper VII-b.
-5. **Application to Andromeda** — NGC 224 fit (7.5 vs 27 km/s RMS), satellite plane as nodal sheet, five-galaxy calibration of C; BdG gapbox → Paper VI-b.
+5. **Application to Andromeda** — NGC 224 receipt fit (9.27 km/s RMS on Chemin et al. Table 4 for `r >= 4 kpc`, versus 15.01 km/s smooth ablation and 14.66 km/s NFW-shape baseline), satellite plane as nodal sheet, five-galaxy calibration of C; BdG gapbox → Paper VI-b.
 6. **Predictions and Limits** — three testable predictions; four open problems including BdG derivation of C and morphology → VI-b.
 - **Appendix A** — variational derivation of Mestel profile from LogSE.
 

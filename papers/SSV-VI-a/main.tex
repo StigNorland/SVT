@@ -49,8 +49,9 @@ $\mathcal{C} = 1.8\times10^9\;\mathrm{kpc}\cdot M_\odot$, is anchored to Androme
 in high-resolution rotation curves.  The gravitational coupling is universal because the
 standing wave operates through the medium's update-capacity field---it slows local time, and
 all matter responds to the resulting gradient regardless of composition.  Applied to
-NGC~224, the framework achieves an RMS residual of $\sim7.5\;\mathrm{km/s}$ versus
-$\sim27\;\mathrm{km/s}$ for a standard NFW comparison at equal parameter count.
+NGC~224, the framework achieves an RMS residual of $\sim9.3\;\mathrm{km/s}$ on the
+published H\,I rotation curve, compared with $\sim15\;\mathrm{km/s}$ for smooth
+two-parameter baselines on the same radial domain.
 
 The scope is deliberately galactic.  No cosmological constant, supernova, broad cosmology,
 or non-axisymmetric morphology claim is used in the argument.
@@ -137,6 +138,12 @@ The corresponding de~Broglie wavelength propagating at $c$ is
       \;=\; \frac{h\,M_\mathrm{BH}}{m_p^2 c}.
   \label{eq:lambda_BH}
 \end{equation}
+This temporal condensate scale is not the observed radial node spacing of the
+disc.  A direct acoustic or de~Broglie matching would give
+$\lambda_\mathrm{BH}\propto M_\mathrm{BH}$, whereas the observed radial spacing
+scales as $M_\mathrm{BH}^{-1}$.  The radial scale is therefore fixed below by
+the gravitational Bohr-radius constant $\mathcal C$ rather than by
+$c/f_\mathrm{BH}$.
 
 \subsection{Spatial standing wave and node spacing}
 
@@ -146,9 +153,10 @@ cylindrical coordinates $(r,\phi,z)$ with azimuthal symmetry the relevant eigenf
   \Psi_\mathrm{wave}(r) \;=\; J_0(k r), \qquad k \;=\; \frac{\pi}{\Delta r},
   \label{eq:bessel}
 \end{equation}
-where $\Delta r$ is the node spacing.  Matching to the de~Broglie scale and calibrating to
-the observed wiggle structure in Andromeda's rotation curve ($\Delta r \approx 12.9$~kpc for
-$M_\mathrm{BH} = 1.4\times10^8\,M_\odot$) gives
+where $\Delta r$ is the radial node spacing.  The phenomenological spacing inferred from
+Andromeda's rotation curve ($\Delta r \approx 12.9$~kpc for
+$M_\mathrm{BH} = 1.4\times10^8\,M_\odot$), and derived in
+\S\ref{sec:C_derivation}, is
 \begin{equation}
   \boxed{\Delta r \;=\; \frac{\mathcal{C}}{M_\mathrm{BH}}, \qquad
   \mathcal{C} \;=\; 1.8\times10^9\;\mathrm{kpc}\cdot M_\odot.}
@@ -158,7 +166,7 @@ For large $r$ the Bessel function falls as $J_0(kr)\sim\sqrt{2/(\pi kr)}$, so th
 standing-wave amplitude decays as $r^{-1/2}$ while the node spacing converges to $\Delta r$,
 ensuring a persistent periodic imprint across the disc.
 
-Table~\ref{tab:galaxies} lists $f_\mathrm{BH}$ and $\Delta r$ for ten representative
+Table~\ref{tab:galaxies} lists $f_\mathrm{BH}$ and $\Delta r$ for six representative
 galaxies spanning six decades in black-hole mass.
 
 \begin{table}[H]
@@ -169,12 +177,12 @@ galaxies spanning six decades in black-hole mass.
 \toprule
 Galaxy & $M_\mathrm{BH}\;(M_\odot)$ & $f_\mathrm{BH}$ (Hz) & Period & $\Delta r$ (kpc) \\
 \midrule
-Milky Way       & $4.3\times10^{6}$  & $5.62\times10^{-11}$ & $565$ yr       & $418.6$ \\
-Centaurus A     & $5.5\times10^{7}$  & $4.39\times10^{-12}$ & $7\,225$ yr    & $32.7$  \\
-Andromeda (M31) & $1.4\times10^{8}$  & $1.73\times10^{-12}$ & $18\,400$ yr   & $12.9$  \\
-NGC 1052        & $1.5\times10^{8}$  & $1.61\times10^{-12}$ & $19\,700$ yr   & $12.0$  \\
-Sombrero (M104) & $1.0\times10^{9}$  & $2.42\times10^{-13}$ & $131\,000$ yr  & $1.80$  \\
-M87 (Virgo A)   & $6.5\times10^{9}$  & $3.72\times10^{-14}$ & $852\,000$ yr  & $0.28$  \\
+Milky Way       & $4.3\times10^{6}$  & $4.44\times10^{-41}$ & $7.14\times10^{32}$ yr & $418.6$ \\
+Centaurus A     & $5.5\times10^{7}$  & $3.47\times10^{-42}$ & $9.13\times10^{33}$ yr & $32.7$  \\
+Andromeda (M31) & $1.4\times10^{8}$  & $1.36\times10^{-42}$ & $2.32\times10^{34}$ yr & $12.9$  \\
+NGC 1052        & $1.5\times10^{8}$  & $1.27\times10^{-42}$ & $2.49\times10^{34}$ yr & $12.0$  \\
+Sombrero (M104) & $1.0\times10^{9}$  & $1.91\times10^{-43}$ & $1.66\times10^{35}$ yr & $1.80$  \\
+M87 (Virgo A)   & $6.5\times10^{9}$  & $2.94\times10^{-44}$ & $1.08\times10^{36}$ yr & $0.28$  \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -335,27 +343,39 @@ density profile $\delta\rho(\mathbf x)$ of the standing wave.
 
 Andromeda (NGC~224, M31) is the optimal test case.  With $M_\mathrm{BH} =
 1.4\times10^8\,M_\odot$ the predicted wiggle spacing $\Delta r \approx 12.9$~kpc falls
-squarely within the optically mapped disc, and the high-resolution rotation curve data
-(625 points at 0.05~kpc steps) provides stringent constraints.
+squarely within the optically mapped disc.  We use the H\,I tilted-ring rotation curve of
+Chemin, Carignan, and Foster~\cite{chemin2009}, specifically their Table~4.
 
 The model \eqref{eq:vwave} is fitted with three parameters: $v_f$ (asymptotic velocity),
 $r_t$ (transition radius), and $\varepsilon$ (wave amplitude fraction).  The BH mass and
 $\Delta r$ are not free parameters---they are fixed by independent dynamical measurements.
 
 \begin{resultbox}[NGC 224 fit result]
-RMS residual $\approx 7.5\;\mathrm{km/s}$ (SSV soliton model) versus
-$\approx 27\;\mathrm{km/s}$ for a standard NFW dark-matter halo fit at equal parameter
-count.  $\Delta\mathrm{AIC} \approx -41.8$ strongly favours the SSV model.
+The repository receipt
+\texttt{instruments/paper\_vi\_a/fit\_rotation\_curve.py} downloads the
+Chemin et al. arXiv source, parses Table~4, and fits the radial domain
+$r\ge4$~kpc.  With $\Delta r$ fixed by the M31 black-hole mass, the SSV
+axisymmetric model gives RMS $\approx9.27\;\mathrm{km/s}$ for 90 data points.
+The no-Bessel smooth ablation gives RMS $\approx15.01\;\mathrm{km/s}$, and a
+two-parameter NFW-shape comparison gives RMS $\approx14.66\;\mathrm{km/s}$.
 \end{resultbox}
 
-\begin{figure}[H]
+\begin{table}[H]
 \centering
-\includegraphics[width=0.82\textwidth]{figures/fig2_six_galaxies.jpg}
-\caption{Rotation curve fits for six galaxies using the SSV soliton model
-\eqref{eq:vwave}.  Each panel uses the independently measured $M_\mathrm{BH}$ to fix
-$\Delta r$; the three fit parameters are $v_f$, $r_t$, and $\varepsilon$.}
-\label{fig:six_galaxies}
-\end{figure}
+\caption{NGC~224 rotation-curve receipt.  All rows use Chemin et al. Table~4 on
+$r\ge4$~kpc.  The SSV row fixes $\Delta r=12.857$~kpc from
+$\mathcal C/M_\mathrm{BH}$ and fits only $v_f$, $r_t$, and $\varepsilon$.}
+\label{tab:m31-fit}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Model & Free shape parameters & RMS (km/s) & AIC \\
+\midrule
+SSV Bessel soliton & $v_f=247.5$, $r_t=0.96$, $\varepsilon=-0.36$ & $9.27$ & $406.8$ \\
+Smooth ablation & $v_f=244.0$, $r_t=2.21$ & $15.01$ & $491.6$ \\
+NFW-shape baseline & $v_s=546.7$, $r_s=6.01$ & $14.66$ & $487.3$ \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{The plane of satellites as a nodal sheet}
 
@@ -384,10 +404,11 @@ away; it is a prediction of the framework.
 
 \subsection{Multi-galaxy calibration of $\mathcal{C}$}
 
-The calibration constant $\mathcal{C}$ enters only through $\Delta r = \mathcal{C}/M_\mathrm{BH}$
-and is the sole free parameter in the spatial part of the model.  To move beyond
-single-galaxy anchoring, the wiggle-spacing formula \eqref{eq:dr} is applied to five
-galaxies with independently determined BH masses and high-resolution rotation curves.
+The spatial constant $\mathcal{C}$ enters only through
+$\Delta r = \mathcal{C}/M_\mathrm{BH}$.  Historically it was first inferred from
+Andromeda; the cross-galaxy check below tests whether the same constant is recovered from
+independently determined black-hole masses and high-resolution rotation curves.  The
+closed-form derivation is given in \S\ref{sec:C_derivation}.
 
 \begin{table}[H]
 \centering
@@ -407,14 +428,16 @@ NGC~4736        & $0.10$  & $\sim\!180$   & $1.80$ & \cite{rubin1980} \\
 NGC~2903        & $0.03$  & $\sim\!600$   & $1.80$ & \cite{rubin1980} \\
 Milky Way       & $0.043$ & $\sim\!420$   & $1.81$ & \cite{nfw1997}   \\
 \midrule
-\multicolumn{3}{l}{Weighted mean} & $1.808 \pm 0.012$ & \\
+\multicolumn{3}{l}{Mean of listed values} & $\approx 1.806$ & \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The $<1\%$ scatter across five galaxies spanning two orders of magnitude in BH mass is not a
-fit: each row uses the independently measured BH mass and observed wiggle scale.  The
-consistency is evidence that $\mathcal{C}$ is a genuine physical constant of the medium.
+The small scatter of the central values across five galaxies spanning two orders of
+magnitude in BH mass is not a rotation-curve fit: each row uses the independently measured
+BH mass and observed wiggle scale.  Because the quoted wiggle spacings are approximate, this
+table should be read as a consistency check on the $M_\mathrm{BH}^{-1}$ law rather than as a
+precision measurement of $\mathcal{C}$.
 
 \begin{figure}[H]
 \centering
@@ -488,9 +511,9 @@ $\alpha_G \equiv G m_p^2/(\hbar c) = 5.906\times10^{-39}$:
     \;=\; \frac{\hbar\,N_p^9}{2\,\alpha_G\,c\,\alpha^{25}}
     \;=\; 1.780\times10^{9}\;\mathrm{kpc}\cdot M_\odot,
 \end{equation*}
-versus the weighted multi-galaxy value $\mathcal{C}_\mathrm{obs} = 1.808\pm
-0.012\times10^{9}\;\mathrm{kpc}\cdot M_\odot$ (Table~\ref{tab:calib}).  The
-agreement is $1.5\%$, within the $N_p$ uncertainty from
+versus the multi-galaxy central value $\mathcal{C}_\mathrm{obs} \approx
+1.806\times10^{9}\;\mathrm{kpc}\cdot M_\odot$ (Table~\ref{tab:calib}).  The
+agreement is about $1.4\%$, within the $N_p$ uncertainty from
 Paper~I~\cite{SSV-I}.  $\mathcal{C}$ is now a derived constant of the SSV
 medium, not a multi-galaxy fit.
 \end{resultbox}
@@ -560,16 +583,16 @@ medium, not a multi-galaxy fit.
   \item The standing wave couples to all matter universally through the medium's
     update-capacity field (time dilation), consistent with the equivalence principle.
 
-  \item Applied to NGC~224, the model achieves RMS $\approx 7.5\;\mathrm{km/s}$ versus
-    $\approx 27\;\mathrm{km/s}$ for NFW at equal parameter count
-    ($\Delta\mathrm{AIC} \approx -41.8$).
+  \item Applied to NGC~224, the receipt fit gives RMS $\approx9.27\;\mathrm{km/s}$
+    on the Chemin et al. H\,I rotation curve for $r\ge4$~kpc, compared with
+    $\approx15.01\;\mathrm{km/s}$ for the no-Bessel smooth ablation and
+    $\approx14.66\;\mathrm{km/s}$ for a two-parameter NFW-shape baseline.
 
   \item The Andromeda plane of satellites is the nodal plane of the M31 standing wave;
     its thickness and co-rotation are predicted without additional parameters.
 
-  \item The calibration constant $\mathcal{C}$ is consistent across five galaxies at
-    $<1\%$ scatter; a dimensional estimate suggests it will be derived from medium
-    constants at integer powers of $\alpha$.
+  \item The spatial constant $\mathcal{C}$ is consistent across five galaxies and is
+    derived in closed form from medium constants at integer powers of $\alpha$.
 \end{enumerate}
 
 \medskip
@@ -624,6 +647,11 @@ L.\ Mestel, ``On the galactic law of rotation,''
 \bibitem{ibata2013}
 R.~A.\ Ibata et al., ``A vast, thin plane of corotating dwarf galaxies orbiting the
 Andromeda galaxy,'' \textit{Nature}\ \textbf{493}, 62--65 (2013).
+
+\bibitem{chemin2009}
+L.\ Chemin, C.\ Carignan, and T.\ Foster,
+``H I kinematics and dynamics of Messier 31,''
+\textit{Astrophys.\ J.}\ \textbf{705}, 1395--1415 (2009).
 
 \bibitem{rubin1980}
 V.~C.\ Rubin, W.~K.\ Ford, and N.\ Thonnard,

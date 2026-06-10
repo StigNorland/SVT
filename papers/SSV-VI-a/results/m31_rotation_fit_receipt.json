@@ -1,0 +1,57 @@
+{
+  "source": {
+    "paper": "Chemin, Carignan & Foster (2009), ApJ 705, 1395",
+    "arxiv": "0909.3846",
+    "table": "Table 4",
+    "cache": "papers/SSV-VI-a/data/chemin2009_table4_m31_rotation_curve.csv"
+  },
+  "fit_domain": {
+    "r_min_kpc": 4.0,
+    "r_max_kpc": 38.09,
+    "n_points": 90
+  },
+  "fixed_parameters": {
+    "m31_black_hole_mass_msun": 140000000.0,
+    "c_kpc_msun": 1800000000.0,
+    "delta_r_kpc": 12.857142857142858
+  },
+  "fits": [
+    {
+      "name": "SSV",
+      "params": {
+        "v_flat_kms": 247.45511206642925,
+        "r_transition_kpc": 0.9582122647708222,
+        "epsilon": -0.36114259263391246
+      },
+      "rms_kms": 9.270804140601067,
+      "wrms_kms": 18.159665550561154,
+      "aic": 406.836622027393
+    },
+    {
+      "name": "smooth",
+      "params": {
+        "v_flat_kms": 244.0387373519483,
+        "r_transition_kpc": 2.2084409881171285
+      },
+      "rms_kms": 15.014743915192751,
+      "wrms_kms": 27.910488938016037,
+      "aic": 491.62587628443396
+    },
+    {
+      "name": "NFW shape",
+      "params": {
+        "v_scale_kms": 546.653118467109,
+        "r_scale_kpc": 6.012858312704688
+      },
+      "rms_kms": 14.657489469420058,
+      "wrms_kms": 26.048087847444442,
+      "aic": 487.291257654315
+    }
+  ],
+  "deltas": {
+    "ssv_minus_smooth_rms_kms": -5.743939774591684,
+    "ssv_minus_nfw_shape_rms_kms": -5.3866853288189915,
+    "ssv_minus_smooth_aic": -84.78925425704097,
+    "ssv_minus_nfw_shape_aic": -80.45463562692203
+  }
+}

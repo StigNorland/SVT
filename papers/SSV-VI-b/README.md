@@ -11,7 +11,7 @@ Issue `#5` status: this paper is downstream of `SSV VI-a`; it uses the flat-curv
 Structure matches the outline exactly:
 
 1. **Introduction** — inherits three results from VI-a without re-derivation; scope and limits statement; roadmap.
-2. **2D Disc Resonance** — full 2D density field with azimuthal overtones; beam-convolved NGC 224 fit (RMS ≈ 14 km/s vs 57 km/s NFW); two figures wired in.
+2. **2D Disc Resonance** — full 2D density field with azimuthal overtones; the old beam-convolved NGC 224 numbers are demoted pending a live 2D receipt, while Paper VI-a now carries the reproducible axisymmetric Chemin Table 4 fit.
 3. **Azimuthal Modes** — CBH spin as mode driver; $\varepsilon_m \propto a_\mathrm{BH}^m$ scaling; corotation radius $r_c = m\mathcal{C}/(\pi M_\mathrm{BH})$; winding problem resolved as soliton refreshment.
 4. **Morphology Sequence** — pitch angle formula; full Hubble sequence as overtone spectrum; pitch angle–BH mass anti-correlation consistent with Seigar et al. and Davis et al.
 5. **Why 1D Curves Appear Smooth** — azimuthal averaging reduces 12.1 km/s wiggle to ~2.3 km/s; wave visible in 2D velocity residuals and HI surface-density maps.
