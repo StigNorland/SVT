@@ -1248,7 +1248,8 @@ def main_hsat(Ns=(1, 2, 4, 8, 16), V0s=(0.15, 0.45)):
 
 
 def run_vortex(charges, *, N=256, L=100.0, b=1.0, dt=0.02, xi=None,
-               t_total=300.0, t_avg=60.0, probe_r=None, floor=1e-6):
+               t_total=300.0, t_avg=60.0, probe_r=None, relax_tau=0.0,
+               floor=1e-6):
     """H7 -- SELF-SUSTAINED topological sources: imprint vortices on the
     psi = 1 background and evolve with NO drive.  charges is a list of
     (x, y, ell) winding numbers.  Energy is carried by the defects
@@ -1281,6 +1282,20 @@ def run_vortex(charges, *, N=256, L=100.0, b=1.0, dt=0.02, xi=None,
     expK_half = _to(np.exp(-1j * K2 / 2.0 * (dt / 2.0)))
     iKX = _to(1j * KXg)
     iKY = _to(1j * KYg)
+
+    # ---- imaginary-time relaxation preconditioner ----
+    # For the LogSE with rho0 = 1 the vacuum has exactly zero energy
+    # (b ln 1 = 0), so e^{-tau H} relaxes the imprint toward the true vortex
+    # profile with NO renormalisation: the winding is topologically
+    # protected (the zeros cannot unwind) while the imprint's sound decays.
+    if relax_tau > 0.0:
+        dtau = 0.02
+        relK_half = _to(np.exp(-K2 / 2.0 * (dtau / 2.0)))
+        for _ in range(int(round(relax_tau / dtau))):
+            psi = xp.fft.ifft2(relK_half * xp.fft.fft2(psi))
+            rho = xp.abs(psi) ** 2
+            psi = psi * xp.exp(-(b * xp.log(xp.maximum(rho, floor))) * dtau)
+            psi = xp.fft.ifft2(relK_half * xp.fft.fft2(psi))
 
     nsteps = int(round(t_total / dt))
     n_avg_start = int(round((t_total - t_avg) / dt))
@@ -1379,7 +1394,7 @@ def main_hvort():
     t0 = _time.time()
     out = run_vortex(
         [(0.0, 0.0, 1), (D, 0.0, -1), (D, D, 1), (0.0, D, -1)],
-        t_total=160.0, t_avg=40.0, **box)
+        t_total=40.0, t_avg=10.0, relax_tau=8.0, **box)
     e_f, rho_f, X, Y = out[6], out[7], out[8], out[9]
     # locate the (drifted) origin-vortex core: density minimum within r < 15
     Rg = np.sqrt(X * X + Y * Y)
@@ -1451,6 +1466,125 @@ def main_hvort():
     return 0
 
 
+def run_pair_in_bath(d=4.0, *, drive_V0=0.0, drive_omega=0.6,
+                     drive_pos=(40.0, 0.0), N=320, L=140.0, b=1.0,
+                     dt=0.02, xi=None, t_total=400.0, probe_r=20.0,
+                     relax_tau=6.0, floor=1e-6):
+    """H7c -- a self-sustained rotating vortex pair embedded in an ambient
+    wave bath from an external driven source at drive_pos.  The pair emits
+    at its own line (~2*Omega ~ 0.17 for d = 4); the drive radiates at
+    drive_omega = 0.6 -- spectrally separable at a far probe.  Question: does
+    ambient intensity suppress the pair's emission line (budget-limited
+    emission)?  Returns (probe complex series, dt_probe)."""
+    xi = xi if xi is not None else 1.0 / np.sqrt(2.0 * b)
+    dx, X, Y, K2 = make_grid(N, L)
+    Gamma = absorber(X, Y, L, width=20.0, gmax=1.2)
+    Dscr = 28.0
+    charges = [(-d / 2, 0.0, 1), (d / 2, 0.0, 1),
+               (0.0, Dscr, -1), (0.0, -Dscr, -1)]
+    psi0 = np.ones((N, N), dtype=complex)
+    for (xs, ys, ell) in charges:
+        rr = np.sqrt((X - xs) ** 2 + (Y - ys) ** 2)
+        th = np.arctan2(Y - ys, X - xs)
+        psi0 *= (np.tanh(rr / xi) ** abs(ell)) * np.exp(1j * ell * th)
+    Wd, _ = window(X, Y, drive_pos[0], 1.6)   # drive at (x0, 0)
+
+    psi = _to(psi0)
+    Wd = _to(Wd)
+    decay = _to(np.exp(-Gamma * dt))
+    expK_half = _to(np.exp(-1j * K2 / 2.0 * (dt / 2.0)))
+
+    if relax_tau > 0.0:
+        dtau = 0.02
+        relK_half = _to(np.exp(-K2 / 2.0 * (dtau / 2.0)))
+        for _ in range(int(round(relax_tau / dtau))):
+            psi = xp.fft.ifft2(relK_half * xp.fft.fft2(psi))
+            rho = xp.abs(psi) ** 2
+            psi = psi * xp.exp(-(b * xp.log(xp.maximum(rho, floor))) * dtau)
+            psi = xp.fft.ifft2(relK_half * xp.fft.fft2(psi))
+
+    nsteps = int(round(t_total / dt))
+    ipb = (int(np.argmin(np.abs(X[:, 0] + probe_r))), N // 2)  # probe at -x
+    rec_every = 4
+    rec_idx = [n for n in range(nsteps) if n % rec_every == 0]
+    probe_dev = xp.empty(len(rec_idx), dtype=complex)
+    j = 0
+    t_ramp = 30.0
+    for n in range(nsteps):
+        t = n * dt
+        psi = xp.fft.ifft2(expK_half * xp.fft.fft2(psi))
+        tm = t + dt / 2.0
+        ramp = min(1.0, tm / t_ramp)
+        Vt = drive_V0 * ramp * np.sin(drive_omega * tm) * Wd
+        rho = xp.abs(psi) ** 2
+        psi = psi * xp.exp(-1j * (b * xp.log(xp.maximum(rho, floor)) + Vt)
+                           * dt)
+        psi = 1.0 + (psi - 1.0) * decay
+        psi = xp.fft.ifft2(expK_half * xp.fft.fft2(psi))
+        if n % rec_every == 0:
+            probe_dev[j] = psi[ipb[0], ipb[1]]
+            j += 1
+    return _host(probe_dev), rec_every * dt
+
+
+def _line_amp(series, dtp, w_target, halfwidth=0.02, t_skip_frac=0.3):
+    """Spectral amplitude of |psi|^2 oscillation near angular frequency
+    w_target (max bin within +/- halfwidth), skipping initial transients."""
+    x = np.abs(series) ** 2
+    x = x[int(len(x) * t_skip_frac):]
+    x = x - x.mean()
+    F = np.abs(np.fft.rfft(x)) / len(x) * 2.0
+    w = 2.0 * np.pi * np.fft.rfftfreq(len(x), d=dtp)
+    m = (w > w_target - halfwidth) & (w < w_target + halfwidth)
+    return float(F[m].max()) if m.any() else np.nan
+
+
+def main_h7c(drives=(0.0, 0.06, 0.12, 0.2)):
+    """H7c -- budget-limited emission: does ambient wave intensity suppress
+    a self-sustained pair's emission line?  Decision rule: pair-line
+    amplitude decreasing with drive amplitude => budget-limited emission
+    exists (foundation for the sqrt(M) saturation); flat => the medium does
+    not throttle budgeted emitters either (negative)."""
+    _stream()
+    w_pair = 0.1676            # measured pair line (H7b, d=4)
+    w_drive = 0.6
+    print(f"H7c -- budget-limited emission test, backend {backend_name()}")
+    print("self-sustained pair (d=4) + external drive at (40,0), "
+          f"omega={w_drive}; probe at (-20,0).")
+    print("pair line ~0.168 vs drive line 0.6: spectrally separated.\n")
+    print("   drive_V0    A(pair line)    A(drive line)    pair/quiet")
+    print("   " + "-" * 56)
+    A0 = None
+    rows = []
+    for V0 in drives:
+        t0 = _time.time()
+        pr, dtp = run_pair_in_bath(drive_V0=V0)
+        Ap = _line_amp(pr, dtp, w_pair)
+        Ad = _line_amp(pr, dtp, w_drive)
+        if A0 is None:
+            A0 = Ap
+        rows.append((V0, Ap, Ad))
+        print(f"   {V0:7.2f}    {Ap:.4e}      {Ad:.4e}      "
+              f"{Ap / A0:.3f}   [{_time.time() - t0:.0f}s]")
+    print()
+    ratios = [Ap / A0 for _, Ap, _ in rows]
+    suppressed = ratios[-1] < 0.8
+    enhanced = ratios[-1] > 1.25
+    if suppressed:
+        verdict = ("SUPPRESSION -- ambient intensity throttles the "
+                   "budgeted emitter: budget-limited emission EXISTS "
+                   "(foundation for sqrt(M) saturation)")
+    elif enhanced:
+        verdict = ("ENHANCEMENT -- ambient bath amplifies the pair line "
+                   "(stimulated emission-like); opposite of saturation")
+    else:
+        verdict = ("FLAT -- no measurable throttling at these intensities "
+                   "(negative for the saturation foundation at this level)")
+    print("RESULT:", verdict)
+    print("H7C COMPLETE")
+    return 0
+
+
 def main_smoke():
     """Tiny-grid sanity pass of every integrator (no physics claims)."""
     _stream()
@@ -1478,7 +1612,8 @@ if __name__ == "__main__":
                 "h2a": main_h2a, "h2b": main_h2b, "h2range": main_h2range,
                 "hdil": main_hdil, "hbh": main_hbh,
                 "hdil3d": main_hdil3d, "hsat": main_hsat,
-                "hvort": main_hvort, "smoke": main_smoke}
+                "hvort": main_hvort, "h7c": main_h7c,
+                "smoke": main_smoke}
     if mode not in dispatch:
         print("usage: python bath_driven_interaction.py "
               "{h1a|h1b|h1c|h2a|h2b|h2range|hdil|hbh|hdil3d|hsat|hvort|"
