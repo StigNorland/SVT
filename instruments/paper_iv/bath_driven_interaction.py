@@ -888,7 +888,7 @@ def main_h2range(omegas=(0.1, 0.2, 0.5, 1.0), ds=(4.0, 6.0, 8.0, 11.0),
 
 def run_blackhole(R=8.0, mu=0.4, *, N=256, L=160.0, b=1.0, dt=0.02,
                   wc=2.0, n_ramp=4, n_settle=12, n_meas=40, rec_every=16,
-                  floor=1e-6):
+                  omega_ref=1.0, floor=1e-6):
     """SSV black hole = a 'black WHOLE': an INTACT condensate (rho = rho0,
     full density) whose TIME is frozen (A = 0, phase does not advance),
     embedded in an exterior whose phase DOES advance at rate mu.  No external
@@ -910,7 +910,10 @@ def run_blackhole(R=8.0, mu=0.4, *, N=256, L=160.0, b=1.0, dt=0.02,
     core = 0.5 * (1.0 - np.tanh((Rg - R) / wc))
     Gamma = absorber(X, Y, L, width=24.0, gmax=1.2)
 
-    period = 2.0 * np.pi / max(mu, 1e-3)
+    # window the run by a FIXED reference frequency, independent of mu, so the
+    # mu=0 control runs the SAME duration as the mu>0 runs (a mu-based period
+    # would blow up to millions of steps at mu=0)
+    period = 2.0 * np.pi / omega_ref
     t_ramp = n_ramp * period
     t_settle = (n_ramp + n_settle) * period
     t_total = t_settle + n_meas * period
@@ -965,12 +968,16 @@ def _osc_spectrum(t, probe):
     return f[k] * 2.0 * np.pi, amp          # angular frequency, amplitude
 
 
-def main_hbh(Rs=(5.0, 7.0, 9.0, 11.0, 14.0, 18.0), mu=1.0):
+def main_hbh(Rs=(5.0, 8.0, 12.0, 18.0), mu=1.0):
     """HBH -- does a frozen-time condensate core (a 'black whole') self-
     oscillate from the boundary time-shear alone?  And does the emission
-    frequency scale as 1/R (-> f_BH ~ 1/M of Paper VI-a)?"""
+    frequency scale as 1/R (-> f_BH ~ 1/M of Paper VI-a)?
+
+    The self-oscillation is SLOW (w ~ 0.05-0.1, a cavity-like mode of the
+    frozen core), so the measurement window is long (n_meas large) to give
+    fine FFT frequency resolution (bin width = omega_ref/n_meas)."""
     _stream()
-    kw = dict(N=256, L=200.0, dt=0.03, n_ramp=4, n_settle=12, n_meas=40,
+    kw = dict(N=160, L=180.0, dt=0.03, n_ramp=3, n_settle=10, n_meas=220,
               rec_every=8)
     print(f"HBH -- horizon-driven self-oscillation of a frozen-time "
           f"condensate, backend {backend_name()}")

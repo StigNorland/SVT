@@ -441,6 +441,87 @@ unchanged" vs the acoustic-metric source term).
 
 ---
 
+## Phase 4 — the 3D dimensional test (decisive on Newtonian vs isothermal)
+
+The 2D simulation cannot separate "time delay ∝ wave amplitude" (→ 1/r,
+Newtonian) from "∝ wave energy/intensity" (→ 1/r², isothermal) because 2D
+dilution disguises the powers.  Mode `hdil3d` runs the single oscillating
+source in full 3D (FP32 on GPU) and measures both fields, at two box sizes.
+
+**Result (ω = 0.8):**
+
+| box | intensity tail | DC plateau ⟨δρ⟩ |
+|---|---|---|
+| L = 100, N = 160 | r⁻¹·⁹⁹ | +3.8×10⁻⁶ |
+| L = 140, N = 224 | r⁻²·⁰¹ | −6.3×10⁻⁵ |
+
+1. **Intensity = 1/r² in 3D, box-independent** (both boxes within 1% of −2).
+   This *confirms by direct 3D simulation* the flux-conservation prediction
+   (intensity ∝ 1/r^{D−1}: 1/r in 2D, 1/r² in 3D).  The wave-cloud density —
+   the owner's "dense cloud of waves that falls off fast but never null" — is
+   the **isothermal ρ ∝ 1/r² profile**.
+2. **The DC potential ⟨δρ⟩ is a box artifact in 3D too** (sign flips
+   +3.8×10⁻⁶ → −6.3×10⁻⁵ between boxes), exactly as in 2D.  The literal
+   Φ ∝ ⟨δρ⟩ reading is not a converged quantity in any dimension tested.
+
+**Conclusion.**  The robust, phase-blind, box-independent time-dilation field
+is the wave intensity, and in 3D it is **1/r² — the flat-rotation-curve
+(isothermal-halo) profile, NOT the Newtonian 1/r potential.**  The
+amplitude-vs-intensity fork is settled on the side of intensity (energy
+density), consistent with the update-budget picture ("the condensate is busy
+processing wave energy → time slows").  This means SSV gravity, read as
+time-delay ∝ wave-cloud density, **natively produces flat rotation curves**
+and must *recover* Newtonian 1/r in some limit (e.g. the near field of a
+concentrated source, or reading (b) where the 1/r² density is a Poisson
+source giving M(r) ∝ r) rather than producing it directly.  Directly ties
+the gravity sector to Paper VI-a.
+
+## Phase 5 — the black hole as a frozen-time resonator (`hbh`)
+
+Owner's mechanism: particles do not make standing waves, but **black holes
+do** — "time stops at the horizon → friction → the BH oscillates."  Paper V:
+BH = acoustic-freezing horizon at A(r_H) = 0.  Owner's sharpening: a "black
+*whole*" = an **intact condensate (ρ = ρ₀) with time frozen (A = 0)**, not a
+depleted hole.  Modeled (`run_blackhole`) as a frozen-phase, full-density
+core clamped each step to ψ = 1, embedded in an exterior whose phase advances
+at μ — a Josephson junction whose phase difference winds at the time-shear,
+with **no external drive**.
+
+**HBH-a — self-oscillation CONFIRMED** (N = 160, FP32):
+
+| | probe oscillation amplitude |
+|---|---|
+| control μ = 0 (no time-shear) | **0.000** (exactly) |
+| μ = 1.0 (time-shear on) | 0.06–0.11 |
+
+With the time-shear off the core is silent; with it on the boundary
+**self-oscillates with no external driver**.  The control is decisive: it is
+the *shear* (frozen-vs-flowing time), not the clamp, that pumps the
+oscillation — a direct numerical confirmation of the owner's
+"time-freeze → friction → oscillation" mechanism, and the physical origin of
+the standing wave Paper VI-a posits.
+
+**HBH-b — frequency scaling f ∝ 1/R: NEGATIVE.**  Resolved with a long
+window (n_meas = 220, bin width ~0.005):
+
+| R | 5 | 8 | 12 | 18 |
+|---|---|---|---|---|
+| w | 0.0455 | 0.0455 | 0.0500 | 0.0546 |
+
+The self-oscillation frequency is **~constant (~0.05) and weakly *increasing*
+with R — not the 1/R *decrease* required**.  So this simple frozen-core model
+**does not reproduce the Paper VI-a eigenfrequency f_BH = f_p·(m_p/M_BH)**.
+The oscillation exists and is shear-driven (HBH-a), but its frequency is set
+by something other than the core size (a fixed mode of the medium/box, or a
+residual of the ramp — the value sits at low FFT bins where slow transients
+also live, so even this number is delicate).  Reported straight per rule 1:
+the "horizon friction *derives* the galactic standing-wave scale" hypothesis
+is **not supported** by this model.  A faithful test would need the Paper-V
+acoustic-inflow horizon (supersonic radial flow), not a hard ψ-clamp, and a
+frequency cleanly separated from the ramp — both deferred.
+
+---
+
 ## Verdict table (to be completed)
 
 | Hypothesis | Decision rule | Outcome |
@@ -453,6 +534,9 @@ unchanged" vs the acoustic-metric source term).
 | H2c | response ∝ m without new postulate | **met (analytic)** — inherits Paper-II δV ∝ m; sub-resonance protects EP |
 | H2d | \|Ġ/G\| vs 1.5×10⁻¹³/yr | freely-redshifting driver excluded (−6H₀); needs pinned zero-mode |
 | H3-dil | time-dilation field long-range & sign-definite | **phase-blind YES; literal Φ a box artifact; robust field ~1/r² (3D) = isothermal, not Newtonian** |
+| H4-3D | intensity 1/r²? DC box-stable? | **intensity r⁻²·⁰ (both boxes) = isothermal CONFIRMED in 3D; DC again a box artifact** |
+| H5-bh (HBH-a) | frozen-time core self-oscillates from shear | **CONFIRMED** — μ=0 control amplitude exactly 0; μ>0 self-oscillates (no driver) |
+| H5-bh (HBH-b) | emission f ∝ 1/R (→ f_BH ~ 1/M) | **NEGATIVE** — w ≈ const (~0.05), weakly increasing with R, not 1/R; does not derive VI-a f_BH in this model |
 
 **Net.**  Three layers, one conclusion:
 1. The mutual-radiation **force** is falsified (H1a sign-oscillation, H1b
