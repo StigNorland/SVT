@@ -1128,6 +1128,125 @@ def main_hdil3d(omega=0.8):
     return 0
 
 
+def run_cloud(n_src, *, V0=0.2, w=1.6, N=320, L=200.0, b=1.0, dt=0.02,
+              r_clust=5.0, omega_lo=0.5, omega_hi=0.8, n_ramp=3,
+              n_settle=12, n_avg=15, floor=1e-6, seed=7):
+    """H6 -- N incoherent oscillating sources (DISTINCT frequencies, so the
+    time-averaged cross terms vanish exactly, per H1b) clustered within
+    r_clust, far from the measurement annulus.  Measures the far-field
+    intensity profile of the combined wave cloud.  Returns
+    (r_centers, intensity(r), rho_min_at_cluster) -- the last is the
+    linearity/crowding diagnostic (how far the cluster drives the medium
+    from rho = 1)."""
+    rng = np.random.default_rng(seed)
+    dx, X, Y, K2 = make_grid(N, L)
+    Gamma = absorber(X, Y, L, width=28.0, gmax=1.2)
+    R = np.sqrt(X * X + Y * Y)
+
+    if n_src == 1:
+        pos = [(0.0, 0.0)]
+        omegas = np.array([0.65])
+    else:
+        ang = 2.0 * np.pi * np.arange(n_src) / n_src + rng.uniform(0, 1)
+        rad = r_clust * np.sqrt(rng.uniform(0.2, 1.0, n_src))
+        pos = list(zip(rad * np.cos(ang), rad * np.sin(ang)))
+        omegas = np.linspace(omega_lo, omega_hi, n_src)
+
+    Wstack = np.stack([np.exp(-(((X - xs) ** 2 + (Y - ys) ** 2))
+                              / (2.0 * w * w)) for xs, ys in pos])
+    Wstack = _to(Wstack)
+    decay = _to(np.exp(-Gamma * dt))
+    psi = xp.ones((N, N), dtype=complex)
+    expK_half = _to(np.exp(-1j * K2 / 2.0 * (dt / 2.0)))
+    clust_mask = _to((R < r_clust + 2.0 * w).astype(float))
+
+    base_T = 2.0 * np.pi / omegas.min()
+    nsteps = int(round((n_ramp + n_settle + n_avg) * base_T / dt))
+    n_meas_start = int(round((n_ramp + n_settle) * base_T / dt))
+
+    rho_acc = xp.zeros((N, N))
+    rho2_acc = xp.zeros((N, N))
+    rho_min_clust = xp.full((), np.inf)
+    acc = 0
+    for n in range(nsteps):
+        t = n * dt
+        psi = xp.fft.ifft2(expK_half * xp.fft.fft2(psi))
+        tm = t + dt / 2.0
+        ramp = min(1.0, tm / (n_ramp * base_T))
+        sins = _to(np.sin(omegas * tm).astype(float))
+        Vt = V0 * ramp * xp.tensordot(sins, Wstack, axes=1)
+        rho = xp.abs(psi) ** 2
+        psi = psi * xp.exp(-1j * (b * xp.log(xp.maximum(rho, floor)) + Vt) * dt)
+        psi = 1.0 + (psi - 1.0) * decay
+        psi = xp.fft.ifft2(expK_half * xp.fft.fft2(psi))
+        if n >= n_meas_start:
+            rho = xp.abs(psi) ** 2
+            rho_acc += rho
+            rho2_acc += rho * rho
+            rho_min_clust = xp.minimum(
+                rho_min_clust,
+                xp.min(xp.where(clust_mask > 0, rho, xp.inf)))
+            acc += 1
+    mean_rho = _host(rho_acc) / acc
+    inten = _host(rho2_acc) / acc - mean_rho ** 2
+
+    edge = L / 2.0 - 28.0
+    r_edges = np.arange(2.0, edge, 2.0)
+    rc = 0.5 * (r_edges[:-1] + r_edges[1:])
+    ip = np.empty(len(rc))
+    for i in range(len(rc)):
+        m = (R >= r_edges[i]) & (R < r_edges[i + 1])
+        ip[i] = inten[m].mean() if m.any() else np.nan
+    return rc, ip, float(rho_min_clust)
+
+
+def main_hsat(Ns=(1, 2, 4, 8, 16), V0s=(0.15, 0.45)):
+    """H6 -- does cloud generation SATURATE?  C(N) = far-field <I*r> for N
+    incoherent clustered sources.  H6a: weak regime p = dlnC/dlnN = 1
+    (incoherent additivity -- consistency).  H6b: crowded regime p < 1
+    (busy-medium emission suppression).  BTFR ultimately needs an effective
+    p = 1/2; this run establishes whether saturation EXISTS, not the
+    asymptotic exponent."""
+    _stream()
+    print(f"H6 -- cloud-generation saturation test, backend {backend_name()}")
+    print("N incoherent sources (distinct frequencies; cross terms vanish "
+          "per H1b),")
+    print("far-field cloud coefficient C = <I*r> over r in [16, 60].\n")
+
+    for V0 in V0s:
+        print(f"  per-source amplitude V0 = {V0}:")
+        print("     N      C=<I*r>      rho_min(cluster)   C/N")
+        print("   " + "-" * 56)
+        rows = []
+        for n_src in Ns:
+            t0 = _time.time()
+            r, ip, rmin = run_cloud(n_src, V0=V0)
+            m = (r > 16.0) & (r < 60.0) & np.isfinite(ip) & (ip > 0)
+            C = float(np.mean(ip[m] * r[m]))
+            rows.append((n_src, C, rmin))
+            print(f"   {n_src:3d}   {C:.4e}   {rmin:13.4f}     "
+                  f"{C / n_src:.4e}   [{_time.time() - t0:.0f}s]")
+        ns = np.array([x[0] for x in rows], dtype=float)
+        Cs = np.array([x[1] for x in rows])
+        p = np.linalg.lstsq(np.vstack([np.log(ns), np.ones(len(ns))]).T,
+                            np.log(Cs), rcond=None)[0][0]
+        # local exponent between the last two points (most crowded)
+        p_hi = (np.log(Cs[-1] / Cs[-2]) / np.log(ns[-1] / ns[-2])
+                if len(Cs) >= 2 else np.nan)
+        print(f"   -> global p = dlnC/dlnN = {p:+.3f}   "
+              f"(last-octave p = {p_hi:+.3f})")
+        print(f"      [H6a expects p = 1 in the linear regime; "
+              f"H6b saturation = p < 1 when crowded]\n")
+    print("Decision: p = 1.00 +/- 0.10 weak-regime validates additivity "
+          "(H6a);")
+    print("p < 1 in the crowded regime = saturation EXISTS (H6b); p = 1 "
+          "everywhere")
+    print("= saturation ABSENT in this regime (negative for the sqrt(M) "
+          "route).")
+    print("HSAT COMPLETE")
+    return 0
+
+
 def main_smoke():
     """Tiny-grid sanity pass of every integrator (no physics claims)."""
     _stream()
@@ -1154,9 +1273,10 @@ if __name__ == "__main__":
     dispatch = {"h1a": main_h1a, "h1b": main_h1b, "h1c": main_h1c,
                 "h2a": main_h2a, "h2b": main_h2b, "h2range": main_h2range,
                 "hdil": main_hdil, "hbh": main_hbh,
-                "hdil3d": main_hdil3d, "smoke": main_smoke}
+                "hdil3d": main_hdil3d, "hsat": main_hsat,
+                "smoke": main_smoke}
     if mode not in dispatch:
         print("usage: python bath_driven_interaction.py "
-              "{h1a|h1b|h1c|h2a|h2b|h2range|hdil|hbh|hdil3d|smoke}")
+              "{h1a|h1b|h1c|h2a|h2b|h2range|hdil|hbh|hdil3d|hsat|smoke}")
         raise SystemExit(2)
     raise SystemExit(dispatch[mode]())
