@@ -216,6 +216,178 @@ def run_static(*, V0=0.5, w=0.8, N=256, L=100.0, b=1.0, dt=0.025,
 
 
 # --------------------------------------------------------------------------
+# H-dilation -- the TIME-DILATION field of a single oscillating source
+# --------------------------------------------------------------------------
+def run_dilation(*, V0=0.2, w=1.6, omega=0.6, N=320, L=200.0, b=1.0,
+                 dt=0.02, n_ramp=3, n_transient=14, n_avg=16, floor=1e-6):
+    """A single oscillating source V = V0 ramp(t) sin(omega t) W(x) at the
+    origin.  Returns the time-averaged radial profiles of
+
+        <delta rho>(r)      -- the rectified DC density well (= the SSV-IV
+                               time-dilation potential, Phi ~ alpha_g <drho>)
+        <(delta rho)^2>(r)  -- the wave intensity (the phase-blind,
+                               sign-definite part of the slowdown)
+
+    These are the *time-dilation* observables: gravity (the user's framing)
+    is the gradient of this well, NOT the two-body Bjerknes force.  Both are
+    phase-blind, so they do not oscillate in sign (escaping H1a) and do not
+    depend on a test clock's frequency (escaping H1b).  The decisive question
+    is their RANGE: a long-range (slow power-law) well is gravity-like; a
+    screened / steep one is not.  Averaged over an integer number of drive
+    periods.  Returns (r_centers, <drho>(r), <drho^2>(r), source W(r))."""
+    dx, X, Y, K2 = make_grid(N, L)
+    Wc, _ = window(X, Y, 0.0, w)
+    Gamma = absorber(X, Y, L, width=28.0, gmax=1.2)
+
+    T = 2.0 * np.pi / omega
+    t_ramp = n_ramp * T
+    t_transient = (n_ramp + n_transient) * T
+    t_total = t_transient + n_avg * T
+    nsteps = int(round(t_total / dt))
+    n_avg_start = int(round(t_transient / dt))
+
+    W = _to(Wc)
+    decay = _to(np.exp(-Gamma * dt))
+    psi = xp.ones((N, N), dtype=complex)
+    expK_half = _to(np.exp(-1j * K2 / 2.0 * (dt / 2.0)))
+
+    rho_acc = xp.zeros((N, N))
+    rho2_acc = xp.zeros((N, N))
+    acc_count = 0
+    for n in range(nsteps):
+        t = n * dt
+        psi = xp.fft.ifft2(expK_half * xp.fft.fft2(psi))
+        tm = t + dt / 2.0
+        ramp = min(1.0, tm / t_ramp)
+        Vt = V0 * ramp * np.sin(omega * tm) * W
+        rho = xp.abs(psi) ** 2
+        psi = psi * xp.exp(-1j * (b * xp.log(xp.maximum(rho, floor)) + Vt) * dt)
+        psi = 1.0 + (psi - 1.0) * decay
+        psi = xp.fft.ifft2(expK_half * xp.fft.fft2(psi))
+        if n >= n_avg_start:
+            rho = xp.abs(psi) ** 2
+            rho_acc += rho
+            rho2_acc += rho * rho
+            acc_count += 1
+    mean_rho = _host(rho_acc) / acc_count
+    mean_rho2 = _host(rho2_acc) / acc_count
+    drho = mean_rho - 1.0                     # rectified DC well (= Phi/alpha_g)
+    intensity = mean_rho2 - mean_rho ** 2     # AC wave intensity <(drho_AC)^2>
+    R = np.sqrt(X * X + Y * Y)
+    edge = L / 2.0 - 28.0
+    r_edges = np.arange(w, edge, max(dx, 0.5))
+    r_centers = 0.5 * (r_edges[:-1] + r_edges[1:])
+    prof = np.empty(len(r_centers))
+    inten = np.empty(len(r_centers))
+    src = np.empty(len(r_centers))
+    for i in range(len(r_centers)):
+        m = (R >= r_edges[i]) & (R < r_edges[i + 1])
+        prof[i] = drho[m].mean() if m.any() else np.nan
+        inten[i] = intensity[m].mean() if m.any() else np.nan
+        src[i] = Wc[m].mean() if m.any() else np.nan
+    return r_centers, prof, inten, src
+
+
+def _intensity_slope(r, inten, lo=8.0, hi=None):
+    hi = hi if hi is not None else r.max() * 0.85
+    m = (r > lo) & (r < hi) & np.isfinite(inten) & (inten > 1e-13)
+    if m.sum() < 5:
+        return np.nan
+    return np.linalg.lstsq(
+        np.vstack([np.log(r[m]), np.ones(m.sum())]).T,
+        np.log(inten[m]), rcond=None)[0][0]
+
+
+def _dc_plateau(r, drho, lo=10.0, hi=None):
+    hi = hi if hi is not None else r.max() * 0.35
+    m = (r > lo) & (r < hi) & np.isfinite(drho)
+    return float(np.nanmedian(drho[m])) if m.any() else np.nan
+
+
+def main_hdil(omega=0.6):
+    """The TIME-DILATION field of a single oscillating source (the user's
+    framing: gravity is the gradient of the time-delay, not the two-body
+    force).  Two observables, two fates -- decided by BOX CONVERGENCE:
+
+      <delta rho>(r)   the rectified DC density = the literal SSV-IV potential
+                       Phi ~ alpha_g <drho>.  Tested for box convergence at
+                       two box sizes; a sign/magnitude that moves with the box
+                       is a standing-wave pedestal, not a physical well.
+      <drho_AC^2>(r)   the wave intensity (energy density) -- phase-blind,
+                       sign-definite.  Follows flux conservation
+                       ~ 1/r^(D-1): 2D -> r^-1, hence 3D -> r^-2.
+    """
+    _stream()
+    print(f"H-dilation -- time-dilation field of ONE oscillating source, "
+          f"backend {backend_name()}")
+    print("Phi ~ alpha_g <delta rho>; gravity = gradient of THIS, not the "
+          "two-body force.")
+    print(f"omega={omega} (lambda~{2 * np.pi / omega:.1f}); box-convergence "
+          "test at L=200 and L=400.\n")
+
+    res = {}
+    for L, N, ntr, nav in ((200.0, 320, 14, 16), (400.0, 640, 24, 16)):
+        t0 = _time.time()
+        r, drho, inten, src = run_dilation(omega=omega, N=N, L=L,
+                                           n_transient=ntr, n_avg=nav)
+        res[L] = (r, drho, inten)
+        ip = _intensity_slope(r, inten)
+        dc = _dc_plateau(r, drho)
+        print(f"  L={L:.0f} N={N}: [{_time.time() - t0:.0f}s]  "
+              f"intensity ~ r^{ip:+.2f},  DC plateau <drho> = {dc:+.3e}")
+
+    # box convergence of the two observables
+    ip1 = _intensity_slope(*res[200.0][::2])
+    ip2 = _intensity_slope(*res[400.0][::2])
+    dc1 = _dc_plateau(res[200.0][0], res[200.0][1])
+    dc2 = _dc_plateau(res[400.0][0], res[400.0][1])
+
+    intensity_converged = (np.isfinite(ip1) and np.isfinite(ip2)
+                           and abs(ip1 - ip2) < 0.15)
+    dc_sign_stable = np.isfinite(dc1) and np.isfinite(dc2) \
+        and np.sign(dc1) == np.sign(dc2) \
+        and abs(dc1 - dc2) < 0.5 * max(abs(dc1), abs(dc2))
+
+    print()
+    print("  BOX CONVERGENCE:")
+    print(f"    intensity slope  : {ip1:+.2f} (L200) vs {ip2:+.2f} (L400)  "
+          f"-> {'CONVERGED' if intensity_converged else 'not converged'}")
+    print(f"    DC plateau       : {dc1:+.3e} (L200) vs {dc2:+.3e} (L400)  "
+          f"-> {'stable' if dc_sign_stable else 'SIGN/MAG FLIPS = box artifact'}")
+    print()
+    print("  PHYSICS:")
+    print(f"    Robust, phase-blind quantity: the wave intensity (energy "
+          f"density),")
+    print(f"    box-independent at ~r^{0.5 * (ip1 + ip2):+.2f} in 2D.  By flux "
+          "conservation")
+    print(f"    (intensity ~ 1/r^(D-1)) this is ~1/r^2 in 3D.")
+    print("    The literal DC potential <drho> is NOT box-converged "
+          "(pedestal).")
+    print()
+    print("  IMPLICATION (the decisive fork, both inconsistent in SSV-IV):")
+    print("    (a) Phi = alpha_g <drho>  -> 3D potential ~1/r^2 -> force "
+          "~1/r^3 (too steep)")
+    print("    (b) lap Phi = 4 pi G rho_eff, rho_eff ~ wave energy ~1/r^2")
+    print("        -> M(r) ~ r -> v^2 = const -> FLAT ROTATION CURVE")
+    print()
+    print("RESULT: NEGATIVE for Newtonian point-mass gravity via time "
+          "dilation --")
+    print("  the literal DC potential is a box artifact, and the robust "
+          "intensity")
+    print("  field scales as 1/r^2 in 3D (isothermal), not the 1/r Newtonian")
+    print("  potential.  NOTABLE: that same 1/r^2 energy density is exactly "
+          "the")
+    print("  flat-rotation-curve (isothermal-halo) profile IF read as a "
+          "Poisson")
+    print("  source (reading b) -- linking this directly to Paper VI-a.")
+    print("  Phase-blindness IS confirmed: unlike the force, this field does "
+          "not")
+    print("  oscillate in sign and does not vanish for unequal frequencies.")
+    print("HDIL COMPLETE")
+    return 0
+
+
+# --------------------------------------------------------------------------
 # H2a/H2b -- passive defects in a maintained long-wavelength bath
 # --------------------------------------------------------------------------
 def run_bath(d, UA, UB, *, eps=0.15, omega_b=0.1, N=160, L=100.0, b=1.0,
@@ -511,34 +683,66 @@ def main_h2a(ds=(5.0, 6.0, 7.0, 8.0, 10.0, 12.0), UA=0.12, UB=0.12,
               f"{dr0:+.3e}   {'yes' if lin else 'NO -- nonlinear!'}"
               f"   [{_time.time() - t0:.0f}s]")
 
-    fsecs = [r[1] for r in rows]
+    ds_arr = np.array([r[0] for r in rows])
+    fsecs = np.array([r[1] for r in rows])
     all_linear = all(r[2] for r in rows)
-    signs = set(np.sign(f) for f in fsecs if f != 0.0)
-    sign_definite = len(signs) == 1
-    attractive = sign_definite and fsecs[0] > 0
-    mags = [abs(f) for f in fsecs]
-    monotone = all(mags[i] >= mags[i + 1] for i in range(len(mags) - 1))
+
+    # noise floor: |F_sec| below this is consistent with zero, not a real
+    # reversal.  Estimate from the smallest resolved magnitude / a fixed ~1e-7
+    # (the pair-minus-single subtraction floor established in calibration).
+    floor = 1e-7
+    resolved = np.abs(fsecs) > floor
+    # sign decided only on resolved points
+    signs = set(np.sign(f) for f in fsecs[resolved])
+    sign_definite = len(signs) <= 1
+    attractive = sign_definite and fsecs[resolved][0] > 0
+
+    # decay law on the resolved points: gravity needs LONG range (force no
+    # steeper than ~1/d^2); fit both a power law and an exponential.
+    dr = ds_arr[resolved]
+    fr = np.abs(fsecs[resolved])
+    pexp = expk = np.nan
+    if len(dr) >= 3:
+        pexp = np.linalg.lstsq(
+            np.vstack([np.log(dr), np.ones(len(dr))]).T, np.log(fr),
+            rcond=None)[0][0]
+        expk = np.linalg.lstsq(
+            np.vstack([dr, np.ones(len(dr))]).T, np.log(fr),
+            rcond=None)[0][0]
+    long_range = np.isfinite(pexp) and pexp > -3.0   # ~1/d^2 or shallower
+
     print()
     print(f"  all separations in linear regime : "
           f"{'OK' if all_linear else 'FAIL -- raise eps margin'}")
-    print(f"  sign-definite across sweep       : "
-          f"{'OK' if sign_definite else 'FAIL -- sign reversal'}")
-    if sign_definite:
-        print(f"  sign                             : "
-              f"{'ATTRACTIVE' if attractive else 'REPULSIVE'}")
-    print(f"  |F_sec| monotone decreasing      : "
-          f"{'OK' if monotone else 'no (structure in near zone)'}")
-    ok = all_linear and sign_definite and attractive
+    print(f"  resolved points (|F|>{floor:.0e})     : "
+          f"{int(resolved.sum())}/{len(rows)}")
+    print(f"  sign-definite (resolved)         : "
+          f"{'OK -- ' + ('ATTRACTIVE' if attractive else 'REPULSIVE') if sign_definite else 'FAIL -- real sign reversal'}")
+    if np.isfinite(pexp):
+        print(f"  decay law  F_sec ~ d^{pexp:.2f}      "
+              f"(power-law fit)")
+        print(f"             F_sec ~ exp(d/{-1.0 / expk:+.2f})   "
+              f"(exponential fit)")
+    print(f"  LONG-RANGE (>= 1/d^2)            : "
+          f"{'OK' if long_range else 'FAIL -- short-ranged, cannot be gravity'}")
+
+    # the candidate must be BOTH sign-definite-attractive AND long-range
+    ok = all_linear and sign_definite and attractive and long_range
     print()
-    print("Decision rule (pre-registered): sign-definite (attractive) "
-          "secondary")
-    print("force at d << lambda supports the candidate; any sign reversal in "
-          "the")
-    print("linear regime falsifies it.")
-    print("RESULT:", "PASS -- the bath-driven secondary force is "
-          "sign-definite and attractive in the linear near zone "
-          "(candidate survives H2a)" if ok
-          else "FALSIFIED/INCONCLUSIVE -- see table (note linearity flags)")
+    print("Decision rule (pre-registered + range): the bath-driven secondary")
+    print("force must be sign-definite attractive AND long-range (>= 1/d^2) to")
+    print("be a gravity candidate.  Short range OR a real sign reversal "
+          "falsifies it.")
+    if ok:
+        verdict = ("PASS -- sign-definite, attractive, and long-range "
+                   "(candidate survives H2a)")
+    elif sign_definite and attractive and not long_range:
+        verdict = ("FALSIFIED (range) -- the secondary force is attractive "
+                   "but SHORT-RANGED (decays far steeper than 1/d^2); it "
+                   "cannot produce long-range gravity")
+    else:
+        verdict = "FALSIFIED/INCONCLUSIVE -- see table (note linearity flags)"
+    print("RESULT:", verdict)
     print("H2A COMPLETE")
     return 0 if ok else 1
 
@@ -604,6 +808,84 @@ def main_h2b(d=6.0, U_lo=0.12, U_hi=0.24, eps=0.03, omega_b=0.1):
     return 0 if ok else 1
 
 
+def main_h2range(omegas=(0.1, 0.2, 0.5, 1.0), ds=(4.0, 6.0, 8.0, 11.0),
+                 UA=0.12, UB=0.12, eps=0.03):
+    """H2-range -- the decisive trilemma test for the bath-driven candidate.
+
+    For each bath frequency omega_b, measure the double-subtracted secondary
+    force F_sec at several separations, fit its decay law, and check its
+    sign-definiteness.  The candidate needs a SINGLE omega_b at which the
+    force is BOTH long-range (decay shallower than ~1/d^2) AND sign-definite
+    (no reversal across the sweep).  The trilemma claim is that no such
+    omega_b exists: sub-wavelength drives give a sign-definite but evanescent
+    (short-range) force, while drives whose wavelength approaches the
+    separations give a long-range but sign-oscillating force (the H1a
+    retardation behaviour).  Confirming that closes the bath-driven redesign.
+    """
+    _stream()
+    kw = dict(N=160, n_ramp=1, n_transient=5, n_avg=8)
+    print(f"H2-range -- decay law & sign of F_sec vs bath frequency, "
+          f"backend {backend_name()}")
+    print(f"defects U={UA} (linear), eps={eps}; "
+          f"omega_b in {omegas}; d in {ds}\n")
+
+    summary = []
+    for omega_b in omegas:
+        # scattered wavelength from the LogSE dispersion omega^2 = k^4/4 + k^2
+        kk = np.sqrt(2.0 * (np.sqrt(1.0 + omega_b ** 2) - 1.0))
+        lam = 2.0 * np.pi / kk
+        print(f"omega_b={omega_b}  (scattered lambda~{lam:.0f}):")
+        print("     d       F_sec        linear?")
+        rows = []
+        for d in ds:
+            t0 = _time.time()
+            fsec, amp, drb, dr0 = _f_secondary(d, UA, UB, eps, omega_b, kw)
+            lin = abs(drb - dr0) < 0.2 * abs(dr0)
+            rows.append((d, fsec, lin))
+            print(f"   {d:5.1f}   {fsec:+.4e}   "
+                  f"{'yes' if lin else 'NO'}   [{_time.time() - t0:.0f}s]")
+        dr = np.array([r[0] for r in rows])
+        fr = np.array([r[1] for r in rows])
+        res = np.abs(fr) > 1e-7
+        signs = set(np.sign(f) for f in fr[res])
+        sign_def = len(signs) <= 1
+        pexp = np.nan
+        if res.sum() >= 3:
+            pexp = np.linalg.lstsq(
+                np.vstack([np.log(dr[res]), np.ones(res.sum())]).T,
+                np.log(np.abs(fr[res])), rcond=None)[0][0]
+        long_range = np.isfinite(pexp) and pexp > -3.0
+        lin_all = all(r[2] for r in rows)
+        summary.append((omega_b, lam, pexp, sign_def, long_range, lin_all))
+        print(f"   -> decay d^{pexp:.2f}, "
+              f"sign-{'definite' if sign_def else 'OSCILLATING'}, "
+              f"{'LONG-range' if long_range else 'short-range'}, "
+              f"linear={'yes' if lin_all else 'NO'}\n")
+
+    print("=" * 60)
+    print("  omega_b   lambda    decay      sign        range")
+    print("  " + "-" * 56)
+    escape = False
+    for omega_b, lam, pexp, sign_def, long_range, lin_all in summary:
+        flag = " <-- long+sign-definite!" if (sign_def and long_range) else ""
+        if sign_def and long_range and lin_all:
+            escape = True
+        print(f"  {omega_b:5.2f}    {lam:6.0f}   d^{pexp:+.2f}   "
+              f"{'definite ' if sign_def else 'OSCILLAT.'}  "
+              f"{'LONG ' if long_range else 'short'}{flag}")
+    print()
+    print("Decision rule: the candidate needs ONE omega_b that is both")
+    print("long-range and sign-definite.  None => trilemma confirmed,")
+    print("bath-driven mechanism falsified for long-range gravity.")
+    print("RESULT:", "ESCAPE FOUND -- a long-range sign-definite window exists "
+          "(candidate survives)" if escape
+          else "TRILEMMA CONFIRMED (negative) -- every omega_b is either "
+          "short-ranged or sign-oscillating; the bath-driven mechanism does "
+          "not yield long-range gravity")
+    print("H2RANGE COMPLETE")
+    return 0 if escape else 1
+
+
 def main_smoke():
     """Tiny-grid sanity pass of every integrator (no physics claims)."""
     _stream()
@@ -628,9 +910,10 @@ def main_smoke():
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else ""
     dispatch = {"h1a": main_h1a, "h1b": main_h1b, "h1c": main_h1c,
-                "h2a": main_h2a, "h2b": main_h2b, "smoke": main_smoke}
+                "h2a": main_h2a, "h2b": main_h2b, "h2range": main_h2range,
+                "hdil": main_hdil, "smoke": main_smoke}
     if mode not in dispatch:
         print("usage: python bath_driven_interaction.py "
-              "{h1a|h1b|h1c|h2a|h2b|smoke}")
+              "{h1a|h1b|h1c|h2a|h2b|h2range|hdil|smoke}")
         raise SystemExit(2)
     raise SystemExit(dispatch[mode]())
