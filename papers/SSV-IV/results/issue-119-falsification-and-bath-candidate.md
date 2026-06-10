@@ -646,3 +646,35 @@ core term (defect's own mass-energy in ρ_eff) and the C ∝ √M scaling
 **self-sustained breather sources** (LogSE solutions that carry their own
 energy and oscillate without a drive).  Until those exist in the solver,
 the two-term model's scaling sector remains open and under tension.
+
+## Phase 8 — H7: self-sustained topological sources (`hvort`)
+
+In the defocusing LogSE the self-sustained objects are topological —
+vortices, which is Paper I's particle ontology.  Mode `hvort` imprints
+vortex configurations on ψ = 1 and evolves them with **no drive**.
+
+**H7b — first self-sustained emitter: CONFIRMED in substance.**  A
+same-sign vortex pair (screened to net-zero box charge):
+- rotates with an **internal clock**: probe ω = 0.168 (d = 4), 0.0833
+  (d = 6) — ratio 2.01 vs the ideal point-vortex 1/d² prediction 2.25,
+  at ~70% of the ideal magnitude (finite-core correction);
+- **emits with no drive**: far-field intensity ≈ 2×10⁻⁵ over an
+  identically-zero control floor;
+- reproducible across three geometry variants.
+The radiating breather that the falsified mutual mechanism *assumed* now
+exists as a genuine budgeted object in the solver.
+
+**H7a — intrinsic 1/r² halo profile: INCONCLUSIVE (honest miss).**  The
+tanh-ansatz imprint releases sound the absorber cannot clear (background
+degraded to ρ ≈ 0.71, flat turbulence energy ≈ 0.12 ≫ the ≤ 0.06 signal).
+Three failure modes were found and fixed en route (screens inside the
+absorber; dipole 1/r phase tail at the periodic seam; core drift smearing
+the time average — final-snapshot core-centred profiling added), but the
+imprint-noise floor remains.  The analytic statement (circulation kinetic
+energy = ρℓ²/2r² — the two-term core + isothermal source *intrinsic* to a
+topological defect) is unchallenged; numerical confirmation needs an
+**imaginary-time relaxation preconditioner**.  Pre-registered next:
+H7a-redo (relaxed vortex; decision rule e·r² = 0.5 ± 0.1), H7c
+(budget-limited emission with N rotating pairs — the real busy-condensate
+test), and the rotation-sourced-halo corollary (galaxy circulation →
+intrinsic 1/r² energy halo) conditional on H7a-redo.

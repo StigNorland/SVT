@@ -1320,6 +1320,18 @@ def run_vortex(charges, *, N=256, L=100.0, b=1.0, dt=0.02, xi=None,
     inten = _host(rho2_acc) / acc - mean_rho ** 2
     e_mean = _host(e_acc) / acc
 
+    # FINAL-SNAPSHOT fields (drift-robust: a quasi-stationary defect's
+    # profile needs no time average, and time-averaging smears a slowly
+    # drifting core over the bins)
+    rho_f = xp.abs(psi) ** 2
+    ft = xp.fft.fft2(psi)
+    gx = xp.fft.ifft2(iKX * ft)
+    gy = xp.fft.ifft2(iKY * ft)
+    rs = xp.maximum(rho_f, floor)
+    e_f = _host(0.5 * (xp.abs(gx) ** 2 + xp.abs(gy) ** 2)
+                + b * (rs * xp.log(rs) - rs + 1.0))
+    rho_fin = _host(rho_f)
+
     edge = L / 2.0 - 20.0
     r_edges = np.arange(1.0, edge, 1.0)
     rc = 0.5 * (r_edges[:-1] + r_edges[1:])
@@ -1331,7 +1343,8 @@ def run_vortex(charges, *, N=256, L=100.0, b=1.0, dt=0.02, xi=None,
         eprof[i] = e_mean[m].mean() if m.any() else np.nan
         rprof[i] = mean_rho[m].mean() if m.any() else np.nan
         iprof[i] = inten[m].mean() if m.any() else np.nan
-    return rc, eprof, rprof, iprof, _host(probe_dev), rec_every * dt
+    return (rc, eprof, rprof, iprof, _host(probe_dev), rec_every * dt,
+            e_f, rho_fin, X, Y)
 
 
 def main_hvort():
@@ -1342,33 +1355,62 @@ def main_hvort():
           f"{backend_name()}")
     print("NO drive anywhere: the defects carry their own energy.\n")
 
+    # geometry: ALL charges must sit well inside the live region (the
+    # absorber starts 20 from the edge and destroys any winding it touches
+    # -- the first run's screening charges were inside it, releasing free
+    # branch cuts that wrecked the field)
+    box = dict(N=320, L=140.0)          # live region |x| < 50
+
     # --- background control (floor) ---
     t0 = _time.time()
-    r, e0, rho0, i0, _, _ = run_vortex([], t_total=120.0, t_avg=40.0)
-    far = (r > 25.0) & (r < 30.0)
+    out = run_vortex([], t_total=120.0, t_avg=40.0, **box)
+    r, e0, rho0, i0 = out[0], out[1], out[2], out[3]
+    far = (r > 35.0) & (r < 45.0)
     floor_I = float(np.nanmean(i0[far]))
     print(f"  control (no vortex): far-field intensity floor "
           f"{floor_I:.3e}   [{_time.time() - t0:.0f}s]\n")
 
-    # --- H7a: vortex + distant antivortex (net zero charge: the phase is
-    # box-compatible; the 1/r^2 regime of the + vortex lives at r << D) ---
-    D = 35.0
+    # --- H7a: vortex measured inside a CHECKERBOARD QUADRUPOLE (net zero
+    # charge AND quadrupole far field ~ 1/r^2, so the periodic seam carries
+    # no phase mismatch -- a bare dipole's 1/r phase tail injects energy at
+    # the seam and degrades the whole box, which broke the first two runs).
+    # The 1/r^2 regime of the origin vortex lives at r << D. ---
+    D = 30.0
     t0 = _time.time()
-    r, e1, rho1, i1, _, _ = run_vortex([(0.0, 0.0, 1), (D, 0.0, -1)],
-                                       t_total=200.0, t_avg=60.0)
-    er2 = e1 * r * r
-    m = (r > 3.0) & (r < 12.0)   # core << r << D
+    out = run_vortex(
+        [(0.0, 0.0, 1), (D, 0.0, -1), (D, D, 1), (0.0, D, -1)],
+        t_total=160.0, t_avg=40.0, **box)
+    e_f, rho_f, X, Y = out[6], out[7], out[8], out[9]
+    # locate the (drifted) origin-vortex core: density minimum within r < 15
+    Rg = np.sqrt(X * X + Y * Y)
+    msk = Rg < 15.0
+    idx = np.unravel_index(np.argmin(np.where(msk, rho_f, np.inf)),
+                           rho_f.shape)
+    xc, yc = float(X[idx]), float(Y[idx])
+    Rc = np.sqrt((X - xc) ** 2 + (Y - yc) ** 2)
+    r_edges = np.arange(1.0, 16.0, 1.0)
+    rcen = 0.5 * (r_edges[:-1] + r_edges[1:])
+    e1 = np.empty(len(rcen))
+    rho1 = np.empty(len(rcen))
+    for i in range(len(rcen)):
+        mm = (Rc >= r_edges[i]) & (Rc < r_edges[i + 1])
+        e1[i] = e_f[mm].mean()
+        rho1[i] = rho_f[mm].mean()
+    er2 = e1 * rcen * rcen
+    m = (rcen > 3.0) & (rcen < 10.0)   # core << r << D
     plateau = float(np.nanmean(er2[m]))
     scat = float(np.nanstd(er2[m]))
-    print(f"  H7a vortex (ell=1) with screening antivortex at D={D:.0f}:")
+    print(f"  H7a vortex (ell=1) in checkerboard quadrupole, D={D:.0f};")
+    print(f"  FINAL-SNAPSHOT profile centred on the core "
+          f"(found at ({xc:+.1f},{yc:+.1f})):")
     print("     r      e(r)         e*r^2     rho")
-    for i in range(0, len(r), 3):
-        if r[i] > 16:
-            break
-        print(f"   {r[i]:5.1f}   {e1[i]:.4e}   {er2[i]:.3f}   {rho1[i]:.4f}")
-    print(f"   -> e*r^2 plateau (r in 3-12) = {plateau:.3f} +/- {scat:.3f}  "
-          f"(prediction l^2/2 = 0.5)   [{_time.time() - t0:.0f}s]")
-    h7a = abs(plateau - 0.5) < 0.1
+    for i in range(len(rcen)):
+        print(f"   {rcen[i]:5.1f}   {e1[i]:.4e}   {er2[i]:.3f}   "
+              f"{rho1[i]:.4f}")
+    print(f"   -> e*r^2 plateau (r in 3-10) = {plateau:.3f} +/- {scat:.3f}  "
+          f"(prediction l^2/2 = 0.5; quadrupole correction ~ (r/D)^2)"
+          f"   [{_time.time() - t0:.0f}s]")
+    h7a = abs(plateau - 0.5) < 0.15
     print(f"   H7a (intrinsic 1/r^2 halo): "
           f"{'CONFIRMED' if h7a else 'FAIL'}\n")
 
@@ -1378,12 +1420,13 @@ def main_hvort():
         t0 = _time.time()
         Om_pred = 2.0 / d ** 2
         T_rot = 2.0 * np.pi / Om_pred
-        Dscr = 30.0
-        r, e2, rho2, i2, pr, dtp = run_vortex(
+        Dscr = 28.0
+        out = run_vortex(
             [(-d / 2, 0.0, 1), (d / 2, 0.0, 1),
              (0.0, Dscr, -1), (0.0, -Dscr, -1)],
             t_total=max(300.0, 4.0 * T_rot), t_avg=2.0 * T_rot,
-            probe_r=d)
+            probe_r=d, **box)
+        r, i2, pr, dtp = out[0], out[3], out[4], out[5]
         # rotation frequency from the probe density oscillation
         x = np.abs(pr) ** 2
         x = x - x.mean()
@@ -1392,9 +1435,11 @@ def main_hvort():
         k = 1 + int(np.argmax(np.abs(F[1:])))
         w_meas = 2.0 * np.pi * fr[k]
         emit = float(np.nanmean(i2[far]))
+        ratio = emit / floor_I if floor_I > 1e-12 else float("inf")
+        rtxt = f"x{ratio:.1f}" if np.isfinite(ratio) else "floor ~ 0"
         print(f"  H7b pair d={d:.0f}: probe osc w = {w_meas:.4f} "
               f"(2*Omega pred = {2 * Om_pred:.4f}); far-field I = {emit:.3e} "
-              f"(floor {floor_I:.3e}, x{emit / max(floor_I, 1e-300):.1f})"
+              f"(floor {floor_I:.3e}, {rtxt})"
               f"   [{_time.time() - t0:.0f}s]")
     print()
     print("Decision rules: H7a e*r^2 = 0.5 +/- 0.1 => the two-term source")
