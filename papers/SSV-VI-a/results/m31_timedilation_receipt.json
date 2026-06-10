@@ -1,0 +1,77 @@
+{
+  "source": "Chemin, Carignan & Foster (2009), arXiv:0909.3846, Table 4",
+  "fit_domain": {
+    "r_min_kpc": 0.0,
+    "r_max_kpc": 38.09,
+    "n_points": 98,
+    "full_range": true
+  },
+  "fixed": {
+    "M_BH_Msun": 140000000.0,
+    "C_kpc_Msun": 1800000000.0,
+    "delta_r_kpc": 12.857142857142858
+  },
+  "fits": [
+    {
+      "name": "SSV time-dilation",
+      "params": {
+        "M_bulge": 6136996610.183344,
+        "a_bulge_kpc": 0.10000000000054904,
+        "M_disc": 5413.525960997678,
+        "R_d_kpc": 14.99999999999988,
+        "V_wave_kms": 244.85424804315167,
+        "r0_kpc": 0.10000000000000002,
+        "epsilon": -0.3599531471881999
+      },
+      "chi2": 915.389513452771,
+      "dof": 91,
+      "reduced_chi2": 10.059225422557923,
+      "rms_kms": 19.779125314180963,
+      "aic": 929.389513452771
+    },
+    {
+      "name": "baryons + NFW",
+      "params": {
+        "M_bulge": 28197030747.99899,
+        "a_bulge_kpc": 1.5820431693117558,
+        "M_disc": 69639109452.70723,
+        "R_d_kpc": 3.9169401975476195,
+        "rho_s_Msun_kpc3": 6784503.1695411345,
+        "r_s_kpc": 23.896674394795085
+      },
+      "chi2": 1682.075902798244,
+      "dof": 92,
+      "reduced_chi2": 18.28343372606787,
+      "rms_kms": 30.37061161964027,
+      "aic": 1694.075902798244
+    },
+    {
+      "name": "measured baryons + CBH wave",
+      "params": {
+        "V_wave_kms": 229.86595142449164,
+        "r0_kpc": 14.99999999999611,
+        "epsilon": -0.5115714060799627
+      },
+      "chi2": 1282.4772122538232,
+      "dof": 95,
+      "reduced_chi2": 13.499760128987612,
+      "rms_kms": 28.333567265903437,
+      "aic": 1288.4772122538232
+    }
+  ],
+  "m31_measured_baryons": {
+    "M_bulge_Msun": 30000000000.0,
+    "a_bulge_kpc": 1.0,
+    "M_disc_Msun": 70000000000.0,
+    "R_d_kpc": 5.3,
+    "v_baryon_at_r_out_kms": 110.07135717272307
+  },
+  "decomposition_at_r_out_free_fit": {
+    "r_out_kpc": 38.09,
+    "v_baryon_kms": 26.55446744944114,
+    "v_wave_kms": 251.7670997695253,
+    "wave_fraction_of_v2": 0.9889979746776985,
+    "note": "free fit drove the baryonic disc to ~0; wave absorbs nearly all support"
+  },
+  "newtonian_limit_note": "v2_cbh(r)=G*M_BH/r recovered exactly as r->0; wave field core-suppressed (->0)."
+}
