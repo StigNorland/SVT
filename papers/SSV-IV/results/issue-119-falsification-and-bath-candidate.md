@@ -602,3 +602,47 @@ automatically safe (Sun's crossover ≈ 7×10³ AU).
   making generation self-limiting).  Decision rule: derived exponent
   0.5 ± 0.1 over the observed mass range, else the scaling sector of the
   two-term model is falsified.
+
+## Phase 7 — H6: cloud-generation saturation test (`hsat`) — **NEGATIVE**
+
+N incoherent sources (distinct frequencies; cross terms vanish per H1b)
+clustered within r = 5; far-field cloud coefficient C(N) = ⟨I·r⟩, two
+amplitudes (GPU):
+
+| V0 = 0.15 (linear) | N=1 | 2 | 4 | 8 | 16 | exponent |
+|---|---|---|---|---|---|---|
+| C/N (×10⁻³) | 7.20 | 6.37 | 6.61 | 6.76 | 6.89 | **p = 0.995** |
+| ρ_min(cluster) | 0.86 | 0.82 | 0.76 | 0.67 | 0.40 | (loading ↑, emission flat) |
+
+| V0 = 0.45 (crowded) | N=1 | 2 | 4 | 8 | 16 | |
+|---|---|---|---|---|---|---|
+| C/N | 0.061 | 0.052 | 0.052 | **0.457** | 0.190 | last-octave p = −0.27 |
+| ρ_min | 0.62 | 0.51 | 0.35 | **0.0001** | 0.0000 | condensate punctured |
+
+- **H6a CONFIRMED**: weak-regime p = 0.995 — perfect incoherent additivity
+  (the H1b-guaranteed behaviour; measurement validated).
+- **H6b NEGATIVE**: no smooth saturation.  Per-source emission is flat to
+  ~5% even as the cluster loads the medium to ρ_min = 0.40.  In the crowded
+  regime the medium does not saturate smoothly — it **breaks**: at N = 8,
+  V0 = 0.45 the cluster punches the condensate to ρ ≈ 0 (critical-breakdown
+  transition, the superfluid critical-velocity analogue) with a ×9 emission
+  blow-up, followed by a hard chaotic ceiling — not p = ½ anywhere.
+- **Consequence**: with C ∝ M, both the BTFR slope and the dwarf-domination
+  trend fail — the scaling sector of the baryon-sourced cloud is in genuine
+  tension.
+
+**Scoping caveat (constructional):** this test could not have detected the
+busy-condensate mechanism even if it is real.  The solver's sources are
+*external drives* — the prescribed potential injects its amplitude
+regardless of the medium's state, so there is no internal budget for the
+ambient cloud to deplete.  The owner's hypothesis is *budget-limited
+emission by self-sustained breathers*.  Verdict: back-reaction saturation
+**falsified**; budget-limited-source saturation **untested and untestable
+with driven sources**.
+
+**Infrastructure conclusion.**  Both remaining derivations — the Newton
+core term (defect's own mass-energy in ρ_eff) and the C ∝ √M scaling
+(budget-limited emission) — are blocked by the same missing component:
+**self-sustained breather sources** (LogSE solutions that carry their own
+energy and oscillate without a drive).  Until those exist in the solver,
+the two-term model's scaling sector remains open and under tension.
