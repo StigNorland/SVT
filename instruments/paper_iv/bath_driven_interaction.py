@@ -1585,6 +1585,93 @@ def main_h7c(drives=(0.0, 0.06, 0.12, 0.2)):
     return 0
 
 
+def _core_profile(out, rmax=16.0, search_r=15.0):
+    """Final-snapshot radial profiles of e and rho centred on the deepest
+    core within search_r of the origin.  Returns (r_centers, e, rho)."""
+    e_f, rho_f, X, Y = out[6], out[7], out[8], out[9]
+    Rg = np.sqrt(X * X + Y * Y)
+    msk = Rg < search_r
+    idx = np.unravel_index(np.argmin(np.where(msk, rho_f, np.inf)),
+                           rho_f.shape)
+    xc, yc = float(X[idx]), float(Y[idx])
+    Rc = np.sqrt((X - xc) ** 2 + (Y - yc) ** 2)
+    r_edges = np.arange(1.0, rmax, 1.0)
+    rc = 0.5 * (r_edges[:-1] + r_edges[1:])
+    e1 = np.empty(len(rc))
+    rho1 = np.empty(len(rc))
+    for i in range(len(rc)):
+        mm = (Rc >= r_edges[i]) & (Rc < r_edges[i + 1])
+        e1[i] = e_f[mm].mean()
+        rho1[i] = rho_f[mm].mean()
+    return rc, e1, rho1
+
+
+def main_h8():
+    """H8 -- cementing battery for the intrinsic two-term source:
+    H8a ell^2 law (charge-2 -> e*r^2 = 2.0); H8b Bernoulli density tail
+    (drho*r^2 -> -1/(2b)); H8c b-dial (b=2: energy plateau unchanged,
+    density tail halved)."""
+    _stream()
+    print(f"H8 -- cementing battery, backend {backend_name()}\n")
+
+    # --- H8a: charge-2 vortex (quadrupole of ell = +/-2), measure beyond
+    # any core splitting ---
+    D = 30.0
+    t0 = _time.time()
+    out = run_vortex(
+        [(0.0, 0.0, 2), (D, 0.0, -2), (D, D, 2), (0.0, D, -2)],
+        t_total=30.0, t_avg=8.0, relax_tau=8.0, N=320, L=140.0)
+    rc, e2, rho2 = _core_profile(out)
+    m = (rc > 4.0) & (rc < 10.0)   # beyond split separation, << D
+    pl2 = float(np.nanmean(e2[m] * rc[m] ** 2))
+    sc2 = float(np.nanstd(e2[m] * rc[m] ** 2))
+    print(f"  H8a charge-2: e*r^2 (r 4-10) = {pl2:.3f} +/- {sc2:.3f}  "
+          f"(prediction l^2/2 = 2.0)   [{_time.time() - t0:.0f}s]")
+    h8a = abs(pl2 - 2.0) < 0.3
+    print(f"  H8a (l^2 law): {'CONFIRMED' if h8a else 'FAIL'}\n")
+
+    # --- H8b: isolated-dominant vortex (D = 45 in a large box), density
+    # tail vs Bernoulli -1/(2b) ---
+    b_ = 1.0
+    t0 = _time.time()
+    out = run_vortex(
+        [(0.0, 0.0, 1), (45.0, 0.0, -1), (45.0, 45.0, 1), (0.0, 45.0, -1)],
+        t_total=40.0, t_avg=10.0, relax_tau=10.0, N=448, L=200.0, b=b_)
+    rc, e1, rho1 = _core_profile(out, rmax=22.0)
+    drr2 = (rho1 - 1.0) * rc * rc
+    er2 = e1 * rc * rc
+    print(f"  H8b isolated vortex (D=45, L=200), b={b_}:")
+    print("     r      e*r^2     drho*r^2")
+    for i in range(2, len(rc), 2):
+        print(f"   {rc[i]:5.1f}   {er2[i]:.3f}    {drr2[i]:+.3f}")
+    m = (rc > 8.0) & (rc < 18.0)
+    tail = float(np.nanmean(drr2[m]))
+    epl = float(np.nanmean(er2[(rc > 3.0) & (rc < 12.0)]))
+    print(f"   -> energy plateau = {epl:.3f} (pred 0.5); density tail "
+          f"drho*r^2 (r 8-18) = {tail:+.3f} (naive Bernoulli -1/(2b) = "
+          f"{-1.0 / (2.0 * b_):+.2f})   [{_time.time() - t0:.0f}s]\n")
+
+    # --- H8c: b-dial at b = 2 ---
+    t0 = _time.time()
+    out = run_vortex(
+        [(0.0, 0.0, 1), (45.0, 0.0, -1), (45.0, 45.0, 1), (0.0, 45.0, -1)],
+        t_total=40.0, t_avg=10.0, relax_tau=10.0, N=448, L=200.0, b=2.0)
+    rc, e1b, rho1b = _core_profile(out, rmax=22.0)
+    epl_b2 = float(np.nanmean((e1b * rc * rc)[(rc > 3.0) & (rc < 12.0)]))
+    tail_b2 = float(np.nanmean(((rho1b - 1.0) * rc * rc)[m]))
+    print(f"  H8c b=2: energy plateau = {epl_b2:.3f} (must STAY ~0.5); "
+          f"density tail = {tail_b2:+.3f} (must HALVE vs b=1: "
+          f"{tail / 2.0:+.3f})   [{_time.time() - t0:.0f}s]")
+    h8c_e = abs(epl_b2 - 0.5) < 0.15
+    h8c_d = abs(tail_b2 - tail / 2.0) < 0.4 * abs(tail / 2.0) \
+        if np.isfinite(tail) and tail != 0 else False
+    print(f"  H8c (kinetic/potential separation): energy "
+          f"{'OK' if h8c_e else 'FAIL'}, density-halving "
+          f"{'OK' if h8c_d else 'FAIL'}")
+    print("H8 COMPLETE")
+    return 0
+
+
 def main_smoke():
     """Tiny-grid sanity pass of every integrator (no physics claims)."""
     _stream()
@@ -1612,7 +1699,7 @@ if __name__ == "__main__":
                 "h2a": main_h2a, "h2b": main_h2b, "h2range": main_h2range,
                 "hdil": main_hdil, "hbh": main_hbh,
                 "hdil3d": main_hdil3d, "hsat": main_hsat,
-                "hvort": main_hvort, "h7c": main_h7c,
+                "hvort": main_hvort, "h7c": main_h7c, "h8": main_h8,
                 "smoke": main_smoke}
     if mode not in dispatch:
         print("usage: python bath_driven_interaction.py "

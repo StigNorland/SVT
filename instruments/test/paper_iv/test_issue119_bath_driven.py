@@ -107,6 +107,30 @@ def test_h2_linear_defect_static_coupling_is_negligible():
     assert abs(f_bath - f_static) > 0.0, "bath has no measurable effect"
 
 
+def test_h7a_vortex_intrinsic_two_term_source():
+    """H7a/H8 (the load-bearing positive result): a relaxed LogSE vortex's
+    energy density carries the two-term gravity source INTRINSICALLY -- a
+    healing-length core plus an isothermal circulation tail with
+    e*r^2 = l^2/2 = 0.5 -- and its density depression follows Bernoulli,
+    drho*r^2 = -1/(2b).  Checked on a checkerboard quadrupole (net-zero
+    box charge), final-snapshot profile centred on the core."""
+    import numpy as np
+    D = 22.0
+    out = bdi.run_vortex(
+        [(0.0, 0.0, 1), (D, 0.0, -1), (D, D, 1), (0.0, D, -1)],
+        N=224, L=100.0, t_total=24.0, t_avg=8.0, relax_tau=8.0)
+    rc, e1, rho1 = bdi._core_profile(out, rmax=12.0)
+    m = (rc > 3.0) & (rc < 9.0)
+    plateau = float(np.nanmean((e1 * rc * rc)[m]))
+    assert abs(plateau - 0.5) < 0.12, (
+        f"vortex energy plateau e*r^2 = {plateau:.3f}, expected 0.5 "
+        "(intrinsic core + 1/r^2 circulation halo)")
+    tail = float(np.nanmean(((rho1 - 1.0) * rc * rc)[(rc > 6.0) & (rc < 10.0)]))
+    assert -0.85 < tail < -0.25, (
+        f"vortex density tail drho*r^2 = {tail:+.3f}, expected ~ -0.5 "
+        "(Bernoulli -1/(2b))")
+
+
 def test_hdil_intensity_follows_2d_flux_law():
     """The robust, box-independent time-dilation observable is the wave
     INTENSITY (energy density), which by flux conservation falls as

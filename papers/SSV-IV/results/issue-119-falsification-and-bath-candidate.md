@@ -664,7 +664,45 @@ same-sign vortex pair (screened to net-zero box charge):
 The radiating breather that the falsified mutual mechanism *assumed* now
 exists as a genuine budgeted object in the solver.
 
-**H7a — intrinsic 1/r² halo profile: INCONCLUSIVE (honest miss).**  The
+**H7a — REDO with imaginary-time preconditioner: CONFIRMED at 2.4%.**
+Exploiting that the LogSE vacuum at ρ₀ = 1 has exactly zero energy (so
+e^{−τH} relaxes imprints with no renormalisation while winding is
+topologically protected), the field is clean (ρ → 0.999) and
+**e·r² = 0.512 ± 0.011 over r ∈ [3, 10] vs the parameter-free ℓ²/2 = 0.5.**
+The two-term gravity source — healing-length core (→ Newton monopole under
+reading (b)) plus isothermal ℓ²ρ/2r² circulation halo (→ flat-curve tail) —
+is the **intrinsic energy-density profile of a topological defect**: no
+radiation, no drive, no postulate.
+
+**H8 cementing battery (pre-registered dials):**
+- **H8a ℓ² law — CONFIRMED:** charge-2 gives e·r² = 2.28 ± 0.13 (pred 2.0;
+  4.4× the charge-1 value vs ideal 4×).
+- **H8b Bernoulli tail — CONFIRMED:** isolated geometry (D = 45, L = 200):
+  energy plateau 0.506; density tail δρ·r² = −0.447 vs −1/(2b) = −0.50
+  (11%); at b = 0.5: **−0.994 vs −1.000 (0.6%)**, killing the 1/b²
+  alternative.  The defect carries its own intrinsic 1/r² *time-dilation*
+  (density-depression) field — the gravity-as-time-delay framing realised
+  without radiation.
+- **H8c b-dial — half-passed:** energy plateau STAYS at 0.508 at b = 2
+  (pure kinematics ✓); the b = 2 density tail is inconclusive (coarse grid
+  under-resolves the ξ = 0.5 core; the fine-grid run destabilises the
+  imaginary-time relaxer at floor-level core pixels — a numerics task,
+  flagged).
+- **H8d repo cement:** `test_h7a_vortex_intrinsic_two_term_source` added;
+  full suite 5/5 on GPU.
+- Validity window note: profiles must be measured at t ≲ 40 — by t = 80
+  vortex drift carries neighbouring cores into the measurement annulus.
+
+**H7c — budget-limited emission: NEGATIVE.**  A self-sustained pair's
+emission line drops only ~7% while the ambient drive line grows ×47 at its
+location (pre-registered threshold 0.8 not met).  With H6, the
+√M-via-saturation route has two independent negatives.  **Reframe:** with
+the halo intrinsic (circulation energy, not radiation), the BTFR scaling
+question becomes an angular-momentum relation (halo ∝ Γ², entrained
+circulation vs baryonic mass; cf. Fall J ∝ M^{5/3}) — with
+dispersion-supported dSphs as the sharp discriminator.
+
+**H7a (first attempt) — archival note: INCONCLUSIVE (honest miss).**  The
 tanh-ansatz imprint releases sound the absorber cannot clear (background
 degraded to ρ ≈ 0.71, flat turbulence energy ≈ 0.12 ≫ the ≤ 0.06 signal).
 Three failure modes were found and fixed en route (screens inside the
