@@ -555,3 +555,50 @@ the potential?**  Reading (b) (source) yields flat rotation curves for free
 and links to Paper VI-a; reading (a) (potential) gives a force too steep to
 be Newtonian.  SSV-IV currently asserts both.  Resolving (a) vs (b) at the
 LogSE/Madelung level (Paper VII-b) is now the central open problem.
+
+---
+
+## Phase 6 — "maybe it is both": the two-term Poisson resolution
+
+Owner's resolution of the (a)/(b) fork: under reading (b), gravity is **one
+Poisson equation with two source terms** —
+
+    ∇²Φ = 4πG [ρ_core + ρ_cloud]
+
+- **ρ_core** = the defect's own concentrated mass-energy → Φ = −GM/r →
+  **Newton 1/r²** (the monopole term; Newton was never absent from (b));
+- **ρ_cloud** = the radiated wave cloud.  Measured (hdil3d, 3D):
+  **I·r² = 0.0405 ± 2%** over the full range — an *exact* 1/r² Poisson
+  source → M_cloud(<r) ∝ r → the **v²/r flat-curve tail**.
+
+Total g(r) = GM/r² + v²/r: Newtonian inside, flat outside, crossover at
+r_c = M/(4πC).  BTFR (v⁴ = GM_bar·a₀) forces the cloud coefficient to scale
+as **C ∝ √M**, whereupon g_cloud/g_N = √(a₀/g_N) — MOND-like phenomenology
+with a₀ emergent from cloud-generation physics, and the solar system
+automatically safe (Sun's crossover ≈ 7×10³ AU).
+
+**Dwarf-galaxy cross-check (owner):**
+1. *Dwarf DM excess — PASSES automatically.*  √(a₀/g_N) gives ~0.8 for
+   MW-class interiors and 10–100 for dwarfs — the observed dwarf
+   dark-matter domination is the same √M scaling as BTFR, seen locally.
+2. *BH-as-cloud-source — FALSIFIED.*  With f_BH ∝ 1/M_BH (small black
+   wholes oscillate faster), the radiated-power scalings give P ∝ M⁰
+   (identical v_flat for all galaxies — contradicted) or P ∝ M⁻² (dwarfs
+   faster — contradicted).  Decisive independent fact: **BH-less
+   bulgeless/LSB galaxies sit exactly on the BTFR**, impossible if the
+   central BH generates the halo.  The cloud is **baryon-sourced**; the
+   black-whole resonator (Phase 5) is not the halo engine.  *This puts the
+   Paper VI-a central-BH standing-wave mechanism for v_flat under direct
+   pressure from two independent results* (HBH-b negative + BH-less BTFR);
+   what may survive of VI-a is the wiggle/node structure as a secondary
+   effect.
+
+**Pre-registered next derivations:**
+- *Core term:* show the defect's own energy density enters ρ_eff with the
+  same coupling as the cloud (Newton from the monopole) — Paper VII-b.
+- *Cloud scaling:* an incoherent particle-cloud sum gives C ∝ M (BTFR slope
+  too steep).  Candidate mechanism for the required C ∝ √M: **cloud-
+  intensity saturation** (the saturated medium / update-budget ceiling
+  making generation self-limiting).  Decision rule: derived exponent
+  0.5 ± 0.1 over the observed mass range, else the scaling sector of the
+  two-term model is falsified.
