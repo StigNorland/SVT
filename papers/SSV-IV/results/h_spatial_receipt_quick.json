@@ -1,0 +1,58 @@
+{
+ "config": {
+  "nx": 1024,
+  "ny": 256,
+  "dx": 0.5,
+  "sigma": 50.0,
+  "lambdas": [
+   8.0,
+   16.0
+  ],
+  "depths": [
+   0.1
+  ],
+  "b0": 1.0,
+  "lam_positive_control": 8.0,
+  "quick": true,
+  "gpu": true
+ },
+ "runs": {
+  "control_lam8.0": {
+   "v_measured": 1.2184945868595973,
+   "v_group_predicted": 1.217884153270287
+  },
+  "control_lam16.0": {
+   "v_measured": 1.056892332212423,
+   "v_group_predicted": 1.0569250660746476
+  },
+  "depression_lam8.0_V0.1": {
+   "index_delay": 0.008534490527372682,
+   "clock_delay": 8.862269254527579,
+   "gamma_eff": 0.0009630141312861331
+  },
+  "depression_lam16.0_V0.1": {
+   "index_delay": -0.14113205267454787,
+   "clock_delay": 8.862269254527579,
+   "gamma_eff": -0.015925046804738635
+  }
+ },
+ "positive_control": {
+  "eta": 0.04,
+  "lambda": 8.0,
+  "delay_measured": 1.325326853689176,
+  "delay_predicted": 1.4562817795608924,
+  "ratio": 0.9100758330498354
+ },
+ "verdicts": {
+  "instrument_validated": true,
+  "gamma_eff_median": -0.007481016336726251,
+  "gamma_eff_by_lambda": {
+   "8.0": 0.0009630141312861331,
+   "16.0": -0.015925046804738635
+  },
+  "R1_pass_gamma_1": false,
+  "R2_gamma_0": true,
+  "R3_achromatic_spread": 0.016888060936024768,
+  "S1_prediction": "gamma_eff = 0 (log nonlinearity: c_s density-independent; clocks dilate by b ln rho)"
+ }
+}

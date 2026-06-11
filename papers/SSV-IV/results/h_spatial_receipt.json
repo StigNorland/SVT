@@ -1,0 +1,80 @@
+{
+ "config": {
+  "nx": 4096,
+  "ny": 768,
+  "dx": 0.5,
+  "sigma": 120.0,
+  "lambdas": [
+   10.0,
+   20.0,
+   50.0
+  ],
+  "depths": [
+   0.05,
+   0.1
+  ],
+  "b0": 1.0,
+  "lam_positive_control": 20.0,
+  "quick": false,
+  "gpu": true
+ },
+ "runs": {
+  "control_lam10.0": {
+   "v_measured": 1.1417650321844353,
+   "v_group_predicted": 1.1423458380411116
+  },
+  "control_lam20.0": {
+   "v_measured": 1.0356324296849033,
+   "v_group_predicted": 1.0366369566254268
+  },
+  "control_lam50.0": {
+   "v_measured": 1.0070210534455246,
+   "v_group_predicted": 1.0059120485653383
+  },
+  "depression_lam10.0_V0.1": {
+   "index_delay": -0.03399692596794897,
+   "clock_delay": 21.269446210866192,
+   "gamma_eff": -0.0015983926253134192
+  },
+  "depression_lam20.0_V0.1": {
+   "index_delay": 0.014358352173454332,
+   "clock_delay": 21.269446210866192,
+   "gamma_eff": 0.0006750693944311018
+  },
+  "depression_lam50.0_V0.1": {
+   "index_delay": -0.34459146677650565,
+   "clock_delay": 21.269446210866192,
+   "gamma_eff": -0.016201243011228935
+  },
+  "depression_lam20.0_V0.05": {
+   "index_delay": -0.01835422720844298,
+   "clock_delay": 10.634723105433096,
+   "gamma_eff": -0.0017258773008453903
+  }
+ },
+ "positive_control": {
+  "eta": 0.04,
+  "lambda": 20.0,
+  "delay_measured": 3.8951716571451396,
+  "delay_predicted": 4.188396364461898,
+  "ratio": 0.9299911751894497
+ },
+ "deflection": {
+  "y_offset": 84.85281374238569,
+  "centroid_shift": -0.2963668894259399,
+  "note": "baseline-subtracted transverse centroid shift at the packet's arrival, vs uniform-medium control"
+ },
+ "verdicts": {
+  "instrument_validated": true,
+  "gamma_eff_median": -0.0015983926253134192,
+  "gamma_eff_by_lambda": {
+   "10.0": -0.0015983926253134192,
+   "20.0": 0.0006750693944311018,
+   "50.0": -0.016201243011228935
+  },
+  "R1_pass_gamma_1": false,
+  "R2_gamma_0": true,
+  "R3_achromatic_spread": 0.016876312405660038,
+  "S1_prediction": "gamma_eff = 0 (log nonlinearity: c_s density-independent; clocks dilate by b ln rho)"
+ }
+}
