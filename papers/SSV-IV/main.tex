@@ -17,6 +17,10 @@
   colback=orange!6!white,colframe=orange!60!black,
   fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
 
+\newtcolorbox{falsbox}[1][]{enhanced,breakable,
+  colback=red!5!white,colframe=red!55!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
 \setstretch{1.1}
 
@@ -32,20 +36,39 @@ Gravity as Update-Capacity Gradient}
 \begin{abstract}
 This paper develops gravity in the Saturated Superfluid Vacuum (SSV)
 framework as the bending of motion through gradients of local time delay.
-It builds on Paper~II, where gravity enters the force sector as the
-interference of the pressure waves that every massive breather radiates into
-the vacuum, and on Paper~III, where physical time is identified with the
+It builds on Paper~III, where physical time is identified with the
 local rate of change of the order parameter $\Psi$ --- the medium's local
-\emph{update capacity}.  The chain is short: the interference of radiated
-waves consumes update capacity and so slows local time; that slowing is
+\emph{update capacity}.  The chain is short: loading the medium consumes
+update capacity and so slows local time; that slowing is
 uneven and therefore has a gradient; and any motion through the gradient is
 bent toward the region of greatest delay.  That bending is gravity.  From a
-single interference potential $\Phi$ follow free fall, gravitational time
+single potential $\Phi$ follow free fall, gravitational time
 dilation, light deflection, and redshift, each at leading order in
 $\Phi/c^2$.  The treatment is weak-field throughout: it delivers the time
 sector of gravity in full --- including the time-delay (Einstein 1911) half
 of light deflection --- with the spatial sector and the recovery of full
 general relativity left to Paper~VII-b.
+
+\textbf{Status change (issue \#119, 2026-06).}  The original account of
+\emph{what builds} $\Phi$ --- the time-averaged interference of the
+pressure waves that breathers mutually radiate (Paper~II's Bjerknes
+mechanism, \S\ref{sec:interference} here) --- is \emph{falsified as
+written}: beyond one wavelength the time-averaged cross-term oscillates in
+sign with separation, and it vanishes outright between breathers of unequal
+frequency, so it cannot supply a sign-definite $1/r$ potential at any
+physically realised separation, nor electron--proton gravity at all.  A
+bath-driven (secondary-Bjerknes) repair gives the right sign but the wrong
+range.  What survives, and is now the live architecture, is everything
+downstream of $\Phi$: the time-dilation field is the correct observable
+(it is phase-blind and does not inherit the falsifiers), and its measured
+source is the \emph{intrinsic} structure of each defect --- a concentrated
+healing-length core plus an isothermal $\ell^2\rho/2r^2$ circulation halo,
+with the defect's own Bernoulli density depression as its time-dilation
+field (issue \#119, H7a/H8).  Newton's constant is at present an empirical
+input: the mutual-radiation derivation, the $Q_p$ sub-grain route
+(\#98), and the circulation-halo triangle (\#119 H9) are all falsified or
+divergent.  The falsified passages are retained below, marked as
+falsification records, per the repository's negative-results rule.
 \end{abstract}
 
 \newpage
@@ -64,16 +87,23 @@ gravitational field, but how gravitational behaviour arises at all if the
 medium's local rate of change is finite and depends on how heavily the
 medium is loaded.
 
-Two earlier papers supply the foundation.  Paper~II places gravity in the
-force sector: every massive defect is a breather, a localised oscillation of
-$\Psi$, and it radiates a longitudinal pressure wave into the medium; the
-time-averaged interference of two such waves is the gravitational
-interaction, and matching it to the observed inverse-square law fixes
-Newton's constant $G$ from the medium parameters.  Paper~III identifies
+Two earlier papers supply the foundation.  Paper~II placed gravity in the
+force sector through the mutual-radiation picture: every massive defect is
+a breather, a localised oscillation of $\Psi$, radiating a longitudinal
+pressure wave; the time-averaged interference of two such waves was to be
+the gravitational interaction, with Newton's constant fixed by the match to
+the inverse-square law.  That mechanism is now \emph{falsified as written}
+(issue \#119; see the abstract's status change and the falsification
+record in \S\ref{sec:interference}): the radiation-zone cross-term is
+sign-indefinite, and it vanishes between unequal frequencies.  $G$ is at
+present an empirical input.  Paper~III identifies
 physical time with the local rate of change of $\Psi$: time is not a
 backdrop but a measure of how fast the medium is updating.  The present
-paper takes the mechanism introduced in Paper~II and develops it in its own
-right, on the footing Paper~III provides.
+paper develops gravity on the footing Paper~III provides --- the
+time-dilation field and its gradient --- which survives the falsification
+intact: every result downstream of the potential $\Phi$ in this paper is
+a statement about gradients of update capacity, not about how $\Phi$ is
+sourced.
 
 The thesis is a single chain.  The interference of radiated waves slows the
 local rate of change of $\Psi$ --- it imposes a time delay.  The delay is
@@ -169,6 +199,21 @@ medium can make anywhere --- is its reciprocal,
 This is the causal content of the photon: a photon crosses one grain in
 exactly $t_0$, updating the grains along its track at the rate $N_0$ and no
 faster.  A photon is the medium being driven at its ceiling.
+
+\begin{gapbox}[Open: the ceiling versus photons above a GeV
+(\#119 pre-registered)]
+$N_0 = m_pc^2/\hbar$ corresponds to a photon energy of
+$m_pc^2 \approx 0.94$\,GeV.  Photons far above this energy are routinely
+observed --- TeV blazar spectra, and PeV gamma rays from Galactic sources
+--- whose field oscillation rates exceed $N_0$ by up to six orders of
+magnitude.  If $N_0$ is a hard per-grain update ceiling, an
+above-ceiling photon must either be a collective object spreading its
+update load across many grains (in which case the per-grain reading of
+the ceiling needs a derivation that permits this while still forbidding
+sub-grain wakes), or the ceiling argument as stated is wrong.  This
+tension was flagged in the \#119 review and is open; no resolution is
+asserted here.
+\end{gapbox}
 
 The ceiling is fixed twice over, and the two ways agree.  Geometrically it
 is $c/a_p$, the light-crossing rate of the grain.  Energetically it is
@@ -307,7 +352,25 @@ across it is gravity.
 \section{The Physical Picture}
 \label{sec:picture}
 
-Gravity is the gradient of a time delay --- and that delay is built
+\begin{falsbox}[Status of this section (\#119): the delay is real; the
+original builder of the delay is falsified]
+This section was written for the mutual-radiation picture: the time delay
+built by the interfering pressure waves that masses radiate at each other.
+That builder is falsified as written (falsification record,
+\S\ref{sec:interference}).  The chain itself --- delay $\to$ gradient
+$\to$ bending --- is independent of the builder and survives; it is the
+content of \S\S\ref{sec:consequences}--\ref{sec:refraction}, which need
+only \emph{some} potential $\Phi$.  The measured replacement source is
+intrinsic: a defect carries its own $1/r^2$ energy-density halo and its
+own Bernoulli density depression --- literally its own time-dilation
+field --- with no mutual radiation involved (\#119 H7a/H8).  The prose
+below is retained as the record of the original picture; read
+``radiated-wave interference'' as the falsified candidate for what the
+intrinsic loading in fact supplies.
+\end{falsbox}
+
+Gravity is the gradient of a time delay --- and that delay was here
+proposed to be built
 by the interfering pressure waves that every mass radiates into the vacuum.
 Three steps connect those two statements: the interference of waves slows
 local time; that slowing is uneven, so across space it is a gradient; and
@@ -386,6 +449,44 @@ after it read off the consequences.
 \section{The Interference Cross-Term}
 \label{sec:interference}
 
+\begin{falsbox}[Falsification record (\#119): the mutual-radiation
+mechanism is falsified as written]
+The cross-term derived in this section is real --- bilinear, sign-fixed by
+concavity, and numerically confirmed in the near zone
+(Appendix~\ref{app:numerics}).  As the mechanism of gravity it fails on
+three pre-registered counts (issue \#119, Phases 1--2; result note
+\ssvfile{issue-119-falsification-and-bath-candidate}):
+\begin{enumerate}
+  \item \textbf{Radiation-zone sign oscillation (H1a).}  Beyond one
+    wavelength the time-averaged force tracks $\cos(2\pi d/\lambda)$,
+    flipping sign every half wavelength.  With $\lambda_p \approx
+    1.3\times10^{-15}$\,m, every physically realised gravitational
+    separation is $\gtrsim 10^{12}$ wavelengths into the radiation zone:
+    the mechanism is sign-indefinite everywhere gravity is observed.
+  \item \textbf{Unequal-frequency null (H1b).}  The time-averaged
+    cross-term between breathers of different Compton frequencies is
+    consistent with zero ($\langle\cos\omega_1 t\,\cos\omega_2 t\rangle =
+    0$): no electron--proton gravity, and composite bodies fail
+    $\propto N$ extensivity against E\"otv\"os-class tests.
+  \item \textbf{Static screening (H1c).}  The $\omega = 0$ escape is
+    closed: the static LogSE response is Yukawa-screened on the healing
+    length; no $1/r$ tail.
+\end{enumerate}
+These three close a trilemma: sign-definite + long-range + $1/r$ cannot be
+had together from mutual radiation, and a bath-driven
+(secondary-Bjerknes) repair --- sign-definite and frequency-blind in the
+common drive --- fails on range (\#119 Phase~2).  \textbf{What survives:}
+the concavity$\to$attraction argument structure; and the time-dilation
+field as the observable, which is phase-blind (it does not oscillate in
+sign and does not vanish for unequal frequencies) and is sourced
+\emph{intrinsically} by each defect's measured two-term structure ---
+healing-length core plus $\ell^2\rho/2r^2$ circulation halo, the latter
+the defect's own energy of circulation, with its Bernoulli density
+depression as its own time-dilation field (\#119 H7a/H8, confirmed at
+$\ell = 1, 2$ and two values of $b$).  No radiation, no drive, and no new
+postulate enter that source.
+\end{falsbox}
+
 The mechanism is already contained in the LogSE.  The medium's nonlinear
 self-interaction is the logarithmic term $b\ln(\rho/\rho_0)$ of the Paper~I
 Lagrangian.  Consider a point of the medium reached by the radiated waves
@@ -451,9 +552,11 @@ The inverse square is the gradient of a diluted wave, not a separately
 postulated law.
 
 The expansion fixes the \emph{structure} of $\Phi$ --- interference only,
-attractive, $1/r$.  Its coefficient is fixed by the breather's acoustic
-output; matching the result to the observed inverse-square law yields
-Newton's constant, computed from the medium in Paper~II.
+attractive, $1/r$ --- \emph{in the near zone}.  The coefficient was to be
+fixed by the breather's acoustic output, with Newton's constant computed
+from the medium in Paper~II; that computation is retired along with the
+mechanism (falsification record above), and its sub-grain $Q_p$ factor was
+independently found divergent (\#98).
 
 The same time-averaged interference of pulsating waves was first analysed
 classically by Bjerknes~\cite{Bjerknes1906}, who obtained it as a
@@ -481,21 +584,29 @@ predicts.  Beyond a wavelength the time-averaged force oscillates in sign
 with separation, the long-known retardation behaviour of the Bjerknes
 force between widely separated pulsators; the near-zone regime, in which
 the cross-term derivation is framed, is the one tested here, and it is
-cleanly attractive.  Appendix~\ref{app:numerics} records the run
+cleanly attractive.  But the near zone is not where gravity lives: at
+$\lambda_p \approx 1.3\times10^{-15}$\,m every physically realised
+separation lies $\gtrsim 10^{12}$ wavelengths into the oscillating regime,
+which is the first falsifier of the record above (\#119 H1a extended this
+check across $d/\lambda$ and confirmed the $\cos(2\pi d/\lambda)$ sign
+structure explicitly).  Appendix~\ref{app:numerics} records the run
 parameters and the convergence tests behind these numbers.
 
 \section{Time Dilation, Deflection, and Redshift}
 \label{sec:consequences}
 
-Paper~II fixes the interference potential of a source mass $M$,
+Take as given the weak-field potential of a source mass $M$,
 \begin{equation}
     \Phi(r) = -\,\frac{GM}{r},
     \label{eq:Phi_newton}
 \end{equation}
-with $G$ computed from the medium; its gradient $-\nabla\Phi$ is free fall.
+with $G$ an empirical input (the medium derivations of $G$ are falsified
+or divergent; \S\ref{sec:interference} falsification record, \#98, \#119
+H9); its gradient $-\nabla\Phi$ is free fall.
 The same $\Phi$ --- with no further parameter --- gives the three remaining
-gravitational phenomena.  Each is the interference cross-term of
-\S\ref{sec:interference} read for a different probe.
+gravitational phenomena.  Everything in this section is downstream of
+$\Phi$ and is independent of how $\Phi$ is sourced; it survives the
+\#119 falsification unchanged.
 
 \paragraph{Time dilation.}
 A clock is an oscillator: any periodic physical process carries a rest
@@ -590,10 +701,28 @@ saturation density and sound speed are the same near the mass as far from
 it; a probe finds no denser or thinner medium to read, and no static
 density blob to refract off.  What is graded is the rate of time itself ---
 the update availability $A$ of \S\ref{sec:capacity}, lowered where the
-mass's radiated waves interfere most strongly.  The probe refracts in a
+medium is most heavily loaded.  The probe refracts in a
 gradient of time, not in a gradient of medium-stuff.  A region where time
 runs slow, and nothing material besides, bends a wave that crosses it: that
 is the content of this section, and the island supplies only the geometry.
+
+\begin{gapbox}[Open: the unchanged-medium premise closes off the spatial
+sector promised to VII-b (\#119 pre-registered)]
+The premise just stated --- saturation density and sound speed unaltered
+near a mass, with \emph{only} the time rate graded --- is what confines
+this paper to the Einstein-1911 half of light deflection and defers the
+other half to Paper~VII-b.  But if $\rho$ and $c_s$ are \emph{exactly}
+unchanged near a mass, no medium-structural spatial sector exists to be
+delivered there, and the promised factor of two has nowhere to come from
+within the medium reading.  The premise is also now in measured tension
+with \#119 H8b: a defect carries an intrinsic Bernoulli density
+depression, $\delta\rho \cdot r^2 \to -1/(2b)$ --- the medium around a
+defect is \emph{not} exactly at saturation, at precisely the $1/r^2$
+order relevant here.  Either the premise must be weakened (the density
+depression supplying the spatial half) or the VII-b handoff must obtain
+the spatial sector from outside the medium structure; the two cannot both
+stand as written.
+\end{gapbox}
 
 \subsection{Particle and wave bend alike}
 \label{sec:particlewave}
@@ -748,21 +877,31 @@ Appendix~\ref{app:numerics}.
 
 \subsection{Universal Coupling: Why Everything Falls}
 
-The interference mechanism is universal because every defect in the
-medium --- regardless of internal structure, charge, or topology ---
-radiates a wave, and any wave interferes with any other.  The amplitude of
-that wave is set by the breather's mass-energy alone --- the fractional
-volume excursion is $\delta V \propto m/\rho_0$ (Paper~II) --- so the
-interference force scales as $m_1 m_2/r^2$ for any pair of objects.
+Universality has two halves, and they fare differently under the \#119
+falsification.  The \emph{response} half survives in full: a defect in a
+gradient of update availability is slowed and bent through the one
+property all processes share --- they advance by changing $\Psi$ --- so the
+path curvature is fixed by the gradient of $A$ alone, with the probe's
+mass cancelling (\S\ref{sec:availability}) and its size cancelling
+(\S\ref{sec:particlewave}).  Nothing in the response half refers to how
+$\Phi$ is sourced.  The \emph{source} half --- that the coupling scales as
+$m_1 m_2$ because every breather radiates a wave of amplitude $\delta V
+\propto m/\rho_0$ (Paper~II) --- belonged to the mutual-radiation
+mechanism and is retired with it (\S\ref{sec:interference} falsification
+record).  In the surviving architecture the source side is the defect's
+intrinsic loading of the medium (\#119 H7a/H8); that the intrinsic source
+of an arbitrary \emph{composite} body scales strictly as its total
+mass-energy --- the extensivity that E\"otv\"os-class experiments confirm
+to $10^{-15}$ --- is an open requirement on the source derivation, not a
+result this section can claim.
 
-This is the mechanical origin of the equivalence principle: the same
-quantity (mass-energy) determines both the inertial response to
-acceleration and the coupling to gravity itself, because both are
-manifestations of the object's acoustic cross-section in the medium.  Every
+The response half is the mechanical origin of the equivalence principle:
+the same quantity (mass-energy) determines both the inertial response to
+acceleration and the response to the availability gradient.  Every
 other force is selective --- electromagnetism couples to chirality, the
 strong force to topological charge, the weak force to core overlap --- but
-gravity couples to the one property all defects share: they displace the
-medium.
+gravity couples to the one property all defects share: they load the
+medium and they advance by updating it.
 
 \subsection{Gravity Without a Graviton}
 
@@ -823,6 +962,23 @@ Note the distinction from the electron healing length $\xi =
 scale for electron-defect physics but not the medium's ultraviolet
 boundary: the true domain-of-validity boundary is $\ell_{\rm grain}
 \approx \xi/1836$, set by the proton.
+
+\begin{gapbox}[Open: a $2\times10^{-16}$\,m grain versus collider-scale
+Lorentz invariance (\#119 pre-registered)]
+Collider physics probes structure to $\sim 10^{-19}$\,m --- three orders
+below $\ell_{\rm grain}$ --- and finds exact Lorentz invariance and
+pointlike leptons, with no sign of a granular substrate.  A medium with a
+$2\times10^{-16}$\,m grain must explain why nothing at
+$10^{-19}$\,m betrays it: deep-inelastic momentum transfers
+$k \gg 1/\ell_{\rm grain}$ are routine experimental input, not
+``outside the description.''  The Navier--Stokes analogy cuts the other
+way here --- molecular structure \emph{is} visible below the continuum
+scale of a real fluid (Brownian motion, light scattering), whereas no
+analogous grain signature is seen.  Emergent low-energy Lorentz
+invariance from Fermi-point structure (Volovik) is the standard escape,
+but SSV has not derived it, and its grain sits five orders above the
+Planck length where such arguments are usually pitched.  Open.
+\end{gapbox}
 
 The absence of a graviton and the absence of UV divergences are the
 same fact stated two ways: SSV has no gravitational field to quantise,
@@ -941,35 +1097,48 @@ over.
 \section{Discussion and Open Problems}
 \label{sec:discussion}
 
-The mechanism set out here is complete at leading order and introduces no
-parameter beyond those fixed in Paper~I.  Gravity is the interference of the
-pressure waves that breathers radiate into the one medium; the interference
-slows local time; its gradient bends motion.  From the single potential
-$\Phi$ the four classical gravitational phenomena follow without further
-assumption, and the same logarithmic nonlinearity that makes the medium a
-medium also makes gravity attractive and inverse-square.
+The paper's standing after the \#119 review divides cleanly at the
+potential $\Phi$.  Downstream of $\Phi$, everything holds: the time-delay
+gradient slows clocks, redshifts climbing waves, bends light at the
+Einstein-1911 strength, and accelerates free fall, all at $O(\Phi/c^2)$
+and with no parameter beyond $\Phi$ itself.  Upstream of $\Phi$, the
+account this paper originally gave --- gravity as the interference of the
+pressure waves breathers radiate at one another --- is falsified as
+written (\S\ref{sec:interference} falsification record): sign-indefinite
+in the radiation zone where all real gravity lives, null between unequal
+frequencies, and unrescuable by the static limit (screened) or by a
+common bath drive (wrong range).  The live upstream candidate is the
+defect's \emph{intrinsic} loading of the medium --- the measured
+healing-length core plus $\ell^2\rho/2r^2$ circulation halo, with the
+defect's Bernoulli density depression as its own time-dilation field
+(\#119 H7a/H8) --- which requires no radiation and no drive, and whose
+Poisson integral supplies a Newtonian core term plus a flat-curve tail.
 
-What is established: the interference cross-term \eqref{eq:cross_term} and
-its three structural properties; the four corollaries of
-\S\ref{sec:consequences} at $O(\Phi/c^2)$; the absence of a graviton and of
-an ultraviolet divergence.  What is deferred: the first-principles value of
-the gravitational coupling --- the sub-grain factor that fixes $G$ ---
-remains the open computation of Paper~II; the extension beyond leading
-order, and with it the post-Newtonian coefficients and the full emergent
-metric, is Paper~VII-b.  Sections~\ref{sec:capacity} and~\ref{sec:refraction} --- the formal account
-of update capacity and the refraction geometry --- are now complete, so the
-paper delivers the time sector of gravity in full at $O(\Phi/c^2)$.  Its one
-half-strength result, light deflection, is half-strength by design: light
-draws equally on the time and spatial sectors, and the spatial sector is
-Paper~VII-b, not a gap in the present argument.  Both ends of the
-mechanism have now been checked against direct simulation: a split-step
+What is established: the cross-term \eqref{eq:cross_term} and
+its three structural properties \emph{as near-zone LogSE facts}; the four
+corollaries of
+\S\ref{sec:consequences} at $O(\Phi/c^2)$; the response half of
+universality; the absence of a graviton and of
+an ultraviolet divergence within the stated domain.  What is falsified:
+the mutual-radiation sourcing of $\Phi$, and with it every extant route
+to $G$ --- the Paper~II sub-grain computation (\#98: $Q_p$ divergent),
+and the circulation-halo triangle against the baryonic Tully--Fisher
+relation (\#119 H9: 35 orders of magnitude off on the natural chain, and
+slope $3/2$ versus the observed $4$).  $G$ is an empirical input of the
+framework, and the 39-order weakness of gravity is its unsolved
+hierarchy problem.  What is deferred: the extension beyond leading
+order, the post-Newtonian coefficients, and the full emergent
+metric (Paper~VII-b) --- now with the unchanged-medium premise gapboxed
+in \S\ref{sec:wavefront}, since it is in measured tension with the
+intrinsic density depression of \#119 H8b.  Both ends of the surviving
+chain have been checked against direct simulation: a split-step
 propagation of a wave packet past a potential well recovers the free-fall
 acceleration $-\nabla\Phi$ in the point-like limit
-(\S\ref{sec:freefall}), and a simulation of two pulsating sources in the
-logarithmic medium recovers the bilinear, sign-fixed interference
-cross-term of \S\ref{sec:interference}, attractive for phase-correlated
-waves.  At leading order the mechanical account set out here is now a
-tested one.
+(\S\ref{sec:freefall}), and the pulsating-source simulation that
+originally supported the cross-term is the same computation that, swept
+across $d/\lambda$ and across unequal frequencies, falsified it as a
+gravity mechanism.  The negative results are reported at full strength;
+per the repository's rules they are the proof the sector now builds on.
 
 \subsection{Derivation versus mechanical interpretation: per-section status}
 \label{sec:claim-status}
@@ -992,9 +1161,12 @@ roadmap in \ssvfile{numerical-minimisation-roadmap}:
     that does not by itself add new mathematical content.
   \item \textbf{structural}: the result follows from the framework's
     logical structure but the number depends on a computation tracked
-    elsewhere (Paper~II for $G$, Paper~VII-b for the spatial sector).
+    elsewhere (Paper~VII-b for the spatial sector).
   \item \textbf{numerical}: a direct simulation check of a derivation
     above, run against the same equations the derivation uses.
+  \item \textbf{falsified}: a pre-registered computation contradicted the
+    claim as written (issue \#119); the text is retained as a
+    falsification record per the repository's negative-results rule.
 \end{itemize}
 
 \paragraph{Per-section content.}
@@ -1018,17 +1190,20 @@ Section & What is what \\
   kinematic face of an emergent Lorentz invariance, not separately
   re-derived here. \\
 \S\ref{sec:picture} (Physical picture)
-& Mechanical interpretation throughout: the three-link
-  ``interference $\to$ delay $\to$ bending'' chain restates the
-  Sections~\ref{sec:interference}--\ref{sec:consequences} mathematics in
-  wavefront language. \\
+& Mechanical interpretation throughout; its ``interference builds the
+  delay'' premise is \textit{falsified} as the gravity mechanism
+  (see the section's status box), while the delay $\to$ gradient $\to$
+  bending chain itself survives as the restatement of
+  \S\S\ref{sec:consequences}--\ref{sec:refraction}. \\
 \S\ref{sec:interference} (Interference cross-term)
-& Derivation of $u_{AB} = -b\rho_0 x_A x_B$ from the LogSE expansion;
-  the three structural properties (coherence-only survival, attractive
-  sign from concavity of $\ln$, bilinear $1/r$ falloff) are corollaries
-  of the same derivation.  Numerical check in \S\ref{app:numerics}.
-  The match to Newton's $G$ is \textit{structural} and cited to
-  Paper~II. \\
+& Derivation of $u_{AB} = -b\rho_0 x_A x_B$ from the LogSE expansion,
+  valid as a near-zone LogSE fact with its numerical check in
+  \S\ref{app:numerics}.  As the mechanism of gravity it is
+  \textit{falsified} (pre-registered, \#119: radiation-zone sign
+  oscillation; unequal-frequency null; static screening; bath repair
+  wrong range) --- see the falsification record opening the section.
+  The match to Newton's $G$ via Paper~II is retired; the $Q_p$
+  sub-grain factor is divergent (\#98). \\
 \S\ref{sec:consequences} (Time dilation, deflection, redshift)
 & Each of the four corollaries (free fall, time dilation, light
   deflection at Einstein-1911 strength, redshift) is a derivation at
@@ -1041,9 +1216,13 @@ Section & What is what \\
   massive defect.  The spatial half of light deflection is gapboxed and
   \textit{structural} via Paper~VII-b. \\
 \S\ref{sec:universal} (Universal coupling, no graviton)
-& Universality is a derivation: the cross-term depends on the breather
-  amplitude $x_A$ only through the universal time delay it produces, so
-  every breather feels the same gradient.  ``Gravity without a graviton''
+& The \emph{response} half of universality is a derivation: every
+  process advances by updating $\Psi$, so every probe feels the same
+  availability gradient, with mass and size cancelling.  The
+  \emph{source} half ($m_1m_2$ from radiated amplitudes) is
+  \textit{falsified} with the mechanism; source extensivity for
+  composite bodies is an open requirement on the intrinsic source
+  (\#119 H7a/H8).  ``Gravity without a graviton''
   is a mechanical interpretation of the absence of a separate
   quantised force-carrier field in the LogSE Lagrangian. \\
 \S\ref{sec:geometry} (Emergent geometry handoff)
@@ -1057,15 +1236,26 @@ Section & What is what \\
 \end{center}
 
 \paragraph{Summary.}  The derivations carried by this paper are
-(i)~the cross-term $u_{AB}$ and its three structural properties; (ii)~free
+(i)~the cross-term $u_{AB}$ and its three structural properties as
+near-zone LogSE facts; (ii)~free
 fall, time dilation, redshift, and the time-half of light deflection at
-$O(\Phi/c^2)$; (iii)~universality of the gravitational coupling.  Everything
-that resembles a stronger claim is a mechanical interpretation, a structural
-result deferred to Paper~II ($G$) or Paper~VII-b (spatial sector, PPN, full
-metric), or one of the two remaining explicit gapboxes marked in the body
-(the order-unity factor of the original \S\ref{sec:ceiling} gapbox has been
+$O(\Phi/c^2)$, all downstream of a given $\Phi$; (iii)~the response half
+of universality.  Falsified as written (\#119, pre-registered): the
+mutual-radiation sourcing of $\Phi$ and every extant medium derivation of
+$G$ (Paper~II sub-grain route, \#98; circulation-halo triangle, \#119
+H9) --- $G$ is an empirical input.  Everything
+that resembles a stronger claim is a mechanical interpretation, a
+structural
+result deferred to Paper~VII-b (spatial sector, PPN, full
+metric), or one of the explicit gapboxes marked in the body: the
+update ceiling versus $\gg$GeV photons (\S\ref{sec:ceiling}); the
+unchanged-medium premise versus the measured intrinsic density
+depression, which also confines the spatial sector
+(\S\ref{sec:wavefront}); and the $2\times10^{-16}$\,m grain versus
+collider-scale Lorentz invariance (\S\ref{sec:universal}).  The
+order-unity factor of the original \S\ref{sec:ceiling} gapbox remains
 closed by the per-defect-healing-length argument in
-\S\ref{para:order-unity-factor}).
+\S\ref{para:order-unity-factor}.
 
 \appendix
 
