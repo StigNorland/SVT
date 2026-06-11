@@ -16,6 +16,9 @@
 \newtcolorbox{gapbox}[1][]{enhanced,breakable,
   colback=orange!6!white,colframe=orange!60!black,
   fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+\newtcolorbox{falsbox}[1][]{enhanced,breakable,
+  colback=red!5!white,colframe=red!55!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
 
 \hypersetup{
     colorlinks=true,
@@ -80,16 +83,25 @@ is structurally $\alpha^{-2}$ and undershoots the ring scale by one power of
 $1/\alpha$ (the ``factor $232$''), confirming that the cap scale is set by ring
 inheritance, not bending.
 
-\textbf{Structural consistency check, not derivation:}
-For gravity, the Bjerknes mechanism between pulsating breather modes
-reproduces the inverse-square law, universal coupling, and time dilation as
-mechanical consequences of spherical wave dilution.  The structural relation
-$G = \alpha_G\hbar c\alpha^2/(N_p^2 m_e^2)$ is consistent with the Paper~I
-proton mass to $0.6\%$ when $\alpha_G$ is taken from CODATA --- this is a
-consistency check showing the gravitational sector is internally coherent
-with the Paper~I masses, not a first-principles derivation of $G$.  Computing
-$\alpha_G$ from the 3D proton breather profile is the central open problem
-of the gravity sector.
+\textbf{Falsified as written (issue \#119, 2026-06):}
+The gravity section's mutual-radiation Bjerknes mechanism --- pulsating
+breathers gravitating through the time-averaged interference of the waves
+they radiate at one another --- is falsified by pre-registered
+computation: the radiation-zone cross-term oscillates in sign with
+separation (every physical separation is $\gtrsim 10^{12}$ proton
+wavelengths into that zone), and it vanishes between breathers of unequal
+Compton frequency, so it yields no electron--proton gravity and fails
+composite-body extensivity.  The section is retained as a falsification
+record (\S\ref{sec:gravity}).  The sub-grain $(m_e/m_p)^3$ route to
+$\alpha_G$ is likewise retired: its acoustic monopole moment $Q_p$ is
+formally divergent (\#98).  The structural relation
+$G = \alpha_G\hbar c\alpha^2/(N_p^2 m_e^2)$ remains a numerical
+consistency check between CODATA $\alpha_G$ and the Paper~I proton mass
+(0.6\%), nothing more: $G$ is at present an empirical input of the
+framework, with no live derivation route (\#119 H9 closed the
+circulation-halo triangle as well).  What survives of the sector is the
+time-dilation-field observable and the defect's measured intrinsic
+two-term source, developed in Paper~IV.
 
 \textbf{Candidate geometry only:}
 For the matter content, the Higgs is recast as two distinct features: a
@@ -150,7 +162,7 @@ the chiral-shear sector, but the numerical value remains an empirical input; see
 \S\ref{sec:EM_open_issue}), and many particle masses cluster near a
 geometric pattern with spacing $m_e/\alpha$, matching
 the charged pion mass to $0.3\%$ and the muon mass to $0.6\%$.  As Paper~I now
-records (gapbox in \S\ref{sec:ladder}), this clustering is an empirical
+records (gapbox in its mass-ladder section), this clustering is an empirical
 coincidence in $m_e$ and $\alpha$, not a dynamically derived spectrum: a
 pre-registered eigenvalue test failed to produce the muon and pion as
 basis-converged toroidal-breather modes.
@@ -199,14 +211,18 @@ is as follows:
         $\mathcal{O}(1)$ coincidence.  The earlier local-bending-equilibrium
         route to $R_{\rm cap}$ is retired (it is structurally $\alpha^{-2}$,
         short of the ring scale by one power of $1/\alpha$).
-  \item \textbf{Structural consistency check.}  The relation $G = \alpha_G
-        \hbar c \alpha^2/(N_p^2 m_e^2)$ for Newton's constant
-        (\S\ref{sec:gravity}) takes $\alpha_G$ from CODATA and matches the
-        Paper~I proton mass to $0.6\%$.  This shows the gravity sector
-        is internally coherent with the mass sector; it is not a
-        derivation of $G$.  The 3D proton breather profile required to
-        compute $\alpha_G$ from first principles is the central open
-        problem of the gravity sector.
+  \item \textbf{Falsified as written; retained as record.}  The
+        mutual-radiation Bjerknes mechanism of \S\ref{sec:gravity} is
+        falsified by pre-registered computation (issue \#119:
+        radiation-zone sign oscillation; unequal-frequency null; static
+        screening), and the sub-grain $(m_e/m_p)^3$ route to $\alpha_G$
+        is retired (\#98: $Q_p$ divergent).  The relation $G = \alpha_G
+        \hbar c \alpha^2/(N_p^2 m_e^2)$ remains a numerical consistency
+        check between CODATA $\alpha_G$ and the Paper~I proton mass
+        ($0.6\%$); it is not a derivation, and $G$ is at present an
+        empirical input.  The surviving gravity-sector content --- the
+        time-dilation field and the intrinsic defect source --- is
+        developed in Paper~IV.
   \item \textbf{Candidate geometry only.}  The neutrino as torsional
         radiation (\S\ref{sec:neutrino}) is presented as a structural
         candidate.  The currently proposed object contradicts the
@@ -2183,14 +2199,48 @@ account of the threefold structure should therefore appear simultaneously in:
 
 The threefold-generation problem is therefore one problem, not two.  Its
 resolution is deferred to the same 3D minimisation that closes the W-mass gap
-(\S\ref{sec:weak}) and the $\alpha_G$ derivation (\S\ref{sec:gravity}); all
-three open problems share the same $\mathcal{L}+\mathcal{L}_\perp$
-computation as their target.
+(\S\ref{sec:weak}); the $\alpha_G$ target that this computation also
+carried is retired --- the sub-grain route's monopole charge is formally
+divergent (\#98), and $G$ is at present an empirical input
+(\S\ref{sec:gravity}).
 
 % ═══════════════════════════════════════════════════════════════════════
 \section{Gravity: Time-Delay Gradients from Interfering Pressure Waves}
 \label{sec:gravity}
 % ═══════════════════════════════════════════════════════════════════════
+
+\begin{falsbox}[Falsification record (issue \#119, 2026-06): this section's
+mechanism is falsified as written; the text is retained as the record]
+Pre-registered computations (issue \#119, Phases 1--2; Paper~IV
+falsification record and result note
+\ssvfile{issue-119-falsification-and-bath-candidate}) falsify the
+mutual-radiation Bjerknes mechanism developed below:
+(i) beyond one wavelength the time-averaged cross-term oscillates in sign
+with separation --- and with $\lambda_p \approx 1.3\times10^{-15}$\,m every
+physically realised separation is $\gtrsim 10^{12}$ wavelengths into the
+radiation zone, so the claimed sign-definite $1/r^2$ force does not exist
+where gravity is observed (the Step-1 zone-independence claim below was
+already contradicted by Paper~IV's own Appendix-A numerics);
+(ii) the time-averaged cross-term between breathers of unequal Compton
+frequency vanishes --- no electron--proton gravity, and composite bodies
+fail the strict $\propto N$ extensivity that E\"otv\"os-class experiments
+confirm to $10^{-15}$;
+(iii) the static ($\omega = 0$) escape is Yukawa-screened on the healing
+length.  A bath-driven (secondary-Bjerknes) repair is sign-definite and
+frequency-blind but short-ranged --- wrong range for Newton (\#119
+Phase~2).  The Step-3 sub-grain route to $\alpha_G$ is independently
+retired: the acoustic monopole moment $Q_p$ is formally divergent
+(\#98).  \textbf{What survives:} the concavity$\to$attraction argument
+structure; the time-dilation-field observable (phase-blind, hence immune
+to (i)--(ii)), whose measured source is each defect's \emph{intrinsic}
+two-term structure --- healing-length core plus $\ell^2\rho/2r^2$
+circulation halo, with the defect's own Bernoulli density depression as
+its time-dilation field (\#119 H7a/H8).  Gravity's coupling $G$ is at
+present an \emph{empirical input}: the H9 circulation-halo triangle, the
+last live derivation route, was falsified against the baryonic
+Tully--Fisher relation (\#119 H9).  Paper~IV carries the surviving
+architecture.
+\end{falsbox}
 
 \subsection{The Physical Picture}
 
@@ -2313,10 +2363,18 @@ Landau--Lifshitz result for a pulsating sphere
 Since the proton Compton wavelength $\lambda_p \approx
 1.3\times10^{-15}\,\mathrm{m}$ is smaller than all macroscopic
 separations, gravitational interactions always occur in the radiation
-zone ($r \gg \lambda_p$).  The time-averaged Bjerknes force
-nevertheless retains its $1/r^2$ form at all distances for in-phase
-oscillators, because the static component of the time-averaged force
-is independent of zone.
+zone ($r \gg \lambda_p$).  The original text asserted here that the
+time-averaged Bjerknes force nevertheless retains its $1/r^2$ form at all
+distances for in-phase oscillators, ``because the static component of the
+time-averaged force is independent of zone.''  \emph{That sentence is
+falsified}: there is no zone-independent static component.  The retarded
+cross-correlation is $\langle x_A x_B\rangle \propto \cos(\omega r/c)/r$,
+so beyond one wavelength the time-averaged force oscillates in sign with
+separation --- as Paper~IV's own Appendix-A simulation shows and the
+\#119 H1a sweep confirmed against the $\cos(2\pi d/\lambda)$ node
+positions.  In the radiation zone, where all real gravitational
+separations lie, the mechanism is sign-indefinite (falsification record
+above).
 
 \paragraph{Step 2: The interference cross-term.}
 A second identical proton at separation $r$ is a resonant oscillator
@@ -2382,9 +2440,14 @@ The coupling hierarchy across the three stable objects is:
 where the photon couples with unit efficiency (it \emph{is} the
 medium wave), the electron couples through its toroidal topology
 (suppressed by $\alpha$), and the proton couples as a sub-grain
-monopole (suppressed by $(m_e/m_p)^3$).  Gravity is weak not because
-of a separate fine-tuning, but because the proton is small relative
-to the medium grain.
+monopole (suppressed by $(m_e/m_p)^3$).  The original conclusion ---
+that gravity is weak because the proton is small relative to the medium
+grain --- \emph{does not survive}: the suppression factor belonged to the
+falsified mechanism, and the monopole moment $Q_p$ it required was
+subsequently shown to be formally divergent, with no box-stable value
+(\#98).  The weakness of gravity --- $\alpha_G \sim 10^{-39}$ --- is at
+present the sector's unsolved hierarchy problem, not a derived
+consequence.
 
 \paragraph{Step 4: Newton's constant from the medium.}
 Substituting $Q_p$ into~\eqref{eq:bjerknes_formula} and matching to
@@ -2417,21 +2480,27 @@ within $0.6\%$ of $G_{\rm obs} = 6.674\times10^{-11}
 the imprecision in $N_p$ (form factor $F \approx 4.47$ is
 numerically determined; see Paper~I).
 
-\begin{gapbox}[Open problem: first-principles derivation of $\alpha_G$]
-$G$ is not an independent constant of the framework.
-Equation~\eqref{eq:G_ladder} expresses it in terms of $\{\hbar, c,
-\alpha, m_e, \alpha_G\}$, where the first four are fixed in Paper~I.
-The remaining open problem is computing the sub-grain suppression
-factor $(a_p/\xi)^n$ from the 3D proton breather profile, which
-would yield $\alpha_G$ without empirical input.  The $0.6\%$
-structural agreement is evidence of framework consistency, not a
-completed derivation.  Two further dependencies that the $0.6\%$
-figure inherits, not visible from this expression alone:
-(i) the proton mass $m_p = N_p\,m_e/\alpha$ with $N_p = N_Y F \approx
-13.44$ inherits the SSV-I §Proton F-cutoff calibration (issue~\ssvissue{66});
-(ii) any tightening of $\alpha_G$ via the sub-grain suppression
-will need the same basis-converged 3D toroidal solve that the
-Path~B null (\S Muon, Paper~I) showed has not yet been achieved.
+\begin{gapbox}[Open problem: $G$ has no live derivation route
+(status after \#119/\#98)]
+$\alpha_G = 5.9\times10^{-39}$ is at present an \emph{empirical input}.
+Equation~\eqref{eq:G_ladder} expresses $G$ in terms of $\{\hbar, c,
+\alpha, m_e, \alpha_G\}$ and matches CODATA to $0.6\%$ when $\alpha_G$ is
+supplied; that is a numerical consistency check of the Paper~I mass
+ladder, not a derivation.  Every route that was to supply $\alpha_G$ from
+the medium is now closed: (i) the sub-grain suppression factor
+$(a_p/\xi)^n$ belonged to the mutual-radiation mechanism falsified above,
+and its monopole charge $Q_p$ is formally divergent --- the LogSE healing
+tail decays as $1/r^2$, so $\int r^2\,\mathrm{deficit}\,dr$ grows with
+box size and no box-stable value exists (\#98, closed resolved-negative);
+(ii) the circulation-halo triangle $v_{\rm flat}^2 =
+G\rho_0\Gamma^2/(2\pi c^2)$, solved against the baryonic Tully--Fisher
+relation on the natural baryon-locked chain, misses $\alpha_G$ by
+$\sim$35 orders of magnitude and predicts BTFR slope $3/2$ instead of
+$4$ (\#119 H9, falsified on both pre-registered rules); (iii) naive
+Sakharov scaling at the SSV grain overshoots by $\sim$39 orders in the
+opposite direction.  The $0.6\%$ figure also inherits the SSV-I
+F-cutoff calibration of $N_p$ (issue~\ssvissue{66}).  The weakness of
+gravity is the sector's hierarchy problem, fully exposed.
 \end{gapbox}
 
 \paragraph{Gravitational and electromagnetic radiation share the Goldstone channel.}
@@ -2460,10 +2529,13 @@ astrophysical radiation.
 
 \subsection{Scope: the Full Treatment in Paper~IV}
 
-The present section has established gravity as the fourth force-sector mode
---- the interference of breather pressure waves, building a time-delay
-gradient that bends trajectories --- and has fixed Newton's constant from
-the medium.  The conceptual development of the mechanism is carried out in
+The present section proposed gravity as the fourth force-sector mode ---
+the interference of breather pressure waves, building a time-delay
+gradient that bends trajectories --- and that proposal is falsified as
+written, with the section retained as the record (falsbox above).  What
+hands off to Paper~IV is the surviving architecture: the time-dilation
+field as the observable and the intrinsic defect source.  The conceptual
+development is carried out in
 Paper~IV: the formal account of update capacity, the four gravitational
 consequences (free fall, time dilation, light deflection, redshift), the
 universality of the coupling, the absence of a graviton, the bridge to
@@ -2491,7 +2563,7 @@ itself oscillating, not an interaction between defects.}
 Electromagnetism & Transverse flow    & Chirality ($\pm$)      & Transverse phonon         & $\infty$        \\
 Strong           & Surface tension    & Topological charge     & Phase oscillation         & $\sim a/\alpha$ \\
 Weak             & Reconnection       & Core overlap           & Amplitude mode ($W,Z$)    & $\sim \xi$      \\
-Gravity          & Pressure-wave interference & Mass-energy (breather) & Longitudinal density wave & $\infty$        \\
+Gravity          & Time-dilation gradient$^{\dagger}$ & Mass-energy (intrinsic defect loading) & Longitudinal density field & $\infty$        \\
 \midrule
 Higgs            & Amplitude mode     & The medium itself      & $\delta\rho$ oscillation  & $\sim \xi_{\rm EW}$ \\
 \bottomrule
@@ -2501,6 +2573,11 @@ Higgs            & Amplitude mode     & The medium itself      & $\delta\rho$ os
 We can now survey the four forces from a single vantage point. Table~\ref{tab:forces}
 summarises the correspondence and adds the Higgs as the one remaining mode of the
 medium that is not an interaction between defects.
+($^{\dagger}$The gravity row reflects the post-\#119 status: the original
+entry, pressure-wave \emph{interference}, is the falsified mutual-radiation
+mechanism of \S\ref{sec:gravity}; the surviving reading is the
+time-dilation gradient sourced by each defect's intrinsic loading of the
+medium, developed in Paper~IV.)
 
 Several structural features of this table deserve comment.
 
@@ -2512,19 +2589,25 @@ amplitude modes of the core. The hierarchy of ranges $r_W \ll r_{\rm strong} \ll
 r_{\rm EM}, r_{\rm gravity}$ follows directly from the hierarchy $\xi \ll a/\alpha \ll
 \infty$.
 
-\paragraph{Coupling strengths.} All couplings are fixed by the same two numbers: $\alpha$
-and $\mu_0 = m_e/\alpha$. The strong coupling is $\sim 1$ (order-unity surface
+\paragraph{Coupling strengths.} Three of the four couplings are fixed by the
+same two numbers, $\alpha$
+and $\mu_0 = m_e/\alpha$: the strong coupling is $\sim 1$ (order-unity surface
 tension, no small factor), the electromagnetic coupling is $\alpha \approx 1/137$
-(transverse-to-longitudinal wave speed ratio), the weak coupling is $\alpha^2$ (two
-powers of the core penetration suppression), and the gravitational coupling is
-$Gm_p^2/\hbar c \approx 6\times 10^{-39}$ (set by the tiny ratio of the
-proton's acoustic cross-section to $c^4/G$, which encodes the vast hierarchy between
-$P_0$ and $m_p c^2$).
+(transverse-to-longitudinal wave speed ratio), and the weak coupling is
+$\alpha^2$ (two
+powers of the core penetration suppression).  The gravitational coupling
+$Gm_p^2/\hbar c \approx 6\times 10^{-39}$ is the exception: it is an
+empirical input with no live derivation route (gapbox,
+\S\ref{sec:Newton}) --- the framework's hierarchy problem.
 
 \paragraph{Universality of gravity.} Every other force is selective: EM acts on
-chirality, strong on topological charge, weak on core overlap. Gravity (Bjerknes)
-acts on \emph{acoustic cross-section}, which is determined by mass-energy alone.
-This is the mechanical root of the equivalence principle.
+chirality, strong on topological charge, weak on core overlap.  Gravity
+couples to the one property all defects share --- they load the medium with
+mass-energy, and every process advances by updating it.  The response side
+of this universality (everything falls alike in a time-dilation gradient)
+is derived in Paper~IV; that the \emph{source} side scales strictly as
+total mass-energy for composite bodies is an open requirement on the
+intrinsic-source derivation (\#119).
 
 \paragraph{Defects vs.\ canvas.} The four force rows of Table~\ref{tab:forces}
 share a common pattern: each describes how some property of a defect (chirality,

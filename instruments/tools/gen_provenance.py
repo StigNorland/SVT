@@ -78,7 +78,10 @@ def _glob_stem(stem: str) -> list[str]:
     hits = (glob.glob(str(REPO_ROOT / f"instruments/**/{stem}.py"), recursive=True)
             + glob.glob(str(REPO_ROOT / f"papers/**/{stem}.md"), recursive=True)
             + glob.glob(str(REPO_ROOT / f"docs/**/{stem}.md"), recursive=True))
-    return sorted({str(Path(h).relative_to(REPO_ROOT)) for h in hits})
+    # .as_posix(): keep repo-relative paths forward-slashed on Windows, where
+    # backslashes would break both the instruments/ prefix test and the
+    # rendered \texttt/\url output
+    return sorted({Path(h).relative_to(REPO_ROOT).as_posix() for h in hits})
 
 
 def _paper_module_dir(paper: str | None) -> str | None:
