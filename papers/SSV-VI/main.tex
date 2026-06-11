@@ -1,0 +1,674 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,physics}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Coloured result boxes
+\newtcolorbox{resultbox}[1][]{enhanced,breakable,
+  colback=blue!4!white,colframe=blue!40!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+\newtcolorbox{gapbox}[1][]{enhanced,breakable,
+  colback=orange!6!white,colframe=orange!60!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+\newtcolorbox{falsbox}[1][]{enhanced,breakable,
+  colback=red!5!white,colframe=red!55!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\newcommand{\seriesname}{Saturated Superfluid Vacuum}
+\newcommand{\papernumber}{VI}
+
+\providecommand{\ssvfile}[1]{\hyperref[file:#1]{\texttt{\detokenize{#1}}}}
+\providecommand{\ssvissue}[1]{\hyperref[issue:#1]{\##1}}
+
+\title{\textbf{\seriesname~\papernumber}\\[0.4em]
+\large Galactic Dynamics: Rotation Curves and Spiral Structure from the
+Two-Term Source}
+\author{Stig Norland\\
+Independent Researcher, Bergen, Norway}
+\date{Draft}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This paper replaces the former Papers VI-a (\emph{Galactic Standing Waves
+and Flat Rotation Curves}) and VI-b (\emph{Galactic Morphology as Overtone
+Structure}).  Both were organised around mechanisms driven by the central
+black hole (CBH): a CBH-anchored standing wave was to produce the flat
+rotation curve, and CBH spin overtones were to produce the spiral arms.
+Both mechanisms are falsified (issues \ssvissue{122}, \ssvissue{124};
+falsification record in Appendix~\ref{app:record}), and one mechanism now
+covers both phenomena, so one paper covers both subjects.
+
+The surviving architecture has three parts.  (i)~Gravity is the gradient
+of the time-dilation field (Paper~IV): the rotation curve is
+$v^2(r) = r\,d\Phi/dr$, with the Keplerian limit near a central mass
+recovered structurally.  (ii)~The source of $\Phi$ is the
+\emph{intrinsic two-term structure} of topological defects, measured in
+the LogSE medium (issue \ssvissue{119}, H7a/H8): a concentrated
+healing-length core and an isothermal $\ell^2\rho/2r^2$ circulation halo,
+whose Poisson integral is a logarithmic potential
+$\Phi_{\rm h} = v_h^2\ln r$ --- a flat-curve tail with no dark-matter
+particles.  (iii)~Everything else is \emph{real Newtonian self-gravity}
+of the baryons: in pre-registered $N$-body experiments (200\,000 stars,
+FFT particle-mesh, no black hole, no dark matter), the baryons-only disc
+reproduces the missing-mass problem (declining curve), the same disc plus
+the measured halo term gives a flat curve, and spiral arms and a bar grow
+by swing amplification with no driver --- the Ostriker--Peebles
+instability --- directly superseding the CBH-overtone mechanism.  The
+combination of a flat curve \emph{and} growing arms constrains the halo
+amplitude to an intermediate, maximal-disc balance --- a falsifiable
+condition, not a free parameter --- though the halo amplitude's value is
+not yet derived from the medium (the circulation-halo route to its
+normalisation was falsified in issue \ssvissue{119}, H9).
+
+The honest data comparison stands on M31: with the measured baryons
+fixed, the flat plateau requires an additional component supplying
+$\sim$83\% of $v^2$ whose amplitude is fitted, not predicted.  The
+spiral-structure section records that the pattern's pitch angle is a
+winding (shear) observable: the pre-registered pitch--$Q$ trend of the
+old dispersion analysis failed its numerical test (D4b).  All retired
+claims are kept as an explicit falsification record per the programme's
+negative-results rule.
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+
+%%──────────────────────────────────────────────────────────────────────
+\section{Introduction}
+\label{sec:intro}
+%%──────────────────────────────────────────────────────────────────────
+
+The rotation curves of spiral galaxies stay flat far beyond the radius
+where the visible matter would let them fall \cite{rubin1980}, and the
+standard resolution is a dark-matter halo \cite{nfw1997}.  The SSV
+programme's galactic sector originally proposed a different engine: the
+central black hole.  Paper~VI-a modelled the disc as a planar soliton
+phase-locked to a standing wave at the CBH eigenfrequency, producing a
+Mestel surface density \cite{mestel1963} and hence a flat curve;
+Paper~VI-b read the Hubble sequence as the overtone spectrum of the same
+wave, with CBH spin exciting azimuthal modes $m = 2, 3, 4$.
+
+Both CBH mechanisms are now falsified, each by pre-registered
+computation against its own decision rules:
+
+\begin{itemize}
+  \item \textbf{The radial mechanism} (flat curve from the CBH wave):
+    rebuilding the rotation curve in the correct framework --- gravity as
+    the time-dilation-field gradient --- showed that the CBH frequency
+    sets at most a wiggle \emph{spacing}; the flat plateau is a free
+    amplitude that must be fitted to each galaxy, not predicted from
+    $M_{\rm BH}$ (issue \ssvissue{122};
+    \S\ref{sec:m31}, Appendix~\ref{app:record}).
+  \item \textbf{The azimuthal mechanism} (arms from CBH overtones): it is
+    contradicted observationally --- M33 has prominent arms and
+    essentially no central black hole \cite{gebhardt2001}, the predicted
+    Milky Way corotation radius misses by more than a factor of 20, and
+    the mode amplitudes invalidly absorbed an astronomically small
+    multipole suppression into their normalisation --- and it is
+    superseded numerically: a self-gravitating stellar disc grows a bar
+    and trailing arms with \emph{no} black hole present at all
+    (issue \ssvissue{124}; \S\ref{sec:arms},
+    Appendix~\ref{app:record}).
+\end{itemize}
+
+What replaces them is simpler and uses fewer ingredients.  The SSV
+contribution to galactic dynamics reduces to a single, measured object:
+the \emph{intrinsic two-term source} carried by topological defects of
+the medium (Paper~IV; issue \ssvissue{119}, H7a/H8).  Its first term is a
+concentrated core --- the Newtonian monopole.  Its second term is the
+energy of the defect's quantised circulation, an isothermal $1/r^2$
+energy density whose Poisson integral is a logarithmic potential --- a
+flat-curve tail.  Everything else in a galaxy is ordinary Newtonian
+self-gravity of the baryons, which we compute with real $N$-body
+experiments rather than ansatz potentials.  The central black hole
+appears nowhere in the mechanism; at most it is an inner-boundary
+perturber.
+
+The paper is organised as follows.  Section~\ref{sec:framework} states
+the time-dilation-gradient framework and the rotation-curve
+decomposition.  Section~\ref{sec:source} imports the measured two-term
+source.  Section~\ref{sec:nbody} presents the pre-registered real-gravity
+$N$-body battery (D1--D3) and the maximal-disc balance condition.
+Section~\ref{sec:arms} treats spiral structure: swing amplification,
+the bar, and the pitch angle as a winding observable, including the
+negative D4b result.  Section~\ref{sec:m31} gives the honest M31
+comparison.  Section~\ref{sec:status} collects claim statuses, open
+problems, and falsifiable predictions.  Appendix~\ref{app:record} is the
+falsification record of the retired VI-a/VI-b mechanisms (rule~1 of the
+programme: correctly negative results are the proof; they are recorded,
+not deleted).  The full retired texts remain available in the repository
+history.
+
+%%──────────────────────────────────────────────────────────────────────
+\section{Framework: the Rotation Curve as a Time-Dilation Gradient}
+\label{sec:framework}
+%%──────────────────────────────────────────────────────────────────────
+
+Paper~IV develops gravity as the gradient of the time-dilation field: the
+local update availability $A = d\tau/dt = 1 + \Phi/c^2$ slows clocks and
+bends trajectories, and at leading order all weak-field phenomenology
+follows from the single potential $\Phi$.  For a cold circular orbit at
+radius $r$ in an axisymmetric galaxy,
+\begin{equation}
+  v^2(r) \;=\; r\,\frac{d\Phi}{dr},
+  \label{eq:vcirc}
+\end{equation}
+and the potential is the sum of the Poisson integrals of the actual
+sources present:
+\begin{equation}
+  v^2(r) \;=\; v^2_{\rm bulge}(r) + v^2_{\rm disc}(r)
+             + v^2_{\rm BH}(r) + v^2_{\rm halo}(r).
+  \label{eq:decomposition}
+\end{equation}
+Three structural points, established in the issue-\ssvissue{122} rebuild
+(\ssvfile{rotation_curve_timedilation}, with tests):
+
+\begin{itemize}
+  \item \textbf{The Keplerian limit is recovered, not bolted on.}  Near a
+    dominant central mass, $\Phi \to -GM/r$ and
+    \eqref{eq:vcirc} gives $v\sqrt{r} = \sqrt{GM}$ constant --- the
+    weak-field limit of the time-dilation field, verified in the test
+    suite.
+  \item \textbf{Each term is a Poisson integral of a real source.}  The
+    bulge and disc terms come from the measured baryonic distributions;
+    the BH term is $GM_{\rm BH}/r$; the halo term is the Poisson
+    integral of the intrinsic circulation-energy density of
+    \S\ref{sec:source}.
+  \item \textbf{No standing-wave amplitude appears.}  The former VI-a
+    wave term survives only as a falsified candidate for the halo slot
+    (Appendix~\ref{app:record}): its amplitude was a free
+    dark-matter-equivalent, and its frequency content set only a wiggle
+    spacing.
+\end{itemize}
+
+%%──────────────────────────────────────────────────────────────────────
+\section{The Two-Term Source}
+\label{sec:source}
+%%──────────────────────────────────────────────────────────────────────
+
+The SSV-specific input is a measured property of topological defects in
+the logarithmic-Schr\"odinger medium (Paper~I ontology; Paper~IV
+gravity).  In pre-registered relaxation experiments
+(issue \ssvissue{119}, H7a and the H8 cementing battery), an isolated
+quantised vortex of winding $\ell$ carries:
+
+\begin{enumerate}
+  \item \textbf{a concentrated core} on the healing length --- under the
+    Poisson reading $\nabla^2\Phi = 4\pi G\,e/c^2$ this is the Newtonian
+    monopole of the defect's mass-energy;
+  \item \textbf{an isothermal circulation halo}: the kinetic energy
+    density of the quantised circulation,
+    \begin{equation}
+      e(r) \;=\; \frac{\ell^2 \rho}{2\,r^2},
+      \label{eq:halo_energy}
+    \end{equation}
+    measured as $e\cdot r^2 = 0.512 \pm 0.011$ against the parameter-free
+    prediction $\ell^2/2 = 0.5$ at $\ell = 1$ (2.4\%), and
+    $2.28 \pm 0.13$ against $2.0$ at $\ell = 2$ --- the $\ell^2$ law;
+  \item \textbf{its own time-dilation field}: a Bernoulli density
+    depression $\delta\rho\cdot r^2 \to -1/(2b)$, confirmed at two values
+    of the LogSE coupling (0.6\% at $b = 0.5$; 11\% at $b = 1$).
+\end{enumerate}
+
+No radiation, no external drive, and no new postulate enter: the halo is
+the defect's \emph{own} circulation energy.  As a Poisson source,
+$e \propto 1/r^2$ integrates to
+\begin{equation}
+  \Phi_{\rm h}(r) \;=\; v_h^2 \ln r
+  \qquad\Longrightarrow\qquad
+  v^2_{\rm halo} = v_h^2 \;=\; \text{const},
+  \label{eq:log_halo}
+\end{equation}
+the flat-curve tail, with $v_h$ the halo amplitude.
+
+\begin{gapbox}[Open: the halo amplitude is not derived
+(\ssvissue{119} H9 falsified the natural route)]
+The pre-registered attempt to fix $v_h$ from the medium --- the
+circulation-halo triangle $v_{\rm flat}^2 = G\rho_0\Gamma^2/(2\pi c^2)$
+with the entrained circulation $\Gamma$ locked to the baryons' angular
+momentum (Fall relation) --- \textbf{failed on both decision rules}: the
+implied gravitational coupling misses by $\sim$35 orders of magnitude,
+and the implied baryonic Tully--Fisher slope is $3/2$ against the
+observed $\approx 4$ \cite{mcgaugh2012}
+(\ssvfile{h9-circulation-halo-triangle}).  In this paper $v_h$ is
+therefore an \emph{empirical amplitude per galaxy}, constrained --- not
+fixed --- by the balance condition of \S\ref{sec:balance}.  Deriving the
+entrainment law $\Gamma(M)$ (which must deliver $\Gamma \propto M^{1/4}$
+at $\sim$17 orders below the baryon circulation, or fail) is owned by the
+successor issue \ssvissue{129}.  Dispersion-supported dwarf spheroidals,
+which barely rotate yet are dark-matter dominated, remain the standing
+discriminator for any circulation-sourced halo.
+\end{gapbox}
+
+%%──────────────────────────────────────────────────────────────────────
+\section{Real-Gravity $N$-Body Experiments (D1--D3)}
+\label{sec:nbody}
+%%──────────────────────────────────────────────────────────────────────
+
+\subsection{Setup}
+
+All claims in this section are backed by direct $N$-body computation with
+\emph{real} Newtonian self-gravity --- softened $1/r^2$ forces from an
+FFT particle-mesh solver with isolated (zero-padded, Hockney--Eastwood
+\cite{hockneyeastwood1988}) boundary conditions --- not by ansatz
+potentials (\ssvfile{disc_nbody}; GPU).  The disc is exponential
+(scale length $R_d = 1$, $G = M_{\rm disc} = 1$), $2\times10^5$ equal-mass
+stars, velocities initialised from the \emph{measured} total acceleration
+with Toomre-$Q$-controlled radial dispersion \cite{toomre1964}.  There is
+\textbf{no central black hole} (the M33-like configuration) and there are
+\textbf{no dark-matter particles}.  The only SSV ingredient is optional:
+the halo term \eqref{eq:log_halo} applied as the external acceleration
+$a_h = -v_h^2/r$, switched on or off.  Decision rules D1--D4 were posted
+to issue \ssvissue{124} before running.
+
+\subsection{Results}
+
+\begin{resultbox}[D1--D3: declining curve, flat curve, and arms --- all
+from real gravity (issue \ssvissue{124})]
+\begin{center}\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+rule & pre-registered criterion & outcome \\
+\midrule
+D1 & baryons-only curve declines beyond the disc &
+\textbf{CONFIRMED} (outer/inner $0.88$--$0.94$) \\
+D2 & + measured halo \eqref{eq:log_halo}: flat at large $r$ &
+\textbf{CONFIRMED} ($v = 0.79$--$0.81$ over $1$--$5.5\,R_d$) \\
+D3 & $m{=}2$ amplitude $\geq 10\%$ in a few rotations, no BH &
+\textbf{CONFIRMED} ($A_2{:}\ 0.014 \to 0.118$, $\sim$3 rotations) \\
+\bottomrule
+\end{tabular}
+\end{center}
+The baryons-only disc develops a \emph{bar plus trailing arms} --- the
+Ostriker--Peebles instability \cite{ostrikerpeebles1973} --- from pure
+self-gravity, with the $m = 2$ pattern winding from $48^\circ$ to
+$22^\circ$ pitch.  Spiral structure is a collective mode of the
+self-gravitating baryons (swing amplification \cite{toomre1981}); no
+central driver exists in the simulation, so no central driver is needed.
+A full three-dimensional run (PM on a $128^3$ grid, disc with vertical
+structure) reproduces the same phenomenology with real 3D gravity.
+Figure: \texttt{figures/fig\_nbody\_real\_gravity.png}.
+\end{resultbox}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.96\textwidth]{figures/fig_nbody_real_gravity.png}
+\caption{The pre-registered D1--D3 battery.  \emph{Left}: baryons-only
+disc --- the rotation curve declines (D1) and a bar + trailing arms grow
+from pure self-gravity (D3).  \emph{Right}: the same disc with the
+measured SSV circulation halo \eqref{eq:log_halo} --- the curve is flat
+(D2).  No black hole, no dark-matter particles, real $1/r^2$ forces.}
+\label{fig:nbody}
+\end{figure}
+
+\subsection{The maximal-disc balance condition}
+\label{sec:balance}
+
+The honest finding of the battery (rule~1: reported at full strength) is
+that the halo-dominated configuration \emph{kills the arms}: at
+$v_h = 0.65$ the disc is stabilised into featurelessness
+($A_2 \sim 0.007$) --- the known ``dead disc'' effect of rigid halos.
+Real galaxies have flat curves \emph{and} spiral arms.  In the 3D run the
+combination is achieved at intermediate amplitude: $v_h = 0.45$ gives a
+flat curve (outer/inner $1.06$--$1.10$) and growing arms
+($A_2$: $0.004 \to 0.060$ and rising).
+
+\begin{resultbox}[The balance condition]
+The requirement \emph{flat curve and live spiral structure} forces the
+disc to remain near-maximal inside with the halo taking over outside.
+This converts the halo amplitude $v_h$ from a free parameter into a
+falsifiable balance condition on every spiral galaxy: a galaxy whose
+photometric disc is far from maximal yet shows strong arms, or a
+maximal disc with no halo signature in its outer curve, breaks it.
+\end{resultbox}
+
+%%──────────────────────────────────────────────────────────────────────
+\section{Spiral Structure}
+\label{sec:arms}
+%%──────────────────────────────────────────────────────────────────────
+
+\subsection{Arms without a driver}
+
+D3 settles the mechanism question for this programme: spiral arms grow by
+swing amplification of the self-gravitating baryons, seeded by shot
+noise, with no external or central driver.  The CBH-overtone account of
+VI-b --- arms as spin-excited azimuthal modes of a CBH-anchored wave ---
+is superseded (and independently contradicted by observation;
+Appendix~\ref{app:record}).  The instability route also produces the bar
+morphology directly: the baryons-only disc \emph{is} a barred spiral
+after three rotations.
+
+\subsection{Pitch angle is a winding observable, not a dispersion dial
+(D4/D4b)}
+\label{sec:pitch}
+
+The one quantitative VI-b result that survived the mechanism's fall was
+the marginal-stability pitch relation of its Lin--Shu-type dispersion
+analysis \cite{linshu1964}, $\tan\alpha_m = mQ/4$ --- pitch increasing
+with the Toomre parameter.  We tested it as pre-registered rule D4:
+sweep $Q \in \{1.0, 1.3, 1.6, 2.0\}$ at matched times and seeds, measure
+the $m = 2$ phase-vs-$\ln r$ pitch, demand a monotone increase (Spearman
+$\rho \geq +0.8$) wherever the arm amplitude is measurable
+($A_2 \geq 0.02$).
+
+\begin{falsbox}[D4b: the pitch--$Q$ trend FAILS in the real-gravity disc
+(issue \ssvissue{124})]
+At the balanced halo amplitude the 2D disc's arms sit below the validity
+floor (D4: inconclusive by rule).  In the strong-arm baryons-only disc
+(D4b, pre-registered follow-up; all 16 $(Q, t)$ cells valid,
+$A_2 = 0.047$--$0.196$):
+\begin{center}\small
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+$t$ & pitch$(Q{=}1.0)$ & $(1.3)$ & $(1.6)$ & $(2.0)$ & Spearman $\rho$ \\
+\midrule
+20 & $24.1^\circ$ & $23.5^\circ$ & $45.8^\circ$ & $44.9^\circ$ & $+0.6$ \\
+30 & $26.0^\circ$ & $27.5^\circ$ & $27.2^\circ$ & $27.0^\circ$ & $+0.2$ \\
+40 & $39.9^\circ$ & $29.7^\circ$ & $27.3^\circ$ & $58.1^\circ$ & $+0.2$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+No matched time reaches the pre-registered $\rho \geq +0.8$; at $t = 30$
+the pitch is \emph{flat to within $1.5^\circ$ across a factor-2 sweep in
+$Q$}.  The pitch of the swing-amplified pattern is set by
+differential-rotation winding (the shear), while $Q$ controls the
+\emph{amplitude} of the response.  The relation $\tan\alpha = mQ/4$ is
+falsified as a fixed-time prediction in the real-gravity disc
+(\ssvfile{d4-pitch-vs-q-issue124};
+\ssvfile{disc_nbody_d4_pitch}).
+\end{falsbox}
+
+What survives of the VI-b analysis: the azimuthal-averaging argument for
+why 1D rotation curves look smooth (a geometric fact independent of the
+arm mechanism), and the dispersion relation \emph{as a relation} ---
+linearising any self-gravitating LogSE disc produces a Lin--Shu-type
+balance --- with its pitch corollary now carrying a falsified status.
+
+%%──────────────────────────────────────────────────────────────────────
+\section{The Honest M31 Comparison}
+\label{sec:m31}
+%%──────────────────────────────────────────────────────────────────────
+
+The issue-\ssvissue{122} rebuild fitted the full Chemin et
+al.~\cite{chemin2009} H\,I rotation curve of M31 ($r = 1.14$--$38$~kpc,
+$n = 98$, absolute errors) in the time-dilation-gradient framework
+(\ssvfile{timedilation-rotation-curve-result}):
+
+\begin{center}\small
+\begin{tabular}{@{}lcc@{}}
+\toprule
+model & reduced $\chi^2$ & RMS (km/s) \\
+\midrule
+SSV time-dilation, all parameters free & 10.1 & 19.8 \\
+measured baryons + NFW halo \cite{nfw1997} & 18.3 & 30.4 \\
+measured baryons fixed + flat-tail component & 13.5 & 28.3 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Three honest readings, all recorded in the issue before this paper was
+assembled:
+\begin{itemize}
+  \item None of the models is statistically acceptable on the full range
+    (reduced $\chi^2 = 10$--$18$): M31's inner bulge/bar and warp make
+    the complete curve genuinely hard for \emph{any} smooth
+    axisymmetric model --- this is not SSV-specific.
+  \item The free fit drives the visible disc's contribution toward zero:
+    an unconstrained flat-tail amplitude is a dark-matter-equivalent and
+    will absorb the baryons if allowed.
+  \item With the measured baryons fixed, they supply only
+    $v \approx 110$~km/s of the observed $\approx 266$~km/s at 38~kpc:
+    the tail must carry $\sim$83\% of $v^2$, with amplitude
+    ($V \approx 230$~km/s) \textbf{fitted, not predicted}.  This is the
+    falsification of the old VI-a claim that the CBH wave produces the
+    plateau, and it is exactly the gap the \S\ref{sec:source} gapbox
+    records: the framework supplies the \emph{form} of the tail
+    ($\ln r$), not yet its amplitude.
+\end{itemize}
+
+%%──────────────────────────────────────────────────────────────────────
+\section{Claim Status, Predictions, and Open Problems}
+\label{sec:status}
+%%──────────────────────────────────────────────────────────────────────
+
+\subsection{Claim-status table}
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}p{0.46\linewidth}p{0.48\linewidth}@{}}
+\toprule
+claim & status \\
+\midrule
+$v^2 = r\,d\Phi/dr$ with Keplerian limit near a point mass &
+\emph{derived} (Paper~IV framework; tested,
+\ssvfile{rotation_curve_timedilation}) \\
+defect carries core + $\ell^2\rho/2r^2$ circulation halo + Bernoulli
+depression &
+\emph{measured} in the LogSE medium (\ssvissue{119} H7a/H8; $\ell^2$ law
+and $-1/(2b)$ tail confirmed) \\
+halo Poisson integral $\Rightarrow$ flat tail $v_h^2 \ln r$ &
+\emph{derived} (exact integration factor pinned by test) \\
+D1 declining baryons-only curve; D2 flat with halo; D3 arms/bar without
+BH & \emph{numerical}, pre-registered, confirmed (\ssvissue{124}) \\
+maximal-disc balance condition on $v_h$ &
+\emph{numerical constraint} (3D balance run); falsifiable per galaxy \\
+halo amplitude $v_h(M)$ from the medium &
+\emph{open} --- the natural chain is \emph{falsified}
+(\ssvissue{119} H9: 35 orders + slope $3/2$ vs $4$); owned by
+\ssvissue{129} \\
+pitch--$Q$ trend ($\tan\alpha = mQ/4$) &
+\emph{falsified} in the real-gravity disc (D4b) \\
+CBH standing wave produces the flat curve &
+\emph{falsified} (\ssvissue{122}; Appendix~\ref{app:record}) \\
+CBH overtones produce arms / Hubble sequence &
+\emph{falsified/superseded} (\ssvissue{124};
+Appendix~\ref{app:record}) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Falsifiable statements this paper makes}
+
+\begin{enumerate}
+  \item \textbf{Balance:} every spiral with a flat outer curve and live
+    arms must be near-maximal-disc inside; strong arms in a strongly
+    halo-dominated disc break the picture (\S\ref{sec:balance}).
+  \item \textbf{BH-independence:} arm and bar incidence must not require
+    a central black hole at any mass (M33 is the existence proof; a
+    demonstrated CBH-mass--arm-existence dependence would break
+    \S\ref{sec:arms}).
+  \item \textbf{Pitch:} pitch angle tracks shear/winding age, not the
+    dispersion at fixed time (\S\ref{sec:pitch}).
+  \item \textbf{dSph discriminator (inherited):} if the halo tail is
+    circulation-sourced, dispersion-supported dwarfs --- which barely
+    rotate yet are DM-dominated --- must be accounted for by whatever
+    entrainment law \ssvissue{129} produces, or the circulation sourcing
+    dies there.
+\end{enumerate}
+
+\subsection{Open problems}
+
+The halo amplitude's derivation (and with it the baryonic Tully--Fisher
+normalisation and slope) is the sector's central open problem, owned by
+issue \ssvissue{129} together with the gravitational coupling's
+magnitude.  The CBH's residual role --- whether its inner Keplerian
+region leaves any observable imprint (wiggle spacing was the last
+candidate, and its amplitude chain is retired) --- is open and currently
+unsupported.  Both are recorded as open, with no claim made.
+
+%%──────────────────────────────────────────────────────────────────────
+\section{Conclusion}
+%%──────────────────────────────────────────────────────────────────────
+
+A galaxy, in the surviving SSV picture, is baryons under real gravity
+plus the intrinsic circulation halo of the vacuum's defect structure.
+Real gravity does what it has been known to do since the 1970s: it
+declines where mass runs out, and it amplifies spiral structure from
+noise.  The medium contributes exactly one new term --- a measured,
+isothermal $1/r^2$ energy density whose potential is logarithmic --- and
+that term supplies the flat tail.  The central black hole drives
+nothing.  What the framework does not yet supply is the halo amplitude:
+its natural derivation route was tested and falsified, and per the
+programme's rules that negative is stated as the result it is.  The
+sector's forward path --- the entrainment law, the Tully--Fisher
+normalisation, the dwarf-spheroidal discriminator --- is pre-registered
+in issue \ssvissue{129}.
+
+%%──────────────────────────────────────────────────────────────────────
+\appendix
+\section{Falsification Record of the Retired VI-a/VI-b Mechanisms}
+\label{app:record}
+%%──────────────────────────────────────────────────────────────────────
+
+Per programme rule~1, the retired mechanisms are recorded here with their
+falsifiers.  The complete retired texts (including the Mestel-soliton
+variational derivation, the 2D beam-convolved resonance fits, the
+$\varepsilon_m(a_{\rm BH})$ overtone tables, and the morphology zoo) are
+preserved in the repository history under \texttt{papers/SSV-VI-a/} and
+\texttt{papers/SSV-VI-b/} at commit \texttt{cc59d19} and earlier.
+
+\subsection{The CBH standing-wave rotation-curve mechanism (VI-a)}
+
+\begin{falsbox}[Falsified: the flat plateau is not produced by the CBH
+(issue \ssvissue{122})]
+The mechanism claimed a disc soliton phase-locked to a CBH-anchored
+standing wave at $f_{\rm BH} = f_p\,(m_p/M_{\rm BH})$, yielding a Mestel
+surface density and an exactly flat baryonic curve.  Rebuilt in the
+correct time-dilation-gradient framework with M31's real baryons fixed,
+the wave component must supply $\sim$83\% of $v^2$ with its amplitude
+\textbf{fitted} ($V_w = 230$~km/s), not predicted from
+$M_{\rm BH}/f_{\rm BH}$; the CBH frequency sets only the wiggle spacing
+$\Delta r$.  A mechanism whose amplitude is free is a dark-matter
+parametrisation, not a prediction.  Carried problems that die with it:
+the calibration constant $\mathcal{C} = 1.8\times10^9\,{\rm kpc}\,
+M_\odot$ was numerological (anchored to one galaxy), and the wavelength
+scaling carried an unresolved $\lambda_{\rm BH} \propto M_{\rm BH}$
+versus $\Delta r \propto 1/M_{\rm BH}$ tension.  The plane-of-satellites
+reading (corotating dwarfs \cite{ibata2013} as a nodal sheet of the same
+wave) was a corollary of the falsified wave and is retired untested.
+The Mestel profile itself \cite{mestel1963} remains, of course, a
+correct description of a $\Sigma \propto 1/r$ disc; what is retired is
+the claim that a CBH-locked LogSE soliton puts the baryons in that
+profile.
+\end{falsbox}
+
+\subsection{The CBH-overtone arm mechanism (VI-b)}
+
+\begin{falsbox}[Falsified and superseded: arms need no black hole
+(issue \ssvissue{124})]
+The mechanism read spiral arms as CBH-spin-excited azimuthal modes
+($m = 2, 3, 4$) of the VI-a wave, and the Hubble sequence as its overtone
+spectrum.  Four independent falsifiers:
+\begin{enumerate}
+  \item \textbf{M33}: prominent grand-design-class arms with
+    $M_{\rm BH} \lesssim 1.5\times10^3\,M_\odot$ \cite{gebhardt2001} ---
+    the predicted node spacing exceeds the size of the observable
+    universe's disc analogue; the mechanism predicts \emph{no} arms.
+  \item \textbf{Corotation}: $r_c = m\mathcal{C}/(\pi M_{\rm BH})$ gives
+    266~kpc for the Milky Way against the observed 6--12~kpc ---
+    off by more than $20\times$.
+  \item \textbf{Multipole suppression}: the $\varepsilon_m(a_{\rm BH})$
+    amplitudes absorbed a Hansen-coefficient suppression of order
+    $(r_g/\Delta r)^m \sim (5\times10^{-10})^m$ ``into the
+    normalisation''; the true spin-driven amplitudes are
+    $\sim 10^{-19}$, not percent-level.  The percent-level table (and
+    the pitch-angle--$M_{\rm BH}$ anti-correlation built on it) was
+    unfounded.
+  \item \textbf{Winding}: the pinned-refreshed-mode picture contradicted
+    the pitch-from-winding picture used in the same chapter, and the
+    proposed $J_m(kr)\cos m\phi$ pattern is not a spiral.
+\end{enumerate}
+Superseded by: \S\ref{sec:arms} --- swing amplification of the
+self-gravitating baryons produces bar + arms with no BH in the
+simulation at all (D3).  The pitch--$Q$ corollary of the surviving
+dispersion analysis subsequently failed its own pre-registered test
+(D4b, \S\ref{sec:pitch}).
+\end{falsbox}
+
+\section{Code and Issue References}
+\input{provenance}
+
+\begin{thebibliography}{99}
+
+\bibitem{SSV-I}
+S.\ Norland, \textit{Saturated Superfluid Vacuum I: Topological Defects in a Saturated
+Superfluid Vacuum---The Geometric Origin of Matter},
+10.5281/zenodo.19651986, 2026.
+
+\bibitem{SSV-IV}
+S.\ Norland, \textit{Saturated Superfluid Vacuum IV: Gravity as Update-Capacity Gradient},
+SSV programme, 2026.
+
+\bibitem{rubin1980}
+V.~C.\ Rubin, W.~K.\ Ford, and N.\ Thonnard,
+``Rotational properties of 21 Sc galaxies with a large range of luminosities and radii,''
+\textit{Astrophys.\ J.}\ \textbf{238}, 471--487 (1980).
+
+\bibitem{nfw1997}
+J.~F.\ Navarro, C.~S.\ Frenk, and S.~D.~M.\ White,
+``A universal density profile from hierarchical clustering,''
+\textit{Astrophys.\ J.}\ \textbf{490}, 493--508 (1997).
+
+\bibitem{mestel1963}
+L.\ Mestel, ``On the galactic law of rotation,''
+\textit{Mon.\ Not.\ R.\ Astron.\ Soc.}\ \textbf{126}, 553--575 (1963).
+
+\bibitem{chemin2009}
+L.\ Chemin, C.\ Carignan, and T.\ Foster,
+``H I kinematics and dynamics of Messier 31,''
+\textit{Astrophys.\ J.}\ \textbf{705}, 1395--1415 (2009).
+
+\bibitem{gebhardt2001}
+K.\ Gebhardt et al., ``M33: a galaxy with no supermassive black hole,''
+\textit{Astron.\ J.}\ \textbf{122}, 2469--2476 (2001).
+
+\bibitem{toomre1964}
+A.\ Toomre, ``On the gravitational stability of a disk of stars,''
+\textit{Astrophys.\ J.}\ \textbf{139}, 1217--1238 (1964).
+
+\bibitem{ostrikerpeebles1973}
+J.~P.\ Ostriker and P.~J.~E.\ Peebles,
+``A numerical study of the stability of flattened galaxies: or, can cold
+galaxies survive?''
+\textit{Astrophys.\ J.}\ \textbf{186}, 467--480 (1973).
+
+\bibitem{toomre1981}
+A.\ Toomre, ``What amplifies the spirals?''
+in \textit{The Structure and Evolution of Normal Galaxies},
+eds.\ S.~M.\ Fall and D.\ Lynden-Bell (Cambridge University Press),
+111--136 (1981).
+
+\bibitem{linshu1964}
+C.~C.\ Lin and F.~H.\ Shu, ``On the spiral structure of disk galaxies,''
+\textit{Astrophys.\ J.}\ \textbf{140}, 646--655 (1964).
+
+\bibitem{hockneyeastwood1988}
+R.~W.\ Hockney and J.~W.\ Eastwood,
+\textit{Computer Simulation Using Particles},
+Adam Hilger, Bristol (1988).
+
+\bibitem{mcgaugh2012}
+S.~S.\ McGaugh, ``The baryonic Tully--Fisher relation of gas-rich
+galaxies as a test of $\Lambda$CDM and MOND,''
+\textit{Astron.\ J.}\ \textbf{143}, 40 (2012).
+
+\bibitem{ibata2013}
+R.~A.\ Ibata et al., ``A vast, thin plane of corotating dwarf galaxies orbiting the
+Andromeda galaxy,'' \textit{Nature}\ \textbf{493}, 62--65 (2013).
+
+\end{thebibliography}
+
+\end{document}

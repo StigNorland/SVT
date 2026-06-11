@@ -38,9 +38,9 @@ from scipy.special import j0
 
 
 ARXIV_EPRINT_URL = "https://arxiv.org/e-print/0909.3846"
-DEFAULT_CACHE = Path("papers/SSV-VI-a/data/chemin2009_table4_m31_rotation_curve.csv")
-DEFAULT_JSON = Path("papers/SSV-VI-a/results/m31_rotation_fit_receipt.json")
-DEFAULT_SVG = Path("papers/SSV-VI-a/figures/fig_m31_rotation_fit_receipt.svg")
+DEFAULT_CACHE = Path("papers/SSV-VI/data/chemin2009_table4_m31_rotation_curve.csv")
+DEFAULT_JSON = Path("papers/SSV-VI/results/m31_rotation_fit_receipt.json")
+DEFAULT_SVG = Path("papers/SSV-VI/figures/fig_m31_rotation_fit_receipt.svg")
 
 M31_BLACK_HOLE_MASS_MSUN = 1.4e8
 C_KPC_MSUN = 1.8e9

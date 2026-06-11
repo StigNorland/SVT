@@ -53,8 +53,8 @@ from scipy.special import i0, i1, j0, k0, k1
 # Units: kpc, km/s, Msun.
 G = 4.30091e-6  # kpc (km/s)^2 / Msun
 
-DATA = Path("papers/SSV-VI-a/data/chemin2009_table4_m31_rotation_curve.csv")
-JSON_OUT = Path("papers/SSV-VI-a/results/m31_timedilation_receipt.json")
+DATA = Path("papers/SSV-VI/data/chemin2009_table4_m31_rotation_curve.csv")
+JSON_OUT = Path("papers/SSV-VI/results/m31_timedilation_receipt.json")
 
 # --- swappable CBH-frequency input ------------------------------------------
 M_BH_MSUN = 1.4e8           # M31 central black hole

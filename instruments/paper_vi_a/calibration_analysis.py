@@ -1,9 +1,11 @@
-"""Live numerical checks for SSV-VI-a calibration constant C.
+"""Numerical checks for the SSV-VI-a calibration constant C (RETIRED CLAIM).
 
-This script deliberately keeps only the checks used by the current manuscript:
+The CBH standing-wave mechanism C calibrated is falsified (#122/#124); see
+the falsification appendix of papers/SSV-VI.  The original VI-a text lives
+in git history.  Kept as the record of:
 
 1. the empirical central-value check C = Delta r * M_BH for the five-galaxy
-   table in papers/SSV-VI-a/main.tex;
+   table of the retired VI-a manuscript;
 2. the closed-form value derived in derive_C.py, reproduced here only as a
    consistency check.
 

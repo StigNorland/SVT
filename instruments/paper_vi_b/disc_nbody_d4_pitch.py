@@ -18,8 +18,8 @@ Reuses the integrator of disc_nbody.py unchanged (FFT particle-mesh,
 isolated BCs, no BH, no DM particles).  GPU via SSV_GPU=1.
 
 Run:  python disc_nbody_d4_pitch.py [--quick]
-Writes papers/SSV-VI-b/results/d4_pitch_receipt.json and
-papers/SSV-VI-b/figures/fig_d4_pitch_vs_q.png.
+Writes papers/SSV-VI/results/d4_pitch_receipt.json and
+papers/SSV-VI/figures/fig_d4_pitch_vs_q.png.
 """
 
 import json
@@ -164,8 +164,8 @@ def main():
     result = evaluate(records, t_samples=t_samples)
     here = os.path.dirname(os.path.abspath(__file__))
     root = os.path.abspath(os.path.join(here, "..", ".."))
-    res_dir = os.path.join(root, "papers", "SSV-VI-b", "results")
-    fig_dir = os.path.join(root, "papers", "SSV-VI-b", "figures")
+    res_dir = os.path.join(root, "papers", "SSV-VI", "results")
+    fig_dir = os.path.join(root, "papers", "SSV-VI", "figures")
     os.makedirs(res_dir, exist_ok=True)
     os.makedirs(fig_dir, exist_ok=True)
 
