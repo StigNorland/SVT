@@ -19,9 +19,9 @@ Comparison models on identical fixed baryons:
 Decision rules (a)-(c): see issue #133 / the result note.
 
 Data: SPARC (Lelli, McGaugh & Schombert 2016, AJ 152, 157), files
-papers/SSV-VI/data/SPARC/{SPARC,MassModels}_Lelli2016c.mrt (official MRT
-files; astroweb.cwru.edu was unreachable, files obtained from a public
-vendored copy and validated against the byte-by-byte headers).
+papers/SSV-VI/data/SPARC/{SPARC,MassModels}_Lelli2016c.mrt -- the
+official MRT files (author's direct download, 2026-06-11; verified
+content-identical to the vendored copy the battery first ran on).
 
 Run:  python instruments/paper_vi/sparc_halo_fit.py
 Writes papers/SSV-VI/results/sparc_halo_fit_receipt.json and figures.
