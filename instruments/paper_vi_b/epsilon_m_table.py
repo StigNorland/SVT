@@ -1,7 +1,11 @@
 """
-SSV-VI-b Issue #43: numerical table of mode amplitudes epsilon_m(a_BH).
+SSV-VI-b Issue #43 (RETIRED CLAIM): table of mode amplitudes epsilon_m(a_BH).
 
-The derivation in papers/SSV-VI-b/main.tex Sec. 3.2 gives
+The CBH-overtone arm mechanism is falsified (#124: M33, corotation, and the
+invalidly absorbed Hansen multipole suppression); see the falsification
+appendix of papers/SSV-VI.  Original VI-b text: git history.
+
+The derivation in the retired VI-b manuscript, Sec. 3.2, gave
     epsilon_m(a_BH) = epsilon_0 * Q_m * a_BH^m / m!
 from the Hansen-Geroch multipole expansion of the rotating central
 breather, with Q_m the Bessel cross-overlap (~1) and epsilon_0 the

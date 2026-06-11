@@ -1,8 +1,13 @@
 """
-SSV-VI-b Issue #44: SSV-specific pitch-angle table from the marginal-
+SSV-VI-b Issue #44 (RETIRED CLAIM): pitch-angle table from the marginal-
 stability Lin-Shu dispersion on the Mestel-soliton disc.
 
-Derivation (papers/SSV-VI-b/main.tex Sec. 4.1):
+The pitch-Q corollary tested here was falsified in the real-gravity disc
+(#124 D4b: pitch is a winding/shear observable) and the Q(M_BH) scaling it
+fed rests on the falsified corotation relation; see the falsification
+appendix of papers/SSV-VI.  Original VI-b text: git history.
+
+Derivation (retired VI-b manuscript, Sec. 4.1):
     (omega - m Omega)^2 = kappa^2 - 2 pi G Sigma_0(r) |k_r| + c_s^2 k_r^2
 gives at the corotation radius (marginal-stability double root)
     tan alpha_m = (m/r_c) / (kappa/c_s) = m c_s / (sqrt(2) v_f) = m Q / 4

@@ -1,10 +1,13 @@
-"""
-SSV-VI-a Issue #42: numerical verification of the closed-form derivation
-of the galactic coupling constant C.
+﻿"""
+SSV-VI-a Issue #42 (RETIRED CLAIM): numerical verification of the
+closed-form derivation of the galactic coupling constant C.
 
-The derivation in papers/SSV-VI-a/main.tex Sec. 4.4 identifies the
-disc-soliton standing-wave node spacing as the gravitational Bohr radius
-of the gravito-Goldstone quasi-particle:
+The CBH standing-wave mechanism this constant calibrated is falsified
+(#122/#124); see the falsification appendix of papers/SSV-VI.  The
+original VI-a text lives in git history.  Kept as the record of the
+retired derivation, which identified the disc-soliton standing-wave node
+spacing as the gravitational Bohr radius of the gravito-Goldstone
+quasi-particle:
 
     C = hbar^2 / (G m_*^2)
       = (hbar^2 / (2 G m_e^2)) * alpha^(-16) * (m_p/m_e)^7
