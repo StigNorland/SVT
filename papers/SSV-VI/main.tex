@@ -72,8 +72,16 @@ condition, not a free parameter --- though the halo amplitude's value is
 not yet derived from the medium (the circulation-halo route to its
 normalisation was falsified in issue \ssvissue{119}, H9).
 
-The honest data comparison stands on M31: with the measured baryons
-fixed, the flat plateau requires an additional component supplying
+The data comparison stands on M31 and on the SPARC sample (83 galaxies,
+pre-registered battery): the \emph{pure} constant-$v_h^2$ form ---
+extrapolated through the core region the H7a/H8 measurement never
+covered --- is falsified there (not competitive with NFW; 21\%
+inner-quintile overshoot), while the halo amplitude across the
+population scales as $v_h \propto M_{\rm bar}^{0.256\pm0.019}$ with
+0.14~dex scatter --- the BTFR-equivalent exponent $1/4$, parameter-free,
+now the measured target for any entrainment derivation.  On M31, with
+the measured baryons fixed, the flat plateau requires an additional
+component supplying
 $\sim$83\% of $v^2$ whose amplitude is fitted, not predicted.  The
 spiral-structure section records that the pattern's pitch angle is a
 winding (shear) observable: the pre-registered pitch--$Q$ trend of the
@@ -440,6 +448,101 @@ assembled:
 \end{itemize}
 
 %%──────────────────────────────────────────────────────────────────────
+\section{The SPARC Sample: the Halo at Population Scale}
+\label{sec:sparc}
+%%──────────────────────────────────────────────────────────────────────
+
+One galaxy is an anecdote.  The SPARC database \cite{lelli2016} provides
+175 galaxies with both the observed rotation curve and the baryonic
+decomposition ($V_{\rm gas}$, $V_{\rm disk}$, $V_{\rm bul}$) at every
+radius, and the SSV halo is unusually testable there: because
+$\Phi_{\rm h} = v_h^2\ln r$ contributes a \emph{constant} $v_h^2$ in
+quadrature, the model
+\begin{equation}
+  v_{\rm model}^2(r) \;=\; V_{\rm gas}|V_{\rm gas}|
+    + \Upsilon_d V_{\rm disk}^2 + \Upsilon_b V_{\rm bul}^2 + v_h^2,
+  \label{eq:sparc_model}
+\end{equation}
+with the SPARC-standard mass-to-light ratios fixed
+($\Upsilon_d = 0.5$, $\Upsilon_b = 0.7$), has \textbf{one free parameter
+per galaxy}.  The pre-registered battery (issue \ssvissue{133}; script
+\ssvfile{sparc_halo_fit}; primary sample $Q = 1$, $i \geq 30^\circ$,
+$\geq 10$ points: 83 galaxies) fits this against NFW (2 parameters),
+MOND/RAR (0 parameters, $a_0$ global), and the endpoint-anchored
+solid-body model of Flynn \& Cannaliato \cite{flynn2026} that prompted
+the exercise.  Full numbers: result note
+\ssvfile{sparc-halo-fit-issue133} and its receipt.
+
+\begin{falsbox}[Rules (a)/(b): the pure (no-core) form is falsified
+(issue \ssvissue{133})]
+Median reduced $\chi^2$ over the sample: SSV pure \textbf{14.5} versus
+NFW 1.6 (pre-registered threshold: ratio $\leq 1.5$; measured 8.8) ---
+rule (a) FAIL.  The stacked residuals show why --- rule (b) FAIL with a
+clean signature: median fractional residuals per quintile of
+$r/R_{\rm max}$ are $-0.21$, $-0.02$, $+0.04$, $+0.08$, $+0.11$.  A
+single constant $v_h^2$ applied at \emph{all} radii overshoots by 21\%
+in the innermost quintile and consequently undershoots outside.  The
+failure localises exactly where the model exceeded its measured
+foundation: H7a/H8 established the $1/r^2$ circulation-energy density
+\emph{outside} the defect core, and the pure form extrapolated it to
+$r \to 0$.  (Context rows: MOND/RAR scores 12.2 with zero per-galaxy
+parameters; the velocity-addition $\omega$ model of \cite{flynn2026}
+scores 93.7 --- adding velocities rather than $v^2$ does not survive
+error-weighted statistics.)
+\end{falsbox}
+
+\begin{resultbox}[Rule (c): the halo amplitude scales as
+$M_{\rm bar}^{0.256\pm0.019}$ --- the BTFR-equivalent exponent,
+parameter-free]
+Across all 83 galaxies (every fit constrains $v_h$ away from zero):
+\begin{equation}
+  \log_{10} v_h = (0.256 \pm 0.019)\,\log_{10} M_{\rm bar} - 0.665,
+  \qquad \text{scatter } 0.14~\text{dex},
+  \label{eq:vh_mbar}
+\end{equation}
+with $M_{\rm bar} = 0.5\,L_{[3.6]} + 1.33\,M_{\rm HI}$, against the
+pre-registered BTFR-equivalent prediction of slope $1/4$
+($M \propto v^4$ \cite{mcgaugh2012}); $v_h(10^{10}M_\odot) \approx 79$
+km/s.  Robust on the $Q \leq 2$ sample (slope 0.268, 115 galaxies).
+This is the measured curve that any entrainment law $\Gamma(M)$ of
+issue \ssvissue{129} must reproduce --- the empirical target the H9
+falsification left undefined.  Per rule~1 a passing rule is suggestive,
+not proof.
+\end{resultbox}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\textwidth]{figures/fig_sparc_montage.png}
+\caption{Twelve SPARC galaxies spanning the luminosity range of the
+$Q = 1$ sample: data (points), fixed baryons (dashed), the
+pre-registered pure SSV halo (solid blue), and NFW (dotted).  The
+inner-region overshoot of the pure form --- the rule-(b) falsifier ---
+is visible in the low-mass discs.}
+\label{fig:sparc_montage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.62\textwidth]{figures/fig_sparc_vh_mbar.png}
+\caption{The fitted halo amplitude against baryonic mass for the 83
+$Q = 1$ galaxies.  The free fit (solid) gives slope $0.256 \pm 0.019$
+with 0.14 dex scatter; the parameter-free BTFR-equivalent slope $1/4$
+(dashed) is shown for comparison.}
+\label{fig:vh_mbar}
+\end{figure}
+
+\paragraph{Post-hoc exploration (flagged, not pre-registered).}
+Rolling the halo off below a core radius,
+$v_h^2\,r^2/(r^2 + r_c^2)$, with $(v_h, r_c)$ free, gives median reduced
+$\chi^2 = 0.89$ and \textbf{beats NFW by BIC in 76\% of the sample at
+equal parameter count} ($r_c$ quartiles 2.5/4.3/7.0~kpc) --- the entire
+pre-registered failure is the core region.  This is recorded as an
+exploration only: promoting the cored form requires deriving the core
+scale from the medium and pre-registering an $r_c$(galaxy) relation
+first.  That derivation, and the dwarf-spheroidal discriminator (dSphs
+are not in SPARC's rotation-supported sample), are the open follow-ups.
+
+%%──────────────────────────────────────────────────────────────────────
 \section{Claim Status, Predictions, and Open Problems}
 \label{sec:status}
 %%──────────────────────────────────────────────────────────────────────
@@ -471,6 +574,16 @@ halo amplitude $v_h(M)$ from the medium &
 \ssvissue{129} \\
 pitch--$Q$ trend ($\tan\alpha = mQ/4$) &
 \emph{falsified} in the real-gravity disc (D4b) \\
+pure (no-core) constant-$v_h^2$ halo on SPARC &
+\emph{falsified} (\ssvissue{133} rules a/b: not competitive; 21\%
+inner-quintile overshoot --- the extrapolation past the measured core
+window) \\
+$v_h \propto M_{\rm bar}^{0.256\pm0.019}$ over 83 galaxies, 0.14 dex &
+\emph{measured} (\ssvissue{133} rule c PASS vs parameter-free $1/4$;
+suggestive, and the falsification target for \ssvissue{129}) \\
+cored halo: median $\chi^2_r = 0.89$, BIC-beats NFW in 76\% &
+\emph{post hoc, flagged} --- promotion requires a derived $r_c$
+(\ssvissue{133}) \\
 CBH standing wave produces the flat curve &
 \emph{falsified} (\ssvissue{122}; Appendix~\ref{app:record}) \\
 CBH overtones produce arms / Hubble sequence &
@@ -522,10 +635,16 @@ isothermal $1/r^2$ energy density whose potential is logarithmic --- and
 that term supplies the flat tail.  The central black hole drives
 nothing.  What the framework does not yet supply is the halo amplitude:
 its natural derivation route was tested and falsified, and per the
-programme's rules that negative is stated as the result it is.  The
-sector's forward path --- the entrainment law, the Tully--Fisher
-normalisation, the dwarf-spheroidal discriminator --- is pre-registered
-in issue \ssvissue{129}.
+programme's rules that negative is stated as the result it is.  At
+population scale the picture sharpened in both directions: the pure
+constant-$v_h^2$ form fails on SPARC exactly where it extrapolated past
+its measured foundation (the core region), while the halo amplitude
+follows $v_h \propto M_{\rm bar}^{0.256\pm0.019}$ with 0.14 dex scatter
+--- the BTFR-equivalent exponent, measured across 83 galaxies.  The
+sector's forward path --- the entrainment law that must produce that
+exponent, the core-scale derivation, the Tully--Fisher
+normalisation, the dwarf-spheroidal discriminator --- is owned by
+issues \ssvissue{129} and \ssvissue{133}.
 
 %%──────────────────────────────────────────────────────────────────────
 \appendix
@@ -664,6 +783,17 @@ Adam Hilger, Bristol (1988).
 S.~S.\ McGaugh, ``The baryonic Tully--Fisher relation of gas-rich
 galaxies as a test of $\Lambda$CDM and MOND,''
 \textit{Astron.\ J.}\ \textbf{143}, 40 (2012).
+
+\bibitem{lelli2016}
+F.\ Lelli, S.~S.\ McGaugh, and J.~M.\ Schombert,
+``SPARC: mass models for 175 disk galaxies with Spitzer photometry and
+accurate rotation curves,''
+\textit{Astron.\ J.}\ \textbf{152}, 157 (2016).
+
+\bibitem{flynn2026}
+D.~C.\ Flynn and J.\ Cannaliato,
+``A new empirical fit to galaxy rotation curves,''
+arXiv:2601.00522 (2026).
 
 \bibitem{ibata2013}
 R.~A.\ Ibata et al., ``A vast, thin plane of corotating dwarf galaxies orbiting the
