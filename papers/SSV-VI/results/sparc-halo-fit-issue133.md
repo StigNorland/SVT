@@ -24,9 +24,14 @@ pins); figures `fig_sparc_montage.png`, `fig_sparc_vh_mbar.png`,
 SPARC (Lelli, McGaugh & Schombert 2016, AJ 152, 157): 175 galaxies, 3391
 rotation-curve points with the baryonic decomposition (V_gas with helium,
 V_disk and V_bul at M/L = 1 [3.6 µm]). Official MRT files cached under
-`papers/SSV-VI/data/SPARC/` (astroweb.cwru.edu was unreachable; files
-obtained from a public vendored copy and validated against the
-byte-by-byte headers, galaxy/point counts, and spot values).
+`papers/SSV-VI/data/SPARC/`. Provenance: the battery first ran on a
+public vendored copy (astroweb.cwru.edu was unreachable from the
+analysis machine), validated against the byte-by-byte headers,
+galaxy/point counts, and spot values; the author subsequently downloaded
+the official files directly (2026-06-11) and they are
+**content-identical line by line** (3416 + 273 data/header lines) to the
+copy used — the repo now carries the official downloads, and every
+number in this note is unchanged.
 **Primary sample (pre-registered): Q = 1, i ≥ 30°, ≥ 10 points → 83
 galaxies.** Robustness: Q ≤ 2 → 115 galaxies (same verdicts; rule-(c)
 slope 0.268).
