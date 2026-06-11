@@ -33,8 +33,27 @@ the official files directly (2026-06-11) and they are
 copy used — the repo now carries the official downloads, and every
 number in this note is unchanged.
 **Primary sample (pre-registered): Q = 1, i ≥ 30°, ≥ 10 points → 83
-galaxies.** Robustness: Q ≤ 2 → 115 galaxies (same verdicts; rule-(c)
-slope 0.268).
+galaxies** (these are SPARC's own quality recommendations: Q = 3 flags
+major asymmetries/non-circular motions, and low inclination makes the
+velocity scale ill-determined).
+
+**No galaxy is hidden.** All 175 SPARC galaxies are fitted identically
+and tabulated per galaxy in
+[`sparc-per-galaxy-results.md`](sparc-per-galaxy-results.md) (CSV:
+`sparc_per_galaxy_results.csv`), and the full rule battery is evaluated
+on three nested tiers in the receipt:
+
+| tier | n | rule (a) | rule (b) quintiles | rule (c) slope | cored (post hoc) |
+|---|---|---|---|---|---|
+| primary (pre-registered) | 83 | FAIL (ratio 8.80) | FAIL (−0.21 … +0.11) | **0.256 ± 0.019 PASS** | 0.89, BIC-wins 76% |
+| Q ≤ 2, i ≥ 30°, N ≥ 10 | 115 | FAIL (ratio 7.73) | FAIL (−0.20 … +0.13) | **0.268 ± 0.017 PASS** | 1.04, BIC-wins 74% |
+| **all 175, no cuts** | 175 | FAIL (ratio 8.80) | FAIL (−0.21 … +0.13) | **0.292 ± 0.016 PASS** | 0.71, BIC-wins 78% |
+
+Every verdict is identical at every tier. The rule-(c) slope drifts
+mildly upward (0.256 → 0.292) as lower-quality galaxies enter, staying
+inside the pre-registered 0.25 ± 0.05 window even with no cuts at all
+(169 of 175 galaxies constrain v_h away from zero; the 6 unconstrained
+ones are listed in the per-galaxy table with their intervals).
 
 ## Models (identical fixed baryons: Υ_d = 0.5, Υ_b = 0.7)
 
