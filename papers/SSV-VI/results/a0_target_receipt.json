@@ -1,0 +1,212 @@
+{
+  "issue": 146,
+  "hypothesis": "H-A0 S0: single galaxy-independent a0_h = v_h^4/(G M_bar) (measurement side only)",
+  "inputs": "papers/SSV-VI/results/sparc_per_galaxy_results.csv (frozen #133/#136 fits; no new fitting)",
+  "pinned_constants": {
+    "G_SI": 6.674e-11,
+    "M_sun_kg": 1.989e+30,
+    "c_m_s": 299800000.0,
+    "Lambda_m^-2": 1.1e-52,
+    "H0_km_s_Mpc": [
+      67.4,
+      73.0
+    ],
+    "Omega_m": 0.315,
+    "a0_RAR_m_s2": 1.2e-10
+  },
+  "tiers": {
+    "primary_nocore": {
+      "n_tier": 83,
+      "n_used": 83,
+      "n_excluded": 0,
+      "exclusion_reasons_global": {
+        "vh_zero": 5,
+        "rc_bound": 0,
+        "vh_bound": 0
+      },
+      "log10_a0_median": -10.434907951398154,
+      "log10_a0_p16": -11.099684862294895,
+      "log10_a0_p84": -10.02735284663202,
+      "a0_median_m_s2": 3.673601541358471e-11,
+      "slope_log_a0_vs_log_M": 0.024443777013063613,
+      "slope_ci95": [
+        -0.11654176639742242,
+        0.17539374038019886
+      ],
+      "equiv_btfr_slope": 3.9045578583752696
+    },
+    "primary_cored": {
+      "n_tier": 83,
+      "n_used": 81,
+      "n_excluded": 2,
+      "exclusion_reasons_global": {
+        "vh_zero": 2,
+        "rc_bound": 4,
+        "vh_bound": 3
+      },
+      "log10_a0_median": -9.94762772966029,
+      "log10_a0_p16": -10.228541842859483,
+      "log10_a0_p84": -9.61104199467827,
+      "a0_median_m_s2": 1.1281640861824739e-10,
+      "slope_log_a0_vs_log_M": -0.09475942480642809,
+      "slope_ci95": [
+        -0.18523025780154903,
+        -0.003923814613555254
+      ],
+      "equiv_btfr_slope": 4.418714880455575
+    },
+    "q2_nocore": {
+      "n_tier": 163,
+      "n_used": 161,
+      "n_excluded": 2,
+      "exclusion_reasons_global": {
+        "vh_zero": 5,
+        "rc_bound": 0,
+        "vh_bound": 0
+      },
+      "log10_a0_median": -10.486841810966647,
+      "log10_a0_p16": -11.216014133135873,
+      "log10_a0_p84": -10.031590218459883,
+      "a0_median_m_s2": 3.259554065884293e-11,
+      "slope_log_a0_vs_log_M": 0.12532410636338231,
+      "slope_ci95": [
+        -0.0018607833268070783,
+        0.2502890811738791
+      ],
+      "equiv_btfr_slope": 3.554531514415409
+    },
+    "q2_cored": {
+      "n_tier": 163,
+      "n_used": 157,
+      "n_excluded": 6,
+      "exclusion_reasons_global": {
+        "vh_zero": 2,
+        "rc_bound": 4,
+        "vh_bound": 3
+      },
+      "log10_a0_median": -9.942049027091624,
+      "log10_a0_p16": -10.253655614362279,
+      "log10_a0_p84": -9.588410037218878,
+      "a0_median_m_s2": 1.14274932362203e-10,
+      "slope_log_a0_vs_log_M": -0.11626279742938107,
+      "slope_ci95": [
+        -0.23564677939515186,
+        -0.007806624019316551
+      ],
+      "equiv_btfr_slope": 4.526232445985957
+    },
+    "all_nocore": {
+      "n_tier": 175,
+      "n_used": 170,
+      "n_excluded": 5,
+      "exclusion_reasons_global": {
+        "vh_zero": 5,
+        "rc_bound": 0,
+        "vh_bound": 0
+      },
+      "log10_a0_median": -10.530102054210023,
+      "log10_a0_p16": -11.37921610658288,
+      "log10_a0_p84": -10.033895224022944,
+      "a0_median_m_s2": 2.9505158079050394e-11,
+      "slope_log_a0_vs_log_M": 0.17167685057171958,
+      "slope_ci95": [
+        0.04977992394270403,
+        0.29417775676686003
+      ],
+      "equiv_btfr_slope": 3.4139105829804524
+    },
+    "all_cored": {
+      "n_tier": 175,
+      "n_used": 166,
+      "n_excluded": 9,
+      "exclusion_reasons_global": {
+        "vh_zero": 2,
+        "rc_bound": 4,
+        "vh_bound": 3
+      },
+      "log10_a0_median": -9.948942091623081,
+      "log10_a0_p16": -10.29136550393542,
+      "log10_a0_p84": -9.588631228338848,
+      "a0_median_m_s2": 1.1247549376284754e-10,
+      "slope_log_a0_vs_log_M": -0.03816710500815102,
+      "slope_ci95": [
+        -0.16937244190417655,
+        0.09882070406237123
+      ],
+      "equiv_btfr_slope": 4.158726553050463
+    }
+  },
+  "rules": {
+    "A1_constancy": {
+      "nocore": {
+        "slope": 0.024443777013063613,
+        "ci95": [
+          -0.11654176639742242,
+          0.17539374038019886
+        ],
+        "pass_abs_slope_le_0p10": true
+      },
+      "cored": {
+        "slope": -0.09475942480642809,
+        "ci95": [
+          -0.18523025780154903,
+          -0.003923814613555254
+        ],
+        "pass_abs_slope_le_0p10": true
+      }
+    },
+    "A2_target": {
+      "target_log10_a0_window": [
+        -11.099684862294895,
+        -9.61104199467827
+      ],
+      "target_a0_window_m_s2": [
+        7.949048333927623e-12,
+        2.4488264378906133e-10
+      ],
+      "headline_log10_a0": -9.94762772966029,
+      "status": "from post-hoc-flagged cored amplitude; flag propagates until the #133 r_c promotion condition is met"
+    },
+    "A3_anchor_table_no_anchor_declared_hit": {
+      "cH0_over_2pi_H0_67.4": {
+        "value_m_s2": 1.0422165280763669e-10,
+        "ratio_cored_median_over_anchor": 1.0824661246398977,
+        "ratio_nocore_median_over_anchor": 0.35247968559267495
+      },
+      "cH0_over_2pi_H0_73.0": {
+        "value_m_s2": 1.1288101861954716e-10,
+        "ratio_cored_median_over_anchor": 0.9994276274072479,
+        "ratio_nocore_median_over_anchor": 0.32544014806775745
+      },
+      "c2_sqrt_Lambda": {
+        "value_m_s2": 9.426698122588714e-10,
+        "ratio_cored_median_over_anchor": 0.11967754472577329,
+        "ratio_nocore_median_over_anchor": 0.03897018334082013
+      },
+      "RAR_literature": {
+        "value_m_s2": 1.2e-10,
+        "ratio_cored_median_over_anchor": 0.9401367384853949,
+        "ratio_nocore_median_over_anchor": 0.3061334617798726
+      }
+    },
+    "A4_two_amplitude_spread_dex": 0.4872802217378638,
+    "A4_wide_window_applied": true
+  },
+  "z_falsifier_table": {
+    "z_0.5": {
+      "H_over_H0": 1.3221667822177352,
+      "cH_anchor_dlog10_M": 0.12128624185780124,
+      "sqrtLambda_anchor_dlog10_M": 0.0
+    },
+    "z_1.0": {
+      "H_over_H0": 1.7902513789968157,
+      "cH_anchor_dlog10_M": 0.25291401692741816,
+      "sqrtLambda_anchor_dlog10_M": 0.0
+    },
+    "z_2.0": {
+      "H_over_H0": 3.031501278244824,
+      "cH_anchor_dlog10_M": 0.4816577556930557,
+      "sqrtLambda_anchor_dlog10_M": 0.0
+    }
+  }
+}
