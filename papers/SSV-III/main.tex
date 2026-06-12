@@ -5,6 +5,15 @@
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
 \usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+
+\newenvironment{resultbox}[1][Result]{%
+  \begin{quote}\noindent\textbf{#1.}\ }{\end{quote}}
+\newenvironment{gapbox}[1][Open problem]{%
+  \begin{quote}\noindent\textbf{#1.}\ }{\end{quote}}
+
+\providecommand{\ssvissue}[1]{\hyperref[issue:#1]{\##1}}% in-text issue ref -> Code & Issue References appendix
+\providecommand{\ssvfile}[1]{\hyperref[file:#1]{\texttt{\detokenize{#1}}}}% in-text code/report ref -> Code & Issue References appendix
 
 \title{Saturated Superfluid Vacuum III\\
 Irreversible Time and Wake Entropy}
@@ -32,6 +41,21 @@ is distinguished from physical reversal in the medium: the substitution $t \to -
 mathematical transformation on trajectories, but does not supply a physical operation that
 globally unwrites the distributed wake of an event. This dissolves the usual paradoxes of time
 travel by treating them as category errors arising from the reification of the past as a place.
+
+The dynamical basis of these claims is now computed rather than asserted
+(\S\ref{sec:forkcomputed}; issue~\ssvissue{137}).  The SSV master dynamics ---
+LogSE, chiral-shear term, saturation potential --- is conservative and exactly
+T-symmetric, so this paper's account of irreversibility is a
+\emph{coarse-graining} account in Boltzmann's lineage, with the forgotten
+variables named concretely; it is not a new dynamical resolution of
+Loschmidt's paradox, and we claim no such priority.  A pre-registered
+reversal-echo computation through a topological-change event confirms the
+conservativity at the field level and sharpens the claim domain: at the
+single-event scale, exact reversal succeeds and is even robust to small
+boundary-data error, so the practical arrow rests on scale, event
+multiplicity, and the absence of any natural operation implementing the
+reversal --- together with the low-entropy initial condition, whose
+derivation this paper does not supply and which is owned by Paper~VIII.
 \end{abstract}
 
 \newpage
@@ -79,9 +103,12 @@ macroscopic order parameter
   \Psi(\mathbf{x},t)=\sqrt{\rho(\mathbf{x},t)}\,e^{i\theta(\mathbf{x},t)},
 \end{equation}
 with density $\rho$, phase $\theta$, and superfluid velocity proportional to $\nabla\theta$ away
-from vortex cores. The exact field equation is not required for the present argument. What is
-required is that the state of the medium has real local structure: phase, density, vortex
-geometry, phonon content, correlations, and boundary data.
+from vortex cores. The detailed form of the field equation is not required for most of the
+present argument; what is required is that the state of the medium has real local structure:
+phase, density, vortex geometry, phonon content, correlations, and boundary data.  One
+structural property of the field equation, however, is load-bearing and is established by
+computation in \S\ref{sec:forkcomputed}: the dynamics is \emph{conservative and
+T-symmetric}, which fixes what kind of irreversibility claim this paper is allowed to make.
 
 In this paper, an ``event'' means a localized update of that structure whose forward
 realization deposits wake content the medium cannot locally re-gather into the prior state.
@@ -226,7 +253,17 @@ globally unwrites that structure back into the exact pre-event state.
 \end{quote}
 
 This is a physical claim about the availability of inverse processes, not merely a bookkeeping
-choice.
+choice.  Its precise content is fixed by the computation of \S\ref{sec:forkcomputed}: the
+\emph{dynamics} can unwrite an event --- conservative T-symmetric evolution runs the inverse
+history when the momenta are reversed, and the \ssvissue{137} echo computation performs
+exactly this through a defect-annihilation event, recovering the pre-event state --- so the
+unavailability is not dynamical impossibility.  What the medium lacks is any \emph{natural
+process that implements the reversal} (conjugating the state of an extended region is an
+operation, not an event), and the control needed to set up the reversed boundary data grows
+with the spatial extent and number of events in the wake.  The monotonicity of wake
+entropy is therefore a statement about preparation, scale, and multiplicity --- Boltzmann's
+statement, located in a concrete medium --- and it inherits, rather than replaces, the need
+for a low-entropy initial condition (\S\ref{sec:initialcondition}).
 
 \subsection{Relation to Boltzmann Entropy}\label{sec:boltzmann}
 
@@ -976,6 +1013,129 @@ directly, turning the reconnection quantum from an estimate into a measured numb
 
 A central distinction is needed between formal and physical reversal.
 
+\subsection{The Fork, Computed: the SSV Dynamics Is Conservative
+(\ssvissue{137})}\label{sec:forkcomputed}
+
+Any account of irreversibility built on a definite dynamics faces a fork, and
+which branch is available is decided by the dynamics, not by preference.  If
+the dynamics is conservative and T-symmetric, then Liouville's theorem and
+unitarity forbid \emph{fundamental} irreversibility, and the account is a
+\emph{coarse-graining} account: real, local, and physical, but in
+Boltzmann's lineage~\cite{Boltzmann1877,Reichenbach1956,Albert2000,
+Rovelli2018}, with the entropy increase conditional on a low-entropy
+boundary condition.  If instead the dynamics carries an explicit
+non-conservative element, a genuinely dynamical arrow is claimable --- at the
+price of naming that element and its phenomenology.  Earlier drafts of this
+paper left the fork implicit.  It is now closed by a pre-registered audit
+and computation (issue~\ssvissue{137}; script \ssvfile{reversal_echo};
+result note \ssvfile{reversal-echo-issue137}).
+
+\paragraph{The audit.}  The SSV master dynamics --- LogSE with the
+saturation potential $V(\rho) = -b\rho[\ln(\rho/\bar\rho)-1]+V_0$ (Paper~I)
+plus the chiral-shear term $\propto\lambda|\nabla\times\mathbf{j}|^2$ --- is
+generated by a real energy functional, so the flow is Hamiltonian and
+conserves energy and norm; and under $t\to-t$, $\Psi\to\Psi^*$ every term
+maps to itself (the current $\mathbf{j}$ is T-odd but enters squared).  In
+particular the saturation potential, \emph{as written, is a conservative
+potential}: it carries no dissipation.  The candidate non-conservative
+element for branch B --- vortex reconnection as genuine dissipation,
+radiating irretrievably --- was put to the pre-registered test: if exact
+time reversal of the simulated field recovers the pre-event configuration,
+the radiation was conservative all along and branch B dies.
+
+\paragraph{The echo computation.}  A topological-change event (two
+colliding vortex--antivortex dipoles annihilating into a sound burst; the
+2D realization of the wake-writing event class of \S\ref{sec:reconnection})
+was evolved through annihilation and well past it, the field conjugated,
+and the same dynamics run forward again.  The echo recovers the pre-event
+state: the full defect set is restored at every grid resolution tested, the
+field fidelity reaches $F = 1 - 8.7\times10^{-12}$ at the finest resolution
+($1-F$ falling $4.7\times10^{-5} \to 3.3\times10^{-9} \to
+8.7\times10^{-12}$ down the ladder), and the
+echo infidelity $1-F$ \emph{falls} under grid/timestep refinement --- the
+signature of numerical (dealiasing-projection and round-off) losses, not of
+dynamics; a genuinely dissipative term would leave a resolution-independent
+deficit.  Energy is conserved through the event to $3\times10^{-6}$
+relative at the finest resolution, the residual falling by factors of
+$30$--$70$ per refinement step (the dealiasing projection's spectral-tail
+shaving; the pre-registered $10^{-8}$ bar was met by no rung, and the
+conservativity verdict rests on this trend together with the audit ---
+recorded in the result note).  The same verdict holds in three dimensions
+for a genuine vortex-line reconnection (a Hopf link of two rings, which
+\emph{must} reconnect: the $2\to1$ core-tube merger observed, then
+restored by the echo, $F = 0.999997$ at the finer of two resolutions).
+\textbf{Branch B is dead as the equations are written.}  Reviving it would require
+\emph{adding} a named non-conservative term to the functional --- which
+would make SSV a substrate cousin of objective-collapse models --- and that
+addition would then be the engine of irreversibility, with the wake
+bookkeeping of this paper as its description.
+
+\paragraph{A measured correction to this paper's earlier wording.}  The
+echo computation also returned one result \emph{against} the expectation
+this section's prose previously encoded.  The reversed evolution is not
+fragile at the single-event scale: perturbing the conjugated field by a
+relative amplitude $\varepsilon$ leaves the recovery essentially intact up
+to $\varepsilon \sim 3\times10^{-2}$ --- three-percent broadband corruption
+of every point of the reversed field --- (fidelity following the
+linear-response law, with no chaotic amplification over the event
+timescale: the perturbed-echo fidelities equal the forward-propagation
+overlaps at the same $\varepsilon$), and recovery is destroyed only
+between $\varepsilon = 3\times10^{-2}$ and $10^{-1}$.  ``Exquisitely tuned incoming
+boundary data'' is therefore \emph{not} required to reverse one
+small-scale event --- modest tuning suffices.  The boundary-data argument
+of \S\ref{sec:boundarydata} consequently rests on \emph{scale and
+multiplicity}: macroscopic wakes spread over regions vastly larger than
+any agent's control volume, across numbers of events for which the
+per-event tolerances compound, and the medium supplies no natural
+operation that conjugates an extended region's state.  The arrow is
+practical and statistical, exactly as Boltzmann had it --- now with the
+microscopic ledger written in a definite medium.
+
+\paragraph{What the gravity sector now asks of this paper.}  The same
+audit prices a demand that arrived from outside the time sector.  The
+\ssvissue{129} token-tax computation (H-BILATERAL S0) showed that the
+bilateral availability mechanism --- the surviving candidate for gravity's
+spatial sector after the \ssvissue{129}/\ssvissue{138} nulls --- delivers
+its $\gamma = 1$ doubling \emph{only} if interaction partners'
+microscopic busy-schedules are statistically independent despite their
+common mean loading (a smooth common-cause loading gives $\gamma = 0$,
+the data-killed half-deflection; Cassini bounds the schedule correlation
+at $c \lesssim 5\times10^{-3}$), and it located the only candidate source
+of such schedules in \emph{this} paper's update accounting.  The present
+computation makes the price explicit: the dynamics audited above is
+conservative, T-symmetric, and deterministic --- it contains no
+stochastic update schedules.  Whatever supplies them is \emph{added}
+structure, in exactly the same category as branch B's non-conservative
+term, and must be declared as such.  Paper III's open obligations are
+therefore three, not two: the low-entropy boundary condition (with
+Paper~VIII, below), the cell constants of \S\ref{sec:subleading}, and
+now a stochastic update-accounting layer --- if the gravity sector's
+bilateral mechanism is to be opened at all.
+
+\paragraph{Entropy, not complexity.}  The same discipline settles the
+sub-fork of \S\ref{sec:wakecomplexity}: the wake functional $W[\Psi]$, as
+constructed in \S\ref{sec:reductions}, is monotone by design --- it is a
+coarse-grained \emph{entropy} with the forgotten variables named (phonon
+phases, Kelvin content, vortex distortions, correlations), not a
+complexity or depth measure.  Genuine complexity measures --- Bennett's
+logical depth~\cite{Bennett1988}, Lloyd--Pagels thermodynamic
+depth~\cite{LloydPagels1988} --- are \emph{non-monotone}: they rise and
+then fall as a closed system relaxes~\cite{AaronsonCarrollOuellette2014},
+and so could not ground a one-way arrow.  Calling $W$ ``wake-complexity''
+is a name for where the information went, not a claim that $W$ measures
+structure in the Bennett sense.
+
+\begin{gapbox}[What this paper still does not supply (owned with
+Paper~VIII)]
+A coarse-graining account requires a low-entropy initial condition; this
+is the half of the problem the field openly lacks (Penrose's
+Weyl-curvature complaint~\cite{Penrose1979}), and nothing in the wake
+mechanism supplies it.  Paper~VIII's void$\to$saturation transition is the
+SSV candidate for \emph{deriving} it; whether it does so without assuming
+what it derives is the live question (issue~\ssvissue{137}, item 4), and
+it is not settled here.
+\end{gapbox}
+
 \subsection{Formal Reversal}
 
 In many equations, one may perform the transformation
@@ -999,13 +1159,18 @@ that because an equation admits a formally reversed trajectory, the physical wor
 to run backward in the same sense. Formal reversal is a property of a mathematical description;
 physical reversal is a claim about what operations the medium can actually perform.
 
-\subsection{Boundary Data and the Inverse Problem}
+\subsection{Boundary Data and the Inverse Problem}\label{sec:boundarydata}
 
-The formal reverse of a dissipated event is not usually generated by a small local adjustment.
-It requires exquisitely tuned incoming boundary data across the region into which the wake has
-spread. In ordinary language, one would have to arrange the phonons, phases, correlations, and
-vortex perturbations so that they converge on the event site in precisely the configuration
-that reconstructs the former state.
+The formal reverse of a dissipated event is not generated by a small local adjustment: one
+would have to arrange the phonons, phases, correlations, and vortex perturbations across the
+entire region into which the wake has spread, so that they converge on the event site in the
+configuration that reconstructs the former state.  The \ssvissue{137} computation calibrates
+how demanding this is (\S\ref{sec:forkcomputed}): for a \emph{single} small-scale event the
+required tuning is modest --- the reversed wake refocuses even under small boundary-data
+error --- so the force of the argument is in the extent and number of the arrangements, not
+in per-event sensitivity.  A macroscopic wake spans regions no agent controls, written by
+numbers of events whose tolerances compound, and the medium offers no natural process whose
+effect is the conjugation of an extended region's state.
 
 SSV therefore locates irreversibility in the gap between a formal inverse trajectory and an
 available physical operation. The reverse trajectory may exist in the mathematical solution
@@ -1102,8 +1267,20 @@ structure. What remains open is of a different and more limited kind:
   rate,
   \item connect this time framework to gravity and black holes in later papers without
   overloading the present one, and in particular supply the cosmological initial condition
-  on $\Psi$ left open at \S\ref{sec:initialcondition}.
+  on $\Psi$ left open at \S\ref{sec:initialcondition} --- after \S\ref{sec:forkcomputed}
+  this is the load-bearing open item: the conservative dynamics makes the wake account
+  conditional on a low-entropy start, and deriving that start (Paper~VIII's
+  void$\to$saturation transition, without smuggling the conclusion into the assumptions)
+  is where a contribution beyond Boltzmann would live (issue~\ssvissue{137}, item 4).
 \end{enumerate}
+
+The status of the paper's central claims after the \ssvissue{137} computation: the
+ontology (time as local change; the past as present wake) is unchanged and remains a
+philosophical stance rather than a result; the dynamical substrate is \emph{computed} ---
+conservative, T-symmetric, with branch B (fundamental irreversibility from reconnection
+dissipation) dead as the equations are written; the entropy reframing survives as an
+honest coarse-graining with named channels; and the paper's earlier suggestion of
+per-event reversal fragility is corrected by measurement (\S\ref{sec:forkcomputed}).
 
 The gain from the present framing is conceptual clarity. If time is local change, and the past
 survives only as present wake, then irreversibility is not an added rule imposed on a reversible
@@ -1115,9 +1292,12 @@ The payoff of the present framing is that irreversibility stops being an extra r
 top of a reversible block universe. If time is local change in $\Psi$ and the past survives
 only as wake structure in the present state, then the asymmetry of experience and the
 asymmetry of equations are no longer in tension: they describe different objects. Equations
-describe trajectory classes that admit formal reversal; the medium carries out forward updates
-whose distributed wake is not locally invertible. Entropy, on this account, is what that
-non-invertibility looks like when it is read off the present state of $\Psi$.
+describe trajectory classes that admit formal reversal --- and the \ssvissue{137} computation
+confirms the SSV equations are exactly of that kind; the medium carries out forward updates
+whose distributed wake no natural process gathers back in.  Entropy, on this account, is what
+that practical non-invertibility looks like when it is read off the present state of $\Psi$
+at a fixed coarse-graining --- Boltzmann's account, written into a definite medium, owing its
+arrow to scale, multiplicity, and the initial condition rather than to the dynamics.
 
 What later papers inherit from this one is therefore a constraint, not a theorem. Any
 SSV-derived account of gravitation, cosmology, or black-hole structure must be compatible with
@@ -1154,6 +1334,29 @@ Time}, Oxford University Press, 1996.
 
 \bibitem{Albert2000}
 D.~Z.~Albert, \textit{Time and Chance}, Harvard University Press, 2000.
+
+\bibitem{Boltzmann1877}
+L.~Boltzmann, ``\"Uber die Beziehung zwischen dem zweiten Hauptsatze der
+mechanischen W\"armetheorie und der Wahrscheinlichkeitsrechnung,''
+\textit{Wien.~Ber.} \textbf{76}, 373--435 (1877).
+
+\bibitem{Reichenbach1956}
+H.~Reichenbach, \textit{The Direction of Time}, University of California
+Press, 1956.
+
+\bibitem{Bennett1988}
+C.~H.~Bennett, ``Logical depth and physical complexity,'' in \textit{The
+Universal Turing Machine: A Half-Century Survey}, R.~Herken (ed.), Oxford
+University Press, 227--257 (1988).
+
+\bibitem{LloydPagels1988}
+S.~Lloyd and H.~Pagels, ``Complexity as thermodynamic depth,''
+\textit{Ann.~Phys.} \textbf{188}, 186--213 (1988).
+
+\bibitem{AaronsonCarrollOuellette2014}
+S.~Aaronson, S.~M.~Carroll, and L.~Ouellette, ``Quantifying the rise and
+fall of complexity in closed systems: the coffee automaton,''
+arXiv:1405.6903 (2014).
 
 \bibitem{Penrose1979}
 R.~Penrose, ``Singularities and time-asymmetry,'' in \textit{General Relativity: An Einstein
@@ -1238,5 +1441,10 @@ C.~F.~Barenghi, L.~Skrbek, and K.~R.~Sreenivasan, ``Introduction to quantum turb
 \textit{Proc.~Natl.~Acad.~Sci.~USA} \textbf{111}, 4647--4652 (2014).
 
 \end{thebibliography}
+
+\appendix
+% Auto-generated provenance (issue URLs + pinned script permalinks).
+% Regenerate: python instruments/tools/gen_provenance.py SSV-III
+\input{provenance.tex}
 
 \end{document}
