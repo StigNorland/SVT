@@ -51,9 +51,11 @@ $b = m_0 c^2/(2\rho_0)$ and the healing length $\xi = \hbar/(m_0 c)$.  Second,
 minimisation of the three-term vortex-ring energy functional over torus radius $R$
 and core radius $a$ yields the unique equilibrium $R_e^* = \xi/\alpha$, from which
 the vacuum density $\rho_0$ is fixed via the Lamb formula with no free parameters
-beyond the two empirical inputs $m_e$ and $\alpha$.  Third, the ratio of the
-chiral-shear speed $c_\perp$ to the sound speed $c_s$ identifies $\alpha \approx
-1/137$ as a geometric property of the medium.
+beyond the two empirical inputs $m_e$ and $\alpha$.  Third, the core-scale
+chiral-to-longitudinal stiffness ratio $c_\perp/c_s$ identifies $\alpha \approx
+1/137$ as a geometric property of the medium (a stiffness ratio, not a second
+signal speed: the \ssvissue{138} dispersion computation shows the chiral-shear
+term supports no propagating linear mode around the uniform vacuum).
 
 These results establish the base energy scale $\mu_0 \equiv m_e c^2/\alpha \approx
 70\,\text{MeV}$ as the energy of a minimal vortex filament segment of the electron
@@ -310,15 +312,26 @@ chiral-shear term
 \end{equation}
 where $\mathbf{j}=(\hbar/2m_0 i)(\Psi^*\nabla\Psi-\Psi\nabla\Psi^*)$
 is the probability current and $\lambda>0$ is a dimensionless coupling.
-This produces a transverse mode with phase speed $c_\perp(k) \propto k$ at
-wavenumber $k$.  Evaluating at the vortex core scale $k\sim1/\xi$ gives
+This term endows curl-bearing flow with a stiffness whose dimensional
+combination defines a formal speed scale $c_\perp(k)\propto k$; evaluated
+at the vortex core scale $k\sim1/\xi$,
 \begin{equation}
   \frac{c_\perp}{c} = \sqrt{\frac{\lambda m_0}{\rho_0}} \equiv \alpha.
   \label{eq:alpha-origin}
 \end{equation}
 The fine-structure constant $\alpha\approx1/137$ is therefore the ratio of
-the transverse shear speed to the longitudinal sound speed in the vacuum at
-the core scale.  Equation~\eqref{eq:alpha-origin} fixes the chiral coupling
+the transverse (chiral-shear) stiffness to the longitudinal stiffness of
+the vacuum at the core scale.  It is a \emph{stiffness ratio, not a second
+signal speed}: the pre-registered \ssvissue{138} linearization shows the
+linear-order current perturbation around the uniform vacuum is a pure
+gradient, so the $|\nabla\times\mathbf{j}|^2$ energy is quartic in the
+perturbation and the chiral term contributes \emph{no propagating linear
+mode} --- the internal-direction (CP$^1$) channel disperses as
+$\omega=\hbar k^2/2m_0$ (spin-wave-like, non-radiating, charge-decoupled
+at linear order), and the only signal speed of the medium is $c$.  The
+stiffness $\lambda$ acts where flow actually curls: in and around defect
+cores, i.e.\ in the statics of charged defects (Paper~II's Coulomb
+sector).  Equation~\eqref{eq:alpha-origin} fixes the chiral coupling
 $\lambda=\alpha^2\rho_0/m_0$; with $\alpha=1/137$ and
 $\lambda\approx2000$ (from the numerical minimisation in
 Appendix~\ref{app:construction}), this yields
@@ -330,9 +343,13 @@ characterisation of the vacuum state.
   \item The LogSE with potential~\eqref{eq:pot} has longitudinal sound speed
         $c_s=\sqrt{2b\rho_0/m_0}$; setting $c_s=c$ gives $b=m_0c^2/(2\rho_0)$
         and healing length $\xi=\hbar/(m_0c)$.
-  \item With the chiral-shear term~\eqref{eq:chiral}, the transverse phase
-        speed at the core scale is $c_\perp=c\sqrt{\lambda m_0/\rho_0}$;
-        identifying $c_\perp/c=\alpha$ fixes $\lambda=\alpha^2\rho_0/m_0$.
+  \item With the chiral-shear term~\eqref{eq:chiral}, the core-scale
+        transverse-to-longitudinal stiffness ratio is
+        $c_\perp/c=\sqrt{\lambda m_0/\rho_0}$; identifying
+        $c_\perp/c=\alpha$ fixes $\lambda=\alpha^2\rho_0/m_0$.  (Per
+        \ssvissue{138} this is a stiffness ratio of the defect sector,
+        not a propagation speed: the chiral term is silent in the linear
+        spectrum of the uniform vacuum.)
 \end{enumerate}
 These are the only two results needed to motivate $\mu_0=m_ec^2/\alpha$ as
 the natural flux-tube energy scale (see \S\ref{sec:ladder}).
@@ -1215,9 +1232,11 @@ In this framework all four fundamental forces are distinct modes of pressure-gra
 interaction within the single saturated superfluid medium.  This section states the
 identification only; detailed derivations appear in Paper~II.
 
-Electromagnetism emerges from chiral flow gradients around toroidal vortices, with
-transverse shear modes propagating at $c_\perp = \alpha c$ and reproducing the
-Coulomb interaction in the far field.  The strong force is vacuum surface tension
+Electromagnetism emerges from chiral flow gradients around toroidal vortices,
+with the chiral-shear stiffness ($c_\perp/c=\alpha$ at the core scale; a
+static stiffness, not a propagating mode --- \ssvissue{138}) reproducing the
+Coulomb interaction in the far field; radiation rides the phase channel at
+$c$.  The strong force is vacuum surface tension
 along flux tubes connecting breather skeletons, with string tension
 $\sigma \approx \alpha m_\pi^2$ recovering the Cornell potential.  Gravity is the
 acoustic Bjerknes force --- mutual attraction between vibrating breathers via
@@ -1244,7 +1263,8 @@ constraining $b=m_0c^2/(2\rho_0)$ and healing length $\xi=\hbar/(m_0c)$;
 $m_ec^2=\frac12\rho_0\kappa_0^2 R_e\Lambda$ from the Lamb vortex-ring energy
 (with $m_e$ and $\alpha$ as empirical inputs); (iv)~the leading-order gyromagnetic
 ratio $g\approx2$ from the current-loop and topological-spin argument.
-The origin of $\alpha=c_\perp/c$ from the chiral-shear coupling is established
+The origin of $\alpha=c_\perp/c$ (a core-scale stiffness ratio;
+\ssvissue{138}) from the chiral-shear coupling is established
 at the operator level.  The pion mass $m_\pi=2\mu_0$ follows from two-winding-number
 topology with $\mu_0$ determined by (iii) and $\alpha$.
 
@@ -1387,7 +1407,9 @@ $R_e^*=\xi/\alpha$ and corresponding electron mass formula
 $m_ec^2=\frac12\rho_0\kappa_0^2 R_e\Lambda$ from the Lamb vortex-ring energy
 (with $m_e$ and $\alpha$ as empirical inputs); (iv)~the gyromagnetic ratio $g\approx2$
 from the current-loop and topological-spin argument; (v)~the fine-structure
-constant as $\alpha=c_\perp/c$ from the chiral-shear coupling constant.
+constant as the core-scale stiffness ratio $\alpha=c_\perp/c$ from the
+chiral-shear coupling constant (\ssvissue{138}: a stiffness ratio, not a
+second signal speed).
 The pion mass $m_\pi=2m_e/\alpha$ follows from the two-winding topology
 with $\mu_0=m_e/\alpha$ identified as the natural vortex energy scale.
 
@@ -1456,7 +1478,12 @@ LogSE Madelung structure; sound speed $c_s=\sqrt{2b\rho_0/m_0}$;
 $\xi=\hbar/(m_0c)$ & derived & Already analytic from the Lagrangian. \\
 $\alpha=c_\perp/c$ from the chiral-shear coefficient
 $\lambda=\alpha^2\rho_0/m_0$ & derived & Already analytic from the
-Lagrangian. \\
+Lagrangian.  \textbf{Reinterpreted 2026-06 (\ssvissue{138})}: a core-scale
+\emph{stiffness ratio} of the defect sector.  The chiral term is silent in
+the linear spectrum of the uniform vacuum (current perturbation is a pure
+gradient; $E_\perp$ quartic), so no mode propagates at $\alpha c$; the
+internal-direction channel disperses as $\omega=\hbar k^2/2m_0$.  One
+signal speed, $c$. \\
 Equilibrium electron radius $R_e^*=\xi/\alpha$ and
 $m_e c^2 = \tfrac12\rho_0\kappa_0^2 R_e \Lambda$ &
 derived & Analytic minimisation of the Lamb formula + chiral-shear
