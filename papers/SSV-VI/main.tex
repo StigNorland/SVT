@@ -257,8 +257,10 @@ fixed --- by the balance condition of \S\ref{sec:balance}.  Deriving the
 entrainment law $\Gamma(M)$ (which must deliver $\Gamma \propto M^{1/4}$
 at $\sim$17 orders below the baryon circulation, or fail) is owned by the
 successor issue \ssvissue{129}.  Dispersion-supported dwarf spheroidals,
-which barely rotate yet are dark-matter dominated, remain the standing
-discriminator for any circulation-sourced halo.
+which barely rotate yet are dark-matter dominated, were the standing
+discriminator for any circulation-sourced halo; that discriminator has
+now been run (\S\ref{sec:dsph}), and it falsifies entrainment
+proportional to the baryons' rotation.
 \end{gapbox}
 
 %%──────────────────────────────────────────────────────────────────────
@@ -550,8 +552,86 @@ equal parameter count} ($r_c$ quartiles 2.5/4.3/7.0~kpc) --- the entire
 pre-registered failure is the core region.  This is recorded as an
 exploration only: promoting the cored form requires deriving the core
 scale from the medium and pre-registering an $r_c$(galaxy) relation
-first.  That derivation, and the dwarf-spheroidal discriminator (dSphs
-are not in SPARC's rotation-supported sample), are the open follow-ups.
+first.  That derivation remains open; the dwarf-spheroidal
+discriminator (dSphs are not in SPARC's rotation-supported sample) has
+now been run, next.
+
+\subsection{The dwarf-spheroidal ledger: the halo reads mass, not
+rotation}
+\label{sec:dsph}
+
+The eight classical Milky Way dwarf spheroidals barely rotate
+($v_{\rm rot} \lesssim 3$ km/s; dispersion-supported) yet are the most
+dark-matter-dominated systems known --- the pre-registered battery of
+issue \ssvissue{147} (script \ssvfile{dsph_ledger}; McConnachie-2012
+values, Wolf estimator $v_c(r_{1/2}) = \sqrt{3}\,\sigma_{\rm los}$)
+confronts them with two competing sourcings of the halo amplitude:
+the measured mass law of Eq.~\eqref{eq:vh_mbar} (model A), and
+rotation-proportional entrainment $v_h \propto \Gamma_{\rm bar}
+= 2\pi R\,v_{\rm rot}$ normalized at the H9 Milky-Way reference
+(model B) --- the reading under which ``circulation halo'' is fed by
+what the baryons are doing.
+
+\begin{falsbox}[\ssvissue{147} B1: rotation-proportional entrainment is
+falsified at the dwarf spheroidals]
+Extrapolated \emph{three decades in mass} below the SPARC sample, the
+dwarfs sit on the mass law: median offset $+0.20$ dex (per-dwarf range
+$+0.01$ to $+0.43$, all inside the pre-registered $\pm 0.5$ window).
+The rotation law's \emph{upper limits} miss by a median of
+\textbf{2.7 dex} --- a factor $\sim 500$ --- and the verdict is stable
+across the entire pre-registered robustness sweep ($M_*/L$ varied
+$\times/\div 2$, $v_{\rm rot}$ limits 1--10 km/s, $\pm 30\%$ anisotropy
+systematic; 27 combinations).  The halo amplitude reads baryonic
+\emph{mass}, not baryonic \emph{rotation}.  Two honesty items recorded
+with it: (i) the naive ``no rotation $\Rightarrow$ no circulation
+budget'' killer does \emph{not} bind --- even at $v_{\rm rot} = 1$ km/s
+the dwarfs carry $\gtrsim 10^{15}$ times the H9-inverted circulation
+requirement, so it is the \emph{correlation}, not the budget, that
+discriminates; (ii) the dwarfs sit systematically \emph{above} the
+relation by $+0.20$ dex (they are MW satellites; the tidal confound is
+recorded, and at face value the offset means slightly \emph{more} halo
+than the mass law predicts, in the same direction the relation's
+0.14-dex scatter allows).
+\end{falsbox}
+
+\begin{falsbox}[\ssvissue{147} B3: a universal kpc-scale core is
+falsified at dwarf scales]
+Under the post-hoc cored form with a \emph{universal}
+$r_c = 2.5$~kpc (the SPARC lower quartile --- the choice most
+favorable to dwarf halos), the predicted dispersions collapse to
+$\sigma_{\rm pred} \approx 1$--$6$ km/s against observed
+$6.6$--$11.7$ km/s: \textbf{7 of 8 dwarfs fall below half the observed
+dispersion} (threshold: $\geq 6$ of 8), sweep-stable.  The \ssvissue{133}
+promotion condition sharpens accordingly: any $r_c$(galaxy) relation
+must deliver $r_c \lesssim r_{1/2} \sim 0.2$--$0.9$~kpc at dwarf scale
+--- a single medium-set core length is dead; only a baryon-set core
+scale survives.
+\end{falsbox}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/fig_dsph_ledger.png}
+\caption{The dwarf-spheroidal ledger (\ssvissue{147}).  The eight
+classical dSphs (diamonds; bars span the $M_*/L$ sweep) against the
+SPARC primary tier (grey) and the measured mass law
+Eq.~\eqref{eq:vh_mbar} (line, with 0.14 dex band).  Triangles: the
+rotation-proportional entrainment \emph{upper limits} at
+$v_{\rm rot} \leq 3$ km/s --- short by $\sim$2.7 dex.  The halo
+amplitude tracks mass, not rotation.}
+\label{fig:dsph_ledger}
+\end{figure}
+
+The consequence for the programme is structural.  What survives of
+``circulation sourcing'' after \ssvissue{147} is only the variant in
+which the galactic medium circulates \emph{without} tracking the
+baryons' rotation --- entrainment as a collective property coupled to
+mass-energy.  Combined with the \ssvissue{129} solar-system scope limit
+(the halo must not attach to individual stars), the mechanism space is
+pinched from both sides; the complementary medium-side question ---
+whether the bare medium's static far field can read mass-energy at all
+--- is the pre-registered extensivity battery of issue \ssvissue{149}.
+The full record lives in \ssvfile{dsph-ledger-issue147} and on issues
+\ssvissue{129} and \ssvissue{147}.
 
 %%──────────────────────────────────────────────────────────────────────
 \section{Claim Status, Predictions, and Open Problems}
@@ -595,6 +675,19 @@ suggestive, and the falsification target for \ssvissue{129}) \\
 cored halo: median $\chi^2_r = 0.89$, BIC-beats NFW in 76\% &
 \emph{post hoc, flagged} --- promotion requires a derived $r_c$
 (\ssvissue{133}) \\
+halo sourced by entrained baryonic rotation
+($v_h \propto R\,v_{\rm rot}$) &
+\emph{falsified} (\ssvissue{147} B1: classical dSphs sit on the mass
+law at $+0.20$ dex while the rotation law's upper limits miss by
+2.7 dex; sweep-stable) \\
+$v_h(M_{\rm bar})$ extends to dispersion-supported dwarfs (3 decades
+below SPARC) &
+\emph{measured} (\ssvissue{147}: median $+0.20$ dex; suggestive per
+rule~1; tidal confound recorded) \\
+universal (medium-set) core radius $r_c$ &
+\emph{falsified at dwarf scales} (\ssvissue{147} B3: 7/8 dwarfs below
+half the observed $\sigma$; surviving $r_c$(galaxy) relations must be
+baryon-set, $r_c \lesssim r_{1/2}$) \\
 CBH standing wave produces the flat curve &
 \emph{falsified} (\ssvissue{122}; Appendix~\ref{app:record}) \\
 CBH overtones produce arms / Hubble sequence &
@@ -616,11 +709,15 @@ Appendix~\ref{app:record}) \\
     \S\ref{sec:arms}).
   \item \textbf{Pitch:} pitch angle tracks shear/winding age, not the
     dispersion at fixed time (\S\ref{sec:pitch}).
-  \item \textbf{dSph discriminator (inherited):} if the halo tail is
-    circulation-sourced, dispersion-supported dwarfs --- which barely
-    rotate yet are DM-dominated --- must be accounted for by whatever
-    entrainment law \ssvissue{129} produces, or the circulation sourcing
-    dies there.
+  \item \textbf{dSph discriminator (run, \S\ref{sec:dsph}):}
+    rotation-fed circulation sourcing died there (\ssvissue{147} B1).
+    What remains falsifiable: any surviving entrainment law must couple
+    to mass-energy rather than rotation and must keep wide binaries
+    strictly Keplerian (the \ssvissue{129} scope limit), and any
+    $r_c$(galaxy) relation must shrink to $\lesssim r_{1/2}$ at dwarf
+    scale (B3) --- a measured dwarf with a kpc-scale core, or a
+    demonstrated $v_h$--rotation correlation at fixed $M_{\rm bar}$,
+    breaks this picture.
 \end{enumerate}
 
 \subsection{Open problems}
