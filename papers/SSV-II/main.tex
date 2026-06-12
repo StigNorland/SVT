@@ -64,9 +64,15 @@ Electromagnetism arises from chiral flow gradients around toroidal vortex
 rings; Coulomb's law and the Biot--Savart force are reproduced by the
 long-range Bernoulli pressure field of overlapping circulations.  The
 fine-structure constant $\alpha\approx 1/137$ enters as an empirical
-dimensionless coupling of the medium; the relation between the medium's
-chiral-shear mode at $c_\perp$ and the observed photon is currently open and
-flagged explicitly in \S\ref{sec:EM_open_issue}.  The strong
+dimensionless coupling of the medium.  The photon-identification question,
+long flagged as the sector's open issue, is now closed by computation
+(issue~\ssvissue{138}; \S\ref{sec:EM_open_issue}): the chiral-shear term
+contributes no propagating linear mode around the uniform vacuum at all
+--- the internal-direction (CP$^1$) channel is spin-wave-like,
+$\omega=\hbar k^2/2m_0$ --- so the medium has exactly one signal speed
+$c$, the observed photon is a phase-channel (Goldstone) wave, and
+$\alpha$ is the static stiffness of the defect near-field sector, not a
+second propagation speed.  The strong
 force is identified with vacuum surface tension along flux-tube vortex
 segments connecting quarks; its short range and the qualitative form of
 asymptotic freedom emerge as natural consequences.
@@ -157,9 +163,10 @@ nonlinear wave equation for a macroscopic complex order parameter $\Psi(\mathbf{
 All particles are topological defects in this medium — leptons are toroidal vortex
 rings, baryons are spherical breather modes stabilised by knotted vortex skeletons.
 The fine-structure constant $\alpha\approx 1/137$ enters as an empirical dimensionless
-coupling of the medium (Paper~I writes it as a wave-speed ratio $c_\perp/c$ within
-the chiral-shear sector, but the numerical value remains an empirical input; see
-\S\ref{sec:EM_open_issue}), and many particle masses cluster near a
+coupling of the medium (Paper~I writes it as the ratio $c_\perp/c$ within
+the chiral-shear sector --- after \ssvissue{138} a core-scale stiffness
+ratio, not a mode speed --- but the numerical value remains an empirical
+input; see \S\ref{sec:EM_open_issue}), and many particle masses cluster near a
 geometric pattern with spacing $m_e/\alpha$, matching
 the charged pion mass to $0.3\%$ and the muon mass to $0.6\%$.  As Paper~I now
 records (gapbox in its mass-ladder section), this clustering is an empirical
@@ -195,14 +202,19 @@ what is shown and what is conjectured.  The structure of the present paper
 is as follows:
 \begin{itemize}
   \item \textbf{Structurally established in the static sector; radiative
-        identification open.}  The mechanical origin of the electromagnetic
-        near-field interaction (\S\ref{sec:EM}) and the qualitative
-        features of the strong force --- short range, confinement,
-        asymptotic freedom (\S\ref{sec:strong}) --- are developed from
-        the medium parameters fixed in Paper~I.  In the EM sector, the
-        static Coulomb/Biot--Savart mechanism is in hand, but the
-        identification of the observed photon with the correct propagating
-        mode remains open (\S\ref{sec:EM_open_issue}).
+        identification resolved (\ssvissue{138}).}  The mechanical origin
+        of the electromagnetic near-field interaction (\S\ref{sec:EM}) and
+        the qualitative features of the strong force --- short range,
+        confinement, asymptotic freedom (\S\ref{sec:strong}) --- are
+        developed from the medium parameters fixed in Paper~I.  In the EM
+        sector, the static Coulomb/Biot--Savart mechanism is in hand, and
+        the observed photon is identified with the phase-channel
+        (Goldstone) mode at $c$: the pre-registered \ssvissue{138}
+        computation shows the chiral-shear sector supports no propagating
+        linear mode around the uniform vacuum (\S\ref{sec:EM_open_issue}).
+        The remaining obligation in that sector is the polarization-transport
+        derivation (light's polarization as the internal CP$^1$ direction
+        carried on the phase channel).
   \item \textbf{Derived scale, $\mathcal{O}(1)$ prefactor open.}  The
         reconnection cap inherits the electron ring scale $R^*=\xi/\alpha$, so
         the $W$ mass scale $m_W\sim m_e/\alpha^2$ is derived; the Rayleigh-jet
@@ -291,9 +303,12 @@ from Paper~I are the only inputs needed here:
           fixing the stiffness parameter and the healing length $\xi = \hbar/(m_0 c)$.
     \item $\alpha \approx 1/137$: an empirical dimensionless coupling
           constant of the medium, governing the strength of the chiral-shear
-          interaction.  Paper~I writes $\alpha = c_\perp/c$ where $c_\perp$ is
-          the speed of an internal mode of the chiral-shear sector
-          (\S\ref{sec:EM_open_issue}); this identification is a feature of
+          interaction.  Paper~I fixes it through the core-scale stiffness
+          ratio $\sqrt{\lambda m_0/\rho_0}\equiv\alpha$ (written there as
+          $c_\perp/c$; the \ssvissue{138} computation shows the chiral
+          sector supports no propagating linear mode, so the combination
+          is a stiffness ratio, not a mode speed ---
+          \S\ref{sec:EM_open_issue}).  This identification is a feature of
           the chiral-shear Lagrangian, not a derivation of the numerical
           value of $\alpha$, which remains an empirical input.  The
           mechanical origin of $\alpha \approx 1/137$ is open.
@@ -412,9 +427,10 @@ $r^{-6}$ and does not produce a long-range force between neutral or like-chirali
 vortices. The long-range Coulomb force arises instead from the \emph{transverse}
 channel: the phase-gradient of a chiral vortex ring supports a transverse flow
 perturbation $\mathbf{v}_\perp$ with an associated chiral-shear stiffness and
-its own Bernoulli pressure.  The speed of this internal mode is not identified
-with the observed photon speed; that issue is isolated in
-\S\ref{sec:EM_open_issue}.
+its own Bernoulli pressure.  This is a \emph{static near-field} structure:
+the chiral-shear sector supports no propagating linear mode around the
+uniform vacuum (\ssvissue{138}; \S\ref{sec:EM_open_issue}), so nothing in
+this subsection depends on a propagation speed --- only on the stiffness.
 
 \paragraph{Transverse velocity potential.}
 Away from the vortex core, the phase of the order parameter satisfies
@@ -506,7 +522,13 @@ This subsection records the provisional radiative identification used in
 the original EM derivation.  Section~\ref{sec:EM_open_issue} explains why
 this cannot be the final physical photon interpretation, but the calculation
 is retained because it displays the chiral-shear mechanism that underlies
-the static electromagnetic near field.  Starting from the linearised GPE,
+the static electromagnetic near field.  (The \ssvissue{138} linearization
+has since computed the actual spectrum: the second-order transverse wave
+equation below does \emph{not} arise from the LogSE + chiral-shear + CP$^1$
+functional around the uniform vacuum --- the chiral term is silent at
+linear order, and the internal-direction channel is first-order in time
+with $\omega=\hbar k^2/2m_0$.  The passage is the historical record of the
+provisional identification.)  Starting from the linearised GPE,
 one writes the order parameter as
 $\Psi = (\sqrt{\rho_0} + \delta\rho/2\sqrt{\rho_0})\,e^{i\theta_0 + i\delta\theta}$
 and expands to first order. The longitudinal (amplitude) mode satisfies
@@ -531,13 +553,16 @@ which is a massless wave equation with dispersion
 \end{equation}
 This is the point at which the provisional identification fails as a
 description of the observed photon: the mode speed is $c_\perp$, whereas
-light in vacuum propagates at $c$.  The calculation is therefore read below
-as the dynamics of the chiral-shear near-field sector, not as a completed
-radiative photon derivation.  The two transverse oscillation directions of
-the chiral-shear phase gradient remain perpendicular to $\mathbf{k}$ by the
-incompressibility of the transverse channel.  There is no longitudinal photon
-polarisation, because the longitudinal channel carries the massive scalar phonon
-(the Higgs amplitude mode; \S\ref{sec:higgs}) with gap $\Delta = c\sqrt{2m_0\lambda\rho_0}/\hbar$.
+light in vacuum propagates at $c$ --- and the \ssvissue{138} computation
+shows the premise itself does not hold (no such linear wave equation exists
+in the actual spectrum).  The calculation is therefore read below as the
+\emph{static} mechanism of the chiral-shear near-field sector, not as a
+radiative photon derivation.  The two polarization directions of the
+observed photon are carried as the internal CP$^1$ direction transported on
+the phase channel (\S\ref{sec:EM_open_issue}); there is no longitudinal
+photon polarisation, because the longitudinal channel carries the massive
+scalar phonon (the Higgs amplitude mode; \S\ref{sec:higgs}) with gap
+$\Delta = c\sqrt{2m_0\lambda\rho_0}/\hbar$.
 
 \subsection{Magnetic Force and Moving Charges}
 
@@ -573,12 +598,13 @@ The Feynman rules for this process map onto QED at leading order:
     \item \textbf{Vertex factor}: the coupling of the vortex ring to the transverse
           phonon is the standard minimal coupling $\sim e/m_e$, where $e$ is fixed
           by $e^2/(4\pi\epsilon_0) = \alpha\hbar c$ (Section~\ref{sec:coulomb_derivation}).
-    \item \textbf{Provisional transverse-mode propagator}: within the
-          chiral-shear calculation retained here, the transverse phonon is
-          massless and propagates at $c_\perp = \sqrt{\alpha}\,c$.  Its
-          propagator has the tensor structure of the QED photon propagator,
-          but the speed mismatch means this is not yet the physical photon
-          propagator; see \S\ref{sec:EM_open_issue}.
+    \item \textbf{Near-field exchange propagator}: within the
+          chiral-shear calculation retained here, the exchanged quantum
+          has the tensor structure of the QED photon propagator.  After
+          \ssvissue{138} this exchange is read as the virtual/constrained
+          near-field sector (the analogue of QED's Coulomb-gauge
+          instantaneous part); the on-shell photon propagator belongs to
+          the phase channel at $c$ (\S\ref{sec:EM_open_issue}).
     \item \textbf{Ring propagator}: in the non-relativistic limit, the toroidal
           vortex obeys an effective Dirac equation sourced by the half-quantum
           circulation (Paper~I, \S4.3), so the ring propagator has the standard
@@ -673,10 +699,13 @@ electromagnetism in SSV: the transverse velocity field $\mathbf{v}_\perp$.
 
 \paragraph{Identification of $\mathbf{B}$.}
 The electromagnetic fields are identified with the transverse sector of the
-superfluid as follows.  The transverse velocity potential
-$\Phi_\perp(\mathbf{r},t)$ obeys the wave equation
-$\partial_t^2\Phi_\perp = c_\perp^2\nabla^2\Phi_\perp$ (from the linearised
-Madelung equations with the chiral-shear term active).  The identifications are
+superfluid as follows.  Within the provisional chiral-shear reading recorded
+above, the transverse velocity potential $\Phi_\perp(\mathbf{r},t)$ obeys the
+wave equation $\partial_t^2\Phi_\perp = c_\perp^2\nabla^2\Phi_\perp$; after
+\ssvissue{138} this is read as a near-field/constrained-sector statement
+(no propagating bulk mode exists; \S\ref{sec:EM_open_issue}), with
+$c_\perp$ a stiffness conversion constant in the identifications below.
+The identifications are
 \begin{equation}
     \mathbf{E} \equiv -\frac{1}{\alpha}\nabla\Phi_\perp - \frac{1}{\alpha c_\perp}\partial_t\mathbf{A},
     \qquad
@@ -877,59 +906,92 @@ Magnetic field $\mathbf{B}$ & Curl of transverse velocity field & $c_\perp^{-1}\
 Faraday induction & Transverse momentum equation & $\partial_t\mathbf{B} = -\nabla\times\mathbf{E}$ \\
 $\nabla\cdot\mathbf{B}=0$ & Vector identity; $\mathbf{B}$ is a curl & Not a postulate \\
 No magnetic monopoles & No scalar topological charge for $\mathbf{v}_\perp$ & Topologically forbidden \\
-Provisional radiative mode & Transverse chiral-shear mode & speed issue: \S\ref{sec:EM_open_issue} \\
-Observed photon & Likely Goldstone phase mode & re-derivation deferred \\
+Chiral-shear sector & Static near field; no propagating linear mode & \ssvissue{138}: \S\ref{sec:EM_open_issue} \\
+Observed photon & Goldstone phase mode at $c$ & polarization = CP$^1$ direction (\ssvissue{138}) \\
 Fine-structure const. & Empirical chiral-shear coupling & $\alpha \approx 1/137$ \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\subsection{Open issue: photon propagation speed}
+\subsection{Resolved issue: photon propagation speed (\ssvissue{138})}
 \label{sec:EM_open_issue}
 
-The derivation in this section identifies the photon with the transverse
-chiral-shear mode of the medium, propagating at $c_\perp = \sqrt{\alpha}\,c
-\approx c/11.7$.  This identification produces the structural results above
-(Coulomb's law, Maxwell's equations, $g-2$, etc.) at the level of mechanism,
-but it has a known and unresolved problem: the measured speed of light is
-$c$, not $c_\perp$.  Earlier drafts of this section attempted to resolve
-this with the patch ``in free vacuum, $\alpha\to 1$ and propagation reduces
-to $c$,'' which is not viable: vacuum \emph{is} the saturated medium in this
-framework, and there is no separate ``free vacuum'' state for $\alpha$ to
-tend to $1$ in.
+The derivation in this section originally identified the photon with a
+transverse chiral-shear mode propagating at $c_\perp < c$ (written
+$\sqrt{\alpha}\,c$ in early drafts of this paper and $\alpha c$ in Paper~I
+--- a convention difference that is moot below).  That identification had a
+known problem: the measured speed of light is $c$, not $c_\perp$, and the
+early patch ``in free vacuum $\alpha\to1$'' is not viable because vacuum
+\emph{is} the saturated medium.  Worse, a propagating charge-coupled mode at
+$c_\perp\ll c$ would make the vacuum Cherenkov-dissipative: every charged
+particle faster than the slow mode would radiate into it, excluded by
+synchrotron beams and ultra-high-energy cosmic rays by many orders of
+magnitude.
 
-The literature-consistent resolution, due originally to Volovik
-\cite{Volovik2003} in the analogue-gravity programme and developed by
-Zloshchastiev \cite{Zloshchastiev2020} in the logarithmic-superfluid model
-closest to the present framework, is that the photon is the \emph{Goldstone
-mode} of $\Psi$ --- phase oscillations $\delta\theta$ at fixed density ---
-which propagate at the medium's sound speed $c$, not at the chiral-shear
-speed $c_\perp$.  In that resolution, the chiral-shear field
-$\mathbf{v}_\perp$ at $c_\perp$ remains a real physical mode of the medium,
-but its role is to mediate the \emph{static near-field Coulomb interaction}
-between vortices via the Bernoulli pressure $\sim\rho_0 v_\perp^2$ ---
-\emph{not} to carry electromagnetic radiation.  Light is then a
-phase-channel disturbance propagating at $c$, with the chiral-shear coupling
-$\alpha$ entering only as the strength of the Coulomb near-field, not as the
-speed of the radiation.
+The question was settled by the pre-registered \ssvissue{138}
+(CHIRAL-DISPERSION) computation (script \ssvfile{chiral_dispersion};
+result note \ssvfile{chiral-dispersion-issue138}), which linearised the
+full LogSE + chiral-shear + CP$^1$ functional around the uniform vacuum.
+Three exact statements result, each confirmed numerically with a
+validated instrument:
+\begin{enumerate}[label=(\roman*)]
+    \item \textbf{The chiral-shear term is silent in the linear spectrum.}
+          The linear-order current perturbation is a pure gradient in
+          every channel, so $\nabla\times\delta\mathbf{j}\equiv 0$ and the
+          $|\nabla\times\mathbf{j}|^2$ energy is \emph{quartic} in the
+          perturbation (measured exponent $4.000$).  There is no
+          propagating linear mode at $c_\perp$ --- at either convention's
+          value.  The ``second light'' never existed in the linear
+          spectrum: $\lambda$ prices curl-bearing flow, which lives only
+          in and near defect cores.  Statics need stiffness, not a
+          carrier.
+    \item \textbf{The internal-direction channel is a free magnon.}  The
+          CP$^1$ (spin) channel disperses as $\omega = \hbar k^2/2m_0$
+          --- gapless, quadratic, precessional (measured power
+          $p = 2.000$, coefficient the quantum-pressure scale
+          $\hbar/2m_0$) --- and carries no linear-order mass current, so
+          charged defects decouple from it at leading order: no vacuum
+          Cherenkov drag.  A non-propagating quadratic branch has no
+          signal speed.
+    \item \textbf{One signal speed.}  The only gapless linear modes of
+          the uniform vacuum are the phase-channel (Goldstone/Bogoliubov)
+          branch at $c$ and the quadratic magnon.  Light, like
+          gravitational radiation (Paper~IV, \ssvissue{129}), is a
+          phase-channel disturbance at $c$.
+\end{enumerate}
 
-Implementing this resolution would re-derive the Maxwell equations in this
-section from $\delta\theta$ rather than from $\mathbf{v}_\perp$, with $c$
-replacing $c_\perp$ throughout the wave-equation, dispersion-relation, and
-Faraday-induction passages.  The static Coulomb result would survive
-unchanged because it depends on the chiral-shear flow field and not on its
-propagation speed.  The structural agreements ($g-2$, the parity
-violation argument, Aharonov--Bohm phase, magnetic moment of the electron)
-also survive because they depend on the topology of the vortex ring and on
-the chiral coupling $\alpha$, not on the photon-mode speed.
+This lands exactly on the resolution proposed by Volovik
+\cite{Volovik2003} in the analogue-gravity programme and by Zloshchastiev
+\cite{Zloshchastiev2020} for the logarithmic superfluid, and sharpens it:
+the chiral-shear field is not a slower second radiation channel that
+happens not to be the photon --- it is not a radiation channel at all.
+Its role is to mediate the \emph{static near-field Coulomb interaction}
+between vortices via the Bernoulli pressure $\sim\rho_0 v_\perp^2$, with
+$\alpha$ entering as the strength (stiffness) of that near field.  The
+static Coulomb result survives unchanged because it depends on the
+chiral-shear flow field and not on any propagation speed; the structural
+agreements ($g-2$, parity violation, Aharonov--Bohm phase, magnetic
+moment) survive because they depend on the topology of the vortex ring
+and on the coupling $\alpha$.
 
-The present paper retains the $c_\perp$-photon derivation as a structural
-mechanism --- it is right about \emph{which} field carries the EM
-interaction, and right about the order-of-magnitude couplings --- but is
-wrong about the propagation speed.  The full re-derivation in terms of the
-Goldstone mode is the principal open task of the EM sector and is deferred
-to a future revision.  Throughout the rest of this paper, every reference
-to ``$c_\perp$ as the photon speed'' should be read with this caveat.
+\textbf{Photon polarization.}  The observed photon's two transverse
+polarizations are identified with the internal CP$^1$ direction $\hat n$
+transported on the phase channel --- orientation carried by the wave, not
+mechanical shear displacement of the medium.  This is the same
+observable-first logic as the \ssvissue{129} gravitational-wave
+identification: what is measured in a polarization experiment is
+orientation and delay, not medium displacement.
+
+\begin{gapbox}[New derivation obligation (recorded under \ssvissue{138})]
+The polarization-transport statement --- that the $\hat n$ degree of
+freedom rides the phase channel at $c$ and reproduces the full Maxwell
+polarization phenomenology (two transverse states, Faraday rotation,
+birefringence bounds) --- is an identification, not yet a derivation.
+Re-deriving the radiative Maxwell system from $\delta\theta$ with the
+CP$^1$ direction as the polarization label, with the displacement-current
+coefficient $1/c^2$, is the remaining task of the EM sector (the matching
+programme of the Goldstone companion note).
+\end{gapbox}
 
 % ═══════════════════════════════════════════════════════════════════════
 \section{The Strong Force: Vacuum Surface Tension}
@@ -1368,9 +1430,10 @@ The SSV analogue maps precisely onto this process in three stages:
         vortex tube — an axially extended torus — along the reconnection axis.
         This tube carries exactly three polarisation degrees of freedom: two
         transverse oscillations of the tube wall, and one longitudinal mode from
-        the stretching of the tube itself.  The photon, a pure transverse
-        phase-gradient wave, never activates the amplitude channel and therefore
-        has no longitudinal mode and no end-caps.
+        the stretching of the tube itself.  The photon, a pure phase-channel
+        wave (its polarization the transported internal CP$^1$ direction,
+        \S\ref{sec:EM_open_issue}), never activates the amplitude channel and
+        therefore has no longitudinal mode and no end-caps.
   \item \textbf{Pinch-off.}  The tube thins until its minor radius reaches $\xi$,
         where quantum pressure dominates surface tension.  The tube severs,
         depositing its energy into the outgoing reconfigured defects — the weak
@@ -1449,7 +1512,8 @@ so an equilibrium at $R_{\rm cap} = \phi/\alpha$ would require
 This route does \emph{not} work, and the way it fails is informative.  The
 chiral-shear Lagrangian $\mathcal{L}_\perp = (\lambda_\perp/2)\int|\nabla\times
 \mathbf{j}|^2\,d^3r$ has coupling $\lambda_\perp = \alpha^{-2}$ (from
-$c_\perp = \alpha c$ at $k = 1/\xi$), and its curvature correction is
+the core-scale stiffness ratio $c_\perp/c = \alpha$ at $k = 1/\xi$;
+\ssvissue{138}), and its curvature correction is
 $\lambda_{\rm bend}^{\rm local} = \lambda_\perp (J{+}K)/4$ with
 $(J{+}K)/4 = 2.50$ an $\mathcal{O}(1)$ core integral
 (\ssvfile{lperp_core_integral}).  A local curvature correction is therefore
@@ -2522,10 +2586,31 @@ source physics --- the relativistic-jet launch, cocoon formation, and jet
 breakout that delay the gamma-ray burst relative to the moment of merger
 --- and carries no implication for any difference in propagation speed.
 This is in full agreement with the mainstream astrophysical interpretation
-\cite{GW170817_MMA}.  The chiral-shear mode at $c_\perp$ is an internal
-mode of the medium that mediates the static near-field Coulomb interaction
-between vortices (\S\ref{sec:EM_open_issue}); it is not the carrier of any
-astrophysical radiation.
+\cite{GW170817_MMA}.  The chiral-shear sector mediates the static
+near-field Coulomb interaction between vortices and supports no
+propagating linear mode at all (\ssvissue{138};
+\S\ref{sec:EM_open_issue}); it is not the carrier of any astrophysical
+radiation.
+
+\paragraph{The spatial sector after \ssvissue{138}: the magnon is not the
+missing carrier either.}  The \ssvissue{129} computation (Paper~IV)
+established that the bare phase channel delivers gravity's time sector and
+none of its spatial sector ($\gamma_{\rm eff}=0$): a transactional carrier
+--- one whose transport consults the local medium state hop by hop, paying
+the bilateral $A^2$ availability tax --- was the surviving candidate
+mechanism, and the CP$^1$ internal-direction channel was the candidate
+carrier.  The \ssvissue{138} battery answered this (its Q3) in the
+\emph{negative}, and the negative is exact: over any static equilibrium
+background, the magnon's effective potential $V + b\ln\rho_b = \mu$ is a
+global constant --- the same symmetry-protected cancellation that produced
+the \ssvissue{129} null (measured $\gamma_{\rm magnon} \approx 10^{-4}$
+with the instrument validated on an explicit spin-channel potential).
+The $\hat n$ channel is exactly as non-transactional as sound.  As of
+\ssvissue{138}, the present medium therefore contains \emph{no candidate
+carrier for the spatial sector of gravity}: the $A^2$ doubling demanded by
+lensing data is mandatory structure that neither the phase channel, nor
+the chiral-shear sector, nor the CP$^1$ channel supplies.  This negative
+is recorded at full strength.
 
 \subsection{Scope: the Full Treatment in Paper~IV}
 
@@ -3038,12 +3123,12 @@ The mechanical origin of the electromagnetic near-field interaction ---
 chiral flow gradients around toroidal vortices, with Coulomb's law and the
 Biot--Savart force following from the Bernoulli pressure field --- is
 reached at the level of structural mechanism using the chiral-shear coupling
-$\alpha$ and the medium parameters fixed in Paper~I.  The propagation speed
-of light in the provisional radiative identification is tied to the
-chiral-shear mode speed $c_\perp$ rather than the medium's sound speed $c$;
-this is a known open issue (\S\ref{sec:EM_open_issue}) whose resolution
-requires re-deriving the photon as the Goldstone mode of $\Psi$ and is
-deferred to a future revision.  The qualitative features of the strong
+$\alpha$ and the medium parameters fixed in Paper~I.  The photon-speed
+question that long shadowed this sector is resolved
+(\ssvissue{138}; \S\ref{sec:EM_open_issue}): the chiral-shear sector has no
+propagating linear mode, the observed photon is the Goldstone phase mode at
+$c$, and the polarization-transport derivation is the recorded follow-on
+obligation.  The qualitative features of the strong
 force --- short range, confinement of vortex strand endpoints, and
 asymptotic freedom as quantum-pressure softening --- follow from the same
 framework.
@@ -3067,11 +3152,11 @@ $\alpha_G$ from CODATA and matches the Paper~I proton mass to $0.6\%$.
 This is consistency between the gravity sector and the Paper~I masses, not a
 derivation of $G$; the 3D proton breather profile required to compute
 $\alpha_G$ from first principles remains the central open calculation.
-Gravitational and electromagnetic radiation are proposed to share the
+Gravitational and electromagnetic radiation share the
 Goldstone (phase) channel of the medium and therefore propagate at the
-medium's sound speed $c$, consistent with GW170817; the relation between
-the chiral-shear sector at $c_\perp$ and the photon as observed is an open
-issue flagged in \S\ref{sec:EM_open_issue}.
+medium's sound speed $c$, consistent with GW170817; the chiral-shear
+sector supports no propagating linear mode and is the static near-field
+stiffness (\ssvissue{138}; \S\ref{sec:EM_open_issue}).
 
 \paragraph{What the paper proposes as candidate geometry.}
 The Higgs is recast as two distinct features: a structural amplitude mode

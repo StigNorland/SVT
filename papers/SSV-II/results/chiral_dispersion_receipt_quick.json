@@ -1,0 +1,150 @@
+{
+ "config": {
+  "quick": true,
+  "b0": 1.0,
+  "rho0": 1.0,
+  "lambda_ssv": 2000.0,
+  "alpha": 0.0072973525205055605
+ },
+ "B1_magnon": {
+  "k": [
+   0.04908738521234052,
+   0.09817477042468103,
+   0.19634954084936207,
+   0.39269908169872414,
+   0.7853981633974483,
+   1.5707963267948966
+  ],
+  "omega": [
+   0.0012046292741033024,
+   0.004818813835504038,
+   0.01927582884233427,
+   0.07710408577793389,
+   0.3084296111656781,
+   1.2337034586408382
+  ],
+  "omega_over_k2_2": [
+   0.9998701682881065,
+   0.9999317433658219,
+   0.99996149452412,
+   0.9999714860391173,
+   1.00001450475688,
+   1.0000023575450852
+  ],
+  "p_fit": 2.0000378922249666,
+  "A_fit": 0.5000035872626657,
+  "A_expected_quantum_pressure": 0.5,
+  "alpha_c_k_for_contrast": [
+   0.00035820795420430046,
+   0.0007164159084086009,
+   0.0014328318168172018,
+   0.0028656636336344037,
+   0.005731327267268807,
+   0.011462654534537615
+  ]
+ },
+ "B2_control": [
+  {
+   "k": 0.09817477042468103,
+   "omega_measured": 0.0982818907214733,
+   "omega_bogoliubov": 0.09829297881850324,
+   "ratio": 0.9998871933970949
+  },
+  {
+   "k": 0.39269908169872414,
+   "omega_measured": 0.4002216367511489,
+   "omega_bogoliubov": 0.4001973861214639,
+   "ratio": 1.0000605966718574
+  },
+  {
+   "k": 1.5707963267948966,
+   "omega_measured": 1.9986279919183754,
+   "omega_bogoliubov": 1.99735278498282,
+   "ratio": 1.0006384485230366
+  }
+ ],
+ "B2_control_p_fit": 1.0864851358412742,
+ "B3a_B4_scaling": {
+  "eps": [
+   0.001,
+   0.003,
+   0.01,
+   0.03
+  ],
+  "E_perp": [
+   3.896363641360098e-10,
+   3.156054549501679e-08,
+   3.896363641360099e-06,
+   0.00031560545495016776
+  ],
+  "E_spin_gradient": [
+   0.0012633093633394382,
+   0.011369784270054941,
+   0.12633093633394382,
+   1.1369784270054941
+  ],
+  "j_norm": [
+   3.078119592388474e-05,
+   0.00027703076331496267,
+   0.003078119592388474,
+   0.02770307633149626
+  ],
+  "curl_j_norm": [
+   2.791545679855552e-05,
+   0.00025123911118699966,
+   0.0027915456798555524,
+   0.025123911118699962
+  ],
+  "slope_E_perp": 4.0,
+  "slope_E_spin_gradient": 2.0,
+  "slope_j": 2.000000000000001,
+  "slope_curl_j": 1.9999999999999998,
+  "q": 0.7853981633974483
+ },
+ "B3b_lambda_on": {
+  "eps": [
+   0.003,
+   0.01
+  ],
+  "lambda": 2000.0,
+  "omega_off_eps0.003": 0.6168511337132961,
+  "omega_on_eps0.003": 0.6236452531020966,
+  "omega_off_eps0.01": 0.6168598155605561,
+  "omega_on_eps0.01": 0.6878583275622329,
+  "omega0_linear_spectrum": 0.6168502750680849,
+  "shift_ratio_measured": 0.09569382790219641,
+  "shift_ratio_eps2_expected": 0.09,
+  "c2_measured": 709.9851200167673,
+  "c2_first_order_PT": 761.0085237031439,
+  "extrapolated_linear_shift_rel": 0.0006553507795792969
+ },
+ "B5a_static": {
+  "max_U_eff_over_V0": 0.0004931039121738867,
+  "max_U_unbalanced_over_V0": 1.0
+ },
+ "B5b_transit": {
+  "k0": 0.7853981633974483,
+  "sigma": 30.0,
+  "V0": 0.1,
+  "wkb_unbalanced_prediction": -9.423409504543034,
+  "delay_depression": 0.00013776231054407617,
+  "delay_positive_control": -9.582517991566192,
+  "pc_ratio": 1.0168843863727297,
+  "gamma_magnon": -1.4619157798211023e-05
+ },
+ "verdicts": {
+  "B1_p": 2.0000378922249666,
+  "R1_trigger_p2": true,
+  "R2_trigger_p1": false,
+  "B1_coefficient_is_quantum_pressure": true,
+  "B2_instrument_distinguishes": true,
+  "B3a_chiral_silent_quartic": true,
+  "B3b_linear_spectrum_shift_le_1e-3": true,
+  "B4_no_linear_order_current": true,
+  "B5_instrument_validated": true,
+  "B5_gamma_magnon": -1.4619157798211023e-05,
+  "Q3_non_transactional": true,
+  "Q3_transactional": false,
+  "S1_prediction": "R1 operative clause (omega = k^2/2, quantum-pressure coefficient, chiral term silent at linear order) and Q3 NEGATIVE"
+ }
+}
