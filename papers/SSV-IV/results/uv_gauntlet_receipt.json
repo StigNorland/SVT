@@ -1,0 +1,85 @@
+{
+  "issue": 148,
+  "hypothesis": "UV-GAUNTLET: quantify SSV-IV gapboxes 5/6 (ceiling vs >>GeV photons; grain vs Lorentz tests)",
+  "pinned_scales": {
+    "a_p_m": 2.103089102066989e-16,
+    "E_grain_GeV": 0.9382720881604905,
+    "N0_s^-1": 1.4254862416687602e+24
+  },
+  "C1_ceiling_vs_photons": {
+    "rows": [
+      {
+        "source": "LHAASO J2032+4127",
+        "E_GeV": 1420000.0,
+        "citation": "Cao et al., Nature 594, 33 (2021)",
+        "omega_s^-1": 2.1573597773095044e+30,
+        "margin_orders": 6.179959547313602
+      },
+      {
+        "source": "Crab Nebula",
+        "E_GeV": 1100000.0,
+        "citation": "LHAASO, Science 373, 425 (2021)",
+        "omega_s^-1": 1.6711941936904614e+30,
+        "margin_orders": 6.06906388808877
+      },
+      {
+        "source": "GRB 221009A",
+        "E_GeV": 13000.0,
+        "citation": "LHAASO, Science 380, 1390 (2023)",
+        "omega_s^-1": 1.9750476834523636e+28,
+        "margin_orders": 4.141614555237382
+      }
+    ],
+    "verdict": "falsified-as-written"
+  },
+  "C2_grain_dispersion_vs_GRB_TOF": {
+    "ssv_effective_E_QG2_GeV": 1.876544176320981,
+    "prereg_estimate_GeV": 1.5321919039259169,
+    "bound_E_QG2_GeV": 130000000000.0,
+    "bound_citation": "Vasileiou et al., PRD 87, 122001 (2013), 95% CL, GRB 090510",
+    "margin_orders": 10.8405845595734,
+    "delta_v_at_31GeV": 409.35213635503635,
+    "note": "delta_v(31 GeV) > 1: the perturbative reading collapses entirely; the margin in scale understates the kill",
+    "verdict": "falsified-as-written"
+  },
+  "C3_superluminal_photon_decay": {
+    "E_GeV": 1420000.0,
+    "k_a_p": 1513420.2732002302,
+    "ssv_delta": 858915346250.0474,
+    "decay_threshold_delta": 2.589961583983162e-19,
+    "margin_orders_above_decay_threshold": 30.520657039967826,
+    "linear_bound_E_LV_GeV": 1.42e+24,
+    "linear_bound_citation": "LHAASO Collab., PRL 128, 051102 (2022)",
+    "note": "k a_p ~ 1.5e6 >> 1: outside the perturbative domain; at k a_p >> 1 the branch is free-particle-like (v_g/c ~ E/E_grain), so the kill holds a fortiori",
+    "verdict": "falsified-as-written"
+  },
+  "C4_collider_compositeness": {
+    "grain_scale_GeV": 0.9382720881604905,
+    "grain_length_m": 2.103089102066989e-16,
+    "contact_scale_GeV": 10000.0,
+    "electron_radius_bound_m": 2e-19,
+    "citation": "LEP contact-interaction limits ~10 TeV; Bourilkov, PRD 64, 071701 (2001)",
+    "margin_orders_energy": 4.027671202930545,
+    "margin_orders_length": 3.0218276772678347,
+    "verdict": "falsified-as-written"
+  },
+  "C5_lab_lorentz_non_exclusion": {
+    "k_optical_m^-1": 9500000.0,
+    "k_a_p": 1.9979346469636394e-09,
+    "predicted_anisotropy_signal": 3.682382782388548e-21,
+    "bound": 1e-18,
+    "bound_citation": "Nagel et al., Nat. Commun. 6, 8174 (2015)",
+    "orders_below_bound": 2.433871068727575,
+    "verdict": "NOT excluded by laboratory interferometry -- the kill lives at TeV-PeV, recorded plainly per the pre-registration"
+  },
+  "survivor_requirements": [
+    "S1: the propagating phase channel must be exactly linear (Lorentzian) to <~1e-17 fractional dispersion out to >= 1e6 E_grain -- a protection mechanism (Fermi-point/emergent-LI class, Volovik) is a derivation obligation on the #138 photon identification, not a free pass: the k^4 quantum-pressure term is measured-real in the magnon channel and present on the Bogoliubov branch by the same algebra",
+    "S2: the ceiling N0, if retained, must be reinterpreted off the single-mode frequency axis (e.g. per-grain bandwidth shared across a delocalized mode) -- as written it is dead by ~6 orders",
+    "S3: the grain must not scatter -- no form factor at GeV; the grain may appear only in defect statics (where #138 put alpha) and in update accounting"
+  ],
+  "honesty_clauses": [
+    "C2 and C3 price the same object (the Bogoliubov branch) at different energies; they are one kill stated twice, not two independent kills",
+    "C5 is a non-exclusion and is reported as such: laboratory interferometry is ~12 orders too soft to see the grain dispersion at optical k",
+    "the confrontations assume the photon rides the bare phase channel (#138 R1); if future structure protects that channel, C2/C3 become constraints on the protection, not kills of SSV"
+  ]
+}
