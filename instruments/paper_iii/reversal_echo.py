@@ -68,11 +68,25 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import sys
 import time as _time
 from pathlib import Path
 
 import numpy as np
+
+try:                                   # threaded FFTs: ~1.8x on the
+    import scipy.fft as _sfft          # transform-dominated stepper
+
+    _WORKERS = os.cpu_count() or 1
+
+    def _fftn(a):
+        return _sfft.fftn(a, workers=_WORKERS)
+
+    def _ifftn(a):
+        return _sfft.ifftn(a, workers=_WORKERS)
+except ImportError:                    # numpy fallback (single-thread)
+    _fftn, _ifftn = np.fft.fftn, np.fft.ifftn
 
 ROOT = Path(__file__).resolve().parents[2]
 RESULTS = ROOT / "papers" / "SSV-III" / "results"
@@ -90,6 +104,10 @@ XI = 1.0 / math.sqrt(2 * B0)  # healing length in these units
 # substep stays exactly unitary and exactly T-invertible, so the echo
 # protocol is unaffected.
 RHO_FLOOR = 1e-6
+
+
+class BlowUp(RuntimeError):
+    pass
 
 
 # ----------------------------------------------------------------------
@@ -114,10 +132,18 @@ class Medium:
         for k, kv in zip(KK, ks):
             mask &= np.abs(k) <= (2 / 3) * np.abs(kv).max()
         self.dealias = mask.astype(float)
+        self._kin = {}                 # dt -> dealiased kinetic factor
+
+    def _kinetic_factor(self, dt):
+        f = self._kin.get(dt)
+        if f is None:
+            f = np.exp(-1j * self.k2 * (dt / 2)) * self.dealias
+            self._kin[dt] = f
+        return f
 
     def _d(self, f, axis):
-        return np.fft.ifftn(1j * self.K[axis] * self.dealias
-                            * np.fft.fftn(f))
+        return _ifftn(1j * self.K[axis] * self.dealias
+                            * _fftn(f))
 
     def grad(self, f):
         return [self._d(f, a) for a in range(self.ndim)]
@@ -153,20 +179,43 @@ class Medium:
         g = self.grad(psi)
         return -(gx * g[0] + gy * g[1])
 
-    def step(self, psi, dt):
+    def _nl(self, psi, tau):
+        """Nonlinear phase substep over time tau (preserves rho)."""
         rho = np.abs(psi)**2
-        psi = psi * np.exp(-1j * B0 * np.log(np.maximum(rho, RHO_FLOOR))
-                           * (dt / 2))
-        psi = np.fft.ifftn(np.fft.fftn(psi)
-                           * (np.exp(-1j * self.k2 * (dt / 2))
-                              * self.dealias))
+        return psi * np.exp(-1j * B0
+                            * np.log(np.maximum(rho, RHO_FLOOR)) * tau)
+
+    def _kin_chi(self, psi, dt):
+        """Kinetic substep (dealiased) + optional chiral RK2."""
+        psi = _ifftn(_fftn(psi) * self._kinetic_factor(dt))
         if self.lam and self.ndim == 2:
             f1 = self._chiral_rhs(psi)
             f2 = self._chiral_rhs(psi + 0.5 * dt * f1)
             psi = psi + dt * f2
-        rho = np.abs(psi)**2
-        return psi * np.exp(-1j * B0 * np.log(np.maximum(rho, RHO_FLOOR))
-                            * (dt / 2))
+        return psi
+
+    def step(self, psi, dt):
+        psi = self._nl(psi, dt / 2)
+        psi = self._kin_chi(psi, dt)
+        return self._nl(psi, dt / 2)
+
+    def run(self, psi, n_steps, dt):
+        """n_steps Strang steps with the interior half-nonlinear
+        substeps FUSED: N(h) [K N(2h)]^(n-1) K N(h), h = dt/2 -- exactly
+        equal to step()^n (the nonlinear substep preserves rho, so two
+        adjacent half-rotations compose to one full rotation), at half
+        the elementwise cost. The composition is palindromic, so the
+        conjugation-echo inverts it exactly, like the unfused form."""
+        if n_steps <= 0:
+            return psi
+        psi = self._nl(psi, dt / 2)
+        for i in range(n_steps):
+            psi = self._kin_chi(psi, dt)
+            if i < n_steps - 1:
+                psi = self._nl(psi, dt)
+                if (i + 1) % 200 == 0 and not np.isfinite(psi.flat[0]):
+                    raise BlowUp(f"non-finite field at step {i + 1}")
+        return self._nl(psi, dt / 2)
 
     def relax(self, psi, n_iter, dtau):
         """Imaginary-time preconditioner (#119 H7a lesson): the LogSE
@@ -177,7 +226,7 @@ class Medium:
             rho = np.abs(psi)**2
             psi = psi * np.exp(-B0 * np.log(np.maximum(rho, RHO_FLOOR))
                                * (dtau / 2))
-            psi = np.fft.ifftn(np.fft.fftn(psi) * kin)
+            psi = _ifftn(_fftn(psi) * kin)
             rho = np.abs(psi)**2
             psi = psi * np.exp(-B0 * np.log(np.maximum(rho, RHO_FLOOR))
                                * (dtau / 2))
@@ -323,18 +372,19 @@ def plane_punctures(psi3d, dx, axis, index):
 # echo machinery
 # ----------------------------------------------------------------------
 
-class BlowUp(RuntimeError):
-    pass
-
-
 def evolve(med, psi, n_steps, dt, record_every=0, recorder=None):
+    """Fused evolution (med.run) with optional recording at
+    record_every-step boundaries (the fusion is closed at each
+    recording point, so the recorded states equal the unfused ones)."""
     out = []
-    for i in range(n_steps):
-        psi = med.step(psi, dt)
-        if (i + 1) % 200 == 0 and not np.isfinite(psi.flat[0]):
-            raise BlowUp(f"non-finite field at step {i + 1}")
-        if record_every and (i + 1) % record_every == 0 and recorder:
-            out.append(recorder(psi, (i + 1) * dt))
+    if not record_every or recorder is None:
+        return med.run(psi, n_steps, dt), out
+    done = 0
+    while done < n_steps:
+        m = min(record_every, n_steps - done)
+        psi = med.run(psi, m, dt)
+        done += m
+        out.append(recorder(psi, done * dt))
     return psi, out
 
 
@@ -359,19 +409,20 @@ def find_annihilation(med, psi0, dt, t_max, check_every=20):
     psi = psi0.copy()
     n_steps = int(round(t_max / dt))
     timeline = []
-    t_hit = None
-    for i in range(n_steps):
-        psi = med.step(psi, dt)
-        if (i + 1) % check_every == 0:
-            t = (i + 1) * dt
-            nd = len(defects_2d(psi, med.dx))
-            timeline.append((t, nd))
-            if nd == 0 and t_hit is None:
-                t_hit = t
-            if nd > 0 and t_hit is not None and t - t_hit < 2 * check_every * dt:
-                t_hit = None        # transient zero, keep looking
-            if t_hit is not None and t > t_hit + 10:
-                break
+    t_hit, done = None, 0
+    while done < n_steps:
+        m = min(check_every, n_steps - done)
+        psi = med.run(psi, m, dt)
+        done += m
+        t = done * dt
+        nd = len(defects_2d(psi, med.dx))
+        timeline.append((t, nd))
+        if nd == 0 and t_hit is None:
+            t_hit = t
+        if nd > 0 and t_hit is not None and t - t_hit < 2 * check_every * dt:
+            t_hit = None            # transient zero, keep looking
+        if t_hit is not None and t > t_hit + 10:
+            break
     return t_hit, timeline
 
 
@@ -380,7 +431,7 @@ def find_annihilation(med, psi0, dt, t_max, check_every=20):
 # ----------------------------------------------------------------------
 
 def run_2d_echo(n, L, dt, d, relax_iter=50, lam=0.0, eps_list=(),
-                t_end=None, tag=""):
+                t_end=None, forward_controls=True, tag=""):
     """One 2D annihilation echo at resolution n. If t_end is given
     (from a coarser ladder run -- the annihilation time is physics, not
     resolution), the annihilation search is skipped and annihilation is
@@ -442,8 +493,9 @@ def run_2d_echo(n, L, dt, d, relax_iter=50, lam=0.0, eps_list=(),
         out[f"fidelity_eps{eps:.0e}"] = fidelity(psi0, psi_p)
         out[f"defects_recovered_eps{eps:.0e}"] = bool(
             defects_match(d0, defects_2d(psi_p, dx), tol=2 * XI))
-        psi_c, _ = evolve(med, psi0 * (1.0 + eps * eta), n_steps, dt)
-        out[f"forward_overlap_eps{eps:.0e}"] = fidelity(psi_f, psi_c)
+        if forward_controls:
+            psi_c, _ = evolve(med, psi0 * (1.0 + eps * eta), n_steps, dt)
+            out[f"forward_overlap_eps{eps:.0e}"] = fidelity(psi_f, psi_c)
     print(f"  [{tag}] N={n} t_end={t_end:.1f} F_exact={F:.6f} "
           f"recovered={recovered} annihilated={annihilated} "
           f"Edrift={out['energy_drift_rel']:.2e} "
@@ -478,23 +530,23 @@ def run_3d_echo(n, L, dt, R, t_max, t_after=6.0, tag=""):
     n_max = int(round(t_max / dt))
     merged_run, frag_run = 0, 0
     while n_steps_done < n_max:
-        psi = med.step(psi, dt)
-        n_steps_done += 1
-        if n_steps_done % check == 0:
-            t = n_steps_done * dt
-            c = low_density_components(psi)
-            comps.append((round(t, 2), c))
-            # topology-change trigger: a persistent merger (2 -> 1) or
-            # persistent fragment production (>= 4 tubes: post-
-            # reconnection products) -- a linked pair cannot do either
-            # without reconnecting; single-frame counts are threshold
-            # noise at marginal resolution and are ignored
-            merged_run = merged_run + 1 if c == 1 else 0
-            frag_run = frag_run + 1 if c >= 4 else 0
-            if t_rec is None and (merged_run >= 2 or frag_run >= 3):
-                t_rec = t - 2.0          # first of the persistent run
-            if t_rec is not None and t >= t_rec + t_after:
-                break
+        m = min(check, n_max - n_steps_done)
+        psi = med.run(psi, m, dt)
+        n_steps_done += m
+        t = n_steps_done * dt
+        c = low_density_components(psi)
+        comps.append((round(t, 2), c))
+        # topology-change trigger: a persistent merger (2 -> 1) or
+        # persistent fragment production (>= 4 tubes: post-
+        # reconnection products) -- a linked pair cannot do either
+        # without reconnecting; single-frame counts are threshold
+        # noise at marginal resolution and are ignored
+        merged_run = merged_run + 1 if c == 1 else 0
+        frag_run = frag_run + 1 if c >= 4 else 0
+        if t_rec is None and (merged_run >= 2 or frag_run >= 3):
+            t_rec = t - 2.0              # first of the persistent run
+        if t_rec is not None and t >= t_rec + t_after:
+            break
     e_end = med.energy(psi)
     punct_end = {ax: plane_punctures(psi, dx, ax, i_mid)
                  for ax in probe_axes}
@@ -550,13 +602,21 @@ def battery(quick=False):
     # ---- B: refinement ladder (with A tracking and C at mid res) ----
     print("B: 2D annihilation echo ladder ...", flush=True)
     # dt ~ dx^2: cutoff phase pinned at k_cut^2 dt/2 = pi/8 (see the
-    # splitting-resonance numerics lesson in the module docstring)
+    # splitting-resonance numerics lesson in the module docstring).
+    # Top rung runs at pi/4: the resonance needs spectral content AT
+    # the cutoff (k_cut xi ~ 16 at N=1024 -- there is none), N=512 was
+    # measured clean at pi/4, and the in-run energy tracking verifies.
+    # The eps-sweep runs in full at N=256 (its physics -- linear
+    # response vs chaotic amplification -- is a property of the
+    # dynamics, not the grid) with a spot-check at N=512.
     if quick:
         ladder = [(256, 0.025), (512, 0.00625)]
         mid = 256
+        eps_spot, eps_spot_n = (), None
     else:
-        ladder = [(256, 0.025), (512, 0.00625), (1024, 0.0015625)]
-        mid = 512
+        ladder = [(256, 0.025), (512, 0.00625), (1024, 0.003125)]
+        mid = 256
+        eps_spot, eps_spot_n = (1e-6, 1e-3, 1e-1), 512
     runs = []
     t_end_shared = None
     for n, dt in ladder:
@@ -568,13 +628,28 @@ def battery(quick=False):
         runs.append(r)
     out["B_ladder"] = runs
 
+    # eps spot-check at higher resolution (resolution-independence of
+    # the linear-response finding)
+    if eps_spot:
+        n_sp = eps_spot_n
+        dt_sp = dict(ladder)[n_sp]
+        out["C_eps_spot"] = run_2d_echo(n_sp, L, dt_sp, d,
+                                        eps_list=eps_spot,
+                                        t_end=t_end_shared,
+                                        forward_controls=False,
+                                        tag=f"eps-spot N={n_sp}")
+
     # ---- A: chiral-on conservativity + echo variant ------------------
     print("A: chiral-on variant ...", flush=True)
-    lam_try = [2000.0, 200.0, 20.0]
+    # lambda ladder: the chiral advection is CFL-stiff on DEFECT-
+    # bearing states (G ~ lambda x core curl gradients; unlike #138's
+    # smooth textures) -- everything >= 20 blows up at dt = 0.002, so
+    # the ladder extends to the measured-stable lambda = 2
+    lam_try = [2000.0, 200.0, 20.0, 2.0]
     chi = None
     chi_attempts = []
     for lam in lam_try:
-        n, dt = (256, 0.002) if quick else (512, 0.001)
+        n, dt = 256, 0.002   # resolution deviation recorded below
         try:
             r = run_2d_echo(n, L, dt, d, lam=lam, t_end=t_end_shared,
                             tag=f"chiral lam={lam}")
@@ -595,12 +670,17 @@ def battery(quick=False):
             chi["lam_used"] = lam
             chi["lam_preregistered"] = 2000.0
             chi["deviation_note"] = (
-                "" if lam == 2000.0 else
-                f"lambda=2000 unstable at feasible dt (chiral advection "
-                f"speed ~ lambda x core curl gradients); ran at the "
-                f"largest stable lambda={lam}. The conservativity/"
-                f"T-symmetry conclusion is lambda-independent (S1); "
-                f"deviation recorded per rule 1.")
+                ("" if lam == 2000.0 else
+                 f"lambda=2000 unstable at feasible dt (chiral advection "
+                 f"speed ~ lambda x core curl gradients); ran at the "
+                 f"largest stable lambda={lam}. ")
+                + "Run at N=256 rather than the pre-registration "
+                  "comment's N=512: the dt~dx^2 resonance guard "
+                  "quadrupled step counts and the explicit chiral RK2 "
+                  "needs dt=0.002, putting the N=512 variant beyond "
+                  "the CPU budget. The conservativity/T-symmetry "
+                  "conclusion is lambda- and N-independent (S1); "
+                  "deviations recorded per rule 1.")
             break
     out["A_chiral"] = chi if chi is not None else {"failed": True}
     out["A_chiral_attempts"] = chi_attempts

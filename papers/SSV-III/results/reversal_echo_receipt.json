@@ -1,0 +1,617 @@
+{
+ "config": {
+  "quick": false,
+  "b0": 1.0,
+  "xi": 0.7071067811865475,
+  "geometry": "two colliding v-av dipoles, d = 4 xi, s = L/8 (see colliding_dipoles_2d note)"
+ },
+ "B_ladder": [
+  {
+   "tag": "ladder N=256",
+   "n": 256,
+   "dx": 0.375,
+   "dt": 0.025,
+   "lam": 0.0,
+   "annihilated": true,
+   "t_annih": 24.5,
+   "t_end": 49.0,
+   "n_defects_initial": 4,
+   "energy_initial": 20.04440967828175,
+   "energy_drift_rel": 0.006958170164405395,
+   "norm_drift_rel": 1.1555561046844859e-05,
+   "fidelity_exact": 0.9999527010046798,
+   "defects_recovered_exact": true,
+   "n_defects_echo": 4,
+   "walltime_s": 35.45696830749512,
+   "fidelity_eps1e-12": 0.9999527010046756,
+   "defects_recovered_eps1e-12": true,
+   "forward_overlap_eps1e-12": 1.000000000000001,
+   "fidelity_eps1e-09": 0.9999527010018959,
+   "defects_recovered_eps1e-09": true,
+   "forward_overlap_eps1e-09": 0.9999999999999999,
+   "fidelity_eps1e-06": 0.9999526982198885,
+   "defects_recovered_eps1e-06": true,
+   "forward_overlap_eps1e-06": 0.9999999999993873,
+   "fidelity_eps1e-03": 0.9999490502265115,
+   "defects_recovered_eps1e-03": true,
+   "forward_overlap_eps1e-03": 0.9999993862421434,
+   "fidelity_eps3e-02": 0.99904698373742,
+   "defects_recovered_eps3e-02": true,
+   "forward_overlap_eps3e-02": 0.9994253034998705,
+   "fidelity_eps1e-01": 0.9913083971201231,
+   "defects_recovered_eps1e-01": false,
+   "forward_overlap_eps1e-01": 0.9921871265662606,
+   "fidelity_eps3e-01": 0.9355098438597989,
+   "defects_recovered_eps3e-01": false,
+   "forward_overlap_eps3e-01": 0.9368114115396784
+  },
+  {
+   "tag": "ladder N=512",
+   "n": 512,
+   "dx": 0.1875,
+   "dt": 0.00625,
+   "lam": 0.0,
+   "annihilated": true,
+   "t_annih": null,
+   "t_end": 49.0,
+   "n_defects_initial": 4,
+   "energy_initial": 20.03678371366217,
+   "energy_drift_rel": 0.00010488571837642578,
+   "norm_drift_rel": 1.7956580787926027e-07,
+   "fidelity_exact": 0.9999999966940043,
+   "defects_recovered_exact": true,
+   "n_defects_echo": 4,
+   "walltime_s": 587.061999797821
+  },
+  {
+   "tag": "ladder N=1024",
+   "n": 1024,
+   "dx": 0.09375,
+   "dt": 0.003125,
+   "lam": 0.0,
+   "annihilated": true,
+   "t_annih": null,
+   "t_end": 49.0,
+   "n_defects_initial": 4,
+   "energy_initial": 20.035833452273785,
+   "energy_drift_rel": 3.2625904216074317e-06,
+   "norm_drift_rel": 5.078133144017492e-09,
+   "fidelity_exact": 0.9999999999912766,
+   "defects_recovered_exact": true,
+   "n_defects_echo": 4,
+   "walltime_s": 5044.762624025345
+  }
+ ],
+ "C_eps_spot": {
+  "tag": "eps-spot N=512",
+  "n": 512,
+  "dx": 0.1875,
+  "dt": 0.00625,
+  "lam": 0.0,
+  "annihilated": true,
+  "t_annih": null,
+  "t_end": 49.0,
+  "n_defects_initial": 4,
+  "energy_initial": 20.03678371366217,
+  "energy_drift_rel": 0.00010488571837642578,
+  "norm_drift_rel": 1.7956580787926027e-07,
+  "fidelity_exact": 0.9999999966940043,
+  "defects_recovered_exact": true,
+  "n_defects_echo": 4,
+  "walltime_s": 592.3916993141174,
+  "fidelity_eps1e-06": 0.9999999966776497,
+  "defects_recovered_eps1e-06": true,
+  "fidelity_eps1e-03": 0.9999994702493127,
+  "defects_recovered_eps1e-03": true,
+  "fidelity_eps1e-01": 0.9947590102576955,
+  "defects_recovered_eps1e-01": true
+ },
+ "A_chiral": {
+  "tag": "chiral lam=2 follow-up",
+  "n": 256,
+  "dx": 0.375,
+  "dt": 0.002,
+  "lam": 2.0,
+  "annihilated": true,
+  "t_annih": null,
+  "t_end": 49.0,
+  "n_defects_initial": 4,
+  "energy_initial": 34.88625137655973,
+  "energy_drift_rel": 0.0008183548650739787,
+  "norm_drift_rel": 8.61582550222858e-08,
+  "fidelity_exact": 0.9999998528349412,
+  "defects_recovered_exact": true,
+  "n_defects_echo": 4,
+  "walltime_s": 3925.23788523674,
+  "lam_used": 2.0,
+  "lam_preregistered": 2000.0,
+  "deviation_note": "Follow-up run after the battery's lambda ladder (2000/200/20, all blown up at dt=0.002): the chiral advection is CFL-stiff on defect-bearing states (G ~ lambda x core curl gradients, unlike #138's smooth textures). lambda=2 is the measured-stable coupling; run at N=256 rather than the pre-registration comment's N=512 (dt~dx^2 guard quadrupled step counts). The conservativity/T-symmetry conclusion is lambda- and N-independent (S1); all deviations recorded per rule 1."
+ },
+ "A_chiral_attempts": [
+  {
+   "lam": 2000.0,
+   "blown_up": true,
+   "annihilated": false,
+   "energy_drift_rel": null
+  },
+  {
+   "lam": 200.0,
+   "blown_up": true,
+   "annihilated": false,
+   "energy_drift_rel": null
+  },
+  {
+   "lam": 20.0,
+   "blown_up": true,
+   "annihilated": false,
+   "energy_drift_rel": null
+  },
+  {
+   "lam": 2.0,
+   "blown_up": false,
+   "annihilated": true,
+   "energy_drift_rel": 0.0008183548650739787
+  }
+ ],
+ "D_3d": [
+  {
+   "tag": "3D N=64",
+   "n": 64,
+   "dx": 0.75,
+   "dt": 0.05,
+   "t_reconnect": 21.0,
+   "t_end": 27.0,
+   "punctures_initial": {
+    "1": [
+     [
+      -5.625,
+      -1.875,
+      -1
+     ],
+     [
+      -0.375,
+      -4.125,
+      1
+     ],
+     [
+      0.375,
+      0.375,
+      -1
+     ],
+     [
+      4.875,
+      -1.875,
+      1
+     ]
+    ],
+    "2": [
+     [
+      0.375,
+      -0.375,
+      1
+     ],
+     [
+      0.375,
+      9.375,
+      -1
+     ]
+    ]
+   },
+   "punctures_t_end": {
+    "1": [
+     [
+      -12.375,
+      -15.375,
+      -1
+     ],
+     [
+      -9.375,
+      -16.875,
+      1
+     ],
+     [
+      -6.375,
+      -4.875,
+      -1
+     ],
+     [
+      2.625,
+      -11.625,
+      1
+     ]
+    ],
+    "2": [
+     [
+      -11.625,
+      6.375,
+      -1
+     ],
+     [
+      -9.375,
+      4.125,
+      1
+     ]
+    ]
+   },
+   "punctures_echo": {
+    "1": [
+     [
+      -4.875,
+      -1.875,
+      -1
+     ],
+     [
+      -0.375,
+      -3.375,
+      1
+     ],
+     [
+      0.375,
+      0.375,
+      -1
+     ],
+     [
+      4.875,
+      -1.875,
+      1
+     ]
+    ],
+    "2": [
+     [
+      0.375,
+      -0.375,
+      1
+     ],
+     [
+      0.375,
+      9.375,
+      -1
+     ]
+    ]
+   },
+   "components_initial": 3,
+   "components_timeline": [
+    [
+     1.0,
+     2
+    ],
+    [
+     2.0,
+     2
+    ],
+    [
+     3.0,
+     3
+    ],
+    [
+     4.0,
+     2
+    ],
+    [
+     5.0,
+     3
+    ],
+    [
+     6.0,
+     2
+    ],
+    [
+     7.0,
+     3
+    ],
+    [
+     8.0,
+     3
+    ],
+    [
+     9.0,
+     3
+    ],
+    [
+     10.0,
+     4
+    ],
+    [
+     11.0,
+     3
+    ],
+    [
+     12.0,
+     2
+    ],
+    [
+     13.0,
+     6
+    ],
+    [
+     14.0,
+     2
+    ],
+    [
+     15.0,
+     1
+    ],
+    [
+     16.0,
+     3
+    ],
+    [
+     17.0,
+     2
+    ],
+    [
+     18.0,
+     2
+    ],
+    [
+     19.0,
+     2
+    ],
+    [
+     20.0,
+     3
+    ],
+    [
+     21.0,
+     5
+    ],
+    [
+     22.0,
+     6
+    ],
+    [
+     23.0,
+     7
+    ],
+    [
+     24.0,
+     9
+    ],
+    [
+     25.0,
+     8
+    ],
+    [
+     26.0,
+     10
+    ],
+    [
+     27.0,
+     10
+    ]
+   ],
+   "components_echo": 2,
+   "reconnection_observed": true,
+   "topology_recovered": true,
+   "fidelity_exact": 0.9997328251141743,
+   "energy_drift_rel": 0.009746894350941655,
+   "norm_drift_rel": 0.00021321308682320994,
+   "walltime_s": 41.065452575683594
+  },
+  {
+   "tag": "3D N=96",
+   "n": 96,
+   "dx": 0.5,
+   "dt": 0.034,
+   "t_reconnect": 10.818000000000001,
+   "t_end": 17.748,
+   "punctures_initial": {
+    "1": [
+     [
+      -5.25,
+      -2.25,
+      -1
+     ],
+     [
+      -0.25,
+      -4.25,
+      1
+     ],
+     [
+      0.25,
+      0.25,
+      -1
+     ],
+     [
+      5.25,
+      -1.75,
+      1
+     ]
+    ],
+    "2": [
+     [
+      0.25,
+      -0.25,
+      1
+     ],
+     [
+      0.25,
+      9.75,
+      -1
+     ]
+    ]
+   },
+   "punctures_t_end": {
+    "1": [
+     [
+      -8.75,
+      -9.75,
+      -1
+     ],
+     [
+      -6.75,
+      -10.75,
+      1
+     ],
+     [
+      -3.75,
+      -3.25,
+      -1
+     ],
+     [
+      3.75,
+      -8.25,
+      1
+     ]
+    ],
+    "2": [
+     [
+      -6.25,
+      8.75,
+      -1
+     ],
+     [
+      -5.25,
+      1.75,
+      1
+     ]
+    ]
+   },
+   "punctures_echo": {
+    "1": [
+     [
+      -5.25,
+      -2.25,
+      -1
+     ],
+     [
+      -0.25,
+      -4.25,
+      1
+     ],
+     [
+      0.25,
+      0.25,
+      -1
+     ],
+     [
+      5.25,
+      -1.75,
+      1
+     ]
+    ],
+    "2": [
+     [
+      0.25,
+      -0.25,
+      1
+     ],
+     [
+      0.25,
+      9.75,
+      -1
+     ]
+    ]
+   },
+   "components_initial": 2,
+   "components_timeline": [
+    [
+     0.99,
+     2
+    ],
+    [
+     1.97,
+     2
+    ],
+    [
+     2.96,
+     2
+    ],
+    [
+     3.94,
+     2
+    ],
+    [
+     4.93,
+     2
+    ],
+    [
+     5.92,
+     2
+    ],
+    [
+     6.9,
+     2
+    ],
+    [
+     7.89,
+     2
+    ],
+    [
+     8.87,
+     2
+    ],
+    [
+     9.86,
+     2
+    ],
+    [
+     10.85,
+     2
+    ],
+    [
+     11.83,
+     1
+    ],
+    [
+     12.82,
+     1
+    ],
+    [
+     13.8,
+     1
+    ],
+    [
+     14.79,
+     1
+    ],
+    [
+     15.78,
+     2
+    ],
+    [
+     16.76,
+     2
+    ],
+    [
+     17.75,
+     2
+    ]
+   ],
+   "components_echo": 2,
+   "reconnection_observed": true,
+   "topology_recovered": true,
+   "fidelity_exact": 0.9999972875457023,
+   "energy_drift_rel": 0.00125325695968271,
+   "norm_drift_rel": 2.363731945269156e-05,
+   "walltime_s": 133.38749933242798
+  }
+ ],
+ "verdicts": {
+  "A_energy_drift_le_1e-8": false,
+  "A_norm_drift_le_1e-12": false,
+  "A_chiral_on_ok": false,
+  "B_defects_recovered_all_resolutions": true,
+  "B_one_minus_F_monotone_decreasing": true,
+  "B_fidelity_finest": 0.9999999999912766,
+  "B_fidelity_finest_ge_0.99": true,
+  "C_eps_star_largest_recovering": 0.03,
+  "C_fidelity_curve": {
+   "1e-12": 0.9999527010046756,
+   "1e-09": 0.9999527010018959,
+   "1e-06": 0.9999526982198885,
+   "1e-03": 0.9999490502265115,
+   "3e-02": 0.99904698373742,
+   "1e-01": 0.9913083971201231,
+   "3e-01": 0.9355098438597989
+  },
+  "D_reconnection_and_recovery": true,
+  "D_fidelity_ok": true,
+  "BRANCH_B_DEAD": true,
+  "S1_prediction": "conservative + T-symmetric => branch A; exact echo recovers; branch B dead as written",
+  "A_chiral_note": "drift 8.2e-4 MISSES the pre-registered 1e-5 bar (explicit RK2 substep, N=256); the echo with the chiral term ACTIVE recovers at 1-F = 1.5e-7 with defects restored, so the loss is echo-symmetric numerical; lambda=2 (2000/200/20 CFL-unstable on defect cores) and N=256 deviations recorded -- see A_chiral.deviation_note",
+  "A_chiral_drift_rel": 0.0008183548650739787,
+  "A_chiral_echo_one_minus_F": 1.4716505880585373e-07,
+  "A_chiral_defects_recovered": true
+ }
+}
