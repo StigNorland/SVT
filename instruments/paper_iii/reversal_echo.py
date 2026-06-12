@@ -754,7 +754,7 @@ def figure(out, dest):
     ns = [r["n"] for r in lad]
     ax.semilogy(ns, [max(1.0 - r["fidelity_exact"], 1e-16) for r in lad],
                 "o-", label="exact echo $1-F$")
-    ax.set_xlabel("grid N (dt halved with N)")
+    ax.set_xlabel(r"grid N (dt $\propto$ dx$^2$)")
     ax.set_ylabel("$1-F$")
     ax.set_title("echo infidelity shrinks under refinement\n"
                  "(numerical, not dynamical)", fontsize=9)
@@ -766,8 +766,9 @@ def figure(out, dest):
                 label="perturbed-reversal fidelity")
     ax.set_xlabel(r"reversal perturbation $\varepsilon$")
     ax.set_ylabel("F")
-    ax.set_title("recovery requires exact boundary data\n"
-                 "(SSV-III sec. 8, measured)", fontsize=9)
+    ax.set_title("single-event reversal is ROBUST: linear response,\n"
+                 "no chaotic amplification (corrects sec. 8 wording)",
+                 fontsize=9)
     ax.legend(fontsize=8)
     fig.tight_layout()
     fig.savefig(dest, dpi=160)
