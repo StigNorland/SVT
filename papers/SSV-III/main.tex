@@ -9,6 +9,8 @@
 \usepackage{verbatim}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
 
 % Coloured result boxes
 \newtcolorbox{resultbox}[1][]{enhanced,breakable,
@@ -68,7 +70,12 @@ LogSE, chiral-shear term, saturation potential --- is conservative and exactly
 T-symmetric, so this paper's account of irreversibility is a
 \emph{coarse-graining} account in Boltzmann's lineage, with the forgotten
 variables named concretely; it is not a new dynamical resolution of
-Loschmidt's paradox, and we claim no such priority.  A pre-registered
+Loschmidt's paradox, and we claim no such priority.  What is specific to
+SSV is the ledger, not the logic: Boltzmann's forgotten variables are here
+physical channels of one medium --- phonon phases, Kelvin content, vortex
+tangle, correlations --- written in $\Psi$'s defect and excitation
+structure rather than in abstract phase space, individually defined,
+calibrated, and exchangeable at computable events.  A pre-registered
 reversal-echo computation through a topological-change event confirms the
 conservativity at the field level and sharpens the claim domain: at the
 single-event scale, exact reversal succeeds and is even robust to small
@@ -190,6 +197,24 @@ displaced vortex geometry, thermalized phonons, modified reconnection opportunit
 pre-event configuration does not contain the later wake as an already-existing region. Causal
 order is carried by structure in $\mathcal{P}(t)$, not by an external archive of completed
 moments.
+
+Three remarks fix the epistemic status of causality in this picture.  First, causal order is
+\emph{read off} wake structure, not observed in the dynamics: the update rule is T-symmetric
+(computed in \S\ref{sec:forkcomputed}), so it contains no direction, and the production
+relation itself --- that causes \emph{make} effects happen --- is Hume's unobservable; mature
+dynamics relates states and produces nothing~\cite{Russell1913}.  Second, the practice of
+physics presupposes the causal reading and cannot prove it: preparation, intervention, and
+record-keeping are all wake operations, possible only in an epoch whose wake inventory is
+asymmetric.  This is a \emph{selection constraint}: it guarantees that every world in which
+physics is uncovered has an arrow, and it explains nothing about why there is an arrowed
+epoch at all --- that question is the initial-condition question of
+\S\ref{sec:initialcondition}.  Third, what \emph{is} observable about causality is its
+structure, not its direction: the medium's signal cone (a single signal speed, established by
+computation in the Paper~II photon-sector resolution) is falsifiable physics, and the wake
+inventory is present structure --- but of the three ingredients, only the inventory is
+directional.  The framework therefore asks no causal primitive to bear weight anywhere: the
+dynamics carries regularity, the cone carries structure, and all of the directedness lives in
+the inventory.
 
 A direct consequence is that time-travel paradoxes are not exotic physical possibilities but
 signs of a mistaken description. They rely on the assumption that the past remains available as
@@ -388,6 +413,49 @@ classification is observer-relative only in the last column: the wake content ta
 ``erased from observation'' is real structure in $\Psi$ that is missed by a specific
 $(\ell,\mathcal{O})$, not absent from the medium. The first quantity of
 \S\ref{sec:twoquantities} retains it; the second loses it.
+Figure~\ref{fig:channels} summarizes the architecture: five physical channels, exchanging
+wake at events, entering one coarse-graining flow.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+  ch/.style={draw=blue!40!black, rounded corners, fill=blue!4,
+             minimum width=3.9cm, minimum height=0.8cm, font=\small},
+  hub/.style={draw=orange!60!black, rounded corners, fill=orange!6,
+              minimum width=3.5cm, minimum height=2.0cm, align=center,
+              font=\small},
+  outp/.style={draw=blue!40!black, rounded corners, fill=blue!4,
+               minimum width=3.6cm, minimum height=1.0cm, align=center,
+               font=\small},
+  arr/.style={-{Stealth[length=2.4mm]}, thick, black!60},
+  conv/.style={-{Stealth[length=2.4mm]}, thick, red!55!black, dashed},
+  lab/.style={font=\scriptsize\itshape, red!55!black}]
+  \node[ch] (V)   at (0, 4.8) {$I_{\mathcal V}$ \; vortex tangle};
+  \node[ch] (K)   at (0, 3.6) {$I_{\mathcal K}$ \; Kelvin waves};
+  \node[ch] (phi) at (0, 2.4) {$I_{\phi}$ \; phase / phonons};
+  \node[ch] (rho) at (0, 1.2) {$I_{\rho}$ \; density / solitons};
+  \node[ch] (C)   at (0, 0.0) {$I_{\mathcal C}$ \; correlations};
+  \draw[conv] (V.west) .. controls (-2.6,4.4) and (-2.6,4.0) .. (K.west);
+  \draw[conv] (K.west) .. controls (-2.6,3.2) and (-2.6,2.8) .. (phi.west);
+  \node[lab, align=right] at (-3.3, 4.2) {reconnection};
+  \node[lab, align=right] at (-3.4, 3.0) {Kelvin cascade};
+  \node[hub] (rg) at (6.4, 2.4)
+    {one renormalization\\ flow in $(\ell,\mathcal O)$\\ (\S\ref{sec:rgflow})};
+  \node[outp] (S) at (11.2, 2.4)
+    {$S_{\text{wake}} = k_B\,W[\Psi]$\\ monotone (sum only)};
+  \foreach \n in {V,K,phi,rho,C}
+    \draw[arr] (\n.east) -- (rg.west|-\n.east);
+  \draw[arr, very thick] (rg.east) -- (S.west);
+\end{tikzpicture}
+\caption{The wake architecture of $W[\Psi]$.  Five physical channels
+(\S\ref{sec:candidatefunctional}, calibrated in \S\ref{sec:reductions}) carry the medium's
+record of events.  Dashed red arrows: inter-channel conversion at events --- reconnection
+converts organized tangle into Kelvin and phonon content, and the Kelvin cascade decays
+into phonons (Table~1) --- so individual channels are \emph{not} monotone; only the sum
+is.  All five enter a single coarse-graining flow in $(\ell,\mathcal O)$
+(\S\ref{sec:rgflow}), whose output is the wake entropy.}
+\label{fig:channels}
+\end{figure}
 
 \subsection{Extensivity, Coarse-Graining, and Present Structure}\label{sec:extensivity}
 
@@ -413,22 +481,43 @@ $W[\Psi(t)]$ therefore rises along physical histories. Whether the initial condi
 is natural, fine-tuned, or derivable from deeper structure is a question outside the scope of
 this paper.
 
+It is, however, possible to say \emph{where} a non-Boltzmannian contribution could live,
+rather than merely deferring it.  Every wake channel of \S\ref{sec:candidatefunctional} is
+defined relative to the uniform saturated medium: phonons, Kelvin content, tangle, and
+correlations are excitations \emph{of} the saturated state, and $W$ vanishes on it.  In the
+Paper~VIII picture the medium itself comes into existence at the void$\to$saturation
+transition --- so the reference state of the wake ledger and the state the transition
+produces are, by construction, the same state up to the imprint of the transition's own
+kinetics.  The initial wake inventory is then not a boundary condition chosen from a
+phase-space measure (Boltzmann's predicament) but a \emph{computable output}: a
+saturation front crossing causally disconnected regions imprints defects and phase
+gradients by Kibble--Zurek-type counting~\cite{Kibble1976,Zurek1985}, with density set by
+the quench rate, and the arrow requires only $W_{\text{init}} \ll W_{\text{max}}$, not
+$W_{\text{init}} = 0$.  The derivation target for Paper~VIII is therefore sharp: compute
+$W_{\text{init}}/W_{\text{max}}$ from the transition kinetics, with the smuggling failure
+mode named in advance --- assuming a synchronized (defect-free) front is assuming the
+conclusion, and a quench-rate counting that yields near-maximal wake would falsify the
+route (issue~\ssvissue{137}, item 4).
+
 \subsection{Two Quantities, Not One: Where the Observer Enters}\label{sec:twoquantities}
 
 The preceding subsections actually describe two distinct quantities, and conflating them is
 the source of the standard worry about whether entropy is ``in the world'' or ``in the head.''
+
+\begin{resultbox}[Two quantities, not one]
 The wake functional $W[\Psi]$ is a property of $\Psi$ alone: it is observer-independent, in
 the same sense that the density $\rho(\mathbf{x},t)$ is observer-independent. The
 coarse-grained entropy that follows from $\Omega_{\text{wake}}$ depends on the choice of
-$(\ell,\mathcal{O})$, and is therefore observer-relative in the standard thermodynamic sense.
+$(\ell,\mathcal{O})$, and is therefore observer-relative in the standard thermodynamic
+sense. The monotonicity argument belongs to the first quantity; the recovery of ordinary
+thermodynamics belongs to the second; they coincide exactly when $(\ell,\mathcal{O})$
+resolves every wake channel.
+\end{resultbox}
 
-SSV takes both seriously. There is a structural burden carried by $\Psi$ regardless of
+SSV takes both seriously: there is a structural burden carried by $\Psi$ regardless of
 description, and there is a coarse-grained shadow of that burden read off by an observer who
-resolves the medium only down to a particular scale and observable set. The two coincide in
-the limit where $(\ell,\mathcal{O})$ resolves every wake channel; they diverge wherever they
-do not. The monotonicity argument of \S\ref{sec:nottautological} belongs to the first
-quantity. The recovery of ordinary thermodynamics in \S\ref{sec:extensivity} belongs to the
-second.
+resolves the medium only down to a particular scale and observable set
+(\S\ref{sec:nottautological} concerns the former; \S\ref{sec:extensivity} the latter).
 
 \subsection{Possible Empirical Signatures}
 
@@ -451,8 +540,32 @@ state: any setting in which $(\ell, \mathcal{O})$ can be varied while the underl
 is held fixed should exhibit the predicted dependence of coarse-grained entropy on the
 resolved wake channels, in the manner described in \S\ref{sec:boltzmann}.
 
-None of these constitute a quantitative prediction in the present paper. They mark the
-regimes where the formalism developed here would most plausibly first be tested.
+Regime (i) admits an order-of-magnitude estimate of measurability, using only the
+calibrated tangle channel of \S\ref{sec:tanglereduction} and textbook helium parameters.
+The tangle's wake entropy density is $s_\mathcal{V} = k_B (L/\xi)\ln\mu$ for line density
+$L$ (length per volume), and the competing conventional count is the phonon-bath entropy
+density $s_{\text{ph}} = (2\pi^2/45)\,k_B (k_B T/\hbar c_1)^3$ ($c_1$ the first-sound
+speed; rotons are frozen out below ${\sim}0.6$\,K, so the phonon form suffices there).
+The two cross at
+\begin{equation}
+  T_\times \;=\; \frac{\hbar c_1}{k_B}
+  \left[\frac{45}{2\pi^2}\,\frac{L\ln\mu}{\xi}\right]^{1/3}.
+\end{equation}
+For $^4$He ($\xi \approx 1$\,\AA, $c_1 = 238$\,m/s, $\ln\mu \approx 1.5$) this gives
+$T_\times \approx 13$\,mK at $L = 10^6\,\mathrm{cm}^{-2}$ and $T_\times \approx
+60$\,mK at $L = 10^8\,\mathrm{cm}^{-2}$: at 1\,K the tangle ledger is a
+$10^{-6}$-level correction to the thermal count (unmeasurable), but in the
+tens-of-millikelvin regime of modern ultra-low-temperature turbulence experiments the
+configurational wake of the tangle becomes \emph{comparable to or larger than} the entire
+thermal entropy of the bath.  There, ``the entropy of the box'' genuinely depends on
+whether one counts wake structure or only thermal occupation --- a discrepancy that can be
+evaluated from published $L(t)$ decay data alone, with no new formalism; the Kelvin channel
+$\alpha_\mathcal{K} I_\mathcal{K}$ adds to the wake side, so the crossover estimate is
+conservative.
+
+Beyond this single hook, the regimes above are not developed into closed predictions in
+the present paper. They mark where the formalism developed here would most plausibly first
+be tested.
 
 \section{Channel-wise Reductions of the Wake Functional}\label{sec:reductions}
 
@@ -1423,6 +1536,18 @@ mechanischen W\"armetheorie und der Wahrscheinlichkeitsrechnung,''
 \bibitem{Reichenbach1956}
 H.~Reichenbach, \textit{The Direction of Time}, University of California
 Press, 1956.
+
+\bibitem{Russell1913}
+B.~Russell, ``On the notion of cause,'' \textit{Proc.~Aristotelian Soc.}
+\textbf{13}, 1--26 (1913).
+
+\bibitem{Kibble1976}
+T.~W.~B.~Kibble, ``Topology of cosmic domains and strings,''
+\textit{J.~Phys.~A} \textbf{9}, 1387--1398 (1976).
+
+\bibitem{Zurek1985}
+W.~H.~Zurek, ``Cosmological experiments in superfluid helium?''
+\textit{Nature} \textbf{317}, 505--508 (1985).
 
 \bibitem{Bennett1988}
 C.~H.~Bennett, ``Logical depth and physical complexity,'' in \textit{The
