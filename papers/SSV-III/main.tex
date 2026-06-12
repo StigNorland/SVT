@@ -1077,7 +1077,8 @@ state: the full defect set is restored at every grid resolution tested, the
 field fidelity reaches $F = 1 - 8.7\times10^{-12}$ at the finest resolution
 ($1-F$ falling $4.7\times10^{-5} \to 3.3\times10^{-9} \to
 8.7\times10^{-12}$ down the ladder), and the
-echo infidelity $1-F$ \emph{falls} under grid/timestep refinement --- the
+echo infidelity $1-F$ \emph{falls} under grid/timestep refinement
+(Figure~\ref{fig:echo}, left) --- the
 signature of numerical (dealiasing-projection and round-off) losses, not of
 dynamics; a genuinely dissipative term would leave a resolution-independent
 deficit.  Energy is conserved through the event to $3\times10^{-6}$
@@ -1113,7 +1114,30 @@ of every point of the reversed field --- (fidelity following the
 linear-response law, with no chaotic amplification over the event
 timescale: the perturbed-echo fidelities equal the forward-propagation
 overlaps at the same $\varepsilon$), and recovery is destroyed only
-between $\varepsilon = 3\times10^{-2}$ and $10^{-1}$.  ``Exquisitely tuned incoming
+between $\varepsilon = 3\times10^{-2}$ and $10^{-1}$
+(Figure~\ref{fig:echo}, right).
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{figures/reversal_echo_battery.png}
+  \caption{The \ssvissue{137} reversal-echo battery
+    (script \ssvfile{reversal_echo}; receipt in the result note).
+    \textit{Left:} exact-echo infidelity $1-F$ through the
+    annihilation event collapses under grid/timestep refinement
+    ($4.7\times10^{-5} \to 3.3\times10^{-9} \to 8.7\times10^{-12}$ at
+    $N = 256/512/1024$, $dt \propto dx^2$) --- the losses are
+    numerical (dealiasing projection and round-off), not dynamical:
+    the dynamics is conservative, and branch B is dead as written.
+    \textit{Right:} fidelity of the $\varepsilon$-perturbed reversal:
+    flat at the exact-echo plateau from $\varepsilon = 10^{-12}$
+    through $10^{-3}$ and equal to the forward-propagation overlaps at
+    the same $\varepsilon$ (linear response, no chaotic amplification)
+    --- the measured correction to this section's earlier
+    ``exquisitely tuned boundary data'' wording: single-event reversal
+    is robust, and the arrow rests on scale, multiplicity, and the
+    absence of any natural conjugation operation.}
+  \label{fig:echo}
+\end{figure}  ``Exquisitely tuned incoming
 boundary data'' is therefore \emph{not} required to reverse one
 small-scale event --- modest tuning suffices.  The boundary-data argument
 of \S\ref{sec:boundarydata} consequently rests on \emph{scale and
