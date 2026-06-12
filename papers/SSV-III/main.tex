@@ -1,24 +1,44 @@
-\documentclass[11pt]{article}
-
-\usepackage[a4paper,margin=1in]{geometry}
-\usepackage[T1]{fontenc}
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
 \usepackage[utf8]{inputenc}
-\usepackage{lmodern}
-\usepackage{amsmath,amssymb}
+\usepackage{amsmath,amssymb,physics}
+\usepackage{booktabs}
 \usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{verbatim}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
 
-\newenvironment{resultbox}[1][Result]{%
-  \begin{quote}\noindent\textbf{#1.}\ }{\end{quote}}
-\newenvironment{gapbox}[1][Open problem]{%
-  \begin{quote}\noindent\textbf{#1.}\ }{\end{quote}}
+% Coloured result boxes
+\newtcolorbox{resultbox}[1][]{enhanced,breakable,
+  colback=blue!4!white,colframe=blue!40!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+\newtcolorbox{gapbox}[1][]{enhanced,breakable,
+  colback=orange!6!white,colframe=orange!60!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+\newtcolorbox{falsbox}[1][]{enhanced,breakable,
+  colback=red!5!white,colframe=red!55!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+% ────────────────────────────────────────────────────────────────────────────
+\newcommand{\seriesname}{Saturated Superfluid Vacuum}
+\newcommand{\papernumber}{III}
+\title{\textbf{\seriesname~\papernumber}\\[0.4em]
+  \large Irreversible Time and Wake Entropy}
+\author{Stig Norland \\ Independent Researcher \\ Bergen, Norway}
+\date{June 2026}
+% ────────────────────────────────────────────────────────────────────────────
 
 \providecommand{\ssvissue}[1]{\hyperref[issue:#1]{\##1}}% in-text issue ref -> Code & Issue References appendix
 \providecommand{\ssvfile}[1]{\hyperref[file:#1]{\texttt{\detokenize{#1}}}}% in-text code/report ref -> Code & Issue References appendix
-
-\title{Saturated Superfluid Vacuum III\\
-Irreversible Time and Wake Entropy}
-\author{Stig Norland}
-\date{Draft}
 
 \begin{document}
 
@@ -70,13 +90,12 @@ experience and thermodynamics, it appears as an irreversible order of change. Th
 usually managed rather than resolved.
 
 The aim of this paper is narrow. We address only the origin of irreversible time in the SSV
-framework introduced in Paper~I~\cite{SSV-I} and developed in Paper~II~\cite{SSV-II}. The
-central claim is:
+framework introduced in Paper~I~\cite{SSV-I} and developed in Paper~II~\cite{SSV-II}.
 
-\begin{quote}
+\begin{resultbox}[Central claim of this paper]
 Time is the local rate of change of $\Psi$, the past survives only as wake structure in the
 present state, and entropy is the persistent wake-complexity of that state.
-\end{quote}
+\end{resultbox}
 
 This paper is therefore about ontology first and thermodynamic interpretation second. The
 goal is to state the time claim cleanly enough that the later papers can inherit it without
@@ -235,9 +254,9 @@ This motivates a reframing of entropy in SSV. Entropy should not be introduced a
 of past events. That would risk tautology if monotonicity is built into the definition from the
 start. The stronger claim is:
 
-\begin{quote}
+\begin{resultbox}[The entropy reframing]
 Entropy is the irreducible wake-complexity of the present state of $\Psi$.
-\end{quote}
+\end{resultbox}
 
 \subsection{Why This Is Not Tautological}\label{sec:nottautological}
 
@@ -333,10 +352,11 @@ the dominant fate of each channel.
 
 \begin{table}[h]
 \centering
+\renewcommand{\arraystretch}{1.2}
 \begin{tabular}{lll}
-\hline
-Channel & Dominant fate & Notes \\
-\hline
+\toprule
+\textbf{Channel} & \textbf{Dominant fate} & \textbf{Notes} \\
+\midrule
 $I_\phi$ (phase disorder) & radiated, then thermalized & Carried outward by phonons; \\
  & & mixed into phonon bath on scattering timescales. \\[2pt]
 $I_\rho$ (density disorder) & radiated, then thermalized & Sound-wave content; integral mass \\
@@ -350,7 +370,7 @@ $I_\mathcal{K}$ (Kelvin-wave) & radiated along filaments & Kelvin cascade transp
 $I_\mathcal{C}$ (correlation) & erased from observation & Long-range entanglement with the \\
  & & environment; structurally present but typically \\
  & & below resolved $(\ell,\mathcal{O})$. \\
-\hline
+\bottomrule
 \end{tabular}
 \caption{Dominant fate of each wake channel under forward evolution in $\Psi$. ``Radiated''
 means the content propagates outward but remains within $\Psi$; ``thermalized'' means it has
@@ -1030,14 +1050,19 @@ paper left the fork implicit.  It is now closed by a pre-registered audit
 and computation (issue~\ssvissue{137}; script \ssvfile{reversal_echo};
 result note \ssvfile{reversal-echo-issue137}).
 
-\paragraph{The audit.}  The SSV master dynamics --- LogSE with the
+\begin{resultbox}[The audit (issue \#137): the dynamics is
+conservative and T-symmetric]
+The SSV master dynamics --- LogSE with the
 saturation potential $V(\rho) = -b\rho[\ln(\rho/\bar\rho)-1]+V_0$ (Paper~I)
 plus the chiral-shear term $\propto\lambda|\nabla\times\mathbf{j}|^2$ --- is
 generated by a real energy functional, so the flow is Hamiltonian and
 conserves energy and norm; and under $t\to-t$, $\Psi\to\Psi^*$ every term
 maps to itself (the current $\mathbf{j}$ is T-odd but enters squared).  In
 particular the saturation potential, \emph{as written, is a conservative
-potential}: it carries no dissipation.  The candidate non-conservative
+potential}: it carries no dissipation.
+\end{resultbox}
+
+The candidate non-conservative
 element for branch B --- vortex reconnection as genuine dissipation,
 radiating irretrievably --- was put to the pre-registered test: if exact
 time reversal of the simulated field recovers the pre-event configuration,
@@ -1064,11 +1089,19 @@ recorded in the result note).  The same verdict holds in three dimensions
 for a genuine vortex-line reconnection (a Hopf link of two rings, which
 \emph{must} reconnect: the $2\to1$ core-tube merger observed, then
 restored by the echo, $F = 0.999997$ at the finer of two resolutions).
-\textbf{Branch B is dead as the equations are written.}  Reviving it would require
-\emph{adding} a named non-conservative term to the functional --- which
-would make SSV a substrate cousin of objective-collapse models --- and that
-addition would then be the engine of irreversibility, with the wake
-bookkeeping of this paper as its description.
+
+\begin{falsbox}[Falsified as written: branch B (fundamental
+irreversibility from reconnection dissipation), issue \ssvissue{137}]
+Exact time reversal recovers the pre-event configuration through both 2D
+annihilation and genuine 3D line reconnection, with the echo deficit
+shrinking under refinement: the radiated content is conservative and
+recoverable, so reconnection, as the equations stand, is \emph{not} a
+dissipative event.  Reviving branch B would require \emph{adding} a named
+non-conservative term to the functional --- which would make SSV a
+substrate cousin of objective-collapse models --- and that addition would
+then be the engine of irreversibility, with the wake bookkeeping of this
+paper as its description.
+\end{falsbox}
 
 \paragraph{A measured correction to this paper's earlier wording.}  The
 echo computation also returned one result \emph{against} the expectation
@@ -1091,26 +1124,29 @@ operation that conjugates an extended region's state.  The arrow is
 practical and statistical, exactly as Boltzmann had it --- now with the
 microscopic ledger written in a definite medium.
 
-\paragraph{What the gravity sector now asks of this paper.}  The same
-audit prices a demand that arrived from outside the time sector.  The
-\ssvissue{129} token-tax computation (H-BILATERAL S0) showed that the
-bilateral availability mechanism --- the surviving candidate for gravity's
-spatial sector after the \ssvissue{129}/\ssvissue{138} nulls --- delivers
-its $\gamma = 1$ doubling \emph{only} if interaction partners'
-microscopic busy-schedules are statistically independent despite their
-common mean loading (a smooth common-cause loading gives $\gamma = 0$,
-the data-killed half-deflection; Cassini bounds the schedule correlation
-at $c \lesssim 5\times10^{-3}$), and it located the only candidate source
-of such schedules in \emph{this} paper's update accounting.  The present
-computation makes the price explicit: the dynamics audited above is
-conservative, T-symmetric, and deterministic --- it contains no
-stochastic update schedules.  Whatever supplies them is \emph{added}
+\begin{gapbox}[What the gravity sector now asks of this paper
+(issue \ssvissue{129})]
+The same audit prices a demand that arrived from outside the time
+sector.  The \ssvissue{129} token-tax computation (H-BILATERAL S0)
+showed that the bilateral availability mechanism --- the surviving
+candidate for gravity's spatial sector after the
+\ssvissue{129}/\ssvissue{138} nulls --- delivers its $\gamma = 1$
+doubling \emph{only} if interaction partners' microscopic
+busy-schedules are statistically independent despite their common mean
+loading (a smooth common-cause loading gives $\gamma = 0$, the
+data-killed half-deflection; Cassini bounds the schedule correlation at
+$c \lesssim 5\times10^{-3}$), and it located the only candidate source
+of such schedules in \emph{this} paper's update accounting.  The
+present computation makes the price explicit: the dynamics audited
+above is conservative, T-symmetric, and deterministic --- it contains
+no stochastic update schedules.  Whatever supplies them is \emph{added}
 structure, in exactly the same category as branch B's non-conservative
 term, and must be declared as such.  Paper III's open obligations are
 therefore three, not two: the low-entropy boundary condition (with
 Paper~VIII, below), the cell constants of \S\ref{sec:subleading}, and
 now a stochastic update-accounting layer --- if the gravity sector's
 bilateral mechanism is to be opened at all.
+\end{gapbox}
 
 \paragraph{Entropy, not complexity.}  The same discipline settles the
 sub-fork of \S\ref{sec:wakecomplexity}: the wake functional $W[\Psi]$, as
@@ -1274,13 +1310,33 @@ structure. What remains open is of a different and more limited kind:
   is where a contribution beyond Boltzmann would live (issue~\ssvissue{137}, item 4).
 \end{enumerate}
 
-The status of the paper's central claims after the \ssvissue{137} computation: the
-ontology (time as local change; the past as present wake) is unchanged and remains a
-philosophical stance rather than a result; the dynamical substrate is \emph{computed} ---
-conservative, T-symmetric, with branch B (fundamental irreversibility from reconnection
-dissipation) dead as the equations are written; the entropy reframing survives as an
-honest coarse-graining with named channels; and the paper's earlier suggestion of
-per-event reversal fragility is corrected by measurement (\S\ref{sec:forkcomputed}).
+The status of the paper's central claims after the \ssvissue{137} computation:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\small
+\begin{tabular}{p{0.36\linewidth} p{0.20\linewidth} p{0.34\linewidth}}
+\toprule
+\textbf{Claim} & \textbf{Status} & \textbf{Basis / pointer} \\
+\midrule
+Time as local change; past as present wake & ontology & stance, not a
+result; unchanged \\
+Conservativity + T-symmetry of the dynamics & \textbf{computed} &
+\ssvissue{137} audit + echo battery (\S\ref{sec:forkcomputed}) \\
+Branch B: reconnection as genuine dissipation & \textbf{falsified as
+written} & exact echo recovers; falsbox, \S\ref{sec:forkcomputed} \\
+Wake entropy $W[\Psi]$ & coarse-grained entropy & monotone by design;
+\emph{not} a depth measure \\
+Per-event reversal fragility (earlier \S\ref{sec:formalreversal} wording)
+& \textbf{corrected by measurement} & robust to $\varepsilon^* =
+3\times10^{-2}$; \S\ref{sec:forkcomputed} \\
+Low-entropy initial condition & open & owned with Paper~VIII
+(\S\ref{sec:initialcondition}) \\
+Stochastic update-accounting layer & open & demanded by \ssvissue{129}
+H-BILATERAL; added structure \\
+\bottomrule
+\end{tabular}
+\end{center}
 
 The gain from the present framing is conceptual clarity. If time is local change, and the past
 survives only as present wake, then irreversibility is not an added rule imposed on a reversible
