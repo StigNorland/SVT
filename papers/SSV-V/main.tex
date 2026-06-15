@@ -554,13 +554,45 @@ gravity includes the redshift factor at the horizon.  Both corrections are recov
 spatial-curvature contribution to the metric is derived in Paper~VII-b.
 \end{gapbox}
 
-The surface gravity and Unruh temperature of this section are the analytic
-half (battery~S1, \ssvissue{155}) of the holographic-compliance programme; the
-\emph{area-law} half---that the medium's cross-horizon entanglement entropy
-furnishes the $S\propto A$ input to this thermodynamic route---is the computed
-result of \S\ref{sec:entropy} (the resultbox there), with the coefficient
-$\eta\to G$ conceded.  The two together would close the Jacobson route; this
-branch delivers the area-law form only.
+\begin{resultbox}
+\textbf{Surface gravity, Unruh $T$, and trans-Planckian robustness from the
+flowing medium (H-EOS~S1, \ssvissue{155}).}  The acoustic metric is
+\emph{kinematic}---fixed algebraically by the flow with no back-reaction
+(Visser~\cite{Visser1998}, \S14: ``form yes, $G$ no'').  A concrete
+mass-conserving radial-sink dumb-hole $v(r) = c_s (r_H/r)^2$ (a radial sink, not
+a pure vortex, is required for a true horizon) crosses the density-independent
+LogSE sound speed $c_s=\sqrt{B_0}$ at $r_H$, and the battery
+\ssvfile{dumb_hole_surface_gravity} reproduces the Visser analogue-gravity forms
+to a relative $10^{-6}$:
+\begin{equation}
+  g_H = \tfrac12\bigl|\partial_r(c_s^2-v^2)\bigr|_{r_H} = \frac{2c_s^2}{r_H},
+  \qquad
+  k_B T_H = \frac{\hbar g_H}{2\pi c_s} \;\Rightarrow\; T_H = \frac{c_s}{\pi r_H}.
+\end{equation}
+
+\textbf{The robustness margin (the negative-capable test; W4\,/\,\ssvissue{148}).}
+The LogSE phonon dispersion $\omega^2=c_s^2k^2+k^4/4$ is \emph{superluminal} for
+all $k>0$ (group velocity $v_g=(c_s^2+k^2/2)/\sqrt{c_s^2+k^2/4}>c_s$, excess
+$\tfrac38 k^2/c_s$), so high-$k$ modes can leak across the horizon
+(Corley--Jacobson~\cite{CorleyJacobson1996}).  Thermality is robust iff
+\[
+  M \equiv \frac{g_H\,\xi}{2\pi c_s^2} = \frac{\xi}{\pi r_H} \ll 1.
+\]
+This is $\sim10^{-40}$ for astrophysical horizons (robust) but $O(1)$ for the
+\emph{local Rindler horizons} of the Jacobson construction at grain-scale
+acceleration: the acoustic-horizon thermodynamics is robust \emph{conditionally
+on horizon $\gg$ grain}---the same local-Lorentz protection that
+\ssvissue{148} already owes, now quantitative.
+
+\textbf{The Jacobson route closes in form.}  With $T_H$ here and the area-law
+$dS=\eta\,dA$ of \S\ref{sec:entropy} (S2), the Clausius relation $\delta Q=T_H\,dS$
+gives $\nabla^2\Phi = 4\pi G_{\text{eff}}\,e/c^2$ with $G_{\text{eff}}=1/(4\hbar
+c\,\eta)$.  The measured $\eta$ is $O(1)$ per $\xi^2$, so $G_{\text{eff}}$
+overshoots $G_N$ by $(a_p/\ell_P)^2\approx1.69\times10^{38}$---the conceded
+sub-grain input (\ssvissue{154}); the identity $(a_p/\ell_P)^2=1/\alpha_G$ is the
+guarded \#122 tautology, not a derivation.  Result note:
+\ssvfile{h-eos-s1-issue155}.  \emph{Form yes, $G$ no}, through the full chain.
+\end{resultbox}
 
 \subsection{Qualitative consequences}
 
@@ -859,6 +891,14 @@ functions,'' \textit{J.~Phys.~A}~\textbf{36}, L205--L208 (2003).
 \bibitem{CasiniHuerta2009}
 H.~Casini and M.~Huerta, ``Entanglement entropy in free quantum field theory,''
 \textit{J.~Phys.~A}~\textbf{42}, 504007 (2009).
+
+\bibitem{Visser1998}
+M.~Visser, ``Acoustic black holes: horizons, ergospheres, and Hawking
+radiation,'' \textit{Class.~Quantum Grav.}~\textbf{15}, 1767--1791 (1998).
+
+\bibitem{CorleyJacobson1996}
+S.~Corley and T.~Jacobson, ``Hawking spectrum and high frequency dispersion,''
+\textit{Phys.~Rev.~D}~\textbf{54}, 1568--1586 (1996).
 
 \end{thebibliography}
 

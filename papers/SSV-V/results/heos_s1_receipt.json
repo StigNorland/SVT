@@ -1,0 +1,101 @@
+{
+ "config": {
+  "B0": 1.0,
+  "c_s": 1.0,
+  "xi": 0.7071067811865475
+ },
+ "S1a": {
+  "rows": [
+   {
+    "r_H": 2.0,
+    "g_H_analytic": 1.0,
+    "g_H_numeric": 1.0000012500009636,
+    "g_H_rel_err": 1.2500009636262632e-06,
+    "T_H_analytic": 0.15915494309189535,
+    "T_H_numeric": 0.15915514203572756,
+    "T_H_rel_err": 1.250000963518733e-06,
+    "robustness_margin_M": 0.11253953951963826,
+    "thermality_robust": false
+   },
+   {
+    "r_H": 4.0,
+    "g_H_analytic": 0.5,
+    "g_H_numeric": 0.5000006250004818,
+    "g_H_rel_err": 1.2500009636262632e-06,
+    "T_H_analytic": 0.07957747154594767,
+    "T_H_numeric": 0.07957757101786378,
+    "T_H_rel_err": 1.250000963518733e-06,
+    "robustness_margin_M": 0.05626976975981913,
+    "thermality_robust": true
+   },
+   {
+    "r_H": 8.0,
+    "g_H_analytic": 0.25,
+    "g_H_numeric": 0.2500003125002409,
+    "g_H_rel_err": 1.2500009636262632e-06,
+    "T_H_analytic": 0.039788735772973836,
+    "T_H_numeric": 0.03978878550893189,
+    "T_H_rel_err": 1.250000963518733e-06,
+    "robustness_margin_M": 0.028134884879909564,
+    "thermality_robust": true
+   },
+   {
+    "r_H": 16.0,
+    "g_H_analytic": 0.125,
+    "g_H_numeric": 0.12500015625012045,
+    "g_H_rel_err": 1.2500009636262632e-06,
+    "T_H_analytic": 0.019894367886486918,
+    "T_H_numeric": 0.019894392754465945,
+    "T_H_rel_err": 1.250000963518733e-06,
+    "robustness_margin_M": 0.014067442439954782,
+    "thermality_robust": true
+   },
+   {
+    "r_H": 32.0,
+    "g_H_analytic": 0.0625,
+    "g_H_numeric": 0.06250007812506023,
+    "g_H_rel_err": 1.2500009636262632e-06,
+    "T_H_analytic": 0.009947183943243459,
+    "T_H_numeric": 0.009947196377232972,
+    "T_H_rel_err": 1.250000963518733e-06,
+    "robustness_margin_M": 0.007033721219977391,
+    "thermality_robust": true
+   },
+   {
+    "r_H": 64.0,
+    "g_H_analytic": 0.03125,
+    "g_H_numeric": 0.03125003906253011,
+    "g_H_rel_err": 1.2500009636262632e-06,
+    "T_H_analytic": 0.0049735919716217296,
+    "T_H_numeric": 0.004973598188616486,
+    "T_H_rel_err": 1.250000963518733e-06,
+    "robustness_margin_M": 0.0035168606099886955,
+    "thermality_robust": true
+   }
+  ],
+  "superluminal_for_all_k": true,
+  "small_k_excess_coeff_measured": 0.37496615288141205,
+  "small_k_excess_coeff_analytic": 0.375,
+  "leak_note": "v_g > c_s for all k>0 (excess ~ (3/8)k^2/c_s); the horizon is sharp for hydrodynamic modes (k xi << 1), fuzzy at the grain scale k ~ 1/xi."
+ },
+ "S1c": {
+  "eta_from_S2_c2_area": 3.689316828107744,
+  "eta_is_O1_per_xi2": true,
+  "G_eff_form": "G_eff = 1/(4 hbar c eta)  [Jacobson, VII-b sec.5.1]",
+  "G_eff_code_units": 0.06776322328712153,
+  "overshoot_a_p_over_l_P_squared": 1.6931500025035654e+38,
+  "guard": "(a_p/l_P)^2 = 1/alpha_G is the #122 IDENTITY (l_P and alpha_G both contain G), not a derivation; G's magnitude stays conceded (D-b, #154). The Clausius chain delivers the FORM; the magnitude is exactly the conceded overshoot."
+ },
+ "verdicts": {
+  "g_H_matches_visser_eq70": true,
+  "T_H_matches_visser_eq118": true,
+  "dispersion_superluminal_all_k": true,
+  "margin_M_to_zero_for_large_rH": true,
+  "rH_breakdown_grainscale": 0.22507907903927651,
+  "S1c_eta_O1_form_closes": true,
+  "S1c_overshoot": 1.6931500025035654e+38,
+  "VERDICT": "R1(a)",
+  "VERDICT_meaning": "R1(a): regular acoustic horizon; g_H, T_H match Visser; thermality robust for scale-separated horizons (M=xi/(pi r_H) -> 0), O(1) at the grain scale (W4/#148 caveat). Clausius closes in FORM; G magnitude conceded (overshoot ~1.69e+38).",
+  "form_yes_G_no": true
+ }
+}
