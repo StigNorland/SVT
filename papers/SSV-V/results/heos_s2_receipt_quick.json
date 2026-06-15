@@ -1,0 +1,104 @@
+{
+ "config": {
+  "quick": true,
+  "B0": 1.0,
+  "c_s": 1.0,
+  "xi": 0.7071067811865475,
+  "N": 120,
+  "a": 0.5,
+  "ell_max": 40,
+  "width": 1.414213562373095
+ },
+ "A_baseline": {
+  "R": [
+   2.0,
+   3.0,
+   4.0,
+   5.0
+  ],
+  "S": [
+   14.235821811020301,
+   28.609685929663815,
+   46.512273258266035,
+   66.95668326391589
+  ],
+  "slope": 1.6921728506750413,
+  "log_prefactor": 1.4880013352098658,
+  "fit_rms": 0.006340178478232012,
+  "ell_used": 40,
+  "k4": true
+ },
+ "B_chiral": {
+  "R": [
+   2.0,
+   3.0,
+   4.0,
+   5.0
+  ],
+  "S_chiral_off": [
+   14.235821811020301,
+   28.609685929663815,
+   46.512273258266035,
+   66.95668326391589
+  ],
+  "S_chiral_on": [
+   14.235821811020301,
+   28.609685929663815,
+   46.512273258266035,
+   66.95668326391589
+  ],
+  "max_rel_diff": 0.0,
+  "slope": 1.6921728506750413,
+  "note": "chiral term is exactly silent at quadratic order over irrotational flow (#138 statement 1); area-law form is chiral-protected. Rotational-flow risk flagged residual."
+ },
+ "C_dumbhole": {
+  "r_H": [
+   2.0,
+   3.0,
+   4.0,
+   5.0
+  ],
+  "S": [
+   15.34639590663664,
+   30.950258047054298,
+   50.5092800545358,
+   72.99853124655169
+  ],
+  "slope": 1.7042981926240997,
+  "fit_rms": 0.00567263629003128,
+  "width": 1.414213562373095,
+  "k4": true,
+  "note": "spatial acoustic-metric inhomogeneity; flowing-horizon Hawking vacuum + surface gravity = S1 (deferred)."
+ },
+ "D_volume_control": {
+  "R": [
+   2.0,
+   3.0,
+   4.0,
+   5.0
+  ],
+  "S_thermal": [
+   1.4159489121870268,
+   4.7788275786312155,
+   11.327591297496214,
+   22.124201752922293
+  ],
+  "slope": 2.999999999999999,
+  "fit_rms": 2.0621477437872914e-15,
+  "T": 1.0
+ },
+ "eta_G_overshoot_a_p_over_l_P_squared": 1.6931500025035654e+38,
+ "verdicts": {
+  "A_baseline_area_law": true,
+  "A_baseline_slope": 1.6921728506750413,
+  "C_dumbhole_area_law": true,
+  "C_dumbhole_slope": 1.7042981926240997,
+  "B_chiral_exactly_silent": true,
+  "D_control_volume_law": true,
+  "D_control_slope": 2.999999999999999,
+  "VERDICT": "R1",
+  "VERDICT_meaning": "R1: cross-horizon entanglement entropy is area-law (form derived); coefficient eta->G conceded (overshoot ~1.69e+38).",
+  "form_yes_G_no": true
+ },
+ "walltime_s": 0.5457749366760254
+}
