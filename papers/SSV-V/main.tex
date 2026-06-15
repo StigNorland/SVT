@@ -19,6 +19,9 @@
 \newmdenv[linewidth=1.1pt,innertopmargin=5pt,innerbottommargin=5pt,%
   innerleftmargin=8pt,innerrightmargin=8pt]{resultbox}
 
+\providecommand{\ssvfile}[1]{\hyperref[file:#1]{\texttt{\detokenize{#1}}}}% in-text code/report ref -> Code & Issue References appendix
+\providecommand{\ssvissue}[1]{\hyperref[issue:#1]{\##1}}% in-text issue ref -> Code & Issue References appendix
+
 \title{Saturated Superfluid Vacuum V\\
 Condensate Black Holes}
 \author{Stig Norland}
@@ -447,6 +450,41 @@ coefficient absorbs both this factor and~\eqref{eq:mP}; both are deferred to Pap
 VII-b.
 \end{gapbox}
 
+\begin{resultbox}
+\textbf{The area dependence is derived, not counted (H-EOS S2, \ssvissue{155}).}
+Equations~\eqref{eq:omega}--\eqref{eq:SH} above obtain the area law by a
+\emph{schematic} count of independent boundary cells of size $\xi^2$.  The
+holographic-compliance programme (Paper~VII-b; the gravity-sector decision
+recorded in \ssvissue{154}) requires the area law to come instead from the
+medium's \emph{cross-horizon entanglement entropy}---the area-law entropy of a
+short-range-correlated ground state with a UV cutoff $\xi$
+(Srednicki~\cite{Srednicki1993}; Bombelli \emph{et al.}~\cite{BKLS1986}), the
+input Jacobson's entanglement-equilibrium route~\cite{JacobsonEEq2016} turns
+into the field equation.  The battery
+\ssvfile{horizon_entanglement_entropy} computes this entropy directly, by the
+correlator method (Peschel~\cite{Peschel2003}; Casini--Huerta~\cite{CasiniHuerta2009})
+applied to the Bogoliubov vacuum of the saturated medium, and finds it
+\emph{area-law}: the entanglement-entropy exponent tracks a provably area-law
+gapped-scalar calibrator and sits a full unit in exponent below the
+volume-law (extensive thermal) control, with $S/R^3 \to 0$; the coefficient
+$\eta$ is size-independent (universal to $5\%$) and reproduces across a
+spherically-symmetric acoustic-metric inhomogeneity at the horizon scale.  The
+one candidate non-locality---the chiral-shear term---is \emph{exactly silent}
+at quadratic order over irrotational flow (\ssvissue{138}), so the form is
+chiral-protected.  This \emph{earns} the area dependence of~\eqref{eq:SH} from
+the medium's vacuum, replacing the boundary count.
+
+\textbf{What is \emph{not} earned: the coefficient.}  The whole of the
+remaining gap of the gapboxes above is localised into the single number
+$\eta = S_{\text{ent}}/\xi^2$: a natural $\eta\sim 1/\xi^2$ overshoots $G_N$ by
+$(a_p/\ell_P)^2 = 1/\alpha_G = (m_P/m_p)^2 \approx 1.69\times10^{38}$ (the
+Susskind--Uglum species problem, Sakharov's induced gravity in another guise).
+$G$'s magnitude is therefore conceded as a sub-grain (trans-Planckian) input
+(\ssvissue{154}), not derived.  Result note: \ssvfile{h-eos-s2-issue155}.  This
+branch delivers the area-law \emph{form} only; the surface gravity, Unruh temperature, and the
+Clausius closure are the analytic battery~S1, deferred.
+\end{resultbox}
+
 \subsection{No information destruction}
 
 The condensate picture dissolves the information-loss problem rather than solving it.  The
@@ -515,6 +553,14 @@ the horizon at $r_H = GM/c^2$ instead of the GR value $r_S = 2GM/c^2$, and the G
 gravity includes the redshift factor at the horizon.  Both corrections are recovered once the
 spatial-curvature contribution to the metric is derived in Paper~VII-b.
 \end{gapbox}
+
+The surface gravity and Unruh temperature of this section are the analytic
+half (battery~S1, \ssvissue{155}) of the holographic-compliance programme; the
+\emph{area-law} half---that the medium's cross-horizon entanglement entropy
+furnishes the $S\propto A$ input to this thermodynamic route---is the computed
+result of \S\ref{sec:entropy} (the resultbox there), with the coefficient
+$\eta\to G$ conceded.  The two together would close the Jacobson route; this
+branch delivers the area-law form only.
 
 \subsection{Qualitative consequences}
 
@@ -794,6 +840,31 @@ R.~Penrose, ``Extraction of rotational energy from a black hole,''
 J.~Steinhauer, ``Observation of quantum Hawking radiation and its entanglement in an analogue
 black hole,'' \textit{Nat.~Phys.}~\textbf{12}, 959--965 (2016).
 
+\bibitem{Srednicki1993}
+M.~Srednicki, ``Entropy and area,''
+\textit{Phys.~Rev.~Lett.}~\textbf{71}, 666--669 (1993).
+
+\bibitem{BKLS1986}
+L.~Bombelli, R.~K.~Koul, J.~Lee, and R.~D.~Sorkin, ``Quantum source of entropy
+for black holes,'' \textit{Phys.~Rev.~D}~\textbf{34}, 373--383 (1986).
+
+\bibitem{JacobsonEEq2016}
+T.~Jacobson, ``Entanglement equilibrium and the Einstein equation,''
+\textit{Phys.~Rev.~Lett.}~\textbf{116}, 201101 (2016).
+
+\bibitem{Peschel2003}
+I.~Peschel, ``Calculation of reduced density matrices from correlation
+functions,'' \textit{J.~Phys.~A}~\textbf{36}, L205--L208 (2003).
+
+\bibitem{CasiniHuerta2009}
+H.~Casini and M.~Huerta, ``Entanglement entropy in free quantum field theory,''
+\textit{J.~Phys.~A}~\textbf{42}, 504007 (2009).
+
 \end{thebibliography}
+
+\appendix
+% Auto-generated provenance (issue URLs + pinned script permalinks).
+% Regenerate: python instruments/tools/gen_provenance.py SSV-V
+\input{provenance.tex}
 
 \end{document}
