@@ -556,6 +556,50 @@ first.  That derivation remains open; the dwarf-spheroidal
 discriminator (dSphs are not in SPARC's rotation-supported sample) has
 now been run, next.
 
+\subsection{The acceleration scale and the cosmological-horizon
+over-constraint}
+\label{sec:a0}
+
+The constant-$v_h$ halo coincides with the deep-MOND tail with
+$a_{0,h}\equiv v_h^4/(G M_{\rm bar})$ (issue \ssvissue{146}; script
+\ssvfile{a0_from_vh}); the cored primary-tier value is
+$a_0 = 1.13\times10^{-10}\,$m\,s$^{-2}$ (scatter $\sim0.31$ dex).
+
+\begin{resultbox}[$a_0 = cH_0/2\pi$ from the de Sitter horizon, and the
+duality over-constraint (H-A0-IR, \ssvissue{155})]
+Papers~V's local horizons fix the holographic thermodynamics --- the
+Unruh/Gibbons--Hawking factor $2\pi$ in $kT_H=\hbar g_H/2\pi c$ (S1) and the
+area-law $\tfrac14$ (S2). Applied to the \emph{cosmological} (de Sitter / Hubble)
+horizon, the same construction gives the IR acceleration scale
+\[
+  a_0 = c\,f_{\rm dS} = \frac{cH_0}{2\pi},
+  \qquad f_{\rm dS}=\frac{H_0}{2\pi}\ \text{(the GH thermal frequency)}.
+\]
+The \emph{magnitude} is conceded: $H_0$ (via $\Lambda=(8\pi G/c^2)(P_0/\rho_0c^2)$
+and the undetermined saturation pressure $P_0$, Paper~VIII) is an input, just as
+$G$'s magnitude is (\ssvissue{154}). What is tested is the dimensionless
+coefficient. The battery \ssvfile{a0_overconstraint} confronts the measured $a_0$
+against each candidate (ratio measured/predicted, $H_0=73$):
+$cH_0/2\pi$ gives $0.999$ (and $1.082$ at $H_0=67.4$ --- consistent across the
+$H_0$ tension); $c^2\sqrt{\Lambda}$ gives $0.12$ --- \textbf{excluded at
+$8.4\times$}, a clean negative for the cosmological-constant branch. The
+over-constraint is therefore \emph{survived}: the local screens (V) and the
+cosmological screen carry one thermodynamics; the otherwise-falsifier-free
+duality \emph{could} have been falsified here (an $a_0$ on the $\sqrt\Lambda$ form
+would have done it) and was not.
+
+\textbf{Survived, not confirmed (rule 1).} Verlinde's $cH_0/6$ differs from
+$cH_0/2\pi$ by only $6/2\pi=0.955$ ($0.020$ dex), far inside the $\sim0.31$ dex
+scatter --- a $0.065\sigma$ separation, and the $H_0$ tension alone moves the
+anchor by $0.035$ dex. SPARC cannot choose between them. The decisive separator
+is the redshift-evolution falsifier (re-pinned from \ssvissue{146}, rule A4): the
+$cH$ branch predicts a BTFR-normalisation shift
+$\Delta\log M=\log_{10}[H(z)/H_0] = 0.121/0.253/0.482$ dex at $z=0.5/1/2$ (flat
+$\Lambda$CDM), against $0$ for the $\sqrt\Lambda$ branch --- a test that needs
+high-$z$ rotation curves not yet in hand. Result note
+\ssvfile{h-a0-ir-issue155}.
+\end{resultbox}
+
 \subsection{The dwarf-spheroidal ledger: the halo reads mass, not
 rotation}
 \label{sec:dsph}
@@ -693,6 +737,13 @@ CBH standing wave produces the flat curve &
 CBH overtones produce arms / Hubble sequence &
 \emph{falsified/superseded} (\ssvissue{124};
 Appendix~\ref{app:record}) \\
+$a_0 = cH_0/2\pi$ coefficient from the de Sitter horizon &
+\emph{derived} (coefficient; over-constraint survived, \S\ref{sec:a0},
+\ssvissue{155}) --- same Unruh/GH $2\pi$ as Paper~V's local horizons \\
+$a_0$ magnitude ($H_0$/$\Lambda$ via $P_0$) &
+\emph{conceded input} (Paper~VIII gapbox; parallel to $G$, \ssvissue{154}) \\
+$a_0 = c^2\sqrt{\Lambda}$ (cosmological-constant form) &
+\emph{falsified} (\ssvissue{155}: $8.4\times$ too large) \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -729,6 +780,17 @@ magnitude.  The CBH's residual role --- whether its inner Keplerian
 region leaves any observable imprint (wiggle spacing was the last
 candidate, and its amplitude chain is retired) --- is open and currently
 unsupported.  Both are recorded as open, with no claim made.
+
+Two further handles are now pinned (\S\ref{sec:a0}, \ssvissue{155}). The
+acceleration scale's coefficient $a_0=cH_0/2\pi$ is consistent with the
+de Sitter Gibbons--Hawking factor but \emph{not decisively separable}
+from Verlinde's $cH_0/6$ given the SPARC scatter ($0.065\sigma$); the
+decisive separator is the redshift-evolution falsifier (the $cH$ branch
+shifts the BTFR normalisation by $0.12$--$0.48$ dex out to $z=2$, the
+$\sqrt\Lambda$ branch by zero), which awaits high-$z$ rotation curves.
+And the $a_0$/$\Lambda$ \emph{magnitude} reduces to the saturation
+pressure $P_0(\rho_0)$ (Paper~VIII), conceded as an input in the same
+sense as $G$.
 
 %%──────────────────────────────────────────────────────────────────────
 \section{Conclusion}
