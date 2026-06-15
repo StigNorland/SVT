@@ -1,0 +1,154 @@
+{
+ "constants": {
+  "c": 299792458.0,
+  "Lambda_m^-2": 1.1e-52,
+  "Omega_m": 0.315,
+  "H0_kmsMpc": {
+   "67.4": 67.4,
+   "73.0": 73.0
+  }
+ },
+ "measured_a0_cored_primary": {
+  "a0_m_s2": 1.1281640861824739e-10,
+  "log10_median": -9.94762772966029,
+  "log10_p16": -10.228541842859483,
+  "log10_p84": -9.61104199467827,
+  "sigma_dex": 0.3087499240906064
+ },
+ "derivation": "a0 = c f_dS, f_dS = H0/2pi (de Sitter Gibbons-Hawking thermal frequency) => a0 = cH0/2pi; the SAME 2pi as S1 kT_H = hbar g_H/(2 pi c). Magnitude conceded (P0->Lambda).",
+ "confrontation_ratio_meas_over_pred": {
+  "67.4": {
+   "GH_2pi (cH0/2pi, SSV)": {
+    "a0_pred": 1.0421978811446008e-10,
+    "ratio_meas_over_pred": 1.0824854920482665,
+    "offset_dex": 0.03442208445671581
+   },
+   "Verlinde (cH0/6)": {
+    "a0_pred": 1.0913870689969088e-10,
+    "ratio_meas_over_pred": 1.033697501308465,
+    "offset_dex": 0.014393466482244394
+   },
+   "equipartition (cH0)": {
+    "a0_pred": 6.548322413981453e-10,
+    "ratio_meas_over_pred": 0.17228291688474417,
+    "offset_dex": -0.7637577839013993
+   },
+   "deSitter (c^2 sqrt(Lambda))": {
+    "a0_pred": 9.426223837979204e-10,
+    "ratio_meas_over_pred": 0.1196835663542157,
+    "offset_dex": -0.9219654780952579
+   }
+  },
+  "73.0": {
+   "GH_2pi (cH0/2pi, SSV)": {
+    "a0_pred": 1.1287899899637367e-10,
+    "ratio_meas_over_pred": 0.9994455090966187,
+    "offset_dex": -0.00024087912842026338
+   },
+   "Verlinde (cH0/6)": {
+    "a0_pred": 1.1820661133052572e-10,
+    "ratio_meas_over_pred": 0.9544001587423362,
+    "offset_dex": -0.020269497102891703
+   },
+   "equipartition (cH0)": {
+    "a0_pred": 7.092396679831543e-10,
+    "ratio_meas_over_pred": 0.1590666931237227,
+    "offset_dex": -0.7984207474865352
+   },
+   "deSitter (c^2 sqrt(Lambda))": {
+    "a0_pred": 9.426223837979204e-10,
+    "ratio_meas_over_pred": 0.1196835663542157,
+    "offset_dex": -0.9219654780952579
+   }
+  }
+ },
+ "rar_cross_check": {
+  "RAR_a0": 1.2e-10,
+  "ssv_halo_a0": 1.1281640861824739e-10,
+  "ssv_halo_prefers": {
+   "67.4": {
+    "ratio_GH2pi": 1.0824854920482665,
+    "ratio_Verlinde": 1.033697501308465,
+    "prefers": "1/6"
+   },
+   "73.0": {
+    "ratio_GH2pi": 0.9994455090966187,
+    "ratio_Verlinde": 0.9544001587423362,
+    "prefers": "1/2pi"
+   }
+  },
+  "rar_prefers": {
+   "67.4": {
+    "ratio_GH2pi": 1.1514128187269888,
+    "ratio_Verlinde": 1.0995182498386362,
+    "prefers": "1/6"
+   },
+   "73.0": {
+    "ratio_GH2pi": 1.063085260030124,
+    "ratio_Verlinde": 1.0151716443715628,
+    "prefers": "1/6"
+   }
+  },
+  "rar_sqrtLambda_ratio_H73": 0.12730442440429637,
+  "estimators_disagree_on_2pi_vs_6": true,
+  "note": "the SSV-halo a0 (1.13e-10) favours 1/2pi; the tighter literature RAR a0 (1.20e-10) favours Verlinde 1/6 at H0=73 -- the two best estimators straddle the two cH coefficients (~6 percent apart). Both keep sqrt(Lambda) excluded (RAR ratio 0.127). So 1/2pi is SSV's prediction and is consistent, but NOT singled out."
+ },
+ "deSitter_via_S1_machinery": {
+  "per_H0": {
+   "67.4": {
+    "g_dS_numeric": 6.548322413987153e-10,
+    "g_dS_analytic_cH0": 6.548322413981453e-10,
+    "g_dS_rel_err": 8.704990432488801e-13,
+    "a0_from_g_dS_over_2pi": 1.0421978811455081e-10,
+    "matches_cH0_over_2pi": true
+   },
+   "73.0": {
+    "g_dS_numeric": 7.092396679837717e-10,
+    "g_dS_analytic_cH0": 7.092396679831543e-10,
+    "g_dS_rel_err": 8.704912564322757e-13,
+    "a0_from_g_dS_over_2pi": 1.1287899899647192e-10,
+    "matches_cH0_over_2pi": true
+   }
+  },
+  "machinery_ok": true,
+  "note": "the SAME Visser eq-70 finite-difference surface gravity as the S1 dumb-hole, applied to the Hubble flow v=H0 r, gives g_dS = c H0 and a0 = g_dS/2pi = cH0/2pi -- the shared thermodynamics is a computation, not an assertion."
+ },
+ "discrimination": {
+  "sep_2pi_vs_6_dex": 0.020028617974471363,
+  "sep_2pi_vs_6_sigma": 0.06487003368005273,
+  "H0_tension_dex": 0.03466296358513607,
+  "rar_systematic_dex": 0.07918124604762482,
+  "decisive_2pi_vs_6": false,
+  "separation_blocked_by": "RAR systematic (0.079 dex) + H0 tension (0.035 dex) both exceed the 1/2pi-vs-1/6 gap (0.020 dex)",
+  "note": "1/2pi and 1/6 differ by 6/2pi = 0.955 (0.020 dex); the SSV-halo sigma is ~0.31 dex, the H0 tension shifts the anchor 0.035 dex, and even the tight RAR is blocked by its ~0.086 dex systematic -- so 1/2pi vs 1/6 is NOT separable by any current estimator."
+ },
+ "z_falsifier": {
+  "z=0.5": {
+   "cH_branch_dex": 0.12128624185780124,
+   "sqrtLambda_branch_dex": 0.0
+  },
+  "z=1.0": {
+   "cH_branch_dex": 0.25291401692741816,
+   "sqrtLambda_branch_dex": 0.0
+  },
+  "z=2.0": {
+   "cH_branch_dex": 0.4816577556930557,
+   "sqrtLambda_branch_dex": 0.0
+  }
+ },
+ "verdicts": {
+  "GH_2pi_consistent": true,
+  "GH_2pi_ratios": {
+   "67.4": 1.0824854920482665,
+   "73.0": 0.9994455090966187
+  },
+  "sqrtLambda_excluded_both_estimators": true,
+  "sqrtLambda_ratio_H73": 0.1196835663542157,
+  "deSitter_machinery_reproduces_cH0_2pi": true,
+  "estimators_disagree_2pi_vs_6": true,
+  "1over2pi_vs_1over6_decisively_separated": false,
+  "VERDICT": "R1",
+  "VERDICT_meaning": "R1: a0 consistent with cH0/2pi (the SAME finite-difference surface-gravity machinery as the S1 dumb-hole gives g_dS=cH0 => a0=cH0/2pi); c^2 sqrt(Lambda) excluded under BOTH the SSV-halo and the RAR a0. Local & cosmological screens share one thermodynamics -- the duality SURVIVES its falsifier; the weak-derivation (b) is discharged from promissory to survived. Magnitude conceded; 1/2pi vs 1/6 NOT separable by any current estimator (SSV-halo favours 1/2pi, RAR favours 1/6) -- decisive test = the z-evolution falsifier, high-z data.",
+  "form_yes_magnitude_conceded": true
+ }
+}
