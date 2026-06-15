@@ -1,0 +1,45 @@
+{
+  "issue": 129,
+  "battery": "GW-POL",
+  "quick": true,
+  "moduleA_antenna_vs_closedform_max_abs_err": 1.9447463213448413,
+  "moduleA_helicity_content": {
+    "plus": 2,
+    "cross": 2,
+    "vec_x": 1,
+    "vec_y": 1,
+    "breathing": 0,
+    "longitudinal": 0
+  },
+  "moduleB_longwavelength_max_F_ssv": 3.08055718521022e-16,
+  "moduleB_longwavelength_max_F_tensor": 0.9999500016666446,
+  "moduleB_suppression_curve": [
+    [
+      10.0,
+      0.00028931816271235346
+    ],
+    [
+      100.0,
+      0.0028931944706131066
+    ],
+    [
+      1000.0,
+      0.028944795720495284
+    ]
+  ],
+  "moduleB_suppression_at_100Hz_4km": 0.0028931944706131066,
+  "moduleC_i_ssv_helicity_set": [
+    0
+  ],
+  "moduleC_i_tensor_overlap": 0.0,
+  "moduleC_ii_distance_bias_factor": 345.63870840942354,
+  "moduleC_ii_gw170817_D_em_Mpc": 40.0,
+  "moduleC_ii_gw170817_D_inferred_Mpc": 13825.548336376942,
+  "moduleC_iii_emission": {
+    "monopole_d2M_peak": 0.0,
+    "dipole_d2P_peak": 0.0,
+    "quadrupole_d3Q_peak": 124.10549968323386
+  },
+  "verdict": "R2",
+  "runtime_s": 0.3898355960845947
+}
