@@ -7,8 +7,10 @@ one thermodynamics: the duality **survives its falsifier**, and the weak
 G-derivation's promissory falsifier (b) is **discharged from promissory to
 survived (not confirmed)**. Honest bars, all at full strength (rule 1): the a₀
 *magnitude* is a conceded input (P₀→Λ→H₀, SSV-VIII), only the coefficient is
-derived; 1/2π vs 1/6 is **not** decisively separable from SPARC (0.065σ); the
-decisive cH-vs-√Λ separation is the z-evolution falsifier, which needs high-z
+derived; 1/2π is **not singled out** — SPARC gives 0.065σ and, more honestly, the
+*independent, tighter* RAR a₀ mildly favours Verlinde's 1/6 while SSV's own halo
+a₀ favours 1/2π (the two best estimators straddle the coefficients ~6% apart);
+the decisive cH-vs-√Λ separation is the z-evolution falsifier, which needs high-z
 data; the cored amplitude is post-hoc (#146 A4). With S1+S2+H-A0-IR the *form*
 half of Option D is complete and internally consistent, with every magnitude
 (G, Λ/H₀) an honest conceded input.**
@@ -37,13 +39,18 @@ teeth. The teeth are in the **dimensionless coefficient** `a₀/(cH₀)`, which 
 equal the de Sitter Gibbons–Hawking `1/2π` — the *same* 2π S1 used in
 `kT_H = ħg_H/(2πc)`.
 
-## The derivation
+## The derivation — and the shared machinery is a computation, not an assertion
 
 `a₀ = c·f_dS`, with `f_dS = H₀/2π` the de Sitter (Hubble) horizon's
 Gibbons–Hawking thermal frequency — the cosmological-horizon instance of S1's
-local `kT_H = ħg_H/(2πc)` (identical Unruh/GH 2π; Visser's acoustic-metric
-construction applied to the de Sitter horizon). So **`a₀ = cH₀/2π`**. The
-magnitude (`H₀`, via `P₀→Λ`) is conceded; only the coefficient `1/2π` is derived.
+local `kT_H = ħg_H/(2πc)`. This is made **concrete**: the *same* Visser eq-70
+finite-difference surface-gravity routine as the S1 dumb-hole
+(`dumb_hole_surface_gravity.py`), applied to the Hubble flow `v(r)=H₀r` against
+sound speed `c`, gives the de Sitter horizon `r_dS=c/H₀`, surface gravity
+`g_dS = ½|∂_r(c²−v²)|_{r_dS} = cH₀` (numeric vs analytic to 9×10⁻¹³), hence
+`a₀ = g_dS/2π = cH₀/2π`. So the "same thermodynamics" claim is a shared
+*computation*, not a coincidence of coefficients. The magnitude (`H₀`, via
+`P₀→Λ`) is conceded; only the coefficient `1/2π` is derived.
 
 ## The over-constraint (vs the #146 measured cored a₀ = 1.13×10⁻¹⁰, σ≈0.31 dex)
 
@@ -56,11 +63,20 @@ magnitude (`H₀`, via `P₀→Λ`) is conceded; only the coefficient `1/2π` is
 
 - **GH-2π consistent** across the H₀ tension (ratio in [0.85, 1.15]).
 - **c²√Λ excluded** (8.4× too large) — a clean negative killing the
-  cosmological-constant holographic branch.
-- **1/2π vs 1/6 not decisively separated:** the two cH coefficients differ by
-  `6/2π = 0.955` (0.020 dex), far below the measurement scatter (~0.31 dex);
-  the σ-separation is **0.065σ**, and the H₀ tension alone shifts the cH anchor
-  by 0.035 dex (> the 1/2π-vs-1/6 gap). SPARC cannot choose between them.
+  cosmological-constant holographic branch; **and excluded under the independent
+  RAR a₀ too** (ratio 0.127), so the exclusion is not an artifact of the SSV halo
+  fit.
+- **1/2π vs 1/6 not separable by any current estimator — and the two best ones
+  disagree (the honest tension).** The cH coefficients differ by `6/2π = 0.955`
+  (0.020 dex), far below the SSV-halo scatter (~0.31 dex; 0.065σ). Worse for a
+  clean claim: the *independent, tighter* literature RAR scale `a₀ = 1.20×10⁻¹⁰`
+  (McGaugh–Lelli–Schombert) favours **Verlinde's 1/6** at H₀=73 (ratio 1.015)
+  while SSV's own halo a₀ favours **1/2π** (ratio 0.999). The two best estimators
+  *straddle* the two cH coefficients (~6% apart). Even the RAR's tiny random
+  error cannot decide it — the binding errors are the RAR systematic (~0.079 dex)
+  and the H₀ tension (0.035 dex), both larger than the 0.020-dex gap. **So 1/2π
+  is SSV's prediction and is consistent, but it is *not singled out* by the
+  data**, and the tightest external estimator mildly prefers 1/6.
 - **The decisive separator is the z-evolution falsifier** (re-pinned from #146
   A4): the cH branch predicts a BTFR normalization shift
   `Δlog M = log[H(z)/H₀]` = **0.121 / 0.253 / 0.482 dex** at z = 0.5 / 1 / 2

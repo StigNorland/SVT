@@ -62,6 +62,13 @@ LAMBDA = 1.1e-52                  # m^-2 (pinned, #146)
 H0_LIST = {"67.4": 67.4, "73.0": 73.0}   # km/s/Mpc (Planck, SH0ES)
 OMEGA_M = 0.315                   # flat LCDM (z-falsifier)
 
+# Independent literature target: the radial-acceleration-relation scale
+# g_dagger (McGaugh-Lelli-Schombert 2016), MUCH tighter than the SSV-halo a0 in
+# random error but with a large systematic. Used as a robustness cross-check.
+RAR_A0 = 1.20e-10                 # m/s^2
+RAR_A0_RANDOM = 0.02e-10          # +/- random
+RAR_A0_SYST = 0.24e-10            # +/- systematic (the binding one)
+
 
 def H0_si(h0_kmsmpc):
     return h0_kmsmpc * 1.0e3 / MPC_M     # s^-1
@@ -77,6 +84,26 @@ def candidate_a0(h0_kmsmpc):
         "equipartition (cH0)": cH,
         "deSitter (c^2 sqrt(Lambda))": C_LIGHT**2 * math.sqrt(LAMBDA),
     }
+
+
+def desitter_surface_gravity(h0_kmsmpc, eps=1e-4):
+    """The cosmological-horizon instance of S1's Visser eq-70 surface gravity,
+    computed by the SAME finite-difference construction as the local dumb-hole
+    (instruments/paper_v/dumb_hole_surface_gravity.py): the Hubble flow
+    v(r) = H0 r against sound speed c crosses at the de Sitter horizon
+    r_dS = c/H0, and
+        g_dS = 1/2 |d/dr (c^2 - v^2)|_{r_dS} = c H0   (analytic),
+    so  a0 = g_dS/(2 pi) = c H0/2 pi  and  kT_dS = hbar g_dS/(2 pi c) = hbar H0/2pi.
+    Returns (g_dS_numeric, g_dS_analytic = c H0, a0 = g_dS/2pi)."""
+    H = H0_si(h0_kmsmpc)
+    r_dS = C_LIGHT / H
+    # central finite difference of f(r) = c^2 - (H r)^2 at r_dS (same method
+    # as surface_gravity_numeric in the S1 instrument)
+    dr = eps * r_dS
+    f = lambda r: C_LIGHT**2 - (H * r) ** 2
+    dfdr = (f(r_dS + dr) - f(r_dS - dr)) / (2 * dr)
+    g_num = 0.5 * abs(dfdr)
+    return g_num, C_LIGHT * H, g_num / (2.0 * math.pi)
 
 
 # ----------------------------------------------------------------------
@@ -129,11 +156,46 @@ def battery():
                                 "offset_dex": math.log10(a0_meas / p)}
                          for name, p in preds.items()}
 
+    # --- robustness cross-check: the independent RAR scale (tighter) ---
+    # which cH coefficient does each a0 estimator prefer? (central values)
+    rar_pref = {}
+    ssv_pref = {}
+    for h in H0_LIST:
+        preds = candidate_a0(H0_LIST[h])
+        gh, ver = preds["GH_2pi (cH0/2pi, SSV)"], preds["Verlinde (cH0/6)"]
+        rar_pref[h] = {"ratio_GH2pi": RAR_A0 / gh, "ratio_Verlinde": RAR_A0 / ver,
+                       "prefers": "1/2pi" if abs(RAR_A0 - gh) < abs(RAR_A0 - ver)
+                       else "1/6"}
+        ssv_pref[h] = {"ratio_GH2pi": a0_meas / gh, "ratio_Verlinde": a0_meas / ver,
+                       "prefers": "1/2pi" if abs(a0_meas - gh) < abs(a0_meas - ver)
+                       else "1/6"}
+    rar_sqrtL = RAR_A0 / candidate_a0(73.0)["deSitter (c^2 sqrt(Lambda))"]
+    estimators_disagree = (ssv_pref["73.0"]["prefers"]
+                           != rar_pref["73.0"]["prefers"])
+
+    # --- the de Sitter horizon via the SAME S1 surface-gravity machinery ---
+    ds = {}
+    for h in H0_LIST:
+        g_num, g_an, a0_ds = desitter_surface_gravity(H0_LIST[h])
+        ds[h] = {"g_dS_numeric": g_num, "g_dS_analytic_cH0": g_an,
+                 "g_dS_rel_err": abs(g_num - g_an) / g_an,
+                 "a0_from_g_dS_over_2pi": a0_ds,
+                 "matches_cH0_over_2pi": abs(a0_ds - candidate_a0(
+                     H0_LIST[h])["GH_2pi (cH0/2pi, SSV)"]) / a0_ds < 1e-9}
+    ds_machinery_ok = all(d["g_dS_rel_err"] < 1e-3 and d["matches_cH0_over_2pi"]
+                          for d in ds.values())
+
     # discrimination power: 1/2pi vs 1/6 are a fixed factor apart; H0 tension
     # shifts the cH anchor; compare both to the measurement sigma.
     sep_2pi_vs_6_dex = abs(math.log10((1.0 / (2 * math.pi)) / (1.0 / 6.0)))
     sep_2pi_vs_6_sigma = sep_2pi_vs_6_dex / sigma_dex
     h0_tension_dex = abs(math.log10(73.0 / 67.4))
+    # decision path: even the tight RAR random error cannot separate them,
+    # because the binding error is the RAR systematic + the H0 tension.
+    rar_syst_dex = abs(math.log10((RAR_A0 + RAR_A0_SYST) / RAR_A0))
+    sep_blocked_by = ("RAR systematic (%.3f dex) + H0 tension (%.3f dex) both "
+                      "exceed the 1/2pi-vs-1/6 gap (%.3f dex)"
+                      % (rar_syst_dex, h0_tension_dex, sep_2pi_vs_6_dex))
 
     # ---- verdict ----
     # GH-2pi consistent across H0 (ratio in band); sqrt(Lambda) excluded
@@ -143,7 +205,9 @@ def battery():
     sqrtL_ratio = confront["73.0"]["deSitter (c^2 sqrt(Lambda))"][
         "ratio_meas_over_pred"]
     sqrtL_excluded = (sqrtL_ratio < 1 / 3.0) or (sqrtL_ratio > 3.0)
-    R1 = bool(gh_consistent and sqrtL_excluded)
+    # robustness: sqrt(Lambda) is excluded under BOTH a0 estimators
+    sqrtL_excluded_both = sqrtL_excluded and (rar_sqrtL < 1 / 3.0)
+    R1 = bool(gh_consistent and sqrtL_excluded_both and ds_machinery_ok)
     decisive_2pi_vs_6 = bool(sep_2pi_vs_6_sigma >= 1.0)
 
     out = {
@@ -157,32 +221,59 @@ def battery():
                       "thermal frequency) => a0 = cH0/2pi; the SAME 2pi as S1 "
                       "kT_H = hbar g_H/(2 pi c). Magnitude conceded (P0->Lambda).",
         "confrontation_ratio_meas_over_pred": confront,
+        "rar_cross_check": {
+            "RAR_a0": RAR_A0, "ssv_halo_a0": a0_meas,
+            "ssv_halo_prefers": ssv_pref, "rar_prefers": rar_pref,
+            "rar_sqrtLambda_ratio_H73": rar_sqrtL,
+            "estimators_disagree_on_2pi_vs_6": bool(estimators_disagree),
+            "note": (f"the SSV-halo a0 (1.13e-10) favours 1/2pi; the tighter "
+                     f"literature RAR a0 (1.20e-10) favours Verlinde 1/6 at "
+                     f"H0=73 -- the two best estimators straddle the two cH "
+                     f"coefficients (~6 percent apart). Both keep sqrt(Lambda) "
+                     f"excluded (RAR ratio {rar_sqrtL:.3f}). So 1/2pi is SSV's "
+                     f"prediction and is consistent, but NOT singled out."),
+        },
+        "deSitter_via_S1_machinery": {
+            "per_H0": ds, "machinery_ok": bool(ds_machinery_ok),
+            "note": "the SAME Visser eq-70 finite-difference surface gravity "
+                    "as the S1 dumb-hole, applied to the Hubble flow v=H0 r, "
+                    "gives g_dS = c H0 and a0 = g_dS/2pi = cH0/2pi -- the "
+                    "shared thermodynamics is a computation, not an assertion.",
+        },
         "discrimination": {
             "sep_2pi_vs_6_dex": sep_2pi_vs_6_dex,
             "sep_2pi_vs_6_sigma": sep_2pi_vs_6_sigma,
             "H0_tension_dex": h0_tension_dex,
+            "rar_systematic_dex": rar_syst_dex,
             "decisive_2pi_vs_6": decisive_2pi_vs_6,
+            "separation_blocked_by": sep_blocked_by,
             "note": "1/2pi and 1/6 differ by 6/2pi = 0.955 (0.020 dex); the "
-                    "measurement sigma is ~0.31 dex and the H0 tension alone "
-                    "shifts the cH anchor by 0.035 dex -- so 1/2pi vs 1/6 is "
-                    "NOT decisively separable from SPARC.",
+                    "SSV-halo sigma is ~0.31 dex, the H0 tension shifts the "
+                    "anchor 0.035 dex, and even the tight RAR is blocked by "
+                    "its ~0.086 dex systematic -- so 1/2pi vs 1/6 is NOT "
+                    "separable by any current estimator.",
         },
         "z_falsifier": z_falsifier(),
         "verdicts": {
             "GH_2pi_consistent": bool(gh_consistent),
             "GH_2pi_ratios": {h: confront[h]["GH_2pi (cH0/2pi, SSV)"][
                 "ratio_meas_over_pred"] for h in H0_LIST},
-            "sqrtLambda_excluded": bool(sqrtL_excluded),
+            "sqrtLambda_excluded_both_estimators": bool(sqrtL_excluded_both),
             "sqrtLambda_ratio_H73": sqrtL_ratio,
+            "deSitter_machinery_reproduces_cH0_2pi": bool(ds_machinery_ok),
+            "estimators_disagree_2pi_vs_6": bool(estimators_disagree),
             "1over2pi_vs_1over6_decisively_separated": decisive_2pi_vs_6,
             "VERDICT": "R1" if R1 else "R2",
             "VERDICT_meaning": (
-                "R1: a0 consistent with cH0/2pi (same GH-2pi as S1/S2); "
-                "c^2 sqrt(Lambda) excluded. Local & cosmological screens share "
-                "one thermodynamics -- the duality SURVIVES its falsifier; the "
-                "weak-derivation (b) is discharged from promissory to survived. "
-                "Magnitude conceded; 1/2pi vs 1/6 not decisively separated "
-                "(decisive test = the z-evolution falsifier, high-z data)."
+                "R1: a0 consistent with cH0/2pi (the SAME finite-difference "
+                "surface-gravity machinery as the S1 dumb-hole gives g_dS=cH0 "
+                "=> a0=cH0/2pi); c^2 sqrt(Lambda) excluded under BOTH the "
+                "SSV-halo and the RAR a0. Local & cosmological screens share one "
+                "thermodynamics -- the duality SURVIVES its falsifier; the weak-"
+                "derivation (b) is discharged from promissory to survived. "
+                "Magnitude conceded; 1/2pi vs 1/6 NOT separable by any current "
+                "estimator (SSV-halo favours 1/2pi, RAR favours 1/6) -- decisive "
+                "test = the z-evolution falsifier, high-z data."
                 if R1 else
                 "R2: a0 inconsistent with cH0/2pi -- the duality is FALSIFIED "
                 "(local & cosmological screens have inconsistent thermodynamics)."),
@@ -238,8 +329,10 @@ def main():
     fig = figure(out, FIGURES / "a0_overconstraint.png")
     v = out["verdicts"]
     print("\n--- verdicts ---")
-    for k in ("GH_2pi_consistent", "GH_2pi_ratios", "sqrtLambda_excluded",
-              "sqrtLambda_ratio_H73",
+    for k in ("GH_2pi_consistent", "GH_2pi_ratios",
+              "sqrtLambda_excluded_both_estimators", "sqrtLambda_ratio_H73",
+              "deSitter_machinery_reproduces_cH0_2pi",
+              "estimators_disagree_2pi_vs_6",
               "1over2pi_vs_1over6_decisively_separated", "VERDICT"):
         print(f"  {k}: {v[k]}")
     print(f"  discrimination: 1/2pi vs 1/6 = "

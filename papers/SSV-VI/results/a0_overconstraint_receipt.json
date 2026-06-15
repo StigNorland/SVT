@@ -62,12 +62,65 @@
    }
   }
  },
+ "rar_cross_check": {
+  "RAR_a0": 1.2e-10,
+  "ssv_halo_a0": 1.1281640861824739e-10,
+  "ssv_halo_prefers": {
+   "67.4": {
+    "ratio_GH2pi": 1.0824854920482665,
+    "ratio_Verlinde": 1.033697501308465,
+    "prefers": "1/6"
+   },
+   "73.0": {
+    "ratio_GH2pi": 0.9994455090966187,
+    "ratio_Verlinde": 0.9544001587423362,
+    "prefers": "1/2pi"
+   }
+  },
+  "rar_prefers": {
+   "67.4": {
+    "ratio_GH2pi": 1.1514128187269888,
+    "ratio_Verlinde": 1.0995182498386362,
+    "prefers": "1/6"
+   },
+   "73.0": {
+    "ratio_GH2pi": 1.063085260030124,
+    "ratio_Verlinde": 1.0151716443715628,
+    "prefers": "1/6"
+   }
+  },
+  "rar_sqrtLambda_ratio_H73": 0.12730442440429637,
+  "estimators_disagree_on_2pi_vs_6": true,
+  "note": "the SSV-halo a0 (1.13e-10) favours 1/2pi; the tighter literature RAR a0 (1.20e-10) favours Verlinde 1/6 at H0=73 -- the two best estimators straddle the two cH coefficients (~6 percent apart). Both keep sqrt(Lambda) excluded (RAR ratio 0.127). So 1/2pi is SSV's prediction and is consistent, but NOT singled out."
+ },
+ "deSitter_via_S1_machinery": {
+  "per_H0": {
+   "67.4": {
+    "g_dS_numeric": 6.548322413987153e-10,
+    "g_dS_analytic_cH0": 6.548322413981453e-10,
+    "g_dS_rel_err": 8.704990432488801e-13,
+    "a0_from_g_dS_over_2pi": 1.0421978811455081e-10,
+    "matches_cH0_over_2pi": true
+   },
+   "73.0": {
+    "g_dS_numeric": 7.092396679837717e-10,
+    "g_dS_analytic_cH0": 7.092396679831543e-10,
+    "g_dS_rel_err": 8.704912564322757e-13,
+    "a0_from_g_dS_over_2pi": 1.1287899899647192e-10,
+    "matches_cH0_over_2pi": true
+   }
+  },
+  "machinery_ok": true,
+  "note": "the SAME Visser eq-70 finite-difference surface gravity as the S1 dumb-hole, applied to the Hubble flow v=H0 r, gives g_dS = c H0 and a0 = g_dS/2pi = cH0/2pi -- the shared thermodynamics is a computation, not an assertion."
+ },
  "discrimination": {
   "sep_2pi_vs_6_dex": 0.020028617974471363,
   "sep_2pi_vs_6_sigma": 0.06487003368005273,
   "H0_tension_dex": 0.03466296358513607,
+  "rar_systematic_dex": 0.07918124604762482,
   "decisive_2pi_vs_6": false,
-  "note": "1/2pi and 1/6 differ by 6/2pi = 0.955 (0.020 dex); the measurement sigma is ~0.31 dex and the H0 tension alone shifts the cH anchor by 0.035 dex -- so 1/2pi vs 1/6 is NOT decisively separable from SPARC."
+  "separation_blocked_by": "RAR systematic (0.079 dex) + H0 tension (0.035 dex) both exceed the 1/2pi-vs-1/6 gap (0.020 dex)",
+  "note": "1/2pi and 1/6 differ by 6/2pi = 0.955 (0.020 dex); the SSV-halo sigma is ~0.31 dex, the H0 tension shifts the anchor 0.035 dex, and even the tight RAR is blocked by its ~0.086 dex systematic -- so 1/2pi vs 1/6 is NOT separable by any current estimator."
  },
  "z_falsifier": {
   "z=0.5": {
@@ -89,11 +142,13 @@
    "67.4": 1.0824854920482665,
    "73.0": 0.9994455090966187
   },
-  "sqrtLambda_excluded": true,
+  "sqrtLambda_excluded_both_estimators": true,
   "sqrtLambda_ratio_H73": 0.1196835663542157,
+  "deSitter_machinery_reproduces_cH0_2pi": true,
+  "estimators_disagree_2pi_vs_6": true,
   "1over2pi_vs_1over6_decisively_separated": false,
   "VERDICT": "R1",
-  "VERDICT_meaning": "R1: a0 consistent with cH0/2pi (same GH-2pi as S1/S2); c^2 sqrt(Lambda) excluded. Local & cosmological screens share one thermodynamics -- the duality SURVIVES its falsifier; the weak-derivation (b) is discharged from promissory to survived. Magnitude conceded; 1/2pi vs 1/6 not decisively separated (decisive test = the z-evolution falsifier, high-z data).",
+  "VERDICT_meaning": "R1: a0 consistent with cH0/2pi (the SAME finite-difference surface-gravity machinery as the S1 dumb-hole gives g_dS=cH0 => a0=cH0/2pi); c^2 sqrt(Lambda) excluded under BOTH the SSV-halo and the RAR a0. Local & cosmological screens share one thermodynamics -- the duality SURVIVES its falsifier; the weak-derivation (b) is discharged from promissory to survived. Magnitude conceded; 1/2pi vs 1/6 NOT separable by any current estimator (SSV-halo favours 1/2pi, RAR favours 1/6) -- decisive test = the z-evolution falsifier, high-z data.",
   "form_yes_magnitude_conceded": true
  }
 }

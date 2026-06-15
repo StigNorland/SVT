@@ -24,11 +24,35 @@ def test_gh_2pi_reproduces_measured_a0():
                for r in out["verdicts"]["GH_2pi_ratios"].values())
 
 
-def test_sqrt_lambda_excluded():
+def test_sqrt_lambda_excluded_both_estimators():
     out = a0.battery()
     r = out["verdicts"]["sqrtLambda_ratio_H73"]
     assert r < 1.0 / 3.0          # off by >3x (measured ~8.4x)
-    assert out["verdicts"]["sqrtLambda_excluded"]
+    assert out["verdicts"]["sqrtLambda_excluded_both_estimators"]
+    # and excluded under the independent RAR a0 too
+    assert out["rar_cross_check"]["rar_sqrtLambda_ratio_H73"] < 1.0 / 3.0
+
+
+def test_estimators_straddle_2pi_vs_6():
+    """The honest tension: the SSV-halo a0 favours 1/2pi, the tighter RAR a0
+    favours 1/6 -- so 1/2pi is consistent but not singled out."""
+    out = a0.battery()
+    rc = out["rar_cross_check"]
+    assert rc["ssv_halo_prefers"]["73.0"]["prefers"] == "1/2pi"
+    assert rc["rar_prefers"]["73.0"]["prefers"] == "1/6"
+    assert rc["estimators_disagree_on_2pi_vs_6"]
+
+
+def test_desitter_via_S1_machinery():
+    """The same Visser eq-70 finite-difference surface gravity as the S1
+    dumb-hole, applied to the Hubble flow, gives g_dS = cH0 and a0 = cH0/2pi --
+    'same thermodynamics' as a computation, not an assertion."""
+    for h0 in (67.4, 73.0):
+        g_num, g_an, a0_ds = a0.desitter_surface_gravity(h0)
+        assert abs(g_num - g_an) / g_an < 1e-3          # g_dS = cH0
+        gh = a0.candidate_a0(h0)["GH_2pi (cH0/2pi, SSV)"]
+        assert abs(a0_ds - gh) / gh < 1e-9              # a0 = g_dS/2pi = cH0/2pi
+    assert a0.battery()["verdicts"]["deSitter_machinery_reproduces_cH0_2pi"]
 
 
 def test_1over2pi_vs_1over6_not_decisive():
@@ -69,5 +93,6 @@ def test_verdict_R1():
     v = out["verdicts"]
     assert v["VERDICT"] == "R1"
     assert v["GH_2pi_consistent"]
-    assert v["sqrtLambda_excluded"]
+    assert v["sqrtLambda_excluded_both_estimators"]
+    assert v["deSitter_machinery_reproduces_cH0_2pi"]
     assert v["form_yes_magnitude_conceded"]
