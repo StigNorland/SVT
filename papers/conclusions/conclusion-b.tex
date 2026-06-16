@@ -1,0 +1,181 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{physics}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{mdframed}
+
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+\setstretch{1.1}
+
+\newmdenv[linewidth=1.1pt,innertopmargin=5pt,innerbottommargin=5pt,%
+  innerleftmargin=8pt,innerrightmargin=8pt]{resultbox}
+
+\title{SSV Conclusions~B\\[2pt]
+\large A concrete superfluid holographic screen undershoots Newton's\\
+constant by 38 orders: a mode-counting negative}
+\author{Stig Norland}
+\date{Closing note, 2026-06-16}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This note records the sharpest quantitative result the Saturated Superfluid
+Vacuum (SSV) programme produced about emergent gravity, and it is a negative.
+Entropic and holographic gravity (Jacobson, Verlinde, Padmanabhan) keep the
+holographic screen \emph{abstract}. SSV's distinctive move was to give the screen
+a concrete microscopic substrate --- a logarithmic-Schr\"odinger condensate whose
+self-defined acoustic horizon carries an area-law entanglement entropy that can be
+\emph{computed} rather than assumed. The form survives: the entanglement entropy
+is area-law, as expected for a local quadratic Hamiltonian. The magnitude does
+not. Counting the actual degrees of freedom the substrate offers per grain gives
+$\mathcal{O}(10)$ Bogoliubov modes --- a few bits --- against the
+$N \simeq 1.7\times10^{38}$ required to reproduce $G$. The screen, made literal
+and counted, misses Newton's constant by roughly $10^{37}$. This is the
+Sakharov / Susskind--Uglum species problem, here \emph{demonstrated by direct
+mode-counting} rather than argued, and it is a clean constraint on any reading
+that takes a holographic screen to be a real reservoir of local degrees of
+freedom. Per the repository's rule, the negative is stated at full strength.
+\end{abstract}
+
+\section{The setup: making the screen literal}
+
+In the thermodynamic route to gravity, the field equation follows from
+$\delta Q = T\,dS$ applied to local causal horizons (Jacobson~1995), with the
+entropy taken to be area-law, $S = A/4\ell_P^2$. Verlinde's entropic-force reading
+and Padmanabhan's surface-thermodynamics share this skeleton. In all of them the
+holographic screen is a bookkeeping surface: one assumes an area-law entropy with
+the Planck-scale coefficient and does not ask what physical degrees of freedom
+supply it.
+
+SSV's one genuinely distinctive contribution is to refuse that abstraction. The
+vacuum is a real medium with order parameter $\Psi=\sqrt{\rho}\,e^{i\theta}$
+governed by a logarithmic Schr\"odinger equation; the screen is a self-defined
+acoustic horizon, the surface where the background flow turns sonic (Visser).
+Because the medium is concrete, two things that are normally assumed become
+\emph{computable}: the area law, and the coefficient.
+
+\section{The form survives (and is the cheap half)}
+
+Quantising the LogSE Bogoliubov fluctuations and computing the vacuum
+entanglement entropy by the correlator method (Peschel; Casini--Huerta) via the
+Srednicki radial decomposition gives an area law. Across a static acoustic
+inhomogeneity (a ``dumb hole'') the scaling exponent tracks a provably area-law
+gapped-scalar calibrator and sits a full $\sim\!1.2$ in log--log slope below a
+volume-law thermal control; the entropy-per-area is universal at the few-percent
+level; and the chiral-shear term is \emph{exactly} silent
+(\texttt{instruments/paper\_v/horizon\_entanglement\_entropy.py}).
+
+This must be stated honestly (repository rule~1): the area law is the
+\emph{expected} side. It follows from the LogSE quadratic Hamiltonian being
+\emph{local} --- generic for any local free field (Srednicki~1993;
+Bombelli--Koul--Lee--Sorkin~1986; Jacobson's entanglement-equilibrium, 2016). So
+the computation \emph{earns} (turns assumed into derived-from-locality) the area
+law that the SSV gravity papers had merely asserted by cell-counting, but it is
+not a surprise and not a discovery. The discriminator was shown to be
+negative-capable --- it correctly rejects volume-law data --- which is what makes
+the next step trustworthy.
+
+\section{The magnitude fails (and is the whole point)}
+
+The coefficient is the test. Writing $\delta Q = T_H\,dS$ with the computed
+area-law $dS = \eta\,dA$ closes the Jacobson construction to
+$\nabla^2\Phi = 4\pi G_{\mathrm{eff}}\,e/c^2$ with
+$G_{\mathrm{eff}} = 1/(4\hbar c\,\eta)$
+(\texttt{instruments/paper\_v/dumb\_hole\_surface\_gravity.py}). To recover the
+measured $G$, the entropy density $\eta$ must correspond to
+\begin{equation}
+  N \;=\; \frac{1}{\alpha_G}
+        \;=\; \frac{\hbar c}{G\,m_p^2}
+        \;=\; \left(\frac{m_P}{m_p}\right)^{2}
+        \;\simeq\; 1.7\times 10^{38}
+\end{equation}
+microstates per grain --- this is just the Planck-to-proton hierarchy.
+
+Now count what the substrate actually provides. The localised excitations of a
+LogSE vortex core --- the bound Bogoliubov (BdG) modes --- number
+$\mathcal{O}(10)$, i.e.\ a few bits, per healing-length cell
+(\texttt{instruments/paper\_i/vortex\_core\_mode\_spectrum.py}). The continuum
+modes are delocalised and do not localise entropy on the grain. So the concrete
+screen supplies of order $10^{1}$ states where $10^{38}$ are needed: a shortfall
+of about $10^{37}$, and correspondingly $G_{\mathrm{eff}}$ overshoots the
+Newtonian value by $(a_p/\ell_P)^2 \approx 1.7\times10^{38}$.
+
+\section{What the negative establishes}
+
+\begin{resultbox}
+\noindent When a holographic screen is given a real microscopic substrate and
+its localised degrees of freedom are \emph{counted}, the area law emerges for
+free but the Planck-scale coefficient does not: the count is short by $\sim$38
+orders of magnitude. A holographic screen that is a literal reservoir of local
+degrees of freedom cannot, in this construction, reproduce $G$. Newton's constant
+must enter below the effective theory's cutoff --- as a trans-Planckian input,
+not an emergent output.
+\end{resultbox}
+
+This is the Sakharov induced-gravity problem and the Susskind--Uglum species
+problem, which Volovik identifies as the structural weak point of superfluid
+gravity. The contribution here is not the existence of the gap but its
+\emph{concrete demonstration}: rather than estimating an induced Newton constant
+from a cutoff, one builds the medium, computes its horizon entanglement entropy,
+counts its grain degrees of freedom, and reads off the shortfall directly. That
+makes the failure model-specific and checkable rather than a heuristic worry.
+
+\section{Caveats, stated plainly}
+
+\begin{itemize}[leftmargin=1.4em]
+\item The identity $(a_p/\ell_P)^2 = 1/\alpha_G$ is a \emph{tautology}: it
+  restates the hierarchy and is not a derivation. It must not be read backwards as
+  ``deriving $N$.'' The negative is the \emph{measured} count
+  ($\mathcal{O}(10)$), confronted with this target.
+\item Bound modes are finite by construction; continuum modes are delocalised.
+  A genuinely different substrate (e.g.\ a rank-2, $^3$He-A-like order parameter
+  with sub-grain structure) is not excluded by this argument --- it simply is not
+  the LogSE medium, and would have to supply its own $10^{38}$ states.
+\item The area-law computation assumes irrotational flow for the exact chiral
+  silence; a rotational/vortex-sink horizon carries a bounded residual risk that
+  was not closed.
+\end{itemize}
+
+\noindent None of these weaken the headline: in the medium actually proposed, the
+screen is $\sim$37 orders too sparse to be the source of $G$.
+
+\begin{thebibliography}{9}
+\bibitem{jacobson} T.\ Jacobson, \emph{Thermodynamics of spacetime: the Einstein
+  equation of state}, Phys.\ Rev.\ Lett.\ \textbf{75}, 1260 (1995).
+\bibitem{jacobson16} T.\ Jacobson, \emph{Entanglement equilibrium and the
+  Einstein equation}, Phys.\ Rev.\ Lett.\ \textbf{116}, 201101 (2016).
+\bibitem{verlinde} E.\ Verlinde, \emph{On the origin of gravity and the laws of
+  Newton}, JHEP \textbf{04}, 029 (2011).
+\bibitem{padmanabhan} T.\ Padmanabhan, \emph{Thermodynamical aspects of gravity:
+  new insights}, Rep.\ Prog.\ Phys.\ \textbf{73}, 046901 (2010).
+\bibitem{visser} M.\ Visser, \emph{Acoustic black holes: horizons, ergospheres
+  and Hawking radiation}, Class.\ Quantum Grav.\ \textbf{15}, 1767 (1998);
+  gr-qc/9712010.
+\bibitem{srednicki} M.\ Srednicki, \emph{Entropy and area}, Phys.\ Rev.\ Lett.\
+  \textbf{71}, 666 (1993).
+\bibitem{bkls} L.\ Bombelli, R.\,K.\ Koul, J.\ Lee, R.\,D.\ Sorkin,
+  \emph{Quantum source of entropy for black holes}, Phys.\ Rev.\ D \textbf{34},
+  373 (1986).
+\bibitem{peschel} I.\ Peschel, \emph{Calculation of reduced density matrices from
+  correlation functions}, J.\ Phys.\ A \textbf{36}, L205 (2003).
+\bibitem{casinihuerta} H.\ Casini and M.\ Huerta, \emph{Entanglement entropy in
+  free quantum field theory}, J.\ Phys.\ A \textbf{42}, 504007 (2009).
+\bibitem{sakharov} A.\,D.\ Sakharov, \emph{Vacuum quantum fluctuations in curved
+  space and the theory of gravitation}, Sov.\ Phys.\ Dokl.\ \textbf{12}, 1040
+  (1968).
+\bibitem{susskinduglum} L.\ Susskind and J.\ Uglum, \emph{Black hole entropy in
+  canonical quantum gravity and superstring theory}, Phys.\ Rev.\ D \textbf{50},
+  2700 (1994).
+\bibitem{volovik} G.\,E.\ Volovik, \emph{The Universe in a Helium Droplet}
+  (Oxford, 2003).
+\end{thebibliography}
+
+\end{document}
