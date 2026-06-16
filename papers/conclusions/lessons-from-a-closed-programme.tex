@@ -1,0 +1,364 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{physics}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{mdframed}
+
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+\setstretch{1.1}
+
+\newmdenv[linewidth=1.1pt,innertopmargin=5pt,innerbottommargin=5pt,%
+  innerleftmargin=8pt,innerrightmargin=8pt]{resultbox}
+
+\title{Lessons from a closed programme\\[2pt]
+\large A post-mortem of Saturated Superfluid Vacuum theory}
+\author{Stig Norland}
+\date{2026-06-16}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The Saturated Superfluid Vacuum (SSV) programme --- an attempt to derive the
+particle, force, gravity, and cosmology sectors from a single logarithmic
+Schr\"odinger order parameter with the vacuum treated as a real superfluid medium
+--- is closed. No surviving route delivers the quantities it set out to derive.
+This is a post-mortem, written to the programme's own standing rule that only
+correctly negative results are proof. Its purpose is to extract what generalises.
+The recurring diagnosis is \emph{form yes, magnitude no}: the framework reproduces
+the kinematic \emph{forms} of analogue and emergent gravity --- weak-field time
+dilation, area-law horizon entropy, the Unruh/Hawking temperature, a logarithmic
+flat-rotation tail --- essentially for free, because those follow from locality
+and symmetry, while every dynamical \emph{magnitude} (Newton's constant $G$, the
+cosmological scale, the particle masses) had to be conceded as an input. The most
+durable outputs are two negatives: a structural no-go --- a scalar/acoustic vacuum
+cannot carry a spin-2 graviton or tensor gravitational-wave polarisations --- and
+a concrete mode-counting demonstration that a literal holographic screen
+undershoots $G$ by roughly 38 orders of magnitude. We also record the methodology
+that made clean failure possible, and the honest home of the surviving ontology
+(foundations / philosophy of physics). The lessons transfer beyond SSV to
+emergent-gravity and superfluid-vacuum model-building generally.
+\end{abstract}
+
+\section{What this document is}
+
+A research programme can end in two ways: it can be abandoned, or it can be
+\emph{closed} --- worked until the reasons it cannot succeed are themselves
+results. SSV is closed in the second sense. The point of writing the ending down
+is that the reasons are more transferable than the framework was. Almost
+everything of value SSV produced is either a re-derivation of results already
+owned by the analogue- and emergent-gravity literature, or a negative; and the
+negatives are sharp enough to be useful to anyone building a vacuum out of a
+condensate. This note collects them, states the failures at full strength, and
+draws the lessons. It supersedes nothing; it concludes.
+
+\section{The programme, in brief}
+
+SSV proposed that the physical vacuum is a saturated superfluid described by a
+macroscopic order parameter $\Psi=\sqrt{\rho}\,e^{i\theta}$, that the fundamental
+particles are topological defects (vortices, breathers) in $\Psi$, and that the
+four forces, gravity, and cosmology all follow from one master dynamics --- a
+logarithmic Schr\"odinger equation (LogSE) with a chiral-shear term and a
+saturation potential. The ambition was unusually total: from $m_e$ and $\alpha$
+alone, to derive the mass spectrum, the force sector, Newton's constant, the
+arrow of time, black-hole structure, galactic rotation curves, and the
+cosmological constant. The logarithmic nonlinearity is itself not new --- it is
+the Bialynicki-Birula--Mycielski equation, developed as a superfluid vacuum by
+Zloshchastiev --- and the superfluid-vacuum lineage runs through Volovik. SSV's
+distinctive bet was the totality: one equation, two inputs, everything else
+derived.
+
+\section{The method that let it fail cleanly}
+
+Before the failures, the part worth keeping. The programme ran under a discipline
+that is, in retrospect, its most exportable product:
+
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{A negative-results rule.} Only correctly negative results count as
+  proof; positive results are merely suggestive and are never softened or buried.
+  This single rule is what kept the programme from drifting into the permanent
+  ``suggestive'' state that absorbs most heterodox physics.
+\item \textbf{Pre-registration.} Each hypothesis and its decision rule were fixed
+  in a tracked issue \emph{before} the computation ran, so a result could not be
+  reinterpreted into a success after the fact.
+\item \textbf{Claim-status tracking.} Every quantitative claim carried an explicit
+  status --- \emph{derived}, \emph{coincidence}, or \emph{falsified} --- and a
+  change of status had to propagate to the prose, the tables, and the record in
+  one pass.
+\item \textbf{Computation-backed analysis.} Analytic claims were backed by a
+  tested script plus a result note, so a claimed derivation had an executable
+  witness and a reference could not silently break.
+\end{itemize}
+
+\noindent This machinery is why the programme could kill its own central claims
+rather than defend them. The lesson generalises: the value of pre-registration
+and a hard negative-results rule is highest precisely where external peer
+pressure is lowest.
+
+\section{What was reproduced: the form}
+
+In its gravity sector SSV reproduced, correctly, a sequence of standard results.
+Identifying local time with the order-parameter phase rate via the Josephson
+relation $\hbar\dot\theta=-\mu$ gives an emergent lapse, and weak-field this
+yields $g_{00}=1+2\Phi/c^2$ with the Einstein-1911 (time-delay) half of light
+deflection. The acoustic horizon --- the surface where the background flow turns
+sonic --- behaves as a black-hole horizon with a definite surface gravity, no
+interior singularity (the finite vortex-core size cuts off collapse), and an
+Unruh/Hawking temperature of the right form. Quantising the LogSE Bogoliubov
+fluctuations gives an area-law horizon entanglement entropy. A logarithmic
+circulation-halo potential $\Phi_h=v_h^2\ln r$ produces a flat rotation-curve
+tail, and ordinary Newtonian self-gravity of the baryons grows spiral arms and a
+bar by swing amplification, with no central black hole and no dark-matter
+particle.
+
+Every item in that list is a known result of analogue/emergent gravity
+(Unruh, Visser, Volovik, Jacobson) or of standard galactic dynamics. SSV
+re-derived them inside one medium, which has pedagogical value, but none is new.
+This matters for the diagnosis: the \emph{forms} came easily.
+
+\section{What failed: magnitudes and structural no-gos}
+
+\subsection{The particle masses became inputs and coincidences}
+
+The mass sector reduced to two inputs, $m_e$ and $\alpha$, rather than deriving a
+spectrum. The ``$\alpha$-harmonic mass ladder'' was demoted to a numerical
+coincidence, not a derived spectrum. The muon as a derived breather mode failed
+three independent null tests and was closed. The $W$ mass \emph{scale}
+$m_W\sim m_e/\alpha^2$ is structurally derived, but the prefactor that brings it
+to the measured value is an $\mathcal{O}(1)$ coincidence. The honest tally: the
+sector reproduces scales it is handed and fits the rest.
+
+\subsection{The scalar-gravity no-go (the durable negative)}
+
+The sharpest structural result is a no-go. SSV's gapless carrier is a single
+scalar phonon; the emergent acoustic metric is conformal-in-space plus a vector
+flow term, with \emph{no} transverse-traceless part. So the framework's
+gravitational radiation is helicity-0, the tensor overlap with a quadrupole
+source is zero, and the isotropic part cancels in a differential readout. The
+attempt to rescue a tensor mode from the spinor sector fails for a representation-
+theoretic reason: $\bar{\mathbf 2}\otimes\mathbf 2=\mathbf 1\oplus\mathbf 3$
+contains no spin-2. The same square-root-of-a-vector fact that gives the photon
+spin-1 \emph{forbids} a spin-2 graviton. SSV's gravity is therefore
+\emph{structurally scalar}: it can mimic light bending in the conformal/trace
+sector but cannot be general relativity, and its predicted gravitational-wave
+polarisation content is wrong (the original ``effective spin-2'' claim was
+falsified and withdrawn; the surviving model passes the Hulse--Taylor test only
+because a scalar emits no dipole). This is the Visser kinematics/dynamics wall,
+stated explicitly: an acoustic metric supplies geometry, not Einstein dynamics.
+It is a clean, transferable constraint on \emph{any} scalar/superfluid emergent-
+gravity model.
+
+\subsection{Newton's constant: a screen too sparse by 38 orders}
+
+Entropic and holographic gravity (Jacobson, Verlinde, Padmanabhan) keep the
+holographic screen abstract: one \emph{assumes} an area law with the Planck-scale
+coefficient. SSV's distinctive move was to make the screen literal --- a real
+acoustic horizon in a real medium --- so that the coefficient becomes computable
+rather than assumed. The form survived: the horizon entanglement entropy is
+area-law, computed by the correlator method (Peschel; Casini--Huerta) via the
+Srednicki radial decomposition, with the chiral term exactly silent. But this is
+the cheap half: the area law follows from the LogSE quadratic Hamiltonian being
+\emph{local}, generic for any local free field (Srednicki; Bombelli--Koul--Lee--
+Sorkin; Jacobson's entanglement-equilibrium). It \emph{earns} an area law the
+papers had merely asserted; it does not surprise.
+
+The coefficient is the test, and it fails. Closing the Jacobson construction with
+the computed $dS=\eta\,dA$ gives $\nabla^2\Phi=4\pi G_{\mathrm{eff}}\,e/c^2$ with
+$G_{\mathrm{eff}}=1/(4\hbar c\,\eta)$. Reproducing the measured $G$ requires
+\begin{equation}
+  N=\frac{1}{\alpha_G}=\frac{\hbar c}{G m_p^2}
+   =\left(\frac{m_P}{m_p}\right)^2\simeq 1.7\times 10^{38}
+\end{equation}
+microstates per grain --- the Planck-to-proton hierarchy. The substrate supplies
+$\mathcal{O}(10)$ localised Bogoliubov modes per healing-length cell, a few bits.
+The literal screen is short by about $10^{37}$.
+
+\begin{resultbox}
+\noindent When a holographic screen is given a real microscopic substrate and its
+localised degrees of freedom are \emph{counted}, the area law emerges for free but
+the Planck-scale coefficient does not: the count falls short by $\sim$38 orders.
+$G$ must enter below the effective theory's cutoff --- a trans-Planckian input,
+not an emergent output.
+\end{resultbox}
+
+\noindent This is the Sakharov induced-gravity problem and the Susskind--Uglum
+species problem, which Volovik names as the structural weak point of superfluid
+gravity --- here \emph{demonstrated by direct mode-counting} rather than argued.
+(Guard: the identity $(a_p/\ell_P)^2=1/\alpha_G$ merely restates the hierarchy and
+must not be read backwards as deriving $N$; the negative is the \emph{measured}
+count of $\mathcal{O}(10)$ confronted with the target.)
+
+\subsection{The arrow of time: a coarse-graining, not a resolution}
+
+SSV originally read its irreversibility as something new. A pre-registered
+reversal-echo computation through a topological-change event settled it the other
+way: the master dynamics is conservative and exactly time-reversal symmetric, and
+exact reversal recovers the pre-event state (fidelity deficit $1-F\approx
+8.7\times10^{-12}$ in 2D annihilation, $F=0.999997$ for 3D Hopf-link
+reconnection, the deficit shrinking under refinement). The account of
+irreversibility is therefore a \emph{coarse-graining} one in Boltzmann's lineage,
+with the forgotten variables named concretely (phonon phases, Kelvin waves,
+vortex tangle, correlations); it is not a new resolution of Loschmidt's paradox,
+and the programme withdrew any such claim. The genuinely open half --- the
+low-entropy past --- was never supplied. (The reconnection-reversibility
+computation does survive as a stand-alone result for the quantum-turbulence
+literature, shorn of the arrow-of-time framing.)
+
+\subsection{The cosmological acceleration: survives but underdetermined}
+
+The MOND-like scale was predicted as $a_0=cH_0/2\pi$ from a de~Sitter
+Gibbons--Hawking $2\pi$, the same factor used for local horizons; the
+cosmological-constant alternative $c^2\sqrt\Lambda$ was excluded at $8.4\times$.
+But the data do not select the coefficient: SSV's own halo estimator favours
+$1/2\pi$ while the independent radial-acceleration relation mildly favours
+Verlinde's $1/6$, and the two straddle by $\sim$6\%. The prediction is consistent
+and falsifiable (the decisive separator is high-redshift evolution) but
+unconfirmed, and the absolute scale is conceded in parallel with $G$.
+
+\section{The diagnosis: form yes, magnitude no}
+
+One pattern runs through every sector. SSV reproduces the \emph{form} of the right
+answer cheaply, and concedes the \emph{magnitude}. Time dilation: form yes, $G$
+no. Area law: form yes, coefficient no. Hawking temperature: form yes, factor of
+four no. Flat rotation curves: form yes, halo amplitude not derived.
+Cosmological $a_0$: form yes, scale conceded. Masses: scales handed in, the rest
+fitted.
+
+The reason is not bad luck; it is structural, and it is the real lesson. Kinematic
+forms --- metric structure, area laws, dispersion relations, conservation laws ---
+follow from \emph{locality and symmetry}, which an emergent medium inherits almost
+automatically. The dynamical magnitudes --- the coupling constants --- live in the
+\emph{microscopic} theory below the effective cutoff. In a superfluid vacuum the
+induced gravitational coupling is trans-Planckian by construction (Volovik), so
+the effective theory that produces the beautiful forms is structurally the wrong
+place to compute the constants. An emergent-gravity model gets geometry for free
+and the gravitational constant never. Recognising this early would have saved
+years; it is the single most useful thing the programme learned.
+
+\section{The surviving ontology and its honest home}
+
+What remains attractive is the ontology: local time as the rate of phase update of
+the medium; a finite update capacity that loading consumes, slowing the local
+clock; and gravity as the response of a holographic record to that loading. Each
+component already has a mainstream owner --- time-as-phase-rate is the Josephson
+relation plus analogue $g_{00}$; finite update capacity is the
+Margolus--Levitin/Lloyd bound on the rate of state change; time-as-change is the
+relational tradition (Barbour; Connes--Rovelli); screen-update-as-gravity is
+Jacobson/Verlinde/Padmanabhan. The ontology adds interpretive coherence (one
+phase field carrying the local clock, the static near-field, and the long-range
+encoding) but no prediction those programmes lack.
+
+Two honest caveats belong with it. First, an internal tension: the bulk-realist
+reading (the medium's local state slows time) and the holographic reading
+(``nothing bends space in the bulk; geometry is localised into the encoding'')
+are reconciled only by a duality claim that carries no falsifier of its own; it
+is a heuristic frame, not a mechanism. Second, the one component that does pull
+weight is \emph{presentism}: because the emergent metric is effective and need not
+be geodesically complete, there is no real future infinity, which dissolves the
+obstacle that breaks global de~Sitter holography and routes naturally to
+observer / static-patch holography (Chandrasekaran--Longo--Penington--Witten). But
+that removes an obstacle without building the dual: the present cosmological
+horizon still has a Gibbons--Hawking entropy whose microstates the medium does not
+supply --- the same magnitude gap as everywhere else. The honest home for the
+ontology is therefore foundations / philosophy of physics, not a theory of
+gravity.
+
+\section{Lessons that generalise}
+
+\begin{enumerate}[leftmargin=1.6em]
+\item \textbf{Forms are cheap, constants are dear.} In any emergent/analogue
+  programme, expect to reproduce kinematic forms from locality and symmetry, and
+  expect the coupling constants to require microscopic input the effective theory
+  structurally cannot provide. Treat a reproduced \emph{form} as confirmation of
+  consistency, never as a derivation of the \emph{magnitude}.
+\item \textbf{Negatives are the durable output.} The scalar-gravity no-go and the
+  mode-counting $G$-shortfall will outlast everything positive the programme
+  proposed, precisely because a correct negative generalises and a numerical
+  coincidence does not.
+\item \textbf{Concreteness exposes what abstraction hides.} Abstract entropic
+  gravity conceals the magnitude problem; building the screen out of real degrees
+  of freedom and counting them makes the $10^{38}$ shortfall undeniable.
+  Demonstrating a known problem concretely is itself worth publishing.
+\item \textbf{Distinguish derivation from fit, in writing.} A claim-status table
+  that forces every number to be labelled \emph{derived}, \emph{coincidence}, or
+  \emph{falsified} is the cheapest defence against a coincidence (the mass ladder,
+  the $\mathcal{O}(1)$ prefactors) being quietly promoted to a derivation.
+\item \textbf{Pre-registration matters most without referees.} A hard
+  negative-results rule and pre-registered decision rules are what let an
+  independent programme falsify itself rather than accumulate suggestive
+  positives. This is the part of SSV most worth copying.
+\end{enumerate}
+
+\section{Conclusion}
+
+SSV set out to derive nearly everything from one equation and two inputs. It ends
+having derived the \emph{forms} of analogue gravity (which were already known),
+having needed three inputs rather than two once $G$ was conceded, and having
+produced two clean negatives and one re-usable numerical result. Measured against
+its ambition that is a failure; measured against the negative-results rule it
+adopted, the failure is the contribution. The lessons --- forms are cheap and
+constants are dear, negatives are the durable output, concreteness exposes the
+magnitude gap, and self-imposed pre-registration is what makes honest closure
+possible --- are not specific to a superfluid vacuum. They are addressed to anyone
+who tries to grow gravity from a medium.
+
+\begin{thebibliography}{99}
+\bibitem{bbm} I.\ Bialynicki-Birula and J.\ Mycielski, \emph{Nonlinear wave
+  mechanics}, Ann.\ Phys.\ \textbf{100}, 62 (1976).
+\bibitem{zlosh} K.\,G.\ Zloshchastiev, \emph{Logarithmic nonlinearity in theories
+  of quantum gravity: origin of time and observational consequences}, Grav.\
+  Cosmol.\ \textbf{16}, 288 (2010).
+\bibitem{volovik} G.\,E.\ Volovik, \emph{The Universe in a Helium Droplet}
+  (Oxford, 2003).
+\bibitem{josephson} B.\,D.\ Josephson, \emph{Possible new effects in
+  superconductive tunnelling}, Phys.\ Lett.\ \textbf{1}, 251 (1962).
+\bibitem{unruh} W.\,G.\ Unruh, \emph{Experimental black-hole evaporation?},
+  Phys.\ Rev.\ Lett.\ \textbf{46}, 1351 (1981).
+\bibitem{visser} M.\ Visser, \emph{Acoustic black holes: horizons, ergospheres and
+  Hawking radiation}, Class.\ Quantum Grav.\ \textbf{15}, 1767 (1998);
+  gr-qc/9712010.
+\bibitem{jacobson} T.\ Jacobson, \emph{Thermodynamics of spacetime: the Einstein
+  equation of state}, Phys.\ Rev.\ Lett.\ \textbf{75}, 1260 (1995).
+\bibitem{jacobson16} T.\ Jacobson, \emph{Entanglement equilibrium and the Einstein
+  equation}, Phys.\ Rev.\ Lett.\ \textbf{116}, 201101 (2016).
+\bibitem{verlinde} E.\ Verlinde, \emph{On the origin of gravity and the laws of
+  Newton}, JHEP \textbf{04}, 029 (2011).
+\bibitem{verlinde16} E.\ Verlinde, \emph{Emergent gravity and the dark universe},
+  SciPost Phys.\ \textbf{2}, 016 (2017).
+\bibitem{padmanabhan} T.\ Padmanabhan, \emph{Thermodynamical aspects of gravity:
+  new insights}, Rep.\ Prog.\ Phys.\ \textbf{73}, 046901 (2010).
+\bibitem{srednicki} M.\ Srednicki, \emph{Entropy and area}, Phys.\ Rev.\ Lett.\
+  \textbf{71}, 666 (1993).
+\bibitem{bkls} L.\ Bombelli, R.\,K.\ Koul, J.\ Lee, R.\,D.\ Sorkin, \emph{Quantum
+  source of entropy for black holes}, Phys.\ Rev.\ D \textbf{34}, 373 (1986).
+\bibitem{peschel} I.\ Peschel, \emph{Calculation of reduced density matrices from
+  correlation functions}, J.\ Phys.\ A \textbf{36}, L205 (2003).
+\bibitem{casinihuerta} H.\ Casini and M.\ Huerta, \emph{Entanglement entropy in
+  free quantum field theory}, J.\ Phys.\ A \textbf{42}, 504007 (2009).
+\bibitem{sakharov} A.\,D.\ Sakharov, \emph{Vacuum quantum fluctuations in curved
+  space and the theory of gravitation}, Sov.\ Phys.\ Dokl.\ \textbf{12}, 1040
+  (1968).
+\bibitem{susskinduglum} L.\ Susskind and J.\ Uglum, \emph{Black hole entropy in
+  canonical quantum gravity and superstring theory}, Phys.\ Rev.\ D \textbf{50},
+  2700 (1994).
+\bibitem{margolus} N.\ Margolus and L.\,B.\ Levitin, \emph{The maximum speed of
+  dynamical evolution}, Physica D \textbf{120}, 188 (1998).
+\bibitem{lloyd} S.\ Lloyd, \emph{Ultimate physical limits to computation}, Nature
+  \textbf{406}, 1047 (2000).
+\bibitem{barbour} J.\ Barbour, \emph{The End of Time} (Oxford, 1999).
+\bibitem{connesrovelli} A.\ Connes and C.\ Rovelli, \emph{Von Neumann algebra
+  automorphisms and time--thermodynamics relation in general covariant quantum
+  theories}, Class.\ Quantum Grav.\ \textbf{11}, 2899 (1994).
+\bibitem{clpw} V.\ Chandrasekaran, R.\ Longo, G.\ Penington, E.\ Witten, \emph{An
+  algebra of observables for de~Sitter space}, JHEP \textbf{02}, 082 (2023);
+  arXiv:2206.10780.
+\end{thebibliography}
+
+\end{document}
