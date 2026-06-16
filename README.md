@@ -3,80 +3,99 @@
 Working repository for the SSV theoretical-physics paper series.
 
 The physical vacuum is modelled as a real macroscopic medium described by an order parameter Ψ
-(LogSE). Matter consists of topological defects in Ψ. The programme derives particle masses,
-forces, gravity, time, and black-hole ontology from the structure of that medium.
+(a logarithmic Schrödinger equation, LogSE, with a chiral-shear term and a saturation potential).
+Matter is topological defects in Ψ. The programme set out to derive particle masses, the forces,
+gravity, time, and black-hole ontology from that single medium and two inputs (mₑ, α).
 
-## Repository Layout
+> **Status: closed (2026-06).** The programme is no longer active. No surviving route delivers the
+> quantities it set out to derive. What the framework reproduced were the *forms* of analogue/
+> emergent gravity (already known); what it could not deliver were the *magnitudes* (G, Λ/a₀, the
+> particle masses). The recurring diagnosis — **"form yes, magnitude no"** — and the salvageable
+> content are written up in [papers/conclusions/](papers/conclusions/). This repository is now an
+> archive plus that post-mortem.
+
+## Table of contents
+
+- [Conclusions / post-mortem](#conclusions--post-mortem) — start here
+- [The recurring diagnosis](#the-recurring-diagnosis)
+- [Paper series and outcomes](#paper-series-and-outcomes)
+- [Repository layout](#repository-layout)
+- [Computation (`instruments/`)](#computation-instruments)
+- [Docs and workflow](#docs-and-workflow)
+
+## Conclusions / post-mortem
+
+The honest accounting of what the programme produced and what survives for mainstream physics
+lives in [papers/conclusions/](papers/conclusions/):
+
+| Document | What it is |
+|----------|-----------|
+| [Lessons from a closed programme](papers/conclusions/lessons-from-a-closed-programme.pdf) | **The post-mortem.** Folds the two notes below into one document, organised around the *form-yes-magnitude-no* diagnosis; covers the surviving methodology, the reproduced forms, the failures, the structural reason, and five transferable lessons. |
+| [Conclusion A](papers/conclusions/conclusion-a.pdf) | Foundations reading — finite-update-rate time dilation and presentist emergent gravity; where the ontology sits relative to Jacobson/Verlinde/Padmanabhan and the de Sitter observer-algebra programme. Honest home: philosophy of physics. |
+| [Conclusion B](papers/conclusions/conclusion-b.pdf) | The mode-counting negative — a concrete superfluid holographic screen reproduces the area law (expected, from locality) but undershoots G by ~38 orders (O(10) Bogoliubov modes vs 1/α_G ≈ 1.7×10³⁸). A demonstrated instance of the Sakharov / Susskind–Uglum species problem. |
+
+## The recurring diagnosis
+
+One pattern runs through every sector. SSV reproduces the **form** of the right answer cheaply, and
+concedes the **magnitude**: time dilation (form yes, G no); horizon area law (form yes, coefficient
+no); Hawking temperature (form yes, factor-of-4 no); flat rotation curves (form yes, halo amplitude
+not derived); cosmological a₀ (form yes, scale conceded); masses (scales handed in, the rest fitted).
+The reason is structural: kinematic forms follow from locality and symmetry, which an emergent medium
+inherits for free, while the coupling constants live in the microscopic theory below the effective
+cutoff (trans-Planckian; Volovik). The most durable outputs are therefore the **negatives**.
+
+## Paper series and outcomes
+
+The drafts and their compiled PDFs remain in `papers/`; the human-readable PDFs are in
+[papers/pdf/](papers/pdf/). Outcomes below reflect the closed state.
+
+| Paper | Title | Outcome at closure |
+|-------|-------|--------------------|
+| [I](papers/pdf/SSV%20I.pdf) | Topological Defects — Geometric Origin of Matter | Mass ladder demoted to a **numerical coincidence**, not a derived spectrum; muon-as-breather **no-go** (#78); proton geometry minimum found (#77) but N_Y/F do not close the sector. |
+| [II](papers/pdf/SSV%20II.pdf) | Forces as Hydrodynamic Modes | Programmatic. EM = Goldstone phase mode, photon question closed (#138); W-mass *scale* mₑ/α² derived, prefactor an O(1) coincidence; the "effective spin-2" GW prediction was **falsified** and withdrawn (#159). |
+| [III](papers/pdf/SSV%20III.pdf) | Irreversible Time and Wake Entropy | Arrow of time is a **Boltzmann coarse-graining**, not a new resolution of Loschmidt; reversal-echo shows the bulk dynamics is conservative and T-symmetric (#137). |
+| [IV](papers/pdf/SSV%20IV.pdf) | Gravity as Update-Capacity Gradient | Time-delay (Einstein-1911) half delivered **in form**; the Bjerknes source mechanism for Φ was **falsified** (#119); G is an empirical input. |
+| [V](papers/pdf/SSV%20V.pdf) | Condensate Black Holes | Analogue-gravity ontology re-derived (Visser): acoustic horizon, no singularity, Unruh/Hawking *form*. Horizon area law **earned from locality** (#155); G conceded — see Conclusion B. |
+| [VI](papers/pdf/SSV%20VI.pdf) | Galactic Rotation Curves and Morphology | CBH-driven mechanisms **falsified** (#122/#124); a circulation halo + ordinary Newtonian self-gravity reproduce flat curve *and* spiral arms with **no dark matter, no central black hole**, but the halo amplitude is not derived (pure constant-v_h falsified on SPARC). |
+| [VII-a](papers/pdf/SSV%20VII-a.pdf) | Quantum Mechanics from Hydrodynamics | Madelung re-derivation; measurement as reconnection. Re-framing, not new. |
+| [VII-b](papers/pdf/SSV%20VII-b.pdf) | Emergent Geometry and the Dissolution of Quantum Gravity | Jacobson route **in form** with G as input; gravity is **structurally scalar** — no spin-2 graviton / tensor GW (the durable no-go). |
+| [VIII](papers/pdf/SSV%20VIII.pdf) | Cosmogony from the Permissive Void | Owns the low-entropy past hypothesis (never supplied); Λ/a₀ magnitude conceded in parallel with G. |
+| IX | CMB and Primordial Phonon Bath | Not written (`main.tex` never drafted, #100). |
+| [Alpha](papers/pdf/SSV%20Alpha.pdf) | Fine-Structure Constant from Toroidal Vortex Geometry | Framing only; α remains an empirical input (aspect-ratio identification is a coincidence). |
+| [Goldstone](papers/pdf/SSV%20Goldstone.pdf) | Electromagnetic Propagation and the Goldstone Mode | Photon identified as the gapless Goldstone/Bogoliubov phase mode at c. |
+
+## Repository layout
 
 | Path | Contents |
 |------|----------|
-| `instruments/paper_i/` | Paper I numerical pipeline: gradient-flow static minimiser, spectral regrid, Numba kernels, BdG / muon probes |
-| `instruments/` | All computational scripts grouped by paper, plus `tools/` (provenance) and the `test/` suite — see `instruments/README.md` |
-| `papers/` | Manuscript drafts, supplemental notes, checkpoint files |
-| `notes/` | Working notes, objections log, Volovik mapping, lepton-ladder note |
-| `docs/` | Roadmap, numerical roadmap, conventions, issue-workflow |
-| `.github/ISSUE_TEMPLATE/` | Issue templates for paper, derivation, numerics, objection tasks |
+| [papers/conclusions/](papers/conclusions/) | **The post-mortem and the two conclusion notes** (`.tex` + `.pdf`) |
+| [papers/](papers/) | Manuscript drafts, supplemental notes, result notes, checkpoint files |
+| [papers/pdf/](papers/pdf/) | Compiled, human-readable PDFs of the series |
+| [instruments/](instruments/) | Computational scripts grouped by paper, plus `tools/` (provenance) and the `test/` suite — see [instruments/README.md](instruments/README.md) |
+| [notes/](notes/) | Working notes, objections log, Volovik mapping, lepton-ladder note |
+| [docs/](docs/) | Roadmap, numerical roadmap, conventions, claim-status, issue-workflow |
+| `.github/ISSUE_TEMPLATE/` | Issue templates (paper, derivation, numerics, objection) |
 
-## Paper Series Status
+## Computation (`instruments/`)
 
-| Paper | Title | Draft status |
-|-------|-------|-------------|
-| SSV I | Topological Defects — Geometric Origin of Matter & α-Harmonic Mass Ladder | Published (Zenodo) |
-| SSV II | Forces as Hydrodynamic Modes | Published |
-| SSV III | Irreversible Time and Wake Entropy | **Complete draft** (9 sections) |
-| SSV IV | Gravity as Update-Capacity Gradient | **Complete draft** (10 sections + appendix) |
-| SSV V | Condensate Black Holes | **Complete draft** (9 sections) |
-| SSV VI-a | Galactic Standing Waves and Flat Rotation Curves | Draft aligned to outline |
-| SSV VI-b | Galactic Morphology as Overtone Structure | Draft aligned to outline |
-| SSV VII-a | Quantum Mechanics from Hydrodynamics | Draft aligned to outline |
-| SSV VII-b | Emergent Geometry and the Dissolution of Quantum Gravity | Draft aligned to outline |
-| SSV VIII | Cosmogony from the Permissive Void | Draft aligned to outline |
-| SSV IX | CMB and Primordial Phonon Bath | Scoped outline; `main.tex` not yet written (#100) |
-| SSV Alpha | Fine-Structure Constant from Toroidal Vortex Geometry | Draft |
-| SSV Goldstone | Electromagnetic Propagation and the Goldstone Mode | Draft |
+The computational backbone is a 3D static minimiser for topological defects in the LogSE, plus
+per-sector batteries (reconnection, horizon entanglement entropy, rotation-curve N-body, etc.).
+Analytic claims were backed by a tested script and a result note; see [instruments/README.md](instruments/README.md)
+for the full layout and the `test/` suite. Notable load-bearing instruments referenced by the
+post-mortem:
 
-Each paper answers one main question. See [docs/roadmap.md](docs/roadmap.md) for scope lines and current priorities.
+- `instruments/paper_iii/reversal_echo.py` — reconnection time-reversibility (the arrow-of-time result, #137)
+- `instruments/paper_v/horizon_entanglement_entropy.py` — area-law verification (#155, Conclusion B)
+- `instruments/paper_v/dumb_hole_surface_gravity.py` — acoustic surface gravity + Clausius closure (#155)
+- `instruments/paper_i/vortex_core_mode_spectrum.py` — the O(10) bound-mode count behind the G shortfall (#78/#155)
 
-## Numerical Pipeline (Paper I)
+## Docs and workflow
 
-The core computation is a 3D static minimiser for topological defects in the LogSE.
+The programme ran issue-driven with pre-registration and a hard negative-results rule — the
+methodology the post-mortem flags as its most transferable product.
 
-**Key files:**
-
-| File | Role |
-|------|------|
-| `instruments/paper_i/gradient_flow_numba.py` | Main static relaxer — imaginary-time gradient flow with Numba kernels (~6× speedup) |
-| `instruments/paper_i/trefoil_geometry_scan.py` | (R, a) geometry scan for the trefoil breather |
-| `instruments/paper_i/trefoil_state_continuation_sweep.py` | Coarse→fine spectral regrid continuation |
-| `instruments/paper_i/trefoil_observables.py` | N_Y, F, link-count readouts |
-| `instruments/paper_i/vortex_ring_mass_inversion.py` | Lepton mass ladder: Lamb formula inversion, 8ⁿ generation fit |
-| `instruments/paper_i/vortex_profile.py` | LogSE radial vortex profile |
-
-**Milestone (issue #77, 2026-06-03):** geometry minimum found at (R, a) = (2.5, 0.85) ξ, giving **N_Y×F = 54**, grid-converged to <2.5% over n=96→192 and route-independent. The grid-convergence wall that blocked the programme since #13 is removed.
-
-**Recent track (issue #78, closed 2026-06-05):** the BdG muon programme is retired (no-go confirmed across 5 independent probes — scalar Ψ has no half-integer Berry phase). Route C and Route D also returned negative: distinct static ring minima give an energy ratio `3.71`, not `206.77`, and the Kelvin-mode degeneracy does not produce an exact `8^n` generation rule. Remaining lepton-generation escape hatches are structural only: half-quantum-vortex or spinorial-order-parameter extensions.
-
-**Open follow-ups (2026-06-07):** #97 upgrades dynamic reconnection cap geometry, #98 maps the #77 static trefoil result into `Q_p` / `\alpha_G`, #99 decides the post-#78 lepton-generation branch, and #100 drafts SSV IX.
-
-## Paper I Supplemental Notes
-
-Result notes, pre-registrations, and checkpoints live under `papers/SSV-I/`. Key recent files:
-
-- `papers/SSV-I/results/proton/geometry-minimum-result-2026-06-03.md` — #77 final result
-- `papers/SSV-I/notes/muon-two-mode-symbolic-reduction.md` — two-mode symbolic model
-- `papers/SSV-I/results/muon/volovik-berry-phase-issue76-tasks1-4.md` — Berry-phase no-go
-- `notes/volovik-mapping.md` — full Volovik analogy map; closed-shell lepton hypothesis now refuted by #78
-
-## Roadmap and Docs
-
-- [docs/roadmap.md](docs/roadmap.md) — paper plan and current priorities
-- [docs/numerical-minimisation-roadmap.md](docs/numerical-minimisation-roadmap.md) — numerical programme plan
+- [docs/roadmap.md](docs/roadmap.md) — paper plan (historical)
+- [docs/numerical-minimisation-roadmap.md](docs/numerical-minimisation-roadmap.md) — numerical programme plan (historical)
 - [docs/numerical-conventions.md](docs/numerical-conventions.md) — units, conventions
 - [docs/claim-status.md](docs/claim-status.md) — compact claim/gapbox status index
-- [docs/issue-workflow.md](docs/issue-workflow.md) — how issues, pre-registrations, and result notes are used
-
-## Issue-Driven Workflow
-
-Use the GitHub issue tracker as the primary progress system. Every claim marked "deferred", "open problem", or "needs derivation" in a draft should have a corresponding issue. Pre-register the decision rule before running any diagnostic; commit the result note immediately after.
-
-Issue types: `paper`, `derivation`, `numerics`, `objection`.
+- [docs/issue-workflow.md](docs/issue-workflow.md) — how issues, pre-registrations, and result notes were used
