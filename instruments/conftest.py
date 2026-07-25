@@ -10,7 +10,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-_dirs = [ROOT] + list(ROOT.glob("paper_*")) + [ROOT / "shared_numerics", ROOT / "tools"]
+_dirs = ([ROOT] + list(ROOT.glob("paper_*")) + list(ROOT.glob("model_*"))
+         + [ROOT / "shared_numerics", ROOT / "tools"])
 for d in _dirs:
     if d.is_dir() and str(d) not in sys.path:
         sys.path.insert(0, str(d))

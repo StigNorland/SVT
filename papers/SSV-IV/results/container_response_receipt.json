@@ -1,0 +1,45 @@
+{
+  "params": {
+    "rho0": 1.0,
+    "g": 1.0,
+    "b": 1.0
+  },
+  "grid": {
+    "N": 48,
+    "L": 20.0
+  },
+  "consistency_error": {
+    "linear": 1.97392092272466e-08,
+    "cubic": 2.8894652226420413e-08,
+    "log": 1.0113127571461908e-07
+  },
+  "positive_control": {
+    "cubic": {
+      "omega_measured": 0.6586148120733318,
+      "omega_bogoliubov": 0.6585953328540791,
+      "rel_err": 2.9576916629975417e-05
+    },
+    "log": {
+      "omega_measured": 0.6586148120733318,
+      "omega_bogoliubov": 0.6585953328540791,
+      "rel_err": 2.9576916629975417e-05
+    }
+  },
+  "shear_growth": {
+    "linear": 0.9999999617363045,
+    "cubic": 1.9850499822215006,
+    "log": 1.9850850799817785
+  },
+  "shear_omega": {
+    "linear": 0.19739208802178715,
+    "cubic": 0.6585953328540791,
+    "log": 0.6585953328540791
+  },
+  "diff_log_vs_cubic": 1.7681046115827112e-05,
+  "diff_log_vs_linear": 0.9850851559384726,
+  "verdict": {
+    "consistency": "PASS",
+    "prediction": "R-NEGATIVE"
+  },
+  "wall_seconds": 83.17
+}
