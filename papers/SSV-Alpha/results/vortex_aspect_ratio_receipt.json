@@ -1,0 +1,26 @@
+{
+  "alpha_true": 0.0072973525693,
+  "alpha_inv": 137.0359990836958,
+  "logse_ring": {
+    "denergy_at_r1": 1.0794415416798357,
+    "denergy_at_r137": 5.999685200025026,
+    "monotone_increasing_physical": true
+  },
+  "reduced_balance": {
+    "coupling_for_r137_p1": 112667.27868295391,
+    "r_star_if_coupling_equals_alpha": null
+  },
+  "circularity": {
+    "ssv_R_over_xi": 137.0359990836958,
+    "equals_alpha_inv": true
+  },
+  "verdict": {
+    "R1_derived": false,
+    "R2_negative": true,
+    "pure_logse_collapses": true,
+    "aspect_ratio_is_inserted_alpha_inv": true,
+    "coupling_needed_for_137": 112667.27868295391,
+    "r_star_from_small_coupling_alpha": null,
+    "verdict": "R2 (clean negative)"
+  }
+}
