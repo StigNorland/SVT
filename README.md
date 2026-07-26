@@ -14,6 +14,15 @@ gravity, time, and black-hole ontology from that single medium and two inputs (m
 > content are written up in [papers/conclusions/](papers/conclusions/). This repository is now an
 > archive plus that post-mortem.
 
+> **Post-closure H-SSV audit (2026-07).** Issue
+> [#180](https://github.com/StigNorland/SVT/issues/180) tested the narrower question of whether the
+> printed SSV scalar could be the stable low-energy limit of a covariant holographic completion.
+> The result is **K3 — incompatible as stated**: the printed homogeneous LogSE background is
+> modulationally unstable, and its exact minimal covariant parent inherits the negative mode.
+> This is not a no-go theorem against holography in general. The reproducible derivation and precise
+> boundary to a neighboring modified theory are in
+> [papers/H-SSV/](papers/H-SSV/).
+
 ## Table of contents
 
 - [Conclusions / post-mortem](#conclusions--post-mortem) — start here
@@ -69,6 +78,7 @@ The drafts and their compiled PDFs remain in `papers/`; the human-readable PDFs 
 | Path | Contents |
 |------|----------|
 | [papers/conclusions/](papers/conclusions/) | **The post-mortem and the two conclusion notes** (`.tex` + `.pdf`) |
+| [papers/H-SSV/](papers/H-SSV/) | Post-closure compatibility audit: covariant LogSE bridge, stability gates, no-go ledger, and K3 decision (#180) |
 | [papers/](papers/) | Manuscript drafts, supplemental notes, result notes, checkpoint files |
 | [papers/pdf/](papers/pdf/) | Compiled, human-readable PDFs of the series |
 | [instruments/](instruments/) | Computational scripts grouped by paper, plus `tools/` (provenance) and the `test/` suite — see [instruments/README.md](instruments/README.md) |
