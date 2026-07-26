@@ -41,3 +41,25 @@ def test_verdict_cautionary_negative():
     assert rep["z2_geometricity_degraded"] is True
     assert rep["far_tail_monotonic_in_z"] is False   # honest: crude probe
     assert "tension" in rep["verdict"]
+
+
+# --- follow-on: is the geometricity IR-emergent? (Bogoliubov crossover) ---
+
+def test_flow_bogoliobov_N_converged():
+    # the flow is physical, not a finite-size artifact (large IR region)
+    a = lf.far_tail_bogoliubov(48, 4.0, N=2000)
+    b = lf.far_tail_bogoliubov(48, 4.0, N=3000)
+    assert abs(a - b) / a < 0.02
+
+
+def test_flow_UV_nongeometric_IR_recovers():
+    flow = lf.run_flow(xi=4.0, ells=(2, 16, 64), N=2000)
+    assert flow["R_uv_mean"] > 3.0                    # ell<=xi: sees z=2 (non-geometric)
+    assert flow["R_ir_mean"] < 2.0                    # ell>>xi: recovers to ~z=1
+    assert flow["R_ir_mean"] < flow["z2_ratio_benchmark"]
+
+
+def test_flow_emergent_lorentz_verdict():
+    flow = lf.run_flow(xi=4.0, ells=(2, 16, 64), N=2000)
+    assert flow["emergent_lorentz"] is True
+    assert "EMERGENT LORENTZ" in flow["verdict"]
