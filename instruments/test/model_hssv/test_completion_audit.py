@@ -16,3 +16,5 @@ def test_completion_manifest_passes():
     assert all(report["required_artifacts"].values())
     assert all(report["document_markers"].values())
     assert all(report["receipt_checks"].values())
+    assert report["publication"]["issue_state"] == "closed"
+    assert report["publication"]["pull_request"] == 181

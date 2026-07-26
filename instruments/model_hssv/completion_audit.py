@@ -82,7 +82,12 @@ def run() -> dict[str, Any]:
         "document_markers": marker_checks,
         "receipt_checks": receipt_checks,
         "verified_test_runs": tests,
-        "publication_pending": True,
+        "publication": {
+            "issue_state": "closed",
+            "pull_request": 181,
+            "pull_request_url": "https://github.com/StigNorland/SVT/pull/181",
+            "scientific_result_commit": "3feae6da6503a5125ec3e42f84f232dcc914b4d1",
+        },
     }
 
 
