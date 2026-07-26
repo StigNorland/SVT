@@ -1,0 +1,18 @@
+{
+  "N": 128,
+  "L": 6.0,
+  "w": 1.5,
+  "B_hedgehog_1turn": -0.9941449561781132,
+  "B_hedgehog_2turn": -1.9648595267687632,
+  "B_hedgehog_1turn_deformed": -0.9957997492568587,
+  "B_hedgehog_1turn_coarse": -0.976498983825721,
+  "u1_winding": 0.0,
+  "u1_max_density": 0.0,
+  "control_C1_B1_integer": true,
+  "control_C2_B2_integer": true,
+  "control_C3_deformation_stable": true,
+  "control_C5_grid_convergent": true,
+  "T1_u1_pointwise_zero": true,
+  "controls_ok": true,
+  "verdict": "bare SSV FAILS the statistics question: the U(1) order parameter's pi_3 winding density is POINTWISE ZERO (max |density| = 0.0e+00) -> B = 0 for any configuration -> no solitons to quantize, a fortiori none fermionic. Minimal repair is DERIVED: a two-component (SU(2)-valued) condensate has integer pi_3 winding (B = -0.994, -1.965 for 1, 2 turns; deformation-stable), and pi_4(S^3) = Z_2 (cited) supplies the Finkelstein-Rubinstein fermionic option. Fermionic solitons demand a multi-component condensate -- a derived constraint on SSV's field content, not a free choice."
+}
