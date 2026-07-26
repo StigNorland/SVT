@@ -1,0 +1,164 @@
+{
+  "adjacent_model": {
+    "changes_required": [
+      "reverse or otherwise change the logarithmic curvature at the background",
+      "supply Maxwell and Einstein fields independently",
+      "withdraw the scalar-Goldstone photon identification"
+    ],
+    "classification": "K2 candidate outside the frozen target",
+    "why_not_issue_180_success": "these changes alter the SSV limit and still leave the Goldstone cone subluminal in the controlled NR regime"
+  },
+  "decision": "K3",
+  "decision_scope": "H-SSV as specified: stable covariant EFT with the literal Paper-I SSV condensate limit",
+  "gates": {
+    "P0": "FAIL -- literal homogeneous SSV background is modulationally unstable",
+    "P1": "FAIL -- exact minimal covariant parent is unbounded below",
+    "P2": "PASS FORMALLY -- the parent maps to the target with a controlled remainder",
+    "P3": "FAIL -- covariant Goldstone branch has omega^2<0 at small k",
+    "P4_H_route": "CONTROL ONLY -- independent Maxwell works after withdrawing the SSV-photon identity, but does not repair P0/P3",
+    "P4_S_route": "FAIL -- one scalar Goldstone is not two photon helicities",
+    "P5": "NOT REACHED for literal SSV because upstream stability gates fail",
+    "P6": "COMPLETE -- no-go ledger recorded in 05-no-go-audit.md"
+  },
+  "instruments": {
+    "relativistic_bridge": {
+      "R0": {
+        "B": 0.1,
+        "gapless_omega2": [
+          0.0,
+          -1.1111109810002517e-09,
+          -0.0002756377319945713,
+          -0.0010770276274831847
+        ],
+        "gapped_omega2": [
+          3.6,
+          3.6000000211111107,
+          3.6052756377319946,
+          3.621077027627483
+        ],
+        "goldstone_c2": -0.11111111111111112,
+        "k": [
+          0.0,
+          0.0001,
+          0.05,
+          0.1
+        ],
+        "m": 1.0,
+        "massive_gap2": 3.6,
+        "potential_bounded_below": false,
+        "target_coefficient": -0.1,
+        "verdict": "exact target sign, but unbounded potential and unstable Goldstone"
+      },
+      "gates": {
+        "P1_R0_bounded": false,
+        "P1_R1_preserves_target_and_stabilizes": false,
+        "P2_R0_exact_NR_map": true,
+        "P3_R0_stable": false,
+        "P3_sign_reversed_control_stable": true,
+        "P4_sign_reversed_control_is_literal_SSV": false
+      },
+      "instrument": "relativistic_logse_bridge",
+      "issue": 180,
+      "sign_reversed_control": {
+        "B": -0.1,
+        "common_light_cone_in_nr_regime": false,
+        "gapless_omega2": [
+          0.0,
+          9.090910246811745e-10,
+          0.00022844544547595547,
+          0.0009277965625478224
+        ],
+        "gapped_omega2": [
+          4.4,
+          4.400000019090909,
+          4.404771554554524,
+          4.419072203437452
+        ],
+        "goldstone_c2": 0.09090909090909091,
+        "interpretation": "stable covariant logarithmic scalar, but opposite to the printed SSV sign and with a subluminal Goldstone cone",
+        "massive_gap2": 4.4,
+        "potential_bounded_below": true
+      },
+      "status": "closure-grade"
+    },
+    "shared_eft_control": {
+      "anomalies": {
+        "SU2_doublets": 4,
+        "SU2_squared_U1": "0",
+        "SU3_cubed_units": 0,
+        "SU3_squared_U1": "0",
+        "U1_cubed": "0",
+        "all_cancel": true,
+        "gravity_squared_U1": "0"
+      },
+      "degrees_of_freedom": {
+        "complex_scalar_goldstones": 1,
+        "massless_graviton_helicities": 2,
+        "maxwell_photon_helicities": 2
+      },
+      "instrument": "shared_eft_audit",
+      "interpretation": "Independent Einstein/Maxwell/anomaly-free chiral sectors are ordinary compatible EFT ingredients, but inserting them is K2 structure and cannot repair the unstable literal SSV scalar.",
+      "issue": 180,
+      "scalar_supplies_transverse_photon": false,
+      "status": "closure-grade"
+    },
+    "target": {
+      "control_point": {
+        "B": 0.1,
+        "actual_omega2": [
+          -0.0009750000000000002,
+          -0.0052734375,
+          -0.009375000000000001,
+          -0.006155999999999997
+        ],
+        "hbar": 1.0,
+        "k": [
+          0.1,
+          0.25,
+          0.5,
+          0.5692099788303083
+        ],
+        "k_edge": 0.6324555320336759,
+        "m": 1.0,
+        "paper_claimed_omega2": [
+          0.0021000000000000007,
+          0.01640625,
+          0.1125,
+          0.16977600000000007
+        ]
+      },
+      "dimensions": {
+        "gradient_term_with_printed_prefactor": "energy",
+        "physical_action_density_normalization_specified": false,
+        "potential_with_b_rho0_as_energy": "energy",
+        "psi_dimensionless": true,
+        "rho_is_physical_density_in_paper": true,
+        "terms_consistent_as_energy_per_reference_element": true,
+        "time_term_with_printed_prefactor": "energy",
+        "unique_physical_action_normalization": false
+      },
+      "gates": {
+        "P0_action_normalization_unique": false,
+        "P0_uniform_background_stable": false
+      },
+      "instrument": "ssv_target_audit",
+      "issue": 180,
+      "status": "closure-grade",
+      "symbolic": {
+        "actual_longwave_c2": "-B/m",
+        "dP_drho": "-b",
+        "hbar2_omega2": "epsilon_k*(epsilon_k-2*B)",
+        "paper_claimed_c2": "2*B/m",
+        "pressure": "-b*rho-V0",
+        "unstable_for": "0<k<2*sqrt(m*B)/hbar"
+      },
+      "target": {
+        "declared_sign": "B=b*rho0>0",
+        "equation_coefficient": "-B ln(n/n0)"
+      },
+      "verdict": "FAIL: the literal B>0 printed LogSE has a long-wavelength modulational instability and does not yield the claimed positive sound cone. The action-density normalization is also under-specified, but that ambiguity is not needed for the failure."
+    }
+  },
+  "issue": 180,
+  "status": "closure-grade"
+}

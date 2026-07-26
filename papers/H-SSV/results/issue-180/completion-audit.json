@@ -1,0 +1,52 @@
+{
+  "document_markers": {
+    "00-prereg-and-target.md": true,
+    "01-ssv-target-audit.md": true,
+    "02-relativistic-bridge.md": true,
+    "03-stability-and-cones.md": true,
+    "04-shared-eft.md": true,
+    "05-no-go-audit.md": true,
+    "README.md": true,
+    "decision.md": true
+  },
+  "issue": 180,
+  "publication": {
+    "issue_state": "closed",
+    "pull_request": 181,
+    "pull_request_url": "https://github.com/StigNorland/SVT/pull/181",
+    "scientific_result_commit": "3feae6da6503a5125ec3e42f84f232dcc914b4d1"
+  },
+  "receipt_checks": {
+    "P0_failed": true,
+    "P2_formal_pass": true,
+    "P3_failed": true,
+    "P5_not_reached": true,
+    "P6_complete": true,
+    "decision_is_K3": true
+  },
+  "required_artifacts": {
+    "bridge_instrument": true,
+    "decision": true,
+    "hssv_index": true,
+    "no_go_audit": true,
+    "preregistration": true,
+    "receipt": true,
+    "relativistic_bridge": true,
+    "root_index": true,
+    "runner": true,
+    "shared_eft": true,
+    "shared_eft_instrument": true,
+    "stability_and_cones": true,
+    "target_audit": true,
+    "target_instrument": true
+  },
+  "status": "PASS",
+  "verified_test_runs": {
+    "commands": [
+      "pytest -q instruments/test/model_hssv",
+      "pytest -q instruments/test"
+    ],
+    "focused": "18 passed",
+    "repository": "411 passed, 1 skipped"
+  }
+}
