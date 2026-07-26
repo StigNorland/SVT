@@ -1,0 +1,97 @@
+{
+  "ell": 40,
+  "N": 1600,
+  "rows": [
+    {
+      "z": 1.0,
+      "S": 0.702431892394095,
+      "far_tail_Hpi": 0.017830589501709397
+    },
+    {
+      "z": 1.25,
+      "S": 0.9936242935512104,
+      "far_tail_Hpi": 0.01122238496542867
+    },
+    {
+      "z": 1.5,
+      "S": 1.324974526045175,
+      "far_tail_Hpi": 0.01352830853506263
+    },
+    {
+      "z": 1.75,
+      "S": 1.7037108941154546,
+      "far_tail_Hpi": 0.02816755488978996
+    },
+    {
+      "z": 2.0,
+      "S": 2.1467870856481612,
+      "far_tail_Hpi": 0.06950619779897492
+    }
+  ],
+  "far_tail_z1": 0.017830589501709397,
+  "far_tail_z2": 0.06950619779897492,
+  "ratio_z2_over_z1": 3.8981435690789383,
+  "control_C1_z1_geometric": true,
+  "far_tail_monotonic_in_z": false,
+  "z2_geometricity_degraded": true,
+  "verdict": "CAUTIONARY NEGATIVE: at SSV's UV (z=2) a robust, N-converged non-local component appears in the modular Hamiltonian (far tail 7% = 3.9x the geometric z=1 value) -- the largest of any screen tested -> the boost-based reconstruction's geometricity is DEGRADED for a presentist (preferred-foliation) screen. Honest bounds: it is a PARTIAL (~7%) non-locality, not a total collapse, and its z-dependence is NON-MONOTONIC, so this is a tension, not a clean law. Presentism and the boost-based reconstruction are in tension, sharpest at the physical z=2.",
+  "flow": {
+    "xi": 4.0,
+    "N": 3000,
+    "rows": [
+      {
+        "ell": 2,
+        "ell_over_xi": 0.5,
+        "far_bog": 0.14468476538753836,
+        "far_z1": 0.005599318447379606,
+        "far_z2": 0.13246723498916999,
+        "R": 25.83971009101091
+      },
+      {
+        "ell": 4,
+        "ell_over_xi": 1.0,
+        "far_bog": 0.1007411203023375,
+        "far_z1": 0.02196457419351802,
+        "far_z2": 0.12356029180584961,
+        "R": 4.586527351487073
+      },
+      {
+        "ell": 8,
+        "ell_over_xi": 2.0,
+        "far_bog": 0.03875123227774724,
+        "far_z1": 0.015189151889217278,
+        "far_z2": 0.09633241287143136,
+        "R": 2.551243977305711
+      },
+      {
+        "ell": 16,
+        "ell_over_xi": 4.0,
+        "far_bog": 0.019730746871943962,
+        "far_z1": 0.016373219163221417,
+        "far_z2": 0.07986590550610193,
+        "R": 1.2050621612800763
+      },
+      {
+        "ell": 32,
+        "ell_over_xi": 8.0,
+        "far_bog": 0.013027433906999942,
+        "far_z1": 0.01606087232956075,
+        "far_z2": 0.07124835202914653,
+        "R": 0.8111286634800259
+      },
+      {
+        "ell": 64,
+        "ell_over_xi": 16.0,
+        "far_bog": 0.01690477692851864,
+        "far_z1": 0.013337801813729249,
+        "far_z2": 0.06688458911719573,
+        "R": 1.2674335070054594
+      }
+    ],
+    "z2_ratio_benchmark": 4.877837687869095,
+    "R_ir_mean": 1.0945414439218537,
+    "R_uv_mean": 15.213118721248993,
+    "emergent_lorentz": true,
+    "verdict": "EMERGENT LORENTZ (Hypothesis A): the z=2 non-geometricity is a UV (ell<~xi) feature -- for IR regions (ell>>xi) the modular far-tail recovers to the geometric z=1 level (R_ir=1.09, ~4x below the z=2 ratio 4.9), while UV regions stay non-geometric (R_uv=15.2). The boost-based reconstruction holds for the EMERGENT IR gravity; presentism survives as the microscopic substrate. The #170 tension is UV-only. (Far-tail is a crude metric: R_ir scatters ~+-25%, non-monotonic -- the robust fact is IR far-tail ~ z=1, ~10x below z=2.)"
+  }
+}
