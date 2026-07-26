@@ -1,0 +1,75 @@
+{
+  "L": 48,
+  "nwin": 4,
+  "control_C1_ward": 7.058401795883072e-07,
+  "control_C3_slope_recovered": 0.49999999999999944,
+  "control_C3_slope_true": 0.5,
+  "control_C2_tail_rate_massive_m0p40": 1.2949246709128206,
+  "fit_L": {
+    "A_cutoff": -0.006083279398360468,
+    "B_phys": 0.0025274178750226604,
+    "R2_m2": 0.9990603511404208,
+    "cutoff_domination_span": 0.0779005566790947,
+    "c2_of_m": [
+      -0.005932027442758717,
+      -0.005855720626279426,
+      -0.005768997674373142,
+      -0.005673026195823418,
+      -0.0055689495373194954,
+      -0.005457871549525991
+    ],
+    "c0_of_m": [
+      0.02373112569357718,
+      0.02342585963224778,
+      0.023078923733507017,
+      0.022694989026117836,
+      0.022278629478128777,
+      0.02183426105341231
+    ],
+    "masses": [
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5
+    ]
+  },
+  "fit_Lminus8": {
+    "A_cutoff": -0.006082450278022753,
+    "B_phys": 0.0025270727415387514,
+    "R2_m2": 0.9990603651423209,
+    "cutoff_domination_span": 0.077900536359591,
+    "c2_of_m": [
+      -0.0059312188984743915,
+      -0.005854922620385724,
+      -0.005768211518020322,
+      -0.00567225312431963,
+      -0.005568190649812736,
+      -0.005457127799008057
+    ],
+    "c0_of_m": [
+      0.023731094569930968,
+      0.023425829459732816,
+      0.023078894132320275,
+      0.02269495994363646,
+      0.022278600934472485,
+      0.0218342330801128
+    ],
+    "masses": [
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5
+    ]
+  },
+  "B_phys": 0.0025274178750226604,
+  "B_phys_altL": 0.0025270727415387514,
+  "B_L_stable": true,
+  "einstein_positive": true,
+  "m2_scaling_confirmed": true,
+  "controls_ok": true,
+  "verdict": "induced Einstein term: the xi-scaling part of 1/16piG is POSITIVE and clean -- c2(m)=A+B m^2 with B>0, R^2>0.99, L-stable -> 1/G proportional to 1/xi^2 (screen scale SETS G, healthy sign). Masslessness is symmetry-protected (conserved stress verified). Short-range screen stress -> long-range, local, positive-G induced gravity."
+}

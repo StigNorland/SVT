@@ -1,14 +1,27 @@
 # Issue #166 sub-calculation 2 — the screen spin-2 stress sector
 
+> **⚠ CORRECTION (sub-calc 3, [induced-polarization-issue166.md](induced-polarization-issue166.md)).**
+> The "short-range → massive bulk mode → R2-leaning" reading below is **wrong**,
+> and is retracted. It used the *membrane-paradigm* inference (screen stress =
+> graviton boundary value, so its range is the graviton's range). For an
+> *induced* metric (Sakharov; the correct reading for SSV) the logic reverses:
+> the short-range stress is the **polarisation** that induces a **local** Einstein
+> term, and the graviton stays **massless by diffeomorphism invariance** (a
+> theorem; precondition = the conserved stress shown here). Sub-calc 3 computes
+> the induced coefficient: `1/16πG ∝ +1/ξ²` (positive, `R²=0.999`, L-stable). So
+> the short-range result is a **feature** (locality), not the death-knell stated
+> below. Read this note for the *stress-exists-and-is-conserved* result only; the
+> range/verdict claims are superseded.
+
 **Status: necessary condition PASSES, with a scale catch.** A conserved,
 two-polarisation **spin-2 stress sector exists** on the screen — nonzero,
 transverse (Ward identity), and conformal — for a *conformal* screen. This is
 demonstrated, not named (it clears #166's "no naming a scalar bilinear spin-2"
-bar). **But SSV's scale `ξ` makes that spin-2 stress short-range (Yukawa):** it
+bar). ~~**But SSV's scale `ξ` makes that spin-2 stress short-range (Yukawa):** it
 can source only a short-range / **massive** bulk mode, not the long-range
-massless graviton real gravity needs. So the spin-2 raw material is present, yet
-the massless-graviton reconstruction requires a screen SSV's scale does not
-supply — the R2 / ontology-tension made concrete.
+massless graviton real gravity needs.~~ *(superseded — see correction above:
+short-range stress induces a local, massless-by-symmetry, positive-G Einstein
+term; ξ sets G, not the range.)*
 
 Pre-registered on [#166](https://github.com/StigNorland/SVT/issues/166) before
 the computation. Script `instruments/model_screen/screen_stress_spin2.py`; tests
