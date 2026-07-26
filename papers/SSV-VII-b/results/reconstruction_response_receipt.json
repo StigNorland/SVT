@@ -1,0 +1,14 @@
+{
+  "L": 48,
+  "control_C1_ward": 7.058401795883072e-07,
+  "control_C2_C3_discriminates": true,
+  "T1_determinacy_min_abs_Pi2": 0.018017396119586644,
+  "T1_determined": true,
+  "T2_response_power_massless": 2.093853757960621,
+  "T2_long_range": true,
+  "imposed_gapped_yukawa_rate": 0.5944161939524342,
+  "imposed_gapped_power": 4.649179542302148,
+  "imposed_is_short_range": true,
+  "controls_ok": true,
+  "verdict": "the bulk shear response is DETERMINED (Pi2 invertible) and, with the verified masslessness, LONG-RANGE (G2(r) ~ 1/r^2): a localized screen source determines bulk shear at distant r -> bulk TT FOLLOWS FROM the screen state (not imposed as in #162, whose gapped kernel is short-range)."
+}
