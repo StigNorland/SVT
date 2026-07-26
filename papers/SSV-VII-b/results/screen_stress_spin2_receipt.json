@@ -1,0 +1,30 @@
+{
+  "control_C1_ward_ratio": 7.058401795883072e-07,
+  "control_C2_powerlaw_rel_spread": 0.0,
+  "control_C3_spin2_nonzero": true,
+  "control_C3_45deg_swap_ok": true,
+  "control_C4_massive_yukawa_mu": 0.4073936814062199,
+  "control_C4_lattice_mass_target": 0.39738022069848283,
+  "controls_ok": true,
+  "spin2_angular": [
+    {
+      "psi": 0.0,
+      "spp": 0.01283247781835542,
+      "sxx": -0.007699486691013252,
+      "spx": 0.0
+    },
+    {
+      "psi": 0.39269908169872414,
+      "spp": 0.0025664955636710823,
+      "sxx": 0.0025664955636710844,
+      "spx": 0.010265982254684336
+    },
+    {
+      "psi": 0.7853981633974483,
+      "spp": -0.0076994866910132555,
+      "sxx": 0.012832477818355427,
+      "spx": 0.0
+    }
+  ],
+  "verdict": "spin-2 sector EXISTS, transverse, two-polarisation (conformal screen); SSV scale makes it short-range -> sources a massive/short-range mode"
+}
