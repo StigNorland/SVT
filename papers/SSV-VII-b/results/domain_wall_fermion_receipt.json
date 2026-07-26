@@ -1,0 +1,40 @@
+{
+  "N": 200,
+  "w": 4.0,
+  "r": 1.0,
+  "m0": 1.0,
+  "bulk_gap": 0.6433278967516224,
+  "kink_antikink_modes": [
+    {
+      "E": 7.619046809423539e-16,
+      "center": 49.762798317610894,
+      "width": 1.508986086387693,
+      "chirality": 1.0000000000000002
+    },
+    {
+      "E": 7.619046809423539e-16,
+      "center": 150.23720168238913,
+      "width": 1.508986086387693,
+      "chirality": -1.0
+    }
+  ],
+  "two_opposite_at_walls": true,
+  "modes_localized": true,
+  "single_wall_modes": [
+    {
+      "E": 1.272723648577934e-16,
+      "center": 0.0,
+      "width": 0.0,
+      "chirality": -1.0
+    },
+    {
+      "E": 1.272723648577934e-16,
+      "center": 99.76279831761089,
+      "width": 1.5089860863876927,
+      "chirality": 1.0000000000000002
+    }
+  ],
+  "single_wall_partner_exiled": true,
+  "controls_ok": true,
+  "verdict": "chirality SURVIVES on the domain wall (H-SSV screen): each wall binds ONE chiral zero mode (|E|<1e-10, width 1.5 sites), and the two walls carry OPPOSITE chirality (+1.00 / -1.00) separated by the gapped bulk -- the doubler is exiled to the far wall by the EXTRA DIMENSION (Kaplan/Callan-Harvey). On a single open wall the partner is exiled to the boundary. Substrate-only SSV cannot isolate a chiral fermion (Nielsen-Ninomiya, no Fermi-point evasion for a bosonic vacuum); the container's extra dimension is the loophole."
+}
