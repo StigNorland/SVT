@@ -1,0 +1,7 @@
+# Retrieved third-party sources are NOT redistributed from this public repo.
+# INDEX.md records the arXiv/DOI id, URL, SHA-256 and retrieval date so any
+# reader can re-fetch the identical file and verify it. Short verbatim
+# quotations needed for the audit live in notes/ and ARE tracked.
+pdf/
+txt/
+.fetchlog.json
