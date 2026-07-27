@@ -32,7 +32,7 @@ in `papers/cited/txt/`, retrieval log in `papers/cited/.fetchlog.json`.
 | C7 | `volovik2003` | **234** | "Following the superfluid-vacuum framework of Volovik, we adopt a logarithmic nonlinear Schrödinger Lagrangian" | **`MISATTRIBUTED`** | Volovik does not use a logarithmic NLS. Correct lineage: Rosen (1968) → Bialynicki-Birula & Mycielski (1976) → Zloshchastiev. Zloshchastiev 2020 himself cites Volovik's book only as a general SVT reference. |
 | C8 | `faddeev1997` | **618** | "…a Y-junction~\cite{faddeev1997} of three quantized vortex filaments meeting at a single central node" | **`MISATTRIBUTED`** | hep-th/9610193 ("Knots and Particles") contains **0 occurrences of "junction"**. It concerns Hopf-charged knot solitons in a unit-vector field model — not Y-junctions and not quantized vortex filaments in a superfluid. |
 | C9 | `proment2012` | **1724** | "Following the vortex-knot construction of Proment et al., we initialise the trefoil skeleton by wrapping **three vortex lines** on a torus" | **`MISREAD`** | Proment et al. build the trefoil $T_{2,3}$ as a **single** closed vortex line on a torus ($f(\varphi)=3\varphi/2$, lines 169–198). Three vortex rings are what an **unstable** trefoil *decays into* (lines 607–653), i.e. the failure mode, not the construction. |
-| C10 | `lamb1932` | 2072 | Elliptic expansion of the self-energy of a circular vortex filament, §163 | `PENDING-PRIMARY` | Scan **retrieved** (archive.org `dli.ernet.3284`, 284,937 words) but its OCR destroys mathematics — it renders $\delta a\,\delta b\,\delta c$ as `8a St Sc`. Prose is legible (259 "vortex" hits), equations are not. Verifying against garbled OCR would risk a new error, so it stays unverified. Needs a clean copy. |
+| C10 | `lamb1932` | 2072 | Elliptic expansion of the self-energy of a circular vortex filament, §163 | **`OK`** | Verified from owner-supplied page images of Lamb pp.239–241, transcribed verbatim in `papers/cited/notes/lamb1932.verbatim.md`. Art. 163 (6): $T/2\pi\rho=(\kappa^2\varpi_0/4\pi)\{\log(8\varpi_0/a)-7/4\}$, i.e. $T=\tfrac12\rho\kappa^2\varpi_0[\log(8\varpi_0/a)-7/4]$ — **exactly** `eq:Ekin`, and §163 is the correct section. The fault is in the appendix, not here. |
 | C11 | `zloshchastiev2023` | 1245 | Bjerknes force reproducing Newtonian gravity with $G$ from $\hbar,c,m_e,\alpha$ | `PENDING-PRIMARY` **high suspicion** | MDPI returned HTTP 403 on both PDF and HTML (open-access journal, bot filter — not circumvented); no arXiv preprint found. Two independent grounds for suspicion: the title covers the emergent metric/potential/speed of light and **does not mention Bjerknes**, and Bjerknes mutual-radiation is **already retired** in this programme. |
 | — | `liberati2006`, `stone2005` | — | — | `UNCITED` | Bibitems present, never cited in the text. |
 
@@ -135,7 +135,7 @@ it supports and which leans on a retired mechanism.
 
 **C-GATE FAIL.** Final tally over 11 keys: 4 `OK` (C1 by proxy, C2, C3, C5/C6),
 2 `MISATTRIBUTED` (C7, C8), 1 `MISATTRIBUTED`+`MISREAD` (C4), 1 `MISREAD` (C9),
-2 `UNCITED`, 2 `PENDING-PRIMARY` (C10, C11).
+2 `UNCITED`, 1 `PENDING-PRIMARY` (C11). **C10 resolved `OK`** after the owner read the book directly.
 
 ### Evidence rule (adopted 2026-07-27)
 
@@ -168,7 +168,7 @@ key. Concretely:
 |---|---|
 | D1 — logarithmic sector ($V$, EOS, $c_s$, $b$, $\xi$) | **OPEN** — depends on `zloshchastiev2020` (`OK`) and `volovik2001` (verdicted) |
 | D2 — trefoil/baryon sector | **OPEN** — depends on `proment2012`, `faddeev1997`, `nitta2012` (all verdicted) |
-| Vortex-ring self-energy elliptic expansion (appendix) | **SHUT** — needs C10 |
+| Vortex-ring self-energy elliptic expansion (appendix) | **OPEN** — C10 resolved 2026-07-27 |
 | Bjerknes → Newtonian $G$ (`main.tex:1245`) | **SHUT** — needs C11 |
 
 The amendment loosens the rule, so it is recorded here and in \#183 rather

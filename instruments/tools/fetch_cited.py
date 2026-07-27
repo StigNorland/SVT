@@ -140,8 +140,11 @@ UNAVAILABLE: list[Unavailable] = [
     Unavailable("lamb1932", "H. Lamb", "Hydrodynamics, 6th ed., §163",
                 "Cambridge University Press (1932)", "—",
                 "https://archive.org/details/dli.ernet.3284",
-                "PENDING-PRIMARY — scan retrieved (284,937 words) but its OCR "
-                "destroys mathematics; equations not readable"),
+                "**RESOLVED `OK`** — OCR unusable for mathematics, but Arts. 162-163 "
+                "(pp.239-241) were read from owner-supplied page images and "
+                "transcribed verbatim in notes/lamb1932.verbatim.md. Art. 163 (6) "
+                "gives T = 1/2 rho kappa^2 R [log(8R/a) - 7/4], matching SSV-I "
+                "eq:Ekin exactly"),
     Unavailable("stone2005", "M. Stone",
                 "Phonons in a BEC as an example of an emergent phenomenon",
                 "Phys. Rev. D 71, 085007 (2005)", "—", "—",

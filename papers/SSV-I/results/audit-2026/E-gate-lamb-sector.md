@@ -1,6 +1,6 @@
 # SSV-I E-gate — Lamb / fat-torus sector
 
-Status: **closure-grade** for E1/E3, **blocked** for E2, **flagged** for E4
+Status: **closure-grade** for E1/E2/E3, **flagged** for E4
 
 Verified symbolically and numerically 2026-07-27 (mpmath, 30 dps).
 Source equation supplied by the owner from a clean copy of Lamb 1932 p.241
@@ -51,25 +51,50 @@ conflated.
 
 \(R^*_e=\xi/\alpha\) is robust. **Correct the appendix; the result stands.**
 
-## E2 — \(-7/4\) vs \(-2\): internal inconsistency — BLOCKED on C10
+## E2 — RESOLVED: `eq:Ekin` is correct, the appendix is the fault
 
-`eq:Ekin` uses \(\ln(8R/a)-\tfrac74\). The appendix claims its elliptic formula
-"recovers \eqref{eq:Ekin} at leading order" with \(K\approx\ln(8R/a)\),
-\(E\approx1\) — which gives \(\ln(8R/a)-\mathbf{2}\), verified above. **The
-appendix's own claim is false.**
+Closed 2026-07-27 against Lamb Arts. 162–163, pp.239–241, read from
+owner-supplied page images and transcribed verbatim in
+`papers/cited/notes/lamb1932.verbatim.md`.
 
-The two constants are different core models: \(-7/4\) for a core of uniform
-vorticity, \(-2\) for a hollow/thin filament. The owner-supplied \(\psi\) shows
-\(-2\), but that is the *stream function*, not the energy.
+**Lamb's core model is stated explicitly** (p.241): *"For the case of a
+circular section more definite results can be obtained as follows. **If we
+neglect the variations of \(\varpi\) and \(\omega\) over the section**…"* —
+\(\omega\) is the vorticity, so this is a **uniform-vorticity circular core of
+radius \(a\)**.
 
-**Impact:** \(R^*_e=\xi/\alpha\) is unaffected (\(\Lambda\) is defined from the
-same constant, so it cancels in \(d\mathcal E/dr\)). But
-\(m_ec^2=\tfrac12\rho_0\kappa_0^2(\xi/\alpha)\Lambda\) gives
-\(\rho_0\propto1/\Lambda\), and \(\Lambda=5.24969\) vs \(4.99969\) is a
-**5.0 % shift in the vacuum density \(\rho_0\)**.
+**Lamb Art. 163 (6):**
 
-**Blocked:** needs Lamb's *energy* expression (§162) and its stated core
-assumption. Requested from the owner.
+$$\frac{T}{2\pi\rho}=\frac{\kappa^2\varpi_0}{4\pi}\left\{\log\frac{8\varpi_0}{a}-\frac74\right\}
+\qquad\Longrightarrow\qquad
+T=\tfrac12\rho\kappa^2\varpi_0\left\{\log\frac{8\varpi_0}{a}-\frac74\right\}$$
+
+This is **exactly** SSV-I `eq:Ekin`. And Art. 163 (7) gives the *velocity* with
+\(-\tfrac14\) — a different constant for a different quantity.
+
+### Verdict, opposite to the working hypothesis
+
+| Item | Status |
+|---|---|
+| `eq:Ekin` (\(-7/4\)) | **CORRECT**, and §163 is the **correct** citation |
+| Appendix `app:biot` claim that its elliptic formula "recovers \eqref{eq:Ekin} at leading order" | **FALSE** |
+| \(\rho_0\) 5 % shift | **VOID** — does not occur |
+
+The appendix's Neumann self-inductance form
+\(\left[(2/\varepsilon-\varepsilon)K(\varepsilon)-(2/\varepsilon)E(\varepsilon)\right]\)
+is a **filament / hollow-core** model whose leading term is \(\ln(8R/a)-2\)
+(verified to 10 digits under E1). Different core model, different constant. It
+cannot recover a uniform-vorticity result and does not.
+
+The \(-2\) that appears in Lamb's \(\psi\) is an intermediate: by eq. (5) it has
+already become \(-\tfrac32\), and only after the final integration does the
+energy constant \(-\tfrac74\) emerge. It is not an energy constant and must not
+be read as one.
+
+**Action:** repair the appendix — either replace the self-inductance form with a
+uniform-vorticity derivation, or keep it and state plainly that it is a
+different core model that does *not* reproduce `eq:Ekin`. The main line is
+untouched.
 
 ## E3 — spurious \(\alpha^2\) in `eq:Etotal` / `eq:stationary`
 
@@ -108,7 +133,7 @@ Either the label is wrong or \(m_0\neq m_e\) in a way the text does not state.
 ## Carried forward
 
 - E1: correct the appendix; \(\alpha\) result unaffected.
-- E2: blocked on C10 (Lamb §162 energy + core model). \(\rho_0\) moves 5 %.
+- E2: **resolved** — `eq:Ekin` correct and correctly cited; the appendix is the fault; \(\rho_0\) does not move.
 - E3: three equations to fix; boxed results stand.
 - E4: resolve the Bohr/classical-radius labelling.
 - All of the above are **independent of D1**; the \(\sqrt2\) correction to
