@@ -128,8 +128,11 @@ unchecked again. That rule caught two of my own errors during this audit.
   that *reproduces* it rather than one that merely cites it.
 - Pre-arXiv/book sources still open: `Landau_Fluid`, `Vinen2002`, `linshu1964`
   and others. None is presently known to be load-bearing.
-- `Villois2017` and `Clisby2010` were deliberately **not** downloaded after title
-  verification showed the search had returned different papers.
+- ~~`Villois2017` and `Clisby2010`~~ — **closed 2026-07-27, both `OK`.** Pinned by
+  arXiv identifier (1612.00386, 1002.0494) instead of by title search. Note the
+  method correction: the Villois preprint was **retitled on publication**, so the
+  title check — added to stop wrong papers being *accepted* — produced a **false
+  negative**. Pin the identifier, then verify author list and content.
 
 ## Next phase — not part of #182
 
