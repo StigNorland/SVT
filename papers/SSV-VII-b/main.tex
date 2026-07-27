@@ -29,6 +29,7 @@
 \date{Draft}
 
 \providecommand{\ssvfile}[1]{\hyperref[file:#1]{\texttt{\detokenize{#1}}}}% in-text code/report ref -> Code & Issue References appendix
+\providecommand{\ssvissue}[1]{\hyperref[issue:#1]{\##1}}% in-text issue ref -> Code & Issue References appendix
 \begin{document}
 \maketitle
 
@@ -197,15 +198,30 @@ a separate geometric theory.
 
 \subsection{Newton's constant from acoustic coupling}
 
-Paper~II~\cite{SSV-II} shows that two breather-mode defects (protons, or any
-oscillating density perturbations) at separation $r$ experience an attractive
-Bjerknes acoustic force~\cite{Bjerknes1906}:
+Paper~II~\cite{SSV-II} \emph{proposed} that two breather-mode defects (protons,
+or any oscillating density perturbations) at separation $r$ experience an
+attractive Bjerknes acoustic force~\cite{Bjerknes1906}:
 \begin{equation}
   F_\mathrm{Bj} = -\frac{\partial}{\partial r}
   \bigl\langle p_1 V_2 + p_2 V_1\bigr\rangle
   \approx -\frac{G_\mathrm{eff}\,m_1 m_2}{r^2},
   \label{eq:Bjerknes}
 \end{equation}
+\begin{resultbox}[Status of \eqref{eq:Bjerknes}: falsified as written (\ssvissue{119})]
+This mechanism is \textbf{falsified by pre-registered computation} and is
+retained here only because the \emph{downstream} construction --- the
+identification of $\Phi$ with a time-dilation field, and everything built on it
+--- does not depend on which mechanism sources $\Phi$.  Beyond one wavelength
+the time-averaged radiation-zone cross-term \emph{oscillates in sign} with
+separation, and it \emph{vanishes} between breathers of unequal frequency, so it
+cannot supply a sign-definite $1/r$ potential at physically realised
+separations, nor electron--proton gravity at all.  A bath-driven
+(secondary-Bjerknes) repair is sign-definite but fails on range.  Paper~IV
+records the trilemma in full.  \textbf{What sources $\Phi$ is open};
+\eqref{eq:G_eff} below should be read as the coupling that \emph{would} follow
+were the mechanism valid, not as a derived value of $G$.
+\end{resultbox}
+
 with effective coupling constant
 \begin{equation}
   G_\mathrm{eff} = \frac{\omega_0^2 A_0^2}{4\pi\rho_0 c_s^2},
@@ -312,8 +328,9 @@ The entropy associated with the local horizon is
   S = \frac{k_B A}{4\xi^2},
   \label{eq:BH_entropy}
 \end{equation}
-where $A$ is the horizon area and $\xi = \hbar/(m_0 c)$ is the healing
-length.  This is the Bekenstein--Hawking area law, but here it is not a
+where $A$ is the horizon area and $\xi = \hbar/(\sqrt{2}\,m_0 c)$ is the
+healing length (Paper~I, sign and normalisation corrected 2026-07 under
+\ssvissue{183}).  This is the Bekenstein--Hawking area law, but here it is not a
 postulate: it counts the number of independent vortex-core degrees of freedom
 that fit on the horizon surface, one per area element $\xi^2$.  The same
 healing length that fixes the vortex-core size in Paper~I simultaneously
@@ -359,10 +376,33 @@ Bekenstein--Hawking formula:
   G = \frac{c^3\xi^2}{\hbar} = \frac{c\xi}{m_0},
   \label{eq:G_xi}
 \end{equation}
-using $\xi = \hbar/(m_0 c)$.  Given the healing length $\xi$ and the
-fundamental mass $m_0$, $G$ is determined.  Inserting $\xi\sim\ell_P \approx
-1.6\times10^{-35}$~m and $m_0\sim m_P$ reproduces
+using $\xi = \hbar/(\sqrt{2}\,m_0 c)$.  Given the healing length $\xi$ and the
+fundamental mass $m_0$, $G$ is determined.  Inserting $\xi = \ell_P \approx
+1.616\times10^{-35}$~m reproduces
 $G\approx 6.67\times10^{-11}$~m$^3$\,kg$^{-1}$\,s$^{-2}$.
+
+\begin{resultbox}[Recomputation under the corrected healing length (\ssvissue{190})]
+Paper~I's correction $\xi=\hbar/(m_0c)\to\hbar/(\sqrt2\,m_0c)$ reaches a stated
+number here, and only here in the series.  Because the counting
+in~\eqref{eq:BH_entropy} \emph{defines} one degree of freedom per $\xi^2$,
+$G=c^3\xi^2/\hbar$ inverts to fix $\xi$ from the observed $G$ --- so
+\begin{equation}
+  \xi = \ell_P = 1.616\times10^{-35}\ \text{m}
+  \label{eq:xi_is_lP}
+\end{equation}
+is \textbf{unchanged}.  What moves is the reference mass inferred from it:
+\begin{equation}
+  m_0 \;=\; \frac{\hbar}{\sqrt2\,\xi c}
+      \;=\; \frac{m_P}{\sqrt2}
+      \;\approx\; 1.539\times10^{-8}\ \text{kg},
+  \label{eq:m0_corrected}
+\end{equation}
+rather than $m_0 = m_P = 2.176\times10^{-8}$~kg.  Equivalently: at fixed $m_0$
+and fixed horizon area the entropy~\eqref{eq:BH_entropy} would \emph{double};
+the resolution is that $m_0$ shifts by $1/\sqrt2$ so that $\xi$ remains $\ell_P$.
+The identification $\xi=\ell_P$ therefore survives the correction intact; the
+statement ``$m_0\sim m_P$'' becomes ``$m_0 = m_P/\sqrt2$''.
+\end{resultbox}
 
 \paragraph{What SSV adds beyond Jacobson.}
 Jacobson's original derivation requires specifying the entropy density as

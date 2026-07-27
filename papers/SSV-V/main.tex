@@ -144,6 +144,11 @@ sound speed
 \begin{equation}\label{eq:cs}
   c_s = \sqrt{\frac{b\hbar}{m}}
 \end{equation}
+\textbf{Notation.}  The symbol $b$ here is a \emph{frequency}, so that
+$b\hbar$ is an energy and $b\hbar/m$ a velocity squared.  This is \emph{not}
+Paper~I's $b$, which is defined through $b\rho_0 = m_0c^2$.  The two differ by
+a factor of $\hbar/\rho_0$ and the change of meaning was previously undeclared
+(\ssvissue{187}).
 and the healing length
 \begin{equation}\label{eq:xi}
   \xi = \frac{\hbar}{mc_s} = \sqrt{\frac{\hbar}{mb}}.
@@ -625,20 +630,34 @@ state of \S\ref{sec:collapse} answers this definitively.  The LogSE
 equation of state has three properties that together fix the endpoint as a
 \emph{stable} Planck-scale remnant.
 
-\paragraph{Argument 1: the LogSE chemical-potential floor.}
-The logarithmic potential $V(\rho) = -b\rho\ln(\rho/\rho_0)$ has chemical
-potential
+\paragraph{Argument 1: confinement of sub-saturated regions.}
+On the adopted branch (Paper~I, \ssvissue{183}) the saturation potential is
+$V(\rho) = +b\rho[\ln(\rho/\rho_0)-1]+V_0$, with chemical potential and pressure
 \begin{equation}
-  \mu(\rho) \;=\; \frac{\delta E}{\delta\rho}
-                \;=\; -b\bigl[\ln(\rho/\rho_0)+1\bigr],
+  \mu(\rho) \;=\; \frac{dV}{d\rho} \;=\; +b\ln(\rho/\rho_0),
+  \qquad
+  P(\rho) \;=\; \rho\mu - V \;=\; b\rho .
   \label{eq:logSE-chempot}
 \end{equation}
-which diverges to $+\infty$ as $\rho\to 0$.  Any region whose density tries to
-fall below $\rho_0$ pays a logarithmic chemical-potential cost; the surrounding
-saturated medium at $\mu(\rho_0) = -b$ therefore exerts an inward pressure on
-any sub-saturated region.  A remnant attempting to ``dissolve'' would need to
-expand below saturation in a finite region, against this confining pressure.
-The LogSE equation of state forbids smooth dissolution.
+$V$ is convex with its minimum at $\rho_0$ and is bounded below, so the uniform
+saturated state is the global minimum.  Because $P$ is \emph{strictly
+increasing} in $\rho$, a sub-saturated region carries lower pressure than the
+medium around it and is therefore \textbf{compressed}: the surrounding medium
+exerts a net inward push $\Delta P = b(\rho_0-\rho)$ on any region that tries to
+fall below saturation.  A remnant attempting to ``dissolve'' must expand below
+saturation against this pressure.
+
+\textbf{Correction (\ssvissue{187}).}  Earlier versions argued this from a
+\emph{chemical-potential floor}: they wrote
+$\mu = -b[\ln(\rho/\rho_0)+1]$ and observed that it ``diverges to $+\infty$ as
+$\rho\to0$''.  That used the sign of the potential which Paper~I has since
+rejected.  On the adopted branch $\mu\to\boldsymbol{-\infty}$ as $\rho\to0$:
+there is \textbf{no chemical-potential floor}, and the original mechanism does
+not weaken --- it \emph{reverses}.  The conclusion is nevertheless recoverable,
+because confinement follows from the pressure gradient rather than from a
+divergent $\mu$, as set out above.  \emph{The mechanism was wrong; the result
+stands on a different footing.}  Machine-checked in
+\ssvfile{ssv_v_remnant_audit_2026}.
 
 \paragraph{Argument 2: topological-charge conservation.}
 The original collapsing condensate carries integer winding number $n$ around
@@ -648,8 +667,14 @@ disturbances of the saturated medium and carry zero winding.  Throughout
 evaporation, $n$ is therefore conserved.  At the endpoint a fully dissolved
 ($n = 0$) state cannot be reached from a non-trivial parent ($n \ne 0$)
 without an unwinding event that passes through $\rho \to 0$ over an extended
-region---precisely what Argument 1 forbids.  Any black hole with $J \ne 0$
-must therefore leave a winding-bearing remnant.
+region.  Argument 1 makes this costly: creating and expanding such a region
+works against the confining pressure $\Delta P = b(\rho_0-\rho)$.  Note the
+weakened form: with the chemical-potential floor withdrawn this is a finite
+\emph{energy barrier}, not a prohibition, so what follows is suppression of
+unwinding rather than its impossibility (\ssvissue{187}).  Any black hole with
+$J \ne 0$ is therefore expected to leave a winding-bearing remnant, with the
+barrier height --- and hence the tunnelling rate through it --- an open
+computation.
 
 \paragraph{Argument 3: horizon vanishing at the Planck scale.}
 The acoustic-freezing mechanism of \S\ref{sec:horizon} requires a smooth
@@ -671,7 +696,9 @@ Planck-scale defect with
   \label{eq:M_remnant}
 \end{equation}
 carrying the parent black hole's topological winding $n$ and confined by the
-chemical-potential pressure of the surrounding saturated medium.  The defect
+pressure of the surrounding saturated medium (Argument~1 as corrected; the
+phrase ``chemical-potential pressure'' used previously named the withdrawn
+mechanism).  The defect
 cannot annihilate spontaneously: doing so would require either dissolution
 (forbidden by Argument 1) or topological-charge violation (forbidden by
 Argument 2).  Annihilation requires meeting an oppositely-wound partner,
