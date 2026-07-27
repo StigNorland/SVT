@@ -699,13 +699,55 @@ result is affected (see the \ssvissue{182} N-gate).
 
 \textbf{What does not:} the identifications below of \emph{quarks} with three
 independent filaments and of \emph{colour} with phase orientation at a central
-node.  Those presuppose the junction and are therefore \textbf{unsupported as
-written}.  They are retained below as a record of the original reasoning, not
-as derived results.  This converges with issue~\ssvissue{178}, which found by a
-fully independent route ($\pi_3(S^1)=0$) that the bare one-component theory has
-no fermionic solitons: both point at \textbf{multi-component structure} as
-missing content rather than as a patch.
+node.  Those presuppose the junction.  They are retained below as a record of
+the original reasoning, not as derived results.  This converges with
+issue~\ssvissue{178}, which found by a fully independent route
+($\pi_3(S^1)=0$) that the bare one-component theory has no fermionic solitons:
+both point at \textbf{multi-component structure} as missing content rather than
+as a patch.
 \end{resultbox}
+
+\begin{gapbox}[Open problem: the colour sector is not merely unsupported]
+The author's position (2026-07) is that \emph{three filaments $=$ quarks} is
+\textbf{wrong}, not just unproven, and that finding what replaces it is future
+work rather than an editing matter.  A structural obstruction can be stated
+precisely, and it does \emph{not} depend on the junction --- it survives even if
+a three-leg node were somehow admitted.
+
+Three legs carry three phases, one of which is the overall gauge phase, leaving
+\textbf{two} independent relative phases.  Locking them at $120^\circ$ yields
+the cyclic group $\mathbb{Z}_3$.  But $\mathbb{Z}_3$ is the \textbf{centre} of
+$SU(3)$, not $SU(3)$:
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+$\dim SU(3)$ & $8$ \\
+reachable from relative phases (Cartan subalgebra) & $2$ \\
+\textbf{missing (off-diagonal root generators)} & $\mathbf{6}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+The six missing generators are exactly those that \emph{change} colour --- the
+gluons.  This explains why the identification looked convincing and is
+nevertheless wrong: the centre carries \emph{triality}, so it reproduces
+precisely the countable features that were being matched (there are three of
+them; only $\mathbb{Z}_3$-neutral combinations are physical) while supplying
+\textbf{none} of the non-abelian content --- no colour-changing dynamics, no
+gluons, no asymptotic freedom.  An abelian group cannot be a non-abelian gauge
+group, so this is a different physical claim from QCD colour, not an
+approximation to it.
+
+Two further obstructions point the same way.  \emph{Fractional charge:} quarks
+carry $\pm1/3,\pm2/3$, while quantized circulation is integer-valued ---
+fractional winding in a one-component condensate is forbidden by the same
+argument that forbids the junction.  \emph{Spin:} quarks are spin-$\tfrac12$,
+and \ssvissue{178} found the bare theory has no fermionic solitons at all.
+
+Machine-checked in \ssvfile{ssv_i_colour_sector_nogo}.  Tracked as an open
+problem; \textbf{the proton mass chain does not depend on any of this} ---
+$N_Y=3$ enters as the trefoil crossing number, a knot invariant, and is
+untouched.
+\end{gapbox}
 
 \begin{itemize}
   \item \textbf{Quarks.}
@@ -1601,11 +1643,16 @@ absent from the cited sources and is forbidden in a one-component $U(1)$
 condensate, where quantized circulation forces $\sum_i n_i=0$ at any node.  No
 number changes --- the computations always used the knot. \\
 Quarks as three filaments; colour as phase orientation at a central node &
-\textbf{unsupported} & Presupposes the withdrawn Y-junction.  Requires
-multi-component structure (three components with coherent coupling and domain
-walls in the relative phases).  Converges with \ssvissue{178}
-($\pi_3(S^1)=0$, no fermionic solitons in the bare theory) on the same
-repair. \\
+\textbf{open problem} & \textbf{Author's position 2026-07: wrong, not merely
+unproven.}  Presupposes the withdrawn Y-junction, and carries a further
+obstruction that survives independently of it: $120^\circ$ phase locking among
+three legs yields $\mathbb{Z}_3$, the \emph{centre} of $SU(3)$, reaching only
+the rank-2 Cartan subalgebra and \textbf{missing 6 of the 8 generators} --- the
+colour-changing ones, i.e.\ the gluons.  The centre carries triality, which is
+why the countable features matched.  Fractional charge ($\pm1/3,\pm2/3$ from
+integer circulation) and spin-$\tfrac12$ (\ssvissue{178}: $\pi_3(S^1)=0$) fail
+by the same shortfall.  Not repairable by editing; tracked separately.  The
+proton mass chain does not depend on it. \\
 Gravity as the acoustic Bjerknes force & \textbf{falsified} & \textbf{As
 written (\ssvissue{119}).}  The radiation-zone cross-term oscillates in sign
 with separation and vanishes between breathers of unequal frequency; a
