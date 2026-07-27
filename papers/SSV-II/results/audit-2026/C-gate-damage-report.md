@@ -14,7 +14,7 @@ evidence rule are defined in `papers/cited/INDEX.md`.
 | C1 | `Volovik`,`Barcelo` | **508** | "the linearised Madelung equations around a single chiral vortex background reduce … to the **vacuum Maxwell equations**" | **`MISATTRIBUTED`** (see D1) |
 | C2 | `Schwinger` | 585 | Schwinger term $g-2=\alpha/\pi$ | **`OK`** — standard: $a_e=(g-2)/2=\alpha/2\pi\Rightarrow g-2=\alpha/\pi$ |
 | C3 | `AharonovBohm1959` | 785 | AB effect: phase shift on a path with $\mathbf B=0$ | **`OK`** — the paper's subject |
-| C4 | `HaldaneWu1985` | 832 | "a vortex transported around a closed path accumulates a Berry phase **proportional to the number of circulation quanta it encloses**" | `PENDING-PRIMARY` — **flagged**, see D3 |
+| C4 | `HaldaneWu1985` | 832 | "a vortex transported around a closed path accumulates a Berry phase **proportional to the number of circulation quanta it encloses**" | **`MISREAD`** — resolved 2026-07-27 by proxy, see D3 |
 | C5 | `Villois` | 1091 | vortex reconnection when filaments approach within a core radius | `PENDING-PRIMARY` — arXiv resolution ambiguous (see below) |
 | C6 | `Bjerknes1906` | 2384 | time-averaged force between two bodies pulsating in a compressible medium | **`OK`** as a citation — but see D2 |
 | C7 | `Landau_Fluid` §74 | 2419 | pressure field of a pulsating sphere | `PENDING-PRIMARY` — book |
@@ -94,19 +94,54 @@ the same sentence and is independently expected `MISATTRIBUTED`
 **Action:** SSV-I:1245 must carry the \#119 falsification, or be rewritten. Filed
 back to \#183.
 
-## D3 — Haldane–Wu: phase proportional to *what*?
+## D3 — Haldane–Wu: phase proportional to *what*? — **RESOLVED `MISREAD`** (2026-07-27)
 
-SSV-II says the Berry phase is *"proportional to the number of **circulation
-quanta** it encloses"*. The standard Haldane–Wu result is that a vortex
-transported around a closed loop in a 2D superfluid acquires a Berry phase
-proportional to the **number of particles enclosed** by the loop (the
-Magnus/Berry phase, $2\pi\times$ enclosed particle number) — a different
-quantity, and the one that carries the superfluid density.
+SSV-II `main.tex:832–834` says the Berry phase is *"proportional to the number of
+**circulation quanta** it encloses"*.
 
-Not verdicted: PRL 54, 1985 is pre-arXiv and was not obtained. Flagged as the
-highest-value remaining check in this paper, because the AB-effect
-identification in §"The Aharonov–Bohm Effect as Mechanical Berry Phase" rests
-on which quantity the phase counts.
+Haldane–Wu (PRL **55**, 2887 — SSV-II's bibitem is correct) is pre-arXiv and
+paywalled, so it was **not obtained**. It has instead been settled through an
+open-access **secondary source**, admitted because it quotes the result in its
+abstract, re-derives it, *and verifies it numerically*: Polkinghorne, Groszek &
+Simula, *Geometric phases of a vortex in a superfluid*, PRA **104**, L041305
+(2021), arXiv:2101.07438. Verbatim quotations in
+`papers/cited/notes/polkinghorne2021.md`; the resolution is recorded against the
+original key in `papers/cited/notes/HaldaneWu1985.md`.
+
+> Haldane and Wu [Phys. Rev. Lett. 55, 2887 (1985)] showed that the geometric
+> phase, $\gamma_C = 2\pi N_C$, of such a vortex is determined by the **number of
+> condensate atoms $N_C$ enclosed by the vortex trajectory**.
+
+**Verdict `MISREAD`.** The phase counts enclosed **atoms**, not enclosed
+circulation quanta. The two are not the same *kind* of quantity:
+
+| | Haldane–Wu $\gamma_C=2\pi N_C$ | what SSV-II needs |
+|---|---|---|
+| counts | condensate atoms | flux/circulation quanta $n$ |
+| scales with | enclosed **area × density** | nothing but $n$ |
+| deform $C$, same enclosed defect | phase **changes** | phase invariant |
+| character | extensive | topological |
+
+This is decisive rather than a matter of degree: the Haldane–Wu phase is
+unbounded as the loop grows in a uniform condensate, so **no choice of prefactor**
+can make it reproduce a loop-independent $\gamma_{\rm AB}=2\pi n$. The sentence
+"This is precisely the Haldane-Wu mechanism" is false as written, and the
+citation must be withdrawn.
+
+Machine-checked: `instruments/paper_ii/ssv_ii_ab_audit_2026.py`, tested in
+`instruments/test/paper_ii/test_ssv_ii_ab_audit_2026.py`.
+
+**Consequence.** The E-gate was held open for every claim depending on C4. It now
+opens, and the §"The Aharonov–Bohm Effect as Mechanical Berry Phase" derivation
+fails two further checks of its own — see the E-gate report, **E3**.
+
+**Partial repair available.** The identification SSV-II most wants — that the
+vector potential *is* a physical flow field — **is** supported, by a source the
+paper already cites. Volovik 2001 §XII A eq. (311) maps phonon propagation around
+a vortex onto the AB problem "with the vector potential $\mathbf A=\mathbf v_s$".
+But the same sentence substitutes the electric charge by the quasiparticle mass
+$E/c^2$, so the analogue phase is **energy-dependent** and still does not yield a
+universal $2\pi n$. Quotations appended to `papers/cited/notes/volovik2001.md`.
 
 ## Retrieval notes
 
@@ -124,7 +159,12 @@ cannot masquerade as the cited work.
 
 **C-GATE FAIL.** One `MISATTRIBUTED` with a live conflict against the paper's own
 computation (D1); one cross-paper falsification-suppression defect whose locus
-is SSV-I (D2); one flagged claim awaiting a pre-arXiv source (D3); three `OK`;
-three `PENDING-PRIMARY`.
+is SSV-I (D2); one `MISREAD` (D3); three `OK`; two `PENDING-PRIMARY`.
 
-E-gate for SSV-II opens for claims not depending on C4, C5, C7.
+E-gate for SSV-II opened for claims not depending on C4, C5, C7.
+
+**Amended 2026-07-27.** C4 is no longer `PENDING-PRIMARY`: the paywalled
+Haldane–Wu PRL was settled through an open-access proxy. The E-gate has been
+reopened for the AB sector; the result is E3, and it is a fail. C5 (`Villois`)
+and C7 (`Landau_Fluid` §74) remain `PENDING-PRIMARY` — neither is load-bearing
+in the way C4 was.

@@ -128,6 +128,14 @@ SOURCES: list[Source] = [
            "No Bjerknes force (0 hits); G is an input, units G=1 -- both halves "
            "of the C11 claim contradicted",
            "34cb087f9019363d"),
+    Source("polkinghorne2021", "R. E. S. Polkinghorne, A. J. Groszek, T. P. Simula",
+           "Geometric phases of a vortex in a superfluid",
+           "Phys. Rev. A 104, L041305 (2021)", "arXiv:2101.07438",
+           "https://arxiv.org/pdf/2101.07438",
+           "SSV-II C4/D3 -- open-access PROXY for the paywalled HaldaneWu1985",
+           "Quotes, re-derives and numerically verifies Haldane-Wu: the phase "
+           "counts enclosed ATOMS, not circulation quanta -> SSV-II MISREAD",
+           "bb9eb1c160557019"),
 ]
 
 #: Sources that could not be obtained openly.  These are *not* verified, and
@@ -156,6 +164,16 @@ UNAVAILABLE: list[Unavailable] = [
                 "transcribed verbatim in notes/lamb1932.verbatim.md. Art. 163 (6) "
                 "gives T = 1/2 rho kappa^2 R [log(8R/a) - 7/4], matching SSV-I "
                 "eq:Ekin exactly"),
+    Unavailable("HaldaneWu1985", "F. D. M. Haldane, Y.-S. Wu",
+                "Quantum dynamics and statistics of vortices in two-dimensional "
+                "superfluids", "Phys. Rev. Lett. 55, 2887 (1985)",
+                "doi:10.1103/PhysRevLett.55.2887",
+                "https://link.aps.org/doi/10.1103/PhysRevLett.55.2887",
+                "**RESOLVED `MISREAD`** — pre-arXiv and paywalled, not obtained. "
+                "Settled via the open-access proxy notes/polkinghorne2021.md, "
+                "which quotes, re-derives AND numerically verifies the result: "
+                "gamma_C = 2*pi*N_C counts the enclosed CONDENSATE ATOMS, not the "
+                "'circulation quanta' SSV-II main.tex:832 attributes to it"),
     Unavailable("stone2005", "M. Stone",
                 "Phonons in a BEC as an example of an emergent phenomenon",
                 "Phys. Rev. D 71, 085007 (2005)", "—", "—",

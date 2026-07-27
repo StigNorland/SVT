@@ -47,7 +47,7 @@ $F(\rho)$ a few lines above. That explains the error without excusing it.
 | Paper | C | E | N |
 |---|---|---|---|
 | SSV-I (#183) | **FAIL** | **FAIL** (D1,D2,E1,E3,E4,E5) | PASS |
-| SSV-II (#184) | **FAIL** | **FAIL** (`eq:maxwell`) | PASS |
+| SSV-II (#184) | **FAIL** | **FAIL** (`eq:maxwell`, AB sector) | PASS |
 | SSV-III (#185) | PASS | PASS | PASS |
 | SSV-IV (#186) | PASS | **FAIL** (inherited) | PASS |
 | SSV-V (#187) | PASS | **FAIL** (Argument 1 inverts) | PASS |
@@ -75,6 +75,15 @@ $F(\rho)$ a few lines above. That explains the error without excusing it.
    recovers a different one.
 5. **SSV-II `eq:maxwell` is unsupported** and contradicted by the paper's own
    #138 result and by #180 P4.
+5b. **SSV-II's Aharonov–Bohm derivation fails** (added 2026-07-27, once the
+   paywalled Haldane–Wu was settled by proxy). Haldane–Wu counts enclosed
+   *atoms*, not circulation quanta, and is extensive where an AB phase must be
+   topological — so no prefactor can repair it. Independently, `eq:AB_SSV` needs
+   the symbol $e$ to be a mass while using it as a charge, which makes step
+   $(\star)$ circular, and `eq:flux_quantisation` is dimensionally inconsistent
+   by $\mathsf{L^{-2}T^{-1}}$. The qualitative claim ($\mathbf A=\mathbf v_s$ is a
+   physical flow) survives and re-cites to Volovik §XII A; the quantised
+   $2\pi n$ does not.
 6. **SSV-VII-a's $\hbar/2$ is imported, not derived** — circular on either branch.
 7. **E3 — spurious $\alpha^2$** in `eq:Etotal`: as printed the functional
    stationarises at $r^*=0.57$, not $1/\alpha$. Presentation-fatal, physics intact.
@@ -112,8 +121,13 @@ unchecked again. That rule caught two of my own errors during this audit.
 
 - `zloshchastiev2023` (*Universe* **9**, 234) — publisher blocks retrieval;
   `MISATTRIBUTED` expected but not verdicted.
-- Pre-arXiv/book sources: `HaldaneWu1985` (phase ∝ particles or circulation
-  quanta?), `Landau_Fluid`, `Vinen2002`, `linshu1964` and others.
+- ~~`HaldaneWu1985`~~ — **closed 2026-07-27.** Settled `MISREAD` without
+  obtaining the paywalled PRL, via an open-access secondary source that quotes,
+  re-derives and numerically verifies it (`notes/polkinghorne2021.md`). The
+  method generalises: for a pre-arXiv result, find a modern open-access paper
+  that *reproduces* it rather than one that merely cites it.
+- Pre-arXiv/book sources still open: `Landau_Fluid`, `Vinen2002`, `linshu1964`
+  and others. None is presently known to be load-bearing.
 - `Villois2017` and `Clisby2010` were deliberately **not** downloaded after title
   verification showed the search had returned different papers.
 
