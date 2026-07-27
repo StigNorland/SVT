@@ -120,6 +120,14 @@ SOURCES: list[Source] = [
            "https://arxiv.org/pdf/1304.4375", "SSV-I D2 supporting",
            "Supporting — fractional vortices require multi-component structure",
            "c50e1fb651c5da0b"),
+    Source("zloshchastiev2023_pramana_rotcurves", "K. G. Zloshchastiev",
+           "Galaxy rotation curves in superfluid vacuum theory",
+           "Pramana 97, 2 (2023)", "arXiv:2310.06861",
+           "https://arxiv.org/pdf/2310.06861",
+           "SSV-I C11 corroboration (NOT the cited work)",
+           "No Bjerknes force (0 hits); G is an input, units G=1 -- both halves "
+           "of the C11 claim contradicted",
+           "34cb087f9019363d"),
 ]
 
 #: Sources that could not be obtained openly.  These are *not* verified, and
@@ -134,9 +142,12 @@ UNAVAILABLE: list[Unavailable] = [
                 "and speed of light in SVT", "Universe 9, 234 (2023)",
                 "doi:10.3390/universe9050234",
                 "https://www.mdpi.com/2218-1997/9/5/234",
-                "PENDING-PRIMARY — HTTP 403 (open-access journal, bot filter); "
-                "**high suspicion**: title does not mention Bjerknes, and the "
-                "mechanism is already retired"),
+                "PENDING-PRIMARY — HTTP 403 (open-access journal, bot filter). "
+                "**Confirmed real via Crossref**, so SSV-I's bibitem is accurate. "
+                "`MISATTRIBUTED` now expected: see "
+                "notes/zloshchastiev2023_pramana_rotcurves.md — a closely-related "
+                "2023 paper by the same author has 0 hits for Bjerknes and treats "
+                "G as an input (units G=1)"),
     Unavailable("lamb1932", "H. Lamb", "Hydrodynamics, 6th ed., §163",
                 "Cambridge University Press (1932)", "—",
                 "https://archive.org/details/dli.ernet.3284",
