@@ -21,6 +21,13 @@ E4  with m_0 = m_e, xi/alpha is the Bohr radius, not the classical electron
 E5  eq:rho0-value does not follow from eq:electron-mass. Route 1 (author's
     decision, 2026-07-27): eq:electron-mass is correct and eq:rho0-value is an
     algebra slip.
+E6  (found 2026-07-27 during the rewrite, NOT by the original E-gate) the symbol
+    ``b`` is dimensionally overloaded *within* SSV-I: eq:pot requires
+    [b] = [V]/[rho], while eq:cs and eq:xi -- which agree with each other --
+    require an extra L^3.  The rho_0 in c_s = sqrt(2 b rho_0/m_0) and
+    xi = hbar/sqrt(2 m_0 b rho_0) is a leftover from the |Psi|^2 = rho/rho_0
+    normalisation and does not belong there.  The E-gate missed this because it
+    checked the *products* (b rho_0) rather than the symbols.
 
 Conventions follow the paper: kappa_0 = h/m_0 (Planck's h), xi = hbar/(m_0 c),
 Lambda = ln(8/alpha) - 7/4.
@@ -198,6 +205,73 @@ def implied_code_sound_speed(log_pressure):
     so c_s = sqrt(b).  At the canonical log_pressure = 0.5 this is 1/sqrt(2),
     while 46 scripts declare 'longitudinal speed c = 1'.  Flagged, not verdicted."""
     return mp.sqrt(log_pressure)
+
+
+# --------------------------------------------------------------------------
+# E6 — the symbol ``b`` is dimensionally overloaded within SSV-I
+# --------------------------------------------------------------------------
+
+def _dims(expr):
+    from sympy.physics.units.systems.si import dimsys_SI
+    return dict(dimsys_SI.get_dimensional_dependencies(expr))
+
+
+def _base():
+    from sympy.physics.units.definitions.dimension_definitions import (
+        length, mass, time)
+    return mass, length, time
+
+
+def b_dimension_from(equation, rho_is_mass_density=True):
+    """Dimensions the symbol ``b`` must carry for each printed SSV-I equation.
+
+    ``equation`` is one of ``"pot"`` (eq:pot, V = b rho [ln(rho/rhobar) - 1]),
+    ``"cs"`` (eq:cs, c_s = sqrt(2 b rho_0/m_0)) or ``"xi"``
+    (eq:xi, xi = hbar/sqrt(2 m_0 b rho_0)).
+    """
+    mass, length, time = _base()
+    energy = mass * length**2 / time**2
+    rho = (mass if rho_is_mass_density else 1) / length**3
+    if equation == "pot":            # V must be an energy DENSITY
+        return _dims(energy / length**3 / rho)
+    if equation == "cs":             # b rho_0/m_0 must be a velocity squared
+        return _dims((length / time) ** 2 * mass / rho)
+    if equation == "xi":             # b rho_0 must be an ENERGY
+        return _dims(energy / rho)
+    raise ValueError(equation)
+
+
+def b_is_consistent_across_ssv_i(rho_is_mass_density=True) -> bool:
+    """False.  eq:cs and eq:xi agree; eq:pot differs from them by L^3."""
+    pot = b_dimension_from("pot", rho_is_mass_density)
+    cs = b_dimension_from("cs", rho_is_mass_density)
+    xi = b_dimension_from("xi", rho_is_mass_density)
+    return pot == cs == xi
+
+
+def rho0_is_a_mass_density() -> bool:
+    """True.  E5's rho_0 = alpha m_e^4 c^3/(2 pi^2 Lambda hbar^3) fixes this
+    independently of the LogSE sector, so ``rho`` is a MASS density and the
+    corrected convention must be written for one."""
+    mass, length, time = _base()
+    hbar = mass * length**2 / time
+    c = length / time
+    return _dims(mass**4 * c**3 / hbar**3) == _dims(mass / length**3)
+
+
+def corrected_sound_speed_squared(b):
+    """Adopted convention: rho a MASS density, V an energy density, so
+    [b] = J/kg = m^2/s^2 and c_s^2 = rho dmu/drho = b exactly.  No rho_0."""
+    return b
+
+
+def corrected_healing_length(b, m=M_E):
+    """xi = hbar/sqrt(2 m_0 * (m_0 b)).  The energy is m_0 b, NOT b rho_0.
+
+    With c_s = c (so b = c^2) this returns hbar/(sqrt(2) m_0 c) -- exactly the
+    D1 value, which is why the correction is presentational, not numerical.
+    """
+    return HBAR / mp.sqrt(2 * m**2 * b)
 
 
 if __name__ == "__main__":  # pragma: no cover
