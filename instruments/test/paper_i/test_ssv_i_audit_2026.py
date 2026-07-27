@@ -64,6 +64,34 @@ def test_d1_healing_length_is_compton_over_sqrt2():
     assert mp.almosteq(xi, HBAR / (mp.sqrt(2) * M_E * C), rel_eps=mp.mpf("1e-25"))
 
 
+def test_d1_adopted_branch_gives_cs_equal_c_exactly():
+    """ADOPTED BRANCH (author, 2026-07-27): stable vacuum, sign = +1.
+
+    With |b| rho_0 = m_0 c^2 the sound speed is exactly c, by construction, and
+    both routes still agree identically.
+    """
+    from ssv_i_audit_2026 import C
+    b = b_rho0_from_source_constraint(M_E)
+    bog, thermo = sound_speed_squared(b, M_E, sign=+1)
+    assert bog == thermo
+    assert bog > 0
+    assert mp.almosteq(mp.sqrt(bog), C, rel_eps=mp.mpf("1e-25"))
+
+
+def test_d1_adopted_branch_healing_length_is_compton_over_sqrt2():
+    from ssv_i_audit_2026 import C, HBAR
+    xi = healing_length(b_rho0_from_source_constraint(M_E), M_E)
+    assert mp.almosteq(xi / (HBAR / (M_E * C)), 1 / mp.sqrt(2),
+                       rel_eps=mp.mpf("1e-25"))
+
+
+def test_d1_rejected_branch_would_be_unstable():
+    """The branch NOT adopted (b>0, Gausson) has c_s^2 < 0: no stable vacuum."""
+    b = b_rho0_from_source_constraint(M_E)
+    bog, _ = sound_speed_squared(b, M_E, sign=-1)
+    assert bog < 0
+
+
 # ---------------------------------------------------------------- E1
 @pytest.mark.parametrize("t,places", [("1e-3", 7), ("1e-4", 8), ("1e-5", 9)])
 def test_e1_next_order_coefficient_is_three_sixteenths(t, places):
