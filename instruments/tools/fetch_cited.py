@@ -113,11 +113,12 @@ SOURCES: list[Source] = [
            "SSV-I D2 resolution (new reference)",
            "A three-vortex junction requires 3 components + coherent coupling",
            "7df6d4e41ba88809"),
-    Source("nitta2013_colorful_vortex_lattices", "M. Eto, M. Nitta",
-           "Vortex lattices in three-component BECs under rotation",
-           "Phys. Rev. A 88, 043613 (2013)", "arXiv:1304.4375",
+    Source("nitta2013_colorful_vortex_lattices", "M. Cipriani, M. Nitta",
+           "Vortex lattices in three-component Bose-Einstein condensates under "
+           "rotation: simulating colorful vortex lattices in a color superconductor",
+           "arXiv only (published venue not verified)", "arXiv:1304.4375",
            "https://arxiv.org/pdf/1304.4375", "SSV-I D2 supporting",
-           "Supporting — non-Abelian/colorful vortex structure",
+           "Supporting — fractional vortices require multi-component structure",
            "c50e1fb651c5da0b"),
 ]
 
@@ -126,17 +127,21 @@ SOURCES: list[Source] = [
 UNAVAILABLE: list[Unavailable] = [
     Unavailable("volovik2003", "G. E. Volovik", "The Universe in a Helium Droplet",
                 "Oxford University Press (2003)", "ISBN 978-0198507826", "—",
-                "PENDING-PRIMARY — book, not openly obtainable"),
+                "PENDING-PRIMARY (book) — but C1 resolved `OK` via the volovik2001 "
+                "proxy, which states it verbatim; C4/C7 stand as faults"),
     Unavailable("zloshchastiev2023", "K. G. Zloshchastiev",
                 "Derivation of emergent spacetime metric, gravitational potential "
                 "and speed of light in SVT", "Universe 9, 234 (2023)",
                 "doi:10.3390/universe9050234",
                 "https://www.mdpi.com/2218-1997/9/5/234",
-                "PENDING-PRIMARY — publisher returned HTTP 403"),
+                "PENDING-PRIMARY — HTTP 403 (open-access journal, bot filter); "
+                "**high suspicion**: title does not mention Bjerknes, and the "
+                "mechanism is already retired"),
     Unavailable("lamb1932", "H. Lamb", "Hydrodynamics, 6th ed., §163",
                 "Cambridge University Press (1932)", "—",
                 "https://archive.org/details/dli.ernet.3284",
-                "PENDING-PRIMARY — scanned book"),
+                "PENDING-PRIMARY — scan retrieved (284,937 words) but its OCR "
+                "destroys mathematics; equations not readable"),
     Unavailable("stone2005", "M. Stone",
                 "Phonons in a BEC as an example of an emergent phenomenon",
                 "Phys. Rev. D 71, 085007 (2005)", "—", "—",
@@ -185,25 +190,39 @@ def render_index() -> str:
     add("Short verbatim quotations used as evidence are tracked in `notes/<key>.md`.\n")
     add("Re-fetch with `python instruments/tools/fetch_cited.py`;")
     add("check bytes without touching the network with `--verify`.\n")
+    add("## Evidence rule\n")
+    add("**No C-gate verdict without a verbatim quotation.** Every row below links")
+    add("to `notes/<key>.md`, which reproduces the actual paragraph or equation the")
+    add("verdict rests on. A reader can therefore check any verdict in this audit")
+    add("without re-downloading anything — which is precisely what was missing when")
+    add("the faults recorded in #183 were introduced.\n")
     add("## Retrieved\n")
-    add("| key | author | work | id | SHA-256 (16) | retrieved | used for | verdict |")
-    add("|---|---|---|---|---|---|---|---|")
+    add("| key | author | work | id | SHA-256 (16) | retrieved | used for | verdict | evidence |")
+    add("|---|---|---|---|---|---|---|---|---|")
     for s in SOURCES:
+        ev = f"[quote](notes/{s.key}.md)" if (CITED / "notes" / f"{s.key}.md").exists() else "**missing**"
         add(f"| `{s.key}` | {s.author} | *{s.title}*, {s.venue} | "
             f"[{s.ident}]({s.url}) | `{s.sha256_16}` | {RETRIEVED} | "
-            f"{s.used_for} | {s.verdict} |")
-    add("\n## Not retrieved\n")
-    add("These are **not** treated as verified. Any SSV claim depending on them is")
+            f"{s.used_for} | {s.verdict} | {ev} |")
+    add("\n## Not retrieved, or retrieved but not machine-verifiable\n")
+    add("These are **not** treated as verified. Any SSV claim depending on them stays")
     add("flagged `PENDING-PRIMARY` in its damage report. Paywalls are not")
-    add("circumvented.\n")
-    add("| key | author | work | id | where | status |")
-    add("|---|---|---|---|---|---|")
+    add("circumvented, and equations are never read off degraded OCR.\n")
+    add("| key | author | work | id | where | status | evidence |")
+    add("|---|---|---|---|---|---|---|")
     for u in UNAVAILABLE:
         where = f"[link]({u.where})" if u.where != "—" else "—"
+        ev = f"[detail](notes/{u.key}.md)" if (CITED / "notes" / f"{u.key}.md").exists() else "**missing**"
         add(f"| `{u.key}` | {u.author} | *{u.title}*, {u.venue} | {u.ident} | "
-            f"{where} | {u.status} |")
+            f"{where} | {u.status} | {ev} |")
     add("")
     return "\n".join(out)
+
+
+def missing_evidence() -> list[str]:
+    """Keys carrying a verdict but no tracked quotation. Must stay empty."""
+    keys = [s.key for s in SOURCES] + [u.key for u in UNAVAILABLE]
+    return [k for k in keys if not (CITED / "notes" / f"{k}.md").exists()]
 
 
 def main() -> int:

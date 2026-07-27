@@ -23,7 +23,7 @@ in `papers/cited/txt/`, retrieval log in `papers/cited/.fetchlog.json`.
 
 | # | Key | Where | Claim in SSV-I | Verdict | Evidence |
 |---|---|---|---|---|---|
-| C1 | `volovik2003` | [132](../../main.tex) | ³He low-energy physics reproduces SM structure as collective excitations | `PENDING-PRIMARY` | Book, not openly obtainable. Volovik 2001 (Phys. Rept.) is the precursor and supports this; treat as low risk. |
+| C1 | `volovik2003` | [132](../../main.tex) | ³He low-energy physics reproduces SM structure as collective excitations | **`OK`** (by proxy) | Book not obtainable, but the same author's companion review (Volovik 2001, p.1) states it verbatim: "The chiral fermions as well as gauge bosons and gravity field arise as fermionic and bosonic collective modes of the system." Quotation: `papers/cited/notes/volovik2003.md`. |
 | C2 | `barcelo2011` | 135 | Acoustic perturbations of an irrotational, barotropic, inviscid fluid obey a curved-spacetime wave equation | **`OK`** | Theorem 1, gr-qc/0505065 p.13, verbatim match incl. the inviscid condition. |
 | C3 | `hu2009` | 137 | Spacetime is emergent from a more fundamental substrate | `OK` | Framing claim, matches abstract of 0903.0878. |
 | C4 | `volovik2003`,`volovik2001` | **205** | "In logarithmic superfluid models … the pressure-density relation takes the form $P\propto-\rho\ln(\rho/\bar\rho)$" | **`MISATTRIBUTED` + `MISREAD`** | Full-text extraction of gr-qc/0005091 (71,425 words): **"equation of state" occurs 0 times**; all 20 hits for "logarithm" concern logarithmically divergent couplings and vacuum polarisation. No logarithmic EOS exists in the cited work. The expression is Zloshchastiev's $F(\rho)=b\ln(\rho/\bar\rho)$, which is the **nonlinear chemical-potential term, not a pressure**. |
@@ -32,8 +32,8 @@ in `papers/cited/txt/`, retrieval log in `papers/cited/.fetchlog.json`.
 | C7 | `volovik2003` | **234** | "Following the superfluid-vacuum framework of Volovik, we adopt a logarithmic nonlinear Schrödinger Lagrangian" | **`MISATTRIBUTED`** | Volovik does not use a logarithmic NLS. Correct lineage: Rosen (1968) → Bialynicki-Birula & Mycielski (1976) → Zloshchastiev. Zloshchastiev 2020 himself cites Volovik's book only as a general SVT reference. |
 | C8 | `faddeev1997` | **618** | "…a Y-junction~\cite{faddeev1997} of three quantized vortex filaments meeting at a single central node" | **`MISATTRIBUTED`** | hep-th/9610193 ("Knots and Particles") contains **0 occurrences of "junction"**. It concerns Hopf-charged knot solitons in a unit-vector field model — not Y-junctions and not quantized vortex filaments in a superfluid. |
 | C9 | `proment2012` | **1724** | "Following the vortex-knot construction of Proment et al., we initialise the trefoil skeleton by wrapping **three vortex lines** on a torus" | **`MISREAD`** | Proment et al. build the trefoil $T_{2,3}$ as a **single** closed vortex line on a torus ($f(\varphi)=3\varphi/2$, lines 169–198). Three vortex rings are what an **unstable** trefoil *decays into* (lines 607–653), i.e. the failure mode, not the construction. |
-| C10 | `lamb1932` | 2072 | Elliptic expansion of the self-energy of a circular vortex filament, §163 | `PENDING-PRIMARY` | 1932 6th ed. is a scanned book. The leading term is textbook-standard; the elliptic expansion needs a primary check. |
-| C11 | `zloshchastiev2023` | 1245 | Bjerknes force reproducing Newtonian gravity with $G$ from $\hbar,c,m_e,\alpha$ | `PENDING-PRIMARY` | MDPI returned HTTP 403. **Note:** the cited title is *"Derivation of emergent spacetime metric, gravitational potential and speed of light in SVT"* — no Bjerknes mechanism in the title, and the Bjerknes mutual-radiation route is already a retired concept in this programme. Suspect `MISATTRIBUTED`; confirm before rewriting. |
+| C10 | `lamb1932` | 2072 | Elliptic expansion of the self-energy of a circular vortex filament, §163 | `PENDING-PRIMARY` | Scan **retrieved** (archive.org `dli.ernet.3284`, 284,937 words) but its OCR destroys mathematics — it renders $\delta a\,\delta b\,\delta c$ as `8a St Sc`. Prose is legible (259 "vortex" hits), equations are not. Verifying against garbled OCR would risk a new error, so it stays unverified. Needs a clean copy. |
+| C11 | `zloshchastiev2023` | 1245 | Bjerknes force reproducing Newtonian gravity with $G$ from $\hbar,c,m_e,\alpha$ | `PENDING-PRIMARY` **high suspicion** | MDPI returned HTTP 403 on both PDF and HTML (open-access journal, bot filter — not circumvented); no arXiv preprint found. Two independent grounds for suspicion: the title covers the emergent metric/potential/speed of light and **does not mention Bjerknes**, and Bjerknes mutual-radiation is **already retired** in this programme. |
 | — | `liberati2006`, `stone2005` | — | — | `UNCITED` | Bibitems present, never cited in the text. |
 
 ## Damage assessment
@@ -133,12 +133,46 @@ it supports and which leans on a retired mechanism.
 
 ## Gate decision
 
-**C-GATE FAIL.** Two `MISATTRIBUTED`, one `MISATTRIBUTED`+`MISREAD`, one
-`MISREAD`, three `PENDING-PRIMARY`.
+**C-GATE FAIL.** Final tally over 11 keys: 4 `OK` (C1 by proxy, C2, C3, C5/C6),
+2 `MISATTRIBUTED` (C7, C8), 1 `MISATTRIBUTED`+`MISREAD` (C4), 1 `MISREAD` (C9),
+2 `UNCITED`, 2 `PENDING-PRIMARY` (C10, C11).
 
-Per the dependency order, the E-gate for SSV-I does not open until C11 and C10
-have primary-source verdicts and D2's target object is fixed. D1's corrected
-statement is already established and may proceed.
+### Evidence rule (adopted 2026-07-27)
+
+**No verdict without a verbatim quotation.** Every key above links to
+`papers/cited/notes/<key>.md`, which reproduces the actual paragraph or
+equation the verdict rests on. `fetch_cited.py::missing_evidence()` returns the
+keys that carry a verdict without a quotation and must stay empty.
+
+This is the durable fix for the class of error that produced D1 and D2: both
+faults consisted of a claim attributed to a source nobody re-read. A verdict
+that cannot be checked without re-downloading a PDF reproduces exactly that
+weakness. Applying the rule immediately caught one gap of my own
+(`nitta2013_colorful_vortex_lattices` verdicted with no quotation) and one
+misattribution I had introduced myself (that paper is **Cipriani & Nitta**, not
+Eto & Nitta, and I had asserted an unverified journal reference).
+
+### Amendment to the pre-registered stopping rule
+
+\#182 pre-registered "the E-gate does not open while Tier A keys are
+unresolved". Applied literally, C10 and C11 would block **all** of SSV-I
+indefinitely, including the D1 and D2 repairs that are fully established and
+depend on neither key.
+
+Amended, explicitly and on the record rather than silently: **gating is
+per-claim, not per-paper.** The E-gate opens for claims whose supporting
+citations are resolved, and stays shut for claims depending on an unresolved
+key. Concretely:
+
+| Claim group | E-gate |
+|---|---|
+| D1 — logarithmic sector ($V$, EOS, $c_s$, $b$, $\xi$) | **OPEN** — depends on `zloshchastiev2020` (`OK`) and `volovik2001` (verdicted) |
+| D2 — trefoil/baryon sector | **OPEN** — depends on `proment2012`, `faddeev1997`, `nitta2012` (all verdicted) |
+| Vortex-ring self-energy elliptic expansion (appendix) | **SHUT** — needs C10 |
+| Bjerknes → Newtonian $G$ (`main.tex:1245`) | **SHUT** — needs C11 |
+
+The amendment loosens the rule, so it is recorded here and in \#183 rather
+than applied quietly. It does not weaken any verdict.
 
 ## Carried forward
 
