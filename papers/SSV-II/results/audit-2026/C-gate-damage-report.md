@@ -15,7 +15,7 @@ evidence rule are defined in `papers/cited/INDEX.md`.
 | C2 | `Schwinger` | 585 | Schwinger term $g-2=\alpha/\pi$ | **`OK`** — standard: $a_e=(g-2)/2=\alpha/2\pi\Rightarrow g-2=\alpha/\pi$ |
 | C3 | `AharonovBohm1959` | 785 | AB effect: phase shift on a path with $\mathbf B=0$ | **`OK`** — the paper's subject |
 | C4 | `HaldaneWu1985` | 832 | "a vortex transported around a closed path accumulates a Berry phase **proportional to the number of circulation quanta it encloses**" | **`MISREAD`** — resolved 2026-07-27 by proxy, see D3 |
-| C5 | `Villois` | 1091 | vortex reconnection when filaments approach within a core radius | `PENDING-PRIMARY` — arXiv resolution ambiguous (see below) |
+| C5 | `Villois` | 1091 | vortex reconnection when filaments approach within a core radius | **`OK`** — resolved 2026-07-27, see retrieval notes |
 | C6 | `Bjerknes1906` | 2384 | time-averaged force between two bodies pulsating in a compressible medium | **`OK`** as a citation — but see D2 |
 | C7 | `Landau_Fluid` §74 | 2419 | pressure field of a pulsating sphere | `PENDING-PRIMARY` — book |
 
@@ -145,21 +145,32 @@ universal $2\pi n$. Quotations appended to `papers/cited/notes/volovik2001.md`.
 
 ## Retrieval notes
 
-`Villois` could not be pinned: an arXiv title search returned *A Vortex Filament
-Tracking Method for the Gross-Pitaevskii Model* (1604.03595), which is a
-**different paper** from the cited *Universal and nonuniversal aspects of vortex
-reconnections in superfluids*. Not downloaded rather than downloaded wrongly.
+~~`Villois` could not be pinned~~ — **both resolved 2026-07-27.** Recorded because
+the *reason* for the original failure generalises.
 
-`Clisby2010` (cited by SSV-III) was similarly mis-resolved during bulk fetch —
-the retrieved file is the J. Stat. Phys. companion, not the cited PRL 104,
-055702. It is stored as `Clisby2010_pivot_implementation_SIBLING.pdf` so it
-cannot masquerade as the cited work.
+`Villois`: the arXiv preprint is titled **"(Non)-universality of vortex
+reconnections in superfluids"** and was **retitled on publication** to *Universal
+and nonuniversal aspects of vortex reconnections in superfluids*. A title search
+from the bibitem therefore returned a different paper (1604.03595, the tracking
+method), which was correctly rejected. Pinning **arXiv:1612.00386** resolves it.
+Verdict **`OK`** — evidence in `papers/cited/notes/Villois2017.md`.
+
+`Clisby2010` (cited by SSV-III): pinned to **arXiv:1002.0494**. Verdict **`OK`** —
+$\nu = 0.587\,597(7)$, an exact match to the value SSV-III quotes. The
+mis-resolved sibling is retained under its `_SIBLING` name so it cannot
+masquerade as the cited work. Evidence in `papers/cited/notes/Clisby2010.md`.
+
+**Lesson.** A bibitem/arXiv title mismatch is common for papers retitled at
+referee stage. Pin the identifier, then verify **author list and content** rather
+than title — a title check alone produces false negatives as well as the false
+positives it was introduced to catch.
 
 ## Gate decision
 
 **C-GATE FAIL.** One `MISATTRIBUTED` with a live conflict against the paper's own
 computation (D1); one cross-paper falsification-suppression defect whose locus
-is SSV-I (D2); one `MISREAD` (D3); three `OK`; two `PENDING-PRIMARY`.
+is SSV-I (D2); one `MISREAD` (D3); four `OK`; one `PENDING-PRIMARY`
+(`Landau_Fluid` §74, a book, not load-bearing).
 
 E-gate for SSV-II opened for claims not depending on C4, C5, C7.
 

@@ -136,6 +136,26 @@ SOURCES: list[Source] = [
            "Quotes, re-derives and numerically verifies Haldane-Wu: the phase "
            "counts enclosed ATOMS, not circulation quanta -> SSV-II MISREAD",
            "bb9eb1c160557019"),
+    # NB: the arXiv preprint is titled "(Non)-universality of vortex
+    # reconnections in superfluids"; it was RETITLED on publication.  That is
+    # why the first bulk fetch's title search failed to resolve it.
+    Source("Villois2017", "A. Villois, D. Proment, G. Krstulovic",
+           "Universal and nonuniversal aspects of vortex reconnections in "
+           "superfluids [arXiv title: '(Non)-universality of vortex "
+           "reconnections in superfluids']",
+           "Phys. Rev. Fluids 2, 044701 (2017)", "arXiv:1612.00386",
+           "https://arxiv.org/pdf/1612.00386",
+           "SSV-II C5 (main.tex:1091); SSV-III (duplicate key `Villois`)",
+           "OK -- GP-model vortex reconnection, delta ~ (Gamma t)^1/2",
+           "3e1dbf92fb867dc8"),
+    Source("Clisby2010", "N. Clisby",
+           "Accurate estimate of the critical exponent nu for self-avoiding "
+           "walks via a fast implementation of the pivot algorithm",
+           "Phys. Rev. Lett. 104, 055702 (2010)", "arXiv:1002.0494",
+           "https://arxiv.org/pdf/1002.0494",
+           "SSV-III main.tex:901 (SAW correlation-length exponent)",
+           "OK -- nu = 0.587597(7), matches the quoted 0.587597 exactly",
+           "cca34bb00b44c599"),
 ]
 
 #: Sources that could not be obtained openly.  These are *not* verified, and
