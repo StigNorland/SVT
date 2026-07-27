@@ -174,6 +174,32 @@ def rho0_asserted_value():
     return mp.mpf("1.9")
 
 
+# --------------------------------------------------------------------------
+# N-gate — the implemented potential is already the adopted branch
+# --------------------------------------------------------------------------
+
+def implemented_potential(rho, log_pressure):
+    """Exactly trefoil_observables.py:25 -- b*(rho*ln(rho) - rho + 1)."""
+    return log_pressure * (rho * mp.log(rho) - rho + 1)
+
+
+def adopted_potential(rho, b, rhobar=1):
+    """Adopted corrected form  +b*rho*[ln(rho/rhobar) - 1] + b."""
+    return b * rho * (mp.log(rho / rhobar) - 1) + b
+
+
+def implemented_rho_mu_prime(log_pressure):
+    """rho*mu'(rho) for the implemented potential: +b, hence c_s^2 > 0."""
+    return log_pressure
+
+
+def implied_code_sound_speed(log_pressure):
+    """With the kinetic term 0.5*|grad psi|^2 the code fixes hbar = m = 1,
+    so c_s = sqrt(b).  At the canonical log_pressure = 0.5 this is 1/sqrt(2),
+    while 46 scripts declare 'longitudinal speed c = 1'.  Flagged, not verdicted."""
+    return mp.sqrt(log_pressure)
+
+
 if __name__ == "__main__":  # pragma: no cover
     print(f"E1 residual coefficient (t=1e-5)  : {mp.nstr(elliptic_residual_coefficient(mp.mpf('1e-5')), 12)}  (3/16 = 0.1875)")
     print(f"E3 r* as printed (alpha^2 twice)  : {mp.nstr(stationary_radius(lambda_param() * ALPHA**2 + ALPHA**2 * 0), 8)}")

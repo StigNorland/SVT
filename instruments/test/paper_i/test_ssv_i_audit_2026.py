@@ -34,6 +34,10 @@ from ssv_i_audit_2026 import (  # noqa: E402
     ssv_elliptic_bracket,
     stationary_radius,
     xi_over_alpha,
+    adopted_potential,
+    implemented_potential,
+    implemented_rho_mu_prime,
+    implied_code_sound_speed,
 )
 
 
@@ -170,3 +174,35 @@ def test_e5_d1_sqrt2_moves_rho0_by_sqrt2_only():
     """The D1 correction cannot account for the E5 discrepancy."""
     ratio = rho0_natural_units(sqrt2_corrected=True) / rho0_natural_units()
     assert mp.almosteq(ratio, mp.sqrt(2), rel_eps=mp.mpf("1e-20"))
+
+
+# ---------------------------------------------------------------- N-gate
+@pytest.mark.parametrize("rho", ["0.2", "0.7", "1.0", "1.5", "3.0"])
+def test_ngate_implemented_potential_is_the_adopted_branch(rho):
+    """trefoil_observables.py:25 already implements the stable-vacuum sign,
+    so no result note needs recomputation under D1."""
+    r = mp.mpf(rho)
+    b = mp.mpf("0.5")
+    assert mp.almosteq(implemented_potential(r, b), adopted_potential(r, b),
+                       abs_eps=mp.mpf("1e-25"))
+
+
+def test_ngate_implemented_potential_is_stable():
+    """rho*mu'(rho) = +b > 0  =>  c_s^2 > 0."""
+    assert implemented_rho_mu_prime(mp.mpf("0.5")) > 0
+
+
+def test_ngate_implemented_potential_minimum_at_background():
+    """V(1) = 0 and it is the minimum: bounded below."""
+    b = mp.mpf("0.5")
+    assert mp.almosteq(implemented_potential(mp.mpf(1), b), 0, abs_eps=mp.mpf("1e-30"))
+    for r in ["0.3", "0.6", "1.4", "2.5"]:
+        assert implemented_potential(mp.mpf(r), b) > 0
+
+
+def test_ngate_canonical_log_pressure_implies_cs_not_one():
+    """FLAGGED for the solver track: canonical log_pressure=0.5 gives
+    c_s = 1/sqrt(2), while 46 scripts declare 'longitudinal speed c = 1'."""
+    assert mp.almosteq(implied_code_sound_speed(mp.mpf("0.5")), 1 / mp.sqrt(2),
+                       rel_eps=mp.mpf("1e-25"))
+    assert mp.almosteq(implied_code_sound_speed(mp.mpf(1)), 1, rel_eps=mp.mpf("1e-25"))
