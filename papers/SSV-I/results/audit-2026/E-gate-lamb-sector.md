@@ -1,6 +1,6 @@
 # SSV-I E-gate — Lamb / fat-torus sector
 
-Status: **closure-grade** for E1/E2/E3, **flagged** for E4
+Status: **closure-grade** for E1/E2/E3; E4 moved to `E-gate-electron-sector.md`
 
 Verified symbolically and numerically 2026-07-27 (mpmath, 30 dps).
 Source equation supplied by the owner from a clean copy of Lamb 1932 p.241
@@ -117,24 +117,20 @@ The printed equations do **not** produce the boxed result. Line 487 then asserts
 right to 1.3e-5; three printed equations are wrong. Remove the \(\alpha^2\) from
 `eq:Etotal` and `eq:stationary`, and delete the inconsistent identity at 487.
 
-## E4 — "classical electron radius" — FLAGGED
+## E4 — RESOLVED elsewhere
 
-Line 495 calls \(R^*_e=\xi/\alpha=\hbar/(\alpha m_0c)\) "the classical electron
-radius". With \(\xi=\hbar/(m_0c)=\bar\lambda_C\), \(\xi/\alpha\) is
-\(\alpha^{-1}\) **above** the Compton scale — that is the **Bohr radius**
-\(a_0=5.29\times10^{-11}\,\mathrm m\). The classical electron radius is
-\(r_e=\alpha\bar\lambda_C=2.82\times10^{-15}\,\mathrm m\), \(\alpha\) **below**
-it. The two differ by \(\alpha^2\approx5.3\times10^{-5}\).
+Settled 2026-07-27: `main.tex:392` states "for the electron (simple ring)
+\(m_0=m_e\)", so \(\xi/\alpha\) is **exactly the Bohr radius** and
+`main.tex:495`'s "classical electron radius" is wrong by \(\alpha^2\).
+A second, independent defect (E5) was found in the same passage.
 
-Either the label is wrong or \(m_0\neq m_e\) in a way the text does not state.
-**Not asserted as a fault** pending the owner's reading of the intended
-\(m_0\); flagged as the highest-value item to check next.
+Both are recorded in `E-gate-electron-sector.md`.
 
 ## Carried forward
 
 - E1: correct the appendix; \(\alpha\) result unaffected.
 - E2: **resolved** — `eq:Ekin` correct and correctly cited; the appendix is the fault; \(\rho_0\) does not move.
 - E3: three equations to fix; boxed results stand.
-- E4: resolve the Bohr/classical-radius labelling.
+- E4/E5: see `E-gate-electron-sector.md` — both `MISDERIVED`.
 - All of the above are **independent of D1**; the \(\sqrt2\) correction to
   \(\xi\) rescales \(R^*_e\) but not the \(R^*_e=\xi/\alpha\) relation.
