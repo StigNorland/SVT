@@ -47,6 +47,23 @@ def citation_keys(path: Path) -> set[str]:
     return keys
 
 
+def series_citation_keys(papers: Path = PAPERS) -> set[str]:
+    """All canonical keys cited by any SSV paper."""
+    keys: set[str] = set()
+    for main in papers.glob("SSV-*/main.tex"):
+        keys.update(citation_keys(main))
+    return keys
+
+
+def cited_by(key: str, papers: Path = PAPERS) -> list[str]:
+    """Paper directory names that cite ``key``."""
+    return sorted(
+        main.parent.name
+        for main in papers.glob("SSV-*/main.tex")
+        if key in citation_keys(main)
+    )
+
+
 def database_key_list(path: Path = DATABASE) -> list[str]:
     return BIB_KEY_RE.findall(_without_comments(path.read_text(encoding="utf-8")))
 

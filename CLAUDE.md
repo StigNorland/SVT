@@ -79,6 +79,10 @@ result notes (`papers/*/results/`). Work is organised around GitHub issues
     checked statuses replace blank identifiers when neither is available.
     `instruments/tools/citation_evidence.py` validates the registry and tracked
     evidence on every gated build; `missing_evidence()` must stay empty.
+    Every cited work, including SSV self-citations, has a catalog entry and
+    `papers/cited/notes/<key>.md`. A note marked `NOT-REVIEWED` is an explicit
+    inventory gap, never evidence and never a verdict. Evidence-bearing notes
+    form the stricter `sources` subset of `verification.json`.
     Bibliographic identity is canonical in `papers/cited/references.bib`;
     all papers use that one database and BibTeX selects only their cited keys.
     `instruments/tools/bibliography.py` rejects inline bibliographies, undefined

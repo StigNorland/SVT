@@ -1,20 +1,32 @@
-# Citation evidence notes
+# Citation notes
 
-This is the repository's **quote directory**. One file per bibliography key
-records enough context to answer two separate questions:
+Every work cited anywhere in the SSV series has one file in this directory.
+The local registry assigns one of three review states:
+
+- `evidence-recorded`: the note contains claim-specific evidence and a verdict;
+- `not-reviewed`: the note inventories the citation and its uses, but contains
+  no quotation verdict;
+- `local-source`: an SSV self-citation whose complete source is in this
+  repository.
+
+`NOT-REVIEWED` is deliberately prominent. It is a coverage gap, not permission
+to treat the citation as verified.
+
+Evidence-recorded notes answer two separate questions:
 
 1. Does the cited source really say this?
 2. Does the SSV paper use what it says correctly?
 
 A bare quotation answers only the first question. Every load-bearing citation
-record must include all of the following:
+that is promoted to `evidence-recorded` must include all of the following:
 
 The canonical machine-readable inventory is
-[`../verification.json`](../verification.json). It records the source URL,
-DOI/arXiv status, access state, verification verdict, evidence mode and whether
-paragraph evidence is required. A note without a registry record is not
-registered evidence and fails the citation gate; a registry record without its
-note fails as well.
+[`../verification.json`](../verification.json). Its `citation_notes` object
+catalogues every note and review state. Its `sources` object is the stricter
+evidence subset, recording source URL, DOI/arXiv status, access state,
+verification verdict, evidence mode and whether paragraph evidence is required.
+A note without a catalog entry fails the citation gate; a catalog entry without
+its note fails as well.
 
 The corresponding bibliographic identity must also exist under the same key in
 [`../references.bib`](../references.bib). The `.bib` file controls what papers
@@ -70,13 +82,13 @@ mathematics in a purportedly verbatim block.
   transcription under `papers/cited/transcripts/`. The evidence note still
   quotes the specific paragraph used.
 
-Every registry record has a stable `source_url`. A DOI is mandatory when the
-work has one, and every arXiv work records its arXiv ID. When an identifier does
-not exist or could not be found, the corresponding checked status is explicit;
-an empty field is not accepted.
+Every evidence-source record has a stable `source_url`. A DOI is mandatory when
+the work has one, and every arXiv work records its arXiv ID. When an identifier
+does not exist or could not be found, the corresponding checked status is
+explicit; an empty field is not accepted.
 
 Uncited bibliography entries should be removed, not given a paragraph waiver.
 
-These files are evidence, not scratch notes. Background investigation can stay
-in a result report; this directory holds the shortest complete verification
-record.
+These files are durable citation records, not scratch notes. A `NOT-REVIEWED`
+file must remain an explicit placeholder until real source evidence replaces
+it; it must never acquire a verdict by inference.

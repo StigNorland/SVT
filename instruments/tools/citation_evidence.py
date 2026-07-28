@@ -14,6 +14,7 @@ import re
 from pathlib import Path
 from typing import Any
 
+import bibliography
 import fetch_cited
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -21,6 +22,7 @@ CITED = ROOT / "papers" / "cited"
 NOTES = CITED / "notes"
 TRANSCRIPTS = CITED / "transcripts"
 REGISTRY = CITED / "verification.json"
+NOTE_INDEX = CITED / "NOTES.md"
 
 VERDICTS = {
     "OK", "MISATTRIBUTED", "MISREAD", "MISDERIVED", "UNSUPPORTED",
@@ -34,6 +36,7 @@ PARAGRAPH_EXCEPTIONS = {
     "paywalled-primary", "unavailable-primary",
     "reproducible-absence-search",
 }
+NOTE_STATUSES = {"evidence-recorded", "not-reviewed", "local-source"}
 
 # Locally retained files that are deliberately not citation sources.  The
 # Liberati file is a false arXiv match discovered during this audit.
@@ -51,6 +54,12 @@ def registered_keys(registry: dict[str, Any] | None = None) -> set[str]:
     data = load_registry() if registry is None else registry
     sources = data.get("sources", {})
     return set(sources) if isinstance(sources, dict) else set()
+
+
+def citation_note_keys(registry: dict[str, Any] | None = None) -> set[str]:
+    data = load_registry() if registry is None else registry
+    notes = data.get("citation_notes", {})
+    return set(notes) if isinstance(notes, dict) else set()
 
 
 def retrieval_keys() -> set[str]:
@@ -95,6 +104,7 @@ def _has_reproducible_search(text: str) -> bool:
 def registry_issues(
     registry: dict[str, Any] | None = None,
     source_keys: set[str] | None = None,
+    catalog_keys: set[str] | None = None,
 ) -> list[str]:
     """Return schema/policy defects in the JSON verification registry."""
     issues: list[str] = []
@@ -111,6 +121,10 @@ def registry_issues(
     if not isinstance(sources, dict):
         return issues + ["verification.json: sources must be an object"]
 
+    catalog = data.get("citation_notes")
+    if not isinstance(catalog, dict):
+        return issues + ["verification.json: citation_notes must be an object"]
+
     expected_keys = retrieval_keys() if source_keys is None else source_keys
     missing = expected_keys - set(sources)
     extra = set(sources) - expected_keys
@@ -118,6 +132,47 @@ def registry_issues(
         issues.append(f"verification.json missing sources: {sorted(missing)}")
     if extra:
         issues.append(f"verification.json has unregistered sources: {sorted(extra)}")
+
+    if catalog_keys is None:
+        expected_catalog = (
+            bibliography.series_citation_keys() | set(sources)
+            if source_keys is None else set(sources)
+        )
+    else:
+        expected_catalog = catalog_keys
+    missing_notes = expected_catalog - set(catalog)
+    extra_notes = set(catalog) - expected_catalog
+    if missing_notes:
+        issues.append(
+            f"verification.json missing citation notes: {sorted(missing_notes)}")
+    if extra_notes:
+        issues.append(
+            f"verification.json has uncatalogued citation notes: "
+            f"{sorted(extra_notes)}")
+
+    for key, record in sorted(catalog.items()):
+        if not isinstance(record, dict):
+            issues.append(f"{key}: citation-note record must be an object")
+            continue
+        if record.get("note") != f"notes/{key}.md":
+            issues.append(f"{key}: citation note must be notes/{key}.md")
+        status = record.get("review_status")
+        if status not in NOTE_STATUSES:
+            issues.append(f"{key}: invalid or missing citation-note review status")
+        if key in sources and status != "evidence-recorded":
+            issues.append(
+                f"{key}: evidence source must be marked evidence-recorded")
+        if status == "evidence-recorded" and key not in sources:
+            issues.append(
+                f"{key}: evidence-recorded note has no source-verification record")
+        if status == "local-source":
+            local = record.get("local_source")
+            if not isinstance(local, str) or not (CITED / local).is_file():
+                issues.append(f"{key}: local-source note has no valid local_source")
+        expected_cited_by = bibliography.cited_by(key)
+        if record.get("cited_by") != expected_cited_by:
+            issues.append(
+                f"{key}: cited_by drift; expected {expected_cited_by}")
 
     for key, record in sorted(sources.items()):
         if not isinstance(record, dict):
@@ -209,24 +264,53 @@ def registry_issues(
 def evidence_issues(
     registry: dict[str, Any] | None = None,
     source_keys: set[str] | None = None,
+    catalog_keys: set[str] | None = None,
 ) -> list[str]:
     """Return human-readable defects in tracked citation evidence."""
     data = load_registry() if registry is None else registry
-    issues = registry_issues(data, source_keys)
+    issues = registry_issues(data, source_keys, catalog_keys)
     sources = data.get("sources", {})
     if not isinstance(sources, dict):
+        return issues
+    catalog = data.get("citation_notes", {})
+    if not isinstance(catalog, dict):
         return issues
 
     note_keys = {
         path.stem for path in NOTES.glob("*.md")
         if path.name != "README.md"
     } if NOTES.is_dir() else set()
-    orphan_notes = note_keys - set(sources)
+    orphan_notes = note_keys - set(catalog)
     if orphan_notes:
         issues.append(
-            "quote notes have no verification.json entry: "
+            "citation notes have no verification.json entry: "
             f"{sorted(orphan_notes)}"
         )
+    missing_note_files = set(catalog) - note_keys
+    if missing_note_files:
+        issues.append(
+            f"citation-note registry entries have no note file: "
+            f"{sorted(missing_note_files)}")
+
+    for key, record in sorted(catalog.items()):
+        note = NOTES / f"{key}.md"
+        if not note.is_file():
+            continue
+        text = note.read_text(encoding="utf-8")
+        first = text.splitlines()[0] if text.splitlines() else ""
+        if key.lower() not in first.lower():
+            issues.append(
+                f"{key}: first heading does not identify the citation key")
+        status = record.get("review_status")
+        if status == "not-reviewed":
+            if "NOT-REVIEWED" not in text:
+                issues.append(
+                    f"{key}: unreviewed citation note is not visibly marked")
+            if "not quotation evidence" not in text.lower():
+                issues.append(
+                    f"{key}: unreviewed note lacks evidence disclaimer")
+        elif status == "local-source" and "LOCAL-SOURCE" not in text:
+            issues.append(f"{key}: local citation note is not visibly marked")
 
     for key, record in sorted(sources.items()):
         verification = record.get("verification", {})
@@ -298,10 +382,54 @@ def unregistered_local_sources() -> list[str]:
     )
 
 
+def render_note_index(registry: dict[str, Any] | None = None) -> str:
+    """Render the navigable index of all citation notes."""
+    data = load_registry() if registry is None else registry
+    catalog = data.get("citation_notes", {})
+    counts = {
+        status: sum(
+            record.get("review_status") == status
+            for record in catalog.values()
+        )
+        for status in NOTE_STATUSES
+    }
+    lines = [
+        "# Citation-note coverage",
+        "",
+        "Generated from `verification.json` — do not edit by hand.",
+        "",
+        (
+            f"{len(catalog)} notes: "
+            f"{counts['evidence-recorded']} evidence-recorded, "
+            f"{counts['not-reviewed']} not reviewed, "
+            f"{counts['local-source']} local SSV sources."
+        ),
+        "",
+        "`NOT-REVIEWED` is a visible coverage gap, not a verification verdict.",
+        "",
+        "| key | review status | cited by | note |",
+        "|---|---|---|---|",
+    ]
+    for key, record in sorted(catalog.items(), key=lambda item: item[0].lower()):
+        cited_by = ", ".join(record.get("cited_by", [])) or "audit evidence only"
+        status = record.get("review_status", "missing")
+        lines.append(
+            f"| `{key}` | `{status}` | {cited_by} | "
+            f"[note](notes/{key}.md) |"
+        )
+    lines.append("")
+    return "\n".join(lines)
+
+
+def write_note_index(registry: dict[str, Any] | None = None) -> None:
+    NOTE_INDEX.write_text(render_note_index(registry), encoding="utf-8")
+
+
 def report() -> str:
     issues = evidence_issues()
     lines = [
-        f"{len(registered_keys())} registered citation sources",
+        f"{len(citation_note_keys())} citation notes",
+        f"{len(registered_keys())} evidence-recorded sources",
         f"{len(issues)} evidence issue(s)",
     ]
     lines.extend(f"  FAIL {issue}" for issue in issues)
