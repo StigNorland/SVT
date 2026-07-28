@@ -79,6 +79,48 @@ FIGURE = os.path.join(REPO, "papers", "SSV-VI", "figures",
 SPARC_CSV = os.path.join(REPO, "papers", "SSV-VI", "results",
                          "sparc_per_galaxy_results.csv")
 
+# Significant figures the receipt is written to.
+#
+# The receipt is a tracked artifact and the test suite rewrites it, so any
+# instability shows up as git churn on every run.  Two consecutive runs on one
+# machine are byte-identical -- the arithmetic is deterministic -- but results
+# drift by up to ~4e-15 relative *across environments* (BLAS/CPU reduction
+# order), which was enough to move 25 of the 259 floats and dirty the working
+# tree on five separate occasions during the #198 work.
+#
+# Measured, not estimated (rounding is monotonic, so testing both ends of the
+# drift interval against every value is exact):
+#
+#     s.f.   floats moved by the observed drift   drift the receipt tolerates
+#     none   25 of 259                            --
+#     14     31                                   0x
+#     12      0                                   4.3e-14   (11x observed)
+#     10      0                                   3.6e-12   (906x observed)
+#
+# 12 s.f. also happens to work today, on an 11x margin that a recomputation
+# could eat.  10 s.f. holds a ~900x margin while still leaving seven orders of
+# magnitude more precision than the ~3 s.f. of physics these numbers carry
+# (km/s, dex).  Guarded by test_receipt_is_stable_under_environment_drift.
+RECEIPT_SIGFIGS = 10
+
+
+def _stable(value):
+    """Round floats to RECEIPT_SIGFIGS so the receipt is environment-stable.
+
+    Recurses through the receipt structure.  ``bool`` is deliberately handled
+    before ``float``/``int`` -- in Python ``isinstance(True, int)`` is True, and
+    a verdict flag rewritten as ``1`` would be a silent content change.
+    """
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, float):
+        return float(f"{value:.{RECEIPT_SIGFIGS}g}")
+    if isinstance(value, dict):
+        return {k: _stable(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_stable(v) for v in value]
+    return value
+
 
 def model_a_vh(mbar_msun: float) -> float:
     """#133 mass law, km/s."""
@@ -256,7 +298,7 @@ def main(quick: bool = False) -> dict:
     }
     os.makedirs(os.path.dirname(RECEIPT), exist_ok=True)
     with open(RECEIPT, "w", encoding="utf-8") as fh:
-        json.dump(receipt, fh, indent=2)
+        json.dump(_stable(receipt), fh, indent=2)
 
     print(f"DSPH-LEDGER (#147)  --  receipt -> "
           f"{os.path.relpath(RECEIPT, REPO)}")
