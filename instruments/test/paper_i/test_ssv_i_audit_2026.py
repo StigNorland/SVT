@@ -16,6 +16,7 @@ p = str(SRC_ROOT / "paper_i")
 if p not in sys.path:
     sys.path.insert(0, p)
 
+import ssv_i_audit_2026 as ssv  # noqa: E402
 from ssv_i_audit_2026 import (  # noqa: E402
     ALPHA,
     A_BOHR,
@@ -206,3 +207,41 @@ def test_ngate_canonical_log_pressure_implies_cs_not_one():
     assert mp.almosteq(implied_code_sound_speed(mp.mpf("0.5")), 1 / mp.sqrt(2),
                        rel_eps=mp.mpf("1e-25"))
     assert mp.almosteq(implied_code_sound_speed(mp.mpf(1)), 1, rel_eps=mp.mpf("1e-25"))
+
+
+# --- E6: the symbol ``b`` is dimensionally overloaded within SSV-I ---------
+
+def test_b_is_not_dimensionally_consistent_across_ssv_i():
+    """Found during the rewrite, not by the original E-gate.
+
+    The E-gate checked the products (b rho_0) and so could not see that the
+    symbol itself carries different dimensions in different equations.
+    """
+    assert ssv.b_is_consistent_across_ssv_i(rho_is_mass_density=True) is False
+    assert ssv.b_is_consistent_across_ssv_i(rho_is_mass_density=False) is False
+
+
+def test_eq_cs_and_eq_xi_agree_with_each_other():
+    """So eq:pot is the odd one out -- the spurious rho_0 is in cs/xi."""
+    assert ssv.b_dimension_from("cs") == ssv.b_dimension_from("xi")
+
+
+def test_eq_pot_differs_from_the_others_by_a_volume():
+    pot, cs = ssv.b_dimension_from("pot"), ssv.b_dimension_from("cs")
+    keys = set(pot) | set(cs)
+    delta = {k: cs.get(k, 0) - pot.get(k, 0) for k in keys}
+    assert {k: v for k, v in delta.items() if v != 0 and str(k).find("length") >= 0}
+
+
+def test_rho0_is_a_mass_density():
+    """E5 fixes this independently, so the corrected text must be written for
+    a mass density."""
+    assert ssv.rho0_is_a_mass_density() is True
+
+
+def test_corrected_convention_reproduces_D1_exactly():
+    """The E6 repair is presentational: same c_s, same xi, to machine precision."""
+    b = ssv.C**2                                  # c_s = c  =>  b = c^2
+    assert ssv.corrected_sound_speed_squared(b) == ssv.C**2
+    xi = ssv.corrected_healing_length(b, ssv.M_E)
+    assert abs(xi - ssv.HBAR / (mp.sqrt(2) * ssv.M_E * ssv.C)) < mp.mpf("1e-40")

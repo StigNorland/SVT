@@ -113,3 +113,60 @@ with \#178's finding that the fermionic sector needs multi-component structure.
 
 `instruments/paper_i/ssv_i_audit_2026.py`, tests in
 `instruments/test/paper_i/test_ssv_i_audit_2026.py`.
+
+---
+
+## E6 — the symbol $b$ is dimensionally overloaded *within* SSV-I
+
+**Found 2026-07-27 during the rewrite, not by the original E-gate.** Recorded
+here because it is a genuine miss, not a refinement.
+
+Machine-checked in `instruments/paper_i/ssv_i_audit_2026.py`
+(`b_is_consistent_across_ssv_i`), tested in
+`instruments/test/paper_i/test_ssv_i_audit_2026.py`.
+
+### The finding
+
+The three printed equations demand three different dimensions for $b$:
+
+| equation | requirement on $b$ | dimension (with $\rho$ a mass density) |
+|---|---|---|
+| `eq:pot` $V=b\rho[\ln(\rho/\bar\rho)-1]+V_0$ | $V$ an energy **density** | $\mathsf{L^2T^{-2}}$ |
+| `eq:cs` $c_s=\sqrt{2b\rho_0/m_0}$ | $b\rho_0/m_0$ a velocity² | $\mathsf{L^5T^{-2}}$ |
+| `eq:xi` $\xi=\hbar/\sqrt{2m_0b\rho_0}$ | $b\rho_0$ an **energy** | $\mathsf{L^5T^{-2}}$ |
+
+`eq:cs` and `eq:xi` **agree with each other**; `eq:pot` differs from both by a
+factor of **volume**. The same holds if $\rho$ is read as a number density, so
+this is not a choice-of-convention artefact.
+
+Independently, **E5 fixes $\rho$ as a mass density**:
+$\rho_0=\alpha m_e^4c^3/(2\pi^2\Lambda\hbar^3)$ has dimensions
+$\mathsf{M\,L^{-3}}$. That settles which convention the corrected text must use.
+
+### Why the E-gate missed it
+
+The E-gate worked with the **products** — $b\rho_0=m_0c^2$, $\xi=\hbar/\sqrt{2m_0b\rho_0}$ —
+which are individually consistent. Checking a product cannot reveal that the
+symbol inside it means different things in different equations. Same failure
+mode as SSV-II E3b, where $e$ served as both a charge and a mass; worth treating
+as a standing check rather than two isolated findings.
+
+### The repair, and why it costs nothing
+
+The $\rho_0$ in `eq:cs` and `eq:xi` is a leftover from the $|\Psi|^2=\rho/\rho_0$
+normalisation and does not belong there. With $\rho$ a mass density and $V$ an
+energy density:
+
+$$\mu = \frac{dV}{d\rho} = b\ln(\rho/\bar\rho)\ \ [\mathsf{J\,kg^{-1}}],\qquad
+c_s^2 = \rho\frac{d\mu}{d\rho} = b,\qquad
+\xi = \frac{\hbar}{\sqrt{2m_0\,(m_0b)}}$$
+
+Setting $c_s=c$ gives $b=c^2$ and
+
+$$\xi = \frac{\hbar}{\sqrt2\,m_0c}$$
+
+— **identical to D1, to machine precision** (verified). So E6 changes no number
+anywhere in the series. It is a presentational defect, and the corrected text
+must not repeat it.
+
+**Verdict `MISDERIVED` (presentation).** No downstream recomputation.

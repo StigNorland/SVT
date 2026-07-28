@@ -9,6 +9,7 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{enumitem}
+\providecommand{\ssvissue}[1]{\hyperref[issue:#1]{\##1}}% in-text issue ref -> Code & Issue References appendix
 \usepackage{caption}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}
@@ -281,10 +282,39 @@ the vacuum medium made quantitative.
 \subsection{Saturation by the Gausson}
 \label{sec:gausson-saturation}
 
-The precise prefactor $1/2$ in \eqref{eq:uncertainty} can be derived directly
-from the LogSE itself, without importing it from the standard wave-packet
-calculation, by computing the uncertainty product on the LogSE's natural
-coherent state.  The logarithmic Schr\"odinger equation
+\begin{gapbox}[Interim status: this section is under revision (\ssvissue{189})]
+\textbf{This section is retained as a record and should not be read as
+current.}  Two findings of the \ssvissue{182} audit apply, and no repair is
+attempted here; the replacement is tracked separately.
+
+\begin{enumerate}[label=(\roman*)]
+  \item \textbf{The Gausson does not exist on the adopted branch.}
+        Equation~\eqref{eq:gausson} solves the LogSE only on the
+        \emph{attractive} branch.  Paper~I (\ssvissue{183}) has since rejected
+        that branch: it makes the uniform vacuum modulationally unstable and
+        cannot support $c_s=c$.  On the stable-vacuum branch actually adopted,
+        \S\ref{sec:gausson-saturation} has no solution to stand on, and
+        particles must be \emph{topological} rather than bright solitons.
+  \item \textbf{The $\hbar/2$ is imported, not derived --- on either branch.}
+        The claim below is that the prefactor comes ``directly from the LogSE
+        itself''.  The offered evidence is that the result is independent of
+        the Gausson width $\sigma$, and therefore of $b$.  That independence is
+        the tell: \emph{every} Gaussian saturates
+        $\Delta x\,\Delta p = \hbar/2$.  It is a property of Gaussians, not of
+        the LogSE.  The computation performed --- Gaussian moments giving
+        $\sigma^2/2$ and $\hbar^2/2\sigma^2$, then multiplying --- \emph{is}
+        the standard wave-packet calculation.  The LogSE contributed only the
+        claim that its stationary state is Gaussian, and under (i) it has no
+        such state.
+\end{enumerate}
+The uncertainty principle may still be recoverable as ``hydraulic stiffness of
+the vacuum'' in the sense this paper intends, but not by this route.
+\end{gapbox}
+
+The precise prefactor $1/2$ in \eqref{eq:uncertainty} was taken to follow
+directly from the LogSE itself, without importing it from the standard
+wave-packet calculation, by computing the uncertainty product on the LogSE's
+natural coherent state.  The logarithmic Schr\"odinger equation
 \begin{equation}
   i\hbar\,\partial_t\Psi
    = -\frac{\hbar^2}{2m}\,\nabla^2\Psi

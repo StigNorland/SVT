@@ -30,6 +30,7 @@ Gravity as Update-Capacity Gradient}
 \date{Draft}
 
 \providecommand{\ssvfile}[1]{\hyperref[file:#1]{\texttt{\detokenize{#1}}}}% in-text code/report ref -> Code & Issue References appendix
+\providecommand{\ssvissue}[1]{\hyperref[issue:#1]{\##1}}% in-text issue ref -> Code & Issue References appendix
 \begin{document}
 \maketitle
 
@@ -491,8 +492,11 @@ postulate enter that source.
 \end{falsbox}
 
 The mechanism is already contained in the LogSE.  The medium's nonlinear
-self-interaction is the logarithmic term $b\ln(\rho/\rho_0)$ of the Paper~I
-Lagrangian.  Consider a point of the medium reached by the radiated waves
+self-interaction is the logarithmic \emph{chemical-potential} term
+$\mu_{\rm nl}=dV/d\rho=b\ln(\rho/\rho_0)$ of the Paper~I Lagrangian --- a
+chemical potential, not a pressure, the distinction that Paper~I's
+\ssvissue{183} audit turned on.  The sign here already matches the
+stable-vacuum branch adopted there.  Consider a point of the medium reached by the radiated waves
 of several breathers.  The local density is the saturation value
 modulated by each wave,
 \begin{equation}

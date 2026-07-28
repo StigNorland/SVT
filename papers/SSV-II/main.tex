@@ -300,7 +300,11 @@ $\oint\mathbf{v}\cdot d\mathbf{l} = n\kappa_0$, $\kappa_0 = h/m_0$.  Three resul
 from Paper~I are the only inputs needed here:
 \begin{enumerate}[label=(\roman*)]
     \item $c_s \equiv c$: the longitudinal sound speed equals the speed of light,
-          fixing the stiffness parameter and the healing length $\xi = \hbar/(m_0 c)$.
+          fixing the stiffness parameter $b\rho_0 = m_0c^2$ and the healing
+          length $\xi = \hbar/(\sqrt{2}\,m_0 c)$.  (Paper~I corrected both in
+          2026-07, \ssvissue{183}: the earlier $b\rho_0=m_0c^2/2$ and
+          $\xi=\hbar/(m_0c)$ carried a spurious factor $2$.  Every result below
+          is expressed in units of $\xi$ and is therefore unaffected.)
     \item $\alpha \approx 1/137$: an empirical dimensionless coupling
           constant of the medium, governing the strength of the chiral-shear
           interaction.  Paper~I fixes it through the core-scale stiffness
@@ -504,8 +508,8 @@ longitudinal Coulomb force (hence no fifth force from neutral matter at the
 $r^{-2}$ level).
 
 In the far field, the linearised Madelung equations around a single chiral vortex
-background reduce, to leading order in $v/c$, to the vacuum Maxwell equations
-\cite{Volovik, Barcelo}:
+background were taken to reduce, to leading order in $v/c$, to the vacuum
+Maxwell equations
 \begin{align}
     \nabla \cdot \mathbf{E} &= \rho_{\rm ch}/\epsilon_0,
     &
@@ -515,6 +519,36 @@ background reduce, to leading order in $v/c$, to the vacuum Maxwell equations
 where $\mathbf{E} \equiv -\nabla\Phi_\perp/\alpha$ and $\mathbf{B}$ is the curl of
 the transverse flow, and $\rho_{\rm ch}$, $\mathbf{J}$ are the chirality source
 densities.  Equation~(\ref{eq:coulomb}) is the static limit of this system.
+
+\begin{falsbox}[\eqref{eq:maxwell} is not derived --- status at the point of statement]
+This equation was previously presented here as a result, citing Volovik and
+Barcel\'o \emph{et al.}  \textbf{Both citations are withdrawn}
+(\ssvissue{184}), and the equation does not follow from the medium as
+specified.  Three independent routes agree:
+\begin{enumerate}[label=(\roman*)]
+  \item \textbf{The cited source says something else.}  Barcel\'o, Liberati and
+        Visser's Theorem~1 yields ``the d'Alembertian equation of motion for a
+        \emph{minimally-coupled massless scalar field} propagating in a
+        (3+1)-dimensional Lorentzian geometry'' --- a \textbf{scalar}, not a
+        vector field.  Of the four occurrences of ``Maxwell'' in that review,
+        none concerns acoustic perturbations of a condensate.  Volovik's
+        $^3$He-A does support emergent gauge fields, but from the
+        \emph{multi-component} $\hat l$-vector order parameter, not from
+        Madelung of a one-component condensate.
+  \item \textbf{This paper's own computation.}  The \ssvissue{138}
+        linearization (next subsection) finds the transverse wave equation does
+        \emph{not} arise from the LogSE $+$ chiral-shear $+$ CP$^1$ functional
+        around the uniform vacuum: the chiral term is \textbf{silent at linear
+        order}.
+  \item \textbf{\ssvissue{180} P4.}  One scalar Goldstone mode cannot furnish
+        two transverse photon helicities.
+\end{enumerate}
+The static Coulomb term~\eqref{eq:coulomb} is derived independently and stands;
+what is withdrawn is the claim that the \emph{full} Maxwell system follows.  This
+is the same shortfall found in the gravitational sector (\ssvissue{129}: no
+spin-2) and in the colour sector (\ssvissue{196}: no $SU(3)$) --- a
+one-component order parameter lacking the representation content.
+\end{falsbox}
 
 \subsection{Provisional Radiative Identification in the Chiral-Shear Sector}
 
@@ -814,59 +848,83 @@ $r > a$ — so $\mathbf{B} = c_\perp^{-1}\nabla\times\mathbf{v}_\perp = 0$ outsi
 the core, exactly as observed.  But $\mathbf{v}_\perp$ itself is non-zero and falls
 off as $1/r$.
 
-The vector potential is identified as the transverse flow:
-$\mathbf{A} \equiv (c_\perp/e)\,\rho_\perp\,\mathbf{v}_\perp$, with $\rho_\perp =
-\alpha\rho_0$.  The magnetic flux carried by $n$ transverse vortex quanta is
+The vector potential is identified with the transverse flow,
 \begin{equation}
-    \Phi_B = \oint_C \mathbf{A}\cdot d\mathbf{l}
-    = \frac{c_\perp\,\alpha\rho_0}{e}\,n\kappa_0
-    = n\,\frac{h}{e} = n\,\Phi_0,
-    \label{eq:flux_quantisation}
+    \mathbf{A} \;\propto\; \mathbf{v}_\perp ,
+    \label{eq:A_is_flow}
 \end{equation}
-where $\Phi_0 = h/e$ is the (electron) flux quantum.  Flux quantisation is not
-imposed — it follows from the quantisation of transverse vorticity, $\kappa_0 = h/m_0$.
+and since $\oint_C\mathbf{v}_\perp\cdot d\mathbf{l} = n\kappa_0$ is quantised,
+any flux built from $\mathbf{A}$ inherits that quantisation.  This
+identification is the substantive claim of the section, and it is supported ---
+see below.
 
 \paragraph{The phase as a Berry phase.}
 When the electron vortex ring travels along $C$, it moves through the non-zero
-transverse velocity field~\eqref{eq:solenoid_flow}.  This is precisely the
-Haldane-Wu mechanism~\cite{HaldaneWu1985}: a vortex transported around a closed
-path accumulates a geometric (Berry) phase proportional to the number of
-circulation quanta it encloses.  The Berry phase for one ring carrying chirality
-$e$ traversing a transverse vortex of circulation $\kappa_0 = h/m_0$ is
-\begin{equation}
-    \gamma_{\rm Berry}
-    = \frac{e}{\hbar}\oint_C \mathbf{v}_\perp\cdot d\mathbf{l}
-    = \frac{e}{\hbar}\,n\kappa_0,
-\end{equation}
-where the prefactor $e/\hbar$ is the Haldane-Wu coupling between a chirality-$e$
-defect and a phase-gradient field, fixed by $e^2/(4\pi\epsilon_0)=\alpha\hbar c$
-(\S\ref{sec:EM}); $n$ is the number of solenoid flux quanta; and $\kappa_0=h/m_0$
-is the transverse circulation quantum.  Because the medium ties the chirality
-unit $e$ to the same $m_0$ that sets the circulation quantum --- both originate
-in the saturated order parameter $\Psi$ --- the dimensional factors collapse
-exactly:
-\begin{equation}
-    \gamma_{\rm AB}
-    = \frac{e}{\hbar}\,n\kappa_0
-    = \frac{e}{\hbar}\,n\,\frac{h}{m_0}
-    = 2\pi n\,\frac{e}{m_0}
-    \;\stackrel{(\star)}{=}\;
-    2\pi n.
-    \label{eq:AB_SSV}
-\end{equation}
-Step $(\star)$ is the load-bearing one.  In the Standard Model, the relation
-$e/m_0 = 1$ in natural units would be empirical: nothing forces the elementary
-charge to match the inverse circulation quantum.  In SSV the medium has only
-one fundamental scale --- $m_0$, the order-parameter mass --- so the chirality
-quantum $e$ and the circulation quantum $\kappa_0 = h/m_0$ are both expressed
-in the same natural units, and their ratio is by construction unity.  The
-quantisation $\gamma_{\rm AB} = 2\pi n$ is therefore not a numerical
-coincidence but a consequence of the medium having a single mass scale.
+transverse velocity field~\eqref{eq:solenoid_flow} and accumulates a geometric
+phase.  That much is sound, and it is the physical content worth keeping: the
+phase is a \emph{mechanical} effect of the medium on the ring, not an
+interaction with an abstract gauge field.
 
-For $n$ flux quanta enclosed, $\gamma_{\rm AB} = 2\pi n$, giving a phase factor
-$e^{i\gamma} = 1$ for integer $n$ (no observable effect) and
-$e^{i\gamma} = e^{i\pi} = -1$ for half-integer $n$ (full interference pattern
-shift) --- precisely the observed Aharonov-Bohm interference.
+\begin{falsbox}[Withdrawn: the quantised value $\gamma_{\rm AB}=2\pi n$]
+Earlier versions derived $\gamma_{\rm AB}=2\pi n$ here, attributing the
+mechanism to Haldane and Wu and building a flux quantum $\Phi_0=h/e$ from
+$\mathbf{A}\equiv(c_\perp/e)\rho_\perp\mathbf{v}_\perp$.  \textbf{The
+derivation, the flux-quantisation equation and the Haldane--Wu citation are all
+withdrawn} (\ssvissue{184}).  Four independent failures:
+\begin{enumerate}[label=(\roman*)]
+  \item \textbf{Haldane--Wu counts the wrong thing.}  Their result is
+        \cite{HaldaneWu1985} is $\gamma_C = 2\pi N_C$ with $N_C$ the number
+        of \emph{condensate atoms}
+        enclosed by the vortex trajectory --- not circulation quanta.  (The 1985
+        PRL is paywalled; this was established from an open-access source that
+        quotes, re-derives and numerically verifies it.)  The two are not even
+        the same \emph{kind} of quantity: $2\pi N_C$ scales with enclosed
+        area $\times$ density and grows without bound as the loop is enlarged,
+        whereas an Aharonov--Bohm phase must be invariant under deformation of
+        the loop.  \textbf{No choice of prefactor can repair this.}
+  \item \textbf{The Berry-phase equation was dimensionally ill-formed.}
+        $\gamma=(e/\hbar)n\kappa_0$ with $\kappa_0=h/m_0$ is dimensionless only
+        if the symbol $e$ carries the dimensions of \emph{mass}; it was used as
+        an electric charge four equations earlier.  This fails in natural units
+        too, so it is not a convention artefact.
+  \item \textbf{Step $(\star)$ was circular.}  Given (ii), $e$ must already have
+        mass dimension for the equation to be well formed; with $m_0$ the only
+        mass in the medium, $e/m_0=1$ is then an identity of the notation, not
+        a consequence of the medium having a single mass scale.
+  \item \textbf{Flux quantisation did not follow.}  With $\rho_\perp=\alpha\rho_0$
+        a mass density, $c_\perp\rho_\perp\kappa_0$ has dimensions
+        $\mathsf{M\,T^{-3}}$ against $\mathsf{M\,L^{2}T^{-2}}$ for $h$ --- a
+        mismatch of $\mathsf{L^{-2}T^{-1}}$ that a dimensionless $\alpha$ cannot
+        absorb.
+\end{enumerate}
+All four are machine-checked in \ssvfile{ssv_ii_ab_audit_2026}.
+\end{falsbox}
+
+\begin{resultbox}[What survives, and its proper source]
+The qualitative thesis stands, and its source is one this paper already cites.
+Volovik's~\cite{Volovik} \S XII\,A maps phonon propagation around a vortex onto the
+Aharonov--Bohm problem
+\begin{equation}
+    E^2\alpha_\phi - c^2\Bigl(-i\nabla + \tfrac{E}{c^2}\mathbf{v}_s\Bigr)^2\alpha_\phi = 0 ,
+    \label{eq:volovik_AB}
+\end{equation}
+in his words, ``with the vector potential $\mathbf{A}=\mathbf{v}_s$'' --- which
+is exactly~\eqref{eq:A_is_flow}, stated independently.  The effect is
+experimentally confirmed in $^3$He-B through the Iordanskii force.
+
+But the same sentence continues: ``where the electric charge $e$ is substituted
+by the mass $E/c^2$ of the particle''.  The analogue phase is therefore
+\textbf{energy-dependent}, which is why the observable is a scattering
+cross-section \emph{periodic in energy} rather than a universal phase.  Volovik
+does \emph{not} deliver $\gamma_{\rm AB}=2\pi n$ either.
+
+So on \emph{both} readings of what the electron ring is --- a topological defect
+(Haldane--Wu) or a quasiparticle in the flow (Volovik) --- the retrieved
+literature offers no route to a universal $2\pi n$.  \textbf{Open:} whether the
+medium can quantise the phase at all.  What is established is the
+identification of $\mathbf{A}$ with a physical flow, and that the
+Aharonov--Bohm phase is mechanical in origin.
+\end{resultbox}
 
 \paragraph{Why the mystery dissolves.}
 There is no mystery in SSV.  The vector potential $\mathbf{A}$ is not an abstract
@@ -884,9 +942,11 @@ The Berry-phase mechanism derived here may extend to other defect types
 travelling through background transverse flow fields.  Speculatively, if neutrino
 flavour oscillations admit a hydrodynamic description as a geometric phase
 accumulated by a torsional pulse traversing the chiral medium, they would share
-the same topological structure as~\eqref{eq:AB_SSV}, with the coupling strength
-suppressed (zero for neutral rings at leading order).  Whether this analogy can
-be made quantitative is open problem (P3) of \S\ref{sec:neutrino}.
+the same geometric-phase structure as~\eqref{eq:A_is_flow}, with the coupling
+strength suppressed (zero for neutral rings at leading order).  Whether this
+analogy can be made quantitative is open problem (P3) of
+\S\ref{sec:neutrino}.  Note that it inherits the open question above: the
+medium is not currently known to \emph{quantise} such a phase.
 
 \subsection{Summary: EM from Vortex Topology}
 
@@ -901,7 +961,7 @@ Coulomb force & Bernoulli pressure of transverse flow & empirical $\alpha$ \\
 Magnetic force & Transverse flow of translating vortex & $\alpha$ \\
 $g = 2$ & Half-quantum topology of torus ring & Exact \\
 $g - 2 = \alpha/\pi$ & Phonon self-energy loop (one-loop) & $\alpha/(2\pi)$ per loop \\
-Aharonov-Bohm phase & Berry phase of ring in vortex flow & $\gamma = 2\pi n\Phi_B/\Phi_0$ \\
+Aharonov-Bohm phase & Berry phase of ring in vortex flow & $\mathbf{A}\propto\mathbf{v}_\perp$; value \textbf{open} \\
 Magnetic field $\mathbf{B}$ & Curl of transverse velocity field & $c_\perp^{-1}\nabla\times\mathbf{v}_\perp$ \\
 Faraday induction & Transverse momentum equation & $\partial_t\mathbf{B} = -\nabla\times\mathbf{E}$ \\
 $\nabla\cdot\mathbf{B}=0$ & Vector identity; $\mathbf{B}$ is a curl & Not a postulate \\

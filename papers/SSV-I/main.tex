@@ -200,11 +200,15 @@ The defining characteristics are:
             = \sqrt{\left.\frac{\partial P}{\partial\rho}\right|_{\rho_0}}.
           \label{eq:sound-speed}
         \end{equation}
-        In logarithmic superfluid models (common in SVT literature), the
-        pressure-density relation takes the form
-        $P\propto-\rho\ln(\rho/\bar{\rho})$~\cite{volovik2003,volovik2001},
-        yielding constant $c_s$ at low excitations while allowing deformed
-        dispersion at high momenta.
+        In logarithmic superfluid models, the logarithm enters the
+        \emph{chemical potential}, not the pressure: the defining relation is
+        $\rho\,|F'(\rho)| = m_0c^2/\hbar$, whose solution is
+        $F(\rho)=b\ln(\rho/\bar{\rho})$~\cite{zloshchastiev2020}.  This yields
+        constant $c_s$ at low excitations while allowing deformed dispersion at
+        high momenta.  Note that the constraint is an \emph{absolute value}: it
+        fixes the magnitude of $b$ and is silent on its sign.  The sign is fixed
+        separately, in \S\ref{sec:lagrangian}, by requiring a stable uniform
+        vacuum.
 
   \item \textbf{Special relativity as emergent hydrodynamics.}
         Objects composed of stable topological defects (vortices/breathers) experience
@@ -230,9 +234,11 @@ from ultra-high-energy cosmic rays and some quantum-gravity phenomenology~\cite{
 
 The dynamics of the saturated superfluid vacuum are governed by an effective field
 theory for the complex order-parameter field $\Psi$ (normalised so
-$|\Psi|^2=\rho/\rho_0$).  Following the superfluid-vacuum framework of
-Volovik~\cite{volovik2003}, we adopt a logarithmic nonlinear Schr\"{o}dinger
-Lagrangian:
+$|\Psi|^2=\rho/\rho_0$).  Following the superfluid-vacuum
+framework~\cite{volovik2003} and adopting the logarithmic nonlinearity
+introduced by Rosen~\cite{rosen1968} and by Bialynicki-Birula and
+Mycielski~\cite{bbm1976}, in the form used in superfluid vacuum
+theory by Zloshchastiev~\cite{zloshchastiev2020}, we take the Lagrangian:
 \begin{equation}
   \mathcal{L}
   = \frac{i\hbar}{2}\bigl(\Psi^*\partial_t\Psi - \Psi\,\partial_t\Psi^*\bigr)
@@ -242,18 +248,32 @@ Lagrangian:
 \end{equation}
 where the potential is
 \begin{equation}
-  V(\rho) = -b\,\rho\bigl[\ln(\rho/\bar{\rho})-1\bigr]+V_0,
+  V(\rho) = +b\,\rho\bigl[\ln(\rho/\bar{\rho})-1\bigr]+V_0,
   \label{eq:pot}
 \end{equation}
 with $b>0$ a stiffness parameter and $\bar{\rho}$ the saturation density.
+
+\begin{resultbox}[Sign of the logarithmic term: the stable-vacuum branch]
+The source constraint $\rho|F'(\rho)|=m_0c^2/\hbar$ is an \emph{absolute value}
+and therefore fixes only $|b|$.  The sign is a physical choice, and the two
+branches are mutually exclusive.  The branch written here ($b>0$ in the
+convention of~\eqref{eq:pot}) gives $\rho\,\mu'(\rho)=+b$, hence $c_s^2>0$, a
+uniform vacuum that is stable against modulation, and a potential bounded
+below.  The opposite branch admits the Gausson of Rosen and of
+Bialynicki-Birula and Mycielski, but makes the uniform vacuum modulationally
+unstable and cannot support $c_s=c$; it is therefore \textbf{rejected}, and with
+it the bright-soliton route to particle saturation.  Earlier versions of this
+paper printed the rejected sign; see the claim-status table.
+\end{resultbox}
+
 Applying the Euler--Lagrange equation to~\eqref{eq:Lag}, using
 $\partial V/\partial\Psi^* = (dV/d\rho)\rho_0\Psi$ and
-$dV/d\rho = -b\ln(\rho/\bar\rho)$, yields the logarithmic Schr\"{o}dinger
+$dV/d\rho = +b\ln(\rho/\bar\rho)$, yields the logarithmic Schr\"{o}dinger
 equation (LogSE):
 \begin{equation}
   i\hbar\,\partial_t\Psi
   = -\frac{\hbar^2}{2m_0}\nabla^2\Psi
-    - b\rho_0\ln\!\left(\frac{\rho_0|\Psi|^2}{\bar{\rho}}\right)\Psi.
+    + b\rho_0\ln\!\left(\frac{\rho_0|\Psi|^2}{\bar{\rho}}\right)\Psi.
   \label{eq:LogSE}
 \end{equation}
 
@@ -273,31 +293,51 @@ The real part, after dividing by $\rho$, gives an Euler equation
     + \frac{\hbar^2}{2m_0^2}\nabla\!\left(\frac{\nabla^2\!\sqrt{\rho}}{\sqrt{\rho}}\right),
   \label{eq:euler}
 \end{equation}
-where the pressure follows the logarithmic equation of state
-$P(\rho)=b\rho\ln(\rho/\bar\rho)$.  The last term is the quantum-pressure
-(Bohm potential), which is negligible at wavelengths $\lambda\gg\xi$;
-at those scales the LogSE reduces to a \emph{compressible inviscid fluid}
-with logarithmic EOS.  The thermodynamic sound speed
-$c_{\rm thermo}=\sqrt{(1/m_0)dP/d\rho|_{\rho_0}}=\sqrt{b/m_0}$ is half the
-Bogoliubov result $c_s=\sqrt{2b\rho_0/m_0}$; the discrepancy is resolved by
-the coupled amplitude-phase Bogoliubov dispersion, which gives
-$\omega^2=c_s^2k^2(1+k^2\xi^2)$ with $c_s=\sqrt{2b\rho_0/m_0}$.
+where the pressure follows from the chemical potential in the usual way,
+$P=\rho\mu-V$ with $\mu=dV/d\rho$, giving the \emph{linear} relation
+$P(\rho)=b\rho$ (up to the constant $V_0$).  The last term is the
+quantum-pressure (Bohm potential), which is negligible at wavelengths
+$\lambda\gg\xi$; at those scales the LogSE reduces to a \emph{compressible
+inviscid fluid}.
+
+Because $\rho\,\mu'(\rho)=b$ is \emph{constant} for a logarithmic chemical
+potential, the thermodynamic and Bogoliubov routes to the sound speed do not
+merely agree to within a factor --- they are \textbf{identically the same
+quantity}:
+\begin{equation}
+  c_{\rm thermo}^2 = \frac{1}{m_0}\frac{dP}{d\rho}\bigg|_{\rho_0}
+  = \frac{b\rho_0}{m_0}
+  = \frac{\rho\,\mu'(\rho)\,\rho_0}{m_0}\bigg|_{\rho_0}
+  = c_s^2 .
+  \label{eq:cs-routes-agree}
+\end{equation}
+The full Bogoliubov dispersion is $\omega^2=c_s^2k^2(1+k^2\xi^2)$.
 
 \textbf{Sound speed.}
 Linearising around the uniform background $\Psi=1+\eta$, $|\eta|\ll1$,
 with $\rho_0=\bar\rho$, the density channel satisfies a wave equation with
 phase velocity
 \begin{equation}
-  c_s = \sqrt{\frac{2b\rho_0}{m_0}}.
+  c_s = \sqrt{\frac{b\rho_0}{m_0}}.
   \label{eq:cs}
 \end{equation}
-Setting $c_s=c$ fixes the stiffness parameter: $b=m_0c^2/(2\rho_0)$.
-The healing length (vortex core size) is
+Setting $c_s=c$ fixes the stiffness parameter through the combination that
+enters every observable:
 \begin{equation}
-  \xi = \frac{\hbar}{\sqrt{2m_0 b\rho_0}} = \frac{\hbar}{m_0 c},
+  b\rho_0 = m_0c^2 ,
+  \label{eq:brho0}
+\end{equation}
+with \emph{no} factor of $2$ --- consistent with the source constraint
+$\rho|F'(\rho)|=m_0c^2/\hbar$ evaluated at $\rho_0$.  The healing length
+(vortex core size) is then
+\begin{equation}
+  \xi = \frac{\hbar}{\sqrt{2m_0 b\rho_0}} = \frac{\hbar}{\sqrt{2}\,m_0 c},
   \label{eq:xi}
 \end{equation}
-i.e., the Compton wavelength of the reference mass $m_0$.
+i.e., the reduced Compton wavelength of $m_0$ divided by $\sqrt2$.  The factor
+$\sqrt2$ is not cosmetic: it propagates to every downstream quantity expressed
+in units of $\xi$, and is the only place where the corrected normalisation
+reaches a stated number (see Paper~VII-b's horizon counting).
 
 \textbf{Transverse stiffness and the origin of $\alpha$.}
 The LogSE admits only irrotational flow at linear order.  To support stable
@@ -448,7 +488,7 @@ superfluid vacuum---a stable, self-sustaining topological defect with finite siz
         \end{equation}
 
         \textit{(ii) Core self-energy (GPE).}
-        Minimising over $a$ alone gives $a^* = \xi = \hbar/(m_0 c)$
+        Minimising over $a$ alone gives $a^* = \xi = \hbar/(\sqrt{2}\,m_0 c)$
         with no free parameters.
 
         \textit{(iii) Chiral-shear energy (LogSE).}
@@ -471,7 +511,7 @@ superfluid vacuum---a stable, self-sustaining topological defect with finite siz
           \mathcal{E}(r)
             = r\!\left(\ln 8r - \frac{7}{4}\right)
               + \frac{2C}{r}
-              - (\Lambda+1)\,\alpha^2\, r,
+              - (\Lambda+1)\, r,
           \label{eq:Etotal}
         \end{equation}
         where $C = 1/8$ from the elliptic self-interaction integral
@@ -479,21 +519,29 @@ superfluid vacuum---a stable, self-sustaining topological defect with finite siz
         Setting $\mathrm{d}\mathcal{E}/\mathrm{d}r = 0$:
         \begin{equation}
           \ln 8r^* - \frac{3}{4} - \frac{2C}{r^{*2}}
-            = (\Lambda+1)\,\alpha^2.
+            = \Lambda+1.
           \label{eq:stationary}
         \end{equation}
         At $r^* \sim 1/\alpha \gg 1$ the term $2C/r^{*2} \sim \alpha^2$
         is negligible.  Using
-        $(\Lambda+1)\alpha^2 = \ln(8/\alpha) - \tfrac{3}{4}$,
+        $\Lambda+1 = \ln(8/\alpha) - \tfrac{3}{4}$ from~\eqref{eq:gammadef},
         Eq.~\eqref{eq:stationary} reduces to
         $\ln 8r^* = \ln(8/\alpha)$,
         with the unique solution
         \begin{equation}
-          \boxed{R_e^* = \frac{\xi}{\alpha} = \frac{\hbar}{\alpha m_0 c}.}
+          \boxed{R_e^* = \frac{\xi}{\alpha}
+                 = \frac{\hbar}{\sqrt{2}\,\alpha m_0 c}.}
           \label{eq:Re-star}
         \end{equation}
-        This is the classical electron radius, derived without empirical
-        input for $R_e$.  Numerically,
+        This is \emph{not} the classical electron radius
+        $r_e = \alpha\hbar/(m_ec)$, which is smaller by a factor $\alpha^2$;
+        earlier versions of this paper misidentified it.  The combination
+        $\hbar/(\alpha m_e c)$ is the \textbf{Bohr radius} $a_0$, so with the
+        corrected healing length $R_e^* = a_0/\sqrt2$.  What is derived here is
+        the \emph{relation} $R^*=\xi/\alpha$ --- an equilibrium radius $1/\alpha$
+        healing lengths across, obtained without empirical input for $R^*$.  Its
+        identification with any particular measured length is a separate claim,
+        and the one previously made was wrong.  Numerically,
         $\mathrm{d}^2\mathcal{E}/\mathrm{d}r^2\big|_{r^*} = \alpha > 0$:
         a \emph{true minimum}, not a saddle.
 
@@ -507,10 +555,17 @@ superfluid vacuum---a stable, self-sustaining topological defect with finite siz
         which fixes the vacuum saturation density:
         \begin{equation}
           \rho_0
-            = \frac{2\alpha\Lambda\,m_e^4c^3}{\pi^2\hbar^3}
-            \approx 1.9\;\frac{m_e^4c^3}{\hbar^3}.
+            = \frac{\sqrt{2}\,\alpha\,m_e^4c^3}{2\pi^2\Lambda\,\hbar^3}
+            \approx 9.96\times10^{-5}\;\frac{m_e^4c^3}{\hbar^3}.
           \label{eq:rho0-value}
         \end{equation}
+        Note that $\Lambda$ appears in the \emph{denominator}: inverting
+        \eqref{eq:electron-mass} for $\rho_0$ divides by $\Lambda$, and the
+        $\sqrt2$ is inherited from the corrected healing
+        length~\eqref{eq:xi}.  Earlier versions of this paper printed this
+        quantity with $\Lambda$ in the numerator and a value of
+        $1.9\,m_e^4c^3/\hbar^3$, too large by a factor of about
+        $2\times10^4$; see the claim-status table.
         The derivation uses two empirical inputs ($m_e$, $\alpha$) and
         no free parameters beyond those already fixed by the Lagrangian.
 
@@ -614,11 +669,85 @@ stays empirical and the $Q_p/\alpha_G$ map is tracked separately.  Full records:
 issues~\ssvissue{66}, \ssvissue{92}, \ssvissue{77}, and \ssvissue{98}.
 \end{gapbox}
 
-The simplest three-dimensional structure that can stabilize a spherical void against
-the immense background pressure $P_0$ is a Y-junction~\cite{faddeev1997} of three quantized vortex
-filaments meeting at a single central node (topologically a trefoil knot projected
-into three orthogonal directions).  This configuration is the hydrodynamic origin of
-baryon number and confinement.
+The three-dimensional structure that stabilizes a spherical void against the
+immense background pressure $P_0$ is the \textbf{trefoil knot} $T_{2,3}$: a
+\emph{single} closed vortex curve with three crossings.  This configuration is
+the hydrodynamic origin of baryon number and confinement.
+
+\begin{resultbox}[Withdrawn: the symmetric Y-junction]
+Earlier versions of this paper described the proton as ``a Y-junction of three
+quantized vortex filaments meeting at a central node''.  \textbf{That
+description is withdrawn}, on two independent grounds established by the
+citation audit (issue~\ssvissue{183}):
+\begin{enumerate}[label=(\roman*)]
+  \item \textbf{It is not what the cited sources say.}  Faddeev and
+        Niemi~\cite{faddeev1997} contains no discussion of vortex junctions;
+        Proment \emph{et al.}~\cite{proment2012} construct $T_{2,3}$ as a
+        \emph{single closed curve}, cut by an axial plane at \emph{four}
+        points.  Three rings are its \emph{decay products}, not its
+        construction.
+  \item \textbf{It is forbidden.}  In a one-component $U(1)$ condensate,
+        quantized circulation forces $\sum_i n_i = 0$ at any node, so a
+        \emph{symmetric} three-leg junction cannot exist.  A genuine vortex
+        trimer requires three components with coherent (Rabi) coupling and
+        domain walls in the relative phases.
+\end{enumerate}
+\textbf{What survives:} the object is the single-curve trefoil, and
+$N_Y=3$ is its \emph{crossing number} --- a genuine knot invariant.  Every
+computation in this programme used the knot, not a junction, so no numerical
+result is affected (see the \ssvissue{182} N-gate).
+
+\textbf{What does not:} the identifications below of \emph{quarks} with three
+independent filaments and of \emph{colour} with phase orientation at a central
+node.  Those presuppose the junction.  They are retained below as a record of
+the original reasoning, not as derived results.  This converges with
+issue~\ssvissue{178}, which found by a fully independent route
+($\pi_3(S^1)=0$) that the bare one-component theory has no fermionic solitons:
+both point at \textbf{multi-component structure} as missing content rather than
+as a patch.
+\end{resultbox}
+
+\begin{gapbox}[Open problem: the colour sector is not merely unsupported]
+The author's position (2026-07) is that \emph{three filaments $=$ quarks} is
+\textbf{wrong}, not just unproven, and that finding what replaces it is future
+work rather than an editing matter.  A structural obstruction can be stated
+precisely, and it does \emph{not} depend on the junction --- it survives even if
+a three-leg node were somehow admitted.
+
+Three legs carry three phases, one of which is the overall gauge phase, leaving
+\textbf{two} independent relative phases.  Locking them at $120^\circ$ yields
+the cyclic group $\mathbb{Z}_3$.  But $\mathbb{Z}_3$ is the \textbf{centre} of
+$SU(3)$, not $SU(3)$:
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+$\dim SU(3)$ & $8$ \\
+reachable from relative phases (Cartan subalgebra) & $2$ \\
+\textbf{missing (off-diagonal root generators)} & $\mathbf{6}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+The six missing generators are exactly those that \emph{change} colour --- the
+gluons.  This explains why the identification looked convincing and is
+nevertheless wrong: the centre carries \emph{triality}, so it reproduces
+precisely the countable features that were being matched (there are three of
+them; only $\mathbb{Z}_3$-neutral combinations are physical) while supplying
+\textbf{none} of the non-abelian content --- no colour-changing dynamics, no
+gluons, no asymptotic freedom.  An abelian group cannot be a non-abelian gauge
+group, so this is a different physical claim from QCD colour, not an
+approximation to it.
+
+Two further obstructions point the same way.  \emph{Fractional charge:} quarks
+carry $\pm1/3,\pm2/3$, while quantized circulation is integer-valued ---
+fractional winding in a one-component condensate is forbidden by the same
+argument that forbids the junction.  \emph{Spin:} quarks are spin-$\tfrac12$,
+and \ssvissue{178} found the bare theory has no fermionic solitons at all.
+
+Machine-checked in \ssvfile{ssv_i_colour_sector_nogo}.  Tracked as an open
+problem; \textbf{the proton mass chain does not depend on any of this} ---
+$N_Y=3$ enters as the trefoil crossing number, a knot invariant, and is
+untouched.
+\end{gapbox}
 
 \begin{itemize}
   \item \textbf{Quarks.}
@@ -1238,11 +1367,17 @@ static stiffness, not a propagating mode --- \ssvissue{138}) reproducing the
 Coulomb interaction in the far field; radiation rides the phase channel at
 $c$.  The strong force is vacuum surface tension
 along flux tubes connecting breather skeletons, with string tension
-$\sigma \approx \alpha m_\pi^2$ recovering the Cornell potential.  Gravity is the
-acoustic Bjerknes force --- mutual attraction between vibrating breathers via
-secondary flow fields in the plenum --- derived in Paper~II and shown there to
-reproduce Newtonian gravity with $G$ expressed in terms of $\hbar$, $c$, $m_e$,
-and $\alpha$~\cite{zloshchastiev2023}. The weak interaction corresponds to transient 
+$\sigma \approx \alpha m_\pi^2$ recovering the Cornell potential.  Gravity was
+originally proposed to be the acoustic Bjerknes force --- mutual attraction
+between vibrating breathers via secondary flow fields in the plenum.
+\textbf{That mechanism is falsified as written} (issue~\ssvissue{119}): the
+radiation-zone cross-term oscillates in sign with separation beyond one
+wavelength and vanishes outright between breathers of unequal frequency, so it
+cannot supply a sign-definite $1/r$ potential, nor electron--proton gravity at
+all.  A bath-driven (secondary-Bjerknes) repair is sign-definite but fails on
+range.  Paper~IV records the trilemma in full; what survives there is
+everything downstream of the potential $\Phi$, not the mechanism that was to
+build it.  The weak interaction corresponds to transient
 vortex reconnections mediating topological reconfigurations (flavour changes), with 
 lifetimes set by tunnelling barriers in the LogSE potential.
 
@@ -1474,8 +1609,56 @@ Claim & Status & Upgrade condition \\
 \endfoot
 \bottomrule
 \endlastfoot
-LogSE Madelung structure; sound speed $c_s=\sqrt{2b\rho_0/m_0}$;
-$\xi=\hbar/(m_0c)$ & derived & Already analytic from the Lagrangian. \\
+LogSE Madelung structure; sound speed $c_s=\sqrt{b\rho_0/m_0}$;
+$\xi=\hbar/(\sqrt2\,m_0c)$ & derived & Already analytic from the Lagrangian.
+\textbf{Corrected 2026-07 (\ssvissue{183}).}  Earlier versions printed the
+opposite sign of the logarithmic potential, $b\rho_0=m_0c^2/2$ (a spurious
+factor $2$), $\xi=\hbar/(m_0c)$, and a ``thermodynamic vs.\ Bogoliubov''
+discrepancy together with its resolution.  Because $\rho\mu'(\rho)$ is constant
+for a logarithmic chemical potential the two routes are identically the same
+quantity, so both the discrepancy and its resolution were artifacts and have
+been removed.  The rejected sign made the uniform vacuum modulationally
+unstable.  \emph{Cost:} the Gausson does not exist on the adopted branch, so
+particles must be topological rather than bright solitons
+(\ssvissue{189}). \\
+Attribution of the logarithmic potential and the LogSE & \textbf{corrected} &
+\textbf{2026-07 (\ssvissue{183}).}  Previously credited to Volovik, whose
+Phys.\ Rept.\ \textbf{351}, 195 contains no logarithmic equation of state
+(``equation of state'' occurs $0$ times in $71{,}425$ words).  The lineage is
+Rosen~\cite{rosen1968} $\to$ Bialynicki-Birula and
+Mycielski~\cite{bbm1976} $\to$ Zloshchastiev~\cite{zloshchastiev2020}.  The
+misattribution is why the error survived review: the real source's constraint
+$\rho|F'(\rho)|=m_0c^2/\hbar$ was never applied, and its $F(\rho)$ --- a
+\emph{chemical-potential} term --- was read as a \emph{pressure}. \\
+Vacuum saturation density $\rho_0$ & derived & \textbf{Corrected 2026-07
+(\ssvissue{183}).}  Previously printed as
+$2\alpha\Lambda m_e^4c^3/\pi^2\hbar^3\approx1.9\,m_e^4c^3/\hbar^3$, with
+$\Lambda$ in the numerator and a value inconsistent with its own formula.
+Inverting~\eqref{eq:electron-mass} correctly gives
+$\approx9.96\times10^{-5}\,m_e^4c^3/\hbar^3$, smaller by $\sim2\times10^4$. \\
+Proton skeleton: single-curve trefoil $T_{2,3}$; $N_Y=3$ as crossing number &
+derived & \textbf{Corrected 2026-07 (\ssvissue{183}).}  The former
+``Y-junction of three quantized vortex filaments'' is \textbf{withdrawn}: it is
+absent from the cited sources and is forbidden in a one-component $U(1)$
+condensate, where quantized circulation forces $\sum_i n_i=0$ at any node.  No
+number changes --- the computations always used the knot. \\
+Quarks as three filaments; colour as phase orientation at a central node &
+\textbf{open problem} & \textbf{Author's position 2026-07: wrong, not merely
+unproven.}  Presupposes the withdrawn Y-junction, and carries a further
+obstruction that survives independently of it: $120^\circ$ phase locking among
+three legs yields $\mathbb{Z}_3$, the \emph{centre} of $SU(3)$, reaching only
+the rank-2 Cartan subalgebra and \textbf{missing 6 of the 8 generators} --- the
+colour-changing ones, i.e.\ the gluons.  The centre carries triality, which is
+why the countable features matched.  Fractional charge ($\pm1/3,\pm2/3$ from
+integer circulation) and spin-$\tfrac12$ (\ssvissue{178}: $\pi_3(S^1)=0$) fail
+by the same shortfall.  Not repairable by editing; tracked separately.  The
+proton mass chain does not depend on it. \\
+Gravity as the acoustic Bjerknes force & \textbf{falsified} & \textbf{As
+written (\ssvissue{119}).}  The radiation-zone cross-term oscillates in sign
+with separation and vanishes between breathers of unequal frequency; a
+bath-driven repair is sign-definite but fails on range.  Retained in Paper~IV
+as record.  Earlier versions of \emph{this} paper stated it as an established
+result. \\
 $\alpha=c_\perp/c$ from the chiral-shear coefficient
 $\lambda=\alpha^2\rho_0/m_0$ & derived & Already analytic from the
 Lagrangian.  \textbf{Reinterpreted 2026-06 (\ssvissue{138})}: a core-scale
@@ -1489,7 +1672,17 @@ $m_e c^2 = \tfrac12\rho_0\kappa_0^2 R_e \Lambda$ &
 derived & Analytic minimisation of the Lamb formula + chiral-shear
 energy; the chiral-shear coefficient is a structural input from
 the Lagrangian, not a fit.  $m_e$ and $\alpha$ remain empirical
-inputs of the theory. \\
+inputs of the theory.  \textbf{Corrected 2026-07 (\ssvissue{183}):}
+$\mathcal{E}(r)$ previously applied $\alpha^2$ twice --- once in the
+chiral-shear coefficient and again in the stationarity condition --- so as
+printed it stationarised at $r^*\approx0.57$, not $1/\alpha$.  The
+physics is intact; the presentation was not. \\
+Identification of $R_e^*=\xi/\alpha$ with the classical electron radius &
+\textbf{falsified} & \textbf{2026-07 (\ssvissue{183}).}  $\hbar/(\alpha m_ec)$
+is the \textbf{Bohr radius} $a_0$, not the classical electron radius
+$r_e=\alpha\hbar/(m_ec)$ --- they differ by $\alpha^2$.  With the corrected
+$\xi$, $R_e^*=a_0/\sqrt2$.  The \emph{relation} $R^*=\xi/\alpha$ survives; the
+identification does not. \\
 Pion mass $m_{\pi^\pm}=2\mu_0$
 ($0.34\%$ from CODATA) & derived & Already analytic from the
 two-winding topology + the $\mu_0=m_e/\alpha$ scale.  No 3D
@@ -1681,6 +1874,14 @@ Class.\ Quant.\ Grav.\ \textbf{23}, R167 (2006).
 M.~Stone, ``Phonons in a Bose-Einstein condensate as an example of an emergent
 phenomenon,''
 Phys.\ Rev.\ D~\textbf{71}, 085007 (2005).
+
+\bibitem{rosen1968}
+G.~Rosen,
+J.\ Math.\ Phys.\ \textbf{9}, 996 (1968).
+
+\bibitem{bbm1976}
+I.~Bialynicki-Birula and J.~Mycielski,
+Ann.\ Phys.\ (N.Y.)\ \textbf{100}, 62 (1976).
 
 \bibitem{lamb1932}
 H.~Lamb, \textit{Hydrodynamics}, 6th~ed., Cambridge University Press (1932),
@@ -2079,19 +2280,35 @@ expansion~\cite{lamb1932} reads
   \varepsilon^2 = 1 - \frac{a^2}{4R^2},
 \end{equation}
 where $K$ and $E$ are complete elliptic integrals of the first and
-second kind.  Expanding for $a \ll R$:
-$K(\varepsilon)\approx\ln(8R/a)$,
-$E(\varepsilon)\approx 1$, recovering~\eqref{eq:Ekin} at leading order.
-The next-order term arises from the interaction of diametrically
-opposite ring segments (separation $\approx 2R$) and contributes
+second kind.  Expanding for $a \ll R$ gives a bracket
+$\ln(8R/a) - 2$, and the next-order term contributes a coefficient
 \begin{equation}
-  \Delta E = \frac{\rho_0\kappa_0^2\,\xi^2}{8R},
-  \quad\Longrightarrow\quad
-  C = \frac{1}{8}.
+  C = \frac{3}{16}\,\Bigl[\ln(8R/a) - 1\Bigr],
   \label{eq:Cvalue}
 \end{equation}
-This is a pure geometric constant from the elliptic expansion;
-no free parameters are introduced.
+obtained by evaluating the bracket numerically and taking $a/R\to0$.
+
+\begin{resultbox}[Two corrections to this appendix (\ssvissue{183})]
+\begin{enumerate}[label=(\roman*)]
+  \item Earlier versions gave $C=1/8$ and called it ``a pure geometric
+        constant from the elliptic expansion''.  It is neither: the
+        coefficient is $3/16$, and the term \textbf{carries a logarithm}, so it
+        is not a constant at all.
+  \item The additive constant in this appendix's own expansion is
+        $\boldsymbol{-2}$, whereas~\eqref{eq:Ekin} carries $-7/4$.  These are
+        \emph{different core models} --- $-2$ is the filament/hollow-core
+        value, $-7/4$ is Lamb's result for a core of \emph{uniform vorticity}
+        (Art.~163~(6), where he neglects the variation of $\varpi$ and $\omega$
+        over the section).  The claim that this appendix ``recovers
+        \eqref{eq:Ekin} at leading order'' was therefore \textbf{false}.
+        Equation~\eqref{eq:Ekin} and its $-7/4$ are correct and unchanged; it
+        is this appendix that was misdescribed.
+\end{enumerate}
+\textbf{Impact on results: none.}  $C$ enters the stationarity condition only
+through $2C/r^{*2}$, which at $r^*\sim1/\alpha$ is of order
+$C\alpha^2\sim10^{-5}$.  Verified in
+\ssvfile{ssv_i_audit_2026}.
+\end{resultbox}
 
 Figure~\ref{fig:minimisation} shows the three energy components
 and the resulting landscape numerically, confirming the analytic
