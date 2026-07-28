@@ -90,3 +90,26 @@ result notes (`papers/*/results/`). Work is organised around GitHub issues
     trusted. Where practical, widen the query until it over-matches and inspect
     the excess, rather than trusting the query that returned the expected
     answer. (Extends rules 1 and 6; see \#198 Part C.)
+14. **Derived numbers are generated, not typed.** A load-bearing number must not
+    exist twice — once in an instrument and once in the `.tex`. Register it in
+    `instruments/tools/gen_values.py`, which writes `papers/<PAPER>/values.tex`
+    (macro namespace `\ssv<CamelCase>`); the paper `\input`s that and prints
+    `\ssvRhoZero` rather than a literal. **Regenerate before building, exactly as
+    for provenance:** `python instruments/tools/gen_values.py <PAPER>` (or
+    `--all`, or `--check` to detect drift without writing). The test
+    `instruments/test/tools/test_gen_values.py` enforces no drift, no dead macro,
+    no undeclared macro — and that the replaced literal no longer occurs in the
+    paper, which is the part that actually prevents re-typing. Currently covers
+    SSV-I and SSV-VII-b only; extend opportunistically, and do not assume a
+    number is generated because others are. (Extends rule 11; see \#198 Part A.)
+15. **Ask what a symbol means throughout, not just whether an equation
+    balances.** Three of the \#182 defects were one error class — a symbol
+    carrying two dimensions in one paper (`b` in SSV-I, `e` in SSV-II) or across
+    papers undeclared (`b` in SSV-V) — and the C/E/N gates missed all three
+    because they checked equations and products, never symbols. Encode a paper's
+    symbol table and relations in `instruments/tools/dimensions.py`, splitting
+    symbols into *anchored* (dimension fixed by definition) and *free*, and ask
+    whether **any** assignment to the free symbols makes the printed relations
+    simultaneously homogeneous. Covers SSV-I, SSV-II and SSV-V only. It checks
+    the relations *as transcribed*, not the `.tex` — state that limit whenever
+    citing it. (Extends rule 7; see \#198 Part B.)
