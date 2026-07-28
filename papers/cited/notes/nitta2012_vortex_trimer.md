@@ -35,3 +35,8 @@ unstable to splitting in a repulsive condensate.
 **Bare SSV has no stable symmetric Y-junction.** This is the same structural
 deficiency recorded in #178 (π₃(S¹) = 0 ⇒ no fermionic solitons), with the same
 indicated repair: a multi-component condensate.
+
+**Use verdict: `OK` as supporting evidence.** The quoted paragraphs support the
+limited statement that the trimer construction requires multiple components,
+coherent coupling and domain walls. The single-component no-go also uses SSV's
+own circulation argument; it is not attributed to this paper alone.

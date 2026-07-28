@@ -6,6 +6,11 @@ relations*, Int. J. Mod. Phys. A **35**, 2040032 (2020), arXiv:2011.11897.
 This is the **actual source** of the logarithmic nonlinearity that SSV-I
 attributes to Volovik.
 
+**Use verdict: `OK` for SSV-I C6's logarithmic-wave-equation lineage.** The
+source supports the logarithmic nonlinearity and its natural scale. It does not
+support SSV-I's separate pressure interpretation, sign choice, or factor of two;
+those misuses are assessed below.
+
 ## Eq. (1) — the logarithmic wave equation, p.1
 
 > i∂_tΨ = [ −ħ/(2m)∇² + V_ext(x,t) − b ln(|Ψ|²/ρ̄) ] Ψ
