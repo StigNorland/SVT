@@ -54,3 +54,39 @@ result notes (`papers/*/results/`). Work is organised around GitHub issues
     is `papers/<PAPER>/provenance.tex`, `\input` in an appendix. The test
     `instruments/test/tools/test_gen_provenance.py` enforces that every cited script path
     exists, so a reference can never silently break.
+12. **The evidence rule: no verdict without a verbatim quotation.** *(User's
+    idea, 2026-07-27: "we could include the paragraph we cite?" — adopted as a
+    rule after it caught two of Claude's own errors during the \#182 audit.)*
+    Every load-bearing citation must be checked against the retrieved primary
+    source, and the **paragraph actually relied on** stored verbatim in
+    `papers/cited/notes/<key>.md` — not a paraphrase, not a page number. Give
+    each note the claim being made, the quotation, and a verdict from the fixed
+    vocabulary: `OK` / `MISATTRIBUTED` / `MISREAD` / `MISDERIVED` /
+    `UNSUPPORTED` / `PENDING-PRIMARY` / `UNCITED`. Sources are hash-pinned and
+    re-fetchable via `instruments/tools/fetch_cited.py`; `missing_evidence()`
+    must stay empty, so a verdict can never exist without its evidence. The
+    retrieved PDFs are **gitignored** — this repo is public and arXiv's licence
+    does not permit redistribution — so the notes are what make a verdict
+    checkable without re-downloading anything.
+    - **Paywalls are never circumvented.** A source that cannot be obtained is
+      recorded `PENDING-PRIMARY` and every dependent claim stays flagged.
+    - **Proxies are allowed when they do more than cite.** A secondary source is
+      admissible if it quotes the result and preferably re-derives or
+      independently verifies it; look for a modern open-access paper that
+      *reproduces* the old one. Record the verdict against the *original* key
+      and name the proxy (e.g. `HaldaneWu1985` → `polkinghorne2021`).
+    - **Pin identifiers, not titles.** Papers are often retitled on publication,
+      so a title check produces false negatives as well as the false positives
+      it exists to catch. Pin the arXiv ID, then verify author list and content.
+    - **Never read equations off degraded OCR.**
+    *Why:* the defect that triggered \#182 survived for years because an
+    equation was credited to a source that does not contain it, so the real
+    source's constraint was never applied. A quotation makes that
+    unsustainable. (Extends rule 1.)
+13. **State the search behind an absence claim.** "X does not appear" and "there
+    are no others" are only as strong as the query that backs them, so give the
+    pattern, the corpus and the count. *"`equation of state` occurs 0 times in
+    71,425 words"* is re-runnable and falsifiable; *"no others"* has to be
+    trusted. Where practical, widen the query until it over-matches and inspect
+    the excess, rather than trusting the query that returned the expected
+    answer. (Extends rules 1 and 6; see \#198 Part C.)
