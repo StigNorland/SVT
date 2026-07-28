@@ -40,9 +40,18 @@ because the D1 sign is a *definition* that propagates:
 - **SSV-IV:494** and **SSV-VII-b:44,187** use $b\ln(\rho/\rho_0)$ — sign to be
   checked against the adopted branch, not assumed.
 
-Full inventory of printed potential forms (the grep is in the commit): SSV-I
+Inventory of printed potential forms, from the pattern
+`ln(\rho/\bar{\rho})` / `ln(\rho/\rho_0)` over `papers/*/main.tex`: SSV-I
 205/245/251/277, SSV-III 1169, SSV-IV 494/503, SSV-V 142/629/633, SSV-VII-b
-44/187. **No others.**
+44/187 — **12 sites in 5 papers**.
+
+> **Correction (2026-07-28).** This originally read "**No others.**" That claim
+> was false. A wider pattern (adding `\ln\rho`, `\log\rho`, `\ln{\rho}`)
+> finds a **13th** site: SSV-II `main.tex:2664`, the magnon effective potential
+> $V+b\ln\rho_b=\mu$. The consequence was nil — that site already carries the
+> adopted sign, like SSV-VII-b — but the completeness claim was unverifiable as
+> stated, and a pre-registration is the worst place for one. Corrected per the
+> new rule 13; see \#198 Part C.
 
 ## Sequence and per-paper items
 
