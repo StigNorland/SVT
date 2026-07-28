@@ -29,7 +29,15 @@ E3c  therefore step (star), ``e/m_0 = 1``, is not a physical consequence of the
      dimensionally well formed.  The argument is circular.
 E3d  eq:flux_quantisation is dimensionally inconsistent as printed: with
      rho_perp = alpha rho_0 a mass density, c rho_perp kappa_0 has dimensions
-     M T^-3, while the asserted h has M L^2 T^-2.  The mismatch is L^-2 T^-1.
+     M T^-2, while the asserted h has M L^2 T^-1.  The mismatch is L^-2 T^-1.
+
+     (This docstring, and SSV-II main.tex, previously gave both dimensions one
+     power of T out -- M T^-3 and M L^2 T^-2, the latter an energy rather than an
+     action.  The MISMATCH, which is the load-bearing quantity and what the code
+     below actually computes, was correct throughout; only the two intermediate
+     dimensions quoted in prose were wrong.  Found by the #198 Part B checker,
+     instruments/tools/dimensions.py, in a paper that had already passed the
+     C/E/N gates -- which is the argument for having the checker.)
 
 Nothing here depends on the D1 branch decision; these are unit identities.
 """
