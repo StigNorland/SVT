@@ -7,7 +7,794 @@
       "unavailable-primary",
       "reproducible-absence-search"
     ],
-    "identifier_rule": "Every record has a source URL. DOI and arXiv identifiers are mandatory when the work has them; an explicit checked status is mandatory otherwise."
+    "identifier_rule": "Every evidence record has a source URL. DOI and arXiv identifiers are mandatory when the work has them; an explicit checked status is mandatory otherwise.",
+    "citation_note_rule": "Every work cited anywhere in the SSV series has a catalogued note. NOT-REVIEWED is an inventory state, never a verification verdict."
+  },
+  "citation_notes": {
+    "AaronsonCarrollOuellette2014": {
+      "note": "notes/AaronsonCarrollOuellette2014.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "Abel2020": {
+      "note": "notes/Abel2020.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-II"
+      ]
+    },
+    "AharonovBohm1959": {
+      "note": "notes/AharonovBohm1959.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-II"
+      ]
+    },
+    "Albert2000": {
+      "note": "notes/Albert2000.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "Barbour1999": {
+      "note": "notes/Barbour1999.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "barcelo2011": {
+      "note": "notes/barcelo2011.md",
+      "review_status": "evidence-recorded",
+      "cited_by": [
+        "SSV-I",
+        "SSV-IV"
+      ]
+    },
+    "Barenghi2014": {
+      "note": "notes/Barenghi2014.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "bbm1976": {
+      "note": "notes/bbm1976.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-I",
+        "SSV-VII-a"
+      ]
+    },
+    "Bekenstein1973": {
+      "note": "notes/Bekenstein1973.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-V"
+      ]
+    },
+    "Bennett1988": {
+      "note": "notes/Bennett1988.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "Bjerknes1906": {
+      "note": "notes/Bjerknes1906.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-II",
+        "SSV-IV",
+        "SSV-VII-b"
+      ]
+    },
+    "BKLS1986": {
+      "note": "notes/BKLS1986.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-V"
+      ]
+    },
+    "BLV2005": {
+      "note": "notes/BLV2005.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-V"
+      ]
+    },
+    "Boltzmann1877": {
+      "note": "notes/Boltzmann1877.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "CasiniHuerta2009": {
+      "note": "notes/CasiniHuerta2009.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-V"
+      ]
+    },
+    "chemin2009": {
+      "note": "notes/chemin2009.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-VI"
+      ]
+    },
+    "Clisby2010": {
+      "note": "notes/Clisby2010.md",
+      "review_status": "evidence-recorded",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "CorleyJacobson1996": {
+      "note": "notes/CorleyJacobson1996.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-V"
+      ]
+    },
+    "CUORE2022": {
+      "note": "notes/CUORE2022.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-II"
+      ]
+    },
+    "Deutsch1991": {
+      "note": "notes/Deutsch1991.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "DUNE2020": {
+      "note": "notes/DUNE2020.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-II"
+      ]
+    },
+    "Endres2012": {
+      "note": "notes/Endres2012.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-II"
+      ]
+    },
+    "faddeev1997": {
+      "note": "notes/faddeev1997.md",
+      "review_status": "evidence-recorded",
+      "cited_by": [
+        "SSV-I"
+      ]
+    },
+    "Fixsen1996": {
+      "note": "notes/Fixsen1996.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-IX"
+      ]
+    },
+    "flynn2026": {
+      "note": "notes/flynn2026.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-VI"
+      ]
+    },
+    "Frantzeskakis2010": {
+      "note": "notes/Frantzeskakis2010.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "gebhardt2001": {
+      "note": "notes/gebhardt2001.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-VI"
+      ]
+    },
+    "Godel1949": {
+      "note": "notes/Godel1949.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "GW170817": {
+      "note": "notes/GW170817.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-II"
+      ]
+    },
+    "HaldaneWu1985": {
+      "note": "notes/HaldaneWu1985.md",
+      "review_status": "evidence-recorded",
+      "cited_by": [
+        "SSV-II"
+      ]
+    },
+    "Hawking1974": {
+      "note": "notes/Hawking1974.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-V"
+      ]
+    },
+    "Hawking1975": {
+      "note": "notes/Hawking1975.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-V"
+      ]
+    },
+    "HK2018": {
+      "note": "notes/HK2018.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-II"
+      ]
+    },
+    "hockneyeastwood1988": {
+      "note": "notes/hockneyeastwood1988.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-VI"
+      ]
+    },
+    "hu2009": {
+      "note": "notes/hu2009.md",
+      "review_status": "evidence-recorded",
+      "cited_by": [
+        "SSV-I"
+      ]
+    },
+    "ibata2013": {
+      "note": "notes/ibata2013.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-VI"
+      ]
+    },
+    "Jacobson1995": {
+      "note": "notes/Jacobson1995.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-VII-b"
+      ]
+    },
+    "JacobsonEEq2016": {
+      "note": "notes/JacobsonEEq2016.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-V"
+      ]
+    },
+    "JoosZeh2003": {
+      "note": "notes/JoosZeh2003.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "KamLANDZen2023": {
+      "note": "notes/KamLANDZen2023.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-II"
+      ]
+    },
+    "KATRIN2022": {
+      "note": "notes/KATRIN2022.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-II"
+      ]
+    },
+    "Kibble1976": {
+      "note": "notes/Kibble1976.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "lamb1932": {
+      "note": "notes/lamb1932.md",
+      "review_status": "evidence-recorded",
+      "cited_by": [
+        "SSV-I"
+      ]
+    },
+    "Landau_Fluid": {
+      "note": "notes/Landau_Fluid.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-II"
+      ]
+    },
+    "LEGEND2021": {
+      "note": "notes/LEGEND2021.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-II"
+      ]
+    },
+    "lelli2016": {
+      "note": "notes/lelli2016.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-VI"
+      ]
+    },
+    "Lindblad1975": {
+      "note": "notes/Lindblad1975.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "linshu1964": {
+      "note": "notes/linshu1964.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-VI"
+      ]
+    },
+    "Lloyd2011": {
+      "note": "notes/Lloyd2011.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "LloydPagels1988": {
+      "note": "notes/LloydPagels1988.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "Loschmidt1876": {
+      "note": "notes/Loschmidt1876.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "Madelung1927": {
+      "note": "notes/Madelung1927.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-VII-a"
+      ]
+    },
+    "MadrasSlade1993": {
+      "note": "notes/MadrasSlade1993.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "mcgaugh2012": {
+      "note": "notes/mcgaugh2012.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-VI"
+      ]
+    },
+    "mcgaugh2016": {
+      "note": "notes/mcgaugh2016.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-VI"
+      ]
+    },
+    "Mermin1979": {
+      "note": "notes/Mermin1979.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "mestel1963": {
+      "note": "notes/mestel1963.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-VI"
+      ]
+    },
+    "MicroBooNE2022": {
+      "note": "notes/MicroBooNE2022.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-II"
+      ]
+    },
+    "MorrisThorne1988": {
+      "note": "notes/MorrisThorne1988.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "nfw1997": {
+      "note": "notes/nfw1997.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-VI"
+      ]
+    },
+    "nitta2012_vortex_trimer": {
+      "note": "notes/nitta2012_vortex_trimer.md",
+      "review_status": "evidence-recorded",
+      "cited_by": []
+    },
+    "nitta2013_colorful_vortex_lattices": {
+      "note": "notes/nitta2013_colorful_vortex_lattices.md",
+      "review_status": "evidence-recorded",
+      "cited_by": []
+    },
+    "ostrikerpeebles1973": {
+      "note": "notes/ostrikerpeebles1973.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-VI"
+      ]
+    },
+    "Penrose1965": {
+      "note": "notes/Penrose1965.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-V"
+      ]
+    },
+    "Penrose1971": {
+      "note": "notes/Penrose1971.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-V"
+      ]
+    },
+    "Penrose1979": {
+      "note": "notes/Penrose1979.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "Peschel2003": {
+      "note": "notes/Peschel2003.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-V"
+      ]
+    },
+    "Planck2020": {
+      "note": "notes/Planck2020.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-II"
+      ]
+    },
+    "Poincare1890": {
+      "note": "notes/Poincare1890.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "polkinghorne2021": {
+      "note": "notes/polkinghorne2021.md",
+      "review_status": "evidence-recorded",
+      "cited_by": []
+    },
+    "Price1996": {
+      "note": "notes/Price1996.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "proment2012": {
+      "note": "notes/proment2012.md",
+      "review_status": "evidence-recorded",
+      "cited_by": [
+        "SSV-I"
+      ]
+    },
+    "Reichenbach1956": {
+      "note": "notes/Reichenbach1956.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "rosen1968": {
+      "note": "notes/rosen1968.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-I"
+      ]
+    },
+    "Rovelli1993": {
+      "note": "notes/Rovelli1993.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "Rovelli2018": {
+      "note": "notes/Rovelli2018.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "rubin1980": {
+      "note": "notes/rubin1980.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-VI"
+      ]
+    },
+    "Russell1913": {
+      "note": "notes/Russell1913.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "Salart2008": {
+      "note": "notes/Salart2008.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-II"
+      ]
+    },
+    "Schwinger": {
+      "note": "notes/Schwinger.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-II"
+      ]
+    },
+    "Srednicki1993": {
+      "note": "notes/Srednicki1993.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-V"
+      ]
+    },
+    "SSV-Goldstone": {
+      "note": "notes/SSV-Goldstone.md",
+      "review_status": "local-source",
+      "cited_by": [
+        "SSV-IX"
+      ],
+      "local_source": "../SSV-Goldstone/main.tex"
+    },
+    "SSV-I": {
+      "note": "notes/SSV-I.md",
+      "review_status": "local-source",
+      "cited_by": [
+        "SSV-Alpha",
+        "SSV-II",
+        "SSV-III",
+        "SSV-V",
+        "SSV-VII-a",
+        "SSV-VII-b",
+        "SSV-VIII"
+      ],
+      "local_source": "../SSV-I/main.tex"
+    },
+    "SSV-II": {
+      "note": "notes/SSV-II.md",
+      "review_status": "local-source",
+      "cited_by": [
+        "SSV-Alpha",
+        "SSV-III",
+        "SSV-IX",
+        "SSV-V",
+        "SSV-VII-b",
+        "SSV-VIII"
+      ],
+      "local_source": "../SSV-II/main.tex"
+    },
+    "SSV-III": {
+      "note": "notes/SSV-III.md",
+      "review_status": "local-source",
+      "cited_by": [
+        "SSV-IX",
+        "SSV-V",
+        "SSV-VII-a"
+      ],
+      "local_source": "../SSV-III/main.tex"
+    },
+    "SSV-IV": {
+      "note": "notes/SSV-IV.md",
+      "review_status": "local-source",
+      "cited_by": [
+        "SSV-V",
+        "SSV-VII-a",
+        "SSV-VII-b"
+      ],
+      "local_source": "../SSV-IV/main.tex"
+    },
+    "SSV-V": {
+      "note": "notes/SSV-V.md",
+      "review_status": "local-source",
+      "cited_by": [
+        "SSV-VII-a",
+        "SSV-VII-b"
+      ],
+      "local_source": "../SSV-V/main.tex"
+    },
+    "SSV-VII-a": {
+      "note": "notes/SSV-VII-a.md",
+      "review_status": "local-source",
+      "cited_by": [
+        "SSV-VII-b"
+      ],
+      "local_source": "../SSV-VII-a/main.tex"
+    },
+    "SSV-VII-b": {
+      "note": "notes/SSV-VII-b.md",
+      "review_status": "local-source",
+      "cited_by": [
+        "SSV-V",
+        "SSV-VIII"
+      ],
+      "local_source": "../SSV-VII-b/main.tex"
+    },
+    "SSV-VIII": {
+      "note": "notes/SSV-VIII.md",
+      "review_status": "local-source",
+      "cited_by": [
+        "SSV-IX"
+      ],
+      "local_source": "../SSV-VIII/main.tex"
+    },
+    "Steinhauer2016": {
+      "note": "notes/Steinhauer2016.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-V"
+      ]
+    },
+    "SumnersWhittington1988": {
+      "note": "notes/SumnersWhittington1988.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "toomre1964": {
+      "note": "notes/toomre1964.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-VI"
+      ]
+    },
+    "toomre1981": {
+      "note": "notes/toomre1981.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-VI"
+      ]
+    },
+    "Unruh1976": {
+      "note": "notes/Unruh1976.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-V",
+        "SSV-VII-b"
+      ]
+    },
+    "Unruh1981": {
+      "note": "notes/Unruh1981.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-V",
+        "SSV-VII-b"
+      ]
+    },
+    "Vedral2002": {
+      "note": "notes/Vedral2002.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "Villois2017": {
+      "note": "notes/Villois2017.md",
+      "review_status": "evidence-recorded",
+      "cited_by": [
+        "SSV-II",
+        "SSV-III"
+      ]
+    },
+    "Vinen2002": {
+      "note": "notes/Vinen2002.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "Visser1998": {
+      "note": "notes/Visser1998.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-V",
+        "SSV-VII-b"
+      ]
+    },
+    "volovik2001": {
+      "note": "notes/volovik2001.md",
+      "review_status": "evidence-recorded",
+      "cited_by": []
+    },
+    "volovik2003": {
+      "note": "notes/volovik2003.md",
+      "review_status": "evidence-recorded",
+      "cited_by": [
+        "SSV-Goldstone",
+        "SSV-I",
+        "SSV-II",
+        "SSV-IV",
+        "SSV-VII-b"
+      ]
+    },
+    "Yin2013": {
+      "note": "notes/Yin2013.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-II"
+      ]
+    },
+    "zloshchastiev2020": {
+      "note": "notes/zloshchastiev2020.md",
+      "review_status": "evidence-recorded",
+      "cited_by": [
+        "SSV-Goldstone",
+        "SSV-I",
+        "SSV-II"
+      ]
+    },
+    "zloshchastiev2023": {
+      "note": "notes/zloshchastiev2023.md",
+      "review_status": "evidence-recorded",
+      "cited_by": []
+    },
+    "zloshchastiev2023_pramana_rotcurves": {
+      "note": "notes/zloshchastiev2023_pramana_rotcurves.md",
+      "review_status": "evidence-recorded",
+      "cited_by": []
+    },
+    "Zurek1985": {
+      "note": "notes/Zurek1985.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    },
+    "Zurek2003": {
+      "note": "notes/Zurek2003.md",
+      "review_status": "not-reviewed",
+      "cited_by": [
+        "SSV-III"
+      ]
+    }
   },
   "sources": {
     "Clisby2010": {

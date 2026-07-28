@@ -332,7 +332,10 @@ def main() -> int:
     bad += bool(evidence)
 
     INDEX.write_text(render_index(), encoding="utf-8")
+    import citation_evidence
+    citation_evidence.write_note_index()
     print(f"\nwrote {INDEX.relative_to(ROOT)}")
+    print(f"wrote {citation_evidence.NOTE_INDEX.relative_to(ROOT)}")
     return 1 if bad else 0
 
 

@@ -73,7 +73,10 @@ def gate_citations(paper: str) -> str:
         detail = "\n".join(f"      {issue}" for issue in issues)
         raise GateFailure(
             f"{len(issues)} citation-evidence defect(s):\n{detail}")
-    return f"{len(citation_evidence.registered_keys())} sources, evidence complete"
+    return (
+        f"{len(citation_evidence.citation_note_keys())} notes, "
+        f"{len(citation_evidence.registered_keys())} evidence records complete"
+    )
 
 
 def gate_bibliography(paper: str) -> str:

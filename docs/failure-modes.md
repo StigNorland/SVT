@@ -228,6 +228,25 @@ externally verify every author, title, DOI and arXiv identifier.
 
 ---
 
+## FM11 — a cited work is absent from the review inventory
+
+**Observed:** after centralising the bibliography, only 10 of the 93 directly
+cited external works had citation notes; the other 83 were invisible in the
+note layer. Six additional notes existed only because the audit had introduced
+proxy or corroborating sources.
+
+**Guard — closed for inventory, not verification.** Every one of the 102 cited
+works, including nine local SSV sources, now has a registry entry and note.
+Evidence-only sources remain catalogued too, for 108 notes total. The build
+rejects missing notes, orphan notes, stale `cited_by` lists, and a note promoted
+to `evidence-recorded` without a full source-verification record.
+
+**Not covered:** 83 external notes are explicitly `NOT-REVIEWED`. The inventory
+makes the gap visible and navigable; it does not manufacture quotations,
+source URLs, identifiers, or verdicts.
+
+---
+
 ## What runs when
 
 `python instruments/tools/build_paper.py <PAPER>` runs FM1, FM2, FM5's evidence
@@ -248,6 +267,7 @@ ones most likely to lapse.
 | FM8 checker over-reports | anchored/free split | suite (this case only) |
 | FM9 citation metadata points at wrong work | `verification.json` | **build** + review |
 | FM10 duplicated bibliographies drift | `references.bib` + `bibliography.py` | **build** |
+| FM11 cited work absent from review inventory | citation-note catalog | **build** |
 
 Adding a failure mode to this register is cheap. Leaving one out because its
 guard is embarrassing is how #182 happened.

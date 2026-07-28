@@ -15,6 +15,7 @@ import fetch_cited as F  # noqa: E402
 def one_source(key):
     data = copy.deepcopy(E.load_registry())
     data["sources"] = {key: data["sources"][key]}
+    data["citation_notes"] = {key: data["citation_notes"][key]}
     return data
 
 
@@ -25,6 +26,17 @@ def test_every_registered_source_has_complete_evidence():
 
 def test_json_registry_exactly_covers_retrieval_registry():
     assert E.registered_keys() == E.retrieval_keys()
+
+
+def test_every_cited_work_has_a_catalogued_note():
+    cited = E.bibliography.series_citation_keys()
+    assert cited <= E.citation_note_keys()
+    assert len(cited) == 102
+    assert len(E.citation_note_keys()) == 108
+
+
+def test_generated_note_index_matches_registry():
+    assert E.NOTE_INDEX.read_text(encoding="utf-8") == E.render_note_index()
 
 
 def test_every_source_has_url_and_checked_identifier_status():
@@ -54,10 +66,37 @@ def test_quote_note_without_registry_entry_is_rejected(tmp_path, monkeypatch):
 
     issues = E.evidence_issues(data, {"barcelo2011"})
     assert any(
-        "quote notes have no verification.json entry" in issue
+        "citation notes have no verification.json entry" in issue
         and "orphan" in issue
         for issue in issues
     )
+
+
+def test_unreviewed_note_must_be_visibly_disclaimed(tmp_path, monkeypatch):
+    notes = tmp_path / "notes"
+    notes.mkdir()
+    (notes / "newsource.md").write_text(
+        "# newsource — citation record\n\nNo status or disclaimer.\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(E, "NOTES", notes)
+    data = {
+        "schema_version": 1,
+        "policy": E.load_registry()["policy"],
+        "citation_notes": {
+            "newsource": {
+                "note": "notes/newsource.md",
+                "review_status": "not-reviewed",
+                "cited_by": [],
+            }
+        },
+        "sources": {},
+    }
+
+    issues = E.evidence_issues(
+        data, source_keys=set(), catalog_keys={"newsource"})
+    assert any("not visibly marked" in issue for issue in issues)
+    assert any("lacks evidence disclaimer" in issue for issue in issues)
 
 
 def test_inaccessible_primary_can_explicitly_waive_paragraph():
