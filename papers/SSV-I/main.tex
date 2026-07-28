@@ -34,6 +34,7 @@ The Geometric Origin of Matter}
 
 \providecommand{\ssvissue}[1]{\hyperref[issue:#1]{\##1}}% in-text issue ref -> Code & Issue References appendix
 \providecommand{\ssvfile}[1]{\hyperref[file:#1]{\texttt{\detokenize{#1}}}}% in-text code/report ref -> Code & Issue References appendix
+\input{values.tex}% generated numbers (\ssvLambda, \ssvRhoZero, ...) -- instruments/tools/gen_values.py
 \begin{document}
 
 \maketitle
@@ -502,7 +503,7 @@ superfluid vacuum---a stable, self-sustaining topological defect with finite siz
             \approx 6.25,
           \label{eq:gammadef}
         \end{equation}
-        where $\Lambda \equiv \ln(8/\alpha) - 7/4 \approx 5.25$.
+        where $\Lambda \equiv \ln(8/\alpha) - 7/4 \approx \ssvLambda$.
 
         \textit{Total functional and minimisation.}
         Setting $a = a^* = \xi$ and working in units of
@@ -537,7 +538,8 @@ superfluid vacuum---a stable, self-sustaining topological defect with finite siz
         $r_e = \alpha\hbar/(m_ec)$, which is smaller by a factor $\alpha^2$;
         earlier versions of this paper misidentified it.  The combination
         $\hbar/(\alpha m_e c)$ is the \textbf{Bohr radius} $a_0$, so with the
-        corrected healing length $R_e^* = a_0/\sqrt2$.  What is derived here is
+        corrected healing length $R_e^* = a_0/\sqrt2 \approx \ssvReStar$~m.
+        What is derived here is
         the \emph{relation} $R^*=\xi/\alpha$ --- an equilibrium radius $1/\alpha$
         healing lengths across, obtained without empirical input for $R^*$.  Its
         identification with any particular measured length is a separate claim,
@@ -545,7 +547,7 @@ superfluid vacuum---a stable, self-sustaining topological defect with finite siz
         $\mathrm{d}^2\mathcal{E}/\mathrm{d}r^2\big|_{r^*} = \alpha > 0$:
         a \emph{true minimum}, not a saddle.
 
-        Inserting $R_e^*$ and $\Lambda \approx 5.25$
+        Inserting $R_e^*$ and $\Lambda \approx \ssvLambda$
         into~\eqref{eq:Ekin}:
         \begin{equation}
           \boxed{m_ec^2
@@ -556,9 +558,14 @@ superfluid vacuum---a stable, self-sustaining topological defect with finite siz
         \begin{equation}
           \rho_0
             = \frac{\sqrt{2}\,\alpha\,m_e^4c^3}{2\pi^2\Lambda\,\hbar^3}
-            \approx 9.96\times10^{-5}\;\frac{m_e^4c^3}{\hbar^3}.
+            \approx \ssvRhoZero\;\frac{m_e^4c^3}{\hbar^3}.
           \label{eq:rho0-value}
         \end{equation}
+        This number, and $\Lambda$ and $R_e^*$ above, are \emph{computed} rather
+        than typed: \ssvfile{ssv_i_audit_2026} derives each one and
+        \texttt{instruments/tools/gen\_values.py} writes it into this document,
+        so a printed value cannot drift from the code behind it
+        (\ssvissue{198}).
         Note that $\Lambda$ appears in the \emph{denominator}: inverting
         \eqref{eq:electron-mass} for $\rho_0$ divides by $\Lambda$, and the
         $\sqrt2$ is inherited from the corrected healing
@@ -1635,7 +1642,7 @@ Vacuum saturation density $\rho_0$ & derived & \textbf{Corrected 2026-07
 $2\alpha\Lambda m_e^4c^3/\pi^2\hbar^3\approx1.9\,m_e^4c^3/\hbar^3$, with
 $\Lambda$ in the numerator and a value inconsistent with its own formula.
 Inverting~\eqref{eq:electron-mass} correctly gives
-$\approx9.96\times10^{-5}\,m_e^4c^3/\hbar^3$, smaller by $\sim2\times10^4$. \\
+$\approx\ssvRhoZero\,m_e^4c^3/\hbar^3$, smaller by $\sim2\times10^4$. \\
 Proton skeleton: single-curve trefoil $T_{2,3}$; $N_Y=3$ as crossing number &
 derived & \textbf{Corrected 2026-07 (\ssvissue{183}).}  The former
 ``Y-junction of three quantized vortex filaments'' is \textbf{withdrawn}: it is

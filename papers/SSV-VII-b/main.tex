@@ -30,6 +30,7 @@
 
 \providecommand{\ssvfile}[1]{\hyperref[file:#1]{\texttt{\detokenize{#1}}}}% in-text code/report ref -> Code & Issue References appendix
 \providecommand{\ssvissue}[1]{\hyperref[issue:#1]{\##1}}% in-text issue ref -> Code & Issue References appendix
+\input{values.tex}% generated numbers (\ssvEllP, \ssvMZero, ...) -- instruments/tools/gen_values.py
 \begin{document}
 \maketitle
 
@@ -378,8 +379,8 @@ Bekenstein--Hawking formula:
 \end{equation}
 using $\xi = \hbar/(\sqrt{2}\,m_0 c)$.  Given the healing length $\xi$ and the
 fundamental mass $m_0$, $G$ is determined.  Inserting $\xi = \ell_P \approx
-1.616\times10^{-35}$~m reproduces
-$G\approx 6.67\times10^{-11}$~m$^3$\,kg$^{-1}$\,s$^{-2}$.
+\ssvEllP$~m reproduces
+$G\approx \ssvGNewton$~m$^3$\,kg$^{-1}$\,s$^{-2}$.
 
 \begin{resultbox}[Recomputation under the corrected healing length (\ssvissue{190})]
 Paper~I's correction $\xi=\hbar/(m_0c)\to\hbar/(\sqrt2\,m_0c)$ reaches a stated
@@ -387,21 +388,27 @@ number here, and only here in the series.  Because the counting
 in~\eqref{eq:BH_entropy} \emph{defines} one degree of freedom per $\xi^2$,
 $G=c^3\xi^2/\hbar$ inverts to fix $\xi$ from the observed $G$ --- so
 \begin{equation}
-  \xi = \ell_P = 1.616\times10^{-35}\ \text{m}
+  \xi = \ell_P = \ssvEllP\ \text{m}
   \label{eq:xi_is_lP}
 \end{equation}
 is \textbf{unchanged}.  What moves is the reference mass inferred from it:
 \begin{equation}
   m_0 \;=\; \frac{\hbar}{\sqrt2\,\xi c}
       \;=\; \frac{m_P}{\sqrt2}
-      \;\approx\; 1.539\times10^{-8}\ \text{kg},
+      \;\approx\; \ssvMZero\ \text{kg},
   \label{eq:m0_corrected}
 \end{equation}
-rather than $m_0 = m_P = 2.176\times10^{-8}$~kg.  Equivalently: at fixed $m_0$
+rather than $m_0 = m_P = \ssvMPlanck$~kg.  Equivalently: at fixed $m_0$
 and fixed horizon area the entropy~\eqref{eq:BH_entropy} would \emph{double};
 the resolution is that $m_0$ shifts by $1/\sqrt2$ so that $\xi$ remains $\ell_P$.
 The identification $\xi=\ell_P$ therefore survives the correction intact; the
 statement ``$m_0\sim m_P$'' becomes ``$m_0 = m_P/\sqrt2$''.
+
+Every number in this subsection is \emph{computed}, not typed:
+\ssvfile{planck_scale_values} derives it from CODATA and the corrected healing
+length, and \texttt{instruments/tools/gen\_values.py} writes it into this
+document (\ssvissue{198}).  $G$ itself remains a conceded input, not a
+derivation.
 \end{resultbox}
 
 \paragraph{What SSV adds beyond Jacobson.}
@@ -527,7 +534,7 @@ energy, without fine-tuning.
 
 The Planck length is the scale at which the continuum approximation breaks down:
 \begin{equation}
-  \ell_P = \xi = \frac{\hbar}{\sqrt{2m_0 g\rho_0}} \approx 1.6\times10^{-35}~\text{m},
+  \ell_P = \xi = \frac{\hbar}{\sqrt{2m_0 g\rho_0}} \approx \ssvEllP~\text{m},
   \label{eq:Planck}
 \end{equation}
 where $g$ is the LogSE coupling constant.  This fixes
