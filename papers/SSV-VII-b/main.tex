@@ -30,6 +30,7 @@
 
 \providecommand{\ssvfile}[1]{\hyperref[file:#1]{\texttt{\detokenize{#1}}}}% in-text code/report ref -> Code & Issue References appendix
 \providecommand{\ssvissue}[1]{\hyperref[issue:#1]{\##1}}% in-text issue ref -> Code & Issue References appendix
+\input{values.tex}% generated numbers (\ssvEllP, \ssvMZero, ...) -- instruments/tools/gen_values.py
 \begin{document}
 \maketitle
 
@@ -86,7 +87,7 @@ This paper covers: the emergent metric picture, weak-field and post-Newtonian
 correspondence, the spatial-curvature correction that resolves the factor-of-two
 gap from Papers~IV and~V, and the full Einstein equations from the
 Jacobson~\cite{Jacobson1995} acoustic-thermodynamic route.  Out of scope: the
-full QM derivation (Paper~VII-a~\cite{SSV-VIIa}), black-hole ontology
+full QM derivation (Paper~VII-a~\cite{SSV-VII-a}), black-hole ontology
 (Paper~V~\cite{SSV-V}), and cosmogony (Paper~VIII).
 
 \subsection*{Roadmap}
@@ -108,7 +109,7 @@ Gravity and quantum mechanics share a substrate in SSV: both are properties
 of the same order parameter.  Gravity is the long-range density gradient of
 the condensate (Paper~IV~\cite{SSV-IV}); quantum behaviour is the wave
 mechanics of that condensate in the low-amplitude limit
-(Paper~VII-a~\cite{SSV-VIIa}).  There is no fundamental tension between them
+(Paper~VII-a~\cite{SSV-VII-a}).  There is no fundamental tension between them
 because they operate in different regimes of the same equation of state.
 
 The conventional quantum-gravity problem is therefore not a conflict waiting to
@@ -168,7 +169,7 @@ $A_{\rm Sch}(r) = \sqrt{1-2GM/(rc^2)}$.
 
 \subsection{Emergent metric tensor}
 
-Writing the Madelung equations~\cite{SSV-VIIa} in a curved-background notation
+Writing the Madelung equations~\cite{SSV-VII-a} in a curved-background notation
 introduces an effective metric.  In the isotropic post-Newtonian gauge, to
 leading order in $\Phi/c^2$:
 \begin{equation}
@@ -378,8 +379,8 @@ Bekenstein--Hawking formula:
 \end{equation}
 using $\xi = \hbar/(\sqrt{2}\,m_0 c)$.  Given the healing length $\xi$ and the
 fundamental mass $m_0$, $G$ is determined.  Inserting $\xi = \ell_P \approx
-1.616\times10^{-35}$~m reproduces
-$G\approx 6.67\times10^{-11}$~m$^3$\,kg$^{-1}$\,s$^{-2}$.
+\ssvEllP$~m reproduces
+$G\approx \ssvGNewton$~m$^3$\,kg$^{-1}$\,s$^{-2}$.
 
 \begin{resultbox}[Recomputation under the corrected healing length (\ssvissue{190})]
 Paper~I's correction $\xi=\hbar/(m_0c)\to\hbar/(\sqrt2\,m_0c)$ reaches a stated
@@ -387,21 +388,28 @@ number here, and only here in the series.  Because the counting
 in~\eqref{eq:BH_entropy} \emph{defines} one degree of freedom per $\xi^2$,
 $G=c^3\xi^2/\hbar$ inverts to fix $\xi$ from the observed $G$ --- so
 \begin{equation}
-  \xi = \ell_P = 1.616\times10^{-35}\ \text{m}
+  \xi = \ell_P = \ssvEllP\ \text{m}
   \label{eq:xi_is_lP}
 \end{equation}
 is \textbf{unchanged}.  What moves is the reference mass inferred from it:
 \begin{equation}
   m_0 \;=\; \frac{\hbar}{\sqrt2\,\xi c}
       \;=\; \frac{m_P}{\sqrt2}
-      \;\approx\; 1.539\times10^{-8}\ \text{kg},
+      \;\approx\; \ssvMZero\ \text{kg},
   \label{eq:m0_corrected}
 \end{equation}
-rather than $m_0 = m_P = 2.176\times10^{-8}$~kg.  Equivalently: at fixed $m_0$
+rather than $m_0 = m_P = \ssvMPlanck$~kg.  Equivalently: at fixed $m_0$
 and fixed horizon area the entropy~\eqref{eq:BH_entropy} would \emph{double};
 the resolution is that $m_0$ shifts by $1/\sqrt2$ so that $\xi$ remains $\ell_P$.
 The identification $\xi=\ell_P$ therefore survives the correction intact; the
 statement ``$m_0\sim m_P$'' becomes ``$m_0 = m_P/\sqrt2$''.
+
+Every number in this subsection is \emph{computed}, not typed:
+\ssvfile{planck_scale_values} derives it from CODATA and the corrected healing
+length, the result is recorded in \texttt{results/values\_receipt.json}, and
+\texttt{instruments/tools/gen\_values.py} renders that receipt into this
+document (\ssvissue{198}).  $G$ itself remains a conceded input, not a
+derivation.
 \end{resultbox}
 
 \paragraph{What SSV adds beyond Jacobson.}
@@ -527,7 +535,7 @@ energy, without fine-tuning.
 
 The Planck length is the scale at which the continuum approximation breaks down:
 \begin{equation}
-  \ell_P = \xi = \frac{\hbar}{\sqrt{2m_0 g\rho_0}} \approx 1.6\times10^{-35}~\text{m},
+  \ell_P = \xi = \frac{\hbar}{\sqrt{2m_0 g\rho_0}} \approx \ssvEllP~\text{m},
   \label{eq:Planck}
 \end{equation}
 where $g$ is the LogSE coupling constant.  This fixes
@@ -554,7 +562,7 @@ effective descriptions at scales $\gg\xi$.
 Paper~VII-b is the geometry and GR-limit paper in the SSV series.  Its inputs
 are the density-to-potential identification of Paper~IV~\cite{SSV-IV}, the
 vortex-core entropy of Paper~I~\cite{SSV-I}, the condensate black-hole picture of
-Paper~V~\cite{SSV-V}, and the Madelung equations of Paper~VII-a~\cite{SSV-VIIa}.
+Paper~V~\cite{SSV-V}, and the Madelung equations of Paper~VII-a~\cite{SSV-VII-a}.
 Its output---the emergent metric, the resolved factor-of-two correction, the
 Jacobson derivation of Einstein's equations with $G$ in terms of $\xi$, and the
 cosmological-constant identification---is the geometrodynamic foundation of the
@@ -566,7 +574,7 @@ deferred to Paper~VIII.
 The Jacobson route used in Section~\ref{sec:jacobson} and the acoustic-horizon
 picture of Paper~V are closely related to the analogue-gravity programme
 (Unruh~\cite{Unruh1976,Unruh1981}, Visser~\cite{Visser1998},
-Volovik~\cite{Volovik2003}).  The SSV difference is ontological rather than
+Volovik~\cite{volovik2003}).  The SSV difference is ontological rather than
 formal: analogue-gravity systems are laboratory analogues of a geometry that
 exists independently; in SSV the condensate \emph{is} the physical vacuum and
 the analogy is the fundamental description.
@@ -715,71 +723,8 @@ vortex dynamics of the saturated vacuum.  The results of this paper are:
 \end{enumerate}
 
 %%──────────────────────────────────────────────────────────────────────────────
-\begin{thebibliography}{99}
-
-\bibitem{SSV-I}
-S.\ Norland, \textit{Saturated Superfluid Vacuum~I: Topological Defects in a
-Saturated Superfluid Vacuum---The Geometric Origin of Matter},
-10.5281/zenodo.19651986, 2026.
-
-\bibitem{SSV-II}
-S.\ Norland, \textit{Saturated Superfluid Vacuum~II: Forces as Hydrodynamic
-Pressure Gradients in the Saturated Superfluid Plenum}, SSV programme, 2026.
-
-\bibitem{SSV-III}
-S.\ Norland, \textit{Saturated Superfluid Vacuum~III: Irreversible Time and
-Wake Entropy}, SSV programme, 2026.
-
-\bibitem{SSV-IV}
-S.\ Norland, \textit{Saturated Superfluid Vacuum~IV: Gravity as Update-Capacity
-Gradient}, SSV programme, 2026.
-
-\bibitem{SSV-V}
-S.\ Norland, \textit{Saturated Superfluid Vacuum~V: Condensate Black Holes},
-SSV programme, 2026.
-
-\bibitem{SSV-VIIa}
-S.\ Norland, \textit{Saturated Superfluid Vacuum~VII-a: Quantum Mechanics from
-Hydrodynamics}, SSV programme, 2026.
-
-\bibitem{Bjerknes1906}
-V.~F.~K.\ Bjerknes, \textit{Fields of Force}
-(Columbia University Press, New York, 1906).
-
-\bibitem{Gross1961}
-E.~P.\ Gross, ``Structure of a Quantised Vortex in Boson Systems,''
-\textit{Nuovo Cim.}\ \textbf{20}, 454--457 (1961).
-
-\bibitem{Jacobson1995}
-T.\ Jacobson, ``Thermodynamics of Spacetime: The Einstein Equation of State,''
-\textit{Phys.\ Rev.\ Lett.}\ \textbf{75}, 1260--1263 (1995).
-[arXiv:gr-qc/9504004]
-
-\bibitem{Madelung1927}
-E.\ Madelung, ``Quantentheorie in hydrodynamischer Form,''
-\textit{Z.\ Phys.}\ \textbf{40}, 322--326 (1927).
-
-\bibitem{Pitaevskii1961}
-L.~P.\ Pitaevskii, ``Vortex Lines in an Imperfect Bose Gas,''
-\textit{Sov.\ Phys.\ JETP}\ \textbf{13}, 451--454 (1961).
-
-\bibitem{Unruh1976}
-W.~G.\ Unruh, ``Notes on Black-Hole Evaporation,''
-\textit{Phys.\ Rev.\ D}\ \textbf{14}, 870--892 (1976).
-
-\bibitem{Unruh1981}
-W.~G.\ Unruh, ``Experimental Black-Hole Evaporation?''
-\textit{Phys.\ Rev.\ Lett.}\ \textbf{46}, 1351--1353 (1981).
-
-\bibitem{Visser1998}
-M.\ Visser, ``Acoustic Black Holes: Horizons, Ergospheres and Hawking
-Radiation,'' \textit{Class.\ Quantum Grav.}\ \textbf{15}, 1767 (1998).
-
-\bibitem{Volovik2003}
-G.~E.\ Volovik, \textit{The Universe in a Helium Droplet}
-(Oxford University Press, Oxford, 2003).
-
-\end{thebibliography}
+\bibliographystyle{unsrt}
+\bibliography{../cited/references}
 
 \appendix
 % Auto-generated provenance (issue URLs + pinned script permalinks).

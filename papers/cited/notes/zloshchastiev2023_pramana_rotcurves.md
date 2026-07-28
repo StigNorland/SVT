@@ -11,11 +11,10 @@ SSV-I's `\bibitem{zloshchastiev2023}` is:
 > potential and speed of light in superfluid vacuum theory," *Universe* **9**,
 > 234 (2023).
 
-Confirmed via Crossref to be a **real paper** — SSV-I's bibliography entry is
-accurate. The present file is a *different* Zloshchastiev 2023 paper (different
-title, journal, volume, page) supplied during the audit. It is filed under its
-own key so it can never be mistaken for the cited work; `zloshchastiev2023`
-remains `PENDING-PRIMARY`.
+The present file is a *different* Zloshchastiev 2023 paper (different title,
+journal, volume, page) supplied during the audit. It is filed under its own key
+so it can never be mistaken for the cited work. The cited Universe paper has
+since been retrieved and checked separately in `notes/zloshchastiev2023.md`.
 
 Provenance: supplied by the owner, then independently re-fetched from
 arXiv:2310.06861 — **byte-identical**, sha256 `34cb087f9019363d`.
@@ -30,9 +29,9 @@ what mechanism Zloshchastiev's SVT gravity actually uses.
 
 ## C11 probe 1 — is there a Bjerknes force?
 
-SSV-I `main.tex:1245` attributes to this author *"the acoustic Bjerknes force —
-mutual attraction between vibrating breathers via secondary flow fields in the
-plenum."*
+The superseded SSV-I claim, now corrected at `main.tex:1379`–`1389`, attributed
+to this author *"the acoustic Bjerknes force — mutual attraction between
+vibrating breathers via secondary flow fields in the plenum."*
 
 Full-text counts (4,663 words):
 
@@ -73,10 +72,11 @@ $G$ is an **input**, not a derived quantity:
 ## Bearing on C11
 
 Both halves of SSV-I's attributed claim are contradicted by the mechanism this
-author actually uses in a closely-related paper of the same year. The verdict on
-`zloshchastiev2023` stays **`PENDING-PRIMARY`** — the audit does not verdict a
-source it has not read — but the burden has shifted decisively, and
-`MISATTRIBUTED` is now the expected outcome.
+author actually uses in a closely-related paper of the same year. The primary
+Universe source has now independently confirmed the `MISATTRIBUTED` verdict.
+
+**Use verdict: `OK` as corroborating evidence.** This record is not substituted
+for the cited work; it is a separately identified consistency check.
 
 ---
 

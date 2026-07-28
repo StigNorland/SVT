@@ -70,7 +70,7 @@ Inventory of printed potential forms, from the pattern
 | E1 | appendix | the elliptic residual is $3/16$ with a logarithm, not a "pure geometric constant" $1/8$; the appendix's $-2$ is a filament core, Lamb's $-7/4$ a uniform-vorticity core — different models, so the appendix does not "recover eq:Ekin" |
 
 `eq:Ekin`'s $-7/4$ is **correct** and stays (Lamb Art. 163 (6), verbatim in
-`papers/cited/notes/lamb1932.verbatim.md`).
+`papers/cited/transcripts/lamb1932.md`).
 
 ### 2. SSV-II (#184)
 

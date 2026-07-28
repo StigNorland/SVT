@@ -55,7 +55,7 @@ conflated.
 
 Closed 2026-07-27 against Lamb Arts. 162–163, pp.239–241, read from
 owner-supplied page images and transcribed verbatim in
-`papers/cited/notes/lamb1932.verbatim.md`.
+`papers/cited/transcripts/lamb1932.md`.
 
 **Lamb's core model is stated explicitly** (p.241): *"For the case of a
 circular section more definite results can be obtained as follows. **If we

@@ -1,0 +1,253 @@
+# Failure modes of this programme, and what guards each
+
+The #182 audit's finding was blunt: *"The computations were sound. The write-up
+was not."* Not one defect in the numerical corpus across twelve papers. Every
+defect was in prose, a citation, or an algebraic step in the text.
+
+This file is the register of the failure modes actually observed — not imagined
+ones — with the guard for each and, where the guard is partial, what it does not
+cover. It is the answer to "how would we know if this went wrong again?"
+
+**Every FM below has been observed at least once in this repository.** None is
+speculative. Where a guard was added after the fact, the entry says so, because a
+guard that has never caught anything is a hypothesis, not a control.
+
+Guard status: **closed** = a test fails if it recurs · **partial** = detected only
+in registered cases · **convention** = discipline, not machinery.
+
+---
+
+## FM1 — a printed number drifts from the instrument that derives it
+
+**Observed:** SSV-I printed `ρ₀ = 1.9` beside a formula yielding `0.0078`. The two
+disagreed in print for years (#182 E5, #183).
+
+**Why it survived:** the number and the code were two independent objects, and
+nothing compared them. Correctness depended on care at the moment of typing.
+
+**Guard — closed.** Rule 14. The number exists once, in an instrument; the result
+is recorded in `results/values_receipt.json`; `values.tex` is rendered from the
+receipt; the paper prints a macro. `test_replaced_literal_is_gone` fails if the
+value is *also* typed into the prose, which is the way this defect actually
+re-enters.
+
+**Not covered:** only the seven registered values. Every other printed number in
+the series is still typed by hand.
+
+---
+
+## FM2 — a reviewed result drifts after its generated number moves
+
+**Observed:** SSV-I printed `R_e* = a₀/√2 ≈ 3.74e-11`, correct. The test that
+looked like its guard, `test_e4_xi_over_alpha_is_the_bohr_radius`, asserted the
+*uncorrected* `ξ/α = a₀ = 5.29e-11` — a different quantity. The printed sentence
+was true by coincidence and guarded by nothing (found 2026-07-28 while building
+the FM1 guard).
+
+**Why it matters:** FM1's guard makes a value *follow* its instrument. A
+legitimate change to the physics can therefore propagate into the paper
+**silently and cleanly** — the receipt updates and the PDF rebuilds, while a
+relationship reviewed against the old value is no longer valid.
+
+**Guard — partial.** `instruments/tools/claims.py` binds each reviewed numerical
+relationship to a stable LaTeX anchor, its generated inputs, a predicate and a
+tolerance. `build_paper.py` checks both the anchor and predicate **before
+`pdflatex`**, so later source or numeric drift requires deliberate review.
+
+Verified by deliberately dropping the √2 from `xi_over_alpha`: the value gate
+passed (the receipt updated correctly), and the build refused, naming
+`main.tex:541` and `main.tex:537`.
+
+**Not covered:** this guard cannot determine whether an author or model wrote a
+sound conclusion in the first place. It freezes a relationship after review; it
+does not perform the review. Coverage is also limited to 9 claims across 2
+papers. `test_every_generated_value_is_claimed` catches values with no registered
+relationship, not every inference made in prose.
+
+**Future improvement — independent semantic review.** When a +2-agent harness is
+available, give every new or materially changed conclusion and its predicate to
+independent "third eye" review before registration. The independent reviewers
+should check that the conclusion follows from the result and that the predicate
+actually represents the conclusion. The build gate then preserves what they
+reviewed.
+
+---
+
+## FM3 — a check that only looks like a check
+
+**Observed twice in one afternoon, both in code written for #198:**
+
+1. `mp.almosteq(a, b, rel_eps=1e-6)` defaults `abs_eps` to `rel_eps`, so for
+   quantities of order `1e-35` every assertion passed on the absolute test alone.
+   Seven green tests proving nothing.
+2. The first `lambda-enters-denominator` predicate restated the computation
+   instead of the conclusion. It passed, and guarded nothing.
+
+**Why it matters more than an ordinary bug:** a broken check is worse than no
+check, because it is counted as coverage. Both instances were green.
+
+**Guard — partial.** Negative controls, and guards on the guards:
+`test_rel_close_is_not_trivially_true`, `test_claims_are_not_tautologies` (which
+perturbs every input a predicate reads and requires it to notice), and
+`test_the_tautology_detector_detects_a_tautology`. Case 1 was caught by a
+negative control; case 2 by hand.
+
+**Not covered:** nothing systematically checks that a *test* tests what its name
+says. Both instances were found by writing a deliberate negative case, which is a
+habit, not a mechanism.
+
+---
+
+## FM4 — a symbol carries two dimensions
+
+**Observed:** three times in one audit — SSV-I `b` (eq:pot needs L²T⁻², eq:cs and
+eq:xi need L⁵T⁻²), SSV-II `e` (mass in the Berry phase, charge in `Φ₀=h/e`),
+SSV-V `b` (a frequency, undeclared against Paper I's). Two of the three surfaced
+during the *rewrite*, not the audit, so a clean gate report would have shipped
+with them intact (#182 E6/E3b, #187 E2).
+
+**Why the gates missed it:** they checked equations, and even checked *products*,
+but never asked whether a symbol means one thing throughout.
+
+**Guard — partial.** Rule 15, `instruments/tools/dimensions.py`. Symbols are
+anchored or free; the check asks whether *any* assignment to the free symbols
+makes the printed relations simultaneously homogeneous.
+
+**Not covered:** it does not parse LaTeX. It checks relations *as transcribed*,
+for three papers only. A relation nobody typed in is invisible to it.
+
+---
+
+## FM5 — a result credited to a source that does not contain it
+
+**Observed:** SSV-I's logarithmic equation of state was credited to Volovik,
+whose Phys. Rept. 351 contains no such thing (`"equation of state"` occurs 0
+times in 71,425 words). The real source's constraint was therefore never applied,
+which is what generated the whole #180 error chain.
+
+**Guard — partial.** Rule 12, the evidence rule: no verdict without a tracked
+record in `papers/cited/verification.json` and the quote directory
+`papers/cited/notes/<key>.md`. The records bind the
+SSV claim to a source locator, the complete relied-on paragraph (or a
+reproducible absence search), and an explicit use assessment. Owner-supplied or
+image-only pages also require an accessible Markdown transcript under
+`papers/cited/transcripts/`. `citation_evidence.py` checks this structure on
+every gated build, and `missing_evidence()` must stay empty.
+
+**Not covered:** a quotation proves the source says it; it does not prove the
+reviewer’s interpretation is correct. The explicit use assessment makes that
+judgment inspectable, but a semantic error still needs a third eye. An
+inaccessible primary can pass without its own paragraph only through an
+explicit reasoned waiver; `PENDING-PRIMARY` leaves unresolved dependent claims
+flagged but printed.
+
+---
+
+## FM6 — an absence claim with no search behind it
+
+**Observed:** the #197 rewrite plan inventoried the printed forms of the
+logarithmic potential and asserted **"No others."** A wider pattern found a 13th
+site. Consequence nil, but the claim was false and it was made in a
+pre-registration.
+
+**Guard — convention.** Rule 13: state the pattern, the corpus and the count.
+*"`equation of state` occurs 0 times in 71,425 words"* is re-runnable;
+*"no others"* has to be trusted.
+
+---
+
+## FM7 — a falsification that is explicit in one place and invisible in another
+
+**Observed:** the #119-falsified Bjerknes mechanism was presented as current in
+three papers while being recorded as falsified elsewhere (#182).
+
+**Guard — convention.** Standing rule 1, plus the `gapbox` / `falsbox`
+convention: when a result is withdrawn, the withdrawal is printed at the site of
+the claim, not only in a results note. SSV-VII-a §"Saturation by the Gausson"
+carries an interim block for exactly this reason while its repair is pending
+(#189).
+
+**Not covered:** nothing enumerates the sites of a retired claim. This is the
+failure mode with the weakest machinery behind it.
+
+---
+
+## FM8 — a checker that over-reports
+
+**Observed:** the first `dimensions.py` flagged `hbar`, `m_0` and `kappa_0` as
+dimensionally overloaded. They are not — they appear inside relations broken by a
+*different* symbol, and solving a broken relation for a healthy symbol yields
+nonsense (2026-07-28, caught before publication).
+
+**Why it belongs in this register:** an inflated defect is a defect. Rule 1 says
+negative results must not be softened; it equally forbids manufacturing them.
+Over-reporting also trains readers to ignore the tool.
+
+**Guard — closed for this case.** The anchored/free split, plus
+`test_solving_for_an_anchored_symbol_is_refused`, which makes the specific
+mistake raise rather than return a plausible-looking wrong answer.
+
+---
+
+## FM9 — citation metadata points at the wrong work
+
+**Observed:** SSV-I's unused `liberati2006` bibitem was paired in the retrieval
+registry with arXiv:0909.3834. That preprint has a different author list and a
+2009 date, so the identifier did not identify the bibliography entry. The same
+metadata pass also found a published Nitta paper labelled “arXiv only”.
+
+**Guard — partial.** `papers/cited/verification.json` is now the canonical
+machine-readable record. Every entry requires a source URL plus an explicit DOI
+and arXiv status; present identifiers are syntax-checked, and its keys must
+exactly match the retrieval registry. The unused mismatched bibitem was removed.
+
+**Not covered:** syntax and completeness do not prove an identifier belongs to
+the named work. Author/title/content matching still happens during initial
+review. A third-party metadata service can also be wrong.
+
+---
+
+## FM10 — duplicated bibliographies drift into different identities
+
+**Observed:** the same Volovik book appeared under `Volovik`, `Volovik2003` and
+`volovik2003`; the same papers likewise had aliases such as `Villois` /
+`Villois2017`. Counting the 27 files in `papers/cited/pdf/` was consequently
+mistaken for counting the series bibliography, although the series cites 93
+distinct external works.
+
+**Guard — closed for key duplication and wiring.** All twelve papers now use
+`papers/cited/references.bib`. BibTeX selects only cited entries.
+`bibliography.py` rejects inline bibliographies, undefined keys, duplicate or
+retired aliases, and quote-registry sources absent from the shared database.
+The build gate runs it before compilation.
+
+**Not covered:** the initial migration preserves legacy formatted citations in
+BibTeX `note` fields. Centralisation prevents future cross-paper drift, but the
+112 entries still need a separate metadata-enrichment pass to structure and
+externally verify every author, title, DOI and arXiv identifier.
+
+---
+
+## What runs when
+
+`python instruments/tools/build_paper.py <PAPER>` runs FM1, FM2, FM5's evidence
+structure and the rule-11 reference check before `pdflatex`, and refuses to
+publish a PDF if any fails. FM4 runs in the test suite. The semantic half of FM5
+and FM6–FM7 still run in a reviewer's head, which is exactly why they are the
+ones most likely to lapse.
+
+| FM | guard | runs at |
+|---|---|---|
+| FM1 number drifts from instrument | rule 14 chain | build + suite |
+| FM2 reviewed result drifts after number moves | `claims.py` | **build** + suite |
+| FM3 check that isn't checking | negative controls | suite (partial) |
+| FM4 symbol with two dimensions | `dimensions.py` | suite |
+| FM5 misattributed citation | rule 12 | **build** (structure) + review (meaning) |
+| FM6 unbacked absence claim | rule 13 | review |
+| FM7 suppressed falsification | rule 1 + gapbox | review |
+| FM8 checker over-reports | anchored/free split | suite (this case only) |
+| FM9 citation metadata points at wrong work | `verification.json` | **build** + review |
+| FM10 duplicated bibliographies drift | `references.bib` + `bibliography.py` | **build** |
+
+Adding a failure mode to this register is cheap. Leaving one out because its
+guard is embarrassing is how #182 happened.

@@ -1,0 +1,368 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "paragraph_default": "required",
+    "allowed_paragraph_exceptions": [
+      "paywalled-primary",
+      "unavailable-primary",
+      "reproducible-absence-search"
+    ],
+    "identifier_rule": "Every record has a source URL. DOI and arXiv identifiers are mandatory when the work has them; an explicit checked status is mandatory otherwise."
+  },
+  "sources": {
+    "Clisby2010": {
+      "title": "Accurate estimate of the critical exponent nu for self-avoiding walks via a fast implementation of the pivot algorithm",
+      "source_url": "https://arxiv.org/abs/1002.0494",
+      "identifiers": {
+        "doi": "10.1103/PhysRevLett.104.055702",
+        "doi_status": "present",
+        "arxiv": "1002.0494",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Clisby2010.md"
+      }
+    },
+    "HaldaneWu1985": {
+      "title": "Quantum dynamics and statistics of vortices in two-dimensional superfluids",
+      "source_url": "https://doi.org/10.1103/PhysRevLett.55.2887",
+      "identifiers": {
+        "doi": "10.1103/PhysRevLett.55.2887",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "paywalled",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "MISREAD",
+        "evidence_mode": "proxy",
+        "paragraph_required": false,
+        "paragraph_exception": {
+          "kind": "paywalled-primary",
+          "reason": "The pre-arXiv primary was not obtained; an open paper quotes, re-derives, and numerically verifies the result."
+        },
+        "note": "notes/HaldaneWu1985.md",
+        "proxy": "polkinghorne2021"
+      }
+    },
+    "Villois2017": {
+      "title": "Universal and nonuniversal aspects of vortex reconnections in superfluids",
+      "source_url": "https://arxiv.org/abs/1612.00386",
+      "identifiers": {
+        "doi": "10.1103/PhysRevFluids.2.044701",
+        "doi_status": "present",
+        "arxiv": "1612.00386",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Villois2017.md"
+      }
+    },
+    "barcelo2011": {
+      "title": "Analogue gravity",
+      "source_url": "https://arxiv.org/abs/gr-qc/0505065",
+      "identifiers": {
+        "doi": "10.12942/lrr-2011-3",
+        "doi_status": "present",
+        "arxiv": "gr-qc/0505065",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/barcelo2011.md"
+      }
+    },
+    "faddeev1997": {
+      "title": "Knots and Particles",
+      "source_url": "https://arxiv.org/abs/hep-th/9610193",
+      "identifiers": {
+        "doi": "10.1038/387058a0",
+        "doi_status": "present",
+        "arxiv": "hep-th/9610193",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "MISATTRIBUTED",
+        "evidence_mode": "search",
+        "paragraph_required": false,
+        "paragraph_exception": {
+          "kind": "reproducible-absence-search",
+          "reason": "The verdict concerns language absent from the complete source; the note records corpus size, patterns, and zero counts."
+        },
+        "note": "notes/faddeev1997.md"
+      }
+    },
+    "hu2009": {
+      "title": "Emergent/quantum gravity: macro/micro structures of spacetime",
+      "source_url": "https://arxiv.org/abs/0903.0878",
+      "identifiers": {
+        "doi": "10.1088/1742-6596/174/1/012015",
+        "doi_status": "present",
+        "arxiv": "0903.0878",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/hu2009.md"
+      }
+    },
+    "lamb1932": {
+      "title": "Hydrodynamics, 6th edition",
+      "source_url": "https://archive.org/details/dli.ernet.3284",
+      "identifiers": {
+        "doi": null,
+        "doi_status": "none-known",
+        "arxiv": null,
+        "arxiv_status": "not-applicable",
+        "other": {
+          "archive.org": "dli.ernet.3284"
+        }
+      },
+      "access": {
+        "status": "owner-supplied-scan",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "transcript",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/lamb1932.md",
+        "transcript": "transcripts/lamb1932.md"
+      }
+    },
+    "nitta2012_vortex_trimer": {
+      "title": "Vortex trimer in three-component Bose-Einstein condensates",
+      "source_url": "https://arxiv.org/abs/1201.0343",
+      "identifiers": {
+        "doi": "10.1103/PhysRevA.85.053645",
+        "doi_status": "present",
+        "arxiv": "1201.0343",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/nitta2012_vortex_trimer.md"
+      }
+    },
+    "nitta2013_colorful_vortex_lattices": {
+      "title": "Vortex lattices in three-component Bose-Einstein condensates under rotation: simulating colorful vortex lattices in a color superconductor",
+      "source_url": "https://arxiv.org/abs/1304.4375",
+      "identifiers": {
+        "doi": "10.1103/PhysRevA.88.013634",
+        "doi_status": "present",
+        "arxiv": "1304.4375",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/nitta2013_colorful_vortex_lattices.md"
+      }
+    },
+    "polkinghorne2021": {
+      "title": "Geometric phases of a vortex in a superfluid",
+      "source_url": "https://arxiv.org/abs/2101.07438",
+      "identifiers": {
+        "doi": "10.1103/PhysRevA.104.L041305",
+        "doi_status": "present",
+        "arxiv": "2101.07438",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "MISREAD",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/polkinghorne2021.md"
+      }
+    },
+    "proment2012": {
+      "title": "Vortex knots in a Bose-Einstein condensate",
+      "source_url": "https://arxiv.org/abs/1110.5757",
+      "identifiers": {
+        "doi": "10.1103/PhysRevE.85.036306",
+        "doi_status": "present",
+        "arxiv": "1110.5757",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "MISREAD",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/proment2012.md"
+      }
+    },
+    "volovik2001": {
+      "title": "Superfluid analogies of cosmological phenomena",
+      "source_url": "https://arxiv.org/abs/gr-qc/0005091",
+      "identifiers": {
+        "doi": "10.1016/S0370-1573(00)00139-3",
+        "doi_status": "present",
+        "arxiv": "gr-qc/0005091",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "MISATTRIBUTED",
+        "evidence_mode": "mixed",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/volovik2001.md"
+      }
+    },
+    "volovik2003": {
+      "title": "The Universe in a Helium Droplet",
+      "source_url": "https://search.worldcat.org/oclc/519697958",
+      "identifiers": {
+        "doi": null,
+        "doi_status": "none-known",
+        "arxiv": null,
+        "arxiv_status": "none-found",
+        "other": {
+          "isbn": "9780198507826"
+        }
+      },
+      "access": {
+        "status": "unavailable",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "PENDING-PRIMARY",
+        "evidence_mode": "proxy",
+        "paragraph_required": false,
+        "paragraph_exception": {
+          "kind": "unavailable-primary",
+          "reason": "The book was not obtained openly; the same author's open review resolves only the claims it reproduces."
+        },
+        "note": "notes/volovik2003.md",
+        "proxy": "volovik2001"
+      }
+    },
+    "zloshchastiev2020": {
+      "title": "Superfluid vacuum theory and deformed dispersion relations",
+      "source_url": "https://arxiv.org/abs/2011.11897",
+      "identifiers": {
+        "doi": "10.1142/S0217751X20400321",
+        "doi_status": "present",
+        "arxiv": "2011.11897",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/zloshchastiev2020.md"
+      }
+    },
+    "zloshchastiev2023": {
+      "title": "Derivation of emergent spacetime metric, gravitational potential and speed of light in superfluid vacuum theory",
+      "source_url": "https://inspirehep.net/files/0715887b217e080940b04b34bbbf375e",
+      "identifiers": {
+        "doi": "10.3390/universe9050234",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "none-found"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "MISATTRIBUTED",
+        "evidence_mode": "mixed",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/zloshchastiev2023.md"
+      }
+    },
+    "zloshchastiev2023_pramana_rotcurves": {
+      "title": "Galaxy rotation curves in superfluid vacuum theory",
+      "source_url": "https://arxiv.org/abs/2310.06861",
+      "identifiers": {
+        "doi": "10.1007/s12043-022-02480-2",
+        "doi_status": "present",
+        "arxiv": "2310.06861",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "mixed",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/zloshchastiev2023_pramana_rotcurves.md"
+      }
+    }
+  }
+}

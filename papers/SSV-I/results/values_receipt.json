@@ -1,0 +1,36 @@
+{
+  "issue": 198,
+  "paper": "SSV-I",
+  "hypothesis": "every load-bearing number this paper prints is computed by a named instrument, not typed by hand (#198 Part A)",
+  "generator": "instruments/tools/gen_values.py",
+  "computed_utc": "2026-07-28T12:18:35Z",
+  "values": {
+    "ssvLambda": {
+      "value": 5.249685200705899,
+      "sig": 3,
+      "rendered": "5.25",
+      "describes": "\\Lambda = \\ln(8/\\alpha) - 7/4",
+      "source": "instruments/paper_i/ssv_i_audit_2026.py::lambda_param",
+      "source_sha256_16": "6e8421aa00d131af",
+      "was": "5.25"
+    },
+    "ssvRhoZero": {
+      "value": 9.959036509566126e-05,
+      "sig": 3,
+      "rendered": "9.96\\times10^{-5}",
+      "describes": "\\rho_0 in units of m_e^4 c^3/\\hbar^3 (E5 route 1, \\sqrt2-corrected)",
+      "source": "instruments/paper_i/ssv_i_audit_2026.py::rho0_natural_units",
+      "source_sha256_16": "6e8421aa00d131af",
+      "was": "9.96\\times10^{-5}"
+    },
+    "ssvReStar": {
+      "value": 3.741847943054528e-11,
+      "sig": 3,
+      "rendered": "3.74\\times10^{-11}",
+      "describes": "R_e^* = \\xi/\\alpha = a_0/\\sqrt2, in metres",
+      "source": "instruments/paper_i/ssv_i_audit_2026.py::xi_over_alpha",
+      "source_sha256_16": "6e8421aa00d131af",
+      "was": ""
+    }
+  }
+}
