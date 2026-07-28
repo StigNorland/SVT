@@ -160,7 +160,9 @@ rule 12. Nothing further owed.
 
 ## Verification
 
-* full suite: **505 passed, 1 skipped** before Part B; Part B adds 22, Part A 40
+* full suite on the finished branch: **527 passed, 1 skipped** (306 s). This
+  issue contributes 62 of them — 40 from Part A, 22 from Part B — against a
+  pre-#198 baseline of 465.
 * SSV-I, SSV-II, SSV-VII-b: clean 2-pass `pdflatex`, 0 errors, no new undefined
   references (rule 8); PDFs moved to `papers/pdf/` (rule 3)
 * provenance regenerated for the papers touched (rule 11)
