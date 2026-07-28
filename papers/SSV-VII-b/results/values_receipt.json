@@ -1,0 +1,45 @@
+{
+  "issue": 198,
+  "paper": "SSV-VII-b",
+  "hypothesis": "every load-bearing number this paper prints is computed by a named instrument, not typed by hand (#198 Part A)",
+  "generator": "instruments/tools/gen_values.py",
+  "computed_utc": "2026-07-28T11:55:39Z",
+  "values": {
+    "ssvEllP": {
+      "value": 1.61625502392855e-35,
+      "sig": 4,
+      "rendered": "1.616\\times10^{-35}",
+      "describes": "\\ell_P = \\sqrt{\\hbar G/c^3}, in metres",
+      "source": "instruments/paper_vii_b/planck_scale_values.py::planck_length",
+      "source_sha256_16": "72d00de514a4a390",
+      "was": "1.616\\times10^{-35}"
+    },
+    "ssvMZero": {
+      "value": 1.5389714820716334e-08,
+      "sig": 4,
+      "rendered": "1.539\\times10^{-8}",
+      "describes": "m_0 = m_P/\\sqrt2, in kg (the D1 \\sqrt2 correction)",
+      "source": "instruments/paper_vii_b/planck_scale_values.py::fundamental_mass",
+      "source_sha256_16": "72d00de514a4a390",
+      "was": "1.539\\times10^{-8}"
+    },
+    "ssvMPlanck": {
+      "value": 2.1764343420511266e-08,
+      "sig": 4,
+      "rendered": "2.176\\times10^{-8}",
+      "describes": "m_P = \\sqrt{\\hbar c/G}, in kg",
+      "source": "instruments/paper_vii_b/planck_scale_values.py::planck_mass",
+      "source_sha256_16": "72d00de514a4a390",
+      "was": "2.176\\times10^{-8}"
+    },
+    "ssvGNewton": {
+      "value": 6.6743e-11,
+      "sig": 3,
+      "rendered": "6.67\\times10^{-11}",
+      "describes": "G (CODATA-2018), in m^3 kg^-1 s^-2 \u2014 a conceded input, not derived",
+      "source": "instruments/paper_vii_b/planck_scale_values.py::G_NEWTON",
+      "source_sha256_16": "72d00de514a4a390",
+      "was": "6.67\\times10^{-11}"
+    }
+  }
+}

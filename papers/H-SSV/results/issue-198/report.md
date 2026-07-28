@@ -16,10 +16,50 @@ structurally closed before this pass — both could recur.
 
 | artifact | role |
 |---|---|
-| `instruments/tools/gen_values.py` | registry → `papers/<PAPER>/values.tex` |
+| `instruments/tools/gen_values.py` | `--compute` → receipt; default → `values.tex` |
+| `papers/<PAPER>/results/values_receipt.json` | the recorded result of the last run |
 | `instruments/paper_vii_b/planck_scale_values.py` | new: VII-b had no instrument for this sector |
-| `instruments/test/tools/test_gen_values.py` | 21 tests |
+| `instruments/test/tools/test_gen_values.py` | 34 tests |
 | `instruments/test/paper_vii_b/test_planck_scale_values.py` | 19 tests |
+
+### Compute and render are separate phases
+
+Owner's design call, 2026-07-28: *"we should have both the calculation and a
+result-json, and the pdf extract the number from the result — then we don't need
+to run the resolver more than once per rendering"*, and *"it is also possible to
+check the result of the last run"*.
+
+```text
+instrument --(--compute)--> results/values_receipt.json --> values.tex --> PDF
+ slow, run when the            the result of the           cheap, run before
+ physics changes                  LAST run                   every build
+```
+
+`--compute` is the only phase that imports a paper's instruments. Rendering reads
+the receipt and imports nothing, so **a document build never re-runs the
+physics** however expensive it becomes — verified by
+`test_rendering_does_not_import_instruments`, which renders with the instrument
+modules evicted from `sys.modules` and `instruments/` stripped from `sys.path`.
+`--check` re-runs the instruments and compares against the receipt, so the
+recorded result is checkable rather than trusted. The receipt follows the
+series' existing `results/*_receipt.json` convention, so the git history of the
+file is the history of the number.
+
+**The cost, stated rather than glossed.** The receipt is a new intermediate
+artifact and therefore **a new place to drift** — the exact failure mode this
+issue exists to close, moved one level up. It is closed by
+`test_receipt_matches_instruments`, the one test that still runs physics. If that
+test is ever skipped because a computation has become too expensive, the
+guarantee weakens from *"the paper matches the instrument"* to *"the paper
+matches what the instrument said when it was last run"*. That is still far better
+than a hand-typed literal, but it is a different claim and must be stated as one.
+
+A second, cheaper signal is recorded alongside each value: `source_sha256_16`,
+the fingerprint of the instrument file. It is deliberately whole-file and
+therefore **over**-sensitive — a docstring edit trips it, and in the acceptance
+run below it flagged `\ssvReStar`, whose value had not moved at all. That is the
+safe direction: re-blessing is one command; a missed change is a wrong number in
+print.
 
 Seven values, the load-bearing ones touched by #182:
 
@@ -40,19 +80,33 @@ them would misrepresent what they are.
 
 ### The acceptance test, pre-registered and run
 
-A generator that nobody can break is decoration. Both mechanisms were tested on
-the real file loop:
+A generator that nobody can break is decoration. Every mechanism was exercised
+on the real file loop, and re-run after the receipt split:
 
-1. **Perturbed** `lambda_param` by `+0.1`. The suite went red
-   (`test_values_tex_is_not_stale`), and after regeneration the paper's printed
-   number moved `5.25 → 5.35`. Restored.
-2. **Re-typed** the literal `5.25` into the prose beside its own macro.
+1. **Perturbed** `lambda_param` by `+0.1` and left the receipt stale.
+   - rendering still succeeded and left `values.tex` **unchanged** — confirming
+     the build does not re-run the physics, which is the point of the split;
+   - `--check` returned exit 1 naming all three SSV-I macros;
+   - exactly two tests went red, both on the compute hop
+     (`test_receipt_matches_instruments`,
+     `test_recorded_fingerprints_match_the_instruments_on_disk`) — none on the
+     render hop.
+2. **`--compute` then render** picked the change up: the paper's printed number
+   moved `5.25 → 5.35`, and `\ssvRhoZero` moved `9.96 → 9.77×10⁻⁵`. Restored and
+   recomputed; `--check` clean.
+3. **Re-typed** the literal `5.25` into the prose beside its own macro.
    `test_replaced_literal_is_gone` fired. Reverted.
 
-The second is the test that closes the issue. The other four keep `values.tex`
-correct; only that one stops a second, hand-typed copy of a number reappearing
-in the prose — which is precisely how `ρ₀` came to be printed as `1.9` beside a
-formula yielding `0.0078`.
+Step 1 also demonstrated the fingerprint's deliberate over-sensitivity:
+`\ssvReStar` was flagged although its value had not moved, because
+`xi_over_alpha` lives in the file that was edited. Reported here rather than
+tuned away — an over-sensitive staleness signal costs one command, an
+under-sensitive one costs a wrong number in print.
+
+Step 3 is the test that closes the issue. Everything else keeps the chain
+internally consistent; only that one stops a second, hand-typed copy of a number
+reappearing in the prose — which is precisely how `ρ₀` came to be printed as
+`1.9` beside a formula yielding `0.0078`.
 
 ### Defects found
 
@@ -110,8 +164,8 @@ suite that reproduces three known failures has demonstrated it can see the class
 at `main.tex:870` stated that `c_⊥ρ_⊥κ₀` has dimensions `M T⁻³` against
 `M L² T⁻²` for `h`. Both are one power of `T` out:
 
-* `c_⊥ρ_⊥κ₀ = (L/T)(M/L³)(L²/T) = **M T⁻²**`
-* `h` is an **action**, `M L² T⁻¹` — the printed `M L² T⁻²` is an *energy*
+- `c_⊥ρ_⊥κ₀ = (L/T)(M/L³)(L²/T) = **M T⁻²**`
+- `h` is an **action**, `M L² T⁻¹` — the printed `M L² T⁻²` is an *energy*
 
 Because both errors run the same direction, the **mismatch** they are quoted
 between — `L⁻²T⁻¹` — is correct, and it is the mismatch the argument rests on.
@@ -160,19 +214,26 @@ rule 12. Nothing further owed.
 
 ## Verification
 
-* full suite on the finished branch: **527 passed, 1 skipped** (306 s). This
+- full suite on the finished branch: **527 passed, 1 skipped** (306 s). This
   issue contributes 62 of them — 40 from Part A, 22 from Part B — against a
   pre-#198 baseline of 465.
-* SSV-I, SSV-II, SSV-VII-b: clean 2-pass `pdflatex`, 0 errors, no new undefined
+- SSV-I, SSV-II, SSV-VII-b: clean 2-pass `pdflatex`, 0 errors, no new undefined
   references (rule 8); PDFs moved to `papers/pdf/` (rule 3)
-* provenance regenerated for the papers touched (rule 11)
+- provenance regenerated for the papers touched (rule 11)
 
 ## What is *not* closed
 
-* Part A covers seven values. Every other printed number in the series is still
+- Part A covers seven values. Every other printed number in the series is still
   typed. The mechanism exists and extending it is cheap, but the extension has
   not been done and should not be assumed.
-* Part B covers three papers and the relations transcribed for them — a small
+- The receipt split buys a cheap render at the cost of a third artifact. Today
+  `test_receipt_matches_instruments` re-runs every value in well under a second,
+  so the full guarantee holds. The moment a registered value becomes expensive
+  enough that someone marks that test slow or optional, the chain is only as
+  strong as the last `--compute`, and the paper's claim quietly becomes "matches
+  what the instrument last said". No mechanism currently detects that transition
+  — it is a judgement someone has to make and record.
+- Part B covers three papers and the relations transcribed for them — a small
   fraction of the series' equations. It cannot see a relation nobody typed in.
-* Neither part addresses the citation half of the #182 defect class; that is
+- Neither part addresses the citation half of the #182 defect class; that is
   rule 12's evidence rule, which is a convention rather than a test.

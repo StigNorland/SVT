@@ -562,9 +562,11 @@ superfluid vacuum---a stable, self-sustaining topological defect with finite siz
           \label{eq:rho0-value}
         \end{equation}
         This number, and $\Lambda$ and $R_e^*$ above, are \emph{computed} rather
-        than typed: \ssvfile{ssv_i_audit_2026} derives each one and
-        \texttt{instruments/tools/gen\_values.py} writes it into this document,
-        so a printed value cannot drift from the code behind it
+        than typed: \ssvfile{ssv_i_audit_2026} derives each one, the result is
+        recorded in \texttt{results/values\_receipt.json}, and
+        \texttt{instruments/tools/gen\_values.py} renders that receipt into this
+        document.  A printed value therefore cannot drift from the code behind
+        it, and the receipt's revision history is the history of the number
         (\ssvissue{198}).
         Note that $\Lambda$ appears in the \emph{denominator}: inverting
         \eqref{eq:electron-mass} for $\rho_0$ divides by $\Lambda$, and the

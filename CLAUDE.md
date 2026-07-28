@@ -90,18 +90,34 @@ result notes (`papers/*/results/`). Work is organised around GitHub issues
     trusted. Where practical, widen the query until it over-matches and inspect
     the excess, rather than trusting the query that returned the expected
     answer. (Extends rules 1 and 6; see \#198 Part C.)
-14. **Derived numbers are generated, not typed.** A load-bearing number must not
-    exist twice — once in an instrument and once in the `.tex`. Register it in
-    `instruments/tools/gen_values.py`, which writes `papers/<PAPER>/values.tex`
-    (macro namespace `\ssv<CamelCase>`); the paper `\input`s that and prints
-    `\ssvRhoZero` rather than a literal. **Regenerate before building, exactly as
-    for provenance:** `python instruments/tools/gen_values.py <PAPER>` (or
-    `--all`, or `--check` to detect drift without writing). The test
-    `instruments/test/tools/test_gen_values.py` enforces no drift, no dead macro,
-    no undeclared macro — and that the replaced literal no longer occurs in the
-    paper, which is the part that actually prevents re-typing. Currently covers
-    SSV-I and SSV-VII-b only; extend opportunistically, and do not assume a
-    number is generated because others are. (Extends rule 11; see \#198 Part A.)
+14. **Derived numbers are generated, not typed — and the computation is separate
+    from the rendering.** A load-bearing number must not exist twice, once in an
+    instrument and once in the `.tex`. Register it in
+    `instruments/tools/gen_values.py`. The chain is *(user's design call,
+    2026-07-28)*:
+
+        instrument --(--compute)--> results/values_receipt.json --> values.tex --> PDF
+
+    - `gen_values.py --compute <PAPER>` runs the instruments and writes the
+      **receipt** — the recorded result of the last run, following the series'
+      existing `results/*_receipt.json` convention. Run it when the *physics*
+      changes.
+    - `gen_values.py <PAPER>` reads the receipt and writes `values.tex`. It
+      imports nothing, so **a document build never re-runs the physics** — run it
+      before every build, exactly as for provenance.
+    - `gen_values.py <PAPER> --check` re-runs the instruments and compares
+      against the receipt, so the recorded result is *checkable*, not merely
+      trusted.
+
+    The paper `\input`s `values.tex` and prints `\ssvRhoZero` rather than a
+    literal (macro namespace `\ssv<CamelCase>`). `test_gen_values.py` tests each
+    hop separately; the one that actually prevents re-typing is
+    `test_replaced_literal_is_gone`. **The receipt is itself a drift surface** —
+    if `test_receipt_matches_instruments` is ever skipped for cost, the guarantee
+    weakens from "the paper matches the instrument" to "the paper matches what
+    the instrument last said". Say which one you mean. Currently covers SSV-I and
+    SSV-VII-b only; extend opportunistically, and do not assume a number is
+    generated because others are. (Extends rule 11; see \#198 Part A.)
 15. **Ask what a symbol means throughout, not just whether an equation
     balances.** Three of the \#182 defects were one error class — a symbol
     carrying two dimensions in one paper (`b` in SSV-I, `e` in SSV-II) or across
