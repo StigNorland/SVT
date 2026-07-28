@@ -1,31 +1,32 @@
-# toomre1964 — citation record
+# toomre1964 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+A. Toomre, *On the gravitational stability of a disk of stars*, Astrophys. J.
+**139**, 1217–1238 (1964).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: DOI 10.1086/147861 · pre-arXiv · open NASA ADS scan checked
+on 2026-07-28. The legacy mirror timed out during local download.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-VI `main.tex:273–284` says its simulated stellar velocities were
+initialized with Toomre-\(Q\)-controlled radial dispersion. The citation is
+methodological; the simulation results themselves are local SSV computations.
 
-```tex
-A.\ Toomre, ``On the gravitational stability of a disk of stars,''
-\textit{Astrophys.\ J.}\ \textbf{139}, 1217--1238 (1964).
-```
+## Source result and explanation
 
-## Uses in the series
+The abstract, printed p. 1217 (PDF p. 1), states:
 
-- `papers/SSV-VI/main.tex:280`
+> The minimum root-mean-square radial velocity dispersion required in any one
+> vicinity for the complete suppression of all axisymmetric instabilities is
+> calculated
 
-## Source and identifiers
+The sentence gives the threshold as
+\(\sigma_{R,\min}=3.36G\Sigma/\kappa\), repeated in Eq. (65), printed p. 1234
+(PDF p. 18). The modern stellar-disk definition
+\(Q=\sigma_R\kappa/(3.36G\Sigma)\) therefore makes \(Q\geq1\) the local
+axisymmetric stability condition.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** The source directly supports controlling initial radial
+velocity dispersion with the stellar Toomre \(Q\) parameter. Its derivation
+addresses local axisymmetric stability; it does not guarantee suppression of
+the non-axisymmetric bar and spiral modes measured by SSV.

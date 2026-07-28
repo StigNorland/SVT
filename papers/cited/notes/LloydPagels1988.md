@@ -1,31 +1,27 @@
-# LloydPagels1988 — citation record
+# LloydPagels1988 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+S. Lloyd and H. Pagels, *Complexity as thermodynamic depth*, *Annals of
+Physics* **188**, 186–213 (1988),
+doi:10.1016/0003-4916(88)90094-2.
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Open preprint record:
+`https://cds.cern.ch/record/190035`. The paper predates arXiv; CERN lists a
+59-page preprint, but its download was not reproducibly obtainable locally.
 
-## Bibliographic record
+## SSV usage and primary abstract
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:1288–1299` names Lloyd–Pagels thermodynamic depth as a
+complexity/depth measure distinct from its monotone entropy. The abstract
+states:
 
-```tex
-S.~Lloyd and H.~Pagels, ``Complexity as thermodynamic depth,''
-\textit{Ann.~Phys.} \textbf{188}, 186--213 (1988).
-```
+> A measure of complexity for the macroscopic states of physical systems is
+> defined. Called depth, the measure is universal: it applies to all physical
+> systems
 
-## Uses in the series
+It defines thermodynamic depth for Hamiltonian systems as the difference
+between coarse- and fine-grained entropy.
 
-- `papers/SSV-III/main.tex:1295`
-
-## Source and identifiers
-
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK` with scope.** The citation correctly identifies the measure.
+The paper does not itself prove SSV's broader sentence that all genuine
+complexity measures rise and then fall; the paired coffee-automaton work is
+the evidence for that example.

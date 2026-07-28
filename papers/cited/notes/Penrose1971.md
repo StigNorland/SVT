@@ -1,31 +1,28 @@
-# Penrose1971 — citation record
+# Penrose1971 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+R. Penrose and R. M. Floyd, *Extraction of Rotational Energy from a Black
+Hole*, *Nature Physical Science* **229**, 177–179 (1971),
+doi:10.1038/physci229177a0.
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Official primary article page:
+`https://www.nature.com/articles/physci229177a0`. The full text is
+subscription-only and the work predates arXiv.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-V `main.tex:356–379` says the Penrose process extracts rotational energy
+from a Kerr black hole through an external interaction with its ergoregion.
 
-```tex
-R.~Penrose, ``Extraction of rotational energy from a black hole,''
-\textit{Nat.~Phys.~Sci.}~\textbf{229}, 177--179 (1971).
-```
+## Accessible primary abstract
 
-## Uses in the series
+The official abstract states:
 
-- `papers/SSV-V/main.tex:366`
+> We now consider the extraction of rotational energy from a black hole, not
+> least because the rotational energy (defined appropriately) of a black hole
 
-## Source and identifiers
+It continues that this energy may be comparable with the total mass-energy.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** This is the defining primary reference for extracting
+rotational energy from a black hole. SSV's further assertion that its proposed
+condensate metric is Kerr and therefore inherits the process is not proved by
+Penrose and must stand on SSV's own metric derivation.

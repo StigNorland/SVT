@@ -1,31 +1,31 @@
-# Peschel2003 — citation record
+# Peschel2003 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+I. Peschel, *Calculation of reduced density matrices from correlation
+functions*, J. Phys. A: Math. Gen. **36**, L205–L208 (2003).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: arXiv:cond-mat/0212631 · DOI:
+10.1088/0305-4470/36/14/101 · local PDF sha256 `4496ceebea0f9174`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-V `main.tex:467–473` names the Peschel correlator method as the method
+used to compute the reduced-state entropy of the saturated medium's
+Bogoliubov vacuum.
 
-```tex
-I.~Peschel, ``Calculation of reduced density matrices from correlation
-functions,'' \textit{J.~Phys.~A}~\textbf{36}, L205--L208 (2003).
-```
+## Source result and explanation
 
-## Uses in the series
+For bosonic coupled oscillators, printed p. 3, the paper introduces the
+position and momentum correlation matrices `X` and `P` and then states:
 
-- `papers/SSV-V/main.tex:470`
+> The diagonal form is again (8) but with bosonic operators and the
+> \(\epsilon_k\) follow from the eigenvalues \(\nu_k^2\) of the matrix \(XP\)
+> via \(\operatorname{cth}(\epsilon_k/2)=\nu_k/2\).
 
-## Source and identifiers
+Equations (18)–(21) show that Gaussian bosonic reduced-density-matrix spectra
+are reconstructed from the subsystem correlators. The abstract and conclusion
+also explicitly cover solvable fermionic and bosonic systems.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** This is the cited correlator method. The paper supplies the
+Gaussian reconstruction, not the later SSV-specific claim that its particular
+medium exhibits an area law; that scaling must stand on SSV's own calculation
+and its Casini–Huerta/Srednicki calibration.

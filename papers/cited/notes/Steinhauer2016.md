@@ -1,31 +1,32 @@
-# Steinhauer2016 — citation record
+# Steinhauer2016 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+J. Steinhauer, *Observation of quantum Hawking radiation and its entanglement
+in an analogue black hole*, Nature Physics **12**, 959–965 (2016).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: arXiv:1510.00621 · DOI: 10.1038/nphys3863 · local PDF sha256
+`bf5194b7c9036eb1`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-V `main.tex:608–611` says that the acoustic Unruh/Hawking effect has been
+observed in analogue acoustic black holes in Bose–Einstein condensates.
 
-```tex
-J.~Steinhauer, ``Observation of quantum Hawking radiation and its entanglement in an analogue
-black hole,'' \textit{Nat.~Phys.}~\textbf{12}, 959--965 (2016).
-```
+## Source result and explanation
 
-## Uses in the series
+The abstract, printed p. 1, reports the claimed analogue observation and its
+correlation signature:
 
-- `papers/SSV-V/main.tex:608`
+> We observe spontaneous Hawking radiation, stimulated by quantum vacuum
+> fluctuations, emanating from an analogue black hole in an atomic
+> Bose-Einstein condensate. Correlations are observed between the Hawking
+> particles outside the black hole and the partner particles inside.
 
-## Source and identifiers
+It continues that the correlations indicate an approximately thermal
+distribution and that high-energy pairs are entangled under the stated
+frequency-correlation assumption. This supports the narrow statement that an
+analogue Hawking effect was reported in a BEC system.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** The citation supports the reported analogue observation.
+It does not by itself validate SSV's microscopic mechanism, translate the
+analogue result to astrophysical black holes, or settle later debate over the
+experiment; the surrounding wording should preserve that scope.

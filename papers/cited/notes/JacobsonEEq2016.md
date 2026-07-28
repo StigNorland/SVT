@@ -1,31 +1,39 @@
-# JacobsonEEq2016 — citation record
+# JacobsonEEq2016 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+T. Jacobson, *Entanglement Equilibrium and the Einstein Equation*,
+Phys. Rev. Lett. **116**, 201101 (2016).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: arXiv:1505.04753v4 · DOI:
+10.1103/PhysRevLett.116.201101 · local PDF sha256 `5269c0e7ff5e2e14`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-V `main.tex:459–470` says cross-horizon entanglement entropy is the input
+that Jacobson's entanglement-equilibrium route turns into the gravitational
+field equation.
+
+## Source equations and explanation
+
+The discussion, p. 5, summarizes the scoped equivalence:
+
+> the semiclassical Einstein equation holds, for first-order variations of
+> the vacuum, if and only if the entropy in small causal diamonds is
+> stationary
+
+The remainder specifies constant volume and variation from a maximally
+symmetric vacuum. Equations (12)–(13) split the entropy variation into UV area
+and infrared matter terms,
 
 ```tex
-T.~Jacobson, ``Entanglement equilibrium and the Einstein equation,''
-\textit{Phys.~Rev.~Lett.}~\textbf{116}, 201101 (2016).
+\delta S_{\rm UV}=\eta\,\delta A,\qquad
+\delta S_{\rm tot}=\eta\,\delta A+\delta S_{\rm IR},
 ```
 
-## Uses in the series
+and stationarity with `η=1/(4\hbar G)` yields the semiclassical Einstein
+equation at first order for conformal fields. Nonconformal fields require a
+stated conjecture.
 
-- `papers/SSV-V/main.tex:467`
-
-## Source and identifiers
-
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** SSV accurately identifies the paper's route from local
+entanglement equilibrium to the field equation, provided Jacobson's
+first-order, small-diamond, vacuum, and matter-field assumptions remain
+attached.

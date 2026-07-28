@@ -1,31 +1,33 @@
-# Vedral2002 — citation record
+# Vedral2002 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+V. Vedral, *The role of relative entropy in quantum information theory*,
+Rev. Mod. Phys. **74**, 197–234 (2002).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: arXiv:quant-ph/0102094 · DOI:
+10.1103/RevModPhys.74.197 · local PDF sha256 `523d4be80d9bf10d`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:1018–1023` identifies monotonic decrease of relative
+entropy under coarse-graining with the quantum data-processing inequality.
+This follows an application of the same theorem to a proposed CPTP block map.
 
-```tex
-V.~Vedral, ``The role of relative entropy in quantum information theory,''
-\textit{Rev.~Mod.~Phys.} \textbf{74}, 197--234 (2002).
-```
+## Source result and explanation
 
-## Uses in the series
+In Sec. II.C, printed p. 209 (PDF p. 13), the review states:
 
-- `papers/SSV-III/main.tex:1023`
+> For any completely positive, trace preserving map \(\Phi\), given by
+> \(\Phi\sigma=\sum_i V_i\sigma V_i^\dagger\) and
+> \(\sum_i V_i^\dagger V_i=1\), we have that
+> \(S(\Phi\sigma\Vert\Phi\rho)\leq S(\sigma\Vert\rho)\).
 
-## Source and identifiers
+The following explanation represents a CP map as a unitary operation on an
+extended Hilbert space followed by a partial trace: the unitary leaves
+relative entropy unchanged, while tracing out the extension loses
+information and cannot increase it.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** This directly supports the data-processing statement.
+Like Lindblad1975, it does not establish that SSV's specific block operation
+is CPTP, that its reference state is fixed, or that SSV's \(dS/d\ln b\)
+equals the corresponding relative-entropy decrease. Those are additional
+premises of the SSV construction.

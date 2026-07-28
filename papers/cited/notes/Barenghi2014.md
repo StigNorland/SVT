@@ -1,31 +1,36 @@
-# Barenghi2014 — citation record
+# Barenghi2014 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+C. F. Barenghi, L. Skrbek, and K. R. Sreenivasan, *Introduction to
+quantum turbulence*, PNAS **111**, 4647–4652 (2014).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: arXiv:1404.1909 · DOI: 10.1073/pnas.1400033111 · local PDF
+sha256 `1d2967503ac87030`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:1112–1118` says that dimensional analysis using circulation
+`κ` and vortex-line density `L` gives
 
 ```tex
-C.~F.~Barenghi, L.~Skrbek, and K.~R.~Sreenivasan, ``Introduction to quantum turbulence,''
-\textit{Proc.~Natl.~Acad.~Sci.~USA} \textbf{111}, 4647--4652 (2014).
+\dot N_{\rm rec}=c_{\rm rec}\,\kappa\,\mathcal L^{5/2}.
 ```
 
-## Uses in the series
+## Source evidence
 
-- `papers/SSV-III/main.tex:1114`
+The paper defines quantized circulation on p. 2 as `κ=h/m` and gives the
+azimuthal vortex velocity `v_s=κ/(2πr)`. It then defines the other dimensional
+input on p. 3:
 
-## Source and identifiers
+> measurement tool in 4 He, revealing the vortex line density L – the total
+> length of the quantized vortex line in a unit volume.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
+The complete 7,278-word extracted text contains no `5/2` exponent and does not
+state a reconnection-rate law. That is consistent with SSV's wording: the
+formula is presented as its own dimensional inference, while the citation
+supplies the physical meanings and dimensions `[κ]=L²/T` and
+`[\mathcal L]=L⁻²`. Those dimensions uniquely give
+`[κ\mathcal L^{5/2}]=L⁻³T⁻¹`, a rate per volume.
 
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** The cited review supports the two quantities used. The
+reconnection-rate equation is not attributed to the review and should continue
+to be described as a dimensional estimate with an undetermined coefficient.

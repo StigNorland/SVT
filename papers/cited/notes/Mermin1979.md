@@ -1,31 +1,37 @@
-# Mermin1979 — citation record
+# Mermin1979 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+N. D. Mermin, *The topological theory of defects in ordered media*,
+Rev. Mod. Phys. **51**, 591–648 (1979).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: DOI 10.1103/RevModPhys.51.591 · pre-arXiv · APS full text ·
+local PDF sha256 `0f85c3290dbe03f7`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:1025–1049` cites Mermin while asserting that five proposed
+channels—Goldstone/density fluctuations, vortex lines, Kelvin modes,
+solitons, and nonlocal correlations—are “mutually exclusive and jointly
+exhaustive” by homotopy classification plus Goldstone decomposition.
 
-```tex
-N.~D.~Mermin, ``The topological theory of defects in ordered media,''
-\textit{Rev.~Mod.~Phys.} \textbf{51}, 591--648 (1979).
-```
+## Source result and explanation
 
-## Uses in the series
+The abstract, printed p. 591 (PDF p. 1), limits the review's subject:
 
-- `papers/SSV-III/main.tex:1030`
+> The aim is to make more readily accessible to physicists the recent
+> applications of homotopy theory to the study of defects in ordered media.
 
-## Source and identifiers
+The introduction, printed p. 592 (PDF p. 2), explains that the fundamental
+group of the order-parameter space describes line defects in three
+dimensions (or point defects in two), and later sections treat point defects,
+broken translational symmetry, and higher homotopy groups. This is a
+classification of *topological defects* by the topology of a specified
+order-parameter space.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `MISREAD`.** Mermin supports homotopy classification of defects,
+including vortex-type line defects and some soliton topology. It does not
+classify all fluctuations of an arbitrary medium, and it does not show that
+Goldstone waves, conjugate density fluctuations, Kelvin excitations,
+solitons, and connected correlations form five mutually exclusive and
+jointly exhaustive sectors. In particular, Kelvin waves are modes of an
+already-classified line defect and correlations are not homotopy defect
+classes. The no-remainder decomposition requires a separate derivation.

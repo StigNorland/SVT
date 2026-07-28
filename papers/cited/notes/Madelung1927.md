@@ -1,31 +1,33 @@
-# Madelung1927 — citation record
+# Madelung1927 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+E. Madelung, *Quantentheorie in hydrodynamischer Form*, Z. Phys. **40**,
+322–326 (1927).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: DOI 10.1007/BF01400372 · pre-arXiv · open English translation
+by D. H. Delphenich · local PDF sha256 `72b3544fd53726ba`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-VII-a `main.tex:481–489` cites Madelung only for the established
+mathematical hydrodynamic representation of the Schrödinger equation. It
+distinguishes that result from SSV's proposed physical interpretation of the
+Madelung fluid as an actual vacuum condensate.
 
-```tex
-E.\ Madelung, ``Quantentheorie in hydrodynamischer Form,''
-\textit{Z.\ Phys.}\ \textbf{40}, 322--326 (1927).
-```
+## Source result and explanation
 
-## Uses in the series
+In the translated text, printed p. 323 (translation PDF p. 2), Madelung
+identifies the transformed equation as a continuity equation with the squared
+amplitude as density and the phase as velocity potential. The next equation
+is characterized as follows:
 
-- `papers/SSV-VII-a/main.tex:481`
+> This equation also corresponds precisely to a hydrodynamical one, namely,
+> that of an irrotational flow moving under the action of conservative forces.
 
-## Source and identifiers
+The paper then states that these hydrodynamical equations are identical with
+Schrödinger's equations for the one-electron problem.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** Madelung is the correct primary source for rewriting the
+Schrödinger equation in continuity-and-flow form. The accessible local file is
+an English translation rather than the publisher scan. The paper does not
+establish SSV's ontological claim that the density and velocity fields are a
+literal vacuum medium.

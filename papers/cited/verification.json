@@ -13,35 +13,35 @@
   "citation_notes": {
     "AaronsonCarrollOuellette2014": {
       "note": "notes/AaronsonCarrollOuellette2014.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "Abel2020": {
       "note": "notes/Abel2020.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-II"
       ]
     },
     "AharonovBohm1959": {
       "note": "notes/AharonovBohm1959.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-II"
       ]
     },
     "Albert2000": {
       "note": "notes/Albert2000.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "Barbour1999": {
       "note": "notes/Barbour1999.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
@@ -56,14 +56,14 @@
     },
     "Barenghi2014": {
       "note": "notes/Barenghi2014.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "bbm1976": {
       "note": "notes/bbm1976.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-I",
         "SSV-VII-a"
@@ -71,21 +71,21 @@
     },
     "Bekenstein1973": {
       "note": "notes/Bekenstein1973.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-V"
       ]
     },
     "Bennett1988": {
       "note": "notes/Bennett1988.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "Bjerknes1906": {
       "note": "notes/Bjerknes1906.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-II",
         "SSV-IV",
@@ -94,35 +94,35 @@
     },
     "BKLS1986": {
       "note": "notes/BKLS1986.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-V"
       ]
     },
     "BLV2005": {
       "note": "notes/BLV2005.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-V"
       ]
     },
     "Boltzmann1877": {
       "note": "notes/Boltzmann1877.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "CasiniHuerta2009": {
       "note": "notes/CasiniHuerta2009.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-V"
       ]
     },
     "chemin2009": {
       "note": "notes/chemin2009.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-VI"
       ]
@@ -136,35 +136,35 @@
     },
     "CorleyJacobson1996": {
       "note": "notes/CorleyJacobson1996.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-V"
       ]
     },
     "CUORE2022": {
       "note": "notes/CUORE2022.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-II"
       ]
     },
     "Deutsch1991": {
       "note": "notes/Deutsch1991.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "DUNE2020": {
       "note": "notes/DUNE2020.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-II"
       ]
     },
     "Endres2012": {
       "note": "notes/Endres2012.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-II"
       ]
@@ -178,42 +178,42 @@
     },
     "Fixsen1996": {
       "note": "notes/Fixsen1996.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-IX"
       ]
     },
     "flynn2026": {
       "note": "notes/flynn2026.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-VI"
       ]
     },
     "Frantzeskakis2010": {
       "note": "notes/Frantzeskakis2010.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "gebhardt2001": {
       "note": "notes/gebhardt2001.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-VI"
       ]
     },
     "Godel1949": {
       "note": "notes/Godel1949.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "GW170817": {
       "note": "notes/GW170817.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-II"
       ]
@@ -227,28 +227,28 @@
     },
     "Hawking1974": {
       "note": "notes/Hawking1974.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-V"
       ]
     },
     "Hawking1975": {
       "note": "notes/Hawking1975.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-V"
       ]
     },
     "HK2018": {
       "note": "notes/HK2018.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-II"
       ]
     },
     "hockneyeastwood1988": {
       "note": "notes/hockneyeastwood1988.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-VI"
       ]
@@ -262,49 +262,49 @@
     },
     "ibata2013": {
       "note": "notes/ibata2013.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-VI"
       ]
     },
     "Jacobson1995": {
       "note": "notes/Jacobson1995.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-VII-b"
       ]
     },
     "JacobsonEEq2016": {
       "note": "notes/JacobsonEEq2016.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-V"
       ]
     },
     "JoosZeh2003": {
       "note": "notes/JoosZeh2003.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "KamLANDZen2023": {
       "note": "notes/KamLANDZen2023.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-II"
       ]
     },
     "KATRIN2022": {
       "note": "notes/KATRIN2022.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-II"
       ]
     },
     "Kibble1976": {
       "note": "notes/Kibble1976.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
@@ -318,119 +318,119 @@
     },
     "Landau_Fluid": {
       "note": "notes/Landau_Fluid.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-II"
       ]
     },
     "LEGEND2021": {
       "note": "notes/LEGEND2021.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-II"
       ]
     },
     "lelli2016": {
       "note": "notes/lelli2016.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-VI"
       ]
     },
     "Lindblad1975": {
       "note": "notes/Lindblad1975.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "linshu1964": {
       "note": "notes/linshu1964.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-VI"
       ]
     },
     "Lloyd2011": {
       "note": "notes/Lloyd2011.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "LloydPagels1988": {
       "note": "notes/LloydPagels1988.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "Loschmidt1876": {
       "note": "notes/Loschmidt1876.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "Madelung1927": {
       "note": "notes/Madelung1927.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-VII-a"
       ]
     },
     "MadrasSlade1993": {
       "note": "notes/MadrasSlade1993.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "mcgaugh2012": {
       "note": "notes/mcgaugh2012.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-VI"
       ]
     },
     "mcgaugh2016": {
       "note": "notes/mcgaugh2016.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-VI"
       ]
     },
     "Mermin1979": {
       "note": "notes/Mermin1979.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "mestel1963": {
       "note": "notes/mestel1963.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-VI"
       ]
     },
     "MicroBooNE2022": {
       "note": "notes/MicroBooNE2022.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-II"
       ]
     },
     "MorrisThorne1988": {
       "note": "notes/MorrisThorne1988.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "nfw1997": {
       "note": "notes/nfw1997.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-VI"
       ]
@@ -447,49 +447,49 @@
     },
     "ostrikerpeebles1973": {
       "note": "notes/ostrikerpeebles1973.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-VI"
       ]
     },
     "Penrose1965": {
       "note": "notes/Penrose1965.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-V"
       ]
     },
     "Penrose1971": {
       "note": "notes/Penrose1971.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-V"
       ]
     },
     "Penrose1979": {
       "note": "notes/Penrose1979.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "Peschel2003": {
       "note": "notes/Peschel2003.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-V"
       ]
     },
     "Planck2020": {
       "note": "notes/Planck2020.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-II"
       ]
     },
     "Poincare1890": {
       "note": "notes/Poincare1890.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
@@ -501,7 +501,7 @@
     },
     "Price1996": {
       "note": "notes/Price1996.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
@@ -515,63 +515,63 @@
     },
     "Reichenbach1956": {
       "note": "notes/Reichenbach1956.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "rosen1968": {
       "note": "notes/rosen1968.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-I"
       ]
     },
     "Rovelli1993": {
       "note": "notes/Rovelli1993.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "Rovelli2018": {
       "note": "notes/Rovelli2018.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "rubin1980": {
       "note": "notes/rubin1980.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-VI"
       ]
     },
     "Russell1913": {
       "note": "notes/Russell1913.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "Salart2008": {
       "note": "notes/Salart2008.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-II"
       ]
     },
     "Schwinger": {
       "note": "notes/Schwinger.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-II"
       ]
     },
     "Srednicki1993": {
       "note": "notes/Srednicki1993.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-V"
       ]
@@ -667,35 +667,35 @@
     },
     "Steinhauer2016": {
       "note": "notes/Steinhauer2016.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-V"
       ]
     },
     "SumnersWhittington1988": {
       "note": "notes/SumnersWhittington1988.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "toomre1964": {
       "note": "notes/toomre1964.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-VI"
       ]
     },
     "toomre1981": {
       "note": "notes/toomre1981.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-VI"
       ]
     },
     "Unruh1976": {
       "note": "notes/Unruh1976.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-V",
         "SSV-VII-b"
@@ -703,7 +703,7 @@
     },
     "Unruh1981": {
       "note": "notes/Unruh1981.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-V",
         "SSV-VII-b"
@@ -711,7 +711,7 @@
     },
     "Vedral2002": {
       "note": "notes/Vedral2002.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
@@ -726,14 +726,14 @@
     },
     "Vinen2002": {
       "note": "notes/Vinen2002.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "Visser1998": {
       "note": "notes/Visser1998.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-V",
         "SSV-VII-b"
@@ -757,7 +757,7 @@
     },
     "Yin2013": {
       "note": "notes/Yin2013.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-II"
       ]
@@ -783,20 +783,967 @@
     },
     "Zurek1985": {
       "note": "notes/Zurek1985.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     },
     "Zurek2003": {
       "note": "notes/Zurek2003.md",
-      "review_status": "not-reviewed",
+      "review_status": "evidence-recorded",
       "cited_by": [
         "SSV-III"
       ]
     }
   },
   "sources": {
+    "rubin1980": {
+      "title": "Rotational properties of 21 Sc galaxies with a large range of luminosities and radii",
+      "source_url": "https://articles.adsabs.harvard.edu/pdf/1980ApJ...238..471R",
+      "identifiers": {
+        "doi": "10.1086/158003",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/rubin1980.md"
+      }
+    },
+    "mestel1963": {
+      "title": "On the galactic law of rotation",
+      "source_url": "https://adsabs.harvard.edu/pdf/1963MNRAS.126..553M",
+      "identifiers": {
+        "doi": "10.1093/mnras/126.6.553",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/mestel1963.md"
+      }
+    },
+    "toomre1964": {
+      "title": "On the gravitational stability of a disk of stars",
+      "source_url": "https://adsabs.harvard.edu/pdf/1964ApJ...139.1217T",
+      "identifiers": {
+        "doi": "10.1086/147861",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/toomre1964.md"
+      }
+    },
+    "ostrikerpeebles1973": {
+      "title": "A numerical study of the stability of flattened galaxies: or, can cold galaxies survive?",
+      "source_url": "https://adsabs.harvard.edu/pdf/1973ApJ...186..467O",
+      "identifiers": {
+        "doi": "10.1086/152513",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/ostrikerpeebles1973.md"
+      }
+    },
+    "Kibble1976": {
+      "title": "Topology of cosmic domains and strings",
+      "source_url": "https://www.phys.ens.psl.eu/~placais/publication/1976_topology-kibble.jphysA.pdf",
+      "identifiers": {
+        "doi": "10.1088/0305-4470/9/8/029",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Kibble1976.md"
+      }
+    },
+    "Zurek1985": {
+      "title": "Cosmological experiments in superfluid helium?",
+      "source_url": "https://www.nature.com/articles/317505a0",
+      "identifiers": {
+        "doi": "10.1038/317505a0",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "paywalled",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": false,
+        "paragraph_exception": {
+          "kind": "paywalled-primary",
+          "reason": "The Nature full text is subscription-only; its official abstract directly states random domain choice after a rapid pressure quench and the resulting phase-mismatch scaling."
+        },
+        "note": "notes/Zurek1985.md"
+      }
+    },
+    "rosen1968": {
+      "title": "Particlelike solutions to nonlinear complex scalar field theories with positive-definite energy densities",
+      "source_url": "https://doi.org/10.1063/1.1664693",
+      "identifiers": {
+        "doi": "10.1063/1.1664693",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "paywalled",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "MISATTRIBUTED",
+        "evidence_mode": "quotation",
+        "paragraph_required": false,
+        "paragraph_exception": {
+          "kind": "paywalled-primary",
+          "reason": "The cited AIP article is closed. Its bibliographic record was compared with Rosen's open 1969 APS paper, whose equations—not the cited key—explicitly introduce the logarithmic relativistic field term."
+        },
+        "note": "notes/rosen1968.md"
+      }
+    },
+    "JoosZeh2003": {
+      "title": "Decoherence and the Appearance of a Classical World in Quantum Theory",
+      "source_url": "https://doi.org/10.1007/978-3-662-05328-7",
+      "identifiers": {
+        "doi": "10.1007/978-3-662-05328-7",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "not-applicable"
+      },
+      "access": {
+        "status": "paywalled",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "proxy",
+        "paragraph_required": false,
+        "paragraph_exception": {
+          "kind": "paywalled-primary",
+          "reason": "The cited book is closed-access. Its publisher record confirms the environmental-decoherence scope, while the paired pinned Zurek2003 review provides open detailed evidence for the specific comparison."
+        },
+        "note": "notes/JoosZeh2003.md",
+        "proxy": "Zurek2003"
+      }
+    },
+    "AharonovBohm1959": {
+      "title": "Significance of electromagnetic potentials in the quantum theory",
+      "source_url": "https://harvest.aps.org/v2/journals/articles/10.1103/PhysRev.115.485/fulltext",
+      "identifiers": {
+        "doi": "10.1103/PhysRev.115.485",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/AharonovBohm1959.md"
+      }
+    },
+    "Unruh1976": {
+      "title": "Notes on black-hole evaporation",
+      "source_url": "https://harvest.aps.org/v2/journals/articles/10.1103/PhysRevD.14.870/fulltext",
+      "identifiers": {
+        "doi": "10.1103/PhysRevD.14.870",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Unruh1976.md"
+      }
+    },
+    "Madelung1927": {
+      "title": "Quantentheorie in hydrodynamischer Form",
+      "source_url": "https://neo-classical-physics.info/uploads/3/4/3/6/34363841/madelung_-_hydrodynamical_qm.pdf",
+      "identifiers": {
+        "doi": "10.1007/BF01400372",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Madelung1927.md"
+      }
+    },
+    "bbm1976": {
+      "title": "Nonlinear wave mechanics",
+      "source_url": "https://www.researchgate.net/profile/Iwo-Bialynicki-Birula/publication/223139969_Nonlinear_wave_mechanics/links/5a64ed65a6fdccb61c57f778/Nonlinear-wave-mechanics.pdf",
+      "identifiers": {
+        "doi": "10.1016/0003-4916(76)90057-9",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/bbm1976.md"
+      }
+    },
+    "Deutsch1991": {
+      "title": "Quantum mechanics near closed timelike lines",
+      "source_url": "https://harvest.aps.org/v2/journals/articles/10.1103/PhysRevD.44.3197/fulltext",
+      "identifiers": {
+        "doi": "10.1103/PhysRevD.44.3197",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Deutsch1991.md"
+      }
+    },
+    "Lindblad1975": {
+      "title": "Completely positive maps and entropy inequalities",
+      "source_url": "https://doi.org/10.1007/BF01609396",
+      "identifiers": {
+        "doi": "10.1007/BF01609396",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "paywalled",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": false,
+        "paragraph_exception": {
+          "kind": "paywalled-primary",
+          "reason": "The pre-arXiv publisher PDF is paywalled; the official abstract directly states the relative-entropy data-processing theorem used by SSV."
+        },
+        "note": "notes/Lindblad1975.md"
+      }
+    },
+    "nfw1997": {
+      "title": "A Universal Density Profile from Hierarchical Clustering",
+      "source_url": "https://arxiv.org/abs/astro-ph/9611107",
+      "identifiers": {
+        "doi": "10.1086/304888",
+        "doi_status": "present",
+        "arxiv": "astro-ph/9611107",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/nfw1997.md"
+      }
+    },
+    "Zurek2003": {
+      "title": "Decoherence, einselection, and the quantum origins of the classical",
+      "source_url": "https://arxiv.org/abs/quant-ph/0105127",
+      "identifiers": {
+        "doi": "10.1103/RevModPhys.75.715",
+        "doi_status": "present",
+        "arxiv": "quant-ph/0105127",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Zurek2003.md"
+      }
+    },
+    "Mermin1979": {
+      "title": "The topological theory of defects in ordered media",
+      "source_url": "https://harvest.aps.org/v2/journals/articles/10.1103/RevModPhys.51.591/fulltext",
+      "identifiers": {
+        "doi": "10.1103/RevModPhys.51.591",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "MISREAD",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Mermin1979.md"
+      }
+    },
+    "Rovelli1993": {
+      "title": "Statistical mechanics of gravity and the thermodynamical origin of time",
+      "source_url": "https://doi.org/10.1088/0264-9381/10/8/015",
+      "identifiers": {
+        "doi": "10.1088/0264-9381/10/8/015",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "none-found"
+      },
+      "access": {
+        "status": "paywalled",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": false,
+        "paragraph_exception": {
+          "kind": "paywalled-primary",
+          "reason": "The publisher PDF is closed and no repository full text was found; the publisher abstract directly supports SSV's qualitative comparison to state-derived physical time."
+        },
+        "note": "notes/Rovelli1993.md"
+      }
+    },
+    "Vedral2002": {
+      "title": "The role of relative entropy in quantum information theory",
+      "source_url": "https://arxiv.org/abs/quant-ph/0102094",
+      "identifiers": {
+        "doi": "10.1103/RevModPhys.74.197",
+        "doi_status": "present",
+        "arxiv": "quant-ph/0102094",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Vedral2002.md"
+      }
+    },
+    "Vinen2002": {
+      "title": "Quantum turbulence",
+      "source_url": "https://doi.org/10.1023/A:1019695418590",
+      "identifiers": {
+        "doi": "10.1023/A:1019695418590",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "none-found"
+      },
+      "access": {
+        "status": "paywalled",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "PENDING-PRIMARY",
+        "evidence_mode": "proxy",
+        "paragraph_required": false,
+        "paragraph_exception": {
+          "kind": "unavailable-primary",
+          "reason": "The publisher PDF is closed and no repository full text was found. The pinned open Barenghi2014 review supports the detailed Kelvin-wave and Vinen-decay uses, but the cited primary has not been checked locally."
+        },
+        "note": "notes/Vinen2002.md",
+        "proxy": "Barenghi2014"
+      }
+    },
+    "Bekenstein1973": {
+      "title": "Black holes and entropy",
+      "source_url": "https://harvest.aps.org/v2/journals/articles/10.1103/PhysRevD.7.2333/fulltext",
+      "identifiers": {
+        "doi": "10.1103/PhysRevD.7.2333",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Bekenstein1973.md"
+      }
+    },
+    "Hawking1974": {
+      "title": "Black hole explosions?",
+      "source_url": "https://www.nature.com/articles/248030a0",
+      "identifiers": {
+        "doi": "10.1038/248030a0",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Hawking1974.md"
+      }
+    },
+    "Hawking1975": {
+      "title": "Particle creation by black holes",
+      "source_url": "https://projecteuclid.org/journals/communications-in-mathematical-physics/volume-43/issue-3/Particle-creation-by-black-holes/cmp/1103899181.pdf",
+      "identifiers": {
+        "doi": "10.1007/BF02345020",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Hawking1975.md"
+      }
+    },
+    "Penrose1965": {
+      "title": "Gravitational collapse and space-time singularities",
+      "source_url": "https://harvest.aps.org/v2/journals/articles/10.1103/PhysRevLett.14.57/fulltext",
+      "identifiers": {
+        "doi": "10.1103/PhysRevLett.14.57",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Penrose1965.md"
+      }
+    },
+    "Fixsen1996": {
+      "title": "The Cosmic Microwave Background Spectrum from the Full COBE/FIRAS Data Set",
+      "source_url": "https://arxiv.org/abs/astro-ph/9605054",
+      "identifiers": {
+        "doi": "10.1086/178173",
+        "doi_status": "present",
+        "arxiv": "astro-ph/9605054",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Fixsen1996.md"
+      }
+    },
+    "Frantzeskakis2010": {
+      "title": "Dark solitons in atomic Bose-Einstein condensates: from theory to experiments",
+      "source_url": "https://arxiv.org/abs/1004.4071",
+      "identifiers": {
+        "doi": "10.1088/1751-8113/43/21/213001",
+        "doi_status": "present",
+        "arxiv": "1004.4071",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Frantzeskakis2010.md"
+      }
+    },
+    "Salart2008": {
+      "title": "Testing spooky action at a distance",
+      "source_url": "https://arxiv.org/abs/0808.3316",
+      "identifiers": {
+        "doi": "10.1038/nature07121",
+        "doi_status": "present",
+        "arxiv": "0808.3316",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Salart2008.md"
+      }
+    },
+    "Yin2013": {
+      "title": "Lower Bound on the Speed of Nonlocal Correlations without Locality and Measurement Choice Loopholes",
+      "source_url": "https://harvest.aps.org/v2/journals/articles/10.1103/PhysRevLett.110.260407/fulltext",
+      "identifiers": {
+        "doi": "10.1103/PhysRevLett.110.260407",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "none-found"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Yin2013.md"
+      }
+    },
+    "BLV2005": {
+      "title": "Analogue Gravity",
+      "source_url": "https://arxiv.org/abs/gr-qc/0505065v2",
+      "identifiers": {
+        "doi": "10.12942/lrr-2005-12",
+        "doi_status": "present",
+        "arxiv": "gr-qc/0505065v2",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/BLV2005.md"
+      }
+    },
+    "Peschel2003": {
+      "title": "Calculation of reduced density matrices from correlation functions",
+      "source_url": "https://arxiv.org/abs/cond-mat/0212631",
+      "identifiers": {
+        "doi": "10.1088/0305-4470/36/14/101",
+        "doi_status": "present",
+        "arxiv": "cond-mat/0212631",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Peschel2003.md"
+      }
+    },
+    "Srednicki1993": {
+      "title": "Entropy and Area",
+      "source_url": "https://arxiv.org/abs/hep-th/9303048",
+      "identifiers": {
+        "doi": "10.1103/PhysRevLett.71.666",
+        "doi_status": "present",
+        "arxiv": "hep-th/9303048",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Srednicki1993.md"
+      }
+    },
+    "Unruh1981": {
+      "title": "Experimental Black-Hole Evaporation?",
+      "source_url": "https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.46.1351",
+      "identifiers": {
+        "doi": "10.1103/PhysRevLett.46.1351",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "paywalled",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": false,
+        "paragraph_exception": {
+          "kind": "paywalled-primary",
+          "reason": "The pre-arXiv full PDF is paywalled at APS; the official primary abstract directly states the qualitative sonic-horizon result cited by SSV."
+        },
+        "note": "notes/Unruh1981.md"
+      }
+    },
+    "KATRIN2022": {
+      "title": "First direct neutrino-mass measurement with sub-eV sensitivity",
+      "source_url": "https://arxiv.org/abs/2105.08533",
+      "identifiers": {
+        "doi": "10.1038/s41567-021-01463-1",
+        "doi_status": "present",
+        "arxiv": "2105.08533",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "MISREAD",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/KATRIN2022.md"
+      }
+    },
+    "MicroBooNE2022": {
+      "title": "Search for an Anomalous Excess of Charged-Current nu_e Interactions without Pions in the Final State with the MicroBooNE Experiment",
+      "source_url": "https://arxiv.org/abs/2110.14065",
+      "identifiers": {
+        "doi": "10.1103/PhysRevD.105.112004",
+        "doi_status": "present",
+        "arxiv": "2110.14065",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "MISATTRIBUTED",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/MicroBooNE2022.md"
+      }
+    },
+    "Planck2020": {
+      "title": "Planck 2018 results. VI. Cosmological parameters",
+      "source_url": "https://arxiv.org/abs/1807.06209",
+      "identifiers": {
+        "doi": "10.1051/0004-6361/201833910",
+        "doi_status": "present",
+        "arxiv": "1807.06209",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Planck2020.md"
+      }
+    },
+    "Steinhauer2016": {
+      "title": "Observation of quantum Hawking radiation and its entanglement in an analogue black hole",
+      "source_url": "https://arxiv.org/abs/1510.00621",
+      "identifiers": {
+        "doi": "10.1038/nphys3863",
+        "doi_status": "present",
+        "arxiv": "1510.00621",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Steinhauer2016.md"
+      }
+    },
+    "Endres2012": {
+      "title": "The 'Higgs' Amplitude Mode at the Two-Dimensional Superfluid-Mott Insulator Transition",
+      "source_url": "https://arxiv.org/abs/1204.5183",
+      "identifiers": {
+        "doi": "10.1038/nature11255",
+        "doi_status": "present",
+        "arxiv": "1204.5183",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Endres2012.md"
+      }
+    },
+    "GW170817": {
+      "title": "Multi-messenger Observations of a Binary Neutron Star Merger",
+      "source_url": "https://arxiv.org/abs/1710.05833",
+      "identifiers": {
+        "doi": "10.3847/2041-8213/aa91c9",
+        "doi_status": "present",
+        "arxiv": "1710.05833",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "MISREAD",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/GW170817.md"
+      }
+    },
+    "JacobsonEEq2016": {
+      "title": "Entanglement Equilibrium and the Einstein Equation",
+      "source_url": "https://arxiv.org/abs/1505.04753",
+      "identifiers": {
+        "doi": "10.1103/PhysRevLett.116.201101",
+        "doi_status": "present",
+        "arxiv": "1505.04753",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/JacobsonEEq2016.md"
+      }
+    },
+    "KamLANDZen2023": {
+      "title": "Search for the Majorana Nature of Neutrinos in the Inverted Mass Ordering Region with KamLAND-Zen",
+      "source_url": "https://arxiv.org/abs/2203.02139",
+      "identifiers": {
+        "doi": "10.1103/PhysRevLett.130.051801",
+        "doi_status": "present",
+        "arxiv": "2203.02139",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/KamLANDZen2023.md"
+      }
+    },
+    "Abel2020": {
+      "title": "Measurement of the permanent electric dipole moment of the neutron",
+      "source_url": "https://arxiv.org/abs/2001.11966",
+      "identifiers": {
+        "doi": "10.1103/PhysRevLett.124.081803",
+        "doi_status": "present",
+        "arxiv": "2001.11966",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Abel2020.md"
+      }
+    },
+    "AaronsonCarrollOuellette2014": {
+      "title": "Quantifying the Rise and Fall of Complexity in Closed Systems: The Coffee Automaton",
+      "source_url": "https://arxiv.org/abs/1405.6903",
+      "identifiers": {
+        "doi": null,
+        "doi_status": "none-known",
+        "arxiv": "1405.6903",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/AaronsonCarrollOuellette2014.md"
+      }
+    },
+    "Barenghi2014": {
+      "title": "Introduction to quantum turbulence",
+      "source_url": "https://arxiv.org/abs/1404.1909",
+      "identifiers": {
+        "doi": "10.1073/pnas.1400033111",
+        "doi_status": "present",
+        "arxiv": "1404.1909",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Barenghi2014.md"
+      }
+    },
+    "CasiniHuerta2009": {
+      "title": "Entanglement entropy in free quantum field theory",
+      "source_url": "https://arxiv.org/abs/0905.2562",
+      "identifiers": {
+        "doi": "10.1088/1751-8113/42/50/504007",
+        "doi_status": "present",
+        "arxiv": "0905.2562",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/CasiniHuerta2009.md"
+      }
+    },
     "Clisby2010": {
       "title": "Accurate estimate of the critical exponent nu for self-avoiding walks via a fast implementation of the pivot algorithm",
       "source_url": "https://arxiv.org/abs/1002.0494",
@@ -816,6 +1763,69 @@
         "paragraph_required": true,
         "paragraph_exception": null,
         "note": "notes/Clisby2010.md"
+      }
+    },
+    "CorleyJacobson1996": {
+      "title": "Hawking spectrum and high frequency dispersion",
+      "source_url": "https://arxiv.org/abs/hep-th/9601073",
+      "identifiers": {
+        "doi": "10.1103/PhysRevD.54.1568",
+        "doi_status": "present",
+        "arxiv": "hep-th/9601073",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "MISREAD",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/CorleyJacobson1996.md"
+      }
+    },
+    "CUORE2022": {
+      "title": "Search for Majorana neutrinos exploiting millikelvin cryogenics with CUORE",
+      "source_url": "https://arxiv.org/abs/2104.06906",
+      "identifiers": {
+        "doi": "10.1038/s41586-022-04497-4",
+        "doi_status": "present",
+        "arxiv": "2104.06906",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/CUORE2022.md"
+      }
+    },
+    "DUNE2020": {
+      "title": "Long-baseline neutrino oscillation physics potential of the DUNE experiment",
+      "source_url": "https://arxiv.org/abs/2006.16043",
+      "identifiers": {
+        "doi": "10.1140/epjc/s10052-020-08456-z",
+        "doi_status": "present",
+        "arxiv": "2006.16043",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/DUNE2020.md"
       }
     },
     "HaldaneWu1985": {
@@ -843,6 +1853,90 @@
         "proxy": "polkinghorne2021"
       }
     },
+    "HK2018": {
+      "title": "Hyper-Kamiokande Design Report",
+      "source_url": "https://arxiv.org/abs/1805.04163",
+      "identifiers": {
+        "doi": null,
+        "doi_status": "none-known",
+        "arxiv": "1805.04163",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/HK2018.md"
+      }
+    },
+    "Jacobson1995": {
+      "title": "Thermodynamics of Spacetime: The Einstein Equation of State",
+      "source_url": "https://arxiv.org/abs/gr-qc/9504004",
+      "identifiers": {
+        "doi": "10.1103/PhysRevLett.75.1260",
+        "doi_status": "present",
+        "arxiv": "gr-qc/9504004",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Jacobson1995.md"
+      }
+    },
+    "Lloyd2011": {
+      "title": "Closed timelike curves via postselection: Theory and experimental test of consistency",
+      "source_url": "https://arxiv.org/abs/1005.2219",
+      "identifiers": {
+        "doi": "10.1103/PhysRevLett.106.040403",
+        "doi_status": "present",
+        "arxiv": "1005.2219",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Lloyd2011.md"
+      }
+    },
+    "LEGEND2021": {
+      "title": "LEGEND-1000 Preconceptual Design Report",
+      "source_url": "https://arxiv.org/abs/2107.11462",
+      "identifiers": {
+        "doi": null,
+        "doi_status": "none-known",
+        "arxiv": "2107.11462",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/LEGEND2021.md"
+      }
+    },
     "Villois2017": {
       "title": "Universal and nonuniversal aspects of vortex reconnections in superfluids",
       "source_url": "https://arxiv.org/abs/1612.00386",
@@ -862,6 +1956,174 @@
         "paragraph_required": true,
         "paragraph_exception": null,
         "note": "notes/Villois2017.md"
+      }
+    },
+    "Visser1998": {
+      "title": "Acoustic black holes: horizons, ergospheres, and Hawking radiation",
+      "source_url": "https://arxiv.org/abs/gr-qc/9712010",
+      "identifiers": {
+        "doi": "10.1088/0264-9381/15/6/024",
+        "doi_status": "present",
+        "arxiv": "gr-qc/9712010",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Visser1998.md"
+      }
+    },
+    "chemin2009": {
+      "title": "HI kinematics and dynamics of Messier 31",
+      "source_url": "https://arxiv.org/abs/0909.3846",
+      "identifiers": {
+        "doi": "10.1088/0004-637X/705/2/1395",
+        "doi_status": "present",
+        "arxiv": "0909.3846",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/chemin2009.md"
+      }
+    },
+    "flynn2026": {
+      "title": "A New Empirical Fit to Galaxy Rotation Curves",
+      "source_url": "https://arxiv.org/abs/2601.00522",
+      "identifiers": {
+        "doi": "10.3389/fspas.2025.1680387",
+        "doi_status": "present",
+        "arxiv": "2601.00522",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/flynn2026.md"
+      }
+    },
+    "gebhardt2001": {
+      "title": "M33: A Galaxy with No Supermassive Black Hole",
+      "source_url": "https://arxiv.org/abs/astro-ph/0107135",
+      "identifiers": {
+        "doi": "10.1086/323481",
+        "doi_status": "present",
+        "arxiv": "astro-ph/0107135",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/gebhardt2001.md"
+      }
+    },
+    "ibata2013": {
+      "title": "A Vast Thin Plane of Co-rotating Dwarf Galaxies Orbiting the Andromeda Galaxy",
+      "source_url": "https://arxiv.org/abs/1301.0446",
+      "identifiers": {
+        "doi": "10.1038/nature11717",
+        "doi_status": "present",
+        "arxiv": "1301.0446",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/ibata2013.md"
+      }
+    },
+    "lelli2016": {
+      "title": "SPARC: Mass Models for 175 Disk Galaxies with Spitzer Photometry and Accurate Rotation Curves",
+      "source_url": "https://arxiv.org/abs/1606.09251",
+      "identifiers": {
+        "doi": "10.3847/0004-6256/152/6/157",
+        "doi_status": "present",
+        "arxiv": "1606.09251",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/lelli2016.md"
+      }
+    },
+    "mcgaugh2012": {
+      "title": "The Baryonic Tully-Fisher Relation of Gas Rich Galaxies as a Test of LCDM and MOND",
+      "source_url": "https://arxiv.org/abs/1107.2934",
+      "identifiers": {
+        "doi": "10.1088/0004-6256/143/2/40",
+        "doi_status": "present",
+        "arxiv": "1107.2934",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/mcgaugh2012.md"
+      }
+    },
+    "mcgaugh2016": {
+      "title": "The Radial Acceleration Relation in Rotationally Supported Galaxies",
+      "source_url": "https://arxiv.org/abs/1609.05917",
+      "identifiers": {
+        "doi": "10.1103/PhysRevLett.117.201101",
+        "doi_status": "present",
+        "arxiv": "1609.05917",
+        "arxiv_status": "present"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/mcgaugh2016.md"
       }
     },
     "barcelo2011": {
@@ -1150,6 +2412,380 @@
         "paragraph_exception": null,
         "note": "notes/zloshchastiev2023_pramana_rotcurves.md"
       }
+    },
+    "hockneyeastwood1988": {
+      "title": "Computer Simulation Using Particles",
+      "source_url": "https://djvu.online/file/cjOfwRgltjv1g",
+      "identifiers": {
+        "doi": "10.1887/0852743920",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "not-applicable",
+        "other": {
+          "isbn": "9780852743928"
+        }
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/hockneyeastwood1988.md"
+      }
+    },
+    "linshu1964": {
+      "title": "On the spiral structure of disk galaxies",
+      "source_url": "https://adsabs.harvard.edu/pdf/1964ApJ...140..646L",
+      "identifiers": {
+        "doi": "10.1086/147955",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/linshu1964.md"
+      }
+    },
+    "toomre1981": {
+      "title": "What amplifies the spirals?",
+      "source_url": "https://ui.adsabs.harvard.edu/abs/1981seng.proc..111T/abstract",
+      "identifiers": {
+        "doi": null,
+        "doi_status": "none-known",
+        "arxiv": null,
+        "arxiv_status": "not-applicable",
+        "other": {
+          "bibcode": "1981seng.proc..111T",
+          "isbn": "9780521239073"
+        }
+      },
+      "access": {
+        "status": "unavailable",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/toomre1981.md"
+      }
+    },
+    "Boltzmann1877": {
+      "title": "Über die Beziehung zwischen dem zweiten Hauptsatze der mechanischen Wärmetheorie und der Wahrscheinlichkeitsrechnung respektive den Sätzen über das Wärmegleichgewicht",
+      "source_url": "https://mdpi-res.com/d_attachment/entropy/entropy-17-01971/article_deploy/entropy-17-01971.pdf",
+      "identifiers": {
+        "doi": "10.3390/e17041971",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv",
+        "other": {
+          "identifier_scope": "DOI identifies the open 2015 English translation; no DOI is known for the 1877 original"
+        }
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Boltzmann1877.md"
+      }
+    },
+    "Loschmidt1876": {
+      "title": "Über den Zustand des Wärmegleichgewichtes eines Systems von Körpern mit Rücksicht auf die Schwerkraft",
+      "source_url": "https://loschmidt.chemi.muni.cz/biography/pdf/warmegleichgewichtes.pdf",
+      "identifiers": {
+        "doi": null,
+        "doi_status": "none-known",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Loschmidt1876.md"
+      }
+    },
+    "Poincare1890": {
+      "title": "Sur le problème des trois corps et les équations de la dynamique",
+      "source_url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/4919-11511_2006_Article_BF02392508.pdf",
+      "identifiers": {
+        "doi": "10.1007/BF02392508",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {
+        "status": "open",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "MISREAD",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Poincare1890.md"
+      }
+    },
+    "Reichenbach1956": {
+      "title": "The Direction of Time",
+      "source_url": "https://archive.org/details/directionoftimee0000reic",
+      "identifiers": {
+        "doi": null,
+        "doi_status": "none-known",
+        "arxiv": null,
+        "arxiv_status": "not-applicable"
+      },
+      "access": {
+        "status": "unavailable",
+        "checked": "2026-07-28"
+      },
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": false,
+        "paragraph_exception": {
+          "kind": "unavailable-primary",
+          "reason": "The book is borrow-only; the page-specific passage and interpretation were checked through an open scholarly reconstruction."
+        },
+        "note": "notes/Reichenbach1956.md"
+      }
+    },
+    "Bennett1988": {
+      "title": "Logical Depth and Physical Complexity",
+      "source_url": "https://www.cs.ucdavis.edu/~doty/papers/LogicalDepthAndPhysicalComplexity.pdf",
+      "identifiers": {
+        "doi": null,
+        "doi_status": "none-known",
+        "arxiv": null,
+        "arxiv_status": "not-applicable"
+      },
+      "access": {"status": "open", "checked": "2026-07-28"},
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Bennett1988.md"
+      }
+    },
+    "Bjerknes1906": {
+      "title": "Fields of Force",
+      "source_url": "https://archive.org/details/fieldsofforcecou00bjer",
+      "identifiers": {
+        "doi": null,
+        "doi_status": "none-known",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv",
+        "other": {"oclc": "10616459"}
+      },
+      "access": {"status": "open", "checked": "2026-07-28"},
+      "verification": {
+        "status": "MISATTRIBUTED",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Bjerknes1906.md"
+      }
+    },
+    "BKLS1986": {
+      "title": "Quantum source of entropy for black holes",
+      "source_url": "https://harvest.aps.org/v2/journals/articles/10.1103/PhysRevD.34.373/fulltext",
+      "identifiers": {
+        "doi": "10.1103/PhysRevD.34.373",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {"status": "open", "checked": "2026-07-28"},
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/BKLS1986.md"
+      }
+    },
+    "MorrisThorne1988": {
+      "title": "Wormholes in spacetime and their use for interstellar travel",
+      "source_url": "https://archive.org/details/pdfy--5NLGQyfpB61dmyG",
+      "identifiers": {
+        "doi": "10.1119/1.15620",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {"status": "open", "checked": "2026-07-28"},
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/MorrisThorne1988.md"
+      }
+    },
+    "Penrose1971": {
+      "title": "Extraction of Rotational Energy from a Black Hole",
+      "source_url": "https://www.nature.com/articles/physci229177a0",
+      "identifiers": {
+        "doi": "10.1038/physci229177a0",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {"status": "paywalled", "checked": "2026-07-28"},
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": false,
+        "paragraph_exception": {
+          "kind": "paywalled-primary",
+          "reason": "The official primary abstract states the extraction result; full text is subscription-only."
+        },
+        "note": "notes/Penrose1971.md"
+      }
+    },
+    "Penrose1979": {
+      "title": "Singularities and Time-Asymmetry",
+      "source_url": "https://personal.lse.ac.uk/robert49/PPB/pdf/Penrose1979a.pdf",
+      "identifiers": {
+        "doi": null,
+        "doi_status": "none-known",
+        "arxiv": null,
+        "arxiv_status": "not-applicable"
+      },
+      "access": {"status": "open", "checked": "2026-07-28"},
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Penrose1979.md"
+      }
+    },
+    "Schwinger": {
+      "title": "On Gauge Invariance and Vacuum Polarization",
+      "source_url": "https://harvest.aps.org/v2/journals/articles/10.1103/PhysRev.82.664/fulltext",
+      "identifiers": {
+        "doi": "10.1103/PhysRev.82.664",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {"status": "open", "checked": "2026-07-28"},
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": true,
+        "paragraph_exception": null,
+        "note": "notes/Schwinger.md"
+      }
+    },
+    "SumnersWhittington1988": {
+      "title": "Knots in self-avoiding walks",
+      "source_url": "https://doi.org/10.1088/0305-4470/21/7/030",
+      "identifiers": {
+        "doi": "10.1088/0305-4470/21/7/030",
+        "doi_status": "present",
+        "arxiv": null,
+        "arxiv_status": "pre-arxiv"
+      },
+      "access": {"status": "paywalled", "checked": "2026-07-28"},
+      "verification": {
+        "status": "OK",
+        "evidence_mode": "quotation",
+        "paragraph_required": false,
+        "paragraph_exception": {
+          "kind": "paywalled-primary",
+          "reason": "The official abstract states the theorem; full text was not obtained openly."
+        },
+        "note": "notes/SumnersWhittington1988.md"
+      }
+    },
+    "Albert2000": {
+      "title": "Time and Chance",
+      "source_url": "https://openlibrary.org/books/OL7670946M/Time_and_Chance",
+      "identifiers": {"doi": null, "doi_status": "none-known", "arxiv": null, "arxiv_status": "not-applicable", "other": {"isbn": "9780674003170"}},
+      "access": {"status": "unavailable", "checked": "2026-07-28"},
+      "verification": {"status": "OK", "evidence_mode": "quotation", "paragraph_required": false, "paragraph_exception": {"kind": "unavailable-primary", "reason": "The closed book's catalogue opening and established Past-Hypothesis scope resolve the qualitative use."}, "note": "notes/Albert2000.md"}
+    },
+    "Barbour1999": {
+      "title": "The End of Time",
+      "source_url": "https://books.google.com/books?id=mV_0DAAAQBAJ",
+      "identifiers": {"doi": null, "doi_status": "none-known", "arxiv": null, "arxiv_status": "not-applicable", "other": {"isbn": "9780195117295"}},
+      "access": {"status": "unavailable", "checked": "2026-07-28"},
+      "verification": {"status": "OK", "evidence_mode": "quotation", "paragraph_required": false, "paragraph_exception": {"kind": "unavailable-primary", "reason": "The full book is closed; publisher metadata directly confirms its timeless ontology."}, "note": "notes/Barbour1999.md"}
+    },
+    "Godel1949": {
+      "title": "An Example of a New Type of Cosmological Solutions of Einstein's Field Equations of Gravitation",
+      "source_url": "https://journals.aps.org/rmp/abstract/10.1103/RevModPhys.21.447",
+      "identifiers": {"doi": "10.1103/RevModPhys.21.447", "doi_status": "present", "arxiv": null, "arxiv_status": "pre-arxiv"},
+      "access": {"status": "paywalled", "checked": "2026-07-28"},
+      "verification": {"status": "OK", "evidence_mode": "quotation", "paragraph_required": false, "paragraph_exception": {"kind": "paywalled-primary", "reason": "The official record identifies the defining Gödel solution; the full APS text was not obtained."}, "note": "notes/Godel1949.md"}
+    },
+    "Landau_Fluid": {
+      "title": "Fluid Mechanics, 2nd edition",
+      "source_url": "https://shop.elsevier.com/books/fluid-mechanics/landau/978-0-08-033933-7",
+      "identifiers": {"doi": null, "doi_status": "none-known", "arxiv": null, "arxiv_status": "not-applicable", "other": {"isbn": "9780080339337"}},
+      "access": {"status": "paywalled", "checked": "2026-07-28"},
+      "verification": {"status": "OK", "evidence_mode": "quotation", "paragraph_required": false, "paragraph_exception": {"kind": "paywalled-primary", "reason": "The cited section is closed; its monopole equation was independently checked against an open standard derivation."}, "note": "notes/Landau_Fluid.md"}
+    },
+    "LloydPagels1988": {
+      "title": "Complexity as thermodynamic depth",
+      "source_url": "https://cds.cern.ch/record/190035",
+      "identifiers": {"doi": "10.1016/0003-4916(88)90094-2", "doi_status": "present", "arxiv": null, "arxiv_status": "pre-arxiv"},
+      "access": {"status": "open", "checked": "2026-07-28"},
+      "verification": {"status": "OK", "evidence_mode": "quotation", "paragraph_required": true, "paragraph_exception": null, "note": "notes/LloydPagels1988.md"}
+    },
+    "MadrasSlade1993": {
+      "title": "The Self-Avoiding Walk",
+      "source_url": "https://link.springer.com/book/10.1007/978-1-4612-4132-4",
+      "identifiers": {"doi": "10.1007/978-1-4612-4132-4", "doi_status": "present", "arxiv": null, "arxiv_status": "none-found"},
+      "access": {"status": "paywalled", "checked": "2026-07-28"},
+      "verification": {"status": "MISREAD", "evidence_mode": "quotation", "paragraph_required": false, "paragraph_exception": {"kind": "paywalled-primary", "reason": "The closed monograph's publisher description explicitly distinguishes unresolved rigorous counts from non-rigorous consensus."}, "note": "notes/MadrasSlade1993.md"}
+    },
+    "Price1996": {
+      "title": "Time's Arrow and Archimedes' Point",
+      "source_url": "https://api.pageplace.de/preview/DT0400.9780198026136_A23604866/preview-9780198026136_A23604866.pdf",
+      "identifiers": {"doi": "10.1093/acprof:oso/9780195117981.001.0001", "doi_status": "present", "arxiv": null, "arxiv_status": "not-applicable", "other": {"isbn": "9780195117981"}},
+      "access": {"status": "open", "checked": "2026-07-28"},
+      "verification": {"status": "OK", "evidence_mode": "quotation", "paragraph_required": true, "paragraph_exception": null, "note": "notes/Price1996.md"}
+    },
+    "Rovelli2018": {
+      "title": "The Order of Time",
+      "source_url": "https://www.penguinrandomhouse.com/books/551483/the-order-of-time-by-carlo-rovelli/",
+      "identifiers": {"doi": null, "doi_status": "none-known", "arxiv": null, "arxiv_status": "not-applicable", "other": {"isbn": "9780735216112"}},
+      "access": {"status": "unavailable", "checked": "2026-07-28"},
+      "verification": {"status": "OK", "evidence_mode": "quotation", "paragraph_required": false, "paragraph_exception": {"kind": "unavailable-primary", "reason": "The full book is closed; the official publisher description directly supports the qualitative comparison."}, "note": "notes/Rovelli2018.md"}
+    },
+    "Russell1913": {
+      "title": "On the Notion of Cause",
+      "source_url": "https://web.mit.edu/bskow/www/215-S12/russell_on-the-notion-of-cause.pdf",
+      "identifiers": {"doi": "10.1093/aristotelian/13.1.1", "doi_status": "present", "arxiv": null, "arxiv_status": "pre-arxiv"},
+      "access": {"status": "open", "checked": "2026-07-28"},
+      "verification": {"status": "OK", "evidence_mode": "quotation", "paragraph_required": true, "paragraph_exception": null, "note": "notes/Russell1913.md"}
     }
   }
 }

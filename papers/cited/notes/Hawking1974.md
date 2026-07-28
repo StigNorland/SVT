@@ -1,31 +1,31 @@
-# Hawking1974 — citation record
+# Hawking1974 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+S. W. Hawking, *Black hole explosions?*, Nature **248**, 30–31 (1974).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source page: DOI 10.1038/248030a0. The publisher article text was
+accessible when checked on 2026-07-28, although a redistributable local PDF
+was not obtained.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-V `main.tex:547–552` cites this letter and Hawking1975 for the standard
+Schwarzschild black-hole temperature
+\(T_H=\hbar c^3/(8\pi k_BGM)\), against which its own result differs by a
+factor of four.
 
-```tex
-S.~W.~Hawking, ``Black hole explosions?,''
-\textit{Nature}~\textbf{248}, 30--31 (1974).
-```
+## Accessible primary-source evidence
 
-## Uses in the series
+The opening result on printed p. 30 says that:
 
-- `papers/SSV-V/main.tex:547`
+> any black hole will create and emit particles such as neutrinos or photons
+> at just the rate that one would expect
 
-## Source and identifiers
+The displayed formula in the same sentence gives the surface-gravity
+temperature with the \(2\pi\) denominator (in the paper's units) and the
+inverse-mass estimate for a Schwarzschild hole.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** This is Hawking's original short announcement of thermal
+black-hole emission and its temperature scale. Hawking1975 provides the
+detailed derivation and is the stronger source for the fully restored
+\(\hbar,c,G,k_B\) formula. Neither paper supports SSV's alternative horizon
+location or its unresolved factor-of-four discrepancy.

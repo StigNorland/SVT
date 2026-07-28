@@ -1,31 +1,28 @@
-# ibata2013 — citation record
+# ibata2013 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+R. A. Ibata *et al.*, *A Vast Thin Plane of Co-rotating Dwarf Galaxies
+Orbiting the Andromeda Galaxy*, Nature **493**, 62–65 (2013).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: arXiv:1301.0446 · DOI: 10.1038/nature11717 · local PDF sha256
+`37da1ba8a818bd51`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-VI `main.tex:854–864` refers to the observed co-rotating M31 dwarf
+satellites while retiring an earlier SSV interpretation of them as a nodal
+sheet.
 
-```tex
-R.~A.\ Ibata et al., ``A vast, thin plane of corotating dwarf galaxies orbiting the
-Andromeda galaxy,'' \textit{Nature}\ \textbf{493}, 62--65 (2013).
-```
+## Source evidence
 
-## Uses in the series
+The source characterizes the geometry on p. 3:
 
-- `papers/SSV-VI/main.tex:859`
+> The structure is vast: at least ∼400 kpc in diameter, but also extremely
+> thin, with a perpendicular scatter <14.1 kpc (99% confidence).
 
-## Source and identifiers
+Its radial-velocity analysis finds a coherent planar structure of 13 satellites
+with rms thickness `12.6±0.6 kpc`; satellites on opposite sides of M31 mostly
+have opposite line-of-sight velocity signs, implying the same sense of rotation.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** “Corotating dwarfs” accurately describes the cited
+observation. SSV explicitly labels its former nodal-sheet explanation retired
+and does not attribute that interpretation to Ibata *et al.*

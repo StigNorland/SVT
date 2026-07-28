@@ -1,34 +1,44 @@
-# Jacobson1995 — citation record
+# Jacobson1995 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+T. Jacobson, *Thermodynamics of Spacetime: The Einstein Equation of State*,
+Phys. Rev. Lett. **75**, 1260–1263 (1995).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: arXiv:gr-qc/9504004 · DOI:
+10.1103/PhysRevLett.75.1260 · local PDF sha256 `85ed65e912baf62c`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-VII-b cites the paper at `main.tex:89`, `main.tex:306`, and
+`main.tex:367` for the local-Rindler-horizon thermodynamic route from the
+Clausius relation to the Einstein field equation.
+
+## Source equation and explanation
+
+The abstract states:
+
+> The key idea is to demand that this relation hold for all the local Rindler
+> causal horizons through each spacetime point.
+
+On pp. 4–5 the source identifies horizon heat flux as
 
 ```tex
-T.\ Jacobson, ``Thermodynamics of Spacetime: The Einstein Equation of State,''
-\textit{Phys.\ Rev.\ Lett.}\ \textbf{75}, 1260--1263 (1995).
-[arXiv:gr-qc/9504004]
+\delta Q=-\kappa\int_H \lambda T_{ab}k^ak^b\,d\lambda\,dA,
 ```
 
-## Uses in the series
+uses entropy variation `dS=ηδA` and the Unruh temperature
+`T=\hbar\kappa/(2π)`, and obtains Eq. (6):
 
-- `papers/SSV-VII-b/main.tex:89`
-- `papers/SSV-VII-b/main.tex:306`
-- `papers/SSV-VII-b/main.tex:367`
+```tex
+R_{ab}-\tfrac12 Rg_{ab}+\Lambda g_{ab}
+  =\frac{2\pi}{\hbar\eta}T_{ab}.
+```
 
-## Source and identifiers
+The explanation immediately preceding Eq. (6) says that imposing
+`δQ=T dS` for every null generator gives a tensor relation between `T_ab` and
+`R_ab`; stress-energy conservation and the contracted Bianchi identity fix the
+remaining scalar term to `-R/2+Λ`.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** This is the result SSV-VII-b attributes to Jacobson. The
+paper verifies the thermodynamic implication; SSV's proposed superfluid
+realisation of each ingredient is a separate model claim and is not evidence
+supplied by this citation.

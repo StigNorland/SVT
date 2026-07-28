@@ -1,31 +1,26 @@
-# Russell1913 — citation record
+# Russell1913 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+B. Russell, *On the Notion of Cause*, *Proceedings of the Aristotelian
+Society* **13**, 1–26 (1913), doi:10.1093/aristotelian/13.1.1.
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Open scholarly copy:
+`https://web.mit.edu/bskow/www/215-S12/russell_on-the-notion-of-cause.pdf`.
+The work predates arXiv. Local PDF sha256 `ed7a8c1af2824bbc`.
 
-## Bibliographic record
+## SSV usage and primary result
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:201–217` says mature dynamics relates states through
+time-symmetric laws rather than containing an observable productive relation
+in which causes make effects happen. Russell writes (p. 14):
 
-```tex
-B.~Russell, ``On the notion of cause,'' \textit{Proc.~Aristotelian Soc.}
-\textbf{13}, 1--26 (1913).
-```
+> In the motions of mutually gravitating bodies, there is nothing that can
+> be called a cause, and nothing that can be called an effect
 
-## Uses in the series
+He continues that there is instead a formula—differential equations holding
+at every instant—and argues that the traditional law of causality is absent
+from advanced physics.
 
-- `papers/SSV-III/main.tex:205`
-
-## Source and identifiers
-
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** This directly supports the philosophical claim SSV
+attributes to Russell. It is an argument about the language and structure of
+fundamental theory, not an empirical proof that no useful higher-level causal
+relations exist.

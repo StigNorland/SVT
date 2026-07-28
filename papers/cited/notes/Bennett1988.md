@@ -1,32 +1,30 @@
-# Bennett1988 — citation record
+# Bennett1988 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+C. H. Bennett, *Logical Depth and Physical Complexity*, in R. Herken (ed.),
+*The Universal Turing Machine: A Half-Century Survey*, pp. 227–257 (1988).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Open author copy:
+`https://www.cs.ucdavis.edu/~doty/papers/LogicalDepthAndPhysicalComplexity.pdf`.
+No DOI is known and arXiv is not applicable. Local PDF sha256
+`05161d7a124f1494`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:1288–1299` distinguishes its monotone entropy from
+Bennett logical depth and says genuine complexity can rise and later fall.
 
-```tex
-C.~H.~Bennett, ``Logical depth and physical complexity,'' in \textit{The
-Universal Turing Machine: A Half-Century Survey}, R.~Herken (ed.), Oxford
-University Press, 227--257 (1988).
-```
+## Source result
 
-## Uses in the series
+The abstract defines the cited measure:
 
-- `papers/SSV-III/main.tex:1294`
+> We formalize this distinction by defining an object’s “logical depth” as
+> the time required by a standard universal Turing machine to generate it
 
-## Source and identifiers
+The chapter proves a slow-growth law and explores conditions for physical
+systems to generate depth. It does not prove that logical depth in every
+closed relaxing system must rise and then fall; SSV's paired coffee-automaton
+citation supplies an example of that qualitative pattern.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK` with scope.** Bennett is the correct source for logical depth.
+The universal non-monotonicity wording is not a theorem of this chapter and
+should be read as SSV's contrast, illustrated by Aaronson–Carroll–Ouellette.

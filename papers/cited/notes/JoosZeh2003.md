@@ -1,32 +1,33 @@
-# JoosZeh2003 — citation record
+# JoosZeh2003 — citation evidence with primary-access limitation
 
-**Review status: `NOT-REVIEWED`.**
+E. Joos, H. D. Zeh, C. Kiefer, D. Giulini, J. Kupsch, and
+I.-O. Stamatescu, *Decoherence and the Appearance of a Classical World in
+Quantum Theory*, 2nd ed. (Springer, 2003).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source page: DOI 10.1007/978-3-662-05328-7 · arXiv not applicable.
+The book is closed-access. Its publisher description and contents were
+checked on 2026-07-28.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:1375–1385` says its quantum reversal argument is closer in
+spirit to einselection and decoherence: event information becomes entangled
+with environmental degrees of freedom, a local subsystem loses its prior
+pure-state description, and reversal would require control of the extended
+environment. The citation is paired with Zurek2003.
 
-```tex
-E.~Joos, H.~D.~Zeh, C.~Kiefer, D.~Giulini, J.~Kupsch, and I.-O.~Stamatescu,
-\textit{Decoherence and the Appearance of a Classical World in Quantum Theory}, 2nd ed.,
-Springer, 2003.
-```
+## Accessible record and open proxy
 
-## Uses in the series
+The official contents identify Chapter 3 as *Decoherence Through Interaction
+with the Environment*, and the publisher describes the second edition as a
+treatment of the established phenomenon, its interpretation, and its
+applications. The detailed local evidence is supplied by the pinned open
+Zurek2003 review (local PDF sha256 `d3e5276d515209a3`), which records
+environment-induced entanglement, local suppression of coherence,
+environmental records, and compatibility with global unitary evolution.
 
-- `papers/SSV-III/main.tex:1377`
-
-## Source and identifiers
-
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** The book is an appropriate qualitative reference for
+environmental decoherence, and the paired open primary review independently
+supports the specific mechanism used in the comparison. Neither source proves
+SSV's stronger claim that no local agent in its proposed medium can assemble
+the global inverse operation; that remains an SSV argument.

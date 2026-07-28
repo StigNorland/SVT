@@ -1,31 +1,37 @@
-# Lindblad1975 — citation record
+# Lindblad1975 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+G. Lindblad, *Completely positive maps and entropy inequalities*,
+Commun. Math. Phys. **40**, 147–151 (1975).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source page: DOI 10.1007/BF01609396. This pre-arXiv article's full
+text was paywalled when checked on 2026-07-28; its official bibliographic
+record and abstract remain accessible.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:999–1023` invokes monotonicity of quantum relative entropy
+under a completely positive trace-preserving map. It applies that result to a
+proposed block transformation \(\mathcal R_b\), a fixed local-equilibrium
+reference \(\sigma\), and an entropy-production functional.
 
-```tex
-G.~Lindblad, ``Completely positive maps and entropy inequalities,''
-\textit{Commun.~Math.~Phys.} \textbf{40}, 147--151 (1975).
-```
+## Accessible primary-source evidence
 
-## Uses in the series
+The publisher/INSPIRE abstract states:
 
-- `papers/SSV-III/main.tex:1007`
+> It is proved that the relative entropy for a quantum system is
+> non-increasing under a trace-preserving completely positive map. The proof
+> is based on the strong sub-additivity property of the entropy.
 
-## Source and identifiers
+That is precisely the data-processing theorem cited in the first step. The
+inaccessible full text prevents paragraph-level local checking, so this
+record waives the full-paragraph requirement under the explicit
+`paywalled-primary` exception.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** Lindblad supports
+\(D(\mathcal R_b\rho\Vert\mathcal R_b\sigma)\leq D(\rho\Vert\sigma)\).
+Using \(\mathcal R_b\sigma=\sigma\) then gives monotonic decrease relative to
+that reference. The citation does not itself establish that SSV's proposed
+block transformation is CPTP, that its chosen \(\sigma\) is a fixed point, or
+that the paper's separately defined \(dS/d\ln b\) is exactly the decrease of
+relative entropy; those premises and the sign convention must be supplied by
+SSV.

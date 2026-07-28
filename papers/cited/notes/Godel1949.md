@@ -1,31 +1,20 @@
-# Godel1949 — citation record
+# Godel1949 — citation evidence with primary-access limitation
 
-**Review status: `NOT-REVIEWED`.**
+K. Gödel, *An Example of a New Type of Cosmological Solutions of Einstein's
+Field Equations of Gravitation*, *Reviews of Modern Physics* **21**, 447–450
+(1949), doi:10.1103/RevModPhys.21.447.
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Official record:
+`https://journals.aps.org/rmp/abstract/10.1103/RevModPhys.21.447`. The full
+APS text was not openly obtained and the work predates arXiv.
 
-## Bibliographic record
+## SSV usage and result
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:1387–1400` lists Gödel's cosmology as a GR solution
+containing closed timelike curves. Gödel's construction is an exact rotating,
+homogeneous solution of Einstein's equations; its timelike curves can close,
+so the metric lacks a global temporal ordering.
 
-```tex
-K.~Gödel, ``An example of a new type of cosmological solutions of Einstein's field
-equations of gravitation,'' \textit{Rev.~Mod.~Phys.} \textbf{21}, 447--450 (1949).
-```
-
-## Uses in the series
-
-- `papers/SSV-III/main.tex:1393`
-
-## Source and identifiers
-
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** This is the defining primary example for the claim. The
+citation establishes mathematical admissibility within GR, not physical
+realism for our universe and not SSV's proposed reinterpretation of a CTC.

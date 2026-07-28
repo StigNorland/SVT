@@ -1,30 +1,28 @@
-# MadrasSlade1993 — citation record
+# MadrasSlade1993 — citation evidence with primary-access limitation
 
-**Review status: `NOT-REVIEWED`.**
+N. Madras and G. Slade, *The Self-Avoiding Walk* (Birkhäuser, 1993),
+doi:10.1007/978-1-4612-4132-4.
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Publisher record:
+`https://link.springer.com/book/10.1007/978-1-4612-4132-4`. No arXiv version
+was found and the book is closed-access.
 
-## Bibliographic record
+## SSV usage and source scope
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:893–903` calls the three-dimensional polygon asymptotic
+\(p_n\sim A\mu^n n^\theta\), with
+\(\theta=\alpha-3=-(1+3\nu)\), “known” and cites this monograph. The
+publisher's description emphasizes the opposite rigorous status:
 
-```tex
-N.~Madras and G.~Slade, \textit{The Self-Avoiding Walk}, Birkh\"auser, Boston, 1993.
-```
+> we do not know much about how far an n-step self-avoiding walk typically
+> travels from its starting point, or even how many such walks there are
 
-## Uses in the series
+The book distinguishes rigorous theorems from physics consensus and
+non-rigorous scaling methods. In three dimensions the precise exponent form
+and hyperscaling substitution are scaling assumptions, not established
+theorems of the cited monograph.
 
-- `papers/SSV-III/main.tex:895`
-
-## Source and identifiers
-
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `MISREAD`.** The book is relevant background, but “is known”
+overstates the result's rigorous status. SSV should label the displayed
+asymptotic and exponent relation as the accepted scaling ansatz (or cite a
+source that explicitly makes that non-rigorous claim).

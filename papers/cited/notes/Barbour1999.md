@@ -1,31 +1,23 @@
-# Barbour1999 — citation record
+# Barbour1999 — citation evidence with primary-access limitation
 
-**Review status: `NOT-REVIEWED`.**
+J. Barbour, *The End of Time: The Next Revolution in Physics* (Oxford
+University Press, 1999), ISBN 9780195117295.
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Publisher-linked record:
+`https://books.google.com/books?id=mV_0DAAAQBAJ`. No DOI is known and arXiv
+is not applicable. The full book was not openly obtained.
 
-## Bibliographic record
+## SSV usage and evidence
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:163–179` says its view of time as physical change rather
+than an independently existing dimension is closer in spirit to Barbour's
+relational treatment. The publisher description says:
 
-```tex
-J.~Barbour, \textit{The End of Time: The Next Revolution in Physics}, Oxford University
-Press, 1999.
-```
+> Barbour argues that the holy grail of physicists—the unification of
+> Einstein's general relativity with quantum mechanics—may well spell the
+> end of time
 
-## Uses in the series
-
-- `papers/SSV-III/main.tex:168`
-
-## Source and identifiers
-
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK` with analogy scope.** Barbour is an appropriate source for a
+timeless/configurational ontology. His view does not derive SSV's local
+update-rate formula and is not identical to a persisting medium whose state
+changes; “closer in spirit” is the warranted strength.

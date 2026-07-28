@@ -1,31 +1,32 @@
-# Srednicki1993 — citation record
+# Srednicki1993 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+M. Srednicki, *Entropy and Area*, Phys. Rev. Lett. **71**, 666–669 (1993).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: arXiv:hep-th/9303048v2 · DOI:
+10.1103/PhysRevLett.71.666 · local PDF sha256 `aed88ccf9e75cfb2`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-V `main.tex:463–471` cites Srednicki for the area-law entanglement entropy
+of a short-range-correlated ground state with a UV cutoff, as conceptual
+support for its numerical Bogoliubov-vacuum calculation.
 
-```tex
-M.~Srednicki, ``Entropy and area,''
-\textit{Phys.~Rev.~Lett.}~\textbf{71}, 666--669 (1993).
-```
+## Source result and explanation
 
-## Uses in the series
+The abstract, PDF p. 1, states the calculation and scaling:
 
-- `papers/SSV-V/main.tex:466`
+> The ground state density matrix for a massless free field is traced over the
+> degrees of freedom residing inside an imaginary sphere; the resulting
+> entropy is shown to be proportional to the area (and not the volume) of the
+> sphere.
 
-## Source and identifiers
+The calculation discretizes a free massless scalar field radially with UV
+cutoff `M=a^{-1}`. Equation (22), printed p. 5, gives
+`S=0.30 M^2R^2`; the conclusion, printed p. 6, describes this as entropy
+proportional to the inaccessible region's surface area.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** The source directly establishes an area law for the
+vacuum entanglement entropy in the stated free-field spherical-cut setup. It
+does not establish SSV's numerical coefficient, inhomogeneous acoustic metric,
+or claim of universality to five percent; those remain results of SSV's own
+calculation rather than facts supplied by this citation.

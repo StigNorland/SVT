@@ -1,32 +1,37 @@
-# mcgaugh2016 — citation record
+# mcgaugh2016 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+S. S. McGaugh, F. Lelli, and J. M. Schombert, *The Radial Acceleration
+Relation in Rotationally Supported Galaxies*, Phys. Rev. Lett. **117**,
+201101 (2016).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: arXiv:1609.05917 · DOI:
+10.1103/PhysRevLett.117.201101 · local PDF sha256 `80357e5b689f1ae7`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-VI `main.tex:595–605` quotes the independent radial-acceleration scale
+`a_0=1.20×10⁻¹⁰ m s⁻²` and uses its systematic uncertainty when comparing
+nearby numerical coefficients.
+
+## Source equation and explanation
+
+Equation (4) fits 2,693 points in 153 galaxies with
 
 ```tex
-S.~S.\ McGaugh, F.\ Lelli, and J.~M.\ Schombert,
-``Radial acceleration relation in rotationally supported galaxies,''
-\textit{Phys.\ Rev.\ Lett.}\ \textbf{117}, 201101 (2016).
+g_{\rm obs}
+ = \frac{g_{\rm bar}}
+        {1-\exp\!\left(-\sqrt{g_{\rm bar}/g_\dagger}\right)}.
 ```
 
-## Uses in the series
+The fitted scale is introduced as:
 
-- `papers/SSV-VI/main.tex:600`
+> The one fit parameter is the acceleration scale, g†, where the mass
+> discrepancy becomes pronounced. For our adopted Υ*, we find g† = 1.20 ±
+> 0.02.
 
-## Source and identifiers
+The continuation gives units `10⁻¹⁰ m s⁻²` and a systematic uncertainty
+`±0.24×10⁻¹⁰ m s⁻²`. Thus the systematic is 20%, about `0.079 dex`, matching
+SSV's rounded `0.08 dex`.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** The central value and the uncertainty interpretation in
+SSV-VI match the cited fit.

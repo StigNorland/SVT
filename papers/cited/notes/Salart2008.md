@@ -1,32 +1,33 @@
-# Salart2008 — citation record
+# Salart2008 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+D. Salart, A. Baas, C. Branciard, N. Gisin, and H. Zbinden, *Testing spooky
+action at a distance*, Nature **454**, 861–864 (2008).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: arXiv:0808.3316 · DOI: 10.1038/nature07121 · local PDF sha256
+`122c9979dcc97043`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-II `main.tex:1977–1984` says experimental “speed of spooky action” lower
+bounds constrain a hypothetical signal/influence model and do not apply if
+the correlations are instead properties of a global state.
 
-```tex
-D.~Salart, A.~Baas, C.~Branciard, N.~Gisin, and H.~Zbinden,
-``Testing the speed of `spooky action at a distance',''
-\textit{Nature} \textbf{454}, 861--864 (2008).
-```
+## Source result and explanation
 
-## Uses in the series
+The abstract, printed p. 1, frames exactly that conditional interpretation:
 
-- `papers/SSV-II/main.tex:1981`
+> A real spooky action at a distance would require a faster than light
+> influence defined in some hypothetical universally privileged reference
+> frame. Here we put stringent experimental bounds on the speed of all such
+> hypothetical influences.
 
-## Source and identifiers
+For a preferred frame in which Earth's speed is below `10⁻³c`, the experiment
+finds that the hypothetical influence must exceed light speed by at least four
+orders of magnitude. The body explicitly calls this “only the speed of a
+hypothetical influence” and distinguishes it from classical signalling.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** SSV accurately characterizes the bound as conditional on a
+finite-speed influence in a preferred frame, rather than as a measured
+propagating signal. Calling it irrelevant to SSV's global-state ontology is an
+interpretive consequence of SSV, not an experimental result supplied by the
+paper.
