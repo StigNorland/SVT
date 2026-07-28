@@ -141,6 +141,27 @@ inaccessible primary can pass without its own paragraph only through an
 explicit reasoned waiver; `PENDING-PRIMARY` leaves unresolved dependent claims
 flagged but printed.
 
+**Retrieval is weaker than the rule's wording suggests (found 2026-07-28).**
+Rule 12 says sources are "hash-pinned and re-fetchable via `fetch_cited.py`".
+That holds for most, not all: **72 of 99** primaries are cached locally, and
+three notes state in their own prose that the primary was not retrieved —
+`bbm1976` ("the host's anti-bot layer prevented a reproducible local download"),
+`Hawking1974`, and `toomre1981`. Their quotations were read and checked by a
+human and their verdicts stand; what is overstated is *reproducibility*, not
+correctness. Treat "hash-pinned and re-fetchable" as the norm the registry aims
+at, and read each record's `access` block for the actual state.
+
+**One structural hole in this guard, now closed.** The validator rejected an
+*open* source that waived its paragraph, but not an *inaccessible* source that
+**asserted** one — the stronger claim. `toomre1981` passed the gate registered
+`unavailable` + `paragraph_required: true` + no waiver while its note recorded
+that the chapter was not obtainable and quoted only an ADS abstract. The
+symmetric rule now exists
+(`test_inaccessible_source_cannot_assert_a_complete_paragraph`), with a
+transcript the single legitimate exemption, and the record carries an explicit
+`unavailable-primary` waiver. This is FM3 inside the evidence layer: the check
+that was there looked complete and covered one direction only.
+
 ---
 
 ## FM6 — an absence claim with no search behind it
@@ -241,9 +262,20 @@ Evidence-only sources remain catalogued too, for 108 notes total. The build
 rejects missing notes, orphan notes, stale `cited_by` lists, and a note promoted
 to `evidence-recorded` without a full source-verification record.
 
-**Not covered:** 83 external notes are explicitly `NOT-REVIEWED`. The inventory
-makes the gap visible and navigable; it does not manufacture quotations,
-source URLs, identifiers, or verdicts.
+**Not covered:** the inventory makes a gap visible and navigable; it does not
+manufacture quotations, source URLs, identifiers, or verdicts.
+
+**Update, `d6bcc2e`:** the 83 notes this entry originally recorded as
+`NOT-REVIEWED` have since been reviewed and promoted. The registry now holds 99
+`evidence-recorded` and 9 `local-source` notes and **no `NOT-REVIEWED` entries at
+all**; 72 of the 99 primaries are cached locally. Spot-checked against an
+independent derivation: `bbm1976`'s note reports BBM's
+\(\ell=\hbar/\sqrt{2mb}\) and its restriction to \(b>0\), which matches the
+symbolic substitution done separately under #189 — so the promotion reflects
+real review, not an automated status flip.
+
+The residual gap is narrower and different in kind: the promotion outran the
+*retrieval* guarantee. See FM5.
 
 ---
 

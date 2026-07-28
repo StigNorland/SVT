@@ -2478,8 +2478,11 @@
       "verification": {
         "status": "OK",
         "evidence_mode": "quotation",
-        "paragraph_required": true,
-        "paragraph_exception": null,
+        "paragraph_required": false,
+        "paragraph_exception": {
+          "kind": "unavailable-primary",
+          "reason": "The 1981 conference chapter was not openly obtainable on 2026-07-28 and has no DOI; the official ADS abstract states the shear/epicycle/self-gravity mechanism SSV relies on. The verdict is already scoped to that abstract and explicitly declines to support SSV's separate 'no central driver' statement."
+        },
         "note": "notes/toomre1981.md"
       }
     },
