@@ -3,7 +3,7 @@
 Three defects found in a single #182 pass were the same kind of error, and none
 was caught by the C/E/N gates:
 
-    SSV-I  (E6)   ``b``  eq:pot needs [V]/[rho]; eq:cs and eq:xi need an extra L^3
+    SSV-I  (E6)   ``b``  eq:pot needed [V]/[rho]; eq:cs and eq:xi needed an extra L^3
     SSV-II (E3b)  ``e``  a dimensionless Berry phase requires a MASS;
                          Phi_0 = h/e uses a CHARGE
     SSV-V  (E2)   ``b``  a FREQUENCY here; an energy-per-mass in Paper I
@@ -11,7 +11,8 @@ was caught by the C/E/N gates:
 The gates checked equations, and even checked *products*, but never asked
 **"does this symbol mean one thing throughout?"**  Two of the three surfaced
 during the rewrite rather than the audit, so a clean gate report would have
-shipped with them intact.
+shipped with them intact.  Issue #216 repairs SSV-I in print; the retired
+relations remain as explicit negative controls.
 
 The question this module asks
 -----------------------------
@@ -185,9 +186,7 @@ class Relation:
                 equals ``target``.  E.g. ``c_s = sqrt(2 b rho_0/m_0)`` becomes
                 ``{b: 1, rho: 1, m_0: -1}`` against ``VELOCITY**2``.
     ``status``  ``"homogeneous"``, or ``"inhomogeneous"`` for a relation recorded
-                as a known defect — encoded **as printed**, so the checker is
-                demonstrated to detect the error class rather than merely to
-                agree with corrected algebra.
+                as a known defect or negative control.
     ``site``    where it was transcribed from, so the transcription this module
                 cannot machine-check is at least checkable by hand.
     """
@@ -200,36 +199,37 @@ class Relation:
     note: str
     status: str = "homogeneous"
     defect: str = ""
-    printed: bool = True     # False for the corrected forms, which are not in print
+    printed: bool = True     # False for historical negative controls
 
 
 RELATIONS: list[Relation] = [
-    # ---------------- SSV-I, as printed ----------------
+    # ---------------- SSV-I, corrected in print by #216 ----------------
+    Relation("SSV-I", "eq:Lag-normalisation", "papers/SSV-I/main.tex",
+             {"hbar": 1, "rho": 1, "m_0": -1}, ACTION / length**3,
+             "n_0 hbar with n_0=rho_0/m_0 is an action density"),
     Relation("SSV-I", "eq:pot", "papers/SSV-I/main.tex:251",
              {"b": 1, "rho": 1}, ENERGY_DENSITY,
              "V(rho) = b rho [ln(rho/rhobar) - 1] + V_0 must be an energy density"),
-    Relation("SSV-I", "eq:cs", "papers/SSV-I/main.tex:321",
-             {"b": 1, "rho": 1, "m_0": -1}, VELOCITY**2,
-             "c_s = sqrt(b rho_0/m_0) as printed",
-             status="inhomogeneous", defect="E6"),
-    Relation("SSV-I", "eq:xi", "papers/SSV-I/main.tex:334",
-             {"hbar": 2, "m_0": -1, "b": -1, "rho": -1}, length**2,
-             "xi = hbar/sqrt(2 m_0 b rho_0) as printed",
-             status="inhomogeneous", defect="E6"),
-    Relation("SSV-I", "eq:brho0", "papers/SSV-I/main.tex:327",
-             {"b": 1, "rho": 1}, ENERGY,
-             "b rho_0 = m_0 c^2 as printed",
-             status="inhomogeneous", defect="E6"),
-    # ---------------- SSV-I, corrected (not in print) ----------------
-    Relation("SSV-I", "eq:cs-corrected",
-             "instruments/paper_i/ssv_i_audit_2026.py::corrected_sound_speed_squared",
+    Relation("SSV-I", "eq:LogSE", "papers/SSV-I/main.tex",
+             {"m_0": 1, "b": 1}, ENERGY,
+             "the logarithmic wave-equation coefficient is m_0 b"),
+    Relation("SSV-I", "eq:cs", "papers/SSV-I/main.tex",
              {"b": 1}, VELOCITY**2,
-             "c_s^2 = rho dmu/drho = b exactly; no rho_0", printed=False),
-    Relation("SSV-I", "eq:xi-corrected",
-             "instruments/paper_i/ssv_i_audit_2026.py::corrected_healing_length",
+             "c_s^2 = dP/drho = rho dmu/drho = b exactly; no rho_0"),
+    Relation("SSV-I", "eq:xi", "papers/SSV-I/main.tex",
              {"hbar": 2, "m_0": -2, "b": -1}, length**2,
-             "xi = hbar/sqrt(2 m_0^2 b); the energy is m_0 b, not b rho_0",
-             printed=False),
+             "xi = hbar/sqrt(2 m_0^2 b); the energy is m_0 b, not b rho_0"),
+    # Historical negative controls: deliberately not printed.
+    Relation("SSV-I", "control:retired-cs",
+             "instruments/paper_i/ssv_i_audit_2026.py::b_dimension_from",
+             {"b": 1, "rho": 1, "m_0": -1}, VELOCITY**2,
+             "retired c_s^2=b rho_0/m_0 must remain inhomogeneous",
+             status="inhomogeneous", defect="E6-control", printed=False),
+    Relation("SSV-I", "control:retired-xi",
+             "instruments/paper_i/ssv_i_audit_2026.py::b_dimension_from",
+             {"hbar": 2, "m_0": -1, "b": -1, "rho": -1}, length**2,
+             "retired xi^2=hbar^2/(2 m_0 b rho_0) must remain inhomogeneous",
+             status="inhomogeneous", defect="E6-control", printed=False),
 
     # ---------------- SSV-II ----------------
     Relation("SSV-II", "eq:berry_ab", "papers/SSV-II/main.tex:823",

@@ -1,5 +1,12 @@
 # SSV-I E-gate — logarithmic sector (D1)
 
+> **Historical audit record.** This file records the #183 gate in the
+> conventions then printed. Issue #216 completed the dimensional propagation:
+> current Paper I uses mass-specific \(b\), \(c_s^2=b\),
+> \(\xi=\hbar/(\sqrt2\,m_0c)\), and no \(\rho_0\) in the latter two relations.
+> See `../issue-216-e6-propagation.md`. Tables below are preserved as audit
+> history, not current equations.
+
 Status: **closure-grade** — branch decided, corrected statement fixed
 
 Gate: **D1 RESOLVED**

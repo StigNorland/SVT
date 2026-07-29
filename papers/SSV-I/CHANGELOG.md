@@ -8,6 +8,36 @@ by the move. Git history and the linked issues carry the rest.
 
 ---
 
+## 2026-07-30 — [#216](https://github.com/StigNorland/SVT/issues/216) · E6 dimensional normalization propagated
+
+The logarithmic sector now uses one mass-specific stiffness throughout:
+\([b]=\mathrm{J\,kg^{-1}}\), \(c_s^2=b\), and \(b=c^2\). Restoring the
+background number density \(n_0=\rho_0/m_0\) in the action gives the LogSE
+energy coefficient \(m_0b\) without inserting \(\rho_0\) into either the
+sound speed or healing length. The conventional healing length remains
+\(\xi=\hbar/(\sqrt2\,m_0c)\), so no registered numerical value changes.
+
+Propagating that convention exposed two independent analytic errors. The
+exact Bogoliubov relation is
+\(\omega^2=c_s^2k^2(1+k^2\xi^2/2)\); the unit-coefficient form uses the shorter
+dispersive crossover length \(\ell_{\rm disp}=\xi/\sqrt2\), not the
+conventional healing length. The same normalization changes the ring estimate
+to \(\omega_{\rm ring}/\omega_c=2\alpha\sqrt{\ln(1/\alpha)}\). Both conclusions
+remain negative for the proposed muon mode.
+
+The old scalar operator \(-\nabla^2+4(1-f_0^2)\) is not the Hessian of the
+corrected LogSE because the physical BdG problem has a nonzero particle-hole
+block. Its no-bound-state argument is therefore withdrawn; the corrected
+coupled-BdG amplitude question is open, while the independent basis-convergence
+and Berry-phase null results remain in force.
+
+The primary-source evidence record for Zloshchastiev 2020 now separates the
+source frequency coefficient \(b_{\rm src}\) from Paper I's mass-specific
+\(b\). Its constraint gives
+\(|b_{\rm src}|=m c_s^2/\hbar\), with no \(\rho_0\) and no factor two. The
+source's printed natural-length formula is dimensionally inconsistent with its
+own Eq. (1), so Paper I derives \(\xi\) from its action instead.
+
 ## 2026-07-29 — [#213](https://github.com/StigNorland/SVT/issues/213) · standard symbol meanings
 
 The overloaded \(\mu_0\) is split by dimension: \(m_\star=m_e/\alpha\) is

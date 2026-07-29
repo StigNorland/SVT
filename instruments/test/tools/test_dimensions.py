@@ -25,26 +25,33 @@ PAPERS = sorted(D.ANCHORED)
 # THE test — the checker reproduces the defects that motivated it
 # --------------------------------------------------------------------------
 
-def test_known_defects_are_detected():
-    """SSV-I E6, SSV-II E3b and SSV-II E3d, encoded as printed, must all fail."""
-    failing = {r.label for p in PAPERS for r in D.relations_for(p)
+def test_known_unrepaired_defects_are_detected():
+    """The still-printed SSV-II defects must fail; repaired SSV-I must not."""
+    failing = {r.label for p in PAPERS for r in D.relations_for(p, printed_only=True)
                if not D.is_homogeneous(r)}
-    assert {"eq:cs", "eq:xi", "eq:brho0"} <= failing        # SSV-I E6
     assert "eq:berry_ab" in failing                          # SSV-II E3b
     assert "eq:flux_quantisation" in failing                 # SSV-II E3d
+    assert not {
+        r.label for r in D.relations_for("SSV-I", printed_only=True)
+    } & failing
 
 
-def test_ssv_i_b_has_no_consistent_dimension():
-    """E6, stated without arguing which equation is the wrong one: there is NO
-    dimension for `b` making SSV-I's four printed relations simultaneously well
-    formed."""
-    assert D.consistent_assignment("SSV-I", "b") is None
+def test_ssv_i_b_is_consistently_energy_per_mass_after_e6_repair():
+    """Every corrected printed relation requires [b] = J/kg."""
+    assert D.consistent_assignment("SSV-I", "b") == D.dims(D.ENERGY / D.mass)
     req = D.requirements("SSV-I", "b")
-    assert D._key(req["eq:pot"]) != D._key(req["eq:cs"])
-    # and the gap is exactly L^3, as the damage report says
     assert req["eq:pot"] == D.dims(D.ENERGY / D.mass)
-    assert req["eq:cs"] == D.dims(D.ENERGY / D.mass * D.length**3)
-    assert req["eq:cs"] == req["eq:xi"] == req["eq:brho0"]
+    assert req["eq:pot"] == req["eq:LogSE"] == req["eq:cs"] == req["eq:xi"]
+
+
+def test_ssv_i_retired_rho0_normalisation_still_fails():
+    """NEGATIVE control: the old rho_0 forms differ from J/kg by L^3."""
+    controls = {
+        r.label: r for r in D.relations_for("SSV-I", printed_only=False)
+        if r.label.startswith("control:")
+    }
+    assert set(controls) == {"control:retired-cs", "control:retired-xi"}
+    assert all(not D.is_homogeneous(r) for r in controls.values())
 
 
 def test_ssv_ii_e_must_be_both_a_mass_and_a_charge():
@@ -86,9 +93,8 @@ def test_h_is_an_action_not_an_energy():
 # --------------------------------------------------------------------------
 
 def test_ssv_i_corrected_relations_are_homogeneous():
-    """The E6 repair works: with [b] = J/kg, c_s^2 = b and xi = hbar/sqrt(2 m^2 b)
-    both balance — which the printed forms do not."""
-    for label in ("eq:cs-corrected", "eq:xi-corrected"):
+    """The printed action, LogSE, sound speed and healing length all balance."""
+    for label in ("eq:Lag-normalisation", "eq:pot", "eq:LogSE", "eq:cs", "eq:xi"):
         rel = next(r for r in D.relations_for("SSV-I") if r.label == label)
         assert D.is_homogeneous(rel), f"{label}: residual {D.residual(rel)}"
 

@@ -48,7 +48,7 @@ breathers stabilised by trefoil vortex skeletons (baryons).
 
 Three results follow from the logarithmic Schr\"{o}dinger Lagrangian from first
 principles.  The sound-speed condition $c_s = c$ fixes the stiffness parameter
-through $b\rho_0 = m_0c^2$ and the healing length
+as $b=c^2$ and the healing length
 $\xi = \hbar/(\sqrt2\,m_0c)$.  Minimising the three-term vortex-ring energy
 functional over torus radius $R$ and core radius $a$ gives the unique
 equilibrium $R_e^* = \xi/\alpha$, which fixes the vacuum density $\rho_0$
@@ -169,15 +169,17 @@ The defining characteristics are:
             = \sqrt{\left.\frac{\partial P}{\partial\rho}\right|_{\rho_0}}.
           \label{eq:sound-speed}
         \end{equation}
-        In logarithmic superfluid models, the logarithm enters the
-        \emph{chemical potential}, not the pressure: the defining relation is
-        $\rho\,|F'(\rho)| = m_0c^2/\hbar$, whose solution is
-        $F(\rho)=b\ln(\rho/\bar{\rho})$~\cite{zloshchastiev2020}.  This yields
-        constant $c_s$ at low excitations while allowing deformed dispersion at
-        high momenta.  Note that the constraint is an \emph{absolute value}: it
-        fixes the magnitude of $b$ and is silent on its sign.  The sign is fixed
-        separately, in \S\ref{sec:lagrangian}, by requiring a stable uniform
-        vacuum.
+        In logarithmic superfluid models, the logarithm enters the nonlinear
+        wave-equation coefficient, not the pressure~\cite{zloshchastiev2020}.
+        In the source convention
+        $i\partial_t\Psi=[\cdots-b_{\rm src}\ln|\Psi|^2]\Psi$; on the stable
+        branch we write the corresponding energy coefficient as
+        $B=-\hbar b_{\rm src}=m_0b>0$, reserving $b$ for the mass-specific
+        stiffness with dimensions of velocity squared.  The
+        logarithmic form yields constant $c_s$ at low excitation while allowing
+        deformed dispersion at high momentum.  Its sign is fixed in
+        \S\ref{sec:lagrangian} by requiring a stable uniform vacuum; its
+        magnitude is fixed independently by $c_s=c$.
 
   \item \textbf{Special relativity as emergent hydrodynamics.}
         Objects composed of stable topological defects (vortices/breathers) experience
@@ -201,47 +203,51 @@ from ultra-high-energy cosmic rays and some quantum-gravity phenomenology~\cite{
 \label{sec:lagrangian}
 %------------------------------------------------------------------
 
-The dynamics of the saturated superfluid vacuum are governed by an effective field
-theory for the complex order-parameter field $\Psi$ (normalised so
-$|\Psi|^2=\rho/\rho_0$).  Following the superfluid-vacuum
+The longitudinal dynamics of the saturated superfluid vacuum are governed by
+an effective field theory for the dimensionless complex order-parameter field
+$\Psi$, normalised so $|\Psi|^2=\rho/\rho_0$.  Let
+$n_0\equiv\rho_0/m_0$ be the background number density.  Following the superfluid-vacuum
 framework~\cite{volovik2003} and adopting the nonrelativistic logarithmic
 nonlinearity introduced by Bialynicki-Birula and Mycielski~\cite{bbm1976}, in
 the form used in superfluid vacuum theory by
-Zloshchastiev~\cite{zloshchastiev2020}, we take the Lagrangian:
+Zloshchastiev~\cite{zloshchastiev2020}, we take the longitudinal Lagrangian
+density
 \begin{equation}
-  \mathcal{L}
-  = \frac{i\hbar}{2}\bigl(\Psi^*\partial_t\Psi - \Psi\,\partial_t\Psi^*\bigr)
-    - \frac{\hbar^2}{2m_0}|\nabla\Psi|^2
+  \mathcal{L}_0
+  = \frac{i\hbar n_0}{2}
+      \bigl(\Psi^*\partial_t\Psi - \Psi\,\partial_t\Psi^*\bigr)
+    - \frac{\hbar^2 n_0}{2m_0}|\nabla\Psi|^2
     - V(\rho),
   \label{eq:Lag}
 \end{equation}
-where the potential is
+where the energy density is
 \begin{equation}
   V(\rho) = +b\,\rho\bigl[\ln(\rho/\bar{\rho})-1\bigr]+V_0,
   \label{eq:pot}
 \end{equation}
-with $b>0$ a stiffness parameter and $\bar{\rho}$ the saturation density.
+Here $b>0$ is a mass-specific stiffness, $[b]=\mathrm{J\,kg^{-1}}
+=\mathrm{m^2\,s^{-2}}$, and $\bar{\rho}$ is the saturation density.  Thus
+every term in~\eqref{eq:Lag} is an energy density.
 
 \begin{resultbox}[Sign of the logarithmic term: the stable-vacuum branch]
-The source constraint $\rho|F'(\rho)|=m_0c^2/\hbar$ is an \emph{absolute value}
-and therefore fixes only $|b|$.  The sign is a physical choice, and the two
-branches are mutually exclusive.  The branch written here ($b>0$ in the
-convention of~\eqref{eq:pot}) gives $\rho\,\mu'(\rho)=+b$, hence $c_s^2>0$, a
-uniform vacuum that is stable against modulation, and a potential bounded
-below.  The opposite branch admits the Bialynicki-Birula--Mycielski Gausson,
-but makes the uniform vacuum modulationally
+The sign is a physical choice, and the two branches are mutually exclusive.
+The branch written here ($b>0$ in the convention of~\eqref{eq:pot}) gives
+$\rho\,\mu'(\rho)=+b$, hence $c_s^2>0$, a uniform vacuum that is stable
+against modulation, and a potential bounded below.  The opposite branch
+admits the Bialynicki-Birula--Mycielski Gausson, but makes the uniform vacuum modulationally
 unstable and cannot support $c_s=c$; it is therefore \textbf{rejected}, and with
-it the bright-soliton route to particle saturation.
+it the bright-soliton route to particle saturation.  The magnitude is fixed
+below by $c_s=c$, not by importing the source coefficient without its units.
 \end{resultbox}
 
 Applying the Euler--Lagrange equation to~\eqref{eq:Lag}, using
 $\partial V/\partial\Psi^* = (dV/d\rho)\rho_0\Psi$ and
-$dV/d\rho = +b\ln(\rho/\bar\rho)$, yields the logarithmic Schr\"{o}dinger
-equation (LogSE):
+$dV/d\rho = +b\ln(\rho/\bar\rho)$, and dividing by
+$n_0=\rho_0/m_0$, yields the logarithmic Schr\"{o}dinger equation (LogSE):
 \begin{equation}
   i\hbar\,\partial_t\Psi
   = -\frac{\hbar^2}{2m_0}\nabla^2\Psi
-    + b\rho_0\ln\!\left(\frac{\rho_0|\Psi|^2}{\bar{\rho}}\right)\Psi.
+    + m_0b\ln\!\left(\frac{\rho_0|\Psi|^2}{\bar{\rho}}\right)\Psi.
   \label{eq:LogSE}
 \end{equation}
 
@@ -257,7 +263,7 @@ equation
 The real part, after dividing by $\rho$, gives an Euler equation
 \begin{equation}
   \partial_t\mathbf{v} + (\mathbf{v}\cdot\nabla)\mathbf{v}
-  = -\frac{1}{m_0\rho}\nabla P(\rho)
+  = -\frac{1}{\rho}\nabla P(\rho)
     + \frac{\hbar^2}{2m_0^2}\nabla\!\left(\frac{\nabla^2\!\sqrt{\rho}}{\sqrt{\rho}}\right),
   \label{eq:euler}
 \end{equation}
@@ -273,44 +279,51 @@ potential, the thermodynamic and Bogoliubov routes to the sound speed do not
 merely agree to within a factor --- they are \textbf{identically the same
 quantity}:
 \begin{equation}
-  c_{\rm thermo}^2 = \frac{1}{m_0}\frac{dP}{d\rho}\bigg|_{\rho_0}
-  = \frac{b\rho_0}{m_0}
-  = \frac{\rho\,\mu'(\rho)\,\rho_0}{m_0}\bigg|_{\rho_0}
+  c_{\rm thermo}^2 = \frac{dP}{d\rho}\bigg|_{\rho_0}
+  = b
+  = \rho\,\mu'(\rho)\big|_{\rho_0}
   = c_s^2 .
   \label{eq:cs-routes-agree}
 \end{equation}
-The full Bogoliubov dispersion is $\omega^2=c_s^2k^2(1+k^2\xi^2)$.
+The exact Bogoliubov dispersion is
+\begin{equation}
+  \omega^2
+  = c_s^2k^2+\frac{\hbar^2k^4}{4m_0^2}
+  = c_s^2k^2\!\left(1+\frac{k^2\xi^2}{2}\right).
+  \label{eq:bogoliubov-dispersion}
+\end{equation}
+The coefficient $1/2$ is required when $\xi$ denotes the conventional healing
+length rather than the shorter dispersive crossover length.
 
 \textbf{Sound speed.}
 Linearising around the uniform background $\Psi=1+\eta$, $|\eta|\ll1$,
 with $\rho_0=\bar\rho$, the density channel satisfies a wave equation with
 phase velocity
 \begin{equation}
-  c_s = \sqrt{\frac{b\rho_0}{m_0}}.
+  c_s = \sqrt{b}.
   \label{eq:cs}
 \end{equation}
-Setting $c_s=c$ fixes the stiffness parameter through the combination that
-enters every observable:
+Setting $c_s=c$ fixes the mass-specific stiffness:
 \begin{equation}
-  b\rho_0 = m_0c^2 ,
-  \label{eq:brho0}
+  b = c^2 .
+  \label{eq:b}
 \end{equation}
-with \emph{no} factor of $2$ --- consistent with the source constraint
-$\rho|F'(\rho)|=m_0c^2/\hbar$ evaluated at $\rho_0$.  The healing length
-(vortex core size) is then
+The logarithmic energy coefficient in~\eqref{eq:LogSE} is consequently
+$m_0b=m_0c^2$.  The conventional healing length (vortex core scale) is
 \begin{equation}
-  \xi = \frac{\hbar}{\sqrt{2m_0 b\rho_0}} = \frac{\hbar}{\sqrt{2}\,m_0 c},
+  \xi = \frac{\hbar}{\sqrt{2m_0^2 b}}
+      = \frac{\hbar}{\sqrt{2}\,m_0 c},
   \label{eq:xi}
 \end{equation}
-i.e., the reduced Compton wavelength of $m_0$ divided by $\sqrt2$.  The factor
-$\sqrt2$ is not cosmetic: it propagates to every downstream quantity expressed
-in units of $\xi$, and is the only place where the corrected normalisation
-reaches a stated number (see Paper~VII-b's horizon counting).
+i.e., the reduced Compton wavelength of $m_0$ divided by $\sqrt2$.
+Equations~\eqref{eq:Lag}--\eqref{eq:xi} use one dimension for $b$ throughout;
+the derivation and negative controls are recorded under \ssvissue{216}
+(\ssvfile{issue-216-e6-propagation}).
 
 \textbf{Transverse stiffness and the origin of $\alpha$.}
 The LogSE admits only irrotational flow at linear order.  To support stable
 vortices and a transverse shear channel (necessary for electromagnetism to
-emerge as chiral flow gradients), we supplement $\mathcal{L}$ with the
+emerge as chiral flow gradients), we supplement $\mathcal{L}_0$ with the
 chiral-shear term
 \begin{equation}
   \mathcal{L}_\perp
@@ -349,8 +362,8 @@ characterisation of the vacuum state.
 \begin{resultbox}[Two derived results]
 \begin{enumerate}
   \item The LogSE with potential~\eqref{eq:pot} has longitudinal sound speed
-        $c_s=\sqrt{2b\rho_0/m_0}$; setting $c_s=c$ gives $b=m_0c^2/(2\rho_0)$
-        and healing length $\xi=\hbar/(m_0c)$.
+        $c_s=\sqrt b$; setting $c_s=c$ gives $b=c^2$ and healing length
+        $\xi=\hbar/(\sqrt2\,m_0c)$.
   \item With the chiral-shear term~\eqref{eq:chiral}, the core-scale
         transverse-to-longitudinal stiffness ratio is
         $c_\perp/c=\sqrt{\lambda m_0/\rho_0}$; identifying
@@ -402,17 +415,15 @@ superfluid vacuum---a stable, self-sustaining topological defect with finite siz
         Paper~II) $m_0 = m_p$.  No single universal value is postulated for
         the medium as a whole.
 
-        Each defect carries its own healing length $\xi \equiv \hbar/(m_0 c)$:
-        the electron's is $\xi_e = \hbar/(m_e c) \approx 3.86\times
-        10^{-13}\,\mathrm{m}$ (the reduced Compton wavelength $\bar\lambda_e$),
-        and the proton's is $\bar{\lambda}_p \equiv \hbar/(m_p c) \approx
-        \ssvProtonReducedComptonWavelength\,\mathrm{m}$.  The ratio
-        $\bar{\lambda}_p/\xi_e = m_e/m_p \approx
-        1/\ssvProtonElectronMassRatio$ is a \emph{cross-defect} quantity;
-        it governs the proton
-        breather's sub-grain coupling to the long-range phonon field in
-        Paper~II's gravity section.  The medium's domain of validity as a
-        continuum effective theory extends to $\ell_{\rm grain} \equiv \bar{\lambda}_p$;
+        Each defect carries the conventional healing length
+        $\xi(m_0)=\hbar/(\sqrt2\,m_0c)=\bar\lambda(m_0)/\sqrt2$.
+        Thus $\xi_e=\bar\lambda_e/\sqrt2$ for the electron and
+        $\xi_p=\bar\lambda_p/\sqrt2$ for the proton, where
+        $\bar{\lambda}_p \equiv \hbar/(m_p c) \approx
+        \ssvProtonReducedComptonWavelength\,\mathrm{m}$ is the reduced proton
+        Compton wavelength.  This distinction matters: the medium's assumed
+        continuum cutoff remains
+        $\ell_{\rm grain}\equiv\bar{\lambda}_p=\sqrt2\,\xi_p$;
         below this scale the LogSE description is silent, in the same sense
         that Navier--Stokes is silent about sub-molecular flow (see Paper~II
         \S2).  Spin $s = \hbar/2$ follows from the order parameter
@@ -600,7 +611,8 @@ gyromagnetic ratio is $S_{\rm topo}=\hbar/2$.  The ratio
           = \frac{4\pi c R_e^2}{\hbar}
   \label{eq:g-raw}
 \end{equation}
-This is parametrically of order $\xi\sim\hbar/(m_ec)$.  The leading-order result
+This is parametrically of order
+$\xi=\hbar/(\sqrt2\,m_ec)$.  The leading-order result
 $g\approx2$ holds whenever $R_e\sim\xi$; higher-order Kelvin-wave dressing
 produces corrections $g-2\sim\alpha/\pi$, consistent with the observed anomalous
 magnetic moment.  A precise derivation of $g=2$ from the exact vortex normalisation
@@ -980,7 +992,7 @@ pre-registered attempts have been completed:
   statistical evidence alone.
 \item \textbf{Path~B (BdG eigenvalue):} the muon and pion rungs were not
   recovered as basis-converged eigenfrequencies of the
-  $\mathcal{L}+\mathcal{L}_\perp$ toroidal-breather BdG operator.  The muon
+  $\mathcal{L}_0+\mathcal{L}_\perp$ toroidal-breather BdG operator.  The muon
   drifts $\pm13\%$ across bases and the pion is absent in every basis.
   Full record: \ssvfile{path-b-eigenvalue-result}.
 \item \textbf{Berry-phase audit (issue~\ssvissue{76}):} Volovik's CdGM framework was
@@ -1154,28 +1166,34 @@ Linearising the LogSE yields the Bogoliubov--de Gennes (BdG) system
   = \hbar\omega\begin{pmatrix}u\\v\end{pmatrix},
   \label{eq:BdG}
 \end{equation}
-with $\hat{L} = -(\hbar^2/2m_0)\nabla^2 + V'_{\rm eff}|\Psi_0|^2 - \mu_{\rm chem}$
-and $\hat{M} = -b\rho_0 f_0^2 e^{2i\theta}$.
+with
+\begin{align}
+  \hat L &=
+  -\frac{\hbar^2}{2m_0}\nabla^2
+  +m_0b\,[\ln(f_0^2)+1]-\mu_{\rm chem}, \\
+  \hat M &= m_0b\,e^{2i\theta}.
+\end{align}
 
-\textbf{Definitive analytical result.}
-For the radial ($m=0$) amplitude channel the relevant operator is
-$\hat{H}_{\rm amp} = -\nabla^2_{\rm 2D} + V_{\rm eff}(\tilde s)$ where
-$V_{\rm eff} = 4(1-f_0^2)\geq0$ everywhere (Appendix~\ref{app:bdg},
-Eq.~\ref{eq:Veff-positive}).  This is a \emph{purely repulsive} potential.
-The spectrum is continuous from $\tilde\omega=0$ with no bound states,
-for any value of the LogSE coupling $b$.
+\begin{gapbox}[Scalar amplitude-mode status]
+The coupled BdG system above does not reduce to the scalar
+operator $-\nabla^2+4(1-f_0^2)$.  Consequently that operator does not prove
+the absence of an $s$-wave amplitude bound state for the corrected LogSE.
+The scalar amplitude-mode question is \textbf{open}; no muon derivation follows
+from it.  The independent basis-drift and Berry-phase no-go results remain
+negative.
+\end{gapbox}
 
-\textbf{Consequence.}
-A core-pulsation breathing mode does not exist in the planar LogSE.
-The muon scale requires the \emph{ring-breathing mode}---oscillation of the
+Any future muon-scale calculation must therefore test the coupled BdG system
+and the \emph{ring-breathing mode}---oscillation of the
 major ring radius $R_e$.  Its frequency estimated from string tension gives
-$\omega_{\rm ring}\approx0.016\,\omega_c$ (Appendix~\ref{app:bdg},
-Eq.~\ref{eq:omega-ring-exact}), a factor $\sim13$ below $\omega_\mu$.
+$\omega_{\rm ring}/\omega_c
+=2\alpha\sqrt{\ln(1/\alpha)}$ (Appendix~\ref{app:bdg},
+Eq.~\ref{eq:omega-ring-exact}), still well below $\omega_\mu/\omega_c$.
 Coupling to the transverse chiral channel must bridge this gap.
 
 \textbf{3D toroidal BdG with helicity-basis Kelvin sector.}
 The full 3D problem is addressed numerically in this paper via direct projection
-of the BdG operator derived from $\mathcal{L}+\mathcal{L}_\perp$ onto a
+of the BdG operator derived from $\mathcal{L}_0+\mathcal{L}_\perp$ onto a
 restricted basis consisting of the core-breathing mode $\Phi_R$, the chiral
 transverse mode $\Phi_\chi$, and helicity Kelvin centerline seeds
 $K_{\sigma,\pm}=(K_r+\sigma i K_z)e^{\pm i\varphi}/\sqrt2$.  The helicity
@@ -1371,8 +1389,9 @@ the present paper makes no quantitative force claims.
 
 Four results in this paper are analytically derived from the LogSE Lagrangian:
 (i)~the Madelung decomposition showing the LogSE is a compressible perfect fluid
-with quantum-pressure corrections; (ii)~the sound speed $c_s=\sqrt{2b\rho_0/m_0}$,
-constraining $b=m_0c^2/(2\rho_0)$ and healing length $\xi=\hbar/(m_0c)$;
+with quantum-pressure corrections; (ii)~the sound speed $c_s=\sqrt b$,
+constraining $b=c^2$ and healing length
+$\xi=\hbar/(\sqrt2\,m_0c)$;
 (iii)~the equilibrium vortex radius $R_e^*=\xi/\alpha$ and the electron mass formula
 $m_ec^2=\frac12\rho_0\kappa_0^2 R_e\Lambda$ from the Lamb vortex-ring energy
 (with $m_e$ and $\alpha$ as empirical inputs); (iv)~the leading-order gyromagnetic
@@ -1382,9 +1401,10 @@ The origin of $\alpha=c_\perp/c$ (a core-scale stiffness ratio;
 at the operator level.  The pion mass $m_\pi=2m_\star$ follows from two-winding-number
 topology with $m_\star$ determined by (iii) and $\alpha$.
 
-The BdG analysis (Appendix~\ref{app:bdg}) establishes analytically that
-$V_{\rm eff}=4(1-f_0^2)\geq0$, so the standard LogSE has \emph{no}
-$s$-wave amplitude mode.  The reduced helicity-basis Kelvin calculation
+The BdG analysis (Appendix~\ref{app:bdg}) leaves the scalar
+$s$-wave amplitude-mode question open: the coupled LogSE Hessian does not
+reduce to a repulsive scalar operator.  The reduced
+helicity-basis Kelvin calculation
 originally suggested a muon-side branch, but the subsequent Path~B,
 issue~\ssvissue{73}, and issue~\ssvissue{76} audits show that this branch is not a
 basis-converged or Berry-protected feature of the current scalar operator.
@@ -1518,8 +1538,8 @@ claim must pass through the HQV/spinorial decision tracked by issue~\ssvissue{99
 Starting from the single postulate that the vacuum is a saturated superfluid,
 this paper derives from the LogSE Lagrangian: (i)~the compressible-fluid
 structure via Madelung decomposition; (ii)~the longitudinal sound speed
-$c_s=\sqrt{2b\rho_0/m_0}$ identifying $c$ and constraining the medium parameters
-(stiffness $b$ and healing length $\xi$); (iii)~the equilibrium vortex radius
+$c_s=\sqrt b$ identifying $c$, with $b=c^2$ and
+$\xi=\hbar/(\sqrt2\,m_0c)$; (iii)~the equilibrium vortex radius
 $R_e^*=\xi/\alpha$ and corresponding electron mass formula
 $m_ec^2=\frac12\rho_0\kappa_0^2 R_e\Lambda$ from the Lamb vortex-ring energy
 (with $m_e$ and $\alpha$ as empirical inputs); (iv)~the gyromagnetic ratio $g\approx2$
@@ -1531,11 +1551,10 @@ The pion mass $m_\pi=2m_e/\alpha$ follows from the two-winding topology
 with $m_\star=m_e/\alpha$ and $E_\star=m_\star c^2$ identified as the
 natural vortex mass and energy scales.
 
-BdG analysis proves analytically that no $s$-wave amplitude bound mode
-exists in the standard LogSE — the effective potential
-$V_{\rm eff}=4(1-f_0^2)\geq0$ is purely repulsive.  The muon scale
-therefore cannot arise from the planar amplitude potential.  Subsequent
-closure work also rules out the current reduced helicity-basis route, the
+The coupled BdG system leaves the planar $s$-wave amplitude bound-mode
+question open; the scalar repulsive-potential reduction is not the Hessian
+of~\eqref{eq:LogSE} and supplies no no-bound-state proof.
+Independent closure work rules out the current reduced helicity-basis route, the
 direct $m_\varphi=\pm1$ scalar BdG sector, and the proposed Volovik
 Berry-phase rescue for the implemented $\mathcal{L}_\perp$ block.  The
 assignment $m_{\mu^\pm}=(3/2)m_\star$ remains an empirical coincidence with no
@@ -1592,7 +1611,7 @@ Claim & Status & Upgrade condition \\
 \endfoot
 \bottomrule
 \endlastfoot
-LogSE Madelung structure; sound speed $c_s=\sqrt{b\rho_0/m_0}$;
+LogSE Madelung structure; sound speed $c_s=\sqrt b$;
 $\xi=\hbar/(\sqrt2\,m_0c)$ & derived & Already analytic from the Lagrangian.
 The thermodynamic and Bogoliubov routes to $c_s$ are identically the same
 quantity, because $\rho\mu'(\rho)$ is constant for a logarithmic chemical
@@ -1607,10 +1626,10 @@ paper~\cite{rosen1968} is likewise not the source of the
 explicit logarithmic field equation; that equation appears in Rosen's 1969
 paper.  The nonrelativistic LogSE used here begins with Bialynicki-Birula and
 Mycielski~\cite{bbm1976} and is used in the SSV setting by
-Zloshchastiev~\cite{zloshchastiev2020}.  The misattribution is why the error
-survived review: the real source's constraint
-$\rho|F'(\rho)|=m_0c^2/\hbar$ was never applied, and its $F(\rho)$ --- a
-\emph{chemical-potential} term --- was read as a \emph{pressure}. \\
+Zloshchastiev~\cite{zloshchastiev2020}.  Its logarithmic coefficient belongs
+to the nonlinear wave equation, not to a pressure law.  In the source sign
+convention Paper I maps it as $B=-\hbar b_{\rm src}=m_0b>0$, with $b$ the
+mass-specific stiffness. \\
 Vacuum saturation density $\rho_0$ & derived &
 Inverting~\eqref{eq:electron-mass} gives
 $\approx\ssvRhoZero\,m_e^4c^3/\hbar^3$, with $\Lambda$ in the
@@ -2039,7 +2058,7 @@ The full BdG eigenvalue equations and numerical implementation are given in
 Appendix~\ref{app:bdg}.
 
 %------------------------------------------------------------------
-\section{BdG Eigenvalue Problem: Equations and Definitive Numerical Result}
+\section{BdG Eigenvalue Problem: Equations and Current Status}
 \label{app:bdg}
 %------------------------------------------------------------------
 
@@ -2047,71 +2066,23 @@ The static vortex amplitude profile $f_0(\tilde s)$ ($\tilde s=s/\xi$) satisfies
 \begin{equation}
   -\!\left(\partial_{\tilde s}^2 + \frac{\partial_{\tilde s}}{\tilde s}
            - \frac{1}{\tilde s^2}\right)\!f_0
-  - 2f_0\ln(f_0^2) = 0,
+  + f_0\ln(f_0^2) = 0,
   \label{eq:f0}
 \end{equation}
-with $f_0\to\tilde s$ as $\tilde s\to0$ and $f_0\to1$ as $\tilde s\to\infty$,
-solved accurately by boundary-value integration.  The profile satisfies
-$f_0(\tilde s)\in[0,1]$ for all $\tilde s\geq0$, with $f_0$ increasing
-monotonically from $0$ to $1$.
+with $f_0\propto\tilde s$ as $\tilde s\to0$ and
+$f_0\to1$ as $\tilde s\to\infty$.  Linear perturbations about
+$\Psi_0=f_0e^{i\theta}$ obey the coupled BdG system~\eqref{eq:BdG}, with
+$\hat L$ and $\hat M$ given below that equation.  The off-diagonal block is
+nonzero, so a real amplitude fluctuation is not governed by an independent
+scalar Schr\"odinger operator.
 
-The $m=0$ amplitude (breathing) mode operator in dimensionless units is
-\begin{equation}
-  \hat{H}_{\rm amp} = -\!\left(\partial_{\tilde s}^2
-                      +\frac{1}{\tilde s}\partial_{\tilde s}\right)
-                      - 4\,(f_0^2-1),
-  \label{eq:Hamp}
-\end{equation}
-with eigenvalue equation $\hat{H}_{\rm amp}\,\eta = \tilde\omega^2\,\eta$ and
-physical frequency $\hbar\omega=\tilde\omega\cdot m_ec^2/\sqrt{2}$.
-
-\textbf{Definitive analytical result.}
-The effective potential in~\eqref{eq:Hamp} is
-\begin{equation}
-  V_{\rm eff}(\tilde s) = -4(f_0^2-1) = 4(1-f_0^2) \geq 0
-  \quad\forall\;\tilde s\geq0,
-  \label{eq:Veff-positive}
-\end{equation}
-since $f_0\in[0,1]$.  This is a \emph{purely repulsive} potential that decays
-from $V_{\rm eff}(0)=4$ to $V_{\rm eff}(\infty)=0$.  The operator
-$\hat{H}_{\rm amp}$ is therefore positive semi-definite: it has no
-negative eigenvalues and its spectrum is continuous starting from $\tilde\omega=0$.
-
-\textbf{Numerical confirmation.}
-Boundary-value solution of Eq.~\eqref{eq:f0} on a grid $N=800$,
-$\tilde s\in[10^{-4},\,20]$, followed by diagonalisation of~\eqref{eq:Hamp},
-confirms:
-\begin{itemize}
-  \item $V_{\rm eff}(\tilde s)$ is positive at all sampled points:
-        $V_{\rm eff}(0.1)\approx3.81$, $V_{\rm eff}(1)\approx1.83$,
-        $V_{\rm eff}(5)\approx0.08$.
-  \item The lowest physical eigenvalue (excluding the numerical boundary
-        artefact at $\tilde s_{\rm min}$) is $\tilde\omega_1^2\approx0.046$,
-        i.e.\ $\tilde\omega_1\approx0.21$.
-  \item There are \emph{no} bound states: the entire spectrum is
-        continuous, starting from zero.
-\end{itemize}
-
-\textbf{Implication for the muon.}
-The absence of a bound breathing mode in the LogSE is now analytically
-established, not merely a numerical observation.  The muon identification
-$m_\mu=(3/2)m_\star$ cannot arise from an $s$-wave amplitude oscillation of
-the planar vortex profile.  A bound muon-like mode requires at least one
-of the following ingredients absent from the current Lagrangian:
-\begin{enumerate}
-  \item \textbf{Full 3D toroidal geometry.}  The correct oscillatory mode
-        of a vortex ring involves deformations of the \emph{ring shape}
-        (major-circle oscillations), not just radial core pulsations.
-        The ring-breathing mode has a restoring force from string tension
-        and is qualitatively different from the minor-circle $s$-mode
-        studied here.  This is the leading candidate and is the priority
-        calculation for Paper~II.
-  \item \textbf{Attractive modification to the potential.}  A term
-        $-\beta\,f_0^2$ with $\beta>0$ added to $V_{\rm eff}$ could
-        create a well.  The chiral-shear term contributes
-        $\Delta V = -4\alpha^2 f_0^2\approx-2\times10^{-4}$, far too
-        small.  A parametrically larger contribution is needed.
-\end{enumerate}
+\begin{gapbox}[What the scalar calculation establishes]
+The operator $-\nabla^2+4(1-f_0^2)$ is not the Hessian of the corrected
+LogSE~\eqref{eq:LogSE}.  Its positive potential therefore establishes no
+no-bound-state theorem for the physical coupled BdG problem.  The planar
+$s$-wave amplitude-mode question is open.  This does not revive the muon
+claim: the independent basis-convergence and Berry-phase tests remain null.
+\end{gapbox}
 
 The ring-breathing (major-circle oscillation) mode frequency can be
 estimated from the string-tension restoring force.  For a ring of major
@@ -2124,29 +2095,27 @@ density $\mu_{\rm line}=\rho_0\pi\xi^2$ (per unit ring length):
   \label{eq:omega-ring}
 \end{equation}
 In units of the Compton frequency $\omega_c=m_ec^2/\hbar$, substituting
-$\kappa_0=2\pi\hbar/m_e$, $\xi=\hbar/(m_ec)$, $R_e=\hbar/(\alpha m_ec)$:
+$\kappa_0=2\pi\hbar/m_e$,
+$\xi=\hbar/(\sqrt2\,m_ec)$, and
+$R_e=\hbar/(\sqrt2\,\alpha m_ec)$:
 \begin{align}
   \omega_{\rm ring}^2
-  &= \frac{(2\pi\hbar/m_e)^2\ln(1/\alpha)}{4\pi^2\,[\hbar/(m_ec)]^2\,[\hbar/(\alpha m_ec)]^2}
-   = \frac{\alpha^2 c^2\ln(1/\alpha)}{\hbar^2/m_e^2}
-   \cdot\frac{m_e^2}{\hbar^2} \notag\\
-  &= \alpha^2\omega_c^2\ln(1/\alpha),
+  &= \frac{(2\pi\hbar/m_e)^2\ln(1/\alpha)}
+          {4\pi^2\,[\hbar/(\sqrt2\,m_ec)]^2
+                     [\hbar/(\sqrt2\,\alpha m_ec)]^2} \notag\\
+  &= 4\alpha^2\omega_c^2\ln(1/\alpha),
   \label{eq:omega-ring-exact}
 \end{align}
 so
 \begin{equation}
   \frac{\omega_{\rm ring}}{\omega_c}
-  = \alpha\sqrt{\ln(1/\alpha)}
-  = \frac{\sqrt{\ln137}}{137}
-  \approx \frac{2.22}{137}
-  \approx 0.016.
-  \label{eq:omega-ring-num}
+  = 2\alpha\sqrt{\ln(1/\alpha)}.
 \end{equation}
-This gives $\omega_{\rm ring}\approx0.016\,\omega_c$, a factor $\sim13$
-below the muon scale $\omega_\mu=m_\mu c^2/\hbar\approx0.207\,\omega_c$.
-The muon scale therefore requires a coupling between the ring-breathing
-and the transverse chiral channel; this resonance, if it exists, must be
-found in the full 3D calculation with $\mathcal{L}+\mathcal{L}_\perp$.
+This remains below the muon scale
+$\omega_\mu=m_\mu c^2/\hbar$.  A muon-scale ring mode would therefore require
+a coupling to the transverse chiral channel; such a resonance is absent from
+the current scalar calculation and would have to be established in the full
+3D system with $\mathcal{L}_0+\mathcal{L}_\perp$.
 
 %------------------------------------------------------------------
 \section{Fat-Torus Self-Interaction Coefficient}
@@ -2231,7 +2200,7 @@ Berry-phase audit of issue~\ssvissue{76}.
 
 \subsection{Projection basis}
 
-The BdG operator derived from $\mathcal{L}+\mathcal{L}_\perp$ is projected
+The BdG operator derived from $\mathcal{L}_0+\mathcal{L}_\perp$ is projected
 onto a restricted basis of localized modes about the equilibrium toroidal
 vortex $\Psi_0$.  The basis contains two sectors:
 
@@ -2395,7 +2364,7 @@ The combined evidence from this reduced calculation suggested:
 The later closure programme changed this interpretation.  Path~B showed that
 the branch is not basis-robust, issue~\ssvissue{73} showed that it is not reproduced by
 a direct $m_\varphi=\pm1$ grid sector, and issue~\ssvissue{76} showed that the current
-scalar $\mathcal{L}+\mathcal{L}_\perp$ operator does not supply the missing
+scalar $\mathcal{L}_0+\mathcal{L}_\perp$ operator does not supply the missing
 half-integer Berry holonomy.  The reduced-basis response remains a diagnostic,
 not a derivation of $m_{\mu^\pm}$.
 

@@ -22,15 +22,14 @@ E5  eq:rho0-value does not follow from eq:electron-mass. Route 1 (author's
     decision, 2026-07-27): eq:electron-mass is correct and eq:rho0-value is an
     algebra slip.
 E6  (found 2026-07-27 during the rewrite, NOT by the original E-gate) the symbol
-    ``b`` is dimensionally overloaded *within* SSV-I: eq:pot requires
-    [b] = [V]/[rho], while eq:cs and eq:xi -- which agree with each other --
-    require an extra L^3.  The rho_0 in c_s = sqrt(2 b rho_0/m_0) and
-    xi = hbar/sqrt(2 m_0 b rho_0) is a leftover from the |Psi|^2 = rho/rho_0
-    normalisation and does not belong there.  The E-gate missed this because it
-    checked the *products* (b rho_0) rather than the symbols.
+    ``b`` was dimensionally overloaded *within* SSV-I: eq:pot required
+    [b] = [V]/[rho], while eq:cs and eq:xi required an extra L^3.  Issue #216
+    propagates the coherent mass-specific convention [b] = J/kg through the
+    action, LogSE, sound speed and healing length.  The old relations remain
+    below only as negative controls.
 
-Conventions follow the paper: kappa_0 = h/m_0 (Planck's h), xi = hbar/(m_0 c),
-Lambda = ln(8/alpha) - 7/4.
+Conventions: kappa_0 = h/m_0 (Planck's h), the conventional healing length is
+xi = hbar/(sqrt(2) m_0 c), and Lambda = ln(8/alpha) - 7/4.
 """
 
 from __future__ import annotations
@@ -242,7 +241,12 @@ def b_dimension_from(equation, rho_is_mass_density=True):
 
 
 def b_is_consistent_across_ssv_i(rho_is_mass_density=True) -> bool:
-    """False.  eq:cs and eq:xi agree; eq:pot differs from them by L^3."""
+    """Historical E6 negative control.
+
+    False for the retired printed equations: eq:cs and eq:xi agreed with each
+    other, while eq:pot differed by L^3.  The corrected printed relations are
+    encoded in ``instruments/tools/dimensions.py``.
+    """
     pot = b_dimension_from("pot", rho_is_mass_density)
     cs = b_dimension_from("cs", rho_is_mass_density)
     xi = b_dimension_from("xi", rho_is_mass_density)
@@ -265,13 +269,67 @@ def corrected_sound_speed_squared(b):
     return b
 
 
-def corrected_healing_length(b, m=M_E):
+def reference_number_density(rho0, m=M_E):
+    """n_0 = rho_0/m_0, the prefactor that makes the Psi action a density."""
+    return rho0 / m
+
+
+def corrected_logse_energy_coefficient(b, m=M_E):
+    """The wave-equation coefficient is B = m_0 b, an energy."""
+    return m * b
+
+
+def corrected_healing_length(b, m=M_E, hbar=HBAR):
     """xi = hbar/sqrt(2 m_0 * (m_0 b)).  The energy is m_0 b, NOT b rho_0.
 
     With c_s = c (so b = c^2) this returns hbar/(sqrt(2) m_0 c) -- exactly the
     D1 value, which is why the correction is presentational, not numerical.
     """
-    return HBAR / mp.sqrt(2 * m**2 * b)
+    return hbar / mp.sqrt(2 * m**2 * b)
+
+
+def corrected_bogoliubov_coefficients(b, m=M_E, hbar=HBAR):
+    """Return the exact k^2 and k^4 coefficients of the stable LogSE branch.
+
+    omega^2 = b k^2 + hbar^2 k^4/(4 m_0^2).
+    """
+    return b, hbar**2 / (4 * m**2)
+
+
+def corrected_bogoliubov_omega_squared(k, b, m=M_E, hbar=HBAR):
+    k2, k4 = corrected_bogoliubov_coefficients(b, m, hbar)
+    return k2 * k**2 + k4 * k**4
+
+
+def healing_length_form_omega_squared(k, b, m=M_E, hbar=HBAR):
+    """The same dispersion in terms of the conventional healing length.
+
+    xi = hbar/sqrt(2 m_0^2 b), hence
+    omega^2 = b k^2 [1 + (xi k)^2/2].
+    """
+    xi = corrected_healing_length(b, m, hbar)
+    return b * k**2 * (1 + xi**2 * k**2 / 2)
+
+
+def retired_unit_xi_dispersion(k, b, m=M_E, hbar=HBAR):
+    """Negative control: the retired unit coefficient doubles the k^4 term."""
+    xi = corrected_healing_length(b, m, hbar)
+    return b * k**2 * (1 + xi**2 * k**2)
+
+
+def corrected_ring_breathing_ratio(alpha=ALPHA):
+    """omega_ring/omega_c after xi and R_e=xi/alpha both carry 1/sqrt(2)."""
+    return 2 * alpha * mp.sqrt(mp.log(1 / alpha))
+
+
+def corrected_vortex_profile_log_coefficient():
+    """Coefficient of f*ln(f^2) in Df - coefficient*f*ln(f^2) = 0."""
+    return mp.mpf(1)
+
+
+def implemented_vortex_profile_log_coefficient():
+    """The retained legacy ``vortex_profile.py`` coefficient."""
+    return mp.mpf(2)
 
 
 if __name__ == "__main__":  # pragma: no cover

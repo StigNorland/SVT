@@ -245,3 +245,50 @@ def test_corrected_convention_reproduces_D1_exactly():
     assert ssv.corrected_sound_speed_squared(b) == ssv.C**2
     xi = ssv.corrected_healing_length(b, ssv.M_E)
     assert abs(xi - ssv.HBAR / (mp.sqrt(2) * ssv.M_E * ssv.C)) < mp.mpf("1e-40")
+
+
+def test_corrected_action_maps_to_the_same_logse_energy_coefficient():
+    """E6 changes the symbol convention, not the physical LogSE coefficient."""
+    b = ssv.C**2
+    assert ssv.corrected_logse_energy_coefficient(b, ssv.M_E) == (
+        ssv.b_rho0_from_source_constraint(ssv.M_E)
+    )
+
+
+def test_corrected_bogoliubov_dispersion_uses_half_healing_length_squared():
+    """With conventional xi, the free-Schrodinger k^4 coefficient is xi^2/2."""
+    b = mp.mpf("3.7")
+    m = mp.mpf("1.3")
+    hbar = mp.mpf("2.1")
+    k = mp.mpf("0.8")
+    exact = ssv.corrected_bogoliubov_omega_squared(k, b, m, hbar)
+    via_xi = ssv.healing_length_form_omega_squared(k, b, m, hbar)
+    assert mp.almosteq(exact, via_xi, rel_eps=mp.mpf("1e-25"))
+
+
+def test_retired_unit_xi_dispersion_doubles_the_k4_coefficient():
+    """NEGATIVE control for the stale omega^2=c_s^2 k^2(1+xi^2 k^2)."""
+    b = mp.mpf("3.7")
+    m = mp.mpf("1.3")
+    hbar = mp.mpf("2.1")
+    k = mp.mpf("0.8")
+    exact = ssv.corrected_bogoliubov_omega_squared(k, b, m, hbar)
+    retired = ssv.retired_unit_xi_dispersion(k, b, m, hbar)
+    k2, k4 = ssv.corrected_bogoliubov_coefficients(b, m, hbar)
+    assert retired != exact
+    assert mp.almosteq(retired - k2 * k**2, 2 * k4 * k**4)
+
+
+def test_ring_breathing_ratio_inherits_both_sqrt2_factors():
+    old = ssv.ALPHA * mp.sqrt(mp.log(1 / ssv.ALPHA))
+    assert mp.almosteq(ssv.corrected_ring_breathing_ratio(), 2 * old)
+
+
+def test_legacy_vortex_profile_is_not_the_corrected_logse_profile():
+    """NEGATIVE: dependent BdG numerics remain controls until re-derived."""
+    assert ssv.implemented_vortex_profile_log_coefficient() == 2
+    assert ssv.corrected_vortex_profile_log_coefficient() == 1
+    assert (
+        ssv.implemented_vortex_profile_log_coefficient()
+        != ssv.corrected_vortex_profile_log_coefficient()
+    )

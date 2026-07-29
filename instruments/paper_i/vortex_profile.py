@@ -1,11 +1,18 @@
-"""Planar LogSE vortex profile by shooting.
+"""Legacy planar LogSE vortex profile by shooting.
 
-Status: validation (cheap building block)
+Status: CONTROL after issue #216; not the corrected SSV profile
 Problem type: static, 1D
 Nondimensionalisation: xi = 1, density rho0 = 1
 Primary observables: vortex amplitude f(x) and derivative on [x_min, x_max]
 Primary role: builds the background profile consumed by every Paper I
 reduced-BdG / curved-torus / chiral-bridge calculation
+
+Issue #216 re-derived the dimensionally complete stable LogSE and found that
+its conventional-xi profile has coefficient 1 multiplying ``f log(f^2)``.
+This retained implementation has coefficient 2.  Its dependent numerical
+results therefore describe the implemented legacy operator, not the corrected
+Paper-I action.  Do not promote them to corrected-SSV evidence without a new
+preregistered recomputation.
 
 Validation status (see papers/SSV-I/validation-refinement-sweeps-2026-05-27.md
 for the full sensitivity table):
