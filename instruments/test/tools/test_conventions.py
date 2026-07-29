@@ -237,17 +237,21 @@ def test_root_symbol_carries_the_readers_expectation():
         "departure — otherwise the check punishes the conforming usage")
 
 
-def test_the_reference_cannot_arbitrate_our_collisions():
-    """Recorded so nobody later mistakes this page for an authority.
+def test_only_b_is_unlisted_by_either_reference():
+    """physics.info covered none of the collisions. Wikipedia covers Lambda and
+    hbar, so the honest statement narrowed: after consulting both, only ``b``
+    is unclaimed by any reference — which is why its three dimensions are an
+    internal defect rather than a clash of external conventions.
 
-    physics.info has no entry for Lambda, b or hbar — it does not cover the
-    collisions this module exists to find, and the docstring says which
-    documents would.
+    Supersedes an earlier assertion that Lambda and hbar were unlisted; that
+    was true of one reference and stated as though it were true of the field.
     """
-    for symbol in ("Lambda", "b", "hbar"):
-        assert symbol in C.NOT_IN_STANDARD
-        assert not C._standard_for(symbol)
-    assert "ISO 80000" in C.__dict__["STANDARD"].__doc__ or True
+    assert "b" in C.NOT_IN_STANDARD
+    assert not C._standard_for("b")
+    for now_covered in ("Lambda", "hbar"):
+        assert C._standard_for(now_covered), (
+            f"{now_covered} is listed by Wikipedia; NOT_IN_STANDARD must not "
+            f"still claim the field is silent on it")
     src = (REPO_ROOT / "instruments/tools/conventions.py").read_text()
     for authority in ("ISO 80000", "SUNAMCO", "NIST SP 811"):
         assert authority in src, f"the real standard {authority} is not named"
@@ -306,11 +310,20 @@ def test_entropy_is_energy_per_temperature():
         "entropy is an energy PER TEMPERATURE, not an energy")
 
 
-def test_ssv_phase_action_still_departs_from_entropy():
-    """The S departure survives the correction — and for a sharper reason:
-    an action (J s) and an entropy (J/K) differ in two base dimensions."""
+def test_ssv_phase_action_is_standard_usage_after_all():
+    """Supersedes ``test_ssv_phase_action_still_departs_from_entropy``.
+
+    Against physics.info alone, SSV's S looked like a departure — that page
+    lists only entropy. Wikipedia lists S as surface area, entropy AND action,
+    so both SSV branches are standard. The S collision is a standard ambiguity
+    the series inherited, not one it invented, which changes the fix from
+    "rename" to "disambiguate locally".
+    """
     reported = " ".join(C.departures_from_standard())
-    assert "S in SSV-VII-a" in reported
+    assert "S in SSV-VII-a" not in reported
+    assert "S in SSV-III" not in reported
+    quantities = {q for q, _ in C.WIKI["S"]}
+    assert {"entropy", "action"} <= quantities
 
 
 def test_s_is_an_action_and_an_entropy():
@@ -338,3 +351,48 @@ def test_notational_uses_never_create_a_collision():
             for paper, _, _ in uses:
                 u = next(x for x in C.uses_of(c.symbol) if x.paper == paper)
                 assert u.dim is not None
+
+
+# --------------------------------------------------------------------------
+# the second reference (Wikipedia, owner's suggestion 2026-07-29)
+# --------------------------------------------------------------------------
+
+def test_second_reference_corrects_the_first():
+    """G and S were reported as departures only because physics.info is silent
+    on Newton's constant and on the action. Wikipedia lists both, and the
+    departures vanish. Two references are the cheapest check on one
+    reference's silence — a gap in a lookup table reads exactly like a finding.
+    """
+    reported = " ".join(C.departures_from_standard())
+    assert "G in " not in reported, (
+        "Newton's constant is standard; reporting it as a departure was an "
+        "artefact of the first reference having no entry for it")
+    assert "S in " not in reported, (
+        "Wikipedia lists S as both entropy (J/K) and action (J s), so both SSV "
+        "branches are standard usage")
+
+
+def test_both_cosmological_conventions_are_recorded():
+    """Wikipedia gives Lambda in s^-2 (Friedmann); SSV prints m^-2 (Einstein).
+    Both are standard and differ by c^2, so recording only one would report
+    every SSV cosmology paper as departing."""
+    lam = dict(C.WIKI["Lambda"])
+    dims = {C._dim_key(d) for d in lam.values()}
+    assert len(dims) == 2
+    reported = " ".join(C.departures_from_standard())
+    for paper in ("SSV-VI", "SSV-VII-b", "SSV-VIII", "SSV-IX"):
+        assert f"Lambda in {paper}" not in reported
+
+
+def test_mu0_departure_is_reported():
+    """The most expensive departure found: mu_0 is the vacuum permeability to
+    essentially every physicist, and SSV uses it for a mass."""
+    reported = " ".join(C.departures_from_standard())
+    assert "mu_0 in SSV-I" in reported
+
+
+def test_departure_message_does_not_repeat_a_reference_entry():
+    for line in C.departures_from_standard():
+        _, _, expect = line.partition("reference lists ")
+        parts = [p.strip() for p in expect.split(";")]
+        assert len(parts) == len(set(parts)), f"duplicated entry: {line}"

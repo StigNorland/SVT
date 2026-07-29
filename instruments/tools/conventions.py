@@ -302,6 +302,18 @@ USES: list[Use] = [
     # so the departure is on the record, not so it is forbidden.
     Use("SSV-I", "F", "form factor of the trefoil breather, a pure number", ONE,
         "papers/SSV-I/main.tex:738"),
+    # ---- departures the Wikipedia reference newly exposes ----
+    # mu_0 is the vacuum permeability to essentially every physicist.  SSV uses
+    # it for a MASS, m_e/alpha ~ 70 MeV, in four papers.  Not a defect — the
+    # series is internally consistent — but the most expensive departure here,
+    # because mu_0 is among the least ambiguous symbols in physics.
+    Use("SSV-I", "mu_0", r"base mass scale m_e/\alpha \approx 70.025 MeV", mass,
+        "papers/SSV-I/main.tex:937"),
+    Use("SSV-I", "xi", "healing length of the defect core", length,
+        "papers/SSV-I/main.tex:403"),
+    Use("SSV-III", "Omega", "number of microstates, dimensionless", ONE,
+        "papers/SSV-III/main.tex:308"),
+
     # ---- S: an action in Goldstone/VII-a, an entropy in III/V ----
     # Prompted by the owner noting S = k_B ln(Omega): entropy is an energy per
     # temperature, so the two uses differ in two base dimensions.
@@ -502,10 +514,54 @@ STANDARD: dict[str, tuple[tuple[str, Dimension], ...]] = {
     "xi":    (),      # no entry — see NOT_IN_STANDARD
 }
 
+#: Second reference, added at the owner's suggestion 2026-07-29:
+#: Wikipedia, "List of common physics notations",
+#: https://en.wikipedia.org/wiki/List_of_common_physics_notations — retrieved
+#: 2026-07-29.  It covers most of what physics.info omits, and consulting it
+#: CORRECTED one of the departures the first reference produced: physics.info
+#: has no entry for Newton's constant, so ``G`` was reported as departing from
+#: "shear modulus, conductance".  Wikipedia lists "universal gravitational
+#: constant" outright, and the departure was an artefact of the first
+#: reference's gap, not a fact about SSV.  Two references disagreeing is the
+#: cheapest available check on a single reference's silence.
+WIKI: dict[str, tuple[tuple[str, Dimension], ...]] = {
+    "a":      (("acceleration", ACCELERATION),),
+    "c":      (("speed of light in vacuum", VELOCITY), ("speed of sound", VELOCITY),
+               ("specific heat capacity", SPECIFIC_HEAT)),
+    "e":      (("eccentricity", ONE), ("Euler's number", ONE),
+               ("elementary charge", charge)),
+    "F":      (("force", mass * length / time**2),),
+    "G":      (("universal gravitational constant", NEWTON_G),
+               ("electrical conductance", CONDUCTANCE), ("shear modulus", PRESSURE)),
+    "k":      (("Boltzmann constant", BOLTZMANN), ("wavenumber", WAVENUMBER),
+               ("stiffness", mass / time**2)),
+    "P":      (("power", ENERGY / time),),
+    "S":      (("surface area", length**2), ("entropy", ENTROPY),
+               ("action", ACTION)),
+    "T":      (("period", time), ("temperature", TEMPERATURE)),
+    "V":      (("voltage", ELECTRIC_POTENTIAL), ("volume", length**3)),
+    "hbar":   (("reduced Planck constant", ACTION),),
+    "lambda": (("wavelength", length), ("linear charge density", charge / length)),
+    "rho":    (("mass density", MASS_DENSITY), ("volume charge density", charge / length**3)),
+    "xi":     (("electromotive force", ELECTRIC_POTENTIAL),),
+    "mu_0":   (("vacuum permeability / magnetic constant",
+                mass * length / (time**2 * current**2)),),
+    "Omega":  (("electric resistance", ELECTRIC_POTENTIAL / current),),
+    # Wikipedia gives the cosmological constant in s^-2 (the Friedmann/dynamical
+    # convention, Lambda/3 = H^2).  SSV prints 1e-52 m^-2, the Einstein-equation
+    # convention.  BOTH are standard; they differ by c^2.  Recorded as the two
+    # entries rather than picking one, so a paper matching either is not
+    # reported as departing.
+    "Lambda": (("cosmological constant (Einstein convention)", CURVATURE),
+               ("cosmological constant (Friedmann convention)", 1 / time**2)),
+}
+
 #: Symbols the series leans on that the reference simply does not cover.  Listed
 #: explicitly so the silence is a recorded fact rather than an inference.
-NOT_IN_STANDARD = ("Lambda", "b", "hbar", "Gamma", "xi", "kappa_0",
-                   "alpha_G", "P_0", "rho_0")
+#: Still unlisted by EITHER reference. ``b`` in particular is unclaimed, so
+#: SSV is free to use it — but only consistently, which is what makes its
+#: three dimensions a defect rather than a clash of conventions.
+NOT_IN_STANDARD = ("b", "Gamma", "kappa_0", "alpha_G", "P_0")
 
 
 def departures_from_standard() -> list[str]:
@@ -524,7 +580,12 @@ def departures_from_standard() -> list[str]:
             continue
         keys = {_dim_key(d) for _, d in entries}
         if _dim_key(u.dim) not in keys:
-            expect = "; ".join(f"{q} [{d}]" for q, d in entries)
+            seen, uniq = set(), []
+            for q, d in entries:
+                if (q, str(d)) not in seen:
+                    seen.add((q, str(d)))
+                    uniq.append(f"{q} [{d}]")
+            expect = "; ".join(uniq)
             out.append(f"{u.symbol} in {u.paper}: SSV means {u.means!r} "
                        f"[{u.dim}]; reference lists {expect}")
     return out
@@ -538,9 +599,10 @@ def _standard_for(symbol: str):
     reads naturally and ``a_0`` as the Bohr radius does not, even though the
     Bohr radius is the older and more universal usage.
     """
-    if symbol in STANDARD:
-        return STANDARD[symbol]
+    merged = tuple(STANDARD.get(symbol, ())) + tuple(WIKI.get(symbol, ()))
+    if merged:
+        return merged
     root = symbol.split("_", 1)[0]
     if root in NOT_IN_STANDARD or symbol in NOT_IN_STANDARD:
         return ()
-    return STANDARD.get(root, ())
+    return tuple(STANDARD.get(root, ())) + tuple(WIKI.get(root, ()))
