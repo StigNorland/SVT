@@ -121,6 +121,48 @@ def test_clean_bibtex_build_succeeds(tmp_path, monkeypatch):
 
 
 # --------------------------------------------------------------------------
+# rule 14 / #213 — generated and shared values
+# --------------------------------------------------------------------------
+
+def _shared_value_gate(monkeypatch, *, drift=None, literals=None):
+    monkeypatch.setattr(B.gen_values, "has_values", lambda paper: True)
+    monkeypatch.setattr(B.gen_values, "REGISTRY", {})
+    monkeypatch.setattr(
+        B.gen_values, "shared_values_for",
+        lambda paper: [SimpleNamespace(macro="ssvShared")],
+    )
+    monkeypatch.setattr(
+        B.gen_values, "shared_receipt_drift", lambda: drift or {})
+    monkeypatch.setattr(
+        B.gen_values, "surviving_shared_literals", lambda paper: literals or {})
+
+
+def test_shared_receipt_drift_fails_the_build_gate(monkeypatch):
+    _shared_value_gate(
+        monkeypatch,
+        drift={"ssvShared": {"receipt": "1", "now": "2"}},
+    )
+    with pytest.raises(B.GateFailure, match="shared.*ssvShared"):
+        B.gate_values("SSV-Test")
+
+
+def test_surviving_shared_literal_fails_the_build_gate(monkeypatch):
+    _shared_value_gate(
+        monkeypatch,
+        literals={"ssvShared": ["1.23"]},
+    )
+    with pytest.raises(B.GateFailure, match="survive as typed literals"):
+        B.gate_values("SSV-Test")
+
+
+def test_current_shared_value_passes_the_build_gate(monkeypatch):
+    _shared_value_gate(monkeypatch)
+    report = B.gate_values("SSV-Test")
+    assert "1 shared values" in report
+    assert "no registered shared literal survives" in report
+
+
+# --------------------------------------------------------------------------
 # rule 17 — papers state current status, not their own edit history (#207)
 # --------------------------------------------------------------------------
 
@@ -177,3 +219,23 @@ def test_the_deny_list_is_matched_case_insensitively(tmp_path, monkeypatch):
     change_record_paper(tmp_path, monkeypatch, "EARLIER VERSIONS said so.")
     with pytest.raises(B.GateFailure):
         B.gate_change_records("SSV-Test")
+
+
+def test_reserved_symbol_violation_fails_the_build_gate(monkeypatch):
+    monkeypatch.setattr(
+        B.conventions, "reserved_symbol_violations",
+        lambda paper: ["main.tex:1: \\\\mu_0 is reserved for permeability"])
+    monkeypatch.setattr(
+        B.conventions, "gate_report",
+        lambda paper: ([], "no declared collisions"))
+    with pytest.raises(B.GateFailure, match="reserved-symbol"):
+        B.gate_conventions("SSV-Test")
+
+
+def test_standard_symbols_pass_the_build_gate(monkeypatch):
+    monkeypatch.setattr(
+        B.conventions, "reserved_symbol_violations", lambda paper: [])
+    monkeypatch.setattr(
+        B.conventions, "gate_report",
+        lambda paper: ([], "no declared collisions"))
+    assert B.gate_conventions("SSV-Test") == "no declared collisions"

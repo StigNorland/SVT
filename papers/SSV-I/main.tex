@@ -56,11 +56,12 @@ through the Lamb formula.  The core-scale chiral-to-longitudinal stiffness
 ratio identifies $\alpha \approx 1/137$ as a geometric property of the
 medium --- a stiffness ratio, not a second signal speed.
 
-Together these set the base energy scale $\mu_0 \equiv m_ec^2/\alpha \approx
-70\,\text{MeV}$, the energy of a minimal vortex filament segment of the
+Together these set the base mass scale $m_\star \equiv m_e/\alpha$ and its
+corresponding energy $E_\star\equiv m_\star c^2\approx70\,\text{MeV}$, the
+energy of a minimal vortex filament segment of the
 electron Compton circumference.  The charged pion, as the minimal
 vortex--antivortex bound state carrying two winding numbers, has mass
-$m_{\pi^\pm} = 2\mu_0$, matching CODATA to $0.34\%$.  The neutron is the
+$m_{\pi^\pm} = 2m_\star$, matching CODATA to $0.34\%$.  The neutron is the
 surface-locked composite of the proton trefoil and an electron torus
 compressed onto the breather skin, from which charge, spin, spin-statistics
 composition and baryon/lepton number follow without fitting.
@@ -108,11 +109,11 @@ nonlinear Schr\"{o}dinger (LogSE) field theory for the vacuum order parameter,
 supplemented by a chiral-shear term.  Stable topological defects of this
 field---toroidal vortex rings and spherical breathers---are identified with
 fundamental particles.  The charged-pion mass is derived topologically at
-$2\mu_0$ (two-winding).  For the proton, only the trefoil factor $N_Y=3$ is
-fixed by the crossing number; the full mass $N_YF\mu_0$ remains candidate-grade
+$2m_\star$ (two-winding).  For the proton, only the trefoil factor $N_Y=3$ is
+fixed by the crossing number; the full mass $N_YFm_\star$ remains candidate-grade
 because the extracted form factor $F$ is cutoff-dependent, where
-$\mu_0=m_e/\alpha$.  A broader empirical observation---that many light
-hadron and lepton masses cluster near half-integer multiples of $\mu_0$ to
+$m_\star=m_e/\alpha$.  A broader empirical observation---that many light
+hadron and lepton masses cluster near half-integer multiples of $m_\star$ to
 $\lesssim0.7\%$---is recorded as a numerical coincidence, \emph{not} a derived
 spectrum: pre-registered dynamical tests (Paper~I \S\ref{sec:ladder}; issues
 \ssvissue{76}, \ssvissue{91}) failed to produce the higher rungs as eigenfrequencies.
@@ -358,8 +359,9 @@ characterisation of the vacuum state.
         not a propagation speed: the chiral term is silent in the linear
         spectrum of the uniform vacuum.)
 \end{enumerate}
-These are the only two results needed to motivate $\mu_0=m_ec^2/\alpha$ as
-the natural flux-tube energy scale (see \S\ref{sec:ladder}).
+These are the only two results needed to motivate
+$E_\star=m_\star c^2=m_ec^2/\alpha$ as the natural flux-tube energy scale
+(see \S\ref{sec:ladder}).
 \end{resultbox}
 
 This Lagrangian admits \textbf{quantised circulation}
@@ -403,12 +405,14 @@ superfluid vacuum---a stable, self-sustaining topological defect with finite siz
         Each defect carries its own healing length $\xi \equiv \hbar/(m_0 c)$:
         the electron's is $\xi_e = \hbar/(m_e c) \approx 3.86\times
         10^{-13}\,\mathrm{m}$ (the reduced Compton wavelength $\bar\lambda_e$),
-        and the proton's is $a_p \equiv \hbar/(m_p c) \approx 2.10\times
-        10^{-16}\,\mathrm{m}$.  The ratio $a_p/\xi_e = m_e/m_p \approx
-        1/1836$ is a \emph{cross-defect} quantity; it governs the proton
+        and the proton's is $\bar{\lambda}_p \equiv \hbar/(m_p c) \approx
+        \ssvProtonReducedComptonWavelength\,\mathrm{m}$.  The ratio
+        $\bar{\lambda}_p/\xi_e = m_e/m_p \approx
+        1/\ssvProtonElectronMassRatio$ is a \emph{cross-defect} quantity;
+        it governs the proton
         breather's sub-grain coupling to the long-range phonon field in
         Paper~II's gravity section.  The medium's domain of validity as a
-        continuum effective theory extends to $\ell_{\rm grain} \equiv a_p$;
+        continuum effective theory extends to $\ell_{\rm grain} \equiv \bar{\lambda}_p$;
         below this scale the LogSE description is silent, in the same sense
         that Navier--Stokes is silent about sub-molecular flow (see Paper~II
         \S2).  Spin $s = \hbar/2$ follows from the order parameter
@@ -609,7 +613,7 @@ The proton is a spherical breather mode---a stable, oscillating cavity in the
 superfluid vacuum, prevented from collapse by an internal trefoil vortex skeleton.
 
 \begin{gapbox}[Form factor $F$ is a cutoff-dependent calibration, not a derivation]
-The proton mass below is written as $m_p c^2 = N_Y\,F\,\mu_0$.  $N_Y=3$ is the
+The proton mass below is written as $m_p c^2 = N_Y\,F\,E_\star$.  $N_Y=3$ is the
 topological crossing number; $3.007$ includes a candidate finite-thickness
 correction from independent grid sweeps (Appendix~\ref{app:minimisation}).
 $F$, however, is not yet a
@@ -620,7 +624,7 @@ $R\approx 1.18\,\xi$ (\S\ref{app:F-extraction}).  The two fine grids agree at
 the $2.5\%$ level at this cutoff; the same observable falls by $19\%$ at
 $R=1.5\,\xi$.  The candidate range at the canonical cutoff is therefore
 $m_p\approx 930$--$953\,\text{MeV}$ --- $-0.9\%$ to $+1.6\%$ of the CODATA
-value $938.272\,\text{MeV}$ --- a range with a documented cutoff systematic,
+value $\ssvProtonMassMeV\,\text{MeV}$ --- a range with a documented cutoff systematic,
 not a single number.  The topological trefoil factor $N_Y=3$ is
 (issues~\ssvissue{92} and \ssvissue{77})
 derived as the trefoil crossing number (equivalently the thin-core writhe, or
@@ -630,7 +634,7 @@ proxy is rejected as non-invariant.  The later \ssvissue{77} continuation scan u
 the combined proton-geometry observable to a \emph{candidate} static result:
 $(R,a)=(2.5,0.85)\xi$ and $N_Y\!\cdot\!F\simeq54$, grid-converged over the
 tested ladder and route-independent.  This does not by itself make the separate
-$F$ extraction or the static-gravity map closure-grade; $\mu_0=m_e/\alpha$
+$F$ extraction or the static-gravity map closure-grade; $m_\star=m_e/\alpha$
 stays empirical and the $Q_p/\alpha_G$ map is tracked separately.  Full records:
 \ssvfile{ny-trefoil-derivation-result} and
 \ssvfile{geometry-minimum-result-2026-06-03}.  Tracked under
@@ -735,19 +739,21 @@ untouched.
         energy functional (vortex-line tension + curvature/core energy +
         acoustic breather energy):
         \begin{equation}
-          m_p c^2 = N_Y\cdot\frac{m_e}{\alpha}\cdot F(\text{geometry}),
+          m_p c^2 = N_Y\cdot E_\star\cdot F(\text{geometry})
+                  = N_Y\cdot\frac{m_e c^2}{\alpha}\cdot F(\text{geometry}),
           \label{eq:proton-mass}
         \end{equation}
-        where $\mu_0\equiv m_e/\alpha\approx70\,\text{MeV}$ is the flux-tube
-        mass scale.  The trefoil factor has topological value $N_Y=3$ from the
+        where $m_\star\equiv m_e/\alpha$ is the flux-tube mass scale and
+        $E_\star=m_\star c^2\approx70\,\text{MeV}$ its rest-energy scale.
+        The trefoil factor has topological value $N_Y=3$ from the
         crossing number; $N_Y\approx3.007$ includes a candidate
         finite-thickness writhe correction (Appendix~\ref{app:minimisation}).
 
         The form factor $F$ encodes the ratio of the total 3D breather energy to
-        the trefoil reference energy $N_Y\mu_0$.  It can be written explicitly as
+        the trefoil reference energy $N_YE_\star$.  It can be written explicitly as
         \begin{equation}
-          F = \frac{E_{\rm breather}^{\rm 3D}}{N_Y\mu_0}
-            = \frac{1}{N_Y\mu_0}
+          F = \frac{E_{\rm breather}^{\rm 3D}}{N_YE_\star}
+            = \frac{1}{N_YE_\star}
               \int\!\left[\frac{\hbar^2}{2m_0}|\nabla\Psi|^2
                          + V(|\Psi|^2)\right]d^3x,
           \label{eq:F-integral}
@@ -844,7 +850,7 @@ which is \emph{quadratic} in $k$ (with a logarithmic factor), not linear.
 Evaluated at the natural infrared cutoff $k\sim 1/R_p$ with breather radius
 $R_p\sim 6\,\xi$ and core scale $a\sim\xi$:
 \begin{equation}
-  \hbar\omega \;\sim\; \mu_0 \cdot
+  \hbar\omega \;\sim\; E_\star \cdot
                         \left(\frac{\xi}{R_p}\right)^{\!2}
                         \ln\!\frac{R_p}{\xi}
         \;\approx\; \frac{70\,\text{MeV}}{36}\,\ln 6
@@ -869,7 +875,7 @@ observed splitting $\Delta E\approx 1.293\,\text{MeV}$ then identifies
 \begin{equation}
   \Delta E_{\rm surf}
      \;=\; \Delta E - m_e c^2
-     \;\approx\; 1.293 - 0.511
+     \;\approx\; 1.293 - \ssvElectronMassMeV
      \;=\; 0.782\,\text{MeV},
   \label{eq:beta-endpoint}
 \end{equation}
@@ -900,7 +906,7 @@ proton trefoil and a surface-locked electron torus:
         $\Delta E_{\rm surf}$ identified as the $\beta$-decay endpoint
         $0.782\,\text{MeV}$;
   \item Kelvin-mode order-of-magnitude check
-        $\hbar\omega\sim\mu_0(\xi/R_p)^2\ln(R_p/\xi)\approx 3.5\,\text{MeV}$,
+        $\hbar\omega\sim E_\star(\xi/R_p)^2\ln(R_p/\xi)\approx 3.5\,\text{MeV}$,
         $\mathcal{O}(1)$ consistent with the observed splitting at the level
         of the unresolved binding term.
 \end{itemize}
@@ -916,37 +922,39 @@ calculation deferred to Paper~II.
 %------------------------------------------------------------------
 
 This section separates what the framework \emph{derives} from what it merely
-\emph{observes}.  The charged-pion mass at $2\mu_0$ is a genuine topological
+\emph{observes}.  The charged-pion mass at $2m_\star$ is a genuine topological
 derivation (the two-winding number, \S\ref{sec:pion}).  For the proton, the
 trefoil factor $N_Y=3$ is likewise topological, but the full mass remains
 candidate-grade because $F$ is cutoff-dependent
 (\S\ref{app:minimisation}, issue~\ssvissue{92}).  The broader observation ---
 that many light lepton and hadron
 masses cluster near half-integer multiples of the single scale
-$\mu_0=m_e/\alpha$ to $\lesssim0.7\%$ --- is a \emph{numerical coincidence}, not
+$m_\star=m_e/\alpha$ to $\lesssim0.7\%$ --- is a \emph{numerical coincidence}, not
 a derived spectrum: pre-registered dynamical tests found no mechanism that
 selects the muon, kaon or $\rho$ values (issues~\ssvissue{76}, \ssvissue{91}, \ssvissue{94}).  We state the
-empirical pattern first because it motivates the scale $\mu_0$, then give the two
+empirical pattern first because it motivates the scale $m_\star$, then give the two
 derivations, then record the coincidental masses honestly.
 
-\subsection{The empirical clustering and the scale $\mu_0$}
+\subsection{The empirical clustering and the scale $m_\star$}
 
 We first state the pattern as a pure numerical observation, independent of any
 dynamical model.  Define the single mass scale
 \begin{equation}
-  \mu_0 \equiv \frac{m_e}{\alpha} \approx 70.025\,\text{MeV}.
-  \label{eq:mu0}
+  m_\star \equiv \frac{m_e}{\alpha},
+  \qquad E_\star\equiv m_\star c^2
+  \approx 70.025\,\text{MeV}.
+  \label{eq:star-scale}
 \end{equation}
 This is not a free parameter: $m_e$ and $\alpha$ are both measured constants,
 and we showed in \S\ref{sec:lagrangian} that $\alpha=c_\perp/c$ and in
-\S\ref{sec:electron} that $\mu_0$ is the natural energy scale of a minimal
+\S\ref{sec:electron} that $E_\star$ is the natural energy scale of a minimal
 vortex excitation.  The observation is then:
 
 \begin{resultbox}[Empirical mass clustering (CODATA) --- a recorded coincidence]
 \begin{equation}
-  m_{\pi^\pm} = 2\mu_0 \times (1+0.0032),\quad
-  m_{\mu^\pm} = \tfrac{3}{2}\mu_0 \times (1+0.0059),\quad
-  m_{K^\pm}   = 7\mu_0 \times (1+0.0071).
+  m_{\pi^\pm} = 2m_\star \times (1+0.0032),\quad
+  m_{\mu^\pm} = \tfrac{3}{2}m_\star \times (1+0.0059),\quad
+  m_{K^\pm}   = 7m_\star \times (1+0.0071).
   \label{eq:empirical-ladder}
 \end{equation}
 These three relations are independent statements about three particles with
@@ -959,7 +967,7 @@ coincidence, not a derived ladder.
 
 Table~\ref{tab:full-ladder} extends the survey to the lightest 14 hadrons and
 leptons from the PDG.  The mean fractional deviation from the nearest half-integer
-multiple of $\mu_0$ is $0.096$, compared to $0.25$ expected for masses distributed
+multiple of $m_\star$ is $0.096$, compared to $0.25$ expected for masses distributed
 uniformly at random.  The ladder is not a statistical fluke.
 
 \begin{gapbox}[An empirical pattern, not a derived spectrum]
@@ -967,7 +975,7 @@ The pattern above is real, but its derivation has not been closed.  Three
 pre-registered attempts have been completed:
 \begin{itemize}
 \item \textbf{Path~A (statistical):} removing either the muon ($3/2$) or the
-  pion ($2$) collapses the significance of $\mu_0$ from top-$3\%$ to
+  pion ($2$) collapses the significance of $m_\star$ from top-$3\%$ to
   top-$10$-$11\%$; the ladder is a two-coincidence numerology on present
   statistical evidence alone.
 \item \textbf{Path~B (BdG eigenvalue):} the muon and pion rungs were not
@@ -993,7 +1001,7 @@ $\mathcal{L}_\perp$ in principle allows the bridge by total-$J_\varphi$
 conservation.  However, issue~\ssvissue{91} (2026-06) shows the spin--orbit lock
 amplitude $|V|=0$ exactly for the IQV electron with uniform $\hat n$: the
 spin channels decouple; Fourier orthogonality kills the coupling; the scalar
-selection rule is reproduced.  The muon rung $(3/2)\mu_0$ therefore remains
+selection rule is reproduced.  The muon rung $(3/2)m_\star$ therefore remains
 a \textbf{numerical coincidence} ($0.59\%$) with no deriving mechanism for
 the IQV.  The pion ($n=2$, integer sector) is unaffected.  The last
 theoretical route, a half-quantum vortex (HQV) electron, was examined and
@@ -1002,8 +1010,8 @@ the core and \emph{is} the electron's spin-$\tfrac12$ (the $\mathbb{Z}_2$ framin
 of \S\ref{sec:electron}, \ssvissue{87} B2) --- not azimuthal, so it cannot supply the
 muon's major-ring Berry phase ($A_\varphi=0$, reproducing \ssvissue{91}); and a free HQV
 carries half charge, excluded by integer circulation.  The muon
-$(3/2)\mu_0$ is therefore a \textbf{numerical coincidence} with no surviving
-derivation; $m_{\pi^\pm}=2\mu_0$ stands (electron integer-winding).
+$(3/2)m_\star$ is therefore a \textbf{numerical coincidence} with no surviving
+derivation; $m_{\pi^\pm}=2m_\star$ stands (electron integer-winding).
 \end{gapbox}
 
 \begin{table}[htbp]
@@ -1011,23 +1019,24 @@ derivation; $m_{\pi^\pm}=2\mu_0$ stands (electron integer-winding).
 \caption{Empirical mass clustering across the light hadron spectrum (a recorded
          coincidence, not a derived spectrum --- see text).
          $n$ is the nearest half-integer, $\Delta$ is the fractional deviation
-         $|m - n\mu_0|/(n\mu_0)$.  $\mu_0=m_e/\alpha\approx70.025\,\text{MeV}$.}
+         $|m - nm_\star|/(nm_\star)$.  $m_\star=m_e/\alpha$, with
+         $m_\star c^2\approx70.025\,\text{MeV}$.}
 \label{tab:full-ladder}
 \begin{tabular}{lrrrl}
 \toprule
-Particle & Mass (MeV) & $m/\mu_0$ & $n$ & $\Delta$ \\
+Particle & Mass (MeV) & $m/m_\star$ & $n$ & $\Delta$ \\
 \midrule
-$\mu^\pm$       & $105.658$   & $1.509$ & $3/2$ & $0.59\%$   \\
-$\pi^\pm$       & $139.570$   & $1.993$ & $2$   & $0.34\%$   \\
+$\mu^\pm$       & $\ssvMuonMassMeV$   & $1.509$ & $3/2$ & $0.59\%$   \\
+$\pi^\pm$       & $\ssvChargedPionMassMeV$ & $1.993$ & $2$ & $0.34\%$   \\
 $\pi^0$         & $134.977$   & $1.927$ & $2$   & $3.65\%$   \\
 $K^\pm$         & $493.677$   & $7.050$ & $7$   & $0.71\%$   \\
 $K^0$           & $497.611$   & $7.106$ & $7$   & $1.52\%$   \\
 $\rho(770)$     & $775.260$   & $11.071$ & $11$ & $0.65\%$  \\
 $\omega(782)$   & $782.660$   & $11.177$ & $11$ & $1.61\%$  \\
 $\phi(1020)$    & $1019.461$  & $14.559$ & $14\frac12$ & $0.41\%$  \\
-$p$             & $938.272$   & $13.399$ & $13\frac12$ & $0.75\%$  \\
+$p$             & $\ssvProtonMassMeV$ & $13.399$ & $13\frac12$ & $0.75\%$  \\
 $n$             & $939.565$   & $13.418$ & $13\frac12$ & $0.61\%$  \\
-$\tau^\pm$      & $1776.860$  & $25.375$ & $25\frac12$ & $0.49\%$  \\
+$\tau^\pm$      & $\ssvTauMassMeV$ & $25.375$ & $25\frac12$ & $0.49\%$  \\
 $D^\pm$         & $1869.660$  & $26.700$ & $26\frac12$ & $0.75\%$  \\
 $B^\pm$         & $5279.340$  & $75.392$ & $75\frac12$ & $0.14\%$  \\
 \bottomrule
@@ -1035,16 +1044,16 @@ $B^\pm$         & $5279.340$  & $75.392$ & $75\frac12$ & $0.14\%$  \\
 \end{table}
 
 Three masses stand out as genuinely close (sub-percent, within the first ten
-half-integers): the muon at $3\mu_0/2$, the charged pion at $2\mu_0$, and the
-charged kaon at $7\mu_0$.  These three particles span two decades in mass, have
+half-integers): the muon at $3m_\star/2$, the charged pion at $2m_\star$, and the
+charged kaon at $7m_\star$.  These three particles span two decades in mass, have
 entirely different quark content, and all land within $0.7\%$ of a half-integer
-multiple of the single scale $\mu_0=m_e/\alpha$.
+multiple of the single scale $m_\star=m_e/\alpha$.
 
 \subsection{Physical origin of the base scale}
 
-From \S\ref{sec:lagrangian}--\ref{sec:electron}, $\mu_0$ is established from first
+From \S\ref{sec:lagrangian}--\ref{sec:electron}, $E_\star$ is established from first
 principles: $\alpha=c_\perp/c$ (Eq.~\ref{eq:alpha-origin}) and the Lamb vortex-ring
-energy give $\mu_0=m_ec^2/\alpha$ as the energy of a minimal vortex filament segment
+energy give $E_\star=m_ec^2/\alpha$ as the energy of a minimal vortex filament segment
 of the electron Compton circumference.  This is not a fitted scale --- it is the
 single combination of the two fundamental constants $m_e$ and $\alpha$ with the
 dimension of energy that emerges from the superfluid vacuum model.
@@ -1053,8 +1062,8 @@ dimension of energy that emerges from the superfluid vacuum model.
 
 \textbf{The flux-tube scale.}
 A vortex filament of the electron Compton circumference $\ell_e=2\pi R_e$ carries
-string energy $E_{\rm filament}\sim m_ec^2/\alpha\equiv\mu_0$
-(Eq.~\ref{eq:mu0}), establishing $\mu_0$ as the fundamental energy
+string energy $E_{\rm filament}\sim m_ec^2/\alpha\equiv E_\star$
+(Eq.~\ref{eq:star-scale}), establishing $E_\star$ as the fundamental energy
 quantum for vortex excitations.
 
 %------------------------------------------------------------------
@@ -1067,14 +1076,15 @@ pair in the saturated superfluid vacuum.
 \textbf{Topological classification.}
 The charged pion carries two units of topological charge: a $+1$ winding
 (vortex) and a $-1$ winding (antivortex), together constituting the minimal
-closed loop.  Each unit carries energy $\mu_0$, giving
+closed loop.  Each unit carries energy $E_\star$, giving the mass relation
 \begin{equation}
-  \boxed{m_{\pi^\pm} \approx 2\,\mu_0 = \frac{2m_e}{\alpha} \approx 140.051\,\text{MeV}.}
+  \boxed{m_{\pi^\pm} \approx 2\,m_\star = \frac{2m_e}{\alpha},
+  \qquad m_{\pi^\pm}c^2\approx 2E_\star\approx 140.051\,\text{MeV}.}
   \label{eq:pion-mass}
 \end{equation}
-Observed (CODATA): $139.57018\pm0.00035\,\text{MeV}$ ($0.34\%$).
+Observed (PDG): $\ssvChargedPionMassMeV\pm0.00018\,\text{MeV}$ ($0.34\%$).
 
-The factor of $2$ is topological; the identification of $\mu_0$ as the energy
+The factor of $2$ is topological; the identification of $E_\star$ as the energy
 per unit winding is motivated by the string tension argument above.  The full
 soliton-energy derivation of the coefficient requires the two-winding profile
 in the LogSE + chiral-shear theory and is deferred to Paper~II.
@@ -1113,7 +1123,7 @@ identification:
   Full record:
   \ssvfile{volovik-berry-phase-issue76-tasks1-4}.
 \end{itemize}
-The muon assignment $m_{\mu^\pm}=\frac{3}{2}\mu_0$ is a \textbf{numerical
+The muon assignment $m_{\mu^\pm}=\frac{3}{2}m_\star$ is a \textbf{numerical
 coincidence} ($0.59\%$) with no deriving mechanism in the current theory.
 Three attempts with the scalar operator gave null results (above).  The
 CP$^1$/spinor extension (\ssvissue{83}, \ssvissue{87} B1) showed the bridge is symmetry-allowed
@@ -1179,10 +1189,10 @@ falls at $\omega/\omega_c=0.2148$, within $3.7\%$ of the muon target $0.207$
 ($0.09\%$ in the relaxed-background variant of
 Appendix~\ref{app:helicity-bridge}).  Driven-response scans on this basis
 appeared to support a selection-rule reading (core-breathing drives at
-$(3/2)\mu_0$, Kelvin drives at $2\mu_0$).  However, the pre-registered
+$(3/2)m_\star$, Kelvin drives at $2m_\star$).  However, the pre-registered
 basis-enrichment test (gapbox above; full record in
 \ssvfile{path-b-eigenvalue-result}) shows that the muon
-agreement is not basis-robust and the $2\mu_0$ ``pion tongue'' is absent in
+agreement is not basis-robust and the $2m_\star$ ``pion tongue'' is absent in
 every basis tested.  The selection-rule reading is therefore a property of
 the truncation, not of the operator.
 
@@ -1202,7 +1212,7 @@ bracket, reported here in prior drafts as a meridional-domain-size
 convergence, is recovered only because the published basis (\texttt{helicity},
 2-core) happens to land near $0.207$; basis enrichment in the standard
 Galerkin sense does not sharpen the result.  Higher rungs of the ladder
-reach sub-percent accuracy against half-integer multiples of $\mu_0$ in the
+reach sub-percent accuracy against half-integer multiples of $m_\star$ in the
 same projection, but that classification ruler is dense enough above
 $\omega\approx 1.4$ that the apparent hits at rungs $8.5$ and $32.5$ are
 guaranteed by ruler density rather than spectrum structure (see
@@ -1229,13 +1239,13 @@ analytic asymptotic deferred to Paper~II.  Tracked under issue~\ssvissue{66}.
 
 The assignment
 \begin{equation}
-  m_{\mu^\pm} \approx \frac{3}{2}\,\mu_0 = \frac{3m_e}{2\alpha}
+  m_{\mu^\pm} \approx \frac{3}{2}\,m_\star = \frac{3m_e}{2\alpha}
               \approx 105.038\,\text{MeV}
               \quad(0.59\%\text{ from CODATA})
   \label{eq:muon-mass}
 \end{equation}
 sits at one of the two sub-percent values of the empirical clustering (the
-other is the pion $m_{\pi^\pm}=2\mu_0$), but it is a \textbf{numerical
+other is the pion $m_{\pi^\pm}=2m_\star$), but it is a \textbf{numerical
 coincidence}, not a derived mass (\S\ref{sec:claim-status}): it is carried only
 by the empirical agreement on the $m_e/\alpha$ scale.  Every route to the
 half-integer Berry holonomy that would be required to derive it has now been
@@ -1251,7 +1261,7 @@ issues~\ssvissue{73}, \ssvissue{76}, \ssvissue{91}, \ssvissue{94}.
 The proton mass uses one derived topological factor inside a candidate
 quantitative relation:
 \begin{equation}
-  m_p c^2 = N_Y\cdot F\cdot\mu_0,
+  m_p c^2 = N_Y\cdot F\cdot E_\star,
   \label{eq:proton-ladder}
 \end{equation}
 with the trefoil factor $N_Y=3$ \emph{derived} as the crossing number
@@ -1261,7 +1271,8 @@ extracted from a
 3D topology-preserving relaxation of the trefoil-knot breather
 (Appendix~\ref{app:F-extraction}).  $F\approx 4.47$ at the canonical cutoff
 $R\approx 1.18\,\xi$ gives $m_p \approx 930$--$953\,\text{MeV}$
-($-0.9\%$ to $+1.6\%$ of the CODATA value $938.272$ MeV).  $F$ is cutoff-dependent
+($-0.9\%$ to $+1.6\%$ of the CODATA value
+$\ssvProtonMassMeV$ MeV).  $F$ is cutoff-dependent
 ($\mathrm{d}\ln F/\mathrm{d}\ln R\approx -0.94$, $19\%$ variation between
 $R=1.18\,\xi$ and $R=1.5\,\xi$) and is not yet a cutoff-independent
 first-principles prediction; the §Proton gapbox above lays out the full
@@ -1269,8 +1280,8 @@ calibration caveat and what closure would require.  Closure tracked under
 issue~\ssvissue{30}; demotion record under issue~\ssvissue{66}.
 
 \textbf{The higher-mass coincidences.}  The charged kaon
-($m_{K^\pm}=493.677\,\text{MeV}=7.05\,\mu_0$, $0.71\%$) and the $\rho(770)$
-($11.07\,\mu_0$, $0.65\%$) sit close to half-integer multiples of $\mu_0$, but
+($m_{K^\pm}=493.677\,\text{MeV}=7.05\,m_\star$, $0.71\%$) and the $\rho(770)$
+($11.07\,m_\star$, $0.65\%$) sit close to half-integer multiples of $m_\star$, but
 ---unlike the pion and proton---the framework supplies \emph{no} deriving
 mechanism for them (issues~\ssvissue{76}, \ssvissue{91}, \ssvissue{93}): they are recorded as numerical
 coincidences, not derived masses.
@@ -1287,11 +1298,11 @@ issues~\ssvissue{76}, \ssvissue{91}, \ssvissue{93}, \ssvissue{94}).}
 \toprule
 Particle & Assignment & Predicted (MeV) & Observed (MeV) & Agreement \\
 \midrule
-$\pi^\pm$ & $2\mu_0$                        & $140.051$ & $139.570$ & $0.34\%$ \\
-$\mu^\pm$ & $\frac{3}{2}\mu_0$              & $105.038$ & $105.658$ & $0.59\%$ \\
-$K^\pm$   & $7\mu_0$                        & $490.177$ & $493.677$ & $0.71\%$ \\
-$\rho$    & $11\mu_0$                       & $770.278$ & $775.260$ & $0.64\%$ \\
-$p$       & $N_Y\!\cdot\!F\!\cdot\!\mu_0$   & $930$--$953$ & $938.272$ & $-0.9$ to $+1.6\%$\footnotemark[1] \\
+$\pi^\pm$ & $2m_\star$                        & $140.051$ & $\ssvChargedPionMassMeV$ & $0.34\%$ \\
+$\mu^\pm$ & $\frac{3}{2}m_\star$              & $105.038$ & $\ssvMuonMassMeV$ & $0.59\%$ \\
+$K^\pm$   & $7m_\star$                        & $490.177$ & $493.677$ & $0.71\%$ \\
+$\rho$    & $11m_\star$                       & $770.278$ & $775.260$ & $0.64\%$ \\
+$p$       & $N_Y\!\cdot\!F\!\cdot\!m_\star$   & $930$--$953$ & $\ssvProtonMassMeV$ & $-0.9$ to $+1.6\%$\footnotemark[1] \\
 \bottomrule
 \end{tabular}
 \footnotetext[1]{$F\approx 4.47$ at the inter-strand half-spacing cutoff
@@ -1306,7 +1317,7 @@ calibration caveat and the cutoff dependence.  Status: candidate
 The numerical \emph{closeness} of the $\alpha$-harmonic clustering is robust as
 an observation, but it is \emph{not} a derived spectrum and is no longer
 presented as one (issue~\ssvissue{93}).  The framework derives the pion mass
-($2\mu_0$, two-winding) and the proton's trefoil factor ($N_Y=3$, the crossing
+($2m_\star$, two-winding) and the proton's trefoil factor ($N_Y=3$, the crossing
 number); the complete proton mass remains candidate-grade through $F$.
 These statements stand independently of any ladder.  The higher half-integer
 rungs (muon $\tfrac32$,
@@ -1368,8 +1379,8 @@ $m_ec^2=\frac12\rho_0\kappa_0^2 R_e\Lambda$ from the Lamb vortex-ring energy
 ratio $g\approx2$ from the current-loop and topological-spin argument.
 The origin of $\alpha=c_\perp/c$ (a core-scale stiffness ratio;
 \ssvissue{138}) from the chiral-shear coupling is established
-at the operator level.  The pion mass $m_\pi=2\mu_0$ follows from two-winding-number
-topology with $\mu_0$ determined by (iii) and $\alpha$.
+at the operator level.  The pion mass $m_\pi=2m_\star$ follows from two-winding-number
+topology with $m_\star$ determined by (iii) and $\alpha$.
 
 The BdG analysis (Appendix~\ref{app:bdg}) establishes analytically that
 $V_{\rm eff}=4(1-f_0^2)\geq0$, so the standard LogSE has \emph{no}
@@ -1387,7 +1398,7 @@ corresponding mass identification.
 
 \paragraph{Stability of $L = 2R_e$ as a topological boundary minimum.}
 \label{para:pion-link-stability}
-The pion mass $m_{\pi^\pm}=2\mu_0$ follows from the link length $L=2R_e$,
+The pion mass $m_{\pi^\pm}=2m_\star$ follows from the link length $L=2R_e$,
 which is fixed by topology rather than by an interior minimum of
 $E_{\rm link}(L)$.  The argument has two parts.
 
@@ -1409,10 +1420,10 @@ self-energy (already minimised at $a^*=\xi$ in
 global minimum on the constrained domain is therefore $L=2R_e$, the boundary
 value, with energy
 \begin{equation}
-  E_{\rm link}(2R_e) = \varepsilon\cdot 2R_e \approx 2\mu_0\,c^2,
+  E_{\rm link}(2R_e) = \varepsilon\cdot 2R_e \approx 2m_\star\,c^2,
   \label{eq:pion-link-energy}
 \end{equation}
-matching $m_{\pi^\pm} c^2 = 2\mu_0 c^2$ by direct evaluation.
+matching $m_{\pi^\pm} c^2 = 2m_\star c^2$ by direct evaluation.
 
 The full 3D LogSE minimisation cannot move the minimum below $L=2R_e$
 without changing the topological sector; a lower-$L$ minimum exists only in
@@ -1423,7 +1434,7 @@ the rigid-ring approximation, with sub-leading corrections suppressed by the
 same $\alpha^2$ that controls the ring-size expansion of \eqref{eq:Ekin}.
 
 \begin{gapbox}[Muon: all derivation routes closed --- a numerical coincidence]
-The muon identification $m_{\mu^\pm}=(3/2)\mu_0$ is a \textbf{numerical
+The muon identification $m_{\mu^\pm}=(3/2)m_\star$ is a \textbf{numerical
 coincidence} carried by the empirical $m_e/\alpha$ scale, not a derived
 eigenfrequency.  Every closure attempt has given a null result.  The
 pre-registered Path~B basis-enrichment test shows that the reduced
@@ -1445,13 +1456,13 @@ half-quantum vortex (HQV) electron, was examined and \textbf{rejected
 (issue~\ssvissue{94})}: the HQV half-winding is meridional (it \emph{is} the electron's
 spin-$\tfrac12$, \ssvissue{87} B2), not azimuthal, so $A_\varphi=0$ and it gives no muon
 Berry phase; a free HQV is charge-excluded.  Every $\gamma_B=\pi$ route is now
-closed; the muon $(3/2)\mu_0$ is a numerical coincidence with no surviving
+closed; the muon $(3/2)m_\star$ is a numerical coincidence with no surviving
 derivation.  The existing helicity-bridge numerics are retained as historical
 diagnostics.
 \end{gapbox}
 
 \begin{gapbox}[Open Problem 3 — Proton: form factor $F$ partially closed]
-The proton mass uses $m_pc^2=N_Y\cdot F\cdot\mu_0$ with $N_Y\approx3.007$
+The proton mass uses $m_pc^2=N_Y\cdot F\cdot E_\star$ with $N_Y\approx3.007$
 (Appendix~\ref{app:minimisation}) and $F\approx4.47$.  The topological value
 $N_Y=3$ is the crossing number; its $3.007$ finite-thickness correction and
 the form factor $F$ are estimated
@@ -1461,7 +1472,7 @@ $(2,3)$-trefoil knot under the full SSV functional
 at three grid resolutions ($n^3=24^3,48^3,72^3$, see
 Appendix~\ref{app:minimisation}).  $F$ is grid-converged within $2.5\%$
 between the two finer grids and depends on the calibration cutoff $R$ used
-to define the per-length vortex tension $\mu_0(R)$.  At the natural physical
+to define the per-length vortex tension $\varepsilon_{\rm line}(R)$.  At the natural physical
 cutoff $R\approx1.18\,\xi$ (the inter-strand half-spacing of the trefoil
 with minor radius $0.85\,\xi$), the fine grids give $F=4.417$--$4.528$,
 whose mean reproduces the analytic estimate, and
@@ -1479,7 +1490,8 @@ not a separate digit.  The alternative $L_{\rm curve}/(4\pi\xi)$ proxy is
 the value $3.086$ was a coincidence of the $R=2.8\,\xi$ embedding).  Verified in
 \ssvfile{trefoil_ny_derivation}.  What remains open:
 \begin{itemize}
-  \item The chiral scale $\mu_0=m_e/\alpha\approx 70\,\text{MeV}$ still takes
+  \item The chiral mass scale $m_\star=m_e/\alpha$ (with
+        $E_\star\approx 70\,\text{MeV}$) still takes
         $m_e,\alpha$ as empirical inputs; deriving it from SSV vacuum parameters
         is the precision-bearing test (the remaining $\sim 1\%$).
   \item The \ssvissue{77} geometry scan gives a candidate combined observable
@@ -1491,7 +1503,7 @@ the value $3.086$ was a coincidence of the $R=2.8\,\xi$ embedding).  Verified in
 
 Following the \ssvissue{77} continuation scan, the proton assignment has a candidate
 static-geometry anchor, $N_Y\!\cdot\!F\simeq54$, but remains short of a closed
-first-principles derivation because $\mu_0=m_e/\alpha$ and the
+first-principles derivation because $m_\star=m_e/\alpha$ and the
 $Q_p/\alpha_G$ map are still external to the candidate geometry result.  The
 pion is on stronger footing: its two-winding topology is topologically forced,
 and the remaining gap is the stability proof for $L=2R_e$.  The scalar-SSV muon
@@ -1516,7 +1528,8 @@ constant as the core-scale stiffness ratio $\alpha=c_\perp/c$ from the
 chiral-shear coupling constant (\ssvissue{138}: a stiffness ratio, not a
 second signal speed).
 The pion mass $m_\pi=2m_e/\alpha$ follows from the two-winding topology
-with $\mu_0=m_e/\alpha$ identified as the natural vortex energy scale.
+with $m_\star=m_e/\alpha$ and $E_\star=m_\star c^2$ identified as the
+natural vortex mass and energy scales.
 
 BdG analysis proves analytically that no $s$-wave amplitude bound mode
 exists in the standard LogSE — the effective potential
@@ -1525,10 +1538,10 @@ therefore cannot arise from the planar amplitude potential.  Subsequent
 closure work also rules out the current reduced helicity-basis route, the
 direct $m_\varphi=\pm1$ scalar BdG sector, and the proposed Volovik
 Berry-phase rescue for the implemented $\mathcal{L}_\perp$ block.  The
-assignment $m_{\mu^\pm}=(3/2)\mu_0$ remains an empirical coincidence with no
+assignment $m_{\mu^\pm}=(3/2)m_\star$ remains an empirical coincidence with no
 deriving mechanism in the present framework.  Agreement with CODATA at the
 $0.34\%$ level is demonstrated for the charged pion.  The proton mass formula
-$m_p c^2 = N_Y\!\cdot\!F\!\cdot\!\mu_0$ with $N_Y\approx3.007$ and form
+$m_p c^2 = N_Y\!\cdot\!F\!\cdot\!E_\star$ with $N_Y\approx3.007$ and form
 factor $F$ at the inter-strand cutoff remains candidate-grade: issue~\ssvissue{30}
 records that cutoff-invariance, simple geometric-$R$ extraction, and
 same-topology recovery all failed under the current static pipeline.
@@ -1642,9 +1655,9 @@ is the \textbf{Bohr radius} $a_0$, not the classical electron radius
 $r_e=\alpha\hbar/(m_ec)$ --- they differ by $\alpha^2$.  With the corrected
 $\xi$, $R_e^*=a_0/\sqrt2$.  The \emph{relation} $R^*=\xi/\alpha$ survives; the
 identification does not. \\
-Pion mass $m_{\pi^\pm}=2\mu_0$
+Pion mass $m_{\pi^\pm}=2m_\star$
 ($0.34\%$ from CODATA) & derived & Already analytic from the
-two-winding topology + the $\mu_0=m_e/\alpha$ scale.  No 3D
+two-winding topology + the $m_\star=m_e/\alpha$ scale.  No 3D
 relaxation needed.  Survives the CP$^1$/spinor extension unchanged
 (spin-$0$ $\Rightarrow$ uniform $\hat n$, \ssvissue{87} A1). \\
 Lepton spin $s=\tfrac12$ & derived & \textbf{Promoted 2026-06 (\ssvissue{87} B2)}
@@ -1653,7 +1666,7 @@ from assumed to derived: intrinsic to the CP$^1$/spinor order parameter
 ($\pi_1(SO(3))=\mathbb{Z}_2$).  Supersedes the scalar
 Finkelstein--Rubinstein route, which \ssvissue{29} showed does not deliver the
 $\mathbb{Z}_2$ for a scalar field. \\
-Muon mass $m_{\mu^\pm}=(3/2)\mu_0$ ($0.59\%$ from CODATA) &
+Muon mass $m_{\mu^\pm}=(3/2)m_\star$ ($0.59\%$ from CODATA) &
 coincidence & \textbf{Demoted 2026-06} from candidate to
 numerical coincidence: five probes (Path~B, \ssvissue{73}, \ssvissue{76}, App.~B potential,
 two-mode reduction) converged on a no-go for the \emph{scalar} U(1) order
@@ -1680,13 +1693,13 @@ residual gap & \textit{falsified} & The repository calculation gives
 a relative shift of $-(3\text{--}9)\times 10^{-9}$, seven orders of
 magnitude too small and with the wrong sign.  Documented in
 \ssvfile{muon-cubic-vertex-result-note}. \\
-Higher rungs $K^\pm \approx 7\mu_0$ and $\rho(770) \approx 11\mu_0$
+Higher rungs $K^\pm \approx 7m_\star$ and $\rho(770) \approx 11m_\star$
 ($\sim$0.7\%) & coincidence & \textbf{Demoted (issue~\ssvissue{93}, 2026-06):} no
 deriving mechanism.  Path~A/B and the issue~\ssvissue{76}/\ssvissue{91} BdG nulls show the
 spectrum is not an even ladder and does not produce these as
 eigenfrequencies; unlike the muon they have no half-winding/HQV route.
 Recorded as a numerical coincidence, not a candidate rung. \\
-Proton mass $m_p \approx N_Y \cdot F \cdot \mu_0 \approx 930$--$953$
+Proton mass $m_p \approx N_Y \cdot F \cdot m_\star \approx 930$--$953$
 MeV ($-0.9$ to $+1.6\%$ from CODATA) &
 candidate & \textbf{Update (\ssvissue{77}):} the static geometry now has a
 candidate combined observable, $N_Y\!\cdot\!F\simeq54$, at
@@ -1694,7 +1707,7 @@ $(R,a)=(2.5,0.85)\xi$, grid-converged over the tested continuation ladder
 and route-independent.  The trefoil factor $N_Y=3$ is separately derived as
 the trefoil crossing number (\ssvissue{92}; see row below), but the separate $F$
 decomposition and the $Q_p/\alpha_G$ map are not closure-grade.  Remaining
-free input: $\mu_0=m_e/\alpha$ (still empirical, the precision-bearing
+free input: $m_\star=m_e/\alpha$ (still empirical, the precision-bearing
 test).  Records:
 \ssvfile{ny-trefoil-derivation-result};
 \ssvfile{geometry-minimum-result-2026-06-03}. \\
@@ -1749,12 +1762,12 @@ paper. \\
 
 \paragraph{Parameter count of the mass sector (issue~\ssvissue{95}).}
 The analytic pion relation and candidate proton relation both use
-$\mu_0=m_e/\alpha$.  For the pion, $N=2$ is fixed by topology.  For the proton,
+$m_\star=m_e/\alpha$.  For the pion, $N=2$ is fixed by topology.  For the proton,
 $N=N_YF=3F$: $N_Y=3$ is topological, but $F$ is a numerical observable with an
 unresolved cutoff prescription.  Thus the current mass sector has two
 empirical inputs, $m_e$ and $\alpha$, \emph{plus} an unresolved theoretical
 systematic in the proton calculation; it is not yet a closed two-input
-spectrum.  $\mu_0$ is not independently predicted; it is $m_e/\alpha$.
+spectrum.  $m_\star$ is not independently predicted; it is $m_e/\alpha$.
 Nor is $\alpha=1/137$ predicted: the $R_e$ relation
 $2\pi\gamma\alpha^2=\ln(8/\alpha)-\tfrac34$ defines $\gamma(\alpha)$ (a
 consistency condition), so $\alpha$, identified as the stiffness ratio
@@ -1867,7 +1880,7 @@ small finite-thickness writhe correction.
 Relaxation under the topology-preserving penalty
 (\ssvfile{topology_penalty}) converges to
 $N_Y\approx3.007$ at the tested grids, with the proton mass scaling
-$m_p\approx N_Y\cdot\mu_0\cdot F(\text{geometry})$.  $F$ is the form factor
+$m_p\approx N_Y\cdot m_\star\cdot F(\text{geometry})$.  $F$ is the form factor
 discussed in \S\ref{app:F-extraction} below; it is grid-converged at the
 canonical cutoff $R=1.18\,\xi$ between $n=48$ and $n=72$ at the $2.5\%$
 level (raw numerator $e_{\rm interior}$ agreement between those grids drives
@@ -1930,28 +1943,31 @@ mechanism generalises to other grids by scaling $\mu$ with the
 $\mathcal{L}_\perp$ gradient ($\mu\!\propto\!1/dx^2$ approximately).
 
 \textbf{(3) The form factor $F$ requires a grid-invariant calibration.}
-The natural calibration $\mu_0^{\rm grid}=E_{\rm slab}/L_{\rm slab}$
+The natural calibration
+$\varepsilon_{\rm line}^{\rm grid}=E_{\rm slab}/L_{\rm slab}$
 (per-length energy of an arc-length slab of the resolved tube) grows
 with grid refinement because the kinetic term resolves sharper gradients
-near the core ($\mu_0^{\rm grid}=3.58,\,4.80,\,5.56$ at $n=24,48,72$).
-The corresponding $F=E_{\rm interior}/(N_Y\mu_0^{\rm grid})$ is
+near the core
+($\varepsilon_{\rm line}^{\rm grid}=3.58,\,4.80,\,5.56$ at $n=24,48,72$).
+The corresponding
+$F=E_{\rm interior}/(N_Y\varepsilon_{\rm line}^{\rm grid})$ is
 therefore not grid-converged.  A genuinely grid-invariant calibration
 is the analytic per-length tension of the planar LogSE soliton,
 integrated to a physical cutoff $R$:
 \begin{equation}
-  \mu_0^{\rm straight}(R) = \int_0^{R}\!2\pi r\,\Bigl[
+  \varepsilon_{\rm line}^{\rm straight}(R) = \int_0^{R}\!2\pi r\,\Bigl[
         \tfrac12\bigl(f'^2 + f^2/r^2\bigr)
       + V(f^2)\Bigr]\,dr,
-  \label{eq:mu0-straight}
+  \label{eq:line-energy-straight}
 \end{equation}
 where $f(r)$ is the ODE-solved soliton profile (slope $1.140$ at the
 origin, $f\to 1$ as $r\to\infty$).  The integral has the familiar
 logarithmic divergence of a 2D vortex, hence the explicit cutoff $R$.
-Using $\mu_0^{\rm straight}(R)$ and the analytic curve length
-$L_{\rm curve}$ for $N_Y\mu_0$, one obtains
+Using $\varepsilon_{\rm line}^{\rm straight}(R)$ and the analytic curve length
+$L_{\rm curve}$ for the reference energy, one obtains
 \begin{equation}
   F_{\rm straight}(R) = \frac{E_{\rm interior}}{L_{\rm curve}\,
-                                \mu_0^{\rm straight}(R)},
+                                \varepsilon_{\rm line}^{\rm straight}(R)},
 \end{equation}
 which IS grid-converged.
 
@@ -1960,7 +1976,7 @@ which IS grid-converged.
 $F_{\rm straight}(R)$ stabilises at the values shown in
 Table~\ref{tab:Fstraight}.  The two finer grids agree within $2.5\%$
 at every cutoff $R$ --- the spread is $R$-independent because only the
-denominator $\mu_0^{\rm straight}(R)$ carries the cutoff, so the ratio is
+denominator $\varepsilon_{\rm line}^{\rm straight}(R)$ carries the cutoff, so the ratio is
 fixed by the residual finite-$n$ error in the numerator
 $E_{\rm interior}$ alone, and would tighten further with $n\geq 96$.
 
@@ -2079,7 +2095,7 @@ confirms:
 \textbf{Implication for the muon.}
 The absence of a bound breathing mode in the LogSE is now analytically
 established, not merely a numerical observation.  The muon identification
-$m_\mu=(3/2)\mu_0$ cannot arise from an $s$-wave amplitude oscillation of
+$m_\mu=(3/2)m_\star$ cannot arise from an $s$-wave amplitude oscillation of
 the planar vortex profile.  A bound muon-like mode requires at least one
 of the following ingredients absent from the current Lagrangian:
 \begin{enumerate}
@@ -2195,7 +2211,8 @@ result $R_e^* = \xi/\alpha$.
     changes sign exactly at $r^* = 1/\alpha = 137$.
     \textit{Right:} Zoom near the minimum confirming a well-defined
     bound state at $R_e^* = \xi/\alpha=a_0/\sqrt2$, not at the classical
-    electron radius.  Computed with $\alpha = 1/137.036$.}
+    electron radius.  Computed with
+    $\alpha = 1/\ssvAlphaInverse$.}
   \label{fig:minimisation}
 \end{figure}
 
@@ -2205,7 +2222,7 @@ result $R_e^* = \xi/\alpha$.
 %------------------------------------------------------------------
 
 This appendix documents the historical numerical 3D BdG projection that first
-motivated the muon identification $m_{\mu^\pm}\approx(3/2)\mu_0$, together
+motivated the muon identification $m_{\mu^\pm}\approx(3/2)m_\star$, together
 with the driven-response diagnostic that appeared to distinguish muon-type and
 pion-type ladder rungs by drive symmetry.  It is retained as a useful record of
 the reduced-basis calculation, but its ladder interpretation is superseded by
@@ -2277,7 +2294,7 @@ reduced-basis feature rather than a derived eigenfrequency of the operator.
 \subsection{Driven-response selection rule}
 
 The discrete eigenvalues of the projected BdG operator cluster near
-half-integer and integer multiples of $\mu_0$ in natural units, but eigenvalue
+half-integer and integer multiples of $m_\star$ in natural units, but eigenvalue
 proximity alone does not distinguish ladder rungs from near-continuum
 accumulation.  A sharper diagnostic is obtained by solving the driven
 frequency-domain problem
@@ -2297,12 +2314,12 @@ $\gamma = 0.005$, scanning $0.15\le\omega/\omega_c\le0.35$:
 \begin{itemize}
   \item Core-breathing drive ($\Phi_R$ or $\Phi_\chi$, $m_\varphi=0$):
         dominant peak at $\omega/\omega_c = 0.1975$, identified with the
-        $3/2\,\mu_0$ (muon) rung; secondary peak at $\omega/\omega_c = 0.2850$
-        ($2\mu_0$ pion rung).
+        $3/2\,m_\star$ (muon) rung; secondary peak at $\omega/\omega_c = 0.2850$
+        ($2m_\star$ pion rung).
 
   \item Kelvin-helicity drive ($K_{\sigma,\pm}$, $m_\varphi=\pm1$):
-        dominant peak at $\omega/\omega_c = 0.2850$ ($2\mu_0$ pion rung);
-        secondary peak at $\omega/\omega_c = 0.1975$ ($3/2\,\mu_0$ muon rung).
+        dominant peak at $\omega/\omega_c = 0.2850$ ($2m_\star$ pion rung);
+        secondary peak at $\omega/\omega_c = 0.1975$ ($3/2\,m_\star$ muon rung).
 \end{itemize}
 
 Both drives excite both peaks through the chiral bridge, so this is a strong

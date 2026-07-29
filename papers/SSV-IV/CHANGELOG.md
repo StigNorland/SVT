@@ -6,6 +6,19 @@ Entries link the issue that drove each change. Git history carries the rest.
 
 ---
 
+## 2026-07-29 — [#213](https://github.com/StigNorland/SVT/issues/213) · standard proton-length notation
+
+The non-standard \(a_p\) is renamed
+\(\bar\lambda_p=\hbar/(m_pc)\), the reduced proton Compton wavelength.
+
+## 2026-07-29 — [#213](https://github.com/StigNorland/SVT/issues/213) · shared observed constants
+
+The proton reduced Compton wavelength, ordinary wavelength, and
+proton/electron mass ratio now
+render from the series-level receipt.  Three radius sites that printed
+\(2.0\times10^{-16}\,\mathrm{m}\) are normalised to the same
+CODATA-derived \(2.1\times10^{-16}\,\mathrm{m}\) value used elsewhere.
+
 ## 2026-07-29 — [#210](https://github.com/StigNorland/SVT/issues/210) · source and scale repair
 
 The Bjerknes attribution now distinguishes the historical synchronous-pulsator

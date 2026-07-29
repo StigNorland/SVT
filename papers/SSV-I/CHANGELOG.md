@@ -8,6 +8,29 @@ by the move. Git history and the linked issues carry the rest.
 
 ---
 
+## 2026-07-29 — [#213](https://github.com/StigNorland/SVT/issues/213) · standard symbol meanings
+
+The overloaded \(\mu_0\) is split by dimension: \(m_\star=m_e/\alpha\) is
+the mass scale, \(E_\star=m_\star c^2\) its rest-energy scale, and
+\(\varepsilon_{\rm line}\) the cutoff-dependent line tension.  The proton
+scale \(a_p\) is renamed to its standard meaning,
+\(\bar\lambda_p=\hbar/(m_pc)\), the reduced proton Compton wavelength.
+The first #213 guard only recorded the \(\mu_0\) collision; the revised build
+gate forbids its non-permeability use.
+
+## 2026-07-29 — [#213](https://github.com/StigNorland/SVT/issues/213) · shared observed constants
+
+Observed particle masses, \(\alpha^{-1}\), and \(m_p/m_e\) now come from the
+series-level shared-value receipt wherever the same quantity is printed in
+another SSV paper.  The candidate \(N_YF\) values remain literals and are
+reported as unregistered: their cutoff-dependent source is not yet a stable
+instrument output.  The programme-wide D1/D2/D3 result and the retained
+negative limit are recorded in
+[`results/issue-213-shared-value-registry.md`](results/issue-213-shared-value-registry.md).
+The charged-pion input is also updated from the older
+\(139.57018\pm0.00035\) MeV pair to the PDG-2024
+\(139.57039\pm0.00018\) MeV value carried by the shared source.
+
 ## 2026-07-29 — [#207](https://github.com/StigNorland/SVT/issues/207) · the proton band reconciled with its own table
 
 Two different proton masses were in print at once. Owner's observation: the

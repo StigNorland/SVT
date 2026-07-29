@@ -4,6 +4,22 @@ The paper states **current status only**. Its history lives here.
 
 ---
 
+## 2026-07-29 — [#213](https://github.com/StigNorland/SVT/issues/213) · standard symbol meanings
+
+The Maxwell \(\mu_0\) remains vacuum permeability.  The unrelated SSV scale
+is now \(m_\star=m_e/\alpha\), with energy \(E_\star=m_\star c^2\), and the
+proton core length is written as the reduced Compton wavelength
+\(\bar\lambda_p\).
+
+## 2026-07-29 — [#213](https://github.com/StigNorland/SVT/issues/213) · shared observed constants
+
+Nine cross-paper observed constants now render from one series receipt.  The
+proton reduced Compton wavelength is normalised to the CODATA-derived
+\(2.1\times10^{-16}\,\mathrm{m}\); this removes the pre-existing
+\(2.0\) versus \(2.1\times10^{-16}\,\mathrm{m}\) drift between Papers II and
+IV.  Candidate \(N_YF=13.44\) remains explicitly unregistered because its
+cutoff-dependent source is not a stable instrument output.
+
 ## 2026-07-29 — [#210](https://github.com/StigNorland/SVT/issues/210) · semantic verification repair
 
 The audit removed several promotions that were not supported by the cited

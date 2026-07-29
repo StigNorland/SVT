@@ -539,13 +539,17 @@ SSV-VII-b still used a gravity conversion and Planck-mass statement missing the
 same \(\sqrt2\).  Paper IX likewise inherited Paper VIII's superseded
 Kibble--Zurek promotion.
 
-**Guard — convention.** A semantic change must be searched across the series,
-including downstream summaries and auto-memory, before it is closed.  Rule 14
-closes this mechanically only for registered generated values; equations and
-status labels remain manual.
+**Guard — partial.** A semantic change must still be searched across the
+series, including downstream summaries and auto-memory, before it is closed.
+For a value declared in `gen_values.SHARED`, however, one series receipt emits
+the same macro into every consumer paper and
+`test_no_shared_literal_survives` plus the build gate reject a second typed
+copy.  Equations, status labels and every value nobody registered remain
+manual.
 
-**Not covered:** there is no dependency graph for equations or claim statuses.
-The one-paper-at-a-time audit is the present control.
+**Not covered:** there is no dependency graph for equations or claim statuses,
+and the registry cannot guard a quantity nobody declared.  The one-paper-at-a-
+time audit is the present control for that unregistered surface.
 
 ---
 
@@ -577,10 +581,12 @@ and the paper simultaneously carried a second figure, \(927\) MeV, that lay
 *outside* its own band.  Nine literal sites, no guard on any of them.  Found by
 the owner reading the paper, three audits after the numbers were written.
 
-**Guard — none.** Rule 14 protects a number only once it is registered in
-`gen_values.py`; an unregistered literal in a `tabular` is invisible to every
-gate.  Rule 16's claim guards anchor to a *sentence*, so a number that appears
-only as a table cell has nothing to anchor.  The re-run
+**Guard — partial.** Rule 14 and #213 Part C protect a table cell once its value
+is registered: the paper must use the generated macro and the build gate
+rejects the old literal anywhere in `main.tex`, including `tabular`.  An
+unregistered literal remains invisible.  Rule 16's claim guards anchor to a
+*sentence*, so a number that appears only as an unregistered table cell has
+nothing to anchor.  The re-run
 (`instruments/paper_i/proton_geometric_r_probe.py`, 23 s) reproduces the
 correct values, so the check is available — it simply was never wired in.
 
@@ -593,6 +599,37 @@ re-runs the instruments.
 **The tell to watch for:** the same quantity printed with two different
 precisions in the same paper (`4.4` in prose, `4.15`/`4.42` in a table).  A
 rounded restatement is where a superseded run survives.
+
+## FM22 — a project-specific quantity occupies a standard symbol
+
+**Observed:** `\mu_0` denoted vacuum permeability in two Maxwell sectors, but
+the SSV scale \(m_e/\alpha\), the energy \(m_ec^2/\alpha\), and a
+cutoff-dependent line tension elsewhere.  Paper I therefore gave one spelling
+three dimensions, including two dimensions inside the same paper.  The reduced
+proton Compton wavelength \(\hbar/(m_pc)\) was also called \(a_p\), hiding the
+standard distinction between \(\lambda_p\) and \(\bar\lambda_p\).
+
+**Why the first guard missed the fix:** the initial #213 convention registry
+successfully *reported* the collision, then whitelisted it as known.  Recording
+a non-standard spelling prevented new drift but left every reader to resolve
+the old ambiguity.  This was a negative result about the infrastructure: a
+collision inventory is not a notation policy.
+
+**Guard — partial.** The papers now use \(m_\star\) for mass,
+\(E_\star=m_\star c^2\) for rest energy,
+\(\varepsilon_{\rm line}\) for line tension, and
+\(\bar\lambda_p\) for the reduced Compton wavelength.  The #213 build gate
+reserves `\mu_0` for permeability and rejects the legacy `a_p` spelling.
+The census preserves the bar accent, and declaration tests require the cited
+source line itself to contain the declared symbol so insertions cannot leave a
+plausible but stale line anchor.
+
+**Not covered:** there is no universal one-symbol dictionary across all
+physics.  \(S\) for action or entropy, \(a_0\) for the Bohr radius or MOND
+acceleration, and \(\Lambda\) in QFT or cosmology are established
+domain-specific uses.  The registry accepts those and still reports 100+
+shared tokens awaiting semantic declaration.  Passing the reserved-symbol
+gate is not certification of every letter in a paper.
 
 ## What runs when
 
@@ -622,9 +659,10 @@ ones most likely to lapse.
 | FM16 deterministic green called semantic verification | v2 verdict boundary | suite + review |
 | FM17 generator assumes non-empty inputs | zero-reference provenance test | suite |
 | FM18 observation inverted into prediction | explicit input/status receipts | review (partial) |
-| FM19 correction misses dependent papers | series-wide dependency search | review |
+| FM19 correction misses dependent papers | shared-value registry + dependency search | **build** (registered values) + review |
 | FM20 necessary diagnostic promoted to sufficient | status-bearing receipt | suite (this result) + review |
-| FM21 table row and prose from different runs | **none** — literals in a `tabular` are unguarded | never |
+| FM21 table row and prose from different runs | generated macro + old-literal rejection | **build** (registered values only) |
+| FM22 project quantity occupies standard symbol | `conventions.py` reserved-symbol gate | **build** (reserved spellings) + suite |
 
 Adding a failure mode to this register is cheap. Leaving one out because its
 guard is embarrassing is how #182 happened.

@@ -101,14 +101,35 @@ def gate_provenance(paper: str) -> str:
 
 
 def gate_values(paper: str) -> str:
-    if paper not in gen_values.REGISTRY:
+    if not gen_values.has_values(paper):
         return "no generated values registered"
-    drift = gen_values.receipt_drift(paper)
-    if drift:
+    local_drift = (
+        gen_values.receipt_drift(paper)
+        if paper in gen_values.REGISTRY else {}
+    )
+    shared_drift = (
+        gen_values.shared_receipt_drift()
+        if gen_values.shared_values_for(paper) else {}
+    )
+    if local_drift or shared_drift:
         raise GateFailure(
-            f"receipt no longer matches its instruments: {sorted(drift)} — run "
-            f"`gen_values.py --compute {paper}`")
-    return f"{len(gen_values.values_for(paper))} values, receipt current"
+            f"receipt no longer matches its instruments: local "
+            f"{sorted(local_drift)}, shared {sorted(shared_drift)} — run "
+            f"`gen_values.py --all --compute`")
+    literals = gen_values.surviving_shared_literals(paper)
+    if literals:
+        raise GateFailure(
+            f"registered shared values survive as typed literals: {literals} — "
+            f"use their \\ssv* macros (#213 Part C)")
+    local_n = (
+        len(gen_values.values_for(paper))
+        if paper in gen_values.REGISTRY else 0
+    )
+    shared_n = len(gen_values.shared_values_for(paper))
+    return (
+        f"{local_n} local + {shared_n} shared values, receipts current; "
+        f"no registered shared literal survives"
+    )
 
 
 def gate_claims(paper: str) -> str:
@@ -180,12 +201,18 @@ def gate_conventions(paper: str) -> str:
     """#213 Part A: one meaning, one dimension per symbol across the programme.
 
     Fails on a collision that is **not** already recorded in
-    ``conventions.KNOWN_COLLISIONS``.  The three known ones stay known: the
+    ``conventions.KNOWN_COLLISIONS`` or on a reserved spelling used with a
+    non-standard meaning.  The four known collisions stay known: the
     cosmological constant and the MOND scale are standard notation in their own
     literatures, so resolving them is a declaration the author makes, not a
     rename this gate can impose.  What it does enforce is that no fourth
     arrives quietly.
     """
+    reserved = conventions.reserved_symbol_violations(paper)
+    if reserved:
+        detail = "\n".join(f"      {item}" for item in reserved)
+        raise GateFailure(
+            f"{len(reserved)} reserved-symbol violation(s):\n{detail}")
     fresh, note = conventions.gate_report(paper)
     if fresh:
         detail = "\n".join(f"      {c.describe()}" for c in fresh)
@@ -197,7 +224,7 @@ def gate_conventions(paper: str) -> str:
 
 
 def render_values(paper: str) -> str:
-    if paper not in gen_values.REGISTRY:
+    if not gen_values.has_values(paper):
         return "skipped"
     r = gen_values.generate(paper)
     return f"values.tex {'rewritten' if r['changed'] else 'unchanged'}"

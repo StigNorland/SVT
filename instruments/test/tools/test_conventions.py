@@ -100,6 +100,31 @@ def test_every_use_site_points_at_a_real_line():
         assert 1 <= int(lineno) <= n, f"{u.symbol}: {u.site} is past end of file"
 
 
+def test_every_use_site_line_contains_the_declared_symbol():
+    """A line number that merely remains inside the file is a false anchor.
+
+    Insertions used to leave stale declarations passing indefinitely.  Require
+    the cited line itself to contain the symbol spelling it is evidence for.
+    """
+    greek = {
+        "Lambda", "Omega", "mu_0", "xi",
+    }
+    for u in C.USES:
+        path_s, _, lineno = u.site.rpartition(":")
+        line = (REPO_ROOT / path_s).read_text(
+            encoding="utf-8", errors="replace").splitlines()[int(lineno) - 1]
+        if u.symbol == "bar_lambda_p":
+            pattern = re.escape(r"\bar{\lambda}_p")
+        elif u.symbol in greek:
+            head, _, sub = u.symbol.partition("_")
+            spelling = rf"\{head}" + (f"_{sub}" if sub else "")
+            pattern = re.escape(spelling)
+        else:
+            pattern = rf"(?<![A-Za-z]){re.escape(u.symbol)}(?![A-Za-z])"
+        assert re.search(pattern, line), (
+            f"{u.symbol}: stale site {u.site}; line is {line!r}")
+
+
 def test_declared_symbol_actually_occurs_in_that_paper():
     """A declaration about a symbol the paper does not use is a stale record."""
     seen = C.census()
@@ -178,16 +203,16 @@ def test_docstring_states_the_limits():
 def test_declared_symbol_is_declared_everywhere_it_occurs():
     """Once a symbol is declared at all, every paper using it must be declared.
 
-    This is the test that would have caught the first pass's own omission: the
-    census reported ``\\Lambda`` in 7 papers while the hand-written table
+    Scoped to ``COMPLETE`` — the symbols whose declarations claim to be
+    exhaustive. This is the test that would have caught the first pass's own
+    omission: the census reported ``\\Lambda`` in 7 papers while the table
     declared 5, silently understating the collision as three dimensions when it
-    is four. A partial declaration is worse than none — it reports a number
-    that looks complete.
+    is four. A partial declaration is worse than none, because it reports a
+    number that looks complete.
     """
     seen = C.census()
-    declared_symbols = {u.symbol for u in C.USES}
     gaps = []
-    for symbol in sorted(declared_symbols):
+    for symbol in sorted(C.COMPLETE):
         have = {u.paper for u in C.uses_of(symbol)}
         missing = seen.get(symbol, set()) - have
         if missing:
@@ -201,3 +226,245 @@ def test_lambda_carries_four_dimensions():
     letter."""
     lam = next(c for c in C.collisions() if c.symbol == "Lambda")
     assert len(lam.dims) == 4, sorted(lam.dims)
+
+
+# --------------------------------------------------------------------------
+# the external reference (physics.info, owner's choice 2026-07-29)
+# --------------------------------------------------------------------------
+
+def test_departure_check_is_not_vacuous():
+    """FM3: a check that cannot fire is not a check.
+
+    The first version of ``departures_from_standard`` returned an empty list —
+    not because SSV agrees with the reference, but because the declared symbols
+    and the reference's symbols barely overlapped. An empty result read as a
+    clean bill of health and was nothing of the kind.
+    """
+    assert C.departures_from_standard(), (
+        "the departure check has stopped finding the known departures; if the "
+        "declared set no longer overlaps STANDARD, an empty result means the "
+        "check is silent, not that the series agrees")
+
+
+def test_domain_standard_overrides_a_generic_root_assumption():
+    """A generic teaching-table entry for ``a`` cannot overrule established
+    subfield notation: a_0 is standard for both the Bohr radius and MOND's
+    acceleration, and bar(lambda)_p is standard for the reduced wavelength."""
+    assert C._standard_for("bar_lambda_p")
+    reported = " ".join(C.departures_from_standard())
+    assert "a_0 in SSV-I" not in reported
+    assert "a_0 in SSV-VI" not in reported, (
+        "both established a_0 usages must be accepted in their domains")
+
+
+def test_only_b_is_unlisted_by_either_reference():
+    """physics.info covered none of the collisions. Wikipedia covers Lambda and
+    hbar, so the honest statement narrowed: after consulting both, only ``b``
+    is unclaimed by any reference — which is why its three dimensions are an
+    internal defect rather than a clash of external conventions.
+
+    Supersedes an earlier assertion that Lambda and hbar were unlisted; that
+    was true of one reference and stated as though it were true of the field.
+    """
+    assert "b" in C.NOT_IN_STANDARD
+    assert not C._standard_for("b")
+    for now_covered in ("Lambda", "hbar"):
+        assert C._standard_for(now_covered), (
+            f"{now_covered} is listed by Wikipedia; NOT_IN_STANDARD must not "
+            f"still claim the field is silent on it")
+    src = (REPO_ROOT / "instruments/tools/conventions.py").read_text()
+    for authority in ("ISO 80000", "SUNAMCO", "NIST SP 811"):
+        assert authority in src, f"the real standard {authority} is not named"
+
+
+def test_reference_source_is_pinned_with_url_and_date():
+    src = (REPO_ROOT / "instruments/tools/conventions.py").read_text()
+    assert "https://physics.info/symbols/" in src
+    assert re.search(r"retrieved 20\d\d-\d\d-\d\d", src)
+
+
+def test_every_collision_symbol_is_asserted_complete():
+    """A collision COUNT is only meaningful over a complete declaration.
+
+    Without this, a symbol could be reported as carrying two dimensions purely
+    because the third paper was never declared — the exact failure the first
+    pass of this file committed.
+    """
+    for c in C.collisions():
+        assert c.symbol in C.COMPLETE, (
+            f"{c.symbol} is reported as a collision but its declarations are "
+            f"only a sample; the dimension count cannot be trusted")
+
+
+def test_sampled_symbols_are_not_silently_treated_as_complete():
+    sampled = {u.symbol for u in C.USES} - C.COMPLETE
+    assert sampled, "COMPLETE has swallowed every symbol; the split is doing nothing"
+
+
+def test_no_placeholder_dimensions_in_the_reference():
+    """``Dimension(1)`` must mean *dimensionless*, never "not encoded yet".
+
+    An earlier STANDARD used it as a stand-in for temperature, charge and
+    current, which made the table assert that entropy is an energy, that
+    temperature is a pure number, and that electric potential is unitless.
+    A placeholder that renders as a real value is the worst kind: it does not
+    look like a gap.
+    """
+    dimensionless_ok = {"specific heat capacity", "conductance", "entropy",
+                        "temperature", "electric potential",
+                        "boltzmann constant"}
+    for symbol, entries in C.STANDARD.items():
+        for quantity, dim in entries:
+            if quantity in dimensionless_ok:
+                assert C._dim_key(dim), (
+                    f"{symbol} ({quantity}) is recorded as dimensionless; that "
+                    f"is a placeholder, not a dimension")
+
+
+def test_entropy_is_energy_per_temperature():
+    """S = k_B ln(Omega), Omega a dimensionless microstate count, so [S] = [k_B]."""
+    entropy = dict(C.STANDARD["S"])["entropy"]
+    boltzmann = dict(C.STANDARD["k_B"])["boltzmann constant"]
+    assert C._dim_key(entropy) == C._dim_key(boltzmann)
+    assert C._dim_key(entropy) != C._dim_key(C.ENERGY), (
+        "entropy is an energy PER TEMPERATURE, not an energy")
+
+
+def test_ssv_phase_action_is_standard_usage_after_all():
+    """Supersedes ``test_ssv_phase_action_still_departs_from_entropy``.
+
+    Against physics.info alone, SSV's S looked like a departure — that page
+    lists only entropy. Wikipedia lists S as surface area, entropy AND action,
+    so both SSV branches are standard. The S collision is a standard ambiguity
+    the series inherited, not one it invented, which changes the fix from
+    "rename" to "disambiguate locally".
+    """
+    reported = " ".join(C.departures_from_standard())
+    assert "S in SSV-VII-a" not in reported
+    assert "S in SSV-III" not in reported
+    quantities = {q for q, _ in C.WIKI["S"]}
+    assert {"entropy", "action"} <= quantities
+
+
+def test_s_is_an_action_and_an_entropy():
+    """Prompted by S = k_B ln(Omega). An action is J s, an entropy is J/K —
+    they differ in two base dimensions, so this is not a near miss."""
+    s = next(c for c in C.collisions() if c.symbol == "S")
+    assert len(s.dims) == 2
+    assert any("temperature" in d for d in s.dims), (
+        "the entropy branch must carry a temperature dimension")
+
+
+def test_notational_uses_carry_a_reason_and_no_dimension():
+    """``S`` in SSV-I is the sphere in pi_3(S^1). Inventing a dimension for it
+    to satisfy the completeness rule would be worse than naming the category."""
+    notational = [u for u in C.USES if u.dim is None]
+    assert notational
+    for u in notational:
+        assert u.notational, f"{u.paper} {u.symbol}: no reason given"
+        assert len(u.notational) > 20
+
+
+def test_notational_uses_never_create_a_collision():
+    for c in C.collisions():
+        for uses in c.dims.values():
+            for paper, _, _ in uses:
+                u = next(x for x in C.uses_of(c.symbol) if x.paper == paper)
+                assert u.dim is not None
+
+
+# --------------------------------------------------------------------------
+# the second reference (Wikipedia, owner's suggestion 2026-07-29)
+# --------------------------------------------------------------------------
+
+def test_second_reference_corrects_the_first():
+    """G and S were reported as departures only because physics.info is silent
+    on Newton's constant and on the action. Wikipedia lists both, and the
+    departures vanish. Two references are the cheapest check on one
+    reference's silence — a gap in a lookup table reads exactly like a finding.
+    """
+    reported = " ".join(C.departures_from_standard())
+    assert "G in " not in reported, (
+        "Newton's constant is standard; reporting it as a departure was an "
+        "artefact of the first reference having no entry for it")
+    assert "S in " not in reported, (
+        "Wikipedia lists S as both entropy (J/K) and action (J s), so both SSV "
+        "branches are standard usage")
+
+
+def test_both_cosmological_conventions_are_recorded():
+    """Wikipedia gives Lambda in s^-2 (Friedmann); SSV prints m^-2 (Einstein).
+    Both are standard and differ by c^2, so recording only one would report
+    every SSV cosmology paper as departing."""
+    lam = dict(C.WIKI["Lambda"])
+    dims = {C._dim_key(d) for d in lam.values()}
+    assert len(dims) == 2
+    reported = " ".join(C.departures_from_standard())
+    for paper in ("SSV-VI", "SSV-VII-b", "SSV-VIII", "SSV-IX"):
+        assert f"Lambda in {paper}" not in reported
+
+
+def test_mu0_has_only_its_standard_meaning():
+    """After #213, mu_0 is reserved for vacuum permeability."""
+    reported = " ".join(C.departures_from_standard())
+    assert "mu_0 in " not in reported
+    uses = C.uses_of("mu_0")
+    assert {u.paper for u in uses} == {"SSV-II", "SSV-Goldstone"}
+    assert len({C._dim_key(u.dim) for u in uses}) == 1
+
+
+def test_departure_message_does_not_repeat_a_reference_entry():
+    for line in C.departures_from_standard():
+        _, _, expect = line.partition("reference lists ")
+        parts = [p.strip() for p in expect.split(";")]
+        assert len(parts) == len(set(parts)), f"duplicated entry: {line}"
+
+
+def test_legacy_mu0_and_a_p_spellings_are_absent_from_papers():
+    violations = {
+        paper: C.reserved_symbol_violations(paper)
+        for paper in C.paper_names()
+    }
+    assert not any(violations.values()), violations
+
+
+def test_reserved_symbol_guard_is_not_vacuous(tmp_path, monkeypatch):
+    paper_dir = tmp_path / "SSV-Test"
+    paper_dir.mkdir()
+    (paper_dir / "main.tex").write_text(
+        r"$\mu_0=m_e/\alpha$ and $a_p=\hbar/(m_pc)$",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(C, "PAPERS", tmp_path)
+    found = " ".join(C.reserved_symbol_violations("SSV-Test"))
+    assert "reserved for vacuum permeability" in found
+    assert "non-standard" in found
+
+
+def test_census_distinguishes_reduced_and_ordinary_compton_wavelengths():
+    symbols = C._symbols_in(
+        r"$\bar{\lambda}_p=\hbar/(m_pc),\quad \lambda_p=2\pi\bar{\lambda}_p$")
+    assert "bar_lambda_p" in symbols
+    assert "lambda_p" in symbols
+
+
+def test_census_normalises_star_subscripts():
+    symbols = C._symbols_in(r"$E_\star=m_\star c^2$")
+    assert {"E_star", "m_star"} <= symbols
+    assert "m_^" not in symbols
+
+
+def test_mu0_over_alpha_is_an_identity_not_a_coincidence():
+    """SI defines alpha = mu_0 c e^2/(2h), so mu_0/alpha = 2h/(e^2 c) exactly."""
+    w = C.mu0_collision_worked_example()
+    a = w["permeability_reading_H_per_m"]
+    b = w["identity_2h_over_e2c_H_per_m"]
+    assert abs(a - b) / a < 1e-9, "the identity must hold to numerical precision"
+    assert abs(a - 1.722e-4) / 1.722e-4 < 1e-3
+
+
+def test_the_two_readings_of_mu0_over_alpha_are_incommensurable():
+    """The collision, in numbers: 1.722e-4 H/m against 9.60 GeV."""
+    w = C.mu0_collision_worked_example()
+    assert abs(w["ssv_base_scale_reading_MeV"] - 9596.0) < 1.0
+    assert w["ssv_base_scale_reading_MeV"] / w["permeability_reading_H_per_m"] > 1e6

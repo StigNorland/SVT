@@ -30,15 +30,16 @@ machine-checked is at least checkable by hand.
 
 What is guarded, and what is not
 --------------------------------
-Guarded: a symbol carrying two declared meanings, or two declared dimensions,
-across papers without a local declaration saying so.
+Guarded: a symbol carrying two declared meanings or dimensions across papers
+without a local declaration; and programme use of a reserved symbol with a
+non-standard meaning.  In particular, ``mu_0`` is reserved for vacuum
+permeability and ``bar(lambda)_p`` for the reduced proton Compton wavelength.
 
 **Not** guarded:
 - A symbol nobody declared.  ``coverage()`` reports those rather than implying
   they are fine — a paper is not covered because some of its symbols are.
-- Whether the paper's prose actually uses the symbol the way its declaration
-  says.  Same limit rule 15 states: this checks the declarations, not the
-  ``.tex``.
+- Arbitrary undeclared symbols.  Reserved spellings are checked directly
+  against ``main.tex``; the rest still require review and declaration.
 - Which of two conflicting uses is *correct*.  Drift guard, not referee.
 
 Mirrored by ``instruments/test/tools/test_conventions.py``.
@@ -130,9 +131,21 @@ def _symbols_in(span: str) -> set[str]:
         name = m.group("greek")
         if not name:
             continue
+        # Preserve the accent in standard notations such as
+        # \bar{\lambda}_p.  Treating this as bare lambda_p would merge the
+        # reduced and ordinary Compton wavelengths in the very census intended
+        # to distinguish them.
+        prefix = span[max(0, m.start() - 12):m.start()]
+        if re.search(r"\\bar\s*\{\s*$", prefix):
+            close = span.find("}", m.end())
+            sub = _SUB.match(span[close + 1:]) if close >= 0 else None
+            found.add(_join(f"bar_{name}", sub))
+            continue
         sub = _SUB.match(span[m.end():])
         found.add(_join(name, sub))
-    bare = span
+    # A macro used as a Latin subscript would otherwise be erased by _STRIP
+    # before the Latin-symbol pass sees it.
+    bare = re.sub(r"_\{?\\star\}?", "_{star}", span)
     for pat in _STRIP:
         bare = pat.sub(" ", bare)
     for m in _SYMBOL.finditer(bare):
@@ -149,6 +162,7 @@ def _join(name: str, sub) -> str:
         return name
     tail = sub.group("braced") if sub.group("braced") is not None else sub.group("bare")
     tail = re.sub(r"\\(?:rm|mathrm|text)\s*", "", tail or "").strip()
+    tail = tail.replace(r"\star", "star")
     return f"{name}_{tail}" if tail else name
 
 
@@ -180,7 +194,7 @@ def shared_symbols(min_papers: int = 2) -> dict[str, set[str]]:
 
 from sympy.physics.units import Dimension                       # noqa: E402
 from sympy.physics.units.definitions.dimension_definitions import (  # noqa: E402
-    length, mass, time)
+    charge, current, length, mass, temperature, time)
 from sympy.physics.units.systems.si import dimsys_SI            # noqa: E402
 
 ONE = Dimension(1)
@@ -194,6 +208,19 @@ FREQUENCY = 1 / time
 WAVENUMBER = 1 / length
 CURVATURE = 1 / length**2
 NEWTON_G = length**3 / (mass * time**2)
+#: Entropy is an energy PER TEMPERATURE, not an energy.  Boltzmann fixes it:
+#: S = k_B ln(Omega) with Omega a dimensionless microstate count, so [S] = [k_B]
+#: exactly.  Writing this out because an earlier version of STANDARD below used
+#: ``Dimension(1)`` as a placeholder for "a dimension I did not encode", which
+#: renders as *dimensionless* and made this table assert that entropy is an
+#: energy — a dimensional error inside the tool built to catch dimensional
+#: errors.  ``test_no_placeholder_dimensions`` now forbids the shortcut.
+BOLTZMANN = ENERGY / temperature
+ENTROPY = BOLTZMANN
+TEMPERATURE = temperature
+SPECIFIC_HEAT = ENERGY / (mass * temperature)
+ELECTRIC_POTENTIAL = ENERGY / charge
+CONDUCTANCE = current**2 * time**3 / (mass * length**2)
 
 
 @dataclass(frozen=True)
@@ -209,9 +236,10 @@ class Use:
     paper: str
     symbol: str
     means: str
-    dim: Dimension
+    dim: Dimension | None      # None = notational, not a dimensioned quantity
     site: str
     local: str = ""
+    notational: str = ""       # why this occurrence carries no dimension
 
 
 #: The canonical programme-wide meaning, where one exists.
@@ -228,13 +256,18 @@ GLOBAL: dict[str, tuple[str, Dimension]] = {
     "P_0":     ("saturation pressure", PRESSURE),
     "kappa_0": ("quantum of circulation, h/m_0", ACTION / mass),
     "H_0":     ("Hubble parameter", FREQUENCY),
+    "m_star":  ("SSV base mass scale, m_e/alpha", mass),
+    "E_star":  ("SSV base rest-energy scale, m_star c^2", ENERGY),
+    "bar_lambda_p": ("reduced proton Compton wavelength, hbar/(m_p c)", length),
+    "mu_0":    ("vacuum permeability / magnetic constant",
+                mass * length / (time**2 * current**2)),
 }
 
 #: Per-paper uses, transcribed and checked in the #213 Part A pass.
 USES: list[Use] = [
     # ---- Lambda: three dimensions across the series, two inside SSV-III ----
     Use("SSV-I", "Lambda", r"\ln(8/\alpha) - 7/4, a pure number", ONE,
-        "papers/SSV-I/main.tex:472"),
+        "papers/SSV-I/main.tex:476"),
     Use("SSV-III", "Lambda", r"\Lambda(k\xi) = \ln(1/k\xi), a slow logarithm", ONE,
         "papers/SSV-III/main.tex:621"),
     Use("SSV-III", "Lambda", r"UV cutoff wavenumber, \Lambda = \xi^{-1}", WAVENUMBER,
@@ -246,30 +279,30 @@ USES: list[Use] = [
     Use("SSV-VIII", "Lambda", "cosmological constant", CURVATURE,
         "papers/SSV-VIII/main.tex:242"),
     Use("SSV-IX", "Lambda", "cosmological constant", CURVATURE,
-        "papers/SSV-IX/main.tex:226"),
+        "papers/SSV-IX/main.tex:236"),
     # The fourth meaning, and the one the first pass of this table MISSED:
     # bare \Lambda in the running-coupling form \ln(Q/\Lambda) is Lambda_QCD,
     # an energy.  The census reported \Lambda in 7 papers while the hand-written
     # half declared only 5 — the machine half caught the human half's omission,
     # which is why test_declared_symbol_is_declared_everywhere_it_occurs exists.
     Use("SSV-II", "Lambda", r"\Lambda_{\rm QCD} \approx 200 MeV, an energy scale",
-        ENERGY, "papers/SSV-II/main.tex:1057"),
+        ENERGY, "papers/SSV-II/main.tex:1059"),
 
     # ---- a_0: Bohr radius vs the MOND acceleration scale ----
     Use("SSV-I", "a_0", "Bohr radius", length,
-        "papers/SSV-I/main.tex:507"),
+        "papers/SSV-I/main.tex:511"),
     Use("SSV-VI", "a_0", "MOND/RAR acceleration scale", ACCELERATION,
         "papers/SSV-VI/main.tex:553"),
     Use("SSV-IX", "a_0", "MOND/RAR acceleration scale", ACCELERATION,
-        "papers/SSV-IX/main.tex:226"),
+        "papers/SSV-IX/main.tex:236"),
 
     # ---- b: the #189 finding, three dimensions, recorded here across papers ----
     Use("SSV-I", "b", "LogSE coupling, energy per unit mass", ENERGY / mass,
-        "papers/SSV-I/main.tex:251"),
+        "papers/SSV-I/main.tex:220"),
     Use("SSV-V", "b", "LogSE coupling, declared a frequency", FREQUENCY,
-        "papers/SSV-V/main.tex:146"),
+        "papers/SSV-V/main.tex:154"),
     Use("SSV-VII-a", "b", "LogSE coupling, required to be an energy", ENERGY,
-        "papers/SSV-VII-a/main.tex:120"),
+        "papers/SSV-VII-a/main.tex:383"),
     Use("SSV-III", "b", "RG block-scaling factor, a pure number", ONE,
         "papers/SSV-III/main.tex:995",
         local="the renormalisation block factor of \\mathcal{R}_b; unrelated to "
@@ -278,17 +311,94 @@ USES: list[Use] = [
     # had not declared.  IV and VII-b agree with SSV-I; VI is a local
     # dimensionless fit parameter; II restates SSV-I's E6 relation.
     Use("SSV-IV", "b", r"LogSE coupling, \mu_{\rm nl} = dV/d\rho = b\ln(\rho/\rho_0)",
-        ENERGY / mass, "papers/SSV-IV/main.tex:495"),
+        ENERGY / mass, "papers/SSV-IV/main.tex:496"),
     Use("SSV-VII-b", "b", r"LogSE coupling, \Phi = b\ln(\rho/\rho_0)",
         ENERGY / mass, "papers/SSV-VII-b/main.tex:46"),
     Use("SSV-II", "b", r"LogSE stiffness, via b\rho_0 = m_0c^2 — inherits SSV-I's "
         r"recorded E6 mismatch, see dimensions.py",
-        ENERGY / mass, "papers/SSV-II/main.tex:253"),
+        ENERGY / mass, "papers/SSV-II/main.tex:254"),
+    # Domain-standard uses that the two small teaching references omit.
+    Use("SSV-I", "F", "form factor of the trefoil breather, a pure number", ONE,
+        "papers/SSV-I/main.tex:615"),
+    # ---- mu_0: reserved for the magnetic constant ----
+    # #213 originally only recorded the collision.  The owner chose the
+    # stronger policy: standard meanings are mandatory.  The SSV scale is now
+    # m_star (mass) / E_star (rest energy), and line tension is epsilon_line.
+    Use("SSV-II", "mu_0", "vacuum permeability in the Maxwell equation",
+        mass * length / (time**2 * current**2),
+        "papers/SSV-II/main.tex:468"),
+    Use("SSV-Goldstone", "mu_0", "vacuum permeability, in Maxwell's equations "
+        r"\nabla\times B = \mu_0 J and the field energy B^2/2\mu_0",
+        mass * length / (time**2 * current**2),
+        "papers/SSV-Goldstone/main.tex:261"),
+    Use("SSV-I", "xi", "healing length of the defect core", length,
+        "papers/SSV-I/main.tex:405"),
+    Use("SSV-III", "Omega", "number of microstates, dimensionless", ONE,
+        "papers/SSV-III/main.tex:308"),
+
+    # ---- S: an action in Goldstone/VII-a, an entropy in III/V ----
+    # Prompted by the owner noting S = k_B ln(Omega): entropy is an energy per
+    # temperature, so the two uses differ in two base dimensions.
+    Use("SSV-VII-a", "S", "phase action of the polar decomposition", ACTION,
+        "papers/SSV-VII-a/main.tex:119"),
+    Use("SSV-Goldstone", "S", r"action functional S[\Psi] = \int dt\,d^3x\,\mathcal{L}",
+        ACTION, "papers/SSV-Goldstone/main.tex:326"),
+    Use("SSV-III", "S", r"entropy, S = k_B\ln\Omega", ENTROPY,
+        "papers/SSV-III/main.tex:308"),
+    Use("SSV-V", "S", r"wake/horizon entropy, S_H = k_B\ln\Omega_H", ENTROPY,
+        "papers/SSV-V/main.tex:437"),
+    # Not dimensioned quantities: a manifold label, an integration surface, a
+    # propagator.  Typing these would be inventing a dimension to satisfy a
+    # completeness rule, which is worse than admitting the category.
+    Use("SSV-I", "S", r"the spheres S^1, S^2 in homotopy statements", None,
+        "papers/SSV-I/main.tex:676",
+        notational="a manifold label in \\pi_3(S^1), \\hat n \\in S^2 — topology, "
+                   "not a physical quantity"),
+    Use("SSV-II", "S", "fermion propagator S(p); also the integration surface "
+        r"in \Phi_B = \int_S B\cdot dA", None,
+        "papers/SSV-II/main.tex:597",
+        notational="a propagator and a surface of integration; neither is a "
+                   "quantity this registry types"),
+    Use("SSV-VII-b", "S", "subscript of the Schwarzschild radius r_S", None,
+        "papers/SSV-VII-b/main.tex:263",
+        notational="occurs only as the subscript in r_S = 2GM/c^2, never as a "
+                   "standalone symbol"),
+    Use("SSV-VII-b", "G", "Newton's constant", NEWTON_G,
+        "papers/SSV-VII-b/main.tex:526"),
+    Use("SSV-I", "bar_lambda_p",
+        r"reduced proton Compton wavelength \hbar/(m_p c)", length,
+        "papers/SSV-I/main.tex:408"),
+    Use("SSV-II", "bar_lambda_p",
+        r"reduced proton Compton wavelength \hbar/(m_p c)", length,
+        "papers/SSV-II/main.tex:294"),
+    Use("SSV-IV", "bar_lambda_p",
+        r"reduced proton Compton wavelength \hbar/(m_p c)", length,
+        "papers/SSV-IV/main.tex:175"),
+    Use("SSV-V", "bar_lambda_p",
+        r"reduced proton Compton wavelength \hbar/(m_p c)", length,
+        "papers/SSV-V/main.tex:492"),
+    Use("SSV-VII-b", "bar_lambda_p",
+        r"reduced proton Compton wavelength \hbar/(m_p c)", length,
+        "papers/SSV-VII-b/main.tex:352"),
+
     Use("SSV-VI", "b", "dimensionless halo-profile fit parameter (b = 0.5, 1)",
         ONE, "papers/SSV-VI/main.tex:218",
         local="a fit exponent in the rotation-curve profile; the LogSE coupling "
               "does not appear anywhere in this paper"),
 ]
+
+
+#: Symbols whose USES are asserted COMPLETE across the series — every paper the
+#: census finds them in is declared.  Everything else in ``USES`` is a *sample*:
+#: enough to record a departure or a meaning, not a claim of full coverage.
+#:
+#: The distinction is not a weakening.  It is the difference between "b carries
+#: four dimensions" (a countable claim, only true if the declaration is
+#: complete) and "SSV-I uses F for a form factor" (a fact about one site).
+#: Reporting the first from a partial table is how the first pass of this file
+#: said "three dimensions" about a symbol carrying four.
+COMPLETE: frozenset = frozenset(
+    {"b", "Lambda", "a_0", "S", "mu_0", "bar_lambda_p"})
 
 
 def uses_of(symbol: str) -> list[Use]:
@@ -324,7 +434,8 @@ def collisions() -> list[Collision]:
     out = []
     for symbol in sorted({u.symbol for u in USES}):
         uses = uses_of(symbol)
-        globals_only = [u for u in uses if not u.local]
+        globals_only = [u for u in uses
+                        if not u.local and u.dim is not None]
         buckets: dict[str, list] = defaultdict(list)
         for u in globals_only:
             buckets[str(u.dim)].append((u.paper, u.site, u.means))
@@ -372,11 +483,41 @@ def coverage() -> dict:
 #: What the gate does guarantee is that **no fourth collision arrives quietly**.
 #: This is the same shape as ``claims.py``: known state is pinned, and drift
 #: from it stops the build.
-KNOWN_COLLISIONS: frozenset = frozenset({"Lambda", "a_0", "b"})
+KNOWN_COLLISIONS: frozenset = frozenset({"Lambda", "a_0", "b", "S"})
 
 
 def new_collisions() -> list[Collision]:
     return [c for c in collisions() if c.symbol not in KNOWN_COLLISIONS]
+
+
+def reserved_symbol_violations(paper: str) -> list[str]:
+    """Non-standard uses whose spellings are reserved programme-wide.
+
+    This is intentionally a small, high-confidence deny-list.  It does not
+    pretend that the external teaching tables define every field's notation.
+    """
+    path = PAPERS / paper / "main.tex"
+    lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+    out: list[str] = []
+    shown = path.relative_to(REPO_ROOT) if path.is_relative_to(REPO_ROOT) else path
+    for lineno, line in enumerate(lines, 1):
+        if re.search(r"(?<![A-Za-z])a_p(?![A-Za-z])", line):
+            out.append(f"{shown}:{lineno}: "
+                       "a_p is non-standard; use \\\\bar{\\\\lambda}_p")
+        if r"\ssvProtonComptonRadius" in line:
+            out.append(f"{shown}:{lineno}: "
+                       "legacy proton-radius macro")
+        if r"\mu_0" not in line:
+            continue
+        is_permeability = (
+            (paper == "SSV-II" and r"\mathbf{J}" in line)
+            or (paper == "SSV-Goldstone"
+                and (r"\mathbf{J}" in line or "B^2" in line))
+        )
+        if not is_permeability:
+            out.append(f"{shown}:{lineno}: "
+                       "\\mu_0 is reserved for vacuum permeability")
+    return out
 
 
 def gate_report(paper: str) -> tuple[list[Collision], str]:
@@ -388,3 +529,203 @@ def gate_report(paper: str) -> tuple[list[Collision], str]:
     note = f"{len(known)} known collision(s): {', '.join(known)}" if known \
         else "no declared collisions"
     return fresh, note
+
+
+# --------------------------------------------------------------------------
+# External reference: the standard assignments a physicist reader expects
+# --------------------------------------------------------------------------
+#: Source: The Physics Hypertextbook, "Symbols" (Glenn Elert),
+#: https://physics.info/symbols/ — retrieved 2026-07-29 (owner's choice).
+#:
+#: WHAT THIS IS FOR.  ``collisions()`` finds symbols the *series* uses two ways.
+#: This table finds something different and equally worth knowing: where SSV
+#: uses a symbol for something other than what a physicist reader will assume
+#: it means.  A departure is not an error — ``F`` for a form factor is fine —
+#: but an *undeclared* departure costs the reader every time.
+#:
+#: WHAT THIS IS NOT.  physics.info is a teaching reference, not a standard.  It
+#: has no entry at all for ``\Lambda``, ``a_0``, ``b``, ``\hbar`` or ``\Gamma``
+#: — which is to say, it does not cover a single one of the four collisions this
+#: module found, and cannot arbitrate them.  The documents that could are
+#: ISO 80000 (Quantities and units), the IUPAP SUNAMCO red book, and NIST SP 811.
+#: If a symbol convention ever becomes load-bearing in a paper, cite one of
+#: those under rule 12, not this.
+STANDARD: dict[str, tuple[tuple[str, Dimension], ...]] = {
+    "a":     (("acceleration", ACCELERATION),),
+    "c":     (("wave speed", VELOCITY), ("specific heat capacity", SPECIFIC_HEAT)),
+    "E":     (("energy", ENERGY),),
+    "F":     (("force", mass * length / time**2),),
+    "f":     (("frequency", FREQUENCY),),
+    "G":     (("shear modulus", PRESSURE), ("conductance", CONDUCTANCE)),
+    "g":     (("gravitational field", ACCELERATION),),
+    "k":     (("spring constant", mass / time**2),),
+    "L":     (("length", length), ("angular momentum", ACTION)),
+    "m":     (("mass", mass),),
+    "P":     (("power", ENERGY / time), ("pressure", PRESSURE)),
+    "p":     (("momentum", mass * length / time),),
+    "r":     (("position, separation, radius", length),),
+    "S":     (("entropy", ENTROPY),),
+    "s":     (("displacement, distance", length),),
+    "T":     (("period", time), ("temperature", TEMPERATURE)),
+    "t":     (("time, duration", time),),
+    "V":     (("volume", length**3), ("electric potential", ELECTRIC_POTENTIAL)),
+    "v":     (("velocity, speed", VELOCITY),),
+    "lambda": (("wavelength", length), ("linear mass density", mass / length)),
+    "rho":   (("density, volume mass density", MASS_DENSITY),),
+    "omega": (("angular frequency", FREQUENCY),),
+    "tau":   (("time constant", time), ("torque", ENERGY),
+              ("shear stress", PRESSURE)),
+    "sigma": (("normal stress", PRESSURE), ("area mass density", mass / length**2)),
+    "k_B":   (("boltzmann constant", BOLTZMANN),),
+    "xi":    (),      # no entry — see NOT_IN_STANDARD
+}
+
+#: Second reference, added at the owner's suggestion 2026-07-29:
+#: Wikipedia, "List of common physics notations",
+#: https://en.wikipedia.org/wiki/List_of_common_physics_notations — retrieved
+#: 2026-07-29.  It covers most of what physics.info omits, and consulting it
+#: CORRECTED one of the departures the first reference produced: physics.info
+#: has no entry for Newton's constant, so ``G`` was reported as departing from
+#: "shear modulus, conductance".  Wikipedia lists "universal gravitational
+#: constant" outright, and the departure was an artefact of the first
+#: reference's gap, not a fact about SSV.  Two references disagreeing is the
+#: cheapest available check on a single reference's silence.
+WIKI: dict[str, tuple[tuple[str, Dimension], ...]] = {
+    "a":      (("acceleration", ACCELERATION),),
+    "c":      (("speed of light in vacuum", VELOCITY), ("speed of sound", VELOCITY),
+               ("specific heat capacity", SPECIFIC_HEAT)),
+    "e":      (("eccentricity", ONE), ("Euler's number", ONE),
+               ("elementary charge", charge)),
+    "F":      (("force", mass * length / time**2),),
+    "G":      (("universal gravitational constant", NEWTON_G),
+               ("electrical conductance", CONDUCTANCE), ("shear modulus", PRESSURE)),
+    "k":      (("Boltzmann constant", BOLTZMANN), ("wavenumber", WAVENUMBER),
+               ("stiffness", mass / time**2)),
+    "P":      (("power", ENERGY / time),),
+    "S":      (("surface area", length**2), ("entropy", ENTROPY),
+               ("action", ACTION)),
+    "T":      (("period", time), ("temperature", TEMPERATURE)),
+    "V":      (("voltage", ELECTRIC_POTENTIAL), ("volume", length**3)),
+    "hbar":   (("reduced Planck constant", ACTION),),
+    "lambda": (("wavelength", length), ("linear charge density", charge / length)),
+    "rho":    (("mass density", MASS_DENSITY), ("volume charge density", charge / length**3)),
+    "xi":     (("electromotive force", ELECTRIC_POTENTIAL),),
+    "mu_0":   (("vacuum permeability / magnetic constant",
+                mass * length / (time**2 * current**2)),),
+    "Omega":  (("electric resistance", ELECTRIC_POTENTIAL / current),),
+    # Wikipedia gives the cosmological constant in s^-2 (the Friedmann/dynamical
+    # convention, Lambda/3 = H^2).  SSV prints 1e-52 m^-2, the Einstein-equation
+    # convention.  BOTH are standard; they differ by c^2.  Recorded as the two
+    # entries rather than picking one, so a paper matching either is not
+    # reported as departing.
+    "Lambda": (("cosmological constant (Einstein convention)", CURVATURE),
+               ("cosmological constant (Friedmann convention)", 1 / time**2)),
+}
+
+#: Established subfield notation omitted by both compact teaching tables.
+#: These entries are intentionally conservative: each is a notation a
+#: specialist would expect without an SSV-specific definition.  This prevents
+#: a one-page general-physics list from falsely labelling standard condensed
+#: matter, atomic, statistical-mechanics, or form-factor notation as a defect.
+DOMAIN_STANDARD: dict[str, tuple[tuple[str, Dimension], ...]] = {
+    "a_0": (("Bohr radius", length), ("MOND acceleration scale", ACCELERATION)),
+    "F": (("form factor", ONE),),
+    "xi": (("healing / coherence length", length),),
+    "Omega": (("number of microstates", ONE),),
+    "bar_lambda_p": (("reduced proton Compton wavelength", length),),
+}
+
+#: Symbols the series leans on that the reference simply does not cover.  Listed
+#: explicitly so the silence is a recorded fact rather than an inference.
+#: Still unlisted by EITHER reference. ``b`` in particular is unclaimed, so
+#: SSV is free to use it — but only consistently, which is what makes its
+#: three dimensions a defect rather than a clash of conventions.
+NOT_IN_STANDARD = ("b", "Gamma", "kappa_0", "alpha_G", "P_0")
+
+
+def departures_from_standard() -> list[str]:
+    """Where SSV's declared meaning is not one the reference lists.
+
+    Reported, never gated.  A departure is a fact about the reader's
+    expectations, not a defect — and the reference is a teaching page, so
+    treating it as an authority would be worse than not consulting it.
+    """
+    out = []
+    for u in USES:
+        if u.dim is None:
+            continue
+        entries = _standard_for(u.symbol)
+        if not entries:
+            continue
+        keys = {_dim_key(d) for _, d in entries}
+        if _dim_key(u.dim) not in keys:
+            seen, uniq = set(), []
+            for q, d in entries:
+                if (q, str(d)) not in seen:
+                    seen.add((q, str(d)))
+                    uniq.append(f"{q} [{d}]")
+            expect = "; ".join(uniq)
+            out.append(f"{u.symbol} in {u.paper}: SSV means {u.means!r} "
+                       f"[{u.dim}]; reference lists {expect}")
+    return out
+
+
+def _standard_for(symbol: str):
+    """Reference entries for a symbol, falling back to its ROOT.
+
+    Exact domain-standard entries take precedence over a generic root.  Thus
+    ``a_0`` is accepted for both the Bohr radius and MOND acceleration, while
+    an unknown subscripted ``a`` still inherits the generic expectation of an
+    acceleration.
+    """
+    merged = (tuple(STANDARD.get(symbol, ()))
+              + tuple(WIKI.get(symbol, ()))
+              + tuple(DOMAIN_STANDARD.get(symbol, ())))
+    if merged:
+        return merged
+    root = symbol.split("_", 1)[0]
+    if root in NOT_IN_STANDARD or symbol in NOT_IN_STANDARD:
+        return ()
+    return (tuple(STANDARD.get(root, ()))
+            + tuple(WIKI.get(root, ()))
+            + tuple(DOMAIN_STANDARD.get(root, ())))
+
+
+# --------------------------------------------------------------------------
+# Worked example: why the mu_0 collision is expensive
+# --------------------------------------------------------------------------
+
+def mu0_collision_worked_example() -> dict:
+    """The two readings of ``\\mu_0/\\alpha`` that this series supports.
+
+    Owner, 2026-07-29, on the *real* constant: "The ratio mu_0/alpha equals
+    approximately 1.722e-4 H/m."  That is exact, and it is an identity rather
+    than a coincidence — SI defines alpha = mu_0 c e^2/(2h), so
+
+        mu_0/alpha = 2h/(e^2 c) = 2 R_K/c,
+
+    with R_K = h/e^2 = 25812.807 ohm the von Klitzing constant.  (The
+    conductance quantum is conventionally G_0 = 2e^2/h, so R_K = 2/G_0.)
+
+    The point for this registry is what happens when the same expression is
+    read in SSV-I, where mu_0 is the base scale m_e/alpha:
+
+        mu_0/alpha = m_e/alpha^2 = 9.60 GeV,
+
+    a mass.  One expression, one series, two quantities sharing no dimension
+    and separated by twenty-five orders of magnitude in any common unit.  No
+    gate can catch a reader parsing it the wrong way; only renaming can.
+    """
+    mu0 = 1.25663706212e-6        # H/m, CODATA-2018
+    c = 2.99792458e8              # m/s, exact
+    h = 6.62607015e-34            # J s, exact
+    e = 1.602176634e-19           # C, exact
+    alpha = 7.2973525693e-3       # CODATA-2018
+    m_e_MeV = 0.51099895          # MeV
+    return {
+        "permeability_reading_H_per_m": mu0 / alpha,
+        "identity_2h_over_e2c_H_per_m": 2 * (h / e**2) / c,
+        "von_klitzing_ohm": h / e**2,
+        "conductance_quantum_S": 2 * e**2 / h,
+        "ssv_base_scale_reading_MeV": m_e_MeV / alpha**2,
+    }

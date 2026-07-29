@@ -148,14 +148,23 @@ result notes (`papers/*/results/`). Work is organised around GitHub issues
     The paper `\input`s `values.tex` and prints `\ssvRhoZero` rather than a
     literal (macro namespace `\ssv<CamelCase>`). `test_gen_values.py` tests each
     hop separately; the one that actually prevents re-typing is
-    `test_replaced_literal_is_gone`. **The receipt is itself a drift surface** —
+    `test_replaced_literal_is_gone`. Cross-paper values are declared in
+    `gen_values.SHARED`, computed once into
+    `papers/shared_values_receipt.json`, and emitted into every declaring
+    paper's `values.tex`; `test_no_shared_literal_survives` and the build gate
+    reject every registered old spelling anywhere in `main.tex`, including
+    tables. This is declared coverage, not a scanner: an unregistered number is
+    still invisible. **The receipt is itself a drift surface** —
     if `test_receipt_matches_instruments` is ever skipped for cost, the guarantee
     weakens from "the paper matches the instrument" to "the paper matches what
-    the instrument last said". Say which one you mean. Currently covers SSV-I and
-    SSV-VII-b only; extend opportunistically, and do not assume a number is
-    generated because others are. (Extends rule 11; see \#198 Part A.)
+    the instrument last said". Say which one you mean. Paper-local receipts
+    currently cover SSV-I, SSV-VI and SSV-VII-b; the shared receipt has
+    consumers in SSV-Alpha, SSV-I, SSV-II and SSV-IV. Extend opportunistically,
+    and do not assume a number is generated because others are. (Extends rule
+    11; see \#198 Part A and \#213 Parts B/C.)
 15. **Ask what a symbol means throughout, not just whether an equation
-    balances.** Three of the \#182 defects were one error class — a symbol
+    balances, and use established domain-standard notation.** Three of the
+    \#182 defects were one error class — a symbol
     carrying two dimensions in one paper (`b` in SSV-I, `e` in SSV-II) or across
     papers undeclared (`b` in SSV-V) — and the C/E/N gates missed all three
     because they checked equations and products, never symbols. Encode a paper's
@@ -164,7 +173,19 @@ result notes (`papers/*/results/`). Work is organised around GitHub issues
     whether **any** assignment to the free symbols makes the printed relations
     simultaneously homogeneous. Covers SSV-I, SSV-II and SSV-V only. It checks
     the relations *as transcribed*, not the `.tex` — state that limit whenever
-    citing it. (Extends rule 7; see \#198 Part B.)
+    citing it.
+
+    `instruments/tools/conventions.py` supplies the programme-wide complement:
+    preserve established subfield notation; where fields conventionally reuse
+    a letter, disambiguate by context or subscript; and rename project-specific
+    quantities that occupy a reserved spelling. In particular, `\mu_0` means
+    vacuum permeability, `m_\star=m_e/\alpha` is the SSV mass scale,
+    `E_\star=m_\star c^2` its rest-energy scale, and
+    `\bar{\lambda}_p=\hbar/(m_pc)` the reduced proton Compton wavelength.
+    The build gate rejects the retired `a_p` and non-permeability `\mu_0`
+    spellings. The wider symbol census remains partial: an undeclared symbol is
+    not certified merely because these reserved cases pass. (Extends rule 7;
+    see \#198 Part B and \#213 Part A.)
 16. **Build through the gate, and freeze reviewed conclusions against number
     drift.**
     *(User's instruction, 2026-07-28: "we need to record our failure mode and

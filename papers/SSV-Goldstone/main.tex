@@ -1,17 +1,31 @@
 \documentclass[11pt,a4paper]{article}
-
-\usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amssymb}
-\usepackage{physics}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,physics}
 \usepackage{booktabs}
 \usepackage{hyperref}
 \usepackage{enumitem}
+\usepackage{caption}
+\usepackage{verbatim}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
 
-\newenvironment{resultbox}[1][Result]{%
-  \begin{quote}\noindent\textbf{#1.}\ }{\end{quote}}
-\newenvironment{gapbox}[1][Open problem]{%
-  \begin{quote}\noindent\textbf{#1.}\ }{\end{quote}}
+% Coloured result boxes
+\newtcolorbox{resultbox}[1][]{enhanced,breakable,
+  colback=blue!4!white,colframe=blue!40!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+\newtcolorbox{gapbox}[1][]{enhanced,breakable,
+  colback=orange!6!white,colframe=orange!60!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+\newtcolorbox{falsbox}[1][]{enhanced,breakable,
+  colback=red!5!white,colframe=red!55!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
 
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
 \newcommand{\half}{\tfrac{1}{2}}
 \newcommand{\mzero}{m_0}
 \newcommand{\seriesname}{Saturated Superfluid Vacuum}

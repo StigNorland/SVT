@@ -1,16 +1,31 @@
 \documentclass[11pt,a4paper]{article}
-
-\usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amssymb}
-\usepackage{physics}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,physics}
 \usepackage{booktabs}
 \usepackage{hyperref}
 \usepackage{enumitem}
+\usepackage{caption}
+\usepackage{verbatim}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
 
-\newenvironment{resultbox}[1][Result]{%
-  \begin{quote}\noindent\textbf{#1.}\ }{\end{quote}}
-\newenvironment{gapbox}[1][Open problem]{%
-  \begin{quote}\noindent\textbf{#1.}\ }{\end{quote}}
+% Coloured result boxes
+\newtcolorbox{resultbox}[1][]{enhanced,breakable,
+  colback=blue!4!white,colframe=blue!40!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+\newtcolorbox{gapbox}[1][]{enhanced,breakable,
+  colback=orange!6!white,colframe=orange!60!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+\newtcolorbox{falsbox}[1][]{enhanced,breakable,
+  colback=red!5!white,colframe=red!55!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
 
 \newcommand{\half}{\tfrac{1}{2}}
 \newcommand{\mzero}{m_0}
@@ -22,6 +37,7 @@ The Fine-Structure Constant as a Vortex Aspect Ratio}
 \author{Stig Norland \\ Independent Researcher \\ Bergen, Norway}
 \date{\today}
 
+\input{values.tex}% generated shared values -- instruments/tools/gen_values.py
 \begin{document}
 \maketitle
 
@@ -31,7 +47,7 @@ quantum electrodynamics as the dimensionless strength of electromagnetic
 coupling.  In the Saturated Superfluid Vacuum (SSV) programme it appears
 more widely: as the strength of the chiral-shear sector, the ratio between
 the electron vortex-ring radius and the healing length, the particle-mass
-scale $\mu_0=m_e/\alpha$, the small parameter controlling
+scale $m_\star=m_e/\alpha$, the small parameter controlling
 finite-ring corrections, and the geometric lever in weak-sector
 reconnection estimates.  This paper isolates the common content of these
 appearances.
@@ -43,7 +59,7 @@ ratio $R^*/\xi$ of the stable toroidal electron vortex from the full
 LogSE plus chiral-shear functional, without inserting $\alpha$ as an
 empirical input, and show that
 \[
-        \frac{R^*}{\xi} = \alpha^{-1} \approx 137.036 .
+        \frac{R^*}{\xi} = \alpha^{-1} \approx \ssvAlphaInverse .
 \]
 This reframes the fine-structure constant as a dimensionless eigenvalue of
 the vacuum defect spectrum rather than as a fundamental coupling constant
@@ -77,7 +93,7 @@ in physics:
     \alpha = \frac{e^2}{4\pi\epsilon_0\hbar c}
     \approx 7.29735256\times 10^{-3},
     \qquad
-    \alpha^{-1}\approx 137.036 .
+    \alpha^{-1}\approx \ssvAlphaInverse .
     \label{eq:alpha_qed}
 \end{equation}
 In the Standard Model it is a measured low-energy coupling, whose running
@@ -121,7 +137,7 @@ The SSV framework does not yet derive $\alpha$.  It reduces the problem to
 a concrete eigenvalue calculation: solve the full 3D LogSE plus
 chiral-shear toroidal-vortex variational problem and compute the
 dimensionless equilibrium aspect ratio $R^*/\xi$.  If the result is
-$137.036\ldots$, the fine-structure constant is geometrically derived as
+$\ssvAlphaInverse\ldots$, the fine-structure constant is geometrically derived as
 $\alpha=\xi/R^*$.
 \end{resultbox}
 
@@ -203,8 +219,8 @@ Electron geometry
   & $R^*/\xi=\alpha^{-1}$
   & toroidal aspect ratio \\
 Mass scale
-  & $\mu_0=m_e/\alpha$
-  & flux-tube energy scale \\
+  & $m_\star=m_e/\alpha$
+  & flux-tube mass scale \\
 Finite ring corrections
   & $(\xi/R^*)^2=\alpha^2$
   & small expansion parameter \\
@@ -226,8 +242,8 @@ $\alpha$ trace back to the relative scale of the electron torus and its
 core.
 
 \begin{resultbox}[Reduction]
-If the full toroidal-vortex calculation yields $R^*/\xi=137.036\ldots$,
-then the Coulomb coupling, the mass scale $\mu_0$, and the small expansion
+If the full toroidal-vortex calculation yields $R^*/\xi=\ssvAlphaInverse\ldots$,
+then the Coulomb coupling, the mass scale $m_\star$, and the small expansion
 parameter all inherit the same number from one defect-geometry eigenvalue.
 \end{resultbox}
 
@@ -321,7 +337,7 @@ The alpha derivation problem is the inverse question:
 \begin{equation}
     r^*_{\rm computed}
     \stackrel{?}{=}
-    137.036\ldots .
+    \ssvAlphaInverse\ldots .
     \label{eq:alpha_test}
 \end{equation}
 
@@ -424,7 +440,7 @@ A valid derivation must instead have the following form:
 The alpha derivation succeeds if a calculation that contains no empirical
 $\alpha$ produces
 \[
-    R^*/\xi = 137.036\ldots
+    R^*/\xi = \ssvAlphaInverse\ldots
 \]
 with a controlled error estimate.  It fails if the result is not close, or
 if the value can be recovered only by inserting an equivalent dimensionless
@@ -477,9 +493,9 @@ The electromagnetic coupling would no longer be a separately inserted
 number.
 
 \paragraph{The mass scale.}
-The scale $\mu_0=m_e/\alpha$ would become
+The scale $m_\star=m_e/\alpha$ would become
 \[
-    \mu_0 = m_e\,\frac{R^*}{\xi},
+    m_\star = m_e\,\frac{R^*}{\xi},
 \]
 so the hadron mass scale would inherit the same factor from the electron-ring
 aspect ratio.
@@ -514,7 +530,7 @@ single dimensionless eigenvalue of the vacuum defect spectrum.
 
 The connectedness of the SSV series is therefore not a weakness here.  It
 is the reason the alpha problem is worth isolating.  Coulomb strength,
-electron geometry, the mass scale $\mu_0$, weak reconnection scales, and
+electron geometry, the mass scale $m_\star$, weak reconnection scales, and
 finite-ring corrections all point to the same ratio.  If the ratio can be
 computed, the framework gains a central derivation.  If it cannot, the
 failure is equally informative.
@@ -542,7 +558,7 @@ the electron torus relative to its healing length.
 
 The derivation target is therefore:
 \[
-    \boxed{\quad R^*/\xi = \alpha^{-1} \approx 137.036 \quad}
+    \boxed{\quad R^*/\xi = \alpha^{-1} \approx \ssvAlphaInverse \quad}
 \]
 from the full 3D LogSE plus chiral-shear toroidal-vortex minimisation.
 That calculation is small enough to be stated precisely and large enough to

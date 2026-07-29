@@ -45,6 +45,7 @@
 
 \providecommand{\ssvissue}[1]{\hyperref[issue:#1]{\##1}}% in-text issue ref -> Code & Issue References appendix
 \providecommand{\ssvfile}[1]{\hyperref[file:#1]{\texttt{\detokenize{#1}}}}% in-text code/report ref -> Code & Issue References appendix
+\input{values.tex}% generated shared values -- instruments/tools/gen_values.py
 \begin{document}
 
 \maketitle
@@ -87,7 +88,7 @@ muon and tau masses are numerical coincidences.  The CP discussion is a
 conceptual reframing whose suppression mechanism is open.
 
 The framework is a continuum effective theory valid down to
-$\ell_{\rm grain}\equiv a_p\approx2\times10^{-16}\,\mathrm{m}$, the scale of the
+$\ell_{\rm grain}\equiv \bar{\lambda}_p\approx\ssvProtonReducedComptonWavelength\,\mathrm{m}$, the scale of the
 heaviest stable defect, and its mean-field treatment is the static envelope of
 the irreversible-time picture of Paper~III.
 \end{abstract}
@@ -199,8 +200,8 @@ is as follows:
         mechanism that is open.
   \item \textbf{Open problem of the framework.}  The hierarchy question
         --- why the toroidal vortex ring has equilibrium radius $R^*
-        \approx 137\,\xi$ while the knotted breather's core is $a_p
-        \approx \xi/1836$, both from the same field equations --- is
+        \approx 137\,\xi$ while the knotted breather's core is $\bar{\lambda}_p
+        \approx \xi/\ssvProtonElectronMassRatio$, both from the same field equations --- is
         stated and the eventual computation outlined, but not solved.
 \end{itemize}
 The body of the paper repeats and develops these distinctions; gapboxes
@@ -266,8 +267,8 @@ from Paper~I are the only inputs needed here:
           the chiral-shear Lagrangian, not a derivation of the numerical
           value of $\alpha$, which remains an empirical input.  The
           mechanical origin of $\alpha \approx 1/137$ is open.
-    \item $\mu_0 = m_e/\alpha \approx 70\,\mathrm{MeV}$: the energy per unit
-          vortex length, the base scale of the particle masses.
+    \item $m_\star = m_e/\alpha$: the base mass scale, with corresponding
+          energy $E_\star=m_\star c^2\approx70\,\mathrm{MeV}$ per winding.
 \end{enumerate}
 These three numbers determine all force couplings derived below.
 
@@ -290,9 +291,9 @@ $m_0$ & defect rest mass & --- &
         reference mass (species-dependent) \\
 $\xi$ & $\hbar/(m_e c)$ & $3.86\times 10^{-13}$\,m &
         electron healing length; vortex core size \\
-$a_p$ & $\hbar/(m_p c)$ & $2.10\times 10^{-16}$\,m &
+$\bar{\lambda}_p$ & $\hbar/(m_p c)$ & $\ssvProtonReducedComptonWavelength$\,m &
         proton healing length; proton defect core \\
-$\ell_{\rm grain}$ & $\equiv a_p$ & $2.10\times 10^{-16}$\,m &
+$\ell_{\rm grain}$ & $\equiv \bar{\lambda}_p$ & $\ssvProtonReducedComptonWavelength$\,m &
         medium domain-of-validity scale \\
 $R^*$ & $\xi/\alpha$ & $5.29\times 10^{-11}$\,m &
         electron equilibrium ring radius ($\approx$ Bohr radius) \\
@@ -306,7 +307,7 @@ $\xi_{\rm EW}$ & $\hbar/(m_H c)$ & $1.6\times 10^{-18}$\,m &
 $\xi$ without subscript always refers to the \emph{electron} healing
 length $\hbar/(m_e c)$.  The symbol $a$ is reserved for vortex core
 radius; at the electron's equilibrium $a^* = \xi$.  The medium's
-continuum description is valid down to $\ell_{\rm grain} \equiv a_p$;
+continuum description is valid down to $\ell_{\rm grain} \equiv \bar{\lambda}_p$;
 below this scale the LogSE is silent.}
 \label{tab:symbols}
 \end{table}
@@ -315,15 +316,16 @@ below this scale the LogSE is silent.}
 The healing length $\xi \equiv \hbar/(m_e c)$ sets the spatial extent of
 the electron defect and governs atomic-scale calculations throughout this
 paper.  It is \emph{not} the medium's UV cutoff in the deep sense.  That
-role belongs to $\ell_{\rm grain} \equiv a_p = \hbar/(m_p c)$, the scale
+role belongs to $\ell_{\rm grain} \equiv \bar{\lambda}_p = \hbar/(m_p c)$, the scale
 of the heaviest stable defect.  The two differ by the proton-to-electron
 mass ratio:
 \begin{equation}
-  \frac{\ell_{\rm grain}}{\xi} = \frac{m_e}{m_p} \approx \frac{1}{1836}.
+  \frac{\ell_{\rm grain}}{\xi} = \frac{m_e}{m_p} \approx
+  \frac{1}{\ssvProtonElectronMassRatio}.
   \label{eq:lgrain_xi}
 \end{equation}
 Cross-defect comparisons --- most importantly the proton sub-grain
-coupling factor $a_p/\xi = m_e/m_p$ in \S\ref{sec:gravity} --- involve
+coupling factor $\bar{\lambda}_p/\xi = m_e/m_p$ in \S\ref{sec:gravity} --- involve
 both scales deliberately and are labelled as such.
 
 \paragraph{SSV as a continuum effective theory.}
@@ -600,7 +602,7 @@ identical to the Schwinger calculation.  The result is
 \begin{equation}
     \frac{g - 2}{2}\bigg|_{\rm 1\text{-}loop}
     = \frac{\alpha}{2\pi}
-    = \frac{1}{2\pi\cdot 137.036\ldots}
+    = \frac{1}{2\pi\cdot \ssvAlphaInverse\ldots}
     \approx 1.1614 \times 10^{-3},
     \label{eq:schwinger}
 \end{equation}
@@ -1041,7 +1043,7 @@ and creates two mesons — the superfluid analogue of quark confinement.
 The confinement energy scale is
 \begin{equation}
     \Lambda_{\rm conf} \sim \frac{\sigma}{a} \sim \frac{\rho_0\kappa_0^2}{a^2}
-    \sim \mu_0 = \frac{m_e}{\alpha} \approx 70\,\mathrm{MeV},
+    \sim E_\star = \frac{m_e c^2}{\alpha} \approx 70\,\mathrm{MeV},
     \label{eq:lambda}
 \end{equation}
 which matches $\Lambda_{\rm QCD} \approx 200\,\mathrm{MeV}$ to within the factor
@@ -1079,12 +1081,13 @@ the gluon is the phase-oscillation mode that exchanges colour between strands.
 \subsection{Pion as the Lightest Flux-Tube Excitation}
 
 \begin{sloppypar}
-In Paper~I we showed that the charged pion mass $m_{\pi^\pm} = 2\mu_0 \approx
-140.0\,\mathrm{MeV}$ (observed: $139.57\,\mathrm{MeV}$, error $0.3\%$) is
+In Paper~I we showed that the charged pion rest energy
+$m_{\pi^\pm}c^2 = 2E_\star \approx140.0\,\mathrm{MeV}$ (observed:
+$139.57\,\mathrm{MeV}$, error $0.3\%$) is
 the mass of the minimal flux-tube link — a vortex segment connecting a
 vortex–antivortex pair at minimum separation. The present analysis confirms this:
-the energy of a flux tube of length $\ell$ is $2\mu_0 + \sigma\ell$, so the zero-length
-state (the pion, with $\ell \to 0$) carries energy $2\mu_0$, and the
+the energy of a flux tube of length $\ell$ is $2E_\star + \sigma\ell$, so the zero-length
+state (the pion, with $\ell \to 0$) carries energy $2E_\star$, and the
 $\ell > 0$ continuum corresponds to the excited meson spectrum.
 \end{sloppypar}
 
@@ -1130,7 +1133,8 @@ ring-scale quantity that sets the reconnection cavity, distinct from the vortex
 core radius $a^* = \xi$; see Table~\ref{tab:symbols}).  Using $R^* = \xi/\alpha$
 and the medium parameters from Paper~I:
 \begin{equation}
-    E_{\rm recon} \sim \frac{m_e}{\alpha^2} \approx \frac{0.511\,\mathrm{MeV}}{(1/137)^2}
+    E_{\rm recon} \sim \frac{m_e}{\alpha^2} \approx
+    \frac{\ssvElectronMassMeV\,\mathrm{MeV}}{(1/137)^2}
     \approx 9600\,\mathrm{MeV} \approx 9.6\,\mathrm{GeV}.
     \label{eq:W_scale}
 \end{equation}
@@ -1248,7 +1252,8 @@ substrate.  The quantity
 \end{equation}
 is the de~Broglie wavelength of the amplitude-mode quantum; it is \emph{not}
 the grain size of the medium.  The medium's domain-of-validity scale is
-$\ell_{\rm grain} \equiv a_p \approx 2.10\times 10^{-16}\,\mathrm{m}$
+$\ell_{\rm grain} \equiv \bar{\lambda}_p \approx
+\ssvProtonReducedComptonWavelength\,\mathrm{m}$
 (Table~\ref{tab:symbols}), set by the heaviest stable defect, not by the Higgs
 denting event.
 
@@ -1275,10 +1280,12 @@ medium supports exactly two classes of stable defect: the toroidal vortex ring
 scales are
 \begin{align}
     \text{electron ring radius:} &\quad R^* = \xi/\alpha \approx 137\,\xi, \\
-    \text{proton core radius:}   &\quad a_p = \xi\cdot(m_e/m_p) \approx \xi/1836,
+    \text{proton core radius:}   &\quad \bar{\lambda}_p = \xi\cdot(m_e/m_p)
+      \approx \xi/\ssvProtonElectronMassRatio,
 \end{align}
 so the electron's major radius exceeds the proton's core by a factor of
-$137\times 1836 \approx 2.5\times 10^5$.  Both structures arise from the same
+$137\times \ssvProtonElectronMassRatio \approx 2.5\times 10^5$.
+Both structures arise from the same
 LogSE$+$chiral functional applied to different topologies.  The framework does
 not yet predict this ratio from first principles: it requires the full 3D
 minimisation of the vortex-ring and knotted-breather energy functionals over
@@ -1287,7 +1294,7 @@ $\mathcal{L}+\mathcal{L}_\perp$.
 \paragraph{Structural composite mass ratio.}
 The defect spectrum hierarchy of the previous paragraph is the SSV
 counterpart of the Standard Model Yukawa hierarchy: the ratio
-$m_p/m_e \approx 1836$ is determined by the relative scaling of two
+$m_p/m_e \approx \ssvProtonElectronMassRatio$ is determined by the relative scaling of two
 topology classes (the toroidal vortex ring and the knotted breather)
 under the same $\mathcal{L}+\mathcal{L}_\perp$ functional.  Although the
 \emph{individual} masses are at mixed status (Paper~I tags $m_e$ and
@@ -1299,12 +1306,12 @@ proton-to-pion mass ratio.
 
 From the Paper~I identifications
 \begin{equation}
-  m_{\pi^\pm} \;=\; 2\mu_0, \qquad
-  m_p \;=\; N_Y\,F\,\mu_0,
+  m_{\pi^\pm} \;=\; 2m_\star, \qquad
+  m_p \;=\; N_Y\,F\,m_\star,
   \label{eq:proton-pion-individual}
 \end{equation}
-where $\mu_0 \equiv m_e/\alpha \approx 70\,\text{MeV}$ is the
-electron-derived flux-tube mass scale, $N_Y$ is the topological crossing
+where $m_\star \equiv m_e/\alpha$ is the electron-derived flux-tube mass
+scale (so $E_\star=m_\star c^2\approx70\,\text{MeV}$), $N_Y$ is the topological crossing
 factor of the trefoil Y-junction, and $F$ is the 3D breather form
 factor, the ratio
 \begin{equation}
@@ -1313,7 +1320,7 @@ factor, the ratio
   }
   \label{eq:mp-over-mpi}
 \end{equation}
-follows immediately, with the empirical input $\mu_0$ cancelling.  With the
+follows immediately, with the empirical input $m_\star$ cancelling.  With the
 derived $N_Y = 3$ (the trefoil crossing number, issue~\ssvissue{92}) and the
 candidate-grade $F \approx 4.47$,
 \begin{equation}
@@ -1321,11 +1328,12 @@ candidate-grade $F \approx 4.47$,
   \label{eq:mp-over-mpi-numeric}
 \end{equation}
 within $0.1\%$ of the observed ratio
-$m_p/m_{\pi^\pm} = 938.272/139.570 \approx 6.722$.
+$m_p/m_{\pi^\pm} =
+\ssvProtonMassMeV/\ssvChargedPionMassMeV \approx 6.722$.
 
 \paragraph{Cross-link to $m_p/m_e$.}
 The same product $N_Y\,F$ also controls the proton--electron ratio
-through the definition $\mu_0 = m_e/\alpha$.  Eliminating $\mu_0$ from
+through the definition $m_\star = m_e/\alpha$.  Eliminating $m_\star$ from
 Eq.~\eqref{eq:proton-pion-individual} gives the identity
 \begin{equation}
   2\,\frac{m_p}{m_{\pi^\pm}} \;=\; \alpha\,\frac{m_p}{m_e}
@@ -1336,12 +1344,13 @@ This is a sharper statement than ``the spectrum has a hierarchy''.
 Three experimentally distinct dimensionless ratios ($m_p/m_{\pi^\pm}$,
 $m_p/m_e$, and $\alpha^{-1}$) reduce to one structural quantity $N_Y\,F$
 in the framework.  Numerically, $2\times 6.722 = 13.444$ and
-$(1/137.036)\times 1836.15 = 13.398$ --- agreement at the $0.3\%$ level,
+$(1/\ssvAlphaInverse)\times \ssvProtonElectronMassRatio = 13.398$ ---
+agreement at the $0.3\%$ level,
 matching the present candidate-grade precision of $F$ (the node factor
 $N_Y=3$ is now derived, issue~\ssvissue{92}).
 Eq.~\eqref{eq:hierarchy-identity} is therefore an internal consistency
 \emph{prediction}: any future first-principles computation of $N_Y$ and
-$F$ must reproduce both the $1836$ and $6.72$ ratios with the same
+$F$ must reproduce both the $\ssvProtonElectronMassRatio$ and $6.72$ ratios with the same
 single number.
 
 \begin{resultbox}[Structural composite mass ratio]
@@ -2137,7 +2146,7 @@ paper in this series.
 Paper~I's proposed muon core-breathing $\oplus$ Kelvin hybrid has been closed
 as a no-go by the Path~A/B, scalar, spinor and half-quantum-vortex tests
 (issues~\ssvissue{76}, \ssvissue{91}, \ssvissue{94}).  Consequently
-$m_\mu=(3/2)\mu_0$ is a numerical coincidence, not a dynamically placed
+$m_\mu=(3/2)m_\star$ is a numerical coincidence, not a dynamically placed
 mode.  The tau construction below depends on that failed muon mode and uses
 measured masses in $2m_p-m_\mu$; it too is retained only as a record of a
 retired hypothesis and an arithmetic coincidence.
@@ -2148,7 +2157,7 @@ retired hypothesis and an arithmetic coincidence.
 Paper~I~\cite{SSV-I} tested whether the muon could be the lowest
 ring-breathing mode of the toroidal electron vortex.  Every implemented route
 failed to produce the required eigenmode.  The numerical assignment
-$m_\mu=(3/2)\mu_0$, which lies within $0.61\%$ of the observed mass, therefore
+$m_\mu=(3/2)m_\star$, which lies within $0.61\%$ of the observed mass, therefore
 has no selecting mechanism in the present functional and is not a prediction.
 
 \subsection{The Tau: Hopf-Linked Trefoil Pair Bound by a Muon Quantum}
@@ -2159,7 +2168,7 @@ The mass relation $m_\tau = 2 m_p - m_\mu$ derived below uses the
 \emph{measured} muon mass (PDG) as a numerical input, so the predicted
 $1770.89$~MeV is arithmetically correct.  But the \emph{structural}
 identification imports a claim that is \textbf{closed as a no-go}:
-the muon as a $3/2\,\mu_0$ core-breathing $\oplus$ Kelvin hybrid eigenmode.
+the muon as a $3/2\,m_\star$ core-breathing $\oplus$ Kelvin hybrid eigenmode.
 Every route to that eigenmode failed --- Path~A/B, the issue~\ssvissue{76} scalar
 Berry-phase null, the issue~\ssvissue{91} spinor lock ($|V|=0$), and the issue~\ssvissue{94}
 half-quantum-vortex audit (wrong circle $+$ charge quantization).  The muon
@@ -2171,27 +2180,30 @@ coincidence.  (It also inherits the proton form-factor calibration $F$, Paper~I
 §The Proton.)  Tracking: issues~\ssvissue{76}, \ssvissue{91}, \ssvissue{93}, \ssvissue{94}.
 \end{gapbox}
 
-The tau sits near $25\tfrac12\,\mu_0$ in the empirical
-$\alpha$-harmonic clustering ($m_\tau = 25.375\,\mu_0$, $0.49\%$).  A former
+The tau sits near $25\tfrac12\,m_\star$ in the empirical
+$\alpha$-harmonic clustering ($m_\tau = 25.375\,m_\star$, $0.49\%$).  A former
 Hopf-link interpretation motivated the arithmetic relation
 \begin{equation}
   \boxed{m_\tau \;=\; 2\,m_p \;-\; m_\mu
-    \;=\; 2(13.5)\mu_0 - (3/2)\mu_0
-    \;=\; \tfrac{51}{2}\mu_0,}
+    \;=\; 2(13.5)m_\star - (3/2)m_\star
+    \;=\; \tfrac{51}{2}m_\star,}
   \label{eq:tau-mass}
 \end{equation}
 which lands on rung $25\tfrac12$ by construction and evaluates, using
 measured masses, to
 \begin{equation}
-  m_\tau^\mathrm{pred} \;=\; 2(938.272) - 105.658 \;=\; 1770.89~\mathrm{MeV},
+  m_\tau^\mathrm{pred} \;=\;
+  2(\ssvProtonMassMeV) - \ssvMuonMassMeV
+  \;=\; 1770.89~\mathrm{MeV},
   \label{eq:tau-numeric}
 \end{equation}
-to compare with the observed $1776.86~\mathrm{MeV}$ ($-0.336\%$).  Using the
+to compare with the observed $\ssvTauMassMeV~\mathrm{MeV}$ ($-0.336\%$).
+Using the
 isospin-averaged baryon mass $(m_p + m_n)/2$ instead of $m_p$ alone gives
 $m_\tau^\mathrm{pred} = 1772.18~\mathrm{MeV}$ ($-0.263\%$), tightening the
 agreement since the two trefoils in a Hopf link are not isospin-distinguished
 in the symmetry channel of the linkage.  Either choice is more accurate
-than the bare ladder coincidence $25\tfrac12\,\mu_0 = 1785.6$~MeV
+than the bare ladder coincidence $25\tfrac12\,m_\star = 1785.6$~MeV$/c^2$
 ($+0.494\%$).
 
 \paragraph{Topological reading.}
@@ -2273,7 +2285,8 @@ falsification record and result note
 \ssvfile{issue-119-falsification-and-bath-candidate}) falsify the
 mutual-radiation Bjerknes mechanism developed below:
 (i) beyond one wavelength the time-averaged cross-term oscillates in sign
-with separation --- and with $\lambda_p \approx 1.3\times10^{-15}$\,m every
+with separation --- and with
+$\lambda_p \approx \ssvProtonComptonWavelength$\,m every
 physically realised separation is $\gtrsim 10^{12}$ wavelengths into the
 radiation zone, so the claimed sign-definite $1/r^2$ force does not exist
 where gravity is observed (the Step-1 zone-independence claim below was
@@ -2333,7 +2346,7 @@ driving.  Its eigenfrequency is the Compton frequency:
     \label{eq:proton_freq}
 \end{equation}
 with corresponding wavelength $\lambda_p = c/f_p \approx
-1.3\times10^{-15}\,\mathrm{m}$.  The breather radiates a longitudinal
+\ssvProtonComptonWavelength\,\mathrm{m}$.  The breather radiates a longitudinal
 density wave into the medium at this frequency; the fractional density
 modulation $x(\mathbf{x},t) \equiv \delta\rho/\rho_0$ falls as $1/r$ from
 spherical dilution.  Every massive defect does the same, scaled by its
@@ -2420,7 +2433,7 @@ Landau--Lifshitz result for a pulsating sphere
     \label{eq:acoustic_pressure}
 \end{equation}
 Since the proton Compton wavelength $\lambda_p \approx
-1.3\times10^{-15}\,\mathrm{m}$ is smaller than all macroscopic
+\ssvProtonComptonWavelength\,\mathrm{m}$ is smaller than all macroscopic
 separations, gravitational interactions always occur in the radiation
 zone ($r \gg \lambda_p$).  The original text asserted here that the
 time-averaged Bjerknes force nevertheless retains its $1/r^2$ form at all
@@ -2468,15 +2481,16 @@ breather volume:
       = \frac{m_p}{\rho_0 V_0},
     \label{eq:epsilon_def}
 \end{equation}
-where $P_0 \approx \rho_0 c^2$ and $V_0 = \tfrac{4}{3}\pi a_p^3$
-with $a_p = \hbar/(m_p c)$ the proton Compton radius.  Since $\delta
+where $P_0 \approx \rho_0 c^2$ and $V_0 = \tfrac{4}{3}\pi \bar{\lambda}_p^3$
+with $\bar{\lambda}_p = \hbar/(m_p c)$ the proton reduced Compton wavelength.  Since $\delta
 V \propto m$, the Bjerknes force scales as $m_1 m_2$ as required.
 
-The proton is a \emph{sub-grain} oscillator: its Compton radius $a_p$
+The proton is a \emph{sub-grain} oscillator: its reduced Compton wavelength $\bar{\lambda}_p$
 is smaller than the medium healing length $\xi = \hbar/(m_e c)$ by
 the mass ratio
 \begin{equation}
-    \frac{a_p}{\xi} = \frac{m_e}{m_p} \approx \frac{1}{1836}.
+    \frac{\bar{\lambda}_p}{\xi} = \frac{m_e}{m_p}
+      \approx \frac{1}{\ssvProtonElectronMassRatio}.
     \label{eq:subgrain}
 \end{equation}
 The medium cannot resolve structure below $\xi$; consequently the
@@ -2485,7 +2499,7 @@ proton couples to the long-range density wave with a suppressed
 oscillator, coupling to wavelengths $\lambda \gg \xi$ is suppressed
 by the ratio of source volume to grain volume:
 \begin{equation}
-    Q_p \sim \delta V_p \cdot \left(\frac{a_p}{\xi}\right)^3
+    Q_p \sim \delta V_p \cdot \left(\frac{\bar{\lambda}_p}{\xi}\right)^3
            = \delta V_p \cdot \left(\frac{m_e}{m_p}\right)^3.
     \label{eq:Qp}
 \end{equation}
@@ -2547,7 +2561,7 @@ Equation~\eqref{eq:G_ladder} expresses $G$ in terms of $\{\hbar, c,
 supplied; that is a numerical consistency check of the Paper~I mass
 ladder, not a derivation.  Every route that was to supply $\alpha_G$ from
 the medium is now closed: (i) the sub-grain suppression factor
-$(a_p/\xi)^n$ belonged to the mutual-radiation mechanism falsified above,
+$(\bar{\lambda}_p/\xi)^n$ belonged to the mutual-radiation mechanism falsified above,
 and its monopole charge $Q_p$ is formally divergent --- the LogSE healing
 tail decays as $1/r^2$, so $\int r^2\,\mathrm{deficit}\,dr$ grows with
 box size and no box-stable value exists (\#98, closed resolved-negative);
@@ -2671,7 +2685,7 @@ r_{\rm EM}, r_{\rm gravity}$ follows directly from the hierarchy $\xi \ll a/\alp
 
 \paragraph{Coupling strengths.} Three of the four couplings are fixed by the
 same two numbers, $\alpha$
-and $\mu_0 = m_e/\alpha$: the strong coupling is $\sim 1$ (order-unity surface
+and $m_\star = m_e/\alpha$: the strong coupling is $\sim 1$ (order-unity surface
 tension, no small factor), the electromagnetic coupling is $\alpha \approx 1/137$
 (transverse-to-longitudinal wave speed ratio), and the weak coupling is
 $\alpha^2$ (two
@@ -2717,7 +2731,7 @@ questions about the same hydrodynamic substrate.
 \paragraph{No new constants.} The framework introduces no coupling constants
 beyond those already fixed by the mass spectrum of Paper~I.  The four forces,
 the Higgs sector, the particle content, and the discrete-symmetry structure
-share the same parameters $\{c, \alpha, \mu_0\}$; they are not independent
+share the same parameters $\{c, \alpha, m_\star\}$; they are not independent
 sectors with mutual couplings, but four different windows into the same
 hydrodynamic pressure field.
 
@@ -2798,7 +2812,7 @@ clear which experiments would test which structural claims.
 
 \item \textbf{Running of $\alpha$ at high energy.} The chiral-shear coupling
   $\alpha$ is a medium property, not a bare constant. At momentum scales
-  approaching $\mu_0 = m_e/\alpha$, the chiral-shear sector begins to couple
+  approaching $E_\star = m_e c^2/\alpha$, the chiral-shear sector begins to couple
   to the longitudinal modes through the nonlinear term in the
   Gross--Pitaevskii equation. This produces a logarithmic running of $\alpha$
   that should match the QED renormalisation group equation --- a
@@ -3045,7 +3059,7 @@ that their resolution requires different tools.
 \item \textbf{Newton's constant: $\alpha_G$ from the proton breather.}  The
   structural formula~\eqref{eq:G_ladder} reproduces $G_{\rm obs}$ to $0.6\%$
   using the Paper~I proton mass.  The remaining task is computing the
-  sub-grain acoustic monopole suppression factor $(a_p/\xi)^n$ from the 3D
+  sub-grain acoustic monopole suppression factor $(\bar{\lambda}_p/\xi)^n$ from the 3D
   \emph{static} proton breather profile, which would yield
   $\alpha_G=Gm_p^2/(\hbar c)\approx 5.906\times 10^{-39}$ without empirical
   input.  This is a different computation from the reconnection one (a
@@ -3102,7 +3116,7 @@ It is worth stating explicitly what the present paper closes, since the
 length of the open-problems list could otherwise mislead.  The mean-field
 mechanical content of all four forces is fixed: each is a calculable pressure
 response of the saturated medium, with coupling constants determined by
-$\{c, \alpha, \mu_0\}$ from Paper~I.  The Higgs is identified with the
+$\{c, \alpha, m_\star\}$ from Paper~I.  The Higgs is identified with the
 amplitude mode of the same order parameter $\Psi$, with no separately
 postulated field.  Magnetic monopoles are topologically forbidden, not merely
 absent.  The ultraviolet divergence of perturbative quantum gravity does not
@@ -3195,7 +3209,8 @@ suppression mechanism that is currently open.
 \paragraph{What the paper identifies as the genuine open problems.}
 The genuine hierarchy question in SSV --- why the toroidal vortex ring has
 equilibrium radius $R^* \approx 137\,\xi$ while the knotted breather's core
-is $a_p \approx \xi/1836$, both solutions of the same field equations ---
+is $\bar{\lambda}_p \approx \xi/\ssvProtonElectronMassRatio$,
+both solutions of the same field equations ---
 is stated but not solved.  Several apparently distinct open problems of
 the Standard Model --- the $W$ mass, the neutrino sector, the
 charged-lepton generations, and the CP observables --- collapse, in this
@@ -3209,10 +3224,11 @@ That computation is the principal task left to subsequent work.
 \paragraph{Scope.}
 All claims above use the medium parameters first fixed by the mass spectrum
 of Paper~I: the sound speed $c$, the fine-structure constant $\alpha$, and
-the base mass scale $\mu_0 = m_e/\alpha$.  No additional fields,
+the base mass scale $m_\star = m_e/\alpha$.  No additional fields,
 symmetries, or coupling constants are introduced in this paper.  The
 framework is presented as a continuum effective theory valid down to
-$\ell_{\rm grain} \equiv a_p \approx 2\times 10^{-16}\,\mathrm{m}$, the
+$\ell_{\rm grain} \equiv \bar{\lambda}_p \approx
+\ssvProtonReducedComptonWavelength\,\mathrm{m}$, the
 scale of the heaviest stable defect.  What lies below this scale is a
 separate question, in the same sense that Navier--Stokes makes no claim
 about sub-molecular structure.  The mean-field force-sector treatment of
