@@ -1,31 +1,24 @@
-# Albert2000 — citation record
+# Albert2000 — citation evidence with primary-access limitation
 
-**Review status: `NOT-REVIEWED`.**
+D. Z. Albert, *Time and Chance* (Harvard University Press, 2000),
+ISBN 9780674003170.
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Catalogue record:
+`https://openlibrary.org/books/OL7670946M/Time_and_Chance`. No DOI is known
+and arXiv is not applicable. The book was not openly obtainable.
 
-## Bibliographic record
+## SSV usage and evidence
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:468–480,1152–1158` cites Albert for the Past Hypothesis:
+time-symmetric microscopic laws are supplemented by a special low-entropy
+past boundary condition. The catalogue reproduces the book's opening:
 
-```tex
-D.~Z.~Albert, \textit{Time and Chance}, Harvard University Press, 2000.
-```
+> What I want to talk about here is a certain tension between fundamental
+> microscopic physical theory and everyday macroscopic human experience
 
-## Uses in the series
+The book is the work that introduced Albert's named Past Hypothesis and
+statistical postulate as the proposed resolution of that tension.
 
-- `papers/SSV-III/main.tex:474`
-- `papers/SSV-III/main.tex:1157`
-
-## Source and identifiers
-
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** Albert is the appropriate primary philosophical source for
+the modern low-entropy boundary-condition account. It supports the standard
+framework SSV analogizes to, not SSV's proposed wake functional.

@@ -1,31 +1,25 @@
-# Rovelli2018 — citation record
+# Rovelli2018 — citation evidence with primary-access limitation
 
-**Review status: `NOT-REVIEWED`.**
+C. Rovelli, *The Order of Time* (Riverhead Books, 2018),
+ISBN 9780735216112.
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Official publisher page:
+`https://www.penguinrandomhouse.com/books/551483/the-order-of-time-by-carlo-rovelli/`.
+No DOI is known and arXiv is not applicable. The full book was not obtained.
 
-## Bibliographic record
+## SSV usage and publisher evidence
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:163–179,1152–1158` cites Rovelli for relational/emergent
+time and a perspectival, thermodynamic arrow. The publisher describes a
+framework in which:
 
-```tex
-C.~Rovelli, \textit{The Order of Time}, Riverhead Books, 2018.
-```
+> at the most fundamental level time disappears. He explains how the theory
+> of quantum gravity attempts to understand and give meaning to the resulting
 
-## Uses in the series
+It also describes experienced temporal flow as perspective-dependent rather
+than a uniform external entity.
 
-- `papers/SSV-III/main.tex:169`
-- `papers/SSV-III/main.tex:1157`
-
-## Source and identifiers
-
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK` with scope.** Rovelli is an appropriate comparison for
+non-fundamental and relational time and for an entropy-linked arrow. His
+perspectival thermal-time account is not SSV's ontological update-rate
+equation and should not be read as deriving it.

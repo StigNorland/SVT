@@ -89,3 +89,58 @@ def test_real_ledger_runs_and_is_coherent():
     assert 0 <= v["B3_n_below_half_sigma"] <= 8
     assert len(receipt["sweep"]) == 27
     assert isinstance(receipt["B1_sweep_stable"], bool)
+
+
+def _receipt_floats(obj):
+    """Every float the receipt writes, skipping bools (which are ints in Python)."""
+    if isinstance(obj, bool):
+        return
+    if isinstance(obj, float):
+        yield obj
+    elif isinstance(obj, dict):
+        for v in obj.values():
+            yield from _receipt_floats(v)
+    elif isinstance(obj, (list, tuple)):
+        for v in obj:
+            yield from _receipt_floats(v)
+
+
+def test_receipt_is_stable_under_environment_drift():
+    """The receipt is tracked and the suite rewrites it, so instability is churn.
+
+    Two runs on one machine are byte-identical -- the arithmetic is
+    deterministic -- but results move by up to ~4e-15 relative *across*
+    environments (BLAS/CPU reduction order). Unrounded, that moved 25 of the 259
+    floats and dirtied the working tree five times during the #198 work, once
+    getting swept into an unrelated commit by `git add -A`.
+
+    Rounding is monotonic, so testing both ends of the drift interval against
+    every value is exact rather than statistical: if neither endpoint moves the
+    written value, nothing inside the interval does.
+    """
+    receipt = dl.main(quick=True)
+    values = [v for v in _receipt_floats(receipt)
+              if v != 0.0 and math.isfinite(v)]
+    assert len(values) > 200, "receipt unexpectedly small; test would prove little"
+
+    def written(x):
+        return float(f"{x:.{dl.RECEIPT_SIGFIGS}g}")
+
+    drift = 100 * 4e-15          # 100x the worst drift actually observed
+    moved = [x for x in values
+             if written(x * (1 + drift)) != written(x)
+             or written(x * (1 - drift)) != written(x)]
+    assert not moved, (
+        f"{len(moved)} receipt value(s) sit within {drift:.0e} relative of a "
+        f"rounding boundary at {dl.RECEIPT_SIGFIGS} s.f., so the tracked file "
+        f"can churn across environments: {moved[:5]}")
+
+
+def test_rounding_actually_changes_what_is_written():
+    """Guard on the guard: if _stable stopped rounding, the test above would
+    still pass on today's values, so assert the rounding is real."""
+    assert dl._stable(1.0 / 3.0) != 1.0 / 3.0
+    assert dl._stable(1.0 / 3.0) == float(f"{1/3:.{dl.RECEIPT_SIGFIGS}g}")
+    # bools must survive as bools, not become 1/0
+    assert dl._stable({"flag": True})["flag"] is True
+    assert dl._stable([1, 2.5]) == [1, 2.5]

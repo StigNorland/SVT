@@ -1,32 +1,31 @@
-# rubin1980 — citation record
+# rubin1980 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+V. C. Rubin, W. K. Ford, Jr., and N. Thonnard, *Rotational properties of
+21 Sc galaxies with a large range of luminosities and radii*, Astrophys. J.
+**238**, 471–487 (1980).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: DOI 10.1086/158003 · pre-arXiv · NASA ADS scan · local PDF
+sha256 `7ea8bfc93a308a4e`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-VI `main.tex:102–104` cites Rubin1980 for the observational fact that
+spiral-galaxy rotation curves remain approximately flat, or at least do not
+show the expected outer Keplerian decline, beyond much of the visible matter.
 
-```tex
-V.~C.\ Rubin, W.~K.\ Ford, and N.\ Thonnard,
-``Rotational properties of 21 Sc galaxies with a large range of luminosities and radii,''
-\textit{Astrophys.\ J.}\ \textbf{238}, 471--487 (1980).
-```
+## Source result and explanation
 
-## Uses in the series
+The abstract, printed p. 471 (PDF p. 1), summarizes the 21-galaxy sample:
 
-- `papers/SSV-VI/main.tex:103`
+> Most rotation curves are rising slowly even at the farthest measured point.
+> Neither high nor low luminosity Sc galaxies have falling rotation curves.
 
-## Source and identifiers
+It reports spectra extending into the faint outer regions, with most curves
+reaching 83% of the corrected optical radius, and concludes that significant
+mass lies beyond the optical image.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** The paper directly supports SSV's introductory statement
+that observed outer rotation curves fail to decline as visible mass alone
+would naively suggest. More precisely, this sample finds slowly rising or
+non-falling curves; “flat” is a conventional shorthand, not the exact shape of
+every curve.

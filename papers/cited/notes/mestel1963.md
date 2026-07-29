@@ -1,32 +1,33 @@
-# mestel1963 — citation record
+# mestel1963 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+L. Mestel, *On the galactic law of rotation*, Mon. Not. R. Astron. Soc.
+**126**, 553–575 (1963).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: DOI 10.1093/mnras/126.6.553 · pre-arXiv · open NASA ADS
+scan checked on 2026-07-28. The legacy mirror timed out during local download.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-VI `main.tex:108` describes an earlier, now-falsified SSV mechanism as
+producing a Mestel surface density and hence a flat rotation curve.
+`main.tex:861–864` explicitly retains only the standard statement that
+\(\Sigma\propto 1/r\) describes a Mestel disk, while withdrawing the claim
+that a black-hole-locked LogSE soliton produces that profile.
 
-```tex
-L.\ Mestel, ``On the galactic law of rotation,''
-\textit{Mon.\ Not.\ R.\ Astron.\ Soc.}\ \textbf{126}, 553--575 (1963).
-```
+## Source result and explanation
 
-## Uses in the series
+The summary, printed p. 553 (PDF p. 1), describes the centrally concentrated
+disk solution:
 
-- `papers/SSV-VI/main.tex:108`
-- `papers/SSV-VI/main.tex:861`
+> disk-like equilibrium is possible with a much more concentrated mass
+> distribution, and with a uniform rotational velocity V. The difference
+> between the two cloud
 
-## Source and identifiers
+Equations (25)–(28), printed pp. 558–559 (PDF pp. 6–7), take the disk surface
+density proportional to \(1/r\). The enclosed mass is therefore proportional
+to \(r\), and the centrifugal-balance equation gives \(V^2=\mathrm{constant}\).
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** Mestel1963 directly supports the
+\(\Sigma\propto1/r\) thin-disk profile and its constant circular speed.
+It does not support SSV's retired claim that a central-black-hole wave creates
+that baryonic profile.

@@ -1,33 +1,36 @@
-# mcgaugh2012 — citation record
+# mcgaugh2012 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+S. S. McGaugh, *The Baryonic Tully–Fisher Relation of Gas Rich Galaxies as a
+Test of ΛCDM and MOND*, Astron. J. **143**, 40 (2012).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: arXiv:1107.2934 · DOI:
+10.1088/0004-6256/143/2/40 · local PDF sha256 `69741090b0bd5feb`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-VI `main.tex:248–258` contrasts a failed predicted slope `3/2` with the
+observed BTFR exponent near four. At `main.tex:516–519` it writes the
+equivalent velocity–mass prediction as slope `1/4`.
+
+## Source equation and explanation
+
+Equation (2) defines the general relation `M_b=A V^x`. The abstract reports the
+measured special case:
+
+> Recent independent data for such galaxies are consistent with
+> M_b = A V_f^4 with A = 47 ± 6 M⊙ km−4 s4. This is equivalent to MOND.
+
+The fourth power implies both forms used by SSV:
 
 ```tex
-S.~S.\ McGaugh, ``The baryonic Tully--Fisher relation of gas-rich
-galaxies as a test of $\Lambda$CDM and MOND,''
-\textit{Astron.\ J.}\ \textbf{143}, 40 (2012).
+M_b\propto V_f^4
+\qquad\Longleftrightarrow\qquad
+V_f\propto M_b^{1/4}.
 ```
 
-## Uses in the series
+The source explains why gas-rich galaxies constrain the exponent particularly
+cleanly: their baryonic masses are comparatively insensitive to uncertain
+stellar-population mass-to-light ratios.
 
-- `papers/SSV-VI/main.tex:253`
-- `papers/SSV-VI/main.tex:518`
-
-## Source and identifiers
-
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** SSV uses both algebraically equivalent versions of the
+source's measured BTFR scaling correctly.

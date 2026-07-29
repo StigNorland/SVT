@@ -1,32 +1,37 @@
-# AharonovBohm1959 — citation record
+# AharonovBohm1959 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+Y. Aharonov and D. Bohm, *Significance of electromagnetic potentials in the
+quantum theory*, Phys. Rev. **115**, 485–491 (1959).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: DOI 10.1103/PhysRev.115.485 · pre-arXiv · APS full text ·
+local PDF sha256 `b45637d30d327938`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-II `main.tex:819–828` cites this paper for the magnetic Aharonov–Bohm
+phase
+\(\gamma_{\rm AB}=(e/\hbar)\oint_C\mathbf A\cdot d\mathbf l
+=(e/\hbar)\Phi_B\), including the fact that the electron's path may be
+field-free. The following paragraphs give SSV's own mechanical-vortex
+interpretation.
 
-```tex
-Aharonov, Y. and Bohm, D.,
-``Significance of Electromagnetic Potentials in the Quantum Theory,''
-\emph{Phys.\ Rev.}\ \textbf{115}, 485--491 (1959).
-```
+## Source result and explanation
 
-## Uses in the series
+Section 3, printed p. 486 (PDF p. 2), gives the phase displacement and the
+closed-loop relation
+\(\oint\mathbf A\cdot d\mathbf x=\int\mathbf H\cdot d\mathbf s=\Phi\), the
+total enclosed magnetic flux. Section 5, printed p. 490 (PDF p. 6),
+summarizes the result:
 
-- `papers/SSV-II/main.tex:819`
+> in quantum theory, an electron (for example) can be influenced by the
+> potentials even if all the field regions are excluded from it
 
-## Source and identifiers
+The same discussion emphasizes that the observable effect depends only on
+the gauge-invariant closed-loop integral, even though the potential is
+physically effective in the field-free, multiply connected region.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** The paper directly supports the standard phase–flux
+relation and field-free-path claim used by SSV. It does not support SSV's
+additional identification of the vector potential with transverse medium
+flow, the solenoid with a quantized vortex line, or the phase as a mechanical
+Berry phase; those are SSV hypotheses.

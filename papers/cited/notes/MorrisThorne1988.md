@@ -1,32 +1,32 @@
-# MorrisThorne1988 — citation record
+# MorrisThorne1988 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+M. S. Morris and K. S. Thorne, *Wormholes in spacetime and their use for
+interstellar travel*, *American Journal of Physics* **56**, 395–412 (1988),
+doi:10.1119/1.15620.
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Open archival scan:
+`https://archive.org/details/pdfy--5NLGQyfpB61dmyG`. The work predates
+arXiv. Local scan PDF sha256 `efc92099074e052a`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:1387–1400` lists traversable wormholes with exotic matter
+among GR configurations associated with closed timelike curves.
 
-```tex
-M.~S.~Morris and K.~S.~Thorne, ``Wormholes in spacetime and their use for interstellar
-travel: A tool for teaching general relativity,'' \textit{Am.~J.~Phys.} \textbf{56},
-395--412 (1988).
-```
+## Primary result
 
-## Uses in the series
+The paper derives static traversable wormhole geometries and shows that the
+throat requires stress-energy violating the usual energy conditions. Its
+later multiple-wormhole discussion (Sec. III H, printed p. 410) concludes:
 
-- `papers/SSV-III/main.tex:1394`
+> such civilizations can use them for backward time travel and causality
+> violation. There seems to be no a priori reason that would preclude such
+> multiple wormholes
 
-## Source and identifiers
+That conclusion is conditional on constructible, stable wormholes and
+appropriate relative motion; the paper repeatedly stresses the unknown
+physics and required exotic matter.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK` with physical-realizability scope.** The source supports both
+the exotic-matter condition and the conditional CTC/time-machine inference.
+It does not establish that such wormholes can physically be built.

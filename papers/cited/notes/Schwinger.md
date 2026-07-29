@@ -1,32 +1,30 @@
-# Schwinger — citation record
+# Schwinger — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+J. Schwinger, *On Gauge Invariance and Vacuum Polarization*, *Physical
+Review* **82**, 664–679 (1951), doi:10.1103/PhysRev.82.664.
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Official APS full text:
+`https://harvest.aps.org/v2/journals/articles/10.1103/PhysRev.82.664/fulltext`.
+The work predates arXiv. Local PDF sha256 `732d7e9582febfd8`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-II `main.tex:615–620` cites the leading electron anomalous-moment result
+\(g-2=\alpha/\pi\), and `main.tex:1083–1090` uses Schwinger pair creation
+only as an analogy for vortex-pair production.
 
-```tex
-J.~Schwinger, ``On gauge invariance and vacuum polarization,''
-\textit{Phys.~Rev.} \textbf{82}, 664 (1951).
-```
+## Primary results
 
-## Uses in the series
+The abstract states that the paper:
 
-- `papers/SSV-II/main.tex:619`
-- `papers/SSV-II/main.tex:1089`
+> derive[s] the additional spin magnetic moment of \(\alpha/2\pi\) magnetons
+> by means of a perturbation calculation in which proper-mass plays the
+> customary role
 
-## Source and identifiers
+Because the anomalous moment is \(a_e=(g-2)/2\), this is exactly
+\(g-2=\alpha/\pi\). The paper also obtains charged-pair creation from the
+imaginary part of the constant-field effective action.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** Both cited uses match the source. Schwinger's calculation
+does not validate SSV's claimed mechanical derivations; it supplies the QED
+target value and the pair-production analogy.

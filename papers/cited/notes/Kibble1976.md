@@ -1,31 +1,37 @@
-# Kibble1976 — citation record
+# Kibble1976 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+T. W. B. Kibble, *Topology of cosmic domains and strings*, J. Phys. A:
+Math. Gen. **9**, 1387–1398 (1976).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: DOI 10.1088/0305-4470/9/8/029 · pre-arXiv · open author
+copy · local PDF sha256 `176f7f7154d6fdb6`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:494–500` cites Kibble1976 and Zurek1985 for the proposal
+that a saturation front crossing causally disconnected regions will imprint
+defects and phase gradients, with the density determined by transition
+kinetics. SSV states this as a future derivation target for Paper VIII, not as
+an already calculated result.
 
-```tex
-Kibble, T.~W.~B., ``Topology of Cosmic Domains and Strings,''
-\emph{J.\ Phys.\ A} \textbf{9}, 1387--1398 (1976).
-```
+## Source result and explanation
 
-## Uses in the series
+Section 3, printed p. 1389 (PDF p. 3), describes spontaneous symmetry
+breaking after cooling through a critical temperature:
 
-- `papers/SSV-III/main.tex:494`
+> this choice will be made independently in different regions of space,
+> provided they are far enough apart. Thus we can anticipate the formation
 
-## Source and identifiers
+The sentence continues with an initial domain structure whose order parameter
+varies randomly from region to region. Printed pp. 1390–1391 then identifies
+the correlation length when distinct ordered phases become established as the
+initial protodomain scale. Section 4 idealizes cells of that scale with random
+order-parameter values and derives which walls, strings, or monopoles can
+remain from the topology of the vacuum manifold.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** Kibble directly supports causally independent domain
+choice and defect formation during a symmetry-breaking transition. The paper
+does not calculate SSV's saturation-front wake, its
+\(W_{\rm init}/W_{\rm max}\), or a defect density for SSV parameters. The
+explicit dependence on a rapid quench is supplied more directly by
+Zurek1985.

@@ -1,32 +1,35 @@
-# chemin2009 — citation record
+# chemin2009 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+L. Chemin, C. Carignan, and T. Foster, *H I kinematics and dynamics of
+Messier 31*, Astrophys. J. **705**, 1395–1415 (2009).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: arXiv:0909.3846 · DOI:
+10.1088/0004-637X/705/2/1395 · local PDF sha256 `757c75acab22f707`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-VI `main.tex:415–418` says its M31 fit uses the full Chemin *et al.*
+rotation curve over `r=1.14–38 kpc`, with `n=98` and absolute errors.
 
-```tex
-L.\ Chemin, C.\ Carignan, and T.\ Foster,
-``H I kinematics and dynamics of Messier 31,''
-\textit{Astrophys.\ J.}\ \textbf{705}, 1395--1415 (2009).
-```
+## Source data and explanation
 
-## Uses in the series
+The abstract summarizes the radial extent:
 
-- `papers/SSV-VI/main.tex:416`
+> The rotation curve is measured out to 38 kpc, showing a nuclear peak at 340
+> km s−1, a dip at 202 km s−1 around 4 kpc.
 
-## Source and identifiers
+Section 5.3 says the velocities are listed in Table 5. The locally cached
+machine-readable transcription
+`papers/SSV-VI/data/chemin2009_table4_m31_rotation_curve.csv` contains 100
+radial rows. The first two (`0.38`, `0.76` kpc) have no measured rotation
+velocity; the remaining **98** run from `1.14` to `38.09` kpc and carry the
+source's velocity uncertainties.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
+The paper explains that those uncertainties combine the formal tilted-ring
+fit error with the maximum difference between the approaching and receding
+halves, making them conservative absolute velocity errors rather than
+fractional errors.
 
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** The source table and its local transcription reproduce all
+three SSV dataset descriptors: 98 usable points, 1.14–38.09 kpc, and absolute
+velocity errors.

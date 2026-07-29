@@ -1,32 +1,40 @@
-# Boltzmann1877 — citation record
+# Boltzmann1877 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+L. Boltzmann, *Über die Beziehung zwischen dem zweiten Hauptsatze der
+mechanischen Wärmetheorie und der Wahrscheinlichkeitsrechnung respektive den
+Sätzen über das Wärmegleichgewicht* (1877).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Open primary translation: K. Sharp and F. Matschinsky, *On the Relationship
+between the Second Fundamental Theorem of the Mechanical Theory of Heat and
+Probability Calculations regarding the Conditions for Thermal Equilibrium*,
+*Entropy* **17**, 1971–2009 (2015),
+doi:10.3390/e17041971. The DOI identifies the translation; no DOI is known for
+the 1877 original, and the work predates arXiv. Local translation PDF sha256
+`55b67e9b2a7834a1`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:1152–1158` says that a conservative, time-reversal-symmetric
+dynamics can support a real coarse-grained arrow in Boltzmann's statistical
+lineage, with entropy increase conditioned by a special low-entropy boundary.
 
-```tex
-L.~Boltzmann, ``\"Uber die Beziehung zwischen dem zweiten Hauptsatze der
-mechanischen W\"armetheorie und der Wahrscheinlichkeitsrechnung,''
-\textit{Wien.~Ber.} \textbf{76}, 373--435 (1877).
-```
+## Primary result and explanation
 
-## Uses in the series
+At the opening of the translated paper (translation p. 1975), Boltzmann
+describes relaxation from a special initial macrostate:
 
-- `papers/SSV-III/main.tex:1157`
+> The initial state in most cases is bound to be highly improbable and from
+> it the system will always rapidly approach a more probable state
 
-## Source and identifiers
+The sentence continues to thermal equilibrium. Boltzmann then identifies the
+quantity called entropy with the probability of the state and explains the
+statistical dominance of uniform distributions by the much larger number of
+compatible state distributions. This is the direct source for the
+probability/entropy account used by SSV.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK` with historical scope.** The paper directly supports a
+statistical approach from an improbable initial condition toward more
+probable macrostates. It does not formulate the modern Past Hypothesis, nor
+does it prove strict monotonic entropy growth for every microscopic
+trajectory. SSV's “low-entropy boundary condition” is a modern sharpening of
+the lineage, not a verbatim Boltzmann theorem.

@@ -1,31 +1,34 @@
-# Frantzeskakis2010 — citation record
+# Frantzeskakis2010 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+D. J. Frantzeskakis, *Dark solitons in atomic Bose–Einstein condensates: from
+theory to experiments*, J. Phys. A: Math. Theor. **43**, 213001 (2010).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: arXiv:1004.4071 · DOI:
+10.1088/1751-8113/43/21/213001 · local PDF sha256 `2c02ff45215594c8`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:929–941` cites the review for an exponentially screened
+Gross–Pitaevskii dark-soliton pair potential
+`U(r)≈U₀ exp(-2r/ξ)`, then derives a finite virial coefficient from that
+asymptotic form.
 
-```tex
-D.~J.~Frantzeskakis, ``Dark solitons in atomic Bose--Einstein condensates: from theory to
-experiments,'' \textit{J.~Phys.~A: Math.~Theor.} \textbf{43}, 213001 (2010).
-```
+## Source result and explanation
 
-## Uses in the series
+Section 3.6.2, printed pp. 26–27, treats extremely slow, well-separated dark
+solitons. After Eq. (76), it states:
 
-- `papers/SSV-III/main.tex:938`
+> If the separation between the dark solitons is sufficiently large (i.e.,
+> \(2z_0\gg1\)) then the hyperbolic sinh function in Eq. (76) can be
+> approximated by its exponential asymptote, and the potential in Eq. (76) can
+> be simplified as \(V_{\rm int}(z_0)\approx
+> 2n_0B^2\exp(-4\sqrt{n_0}Bz_0)\).
 
-## Source and identifiers
+Writing the full centre-to-centre separation as `r=2z₀`, taking a nearly black
+soliton `B≈1`, and identifying the dimensionless healing scale as
+`ξ=1/√n₀` gives the SSV exponential `exp(-2r/ξ)`.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** The cited asymptotic screening is supported under the
+source's slow, well-separated, nearly black one-dimensional soliton
+assumptions. The stated `B₂` magnitude and logarithmic temperature dependence
+are SSV's subsequent approximation, not results quoted from this review.

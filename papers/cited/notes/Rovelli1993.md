@@ -1,31 +1,35 @@
-# Rovelli1993 — citation record
+# Rovelli1993 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+C. Rovelli, *Statistical mechanics of gravity and the thermodynamical origin
+of time*, Class. Quantum Grav. **10**, 1549–1566 (1993).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source page: DOI 10.1088/0264-9381/10/8/015. The publisher PDF is
+closed-access and no open repository copy was found when checked on
+2026-07-28; the publisher abstract and bibliographic record remain
+accessible.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:163–175` says that treating time as local physical change
+rather than an independent substance is “closer in spirit” to relational
+treatments by Rovelli and Barbour than to a block-universe reading. It does
+not attribute SSV's specific update-rate equation to Rovelli.
 
-```tex
-C.~Rovelli, ``Statistical mechanics of gravity and the thermodynamical origin of time,''
-\textit{Class.~Quantum Grav.} \textbf{10}, 1549--1566 (1993).
-```
+## Accessible primary-source evidence
 
-## Uses in the series
+The publisher abstract says:
 
-- `papers/SSV-III/main.tex:169`
+> The idea that a preferred physical time variable is singled out by the
+> statistical properties of the state is proposed.
 
-## Source and identifiers
+It describes a generally covariant statistical-thermodynamics scheme in
+which an intrinsic equilibrium flow is called thermodynamical time. The
+inaccessible full text prevents paragraph-level local checking, so this
+record uses the explicit `paywalled-primary` exception.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** The broad “closer in spirit” comparison is supported:
+Rovelli derives a physical time flow from the statistical state rather than
+assuming an external preferred time. This does not support SSV's stronger
+ontology that time is not a dimension, nor its schematic
+\(d\tau\propto\mathcal R[\Psi]dt\); the wording in SSV correctly presents
+those as its own proposal.

@@ -1,31 +1,40 @@
-# Poincare1890 — citation record
+# Poincare1890 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+H. Poincaré, *Sur le problème des trois corps et les équations de la
+dynamique*, *Acta Mathematica* **13**, 1–270 (1890).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+The recurrence result is in the separately indexed section *Théorie des
+invariants intégraux*, pp. 46–88, doi:10.1007/BF02392508. Open primary
+section:
+`https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/4919-11511_2006_Article_BF02392508.pdf`.
+The work predates arXiv. Local section PDF sha256 `9a69e9f675e7735f`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:1353–1364` says that Poincaré recurrence guarantees
+arbitrarily close return “in a bounded system with discrete spectrum” on
+cosmological timescales, then argues that SSV's effectively unbounded field
+and continuous-spectrum channels have no relevant finite recurrence time.
 
-```tex
-H.~Poincaré, ``Sur le problème des trois corps et les équations de la dynamique,''
-\textit{Acta Math.} \textbf{13}, 1--270 (1890).
-```
+## Primary theorem and conditions
 
-## Uses in the series
+Poincaré's Théorème I in §8, printed p. 69, begins with its actual
+hypotheses:
 
-- `papers/SSV-III/main.tex:1354`
+> Supposons que le point P reste à distance finie, et que le volume
+> \(dx_1 dx_2 dx_3\) soit un invariant intégral
 
-## Source and identifiers
+It then states that, for any region however small, trajectories will cross it
+infinitely many times. The following proof uses a finite containing region and
+invariance of volume. A later corollary strengthens this to an almost-everywhere
+statement. These are classical boundedness and invariant-measure conditions;
+the theorem does not assume a discrete energy spectrum and does not assign a
+“cosmological” recurrence time.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `MISREAD` for the stated conditions.** The citation supports the
+broad recurrence objection and SSV is directionally right that an unbounded
+system can evade the classical theorem. But “discrete spectrum” is a condition
+from quantum recurrence results, not Poincaré's 1890 theorem, and
+“cosmologically long” is not supplied by this source. The sentence should
+either state Poincaré's finite-measure conditions or add a separate quantum
+recurrence reference.

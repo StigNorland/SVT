@@ -124,6 +124,36 @@ def test_open_source_cannot_use_inaccessible_source_waiver():
     assert any("open source cannot waive paragraph" in issue for issue in issues)
 
 
+def test_inaccessible_source_cannot_assert_a_complete_paragraph():
+    """The mirror of the rule above, and the one that was missing.
+
+    Waiving the paragraph on an open source was rejected; *asserting* the
+    complete relied-on paragraph on a source nobody could obtain was not. That
+    asymmetry let `toomre1981` pass the gate registered
+    unavailable + paragraph_required + no waiver, while its own note recorded
+    that the chapter "was not openly obtainable" and quoted only an abstract.
+    """
+    data = one_source("HaldaneWu1985")          # access: paywalled
+    verification = data["sources"]["HaldaneWu1985"]["verification"]
+    verification["evidence_mode"] = "quotation"
+    verification["paragraph_required"] = True
+    verification["paragraph_exception"] = None
+    issues = E.registry_issues(data, {"HaldaneWu1985"})
+    assert any("asserts a complete relied-on paragraph" in issue for issue in issues)
+
+
+def test_owner_supplied_scan_may_assert_a_paragraph_via_transcript():
+    """The one legitimate exemption: a transcript makes the full text available
+    without retrieval, which is why `lamb1932` is allowed to require a
+    paragraph while being an owner-supplied scan."""
+    data = one_source("lamb1932")
+    verification = data["sources"]["lamb1932"]["verification"]
+    assert verification["evidence_mode"] == "transcript"
+    assert verification["paragraph_required"] is True
+    assert not [i for i in E.registry_issues(data, {"lamb1932"})
+                if "asserts a complete relied-on paragraph" in i]
+
+
 def test_present_doi_must_contain_valid_doi():
     data = one_source("barcelo2011")
     data["sources"]["barcelo2011"]["identifiers"]["doi"] = None

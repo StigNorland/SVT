@@ -1,32 +1,37 @@
-# Hawking1975 — citation record
+# Hawking1975 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+S. W. Hawking, *Particle creation by black holes*, Commun. Math. Phys.
+**43**, 199–220 (1975).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: DOI 10.1007/BF02345020. An open Project Euclid copy and its
+text were accessible when checked on 2026-07-28, but automated local download
+was blocked by the host.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-V `main.tex:432–448` uses the paper with Bekenstein1973 for
+\(S_{\rm BH}=k_BA_H/(4l_P^2)\). At `main.tex:547–552` it uses the paper with
+Hawking1974 for \(T_H=\hbar c^3/(8\pi k_BGM)\).
 
-```tex
-S.~W.~Hawking, ``Particle creation by black holes,''
-\textit{Commun.~Math.~Phys.}~\textbf{43}, 199--220 (1975).
-```
+## Accessible primary-source evidence
 
-## Uses in the series
+The abstract, printed p. 199, begins:
 
-- `papers/SSV-V/main.tex:432`
-- `papers/SSV-V/main.tex:547`
+> In the classical theory black holes can only absorb and not emit particles.
+> However it is shown that quantum mechanical effects cause black holes
 
-## Source and identifiers
+The sentence continues by saying that they create and emit as hot bodies, and
+gives the temperature \(T=\hbar\kappa/(2\pi k_B c)\), where \(\kappa\) is
+surface gravity (with constants restored).
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
+For a Schwarzschild black hole,
+\(\kappa=c^4/(4GM)\), which gives
+\(T_H=\hbar c^3/(8\pi k_BGM)\). The discussion following the calculation
+identifies the generalized second law and the entropy required for the black
+hole; combining \(dE=T\,dS\) with this temperature fixes the
+\(A/(4l_P^2)\) coefficient.
 
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** The cited temperature and the exact
+Bekenstein–Hawking entropy coefficient are supported. The source does not
+support SSV's own cell-counting mechanism, \(\xi=l_P\) assumption, or its
+factor-of-four mismatch.

@@ -1,31 +1,34 @@
-# Zurek1985 — citation record
+# Zurek1985 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+W. H. Zurek, *Cosmological experiments in superfluid helium?*, Nature
+**317**, 505–508 (1985).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source page: DOI 10.1038/317505a0 · pre-arXiv. The publisher abstract
+was accessible on 2026-07-28; the full article is subscription-only and no
+local PDF was obtained.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:494–500` cites Zurek1985 with Kibble1976 for
+transition-generated defects and phase gradients whose density depends on
+quench kinetics. SSV treats the corresponding saturation-front calculation
+as an open target for Paper VIII.
 
-```tex
-W.~H.~Zurek, ``Cosmological experiments in superfluid helium?''
-\textit{Nature} \textbf{317}, 505--508 (1985).
-```
+## Accessible primary-source evidence
 
-## Uses in the series
+The publisher abstract, printed p. 505, says the phase is chosen independently
+in characteristic domains after a rapid pressure quench:
 
-- `papers/SSV-III/main.tex:494`
+> will be chosen randomly in domains of some characteristic size d. When the
+> quench is performed in an annulus of circumference C
 
-## Source and identifiers
+It then predicts a typical phase mismatch proportional to
+\((C/d)^{1/2}\), producing a measurable randomly directed superflow. The
+abstract explicitly frames this as a superfluid analogue of cosmological
+string formation.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** The cited paper supports random-domain phase selection and
+defect/phase-gradient counting in a quenched superfluid. It does not provide
+SSV's saturation-front dynamics or establish that the resulting initial wake
+is low compared with \(W_{\rm max}\); SSV correctly leaves that calculation
+open.

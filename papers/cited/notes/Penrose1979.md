@@ -1,33 +1,32 @@
-# Penrose1979 — citation record
+# Penrose1979 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+R. Penrose, *Singularities and Time-Asymmetry*, in S. W. Hawking and
+W. Israel (eds.), *General Relativity: An Einstein Centenary Survey*,
+pp. 581–638 (Cambridge University Press, 1979).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Open scholarly copy:
+`https://personal.lse.ac.uk/robert49/PPB/pdf/Penrose1979a.pdf`. No DOI is
+known and arXiv is not applicable. Local PDF sha256 `c7d95cd452aeaefd`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:468–480,1301–1309` cites Penrose's Weyl-curvature
+hypothesis as the gravitational form of the special low-entropy initial-state
+problem.
 
-```tex
-R.~Penrose, ``Singularities and time-asymmetry,'' in \textit{General Relativity: An Einstein
-Centenary Survey}, eds.\ S.~W.~Hawking and W.~Israel, Cambridge University Press, 1979,
-pp.~581--638.
-```
+## Primary result
 
-## Uses in the series
+In §12.4 Penrose connects gravitational clumping to entropy and explains:
 
-- `papers/SSV-III/main.tex:473`
-- `papers/SSV-III/main.tex:1305`
+> absence of clumping corresponds, very roughly, to the absence of Weyl
+> conformal curvature (since absence of clumping implies spatial-isotropy
+> and hence no gravitational principal null-directions)
 
-## Source and identifiers
+He then proposes a time-asymmetric boundary restriction: Weyl curvature is
+constrained at initial singularities but not at final singularities. This is
+the special cosmological condition SSV acknowledges that its wake mechanism
+does not derive.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** The citation directly supports both the Weyl-curvature
+hypothesis and the claim that a special initial gravitational condition is a
+separate part of explaining the arrow of time.

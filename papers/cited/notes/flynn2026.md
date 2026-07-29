@@ -1,33 +1,35 @@
-# flynn2026 — citation record
+# flynn2026 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+D. C. Flynn and J. Cannaliato, *A New Empirical Fit to Galaxy Rotation
+Curves*, Front. Astron. Space Sci. **12**, 1680387 (2025).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: arXiv:2601.00522 · DOI:
+10.3389/fspas.2025.1680387 · local PDF sha256 `2db1bbfc0cfcfe0e`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-VI `main.tex:469–476` calls this an endpoint-anchored solid-body model
+with one empirical parameter per galaxy. At `main.tex:502–504` it reports the
+SSV battery's own error-weighted score for the model.
+
+## Source equation and explanation
+
+The model's Eqs. (1)–(2), pp. 5–6, are
 
 ```tex
-D.~C.\ Flynn and J.\ Cannaliato,
-``A new empirical fit to galaxy rotation curves,''
-arXiv:2601.00522 (2026).
+V=R\omega,\qquad
+V_{\rm observed}=V_{\rm Kepler}+R\omega.
 ```
 
-## Uses in the series
+Section 4.2 states its endpoint construction:
 
-- `papers/SSV-VI/main.tex:474`
-- `papers/SSV-VI/main.tex:502`
+> we only need to do the calculation for the closest and farthest stars from
+> the center of the galaxy in each data set.
 
-## Source and identifiers
+The paper describes `ω` as an empirically derived scalar for each galaxy and
+applies the equations to a selected set of 84 SPARC galaxies. Thus `Rω` is a
+solid-body velocity contribution and `ω` is the one per-galaxy parameter.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** SSV accurately identifies the published comparison model.
+The score `93.7` is not attributed to Flynn and Cannaliato; it is explicitly
+the result of SSV's separate, uniform fitting battery.

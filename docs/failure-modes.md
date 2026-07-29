@@ -141,6 +141,27 @@ inaccessible primary can pass without its own paragraph only through an
 explicit reasoned waiver; `PENDING-PRIMARY` leaves unresolved dependent claims
 flagged but printed.
 
+**Retrieval is weaker than the rule's wording suggests (found 2026-07-28).**
+Rule 12 says sources are "hash-pinned and re-fetchable via `fetch_cited.py`".
+That holds for most, not all: **72 of 99** primaries are cached locally, and
+three notes state in their own prose that the primary was not retrieved —
+`bbm1976` ("the host's anti-bot layer prevented a reproducible local download"),
+`Hawking1974`, and `toomre1981`. Their quotations were read and checked by a
+human and their verdicts stand; what is overstated is *reproducibility*, not
+correctness. Treat "hash-pinned and re-fetchable" as the norm the registry aims
+at, and read each record's `access` block for the actual state.
+
+**One structural hole in this guard, now closed.** The validator rejected an
+*open* source that waived its paragraph, but not an *inaccessible* source that
+**asserted** one — the stronger claim. `toomre1981` passed the gate registered
+`unavailable` + `paragraph_required: true` + no waiver while its note recorded
+that the chapter was not obtainable and quoted only an ADS abstract. The
+symmetric rule now exists
+(`test_inaccessible_source_cannot_assert_a_complete_paragraph`), with a
+transcript the single legitimate exemption, and the record carries an explicit
+`unavailable-primary` waiver. This is FM3 inside the evidence layer: the check
+that was there looked complete and covered one direction only.
+
 ---
 
 ## FM6 — an absence claim with no search behind it
@@ -241,9 +262,78 @@ Evidence-only sources remain catalogued too, for 108 notes total. The build
 rejects missing notes, orphan notes, stale `cited_by` lists, and a note promoted
 to `evidence-recorded` without a full source-verification record.
 
-**Not covered:** 83 external notes are explicitly `NOT-REVIEWED`. The inventory
-makes the gap visible and navigable; it does not manufacture quotations,
-source URLs, identifiers, or verdicts.
+**Not covered:** the inventory makes a gap visible and navigable; it does not
+manufacture quotations, source URLs, identifiers, or verdicts.
+
+**Update, `d6bcc2e`:** the 83 notes this entry originally recorded as
+`NOT-REVIEWED` have since been reviewed and promoted. The registry now holds 99
+`evidence-recorded` and 9 `local-source` notes and **no `NOT-REVIEWED` entries at
+all**; 72 of the 99 primaries are cached locally. Spot-checked against an
+independent derivation: `bbm1976`'s note reports BBM's
+\(\ell=\hbar/\sqrt{2mb}\) and its restriction to \(b>0\), which matches the
+symbolic substitution done separately under #189 — so the promotion reflects
+real review, not an automated status flip.
+
+The residual gap is narrower and different in kind: the promotion outran the
+*retrieval* guarantee. See FM5.
+
+---
+
+## FM12 — a tracked generated artifact is not reproducible across environments
+
+**Observed:** `papers/SSV-VI/results/dsph_ledger_receipt.json` is written by
+`dsph_ledger.main()`, which `test_real_ledger_runs_and_is_coherent` calls — so
+**the test suite rewrites a tracked file**. Two runs on one machine are
+byte-identical, but values drift by up to `3.83e-15` relative *across*
+environments (BLAS/CPU reduction order), which moved **25 of its 259 floats**.
+During the #198 work this dirtied the working tree on five separate occasions
+and was once swept into an unrelated commit by `git add -A`, needing an amend.
+The same run also re-rendered `fig_dsph_ledger.png` at a different byte size
+(85 KB → 102 KB) purely from a different matplotlib build.
+
+**Why it matters beyond tidiness:** churn that appears on every run stops being
+read. A reviewer who sees this file modified after every test run learns to
+`git checkout` it reflexively — which is exactly the habit that lets a *real*
+change to a result receipt pass unnoticed. It also makes `git add -A` unsafe,
+and that is not a habit worth having in a repository whose whole discipline is
+that tracked artifacts mean something.
+
+**Guard — closed for the receipt.** Values are written at
+`RECEIPT_SIGFIGS = 10` significant figures. Measured rather than estimated, by
+testing both ends of the drift interval against every value (rounding is
+monotonic, so this is exact, not statistical):
+
+| s.f. | floats moved by the observed drift | drift tolerated |
+|---|---|---|
+| none | 25 of 259 | — |
+| 14 | 31 | 0× |
+| 12 | 0 | 4.3e-14 (11× observed) |
+| **10** | **0** | **3.6e-12 (906× observed)** |
+
+12 s.f. — the intuitive "a couple fewer decimals" — also passes today, but on an
+11× margin a recomputation could eat. 10 s.f. keeps ~900× while still leaving
+seven orders of magnitude more precision than the ~3 s.f. of physics these
+numbers carry. `test_receipt_is_stable_under_environment_drift` asserts the
+receipt survives 100× the observed drift, and
+`test_rounding_actually_changes_what_is_written` stops the rounding being
+silently disabled — without it, that test would still pass on today's values.
+
+**Not covered:** the figure. PNG output is not byte-reproducible across
+matplotlib builds and nothing rounds it; it simply must not be regenerated
+casually. And this is one artifact — the other ~20 `results/*_receipt.json`
+files have not been checked for the same property, so **do not assume a receipt
+is stable because this one now is**.
+
+**A note on how this was diagnosed**, because it is FM3 again and I walked into
+it three times: the first two attempts to size the rounding were wrong — an
+analytic estimate that mismodelled the boundary geometry, then a Monte-Carlo
+that perturbed the *same fixed value* repeatedly and so could only ever answer
+"this particular number is safe", never "the receipt is safe". A third check
+measured distance to the nearest *grid point* rather than the nearest *rounding
+boundary*, which scored exactly-representable values like `1.6` as maximally at
+risk when they are maximally safe. Only the exact endpoint test is right. Three
+plausible-looking measurements, three wrong answers, all of which would have
+been reported with a straight face.
 
 ---
 
@@ -268,6 +358,7 @@ ones most likely to lapse.
 | FM9 citation metadata points at wrong work | `verification.json` | **build** + review |
 | FM10 duplicated bibliographies drift | `references.bib` + `bibliography.py` | **build** |
 | FM11 cited work absent from review inventory | citation-note catalog | **build** |
+| FM12 generated artifact churns across environments | `RECEIPT_SIGFIGS` rounding | suite (one receipt only) |
 
 Adding a failure mode to this register is cheap. Leaving one out because its
 guard is embarrassing is how #182 happened.

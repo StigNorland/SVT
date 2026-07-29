@@ -1,31 +1,39 @@
-# Penrose1965 — citation record
+# Penrose1965 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+R. Penrose, *Gravitational collapse and space-time singularities*,
+Phys. Rev. Lett. **14**, 57–59 (1965).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: DOI 10.1103/PhysRevLett.14.57 · pre-arXiv · APS full text ·
+local PDF sha256 `ce054908ed51850d`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-V `main.tex:193–199` says that, within general relativity, collapse with
+ordinary matter and a trapped surface leads to a geodesic-incompleteness
+singularity. It then asserts that SSV lies outside the theorem's domain.
 
-```tex
-R.~Penrose, ``Gravitational collapse and space-time singularities,''
-\textit{Phys.~Rev.~Lett.}~\textbf{14}, 57--59 (1965).
-```
+## Source result and explanation
 
-## Uses in the series
+Penrose first describes the collapse result on printed p. 57 (PDF p. 1):
 
-- `papers/SSV-V/main.tex:193`
+> It will be shown that, after a certain critical condition has been
+> fulfilled, deviations from spherical symmetry cannot prevent space-time
+> singularities from arising.
 
-## Source and identifiers
+On printed p. 58 (PDF p. 2), he lists the precise assumptions: a nonsingular
+time-oriented spacetime, future null completeness, a noncompact Cauchy
+hypersurface, nonnegative local energy, and a trapped surface, and proves
+that these are together inconsistent.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
+The proof therefore shows that a spacetime satisfying the causal/global and
+energy assumptions and containing a trapped surface cannot remain future
+null-geodesically complete. It does not locate a curvature-divergent endpoint
+or say that matter literally “terminates” there.
 
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK`.** Read as geodesic incompleteness, SSV's summary captures
+the theorem's core consequence. It omits the noncompact-Cauchy/global-causal
+assumptions, and “must terminate” is looser than the theorem. More
+importantly, declaring the SSV medium to be spacetime-generating does not by
+itself evade this geometric theorem: SSV must show which energy, causality,
+global-hyperbolicity, or trapped-surface premise its effective spacetime
+violates.

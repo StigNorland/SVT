@@ -1,33 +1,36 @@
-# Lloyd2011 — citation record
+# Lloyd2011 — citation evidence
 
-**Review status: `NOT-REVIEWED`.**
+S. Lloyd *et al.*, *Closed Timelike Curves via Postselection: Theory and
+Experimental Test of Consistency*, Phys. Rev. Lett. **106**, 040403 (2011).
 
-This is a coverage record, not quotation evidence. It must not be read as
-confirmation that the cited work supports the SSV claim.
+Primary source: arXiv:1005.2219 · DOI:
+10.1103/PhysRevLett.106.040403 · local PDF sha256 `f8e881534aa540b1`.
 
-## Bibliographic record
+## SSV usage
 
-Migrated from the former inline bibliography; not independently re-verified in
-this note:
+SSV-III `main.tex:1404–1413` writes the Deutsch fixed-point condition, notes
+computational consequences, and cites Lloyd *et al.* specifically as the
+postselected alternative.
+
+## Source equation and explanation
+
+Equation (1), p. 1, is
 
 ```tex
-S.~Lloyd, L.~Maccone, R.~Garcia-Patron, V.~Giovannetti, Y.~Shikano, S.~Pirandola,
-L.~A.~Rozema, A.~Darabi, Y.~Soudagar, L.~K.~Shalm, and A.~M.~Steinberg, ``Closed timelike
-curves via postselection: Theory and experimental test of consistency,''
-\textit{Phys.~Rev.~Lett.} \textbf{106}, 040403 (2011).
+\rho=\operatorname{Tr}_A[U(\rho\otimes\rho_A)U^\dagger].
 ```
 
-## Uses in the series
+The source explains why the fixed point exists:
 
-- `papers/SSV-III/main.tex:1409`
+> A state ρ that satisfies Eq. (1) always exists because the above interaction
+> is a completely positive map which possesses at least one fixed point.
 
-## Source and identifiers
+It then distinguishes Deutsch CTCs from its teleportation-plus-postselection
+construction. On p. 3 it states that postselected CTCs can efficiently solve
+NP-complete problems, while Deutsch CTCs have the stronger PSPACE result but
+may decorrelate outputs from externally stored inputs.
 
-No source URL, DOI status, or arXiv status has yet been verified in the local
-evidence registry for this work.
-
-## Quotation evidence
-
-None recorded. Before assigning a use verdict, retrieve the source where
-possible, add the relied-on paragraph and locator, and promote this key to an
-`evidence-recorded` source in `verification.json`.
+**Verdict: `OK` with scope.** The fixed-point equation and existence statement
+are reproduced correctly, and Lloyd *et al.* is an appropriate source for the
+postselected variant. It is not the primary source for Deutsch's model or for
+every computational property listed in the surrounding SSV sentence.

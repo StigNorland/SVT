@@ -153,6 +153,415 @@ SOURCES: list[Source] = [
            "SSV-III main.tex:901 (SAW correlation-length exponent)",
            "OK -- nu = 0.587597(7), matches the quoted 0.587597 exactly",
            "cca34bb00b44c599"),
+    Source("Abel2020", "C. Abel et al.",
+           "Measurement of the permanent electric dipole moment of the neutron",
+           "Phys. Rev. Lett. 124, 081803 (2020)", "arXiv:2001.11966",
+           "https://arxiv.org/pdf/2001.11966",
+           "SSV-II main.tex:1904,2947 (neutron EDM upper bound)",
+           "OK -- reports |d_n| < 1.8e-26 e cm at 90% confidence",
+           "1afeb830f372c772"),
+    Source("AaronsonCarrollOuellette2014",
+           "S. Aaronson, S. M. Carroll, L. Ouellette",
+           "Quantifying the Rise and Fall of Complexity in Closed Systems: "
+           "The Coffee Automaton",
+           "arXiv preprint (2014)", "arXiv:1405.6903",
+           "https://arxiv.org/pdf/1405.6903",
+           "SSV-III main.tex:1296 (rise and fall of complexity)",
+           "OK with scope -- provides the qualitative contrast and an "
+           "apparent-complexity example, not a universal theorem",
+           "e35b1fa18e664028"),
+    Source("CasiniHuerta2009", "H. Casini, M. Huerta",
+           "Entanglement entropy in free quantum field theory",
+           "J. Phys. A 42, 504007 (2009)", "arXiv:0905.2562",
+           "https://arxiv.org/pdf/0905.2562",
+           "SSV-V main.tex:470 (free-boson correlator method)",
+           "OK -- derives the reduced-density-matrix spectrum from X and P "
+           "correlators and states the leading area law",
+           "9568e8b3bd7e07c6"),
+    Source("Barenghi2014", "C. F. Barenghi, L. Skrbek, K. R. Sreenivasan",
+           "Introduction to quantum turbulence",
+           "PNAS 111, 4647-4652 (2014)", "arXiv:1404.1909",
+           "https://arxiv.org/pdf/1404.1909",
+           "SSV-III main.tex:1114 (circulation and vortex-line density)",
+           "OK -- source defines kappa and L; the L^(5/2) rate is SSV's "
+           "dimensional inference, not a quoted result",
+           "1d2967503ac87030"),
+    Source("BLV2005", "C. Barcelo, S. Liberati, M. Visser",
+           "Analogue Gravity",
+           "Living Rev. Relativ. 8, 12 (2005)", "arXiv:gr-qc/0505065v2",
+           "https://arxiv.org/pdf/gr-qc/0505065v2",
+           "SSV-V main.tex:518-521,792-799 (acoustic Hawking tools)",
+           "OK -- derives the acoustic metric, horizon and surface gravity "
+           "and reviews phononic Hawking radiation",
+           "8461440c08c18300"),
+    Source("CorleyJacobson1996", "S. Corley, T. Jacobson",
+           "Hawking spectrum and high frequency dispersion",
+           "Phys. Rev. D 54, 1568-1586 (1996)", "arXiv:hep-th/9601073",
+           "https://arxiv.org/pdf/hep-th/9601073",
+           "SSV-V main.tex:582 (modified-dispersion robustness)",
+           "MISREAD -- near-thermality was computed for subluminal dispersion; "
+           "the superluminal cases require extra short-distance conditions",
+           "7da7b5454dd05565"),
+    Source("CUORE2022", "CUORE Collaboration",
+           "Search for Majorana neutrinos exploiting millikelvin cryogenics "
+           "with CUORE",
+           "Nature 604, 53-58 (2022)", "arXiv:2104.06906",
+           "https://arxiv.org/pdf/2104.06906",
+           "SSV-II main.tex:2006,2138 (0nu beta beta falsifier)",
+           "OK -- CUORE searches the Majorana channel; this paper reports no "
+           "signal and T_1/2 > 2.2e25 yr",
+           "4e1f17cf54811bf8"),
+    Source("DUNE2020", "DUNE Collaboration",
+           "Long-baseline neutrino oscillation physics potential of the DUNE "
+           "experiment",
+           "Eur. Phys. J. C 80, 978 (2020)", "arXiv:2006.16043",
+           "https://arxiv.org/pdf/2006.16043",
+           "SSV-II main.tex:2122 (future precision PMNS CP phase)",
+           "OK -- projects delta_CP resolution of five to fifteen degrees "
+           "after 15 years",
+           "89e5f73b23dc5ca6"),
+    Source("Endres2012", "M. Endres et al.",
+           "The 'Higgs' Amplitude Mode at the Two-Dimensional "
+           "Superfluid-Mott Insulator Transition",
+           "Nature 487, 454-458 (2012)", "arXiv:1204.5183",
+           "https://arxiv.org/pdf/1204.5183",
+           "SSV-II main.tex:1278,2884 (cold-atom amplitude-mode analogy)",
+           "OK with scope -- directly identifies a cold-atom amplitude mode, "
+           "not the particle-physics Higgs",
+           "790c48c116884412"),
+    Source("Fixsen1996", "D. J. Fixsen et al.",
+           "The Cosmic Microwave Background Spectrum from the Full COBE/FIRAS "
+           "Data Set",
+           "Astrophys. J. 473, 576-587 (1996)", "arXiv:astro-ph/9605054",
+           "https://arxiv.org/pdf/astro-ph/9605054",
+           "SSV-IX main.tex:267-284,374-386 (CMB distortion limits)",
+           "OK -- reports |y| < 15e-6 and |mu| < 9e-5 at 95% confidence",
+           "70165f3450634e51"),
+    Source("Frantzeskakis2010", "D. J. Frantzeskakis",
+           "Dark solitons in atomic Bose-Einstein condensates: from theory "
+           "to experiments",
+           "J. Phys. A 43, 213001 (2010)", "arXiv:1004.4071",
+           "https://arxiv.org/pdf/1004.4071",
+           "SSV-III main.tex:929-941 (dark-soliton pair potential)",
+           "OK with scope -- for slow separated nearly black solitons, "
+           "Eq. 77 is exponential in the full separation",
+           "2c02ff45215594c8"),
+    Source("GW170817", "B. P. Abbott et al.",
+           "Multi-messenger Observations of a Binary Neutron Star Merger",
+           "Astrophys. J. Lett. 848, L12 (2017)", "arXiv:1710.05833",
+           "https://arxiv.org/pdf/1710.05833",
+           "SSV-II main.tex:2645-2652 and summaries (GW/EM timing)",
+           "MISREAD -- establishes the 1.734 s delay but not that it is "
+           "entirely intrinsic or a standalone equal-speed derivation",
+           "abade212b3d6763f"),
+    Source("HK2018", "Hyper-Kamiokande Proto-Collaboration",
+           "Hyper-Kamiokande Design Report",
+           "arXiv preprint (2018)", "arXiv:1805.04163",
+           "https://arxiv.org/pdf/1805.04163",
+           "SSV-II main.tex:2122 (future precision PMNS CP phase)",
+           "OK -- projects delta_CP precision of 7.2 to 23 degrees",
+           "5123334cbdd8b278"),
+    Source("Jacobson1995", "T. Jacobson",
+           "Thermodynamics of Spacetime: The Einstein Equation of State",
+           "Phys. Rev. Lett. 75, 1260-1263 (1995)", "arXiv:gr-qc/9504004",
+           "https://arxiv.org/pdf/gr-qc/9504004",
+           "SSV-VII-b main.tex:89,306,367 (local-horizon derivation)",
+           "OK -- requiring delta Q = T dS on every local Rindler horizon "
+           "yields the Einstein equation",
+           "85ed65e912baf62c"),
+    Source("JacobsonEEq2016", "T. Jacobson",
+           "Entanglement Equilibrium and the Einstein Equation",
+           "Phys. Rev. Lett. 116, 201101 (2016)", "arXiv:1505.04753",
+           "https://arxiv.org/pdf/1505.04753",
+           "SSV-V main.tex:467 (entanglement-equilibrium field equation)",
+           "OK with scope -- first-order small-diamond vacuum stationarity "
+           "at fixed volume yields the semiclassical Einstein equation",
+           "5269c0e7ff5e2e14"),
+    Source("KamLANDZen2023", "KamLAND-Zen Collaboration",
+           "Search for the Majorana Nature of Neutrinos in the Inverted Mass "
+           "Ordering Region with KamLAND-Zen",
+           "Phys. Rev. Lett. 130, 051801 (2023)", "arXiv:2203.02139",
+           "https://arxiv.org/pdf/2203.02139",
+           "SSV-II main.tex:2006,2139-2144 (0nu beta beta and mass bound)",
+           "OK -- reports 36-156 meV effective-Majorana-mass upper limits",
+           "7987c985c58dbe6d"),
+    Source("KATRIN2022", "KATRIN Collaboration",
+           "First direct neutrino-mass measurement with sub-eV sensitivity",
+           "Nature Physics 18, 160-166 (2022)", "arXiv:2105.08533",
+           "https://arxiv.org/pdf/2105.08533",
+           "SSV-II main.tex:2081-2087 (neutrino mass bound)",
+           "MISREAD -- measures effective electron-neutrino mass and reports "
+           "m_beta < 0.8 eV, not sum m_i < 0.45 eV",
+           "e7a8377bfa12b4a4"),
+    Source("Lloyd2011", "S. Lloyd et al.",
+           "Closed timelike curves via postselection: Theory and experimental "
+           "test of consistency",
+           "Phys. Rev. Lett. 106, 040403 (2011)", "arXiv:1005.2219",
+           "https://arxiv.org/pdf/1005.2219",
+           "SSV-III main.tex:1409 (postselected CTC variant)",
+           "OK with scope -- gives the Deutsch fixed-point equation and shows "
+           "postselected CTCs can solve NP-complete problems",
+           "f8e881534aa540b1"),
+    Source("LEGEND2021", "LEGEND Collaboration",
+           "LEGEND-1000 Preconceptual Design Report",
+           "arXiv preprint (2021)", "arXiv:2107.11462",
+           "https://arxiv.org/pdf/2107.11462",
+           "SSV-II main.tex:2007,2139 (0nu beta beta falsifier)",
+           "OK -- designs a 0nu beta beta search and explains that discovery "
+           "would establish lepton-number violation tied to neutrino mass",
+           "ad2a3b76972e50af"),
+    Source("MicroBooNE2022", "MicroBooNE Collaboration",
+           "Search for an Anomalous Excess of Charged-Current nu_e "
+           "Interactions without Pions in the Final State with the "
+           "MicroBooNE Experiment",
+           "Phys. Rev. D 105, 112004 (2022)", "arXiv:2110.14065",
+           "https://arxiv.org/pdf/2110.14065",
+           "SSV-II main.tex:2096-2108 (fourth active-flavour falsifier)",
+           "MISATTRIBUTED -- short-baseline MiniBooNE-excess test, not a "
+           "long-baseline or atmospheric fourth-active-flavour search",
+           "1ffb214b646945b4"),
+    Source("Planck2020", "Planck Collaboration",
+           "Planck 2018 results. VI. Cosmological parameters",
+           "Astron. Astrophys. 641, A6 (2020)", "arXiv:1807.06209",
+           "https://arxiv.org/pdf/1807.06209",
+           "SSV-II main.tex:2081-2087 (cosmological neutrino mass sum)",
+           "OK -- Planck TT,TE,EE+lowE+lensing+BAO gives "
+           "sum m_nu < 0.12 eV at 95% confidence",
+           "8e172730faf07c9f"),
+    Source("Peschel2003", "I. Peschel",
+           "Calculation of reduced density matrices from correlation "
+           "functions",
+           "J. Phys. A 36, L205-L208 (2003)", "arXiv:cond-mat/0212631",
+           "https://arxiv.org/pdf/cond-mat/0212631",
+           "SSV-V main.tex:467-473 (bosonic correlator method)",
+           "OK -- reconstructs Gaussian bosonic reduced-state spectra from "
+           "the eigenvalues of the XP correlator product",
+           "4496ceebea0f9174"),
+    Source("Srednicki1993", "M. Srednicki",
+           "Entropy and Area",
+           "Phys. Rev. Lett. 71, 666-669 (1993)", "arXiv:hep-th/9303048",
+           "https://arxiv.org/pdf/hep-th/9303048",
+           "SSV-V main.tex:463-471 (vacuum entanglement area law)",
+           "OK -- free scalar vacuum reduced across a sphere has entropy "
+           "proportional to area rather than volume",
+           "aed88ccf9e75cfb2"),
+    Source("Salart2008", "D. Salart et al.",
+           "Testing spooky action at a distance",
+           "Nature 454, 861-864 (2008)", "arXiv:0808.3316",
+           "https://arxiv.org/pdf/0808.3316",
+           "SSV-II main.tex:1977-1984 (conditional nonlocal-speed bound)",
+           "OK -- constrains a hypothetical preferred-frame influence and "
+           "explicitly distinguishes it from classical signalling",
+           "122c9979dcc97043"),
+    Source("Steinhauer2016", "J. Steinhauer",
+           "Observation of quantum Hawking radiation and its entanglement in "
+           "an analogue black hole",
+           "Nature Physics 12, 959-965 (2016)", "arXiv:1510.00621",
+           "https://arxiv.org/pdf/1510.00621",
+           "SSV-V main.tex:608-611 (analogue Hawking observation)",
+           "OK with scope -- reports spontaneous analogue Hawking radiation "
+           "and partner correlations in an atomic BEC",
+           "bf5194b7c9036eb1"),
+    Source("Visser1998", "M. Visser",
+           "Acoustic black holes: horizons, ergospheres, and Hawking radiation",
+           "Class. Quantum Grav. 15, 1767-1791 (1998)",
+           "arXiv:gr-qc/9712010", "https://arxiv.org/pdf/gr-qc/9712010",
+           "SSV-V main.tex:566; SSV-VII-b main.tex:576",
+           "OK -- acoustic metric and Hawking effect are kinematic; the "
+           "Einstein dynamics do not carry over",
+           "a79e2a9a8e912bb5"),
+    Source("Yin2013", "J. Yin et al.",
+           "Lower Bound on the Speed of Nonlocal Correlations without Locality "
+           "and Measurement Choice Loopholes",
+           "Phys. Rev. Lett. 110, 260407 (2013)",
+           "doi:10.1103/PhysRevLett.110.260407",
+           "https://harvest.aps.org/v2/journals/articles/"
+           "10.1103/PhysRevLett.110.260407/fulltext",
+           "SSV-II main.tex:1977-1984 (conditional nonlocal-speed bound)",
+           "OK -- gives V_sa/c >= 1.37e4 under the stated preferred-frame "
+           "condition and does not claim a usable signal",
+           "bdd5e892b93376ec"),
+    Source("rubin1980", "V. C. Rubin, W. K. Ford Jr., N. Thonnard",
+           "Rotational properties of 21 Sc galaxies with a large range of "
+           "luminosities and radii",
+           "Astrophys. J. 238, 471-487 (1980)",
+           "doi:10.1086/158003",
+           "https://articles.adsabs.harvard.edu/pdf/1980ApJ...238..471R",
+           "SSV-VI main.tex:102-104 (non-falling outer rotation curves)",
+           "OK with scope -- the sample's curves rise slowly or do not fall; "
+           "flat is a conventional summary, not every curve's exact shape",
+           "7ea8bfc93a308a4e"),
+    Source("Kibble1976", "T. W. B. Kibble",
+           "Topology of cosmic domains and strings",
+           "J. Phys. A: Math. Gen. 9, 1387-1398 (1976)",
+           "doi:10.1088/0305-4470/9/8/029",
+           "https://www.phys.ens.psl.eu/~placais/publication/"
+           "1976_topology-kibble.jphysA.pdf",
+           "SSV-III main.tex:494-500 (transition-generated domains/defects)",
+           "OK with scope -- supports independently chosen domains and "
+           "topological defects, not SSV's uncomputed initial-wake ratio",
+           "176f7f7154d6fdb6"),
+    Source("AharonovBohm1959", "Y. Aharonov, D. Bohm",
+           "Significance of electromagnetic potentials in the quantum theory",
+           "Phys. Rev. 115, 485-491 (1959)",
+           "doi:10.1103/PhysRev.115.485",
+           "https://harvest.aps.org/v2/journals/articles/"
+           "10.1103/PhysRev.115.485/fulltext",
+           "SSV-II main.tex:819-828 (magnetic Aharonov-Bohm phase)",
+           "OK with scope -- supports the phase-flux relation and field-free "
+           "path, not SSV's mechanical-vortex interpretation",
+           "b45637d30d327938"),
+    Source("Unruh1976", "W. G. Unruh",
+           "Notes on black-hole evaporation",
+           "Phys. Rev. D 14, 870-892 (1976)",
+           "doi:10.1103/PhysRevD.14.870",
+           "https://harvest.aps.org/v2/journals/articles/"
+           "10.1103/PhysRevD.14.870/fulltext",
+           "SSV-V main.tex:512-518; SSV-VII-b main.tex:318,576",
+           "OK with scope -- an accelerated detector has a thermal response "
+           "at a/(2*pi), but this does not establish SSV's material medium",
+           "9ce9931c9ba5de40"),
+    Source("Madelung1927", "E. Madelung",
+           "Quantentheorie in hydrodynamischer Form",
+           "Z. Phys. 40, 322-326 (1927)",
+           "doi:10.1007/BF01400372",
+           "https://neo-classical-physics.info/uploads/3/4/3/6/34363841/"
+           "madelung_-_hydrodynamical_qm.pdf",
+           "SSV-VII-a main.tex:481-489 (Madelung representation)",
+           "OK with scope -- supports the hydrodynamic rewrite of the "
+           "Schrodinger equation, not a literal vacuum-fluid ontology",
+           "72b3544fd53726ba"),
+    Source("Deutsch1991", "D. Deutsch",
+           "Quantum mechanics near closed timelike lines",
+           "Phys. Rev. D 44, 3197-3217 (1991)",
+           "doi:10.1103/PhysRevD.44.3197",
+           "https://harvest.aps.org/v2/journals/articles/"
+           "10.1103/PhysRevD.44.3197/fulltext",
+           "SSV-III main.tex:1402-1415 (D-CTC fixed-point proposal)",
+           "OK with scope -- proves a density-operator fixed point and "
+           "state-measurement consequence, but not the later precise "
+           "efficient-NP-hard complexity claim",
+           "afea606ca7119546"),
+    Source("nfw1997", "J. F. Navarro, C. S. Frenk, S. D. M. White",
+           "A Universal Density Profile from Hierarchical Clustering",
+           "Astrophys. J. 490, 493-508 (1997)",
+           "arXiv:astro-ph/9611107",
+           "https://arxiv.org/pdf/astro-ph/9611107",
+           "SSV-VI main.tex:102-104,426 (standard NFW halo comparison)",
+           "OK with scope -- gives the NFW density and circular-velocity "
+           "profiles; SSV's M31 fit quality is its own calculation",
+           "a5847011c47580d6"),
+    Source("Zurek2003", "W. H. Zurek",
+           "Decoherence, einselection, and the quantum origins of the "
+           "classical",
+           "Rev. Mod. Phys. 75, 715-775 (2003)",
+           "arXiv:quant-ph/0105127",
+           "https://arxiv.org/pdf/quant-ph/0105127",
+           "SSV-III main.tex:1375-1385 (environmental decoherence analogy)",
+           "OK with scope -- supports environment-induced entanglement, "
+           "local loss of coherence, records and global unitarity, not SSV's "
+           "medium-specific reversal impossibility",
+           "d3e5276d515209a3"),
+    Source("Mermin1979", "N. D. Mermin",
+           "The topological theory of defects in ordered media",
+           "Rev. Mod. Phys. 51, 591-648 (1979)",
+           "doi:10.1103/RevModPhys.51.591",
+           "https://harvest.aps.org/v2/journals/articles/"
+           "10.1103/RevModPhys.51.591/fulltext",
+           "SSV-III main.tex:1025-1049 (claimed exhaustive channel classes)",
+           "MISREAD -- classifies topological defects, not all fluctuations, "
+           "Kelvin modes and correlations as five exhaustive sectors",
+           "0f85c3290dbe03f7"),
+    Source("Vedral2002", "V. Vedral",
+           "The role of relative entropy in quantum information theory",
+           "Rev. Mod. Phys. 74, 197-234 (2002)",
+           "arXiv:quant-ph/0102094",
+           "https://arxiv.org/pdf/quant-ph/0102094",
+           "SSV-III main.tex:1018-1023 (data-processing inequality)",
+           "OK with scope -- relative entropy contracts under CPTP maps; "
+           "SSV must establish that its block map and reference satisfy the "
+           "theorem's premises",
+           "523d4be80d9bf10d"),
+    Source("Bekenstein1973", "J. D. Bekenstein",
+           "Black holes and entropy",
+           "Phys. Rev. D 7, 2333-2346 (1973)",
+           "doi:10.1103/PhysRevD.7.2333",
+           "https://harvest.aps.org/v2/journals/articles/"
+           "10.1103/PhysRevD.7.2333/fulltext",
+           "SSV-V main.tex:432-448 (black-hole entropy area law)",
+           "OK with scope -- establishes area over Planck area up to a "
+           "dimensionless coefficient; Hawking1975 fixes one quarter",
+           "54ea4b4922bd052b"),
+    Source("Penrose1965", "R. Penrose",
+           "Gravitational collapse and space-time singularities",
+           "Phys. Rev. Lett. 14, 57-59 (1965)",
+           "doi:10.1103/PhysRevLett.14.57",
+           "https://harvest.aps.org/v2/journals/articles/"
+           "10.1103/PhysRevLett.14.57/fulltext",
+           "SSV-V main.tex:193-199 (collapse singularity theorem)",
+           "OK with scope -- trapped surface plus the energy and global "
+           "causal assumptions implies future null geodesic incompleteness",
+           "ce054908ed51850d"),
+    Source("chemin2009", "L. Chemin, C. Carignan, T. Foster",
+           "HI kinematics and dynamics of Messier 31",
+           "Astrophys. J. 705, 1395-1415 (2009)", "arXiv:0909.3846",
+           "https://arxiv.org/pdf/0909.3846",
+           "SSV-VI main.tex:416 (98-point M31 rotation curve)",
+           "OK -- Table 5 supplies 98 measured velocities from 1.14 to "
+           "38.09 kpc",
+           "757c75acab22f707"),
+    Source("flynn2026", "D. C. Flynn, J. Cannaliato",
+           "A New Empirical Fit to Galaxy Rotation Curves",
+           "Front. Astron. Space Sci. 12, 1680387 (2025)",
+           "arXiv:2601.00522", "https://arxiv.org/pdf/2601.00522",
+           "SSV-VI main.tex:474,502 (endpoint-anchored omega model)",
+           "OK -- source uses V_obs=V_Kepler+R omega with one empirical "
+           "omega per galaxy anchored by endpoint data",
+           "2db1bbfc0cfcfe0e"),
+    Source("gebhardt2001", "K. Gebhardt et al.",
+           "M33: A Galaxy with No Supermassive Black Hole",
+           "Astron. J. 122, 2469-2476 (2001)",
+           "arXiv:astro-ph/0107135",
+           "https://arxiv.org/pdf/astro-ph/0107135",
+           "SSV-VI main.tex:125,876 (M33 central-black-hole limit)",
+           "OK -- best fit is zero and conservative upper limit is 1500 "
+           "solar masses",
+           "225a1f9c7ec8af41"),
+    Source("ibata2013", "R. A. Ibata et al.",
+           "A Vast Thin Plane of Co-rotating Dwarf Galaxies Orbiting the "
+           "Andromeda Galaxy",
+           "Nature 493, 62-65 (2013)", "arXiv:1301.0446",
+           "https://arxiv.org/pdf/1301.0446",
+           "SSV-VI main.tex:859 (M31 co-rotating satellite plane)",
+           "OK -- source reports a thin, coherent plane of 13 satellites "
+           "co-rotating around M31",
+           "37da1ba8a818bd51"),
+    Source("lelli2016", "F. Lelli, S. S. McGaugh, J. M. Schombert",
+           "SPARC: Mass Models for 175 Disk Galaxies with Spitzer Photometry "
+           "and Accurate Rotation Curves",
+           "Astron. J. 152, 157 (2016)", "arXiv:1606.09251",
+           "https://arxiv.org/pdf/1606.09251",
+           "SSV-VI main.tex:457 (SPARC population data)",
+           "OK -- source documents 175 galaxies, resolved rotation curves, "
+           "and gas/disk/bulge mass-model components",
+           "d089215877213661"),
+    Source("mcgaugh2012", "S. S. McGaugh",
+           "The Baryonic Tully-Fisher Relation of Gas Rich Galaxies as a "
+           "Test of LCDM and MOND",
+           "Astron. J. 143, 40 (2012)", "arXiv:1107.2934",
+           "https://arxiv.org/pdf/1107.2934",
+           "SSV-VI main.tex:253,518 (BTFR fourth-power scaling)",
+           "OK -- source gives M_b=A V_f^4 with A=47+/-6",
+           "69741090b0bd5feb"),
+    Source("mcgaugh2016", "S. S. McGaugh, F. Lelli, J. M. Schombert",
+           "The Radial Acceleration Relation in Rotationally Supported "
+           "Galaxies",
+           "Phys. Rev. Lett. 117, 201101 (2016)", "arXiv:1609.05917",
+           "https://arxiv.org/pdf/1609.05917",
+           "SSV-VI main.tex:600 (radial-acceleration scale)",
+           "OK -- fitted g_dagger=1.20e-10 m/s^2 with stated random and "
+           "systematic uncertainties",
+           "80357e5b689f1ae7"),
     Source("zloshchastiev2023", "K. G. Zloshchastiev",
            "Derivation of emergent spacetime metric, gravitational potential "
            "and speed of light in superfluid vacuum theory",
@@ -162,6 +571,105 @@ SOURCES: list[Source] = [
            "MISATTRIBUTED -- no Bjerknes mechanism and no derivation of G from "
            "hbar, c, electron mass and alpha",
            "d80609424b0e3774"),
+    Source("Boltzmann1877", "L. Boltzmann",
+           "On the relationship between the second fundamental theorem of "
+           "the mechanical theory of heat and probability calculations",
+           "Wien. Ber. 76, 373-435 (1877); English translation in Entropy "
+           "17, 1971-2009 (2015)",
+           "translation doi:10.3390/e17041971",
+           "https://mdpi-res.com/d_attachment/entropy/entropy-17-01971/"
+           "article_deploy/entropy-17-01971.pdf",
+           "SSV-III main.tex:1157 (statistical entropic arrow)",
+           "OK with historical scope -- supports evolution from an "
+           "improbable initial state toward probable equilibrium, not the "
+           "modern Past Hypothesis verbatim",
+           "55b67e9b2a7834a1"),
+    Source("Loschmidt1876", "J. Loschmidt",
+           "Über den Zustand des Wärmegleichgewichtes eines Systems von "
+           "Körpern mit Rücksicht auf die Schwerkraft",
+           "Sitzungsber. Akad. Wiss. Wien 73, 128-142 (1876)",
+           "no DOI; pre-arXiv",
+           "https://loschmidt.chemi.muni.cz/biography/pdf/"
+           "warmegleichgewichtes.pdf",
+           "SSV-III main.tex:1353-1357 (velocity-reversal objection)",
+           "OK -- printed p.139 states that reversing every element's "
+           "velocity reverses the whole course of events",
+           "c5f6b07436cad3cf"),
+    Source("Poincare1890", "H. Poincaré",
+           "Sur le problème des trois corps et les équations de la dynamique",
+           "Acta Math. 13, 1-270 (1890), recurrence section pp.46-88",
+           "doi:10.1007/BF02392508",
+           "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/"
+           "4919-11511_2006_Article_BF02392508.pdf",
+           "SSV-III main.tex:1354-1362 (recurrence objection)",
+           "MISREAD -- classical theorem requires bounded finite-measure "
+           "phase space and invariant volume, not a discrete spectrum",
+           "9a69e9f675e7735f"),
+    Source("Bennett1988", "C. H. Bennett",
+           "Logical Depth and Physical Complexity",
+           "in The Universal Turing Machine, 227-257 (1988)",
+           "no DOI", "https://www.cs.ucdavis.edu/~doty/papers/"
+           "LogicalDepthAndPhysicalComplexity.pdf",
+           "SSV-III main.tex:1293", "OK with scope -- defines logical depth",
+           "05161d7a124f1494"),
+    Source("Bjerknes1906", "V. Bjerknes", "Fields of Force",
+           "Columbia University Press (1906)", "OCLC 10616459",
+           "https://archive.org/download/fieldsofforcecou00bjer/"
+           "fieldsofforcecou00bjer.pdf",
+           "SSV-II/IV/VII-b (pulsator force)",
+           "MISATTRIBUTED for exact normalization -- source gives phase sign, "
+           "bilinearity, and inverse-square scaling only",
+           "d93fc22586c0d2a9"),
+    Source("BKLS1986", "L. Bombelli et al.",
+           "Quantum source of entropy for black holes",
+           "Phys. Rev. D 34, 373-383 (1986)",
+           "doi:10.1103/PhysRevD.34.373",
+           "https://harvest.aps.org/v2/journals/articles/"
+           "10.1103/PhysRevD.34.373/fulltext",
+           "SSV-V main.tex:466", "OK -- regulated entanglement area law",
+           "e62ea2d5296b1deb"),
+    Source("MorrisThorne1988", "M. S. Morris, K. S. Thorne",
+           "Wormholes in spacetime and their use for interstellar travel",
+           "Am. J. Phys. 56, 395-412 (1988)", "doi:10.1119/1.15620",
+           "https://ia800904.us.archive.org/20/items/"
+           "pdfy--5NLGQyfpB61dmyG/American%20Journal%20of%20Physics%20"
+           "Volume%2056%20issue%205%201988%20%5Bdoi%2010.1119%2F1.15620%5D"
+           "%20Morris%2C%20Michael%20S.%20--%20Wormholes%20in%20spacetime"
+           "%20and%20their%20use%20for%20interstellar%20travel-%20A%20tool"
+           "%20for%20teaching%20general%20relativity.pdf",
+           "SSV-III main.tex:1394", "OK with realizability scope",
+           "efc92099074e052a"),
+    Source("Penrose1979", "R. Penrose", "Singularities and Time-Asymmetry",
+           "in General Relativity: An Einstein Centenary Survey, 581-638",
+           "no DOI", "https://personal.lse.ac.uk/robert49/PPB/pdf/"
+           "Penrose1979a.pdf",
+           "SSV-III main.tex:473,1305", "OK -- Weyl-curvature hypothesis",
+           "c7d95cd452aeaefd"),
+    Source("Schwinger", "J. Schwinger",
+           "On Gauge Invariance and Vacuum Polarization",
+           "Phys. Rev. 82, 664-679 (1951)", "doi:10.1103/PhysRev.82.664",
+           "https://harvest.aps.org/v2/journals/articles/"
+           "10.1103/PhysRev.82.664/fulltext",
+           "SSV-II main.tex:619,1089", "OK -- anomalous moment and pair creation",
+           "732d7e9582febfd8"),
+    Source("Price1996", "H. Price",
+           "Time's Arrow and Archimedes' Point",
+           "Oxford University Press (1996)",
+           "doi:10.1093/acprof:oso/9780195117981.001.0001",
+           "https://api.pageplace.de/preview/"
+           "DT0400.9780198026136_A23604866/"
+           "preview-9780198026136_A23604866.pdf",
+           "SSV-III main.tex:474,1356",
+           "OK -- time-symmetric laws and boundary-condition arrows",
+           "542ed1bc060afde7"),
+    Source("Russell1913", "B. Russell", "On the Notion of Cause",
+           "Proc. Aristotelian Soc. 13, 1-26 (1913)",
+           "doi:10.1093/aristotelian/13.1.1",
+           "https://web.mit.edu/bskow/www/215-S12/"
+           "russell_on-the-notion-of-cause.pdf",
+           "SSV-III main.tex:205",
+           "OK -- fundamental equations relate states without productive cause",
+           "ed7a8c1af2824bbc"),
 ]
 
 #: Sources that could not be obtained openly.  These are *not* verified, and
@@ -189,6 +697,225 @@ UNAVAILABLE: list[Unavailable] = [
                 "which quotes, re-derives AND numerically verifies the result: "
                 "gamma_C = 2*pi*N_C counts the enclosed CONDENSATE ATOMS, not the "
                 "'circulation quanta' SSV-II main.tex:832 attributes to it"),
+    Unavailable("Unruh1981", "W. G. Unruh",
+                "Experimental Black-Hole Evaporation?",
+                "Phys. Rev. Lett. 46, 1351-1353 (1981)",
+                "doi:10.1103/PhysRevLett.46.1351",
+                "https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.46.1351",
+                "**RESOLVED `OK` for the qualitative use** -- the pre-arXiv "
+                "full PDF is paywalled, but the official APS abstract directly "
+                "states that a sonic horizon emits a thermal sound spectrum"),
+    Unavailable("Lindblad1975", "G. Lindblad",
+                "Completely positive maps and entropy inequalities",
+                "Commun. Math. Phys. 40, 147-151 (1975)",
+                "doi:10.1007/BF01609396",
+                "https://doi.org/10.1007/BF01609396",
+                "**RESOLVED `OK` for the cited theorem** -- the pre-arXiv "
+                "full text is paywalled, but the official abstract directly "
+                "states that quantum relative entropy is non-increasing under "
+                "a trace-preserving completely positive map"),
+    Unavailable("Rovelli1993", "C. Rovelli",
+                "Statistical mechanics of gravity and the thermodynamical "
+                "origin of time",
+                "Class. Quantum Grav. 10, 1549-1566 (1993)",
+                "doi:10.1088/0264-9381/10/8/015",
+                "https://doi.org/10.1088/0264-9381/10/8/015",
+                "**RESOLVED `OK` for the qualitative comparison** -- the "
+                "publisher PDF is closed, but the abstract explicitly "
+                "derives a preferred physical time flow from properties of "
+                "the statistical state"),
+    Unavailable("Vinen2002", "W. F. Vinen, J. J. Niemela",
+                "Quantum turbulence",
+                "J. Low Temp. Phys. 128, 167-231 (2002)",
+                "doi:10.1023/A:1019695418590",
+                "https://doi.org/10.1023/A:1019695418590",
+                "`PENDING-PRIMARY` -- publisher PDF is closed and no open "
+                "repository copy was found; the pinned Barenghi2014 proxy "
+                "supports Kelvin-wave k^2 scaling and Vinen-regime t^-1 "
+                "decay, not every cited normalization"),
+    Unavailable("Hawking1974", "S. W. Hawking",
+                "Black hole explosions?",
+                "Nature 248, 30-31 (1974)",
+                "doi:10.1038/248030a0",
+                "https://www.nature.com/articles/248030a0",
+                "**RESOLVED `OK`** -- publisher article text directly states "
+                "thermal particle emission at the surface-gravity "
+                "temperature; no local PDF was obtained"),
+    Unavailable("Hawking1975", "S. W. Hawking",
+                "Particle creation by black holes",
+                "Commun. Math. Phys. 43, 199-220 (1975)",
+                "doi:10.1007/BF02345020",
+                "https://projecteuclid.org/journals/"
+                "communications-in-mathematical-physics/volume-43/issue-3/"
+                "Particle-creation-by-black-holes/cmp/1103899181.pdf",
+                "**RESOLVED `OK`** -- the open Project Euclid primary text "
+                "gives the Hawking temperature and generalized second law; "
+                "its anti-bot layer blocked the local automated download"),
+    Unavailable("bbm1976", "I. Bialynicki-Birula, J. Mycielski",
+                "Nonlinear wave mechanics",
+                "Ann. Phys. 100, 62-93 (1976)",
+                "doi:10.1016/0003-4916(76)90057-9",
+                "https://www.researchgate.net/profile/Iwo-Bialynicki-Birula/"
+                "publication/223139969_Nonlinear_wave_mechanics/links/"
+                "5a64ed65a6fdccb61c57f778/Nonlinear-wave-mechanics.pdf",
+                "**RESOLVED `OK` with sign scope** -- the author-uploaded "
+                "primary text was checked in-browser, but the host blocked a "
+                "reproducible local download; BBM supports the Gausson only "
+                "for its attractive sign branch"),
+    Unavailable("Zurek1985", "W. H. Zurek",
+                "Cosmological experiments in superfluid helium?",
+                "Nature 317, 505-508 (1985)",
+                "doi:10.1038/317505a0",
+                "https://www.nature.com/articles/317505a0",
+                "**RESOLVED `OK` with scope** -- the subscription-only "
+                "primary's official abstract states random domain selection "
+                "after a rapid pressure quench and phase-mismatch scaling"),
+    Unavailable("rosen1968", "G. Rosen",
+                "Particlelike solutions to nonlinear complex scalar field "
+                "theories with positive-definite energy densities",
+                "J. Math. Phys. 9, 996-998 (1968)",
+                "doi:10.1063/1.1664693",
+                "https://doi.org/10.1063/1.1664693",
+                "**RESOLVED `MISATTRIBUTED`** -- the cited AIP article is "
+                "closed; Rosen's open 1969 APS paper, DOI "
+                "10.1103/PhysRev.183.1186, is the explicit logarithmic-field "
+                "source"),
+    Unavailable("JoosZeh2003", "E. Joos et al.",
+                "Decoherence and the Appearance of a Classical World in "
+                "Quantum Theory, 2nd ed.",
+                "Springer (2003)",
+                "doi:10.1007/978-3-662-05328-7",
+                "https://doi.org/10.1007/978-3-662-05328-7",
+                "**RESOLVED `OK` for the qualitative use** -- the cited book "
+                "is closed; its publisher scope and the paired pinned "
+                "Zurek2003 review support environmental decoherence"),
+    Unavailable("mestel1963", "L. Mestel",
+                "On the galactic law of rotation",
+                "Mon. Not. R. Astron. Soc. 126, 553-575 (1963)",
+                "doi:10.1093/mnras/126.6.553",
+                "https://adsabs.harvard.edu/pdf/1963MNRAS.126..553M",
+                "**RESOLVED `OK`** -- the open ADS primary was checked "
+                "in-browser; equations 25-28 give surface density proportional "
+                "to 1/r and constant circular speed, but the legacy mirror "
+                "timed out during local download"),
+    Unavailable("toomre1964", "A. Toomre",
+                "On the gravitational stability of a disk of stars",
+                "Astrophys. J. 139, 1217-1238 (1964)",
+                "doi:10.1086/147861",
+                "https://adsabs.harvard.edu/pdf/1964ApJ...139.1217T",
+                "**RESOLVED `OK`** -- the open ADS primary gives the 3.36 "
+                "stellar-disk radial-dispersion threshold underlying Toomre Q; "
+                "the legacy mirror timed out during local download"),
+    Unavailable("ostrikerpeebles1973", "J. P. Ostriker, P. J. E. Peebles",
+                "A numerical study of the stability of flattened galaxies: "
+                "or, can cold galaxies survive?",
+                "Astrophys. J. 186, 467-480 (1973)",
+                "doi:10.1086/152513",
+                "https://adsabs.harvard.edu/pdf/1973ApJ...186..467O",
+                "**RESOLVED `OK`** -- the open ADS primary directly reports "
+                "rapid barlike instability in cold flattened models; the "
+                "legacy mirror timed out during local download"),
+    Unavailable("hockneyeastwood1988", "R. W. Hockney, J. W. Eastwood",
+                "Computer Simulation Using Particles",
+                "Adam Hilger/IOP Publishing (1988)",
+                "doi:10.1887/0852743920; ISBN 9780852743928",
+                "https://djvu.online/file/cjOfwRgltjv1g",
+                "**RESOLVED `OK`** -- the readable scan's Sec. 6-5-4 "
+                "defines isolated decay at infinity and constructs the "
+                "doubled transform mesh by making the inactive region "
+                "identically zero; no reproducible local PDF was obtained"),
+    Unavailable("linshu1964", "C. C. Lin, F. H. Shu",
+                "On the spiral structure of disk galaxies",
+                "Astrophys. J. 140, 646-655 (1964)",
+                "doi:10.1086/147955",
+                "https://adsabs.harvard.edu/pdf/1964ApJ...140..646L",
+                "**RESOLVED `OK` with attribution scope** -- equations 12 "
+                "and 14 provide the tightly wound radial phase relation, "
+                "but not SSV's own tan(alpha_m)=mQ/4 formula; the legacy "
+                "mirror timed out during local download"),
+    Unavailable("toomre1981", "A. Toomre",
+                "What amplifies the spirals?",
+                "in The Structure and Evolution of Normal Galaxies, "
+                "111-136 (1981)",
+                "ISBN 9780521239073; bibcode 1981seng.proc..111T",
+                "https://ui.adsabs.harvard.edu/abs/"
+                "1981seng.proc..111T/abstract",
+                "**RESOLVED `OK` with seed scope** -- the official abstract "
+                "attributes swing amplification to shear, epicyclic motion, "
+                "and self-gravity; the chapter's imposed transient "
+                "perturbation does not itself prove SSV's no-central-driver "
+                "simulation result"),
+    Unavailable("Reichenbach1956", "H. Reichenbach",
+                "The Direction of Time",
+                "University of California Press (1956)",
+                "no DOI; arXiv not applicable",
+                "https://archive.org/details/directionoftimee0000reic",
+                "**RESOLVED `OK` with attribution scope** -- the borrow-only "
+                "book's pp.54-55 statistical-arrow passage is reproduced in "
+                "the open Fernandes 2022 reconstruction; Reichenbach does "
+                "not by himself support Albert's initial-boundary Past "
+                "Hypothesis"),
+    Unavailable("Penrose1971", "R. Penrose, R. M. Floyd",
+                "Extraction of Rotational Energy from a Black Hole",
+                "Nature Phys. Sci. 229, 177-179 (1971)",
+                "doi:10.1038/physci229177a0",
+                "https://www.nature.com/articles/physci229177a0",
+                "**RESOLVED `OK`** -- official primary abstract directly "
+                "states extraction of rotational black-hole energy"),
+    Unavailable("SumnersWhittington1988",
+                "D. W. Sumners, S. G. Whittington",
+                "Knots in self-avoiding walks",
+                "J. Phys. A 21, 1689-1694 (1988)",
+                "doi:10.1088/0305-4470/21/7/030",
+                "https://doi.org/10.1088/0305-4470/21/7/030",
+                "**RESOLVED `OK` with scope** -- official abstract states "
+                "almost all sufficiently long 3D cubic-lattice SAWs are "
+                "knotted; it does not derive SSV's fixed-knot exponent"),
+    Unavailable("Albert2000", "D. Z. Albert", "Time and Chance",
+                "Harvard University Press (2000)", "ISBN 9780674003170",
+                "https://openlibrary.org/books/OL7670946M/Time_and_Chance",
+                "**RESOLVED `OK`** -- appropriate primary source for the "
+                "modern Past Hypothesis"),
+    Unavailable("Barbour1999", "J. Barbour", "The End of Time",
+                "Oxford University Press (1999)", "ISBN 9780195117295",
+                "https://books.google.com/books?id=mV_0DAAAQBAJ",
+                "**RESOLVED `OK` with analogy scope** -- publisher record "
+                "confirms the timeless/configurational ontology"),
+    Unavailable("Godel1949", "K. Gödel",
+                "An Example of a New Type of Cosmological Solutions of "
+                "Einstein's Field Equations of Gravitation",
+                "Rev. Mod. Phys. 21, 447-450 (1949)",
+                "doi:10.1103/RevModPhys.21.447",
+                "https://journals.aps.org/rmp/abstract/"
+                "10.1103/RevModPhys.21.447",
+                "**RESOLVED `OK`** -- defining Gödel solution with closed "
+                "timelike curves; full APS text not obtained"),
+    Unavailable("Landau_Fluid", "L. D. Landau, E. M. Lifshitz",
+                "Fluid Mechanics, 2nd edition",
+                "Pergamon Press (1987)", "ISBN 9780080339337",
+                "https://shop.elsevier.com/books/fluid-mechanics/landau/"
+                "978-0-08-033933-7",
+                "**RESOLVED `OK` by independent derivation** -- standard "
+                "compact-monopole pressure exactly matches SSV's equation"),
+    Unavailable("LloydPagels1988", "S. Lloyd, H. Pagels",
+                "Complexity as thermodynamic depth",
+                "Ann. Phys. 188, 186-213 (1988)",
+                "doi:10.1016/0003-4916(88)90094-2",
+                "https://cds.cern.ch/record/190035",
+                "**RESOLVED `OK` with scope** -- open preprint record and "
+                "abstract define thermodynamic depth"),
+    Unavailable("MadrasSlade1993", "N. Madras, G. Slade",
+                "The Self-Avoiding Walk", "Birkhäuser (1993)",
+                "doi:10.1007/978-1-4612-4132-4",
+                "https://link.springer.com/book/10.1007/978-1-4612-4132-4",
+                "**RESOLVED `MISREAD`** -- source distinguishes non-rigorous "
+                "3D scaling consensus from known theorems"),
+    Unavailable("Rovelli2018", "C. Rovelli", "The Order of Time",
+                "Riverhead Books (2018)", "ISBN 9780735216112",
+                "https://www.penguinrandomhouse.com/books/551483/"
+                "the-order-of-time-by-carlo-rovelli/",
+                "**RESOLVED `OK` with scope** -- official publisher record "
+                "supports non-fundamental, perspectival time"),
 ]
 
 

@@ -236,6 +236,18 @@ def registry_issues(
             if mode not in {"quotation", "mixed", "transcript"}:
                 issues.append(
                     f"{key}: paragraph-required record cannot use {mode!r} mode")
+            # Mirror of the open-source rule below.  Without this the asymmetry
+            # lets an inaccessible source assert the *stronger* evidence state:
+            # `paragraph_required` says the complete relied-on paragraph is
+            # present, which a source nobody could obtain cannot honour.  Only a
+            # transcript (rule 12's owner-supplied-scan route) makes the full
+            # text available without retrieval.  Found 2026-07-28: `toomre1981`
+            # was registered unavailable + paragraph_required + no waiver while
+            # its own note said the chapter "was not openly obtainable".
+            if access_status in {"paywalled", "unavailable"} and mode != "transcript":
+                issues.append(
+                    f"{key}: {access_status} source asserts a complete relied-on "
+                    f"paragraph without a waiver or a transcript")
         else:
             if not isinstance(exception, dict):
                 issues.append(
