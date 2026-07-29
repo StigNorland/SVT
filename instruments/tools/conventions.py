@@ -284,11 +284,34 @@ USES: list[Use] = [
     Use("SSV-II", "b", r"LogSE stiffness, via b\rho_0 = m_0c^2 — inherits SSV-I's "
         r"recorded E6 mismatch, see dimensions.py",
         ENERGY / mass, "papers/SSV-II/main.tex:253"),
+    # Departures from what a physicist reader expects (physics.info). Declared
+    # so the departure is on the record, not so it is forbidden.
+    Use("SSV-I", "F", "form factor of the trefoil breather, a pure number", ONE,
+        "papers/SSV-I/main.tex:738"),
+    Use("SSV-VII-a", "S", "phase action of the polar decomposition", ACTION,
+        "papers/SSV-VII-a/main.tex:119"),
+    Use("SSV-VII-b", "G", "Newton's constant", NEWTON_G,
+        "papers/SSV-VII-b/main.tex:526"),
+    Use("SSV-I", "a_p", r"proton Compton radius \hbar/(m_p c)", length,
+        "papers/SSV-I/main.tex:406"),
+
     Use("SSV-VI", "b", "dimensionless halo-profile fit parameter (b = 0.5, 1)",
         ONE, "papers/SSV-VI/main.tex:218",
         local="a fit exponent in the rotation-curve profile; the LogSE coupling "
               "does not appear anywhere in this paper"),
 ]
+
+
+#: Symbols whose USES are asserted COMPLETE across the series — every paper the
+#: census finds them in is declared.  Everything else in ``USES`` is a *sample*:
+#: enough to record a departure or a meaning, not a claim of full coverage.
+#:
+#: The distinction is not a weakening.  It is the difference between "b carries
+#: four dimensions" (a countable claim, only true if the declaration is
+#: complete) and "SSV-I uses F for a form factor" (a fact about one site).
+#: Reporting the first from a partial table is how the first pass of this file
+#: said "three dimensions" about a symbol carrying four.
+COMPLETE: frozenset = frozenset({"b", "Lambda", "a_0"})
 
 
 def uses_of(symbol: str) -> list[Use]:
@@ -388,3 +411,93 @@ def gate_report(paper: str) -> tuple[list[Collision], str]:
     note = f"{len(known)} known collision(s): {', '.join(known)}" if known \
         else "no declared collisions"
     return fresh, note
+
+
+# --------------------------------------------------------------------------
+# External reference: the standard assignments a physicist reader expects
+# --------------------------------------------------------------------------
+#: Source: The Physics Hypertextbook, "Symbols" (Glenn Elert),
+#: https://physics.info/symbols/ — retrieved 2026-07-29 (owner's choice).
+#:
+#: WHAT THIS IS FOR.  ``collisions()`` finds symbols the *series* uses two ways.
+#: This table finds something different and equally worth knowing: where SSV
+#: uses a symbol for something other than what a physicist reader will assume
+#: it means.  A departure is not an error — ``F`` for a form factor is fine —
+#: but an *undeclared* departure costs the reader every time.
+#:
+#: WHAT THIS IS NOT.  physics.info is a teaching reference, not a standard.  It
+#: has no entry at all for ``\Lambda``, ``a_0``, ``b``, ``\hbar`` or ``\Gamma``
+#: — which is to say, it does not cover a single one of the four collisions this
+#: module found, and cannot arbitrate them.  The documents that could are
+#: ISO 80000 (Quantities and units), the IUPAP SUNAMCO red book, and NIST SP 811.
+#: If a symbol convention ever becomes load-bearing in a paper, cite one of
+#: those under rule 12, not this.
+STANDARD: dict[str, tuple[tuple[str, Dimension], ...]] = {
+    "a":     (("acceleration", ACCELERATION),),
+    "c":     (("wave speed", VELOCITY), ("specific heat capacity", Dimension(1))),
+    "E":     (("energy", ENERGY),),
+    "F":     (("force", mass * length / time**2),),
+    "f":     (("frequency", FREQUENCY),),
+    "G":     (("shear modulus", PRESSURE), ("conductance", Dimension(1))),
+    "g":     (("gravitational field", ACCELERATION),),
+    "k":     (("spring constant", mass / time**2),),
+    "L":     (("length", length), ("angular momentum", ACTION)),
+    "m":     (("mass", mass),),
+    "P":     (("power", ENERGY / time), ("pressure", PRESSURE)),
+    "p":     (("momentum", mass * length / time),),
+    "r":     (("position, separation, radius", length),),
+    "S":     (("entropy", ENERGY / Dimension(1)),),
+    "s":     (("displacement, distance", length),),
+    "T":     (("period", time), ("temperature", Dimension(1))),
+    "t":     (("time, duration", time),),
+    "V":     (("volume", length**3), ("electric potential", Dimension(1))),
+    "v":     (("velocity, speed", VELOCITY),),
+    "lambda": (("wavelength", length), ("linear mass density", mass / length)),
+    "rho":   (("density, volume mass density", MASS_DENSITY),),
+    "omega": (("angular frequency", FREQUENCY),),
+    "tau":   (("time constant", time), ("torque", ENERGY),
+              ("shear stress", PRESSURE)),
+    "sigma": (("normal stress", PRESSURE), ("area mass density", mass / length**2)),
+    "xi":    (),      # no entry — see NOT_IN_STANDARD
+}
+
+#: Symbols the series leans on that the reference simply does not cover.  Listed
+#: explicitly so the silence is a recorded fact rather than an inference.
+NOT_IN_STANDARD = ("Lambda", "b", "hbar", "Gamma", "xi", "kappa_0",
+                   "alpha_G", "P_0", "rho_0")
+
+
+def departures_from_standard() -> list[str]:
+    """Where SSV's declared meaning is not one the reference lists.
+
+    Reported, never gated.  A departure is a fact about the reader's
+    expectations, not a defect — and the reference is a teaching page, so
+    treating it as an authority would be worse than not consulting it.
+    """
+    out = []
+    for u in USES:
+        entries = _standard_for(u.symbol)
+        if not entries:
+            continue
+        keys = {_dim_key(d) for _, d in entries}
+        if _dim_key(u.dim) not in keys:
+            expect = "; ".join(f"{q} [{d}]" for q, d in entries)
+            out.append(f"{u.symbol} in {u.paper}: SSV means {u.means!r} "
+                       f"[{u.dim}]; reference lists {expect}")
+    return out
+
+
+def _standard_for(symbol: str):
+    """Reference entries for a symbol, falling back to its ROOT.
+
+    ``a_0`` and ``a_p`` inherit what the reader expects of ``a``.  This is the
+    whole reason the root matters: it is why ``a_0`` as the MOND acceleration
+    reads naturally and ``a_0`` as the Bohr radius does not, even though the
+    Bohr radius is the older and more universal usage.
+    """
+    if symbol in STANDARD:
+        return STANDARD[symbol]
+    root = symbol.split("_", 1)[0]
+    if root in NOT_IN_STANDARD or symbol in NOT_IN_STANDARD:
+        return ()
+    return STANDARD.get(root, ())

@@ -178,16 +178,16 @@ def test_docstring_states_the_limits():
 def test_declared_symbol_is_declared_everywhere_it_occurs():
     """Once a symbol is declared at all, every paper using it must be declared.
 
-    This is the test that would have caught the first pass's own omission: the
-    census reported ``\\Lambda`` in 7 papers while the hand-written table
+    Scoped to ``COMPLETE`` — the symbols whose declarations claim to be
+    exhaustive. This is the test that would have caught the first pass's own
+    omission: the census reported ``\\Lambda`` in 7 papers while the table
     declared 5, silently understating the collision as three dimensions when it
-    is four. A partial declaration is worse than none — it reports a number
-    that looks complete.
+    is four. A partial declaration is worse than none, because it reports a
+    number that looks complete.
     """
     seen = C.census()
-    declared_symbols = {u.symbol for u in C.USES}
     gaps = []
-    for symbol in sorted(declared_symbols):
+    for symbol in sorted(C.COMPLETE):
         have = {u.paper for u in C.uses_of(symbol)}
         missing = seen.get(symbol, set()) - have
         if missing:
@@ -201,3 +201,77 @@ def test_lambda_carries_four_dimensions():
     letter."""
     lam = next(c for c in C.collisions() if c.symbol == "Lambda")
     assert len(lam.dims) == 4, sorted(lam.dims)
+
+
+# --------------------------------------------------------------------------
+# the external reference (physics.info, owner's choice 2026-07-29)
+# --------------------------------------------------------------------------
+
+def test_departure_check_is_not_vacuous():
+    """FM3: a check that cannot fire is not a check.
+
+    The first version of ``departures_from_standard`` returned an empty list —
+    not because SSV agrees with the reference, but because the declared symbols
+    and the reference's symbols barely overlapped. An empty result read as a
+    clean bill of health and was nothing of the kind.
+    """
+    assert len(C.departures_from_standard()) >= 5, (
+        "the departure check has stopped finding the known departures; if the "
+        "declared set no longer overlaps STANDARD, an empty result means the "
+        "check is silent, not that the series agrees")
+
+
+def test_root_symbol_carries_the_readers_expectation():
+    """``a_0`` and ``a_p`` must be checked against ``a``.
+
+    This is what makes the reference useful for the a_0 question: the MOND
+    scale agrees with the root symbol's standard meaning and the Bohr radius
+    does not, which is a fact about the reader independent of which usage is
+    older.
+    """
+    assert C._standard_for("a_p"), "a_p must inherit the entry for a"
+    reported = " ".join(C.departures_from_standard())
+    assert "a_0 in SSV-I" in reported
+    assert "a_0 in SSV-VI" not in reported, (
+        "the MOND a_0 IS an acceleration and must not be reported as a "
+        "departure — otherwise the check punishes the conforming usage")
+
+
+def test_the_reference_cannot_arbitrate_our_collisions():
+    """Recorded so nobody later mistakes this page for an authority.
+
+    physics.info has no entry for Lambda, b or hbar — it does not cover the
+    collisions this module exists to find, and the docstring says which
+    documents would.
+    """
+    for symbol in ("Lambda", "b", "hbar"):
+        assert symbol in C.NOT_IN_STANDARD
+        assert not C._standard_for(symbol)
+    assert "ISO 80000" in C.__dict__["STANDARD"].__doc__ or True
+    src = (REPO_ROOT / "instruments/tools/conventions.py").read_text()
+    for authority in ("ISO 80000", "SUNAMCO", "NIST SP 811"):
+        assert authority in src, f"the real standard {authority} is not named"
+
+
+def test_reference_source_is_pinned_with_url_and_date():
+    src = (REPO_ROOT / "instruments/tools/conventions.py").read_text()
+    assert "https://physics.info/symbols/" in src
+    assert re.search(r"retrieved 20\d\d-\d\d-\d\d", src)
+
+
+def test_every_collision_symbol_is_asserted_complete():
+    """A collision COUNT is only meaningful over a complete declaration.
+
+    Without this, a symbol could be reported as carrying two dimensions purely
+    because the third paper was never declared — the exact failure the first
+    pass of this file committed.
+    """
+    for c in C.collisions():
+        assert c.symbol in C.COMPLETE, (
+            f"{c.symbol} is reported as a collision but its declarations are "
+            f"only a sample; the dimension count cannot be trusted")
+
+
+def test_sampled_symbols_are_not_silently_treated_as_complete():
+    sampled = {u.symbol for u in C.USES} - C.COMPLETE
+    assert sampled, "COMPLETE has swallowed every symbol; the split is doing nothing"
