@@ -46,12 +46,14 @@ Macro namespace: ``\\ssv<CamelCase>``.  Deliberately disjoint from the existing
 ``\\ssvissue`` / ``\\ssvfile`` cross-ref macros (lower-case after ``ssv``), so
 the regex ``\\\\ssv[A-Z][A-Za-z]*`` matches generated values and nothing else.
 
-Scope is deliberately narrow — the load-bearing numbers touched by #182 — not
-every number in the series.  The goal is that *derived* numbers are generated,
-not that prose becomes unwritable.
+Scope is deliberately declared rather than inferred.  The paper-local registry
+covers load-bearing numbers touched by #182; ``SHARED`` adds the observed
+constants selected by #213 Part B.  Neither is every number in the series, and
+coverage is reported rather than implied.
 
 Usage:
     python instruments/tools/gen_values.py --compute SSV-I   # run physics -> receipt
+    python instruments/tools/gen_values.py --shared --compute # series sources -> receipt
     python instruments/tools/gen_values.py SSV-I             # receipt -> values.tex
     python instruments/tools/gen_values.py --all             # every registered paper
     python instruments/tools/gen_values.py --all --check     # re-run + compare, write nothing
@@ -63,6 +65,7 @@ import argparse
 import hashlib
 import json
 import math
+import re
 import sys
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -103,6 +106,139 @@ class Value:
     describes: str
     source: str
     was: str
+
+
+@dataclass(frozen=True)
+class SharedValue:
+    """One value computed once and emitted into every declaring paper.
+
+    ``papers`` is the explicit coverage surface.  ``was`` records the literal
+    spellings replaced in each paper; it is deliberately declared rather than
+    discovered by scanning, because #213 showed that scanning numeric literals
+    has poor recall and poor precision in opposite directions.
+    """
+
+    macro: str
+    compute: Callable[[], float]
+    sig: int
+    describes: str
+    source: str
+    papers: tuple[str, ...]
+    was: dict[str, tuple[str, ...]]
+
+
+def _lazy_call(module: str, attr: str) -> Callable[[], float]:
+    """Return a callable that imports its instrument only when computed.
+
+    Rendering reads receipts and must never import the physics.
+    """
+    return lambda: float(getattr(__import__(module), attr)())
+
+
+def _shared(
+    macro: str,
+    attr: str,
+    sig: int,
+    describes: str,
+    papers: tuple[str, ...],
+    was: dict[str, tuple[str, ...]],
+) -> SharedValue:
+    source = f"instruments/series_values.py::{attr}"
+    return SharedValue(
+        macro, _lazy_call("series_values", attr), sig, describes, source,
+        papers, was,
+    )
+
+
+# Programme-level values.  This is the declared surface; it is intentionally
+# not inferred from main.tex.  All are observed inputs, not SSV derivations.
+SHARED: tuple[SharedValue, ...] = (
+    _shared(
+        "ssvAlphaInverse", "inverse_fine_structure", 6,
+        r"\alpha^{-1}, CODATA observed input",
+        ("SSV-Alpha", "SSV-I", "SSV-II"),
+        {
+            "SSV-Alpha": ("137.036",),
+            "SSV-I": ("137.036",),
+            "SSV-II": ("137.036",),
+        },
+    ),
+    _shared(
+        "ssvProtonElectronMassRatio", "proton_electron_mass_ratio", 6,
+        r"m_p/m_e, CODATA observed input",
+        ("SSV-I", "SSV-II", "SSV-IV"),
+        {
+            "SSV-I": ("1836",),
+            "SSV-II": ("1836", "1836.15"),
+            "SSV-IV": ("1836",),
+        },
+    ),
+    _shared(
+        "ssvElectronMassMeV", "electron_mass_mev", 3,
+        r"m_e c^2 in MeV, observed input",
+        ("SSV-I", "SSV-II"),
+        {"SSV-I": ("0.511",), "SSV-II": ("0.511",)},
+    ),
+    _shared(
+        "ssvMuonMassMeV", "muon_mass_mev", 6,
+        r"m_\mu c^2 in MeV, observed input",
+        ("SSV-I", "SSV-II"),
+        {"SSV-I": ("105.658",), "SSV-II": ("105.658",)},
+    ),
+    _shared(
+        "ssvChargedPionMassMeV", "charged_pion_mass_mev", 8,
+        r"m_{\pi^\pm} c^2 in MeV, observed input",
+        ("SSV-I", "SSV-II"),
+        {
+            "SSV-I": ("139.570", "139.57018"),
+            "SSV-II": ("139.570",),
+        },
+    ),
+    _shared(
+        "ssvProtonMassMeV", "proton_mass_mev", 6,
+        r"m_p c^2 in MeV, observed input",
+        ("SSV-I", "SSV-II"),
+        {"SSV-I": ("938.272",), "SSV-II": ("938.272",)},
+    ),
+    _shared(
+        "ssvTauMassMeV", "tau_mass_mev", 6,
+        r"m_\tau c^2 in MeV, observed input",
+        ("SSV-I", "SSV-II"),
+        {"SSV-I": ("1776.860",), "SSV-II": ("1776.86",)},
+    ),
+    _shared(
+        "ssvProtonReducedComptonWavelength", "proton_reduced_compton_wavelength", 2,
+        r"\bar{\lambda}_p=\hbar/(m_p c) in metres, CODATA observed inputs",
+        ("SSV-I", "SSV-II", "SSV-IV"),
+        {
+            "SSV-I": (
+                r"2.10\times10^{-16}", r"2.10\times 10^{-16}",
+            ),
+            "SSV-II": (
+                r"2\times10^{-16}", r"2\times 10^{-16}",
+                r"2.10\times10^{-16}", r"2.10\times 10^{-16}",
+            ),
+            "SSV-IV": (
+                r"2\times10^{-16}", r"2\times 10^{-16}",
+                r"2.1\times10^{-16}", r"2.1\times 10^{-16}",
+                r"2.10\times10^{-16}", r"2.10\times 10^{-16}",
+            ),
+        },
+    ),
+    _shared(
+        "ssvProtonComptonWavelength", "proton_compton_wavelength", 2,
+        r"\lambda_p=2\pi\hbar/(m_p c) in metres, CODATA observed inputs",
+        ("SSV-II", "SSV-IV"),
+        {
+            "SSV-II": (
+                r"1.3\times10^{-15}", r"1.3\times 10^{-15}",
+            ),
+            "SSV-IV": (
+                r"1.3\times10^{-15}", r"1.3\times 10^{-15}",
+            ),
+        },
+    ),
+)
 
 
 def _ssv_i() -> list[Value]:
@@ -212,6 +348,18 @@ def values_for(paper: str) -> list[Value]:
     return REGISTRY[paper]()
 
 
+def shared_values_for(paper: str) -> list[SharedValue]:
+    return [value for value in SHARED if paper in value.papers]
+
+
+def registered_papers() -> list[str]:
+    return sorted(set(REGISTRY) | {paper for value in SHARED for paper in value.papers})
+
+
+def has_values(paper: str) -> bool:
+    return paper in REGISTRY or bool(shared_values_for(paper))
+
+
 # --------------------------------------------------------------------------
 # Formatting
 # --------------------------------------------------------------------------
@@ -246,6 +394,10 @@ def receipt_path(paper: str) -> Path:
 
 def values_path(paper: str) -> Path:
     return PAPERS / paper / "values.tex"
+
+
+def shared_receipt_path() -> Path:
+    return PAPERS / "shared_values_receipt.json"
 
 
 def source_fingerprint(source: str) -> str:
@@ -286,6 +438,33 @@ def compute_receipt(paper: str) -> dict:
     }
 
 
+def compute_shared_receipt() -> dict:
+    """Run each series-level source once and build the shared receipt."""
+    entries = {}
+    for value in SHARED:
+        number = float(value.compute())
+        entries[value.macro] = {
+            "value": number,
+            "sig": value.sig,
+            "rendered": fmt(number, value.sig),
+            "describes": value.describes,
+            "source": value.source,
+            "source_sha256_16": source_fingerprint(value.source),
+            "papers": list(value.papers),
+            "was": {paper: list(literals)
+                    for paper, literals in value.was.items()},
+        }
+    return {
+        "issue": 213,
+        "scope": "SSV series",
+        "hypothesis": "every declared load-bearing value printed in two or "
+                      "more papers has one computed source (#213 Part B)",
+        "generator": "instruments/tools/gen_values.py",
+        "computed_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "values": entries,
+    }
+
+
 def read_receipt(paper: str) -> dict:
     path = receipt_path(paper)
     if not path.is_file():
@@ -299,6 +478,20 @@ def write_receipt(paper: str, receipt: dict) -> None:
     path = receipt_path(paper)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
+
+
+def read_shared_receipt() -> dict:
+    path = shared_receipt_path()
+    if not path.is_file():
+        raise FileNotFoundError(
+            f"{path.relative_to(REPO_ROOT).as_posix()} missing — run "
+            f"`python instruments/tools/gen_values.py --shared --compute`")
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def write_shared_receipt(receipt: dict) -> None:
+    shared_receipt_path().write_text(
+        json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
 
 
 def receipt_drift(paper: str) -> dict[str, dict]:
@@ -324,11 +517,81 @@ def receipt_drift(paper: str) -> dict[str, dict]:
     return drift
 
 
+def shared_receipt_drift() -> dict[str, dict]:
+    """Compare the one series receipt against the shared-value sources."""
+    old = read_shared_receipt()["values"]
+    new = compute_shared_receipt()["values"]
+    drift = {}
+    for macro in sorted(set(old) | set(new)):
+        before, after = old.get(macro), new.get(macro)
+        if before is None or after is None:
+            drift[macro] = {"receipt": before, "now": after}
+            continue
+        if (before["rendered"] != after["rendered"]
+                or before["source_sha256_16"] != after["source_sha256_16"]
+                or before["papers"] != after["papers"]
+                or before["was"] != after["was"]):
+            drift[macro] = {"receipt": before, "now": after}
+    return drift
+
+
+def literal_occurs(text: str, literal: str) -> bool:
+    """Whether a declared old literal survives as a complete numeric token."""
+    if re.fullmatch(r"\d+(?:\.\d+)?", literal):
+        return re.search(
+            rf"(?<![\d.]){re.escape(literal)}(?![\d.])", text
+        ) is not None
+    if r"\times" in literal:
+        # LaTeX authors wrap long scientific notation across lines.  Whitespace
+        # is not semantic here, so a line break must not evade the guard.
+        return re.sub(r"\s+", "", literal) in re.sub(r"\s+", "", text)
+    return literal in text
+
+
+def surviving_shared_literals(paper: str) -> dict[str, list[str]]:
+    """Registered old spellings still typed in one paper (#213 Part C)."""
+    text = (PAPERS / paper / "main.tex").read_text(encoding="utf-8")
+    offenders = {}
+    for value in shared_values_for(paper):
+        found = [literal for literal in value.was.get(paper, ())
+                 if literal_occurs(text, literal)]
+        if found:
+            offenders[value.macro] = found
+    return offenders
+
+
 # --------------------------------------------------------------------------
 # Rendering — reads the receipt only, imports nothing
 # --------------------------------------------------------------------------
 
-def render(paper: str, receipt: dict) -> str:
+def _entries_for_render(
+    paper: str,
+    receipt: dict | None,
+    shared_receipt: dict | None,
+) -> dict:
+    entries = dict((receipt or {"values": {}})["values"])
+    if shared_receipt is not None:
+        for macro, entry in shared_receipt["values"].items():
+            if paper in entry["papers"]:
+                if macro in entries:
+                    raise ValueError(
+                        f"{paper}: {macro} is both paper-local and shared")
+                entries[macro] = entry
+    return entries
+
+
+def render(
+    paper: str,
+    receipt: dict | None,
+    shared_receipt: dict | None = None,
+) -> str:
+    entries = _entries_for_render(paper, receipt, shared_receipt)
+    receipt_sources = []
+    if receipt is not None:
+        receipt_sources.append("results/values_receipt.json")
+    if shared_receipt is not None:
+        receipt_sources.append("../shared_values_receipt.json")
+    source_note = " and ".join(receipt_sources)
     lines = [
         "% Auto-generated by instruments/tools/gen_values.py — do not edit by hand.",
         f"% Regenerate: python instruments/tools/gen_values.py {paper}",
@@ -337,12 +600,12 @@ def render(paper: str, receipt: dict) -> str:
         "% number printed in this paper cannot drift from the code that derives it,",
         "% because there is only one of it.  (#198 Part A)",
         "%",
-        f"% Rendered from results/values_receipt.json — the recorded result of the",
+        f"% Rendered from {source_note} — the recorded result of the",
         f"% last instrument run.  Re-run the physics with --compute; verify the",
         f"% recorded result against the instruments with --check.",
         "",
     ]
-    for macro, e in receipt["values"].items():
+    for macro, e in entries.items():
         lines += [
             f"% {e['describes']}",
             f"%   {e['source']}",
@@ -357,20 +620,25 @@ def render(paper: str, receipt: dict) -> str:
 # --------------------------------------------------------------------------
 
 def generate(paper: str) -> dict:
-    """Write ``papers/<PAPER>/values.tex`` from the receipt."""
-    receipt = read_receipt(paper)
-    fresh = render(paper, receipt)
+    """Write one paper's ``values.tex`` from local and shared receipts."""
+    if not has_values(paper):
+        raise KeyError(f"{paper} has no registered local or shared values")
+    receipt = read_receipt(paper) if paper in REGISTRY else None
+    shared = read_shared_receipt() if shared_values_for(paper) else None
+    fresh = render(paper, receipt, shared)
     path = values_path(paper)
     current = path.read_text(encoding="utf-8") if path.is_file() else None
     path.write_text(fresh, encoding="utf-8")
     return {"paper": paper, "path": path, "changed": current != fresh,
-            "n": len(receipt["values"])}
+            "n": len(_entries_for_render(paper, receipt, shared))}
 
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("paper", nargs="?", help="paper dir name, e.g. SSV-I")
     ap.add_argument("--all", action="store_true", help="every registered paper")
+    ap.add_argument("--shared", action="store_true",
+                    help="the series-level shared receipt and all its papers")
     ap.add_argument("--compute", action="store_true",
                     help="run the instruments and rewrite the receipt")
     ap.add_argument("--check", action="store_true",
@@ -379,30 +647,58 @@ def main() -> None:
                          "(exit 1 on any drift)")
     args = ap.parse_args()
 
-    if args.all:
-        papers = sorted(REGISTRY)
+    if sum(bool(x) for x in (args.all, args.shared, args.paper)) != 1:
+        ap.error("give one paper name, --all, or --shared")
+
+    if args.shared:
+        papers = sorted({paper for value in SHARED for paper in value.papers})
+    elif args.all:
+        papers = registered_papers()
     elif args.paper:
         papers = [args.paper]
-    else:
-        ap.error("give a paper name or --all")
+
+    include_shared = (
+        args.shared or args.all or any(shared_values_for(paper) for paper in papers)
+    )
 
     bad = False
-    for paper in papers:
-        if args.check:
-            drift = receipt_drift(paper)
-            stale_tex = (values_path(paper).read_text(encoding="utf-8")
-                         if values_path(paper).is_file() else None
-                         ) != render(paper, read_receipt(paper))
-            tag = "STALE" if (drift or stale_tex) else "ok   "
-            print(f"{tag} {paper}: receipt drift {sorted(drift) or 'none'}; "
-                  f"values.tex {'STALE' if stale_tex else 'current'}")
-            bad |= bool(drift) or stale_tex
-        elif args.compute:
+    if args.check:
+        shared_drift = shared_receipt_drift() if include_shared else {}
+        if include_shared:
+            tag = "STALE" if shared_drift else "ok   "
+            print(f"{tag} shared: receipt drift "
+                  f"{sorted(shared_drift) or 'none'}")
+            bad |= bool(shared_drift)
+        for paper in papers:
+            local_drift = receipt_drift(paper) if paper in REGISTRY else {}
+            local = read_receipt(paper) if paper in REGISTRY else None
+            shared = read_shared_receipt() if shared_values_for(paper) else None
+            stale_tex = (
+                values_path(paper).read_text(encoding="utf-8")
+                if values_path(paper).is_file() else None
+            ) != render(paper, local, shared)
+            literals = surviving_shared_literals(paper)
+            tag = "STALE" if (local_drift or stale_tex or literals) else "ok   "
+            print(f"{tag} {paper}: local receipt drift "
+                  f"{sorted(local_drift) or 'none'}; values.tex "
+                  f"{'STALE' if stale_tex else 'current'}; shared literals "
+                  f"{literals or 'none'}")
+            bad |= bool(local_drift) or stale_tex or bool(literals)
+    elif args.compute:
+        if include_shared:
+            shared = compute_shared_receipt()
+            write_shared_receipt(shared)
+            print(f"computed shared: {len(shared['values'])} values -> "
+                  f"{shared_receipt_path().relative_to(REPO_ROOT).as_posix()}")
+        for paper in papers:
+            if args.shared or paper not in REGISTRY:
+                continue
             r = compute_receipt(paper)
             write_receipt(paper, r)
             print(f"computed {paper}: {len(r['values'])} values -> "
                   f"{receipt_path(paper).relative_to(REPO_ROOT).as_posix()}")
-        else:
+    else:
+        for paper in papers:
             r = generate(paper)
             print(f"wrote {paper}: {r['n']} values -> "
                   f"{r['path'].relative_to(REPO_ROOT).as_posix()}"

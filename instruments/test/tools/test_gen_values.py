@@ -30,7 +30,8 @@ import gen_values as gv  # noqa: E402
 import pytest  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[3]
-PAPERS = sorted(gv.REGISTRY)
+LOCAL_PAPERS = sorted(gv.REGISTRY)
+PAPERS = gv.registered_papers()
 
 # \ssv<CamelCase> — the generated-value namespace.  Deliberately excludes the
 # cross-ref macros \ssvissue and \ssvfile, which are lower-case after "ssv".
@@ -71,7 +72,7 @@ def test_fmt(x, sig, want):
 # hop 1 — instrument -> receipt   (the only test that runs physics)
 # --------------------------------------------------------------------------
 
-@pytest.mark.parametrize("paper", PAPERS)
+@pytest.mark.parametrize("paper", LOCAL_PAPERS)
 def test_receipt_exists_and_is_wellformed(paper):
     r = gv.read_receipt(paper)
     assert r["paper"] == paper and r["issue"] == 198
@@ -81,7 +82,7 @@ def test_receipt_exists_and_is_wellformed(paper):
                           "source_sha256_16", "was"}, f"{macro}: bad fields"
 
 
-@pytest.mark.parametrize("paper", PAPERS)
+@pytest.mark.parametrize("paper", LOCAL_PAPERS)
 def test_receipt_matches_instruments(paper):
     """Re-run the physics and compare against the recorded last run.
 
@@ -97,7 +98,7 @@ def test_receipt_matches_instruments(paper):
         f"{summary} — run `gen_values.py --compute {paper}`")
 
 
-@pytest.mark.parametrize("paper", PAPERS)
+@pytest.mark.parametrize("paper", LOCAL_PAPERS)
 def test_recorded_fingerprints_match_the_instruments_on_disk(paper):
     """Cheap staleness signal, independent of re-running: the instrument file
     backing each value is byte-for-byte what it was when the receipt was written."""
@@ -107,7 +108,7 @@ def test_recorded_fingerprints_match_the_instruments_on_disk(paper):
             f"receipt was computed")
 
 
-@pytest.mark.parametrize("paper", PAPERS)
+@pytest.mark.parametrize("paper", LOCAL_PAPERS)
 def test_every_source_resolves(paper):
     """`source` must name a real file and a real attribute in it — so the
     macro -> receipt -> function -> test path a reader follows cannot dangle."""
@@ -118,12 +119,83 @@ def test_every_source_resolves(paper):
         assert hasattr(mod, attr), f"{macro}: {path_part} has no {attr}"
 
 
-@pytest.mark.parametrize("paper", PAPERS)
+@pytest.mark.parametrize("paper", LOCAL_PAPERS)
 def test_registry_and_receipt_declare_the_same_macros(paper):
     """A value added to the registry but never computed would otherwise be
     invisible until someone noticed the paper was missing a number."""
     assert {v.macro for v in gv.values_for(paper)} == set(
         gv.read_receipt(paper)["values"])
+
+
+# --------------------------------------------------------------------------
+# series receipt — one computation, multiple declaring papers (#213 Part B)
+# --------------------------------------------------------------------------
+
+def test_shared_receipt_exists_and_is_wellformed():
+    receipt = gv.read_shared_receipt()
+    assert receipt["issue"] == 213 and receipt["scope"] == "SSV series"
+    assert receipt["values"]
+    for macro, entry in receipt["values"].items():
+        assert set(entry) == {
+            "value", "sig", "rendered", "describes", "source",
+            "source_sha256_16", "papers", "was",
+        }, f"{macro}: bad shared fields"
+        assert len(entry["papers"]) >= 2, (
+            f"{macro}: shared values must be printed in at least two papers")
+
+
+def test_shared_receipt_matches_instruments():
+    drift = gv.shared_receipt_drift()
+    assert not drift, (
+        f"shared receipt no longer describes its sources: {sorted(drift)} — "
+        f"run `gen_values.py --shared --compute`")
+
+
+def test_shared_registry_and_receipt_declare_the_same_surface():
+    receipt = gv.read_shared_receipt()["values"]
+    assert {value.macro for value in gv.SHARED} == set(receipt)
+    for value in gv.SHARED:
+        entry = receipt[value.macro]
+        assert entry["papers"] == list(value.papers)
+        assert entry["was"] == {
+            paper: list(literals) for paper, literals in value.was.items()
+        }
+        assert set(value.was) == set(value.papers)
+
+
+def test_every_shared_source_resolves_and_is_fingerprint_current():
+    for macro, entry in gv.read_shared_receipt()["values"].items():
+        path_part, _, attr = entry["source"].partition("::")
+        assert (REPO / path_part).is_file(), f"{macro}: no such file {path_part}"
+        module = __import__(Path(path_part).stem)
+        assert hasattr(module, attr), f"{macro}: {path_part} has no {attr}"
+        assert entry["source_sha256_16"] == gv.source_fingerprint(entry["source"])
+
+
+def test_shared_receipt_is_deterministic_apart_from_timestamp():
+    first = gv.compute_shared_receipt()
+    second = gv.compute_shared_receipt()
+    first.pop("computed_utc"), second.pop("computed_utc")
+    assert first == second
+
+
+def test_shared_macros_are_unique_and_do_not_collide_with_local_macros():
+    shared = [value.macro for value in gv.SHARED]
+    assert len(shared) == len(set(shared))
+    for paper in PAPERS:
+        local = (
+            {value.macro for value in gv.values_for(paper)}
+            if paper in gv.REGISTRY else set()
+        )
+        assert local.isdisjoint(value.macro for value in gv.shared_values_for(paper))
+
+
+def test_numeric_literal_matching_uses_token_boundaries():
+    assert gv.literal_occurs("x=139.570 MeV", "139.570")
+    assert not gv.literal_occurs("x=139.57018 MeV", "139.570")
+    assert gv.literal_occurs(r"x=1.3\times10^{-15}", r"1.3\times10^{-15}")
+    assert gv.literal_occurs(
+        "x=2.10\\times\n  10^{-16}", r"2.10\times10^{-16}")
 
 
 # --------------------------------------------------------------------------
@@ -133,7 +205,9 @@ def test_registry_and_receipt_declare_the_same_macros(paper):
 @pytest.mark.parametrize("paper", PAPERS)
 def test_values_tex_matches_receipt(paper):
     assert gv.values_path(paper).is_file(), f"{paper}/values.tex not generated"
-    fresh = gv.render(paper, gv.read_receipt(paper))
+    local = gv.read_receipt(paper) if paper in gv.REGISTRY else None
+    shared = gv.read_shared_receipt() if gv.shared_values_for(paper) else None
+    fresh = gv.render(paper, local, shared)
     assert gv.values_path(paper).read_text(encoding="utf-8") == fresh, (
         f"{paper}/values.tex is out of date with its receipt — run "
         f"`python instruments/tools/gen_values.py {paper}`")
@@ -148,7 +222,7 @@ def test_rendering_does_not_import_instruments():
     receipt = {"values": {"ssvFake": {
         "rendered": r"1.23\times10^{-4}", "describes": "x", "source": "y::z"}}}
     saved = dict(sys.modules)
-    for name in ("ssv_i_audit_2026", "planck_scale_values"):
+    for name in ("ssv_i_audit_2026", "planck_scale_values", "series_values"):
         sys.modules.pop(name, None)
     saved_path = list(sys.path)
     try:
@@ -184,7 +258,7 @@ def test_no_undeclared_macro(paper):
     assert not undeclared, f"{paper}: used but not declared: {sorted(undeclared)}"
 
 
-@pytest.mark.parametrize("paper", PAPERS)
+@pytest.mark.parametrize("paper", LOCAL_PAPERS)
 def test_replaced_literal_is_gone(paper):
     """No generated value may also appear as a typed literal in the paper.
 
@@ -202,6 +276,15 @@ def test_replaced_literal_is_gone(paper):
 
 
 @pytest.mark.parametrize("paper", PAPERS)
+def test_no_shared_literal_survives(paper):
+    """#213 Part C: every declared cross-paper copy was replaced by its macro."""
+    offenders = gv.surviving_shared_literals(paper)
+    assert not offenders, (
+        f"{paper}: registered shared values remain typed beside their macros: "
+        f"{offenders}")
+
+
+@pytest.mark.parametrize("paper", LOCAL_PAPERS)
 def test_rendered_value_round_trips(paper):
     """The rendered string round-trips to the recorded value at the printed
     precision — so a formatting bug cannot silently misreport the computation."""
@@ -212,11 +295,21 @@ def test_rendered_value_round_trips(paper):
             f"{macro}: printed {e['rendered']} but recorded {exact}")
 
 
+def test_shared_rendered_values_round_trip():
+    for macro, entry in gv.read_shared_receipt()["values"].items():
+        as_float = float(
+            entry["rendered"].replace(r"\times10^{", "e").replace("}", "")
+        )
+        exact = float(entry["value"])
+        assert abs(as_float - exact) <= abs(exact) * 10.0 ** -(entry["sig"] - 1), (
+            f"{macro}: printed {entry['rendered']} but recorded {exact}")
+
+
 # --------------------------------------------------------------------------
 # the receipt is a tracked, readable record
 # --------------------------------------------------------------------------
 
-@pytest.mark.parametrize("paper", PAPERS)
+@pytest.mark.parametrize("paper", LOCAL_PAPERS)
 def test_receipt_is_deterministic_apart_from_its_timestamp(paper):
     """Two computes must differ only in `computed_utc`.  If anything else moves,
     the receipt is not a stable record and its git history is not the history of
@@ -227,6 +320,6 @@ def test_receipt_is_deterministic_apart_from_its_timestamp(paper):
     assert a == b
 
 
-@pytest.mark.parametrize("paper", PAPERS)
+@pytest.mark.parametrize("paper", LOCAL_PAPERS)
 def test_receipt_is_valid_json_on_disk(paper):
     json.loads(gv.receipt_path(paper).read_text(encoding="utf-8"))

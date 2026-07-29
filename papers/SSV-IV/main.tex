@@ -31,6 +31,7 @@ Gravity as Update-Capacity Gradient}
 
 \providecommand{\ssvfile}[1]{\hyperref[file:#1]{\texttt{\detokenize{#1}}}}% in-text code/report ref -> Code & Issue References appendix
 \providecommand{\ssvissue}[1]{\hyperref[issue:#1]{\##1}}% in-text issue ref -> Code & Issue References appendix
+\input{values.tex}% generated shared values -- instruments/tools/gen_values.py
 \begin{document}
 \maketitle
 
@@ -171,10 +172,10 @@ time; it is proper time, counted as a rate.
 There is a fastest possible update rate, and it can be argued rather than
 assumed.  The argument has two steps.
 
-First, the smallest thing that can carry an update is the grain $a_p =
-\hbar/(m_p c) \approx 2.1\times10^{-16}\,\mathrm{m}$, the proton Compton
+First, the smallest thing that can carry an update is the grain $\bar{\lambda}_p =
+\hbar/(m_p c) \approx \ssvProtonReducedComptonWavelength\,\mathrm{m}$, the proton Compton
 radius.  An update must be a wake-writing event; a change localised to less
-than $a_p$ writes no persistent wake, because below $a_p$ nothing is stable
+than $\bar{\lambda}_p$ writes no persistent wake, because below $\bar{\lambda}_p$ nothing is stable
 enough to persist (\S\ref{sec:universal}).  A sub-grain change therefore
 stands on exactly the footing of the zero-point fluctuations Paper~III
 already excludes from the event count.  The finest thing that counts as an
@@ -185,13 +186,13 @@ Nothing propagates faster than the medium's speed $c$, and a grain cannot
 register a new state before a signal has had time to traverse it.  The
 minimum update time is therefore the grain's light-crossing time,
 \begin{equation}
-    t_0 = \frac{a_p}{c} \approx 7.0\times10^{-25}\,\mathrm{s},
+    t_0 = \frac{\bar{\lambda}_p}{c} \approx 7.0\times10^{-25}\,\mathrm{s},
     \label{eq:t0}
 \end{equation}
 and the update-capacity ceiling --- the most updates per unit time the
 medium can make anywhere --- is its reciprocal,
 \begin{equation}
-    N_0 = \frac{c}{a_p} = \frac{m_p c^2}{\hbar}
+    N_0 = \frac{c}{\bar{\lambda}_p} = \frac{m_p c^2}{\hbar}
         \approx 1.4\times10^{24}\ \mathrm{s^{-1}}.
     \label{eq:N0}
 \end{equation}
@@ -219,7 +220,7 @@ flag.
 \end{gapbox}
 
 The ceiling is fixed twice over, and the two ways agree.  Geometrically it
-is $c/a_p$, the light-crossing rate of the grain.  Energetically it is
+is $c/\bar{\lambda}_p$, the light-crossing rate of the grain.  Energetically it is
 $\omega_p = m_p c^2/\hbar$, the Compton angular frequency of the heaviest
 stable defect, the proton: the medium updates precisely as fast as its
 fastest stable resident oscillates.  A process demanding updates faster than
@@ -229,7 +230,7 @@ twice.
 
 \paragraph{The order-unity factor is exactly one.}
 \label{para:order-unity-factor}
-The dimensionless prefactor in $N_0 = c/a_p$ is fixed by the framework's
+The dimensionless prefactor in $N_0 = c/\bar{\lambda}_p$ is fixed by the framework's
 own conventions, not by a separate wake-deposition calculation.  Three
 inputs pin it:
 \begin{enumerate}
@@ -239,19 +240,19 @@ inputs pin it:
     wake survives.
   \item SSV assigns each defect its own healing length equal to its Compton
     radius (Paper~I, \S\ref{sec:capacity} above): for the
-    electron $\xi_e = \hbar/(m_e c)$, for the proton $\xi_p \equiv a_p =
+    electron $\xi_e = \hbar/(m_e c)$, for the proton $\xi_p \equiv \bar{\lambda}_p =
     \hbar/(m_p c)$.  These are not approximations; they are how the SSV
     framework labels its defect length scales.
   \item Paper~I identifies the proton as the heaviest stable defect of the
     medium.  Its healing length therefore sets the medium's grain.
 \end{enumerate}
 Combining the three: the minimum wake-depositing length is the healing length
-of the heaviest stable defect, which is $a_p$ exactly.  No multiplicative
-ambiguity survives the definition.  The identity $c/a_p = \omega_p$ is then
-an exact consequence of $a_p = \hbar/(m_p c)$, not a coincidence that holds
+of the heaviest stable defect, which is $\bar{\lambda}_p$ exactly.  No multiplicative
+ambiguity survives the definition.  The identity $c/\bar{\lambda}_p = \omega_p$ is then
+an exact consequence of $\bar{\lambda}_p = \hbar/(m_p c)$, not a coincidence that holds
 up to a tunable factor.  A wake-deposition calculation in the LogSE would
 recover the same answer because the LogSE healing length around the proton
-breather, by the same per-defect convention, is precisely $a_p$.
+breather, by the same per-defect convention, is precisely $\bar{\lambda}_p$.
 
 \subsection{Two uses of one budget: kinematic time dilation}
 \label{sec:kinematic}
@@ -463,7 +464,7 @@ three pre-registered counts (issue \#119, Phases 1--2; result note
   \item \textbf{Radiation-zone sign oscillation (H1a).}  Beyond one
     wavelength the time-averaged force tracks $\cos(2\pi d/\lambda)$,
     flipping sign every half wavelength.  With $\lambda_p \approx
-    1.3\times10^{-15}$\,m, every physically realised gravitational
+    \ssvProtonComptonWavelength$\,m, every physically realised gravitational
     separation is $\gtrsim 10^{12}$ wavelengths into the radiation zone:
     the mechanism is sign-indefinite everywhere gravity is observed.
   \item \textbf{Unequal-frequency null (H1b).}  The time-averaged
@@ -593,7 +594,7 @@ with separation, the long-known retardation behaviour of the Bjerknes
 force between widely separated pulsators; the near-zone regime, in which
 the cross-term derivation is framed, is the one tested here, and it is
 cleanly attractive.  But the near zone is not where gravity lives: at
-$\lambda_p \approx 1.3\times10^{-15}$\,m every physically realised
+$\lambda_p \approx \ssvProtonComptonWavelength$\,m every physically realised
 separation lies $\gtrsim 10^{12}$ wavelengths into the oscillating regime,
 which is the first falsifier of the record above (\#119 H1a extended this
 check across $d/\lambda$ and confirmed the $\cos(2\pi d/\lambda)$ sign
@@ -964,8 +965,8 @@ because the framework's domain of validity makes it impossible to
 state.  SSV is a continuum effective theory valid down to the scale
 of the heaviest stable defect,
 \begin{equation}
-    \ell_{\rm grain} \equiv a_p = \frac{\hbar}{m_p c}
-    \approx 2.10\times10^{-16}\,\mathrm{m}.
+    \ell_{\rm grain} \equiv \bar{\lambda}_p = \frac{\hbar}{m_p c}
+    \approx \ssvProtonReducedComptonWavelength\,\mathrm{m}.
     \label{eq:lgrain_cutoff}
 \end{equation}
 Below $\ell_{\rm grain}$, the LogSE continuum description ceases to
@@ -986,16 +987,16 @@ simply does not arise.  The cutoff $\ell_{\rm grain}$ is not a new
 postulate introduced to tame divergences; it is the healing length of
 the heaviest stable defect, fixed by the proton mass alone.  The
 same physical reasoning that gives Navier--Stokes its molecular
-cutoff gives SSV its cutoff at $a_p$: at scales finer than the
+cutoff gives SSV its cutoff at $\bar{\lambda}_p$: at scales finer than the
 smallest stable structure, the continuum description is silent.
 
 Note the distinction from the corrected electron healing length $\xi =
 \hbar/(\sqrt2\,m_e c) \approx 2.73\times 10^{-13}\,\mathrm{m}$, the natural
 scale for electron-defect physics but not the medium's ultraviolet
 boundary: the true domain-of-validity boundary is $\ell_{\rm grain}
-\approx \sqrt2\,\xi/1836$, set by the proton.
+\approx \sqrt2\,\xi/\ssvProtonElectronMassRatio$, set by the proton.
 
-\begin{gapbox}[Quantified (\#148): a $2\times10^{-16}$\,m grain versus
+\begin{gapbox}[Quantified (\#148): a $\ssvProtonReducedComptonWavelength$\,m grain versus
 Lorentz tests --- the dispersion and scattering readings are dead by
 3--30 orders; the laboratory does \emph{not} exclude it]
 Collider physics probes structure to $\sim 10^{-19}$\,m --- three orders
@@ -1004,7 +1005,7 @@ pointlike leptons.  The pre-registered UV gauntlet (\#148, script
 \ssvfile{uv_gauntlet}) priced each reading of the grain against pinned
 bounds:
 (i)~\textbf{dispersion}: the bare-medium Bogoliubov branch
-$\omega^2 = c^2k^2[1 + (k a_p/2)^2]$ --- whose quantum-pressure $k^4$
+$\omega^2 = c^2k^2[1 + (k \bar{\lambda}_p/2)^2]$ --- whose quantum-pressure $k^4$
 term is \emph{measured real} in the \#138 magnon channel --- is a
 superluminal quadratic dispersion with effective
 $E_{\rm QG,2} = 2\,m_pc^2 \approx 1.9$\,GeV, against the GRB~090510
@@ -1231,12 +1232,12 @@ roadmap in \ssvfile{numerical-minimisation-roadmap}:
 Section & What is what \\
 \midrule
 \S\ref{sec:capacity} (Update capacity)
-& The ceiling $N_0 = c/a_p = m_p c^2/\hbar$ is a derivation from
+& The ceiling $N_0 = c/\bar{\lambda}_p = m_p c^2/\hbar$ is a derivation from
   the sub-grain admissibility argument.  The previously gapboxed
   order-unity factor is fixed by the framework's per-defect-healing-length
   convention (see \S\ref{para:order-unity-factor} above): the minimum
   wake-depositing length is the healing length of the heaviest stable
-  defect, which is $a_p$ exactly.  The unification of kinematic and gravitational
+  defect, which is $\bar{\lambda}_p$ exactly.  The unification of kinematic and gravitational
   time dilation as a single budget split is a \emph{mechanical
   interpretation} of the quadrature plus the cross-term shift; the
   quadrature itself ($\sqrt{1{-}v^2/c^2}$) is honestly stated as the
@@ -1308,7 +1309,7 @@ structural
 result deferred to Paper~VII-b (spatial sector, PPN, full
 metric), or one of the explicit gapboxes marked in the body: the
 update ceiling versus $\gg$GeV photons (\S\ref{sec:ceiling}) and the
-$2\times10^{-16}$\,m grain versus Lorentz tests (\S\ref{sec:universal})
+$\ssvProtonReducedComptonWavelength$\,m grain versus Lorentz tests (\S\ref{sec:universal})
 --- both now \emph{quantified} by the pre-registered UV gauntlet
 (\#148): the naive single-mode ceiling is dead by 6 orders, the bare
 Bogoliubov photon dispersion by 11--30 orders, the scattering reading

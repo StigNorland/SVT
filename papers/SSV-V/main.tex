@@ -1,24 +1,31 @@
-\documentclass[11pt]{article}
-
-\usepackage[a4paper,margin=1in]{geometry}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{lmodern}
-\usepackage{amsmath,amssymb}
-\usepackage{physics}
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,physics}
+\usepackage{booktabs}
 \usepackage{hyperref}
 \usepackage{enumitem}
-\usepackage{setspace}
-\usepackage{mdframed}
+\usepackage{caption}
+\usepackage{verbatim}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
 
-\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
-\setstretch{1.1}
+% Coloured result boxes
+\newtcolorbox{resultbox}[1][]{enhanced,breakable,
+  colback=blue!4!white,colframe=blue!40!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+\newtcolorbox{gapbox}[1][]{enhanced,breakable,
+  colback=orange!6!white,colframe=orange!60!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+\newtcolorbox{falsbox}[1][]{enhanced,breakable,
+  colback=red!5!white,colframe=red!55!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
 
-\newmdenv[linewidth=0.8pt,innertopmargin=5pt,innerbottommargin=5pt,%
-  innerleftmargin=8pt,innerrightmargin=8pt]{gapbox}
-\newmdenv[linewidth=1.1pt,innertopmargin=5pt,innerbottommargin=5pt,%
-  innerleftmargin=8pt,innerrightmargin=8pt]{resultbox}
-
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
 \providecommand{\ssvfile}[1]{\hyperref[file:#1]{\texttt{\detokenize{#1}}}}% in-text code/report ref -> Code & Issue References appendix
 \providecommand{\ssvissue}[1]{\hyperref[issue:#1]{\##1}}% in-text issue ref -> Code & Issue References appendix
 
@@ -482,7 +489,7 @@ the medium's vacuum, replacing the boundary count.
 \textbf{What is \emph{not} earned: the coefficient.}  The whole of the
 remaining gap of the gapboxes above is localised into the single number
 $\eta = S_{\text{ent}}/\xi^2$: a natural $\eta\sim 1/\xi^2$ overshoots $G_N$ by
-$(a_p/\ell_P)^2 = 1/\alpha_G = (m_P/m_p)^2 \approx 1.69\times10^{38}$ (the
+$(\bar{\lambda}_p/\ell_P)^2 = 1/\alpha_G = (m_P/m_p)^2 \approx 1.69\times10^{38}$ (the
 Susskind--Uglum species problem, Sakharov's induced gravity in another guise).
 $G$'s magnitude is therefore conceded as a sub-grain (trans-Planckian) input
 (\ssvissue{154}), not derived.  Result note: \ssvfile{h-eos-s2-issue155}.  This
@@ -597,8 +604,8 @@ claimed.
 $dS=\eta\,dA$ of \S\ref{sec:entropy} (S2), the Clausius relation $\delta Q=T_H\,dS$
 gives $\nabla^2\Phi = 4\pi G_{\text{eff}}\,e/c^2$ with $G_{\text{eff}}=1/(4\hbar
 c\,\eta)$.  The measured $\eta$ is $O(1)$ per $\xi^2$, so $G_{\text{eff}}$
-overshoots $G_N$ by $(a_p/\ell_P)^2\approx1.69\times10^{38}$---the conceded
-sub-grain input (\ssvissue{154}); the identity $(a_p/\ell_P)^2=1/\alpha_G$ is the
+overshoots $G_N$ by $(\bar{\lambda}_p/\ell_P)^2\approx1.69\times10^{38}$---the conceded
+sub-grain input (\ssvissue{154}); the identity $(\bar{\lambda}_p/\ell_P)^2=1/\alpha_G$ is the
 guarded \#122 tautology, not a derivation.  Result note:
 \ssvfile{h-eos-s1-issue155}.  \emph{Form yes, $G$ no}, through the full chain.
 \end{resultbox}

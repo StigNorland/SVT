@@ -1,25 +1,31 @@
-\documentclass[11pt]{article}
-
-\usepackage[a4paper,margin=1in]{geometry}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{lmodern}
-\usepackage{amsmath,amssymb}
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,physics}
 \usepackage{booktabs}
 \usepackage{hyperref}
 \usepackage{enumitem}
-\usepackage{setspace}
+\usepackage{caption}
+\usepackage{verbatim}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}
+
+% Coloured result boxes
 \newtcolorbox{resultbox}[1][]{enhanced,breakable,
   colback=blue!4!white,colframe=blue!40!black,
   fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
 \newtcolorbox{gapbox}[1][]{enhanced,breakable,
   colback=orange!6!white,colframe=orange!60!black,
   fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
+\newtcolorbox{falsbox}[1][]{enhanced,breakable,
+  colback=red!5!white,colframe=red!55!black,
+  fonttitle=\bfseries,title={#1},boxrule=0.6pt,arc=4pt}
 
-\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
-\setstretch{1.1}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
 
 \title{Saturated Superfluid Vacuum IX\\
 CMB and the Primordial Phonon Bath}
@@ -56,6 +62,10 @@ criteria for what observational or theoretical work would change its status. The
 purpose is to state the phonon-bath reading of the CMB cleanly and to fix the
 support conditions for it --- not to present a quantitative CMB cosmology.
 \end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
 
 \section{Introduction}
 \label{sec:intro}

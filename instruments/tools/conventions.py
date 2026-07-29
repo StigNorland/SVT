@@ -30,15 +30,16 @@ machine-checked is at least checkable by hand.
 
 What is guarded, and what is not
 --------------------------------
-Guarded: a symbol carrying two declared meanings, or two declared dimensions,
-across papers without a local declaration saying so.
+Guarded: a symbol carrying two declared meanings or dimensions across papers
+without a local declaration; and programme use of a reserved symbol with a
+non-standard meaning.  In particular, ``mu_0`` is reserved for vacuum
+permeability and ``bar(lambda)_p`` for the reduced proton Compton wavelength.
 
 **Not** guarded:
 - A symbol nobody declared.  ``coverage()`` reports those rather than implying
   they are fine — a paper is not covered because some of its symbols are.
-- Whether the paper's prose actually uses the symbol the way its declaration
-  says.  Same limit rule 15 states: this checks the declarations, not the
-  ``.tex``.
+- Arbitrary undeclared symbols.  Reserved spellings are checked directly
+  against ``main.tex``; the rest still require review and declaration.
 - Which of two conflicting uses is *correct*.  Drift guard, not referee.
 
 Mirrored by ``instruments/test/tools/test_conventions.py``.
@@ -130,9 +131,21 @@ def _symbols_in(span: str) -> set[str]:
         name = m.group("greek")
         if not name:
             continue
+        # Preserve the accent in standard notations such as
+        # \bar{\lambda}_p.  Treating this as bare lambda_p would merge the
+        # reduced and ordinary Compton wavelengths in the very census intended
+        # to distinguish them.
+        prefix = span[max(0, m.start() - 12):m.start()]
+        if re.search(r"\\bar\s*\{\s*$", prefix):
+            close = span.find("}", m.end())
+            sub = _SUB.match(span[close + 1:]) if close >= 0 else None
+            found.add(_join(f"bar_{name}", sub))
+            continue
         sub = _SUB.match(span[m.end():])
         found.add(_join(name, sub))
-    bare = span
+    # A macro used as a Latin subscript would otherwise be erased by _STRIP
+    # before the Latin-symbol pass sees it.
+    bare = re.sub(r"_\{?\\star\}?", "_{star}", span)
     for pat in _STRIP:
         bare = pat.sub(" ", bare)
     for m in _SYMBOL.finditer(bare):
@@ -149,6 +162,7 @@ def _join(name: str, sub) -> str:
         return name
     tail = sub.group("braced") if sub.group("braced") is not None else sub.group("bare")
     tail = re.sub(r"\\(?:rm|mathrm|text)\s*", "", tail or "").strip()
+    tail = tail.replace(r"\star", "star")
     return f"{name}_{tail}" if tail else name
 
 
@@ -242,13 +256,18 @@ GLOBAL: dict[str, tuple[str, Dimension]] = {
     "P_0":     ("saturation pressure", PRESSURE),
     "kappa_0": ("quantum of circulation, h/m_0", ACTION / mass),
     "H_0":     ("Hubble parameter", FREQUENCY),
+    "m_star":  ("SSV base mass scale, m_e/alpha", mass),
+    "E_star":  ("SSV base rest-energy scale, m_star c^2", ENERGY),
+    "bar_lambda_p": ("reduced proton Compton wavelength, hbar/(m_p c)", length),
+    "mu_0":    ("vacuum permeability / magnetic constant",
+                mass * length / (time**2 * current**2)),
 }
 
 #: Per-paper uses, transcribed and checked in the #213 Part A pass.
 USES: list[Use] = [
     # ---- Lambda: three dimensions across the series, two inside SSV-III ----
     Use("SSV-I", "Lambda", r"\ln(8/\alpha) - 7/4, a pure number", ONE,
-        "papers/SSV-I/main.tex:472"),
+        "papers/SSV-I/main.tex:476"),
     Use("SSV-III", "Lambda", r"\Lambda(k\xi) = \ln(1/k\xi), a slow logarithm", ONE,
         "papers/SSV-III/main.tex:621"),
     Use("SSV-III", "Lambda", r"UV cutoff wavenumber, \Lambda = \xi^{-1}", WAVENUMBER,
@@ -260,30 +279,30 @@ USES: list[Use] = [
     Use("SSV-VIII", "Lambda", "cosmological constant", CURVATURE,
         "papers/SSV-VIII/main.tex:242"),
     Use("SSV-IX", "Lambda", "cosmological constant", CURVATURE,
-        "papers/SSV-IX/main.tex:226"),
+        "papers/SSV-IX/main.tex:232"),
     # The fourth meaning, and the one the first pass of this table MISSED:
     # bare \Lambda in the running-coupling form \ln(Q/\Lambda) is Lambda_QCD,
     # an energy.  The census reported \Lambda in 7 papers while the hand-written
     # half declared only 5 — the machine half caught the human half's omission,
     # which is why test_declared_symbol_is_declared_everywhere_it_occurs exists.
     Use("SSV-II", "Lambda", r"\Lambda_{\rm QCD} \approx 200 MeV, an energy scale",
-        ENERGY, "papers/SSV-II/main.tex:1057"),
+        ENERGY, "papers/SSV-II/main.tex:1059"),
 
     # ---- a_0: Bohr radius vs the MOND acceleration scale ----
     Use("SSV-I", "a_0", "Bohr radius", length,
-        "papers/SSV-I/main.tex:507"),
+        "papers/SSV-I/main.tex:511"),
     Use("SSV-VI", "a_0", "MOND/RAR acceleration scale", ACCELERATION,
         "papers/SSV-VI/main.tex:553"),
     Use("SSV-IX", "a_0", "MOND/RAR acceleration scale", ACCELERATION,
-        "papers/SSV-IX/main.tex:226"),
+        "papers/SSV-IX/main.tex:232"),
 
     # ---- b: the #189 finding, three dimensions, recorded here across papers ----
     Use("SSV-I", "b", "LogSE coupling, energy per unit mass", ENERGY / mass,
-        "papers/SSV-I/main.tex:251"),
+        "papers/SSV-I/main.tex:220"),
     Use("SSV-V", "b", "LogSE coupling, declared a frequency", FREQUENCY,
-        "papers/SSV-V/main.tex:146"),
+        "papers/SSV-V/main.tex:135"),
     Use("SSV-VII-a", "b", "LogSE coupling, required to be an energy", ENERGY,
-        "papers/SSV-VII-a/main.tex:120"),
+        "papers/SSV-VII-a/main.tex:383"),
     Use("SSV-III", "b", "RG block-scaling factor, a pure number", ONE,
         "papers/SSV-III/main.tex:995",
         local="the renormalisation block factor of \\mathcal{R}_b; unrelated to "
@@ -292,46 +311,28 @@ USES: list[Use] = [
     # had not declared.  IV and VII-b agree with SSV-I; VI is a local
     # dimensionless fit parameter; II restates SSV-I's E6 relation.
     Use("SSV-IV", "b", r"LogSE coupling, \mu_{\rm nl} = dV/d\rho = b\ln(\rho/\rho_0)",
-        ENERGY / mass, "papers/SSV-IV/main.tex:495"),
+        ENERGY / mass, "papers/SSV-IV/main.tex:496"),
     Use("SSV-VII-b", "b", r"LogSE coupling, \Phi = b\ln(\rho/\rho_0)",
         ENERGY / mass, "papers/SSV-VII-b/main.tex:46"),
     Use("SSV-II", "b", r"LogSE stiffness, via b\rho_0 = m_0c^2 — inherits SSV-I's "
         r"recorded E6 mismatch, see dimensions.py",
-        ENERGY / mass, "papers/SSV-II/main.tex:253"),
-    # Departures from what a physicist reader expects (physics.info). Declared
-    # so the departure is on the record, not so it is forbidden.
+        ENERGY / mass, "papers/SSV-II/main.tex:254"),
+    # Domain-standard uses that the two small teaching references omit.
     Use("SSV-I", "F", "form factor of the trefoil breather, a pure number", ONE,
-        "papers/SSV-I/main.tex:738"),
-    # ---- departures the Wikipedia reference newly exposes ----
-    # mu_0 is the vacuum permeability to essentially every physicist.  SSV uses
-    # it for a MASS, m_e/alpha ~ 70 MeV, in four papers.  Not a defect — the
-    # series is internally consistent — but the most expensive departure here,
-    # because mu_0 is among the least ambiguous symbols in physics.
-    # ---- mu_0: the sharpest collision in the series ----
-    # The series uses mu_0 BOTH for its own base scale and, in Goldstone's
-    # Maxwell equations, for the actual vacuum permeability -- alongside
-    # epsilon_0, so there is no reading in which it is anything else.
-    # And SSV-I defines its own scale two ways, a factor c^2 apart:
-    #   :59, :361, :1047   mu_0 = m_e c^2/alpha   an ENERGY
-    #   :937 and 12 others mu_0 = m_e/alpha       a MASS
-    # The printed relations require the ENERGY reading -- m_p c^2 = N_Y F mu_0
-    # has an energy on the left, and hbar omega ~ mu_0 (...) likewise. These
-    # papers keep c explicit throughout, so the mass form is not natural-units
-    # shorthand; it is inhomogeneous.
-    Use("SSV-I", "mu_0", r"base scale, printed as m_ec^2/\alpha -- an ENERGY",
-        ENERGY, "papers/SSV-I/main.tex:59"),
-    Use("SSV-I", "mu_0", r"base scale, printed as m_e/\alpha -- a MASS",
-        mass, "papers/SSV-I/main.tex:937"),
-    Use("SSV-II", "mu_0", r"base scale m_e/\alpha \approx 70 MeV", mass,
-        "papers/SSV-II/main.tex:269"),
-    Use("SSV-Alpha", "mu_0", r"base scale m_e/\alpha", mass,
-        "papers/SSV-Alpha/main.tex:34"),
+        "papers/SSV-I/main.tex:615"),
+    # ---- mu_0: reserved for the magnetic constant ----
+    # #213 originally only recorded the collision.  The owner chose the
+    # stronger policy: standard meanings are mandatory.  The SSV scale is now
+    # m_star (mass) / E_star (rest energy), and line tension is epsilon_line.
+    Use("SSV-II", "mu_0", "vacuum permeability in the Maxwell equation",
+        mass * length / (time**2 * current**2),
+        "papers/SSV-II/main.tex:468"),
     Use("SSV-Goldstone", "mu_0", "vacuum permeability, in Maxwell's equations "
         r"\nabla\times B = \mu_0 J and the field energy B^2/2\mu_0",
         mass * length / (time**2 * current**2),
-        "papers/SSV-Goldstone/main.tex:247"),
+        "papers/SSV-Goldstone/main.tex:261"),
     Use("SSV-I", "xi", "healing length of the defect core", length,
-        "papers/SSV-I/main.tex:403"),
+        "papers/SSV-I/main.tex:405"),
     Use("SSV-III", "Omega", "number of microstates, dimensionless", ONE,
         "papers/SSV-III/main.tex:308"),
 
@@ -341,7 +342,7 @@ USES: list[Use] = [
     Use("SSV-VII-a", "S", "phase action of the polar decomposition", ACTION,
         "papers/SSV-VII-a/main.tex:119"),
     Use("SSV-Goldstone", "S", r"action functional S[\Psi] = \int dt\,d^3x\,\mathcal{L}",
-        ACTION, "papers/SSV-Goldstone/main.tex:312"),
+        ACTION, "papers/SSV-Goldstone/main.tex:326"),
     Use("SSV-III", "S", r"entropy, S = k_B\ln\Omega", ENTROPY,
         "papers/SSV-III/main.tex:308"),
     Use("SSV-V", "S", r"wake/horizon entropy, S_H = k_B\ln\Omega_H", ENTROPY,
@@ -350,12 +351,12 @@ USES: list[Use] = [
     # propagator.  Typing these would be inventing a dimension to satisfy a
     # completeness rule, which is worse than admitting the category.
     Use("SSV-I", "S", r"the spheres S^1, S^2 in homotopy statements", None,
-        "papers/SSV-I/main.tex:672",
+        "papers/SSV-I/main.tex:676",
         notational="a manifold label in \\pi_3(S^1), \\hat n \\in S^2 — topology, "
                    "not a physical quantity"),
     Use("SSV-II", "S", "fermion propagator S(p); also the integration surface "
         r"in \Phi_B = \int_S B\cdot dA", None,
-        "papers/SSV-II/main.tex:595",
+        "papers/SSV-II/main.tex:597",
         notational="a propagator and a surface of integration; neither is a "
                    "quantity this registry types"),
     Use("SSV-VII-b", "S", "subscript of the Schwarzschild radius r_S", None,
@@ -364,8 +365,21 @@ USES: list[Use] = [
                    "standalone symbol"),
     Use("SSV-VII-b", "G", "Newton's constant", NEWTON_G,
         "papers/SSV-VII-b/main.tex:526"),
-    Use("SSV-I", "a_p", r"proton Compton radius \hbar/(m_p c)", length,
-        "papers/SSV-I/main.tex:406"),
+    Use("SSV-I", "bar_lambda_p",
+        r"reduced proton Compton wavelength \hbar/(m_p c)", length,
+        "papers/SSV-I/main.tex:408"),
+    Use("SSV-II", "bar_lambda_p",
+        r"reduced proton Compton wavelength \hbar/(m_p c)", length,
+        "papers/SSV-II/main.tex:294"),
+    Use("SSV-IV", "bar_lambda_p",
+        r"reduced proton Compton wavelength \hbar/(m_p c)", length,
+        "papers/SSV-IV/main.tex:175"),
+    Use("SSV-V", "bar_lambda_p",
+        r"reduced proton Compton wavelength \hbar/(m_p c)", length,
+        "papers/SSV-V/main.tex:485"),
+    Use("SSV-VII-b", "bar_lambda_p",
+        r"reduced proton Compton wavelength \hbar/(m_p c)", length,
+        "papers/SSV-VII-b/main.tex:352"),
 
     Use("SSV-VI", "b", "dimensionless halo-profile fit parameter (b = 0.5, 1)",
         ONE, "papers/SSV-VI/main.tex:218",
@@ -383,7 +397,8 @@ USES: list[Use] = [
 #: complete) and "SSV-I uses F for a form factor" (a fact about one site).
 #: Reporting the first from a partial table is how the first pass of this file
 #: said "three dimensions" about a symbol carrying four.
-COMPLETE: frozenset = frozenset({"b", "Lambda", "a_0", "S", "mu_0"})
+COMPLETE: frozenset = frozenset(
+    {"b", "Lambda", "a_0", "S", "mu_0", "bar_lambda_p"})
 
 
 def uses_of(symbol: str) -> list[Use]:
@@ -468,11 +483,41 @@ def coverage() -> dict:
 #: What the gate does guarantee is that **no fourth collision arrives quietly**.
 #: This is the same shape as ``claims.py``: known state is pinned, and drift
 #: from it stops the build.
-KNOWN_COLLISIONS: frozenset = frozenset({"Lambda", "a_0", "b", "S", "mu_0"})
+KNOWN_COLLISIONS: frozenset = frozenset({"Lambda", "a_0", "b", "S"})
 
 
 def new_collisions() -> list[Collision]:
     return [c for c in collisions() if c.symbol not in KNOWN_COLLISIONS]
+
+
+def reserved_symbol_violations(paper: str) -> list[str]:
+    """Non-standard uses whose spellings are reserved programme-wide.
+
+    This is intentionally a small, high-confidence deny-list.  It does not
+    pretend that the external teaching tables define every field's notation.
+    """
+    path = PAPERS / paper / "main.tex"
+    lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+    out: list[str] = []
+    shown = path.relative_to(REPO_ROOT) if path.is_relative_to(REPO_ROOT) else path
+    for lineno, line in enumerate(lines, 1):
+        if re.search(r"(?<![A-Za-z])a_p(?![A-Za-z])", line):
+            out.append(f"{shown}:{lineno}: "
+                       "a_p is non-standard; use \\\\bar{\\\\lambda}_p")
+        if r"\ssvProtonComptonRadius" in line:
+            out.append(f"{shown}:{lineno}: "
+                       "legacy proton-radius macro")
+        if r"\mu_0" not in line:
+            continue
+        is_permeability = (
+            (paper == "SSV-II" and r"\mathbf{J}" in line)
+            or (paper == "SSV-Goldstone"
+                and (r"\mathbf{J}" in line or "B^2" in line))
+        )
+        if not is_permeability:
+            out.append(f"{shown}:{lineno}: "
+                       "\\mu_0 is reserved for vacuum permeability")
+    return out
 
 
 def gate_report(paper: str) -> tuple[list[Collision], str]:
@@ -577,6 +622,19 @@ WIKI: dict[str, tuple[tuple[str, Dimension], ...]] = {
                ("cosmological constant (Friedmann convention)", 1 / time**2)),
 }
 
+#: Established subfield notation omitted by both compact teaching tables.
+#: These entries are intentionally conservative: each is a notation a
+#: specialist would expect without an SSV-specific definition.  This prevents
+#: a one-page general-physics list from falsely labelling standard condensed
+#: matter, atomic, statistical-mechanics, or form-factor notation as a defect.
+DOMAIN_STANDARD: dict[str, tuple[tuple[str, Dimension], ...]] = {
+    "a_0": (("Bohr radius", length), ("MOND acceleration scale", ACCELERATION)),
+    "F": (("form factor", ONE),),
+    "xi": (("healing / coherence length", length),),
+    "Omega": (("number of microstates", ONE),),
+    "bar_lambda_p": (("reduced proton Compton wavelength", length),),
+}
+
 #: Symbols the series leans on that the reference simply does not cover.  Listed
 #: explicitly so the silence is a recorded fact rather than an inference.
 #: Still unlisted by EITHER reference. ``b`` in particular is unclaimed, so
@@ -615,18 +673,22 @@ def departures_from_standard() -> list[str]:
 def _standard_for(symbol: str):
     """Reference entries for a symbol, falling back to its ROOT.
 
-    ``a_0`` and ``a_p`` inherit what the reader expects of ``a``.  This is the
-    whole reason the root matters: it is why ``a_0`` as the MOND acceleration
-    reads naturally and ``a_0`` as the Bohr radius does not, even though the
-    Bohr radius is the older and more universal usage.
+    Exact domain-standard entries take precedence over a generic root.  Thus
+    ``a_0`` is accepted for both the Bohr radius and MOND acceleration, while
+    an unknown subscripted ``a`` still inherits the generic expectation of an
+    acceleration.
     """
-    merged = tuple(STANDARD.get(symbol, ())) + tuple(WIKI.get(symbol, ()))
+    merged = (tuple(STANDARD.get(symbol, ()))
+              + tuple(WIKI.get(symbol, ()))
+              + tuple(DOMAIN_STANDARD.get(symbol, ())))
     if merged:
         return merged
     root = symbol.split("_", 1)[0]
     if root in NOT_IN_STANDARD or symbol in NOT_IN_STANDARD:
         return ()
-    return tuple(STANDARD.get(root, ())) + tuple(WIKI.get(root, ()))
+    return (tuple(STANDARD.get(root, ()))
+            + tuple(WIKI.get(root, ()))
+            + tuple(DOMAIN_STANDARD.get(root, ())))
 
 
 # --------------------------------------------------------------------------

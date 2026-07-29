@@ -1,0 +1,214 @@
+{
+  "issue": 213,
+  "scope": "SSV series",
+  "hypothesis": "every declared load-bearing value printed in two or more papers has one computed source (#213 Part B)",
+  "generator": "instruments/tools/gen_values.py",
+  "computed_utc": "2026-07-29T19:37:13Z",
+  "values": {
+    "ssvAlphaInverse": {
+      "value": 137.035999084,
+      "sig": 6,
+      "rendered": "137.036",
+      "describes": "\\alpha^{-1}, CODATA observed input",
+      "source": "instruments/series_values.py::inverse_fine_structure",
+      "source_sha256_16": "ed78dc762df39e91",
+      "papers": [
+        "SSV-Alpha",
+        "SSV-I",
+        "SSV-II"
+      ],
+      "was": {
+        "SSV-Alpha": [
+          "137.036"
+        ],
+        "SSV-I": [
+          "137.036"
+        ],
+        "SSV-II": [
+          "137.036"
+        ]
+      }
+    },
+    "ssvProtonElectronMassRatio": {
+      "value": 1836.1526734400013,
+      "sig": 6,
+      "rendered": "1836.15",
+      "describes": "m_p/m_e, CODATA observed input",
+      "source": "instruments/series_values.py::proton_electron_mass_ratio",
+      "source_sha256_16": "ed78dc762df39e91",
+      "papers": [
+        "SSV-I",
+        "SSV-II",
+        "SSV-IV"
+      ],
+      "was": {
+        "SSV-I": [
+          "1836"
+        ],
+        "SSV-II": [
+          "1836",
+          "1836.15"
+        ],
+        "SSV-IV": [
+          "1836"
+        ]
+      }
+    },
+    "ssvElectronMassMeV": {
+      "value": 0.5109989461,
+      "sig": 3,
+      "rendered": "0.511",
+      "describes": "m_e c^2 in MeV, observed input",
+      "source": "instruments/series_values.py::electron_mass_mev",
+      "source_sha256_16": "ed78dc762df39e91",
+      "papers": [
+        "SSV-I",
+        "SSV-II"
+      ],
+      "was": {
+        "SSV-I": [
+          "0.511"
+        ],
+        "SSV-II": [
+          "0.511"
+        ]
+      }
+    },
+    "ssvMuonMassMeV": {
+      "value": 105.6583755,
+      "sig": 6,
+      "rendered": "105.658",
+      "describes": "m_\\mu c^2 in MeV, observed input",
+      "source": "instruments/series_values.py::muon_mass_mev",
+      "source_sha256_16": "ed78dc762df39e91",
+      "papers": [
+        "SSV-I",
+        "SSV-II"
+      ],
+      "was": {
+        "SSV-I": [
+          "105.658"
+        ],
+        "SSV-II": [
+          "105.658"
+        ]
+      }
+    },
+    "ssvChargedPionMassMeV": {
+      "value": 139.57039,
+      "sig": 8,
+      "rendered": "139.57039",
+      "describes": "m_{\\pi^\\pm} c^2 in MeV, observed input",
+      "source": "instruments/series_values.py::charged_pion_mass_mev",
+      "source_sha256_16": "ed78dc762df39e91",
+      "papers": [
+        "SSV-I",
+        "SSV-II"
+      ],
+      "was": {
+        "SSV-I": [
+          "139.570",
+          "139.57018"
+        ],
+        "SSV-II": [
+          "139.570"
+        ]
+      }
+    },
+    "ssvProtonMassMeV": {
+      "value": 938.27208816,
+      "sig": 6,
+      "rendered": "938.272",
+      "describes": "m_p c^2 in MeV, observed input",
+      "source": "instruments/series_values.py::proton_mass_mev",
+      "source_sha256_16": "ed78dc762df39e91",
+      "papers": [
+        "SSV-I",
+        "SSV-II"
+      ],
+      "was": {
+        "SSV-I": [
+          "938.272"
+        ],
+        "SSV-II": [
+          "938.272"
+        ]
+      }
+    },
+    "ssvTauMassMeV": {
+      "value": 1776.86,
+      "sig": 6,
+      "rendered": "1776.86",
+      "describes": "m_\\tau c^2 in MeV, observed input",
+      "source": "instruments/series_values.py::tau_mass_mev",
+      "source_sha256_16": "ed78dc762df39e91",
+      "papers": [
+        "SSV-I",
+        "SSV-II"
+      ],
+      "was": {
+        "SSV-I": [
+          "1776.860"
+        ],
+        "SSV-II": [
+          "1776.86"
+        ]
+      }
+    },
+    "ssvProtonReducedComptonWavelength": {
+      "value": 2.103089102066989e-16,
+      "sig": 2,
+      "rendered": "2.1\\times10^{-16}",
+      "describes": "\\bar{\\lambda}_p=\\hbar/(m_p c) in metres, CODATA observed inputs",
+      "source": "instruments/series_values.py::proton_reduced_compton_wavelength",
+      "source_sha256_16": "ed78dc762df39e91",
+      "papers": [
+        "SSV-I",
+        "SSV-II",
+        "SSV-IV"
+      ],
+      "was": {
+        "SSV-I": [
+          "2.10\\times10^{-16}",
+          "2.10\\times 10^{-16}"
+        ],
+        "SSV-II": [
+          "2\\times10^{-16}",
+          "2\\times 10^{-16}",
+          "2.10\\times10^{-16}",
+          "2.10\\times 10^{-16}"
+        ],
+        "SSV-IV": [
+          "2\\times10^{-16}",
+          "2\\times 10^{-16}",
+          "2.1\\times10^{-16}",
+          "2.1\\times 10^{-16}",
+          "2.10\\times10^{-16}",
+          "2.10\\times 10^{-16}"
+        ]
+      }
+    },
+    "ssvProtonComptonWavelength": {
+      "value": 1.3214098545796814e-15,
+      "sig": 2,
+      "rendered": "1.3\\times10^{-15}",
+      "describes": "\\lambda_p=2\\pi\\hbar/(m_p c) in metres, CODATA observed inputs",
+      "source": "instruments/series_values.py::proton_compton_wavelength",
+      "source_sha256_16": "ed78dc762df39e91",
+      "papers": [
+        "SSV-II",
+        "SSV-IV"
+      ],
+      "was": {
+        "SSV-II": [
+          "1.3\\times10^{-15}",
+          "1.3\\times 10^{-15}"
+        ],
+        "SSV-IV": [
+          "1.3\\times10^{-15}",
+          "1.3\\times 10^{-15}"
+        ]
+      }
+    }
+  }
+}

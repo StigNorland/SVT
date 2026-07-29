@@ -100,6 +100,31 @@ def test_every_use_site_points_at_a_real_line():
         assert 1 <= int(lineno) <= n, f"{u.symbol}: {u.site} is past end of file"
 
 
+def test_every_use_site_line_contains_the_declared_symbol():
+    """A line number that merely remains inside the file is a false anchor.
+
+    Insertions used to leave stale declarations passing indefinitely.  Require
+    the cited line itself to contain the symbol spelling it is evidence for.
+    """
+    greek = {
+        "Lambda", "Omega", "mu_0", "xi",
+    }
+    for u in C.USES:
+        path_s, _, lineno = u.site.rpartition(":")
+        line = (REPO_ROOT / path_s).read_text(
+            encoding="utf-8", errors="replace").splitlines()[int(lineno) - 1]
+        if u.symbol == "bar_lambda_p":
+            pattern = re.escape(r"\bar{\lambda}_p")
+        elif u.symbol in greek:
+            head, _, sub = u.symbol.partition("_")
+            spelling = rf"\{head}" + (f"_{sub}" if sub else "")
+            pattern = re.escape(spelling)
+        else:
+            pattern = rf"(?<![A-Za-z]){re.escape(u.symbol)}(?![A-Za-z])"
+        assert re.search(pattern, line), (
+            f"{u.symbol}: stale site {u.site}; line is {line!r}")
+
+
 def test_declared_symbol_actually_occurs_in_that_paper():
     """A declaration about a symbol the paper does not use is a stale record."""
     seen = C.census()
@@ -215,26 +240,21 @@ def test_departure_check_is_not_vacuous():
     and the reference's symbols barely overlapped. An empty result read as a
     clean bill of health and was nothing of the kind.
     """
-    assert len(C.departures_from_standard()) >= 5, (
+    assert C.departures_from_standard(), (
         "the departure check has stopped finding the known departures; if the "
         "declared set no longer overlaps STANDARD, an empty result means the "
         "check is silent, not that the series agrees")
 
 
-def test_root_symbol_carries_the_readers_expectation():
-    """``a_0`` and ``a_p`` must be checked against ``a``.
-
-    This is what makes the reference useful for the a_0 question: the MOND
-    scale agrees with the root symbol's standard meaning and the Bohr radius
-    does not, which is a fact about the reader independent of which usage is
-    older.
-    """
-    assert C._standard_for("a_p"), "a_p must inherit the entry for a"
+def test_domain_standard_overrides_a_generic_root_assumption():
+    """A generic teaching-table entry for ``a`` cannot overrule established
+    subfield notation: a_0 is standard for both the Bohr radius and MOND's
+    acceleration, and bar(lambda)_p is standard for the reduced wavelength."""
+    assert C._standard_for("bar_lambda_p")
     reported = " ".join(C.departures_from_standard())
-    assert "a_0 in SSV-I" in reported
+    assert "a_0 in SSV-I" not in reported
     assert "a_0 in SSV-VI" not in reported, (
-        "the MOND a_0 IS an acceleration and must not be reported as a "
-        "departure — otherwise the check punishes the conforming usage")
+        "both established a_0 usages must be accepted in their domains")
 
 
 def test_only_b_is_unlisted_by_either_reference():
@@ -384,11 +404,13 @@ def test_both_cosmological_conventions_are_recorded():
         assert f"Lambda in {paper}" not in reported
 
 
-def test_mu0_departure_is_reported():
-    """The most expensive departure found: mu_0 is the vacuum permeability to
-    essentially every physicist, and SSV uses it for a mass."""
+def test_mu0_has_only_its_standard_meaning():
+    """After #213, mu_0 is reserved for vacuum permeability."""
     reported = " ".join(C.departures_from_standard())
-    assert "mu_0 in SSV-I" in reported
+    assert "mu_0 in " not in reported
+    uses = C.uses_of("mu_0")
+    assert {u.paper for u in uses} == {"SSV-II", "SSV-Goldstone"}
+    assert len({C._dim_key(u.dim) for u in uses}) == 1
 
 
 def test_departure_message_does_not_repeat_a_reference_entry():
@@ -398,23 +420,38 @@ def test_departure_message_does_not_repeat_a_reference_entry():
         assert len(parts) == len(set(parts)), f"duplicated entry: {line}"
 
 
-def test_mu0_is_the_permeability_and_the_base_scale_and_two_of_itself():
-    """The sharpest collision in the series.
+def test_legacy_mu0_and_a_p_spellings_are_absent_from_papers():
+    violations = {
+        paper: C.reserved_symbol_violations(paper)
+        for paper in C.paper_names()
+    }
+    assert not any(violations.values()), violations
 
-    mu_0 is the vacuum permeability in SSV-Goldstone's Maxwell equations —
-    printed beside epsilon_0, so no other reading is available — and the base
-    scale m_e/alpha in three other papers. Worse, SSV-I prints its own scale
-    two ways a factor c^2 apart, and the relations require the energy one.
-    """
-    mu = next(c for c in C.collisions() if c.symbol == "mu_0")
-    assert len(mu.dims) == 3, sorted(mu.dims)
-    papers = {p for uses in mu.dims.values() for p, _, _ in uses}
-    assert "SSV-Goldstone" in papers, "the Maxwell permeability use must be recorded"
-    within_i = [d for d, uses in mu.dims.items()
-                if any(p == "SSV-I" for p, _, _ in uses)]
-    assert len(within_i) == 2, (
-        "SSV-I prints mu_0 as both m_e c^2/alpha (energy) and m_e/alpha "
-        "(mass); in a paper that keeps c explicit these are not the same")
+
+def test_reserved_symbol_guard_is_not_vacuous(tmp_path, monkeypatch):
+    paper_dir = tmp_path / "SSV-Test"
+    paper_dir.mkdir()
+    (paper_dir / "main.tex").write_text(
+        r"$\mu_0=m_e/\alpha$ and $a_p=\hbar/(m_pc)$",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(C, "PAPERS", tmp_path)
+    found = " ".join(C.reserved_symbol_violations("SSV-Test"))
+    assert "reserved for vacuum permeability" in found
+    assert "non-standard" in found
+
+
+def test_census_distinguishes_reduced_and_ordinary_compton_wavelengths():
+    symbols = C._symbols_in(
+        r"$\bar{\lambda}_p=\hbar/(m_pc),\quad \lambda_p=2\pi\bar{\lambda}_p$")
+    assert "bar_lambda_p" in symbols
+    assert "lambda_p" in symbols
+
+
+def test_census_normalises_star_subscripts():
+    symbols = C._symbols_in(r"$E_\star=m_\star c^2$")
+    assert {"E_star", "m_star"} <= symbols
+    assert "m_^" not in symbols
 
 
 def test_mu0_over_alpha_is_an_identity_not_a_coincidence():

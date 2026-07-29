@@ -6,6 +6,11 @@ Entries link the issue that drove each change. Git history carries the rest.
 
 ---
 
+## 2026-07-29 — [#213](https://github.com/StigNorland/SVT/issues/213) · standard proton-length notation
+
+The reduced proton Compton wavelength is now written
+\(\bar\lambda_p\), replacing the project-specific \(a_p\).
+
 ## 2026-07-29 — [#213](https://github.com/StigNorland/SVT/issues/213) · the cosmological-constant relation was dimensionally inhomogeneous
 
 Found by the new programme-wide symbol census (`instruments/tools/conventions.py`),

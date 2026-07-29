@@ -4,6 +4,11 @@ The paper states **current status only**. Its history lives here.
 
 ---
 
+## 2026-07-29 — [#213](https://github.com/StigNorland/SVT/issues/213) · standard proton-length notation
+
+The reduced proton Compton wavelength is now written
+\(\bar\lambda_p\), replacing the project-specific \(a_p\).
+
 ## 2026-07-29 — [#210](https://github.com/StigNorland/SVT/issues/210) · horizon-thermality status
 
 The surface-gravity and Unruh-temperature checks remain kinematically valid,
