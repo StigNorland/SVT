@@ -279,7 +279,7 @@ USES: list[Use] = [
     Use("SSV-VIII", "Lambda", "cosmological constant", CURVATURE,
         "papers/SSV-VIII/main.tex:242"),
     Use("SSV-IX", "Lambda", "cosmological constant", CURVATURE,
-        "papers/SSV-IX/main.tex:232"),
+        "papers/SSV-IX/main.tex:236"),
     # The fourth meaning, and the one the first pass of this table MISSED:
     # bare \Lambda in the running-coupling form \ln(Q/\Lambda) is Lambda_QCD,
     # an energy.  The census reported \Lambda in 7 papers while the hand-written
@@ -294,13 +294,13 @@ USES: list[Use] = [
     Use("SSV-VI", "a_0", "MOND/RAR acceleration scale", ACCELERATION,
         "papers/SSV-VI/main.tex:553"),
     Use("SSV-IX", "a_0", "MOND/RAR acceleration scale", ACCELERATION,
-        "papers/SSV-IX/main.tex:232"),
+        "papers/SSV-IX/main.tex:236"),
 
     # ---- b: the #189 finding, three dimensions, recorded here across papers ----
     Use("SSV-I", "b", "LogSE coupling, energy per unit mass", ENERGY / mass,
         "papers/SSV-I/main.tex:220"),
     Use("SSV-V", "b", "LogSE coupling, declared a frequency", FREQUENCY,
-        "papers/SSV-V/main.tex:135"),
+        "papers/SSV-V/main.tex:154"),
     Use("SSV-VII-a", "b", "LogSE coupling, required to be an energy", ENERGY,
         "papers/SSV-VII-a/main.tex:383"),
     Use("SSV-III", "b", "RG block-scaling factor, a pure number", ONE,
@@ -346,7 +346,7 @@ USES: list[Use] = [
     Use("SSV-III", "S", r"entropy, S = k_B\ln\Omega", ENTROPY,
         "papers/SSV-III/main.tex:308"),
     Use("SSV-V", "S", r"wake/horizon entropy, S_H = k_B\ln\Omega_H", ENTROPY,
-        "papers/SSV-V/main.tex:430"),
+        "papers/SSV-V/main.tex:437"),
     # Not dimensioned quantities: a manifold label, an integration surface, a
     # propagator.  Typing these would be inventing a dimension to satisfy a
     # completeness rule, which is worse than admitting the category.
@@ -376,7 +376,7 @@ USES: list[Use] = [
         "papers/SSV-IV/main.tex:175"),
     Use("SSV-V", "bar_lambda_p",
         r"reduced proton Compton wavelength \hbar/(m_p c)", length,
-        "papers/SSV-V/main.tex:485"),
+        "papers/SSV-V/main.tex:492"),
     Use("SSV-VII-b", "bar_lambda_p",
         r"reduced proton Compton wavelength \hbar/(m_p c)", length,
         "papers/SSV-VII-b/main.tex:352"),
