@@ -124,6 +124,16 @@ ANCHORED: dict[str, dict[str, Dimension]] = {
         "m": mass,
         "rho": MASS_DENSITY,
     },
+    # Added by #213 Part A: the cross-paper symbol census flagged Lambda as
+    # carrying three dimensions across the series, which sent the checker at
+    # this paper's cosmological-constant relation for the first time.
+    "SSV-VII-b": {
+        "hbar": ACTION,
+        "c": VELOCITY,
+        "G": length**3 / (mass * time**2),
+        "rho": MASS_DENSITY,                     # rho_0, the saturation density
+        "P": mass / (length * time**2),          # P_0, the saturation pressure
+    },
     "SSV-VII-a": {
         "hbar": ACTION,
         "m": mass,
@@ -139,6 +149,12 @@ ANCHORED: dict[str, dict[str, Dimension]] = {
 }
 
 FREE: dict[str, set[str]] = {
+    # SSV-VII-b introduces no unpinned symbol: every symbol in its Lambda
+    # relation is fixed by definition elsewhere.  The empty set is a
+    # declaration, not an omission — with nothing free, an inhomogeneous
+    # relation cannot be repaired by any assignment, which is what makes the
+    # #213-A1 defect unrepairable rather than merely unresolved.
+    "SSV-VII-b": set(),
     "SSV-I": {"b"},
     "SSV-II": {"e"},
     "SSV-V": {"b"},
@@ -269,6 +285,22 @@ RELATIONS: list[Relation] = [
              "1D probability density, but eq:polar declares rho the MASS "
              "density — one symbol, two dimensions",
              status="inhomogeneous", defect="E5"),
+
+    # ---------------- SSV-VII-b (#213 Part A) ----------------
+    # Both forms are kept.  Recording the defective one as printed is what makes
+    # this checker demonstrably able to catch the class, rather than merely
+    # agreeing with corrected algebra — the same convention as SSV-I eq:cs.
+    Relation("SSV-VII-b", "eq:Lambda-as-printed-pre-213",
+             "papers/SSV-VII-b/main.tex:526",
+             {"G": 1, "c": -4, "P": 1, "rho": -1}, 1 / length**2,
+             "Lambda = (8 pi G/c^2)(P_0/rho_0 c^2) as printed before #213: the "
+             "prefactor is missing rho_0, so the expression is L/M while the "
+             "paper's own text quotes Lambda ~ 1e-52 m^-2",
+             status="inhomogeneous", defect="#213-A1", printed=False),
+    Relation("SSV-VII-b", "eq:Lambda", "papers/SSV-VII-b/main.tex:526",
+             {"G": 1, "rho": 1, "c": -2}, 1 / length**2,
+             "Lambda = (8 pi G rho_0/c^2)(P_0/rho_0 c^2) = 8 pi G P_0/c^4, the "
+             "corrected form: a curvature, matching the quoted 1e-52 m^-2"),
 ]
 
 
