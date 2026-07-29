@@ -118,18 +118,6 @@ def test_the_three_known_collisions_are_reported():
     assert {"Lambda", "a_0", "b"} <= found
 
 
-def test_lambda_carries_three_dimensions():
-    """#213 Part A. Dimensionless in I/III, a wavenumber in III, a curvature
-    in VI/VII-b/IX — and two of those are inside SSV-III alone."""
-    lam = next(c for c in C.collisions() if c.symbol == "Lambda")
-    assert len(lam.dims) == 3
-    within_iii = [d for d, uses in lam.dims.items()
-                  if any(p == "SSV-III" for p, _, _ in uses)]
-    assert len(within_iii) == 2, (
-        "SSV-III uses Lambda both as a slow logarithm and as the cutoff "
-        "wavenumber xi^-1; that is the b-in-SSV-I error class inside one paper")
-
-
 def test_a0_is_a_bohr_radius_and_an_acceleration():
     a0 = next(c for c in C.collisions() if c.symbol == "a_0")
     assert len(a0.dims) == 2
@@ -185,3 +173,31 @@ def test_docstring_states_the_limits():
     doc = C.__doc__
     for phrase in ("Not** guarded", "drift guard", "not referee"):
         assert phrase.lower() in doc.lower(), f"missing limit: {phrase}"
+
+
+def test_declared_symbol_is_declared_everywhere_it_occurs():
+    """Once a symbol is declared at all, every paper using it must be declared.
+
+    This is the test that would have caught the first pass's own omission: the
+    census reported ``\\Lambda`` in 7 papers while the hand-written table
+    declared 5, silently understating the collision as three dimensions when it
+    is four. A partial declaration is worse than none — it reports a number
+    that looks complete.
+    """
+    seen = C.census()
+    declared_symbols = {u.symbol for u in C.USES}
+    gaps = []
+    for symbol in sorted(declared_symbols):
+        have = {u.paper for u in C.uses_of(symbol)}
+        missing = seen.get(symbol, set()) - have
+        if missing:
+            gaps.append(f"{symbol}: undeclared in {sorted(missing)}")
+    assert not gaps, "\n".join(gaps)
+
+
+def test_lambda_carries_four_dimensions():
+    """Dimensionless (I, III), a wavenumber (III), a curvature (VI/VII-b/VIII/IX)
+    and an energy (II, Lambda_QCD). Four unrelated quantities, four fields, one
+    letter."""
+    lam = next(c for c in C.collisions() if c.symbol == "Lambda")
+    assert len(lam.dims) == 4, sorted(lam.dims)

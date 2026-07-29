@@ -243,8 +243,17 @@ USES: list[Use] = [
         "papers/SSV-VI/main.tex:570"),
     Use("SSV-VII-b", "Lambda", "cosmological constant", CURVATURE,
         "papers/SSV-VII-b/main.tex:526"),
+    Use("SSV-VIII", "Lambda", "cosmological constant", CURVATURE,
+        "papers/SSV-VIII/main.tex:242"),
     Use("SSV-IX", "Lambda", "cosmological constant", CURVATURE,
         "papers/SSV-IX/main.tex:226"),
+    # The fourth meaning, and the one the first pass of this table MISSED:
+    # bare \Lambda in the running-coupling form \ln(Q/\Lambda) is Lambda_QCD,
+    # an energy.  The census reported \Lambda in 7 papers while the hand-written
+    # half declared only 5 — the machine half caught the human half's omission,
+    # which is why test_declared_symbol_is_declared_everywhere_it_occurs exists.
+    Use("SSV-II", "Lambda", r"\Lambda_{\rm QCD} \approx 200 MeV, an energy scale",
+        ENERGY, "papers/SSV-II/main.tex:1057"),
 
     # ---- a_0: Bohr radius vs the MOND acceleration scale ----
     Use("SSV-I", "a_0", "Bohr radius", length,
@@ -265,6 +274,20 @@ USES: list[Use] = [
         "papers/SSV-III/main.tex:995",
         local="the renormalisation block factor of \\mathcal{R}_b; unrelated to "
               "the LogSE coupling and never appears beside it"),
+    # The completeness test found four more papers using b that the first pass
+    # had not declared.  IV and VII-b agree with SSV-I; VI is a local
+    # dimensionless fit parameter; II restates SSV-I's E6 relation.
+    Use("SSV-IV", "b", r"LogSE coupling, \mu_{\rm nl} = dV/d\rho = b\ln(\rho/\rho_0)",
+        ENERGY / mass, "papers/SSV-IV/main.tex:495"),
+    Use("SSV-VII-b", "b", r"LogSE coupling, \Phi = b\ln(\rho/\rho_0)",
+        ENERGY / mass, "papers/SSV-VII-b/main.tex:46"),
+    Use("SSV-II", "b", r"LogSE stiffness, via b\rho_0 = m_0c^2 — inherits SSV-I's "
+        r"recorded E6 mismatch, see dimensions.py",
+        ENERGY / mass, "papers/SSV-II/main.tex:253"),
+    Use("SSV-VI", "b", "dimensionless halo-profile fit parameter (b = 0.5, 1)",
+        ONE, "papers/SSV-VI/main.tex:218",
+        local="a fit exponent in the rotation-curve profile; the LogSE coupling "
+              "does not appear anywhere in this paper"),
 ]
 
 
