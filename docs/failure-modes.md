@@ -420,6 +420,54 @@ in the grid?* Here the answer was no, for years.
 
 ---
 
+## FM15 — a paper narrates its own edit history
+
+**Observed:** ten of twelve papers carried change-record prose, and SSV-I
+carried an entire **`What changed in this paper`** section — a changelog inside
+the argument. A first survey found 16 passages; the gate written to enforce the
+rule immediately found **two more the survey had missed**, including that
+section, because it used wording ("appeared in earlier drafts", "was previously
+headlined") the survey's patterns did not cover. The final count was 18
+passages across 5 papers, roughly 180 lines.
+
+Density showed the habit **accelerating, not decaying**: SSV-VII-a carried 4
+passages in 3,876 words the same day it was audited, against SSV-IV's 0 in
+11,067. Most of VII-a's were written by the model, in the repository's own house
+style, hours before the rule existed.
+
+**Why it matters:** it is not only length. A reader cannot tell, at a glance,
+whether a paragraph states what the theory claims or what it used to claim, and
+the two are interleaved inside single sentences. The paper stops being a
+statement of the theory and becomes a diff.
+
+**Guard:** `build_paper.py::gate_change_records` — a literal deny-list of
+phrases, run before `pdflatex`, plus a required `papers/<PAPER>/CHANGELOG.md`
+so removed history has somewhere to go. Linked once from the generated
+provenance appendix.
+
+**The dangerous failure of this guard, and what stops it.** A naive
+implementation would ban verdict words — `withdrawn`, `falsified`, `retracted`,
+`rejected` — and would then be a tool for **deleting negative results**, which
+is the exact defect \#182 existed to find. The deny-list contains no verdict
+word, and `test_present_tense_verdicts_are_never_banned` asserts that for each
+of the four. The distinction is **tense, not topic**: a falsification stated in
+the present tense is not a change record.
+
+Migration is a *split*, not a delete: most passages are half status and half
+history inside one sentence. Every removed passage must leave a present-tense
+statement of the same finding in the paper, and the removed text is reproduced
+verbatim in the changelog, so nothing is destroyed — only relocated.
+
+A claim guard whose statement moves **moves with it**: `claims.py` anchors to
+whatever file `site` names, so `rho0-smaller-by-2e4` now guards its sentence in
+`papers/SSV-I/CHANGELOG.md` rather than being quietly dropped when the sentence
+left `main.tex`.
+
+**Not covered:** the gate matches *phrasing*, not intent. "This paragraph used
+to say something else", written in words not on the list, passes. It is a drift
+guard like rules 15 and 16, and the judgement of whether a paper reads as a
+statement or as a diff stays with the reviewer.
+
 ## What runs when
 
 `python instruments/tools/build_paper.py <PAPER>` runs FM1, FM2, FM5's evidence
@@ -444,6 +492,7 @@ ones most likely to lapse.
 | FM12 generated artifact churns across environments | `RECEIPT_SIGFIGS` rounding | suite (one receipt only) |
 | FM13 constant labelled with a provenance it lacks | read the source receipt, don't retype | suite (one instrument only) |
 | FM14 sweep omits the axis the conclusion turns on | `b1_fragility_report` + claim guard | **build** (this verdict only) + review |
+| FM15 paper narrates its own edit history | phrase deny-list + per-paper `CHANGELOG.md` | **build** (phrasing only) + review |
 
 Adding a failure mode to this register is cheap. Leaving one out because its
 guard is embarrassing is how #182 happened.
