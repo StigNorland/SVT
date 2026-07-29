@@ -396,3 +396,22 @@ def test_departure_message_does_not_repeat_a_reference_entry():
         _, _, expect = line.partition("reference lists ")
         parts = [p.strip() for p in expect.split(";")]
         assert len(parts) == len(set(parts)), f"duplicated entry: {line}"
+
+
+def test_mu0_is_the_permeability_and_the_base_scale_and_two_of_itself():
+    """The sharpest collision in the series.
+
+    mu_0 is the vacuum permeability in SSV-Goldstone's Maxwell equations —
+    printed beside epsilon_0, so no other reading is available — and the base
+    scale m_e/alpha in three other papers. Worse, SSV-I prints its own scale
+    two ways a factor c^2 apart, and the relations require the energy one.
+    """
+    mu = next(c for c in C.collisions() if c.symbol == "mu_0")
+    assert len(mu.dims) == 3, sorted(mu.dims)
+    papers = {p for uses in mu.dims.values() for p, _, _ in uses}
+    assert "SSV-Goldstone" in papers, "the Maxwell permeability use must be recorded"
+    within_i = [d for d, uses in mu.dims.items()
+                if any(p == "SSV-I" for p, _, _ in uses)]
+    assert len(within_i) == 2, (
+        "SSV-I prints mu_0 as both m_e c^2/alpha (energy) and m_e/alpha "
+        "(mass); in a paper that keeps c explicit these are not the same")

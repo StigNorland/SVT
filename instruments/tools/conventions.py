@@ -307,8 +307,29 @@ USES: list[Use] = [
     # it for a MASS, m_e/alpha ~ 70 MeV, in four papers.  Not a defect — the
     # series is internally consistent — but the most expensive departure here,
     # because mu_0 is among the least ambiguous symbols in physics.
-    Use("SSV-I", "mu_0", r"base mass scale m_e/\alpha \approx 70.025 MeV", mass,
-        "papers/SSV-I/main.tex:937"),
+    # ---- mu_0: the sharpest collision in the series ----
+    # The series uses mu_0 BOTH for its own base scale and, in Goldstone's
+    # Maxwell equations, for the actual vacuum permeability -- alongside
+    # epsilon_0, so there is no reading in which it is anything else.
+    # And SSV-I defines its own scale two ways, a factor c^2 apart:
+    #   :59, :361, :1047   mu_0 = m_e c^2/alpha   an ENERGY
+    #   :937 and 12 others mu_0 = m_e/alpha       a MASS
+    # The printed relations require the ENERGY reading -- m_p c^2 = N_Y F mu_0
+    # has an energy on the left, and hbar omega ~ mu_0 (...) likewise. These
+    # papers keep c explicit throughout, so the mass form is not natural-units
+    # shorthand; it is inhomogeneous.
+    Use("SSV-I", "mu_0", r"base scale, printed as m_ec^2/\alpha -- an ENERGY",
+        ENERGY, "papers/SSV-I/main.tex:59"),
+    Use("SSV-I", "mu_0", r"base scale, printed as m_e/\alpha -- a MASS",
+        mass, "papers/SSV-I/main.tex:937"),
+    Use("SSV-II", "mu_0", r"base scale m_e/\alpha \approx 70 MeV", mass,
+        "papers/SSV-II/main.tex:269"),
+    Use("SSV-Alpha", "mu_0", r"base scale m_e/\alpha", mass,
+        "papers/SSV-Alpha/main.tex:34"),
+    Use("SSV-Goldstone", "mu_0", "vacuum permeability, in Maxwell's equations "
+        r"\nabla\times B = \mu_0 J and the field energy B^2/2\mu_0",
+        mass * length / (time**2 * current**2),
+        "papers/SSV-Goldstone/main.tex:247"),
     Use("SSV-I", "xi", "healing length of the defect core", length,
         "papers/SSV-I/main.tex:403"),
     Use("SSV-III", "Omega", "number of microstates, dimensionless", ONE,
@@ -362,7 +383,7 @@ USES: list[Use] = [
 #: complete) and "SSV-I uses F for a form factor" (a fact about one site).
 #: Reporting the first from a partial table is how the first pass of this file
 #: said "three dimensions" about a symbol carrying four.
-COMPLETE: frozenset = frozenset({"b", "Lambda", "a_0", "S"})
+COMPLETE: frozenset = frozenset({"b", "Lambda", "a_0", "S", "mu_0"})
 
 
 def uses_of(symbol: str) -> list[Use]:
@@ -447,7 +468,7 @@ def coverage() -> dict:
 #: What the gate does guarantee is that **no fourth collision arrives quietly**.
 #: This is the same shape as ``claims.py``: known state is pinned, and drift
 #: from it stops the build.
-KNOWN_COLLISIONS: frozenset = frozenset({"Lambda", "a_0", "b", "S"})
+KNOWN_COLLISIONS: frozenset = frozenset({"Lambda", "a_0", "b", "S", "mu_0"})
 
 
 def new_collisions() -> list[Collision]:
