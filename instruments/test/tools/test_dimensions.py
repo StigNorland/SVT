@@ -152,3 +152,41 @@ def test_solving_for_an_anchored_symbol_is_refused():
     rel = next(r for r in D.relations_for("SSV-I") if r.label == "eq:xi")
     with pytest.raises(ValueError):
         D.implied_dimension(rel, "hbar")
+
+
+# --------------------------------------------------------------------------
+# SSV-VII-a (#189) — and the cross-paper finding it makes visible
+# --------------------------------------------------------------------------
+
+def test_vii_a_b_is_consistently_an_energy_within_its_own_paper():
+    """Unlike SSV-I's `b`, VII-a's is NOT overloaded internally: the LogSE,
+    the Gausson width and the sound-speed-free relations all want an energy.
+    Recording the clean case matters — a checker that only ever reports
+    defects is indistinguishable from one that always reports defects."""
+    assigned = D.consistent_assignment("SSV-VII-a", "b")
+    assert assigned is not None
+    assert assigned == D.dims(D.ENERGY)
+
+
+def test_vii_a_rho_carries_two_dimensions():
+    """E5, encoded as printed. `eq:polar` declares rho the mass density;
+    `eq:gausson-Dx` needs |Psi|^2 to be a 1D probability density."""
+    dx = next(r for r in D.relations_for("SSV-VII-a")
+              if r.label == "eq:gausson-Dx")
+    assert dx.status == "inhomogeneous" and dx.defect == "E5"
+    assert not D.is_homogeneous(dx)
+    # rho is anchored, so no assignment to the free symbols can absorb this
+    assert dx in D.unrepairable("SSV-VII-a")
+
+
+def test_b_carries_three_different_dimensions_across_the_series():
+    """The #205 headline, produced by the checker rather than asserted.
+
+    `b` is declared J/kg in SSV-I, a frequency in SSV-V, and required to be an
+    energy in SSV-VII-a. Each is self-consistent within its own paper, which is
+    exactly why no per-paper gate could see it.
+    """
+    across = D.declared_across_papers("b")
+    assert set(across) == {"SSV-I", "SSV-V", "SSV-VII-a"}
+    assert len({D._key(d) for d in across.values()}) == 3, (
+        f"expected three distinct dimensions for b, got {across}")

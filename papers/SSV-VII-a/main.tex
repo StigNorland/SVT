@@ -10,6 +10,7 @@
 \usepackage{hyperref}
 \usepackage{enumitem}
 \providecommand{\ssvissue}[1]{\hyperref[issue:#1]{\##1}}% in-text issue ref -> Code & Issue References appendix
+\providecommand{\ssvfile}[1]{\hyperref[file:#1]{\texttt{\detokenize{#1}}}}% in-text script/report ref -> same appendix
 \usepackage{caption}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}
@@ -115,7 +116,25 @@ Let the local state of the saturated medium be the complex order parameter
   \Psi(\mathbf{x},t) = \sqrt{\rho(\mathbf{x},t)}\,e^{iS(\mathbf{x},t)/\hbar},
   \label{eq:polar}
 \end{equation}
-where $\rho$ is the mass density and $S$ is the phase action.  The associated
+where $\rho$ is the mass density and $S$ is the phase action.
+
+\paragraph{Normalisation convention, stated once (\ssvissue{189}).}
+$\rho$ is used in two conventions in this paper and the difference is recorded
+here rather than left to the reader.  In the hydrodynamic sections
+\eqref{eq:continuity}--\eqref{eq:euler} and in the Schr\"odinger limit,
+$\rho = |\Psi|^2$ is a \emph{mass density} and $\rho_0$ is the saturated
+background of Papers~I--IV.  In \S\ref{sec:gausson-saturation} the
+single-particle convention $\int|\Psi|^2\,\mathrm{d}x = 1$ is used instead,
+without which \eqref{eq:gausson-Dx} would not give $\sigma^2/2$; there
+$|\Psi|^2$ is a probability density and $\rho_0$ is whatever reference
+density makes the logarithm's argument dimensionless.  The two differ by a
+factor of the particle mass and a normalisation volume.  Nothing in
+\eqref{eq:continuity}--\eqref{eq:euler} depends on the choice --- $Q$ in
+\eqref{eq:Q} is invariant under $\rho\to\lambda\rho$ --- but the symbol does
+carry two dimensions across the paper, and saying so is cheaper than the
+alternative.  Generalised as \ssvissue{205}.
+
+The associated
 irrotational velocity field is
 \begin{equation}
   \mathbf{v} = \frac{1}{m}\nabla S.
@@ -213,7 +232,25 @@ linearised chiral-shear potential reduces to the Coulomb form
 \end{equation}
 where the proportionality is fixed by the same identification
 $\alpha = c_\perp/c$ that defines the chiral-shear coupling in
-Paper~I (\S\,Postulate).  Equation~\eqref{eq:schrodinger} with
+Paper~I (\S\,Postulate).
+
+\emph{Correction of attribution (\ssvissue{189}).}  Earlier versions of this
+paragraph credited the reduction to Coulomb form to ``Paper~I's
+electromagnetism sector''.  It is not there.  Paper~I fixes
+$\alpha = c_\perp/c$ and states that the chiral stiffness acts ``in the
+statics of charged defects'', explicitly routing that sector to
+Paper~II~\cite{SSV-II}; the Bernoulli-pressure derivation of
+$F_C = \alpha\hbar c/r^2$ is Paper~II's.  The two papers were both cited for
+one claim that only one of them makes.
+
+It should also be said plainly what \eqref{eq:Veff-coulomb} costs.  Paper~II
+records the Coulomb coupling as \emph{empirical} $\alpha$: the $1/r$ form is
+derived, the strength is an input.  So what follows is a
+\emph{consistency} result --- the Rydberg series is recovered given
+$\{m_e,\alpha,c\}$, which the series already concedes as inputs --- and not a
+prediction of the Rydberg constant.
+
+Equation~\eqref{eq:schrodinger} with
 $V_\mathrm{eff}$ from \eqref{eq:Veff-coulomb} is the hydrogen Schr\"odinger
 equation; its eigenvalues are the familiar Rydberg series
 \begin{equation}
@@ -223,9 +260,12 @@ equation; its eigenvalues are the familiar Rydberg series
 \end{equation}
 with the prefactor expressed entirely in SSV constants $\{m_e, \alpha, c\}$
 that Paper~I already takes as fixed.  The hydrogen-like bound-state spectrum
-is therefore a direct consequence of the LogSE low-amplitude long-wavelength
-limit together with Paper~I's chiral-shear identification of electromagnetism,
-with no fresh numerical input.
+therefore follows from the LogSE low-amplitude long-wavelength limit together
+with the chiral-shear identification of electromagnetism (Paper~I for
+$\alpha=c_\perp/c$, Paper~II~\cite{SSV-II} for the Coulomb statics), adding no
+input beyond the ones already conceded.  ``No fresh input'' is the correct
+claim; ``derived'' is not, since $\alpha$ enters
+\eqref{eq:Veff-coulomb} empirically.
 
 The same construction applies to any heavy SSV source defect.  The effective
 potential is set by the long-wavelength chiral-shear field of that source,
@@ -282,34 +322,61 @@ the vacuum medium made quantitative.
 \subsection{Saturation by the Gausson}
 \label{sec:gausson-saturation}
 
-\begin{gapbox}[Interim status: this section is under revision (\ssvissue{189})]
-\textbf{This section is retained as a record and should not be read as
-current.}  Two findings of the \ssvissue{182} audit apply, and no repair is
-attempted here; the replacement is tracked separately.
+\begin{gapbox}[Rejected-branch record --- this section is not current
+(\ssvissue{189})]
+\textbf{This section is retained deliberately, as a record of a route that
+does not work.}  It is kept rather than deleted for the same reason
+Paper~I keeps its rejected sign visible: a negative result that is explicit
+in one place and invisible in another is the defect the \ssvissue{182} audit
+was created to find.  \textbf{Nothing below should be read as a current claim
+of the programme.}  Both findings are now machine-checked
+(\ssvfile{logse_gaussian}; report \ssvfile{logse-gaussian-issue189}).
 
 \begin{enumerate}[label=(\roman*)]
   \item \textbf{The Gausson does not exist on the adopted branch.}
-        Equation~\eqref{eq:gausson} solves the LogSE only on the
-        \emph{attractive} branch.  Paper~I (\ssvissue{183}) has since rejected
-        that branch: it makes the uniform vacuum modulationally unstable and
-        cannot support $c_s=c$.  On the stable-vacuum branch actually adopted,
+        Substituting the Gaussian ansatz into the LogSE and requiring the
+        $x^2$ terms to cancel fixes the width uniquely, and its \emph{sign} is
+        set by the sign of the logarithmic term.  In the convention this
+        section prints, $\sigma^2 = +\hbar^2/(2mb)$ and
+        Eq.~\eqref{eq:gausson} is correct.  In the convention Paper~I adopted
+        (\ssvissue{183}), $\sigma^2 = -\hbar^2/(2mb) < 0$ and \textbf{no
+        normalisable Gaussian exists at all}.  Paper~I rejected the attractive
+        branch because it makes the uniform vacuum modulationally unstable and
+        cannot support $c_s=c$.  On the branch actually adopted,
         \S\ref{sec:gausson-saturation} has no solution to stand on, and
         particles must be \emph{topological} rather than bright solitons.
+
+        The distinction matters for what is being conceded: this section did
+        not miscalculate.  It wrote a correct equation for a theory the series
+        has since rejected.
   \item \textbf{The $\hbar/2$ is imported, not derived --- on either branch.}
         The claim below is that the prefactor comes ``directly from the LogSE
         itself''.  The offered evidence is that the result is independent of
         the Gausson width $\sigma$, and therefore of $b$.  That independence is
-        the tell: \emph{every} Gaussian saturates
-        $\Delta x\,\Delta p = \hbar/2$.  It is a property of Gaussians, not of
-        the LogSE.  The computation performed --- Gaussian moments giving
-        $\sigma^2/2$ and $\hbar^2/2\sigma^2$, then multiplying --- \emph{is}
-        the standard wave-packet calculation.  The LogSE contributed only the
-        claim that its stationary state is Gaussian, and under (i) it has no
-        such state.
+        the tell: \emph{every} normalised Gaussian saturates
+        $\Delta x\,\Delta p = \hbar/2$, for any width, with $b$ entering
+        nowhere.  It is a property of Gaussians, not of the LogSE.  The
+        computation performed --- Gaussian moments giving $\sigma^2/2$ and
+        $\hbar^2/2\sigma^2$, then multiplying --- \emph{is} the standard
+        wave-packet calculation.  The LogSE contributed only the claim that its
+        stationary state is Gaussian, and under (i) it has no such state.
+
+        That saturation is specific to Gaussianity rather than to
+        normalisability is checked against a control: the normalised state
+        $\psi \propto e^{-|x|/\lambda}$ gives
+        $\Delta x\,\Delta p = (\sqrt2/2)\,\hbar > \hbar/2$.  Without that
+        control the observation would be empty.
 \end{enumerate}
 The uncertainty principle may still be recoverable as ``hydraulic stiffness of
-the vacuum'' in the sense this paper intends, but not by this route.
+the vacuum'' in the sense this paper intends, but not by this route.  Whether a
+\emph{topological} defect can do what the bright soliton cannot is open, and
+shares a root with \ssvissue{196} and \ssvissue{178}: the bare one-component
+order parameter may not carry the required structure, in which case the
+replacement is a change of theory rather than a substitution.
 \end{gapbox}
+
+The remainder of this section is reproduced \emph{as it stood}, and is the
+rejected-branch material referred to above.
 
 The precise prefactor $1/2$ in \eqref{eq:uncertainty} was taken to follow
 directly from the LogSE itself, without importing it from the standard
@@ -363,18 +430,27 @@ The product is
 which is independent of the Gausson width $\sigma$ and therefore independent
 of the LogSE coupling $b$.
 
-\begin{resultbox}[The $\hbar/2$ prefactor is derived, not imported]
-The minimum uncertainty product $\Delta x\,\Delta p = \hbar/2$ is realised
-exactly on the Gausson \eqref{eq:gausson}, the LogSE's natural coherent
-state.  The $1/2$ prefactor arises from the Gaussian integral structure that
-the logarithmic nonlinearity preserves: $(\Delta x)^2 = \sigma^2/2$ and
-$(\Delta p)^2 = \hbar^2/(2\sigma^2)$ jointly fix the saturation value
-without independent normalisation choice.  The hydraulic-stiffness argument
-of \S\ref{sec:uncertainty} therefore not only recovers the form of the
-uncertainty relation; it identifies the LogSE coherent state on which the
-bound is saturated and the LogSE structure constants $(m, b)$ that fix the
-Gausson width.
-\end{resultbox}
+\begin{gapbox}[Withdrawn: the $\hbar/2$ prefactor is imported, not derived]
+\textbf{This replaces the result this section originally claimed.}  The
+superseded statement was that ``the $\hbar/2$ prefactor is derived, not
+imported'' --- that the minimum uncertainty product is realised on the Gausson
+as the LogSE's natural coherent state, with the structure constants $(m,b)$
+fixing the width and hence the bound.
+
+Both halves fail.  Under (i) the LogSE has no normalisable Gaussian on the
+adopted branch, so there is no such coherent state; and under (ii) the width
+$\sigma$ cancels out of \eqref{eq:gausson-saturation} identically, so
+$(m,b)$ cannot be fixing anything the answer depends on.  The calculation
+performed in \eqref{eq:gausson-Dx}--\eqref{eq:gausson-saturation} is the
+textbook Gaussian wave-packet result, and it returns $\hbar/2$ whether or not
+the LogSE is anywhere in the problem.
+
+What \S\ref{sec:uncertainty} still supports is the \emph{form} of an
+uncertainty relation from hydraulic stiffness.  The \emph{prefactor} is not
+earned here.  Verdict \texttt{MISDERIVED}, recorded in
+\ssvfile{logse-gaussian-issue189} and guarded against silent re-upgrade by
+\ssvfile{logse_gaussian}.
+\end{gapbox}
 
 %%──────────────────────────────────────────────────────────────────────────────
 \section{Measurement as Reconnection}
@@ -445,12 +521,49 @@ in the window, is
   \label{eq:born-derived}
 \end{equation}
 where the last step uses the standard normalisation $\sum_j |c_j|^2 = 1$.
-The basin volume for outcome $k$ is therefore $|c_k|^2$ by direct calculation
-in the reconnection-threshold model, with no remaining choice: the rate
-linearity comes from the leading-coupling expansion, and the cancellation of
-the apparatus factor $\kappa$ comes from every branch coupling to the same
-threshold mode.  The Born rule \eqref{eq:born} is a derived consequence of
-the SSV measurement mechanism, not merely a consistency statement.
+
+\begin{gapbox}[Withdrawn: the basin argument does not derive the Born
+exponent (\ssvissue{189})]
+This paragraph previously concluded that ``the Born rule~\eqref{eq:born} is a
+derived consequence of the SSV measurement mechanism, not merely a consistency
+statement''.  That conclusion is withdrawn; the argument above is retained
+because what it does establish is worth keeping.
+
+The exponent is \emph{assumed, not obtained}.  The chain is
+\[
+  \varepsilon_k = |c_k|^2|\psi_k|^2
+  \;\longrightarrow\;
+  \Gamma_k \propto \varepsilon_k
+  \;\longrightarrow\;
+  P_k \propto |c_k|^2 ,
+\]
+and the first arrow is the Born weight itself --- the premise that the energy
+density delivered by a branch is \emph{quadratic} in its amplitude.  It is
+the same assumption the preceding paragraph offers as the informal
+consistency argument.  Cancelling $\kappa$ removes a factor common to all
+branches; it cannot change an exponent that entered at the first step.  This
+is the error of \S\ref{sec:gausson-saturation} in a second place: what is put
+in as an amplitude-squared is recovered as an amplitude-squared, and the
+intervening algebra is where the appearance of derivation comes from.
+
+What the argument \emph{does} establish, conditionally and usefully: given
+(a) rate linear in delivered energy density, (b) a threshold mode common to
+every branch, so that $\kappa$ is genuinely $k$-independent, and (c) unit
+normalisation, the reconnection-threshold model reproduces Born weights
+rather than some competing rule.  That is a real constraint on the
+measurement model.  It is not a derivation of the exponent, which is what
+makes the Born rule hard.
+
+A derivation would have to obtain $\varepsilon_k \propto |c_k|^2$ from the
+medium dynamics without assuming the quadratic form --- or replace the
+argument with one that fixes the exponent from a symmetry or a counting
+principle.  Neither is in hand.
+
+Notation, recorded with it: $\kappa$ in \eqref{eq:gamma-k} is defined by an
+integral containing $\psi_k$, so as written it carries a $k$ index that the
+cancellation requires it not to have.  Assumption (b) is what removes it, and
+it should be stated as an assumption rather than hidden in the notation.
+\end{gapbox}
 
 \subsection{What this does and does not claim}
 
@@ -512,9 +625,15 @@ Two near-term checks follow from the reconnection model.
     from the LogSE, without treating $V_\mathrm{eff}$ as an external input, is
     part of the Paper~I programme.
 
-  \item \emph{Precise uncertainty prefactor.}  The $1/2$ in \eqref{eq:uncertainty}
-    should emerge from the LogSE coherent-state minimum; the calculation is
-    deferred to the Paper~I programme.
+  \item \emph{Precise uncertainty prefactor --- one route now closed.}  The
+    $1/2$ in \eqref{eq:uncertainty} was to emerge from the LogSE
+    coherent-state minimum.  That specific route is \emph{closed}, not
+    deferred (\ssvissue{189}; \S\ref{sec:gausson-saturation}): on the branch
+    Paper~I adopted the LogSE has no normalisable Gaussian stationary state,
+    and on either branch the Gaussian uncertainty product is independent of
+    the width and of $b$, so it cannot carry information about the LogSE.  A
+    derivation of the prefactor would have to come from a \emph{topological}
+    minimiser, and no candidate is in hand.
 
   \item \emph{Multi-particle states.}  The present treatment addresses
     single-order-parameter modes.  Multi-particle states and exchange statistics

@@ -91,7 +91,7 @@ Generated from `verification.json` — do not edit by hand.
 | `Srednicki1993` | `evidence-recorded` | SSV-V | [note](notes/Srednicki1993.md) |
 | `SSV-Goldstone` | `local-source` | SSV-IX | [note](notes/SSV-Goldstone.md) |
 | `SSV-I` | `local-source` | SSV-Alpha, SSV-II, SSV-III, SSV-V, SSV-VII-a, SSV-VII-b, SSV-VIII | [note](notes/SSV-I.md) |
-| `SSV-II` | `local-source` | SSV-Alpha, SSV-III, SSV-IX, SSV-V, SSV-VII-b, SSV-VIII | [note](notes/SSV-II.md) |
+| `SSV-II` | `local-source` | SSV-Alpha, SSV-III, SSV-IX, SSV-V, SSV-VII-a, SSV-VII-b, SSV-VIII | [note](notes/SSV-II.md) |
 | `SSV-III` | `local-source` | SSV-IX, SSV-V, SSV-VII-a | [note](notes/SSV-III.md) |
 | `SSV-IV` | `local-source` | SSV-V, SSV-VII-a, SSV-VII-b | [note](notes/SSV-IV.md) |
 | `SSV-V` | `local-source` | SSV-VII-a, SSV-VII-b | [note](notes/SSV-V.md) |
