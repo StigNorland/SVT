@@ -5,38 +5,38 @@
     {
       "m": 0.001,
       "m_ell": 0.04,
-      "S": 0.7016173693333891,
-      "far_tail_Hpi": 0.01784571235687072
+      "S": 0.7016173693333919,
+      "far_tail_Hpi": 0.017845712351304565
     },
     {
       "m": 0.05,
       "m_ell": 2.0,
-      "S": 0.4974507683189698,
-      "far_tail_Hpi": 0.009788425546575698
+      "S": 0.4974507683189703,
+      "far_tail_Hpi": 0.009788425551714046
     },
     {
       "m": 0.15,
       "m_ell": 6.0,
-      "S": 0.31885957368377754,
-      "far_tail_Hpi": 0.004513352539315715
+      "S": 0.31885957368378764,
+      "far_tail_Hpi": 0.004513352539485734
     },
     {
       "m": 0.4,
       "m_ell": 16.0,
-      "S": 0.16667247702814794,
-      "far_tail_Hpi": 4.6517880102363894e-05
+      "S": 0.16667247702816232,
+      "far_tail_Hpi": 4.651788004898222e-05
     },
     {
       "m": 1.0,
       "m_ell": 40.0,
-      "S": 0.05590040562643401,
-      "far_tail_Hpi": 5.293843588943825e-10
+      "S": 0.05590040562645328,
+      "far_tail_Hpi": 5.301280963046648e-10
     }
   ],
-  "control_C1_entropy_c_eff": 0.9720295513961638,
-  "control_C2_reconstruction_err": 1.9999932942401582e-07,
-  "control_C3_massless_far_tail": 0.01784571235687072,
+  "control_C1_entropy_c_eff": 0.9720295513955025,
+  "control_C2_reconstruction_err": 1.9999932893691983e-07,
+  "control_C3_massless_far_tail": 0.017845712351304565,
   "controls_ok": true,
   "far_tail_grows_with_scale": false,
-  "verdict": "R1-open: modular flow stays geometric (far tail does not grow)"
+  "verdict": "CONTROL ONLY: the selected H_pi far tail does not grow; this does not establish geometric modular flow or model corrected SSV"
 }

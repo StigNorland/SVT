@@ -631,6 +631,49 @@ domain-specific uses.  The registry accepts those and still reports 100+
 shared tokens awaiting semantic declaration.  Passing the reserved-symbol
 gate is not certification of every letter in a paper.
 
+## FM23 — a control kernel is reported as if it came from the measured data
+
+**Observed:** #166 sub-calculation 4 described
+`G_2(k)=1/Pi_2(k)` as the screen-derived bulk response, but its propagation
+path never used the measured `Pi_2`.  It inverted `khat2(L)`, verified the
+known `1/r^2` Green function and promoted that control to “bulk TT follows from
+the screen state.”  The measured polarisation entered only the unrelated scalar
+`min(abs(Pi_2))`.
+
+**Guard — closed for this path.**
+`reconstruction_audit.py` inspects the actual kernels passed to
+`greens_function`, while a blind-null control proves that the harness
+distinguishes massless and gapped kernels when supplied data really enter the
+inversion.  `test_subcalc4_t2_does_not_invert_measured_screen_polarisation`
+freezes the negative finding, and the old instrument now prints
+`CONTROL ONLY`.
+
+**Not covered:** this is not general dataflow analysis.  A different instrument
+can still compute the right-shaped observable from a fixture, prior or analytic
+ansatz while describing it as measured.  Every load-bearing output needs the
+question “which input changes this number?” during review.
+
+## FM24 — a physical crossover length is silently replaced by a mass
+
+**Observed:** #166 sub-calculations 1–3 called a massive free scalar with
+`m approximately 1/xi` “SSV-like” and inferred Yukawa stress, induced
+`1/G proportional to 1/xi^2`, and massive-screen modular behavior.  Corrected
+SSV is gapless:
+\(\omega^2=c_s^2k^2(1+\xi^2k^2)\).  Its healing length controls the
+\(k^2\)-to-\(k^4\) crossover; it is not a mass gap.  The surrogate changed the
+infrared theory rather than approximating it.
+
+**Guard — closed for these batteries.** The old scripts and receipts now label
+their surviving massive-scalar mathematics as controls.  The replacement
+`ssv_disk_modular.py` encodes the gapless corrected dispersion directly in two
+screen dimensions, and
+`test_dispersion_is_gapless_ssv_crossover_not_massive_yukawa` prevents the same
+substitution there.
+
+**Not covered:** the 2+1D Gaussian screen is itself a candidate, not a derived
+restriction of the full 3+1D SSV state.  Matching a dispersion does not provide
+the still-missing horizon algebra or bulk–screen encoding map.
+
 ## What runs when
 
 `python instruments/tools/build_paper.py <PAPER>` runs FM1, FM2, FM5's evidence
@@ -663,6 +706,8 @@ ones most likely to lapse.
 | FM20 necessary diagnostic promoted to sufficient | status-bearing receipt | suite (this result) + review |
 | FM21 table row and prose from different runs | generated macro + old-literal rejection | **build** (registered values only) |
 | FM22 project quantity occupies standard symbol | `conventions.py` reserved-symbol gate | **build** (reserved spellings) + suite |
+| FM23 control kernel reported as measured response | reconstruction dependency + blind-null audit | suite (this path) + review |
+| FM24 crossover length replaced by a mass | corrected-dispersion test + scoped receipts | suite (these batteries) + review |
 
 Adding a failure mode to this register is cheap. Leaving one out because its
 guard is embarrassing is how #182 happened.

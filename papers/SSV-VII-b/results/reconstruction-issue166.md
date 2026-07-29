@@ -1,6 +1,14 @@
 # Issue #166 sub-calculation 4 — the reconstruction map (does the bulk TT *follow from* the screen state?)
 
-**Status: R1 assembled — the bulk shear response is DETERMINED and LONG-RANGE
+> **CORRECTION — sub-calculation 5.** The “R1 assembled” interpretation below
+> does not survive the reconstruction-dependency audit. T2 inverts an inserted
+> `khat²` kernel, not the measured screen `Pi2`; the cited holographic theorem's
+> ball-region, entropy-functional, state-map and dimensional premises are also
+> absent. The numerical `1/r²` result remains a valid massless Green-function
+> control only. Current verdict:
+> [reconstruction-assumption-audit-issue166.md](reconstruction-assumption-audit-issue166.md).
+
+**Original status (superseded): R1 assembled — the bulk shear response is DETERMINED and LONG-RANGE
 (it *follows from* the screen state), not imposed as in #162.** With three
 necessary conditions verified (geometric modular flow, conserved spin-2 stress,
 local positive-G induced Einstein term), the Faulkner–Van Raamsdonk theorem
