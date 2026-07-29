@@ -1,0 +1,4 @@
+interface:
+  display_name: "SSV Verify"
+  short_description: "Audit SSV papers from evidence to prose"
+  default_prompt: "Use $ssv-verify to run a read-only verification audit on an SSV paper."
