@@ -67,7 +67,7 @@ composition and baryon/lepton number follow without fitting.
 
 Two empirical inputs are used, $m_e$ and $\alpha$.  The charged-pion result
 matches CODATA to $0.34\%$.  The proton mass is candidate-grade, spanning
-$930$--$954\,\mathrm{MeV}$ across the two fine grids, with explicit dependence
+$930$--$953\,\mathrm{MeV}$ across the two fine grids, with explicit dependence
 on the regularisation cutoff documented in the body.  The muon and higher
 light-hadron alignments are numerical coincidences rather than predictions,
 and the proton's charge-to-gravitational-coupling map is open.
@@ -608,7 +608,7 @@ is deferred to Paper~II.
 The proton is a spherical breather mode---a stable, oscillating cavity in the
 superfluid vacuum, prevented from collapse by an internal trefoil vortex skeleton.
 
-\begin{gapbox}[Status (2026-05): form factor $F$ is a cutoff-dependent calibration]
+\begin{gapbox}[Form factor $F$ is a cutoff-dependent calibration, not a derivation]
 The proton mass below is written as $m_p c^2 = N_Y\,F\,\mu_0$.  $N_Y=3$ is the
 topological crossing number; $3.007$ includes a candidate finite-thickness
 correction from independent grid sweeps (Appendix~\ref{app:minimisation}).
@@ -617,17 +617,11 @@ derivation: it is extracted from the relaxed-breather energy integral against
 a straight-vortex calibration at cutoff $R$, and varies as
 $\mathrm{d}\ln F/\mathrm{d}\ln R\approx -0.94$ near the canonical
 $R\approx 1.18\,\xi$ (\S\ref{app:F-extraction}).  The two fine grids agree at
-the $\sim 6\%$ level at this cutoff; the same observable falls by $19\%$ at
-$R=1.5\,\xi$.  The reduced-ansatz $Q_p$ family of scripts that attempted to
-calibrate this cutoff away (the \texttt{q\_p\_two\_factor\_*} probes and the
-\texttt{eta} calibration trio) was quarantined to
-\texttt{instruments/\_fitted\_quarantine/} after the Path~B null exposed how readily
-calibrated inputs flatter derived results; their own docstrings already
-labelled them ``provisional consistency-based calibration rather than a
-derived physical constant.''  The honest candidate range at the canonical
-cutoff is therefore $m_p\approx 930$--$954\,\text{MeV}$ ($\sim 1.5\%$ of
-CODATA) with a documented cutoff systematic, \emph{not} a single-number
-$0.3\%$ figure.  The topological trefoil factor $N_Y=3$ is
+the $2.5\%$ level at this cutoff; the same observable falls by $19\%$ at
+$R=1.5\,\xi$.  The candidate range at the canonical cutoff is therefore
+$m_p\approx 930$--$953\,\text{MeV}$ --- $-0.9\%$ to $+1.6\%$ of the CODATA
+value $938.272\,\text{MeV}$ --- a range with a documented cutoff systematic,
+not a single number.  The topological trefoil factor $N_Y=3$ is
 (issues~\ssvissue{92} and \ssvissue{77})
 derived as the trefoil crossing number (equivalently the thin-core writhe, or
 the braid-word exponent $\sigma_1^3$); the $3.007$ is this $3$ plus a small
@@ -758,27 +752,25 @@ untouched.
                          + V(|\Psi|^2)\right]d^3x,
           \label{eq:F-integral}
         \end{equation}
-        where the integral is over the full 3D breather profile.  The initial
-        evaluation used $F\approx4.47$.  The consistency check is
-        $N_Y\times F = 3.007\times4.47\approx13.44$, giving
-        $m_pc^2\approx13.44\times70\,\text{MeV}\approx941\,\text{MeV}$,
-        within $0.3\%$ of the observed value before fine relaxation of the
-        cavity geometry.  The numerical extraction of $F$ and its remaining
-        cutoff dependence are documented below.
+        where the integral is over the full 3D breather profile.  The
+        analytic estimate is $F\approx4.47$, giving
+        $N_Y\times F = 3.007\times4.47\approx13.44$ and
+        $m_pc^2\approx13.44\times70\,\text{MeV}\approx941\,\text{MeV}$.
 
-        \emph{Numerical update (2026-05-19, see Appendix~\ref{app:minimisation}):}
         A topology-preserving relaxation of Eq.~\eqref{eq:F-integral} on the
-        $(2,3)$-trefoil knot has now been completed at three grid resolutions
+        $(2,3)$-trefoil knot (Appendix~\ref{app:minimisation}) evaluates $F$
+        at three grid resolutions
         ($n^3 = 24^3, 48^3, 72^3$ with $\xi$-normalised box half-width $6\xi$).
         With a grid-invariant straight-vortex calibration, $F$ depends on the
-        physical cutoff $R$ at which the calibration tube terminates:
-        $F(R\!=\!1.18\,\xi)\approx 4.4$ (fine-grid extrapolation) matches the
-        analytic estimate; $R\!=\!1.18\,\xi$ is the natural inter-strand
-        half-spacing of the trefoil with minor radius $0.85\,\xi$.  The
-        product $N_Y\cdot F$ then gives $m_p\approx 927\,\text{MeV}$
-        ($1.2\%$ below the observed value), rather than the original
-        $0.3\%$ figure; the $0.3\%$ match was tight to a coarse-grid evaluation
-        of $F$ at a different cutoff.
+        physical cutoff $R$ at which the calibration tube terminates.  At
+        $R\!=\!1.18\,\xi$ --- the natural inter-strand half-spacing of the
+        trefoil with minor radius $0.85\,\xi$ --- the two fine grids give
+        $F=4.528$ ($n=48$) and $F=4.417$ ($n=72$), a $2.5\%$ bracket whose
+        mean reproduces the analytic estimate.  The product $N_Y\cdot F$ then
+        gives $m_p\approx 930$--$953\,\text{MeV}$, $-0.9\%$ to $+1.6\%$ of the
+        observed value.  That $941\,\text{MeV}$ falls $0.3\%$ from CODATA is
+        a property of the midpoint of this bracket, not a separate
+        determination, and the cutoff systematic below dominates both.
 \end{itemize}
 
 The single trefoil curve carries non-trivial knot topology: changing its knot
@@ -970,7 +962,7 @@ leptons from the PDG.  The mean fractional deviation from the nearest half-integ
 multiple of $\mu_0$ is $0.096$, compared to $0.25$ expected for masses distributed
 uniformly at random.  The ladder is not a statistical fluke.
 
-\begin{gapbox}[Status (2026-06): empirical pattern, not yet a derived spectrum]
+\begin{gapbox}[An empirical pattern, not a derived spectrum]
 The pattern above is real, but its derivation has not been closed.  Three
 pre-registered attempts have been completed:
 \begin{itemize}
@@ -1100,7 +1092,7 @@ pseudospin coupling, falls naturally in this integer sector.
 The muon is tentatively identified with the first oscillatory mode of the
 electron toroidal vortex.
 
-\begin{gapbox}[Status (2026-06): muon identification not closed; three null results]
+\begin{gapbox}[The muon identification is not closed: three null results]
 Three pre-registered tests have been completed without closing the muon
 identification:
 \begin{itemize}
@@ -1268,8 +1260,8 @@ writhe, issue~\ssvissue{92}; Appendix~\ref{app:minimisation}) and $F$ the form f
 extracted from a
 3D topology-preserving relaxation of the trefoil-knot breather
 (Appendix~\ref{app:F-extraction}).  $F\approx 4.47$ at the canonical cutoff
-$R\approx 1.18\,\xi$ gives $m_p \approx 930$--$954\,\text{MeV}$
-(${\sim}1.5\%$ of the CODATA value $938.272$ MeV).  $F$ is cutoff-dependent
+$R\approx 1.18\,\xi$ gives $m_p \approx 930$--$953\,\text{MeV}$
+($-0.9\%$ to $+1.6\%$ of the CODATA value $938.272$ MeV).  $F$ is cutoff-dependent
 ($\mathrm{d}\ln F/\mathrm{d}\ln R\approx -0.94$, $19\%$ variation between
 $R=1.18\,\xi$ and $R=1.5\,\xi$) and is not yet a cutoff-independent
 first-principles prediction; the §Proton gapbox above lays out the full
@@ -1299,13 +1291,13 @@ $\pi^\pm$ & $2\mu_0$                        & $140.051$ & $139.570$ & $0.34\%$ \
 $\mu^\pm$ & $\frac{3}{2}\mu_0$              & $105.038$ & $105.658$ & $0.59\%$ \\
 $K^\pm$   & $7\mu_0$                        & $490.177$ & $493.677$ & $0.71\%$ \\
 $\rho$    & $11\mu_0$                       & $770.278$ & $775.260$ & $0.64\%$ \\
-$p$       & $N_Y\!\cdot\!F\!\cdot\!\mu_0$   & $930$--$954$ & $938.272$ & ${\sim}1.5\%$\footnotemark[1] \\
+$p$       & $N_Y\!\cdot\!F\!\cdot\!\mu_0$   & $930$--$953$ & $938.272$ & $-0.9$ to $+1.6\%$\footnotemark[1] \\
 \bottomrule
 \end{tabular}
 \footnotetext[1]{$F\approx 4.47$ at the inter-strand half-spacing cutoff
 $R=1.18\,\xi$ (mean of $n^3{=}48^3$ and $72^3$ straight-vortex
-extractions, agreeing at $\sim 6\%$).  The $930$--$954\,\text{MeV}$ range
-spans the two fine grids.  See the §Proton gapbox for the full
+extractions, agreeing at $2.5\%$).  The $930$--$953\,\text{MeV}$ range
+spans the two fine grids: $F(n{=}72)=4.417$ and $F(n{=}48)=4.528$.  See the §Proton gapbox for the full
 calibration caveat and the cutoff dependence.  Status: candidate
 (\S\ref{sec:claim-status}, issues~\ssvissue{30} and~\ssvissue{66}).}
 \end{table}
@@ -1462,18 +1454,19 @@ diagnostics.
 The proton mass uses $m_pc^2=N_Y\cdot F\cdot\mu_0$ with $N_Y\approx3.007$
 (Appendix~\ref{app:minimisation}) and $F\approx4.47$.  The topological value
 $N_Y=3$ is the crossing number; its $3.007$ finite-thickness correction and
-the form factor $F$ have been estimated
-numerically (2026-05-19) from a topology-preserving relaxation of the
+the form factor $F$ are estimated
+numerically from a topology-preserving relaxation of the
 $(2,3)$-trefoil knot under the full SSV functional
 (LogSE + chiral non-local shear $\mathcal{L}_\perp$ at $\lambda=2000$),
 at three grid resolutions ($n^3=24^3,48^3,72^3$, see
-Appendix~\ref{app:minimisation}).  $F$ is grid-converged within $\sim 6\%$
+Appendix~\ref{app:minimisation}).  $F$ is grid-converged within $2.5\%$
 between the two finer grids and depends on the calibration cutoff $R$ used
 to define the per-length vortex tension $\mu_0(R)$.  At the natural physical
 cutoff $R\approx1.18\,\xi$ (the inter-strand half-spacing of the trefoil
-with minor radius $0.85\,\xi$), the fine-grid value $F\approx4.4$ reproduces
-the analytic estimate, giving $m_p\approx 927\,\text{MeV}$ ($1.2\%$ below
-the observed value).
+with minor radius $0.85\,\xi$), the fine grids give $F=4.417$--$4.528$,
+whose mean reproduces the analytic estimate, and
+$m_p\approx 930$--$953\,\text{MeV}$ ($-0.9\%$ to $+1.6\%$ of the observed
+value).
 
 \textbf{Update (issues~\ssvissue{92} and \ssvissue{77}, 2026-06):}  $N_Y$ is the
 trefoil \emph{crossing number} $=3$ --- the defining topological invariant of
@@ -1693,8 +1686,8 @@ deriving mechanism.  Path~A/B and the issue~\ssvissue{76}/\ssvissue{91} BdG null
 spectrum is not an even ladder and does not produce these as
 eigenfrequencies; unlike the muon they have no half-winding/HQV route.
 Recorded as a numerical coincidence, not a candidate rung. \\
-Proton mass $m_p \approx N_Y \cdot F \cdot \mu_0 \approx 930$--$954$
-MeV ($\sim$1.5\% from CODATA) &
+Proton mass $m_p \approx N_Y \cdot F \cdot \mu_0 \approx 930$--$953$
+MeV ($-0.9$ to $+1.6\%$ from CODATA) &
 candidate & \textbf{Update (\ssvissue{77}):} the static geometry now has a
 candidate combined observable, $N_Y\!\cdot\!F\simeq54$, at
 $(R,a)=(2.5,0.85)\xi$, grid-converged over the tested continuation ladder
@@ -1771,7 +1764,7 @@ Record: \ssvfile{mu0-parameter-count-result}.
 \paragraph{What this paper claims.}  With $m_e$ and $\alpha$ as empirical
 inputs, the SSV postulate plus the LogSE + chiral-shear Lagrangian yields the
 charged-pion mass to $0.34\%$.  It gives a candidate proton range of
-$930$--$954\,\mathrm{MeV}$ whose form factor remains cutoff-dependent.  The
+$930$--$953\,\mathrm{MeV}$ whose form factor remains cutoff-dependent.  The
 muon and higher light-hadron alignments are recorded only as numerical
 coincidences.  The claim-status table states which quantities are derived,
 structural, candidate-grade, or coincidental.
@@ -1876,13 +1869,13 @@ Relaxation under the topology-preserving penalty
 $N_Y\approx3.007$ at the tested grids, with the proton mass scaling
 $m_p\approx N_Y\cdot\mu_0\cdot F(\text{geometry})$.  $F$ is the form factor
 discussed in \S\ref{app:F-extraction} below; it is grid-converged at the
-canonical cutoff $R=1.18\,\xi$ between $n=48$ and $n=72$ at the $\sim6\%$
+canonical cutoff $R=1.18\,\xi$ between $n=48$ and $n=72$ at the $2.5\%$
 level (raw numerator $e_{\rm interior}$ agreement between those grids drives
 the residual; finer grids would tighten further).  No measured
 cross-resolution spread for $N_Y$ is available yet; see
 issue~\ssvissue{30}.
 
-\subsection*{Numerical extraction of $F$ for the $(2,3)$-trefoil knot (2026-05-19)}
+\subsection*{Numerical extraction of $F$ for the $(2,3)$-trefoil knot}
 \label{app:F-extraction}
 
 The form factor $F$ in Eq.~\eqref{eq:F-integral} has been extracted
@@ -1965,10 +1958,11 @@ which IS grid-converged.
 \paragraph{Grid-converged numerical result.}  At three resolutions
 ($n^3=24^3,48^3,72^3$, box half-width $6\,\xi$, $800$ steps),
 $F_{\rm straight}(R)$ stabilises at the values shown in
-Table~\ref{tab:Fstraight}.  The two finer grids agree within $6\%$
-at every cutoff $R$; the remaining spread reflects residual
-finite-$n$ error in the numerator $E_{\rm interior}$ that would
-tighten further with $n\geq 96$.
+Table~\ref{tab:Fstraight}.  The two finer grids agree within $2.5\%$
+at every cutoff $R$ --- the spread is $R$-independent because only the
+denominator $\mu_0^{\rm straight}(R)$ carries the cutoff, so the ratio is
+fixed by the residual finite-$n$ error in the numerator
+$E_{\rm interior}$ alone, and would tighten further with $n\geq 96$.
 
 \begin{table}[h]
 \centering
@@ -1982,26 +1976,26 @@ $\rho_t=0.01$, $800$ relaxation steps.}
 grid & $R=1.0\,\xi$ & $R=1.18\,\xi$ & $R=1.5\,\xi$ & $R=2.0\,\xi$ & $R=3.0\,\xi$ \\
 \midrule
 $n=24$ & $6.61$ & $5.61$ & $4.54$ & $3.67$ & $2.86$ \\
-$n=48$ & $4.90$ & $4.15$ & $3.36$ & $2.72$ & $2.12$ \\
+$n=48$ & $5.34$ & $4.53$ & $3.67$ & $2.96$ & $2.31$ \\
 $n=72$ & $5.21$ & $4.42$ & $3.58$ & $2.89$ & $2.26$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \paragraph{Matching the analytic estimate.}  The analytic prediction
-$F\approx4.47$ is reproduced at $R\approx1.18\,\xi$ in the fine-grid
-limit (linearly interpolating between $R=1.0$ and $R=1.5$ on the
-$n=72$ row).  This cutoff is physically motivated: it sits between
+$F\approx4.47$ is bracketed at $R\approx1.18\,\xi$ by the two fine grids,
+$F=4.417$ ($n=72$) and $F=4.528$ ($n=48$), whose mean is $4.47$.  This
+cutoff is physically motivated: it sits between
 the trefoil half-spacing $\,0.85\,\xi\,$ and full spacing $\,1.70\,\xi\,$
 at minor radius $0.85\,\xi$, i.e.\ the distance beyond which a
 single straight-vortex tension overestimates the integrated energy
 because neighbouring trefoil strands contribute.  The product
-$N_Y\cdot F=3.007\times4.4\approx 13.2$ gives
-$m_pc^2\approx 927\,\text{MeV}$, within $1.2\%$ of the observed
-proton mass.  The original $0.3\%$ figure quoted in the main text
-required the analytic $F=4.47$ at the same cutoff exactly; the
-numerical $F$ at this cutoff sits $\sim 1.5\%$ below, hence the
-$\sim 1\%$ residual discrepancy.
+$N_Y\cdot F = 3.007\times F$ then spans $13.28$--$13.62$, giving
+$m_pc^2\approx 930$--$953\,\text{MeV}$, i.e.\ $-0.9\%$ to $+1.6\%$ of the
+observed proton mass.  A single-number agreement at the $0.3\%$ level is
+not available: it requires the mean of the two grids to be read as a
+determination, and the mean is not a converged value but the midpoint of a
+$2.5\%$ bracket sitting on top of a much larger cutoff systematic.
 
 \paragraph{Topological status of $N_Y$ (settled, issue~\ssvissue{92}).}  $N_Y$ is the
 \emph{crossing number of the $(2,3)$-trefoil}, $N_Y=3$: the minimal number of
