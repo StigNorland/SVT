@@ -9,9 +9,10 @@ is closed-access and no open full text was found.
 
 ## SSV usage
 
-SSV-I `main.tex:240–242` says the logarithmic nonlinearity was introduced by
-Rosen1968 and BBM1976. Its correction table at `main.tex:1633–1641` gives the
-lineage Rosen1968 → BBM1976 → Zloshchastiev2020.
+SSV-I now cites Rosen1968 only as a negative result: the paper explicitly says
+that this 1968 article is not the source of the logarithmic field equation. It
+identifies Rosen's 1969 paper as the relativistic precursor and attributes the
+nonrelativistic LogSE used in SSV to BBM1976.
 
 ## Bibliographic check and correct source
 
@@ -28,7 +29,6 @@ The independently checked BBM1976 paper then introduces the nonrelativistic
 logarithmic Schrödinger equation used in nonlinear wave mechanics.
 
 **Verdict: `MISATTRIBUTED`.** Rosen belongs in the broader historical
-lineage, but the specific key and year cited by SSV are not the source of the
-explicit logarithmic field equation. Replace `rosen1968` with a Rosen1969
-bibliographic entry for that claim, while retaining BBM1976 for the
-nonrelativistic LogSE and Gausson.
+lineage, but this specific article is not the source of the explicit
+logarithmic field equation. SSV-I's present negative use matches this evidence;
+BBM1976 remains the cited source for the nonrelativistic LogSE and Gausson.

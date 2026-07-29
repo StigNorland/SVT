@@ -6,6 +6,20 @@ Entries link the issue that drove each change. Git history carries the rest.
 
 ---
 
+## 2026-07-29 — [#210](https://github.com/StigNorland/SVT/issues/210) · citation-scope repair
+
+Two literature claims were narrowed to what the cited sources establish.
+Madras--Slade is no longer presented as a rigorous derivation of the printed
+three-dimensional scaling law, and Mermin is no longer credited with an
+exhaustive five-sector classification.  The Poincaré recurrence statement now
+names the finite-measure, measure-preserving hypotheses.
+
+Load-bearing wording removed or replaced (verbatim):
+
+> “The scaling is rigorous for self-avoiding walks.”
+
+> “Mermin's classification gives five independent topological sectors.”
+
 ## 2026-07 — [#182](https://github.com/StigNorland/SVT/issues/182) · C- and E-gate audit
 
 Reports in [`results/audit-2026/`](results/audit-2026/).

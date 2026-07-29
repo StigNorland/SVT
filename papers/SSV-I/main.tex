@@ -65,13 +65,15 @@ surface-locked composite of the proton trefoil and an electron torus
 compressed onto the breather skin, from which charge, spin, spin-statistics
 composition and baryon/lepton number follow without fitting.
 
-Two empirical inputs are used, $m_e$ and $\alpha$.  The predictions match the
-observed lepton and light-hadron spectrum at the $\lesssim 1.5\%$ level, with
-explicit dependence on the regularisation cutoff documented in the body.  The
-charged-lepton mass ratios (muon, tau) are numerical coincidences rather than
-derived rungs, and the proton's charge-to-gravitational-coupling map is open.
+Two empirical inputs are used, $m_e$ and $\alpha$.  The charged-pion result
+matches CODATA to $0.34\%$.  The proton mass is candidate-grade, spanning
+$930$--$954\,\mathrm{MeV}$ across the two fine grids, with explicit dependence
+on the regularisation cutoff documented in the body.  The muon and higher
+light-hadron alignments are numerical coincidences rather than predictions,
+and the proton's charge-to-gravitational-coupling map is open.
 Section~\ref{sec:claim-status} tags every quantitative claim as
-\textit{derived}, \textit{structural}, \textit{candidate} or \textit{ansatz}.
+\textit{derived}, \textit{structural}, \textit{candidate},
+\textit{coincidence} or \textit{ansatz}.
 \end{abstract}
 
 \newpage
@@ -85,9 +87,9 @@ The Standard Model predicts particle masses, charges and interaction rates with
 extraordinary precision, yet it provides no mechanism for \emph{why} these quantities
 take their observed values.  Some 19 free parameters---particle masses, coupling
 constants, mixing angles---must be inserted by hand.  At the same time, attempts
-to quantize gravity perturbatively produce non-renormalizable divergences, and
-roughly $95\%$ of the universe's energy content must be assigned to unknown dark
-components inferred only from gravitational anomalies.
+to quantize gravity perturbatively produce non-renormalizable divergences.  In
+the base-$\Lambda$CDM fit, roughly $95\%$ of the inferred cosmic energy budget
+is non-baryonic dark matter or dark energy~\cite{Planck2020}.
 
 We propose that this impasse reflects a missing ontological layer.  The vacuum
 is not empty: it is a physical substance---a saturated superfluid.  All phenomena
@@ -105,10 +107,11 @@ The present work pursues a specific realisation of this programme: a logarithmic
 nonlinear Schr\"{o}dinger (LogSE) field theory for the vacuum order parameter,
 supplemented by a chiral-shear term.  Stable topological defects of this
 field---toroidal vortex rings and spherical breathers---are identified with
-fundamental particles.  The masses that the framework actually \emph{derives}
-are topological: the charged pion at $2\mu_0$ (two-winding) and the proton at
-$N_Y F\mu_0$ with the node factor $N_Y=3$ fixed by the trefoil crossing number,
-where $\mu_0=m_e/\alpha$.  A broader empirical observation---that many light
+fundamental particles.  The charged-pion mass is derived topologically at
+$2\mu_0$ (two-winding).  For the proton, only the trefoil factor $N_Y=3$ is
+fixed by the crossing number; the full mass $N_YF\mu_0$ remains candidate-grade
+because the extracted form factor $F$ is cutoff-dependent, where
+$\mu_0=m_e/\alpha$.  A broader empirical observation---that many light
 hadron and lepton masses cluster near half-integer multiples of $\mu_0$ to
 $\lesssim0.7\%$---is recorded as a numerical coincidence, \emph{not} a derived
 spectrum: pre-registered dynamical tests (Paper~I \S\ref{sec:ladder}; issues
@@ -120,11 +123,11 @@ derives the sound speed, and establishes the origin of $\alpha$ from the
 chiral-shear coupling.  Section~\ref{sec:matter} establishes the equilibrium vortex geometry and the
 vacuum density from the Lamb vortex-ring formula, taking $m_e$ and $\alpha$
 as empirical inputs, and presents the proton and neutron models.
-Section~\ref{sec:ladder} presents the derived topological masses---the pion
-(analytically, two-winding) and the proton (node factor $N_Y=3$ from the
-trefoil crossing number, times the breather form factor)---and records the
-broader $\alpha$-harmonic mass clustering as an explicitly-flagged numerical
-coincidence rather than a derived spectrum.  Section~\ref{sec:forces} sketches the emergence of forces.
+Section~\ref{sec:ladder} presents the derived pion mass and separates the
+derived proton crossing-number factor from the candidate, cutoff-dependent
+proton mass.  It records the broader $\alpha$-harmonic mass clustering as an
+explicitly flagged numerical coincidence rather than a derived spectrum.
+Section~\ref{sec:forces} sketches the emergence of forces.
 Sections~\ref{sec:outlook}--\ref{sec:conclusion} give the outlook and conclusions.
 Appendices contain the numerical minimisation and the BdG eigenvalue equations
 together with their numerical solution.
@@ -200,10 +203,10 @@ from ultra-high-energy cosmic rays and some quantum-gravity phenomenology~\cite{
 The dynamics of the saturated superfluid vacuum are governed by an effective field
 theory for the complex order-parameter field $\Psi$ (normalised so
 $|\Psi|^2=\rho/\rho_0$).  Following the superfluid-vacuum
-framework~\cite{volovik2003} and adopting the logarithmic nonlinearity
-introduced by Rosen~\cite{rosen1968} and by Bialynicki-Birula and
-Mycielski~\cite{bbm1976}, in the form used in superfluid vacuum
-theory by Zloshchastiev~\cite{zloshchastiev2020}, we take the Lagrangian:
+framework~\cite{volovik2003} and adopting the nonrelativistic logarithmic
+nonlinearity introduced by Bialynicki-Birula and Mycielski~\cite{bbm1976}, in
+the form used in superfluid vacuum theory by
+Zloshchastiev~\cite{zloshchastiev2020}, we take the Lagrangian:
 \begin{equation}
   \mathcal{L}
   = \frac{i\hbar}{2}\bigl(\Psi^*\partial_t\Psi - \Psi\,\partial_t\Psi^*\bigr)
@@ -224,8 +227,8 @@ and therefore fixes only $|b|$.  The sign is a physical choice, and the two
 branches are mutually exclusive.  The branch written here ($b>0$ in the
 convention of~\eqref{eq:pot}) gives $\rho\,\mu'(\rho)=+b$, hence $c_s^2>0$, a
 uniform vacuum that is stable against modulation, and a potential bounded
-below.  The opposite branch admits the Gausson of Rosen and of
-Bialynicki-Birula and Mycielski, but makes the uniform vacuum modulationally
+below.  The opposite branch admits the Bialynicki-Birula--Mycielski Gausson,
+but makes the uniform vacuum modulationally
 unstable and cannot support $c_s=c$; it is therefore \textbf{rejected}, and with
 it the bright-soliton route to particle saturation.
 \end{resultbox}
@@ -498,7 +501,8 @@ superfluid vacuum---a stable, self-sustaining topological defect with finite siz
           \label{eq:Re-star}
         \end{equation}
         This is \emph{not} the classical electron radius
-        $r_e = \alpha\hbar/(m_ec)$, which is smaller by a factor $\alpha^2$.
+        $r_e = \alpha\hbar/(m_ec)$, which is smaller than $R_e^*$ by a factor
+        $\sqrt{2}\,\alpha^2$.
         The combination
         $\hbar/(\alpha m_e c)$ is the \textbf{Bohr radius} $a_0$, so with the
         corrected healing length $R_e^* = a_0/\sqrt2 \approx \ssvReStar$~m.
@@ -605,9 +609,10 @@ The proton is a spherical breather mode---a stable, oscillating cavity in the
 superfluid vacuum, prevented from collapse by an internal trefoil vortex skeleton.
 
 \begin{gapbox}[Status (2026-05): form factor $F$ is a cutoff-dependent calibration]
-The proton mass below is written as $m_p c^2 = N_Y\,F\,\mu_0$.  $N_Y\approx
-3.007$ is a topological factor with candidate status from independent grid
-sweeps (Appendix~\ref{app:minimisation}).  $F$, however, is not yet a
+The proton mass below is written as $m_p c^2 = N_Y\,F\,\mu_0$.  $N_Y=3$ is the
+topological crossing number; $3.007$ includes a candidate finite-thickness
+correction from independent grid sweeps (Appendix~\ref{app:minimisation}).
+$F$, however, is not yet a
 derivation: it is extracted from the relaxed-breather energy integral against
 a straight-vortex calibration at cutoff $R$, and varies as
 $\mathrm{d}\ln F/\mathrm{d}\ln R\approx -0.94$ near the canonical
@@ -619,10 +624,10 @@ calibrate this cutoff away (the \texttt{q\_p\_two\_factor\_*} probes and the
 \texttt{instruments/\_fitted\_quarantine/} after the Path~B null exposed how readily
 calibrated inputs flatter derived results; their own docstrings already
 labelled them ``provisional consistency-based calibration rather than a
-derived physical constant.''  The honest framework prediction at the canonical
+derived physical constant.''  The honest candidate range at the canonical
 cutoff is therefore $m_p\approx 930$--$954\,\text{MeV}$ ($\sim 1.5\%$ of
 CODATA) with a documented cutoff systematic, \emph{not} a single-number
-$0.3\%$ figure.  The topological node factor $N_Y=3$ is
+$0.3\%$ figure.  The topological trefoil factor $N_Y=3$ is
 (issues~\ssvissue{92} and \ssvissue{77})
 derived as the trefoil crossing number (equivalently the thin-core writhe, or
 the braid-word exponent $\sigma_1^3$); the $3.007$ is this $3$ plus a small
@@ -718,34 +723,34 @@ untouched.
 \end{gapbox}
 
 \begin{itemize}
-  \item \textbf{Quarks.}
-        The three vortex filaments themselves.  They are not independent particles but
-        structural legs of the skeleton.  Each carries a fraction of the total
-        topological charge; their length and curvature set the proton radius
-        ($\sim0.84\,\text{fm}$ from charge radius data).
+  \item \textbf{Quarks (retired identification).}
+        The earlier identification of three filaments with three quarks is
+        withdrawn: the trefoil is one closed vortex curve and supplies no three
+        independent defects to carry quark quantum numbers.  A replacement
+        microscopic account of the quark sector remains open.
 
-  \item \textbf{Color charge.}
-        The phase orientation of the three filaments at the central Y-junction.  In
-        three spatial dimensions the only stable balance is $120^\circ$ separation in
-        phase space.  This reproduces the three ``colors'' and the requirement that the
-        total wavefunction be color-neutral at the node.  Reconnection or imbalance at
-        the junction costs extra energy---the source of confinement.
+  \item \textbf{Colour charge (retired identification).}
+        The earlier phase-orientation construction produced only a
+        $\mathbb{Z}_3$ triality label, not the non-abelian $SU(3)$ colour
+        dynamics.  It is retained in the resultbox above only as a falsified
+        line of reasoning; it supplies neither gluons nor a confinement
+        mechanism.
 
   \item \textbf{Mass.}
-        The rest energy is obtained by minimizing the total hydrodynamic energy
-        functional (vortex-line tension + junction self-energy + acoustic breather
-        energy):
+        The candidate rest energy is evaluated from the total hydrodynamic
+        energy functional (vortex-line tension + curvature/core energy +
+        acoustic breather energy):
         \begin{equation}
           m_p c^2 = N_Y\cdot\frac{m_e}{\alpha}\cdot F(\text{geometry}),
           \label{eq:proton-mass}
         \end{equation}
-        where $\mu_0\equiv m_e/\alpha\approx70\,\text{MeV}$ is the flux-tube mass
-        scale and $N_Y\approx3.007$ is the dimensionless node-cost factor from 3D
-        numerical energy minimization of the Y-junction
-        (Appendix~\ref{app:minimisation}).
+        where $\mu_0\equiv m_e/\alpha\approx70\,\text{MeV}$ is the flux-tube
+        mass scale.  The trefoil factor has topological value $N_Y=3$ from the
+        crossing number; $N_Y\approx3.007$ includes a candidate
+        finite-thickness writhe correction (Appendix~\ref{app:minimisation}).
 
         The form factor $F$ encodes the ratio of the total 3D breather energy to
-        the Y-junction line energy $N_Y\mu_0$.  It can be written explicitly as
+        the trefoil reference energy $N_Y\mu_0$.  It can be written explicitly as
         \begin{equation}
           F = \frac{E_{\rm breather}^{\rm 3D}}{N_Y\mu_0}
             = \frac{1}{N_Y\mu_0}
@@ -753,14 +758,13 @@ untouched.
                          + V(|\Psi|^2)\right]d^3x,
           \label{eq:F-integral}
         \end{equation}
-        where the integral is over the full 3D breather profile.  From the
-        3D numerical minimisation with the trefoil Y-junction skeleton,
-        $F\approx4.47$.  The consistency check is
+        where the integral is over the full 3D breather profile.  The initial
+        evaluation used $F\approx4.47$.  The consistency check is
         $N_Y\times F = 3.007\times4.47\approx13.44$, giving
         $m_pc^2\approx13.44\times70\,\text{MeV}\approx941\,\text{MeV}$,
         within $0.3\%$ of the observed value before fine relaxation of the
-        cavity geometry.  The full derivation of $F$ from the 3D profile
-        without any fitting will be given in Paper~II.
+        cavity geometry.  The numerical extraction of $F$ and its remaining
+        cutoff dependence are documented below.
 
         \emph{Numerical update (2026-05-19, see Appendix~\ref{app:minimisation}):}
         A topology-preserving relaxation of Eq.~\eqref{eq:F-integral} on the
@@ -777,17 +781,16 @@ untouched.
         of $F$ at a different cutoff.
 \end{itemize}
 
-The trefoil skeleton is topologically protected: unlink one filament and the whole
-structure unties, costing the full baryon mass.  This is confinement in hydrodynamic
-language---the vacuum surface tension (strong force) simply refuses to let the
-filaments separate beyond the healing length.
+The single trefoil curve carries non-trivial knot topology: changing its knot
+type requires a reconnection.  Whether this obstruction supplies a
+quantitative confinement mechanism remains an open dynamical question.
 %------------------------------------------------------------------
 \subsection{The Neutron (Surface-Locked Composite)}
 \label{sec:neutron}
 %------------------------------------------------------------------
 The neutron is identified with the joint defect formed when an electron toroidal
 vortex is captured onto the outer breather skin of a proton and compressed onto
-that surface as a Kelvin mode of the trefoil Y-junction.  Within the same
+that surface as a Kelvin mode of the trefoil curve.  Within the same
 LogSE$+\mathcal{L}_\perp$ framework used for the proton, this assignment is a
 \emph{structural} consequence of three observations: (i)~the breather skin
 $\Sigma_p$ is a codimension-one surface that admits bound vortex modes; (ii)~the
@@ -800,7 +803,7 @@ trefoil-breather geometry tracked under issue~\ssvissue{30} plus a surface-mode
 eigenvalue calculation deferred to Paper~II.
 
 \paragraph{Topology and quantum numbers.}
-Let $\mathcal{T}$ denote the trefoil Y-junction skeleton of the proton, with
+Let $\mathcal{T}$ denote the single-curve trefoil skeleton of the proton, with
 crossing number $3$, and let $\mathcal{E}$ denote a torus vortex of unit
 winding.  The neutron defect is the fusion
 $\mathcal{N}=\mathcal{T}\cup_{\Sigma_p}\mathcal{E}$ in which $\mathcal{E}$ is
@@ -921,10 +924,12 @@ calculation deferred to Paper~II.
 %------------------------------------------------------------------
 
 This section separates what the framework \emph{derives} from what it merely
-\emph{observes}.  Two masses are genuine topological derivations: the charged
-pion at $2\mu_0$ (the two-winding number, \S\ref{sec:pion}) and the proton, whose
-node factor $N_Y=3$ is the trefoil crossing number (\S\ref{app:minimisation},
-issue~\ssvissue{92}).  The broader observation --- that many light lepton and hadron
+\emph{observes}.  The charged-pion mass at $2\mu_0$ is a genuine topological
+derivation (the two-winding number, \S\ref{sec:pion}).  For the proton, the
+trefoil factor $N_Y=3$ is likewise topological, but the full mass remains
+candidate-grade because $F$ is cutoff-dependent
+(\S\ref{app:minimisation}, issue~\ssvissue{92}).  The broader observation ---
+that many light lepton and hadron
 masses cluster near half-integer multiples of the single scale
 $\mu_0=m_e/\alpha$ to $\lesssim0.7\%$ --- is a \emph{numerical coincidence}, not
 a derived spectrum: pre-registered dynamical tests found no mechanism that
@@ -1249,14 +1254,15 @@ supply the $\gamma_B=\pi$ holonomy, and the half-quantum route is excluded, so
 no derivation of the muon mass survives in the framework.  Tracking:
 issues~\ssvissue{73}, \ssvissue{76}, \ssvissue{91}, \ssvissue{94}.
 
-\subsection{The proton (derived), and the higher-mass coincidences}
+\subsection{The proton (candidate mass), and the higher-mass coincidences}
 
-The proton is the second genuine topological derivation:
+The proton mass uses one derived topological factor inside a candidate
+quantitative relation:
 \begin{equation}
   m_p c^2 = N_Y\cdot F\cdot\mu_0,
   \label{eq:proton-ladder}
 \end{equation}
-with the node factor $N_Y=3$ \emph{derived} as the trefoil crossing number
+with the trefoil factor $N_Y=3$ \emph{derived} as the crossing number
 (the $(2,3)$-torus-knot minimal crossing number; equivalently the thin-core
 writhe, issue~\ssvissue{92}; Appendix~\ref{app:minimisation}) and $F$ the form factor
 extracted from a
@@ -1279,10 +1285,11 @@ coincidences, not derived masses.
 
 \begin{table}[h]
 \centering
-\caption{Particle masses vs.\ CODATA. Only the pion ($2$, two-winding) and the
-proton ($N_Y=3$, crossing number) are derived; the muon, kaon and $\rho$ entries
-are numerical coincidences (no selecting mechanism, issues~\ssvissue{76}, \ssvissue{91}, \ssvissue{93},
-\ssvissue{94}).}
+\caption{Particle masses vs.\ CODATA. The pion mass is derived from its
+two-winding number.  For the proton, $N_Y=3$ is the derived crossing number but
+the full mass is candidate-grade because $F$ is cutoff-dependent.  The muon,
+kaon and $\rho$ entries are numerical coincidences (no selecting mechanism,
+issues~\ssvissue{76}, \ssvissue{91}, \ssvissue{93}, \ssvissue{94}).}
 \label{tab:ladder}
 \begin{tabular}{lcccc}
 \toprule
@@ -1306,10 +1313,11 @@ calibration caveat and the cutoff dependence.  Status: candidate
 \paragraph{Open issues and next steps.}
 The numerical \emph{closeness} of the $\alpha$-harmonic clustering is robust as
 an observation, but it is \emph{not} a derived spectrum and is no longer
-presented as one (issue~\ssvissue{93}).  The two masses the framework genuinely derives
-are topological---the pion ($2\mu_0$, two-winding) and the proton node factor
-($N_Y=3$, the trefoil crossing number)---and these stand on their own,
-independent of any ladder.  The higher half-integer rungs (muon $\tfrac32$,
+presented as one (issue~\ssvissue{93}).  The framework derives the pion mass
+($2\mu_0$, two-winding) and the proton's trefoil factor ($N_Y=3$, the crossing
+number); the complete proton mass remains candidate-grade through $F$.
+These statements stand independently of any ladder.  The higher half-integer
+rungs (muon $\tfrac32$,
 kaon $7$, $\rho$ at $11$) have \emph{no} deriving mechanism: pre-registered
 dynamical tests found the scalar/IQV-spinor BdG spectrum is not an even ladder
 and does not produce these as eigenfrequencies (Path~A/B, issues~\ssvissue{76}, \ssvissue{91}),
@@ -1452,8 +1460,9 @@ diagnostics.
 
 \begin{gapbox}[Open Problem 3 — Proton: form factor $F$ partially closed]
 The proton mass uses $m_pc^2=N_Y\cdot F\cdot\mu_0$ with $N_Y\approx3.007$
-(Appendix~\ref{app:minimisation}) and $F\approx4.47$.  The node cost $N_Y$
-is numerically determined; the form factor $F$ has now been extracted
+(Appendix~\ref{app:minimisation}) and $F\approx4.47$.  The topological value
+$N_Y=3$ is the crossing number; its $3.007$ finite-thickness correction and
+the form factor $F$ have been estimated
 numerically (2026-05-19) from a topology-preserving relaxation of the
 $(2,3)$-trefoil knot under the full SSV functional
 (LogSE + chiral non-local shear $\mathcal{L}_\perp$ at $\lambda=2000$),
@@ -1523,8 +1532,8 @@ therefore cannot arise from the planar amplitude potential.  Subsequent
 closure work also rules out the current reduced helicity-basis route, the
 direct $m_\varphi=\pm1$ scalar BdG sector, and the proposed Volovik
 Berry-phase rescue for the implemented $\mathcal{L}_\perp$ block.  The
-assignment $m_{\mu^\pm}=(3/2)\mu_0$ remains an empirical/candidate rung
-pending a changed microscopic ingredient.  Agreement with CODATA at the
+assignment $m_{\mu^\pm}=(3/2)\mu_0$ remains an empirical coincidence with no
+deriving mechanism in the present framework.  Agreement with CODATA at the
 $0.34\%$ level is demonstrated for the charged pion.  The proton mass formula
 $m_p c^2 = N_Y\!\cdot\!F\!\cdot\!\mu_0$ with $N_Y\approx3.007$ and form
 factor $F$ at the inter-strand cutoff remains candidate-grade: issue~\ssvissue{30}
@@ -1587,10 +1596,13 @@ this branch, so particles must be topological rather than bright solitons
 Attribution of the logarithmic potential and the LogSE & derived &
 Volovik's Phys.\ Rept.\ \textbf{351}, 195 contains no logarithmic equation of
 state (``equation of state'' occurs $0$ times in $71{,}425$ words), so it is
-not the source (\ssvissue{183}).  The lineage is
-Rosen~\cite{rosen1968} $\to$ Bialynicki-Birula and
-Mycielski~\cite{bbm1976} $\to$ Zloshchastiev~\cite{zloshchastiev2020}.  The
-misattribution is why the error survived review: the real source's constraint
+not the source (\ssvissue{183}).  The cited Rosen 1968
+paper~\cite{rosen1968} is likewise not the source of the
+explicit logarithmic field equation; that equation appears in Rosen's 1969
+paper.  The nonrelativistic LogSE used here begins with Bialynicki-Birula and
+Mycielski~\cite{bbm1976} and is used in the SSV setting by
+Zloshchastiev~\cite{zloshchastiev2020}.  The misattribution is why the error
+survived review: the real source's constraint
 $\rho|F'(\rho)|=m_0c^2/\hbar$ was never applied, and its $F(\rho)$ --- a
 \emph{chemical-potential} term --- was read as a \emph{pressure}. \\
 Vacuum saturation density $\rho_0$ & derived &
@@ -1681,12 +1693,12 @@ deriving mechanism.  Path~A/B and the issue~\ssvissue{76}/\ssvissue{91} BdG null
 spectrum is not an even ladder and does not produce these as
 eigenfrequencies; unlike the muon they have no half-winding/HQV route.
 Recorded as a numerical coincidence, not a candidate rung. \\
-Proton mass $m_p \approx N_Y \cdot F \cdot \mu_0 \approx 924$--$954$
+Proton mass $m_p \approx N_Y \cdot F \cdot \mu_0 \approx 930$--$954$
 MeV ($\sim$1.5\% from CODATA) &
 candidate & \textbf{Update (\ssvissue{77}):} the static geometry now has a
 candidate combined observable, $N_Y\!\cdot\!F\simeq54$, at
 $(R,a)=(2.5,0.85)\xi$, grid-converged over the tested continuation ladder
-and route-independent.  The node factor $N_Y=3$ is separately derived as
+and route-independent.  The trefoil factor $N_Y=3$ is separately derived as
 the trefoil crossing number (\ssvissue{92}; see row below), but the separate $F$
 decomposition and the $Q_p/\alpha_G$ map are not closure-grade.  Remaining
 free input: $\mu_0=m_e/\alpha$ (still empirical, the precision-bearing
@@ -1742,29 +1754,27 @@ deferred to Paper~II.  No quantitative force claim is made in this
 paper. \\
 \end{longtable}
 
-\paragraph{Parameter count of the mass sector (issue~\ssvissue{95}).}  Every particle
-mass derived here has the form $m_X = N_X\,\mu_0$ with $\mu_0 = m_e/\alpha$ and
-$N_X$ a pure number fixed by topology (pion $N=2$, two-winding; proton
-$N=N_Y F=3F$, the trefoil crossing number).  Hence the mass \emph{ratios}
-$m_X/m_e = N_X/\alpha$ depend only on $\alpha$ and topology --- they are
-independent of every vacuum parameter $\{\rho_0, m_0, b, \lambda, \xi\}$, which
-either cancel from ratios ($m_0$, the graininess scale) or are fixed by
-$c_s=c$, $c_\perp/c=\alpha$ and the $m_e$ normalisation.  The SSV mass sector
-therefore has exactly \textbf{two irreducible inputs} --- a scale $m_e$ and the
-dimensionless $\alpha$ --- versus the Standard Model's $\sim$19.  $\mu_0$ is not
-independently predicted; it \emph{is} $m_e/\alpha$.  Nor is $\alpha=1/137$
-predicted: the $R_e$ relation $2\pi\gamma\alpha^2=\ln(8/\alpha)-\tfrac34$ defines
-$\gamma(\alpha)$ (a consistency condition), so $\alpha$, identified as the
-stiffness ratio $c_\perp/c$, remains the one irreducible dimensionless number.
+\paragraph{Parameter count of the mass sector (issue~\ssvissue{95}).}
+The analytic pion relation and candidate proton relation both use
+$\mu_0=m_e/\alpha$.  For the pion, $N=2$ is fixed by topology.  For the proton,
+$N=N_YF=3F$: $N_Y=3$ is topological, but $F$ is a numerical observable with an
+unresolved cutoff prescription.  Thus the current mass sector has two
+empirical inputs, $m_e$ and $\alpha$, \emph{plus} an unresolved theoretical
+systematic in the proton calculation; it is not yet a closed two-input
+spectrum.  $\mu_0$ is not independently predicted; it is $m_e/\alpha$.
+Nor is $\alpha=1/137$ predicted: the $R_e$ relation
+$2\pi\gamma\alpha^2=\ln(8/\alpha)-\tfrac34$ defines $\gamma(\alpha)$ (a
+consistency condition), so $\alpha$, identified as the stiffness ratio
+$c_\perp/c$, remains an empirical dimensionless input.
 Record: \ssvfile{mu0-parameter-count-result}.
 
-\paragraph{What this paper claims.}  The SSV postulate
-plus the LogSE + chiral-shear Lagrangian reproduces the observed lepton
-and light-hadron spectrum at the $\lesssim 1.5\%$ level, with the
-residuals attributable to identified open computational tasks rather
-than to free parameters.  The claim-status table states which numbers are
-derived, which are structural, and which are candidate-grade pending the
-closure work tracked in the issue tracker.
+\paragraph{What this paper claims.}  With $m_e$ and $\alpha$ as empirical
+inputs, the SSV postulate plus the LogSE + chiral-shear Lagrangian yields the
+charged-pion mass to $0.34\%$.  It gives a candidate proton range of
+$930$--$954\,\mathrm{MeV}$ whose form factor remains cutoff-dependent.  The
+muon and higher light-hadron alignments are recorded only as numerical
+coincidences.  The claim-status table states which quantities are derived,
+structural, candidate-grade, or coincidental.
 
 %------------------------------------------------------------------
 \section{Acknowledgments}
@@ -1780,23 +1790,23 @@ The author thanks Grok (xAI), Claude (Anthropic) and Gpt(OpenAI) for extensive a
 \appendix
 
 %------------------------------------------------------------------
-\section{Numerical Construction of the Trefoil Y-Junction Breather}
+\section{Numerical Construction of the Trefoil Breather}
 \label{app:construction}
 %------------------------------------------------------------------
 
-The proton breather is stabilised by a trefoil Y-junction of three vortex filaments
-meeting at a central node.  This configuration is not invented; it already appears as
-a stable topological soliton in real superfluids.
+The proton breather ansatz is built around a single closed $T_{2,3}$ trefoil
+vortex curve.  This is the topology used by the numerical construction below.
 
-Following the vortex-knot construction of Proment et al.~\cite{proment2012}, we initialise the
-trefoil skeleton by wrapping three vortex lines on a torus and superimposing 2D vortex
-profiles (phase jump $2\pi$ along each filament).  In our saturated LogSE potential
+Following the vortex-knot construction of Proment et al.~\cite{proment2012},
+we initialise one closed trefoil line on a torus.  An axial plane intersects
+the $T_{2,3}$ curve at four points, whose 2D vortex profiles are combined so
+that the phase closes continuously around the single curve.  In our saturated LogSE potential
 with the chiral non-local shear term ($\lambda=2000$), the energy functional is
 minimised on a 3D grid using topology-preserving gradient descent
 (\S\ref{app:F-extraction}; the topology-preserving penalty mechanism is
 documented in the repository at
 \ssvfile{topology_penalty}).  Vortex lines are tracked where
-$|\Psi|=0$ or the phase jumps by $2\pi$.  The dimensionless node-cost factor
+$|\Psi|=0$ or the phase jumps by $2\pi$.  The dimensionless trefoil factor
 reported in this paper is $N_Y\approx3.007$
 (\textit{candidate}, see \S\ref{sec:claim-status}), based on the
 topology-preserving 3D relaxation runs documented in the repository at grid
@@ -1814,30 +1824,31 @@ trefoil state and bare-LogSE relaxation are built by
 minimisation under the full $\mathrm{LogSE}+\mathcal{L}_\perp$ functional is
 performed by \ssvfile{trefoil_gradient_flow_static} (pure imaginary-time
 gradient flow, which replaced the earlier Krylov-penalty solver and preserves
-the knot topology exactly). The node-cost factor and form factor are then
-extracted by volume integration in arc-tubes and node-balls
+the knot topology exactly). The trefoil factor and form factor are then
+extracted by volume integration in arc-tubes and central cavity balls
 (\ssvfile{trefoil_breather_observables}) --- not by a 1D filament line
 integral.
 
 %------------------------------------------------------------------
-\section{Numerical Minimisation of the Trefoil Y-Junction Energy}
+\section{Numerical Minimisation of the Trefoil Energy}
 \label{app:minimisation}
 %------------------------------------------------------------------
 
-The dimensionless node-cost factor $N_Y\approx3.007$ arises from minimising the total
-hydrodynamic energy of three vortex filaments meeting at a central Y-junction in 3D
-space.  The energy functional for quantized vortex lines includes kinetic energy along
-the filaments and core contributions:
+The dimensionless trefoil factor has topological value $N_Y=3$, the crossing
+number of $T_{2,3}$.  The value $N_Y\approx3.007$ used below adds a candidate
+finite-thickness writhe correction obtained from the relaxed 3D trefoil.  A
+schematic filament energy includes kinetic, curvature/core, and breather
+contributions:
 \begin{equation}
   E = \frac{\rho_0\kappa_0^2}{2}
       \int\!\left(\frac{1}{r_\perp}+\text{core corrections}\right)ds
-      + E_\text{junction} + E_\text{breather},
+      + E_\text{curvature} + E_\text{breather},
   \label{eq:vortex-energy}
 \end{equation}
-where $\kappa_0=h/m_0$ is the quantum of circulation, $ds$ is the arc-length element
-along each filament, $r_\perp$ is the local distance to the vortex axis (logarithmic
-divergence regularised by core size), and $E_\text{junction}$ captures the $120^\circ$
-phase balance at the node.
+where $\kappa_0=h/m_0$ is the quantum of circulation, $ds$ is the arc-length
+element along the trefoil curve, $r_\perp$ is the local distance to the vortex
+axis (logarithmic divergence regularised by core size), and
+$E_\text{curvature}$ captures geometry beyond the straight-filament term.
 
 The factor $N_Y\approx3.007$ emerges as the effective multiplier to the base
 flux-tube energy per unit length after relaxation.  Reproducibility runs in
@@ -1851,12 +1862,12 @@ issue~\ssvissue{30} and \S\ref{sec:claim-status}.  \paragraph{Reference implemen
 The repository pipeline does \emph{not} use the 1D filament line-integral form
 schematically shown in Eq.~\eqref{eq:vortex-energy}; instead the full
 $\mathrm{LogSE}+\mathcal{L}_\perp$ energy density is integrated on a 3D Cartesian
-grid (\ssvfile{trefoil_gradient_flow_static}), and the node-cost factor is
+grid (\ssvfile{trefoil_gradient_flow_static}), and the trefoil factor is
 extracted by \ssvfile{trefoil_breather_observables} as the energy in a
 tubular neighbourhood around the relaxed vortex curve plus a central cavity
 ball, normalised by a self-calibrated per-arc-length energy.  The two pictures
 agree only in the dilute-filament limit.  The \emph{topological} value of the
-node factor, $N_Y = 3$ (the $(2,3)$-trefoil crossing number), is derived in
+trefoil factor, $N_Y = 3$ (the $(2,3)$-trefoil crossing number), is derived in
 issue~\ssvissue{92}; the $3.007$ used as the dilute-limit estimate is that $3$ plus a
 small finite-thickness writhe correction.
 
@@ -2189,8 +2200,8 @@ result $R_e^* = \xi/\alpha$.
     \textit{Centre:} The stationarity condition $\mathrm{d}\mathcal{E}/\mathrm{d}r$
     changes sign exactly at $r^* = 1/\alpha = 137$.
     \textit{Right:} Zoom near the minimum confirming a well-defined
-    bound state at $R_e^* = \xi/\alpha$ (the classical electron
-    radius).  Computed with $\alpha = 1/137.036$.}
+    bound state at $R_e^* = \xi/\alpha=a_0/\sqrt2$, not at the classical
+    electron radius.  Computed with $\alpha = 1/137.036$.}
   \label{fig:minimisation}
 \end{figure}
 

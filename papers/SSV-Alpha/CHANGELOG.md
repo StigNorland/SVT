@@ -6,6 +6,21 @@ Entries link the issue that drove each change. Git history carries the rest.
 
 ---
 
+## 2026-07-29 — [#210](https://github.com/StigNorland/SVT/issues/210) · carrier and healing-length repair
+
+The healing length is corrected to \(\xi=\hbar/(\sqrt2m_0c)\).  Eliminating
+the slow chiral-shear branch does not identify the scalar
+Goldstone/Bogoliubov sound branch as the photon; the latter remains a carrier
+candidate pending transverse-polarization and Maxwell matching.
+
+Load-bearing wording removed or replaced (verbatim):
+
+> “The observed photon belongs to the Goldstone/Bogoliubov channel
+> propagating at \(c\).”
+
+> “The channel that supports physical radiation is therefore the
+> Goldstone/Bogoliubov channel.”
+
 ## 2026-07 — [#182](https://github.com/StigNorland/SVT/issues/182) · series-wide audit
 
 C-gate run; see [`results/audit-2026/C-gate-damage-report.md`](results/audit-2026/C-gate-damage-report.md).

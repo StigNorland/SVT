@@ -135,6 +135,33 @@ def test_verdict_never_claims_semantic_pass_from_green_checks():
     assert audit.to_dict()["schema"] == "ssv-verify/v2"
 
 
+def test_provenance_without_references_needs_no_generated_file(
+    tmp_path, monkeypatch
+):
+    paper_dir = tmp_path / "papers" / "SSV-Test"
+    paper_dir.mkdir(parents=True)
+    monkeypatch.setattr(V, "PAPERS", tmp_path / "papers")
+    monkeypatch.setattr(V.gen_provenance, "repo_slug", lambda: "owner/repo")
+    audit = V.Audit(
+        paper="SSV-Test",
+        generated_utc="2026-07-29T00:00:00Z",
+        recomputed_instruments=False,
+    )
+
+    V._audit_provenance(
+        audit,
+        "SSV-Test",
+        r"\documentclass{article}\begin{document}No refs.\end{document}",
+    )
+
+    finding = next(
+        item for item in audit.findings
+        if item.check_id == "S1-PROVENANCE-RENDER"
+    )
+    assert finding.status == "PASS"
+    assert "No provenance references" in finding.message
+
+
 def test_deterministic_failure_controls_exit_verdict():
     audit = V.Audit(
         paper="SSV-Test",

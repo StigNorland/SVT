@@ -4,6 +4,22 @@ The paper states **current status only**. Its history lives here.
 
 ---
 
+## 2026-07-29 — [#210](https://github.com/StigNorland/SVT/issues/210) · horizon-thermality status
+
+The surface-gravity and Unruh-temperature checks remain kinematically valid,
+but the audit found that the paper and receipt promoted
+\(M=\xi/(\pi r_H)\ll1\) from scale separation to a sufficient thermality
+criterion.  The cited Corley--Jacobson calculation uses a different dispersion
+branch.  The receipt now records hydrodynamic scale separation and keeps
+thermality unresolved pending a LogSE-specific mode-conversion calculation.
+
+Load-bearing wording removed or replaced (verbatim):
+
+> “thermality is robust iff the surface-gravity frequency sits below the
+> dispersion frequency”
+
+> “robust iff \(M\ll1\)”
+
 ## 2026-07-29 — [#207](https://github.com/StigNorland/SVT/issues/207) · change records moved out of the paper
 
 One passage of edit history removed from `main.tex` and recorded below.

@@ -390,14 +390,23 @@ def _audit_provenance(audit: Audit, paper: str, tex: str) -> None:
         (f"papers/{paper}/main.tex",),
     )
 
-    expected = gen_provenance.render(
-        paper, issues, paths, reports, gen_provenance.repo_slug())
     path = PAPERS / paper / "provenance.tex"
     actual = path.read_text(encoding="utf-8") if path.is_file() else None
+    has_references = bool(issues or paths or reports)
+    expected = (
+        gen_provenance.render(
+            paper, issues, paths, reports, gen_provenance.repo_slug())
+        if has_references
+        else None
+    )
     _finding(
         audit, "S1-PROVENANCE-RENDER", "artifact-integrity",
         actual == expected,
-        "provenance.tex matches the current manuscript references.",
+        (
+            "provenance.tex matches the current manuscript references."
+            if has_references
+            else "No provenance references require a generated appendix."
+        ),
         "provenance.tex is missing or stale; regeneration would change it.",
         (f"papers/{paper}/provenance.tex",),
     )

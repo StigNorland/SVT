@@ -16,7 +16,6 @@ The cited work is part of this repository:
 - `papers/SSV-V/main.tex:92`
 - `papers/SSV-V/main.tex:169`
 - `papers/SSV-VII-b/main.tex:202`
-- `papers/SSV-VIII/main.tex:321`
 
 ## Verification
 

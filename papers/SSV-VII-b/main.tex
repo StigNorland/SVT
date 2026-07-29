@@ -48,10 +48,12 @@ $\Phi = b\ln(\rho/\rho_0)$ of Paper~IV, with time dilation $d\tau/dt =
 post-Newtonian order.  Spatial curvature in the full isotropic metric resolves
 the factor-of-two discrepancy in horizon radius identified in Papers~IV and~V,
 yielding the correct surface gravity $\kappa = c^4/(4GM)$ and Hawking
-temperature $T_H = \hbar c^3/(8\pi G M k_B)$.  The full nonlinear Einstein
-equations are recovered via the Jacobson acoustic-thermodynamic route, with
-Newton's constant $G$ expressed in terms of the healing length $\xi$ already
-fixed by the particle sector.  At the vortex-core scale $\xi\sim\ell_P$ the
+temperature $T_H = \hbar c^3/(8\pi G M k_B)$.  Conditional on an assumed
+horizon entropy density, the Jacobson acoustic-thermodynamic route implies
+the full nonlinear Einstein equations, with
+Newton's constant $G$ expressed in terms of an assumed horizon-entropy density.
+Matching that density to observed $G$ fixes $\xi=\ell_P$; the particle sector
+does not yet predict this scale.  At the vortex-core scale $\xi\sim\ell_P$ the
 continuum description breaks down, and the quantum-gravity problem is replaced
 by the problem of deriving the continuum limit from the medium.
 \end{abstract}
@@ -201,7 +203,9 @@ a separate geometric theory.
 
 Paper~II~\cite{SSV-II} \emph{proposed} that two breather-mode defects (protons,
 or any oscillating density perturbations) at separation $r$ experience an
-attractive Bjerknes acoustic force~\cite{Bjerknes1906}:
+attractive acoustic force.  Bjerknes~\cite{Bjerknes1906} supports the
+historical phase-dependent sign, bilinearity and inverse-square structure,
+but not the following normalized formula:
 \begin{equation}
   F_\mathrm{Bj} = -\frac{\partial}{\partial r}
   \bigl\langle p_1 V_2 + p_2 V_1\bigr\rangle
@@ -374,35 +378,35 @@ equivalent to the Einstein field equations:
 Newton's constant is fixed by matching the entropy density to the
 Bekenstein--Hawking formula:
 \begin{equation}
-  G = \frac{c^3\xi^2}{\hbar} = \frac{c\xi}{m_0},
+  G = \frac{c^3\xi^2}{\hbar}
+    = \frac{c^2\xi}{\sqrt2\,m_0},
   \label{eq:G_xi}
 \end{equation}
-using $\xi = \hbar/(\sqrt{2}\,m_0 c)$.  Given the healing length $\xi$ and the
-fundamental mass $m_0$, $G$ is determined.  Inserting $\xi = \ell_P \approx
+using $\xi = \hbar/(\sqrt{2}\,m_0 c)$.  Given an entropy cutoff $\xi$, the
+first equality fixes the corresponding coupling.  Inserting
+$\xi = \ell_P \approx
 \ssvEllP$~m reproduces
 $G\approx \ssvGNewton$~m$^3$\,kg$^{-1}$\,s$^{-2}$.
 
 \begin{resultbox}[Recomputation under the corrected healing length (\ssvissue{190})]
-Paper~I's correction $\xi=\hbar/(m_0c)\to\hbar/(\sqrt2\,m_0c)$ reaches a stated
-number here, and only here in the series.  Because the counting
-in~\eqref{eq:BH_entropy} \emph{defines} one degree of freedom per $\xi^2$,
-$G=c^3\xi^2/\hbar$ inverts to fix $\xi$ from the observed $G$ --- so
+With $\xi=\hbar/(\sqrt2\,m_0c)$, the counting
+in~\eqref{eq:BH_entropy} \emph{defines} one degree of freedom per $\xi^2$.
+The relation $G=c^3\xi^2/\hbar$ then inverts to fix $\xi$ from the observed
+$G$:
 \begin{equation}
   \xi = \ell_P = \ssvEllP\ \text{m}
   \label{eq:xi_is_lP}
 \end{equation}
-is \textbf{unchanged}.  What moves is the reference mass inferred from it:
+The corresponding reference mass is
 \begin{equation}
   m_0 \;=\; \frac{\hbar}{\sqrt2\,\xi c}
       \;=\; \frac{m_P}{\sqrt2}
       \;\approx\; \ssvMZero\ \text{kg},
   \label{eq:m0_corrected}
 \end{equation}
-rather than $m_0 = m_P = \ssvMPlanck$~kg.  Equivalently: at fixed $m_0$
-and fixed horizon area the entropy~\eqref{eq:BH_entropy} would \emph{double};
-the resolution is that $m_0$ shifts by $1/\sqrt2$ so that $\xi$ remains $\ell_P$.
-The identification $\xi=\ell_P$ therefore survives the correction intact; the
-statement ``$m_0\sim m_P$'' becomes ``$m_0 = m_P/\sqrt2$''.
+At fixed $m_0$ and fixed horizon area, omitting the $\sqrt2$ in the healing
+length doubles the entropy~\eqref{eq:BH_entropy}.  The present formula instead
+uses $m_0=m_P/\sqrt2$ and $\xi=\ell_P$ consistently.
 
 Every number in this subsection is \emph{computed}, not typed:
 \ssvfile{planck_scale_values} derives it from CODATA and the corrected healing
@@ -412,18 +416,18 @@ document (\ssvissue{198}).  $G$ itself remains a conceded input, not a
 derivation.
 \end{resultbox}
 
-\paragraph{What SSV adds beyond Jacobson.}
+\paragraph{What remains beyond Jacobson.}
 Jacobson's original derivation requires specifying the entropy density as
-an external input and does not fix $G$ from first principles.  In SSV the
-UV cutoff $\xi$ is not a free parameter: it is the same healing length that
-sets the vortex core size, fixes the particle mass scale $\mu_0=m_e/\alpha$
-(Paper~I), and enters the gravitational entropy.  The Jacobson argument therefore closes
-into a genuine derivation of~\eqref{eq:Einstein} with $G$ expressed in
-terms of quantities already determined by the particle sector.
+an external input and does not fix $G$ from first principles.  SSV proposes
+to identify that entropy cutoff with the healing length that sets vortex-core
+size, but the equality $\xi=\ell_P$ is presently obtained by inverting the
+observed $G$, not from the particle sector.  The Jacobson argument therefore
+supplies the conditional form of Eq.~\eqref{eq:Einstein}; it is not yet an
+independent derivation of its coupling.
 
 \begin{gapbox}[Open: quantitative $G$ from $\{m_e,\alpha,\hbar,c\}$]
 Equation~\eqref{eq:G_xi} gives the correct order of magnitude but requires
-$m_0 = m_P$.  The Planck mass is not the electron or proton mass.  The
+$m_0 = m_P/\sqrt2$.  This grain mass is not the electron or proton mass.  The
 precise identification of the medium grain mass $m_0$ with the observed
 particle masses---and the resulting derivation of $G$ from
 $\{m_e,\alpha,\hbar,c\}$---is the remaining open problem.  It is the same
@@ -501,19 +505,16 @@ $\Delta\phi/\text{orbit}$ (T3, $a\!=\!10^3 M$, $e\!=\!0.1$, rad)
 \end{tabular}
 \end{table}
 
-\begin{resultbox}[Strong-field consistency: closure at the verification
-level]
+\begin{resultbox}[Strong-field consistency of the inserted Schwarzschild
+metric]
 The two strong-field observables match the exact GR analytic results to
 machine precision over $r\in[1.5,\,3]\,r_S$; the weak-field perihelion
 precession matches the leading 1PN formula at $\sim 0.8\%$ residual,
 consistent with the expected $(M/a)$ next-PN correction.  Open
-Problem~3 of \S\ref{sec:open-problems} is therefore closed at the
-\emph{consistency-verification level}: the SSV emergent metric, as
-identified by the Jacobson route, reproduces classical strong-field
-GR phenomenology with no observable deviation.  A first-principles
-derivation of the same metric directly from the LogSE static
-equilibrium (without the Jacobson identification) remains the natural
-next step.
+These tests verify the geodesic implementation of the Schwarzschild metric
+used as input; they do not show that the LogSE dynamics derives that metric.
+A first-principles strong-field metric from the LogSE static equilibrium
+remains required before the result can test SSV rather than GR itself.
 \end{resultbox}
 
 \subsection{Cosmological constant}
@@ -585,29 +586,20 @@ the analogy is the fundamental description.
 \begin{enumerate}
   \item \emph{Quantitative $G$ from the particle sector.}  Equation~\eqref{eq:G_xi}
     gives the correct order of magnitude; deriving $G$ from $\{m_e,\alpha,\hbar,c\}$
-    without treating $m_0 = m_P$ as an assumption is the principal open problem.
+    without treating $m_0 = m_P/\sqrt2$ as an assumption is the principal
+    open problem.
 
-  \item \emph{Full Kerr exterior and no-hair theorem.}  These are direct
-    consequences of \S\ref{sec:jacobson} once the SSV picture is accepted.
-    The Jacobson route closes onto the \emph{full} nonlinear Einstein
-    equations~\eqref{eq:Einstein}, not specifically the Schwarzschild
-    sector; the Kerr metric is then the unique stationary axisymmetric
-    vacuum solution of those same equations, and the no-hair theorem is
-    the standard GR result of Israel, Carter, Hawking, and Robinson
-    applied to the SSV-emergent metric.  Paper~V~\cite{SSV-V} already
-    establishes that black-hole rotation is consistent with the SSV
-    strand-vortex picture via Dirac's trick on the horizon weave, so the
-    rotating condensate black hole is not an obstruction.  The remaining
-    work is verification rather than new derivation: explicit construction
-    of the SSV emergent Boyer--Lindquist metric, and a Paper~V-style
-    discussion of how the SSV horizon weave realises the Kerr horizon and
-    its frame-dragging.
+  \item \emph{Full Kerr exterior and no-hair theorem.}  Kerr and no-hair
+    follow within GR once the Einstein equations and their usual hypotheses
+    are granted; that conditional implication is not an SSV derivation.
+    SSV still needs an explicit rotating-condensate solution and a derivation
+    of its effective metric before those GR results can be imported.
 
-  \item \emph{Strong-field deviations.}  The post-Newtonian expansion confirms
-    Einstein's equations perturbatively; the Jacobson argument is nonlinear but
-    assumes local thermodynamic equilibrium.  Numerical verification of three
-    strong-field observables (photon sphere, ISCO, perihelion precession) at
-    the SSV-identified metric reproduces the exact GR results to machine
+  \item \emph{Strong-field deviations.}  The post-Newtonian identification is
+    perturbative; the Jacobson argument is conditional on local thermodynamic
+    equilibrium and an entropy density.  Numerical evaluation of three
+    observables (photon sphere, ISCO, perihelion precession) in the inserted
+    Schwarzschild metric reproduces the exact GR results to machine
     precision at $r = 1.5\,r_S$ and $r = 3\,r_S$, and the leading 1PN
     formula at the $0.8\%$ residual expected from the next post-Newtonian
     correction in the weak-field regime (\S\ref{sec:strong-field-numeric},
@@ -650,14 +642,13 @@ Jacobson route, and the dissolution thesis):
     $T_H = \hbar c^3/(8\pi G M k_B)$ (Section~\ref{sec:factor2}).  This is met
     in the present paper.
 
-  \item \textbf{The full Einstein equations are recovered nonlinearly.}  The
+  \item \textbf{The Jacobson implication is recovered conditionally.}  The
     Jacobson five-step route (Section~\ref{sec:jacobson}) closes from a
     local Rindler horizon and the entropy density $S = k_B A / (4\xi^2)$ to
     $G_{\mu\nu}+\Lambda g_{\mu\nu} = (8\pi G/c^4)T_{\mu\nu}$, with the UV
-    cutoff $\xi$ supplied by the particle sector rather than postulated.  This
-    is met up to the open problem of fixing $m_0$ in the entropy formula; the
-    order-of-magnitude $G$ is in place, the quantitative $G$ from
-    $\{m_e,\alpha,\hbar,c\}$ is not.
+    cutoff $\xi$ supplied as an entropy-density input.  Matching observed $G$
+    sets $\xi=\ell_P$; deriving that cutoff and the coefficient from
+    $\{m_e,\alpha,\hbar,c\}$ remains open.
 
   \item \textbf{The dissolution thesis is precise rather than rhetorical.}
     The replacement of ``how do you quantise $g_{\mu\nu}$?'' with ``coarse-grain
@@ -679,7 +670,8 @@ Jacobson route, and the dissolution thesis):
 
 \paragraph{What would constitute closure-grade success.}  Each open problem
 in Section~6.3 has a definite upgrade condition: a derivation of $G$ from
-$\{m_e,\alpha,\hbar,c\}$ that does not require $m_0 = m_P$ as an input
+    $\{m_e,\alpha,\hbar,c\}$ that does not require
+    $m_0 = m_P/\sqrt2$ as an input
 (problem~1); a Kerr-metric extension of the Jacobson argument and an
 acoustic-horizon analogue of the no-hair theorem (problem~2); a numerical
 demonstration that the condensate dynamics reproduces GR in genuinely
