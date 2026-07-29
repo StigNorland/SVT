@@ -1,4 +1,9 @@
-"""#166 sub-calculation 2 -- the screen spin-2 stress sector.
+"""#166 sub-calculation 2 -- generic free-scalar stress-sector control.
+
+CORRECTION (sub-calculations 5-6): the massive scalar used here is not the
+corrected SSV screen state.  Corrected SSV has a gapless Bogoliubov branch and
+xi is a crossover length, not m^{-1}.  The conserved free-scalar stress
+calculation survives; the SSV/bulk interpretation does not.
 
 Pre-registered on issue #166, BEFORE this code.  The decisive object of the
 bulk-screen duality is the screen's traceless spin-2 stress response
@@ -145,8 +150,11 @@ def run():
 
     controls_ok = ((ward < 1e-4) and (power_const < 1e-2) and spin2_nonzero
                    and swap_ok and yukawa_ok)
-    verdict = ("spin-2 sector EXISTS, transverse, two-polarisation (conformal screen); "
-               "SSV scale makes it short-range -> sources a massive/short-range mode")
+    verdict = (
+        "CONTROL ONLY: a generic free scalar has a nonzero conserved spin-2 "
+        "stress correlator, and a genuinely massive scalar is short-range. "
+        "This does not model corrected SSV or derive a bulk TT mode."
+    )
 
     return {
         "control_C1_ward_ratio": ward,
@@ -178,7 +186,7 @@ def main():
     print("   psi      <s+ s+>     <sx sx>     <s+ sx>")
     for a in rep["spin2_angular"]:
         print(f"   {a['psi']:.3f}   {a['spp']:+.5f}   {a['sxx']:+.5f}   {a['spx']:+.5f}")
-    print(f"\nMASSIVE screen (scale xi ~ 1/m, m=0.4): Yukawa mass mu = "
+    print(f"\nMASSIVE-SCALAR CONTROL (m=0.4; not corrected SSV): Yukawa mass mu = "
           f"{rep['control_C4_massive_yukawa_mu']:.3f}  "
           f"(lattice-mass target {rep['control_C4_lattice_mass_target']:.3f})")
     print("  => W and <TT> ~ e^{-2 mu r}: the spin-2 stress is SHORT-RANGE")

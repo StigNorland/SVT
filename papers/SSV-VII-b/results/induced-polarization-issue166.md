@@ -1,6 +1,13 @@
 # Issue #166 sub-calculation 3 — the induced gravitational polarisation
 
-**Status: the fix HOLDS (positive, honestly scoped).** Reading the screen as
+> **CORRECTION — sub-calculations 5–6.** The identification `m=1/xi` is invalid
+> for corrected SSV, whose quadratic branch is gapless. The positive
+> `dc2/dm²` lattice fit below survives as a massive-scalar control, but it is not
+> a derivation of `1/G ∝ 1/xi²`; the seagull, covariant regulator and explicit
+> screen-to-metric map are also absent. The “screen scale sets G” interpretation
+> is retracted.
+
+**Original status (superseded): the fix HOLDS (positive, honestly scoped).** Reading the screen as
 *matter one integrates out* (Sakharov induced gravity — the correct reading for
 a superfluid whose metric is induced, not fundamental), the short-range screen
 stress **induces a positive-sign, local Einstein term whose Newton constant is

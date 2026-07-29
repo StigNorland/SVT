@@ -1,5 +1,11 @@
 # Issue #166 sub-calculation 2 — the screen spin-2 stress sector
 
+> **CURRENT SCOPE — sub-calculations 5–6.** The generic free-scalar stress
+> correlator below is conserved and has the stated tensor components. The
+> massive scalar is not corrected SSV: `xi` controls a gapless `k²→k⁴`
+> Bogoliubov crossover, not a Yukawa mass. No SSV-screen or bulk-TT conclusion
+> follows from this control.
+
 > **⚠ CORRECTION (sub-calc 3, [induced-polarization-issue166.md](induced-polarization-issue166.md)).**
 > The "short-range → massive bulk mode → R2-leaning" reading below is **wrong**,
 > and is retracted. It used the *membrane-paradigm* inference (screen stress =

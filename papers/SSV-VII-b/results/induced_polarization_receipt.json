@@ -4,27 +4,27 @@
   "control_C1_ward": 7.058401795883072e-07,
   "control_C3_slope_recovered": 0.49999999999999944,
   "control_C3_slope_true": 0.5,
-  "control_C2_tail_rate_massive_m0p40": 1.2949246709128206,
+  "control_C2_tail_rate_massive_m0p40": 1.2949246708940456,
   "fit_L": {
-    "A_cutoff": -0.006083279398360468,
-    "B_phys": 0.0025274178750226604,
-    "R2_m2": 0.9990603511404208,
-    "cutoff_domination_span": 0.0779005566790947,
+    "A_cutoff": -0.006083279398360596,
+    "B_mass_slope": 0.0025274178750229743,
+    "R2_m2": 0.9990603511403889,
+    "cutoff_domination_span": 0.07790055667910274,
     "c2_of_m": [
-      -0.005932027442758717,
-      -0.005855720626279426,
-      -0.005768997674373142,
-      -0.005673026195823418,
-      -0.0055689495373194954,
-      -0.005457871549525991
+      -0.005932027442758941,
+      -0.0058557206262795205,
+      -0.00576899767437311,
+      -0.005673026195823458,
+      -0.005568949537319468,
+      -0.0054578715495261585
     ],
     "c0_of_m": [
-      0.02373112569357718,
+      0.023731125693577187,
       0.02342585963224778,
-      0.023078923733507017,
+      0.02307892373350701,
       0.022694989026117836,
-      0.022278629478128777,
-      0.02183426105341231
+      0.02227862947812876,
+      0.021834261053412324
     ],
     "masses": [
       0.25,
@@ -36,24 +36,24 @@
     ]
   },
   "fit_Lminus8": {
-    "A_cutoff": -0.006082450278022753,
-    "B_phys": 0.0025270727415387514,
-    "R2_m2": 0.9990603651423209,
-    "cutoff_domination_span": 0.077900536359591,
+    "A_cutoff": -0.0060824502780227885,
+    "B_mass_slope": 0.0025270727415388364,
+    "R2_m2": 0.9990603651423241,
+    "cutoff_domination_span": 0.07790053635959317,
     "c2_of_m": [
-      -0.0059312188984743915,
-      -0.005854922620385724,
-      -0.005768211518020322,
-      -0.00567225312431963,
-      -0.005568190649812736,
-      -0.005457127799008057
+      -0.005931218898474374,
+      -0.005854922620385822,
+      -0.005768211518020324,
+      -0.0056722531243196305,
+      -0.005568190649812779,
+      -0.005457127799008058
     ],
     "c0_of_m": [
-      0.023731094569930968,
-      0.023425829459732816,
+      0.023731094569930965,
+      0.023425829459732823,
       0.023078894132320275,
       0.02269495994363646,
-      0.022278600934472485,
+      0.022278600934472488,
       0.0218342330801128
     ],
     "masses": [
@@ -65,11 +65,11 @@
       0.5
     ]
   },
-  "B_phys": 0.0025274178750226604,
-  "B_phys_altL": 0.0025270727415387514,
+  "B_mass_slope": 0.0025274178750229743,
+  "B_mass_slope_altL": 0.0025270727415388364,
   "B_L_stable": true,
-  "einstein_positive": true,
-  "m2_scaling_confirmed": true,
+  "mass_slope_positive": true,
+  "m2_fit_confirmed": true,
   "controls_ok": true,
-  "verdict": "induced Einstein term: the xi-scaling part of 1/16piG is POSITIVE and clean -- c2(m)=A+B m^2 with B>0, R^2>0.99, L-stable -> 1/G proportional to 1/xi^2 (screen scale SETS G, healthy sign). Masslessness is symmetry-protected (conserved stress verified). Short-range screen stress -> long-range, local, positive-G induced gravity."
+  "verdict": "CONTROL ONLY: the chosen massive-scalar lattice correlator has an L-stable positive dc2/dm^2 fit. Corrected SSV is gapless, m is not 1/xi, and the omitted seagull/screen-metric map prevent interpreting this coefficient as a derived Newton constant."
 }

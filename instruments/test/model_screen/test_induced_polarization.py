@@ -36,22 +36,21 @@ def test_control_C3_slope_recovery():
 
 
 def test_raw_c2_is_cutoff_dominated():
-    # the m^2 (physical) part is a small fraction of the cutoff (contact) piece,
-    # so the raw c2 sign/value is NOT physical -- isolation is required
-    f = ip.einstein_coefficient(32, nwin=4)
+    # The m^2 span is small compared with the lattice contact piece.
+    f = ip.mass_slope_fit(32, nwin=4)
     assert f["cutoff_domination_span"] < 0.2
     assert f["A_cutoff"] < 0.0            # raw c2 dominated by the cutoff piece
 
 
-def test_induced_einstein_positive_and_m2_law():
-    f = ip.einstein_coefficient(32, nwin=4)
-    assert f["B_phys"] > 0.0              # positive / healthy induced 1/G
-    assert f["R2_m2"] > 0.99             # c2 linear in m^2 -> 1/G ~ 1/xi^2
+def test_mass_slope_is_positive_and_linear_in_m2():
+    f = ip.mass_slope_fit(32, nwin=4)
+    assert f["B_mass_slope"] > 0.0
+    assert f["R2_m2"] > 0.99
 
 
 def test_B_lattice_stable():
-    b32 = ip.einstein_coefficient(32, nwin=4)["B_phys"]
-    b24 = ip.einstein_coefficient(24, nwin=4)["B_phys"]
+    b32 = ip.mass_slope_fit(32, nwin=4)["B_mass_slope"]
+    b24 = ip.mass_slope_fit(24, nwin=4)["B_mass_slope"]
     assert abs(b32 - b24) / abs(b32) < 0.05
 
 
@@ -63,6 +62,7 @@ def test_locality_massive_tail_exponential():
 def test_verdict_controls_pass():
     rep = ip.run(L=32, nwin=4)
     assert rep["controls_ok"] is True
-    assert rep["einstein_positive"] is True
-    assert rep["m2_scaling_confirmed"] is True
-    assert "1/xi^2" in rep["verdict"]
+    assert rep["mass_slope_positive"] is True
+    assert rep["m2_fit_confirmed"] is True
+    assert rep["verdict"].startswith("CONTROL ONLY")
+    assert "m is not 1/xi" in rep["verdict"]

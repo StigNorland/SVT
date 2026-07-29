@@ -54,5 +54,5 @@ def test_control_C4_massive_is_yukawa_short_range():
 def test_verdict_controls_pass():
     rep = s.run()
     assert rep["controls_ok"] is True
-    assert "spin-2 sector EXISTS" in rep["verdict"]
-    assert "short-range" in rep["verdict"]
+    assert rep["verdict"].startswith("CONTROL ONLY")
+    assert "does not model corrected SSV" in rep["verdict"]

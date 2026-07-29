@@ -57,8 +57,9 @@ def test_result_far_tail_does_not_grow_with_scale():
     assert t_large <= t_small, f"far tail grew: {t_small} -> {t_large}"
 
 
-def test_verdict_is_R1_open():
+def test_verdict_is_scoped_as_far_tail_control():
     rep = ml.run(ell=24, masses=(1e-3, 0.1, 0.6), N=900)
     assert rep["controls_ok"] is True
     assert rep["far_tail_grows_with_scale"] is False
-    assert rep["verdict"].startswith("R1-open")
+    assert rep["verdict"].startswith("CONTROL ONLY")
+    assert "does not establish" in rep["verdict"]

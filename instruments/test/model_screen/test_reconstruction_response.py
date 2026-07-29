@@ -1,4 +1,4 @@
-"""Tests for #166 sub-calculation 4 -- the reconstruction map.
+"""Tests for #166 sub-calculation 4 -- supplied-kernel control.
 
 Validates the instrument, then checks the result:
   (i)   CONTROL C1: the response is transverse (Ward, reuse sub-calc 2);
@@ -54,9 +54,11 @@ def test_T2_long_range_vs_imposed_short_range():
     assert rate_short > 0.3                               # imposed: short-range
 
 
-def test_verdict_controls_pass():
+def test_verdict_is_scoped_as_control_after_reconstruction_audit():
     rep = r.run(L=40)
     assert rep["controls_ok"] is True
     assert rep["T1_determined"] is True
     assert rep["T2_long_range"] is True
-    assert "FOLLOWS FROM" in rep["verdict"]
+    assert rep["measured_screen_polarisation_enters_T2"] is False
+    assert rep["verdict"].startswith("CONTROL ONLY")
+    assert "does NOT establish" in rep["verdict"]

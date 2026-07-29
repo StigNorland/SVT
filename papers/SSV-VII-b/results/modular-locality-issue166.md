@@ -1,6 +1,13 @@
 # Issue #166 sub-calculation 1 — modular-locality of the screen
 
-**Status: R1-open — the necessary condition PASSES.** The screen's modular flow
+> **CURRENT SCOPE — sub-calculations 5–6.** The far-tail numbers below remain
+> valid, but they do not establish geometric modular flow: the statistic omits
+> other components of the complete kernel. Moreover, `m=1/xi` is not the
+> corrected gapless SSV dispersion. This is a one-dimensional massive-scalar
+> control, superseded for SSV by
+> [ssv-disk-modular-issue166.md](ssv-disk-modular-issue166.md).
+
+**Original status (superseded): R1-open — the necessary condition PASSES.** The screen's modular flow
 stays **geometric** (a short-range / local operator) as SSV's scale `ξ` is turned
 on; the non-local (bilocal) tail that would break the boost **does not grow** with
 `mξ` — it shrinks. So the obstruction I expected (a scale making the modular

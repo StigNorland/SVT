@@ -1,0 +1,74 @@
+{
+  "dependency": {
+    "L": 32,
+    "greens_function_kernel_arguments_in_run": [
+      "k2",
+      "M * M + k2"
+    ],
+    "measured_screen_polarisation_enters_T2": false,
+    "claimed_T2_power_with_massless_screen_fixture": 2.089158167615308,
+    "claimed_T2_power_with_gapped_screen_fixture": 2.089158167615308,
+    "claimed_T2_change": 0.0,
+    "control_massless_power": 2.089158167615308,
+    "control_gapped_yukawa_rate": 0.5887158413147584,
+    "control_detects_supplied_kernel_change": true
+  },
+  "theorem": {
+    "corpus": [
+      "instruments/model_screen/modular_locality.py",
+      "instruments/model_screen/screen_stress_spin2.py",
+      "instruments/model_screen/induced_polarization.py",
+      "instruments/model_screen/reconstruction_response.py",
+      "papers/SSV-VII-b/results/modular-locality-issue166.md",
+      "papers/SSV-VII-b/results/screen-stress-spin2-issue166.md",
+      "papers/SSV-VII-b/results/induced-polarization-issue166.md",
+      "papers/SSV-VII-b/results/reconstruction-issue166.md"
+    ],
+    "corpus_file_count": 8,
+    "queries": {
+      "all_ball_regions_and_frames": "ball-shaped|AdS-Rindler|every (?:ball|Lorentz frame)",
+      "holographic_entropy_functional": "Ryu[-\u2013 ]Takayanagi|RT (?:formula|functional)|Wald functional",
+      "asymptotic_stress_metric_dictionary": "Fefferman[-\u2013 ]Graham|asymptotic (?:bulk )?metric|stress.{0,30}metric dictionary",
+      "explicit_bulk_screen_state_map": "explicit bulk[-\u2013 ]screen map|isometry.{0,30}(?:bulk|screen)|encoding map"
+    },
+    "premises": {
+      "one_common_state_space_and_dimension": {
+        "present": false,
+        "evidence": "sub-calc 1 is a one-dimensional open chain; sub-calcs 2-4 use D=4 Euclidean arrays, with no state map between them",
+        "dimensions_mixed": true
+      },
+      "all_ball_regions_and_lorentz_frames": {
+        "present": false,
+        "search_count": 0
+      },
+      "holographic_entropy_functional": {
+        "present": false,
+        "search_count": 0
+      },
+      "asymptotic_stress_metric_dictionary": {
+        "present": false,
+        "search_count": 0
+      },
+      "explicit_bulk_screen_state_map": {
+        "present": false,
+        "search_count": 0
+      },
+      "derived_bulk_kinetic_kernel": {
+        "present": false,
+        "evidence": "sub-calc 4 inverts khat2(L), not the measured screen Pi2(k)"
+      }
+    },
+    "missing_premises": [
+      "one_common_state_space_and_dimension",
+      "all_ball_regions_and_lorentz_frames",
+      "holographic_entropy_functional",
+      "asymptotic_stress_metric_dictionary",
+      "explicit_bulk_screen_state_map",
+      "derived_bulk_kinetic_kernel"
+    ]
+  },
+  "controls_ok": true,
+  "D1_clean_negative_subcalc4": true,
+  "D2_theorem_not_applicable": true,
+  "decision": "D1+D2: clean negative on the existing reconstruction claim; sub-calc 4 is screen-data-independent and the cited theorem's load-bearing premises are absent. Duality itself remains open."
+}

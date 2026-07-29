@@ -1,4 +1,10 @@
-"""#166 sub-calculation 1 -- modular-locality test (bulk-screen duality).
+"""#166 sub-calculation 1 -- one-dimensional modular far-tail control.
+
+CORRECTION (sub-calculations 5-6): a shrinking far tail in H_pi does not prove
+that the complete modular Hamiltonian is geometric, and a scalar mass m=1/xi is
+not the corrected gapless SSV dispersion.  The mathematical observation remains
+a control only.  See reconstruction-assumption-audit-issue166.md and
+ssv-disk-modular-issue166.md.
 
 Pre-registered on issue #166 (comment), BEFORE this code.  A NECESSARY
 CONDITION for the proposed duality: the screen's modular flow must be
@@ -174,9 +180,15 @@ def run(ell=40, masses=(1e-3, 0.05, 0.15, 0.4, 1.0), N=1600):
     if not controls_ok:
         verdict = "INVALID -- positive control failed; no physics verdict"
     elif grows:
-        verdict = "R3-leaning: scale breaks the boost (far tail grows with m*ell)"
+        verdict = (
+            "CONTROL: the selected H_pi far tail grows with scalar mass; "
+            "complete-kernel interpretation required"
+        )
     else:
-        verdict = "R1-open: modular flow stays geometric (far tail does not grow)"
+        verdict = (
+            "CONTROL ONLY: the selected H_pi far tail does not grow; this does "
+            "not establish geometric modular flow or model corrected SSV"
+        )
 
     return {
         "ell": ell, "N": N, "rows": rows,

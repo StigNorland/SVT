@@ -1,5 +1,10 @@
-"""#166 sub-calculation 4 -- the reconstruction map (does the bulk TT FOLLOW
-from the screen state, or must it be imposed as in #162?).
+"""#166 sub-calculation 4 -- massless Green-function control.
+
+CORRECTION (sub-calculation 5): this instrument does not derive the bulk TT
+kernel from measured screen data.  Its T2 path inserts khat^2 and verifies the
+known long-range Green function of that supplied massless kernel.  The previous
+"bulk TT follows from the screen state" interpretation is retracted.  See
+papers/SSV-VII-b/results/reconstruction-assumption-audit-issue166.md.
 
 Pre-registered on issue #166 BEFORE this code.
 
@@ -13,8 +18,10 @@ transverse, LONG-RANGE bulk shear response (the operational content of "follows
 from"), versus #162 where the bulk shear was IMPOSED by hand (a local/contact
 insertion with free data).
 
-OBJECT.  The induced bulk spin-2 Green's function G2(k) = 1/Pi2(k) (the response
-to a unit screen source), from the sub-calc 3 polarisation Pi2.
+ORIGINAL OBJECT.  The intended object was the induced bulk spin-2 Green's
+function G2(k) = 1/Pi2(k).  The implementation below does not compute that
+object: measured Pi2 is reduced to a separate minimum-value diagnostic, while
+T2 inverts an analytic khat^2 fixture.
 
 DECISION RULE.
   T1 determinacy: Pi2(k) != 0 for physical k>0  -> the map source->response
@@ -130,7 +137,8 @@ def run(L=48):
 
     k2 = khat2(L)
 
-    # T2 / C2: physical (massless-by-symmetry) response -> long-range 1/r^2
+    # T2 / C2: supplied massless-kernel control -> long-range 1/r^2.
+    # This is deliberately NOT labelled screen reconstruction after audit #166/5.
     G_massless = greens_function(L, k2)
     rs, prof_m = radial_profile(G_massless, L)
     p_massless = fit_power(rs, prof_m)
@@ -149,10 +157,10 @@ def run(L=48):
     controls_ok = (ward < 1e-4) and long_range and short_range_imposed
 
     verdict = (
-        "the bulk shear response is DETERMINED (Pi2 invertible) and, with the "
-        "verified masslessness, LONG-RANGE (G2(r) ~ 1/r^2): a localized screen "
-        "source determines bulk shear at distant r -> bulk TT FOLLOWS FROM the "
-        "screen state (not imposed as in #162, whose gapped kernel is short-range)."
+        "CONTROL ONLY: an independently supplied massless khat^2 kernel has "
+        "G(r) ~ 1/r^2 and a supplied gapped kernel is short-range. Measured "
+        "screen Pi2 does not enter T2, so this does NOT establish screen-to-bulk "
+        "reconstruction."
     )
 
     return {
@@ -163,6 +171,7 @@ def run(L=48):
         "T1_determined": bool(determined),
         "T2_response_power_massless": p_massless,
         "T2_long_range": bool(long_range),
+        "measured_screen_polarisation_enters_T2": False,
         "imposed_gapped_yukawa_rate": rate_gapped,
         "imposed_gapped_power": p_gapped,
         "imposed_is_short_range": bool(short_range_imposed),
@@ -177,8 +186,7 @@ def main():
     rep = run(L=ap.parse_args().L)
 
     print("=" * 76)
-    print("#166  reconstruction map  --  does the bulk TT FOLLOW FROM the screen")
-    print("      state (long-range response), or is it imposed (#162, contact)?")
+    print("#166  supplied-kernel Green-function control")
     print("=" * 76)
     print("\nCONTROLS")
     print(f"  C1 Ward (response transverse)        = {rep['control_C1_ward']:.2e} (~0)")

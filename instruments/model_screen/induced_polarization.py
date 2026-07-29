@@ -1,4 +1,10 @@
-"""#166 sub-calculation 3 -- the INDUCED gravitational polarisation.
+"""#166 sub-calculation 3 -- massive-scalar polarisation control.
+
+CORRECTION (sub-calculations 5-6): the mass varied here cannot be identified
+with 1/xi of corrected SSV, whose Goldstone/Bogoliubov branch is gapless.
+Without the seagull, a covariant regulator and an explicit screen-to-metric map,
+the fitted mass slope is not a derived Newton constant.  The lattice fit remains
+a generic massive-scalar control only.
 
 Pre-registered (and amended) on issue #166 BEFORE this code.
 
@@ -165,17 +171,14 @@ def control_C1_ward():
 MASSES = (0.25, 0.30, 0.35, 0.40, 0.45, 0.50)
 
 
-def einstein_coefficient(L, masses=MASSES, nwin=4):
-    """Extract the induced Einstein coefficient by isolating the physical,
-    xi-scaling part of the k^2 form factor.
+def mass_slope_fit(L, masses=MASSES, nwin=4):
+    """Fit c2(m)=A+B*m^2 for the generic massive-scalar lattice control.
 
-    The raw c2(m) is dominated by an m-INDEPENDENT lattice-cutoff contact piece
-    (~1/a^2); the physical, screen-scale-dependent part is the m^2 term.  Fit
-    c2(m) = A + B m^2:  A is the (unphysical, a-scale) cutoff contact, and
-    B = d c2 / d m^2 is the CUTOFF-INDEPENDENT physical response -- the induced
-    1/16 pi G per unit 1/xi^2.  (dc2/dm^2 drops the m-independent A, so B and its
-    SIGN are scheme-robust; the absolute 1/G needs the physical cutoff = 1/xi and
-    the seagull -> deferred.)"""
+    A is dominated by a mass-independent lattice contact.  B is reproducible
+    for this regulator and fit window, but without the seagull and a covariant
+    screen-to-metric construction it is not labelled a physical Einstein
+    coefficient or a scheme-independent Newton constant.
+    """
     c2s, c0s = [], []
     for m in masses:
         k0, pi2 = spin2_formfactor(L, m, nwin)          # n = 1..nwin (small k)
@@ -186,9 +189,9 @@ def einstein_coefficient(L, masses=MASSES, nwin=4):
     (A, B), *_ = np.linalg.lstsq(Aa, c2s, rcond=None)
     pred = A + B * m2
     R2 = float(1.0 - np.sum((c2s - pred) ** 2) / np.sum((c2s - c2s.mean()) ** 2))
-    # cutoff domination: the m^2 physical part is small vs the cutoff piece
+    # The mass-dependent span is small compared with the contact piece.
     span = float(np.ptp(B * m2) / abs(A))
-    return {"A_cutoff": float(A), "B_phys": float(B), "R2_m2": R2,
+    return {"A_cutoff": float(A), "B_mass_slope": float(B), "R2_m2": R2,
             "cutoff_domination_span": span,
             "c2_of_m": c2s.tolist(), "c0_of_m": c0s,
             "masses": list(masses)}
@@ -198,18 +201,17 @@ def run(L=48, nwin=4):
     ward = control_C1_ward()                            # C1 precondition (reuse)
     c2_hat, c2_true = control_C3_slope_recovery()       # C3 fit validation
 
-    # core: induced Einstein coefficient, at two lattice sizes (L-stability)
-    main_fit = einstein_coefficient(L, nwin=nwin)
-    alt_fit = einstein_coefficient(L - 8, nwin=nwin)
-    B, B_alt = main_fit["B_phys"], alt_fit["B_phys"]
+    # Generic mass slope at two lattice sizes (L-stability control).
+    main_fit = mass_slope_fit(L, nwin=nwin)
+    alt_fit = mass_slope_fit(L - 8, nwin=nwin)
+    B, B_alt = main_fit["B_mass_slope"], alt_fit["B_mass_slope"]
     B_stable = abs(B - B_alt) / abs(B) < 0.05
 
-    # locality: massive <TT>(x) is exponentially short-range (a FEATURE ->
-    # analytic/local induced action).  (The near-massless field is not in the
-    # asymptotic scaling regime at accessible L, cf. sub-calc 1 -- not used.)
+    # Control: a genuinely massive scalar has an exponentially short-range
+    # correlator.  This is not identified with corrected SSV's xi.
     rate_massive = tail_decay_rate(L, 0.40)
 
-    einstein_positive = B > 0.0
+    mass_slope_positive = B > 0.0
     m2_law = main_fit["R2_m2"] > 0.99
     controls_ok = ((ward < 1e-4)
                    and abs(c2_hat - c2_true) / c2_true < 1e-6
@@ -217,11 +219,10 @@ def run(L=48, nwin=4):
                    and B_stable)
 
     verdict = (
-        "induced Einstein term: the xi-scaling part of 1/16piG is POSITIVE and "
-        "clean -- c2(m)=A+B m^2 with B>0, R^2>0.99, L-stable -> 1/G proportional "
-        "to 1/xi^2 (screen scale SETS G, healthy sign). Masslessness is "
-        "symmetry-protected (conserved stress verified). Short-range screen "
-        "stress -> long-range, local, positive-G induced gravity."
+        "CONTROL ONLY: the chosen massive-scalar lattice correlator has an "
+        "L-stable positive dc2/dm^2 fit. Corrected SSV is gapless, m is not "
+        "1/xi, and the omitted seagull/screen-metric map prevent interpreting "
+        "this coefficient as a derived Newton constant."
     )
 
     return {
@@ -231,9 +232,11 @@ def run(L=48, nwin=4):
         "control_C3_slope_true": c2_true,
         "control_C2_tail_rate_massive_m0p40": rate_massive,
         "fit_L": main_fit, "fit_Lminus8": alt_fit,
-        "B_phys": B, "B_phys_altL": B_alt, "B_L_stable": bool(B_stable),
-        "einstein_positive": bool(einstein_positive),
-        "m2_scaling_confirmed": bool(m2_law),
+        "B_mass_slope": B,
+        "B_mass_slope_altL": B_alt,
+        "B_L_stable": bool(B_stable),
+        "mass_slope_positive": bool(mass_slope_positive),
+        "m2_fit_confirmed": bool(m2_law),
         "controls_ok": bool(controls_ok),
         "verdict": verdict,
     }
@@ -247,8 +250,7 @@ def main():
     rep = run(L=a.L, nwin=a.nwin)
 
     print("=" * 74)
-    print("#166  induced gravitational polarisation  --  does the screen induce")
-    print("      a LOCAL, long-range Einstein term whose G is set by xi?")
+    print("#166  generic massive-scalar polarisation control")
     print("=" * 74)
     print(f"\nCONTROLS")
     print(f"  C1 Ward (separated-point transversality) = {rep['control_C1_ward']:.2e} (~0)")
@@ -265,14 +267,14 @@ def main():
     print(f"   -> raw c2 is cutoff-dominated (m^2 part is only "
           f"{100*f['cutoff_domination_span']:.0f}% of the |cutoff| piece)")
 
-    print(f"\nISOLATED induced Einstein coefficient  c2(m) = A + B m^2")
-    print(f"   A (lattice-cutoff contact, unphysical)   = {f['A_cutoff']:+.5f}")
-    print(f"   B = d c2/d m^2 (physical, 1/16piG per 1/xi^2) = {f['B_phys']:+.5f}")
+    print(f"\nMASS-SLOPE FIT  c2(m) = A + B m^2")
+    print(f"   A (lattice contact)                      = {f['A_cutoff']:+.5f}")
+    print(f"   B = d c2/d m^2 (control fit)             = {f['B_mass_slope']:+.5f}")
     print(f"   R^2 (linear in m^2)                      = {f['R2_m2']:.5f}")
-    print(f"   B at L={rep['L']-8} (stability)                    = {rep['B_phys_altL']:+.5f}"
+    print(f"   B at L={rep['L']-8} (stability)                    = {rep['B_mass_slope_altL']:+.5f}"
           f"   stable: {rep['B_L_stable']}")
-    print(f"\n   B > 0 (positive/healthy induced 1/G):  {rep['einstein_positive']}")
-    print(f"   1/G proportional to 1/xi^2 (m^2 law):  {rep['m2_scaling_confirmed']}")
+    print(f"\n   B > 0:                                  {rep['mass_slope_positive']}")
+    print(f"   c2 linear in m^2 in this window:        {rep['m2_fit_confirmed']}")
     print(f"\nRESULT: {rep['verdict']}")
 
     RESULTS.mkdir(parents=True, exist_ok=True)
