@@ -32,12 +32,11 @@ S1(a) -- flowing dumb-hole (3D radial sink / draining bathtub):
     v_g(k) = (c_s^2 + k^2/2)/sqrt(c_s^2 + k^2/4)
   exceeds c_s for ALL k>0 (excess ~ (3/8) k^2/c_s as k->0), so high-k modes can
   outrun sound and leak across the acoustic horizon (Corley-Jacobson 1996;
-  Unruh-Schuetzhold 2005). Thermality is robust iff the surface-gravity
-  frequency sits well below the dispersion frequency:
-    margin  M = g_H xi/(2 pi c_s^2) = xi/(pi r_H)   must be << 1.
-  Robust for astrophysical r_H >> xi; O(1) for grain-scale local Rindler
-  horizons (the Jacobson construction) -- the conditional caveat that ties the
-  gravity sector to the #148 local-Lorentz protection.
+  Unruh-Schuetzhold 2005). The scale-separation diagnostic is
+    M = g_H xi/(2 pi c_s^2) = xi/(pi r_H).
+  M << 1 is necessary for a hydrodynamic horizon but is not a sufficient
+  thermality theorem for this superluminal LogSE branch. A mode-conversion
+  calculation is still required.
 
 S1(b) -- area-law dS = eta dA: RESOLVED by S2 (R1). Read eta from its receipt.
 
@@ -124,7 +123,7 @@ def s1a(rH_list):
             "T_H_numeric": T_num,
             "T_H_rel_err": abs(T_num - T_an) / T_an,
             "robustness_margin_M": margin,
-            "thermality_robust": bool(margin < 0.1),
+            "hydrodynamic_scale_separation": bool(margin < 0.1),
         })
     # superluminal-excess profile: v_g(k) - c_s > 0 for all k>0
     ks = np.linspace(1e-3, 4.0 / XI, 200)
@@ -191,14 +190,14 @@ def battery():
 
     g_ok = all(row["g_H_rel_err"] < 1e-3 for row in A["rows"])
     T_ok = all(row["T_H_rel_err"] < 1e-3 for row in A["rows"])
-    # margin -> 0 as r_H grows (thermality robust for scale-separated horizons)
+    # margin -> 0 as r_H grows (hydrodynamic scale separation improves)
     margins = [row["robustness_margin_M"] for row in A["rows"]]
     margin_monotone = all(margins[i + 1] < margins[i]
                           for i in range(len(margins) - 1))
-    robust_large = A["rows"][-1]["thermality_robust"]
+    separated_large = A["rows"][-1]["hydrodynamic_scale_separation"]
     # the grain-scale caveat: extrapolate where M crosses 1 (r_H ~ xi/pi)
     rH_breakdown = XI / math.pi               # M = 1 at r_H = xi/pi
-    R1a = bool(g_ok and T_ok and margin_monotone and robust_large
+    R1a = bool(g_ok and T_ok and margin_monotone
                and A["superluminal_for_all_k"])
     out = {
         "config": {"B0": B0, "c_s": C_S, "xi": XI},
@@ -208,21 +207,25 @@ def battery():
             "g_H_matches_visser_eq70": bool(g_ok),
             "T_H_matches_visser_eq118": bool(T_ok),
             "dispersion_superluminal_all_k": bool(A["superluminal_for_all_k"]),
-            "margin_M_to_zero_for_large_rH": bool(margin_monotone
-                                                  and robust_large),
+            "margin_M_to_zero_for_large_rH": bool(
+                margin_monotone and separated_large
+            ),
+            "thermality_status": (
+                "UNRESOLVED: M << 1 is necessary scale separation, not a "
+                "sufficient criterion for superluminal LogSE thermality"
+            ),
             "rH_breakdown_grainscale": rH_breakdown,
             "S1c_eta_O1_form_closes": bool(C["eta_is_O1_per_xi2"]),
             "S1c_overshoot": C["overshoot_a_p_over_l_P_squared"],
             "VERDICT": "R1(a)" if R1a else "R2(a)",
             "VERDICT_meaning": (
                 "R1(a): regular acoustic horizon; g_H, T_H match Visser; "
-                "thermality robust for scale-separated horizons (M=xi/(pi r_H) "
-                "-> 0), O(1) at the grain scale (W4/#148 caveat). Clausius "
-                "closes in FORM; G magnitude conceded (overshoot "
+                "M=xi/(pi r_H) -> 0 for scale-separated horizons but "
+                "thermality remains unresolved for the superluminal branch. "
+                "Clausius closes in FORM; G magnitude conceded (overshoot "
                 f"~{C['overshoot_a_p_over_l_P_squared']:.2e})."
                 if R1a else
-                "R2(a): horizon or thermality not robust -- Jacobson route "
-                "undermined for this medium."),
+                "R2(a): the kinematic horizon checks fail."),
             "form_yes_G_no": bool(R1a),
         },
     }
@@ -243,11 +246,12 @@ def figure(out, dest):
     ax = axes[0]
     ax.loglog(rH, M, "o-", label=r"margin $M=\xi/(\pi r_H)$")
     ax.axhline(1.0, color="r", ls="--", lw=1, label="trans-Planckian breakdown")
-    ax.axhline(0.1, color="orange", ls=":", lw=1, label="robust threshold")
+    ax.axhline(0.1, color="orange", ls=":", lw=1,
+               label="scale-separation guide")
     ax.set_xlabel(r"horizon radius $r_H/\xi$")
     ax.set_ylabel("robustness margin $M$")
-    ax.set_title("thermality robust iff $M\\ll1$: $M\\to0$ for $r_H\\gg\\xi$,\n"
-                 "$O(1)$ at grain-scale (Rindler) horizons (W4/#148)",
+    ax.set_title("$M\\to0$ for $r_H\\gg\\xi$; thermality unresolved\n"
+                 "without a superluminal mode-conversion calculation",
                  fontsize=8)
     ax.legend(fontsize=7)
     ax = axes[1]

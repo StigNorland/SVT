@@ -3,9 +3,9 @@
 A generated number closes half the defect. The other half is the prose around it.
 
     "This is *not* the classical electron radius, which is smaller by a factor
-     alpha^2"                                       -- SSV-I main.tex:537
+     sqrt(2) alpha^2"                               -- SSV-I main.tex:537
     "smaller by ~2x10^4"                            -- SSV-I main.tex:1639
-    "the entropy would double"                      -- SSV-VII-b main.tex:401
+    "omitting sqrt(2) doubles the entropy"          -- SSV-VII-b main.tex:407
 
 Each is a relationship that was reviewed when written. Under #198 Part A the
 value can no longer drift from its instrument — but the instrument and receipt
@@ -114,15 +114,15 @@ def _ssv_i() -> list[Claim]:
         ),
         Claim(
             "SSV-I", "Re-is-not-classical-electron-radius", "papers/SSV-I/main.tex:537",
-            "R_e^* is NOT the classical electron radius r_e, which is smaller by alpha^2",
+            "R_e^* is NOT the classical electron radius r_e, which is smaller "
+            "by sqrt(2) alpha^2",
             ("ssvReStar",),
             lambda: _rel(Re() / A.R_E_CLASSICAL, 1 / (A.ALPHA**2 * mp.sqrt(2))) < 1e-6,
             tolerance="relative 1e-6 on the ratio",
-            note="the sqrt2 enters because the printed R_e^* is the corrected one; "
-                 "the paper's 'factor alpha^2' is the uncorrected statement.",
+            note="the sqrt2 enters because the printed R_e^* is the corrected one.",
             source_anchor=(
-                r"$r_e = \alpha\hbar/(m_ec)$, which is smaller by a factor "
-                r"$\alpha^2$."
+                r"$r_e = \alpha\hbar/(m_ec)$, which is smaller than $R_e^*$ "
+                r"by a factor $\sqrt{2}\,\alpha^2$."
             ),
         ),
         Claim(
@@ -195,15 +195,15 @@ def _ssv_vii_b() -> list[Claim]:
         ),
         Claim(
             "SSV-VII-b", "m0-is-mP-over-root2", "papers/SSV-VII-b/main.tex:396",
-            "what moves is the mass: m_0 = m_P/sqrt2, not m_0 = m_P",
+            "the reference mass is m_0 = m_P/sqrt2",
             ("ssvMZero", "ssvMPlanck"),
             lambda: _rel(P.correction_factor(), mp.sqrt(2)) < 1e-20,
             tolerance="relative 1e-20 — the claim is exactness, not approximation",
             source_anchor=r"\frac{m_P}{\sqrt2} \;\approx\; \ssvMZero\ \text{kg}",
         ),
         Claim(
-            "SSV-VII-b", "entropy-would-double", "papers/SSV-VII-b/main.tex:401",
-            "at fixed m_0 and horizon area the entropy would DOUBLE (factor 2, not sqrt2)",
+            "SSV-VII-b", "entropy-would-double", "papers/SSV-VII-b/main.tex:407",
+            "at fixed m_0 and horizon area omitting sqrt2 doubles the entropy",
             ("ssvEllP", "ssvMZero"),
             lambda: _rel(P.healing_length(P.fundamental_mass(),
                                           sqrt2_corrected=False)**2
@@ -213,7 +213,7 @@ def _ssv_vii_b() -> list[Claim]:
                  "factor 2 in the count. This is the arithmetic the sentence "
                  "asserts, and it is not the same statement as m_P/m_0 = sqrt2.",
             source_anchor=(
-                r"entropy~\eqref{eq:BH_entropy} would \emph{double};"
+                r"length doubles the entropy~\eqref{eq:BH_entropy}."
             ),
         ),
         Claim(

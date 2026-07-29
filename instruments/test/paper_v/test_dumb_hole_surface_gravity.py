@@ -1,11 +1,12 @@
 """Tests for #155 H-EOS S1 -- flowing-dumb-hole surface gravity, Unruh T, the
-trans-Planckian robustness margin, and the Clausius -> G_eff closure.
+trans-Planckian scale-separation margin, and the Clausius -> G_eff closure.
 
 Covers: (1) surface gravity matches Visser eq 70 (2 c_s^2/r_H); (2) Hawking T
 matches eq 118 (c_s/pi r_H); (3) the LogSE dispersion is superluminal for all k
-with the analytic small-k excess 3/8/c_s; (4) the robustness margin M=xi/(pi r_H)
-decays with r_H and is O(1) at the grain scale -- NEGATIVE CAPABILITY: the
-diagnostic flags grain-scale Rindler horizons as non-robust; (5) the S1(c)
+with the analytic small-k excess 3/8/c_s; (4) the scale-separation margin
+M=xi/(pi r_H) decays with r_H and is O(1) at the grain scale -- NEGATIVE
+CAPABILITY: the diagnostic flags grain-scale Rindler horizons as
+non-hydrodynamic but does not claim that small M proves thermality; (5) the S1(c)
 Clausius form closes with eta O(1) and the conceded (a_p/l_P)^2 overshoot; (6)
 the overall verdict.
 """
@@ -73,4 +74,9 @@ def test_verdict_R1a():
     assert v["g_H_matches_visser_eq70"]
     assert v["T_H_matches_visser_eq118"]
     assert v["margin_M_to_zero_for_large_rH"]
+    assert "UNRESOLVED" in v["thermality_status"]
     assert v["form_yes_G_no"]
+    assert all(
+        "thermality_robust" not in row
+        for row in out["S1a"]["rows"]
+    )

@@ -11,11 +11,10 @@ The relevant quench parameter is the effective chemical potential mu(t)
 (equivalently the saturation pressure b ln rho_0) ramped from below
 to above its critical value at finite rate 1/tau_Q.
 
-For the *defect-counting* purpose only the universality class matters --
-the long-wavelength dynamics of the symmetry-breaking transition in 2D
-are captured by the dissipative time-dependent Ginzburg-Landau (TDGL)
-equation, which is in the same KZ universality class as the
-finite-temperature LogSE crossover. We therefore solve
+This script tests the hypothesis that a dissipative 2D
+time-dependent Ginzburg-Landau (TDGL) surrogate exhibits the expected
+Kibble-Zurek trend. It does not establish that the finite-temperature
+LogSE transition belongs to the same dynamic universality class. We solve
 
     d_t Psi = nabla^2 Psi + ( mu(t) - g |Psi|^2 ) Psi + eta(x,t)
 
@@ -28,10 +27,10 @@ is extracted from a tau_Q scan. The fitted exponent is reported and
 compared with mean-field (nu = 1/2, z = 2 => 2D exponent 0.5) and
 3D XY (nu ~ 0.67, z = 2 in 3D => exponent ~ 0.86).
 
-The 2D mean-field exponent and a quench-rate window are then used to
-predict the equivalent 3D dimensionless defect density at a
-cosmologically realistic tau_Q / tau_0 = O(H^-1 / xi/c), yielding the
-order-of-magnitude prediction for eta = n_baryon / n_photon.
+The observed baryon-to-photon ratio can be inverted to state the quench
+ratio that the scaling ansatz would require. This is a target, not a
+prediction: the script does not compute the saturation-epoch Hubble rate,
+phonon abundance, or a defect-to-baryon map.
 """
 
 from __future__ import annotations
@@ -160,6 +159,48 @@ def count_defects(phase: np.ndarray, rho: np.ndarray, rho_cut: float) -> int:
 # ---------------------------------------------------------------------------
 
 
+def summarize_scan(table: list[dict]) -> dict:
+    """Fit an existing scan and label observation-derived quantities.
+
+    This is separate from the expensive stochastic evolution so the
+    interpretation and uncertainty calculation have a fast regression test.
+    """
+    # Fit n_def ~ tau_Q^(-alpha) in log-log
+    logs_x = np.log([row["tau_Q"] for row in table])
+    logs_y = np.log([row["density"] for row in table])
+    (slope, intercept), covariance = np.polyfit(
+        logs_x, logs_y, 1, cov=True
+    )
+    alpha_fit = -float(slope)
+    alpha_fit_std_error = float(math.sqrt(covariance[0, 0]))
+
+    # 2D mean field (nu = 1/2, z = 2): alpha_2D = d nu / (1 + nu z) = 0.5
+    # 3D XY (nu = 0.6717, z = 2): alpha_3D = 3 * 0.6717 / (1 + 1.3434) ~ 0.86
+    nu_XY = 0.6717
+    exp3D_XY = 3 * nu_XY / (1 + nu_XY * 2)
+
+    # Cosmological eta estimate:
+    #   n_def_3D * xi^3 ~ (tau_0/tau_Q)^alpha_3D
+    # Take alpha_3D = 3/4 (mean field). Then for eta = 6e-10:
+    #   tau_Q/tau_0 = eta^(-1/alpha_3D)
+    eta_obs = 6e-10
+    tau_ratio_MF = eta_obs ** (-1.0 / 0.75)
+    tau_ratio_XY = eta_obs ** (-1.0 / exp3D_XY)
+
+    return dict(
+        fitted_alpha_2D=alpha_fit,
+        fitted_alpha_2D_std_error=alpha_fit_std_error,
+        meanfield_alpha_2D=0.5,
+        meanfield_alpha_3D=0.75,
+        XY_alpha_3D=exp3D_XY,
+        eta_observed=eta_obs,
+        eta_status="observational input; not predicted by this scan",
+        tau_Q_over_tau_0_required_MF=tau_ratio_MF,
+        tau_Q_over_tau_0_required_XY=tau_ratio_XY,
+        scaling_status="inconclusive; fitted exponent misses mean-field target",
+    )
+
+
 def run_scan(output_path: Path) -> dict:
     tau_Q_values = [20.0, 40.0, 80.0, 160.0, 320.0]
     n_seeds = 6
@@ -183,48 +224,11 @@ def run_scan(output_path: Path) -> dict:
             dict(tau_Q=tau_Q, mean_count=mean, std=std, density=n_def)
         )
 
-    # Fit n_def ~ tau_Q^(-alpha) in log-log
-    logs_x = np.log([row["tau_Q"] for row in table])
-    logs_y = np.log([row["density"] for row in table])
-    slope, intercept = np.polyfit(logs_x, logs_y, 1)
-    alpha_fit = -float(slope)
-
-    # 2D mean field (nu = 1/2, z = 2): alpha_2D = d nu / (1 + nu z) = 0.5
-    # 3D XY (nu = 0.6717, z = 2): alpha_3D = 3 * 0.6717 / (1 + 1.3434) ~ 0.86
-    nu_XY = 0.6717
-    exp3D_XY = 3 * nu_XY / (1 + nu_XY * 2)
-
-    # Cosmological eta estimate:
-    #   n_def_3D * xi^3 ~ (tau_0/tau_Q)^alpha_3D
-    # Take alpha_3D = 3/4 (mean field). Then for eta = 6e-10:
-    #   tau_Q/tau_0 = eta^(-1/alpha_3D)
-    eta_obs = 6e-10
-    tau_ratio_MF = eta_obs ** (-1.0 / 0.75)
-    tau_ratio_XY = eta_obs ** (-1.0 / exp3D_XY)
-
-    # In SSV the natural unit is tau_0 = xi/c (the LogSE characteristic time)
-    # and tau_Q is the Hubble time at the saturation epoch: tau_Q = H^-1.
-    # H^-1 / (xi/c) is a huge dimensionless ratio. With xi ~ 10^-15 m
-    # (proton-size healing length from Paper I) and H^-1 ~ 4.4e17 s:
-    #   tau_Q/tau_0 = H^-1 c / xi ~ 4.4e17 * 3e8 / 1e-15 = 1.3e41.
-    tau_Q_cosmo = 1.3e41
-    eta_pred_MF = tau_Q_cosmo ** (-0.75)
-    eta_pred_XY = tau_Q_cosmo ** (-exp3D_XY)
-
     result = dict(
         grid=dict(N=N, L=L),
         seeds=n_seeds,
         scan=table,
-        fitted_alpha_2D=alpha_fit,
-        meanfield_alpha_2D=0.5,
-        meanfield_alpha_3D=0.75,
-        XY_alpha_3D=exp3D_XY,
-        eta_observed=eta_obs,
-        tau_Q_over_tau_0_required_MF=tau_ratio_MF,
-        tau_Q_over_tau_0_required_XY=tau_ratio_XY,
-        cosmological_tau_Q_over_tau_0=tau_Q_cosmo,
-        eta_predicted_MF=eta_pred_MF,
-        eta_predicted_XY=eta_pred_XY,
+        **summarize_scan(table),
     )
 
     output_path.write_text(json.dumps(result, indent=2))

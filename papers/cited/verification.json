@@ -484,6 +484,7 @@
       "note": "notes/Planck2020.md",
       "review_status": "evidence-recorded",
       "cited_by": [
+        "SSV-I",
         "SSV-II"
       ]
     },
@@ -607,8 +608,7 @@
         "SSV-IX",
         "SSV-V",
         "SSV-VII-a",
-        "SSV-VII-b",
-        "SSV-VIII"
+        "SSV-VII-b"
       ],
       "local_source": "../SSV-II/main.tex"
     },

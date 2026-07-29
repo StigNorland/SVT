@@ -891,16 +891,18 @@ that the leftover constants $\mu_{\text{eff}}$, $v_0$, and $g_{\text{int}}$ are 
 separate loose ends but three instances of one structure.
 
 \emph{Vortex tangle.} The leading term $(L/\xi)\ln\mu_{\text{eff}}$ of
-\S\ref{sec:tanglereduction} counts a self-avoiding loop ensemble. The asymptotic enumeration
-of a single self-avoiding polygon of $n = L/\xi$ segments is known~\cite{MadrasSlade1993},
+\S\ref{sec:tanglereduction} counts a self-avoiding loop ensemble. A standard
+but non-rigorous three-dimensional scaling ansatz for a self-avoiding polygon
+of $n = L/\xi$ segments is~\cite{MadrasSlade1993},
 \begin{equation}
   p_n \;\sim\; A\,\mu^{\,n}\,n^{\,\theta},
   \qquad \theta \;=\; \alpha - 3 \;=\; -(1 + 3\nu),
 \end{equation}
 with $\mu$ the connective constant of the regularization, $A$ a non-universal amplitude, and
 $\nu \approx 0.587597$ the self-avoiding-walk correlation-length exponent~\cite{Clisby2010}.
-The exponent $\theta \approx -2.76$ is universal --- fixed by the hyperscaling relation
-$\alpha = 2 - d\nu$ in $d = 3$ --- and hence regularization-independent. A tangle of
+Within that scaling ansatz, $\theta \approx -2.76$ follows from the
+hyperscaling relation $\alpha = 2-d\nu$ in $d=3$ and is expected to be
+universal; it is not a rigorous enumeration theorem. A tangle of
 $\mathcal{N}$ closed loops of lengths $\{L_i\}$ summing to $L$ then has
 \begin{equation}
   \Omega_\mathcal{V} \;=\; \frac{1}{\mathcal{N}!}\prod_{i=1}^{\mathcal{N}}
@@ -1023,11 +1025,12 @@ the unavailability of inverse processes, is here recovered as the data-processin
 for a coarse-graining map~\cite{Vedral2002} --- the same statement in information-theoretic
 dress.
 
-\emph{The five channels are the sectors of one generator.} The integrand $dS/d\ln b$ is a
-single quantity, but the modes it removes at scale $b$ fall into disjoint classes. Any
-fluctuation of $\Psi$ about a local condensate background is exactly one of the following,
-by the symmetry of the order parameter together with the homotopy classification of its
-defects~\cite{Mermin1979}:
+\emph{A proposed five-channel bookkeeping.} The integrand $dS/d\ln b$ is a
+single quantity.  We organise the modes removed at scale $b$ into the
+following useful, but not proven exhaustive, sectors.  Homotopy theory
+supports the classification of topological defects such as vortex
+lines~\cite{Mermin1979}; it does not classify Kelvin excitations or connected
+correlations:
 \begin{itemize}
   \item a smooth $U(1)$ phase (Goldstone) fluctuation, with its conjugate density partner
         --- the Bogoliubov sector --- contributing $dS_\phi/d\ln b$;
@@ -1040,11 +1043,12 @@ defects~\cite{Mermin1979}:
   \item a connected correlation between regions, not reducible to local data, contributing
         $dS_\mathcal{C}/d\ln b$.
 \end{itemize}
-These five classes are mutually exclusive and jointly exhaustive --- that is the content of
-the homotopy classification together with the Goldstone decomposition --- so the generator
-splits with no remainder,
+Kelvin waves are modes of the vortex sector and correlations can overlap the
+other sectors, so mutual exclusivity and completeness require a separate
+projection construction that is not supplied here.  The following
+decomposition is therefore an ansatz,
 \begin{equation}
-  \frac{dS}{d\ln b} \;=\;
+  \frac{dS}{d\ln b} \;\stackrel{\rm ansatz}{=}\;
   \sum_{i\,\in\,\{\phi,\rho,\mathcal{V},\mathcal{K},\mathcal{C}\}}
   \frac{dS_i}{d\ln b},
   \qquad
@@ -1355,13 +1359,13 @@ Poincaré~\cite{Poincare1890} objections are absorbed. Loschmidt's paradox notes
 microreversible dynamics admit a formally reversed trajectory for every forward one; SSV does
 not deny that, but holds (with Price~\cite{Price1996}) that the reverse trajectory is realized
 only when the required incoming boundary data are actually supplied — which the medium does
-not do spontaneously. Poincaré recurrence guarantees return to an arbitrarily close state in a
-bounded system with discrete spectrum on cosmologically long timescales, but $\Psi$ in SSV is
-effectively unbounded and supports continuous-spectrum excitations (outgoing phonons,
-radiated Kelvin content, long-range correlations). The wake propagates into channels with no
-finite recurrence time on physically relevant scales. Both objections are about what the
-mathematics permits in the limit; the SSV claim is about what the medium delivers in finite
-time.
+not do spontaneously. Poincaré's classical recurrence theorem applies when
+the motion remains in a finite region and preserves a finite invariant
+measure; it neither assumes a discrete spectrum nor fixes a cosmological
+timescale.  An effectively unbounded SSV field with outgoing excitations need
+not satisfy those hypotheses.  Establishing the measure and boundary
+conditions of the full SSV dynamics is therefore the relevant test; the
+citation alone does not prove the absence of recurrence.
 
 \subsection{Classical Time Reversal Versus Quantum Unitarity}
 

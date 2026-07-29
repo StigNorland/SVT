@@ -8,6 +8,29 @@ by the move. Git history and the linked issues carry the rest.
 
 ---
 
+## 2026-07-29 — [#210](https://github.com/StigNorland/SVT/issues/210) · SSV verification repair
+
+The read-only series audit found that the paper still mixed derived factors,
+candidate masses and historical source attributions.  The abstract, overview,
+proton section and claim-status table now distinguish the derived pion mass,
+the derived trefoil crossing number, the cutoff-dependent candidate proton
+mass and the coincidental higher-mass alignments.  Rosen's 1968 article is
+retained only as a negative attribution result; BBM 1976 is the source used for
+the nonrelativistic LogSE.
+
+Load-bearing wording removed or replaced (verbatim):
+
+> “Two masses are genuine topological derivations: the charged pion at
+> \(2\mu_0\) (the two-winding number) and the proton, whose node factor
+> \(N_Y=3\) is the trefoil crossing number.”
+
+> “This is not the classical electron radius
+> \(r_e=\alpha\hbar/(m_ec)\), which is smaller by a factor \(\alpha^2\).”
+
+The corrected radius ratio includes the inherited healing-length factor:
+\(r_e/R_e^*=\sqrt{2}\alpha^2\).  The proton's full mass is candidate-grade
+because \(F\) remains cutoff-dependent; only \(N_Y=3\) is topological.
+
 ## 2026-07-29 — [#207](https://github.com/StigNorland/SVT/issues/207) · change records moved out of the paper
 
 Eight passages of edit history removed from `main.tex` and recorded below. No

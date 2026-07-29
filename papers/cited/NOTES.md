@@ -75,7 +75,7 @@ Generated from `verification.json` — do not edit by hand.
 | `Penrose1971` | `evidence-recorded` | SSV-V | [note](notes/Penrose1971.md) |
 | `Penrose1979` | `evidence-recorded` | SSV-III | [note](notes/Penrose1979.md) |
 | `Peschel2003` | `evidence-recorded` | SSV-V | [note](notes/Peschel2003.md) |
-| `Planck2020` | `evidence-recorded` | SSV-II | [note](notes/Planck2020.md) |
+| `Planck2020` | `evidence-recorded` | SSV-I, SSV-II | [note](notes/Planck2020.md) |
 | `Poincare1890` | `evidence-recorded` | SSV-III | [note](notes/Poincare1890.md) |
 | `polkinghorne2021` | `evidence-recorded` | audit evidence only | [note](notes/polkinghorne2021.md) |
 | `Price1996` | `evidence-recorded` | SSV-III | [note](notes/Price1996.md) |
@@ -91,7 +91,7 @@ Generated from `verification.json` — do not edit by hand.
 | `Srednicki1993` | `evidence-recorded` | SSV-V | [note](notes/Srednicki1993.md) |
 | `SSV-Goldstone` | `local-source` | SSV-IX | [note](notes/SSV-Goldstone.md) |
 | `SSV-I` | `local-source` | SSV-Alpha, SSV-II, SSV-III, SSV-V, SSV-VII-a, SSV-VII-b, SSV-VIII | [note](notes/SSV-I.md) |
-| `SSV-II` | `local-source` | SSV-Alpha, SSV-III, SSV-IX, SSV-V, SSV-VII-a, SSV-VII-b, SSV-VIII | [note](notes/SSV-II.md) |
+| `SSV-II` | `local-source` | SSV-Alpha, SSV-III, SSV-IX, SSV-V, SSV-VII-a, SSV-VII-b | [note](notes/SSV-II.md) |
 | `SSV-III` | `local-source` | SSV-IX, SSV-V, SSV-VII-a | [note](notes/SSV-III.md) |
 | `SSV-IV` | `local-source` | SSV-V, SSV-VII-a, SSV-VII-b | [note](notes/SSV-IV.md) |
 | `SSV-V` | `local-source` | SSV-VII-a, SSV-VII-b | [note](notes/SSV-V.md) |

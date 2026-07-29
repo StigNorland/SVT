@@ -29,14 +29,20 @@ supporting artifacts.
 
    - **Registered claims:** read the current source anchor, predicate,
      tolerance, receipt and supporting derivation. Decide whether the predicate
-     represents the conclusion rather than merely restating a calculation.
+     represents the conclusion rather than merely restating a calculation. Use
+     the dynamically resolved `current_location`, not the registry's historical
+     line number.
    - **Citations:** read every current manuscript location and its evidence
-     note. A historical `MISREAD` or `MISATTRIBUTED` verdict can be used
+     note using the supplied source snippet. Review `HIGH`, then `MEDIUM`, then
+     `NORMAL`. A historical `MISREAD` or `MISATTRIBUTED` verdict can be used
      correctly in present prose as a negative result, so judge each current use
      instead of copying the stored verdict.
    - **Numeric candidates:** classify candidates as generated, definitional,
      externally sourced, derived with a saved derivation, decorative, or
-     untraceable. Do not call a candidate defective merely because it is typed.
+     untraceable. Review the default high/medium-priority queue; use
+     `--all-numbers` only for an exhaustive sweep. Low-priority candidates stay
+     counted even when omitted; layout-only LaTeX dimensions are excluded.
+     Do not call a candidate defective merely because it is typed.
 6. Report findings with exact `file:line` locations and one of:
 
    - `CRITICAL`: contradicted result, live misattribution, wrong direction,
@@ -58,3 +64,6 @@ supporting artifacts.
   authoritative for numerical values.
 - Finish with separate deterministic and semantic verdicts plus a concrete fix
   checklist. If no semantic review was performed, say it remains pending.
+- Cite stable `CLAIM-*`, `CITE-*`, and `NUM-*` review IDs in the semantic
+  findings so later reruns can distinguish the reviewed item from its line
+  number.

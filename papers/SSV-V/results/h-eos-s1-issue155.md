@@ -2,15 +2,14 @@
 
 **Status: R1(a) — the flowing LogSE dumb-hole has a regular acoustic horizon
 with surface gravity and Unruh/Hawking temperature matching the Visser
-analogue-gravity forms, and thermality is robust for scale-separated horizons
-(margin M = ξ/(π r_H) → 0). Together with S2 (area-law dS), the Jacobson route
+analogue-gravity forms, while the scale-separation margin
+M = ξ/(π r_H) tends to zero. Thermality for the superluminal branch is
+unresolved. Together with S2 (area-law dS), the Jacobson route
 closes IN FORM: δQ = T·dS ⇒ ∇²Φ = 4πG_eff·e/c² with G_eff = 1/(4ħc·η). The
 missingness is, again, entirely in the coefficient — G's magnitude overshoots
 by (a_p/ℓ_P)² ≈ 1.69×10³⁸, the conceded sub-grain input. "Form yes, G no"
 through the full chain. The genuine new content is the quantified W4/#148
-caveat: the margin is O(1) at grain-scale (local Rindler) horizons, so the
-acoustic-horizon thermodynamics is robust only conditionally on horizon ≫
-grain.**
+caveat: the margin is O(1) at grain-scale (local Rindler) horizons.**
 
 Pre-registered on issue [#155](https://github.com/StigNorland/SVT/issues/155)
 (S1(a)/S1(b)/S1(c) in the body; the instrument design, the four quantities, the
@@ -39,21 +38,27 @@ density-independent LogSE sound speed `c_s = √B0` at the acoustic horizon `r_H
 **The negative-capable test — trans-Planckian robustness (W4/#148).** The LogSE
 phonon dispersion is **superluminal for all k>0** (`v_g = (c_s²+k²/2)/√(c_s²+k²/4) > c_s`,
 excess `(3/8)k²/c_s`), so high-k modes outrun sound and leak across the horizon
-(Corley–Jacobson 1996; Unruh–Schützhold 2005). Thermality is robust iff the
-surface-gravity frequency sits below the dispersion frequency:
+(Corley–Jacobson 1996; Unruh–Schützhold 2005). The scale-separation diagnostic is:
 
-> **margin `M = g_H ξ/(2πc_s²) = ξ/(π r_H)`** — robust iff `M ≪ 1`.
+> **margin `M = g_H ξ/(2πc_s²) = ξ/(π r_H)`**.
+
+`M ≪ 1` is necessary for a hydrodynamic horizon, but the cited
+Corley–Jacobson calculation uses subluminal dispersion and does not make it a
+sufficient thermality criterion for the superluminal LogSE branch.
 
 Measured: `M = 0.113, 0.056, 0.028, 0.014, 0.0070, 0.0035` for
-`r_H/ξ = 2.8, 5.7, 11, 23, 45, 91` — monotone → 0 (robust for scale-separated
-horizons), crossing `M = 1` at the grain scale `r_H = ξ/π ≈ 0.23`.
+`r_H/ξ = 2.8, 5.7, 11, 23, 45, 91` — monotone → 0 (increasing hydrodynamic
+scale separation), crossing `M = 1` at the grain scale
+`r_H = ξ/π ≈ 0.23`.
 
 ## Verdict: R1(a), and the carried negative
 
-- **R1(a) (form):** a regular acoustic horizon exists; `g_H` and `T_H` match
-  the Visser forms to 10⁻⁶; thermality is robust for `r_H ≫ ξ`. This is the
+- **R1(a) (kinematic form):** a regular acoustic horizon exists; `g_H` and
+  `T_H` match the Visser forms to 10⁻⁶; `M` becomes small for
+  `r_H ≫ ξ`. This is the
   *expected, kinematic* side (rule 1): the analogue-gravity result is generic;
-  the LogSE specialization just confirms it.
+  the LogSE specialization just confirms it. Thermality remains unresolved
+  pending a LogSE-specific mode-conversion calculation.
 - **S1(b):** the area-law `dS = η dA` input is **S2 (R1)** — cited, not
   recomputed.
 - **S1(c) — the Jacobson route closes in form.** Imposing `δQ = T_H·dS` on the
@@ -75,11 +80,10 @@ Jacobson derivation requires the Clausius relation to hold on *every* local
 Rindler horizon at *every* point — including horizons whose acceleration scale
 approaches the grain. There, the superluminal LogSE dispersion makes the horizon
 leaky and the Hawking thermality is not guaranteed. So the acoustic-horizon
-thermodynamics underpinning the compliance law is robust **conditionally on
-horizon ≫ grain** — the same ≲10⁻¹⁷ local-Lorentz protection #148 already owes
-(W4), now made quantitative for the gravity sector. This does not overturn R1(a)
-(the construction works for the macroscopic horizons that matter for gravity),
-but it is a recorded, non-trivial limitation and a falsifiable handle: a regime
+thermodynamics has clean scale separation **conditionally on horizon ≫
+grain**, but its thermality has not been proved for the superluminal branch.
+This does not overturn the R1(a) kinematic result, but it is a recorded,
+non-trivial limitation and a falsifiable handle: a regime
 where local horizons are forced to the grain scale would break the route.
 
 ## Consequences (applied this branch)
@@ -100,8 +104,9 @@ where local horizons are forced to the grain scale would break the route.
 ## Status
 
 #155 S1 resolves the analytic half: **R1(a)**, surface gravity + Unruh T match
-Visser, thermality robust for scale-separated horizons, and the Clausius closure
-delivers the compliance form with the conceded `(a_p/ℓ_P)²` overshoot. Together
+Visser, the scale-separation diagnostic is quantified, and the Clausius
+closure delivers the compliance form with the conceded `(a_p/ℓ_P)²`
+overshoot. Thermality remains unresolved. Together
 with **S2** (area-law `dS`, [h-eos-s2-issue155](h-eos-s2-issue155.md)) the
 Jacobson route is complete **in form**. Still live on #155: **H-A0-IR** (the a₀
 coefficient + the duality over-constraint falsifier — the same G must fit η,

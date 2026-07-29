@@ -47,9 +47,9 @@ $T_0 = 2.725$~K, does \emph{not} derive the blackbody form of the spectrum, and
 does \emph{not} compute the spectral distortions; each of those is marked with an
 explicit gap box and tied to the same missing input --- the absolute saturation
 pressure $P_0(\rho_0)$ --- that blocks the cosmological-constant value in
-Paper~VIII. What the paper \emph{does} inherit quantitatively is the
-Kibble--Zurek defect statistics of Paper~VIII's Stage~5, which is
-\textit{structural with numerical evidence}. Every claim is tagged
+Paper~VIII. What the paper inherits is Paper~VIII's exploratory
+Kibble--Zurek defect scan, whose fitted exponent does not yet confirm the
+expected scaling. Every claim is tagged
 \textit{derived}, \textit{structural}, \textit{candidate}, \textit{interpretive},
 or \textit{deferred} in the Discussion (\S\ref{sec:discussion}), with explicit
 criteria for what observational or theoretical work would change its status. The
@@ -92,36 +92,29 @@ distortion content as \textit{deferred} (gap-boxed), not as results.
 
 Paper~VIII, Stage~4, ends with the saturation fronts colliding and the binding
 energy released into the kinetic energy of the flow field, ``driving turbulence.''
-Stage~5 then nucleates the first topological defects wherever the phase mosaic of
-the saturating vacuum forced a mismatch. Two things are produced together at
-saturation: \emph{defects} (the matter content, counted by Kibble--Zurek) and
-\emph{radiation} (the sound field shed by the violent relaxation of the flow).
-This paper is about the second product.
+Stage~5 then hypothesises defect nucleation during phase ordering.  If the
+postulated saturation quench occurs, it can produce both defects and sound;
+neither their cosmological abundance nor their identification with matter and
+radiation is derived.  This paper explores the second product.
 
 In a saturated superfluid the low-energy excitations above the ground state
 $\rho_0$ are phonons: linear sound modes with dispersion $\omega = c_s k$ in the
 long-wavelength limit, where $c_s$ is the medium's sound speed fixed by the
 equation of state $P(\rho)$ of Paper~II~\cite{SSV-II}. The saturation transition is
-not adiabatic --- it is an exothermic quench --- so it leaves the condensate in an
-excited state populated by these modes. We call this population the
-\emph{primordial phonon bath}. Its existence is a structural consequence of having
-a saturation transition at all: any quench of a medium with a Goldstone sector
-deposits energy into that sector.
+postulated to be non-adiabatic and exothermic, so it could leave the
+condensate in an excited state populated by these modes. We call this
+candidate population the \emph{primordial phonon bath}.
 
 \begin{quote}
 \textit{Claim (\S\ref{sec:phononbath}).} The saturated vacuum is left, after the
 Stage~4--5 transition, with a residual bath of phonon (sound) modes carrying the
-energy shed by the relaxing flow field. Status: \textit{interpretive} (the
-existence of the bath follows structurally from the quench; its spectrum is not
-derived here).
+energy shed by the relaxing flow field. Status: \textit{interpretive}; neither
+the quench dynamics, bath abundance nor spectrum is derived here.
 \end{quote}
 
-The bath is the radiation counterpart of the Kibble--Zurek defect count: defects
-freeze in where the phase cannot be combed smooth, and phonons carry off the energy
-difference between the turbulent saturating state and the relaxed ground state. The
-\emph{ratio} of the two --- defects to phonons --- is, in cosmological language, the
-baryon-to-photon ratio $\eta$, and it is exactly the quantity Paper~VIII computes
-from the Kibble--Zurek mechanism (\S\ref{sec:viii}).
+A joint defect-and-phonon simulation could test whether frozen defects and
+sound carry a reproducible ratio.  Paper~VIII currently counts only defects;
+it does not compute the baryon-to-photon ratio $\eta$.
 
 \paragraph{The bath is not load-bearing for gravity (\#119 outcome).}
 During the \#119 gravity-sector redesign, this bath was the candidate
@@ -165,8 +158,9 @@ same as a Planck (blackbody) spectrum, a distinction we are careful about in
 \paragraph{Irreversibility.} The integrated noise is irreversible: it is the wake
 entropy of Paper~III~\cite{SSV-III} read at cosmological scale. The arrow of time that
 Paper~III attributes to the growth of wake complexity is, here, the statement that
-the phonon bath cannot un-radiate back into coherent flow. The CMB is, in this
-language, the largest single reservoir of the universe's wake entropy.
+the phonon bath does not spontaneously refocus into coherent flow.  It may
+be a large wake-entropy reservoir, but this paper contains no entropy
+inventory comparing it with black holes or other cosmic components.
 
 \paragraph{Redshift as medium relaxation.} The cooling of the bath is the slow
 relaxation of the background $\rho_0$ and the corresponding stretching of mode
@@ -287,41 +281,41 @@ calculation with an explicit numerical $\mu,y$.
 \section{Connection to SSV VIII Cosmogony}
 \label{sec:viii}
 
-The one quantitative anchor this paper inherits is Paper~VIII's Kibble--Zurek
-result. Stage~5 of Paper~VIII nucleates defects with number density
+The exploratory quantitative input inherited from Paper~VIII is a
+Kibble--Zurek-motivated defect scan. Stage~5 posits a defect density
 \begin{equation}
     n_{\rm defect} \sim \frac{1}{\xi^3}
         \left(\frac{\tau_0}{\tau_Q}\right)^{d\nu/(1+\nu z)},
     \label{eq:kz}
 \end{equation}
 with $\tau_0 = \xi/c$ the microscopic time and $\tau_Q$ the quench time of the
-saturation epoch. Paper~VIII reports a stochastic time-dependent Ginzburg--Landau
-simulation (\ssvfile{kibble_zurek_gpe}) that confirms this scaling in the correct
-universality class, lifting the prediction to \textit{structural with numerical
-evidence}; the single dimensionless unknown $\tau_Q/\tau_0$ that fixes the
-baryon-to-photon ratio $\eta = 6\times10^{-10}$ lies in the natural SSV window
-$\tau_Q/\tau_0 \in [10^{10},10^{13}]$.
+saturation epoch. Paper~VIII reports a stochastic time-dependent
+Ginzburg--Landau simulation (\ssvfile{kibble_zurek_gpe}) with a decreasing
+defect-count trend but a fitted exponent about $5.1$ regression standard
+errors below the mean-field expectation.  The scan therefore
+does not confirm the universality class.  Values of $\tau_Q/\tau_0$ quoted
+there are obtained by inverting the observed
+$\eta=6\times10^{-10}$; they are not independent predictions.
 
-For the present paper the same simulation fixes the \emph{ratio} of the two products
-of saturation --- defects to phonons --- because $\eta$ is precisely the
-defect-to-photon number ratio. The phonon-bath number density is therefore not an
-independent quantity: it is $n_{\rm defect}/\eta$, with $n_{\rm defect}$ from
-Eq.~\eqref{eq:kz}. This is the cleanest structural link between IX and VIII.
+The simulation counts defects but does not count phonons, establish which
+defects become baryons, or derive their ratio.  Writing
+$n_\gamma=n_{\rm baryon}/\eta$ merely inserts the observed $\eta$ and cannot
+serve as a prediction of the phonon-bath density.
 
 \begin{quote}
-\textit{Claim (\S\ref{sec:viii}, structural with numerical evidence).} The
-phonon-bath number density is tied to the Kibble--Zurek defect density of
-Paper~VIII Stage~5 through the baryon-to-photon ratio $\eta$; the defect side of
-this link carries the numerical evidence reported in Paper~VIII.
+\textit{Candidate link (\S\ref{sec:viii}).} A future joint calculation of
+defect and phonon production could predict their ratio.  The present
+simulation supplies only exploratory defect counts, while the numerical
+$\eta$ used here is observational input.
 \end{quote}
 
 \begin{gapbox}[Gap: the entropy budget is not closed]
 The cosmological entropy budget --- the photon (phonon-bath) entropy per baryon,
-$\sim\eta^{-1}$ in dimensionless terms --- is \textit{structurally} fixed by
-$\eta$ but \emph{numerically} open, because the \emph{absolute} photon entropy
+of order $\eta^{-1}$ only after importing the observed ratio --- is
+\emph{numerically} open, because the absolute photon entropy
 needs the bath temperature $T_0$, which is gap-boxed in \S\ref{sec:spectrum}. The
-arrow-of-time reading of Paper~III~\cite{SSV-III} identifies this bath as the dominant
-wake-entropy reservoir, but the present paper does not evaluate the budget in
+arrow-of-time reading of Paper~III~\cite{SSV-III} motivates treating the bath
+as a wake-entropy reservoir, but the present paper does not evaluate the budget in
 physical units. Support criterion: the same $P_0(\rho_0) + T_0$ closure required
 for the temperature.
 \end{gapbox}
@@ -365,8 +359,8 @@ one of:
     \item Spectral distortions (\S\ref{sec:distortions}): \textit{candidate} ---
         definite FIRAS falsification gate, amplitudes gap-boxed.
     \item Phonon-bath / defect link via $\eta$ (\S\ref{sec:viii}):
-        \textit{structural with numerical evidence} --- inherits Paper~VIII's
-        Kibble--Zurek simulation.
+        \textit{candidate} --- Paper~VIII supplies an exploratory defect scan,
+        not a phonon count or predicted ratio.
     \item Entropy budget (\S\ref{sec:viii}): \textit{deferred} (gap-boxed) ---
         structurally fixed by $\eta$, numerically blocked by $T_0$.
 \end{itemize}
@@ -386,8 +380,8 @@ one of:
         COBE/FIRAS~\cite{Fixsen1996} and is the cleanest near-term falsification route.
     \item \emph{Extending the Kibble--Zurek dynamic range} of
         \ssvfile{kibble_zurek_gpe} (the Paper~VIII Stage~5 simulation) to tighten the
-        exponent and the $\tau_Q/\tau_0$ window would sharpen the $\eta$ anchor that
-        ties the phonon bath to the defect count.
+        exponent, followed by a phonon-production calculation, would test
+        whether any predicted $\eta$ anchor exists.
 \end{enumerate}
 
 \subsection{What this paper is not}
@@ -407,9 +401,9 @@ manifesto drift that the split of the late-series papers was designed to avoid.
 Within the scoped SSV programme, this paper carries one claim: the cosmic microwave
 background is the present, red-shifted image of the primordial phonon bath shed by
 the void-to-saturation transition of Paper~VIII --- integrated reconnection noise,
-not a separately postulated radiation relic. The reading is interpretive, its one
-quantitative anchor (the defect/phonon ratio $\eta$) is inherited from Paper~VIII's
-Kibble--Zurek result, and its central physical quantities --- the temperature, the
+not a separately postulated radiation relic. The reading is interpretive;
+Paper~VIII does not yet supply a quantitative defect/phonon anchor.  The
+central physical quantities --- the temperature, the
 blackbody form, and the distortions --- are explicitly deferred to the named closure
 inputs rather than claimed.
 

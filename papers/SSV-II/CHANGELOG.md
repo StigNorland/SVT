@@ -4,6 +4,35 @@ The paper states **current status only**. Its history lives here.
 
 ---
 
+## 2026-07-29 — [#210](https://github.com/StigNorland/SVT/issues/210) · semantic verification repair
+
+The audit removed several promotions that were not supported by the cited
+sources or by the implemented calculations.  The scalar Goldstone sound branch
+is now a photon-carrier candidate rather than an identified photon; the
+three-strand quark/colour picture is retired; the W scale remains motivated but
+its golden-ratio prefactor is explicitly post hoc; KATRIN's effective beta mass
+is no longer described as the neutrino mass sum; MicroBooNE's scope is stated
+accurately; and the failed muon/tau mechanisms are recorded as coincidences.
+
+Load-bearing wording removed or replaced (verbatim):
+
+> “the observed photon is a phase-channel (Goldstone) wave”
+
+> “the observed photon is identified with the phase-channel (Goldstone) mode
+> at \(c\)”
+
+> “The strong force is identified with vacuum surface tension along flux-tube
+> vortex segments connecting quarks”
+
+> “Status: muon dynamically placed, tau topologically identified”
+
+> “This is not a bare fit: the cap inherits the electron ring scale
+> \(R^*=\xi/\alpha\)”
+
+The Bjerknes citation is also narrowed: the 1906 source supports the
+phase-dependent inverse-square interaction of synchronous pulsators, not the
+normalised compressible-medium volume-rate formula printed later in the paper.
+
 ## 2026-07-29 — [#207](https://github.com/StigNorland/SVT/issues/207) · change records moved out of the paper
 
 Three passages of edit history removed from `main.tex` and recorded below. No

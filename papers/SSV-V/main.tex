@@ -579,15 +579,19 @@ to a relative $10^{-6}$:
 The LogSE phonon dispersion $\omega^2=c_s^2k^2+k^4/4$ is \emph{superluminal} for
 all $k>0$ (group velocity $v_g=(c_s^2+k^2/2)/\sqrt{c_s^2+k^2/4}>c_s$, excess
 $\tfrac38 k^2/c_s$), so high-$k$ modes can leak across the horizon
-(Corley--Jacobson~\cite{CorleyJacobson1996}).  Thermality is robust iff
+(Corley--Jacobson~\cite{CorleyJacobson1996} discusses the general sensitivity
+of Hawking spectra to modified dispersion, but its numerical model is
+subluminal and does not establish robustness for this opposite-sign LogSE
+branch).  The dimensionless scale-separation parameter is
 \[
   M \equiv \frac{g_H\,\xi}{2\pi c_s^2} = \frac{\xi}{\pi r_H} \ll 1.
 \]
-This is $\sim10^{-40}$ for astrophysical horizons (robust) but $O(1)$ for the
+It is $\sim10^{-40}$ for astrophysical horizons but $O(1)$ for the
 \emph{local Rindler horizons} of the Jacobson construction at grain-scale
-acceleration: the acoustic-horizon thermodynamics is robust \emph{conditionally
-on horizon $\gg$ grain}---the same local-Lorentz protection that
-\ssvissue{148} already owes, now quantitative.
+acceleration.  Thus $M\ll1$ is a necessary scale-separation diagnostic, not a
+proved sufficient condition for thermality.  A LogSE-specific superluminal
+mode-conversion calculation is still required before robustness can be
+claimed.
 
 \textbf{The Jacobson route closes in form.}  With $T_H$ here and the area-law
 $dS=\eta\,dA$ of \S\ref{sec:entropy} (S2), the Clausius relation $\delta Q=T_H\,dS$
@@ -723,7 +727,8 @@ definite without the deferred numerics.
 
 \paragraph{Observational consequence: Planck-mass relics.}
 Every black hole that completes Hawking evaporation leaves behind a single
-Planck-mass topological defect.  Primordial black holes (PBHs) with initial
+Planck-mass topological defect.  Under the standard Hawking evaporation
+estimate~\cite{Hawking1975}, primordial black holes (PBHs) with initial
 mass $M_*\sim 5\times10^{14}\,\mathrm{g}$ would have finished evaporating
 in the present cosmological epoch, depositing $\sim M_*/m_P \sim 10^{19}$
 times less remnant mass than parent mass --- a remnant density today of

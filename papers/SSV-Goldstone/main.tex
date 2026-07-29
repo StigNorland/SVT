@@ -35,10 +35,11 @@ identified the propagating photon with the chiral-shear mode at
 $c_\perp$, producing a speed mismatch: observed light in vacuum propagates
 at $c$, not at $c_\perp$.
 
-This paper isolates the correction required by that audit.  The observed
-photon should be identified with the Goldstone/Bogoliubov phase mode of
-the saturated order parameter $\Psi$, propagating at the medium sound speed
-$c$.  The chiral-shear sector remains physically real, but it is reassigned
+This paper isolates the candidate correction suggested by that audit.  The
+saturated order parameter has a longitudinal Goldstone/Bogoliubov sound mode
+at $c$, but a scalar phase mode alone is not a photon: it supplies neither two
+transverse polarizations nor Maxwell gauge structure.  The chiral-shear
+sector remains physically real, but it is provisionally reassigned
 to the static and near-field electromagnetic structure: Coulomb pressure,
 magnetic circulation, Aharonov--Bohm phase, and vortex-ring self-energy.
 
@@ -58,12 +59,13 @@ linear-order current is a pure gradient; the $|\nabla\times\mathbf{j}|^2$
 energy is quartic), so there is no propagating chiral-shear mode at any
 speed --- and the internal-direction channel disperses as
 $\omega=\hbar k^2/2m_0$, gapless, quadratic, charge-decoupled at linear
-order.  The Goldstone assignment proposed here is therefore no longer one
-candidate among two: it is the only propagating gapless linear channel
-the medium has.  The photon's two polarizations are identified with the
-internal CP$^1$ direction transported on the phase channel; deriving that
-transport (the matching programme of this note, with displacement-current
-coefficient $1/c^2$) is the remaining obligation.
+order.  This eliminates the proposed slow chiral-shear photon, but it does
+not by elimination establish the remaining scalar sound mode as the
+electromagnetic photon.  The internal CP$^1$ direction is quadratic and
+charge-decoupled at linear order, so its transport cannot simply be asserted
+to provide two photon polarizations.  Deriving a transverse, gauge-like
+two-polarization sector with displacement-current coefficient $1/c^2$ is
+the remaining obligation.
 \end{abstract}
 
 \newpage
@@ -89,9 +91,12 @@ second.  It treated the chiral-shear mode as the photon and assigned it the
 speed $c_\perp$.  This cannot be the final physical interpretation because
 the observed photon propagates at $c$.
 
-The correction is suggested by analogue-gravity and logarithmic-superfluid
-vacuum theory: the physical photon is the Goldstone phase mode of
-$\Psi$~\cite{volovik2003,zloshchastiev2020}.  The phase mode propagates at
+Analogue-gravity and superfluid-vacuum literature motivates emergent
+collective fields~\cite{volovik2003}, while
+Zloshchastiev~\cite{zloshchastiev2020} supplies the logarithmic wave
+equation.  Neither cited source establishes the SSV-specific identification
+of the physical photon with the scalar phase mode of $\Psi$.  That phase mode
+propagates at
 the medium sound speed,
 \begin{equation}
     c_s(\rho_0)=c,
@@ -110,12 +115,12 @@ Paper~II survive the replacement:
 \]
 The present paper formulates that problem.
 
-\begin{resultbox}[Claim of this paper]
-The observed photon should be the Goldstone/Bogoliubov phase mode of the
-SSV order parameter, propagating at $c$.  The chiral-shear field should be
-retained as the static near-field sector that fixes Coulomb strength and
-magnetic topology.  The open calculation is the matching between these two
-sectors.
+\begin{resultbox}[Candidate programme]
+The Goldstone/Bogoliubov mode supplies a candidate carrier speed $c$, while
+the chiral-shear field supplies a candidate static near-field sector.  A
+photon identification requires a derivation of two transverse polarizations,
+Maxwell dynamics and source matching; none follows from the scalar sound mode
+alone.
 \end{resultbox}
 
 % ---------------------------------------------------------------------
@@ -181,13 +186,13 @@ Write the order parameter as
     e^{i\theta_0+i\delta\theta}.
     \label{eq:psi_expand}
 \end{equation}
-Linearisation gives two familiar modes:
+Linearisation gives coupled density and phase perturbations:
 \begin{itemize}[leftmargin=2em]
-    \item the amplitude mode $\delta\rho$, gapped by the stiffness of the
-          saturated medium;
-    \item the phase mode $\delta\theta$, the Goldstone/Bogoliubov mode.
+    \item $\delta\rho$ is the density component;
+    \item $\delta\theta$ is the phase component.
 \end{itemize}
-At long wavelengths, the phase mode obeys
+Together they form the longitudinal Bogoliubov sound branch.  At long
+wavelengths its phase component obeys
 \begin{equation}
     \partial_t^2\delta\theta
     =
@@ -200,15 +205,14 @@ with dispersion
     \label{eq:goldstone_disp}
 \end{equation}
 
-This is the natural carrier for physical radiation in SSV.  It is massless,
-universal, and propagates at the observed vacuum light speed.  It is also
-the same channel used in the acoustic-metric reading of gravity, where
-local density variations modify the local propagation rate.
+This branch has the required propagation speed, but it is a scalar
+longitudinal sound mode.  Speed agreement is necessary and not sufficient
+for identifying it with physical electromagnetic radiation.
 
-\begin{resultbox}[Channel assignment]
-The Goldstone/Bogoliubov channel carries propagating radiation at $c$.
-The chiral-shear channel fixes the handed near-field structure of charged
-defects and the coupling strength $\alpha$.
+\begin{resultbox}[Candidate channel assignment]
+The Goldstone/Bogoliubov branch is the only current candidate carrier at
+$c$.  The chiral-shear channel is a candidate near-field structure of
+charged defects.  Their electromagnetic interpretation remains unproved.
 \end{resultbox}
 
 % ---------------------------------------------------------------------
@@ -361,10 +365,10 @@ with two requirements:
     \label{eq:limits}
 \end{align}
 
-The calculation is therefore a matched asymptotic problem.  Near charged
-defects, chiral-shear topology fixes the source and static response.  Far
-from sources, the propagating disturbance must project onto the Goldstone
-phase mode.
+The calculation is therefore a matched asymptotic problem.  It must test
+whether chiral-shear topology can supply the source and static response and
+whether a far-field disturbance can project onto a transverse sector
+transported at the Goldstone-branch speed.
 
 % ---------------------------------------------------------------------
 \section{Avoiding New Circularity}
@@ -446,11 +450,10 @@ paper states the corrected target.
 \label{sec:conclusion}
 % ---------------------------------------------------------------------
 
-The observed photon in SSV should be the Goldstone/Bogoliubov phase mode of
-the saturated order parameter, propagating at $c$.  The chiral-shear sector
-should be retained as the near-field and topological electromagnetic sector,
-where it fixes Coulomb strength, magnetic circulation, and the role of
-$\alpha$.
+The current SSV functional rules out the former slow chiral-shear photon.
+Its remaining Goldstone/Bogoliubov sound branch propagates at $c$, but the
+paper has not derived a photon from it.  The chiral-shear near-field
+interpretation is likewise conditional on the matching calculation.
 
 The open derivation is the matching calculation:
 \[

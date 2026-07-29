@@ -468,6 +468,103 @@ to say something else", written in words not on the list, passes. It is a drift
 guard like rules 15 and 16, and the judgement of whether a paper reads as a
 statement or as a diff stays with the reviewer.
 
+---
+
+## FM16 — deterministic green is mistaken for semantic verification
+
+**Observed:** the first `ssv-verify` series run produced clean artifact,
+bibliography and build checks for papers that still contained mis-scoped
+citations, inherited retired claims and observation-backed “predictions.”
+Those defects were found only by reading the cited evidence and the prose.
+
+**Why it survived:** hashes, generated artifacts and successful compilation
+answer whether the repository is internally consistent.  They cannot answer
+whether a sentence follows from a source or a computation.
+
+**Guard — partial.** The v2 audit schema never emits a semantic-pass verdict;
+its report distinguishes deterministic checks from human review IDs, and
+`test_verdict_never_claims_semantic_pass_from_green_checks` freezes that
+boundary.  A green report means the requested checks ran cleanly, not that the
+theory or manuscript is verified.
+
+**Not covered:** semantic review remains a reviewer task.  The schema can
+prevent a false label but cannot make the review happen.
+
+---
+
+## FM17 — a generated-artifact rule assumes every paper has inputs
+
+**Observed:** SSV-Alpha and SSV-Goldstone cite no issue, file or result links
+that require a provenance appendix, yet the verifier required an empty
+`provenance.tex` and reported both papers stale.
+
+**Guard — closed for this case.** `_audit_provenance` now renders and compares
+the appendix only when at least one provenance reference exists.
+`test_provenance_without_references_needs_no_generated_file` reproduces the
+zero-reference paper and requires a pass without a generated file.
+
+**Not covered:** other generators may still confuse “no inputs” with “missing
+output”; each needs its own empty-domain test.
+
+---
+
+## FM18 — an observed value is inverted and reported as a prediction
+
+**Observed:** SSV-II selected the golden-ratio cap prefactor after back-solving
+the observed W mass.  SSV-VIII inverted the observed baryon-to-photon ratio to
+obtain a required quench-time ratio, then described that ratio as lying in a
+natural SSV window.  The same instrument also carried hard-coded
+pseudo-cosmological outputs it had not derived.
+
+**Why it matters:** algebraic inversion is useful as a target or consistency
+check, but it has zero out-of-sample predictive content when the observation
+being “predicted” supplied the input.
+
+**Guard — partial.** The W prefactor and the Kibble--Zurek inversion are now
+labelled post hoc/required-input results.  The KZ receipt records
+`eta_status`, stores the fitted regression uncertainty, and no longer writes
+the hard-coded cosmological “predictions.”
+
+**Not covered:** no tool can infer that a literal or parameter was selected
+after seeing the answer.  Provenance of fit and calibration choices remains a
+review obligation.
+
+---
+
+## FM19 — a correction does not propagate to dependent papers
+
+**Observed:** after the series had adopted
+\(\xi=\hbar/(\sqrt2m_0c)\), SSV-Alpha still printed the old healing length and
+SSV-VII-b still used a gravity conversion and Planck-mass statement missing the
+same \(\sqrt2\).  Paper IX likewise inherited Paper VIII's superseded
+Kibble--Zurek promotion.
+
+**Guard — convention.** A semantic change must be searched across the series,
+including downstream summaries and auto-memory, before it is closed.  Rule 14
+closes this mechanically only for registered generated values; equations and
+status labels remain manual.
+
+**Not covered:** there is no dependency graph for equations or claim statuses.
+The one-paper-at-a-time audit is the present control.
+
+---
+
+## FM20 — a necessary diagnostic is promoted to a sufficient theorem
+
+**Observed:** SSV-V's \(M=\xi/(\pi r_H)\ll1\) demonstrates hydrodynamic scale
+separation, but the instrument, receipt and paper called it a sufficient
+thermality condition for the superluminal LogSE branch.  The cited
+Corley--Jacobson calculation uses subluminal dispersion and does not establish
+that implication.
+
+**Guard — partial.** The instrument now names the boolean
+`hydrodynamic_scale_separation`, records thermality as unresolved and keeps the
+kinematic surface-gravity/temperature result separate.  The generated receipt
+therefore cannot silently restore the stronger label.
+
+**Not covered:** the general necessary-versus-sufficient distinction remains
+semantic.  A mode-conversion calculation is still required.
+
 ## What runs when
 
 `python instruments/tools/build_paper.py <PAPER>` runs FM1, FM2, FM5's evidence
@@ -493,6 +590,11 @@ ones most likely to lapse.
 | FM13 constant labelled with a provenance it lacks | read the source receipt, don't retype | suite (one instrument only) |
 | FM14 sweep omits the axis the conclusion turns on | `b1_fragility_report` + claim guard | **build** (this verdict only) + review |
 | FM15 paper narrates its own edit history | phrase deny-list + per-paper `CHANGELOG.md` | **build** (phrasing only) + review |
+| FM16 deterministic green called semantic verification | v2 verdict boundary | suite + review |
+| FM17 generator assumes non-empty inputs | zero-reference provenance test | suite |
+| FM18 observation inverted into prediction | explicit input/status receipts | review (partial) |
+| FM19 correction misses dependent papers | series-wide dependency search | review |
+| FM20 necessary diagnostic promoted to sufficient | status-bearing receipt | suite (this result) + review |
 
 Adding a failure mode to this register is cheap. Leaving one out because its
 guard is embarrassing is how #182 happened.
