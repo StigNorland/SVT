@@ -49,6 +49,7 @@ if str(TOOLS) not in sys.path:
 
 import claims  # noqa: E402
 import bibliography  # noqa: E402
+import conventions  # noqa: E402
 import citation_evidence  # noqa: E402
 import gen_provenance  # noqa: E402
 import gen_values  # noqa: E402
@@ -175,6 +176,26 @@ def gate_change_records(paper: str) -> str:
     return f"current-status only; CHANGELOG.md present"
 
 
+def gate_conventions(paper: str) -> str:
+    """#213 Part A: one meaning, one dimension per symbol across the programme.
+
+    Fails on a collision that is **not** already recorded in
+    ``conventions.KNOWN_COLLISIONS``.  The three known ones stay known: the
+    cosmological constant and the MOND scale are standard notation in their own
+    literatures, so resolving them is a declaration the author makes, not a
+    rename this gate can impose.  What it does enforce is that no fourth
+    arrives quietly.
+    """
+    fresh, note = conventions.gate_report(paper)
+    if fresh:
+        detail = "\n".join(f"      {c.describe()}" for c in fresh)
+        raise GateFailure(
+            f"{len(fresh)} undeclared symbol collision(s):\n{detail}\n"
+            f"      Declare the reuse in conventions.USES with a reason, or "
+            f"rename the symbol.")
+    return note
+
+
 def render_values(paper: str) -> str:
     if paper not in gen_values.REGISTRY:
         return "skipped"
@@ -247,7 +268,8 @@ def build(paper: str, gate_only: bool) -> bool:
              ("provenance  (rule 11)", gate_provenance),
              ("values      (rule 14)", gate_values),
              ("claims      (Part D) ", gate_claims),
-             ("changelog   (rule 17)", gate_change_records)]
+             ("changelog   (rule 17)", gate_change_records),
+             ("symbols     (#213 A) ", gate_conventions)]
     if not gate_only:
         steps += [("render values       ", render_values),
                   ("pdflatex    (rule 8) ", run_pdflatex),
