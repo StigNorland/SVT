@@ -11,6 +11,7 @@ caller.
 Usage:
     python instruments/tools/ssv_verify.py SSV-I
     python instruments/tools/ssv_verify.py SSV-I --no-recompute
+    python instruments/tools/ssv_verify.py SSV-I --all-numbers
     python instruments/tools/ssv_verify.py SSV-I \
         --json-out /tmp/ssv-verify-SSV-I.json \
         --md-out /tmp/ssv-verify-SSV-I.md
@@ -56,6 +57,44 @@ NUMERIC_CANDIDATE_RE = re.compile(
     r"|\d+\.\d+"
     r")"
 )
+SECTION_RE = re.compile(
+    r"\\(?:part|chapter|section|subsection|subsubsection)\*?\{([^{}]+)\}")
+BEGIN_RE = re.compile(r"\\begin\{([^{}]+)\}")
+END_RE = re.compile(r"\\end\{([^{}]+)\}")
+
+HIGH_VALUE_ENVIRONMENTS = {
+    "abstract", "resultbox", "falsbox", "gapbox",
+}
+HIGH_VALUE_SECTION_TERMS = {
+    "abstract", "claim status", "conclusion", "result", "summary",
+}
+HIGH_VALUE_NUMERIC_CUES = re.compile(
+    r"\b(?:derived|falsif\w*|withdrawn|retracted|no-go|match(?:es|ed|ing)?|"
+    r"agreement|disagreement|within|factor|bound|prediction|observed|"
+    r"candidate|coincidence|excluded|shortfall|larger|smaller|exceeds|"
+    r"below|above|minimum|maximum)\b",
+    flags=re.IGNORECASE,
+)
+MEDIUM_VALUE_NUMERIC_CUES = re.compile(
+    r"(?:\\approx|\\sim|\\lesssim|\\gtrsim|\b(?:ratio|percent|error|grid|"
+    r"resolution|sweep|uncertainty|mass|energy|radius|density|speed|"
+    r"temperature|coefficient|offset|value)\b)",
+    flags=re.IGNORECASE,
+)
+DISPLAY_MATH_ENVIRONMENTS = {
+    "equation", "equation*", "align", "align*", "gather", "gather*",
+    "multline", "multline*",
+}
+LAYOUT_ONLY_LINE_RES = (
+    re.compile(
+        r"^\s*\\renewcommand\{\\arraystretch\}"
+        r"(?:\[[^]]*\])?\{[^{}]*\}\s*$"
+    ),
+    re.compile(
+        r"^\s*\\begin\{(?:array|tabular|tabularx|longtable)\}"
+        r"(?:\[[^]]*\])?\{.*\}\s*$"
+    ),
+)
 
 
 @dataclass(frozen=True)
@@ -77,6 +116,7 @@ class Audit:
     registered_claims: list[dict[str, Any]] = field(default_factory=list)
     citation_review_queue: list[dict[str, Any]] = field(default_factory=list)
     numeric_review_queue: list[dict[str, Any]] = field(default_factory=list)
+    include_all_numbers: bool = False
     coverage: dict[str, Any] = field(default_factory=dict)
 
     @property
@@ -91,10 +131,11 @@ class Audit:
 
     def to_dict(self) -> dict[str, Any]:
         return {
-            "schema": "ssv-verify/v1",
+            "schema": "ssv-verify/v2",
             "paper": self.paper,
             "generated_utc": self.generated_utc,
             "recomputed_instruments": self.recomputed_instruments,
+            "include_all_numbers": self.include_all_numbers,
             "verdict": self.verdict,
             "summary": {
                 "deterministic_checks": len(self.findings),
@@ -136,6 +177,75 @@ def _without_comments(line: str) -> str:
     return re.sub(r"(?<!\\)%.*$", "", line)
 
 
+def tex_contexts(tex: str) -> dict[int, dict[str, Any]]:
+    """Return the current section and LaTeX environment stack per line."""
+    contexts: dict[int, dict[str, Any]] = {}
+    environments: list[str] = []
+    section = ""
+    for lineno, raw in enumerate(tex.splitlines(), start=1):
+        line = _without_comments(raw)
+        section_match = SECTION_RE.search(line)
+        if section_match:
+            section = section_match.group(1).strip()
+        for match in BEGIN_RE.finditer(line):
+            environments.append(match.group(1))
+        contexts[lineno] = {
+            "section": section,
+            "environments": tuple(environments),
+        }
+        for match in END_RE.finditer(line):
+            environment = match.group(1)
+            for index in range(len(environments) - 1, -1, -1):
+                if environments[index] == environment:
+                    del environments[index]
+                    break
+    return contexts
+
+
+def source_snippet(tex: str, lineno: int, radius: int = 1) -> str:
+    """Join nearby non-comment source lines into a compact review excerpt."""
+    lines = tex.splitlines()
+    start = max(0, lineno - radius - 1)
+    end = min(len(lines), lineno + radius)
+    selected = [
+        _without_comments(line).strip()
+        for line in lines[start:end]
+        if _without_comments(line).strip()
+    ]
+    return " ".join(selected)
+
+
+def _numeric_priority(
+    line: str,
+    context: dict[str, Any],
+) -> tuple[str, tuple[str, ...]]:
+    """Prioritize review without turning a heuristic into a defect verdict."""
+    reasons: list[str] = []
+    environments = set(context["environments"])
+    section = context["section"].lower()
+    if environments & HIGH_VALUE_ENVIRONMENTS:
+        reasons.append("high-value-environment")
+    if any(
+        re.search(rf"\b{re.escape(term)}s?\b", section)
+        for term in HIGH_VALUE_SECTION_TERMS
+    ):
+        reasons.append("high-value-section")
+    if HIGH_VALUE_NUMERIC_CUES.search(line):
+        reasons.append("claim-language")
+    if reasons:
+        return "HIGH", tuple(reasons)
+    if environments & DISPLAY_MATH_ENVIRONMENTS:
+        return "LOW", ("display-math",)
+    if MEDIUM_VALUE_NUMERIC_CUES.search(line):
+        return "MEDIUM", ("quantitative-prose",)
+    return "LOW", ("background-or-unclassified",)
+
+
+def _is_layout_only_numeric_line(line: str) -> bool:
+    """Return true for table-formatting commands with no manuscript datum."""
+    return any(pattern.fullmatch(line) for pattern in LAYOUT_ONLY_LINE_RES)
+
+
 def extract_numeric_candidates(
     tex: str,
     generated_macros: set[str],
@@ -148,6 +258,7 @@ def extract_numeric_candidates(
     """
     candidates: list[dict[str, Any]] = []
     lines = tex.splitlines()
+    contexts = tex_contexts(tex)
     document_starts = [
         index for index, line in enumerate(lines)
         if r"\begin{document}" in _without_comments(line)
@@ -159,27 +270,39 @@ def extract_numeric_candidates(
         line = _without_comments(raw)
         if not line.strip():
             continue
+        if _is_layout_only_numeric_line(line):
+            continue
         used_macros = sorted(
             macro for macro in generated_macros if f"\\{macro}" in line
         )
-        for match in NUMERIC_CANDIDATE_RE.finditer(line):
-            candidates.append({
-                "location": f"{source}:{lineno}",
-                "token": match.group(0),
-                "generated_macros_on_line": used_macros,
-                "classification": (
-                    "MIXED_WITH_GENERATED_VALUE" if used_macros
-                    else "MANUAL_NUMERIC_CANDIDATE"
-                ),
-                "snippet": line.strip(),
-            })
+        tokens = [match.group(0) for match in NUMERIC_CANDIDATE_RE.finditer(line)]
+        if not tokens:
+            continue
+        context = contexts[lineno]
+        priority, reasons = _numeric_priority(line, context)
+        candidates.append({
+            "review_id": f"NUM-{lineno}",
+            "location": f"{source}:{lineno}",
+            "tokens": tokens,
+            "generated_macros_on_line": used_macros,
+            "classification": (
+                "MIXED_WITH_GENERATED_VALUE" if used_macros
+                else "MANUAL_NUMERIC_CANDIDATE"
+            ),
+            "priority": priority,
+            "priority_reasons": list(reasons),
+            "section": context["section"],
+            "environments": list(context["environments"]),
+            "snippet": source_snippet(tex, lineno),
+        })
     return candidates
 
 
-def citation_locations(tex: str, key: str, source: str) -> list[str]:
-    """Find line-level uses of a BibTeX key inside citation commands."""
-    locations = []
+def citation_uses(tex: str, key: str, source: str) -> list[dict[str, Any]]:
+    """Return context-rich, line-level uses of a BibTeX key."""
+    uses = []
     cite_re = re.compile(r"\\cite\w*\{([^{}]+)\}")
+    contexts = tex_contexts(tex)
     for lineno, raw in enumerate(tex.splitlines(), start=1):
         line = _without_comments(raw)
         cited = {
@@ -188,8 +311,54 @@ def citation_locations(tex: str, key: str, source: str) -> list[str]:
             for item in match.group(1).split(",")
         }
         if key in cited:
-            locations.append(f"{source}:{lineno}")
-    return locations
+            context = contexts[lineno]
+            uses.append({
+                "review_id": f"CITE-{key}-{lineno}",
+                "location": f"{source}:{lineno}",
+                "section": context["section"],
+                "environments": list(context["environments"]),
+                "snippet": source_snippet(tex, lineno),
+            })
+    return uses
+
+
+def _normalised_with_lines(text: str) -> tuple[str, list[int]]:
+    """Collapse whitespace while retaining a source line for every character."""
+    out: list[str] = []
+    source_lines: list[int] = []
+    pending_space = False
+    pending_line = 1
+    for lineno, line in enumerate(text.splitlines(keepends=True), start=1):
+        for char in line:
+            if char.isspace():
+                if out:
+                    pending_space = True
+                    pending_line = lineno
+                continue
+            if pending_space:
+                out.append(" ")
+                source_lines.append(pending_line)
+                pending_space = False
+            out.append(char)
+            source_lines.append(lineno)
+    return "".join(out), source_lines
+
+
+def current_claim_location(claim: claims.Claim) -> tuple[str, str]:
+    """Resolve a registered anchor to its current line rather than stale metadata."""
+    relative_path = claim.site.rsplit(":", 1)[0]
+    source_path = REPO_ROOT / relative_path
+    try:
+        text = source_path.read_text(encoding="utf-8")
+    except OSError:
+        return relative_path, ""
+    normalised, source_lines = _normalised_with_lines(text)
+    anchor = re.sub(r"\s+", " ", claim.source_anchor).strip()
+    index = normalised.find(anchor) if anchor else -1
+    if index < 0 or index >= len(source_lines):
+        return relative_path, ""
+    lineno = source_lines[index]
+    return f"{relative_path}:{lineno}", source_snippet(text, lineno)
 
 
 def _audit_bibliography_and_evidence(audit: Audit, paper: str) -> None:
@@ -325,19 +494,26 @@ def _audit_claims(
         (f"instruments/tools/claims.py",),
     )
 
-    audit.registered_claims = [{
-        "claim_id": claim.key,
-        "site": claim.site,
-        "asserts": claim.asserts,
-        "depends_on": list(claim.depends_on),
-        "tolerance": claim.tolerance,
-        "note": claim.note,
-        "deterministic_predicate": "PASS" if claim not in failing else "FAIL",
-        "semantic_question": (
-            "Does the predicate test the stated conclusion, and is the "
-            "conclusion warranted by the underlying derivation?"
-        ),
-    } for claim in registered]
+    audit.registered_claims = []
+    for claim in registered:
+        current_location, snippet = current_claim_location(claim)
+        audit.registered_claims.append({
+            "review_id": f"CLAIM-{claim.key}",
+            "claim_id": claim.key,
+            "registered_site": claim.site,
+            "current_location": current_location,
+            "current_snippet": snippet,
+            "asserts": claim.asserts,
+            "depends_on": list(claim.depends_on),
+            "tolerance": claim.tolerance,
+            "note": claim.note,
+            "deterministic_predicate": (
+                "PASS" if claim not in failing else "FAIL"),
+            "semantic_question": (
+                "Does the predicate test the stated conclusion, and is the "
+                "conclusion warranted by the underlying derivation?"
+            ),
+        })
 
     audit.coverage.update({
         "generated_macros": sorted(generated_macros),
@@ -386,9 +562,11 @@ def _build_citation_queue(
             priority = "MEDIUM"
         else:
             priority = "NORMAL"
+        uses = citation_uses(tex, key, source)
         queue.append({
+            "review_id": f"CITATION-{key}",
             "cite_key": key,
-            "locations": citation_locations(tex, key, source),
+            "uses": uses,
             "evidence_note": f"papers/cited/notes/{key}.md",
             "review_status": review_status,
             "recorded_evidence_verdict": verdict or review_status,
@@ -401,13 +579,19 @@ def _build_citation_queue(
         })
     audit.citation_review_queue = queue
     audit.coverage["citation_count"] = len(keys)
+    audit.coverage["citation_use_count"] = sum(
+        len(item["uses"]) for item in queue)
     audit.coverage["citation_high_priority"] = sum(
         item["priority"] == "HIGH" for item in queue)
     audit.coverage["citation_medium_priority"] = sum(
         item["priority"] == "MEDIUM" for item in queue)
 
 
-def audit_paper(paper: str, recompute: bool = True) -> Audit:
+def audit_paper(
+    paper: str,
+    recompute: bool = True,
+    include_all_numbers: bool = False,
+) -> Audit:
     paper_dir = PAPERS / paper
     main_tex = paper_dir / "main.tex"
     if not main_tex.is_file():
@@ -418,6 +602,7 @@ def audit_paper(paper: str, recompute: bool = True) -> Audit:
         paper=paper,
         generated_utc=datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         recomputed_instruments=recompute,
+        include_all_numbers=include_all_numbers,
     )
 
     _audit_bibliography_and_evidence(audit, paper)
@@ -426,13 +611,28 @@ def audit_paper(paper: str, recompute: bool = True) -> Audit:
     _audit_claims(audit, paper, generated_macros)
     _audit_change_record(audit, paper)
     _build_citation_queue(audit, paper, tex)
-    audit.numeric_review_queue = extract_numeric_candidates(
+    numeric_inventory = extract_numeric_candidates(
         tex, generated_macros, f"papers/{paper}/main.tex")
-    audit.coverage["numeric_candidate_count"] = len(
+    audit.numeric_review_queue = [
+        item for item in numeric_inventory
+        if include_all_numbers or item["priority"] != "LOW"
+    ]
+    audit.coverage["numeric_line_inventory_count"] = len(numeric_inventory)
+    audit.coverage["numeric_token_inventory_count"] = sum(
+        len(item["tokens"]) for item in numeric_inventory)
+    audit.coverage["numeric_review_queue_count"] = len(
         audit.numeric_review_queue)
+    audit.coverage["numeric_low_priority_omitted"] = sum(
+        item["priority"] == "LOW" for item in numeric_inventory
+        if not include_all_numbers)
+    audit.coverage["numeric_priority_counts"] = {
+        priority: sum(
+            item["priority"] == priority for item in numeric_inventory)
+        for priority in ("HIGH", "MEDIUM", "LOW")
+    }
     audit.coverage["manual_numeric_candidate_count"] = sum(
         item["classification"] == "MANUAL_NUMERIC_CANDIDATE"
-        for item in audit.numeric_review_queue
+        for item in numeric_inventory
     )
     return audit
 
@@ -476,9 +676,11 @@ def render_markdown(audit: Audit, numeric_limit: int = 40) -> str:
     ]
     for claim in audit.registered_claims:
         lines += [
-            f"### `{claim['claim_id']}`",
+            f"### `{claim['review_id']}`",
             "",
-            f"- Site: `{claim['site']}`",
+            f"- Current location: `{claim['current_location']}`",
+            f"- Registered site metadata: `{claim['registered_site']}`",
+            f"- Current source: {claim['current_snippet']}",
             f"- Statement: {claim['asserts']}",
             f"- Inputs: `{', '.join(claim['depends_on']) or '(symbolic)'}`",
             f"- Tolerance: {claim['tolerance']}",
@@ -488,16 +690,48 @@ def render_markdown(audit: Audit, numeric_limit: int = 40) -> str:
         ]
 
     lines += [
-        "## Citation semantic review queue",
+        "## Prioritized citation semantic review",
         "",
-        "| Priority | Key | Recorded verdict | Current uses | Evidence |",
-        "|---|---|---|---|---|",
+    ]
+    prioritized_citations = [
+        item for item in audit.citation_review_queue
+        if item["priority"] != "NORMAL"
+    ]
+    prioritized_citations.sort(
+        key=lambda item: {"HIGH": 0, "MEDIUM": 1}[item["priority"]])
+    for item in prioritized_citations:
+        lines += [
+            f"### {item['priority']} — `{item['review_id']}`",
+            "",
+            f"- Recorded evidence verdict: "
+            f"`{item['recorded_evidence_verdict']}`",
+            f"- Evidence: `{item['evidence_note']}`",
+        ]
+        for use in item["uses"]:
+            context = use["section"] or "(no section)"
+            lines += [
+                f"- `{use['review_id']}` — `{use['location']}` — "
+                f"section: {context}",
+                f"  - {use['snippet']}",
+            ]
+        lines.append("")
+
+    lines += [
+        "### Normal-priority citations",
+        "",
+        "Retained in the JSON queue; compacted here so routine `OK` sources do "
+        "not bury the exception cases.",
+        "",
+        "| Key | Uses | Evidence |",
+        "|---|---|---|",
     ]
     for item in audit.citation_review_queue:
-        uses = ", ".join(f"`{loc}`" for loc in item["locations"]) or "(none)"
+        if item["priority"] != "NORMAL":
+            continue
+        locations = ", ".join(
+            f"`{use['location']}`" for use in item["uses"]) or "(none)"
         lines.append(
-            f"| **{item['priority']}** | `{item['cite_key']}` | "
-            f"`{item['recorded_evidence_verdict']}` | {uses} | "
+            f"| `{item['cite_key']}` | {locations} | "
             f"`{item['evidence_note']}` |")
 
     lines += [
@@ -505,17 +739,27 @@ def render_markdown(audit: Audit, numeric_limit: int = 40) -> str:
         "## Manual numeric review queue",
         "",
         f"Showing the first {min(numeric_limit, len(audit.numeric_review_queue))} "
-        f"of {len(audit.numeric_review_queue)} candidates. Candidate status is "
-        "not a defect verdict.",
+        f"of {len(audit.numeric_review_queue)} prioritized lines. Candidate "
+        "status is not a defect verdict. Low-priority lines are counted but "
+        "omitted unless `--all-numbers` is used.",
         "",
-        "| Location | Token | Classification | Snippet |",
-        "|---|---|---|---|",
+        "| Priority | Review ID | Location | Tokens | Context | Snippet |",
+        "|---|---|---|---|---|---|",
     ]
-    for item in audit.numeric_review_queue[:numeric_limit]:
+    numeric_queue = sorted(
+        audit.numeric_review_queue,
+        key=lambda item: (
+            {"HIGH": 0, "MEDIUM": 1, "LOW": 2}[item["priority"]],
+            int(item["review_id"].split("-")[1]),
+        ),
+    )
+    for item in numeric_queue[:numeric_limit]:
         snippet = item["snippet"].replace("|", r"\|")
+        tokens = ", ".join(f"`{token}`" for token in item["tokens"])
+        context = item["section"] or ", ".join(item["environments"]) or "prose"
         lines.append(
-            f"| `{item['location']}` | `{item['token']}` | "
-            f"{item['classification']} | {snippet} |")
+            f"| **{item['priority']}** | `{item['review_id']}` | "
+            f"`{item['location']}` | {tokens} | {context} | {snippet} |")
 
     lines += [
         "",
@@ -547,12 +791,19 @@ def main() -> int:
     parser.add_argument(
         "--no-recompute", action="store_true",
         help="skip fresh instrument execution; all other checks still run")
+    parser.add_argument(
+        "--all-numbers", action="store_true",
+        help="include low-priority numeric lines in the semantic review queue")
     parser.add_argument("--json-out", type=Path, help="write a new JSON report")
     parser.add_argument("--md-out", type=Path, help="write a new Markdown report")
     args = parser.parse_args()
 
     try:
-        audit = audit_paper(args.paper, recompute=not args.no_recompute)
+        audit = audit_paper(
+            args.paper,
+            recompute=not args.no_recompute,
+            include_all_numbers=args.all_numbers,
+        )
         payload = json.dumps(audit.to_dict(), indent=2) + "\n"
         if args.json_out:
             _write_new(args.json_out, payload)
