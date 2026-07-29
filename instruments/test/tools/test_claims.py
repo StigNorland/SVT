@@ -102,15 +102,76 @@ def claims_ignoring_perturbations(registered, targets):
     return unguarded
 
 
+#: Papers whose registered claims are about a SIGN or a STRUCTURE rather than
+#: a magnitude. Multiplying an input by a positive factor cannot falsify
+#: "sigma^2 < 0" or "b does not appear in this expression", so the magnitude
+#: harness would report them unguarded — FM8, over-reporting, again. They get
+#: the control below, which perturbs the thing they actually depend on.
+SIGN_CONTROLLED = {"SSV-VII-a"}
+
+
+def claims_ignoring_a_flipped_convention(registered):
+    """Keys of predicates that do not notice the LogSE sign convention flipping.
+
+    The right perturbation for SSV-VII-a: its findings turn entirely on which
+    sign the logarithmic term carries, which is the whole of #189.
+    """
+    import logse_gaussian as G
+
+    unguarded = []
+    original = dict(G.CONVENTIONS)
+    for claim in registered:
+        G.CONVENTIONS.update({k: -v for k, v in original.items()})
+        try:
+            noticed = not claim.check()
+        except Exception:
+            noticed = True
+        finally:
+            G.CONVENTIONS.update(original)
+        if not noticed:
+            unguarded.append(claim.key)
+    return unguarded
+
+
+def test_the_sign_control_detects_a_sign_blind_predicate():
+    """Guard on the guard: a predicate ignoring the convention must be caught."""
+    always = C.Claim("SSV-VII-a", "always-true",
+                     "papers/SSV-VII-a/main.tex:1", "2 + 2 = 4", (),
+                     lambda: True)
+    assert claims_ignoring_a_flipped_convention([always]) == ["always-true"]
+
+
 @pytest.mark.parametrize("paper", PAPERS)
 def test_claims_are_not_tautologies(paper):
-    """Every predicate must actually depend on the numbers it reads.
+    """Every predicate must actually depend on the inputs it reads.
 
-    Perturb the instrument function each claim rests on and require the claim to
-    notice. A predicate that survives an arbitrary perturbation of its own inputs
-    is not guarding anything — which is precisely the bug this test was written
-    after finding by hand.
+    Perturb what each claim rests on and require the claim to notice. A
+    predicate that survives an arbitrary perturbation of its own inputs is not
+    guarding anything — which is precisely the bug this test was written after
+    finding by hand.
     """
+    if paper in SIGN_CONTROLLED:
+        import logse_gaussian as G
+
+        # Two controls, and a claim needs only ONE of them to catch it.
+        # E1 is about the sign of sigma^2 and is invisible to a positive
+        # rescaling; E2 ("hbar/2 is a property of Gaussians") holds on BOTH
+        # branches by construction, so it is invisible to a sign flip -- that
+        # is its content, not a weakness. Demanding both would fail a correct
+        # claim for being correct.
+        blind_to_sign = set(claims_ignoring_a_flipped_convention(
+            claims_of(paper)))
+        blind_to_magnitude = set(claims_ignoring_perturbations(
+            claims_of(paper),
+            [(G, "uncertainty_product"), (G, "laplace_uncertainty_product"),
+             (G, "gausson_width_squared_unconstrained")]))
+        unguarded = sorted(blind_to_sign & blind_to_magnitude)
+        assert not unguarded, (
+            f"{paper}: these predicates survive both a flipped LogSE sign "
+            f"convention and a rescaling of every quantity they read: "
+            f"{unguarded}")
+        return
+
     import dsph_ledger as D
     import ssv_i_audit_2026 as A
     import planck_scale_values as P
@@ -149,11 +210,25 @@ def test_the_tautology_detector_detects_a_tautology():
 # 3 — coverage: a generated number with no guarded conclusion
 # --------------------------------------------------------------------------
 
+def generated_macros(paper):
+    """Macros rule 14 generates for this paper, empty if it registers none.
+
+    A paper may legitimately guard conclusions without printing any generated
+    number: SSV-VII-a's #189 findings are symbolic identities, so there is no
+    number to generate and nothing to drift. `gv.values_for` raises for such a
+    paper, which is right for the generator and wrong for a coverage check.
+    """
+    try:
+        return {v.macro for v in gv.values_for(paper)}
+    except KeyError:
+        return set()
+
+
 @pytest.mark.parametrize("paper", PAPERS)
 def test_every_generated_value_is_claimed(paper):
     """A number printed with no conclusion attached is either decoration or an
     unguarded claim. Either way someone should look at it."""
-    generated = {v.macro for v in gv.values_for(paper)}
+    generated = generated_macros(paper)
     claimed = {m for c in claims_of(paper) for m in c.depends_on}
     orphans = generated - claimed
     assert not orphans, (
@@ -163,7 +238,7 @@ def test_every_generated_value_is_claimed(paper):
 
 @pytest.mark.parametrize("paper", PAPERS)
 def test_claims_only_reference_real_macros(paper):
-    generated = {v.macro for v in gv.values_for(paper)}
+    generated = generated_macros(paper)
     for c in claims_of(paper):
         unknown = set(c.depends_on) - generated
         assert not unknown, f"{c.key} depends on unregistered macros {unknown}"

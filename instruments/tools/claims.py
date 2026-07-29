@@ -360,9 +360,74 @@ def _b1_fragility_is_as_printed(D) -> bool:
             and f["within_vrot_limit"]["margin_dex"] > 0)
 
 
+# --------------------------------------------------------------------------
+# SSV-VII-a
+# --------------------------------------------------------------------------
+
+def _ssv_vii_a() -> list[Claim]:
+    """#189.  Both registered claims guard NEGATIVE results.
+
+    `depends_on` is empty and that is correct, not an oversight: VII-a's
+    findings are symbolic identities, so there is no number to generate under
+    rule 14 and nothing to drift. What must not drift is the *conclusion* --
+    a later edit restoring "the hbar/2 prefactor is derived" would sail past
+    every other gate in the repository.
+    """
+    import sympy as sp
+
+    import logse_gaussian as G
+
+    return [
+        Claim(
+            "SSV-VII-a", "no-gausson-on-the-adopted-branch",
+            "papers/SSV-VII-a/main.tex:301",
+            "under the +b ln convention SSV-I adopted, sigma^2 < 0 and no "
+            "normalisable Gaussian stationary state exists; under VII-a's "
+            "-b ln convention it does",
+            (),
+            lambda: (G.gaussian_exists("adopted_plus", b_positive=True) is False
+                     and G.gaussian_exists("vii_a_minus", b_positive=True)
+                     is True),
+            tolerance="exact: the sign of sigma^2, not its magnitude",
+            note="E1. The two conventions give sigma^2 differing only in sign, "
+                 "so the finding is 'VII-a wrote a correct equation for a "
+                 "rejected theory', not 'VII-a miscalculated'. Both halves are "
+                 "asserted so that a convention flip in either direction is "
+                 "caught.",
+            source_anchor=(
+                r"$\sigma^2 = -\hbar^2/(2mb) < 0$ and \textbf{no "
+                r"normalisable Gaussian exists at all}"
+            ),
+        ),
+        Claim(
+            "SSV-VII-a", "hbar-half-is-a-property-of-gaussians",
+            "papers/SSV-VII-a/main.tex:428",
+            "every normalised Gaussian saturates to hbar/2 with b absent from "
+            "the result, while a normalised non-Gaussian does not saturate",
+            (),
+            lambda: (
+                sp.simplify(G.uncertainty_product() - G.hbar / 2) == 0
+                and G.b not in G.uncertainty_product().free_symbols
+                and sp.simplify(
+                    G.laplace_uncertainty_product() - G.hbar / 2) != 0),
+            tolerance="exact symbolic identity; the control must NOT saturate",
+            note="E2, including its negative control. Without the third "
+                 "conjunct the claim would be compatible with every "
+                 "normalisable state saturating, in which case 'the Gaussian "
+                 "is what does the work' says nothing (FM3).",
+            source_anchor=(
+                r"The \emph{prefactor} is not"
+                "\n"
+                r"earned here.  Verdict \texttt{MISDERIVED}"
+            ),
+        ),
+    ]
+
+
 REGISTRY: dict[str, Callable[[], list[Claim]]] = {
     "SSV-I": _ssv_i,
     "SSV-VI": _ssv_vi,
+    "SSV-VII-a": _ssv_vii_a,
     "SSV-VII-b": _ssv_vii_b,
 }
 

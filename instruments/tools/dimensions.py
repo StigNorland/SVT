@@ -40,10 +40,16 @@ honest limit of the "80% version", and it is why each relation carries the
 ``site`` it came from: the transcription is checkable by hand even though it is
 not checked by machine.
 
-Scope is SSV-I, SSV-II and SSV-V — the three papers where a dimensional defect
-was actually found.  Transcribing all twelve by hand would be a large manual
-operation with a real chance of introducing the very error class this exists to
-catch; that trade is not worth taking.
+Scope is SSV-I, SSV-II, SSV-V and SSV-VII-a — the papers where a dimensional
+defect was actually found, plus VII-a which #189 brought in.  Transcribing all
+twelve by hand would be a large manual operation with a real chance of
+introducing the very error class this exists to catch; that trade is not worth
+taking, and #205 is the proposal to do it properly rather than by hand.
+
+Adding VII-a produced a finding no per-paper check could reach: ``b`` is
+declared J/kg in SSV-I, a frequency in SSV-V, and required to be an energy in
+SSV-VII-a — three dimensions for one letter, each self-consistent inside its
+own paper.  See ``declared_across_papers``.
 
 Mirrored by ``instruments/test/tools/test_dimensions.py``.
 """
@@ -118,12 +124,25 @@ ANCHORED: dict[str, dict[str, Dimension]] = {
         "m": mass,
         "rho": MASS_DENSITY,
     },
+    "SSV-VII-a": {
+        "hbar": ACTION,
+        "m": mass,
+        "m_e": mass,
+        "c": VELOCITY,
+        "S": ACTION,                             # Psi = sqrt(rho) exp(iS/hbar)
+        # rho is anchored to what eq:polar DECLARES it to be -- "the mass
+        # density".  The Gausson section then uses it as a normalised
+        # probability density, and that clash is the E5 defect: anchoring it
+        # here is what lets the checker see the clash rather than absorb it.
+        "rho": MASS_DENSITY,
+    },
 }
 
 FREE: dict[str, set[str]] = {
     "SSV-I": {"b"},
     "SSV-II": {"e"},
     "SSV-V": {"b"},
+    "SSV-VII-a": {"b"},
 }
 
 # What each paper *declares* its free symbols to be, for comparison against what
@@ -132,6 +151,9 @@ DECLARED: dict[str, dict[str, Dimension]] = {
     "SSV-I": {"b": ENERGY / mass},               # J/kg, after the E6 correction
     "SSV-II": {"e": charge},                     # as used by Phi_0 = h/e
     "SSV-V": {"b": FREQUENCY},                   # declared at main.tex:146
+    # VII-a never declares [b]; the LogSE fixes it, since b Psi ln(...) must
+    # match i hbar d_t Psi.  Recorded as the requirement, not as a declaration.
+    "SSV-VII-a": {"b": ENERGY},
 }
 
 
@@ -211,6 +233,42 @@ RELATIONS: list[Relation] = [
     Relation("SSV-V", "eq:cs", "papers/SSV-V/main.tex:145",
              {"b": 1, "hbar": 1, "m": -1}, VELOCITY**2,
              "c_s = sqrt(b hbar/m) with b a frequency — declared at main.tex:146"),
+
+    # ---------------- SSV-VII-a (#189) ----------------
+    Relation("SSV-VII-a", "eq:velocity", "papers/SSV-VII-a/main.tex:140",
+             {"S": 1, "m": -1}, length**2 / time,
+             "v = grad S / m; the gradient's length is folded into the target"),
+    Relation("SSV-VII-a", "eq:hamilton_jacobi", "papers/SSV-VII-a/main.tex:163",
+             {"S": 2, "m": -1}, ENERGY * length**2,
+             "(grad S)^2 / 2m must be an energy"),
+    Relation("SSV-VII-a", "eq:Q", "papers/SSV-VII-a/main.tex:168",
+             {"hbar": 2, "m": -1}, ENERGY * length**2,
+             "Q = -hbar^2/(2m) lap(sqrt rho)/sqrt rho is an energy; rho cancels, "
+             "which is why Q is blind to the E5 normalisation clash"),
+    Relation("SSV-VII-a", "eq:phase_quantisation",
+             "papers/SSV-VII-a/main.tex:282",
+             {"S": 1}, ACTION,
+             "contour integral of grad S equals 2 pi n hbar"),
+    Relation("SSV-VII-a", "eq:circulation", "papers/SSV-VII-a/main.tex:287",
+             {"hbar": 1, "m": -1}, length**2 / time,
+             "quantum of circulation h/m"),
+    Relation("SSV-VII-a", "eq:LogSE-VIIa", "papers/SSV-VII-a/main.tex:388",
+             {"b": 1}, ENERGY,
+             "b Psi ln(|Psi|^2/rho_0) must match i hbar d_t Psi — this is what "
+             "fixes [b] = energy in THIS paper"),
+    Relation("SSV-VII-a", "eq:gausson", "papers/SSV-VII-a/main.tex:399",
+             {"hbar": 2, "m": -1, "b": -1}, length**2,
+             "sigma^2 = hbar^2/(2 m b); homogeneous exactly when b is an energy"),
+    Relation("SSV-VII-a", "eq:rydberg", "papers/SSV-VII-a/main.tex:258",
+             {"m_e": 1, "c": 2}, ENERGY,
+             "E_n = -m_e c^2 alpha^2 / 2n^2, with alpha dimensionless"),
+    # The E5 defect, encoded AS PRINTED.
+    Relation("SSV-VII-a", "eq:gausson-Dx", "papers/SSV-VII-a/main.tex:413",
+             {"rho": 1}, 1 / length,
+             "(Dx)^2 = int x^2 |Psi|^2 dx = sigma^2/2 requires |Psi|^2 to be a "
+             "1D probability density, but eq:polar declares rho the MASS "
+             "density — one symbol, two dimensions",
+             status="inhomogeneous", defect="E5"),
 ]
 
 
