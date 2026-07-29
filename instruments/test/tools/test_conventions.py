@@ -415,3 +415,19 @@ def test_mu0_is_the_permeability_and_the_base_scale_and_two_of_itself():
     assert len(within_i) == 2, (
         "SSV-I prints mu_0 as both m_e c^2/alpha (energy) and m_e/alpha "
         "(mass); in a paper that keeps c explicit these are not the same")
+
+
+def test_mu0_over_alpha_is_an_identity_not_a_coincidence():
+    """SI defines alpha = mu_0 c e^2/(2h), so mu_0/alpha = 2h/(e^2 c) exactly."""
+    w = C.mu0_collision_worked_example()
+    a = w["permeability_reading_H_per_m"]
+    b = w["identity_2h_over_e2c_H_per_m"]
+    assert abs(a - b) / a < 1e-9, "the identity must hold to numerical precision"
+    assert abs(a - 1.722e-4) / 1.722e-4 < 1e-3
+
+
+def test_the_two_readings_of_mu0_over_alpha_are_incommensurable():
+    """The collision, in numbers: 1.722e-4 H/m against 9.60 GeV."""
+    w = C.mu0_collision_worked_example()
+    assert abs(w["ssv_base_scale_reading_MeV"] - 9596.0) < 1.0
+    assert w["ssv_base_scale_reading_MeV"] / w["permeability_reading_H_per_m"] > 1e6

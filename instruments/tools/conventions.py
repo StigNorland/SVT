@@ -627,3 +627,43 @@ def _standard_for(symbol: str):
     if root in NOT_IN_STANDARD or symbol in NOT_IN_STANDARD:
         return ()
     return tuple(STANDARD.get(root, ())) + tuple(WIKI.get(root, ()))
+
+
+# --------------------------------------------------------------------------
+# Worked example: why the mu_0 collision is expensive
+# --------------------------------------------------------------------------
+
+def mu0_collision_worked_example() -> dict:
+    """The two readings of ``\\mu_0/\\alpha`` that this series supports.
+
+    Owner, 2026-07-29, on the *real* constant: "The ratio mu_0/alpha equals
+    approximately 1.722e-4 H/m."  That is exact, and it is an identity rather
+    than a coincidence — SI defines alpha = mu_0 c e^2/(2h), so
+
+        mu_0/alpha = 2h/(e^2 c) = 2 R_K/c,
+
+    with R_K = h/e^2 = 25812.807 ohm the von Klitzing constant.  (The
+    conductance quantum is conventionally G_0 = 2e^2/h, so R_K = 2/G_0.)
+
+    The point for this registry is what happens when the same expression is
+    read in SSV-I, where mu_0 is the base scale m_e/alpha:
+
+        mu_0/alpha = m_e/alpha^2 = 9.60 GeV,
+
+    a mass.  One expression, one series, two quantities sharing no dimension
+    and separated by twenty-five orders of magnitude in any common unit.  No
+    gate can catch a reader parsing it the wrong way; only renaming can.
+    """
+    mu0 = 1.25663706212e-6        # H/m, CODATA-2018
+    c = 2.99792458e8              # m/s, exact
+    h = 6.62607015e-34            # J s, exact
+    e = 1.602176634e-19           # C, exact
+    alpha = 7.2973525693e-3       # CODATA-2018
+    m_e_MeV = 0.51099895          # MeV
+    return {
+        "permeability_reading_H_per_m": mu0 / alpha,
+        "identity_2h_over_e2c_H_per_m": 2 * (h / e**2) / c,
+        "von_klitzing_ohm": h / e**2,
+        "conductance_quantum_S": 2 * e**2 / h,
+        "ssv_base_scale_reading_MeV": m_e_MeV / alpha**2,
+    }
