@@ -29,6 +29,8 @@
 \providecommand{\ssvfile}[1]{\hyperref[file:#1]{\texttt{\detokenize{#1}}}}
 \providecommand{\ssvissue}[1]{\hyperref[issue:#1]{\##1}}
 
+\input{values.tex}% generated numbers (\ssvDsphMedianDeltaB, ...) -- instruments/tools/gen_values.py
+
 \title{\textbf{\seriesname~\papernumber}\\[0.4em]
 \large Galactic Dynamics: Rotation Curves and Spiral Structure from the
 Two-Term Source}
@@ -629,22 +631,41 @@ what the baryons are doing.
 \begin{falsbox}[\ssvissue{147} B1: rotation-proportional entrainment is
 falsified at the dwarf spheroidals]
 Extrapolated \emph{three decades in mass} below the SPARC sample, the
-dwarfs sit on the mass law: median offset $+0.20$ dex (per-dwarf range
-$+0.01$ to $+0.43$, all inside the pre-registered $\pm 0.5$ window).
-The rotation law's \emph{upper limits} miss by a median of
-\textbf{2.7 dex} --- a factor $\sim 500$ --- and the verdict is stable
-across the entire pre-registered robustness sweep ($M_*/L$ varied
-$\times/\div 2$, $v_{\rm rot}$ limits 1--10 km/s, $\pm 30\%$ anisotropy
-systematic; 27 combinations).  The halo amplitude reads baryonic
-\emph{mass}, not baryonic \emph{rotation}.  Two honesty items recorded
-with it: (i) the naive ``no rotation $\Rightarrow$ no circulation
+dwarfs sit on the mass law: median offset $+\ssvDsphMedianDeltaA$ dex
+(no dwarf outside the pre-registered $\pm 0.5$ window; the largest
+offset is $+\ssvDsphDeltaAMax$).  The rotation law's \emph{upper
+limits} miss by a median of \textbf{$\ssvDsphMedianDeltaB$ dex} --- a
+factor $\sim\ssvDsphShortfallFactor$.  The halo amplitude reads
+baryonic \emph{mass}, not baryonic \emph{rotation}.  Three honesty
+items are recorded with it.
+
+\emph{(i) The verdict is sweep-fragile, and the fragility is
+reported rather than absorbed.}  Across the
+$\ssvDsphSweepPoints$-point pre-registered sweep ($M_*/L$ varied
+$\times/\div 2$; $v_{\rm rot}$ limits 1--10 km/s; $\pm 30\%$
+anisotropy systematic; and, since \ssvissue{203}, the Milky-Way
+normalisation radius over 4--15 kpc)
+$\ssvDsphSweepDisagreeing$ points return \emph{inconclusive} rather
+than \emph{falsified}.  All $\ssvDsphSweepDisagreeing$ sit at
+$v_{\rm rot} = 10$ km/s --- more than three times the $\leq 3$ km/s
+observational upper limit the sweep exists to stress --- and at the
+smallest, most model-B-favourable normalisation radius.  Restricted to
+$v_{\rm rot} \leq 3$ km/s the verdict holds at every sweep point, with
+$\ssvDsphMarginDex$ dex of margin above the 1.5 dex threshold.  B1 is
+therefore falsified throughout the observationally allowed region and
+inconclusive only outside it; the unqualified stability flag in the
+receipt is \texttt{false}.
+
+\emph{(ii)} The naive ``no rotation $\Rightarrow$ no circulation
 budget'' killer does \emph{not} bind --- even at $v_{\rm rot} = 1$ km/s
-the dwarfs carry $\gtrsim 10^{15}$ times the H9-inverted circulation
-requirement, so it is the \emph{correlation}, not the budget, that
-discriminates; (ii) the dwarfs sit systematically \emph{above} the
-relation by $+0.20$ dex (they are MW satellites; the tidal confound is
-recorded, and at face value the offset means slightly \emph{more} halo
-than the mass law predicts, in the same direction the relation's
+the dwarfs carry $\gtrsim \ssvDsphBudgetRatio$ times the H9-inverted
+circulation requirement, so it is the \emph{correlation}, not the
+budget, that discriminates.
+
+\emph{(iii)} The dwarfs sit systematically \emph{above} the relation by
+$+\ssvDsphMedianDeltaA$ dex (they are MW satellites; the tidal confound
+is recorded, and at face value the offset means slightly \emph{more}
+halo than the mass law predicts, in the same direction the relation's
 0.14-dex scatter allows).
 \end{falsbox}
 
@@ -670,10 +691,53 @@ classical dSphs (diamonds; bars span the $M_*/L$ sweep) against the
 SPARC primary tier (grey) and the measured mass law
 Eq.~\eqref{eq:vh_mbar} (line, with 0.14 dex band).  Triangles: the
 rotation-proportional entrainment \emph{upper limits} at
-$v_{\rm rot} \leq 3$ km/s --- short by $\sim$2.7 dex.  The halo
-amplitude tracks mass, not rotation.}
+$v_{\rm rot} \leq 3$ km/s --- short by $\sim\ssvDsphMedianDeltaB$ dex.
+The halo amplitude tracks mass, not rotation.  The triangles sit two
+decades below the data because classical dSphs genuinely do not rotate:
+matching the observed $v_h$ under a law linear in $\Gamma_{\rm bar}$
+would require rotation speeds of
+$\ssvDsphVrotNeededMin$--$\ssvDsphVrotNeededMax$ km/s in systems whose
+\emph{entire} velocity dispersion is
+$\sigma_{\rm los} \approx 7$--$12$ km/s --- every one of them also
+above the Milky Way's own rotation.}
 \label{fig:dsph_ledger}
 \end{figure}
+
+\paragraph{Two limitations of the ledger, recorded.}
+\emph{Why model B is linear in $\Gamma$.}  The exponent is not a free
+choice: model A gives $v_h \propto M_{\rm bar}^{0.256}$ and H9 gives
+$\Gamma_{\rm req} \propto M_{\rm bar}^{1/4}$, so
+$v_h \propto \Gamma^{1.02}$.  The alternative readings are worth
+stating because they are self-defeating rather than merely
+disfavoured: $v_h \propto \Gamma^{1/4}$ would lift model B onto model A
+(median offset $-0.03$ dex), so the two hypotheses B1 is
+pre-registered to separate would become the same curve and the test
+would decide nothing.  An exponent chosen to bring the triangles of
+Fig.~\ref{fig:dsph_ledger} up to the data is an exponent that dissolves
+the discriminator.
+
+\emph{The mass estimator assumes Newtonian dynamics.}  The Wolf
+$v_c(r_{1/2}) = \sqrt3\,\sigma_{\rm los}$ relation is a spherical
+Jeans result in a Newtonian potential.  General-relativistic
+corrections are irrelevant here --- $(v_c/c)^2 \lesssim 5\times10^{-9}$
+against a 0.14 dex observational scatter --- but the Newtonian
+assumption is not: every classical dSph sits at
+$a = v_c^2/r_{1/2} \approx 0.06$--$0.32\,a_0$, i.e. entirely
+\emph{below} the acceleration scale that \S\ref{sec:a0} argues governs
+this regime.  The ledger therefore extracts $v_h$ with a tool that
+assumes the dynamics this paper disputes.  That does not rescue model
+B, and the reason is structural rather than numerical:
+$v_h^2 = v_c^2 - v_{\rm bar}^2$ enters \emph{both} residuals, so any
+error in the extraction is common-mode.  Moving model B onto the data
+needs $\sim2$ dex; the same shift would carry the mass-law offset from
+$+\ssvDsphMedianDeltaA$ to $\sim2.2$ dex and breach the $\pm0.5$ window
+by fourfold.  No systematic in the $v_h$ extraction can rescue model B
+without destroying model A.  What does survive as an open question is
+narrower: model A is fitted to rotation-supported discs and applied
+here to pressure-supported systems three decades lower in mass, so a
+regime-dependent extraction bias would enter the $+\ssvDsphMedianDeltaA$
+dex offset --- against which the dwarfs' landing on the relation across
+that whole extrapolation is evidence, not proof.
 
 The consequence for the programme is structural.  What survives of
 ``circulation sourcing'' after \ssvissue{147} is only the variant in
@@ -732,12 +796,15 @@ cored halo: median $\chi^2_r = 0.89$, BIC-beats NFW in 76\% &
 halo sourced by entrained baryonic rotation
 ($v_h \propto R\,v_{\rm rot}$) &
 \emph{falsified} (\ssvissue{147} B1: classical dSphs sit on the mass
-law at $+0.20$ dex while the rotation law's upper limits miss by
-2.7 dex; sweep-stable) \\
+law at $+\ssvDsphMedianDeltaA$ dex while the rotation law's upper
+limits miss by $\ssvDsphMedianDeltaB$ dex; sweep-fragile ---
+$\ssvDsphSweepDisagreeing$/$\ssvDsphSweepPoints$ points inconclusive,
+all above the observational $v_{\rm rot}$ limit, \ssvissue{203}) \\
 $v_h(M_{\rm bar})$ extends to dispersion-supported dwarfs (3 decades
 below SPARC) &
-\emph{measured} (\ssvissue{147}: median $+0.20$ dex; suggestive per
-rule~1; tidal confound recorded) \\
+\emph{measured} (\ssvissue{147}: median $+\ssvDsphMedianDeltaA$ dex;
+suggestive per rule~1; tidal confound and the Newtonian-estimator
+assumption recorded) \\
 universal (medium-set) core radius $r_c$ &
 \emph{falsified at dwarf scales} (\ssvissue{147} B3: 7/8 dwarfs below
 half the observed $\sigma$; surviving $r_c$(galaxy) relations must be

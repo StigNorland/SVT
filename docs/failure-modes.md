@@ -303,17 +303,27 @@ that tracked artifacts mean something.
 testing both ends of the drift interval against every value (rounding is
 monotonic, so this is exact, not statistical):
 
-| s.f. | floats moved by the observed drift | drift tolerated |
+| s.f. | drift tolerated, 259 floats (#198) | drift tolerated, 618 floats (#203) |
 |---|---|---|
-| none | 25 of 259 | — |
-| 14 | 31 | 0× |
-| 12 | 0 | 4.3e-14 (11× observed) |
-| **10** | **0** | **3.6e-12 (906× observed)** |
+| none | — | — |
+| 12 | 4.3e-14 (11×) | 1.0e-14 (3×) |
+| 10 | **3.6e-12 (906×)** | 3.7e-13 (**91×**) |
+| 9 | — | 4.9e-12 (1222×) |
+| **8** | — | **7.7e-12 (1931×)** |
 
-12 s.f. — the intuitive "a couple fewer decimals" — also passes today, but on an
-11× margin a recomputation could eat. 10 s.f. keeps ~900× while still leaving
-seven orders of magnitude more precision than the ~3 s.f. of physics these
-numbers carry. `test_receipt_is_stable_under_environment_drift` asserts the
+12 s.f. — the intuitive "a couple fewer decimals" — also passed at #198, but on
+an 11× margin a recomputation could eat.
+
+**And then a recomputation ate it.** #203 added a sweep axis, the receipt grew
+from 259 floats to 618, one sweep value landed 3.7e-13 from a rounding boundary,
+and the 906× margin fell to 91× — the guard fired, correctly, and
+`RECEIPT_SIGFIGS` moved to 8 (~1900×). The lesson is sharper than the fix:
+**the margin is a property of the values, not of the s.f. choice**, so it must
+be re-measured whenever the receipt grows rather than inherited from the comment
+that recorded it. (Note 8 s.f. beats 9 here — that is where these particular
+numbers happen to fall, not a trend to generalise.)
+
+`test_receipt_is_stable_under_environment_drift` asserts the
 receipt survives 100× the observed drift, and
 `test_rounding_actually_changes_what_is_written` stops the rounding being
 silently disabled — without it, that test would still pass on today's values.
@@ -334,6 +344,79 @@ boundary*, which scored exactly-representable values like `1.6` as maximally at
 risk when they are maximally safe. Only the exact endpoint test is right. Three
 plausible-looking measurements, three wrong answers, all of which would have
 been reported with a straight face.
+
+---
+
+## FM13 — a constant labelled with a provenance it does not have
+
+**Observed:** `instruments/paper_vi/dsph_ledger.py` carried
+
+```python
+# H9 MW reference (h9_triangle_receipt.json) and inversion
+M_MW = 6.0e10            # M_sun
+R_MW_KPC = 15.0          # kpc
+V_MW = 220.0             # km/s
+GAMMA_REQ_MW = 1.297e9   # m^2/s
+```
+
+Two of the four came from that receipt. H9 records a BTFR velocity of
+**189.02** km/s at this mass, not 220, and contains **no MW circulation radius
+at all** — 10 kpc appears in it only as the radius where a required medium flow
+is evaluated. The comment asserted a sourcing for all four.
+
+**Why it matters:** this is FM1 with the arrow reversed. Rule 14 stops a printed
+number drifting *from* its instrument; nothing stopped the instrument itself
+resting on a constant that was never sourced. Every downstream guard — receipt,
+`values.tex`, claim predicate — would faithfully preserve a wrong number,
+because they check consistency, not provenance. The mislabelling survived the
+\#182 audit, the \#198 pass, and a published falsification.
+
+**Guard:** the constants are now **read from the H9 receipt at import**, so the
+class of defect is structurally impossible rather than merely corrected —
+rule 14's "a load-bearing number must not exist twice", applied across papers.
+`test_h9_constants_are_read_not_retyped` asserts the read. The genuinely
+unsourced one (`R_MW_KPC`) is declared a convention in the code and in the
+receipt, and carried as a sweep axis instead of being asserted.
+
+**Not covered:** nothing checks that a *comment* naming a source is true. Only
+the constants actually read from a receipt are protected; the next hand-copied
+literal under an authoritative-sounding comment will read exactly as convincing.
+Prefer reading a value over citing it in a comment.
+
+---
+
+## FM14 — a robustness sweep that omits the axis the conclusion turns on
+
+**Observed:** \#147's B1 was reported "stable across the entire pre-registered
+robustness sweep … 27 combinations" — varying `M*/L`, the dwarf rotation limit,
+and an anisotropy systematic. It did **not** vary the Milky-Way normalisation
+radius, which was the single largest lever on model B (a factor 3.4 between
+defensible choices, against 1.3–1.5 for the axes that were swept). Adding it in
+\#203 took the grid to 81 points, and **6 of them stopped returning
+"falsified"**. A verdict asserted as sweep-stable was, on the completed grid,
+sweep-fragile.
+
+**Why it matters:** a sweep is an argument that a conclusion does not depend on
+choices the author made. It is only as strong as the choices it varies, and the
+axes easiest to think of are the ones already written down as parameters — the
+sweep inherits the author's blind spot precisely where it is meant to correct
+for it. Worse, a passing sweep reads as *more* rigorous than no sweep, so the
+gap is actively camouflaged.
+
+**Guard — partial, and honest about it.** `dsph_ledger.b1_fragility_report()`
+records where the verdict fails, whether the failing region lies outside the
+observational limit, and the margin inside it; the SSV-VI claim
+`fragility-lies-outside-the-observational-limit` fails the build if a later
+change makes B1 stable, or moves the fragility *inside* the observational limit
+— it guards the negative result in both directions. The unqualified
+`B1_sweep_stable` flag stays `false` in the receipt rather than being redefined
+to something that passes.
+
+**Not covered, and this is the important half:** nothing can tell you an axis is
+missing. There is no check for "the sweep should also have varied X" — that is a
+review question, and the only general defence is to ask, before writing
+"sweep-stable", *which single choice would move this conclusion most, and is it
+in the grid?* Here the answer was no, for years.
 
 ---
 
@@ -359,6 +442,8 @@ ones most likely to lapse.
 | FM10 duplicated bibliographies drift | `references.bib` + `bibliography.py` | **build** |
 | FM11 cited work absent from review inventory | citation-note catalog | **build** |
 | FM12 generated artifact churns across environments | `RECEIPT_SIGFIGS` rounding | suite (one receipt only) |
+| FM13 constant labelled with a provenance it lacks | read the source receipt, don't retype | suite (one instrument only) |
+| FM14 sweep omits the axis the conclusion turns on | `b1_fragility_report` + claim guard | **build** (this verdict only) + review |
 
 Adding a failure mode to this register is cheap. Leaving one out because its
 guard is embarrassing is how #182 happened.

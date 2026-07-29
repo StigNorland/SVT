@@ -61,24 +61,40 @@ def claims_of(paper):
 # 2 — the claims could fail   (the group that matters)
 # --------------------------------------------------------------------------
 
+#: Perturbation factors tried, in order, before a predicate is called unguarded.
+#:
+#: A single fixed factor conflates two different things: a predicate that
+#: ignores its inputs, and a claim that is simply robust.  SSV-VI's B1 clears
+#: its threshold by 0.8 dex, so a 1.5x (0.18 dex) nudge legitimately does not
+#: flip it — reporting that as a tautology would be a false positive, and the
+#: register warns that an inflated defect is still a defect (FM8).  Escalating
+#: separates the two: a real tautology survives every factor, a margin does not.
+PERTURBATIONS = (1.5, 10.0, 1.0e3, 1.0e6)
+
+
 def claims_ignoring_perturbations(registered, targets):
-    """Keys of predicates that do not notice any registered input changing."""
+    """Keys of predicates that no perturbation of their inputs can disturb."""
     unguarded = []
     for claim in registered:
         noticed = False
-        for mod, attr in targets:
-            original = getattr(mod, attr)
-            if callable(original):
-                setattr(mod, attr, lambda *a, _o=original, **k: _o(*a, **k) * 1.5)
-            else:
-                setattr(mod, attr, original * 1.5)
-            try:
-                if not claim.check():
-                    noticed = True
-            except Exception:
-                noticed = True          # blowing up counts as noticing
-            finally:
-                setattr(mod, attr, original)
+        for factor in PERTURBATIONS:
+            for mod, attr in targets:
+                original = getattr(mod, attr)
+                if callable(original):
+                    setattr(mod, attr,
+                            lambda *a, _o=original, _f=factor, **k:
+                            _o(*a, **k) * _f)
+                else:
+                    setattr(mod, attr, original * factor)
+                try:
+                    if not claim.check():
+                        noticed = True
+                except Exception:
+                    noticed = True      # blowing up counts as noticing
+                finally:
+                    setattr(mod, attr, original)
+                if noticed:
+                    break
             if noticed:
                 break
         if not noticed:
@@ -95,6 +111,7 @@ def test_claims_are_not_tautologies(paper):
     is not guarding anything — which is precisely the bug this test was written
     after finding by hand.
     """
+    import dsph_ledger as D
     import ssv_i_audit_2026 as A
     import planck_scale_values as P
 
@@ -103,6 +120,8 @@ def test_claims_are_not_tautologies(paper):
         "SSV-I": [(A, "lambda_param"), (A, "xi_over_alpha"),
                   (A, "rho0_natural_units"), (A, "rho0_as_printed"),
                   (A, "stationary_radius"), (A, "A_BOHR"), (A, "R_E_CLASSICAL")],
+        "SSV-VI": [(D, "model_a_vh"), (D, "model_b_vh"), (D, "gamma_req"),
+                   (D, "V_MW"), (D, "GAMMA_REQ_MW")],
         "SSV-VII-b": [(P, "planck_length"), (P, "planck_mass"),
                       (P, "fundamental_mass"), (P, "healing_length"),
                       (P, "G_NEWTON")],
