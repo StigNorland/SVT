@@ -197,3 +197,33 @@ result notes (`papers/*/results/`). Work is organised around GitHub issues
     mode observed in this repository, with its guard and what the guard does not
     cover. When a new failure mode is found, add it there in the same pass —
     including when the guard is embarrassing. (See \#198 Part D.)
+
+17. **A paper states its current status; it does not narrate its own edit
+    history.** *(User's instruction, 2026-07-29: "we keep a change record in the
+    papers themselves, we need to stop that — it increases the size of each
+    paper and doesn't add comprehension and clarity.")* Every paper has
+    `papers/<PAPER>/CHANGELOG.md`; corrections, withdrawals and re-framings go
+    there, linked once from the generated provenance appendix, and never into
+    the prose.
+
+    The line is **tense, not topic**:
+    - *"the $\hbar/2$ prefactor is imported, not derived"* — status. **Stays.**
+    - *"this replaces the result this section originally claimed"* — history.
+      **Moves.**
+
+    **Rule 1 outranks this rule.** A falsification stated in the present tense
+    is not a change record. The deny-list in
+    `build_paper.py::CHANGE_RECORD_PHRASES` therefore contains no verdict word —
+    not `withdrawn`, `falsified`, `retracted` or `rejected` — and
+    `test_present_tense_verdicts_are_never_banned` keeps it that way. Removing a
+    change record must leave a present-tense statement of the same finding
+    behind; if a passage has no such residue, report it rather than treating the
+    rule as licence to delete a negative result. Removed text is reproduced
+    verbatim in the changelog, so the migration relocates and never destroys.
+
+    A claim guard whose statement moves to the changelog **moves with it** —
+    `claims.py` anchors to whatever file `site` names, so the guarantee follows
+    the sentence instead of being dropped (see `rho0-smaller-by-2e4`).
+
+    The gate catches *phrasing*, not intent: history written in fresh words will
+    pass. Drift guard, not referee. (Extends rules 1 and 5; see \#207, FM15.)

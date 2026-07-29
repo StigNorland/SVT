@@ -128,6 +128,52 @@ def gate_claims(paper: str) -> str:
     return f"{len(registered)} claims hold"
 
 
+#: Phrases that narrate a paper's own edit history rather than its current
+#: state (#207).  Deliberately a short, literal deny-list rather than anything
+#: clever: it catches the *phrasing*, not the intent, and a determined author
+#: can write history in fresh words and pass.  A drift guard, like rules 15 and
+#: 16 — see FM15.
+#:
+#: What is NOT here, and must not be added: "withdrawn", "falsified",
+#: "retracted", "rejected".  Those state a CURRENT verdict.  Banning them would
+#: turn this gate into a tool for deleting negative results, which is the exact
+#: defect #182 existed to find (standing rule 1).
+CHANGE_RECORD_PHRASES = (
+    "earlier version",
+    "previous version",
+    "previously claimed",
+    "previously concluded",
+    "previously printed",
+    "previously credited",
+    "previously stated",
+    "previously derived",
+    "this replaces the result",
+    "the superseded",
+    "originally claimed",
+    "as it stood",
+    "in earlier drafts",
+    "no longer says",
+)
+
+
+def gate_change_records(paper: str) -> str:
+    """Rule 17: a paper states current status; its history lives in CHANGELOG.md."""
+    changelog = PAPERS / paper / "CHANGELOG.md"
+    if not changelog.is_file():
+        raise GateFailure(
+            f"no CHANGELOG.md — every paper needs one, so removed history has "
+            f"somewhere to go (rule 17)")
+    text = (PAPERS / paper / "main.tex").read_text(
+        encoding="utf-8", errors="replace").lower()
+    found = sorted(p for p in CHANGE_RECORD_PHRASES if p in text)
+    if found:
+        raise GateFailure(
+            f"main.tex narrates its own edit history: {found} — state the "
+            f"current status in the paper and move the history to "
+            f"papers/{paper}/CHANGELOG.md (rule 17)")
+    return f"current-status only; CHANGELOG.md present"
+
+
 def render_values(paper: str) -> str:
     if paper not in gen_values.REGISTRY:
         return "skipped"
@@ -199,7 +245,8 @@ def build(paper: str, gate_only: bool) -> bool:
              ("citations   (rule 12)", gate_citations),
              ("provenance  (rule 11)", gate_provenance),
              ("values      (rule 14)", gate_values),
-             ("claims      (Part D) ", gate_claims)]
+             ("claims      (Part D) ", gate_claims),
+             ("changelog   (rule 17)", gate_change_records)]
     if not gate_only:
         steps += [("render values       ", render_values),
                   ("pdflatex    (rule 8) ", run_pdflatex),

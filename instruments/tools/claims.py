@@ -122,11 +122,16 @@ def _ssv_i() -> list[Claim]:
                  "the paper's 'factor alpha^2' is the uncorrected statement.",
             source_anchor=(
                 r"$r_e = \alpha\hbar/(m_ec)$, which is smaller by a factor "
-                r"$\alpha^2$;"
+                r"$\alpha^2$."
             ),
         ),
         Claim(
-            "SSV-I", "rho0-smaller-by-2e4", "papers/SSV-I/main.tex:1647",
+            # Anchored to the CHANGELOG, not main.tex: #207 moved edit history
+            # out of the papers, and "smaller than the retired value" is a
+            # statement about a past printing.  source_drift() reads whatever
+            # file `site` names, so the guarantee follows the statement instead
+            # of being quietly dropped when the statement leaves the paper.
+            "SSV-I", "rho0-smaller-by-2e4", "papers/SSV-I/CHANGELOG.md",
             "the corrected rho_0 is smaller than the retired 1.9 by ~2x10^4",
             ("ssvRhoZero",),
             lambda: 1.5e4 < float(A.rho0_asserted_value()
@@ -135,8 +140,7 @@ def _ssv_i() -> list[Claim]:
             note="guards the claim-status table entry, which is the paper's own "
                  "record of the #183 correction.",
             source_anchor=(
-                r"$\approx\ssvRhoZero\,m_e^4c^3/\hbar^3$, smaller by "
-                r"$\sim2\times10^4$."
+                "`≈ 9.96e-5 m_e^4 c^3 / hbar^3` — **smaller by ~2×10⁴**"
             ),
         ),
         Claim(

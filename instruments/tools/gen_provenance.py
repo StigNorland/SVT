@@ -234,6 +234,17 @@ def render(paper: str, issues: list[int], paths: list[str], reports: list[str],
         lines.append("This paper makes no external code or issue references.")
         lines.append("")
 
+    # Rule 17 (#207): the paper states current status; its history lives in the
+    # changelog.  Linked once, here, so the prose carries none of it.
+    lines += [
+        r"\paragraph{Change record.}",
+        f"This paper states its \\emph{{current}} status only. Corrections, "
+        f"withdrawals and re-framings are recorded in "
+        f"\\url{{{base}/blob/main/papers/{paper}/CHANGELOG.md}}, and the full "
+        r"history is in the repository's commits.",
+        "",
+    ]
+
     return "\n".join(lines)
 
 
