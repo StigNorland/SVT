@@ -10,6 +10,7 @@ Fast CPU checks:
         (budget ratios positive, B3 count in range, sweep present).
 """
 
+import json
 import math
 import os
 import sys
@@ -87,8 +88,58 @@ def test_real_ledger_runs_and_is_coherent():
         assert r["v_h_modelB_upper_kms"] < r["v_h_modelA_kms"]
     v = receipt["verdicts"]
     assert 0 <= v["B3_n_below_half_sigma"] <= 8
-    assert len(receipt["sweep"]) == 27
+    assert len(receipt["sweep"]) == (len(dl.ML_SWEEP) * len(dl.VROT_SWEEP)
+                                     * len(dl.ANISO_SWEEP)
+                                     * len(dl.R_MW_SWEEP)) == 81
     assert isinstance(receipt["B1_sweep_stable"], bool)
+
+
+def test_h9_constants_are_read_not_retyped():
+    """The defect that opened #203: `V_MW` and `R_MW_KPC` were hand-copied
+    literals under a comment claiming all four constants came from the H9
+    receipt. Two did not. Reading them makes the mislabelling impossible."""
+    with open(dl.H9_RECEIPT, encoding="utf-8") as fh:
+        h9 = json.load(fh)
+    assert dl.M_MW == h9["reference_point"]["M_b_Msun"]
+    assert dl.V_MW == h9["reference_point"]["v_btfr_km_s"]
+    assert dl.GAMMA_REQ_MW == h9["inversions"][
+        "Gamma_required_with_grain_rho0_real_G_m2_s"]
+    # and the one that is NOT in H9 is declared a convention, not sourced
+    assert dl.R_MW_KPC in dl.R_MW_SWEEP
+
+
+def test_model_b_uses_the_same_radius_as_the_dynamics():
+    """Before #203 model B alone used the projected R_e while every other
+    quantity used r_1/2 = (4/3) R_e -- the dwarf's circulation was evaluated at
+    a different radius from its own dynamics."""
+    row = dl.dwarf_row(*dl.DSPH[0])
+    expected = dl.model_b_vh(row["r_half_pc"] / 1.0e3, dl.VROT_BASE)
+    assert row["v_h_modelB_upper_kms"] == expected
+    assert row["r_half_pc"] == (4.0 / 3.0) * dl.DSPH[0][3]
+
+
+def test_b1_fragility_is_reported_not_hidden():
+    """B1 is fragile under the #203 R_MW axis. A bare `B1_sweep_stable: false`
+    would record that while hiding the fact that every disagreeing point sits
+    above the observational v_rot limit, so both must be in the receipt."""
+    receipt = dl.main(quick=True)
+    f = receipt["B1_fragility"]
+    assert receipt["B1_sweep_stable"] is False, \
+        "if B1 became stable, this test and the paper's wording both need review"
+    assert f["n_disagreeing"] > 0
+    assert f["all_disagreement_above_vrot_limit"] is True
+    assert f["within_vrot_limit"]["stable"] is True
+    assert f["within_vrot_limit"]["margin_dex"] > 0
+
+
+def test_fragility_report_would_notice_disagreement_inside_the_limit():
+    """Guard on the guard: the reassuring half of the fragility report must be
+    capable of being false, or it records nothing."""
+    sw = [{"B1": "X", "vrot_kms": 1.0, "r_mw_kpc": 4.0,
+           "median_delta_B_dex": 0.2}]
+    f = dl.b1_fragility_report("FALSIFIED", sw)
+    assert f["all_disagreement_above_vrot_limit"] is False
+    assert f["within_vrot_limit"]["stable"] is False
 
 
 def _receipt_floats(obj):

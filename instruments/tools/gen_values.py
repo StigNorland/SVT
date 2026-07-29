@@ -145,10 +145,63 @@ def _ssv_vii_b() -> list[Value]:
     ]
 
 
+def _ssv_vi() -> list[Value]:
+    """#203.  The B1 falsbox printed its shortfall three times -- falsbox,
+    figure caption, claim-status table -- none of them generated, so a
+    recomputation moved the instrument and left all three false.  That is how
+    #203 was found: by eye, off the figure, not by any gate."""
+    import dsph_ledger as D
+    S = "instruments/paper_vi/dsph_ledger.py::summary"
+
+    # Uncached, like the SSV-VI claims: summary() costs 2.3 ms, and a shared
+    # cache would let a --check run compare the receipt against one stale
+    # snapshot instead of against the instruments.
+    def get(key):
+        return lambda: D.summary()[key]
+
+    return [
+        Value("ssvDsphMedianDeltaB", get("median_delta_B_dex"), 3,
+              r"median $\log_{10}(v_h^{\rm obs}/v_h^{\rm B})$ over the 8 dSphs",
+              S, "2.7"),
+        Value("ssvDsphShortfallFactor", get("shortfall_factor"), 2,
+              r"model-B shortfall as a factor, $10^{\rm median\ dB}$",
+              S, r"\sim 500"),
+        Value("ssvDsphMedianDeltaA", get("median_delta_A_dex"), 2,
+              r"median offset of the dwarfs from the mass law, dex",
+              S, ""),      # 0.20 recurs in unrelated prose; not literal-checked
+        # The per-dwarf minimum (~8e-3 dex) is deliberately NOT a macro: a
+        # sig-fig formatter renders it 8\times10^{-3}, which reads badly inside
+        # a printed range, and it carries no weight of its own.  The claim
+        # predicate still bounds it, so it stays honest without being printed.
+        Value("ssvDsphDeltaAMax", get("delta_A_max_dex"), 2,
+              r"largest per-dwarf offset from the mass law, dex", S, ""),
+        Value("ssvDsphSweepPoints", get("n_sweep_points"), 2,
+              r"pre-registered robustness sweep grid size",
+              # "27" alone would match any 27 anywhere in the prose; the
+              # literal that mattered is the phrase it appeared in.
+              S, "27 combinations"),
+        Value("ssvDsphSweepDisagreeing", get("n_sweep_disagreeing"), 1,
+              r"sweep points where B1 is not falsified (fragility, \#203)",
+              S, ""),
+        Value("ssvDsphMarginDex", get("within_limit_margin_dex"), 2,
+              r"margin above the 1.5 dex B1 threshold within $v_{\rm rot} "
+              r"\leq 3$ km/s", S, ""),
+        Value("ssvDsphBudgetRatio", get("min_budget_ratio"), 2,
+              r"smallest $\Gamma_{\rm bar}/\Gamma_{\rm req}$ over the dwarfs",
+              S, ""),
+        Value("ssvDsphVrotNeededMin", get("vrot_needed_min_kms"), 2,
+              r"least rotation any dwarf would need for model B to reach its "
+              r"observed $v_h$, km/s", S, ""),
+        Value("ssvDsphVrotNeededMax", get("vrot_needed_max_kms"), 2,
+              r"most rotation any dwarf would need, km/s", S, ""),
+    ]
+
+
 # Lazy: the loaders import instrument modules, so nothing is imported unless a
 # paper is actually computed or checked.  Rendering never triggers them.
 REGISTRY: dict[str, Callable[[], list[Value]]] = {
     "SSV-I": _ssv_i,
+    "SSV-VI": _ssv_vi,
     "SSV-VII-b": _ssv_vii_b,
 }
 

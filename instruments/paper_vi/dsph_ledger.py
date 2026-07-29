@@ -19,8 +19,17 @@ circulation-sourced halo phenomenology.  Three pre-registered questions
 Pinned data: McConnachie 2012 (AJ 144, 4) compilation values; Wolf et al.
 2010 mass estimator v_c(r_1/2) = sqrt(3) sigma_los at r_1/2 = (4/3) R_e.
 Decision rules are evaluated verbatim; robustness sweeps (M*/L x/÷2,
-v_rot in {1, 3, 10} km/s, +/-30% anisotropy systematic on v_c) are part of
-the pre-registration: verdicts must be sweep-stable or are reported fragile.
+v_rot in {1, 3, 10} km/s, +/-30% anisotropy systematic on v_c, and since #203
+the MW normalisation radius in {4, 10, 15} kpc) are part of the
+pre-registration: verdicts must be sweep-stable or are reported fragile.
+
+B1 IS REPORTED FRAGILE.  The R_MW axis added in #203 makes 6 of the 81 sweep
+points return "inconclusive" rather than "falsified".  All six sit at
+v_rot = 10 km/s -- 3.3x above the <= 3 km/s observational upper limit the
+sweep exists to stress -- and at the smallest, most model-B-favourable MW
+radius.  Within v_rot <= 3 km/s the verdict holds at all 54 points with a
+0.17 dex margin.  Both statements are in the receipt; the unqualified
+B1_sweep_stable flag stays false.
 
 Run:  python instruments/paper_vi/dsph_ledger.py [--quick]
 Writes papers/SSV-VI/results/dsph_ledger_receipt.json and (unless --quick)
@@ -45,11 +54,39 @@ KM = 1.0e3               # m
 SLOPE_A = 0.256
 INTERCEPT_A = -0.665
 
-# H9 MW reference (h9_triangle_receipt.json) and inversion
-M_MW = 6.0e10            # M_sun
-R_MW_KPC = 15.0          # kpc
-V_MW = 220.0             # km/s
-GAMMA_REQ_MW = 1.297e9   # m^2/s, Gamma_req at M_MW;  Gamma_req ~ M^{1/4}
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
+H9_RECEIPT = os.path.join(REPO, "papers", "SSV-IV", "results",
+                          "h9_triangle_receipt.json")
+
+
+def _h9_reference():
+    """The MW reference point, read from H9's receipt rather than retyped.
+
+    Until #203 these were four hand-copied literals under a comment claiming
+    all four came from ``h9_triangle_receipt.json``.  Only two did: `M_MW` and
+    `GAMMA_REQ_MW`.  `V_MW` was 220 where H9 records a BTFR velocity of 189.02
+    at this mass, and `R_MW_KPC` was 15 -- a radius H9 does not contain at all.
+    Reading them makes that class of defect structurally impossible instead of
+    merely fixed, and is rule 14's "a load-bearing number must not exist twice"
+    applied across papers.
+    """
+    with open(H9_RECEIPT, encoding="utf-8") as fh:
+        h9 = json.load(fh)
+    return (h9["reference_point"]["M_b_Msun"],
+            h9["reference_point"]["v_btfr_km_s"],
+            h9["inversions"]["Gamma_required_with_grain_rho0_real_G_m2_s"])
+
+
+M_MW, V_MW, GAMMA_REQ_MW = _h9_reference()   # M_sun, km/s, m^2/s
+
+# The MW circulation radius is NOT in the H9 receipt -- 10 kpc is merely where
+# H9 evaluates its required medium flow.  It is a convention either way, so it
+# is declared as one and carried as a pre-registered sweep axis (#203) rather
+# than asserted.  4 kpc is a half-light-like normalisation, comparable with the
+# dwarfs' own r_1/2; 15 kpc is the outer disc.  Smaller R_MW favours model B.
+R_MW_KPC = 10.0
+R_MW_SWEEP = (4.0, 10.0, 15.0)
 
 R_C_UNIVERSAL_KPC = 2.5  # #133 post-hoc r_c lower quartile (dwarf-favorable)
 
@@ -70,8 +107,6 @@ ML_BASE, ML_SWEEP = 1.6, (0.8, 1.6, 3.2)     # M*/L_V
 VROT_BASE, VROT_SWEEP = 3.0, (1.0, 3.0, 10.0)  # km/s upper limit
 ANISO_SWEEP = (0.7, 1.0, 1.3)                # systematic factor on v_c
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
 RECEIPT = os.path.join(REPO, "papers", "SSV-VI", "results",
                        "dsph_ledger_receipt.json")
 FIGURE = os.path.join(REPO, "papers", "SSV-VI", "figures",
@@ -91,17 +126,25 @@ SPARC_CSV = os.path.join(REPO, "papers", "SSV-VI", "results",
 # Measured, not estimated (rounding is monotonic, so testing both ends of the
 # drift interval against every value is exact):
 #
-#     s.f.   floats moved by the observed drift   drift the receipt tolerates
-#     none   25 of 259                            --
-#     14     31                                   0x
-#     12      0                                   4.3e-14   (11x observed)
-#     10      0                                   3.6e-12   (906x observed)
+#     s.f.   drift the receipt tolerates
+#      6     1.9e-08   (4733785x observed)
+#      8     7.7e-12   (   1931x observed)
+#      9     4.9e-12   (   1222x observed)
+#     10     3.7e-13   (     91x observed)
+#     12     1.0e-14   (      3x observed)
 #
-# 12 s.f. also happens to work today, on an 11x margin that a recomputation
-# could eat.  10 s.f. holds a ~900x margin while still leaving seven orders of
-# magnitude more precision than the ~3 s.f. of physics these numbers carry
-# (km/s, dex).  Guarded by test_receipt_is_stable_under_environment_drift.
-RECEIPT_SIGFIGS = 10
+# #203 is the worked example of why this number needs re-measuring rather than
+# inheriting.  At 10 s.f. the margin was ~900x when the receipt held 259
+# floats; adding the R_MW sweep axis tripled it to 618, and one sweep value
+# landed 3.7e-13 from a rounding boundary -- margin down to 91x, and the guard
+# fired.  The margin is a property of the *values*, not of the s.f. choice, so
+# a receipt that grows erodes it.  (Note 8 s.f. beats 9 here for the same
+# reason: it is where these particular numbers fall, not a trend.)
+#
+# 8 s.f. holds ~1900x while still leaving five orders of magnitude more
+# precision than the ~3 s.f. of physics these numbers carry (km/s, dex).
+# Guarded by test_receipt_is_stable_under_environment_drift.
+RECEIPT_SIGFIGS = 8
 
 
 def _stable(value):
@@ -127,10 +170,20 @@ def model_a_vh(mbar_msun: float) -> float:
     return 10.0 ** (SLOPE_A * math.log10(mbar_msun) + INTERCEPT_A)
 
 
-def model_b_vh(re_kpc: float, vrot_kms: float) -> float:
+def model_b_vh(r_half_kpc: float, vrot_kms: float,
+               r_mw_kpc: float = R_MW_KPC) -> float:
     """Rotation-proportional entrainment, normalized at the H9 MW
-    reference: v_h = v_h_A(M_MW) * (R v_rot) / (R_MW v_MW)."""
-    return model_a_vh(M_MW) * (re_kpc * vrot_kms) / (R_MW_KPC * V_MW)
+    reference: v_h = v_h_A(M_MW) * (R v_rot) / (R_MW v_MW).
+
+    The radius is r_1/2, the same one the rest of the ledger uses; before #203
+    this line alone used the projected R_e, so the dwarf's circulation was
+    evaluated at a different radius from its dynamics (a factor 4/3).
+
+    Linear in Gamma is derived, not chosen: model A gives v_h ~ M^0.256 and H9
+    gives Gamma_req ~ M^0.25, hence v_h ~ Gamma^1.02.  See #203 section C --
+    Gamma^{1/4} would put model B on top of model A and dissolve the test.
+    """
+    return model_a_vh(M_MW) * (r_half_kpc * vrot_kms) / (r_mw_kpc * V_MW)
 
 
 def gamma_req(mbar_msun: float) -> float:
@@ -139,7 +192,7 @@ def gamma_req(mbar_msun: float) -> float:
 
 
 def dwarf_row(name, lv6, sigma, re_pc, *, ml=ML_BASE, vrot=VROT_BASE,
-              aniso=1.0):
+              aniso=1.0, r_mw_kpc=R_MW_KPC):
     """All derived quantities for one dwarf at given sweep settings."""
     mstar = ml * lv6 * 1.0e6                  # M_sun (gas-free)
     r_half = (4.0 / 3.0) * re_pc              # 3D half-light radius, pc
@@ -147,13 +200,14 @@ def dwarf_row(name, lv6, sigma, re_pc, *, ml=ML_BASE, vrot=VROT_BASE,
     v_bar_sq = G_PC * (mstar / 2.0) / r_half  # (km/s)^2
     v_h_obs = math.sqrt(max(v_c ** 2 - v_bar_sq, 0.0))
     v_h_a = model_a_vh(mstar)
-    v_h_b = model_b_vh(re_pc / 1.0e3, vrot)
+    v_h_b = model_b_vh(r_half / 1.0e3, vrot, r_mw_kpc)
     # B3: universal-core prediction at r_1/2
     r_kpc = r_half / 1.0e3
     core_fac = r_kpc ** 2 / (r_kpc ** 2 + R_C_UNIVERSAL_KPC ** 2)
     sigma_pred = math.sqrt((v_bar_sq + v_h_a ** 2 * core_fac) / 3.0)
     # B2: circulation budget vs requirement (SI)
-    gamma_bar = 2.0 * math.pi * (re_pc * PC_M) * (vrot * KM)
+    # r_1/2, not R_e, for the same reason as model B above (#203).
+    gamma_bar = 2.0 * math.pi * (r_half * PC_M) * (vrot * KM)
     return {
         "name": name, "M_star_Msun": mstar, "r_half_pc": r_half,
         "sigma_obs_kms": sigma, "v_c_kms": v_c,
@@ -169,8 +223,9 @@ def dwarf_row(name, lv6, sigma, re_pc, *, ml=ML_BASE, vrot=VROT_BASE,
     }
 
 
-def ledger(*, ml=ML_BASE, vrot=VROT_BASE, aniso=1.0):
-    return [dwarf_row(*d, ml=ml, vrot=vrot, aniso=aniso) for d in DSPH]
+def ledger(*, ml=ML_BASE, vrot=VROT_BASE, aniso=1.0, r_mw_kpc=R_MW_KPC):
+    return [dwarf_row(*d, ml=ml, vrot=vrot, aniso=aniso, r_mw_kpc=r_mw_kpc)
+            for d in DSPH]
 
 
 def verdicts(rows):
@@ -206,13 +261,85 @@ def sweep():
     for ml in ML_SWEEP:
         for vrot in VROT_SWEEP:
             for an in ANISO_SWEEP:
-                v = verdicts(ledger(ml=ml, vrot=vrot, aniso=an))
-                out.append({"ml": ml, "vrot_kms": vrot, "aniso": an,
-                            "B1": v["B1"],
-                            "median_delta_A_dex": v["median_delta_A_dex"],
-                            "median_delta_B_dex": v["median_delta_B_dex"],
-                            "B3_n_below": v["B3_n_below_half_sigma"]})
+                for rmw in R_MW_SWEEP:
+                    v = verdicts(ledger(ml=ml, vrot=vrot, aniso=an,
+                                        r_mw_kpc=rmw))
+                    out.append({"ml": ml, "vrot_kms": vrot, "aniso": an,
+                                "r_mw_kpc": rmw,
+                                "B1": v["B1"],
+                                "median_delta_A_dex":
+                                    v["median_delta_A_dex"],
+                                "median_delta_B_dex":
+                                    v["median_delta_B_dex"],
+                                "B3_n_below": v["B3_n_below_half_sigma"]})
     return out
+
+
+def b1_fragility_report(baseline_b1, sw):
+    """Where B1 stops holding, and whether that region is observable.
+
+    Added by #203 together with the R_MW sweep axis, which is what made B1
+    fragile.  A bare ``B1_sweep_stable: false`` would record the fragility
+    while hiding the one thing a reader needs -- that every disagreeing point
+    sits at v_rot = 10 km/s, which is 3.3x ABOVE the <= 3 km/s observational
+    upper limit the sweep exists to stress.  Reported, not softened: the
+    unqualified flag stays false (rule 1).
+    """
+    bad = [s for s in sw if s["B1"] != baseline_b1]
+    inside = [s for s in sw if s["vrot_kms"] <= VROT_BASE]
+    bad_inside = [s for s in inside if s["B1"] != baseline_b1]
+    return {
+        "n_sweep_points": len(sw),
+        "n_disagreeing": len(bad),
+        "disagreeing_at": sorted({
+            (s["vrot_kms"], s["r_mw_kpc"]) for s in bad}),
+        "all_disagreement_above_vrot_limit":
+            bool(bad) and all(s["vrot_kms"] > VROT_BASE for s in bad),
+        "vrot_observational_limit_kms": VROT_BASE,
+        "within_vrot_limit": {
+            "n_points": len(inside),
+            "n_disagreeing": len(bad_inside),
+            "stable": not bad_inside,
+            "min_median_delta_B_dex":
+                min(s["median_delta_B_dex"] for s in inside),
+            "margin_dex":
+                min(s["median_delta_B_dex"] for s in inside) - 1.5},
+    }
+
+
+def summary() -> dict:
+    """The paper's load-bearing numbers, computed without writing anything.
+
+    ``gen_values.py`` (rule 14) calls these.  It must not go through ``main``:
+    that writes the tracked receipt, so rendering the paper would mutate a
+    result artifact.  Deliberately recomputes rather than reading the receipt,
+    so ``gen_values --check`` can compare the two.
+    """
+    rows = ledger()
+    v = verdicts(rows)
+    f = b1_fragility_report(v["B1"], sweep())
+    return {
+        "median_delta_A_dex": v["median_delta_A_dex"],
+        "median_delta_B_dex": v["median_delta_B_dex"],
+        "shortfall_factor": 10.0 ** v["median_delta_B_dex"],
+        "delta_A_min_dex": min(r["delta_A_dex"] for r in rows),
+        "delta_A_max_dex": max(r["delta_A_dex"] for r in rows),
+        "n_sweep_points": float(f["n_sweep_points"]),
+        "n_sweep_disagreeing": float(f["n_disagreeing"]),
+        "within_limit_margin_dex": f["within_vrot_limit"]["margin_dex"],
+        "min_budget_ratio": v["B2_min_budget_ratio"],
+        # The observational form of "why are the triangles at 10^-1?" (#203):
+        # the rotation each dwarf would need for a law linear in Gamma to reach
+        # its observed v_h.  Every value exceeds the Milky Way's own 220 km/s.
+        "vrot_needed_min_kms": min(_vrot_needed(r) for r in rows),
+        "vrot_needed_max_kms": max(_vrot_needed(r) for r in rows),
+    }
+
+
+def _vrot_needed(row) -> float:
+    """v_rot at which model B would reproduce this dwarf's observed v_h."""
+    return (row["v_h_obs_kms"] * (R_MW_KPC * V_MW)
+            / (model_a_vh(M_MW) * row["r_half_pc"] / 1.0e3))
 
 
 def make_figure(rows):
@@ -275,6 +402,7 @@ def main(quick: bool = False) -> dict:
     v = verdicts(rows)
     sw = sweep()
     b1_stable = all(s["B1"] == v["B1"] for s in sw)
+    b1_fragility = b1_fragility_report(v["B1"], sw)
     b3_stable = all(s["B3_n_below"] >= 6 for s in sw) if \
         v["B3_n_below_half_sigma"] >= 6 else \
         all(s["B3_n_below"] < 6 for s in sw)
@@ -285,15 +413,25 @@ def main(quick: bool = False) -> dict:
         "pinned": {
             "data": "McConnachie 2012 compilation (8 classical MW dSphs)",
             "mass_law": [SLOPE_A, INTERCEPT_A],
-            "h9_reference": {"M_MW": M_MW, "R_MW_kpc": R_MW_KPC,
-                             "v_MW_kms": V_MW,
-                             "Gamma_req_MW_m2_s": GAMMA_REQ_MW},
+            "h9_reference": {
+                "read_from": "papers/SSV-IV/results/h9_triangle_receipt.json",
+                "M_MW": M_MW, "v_MW_kms": V_MW,
+                "Gamma_req_MW_m2_s": GAMMA_REQ_MW},
+            "conventions": {
+                "R_MW_kpc": R_MW_KPC,
+                "R_MW_kpc_note": "not in the H9 receipt; convention, swept",
+                "R_MW_sweep_kpc": list(R_MW_SWEEP),
+                "model_b_radius": "r_1/2 (= 4/3 R_e), as elsewhere in the "
+                                  "ledger",
+                "model_b_exponent": "v_h ~ Gamma^1 (derived: model A "
+                                    "M^0.256 with H9 Gamma_req M^0.25)"},
             "r_c_universal_kpc": R_C_UNIVERSAL_KPC,
             "ml_base": ML_BASE, "vrot_base_kms": VROT_BASE},
         "baseline_ledger": rows,
         "verdicts": v,
         "sweep": sw,
         "B1_sweep_stable": bool(b1_stable),
+        "B1_fragility": b1_fragility,
         "B3_sweep_stable": bool(b3_stable),
     }
     os.makedirs(os.path.dirname(RECEIPT), exist_ok=True)
@@ -315,6 +453,18 @@ def main(quick: bool = False) -> dict:
     print(f"  B1: median dA = {v['median_delta_A_dex']:+.3f}, "
           f"median dB = {v['median_delta_B_dex']:+.3f}  ->  {v['B1']} "
           f"(sweep-stable: {b1_stable})")
+    f = b1_fragility
+    if not b1_stable:
+        print(f"      FRAGILE: {f['n_disagreeing']}/{f['n_sweep_points']} "
+              f"sweep points disagree, all at "
+              f"{sorted({p[0] for p in f['disagreeing_at']})} km/s "
+              f"(limit {f['vrot_observational_limit_kms']}) and R_MW "
+              f"{sorted({p[1] for p in f['disagreeing_at']})} kpc")
+        w = f["within_vrot_limit"]
+        print(f"      within v_rot <= {f['vrot_observational_limit_kms']} "
+              f"km/s: {w['n_disagreeing']}/{w['n_points']} disagree, "
+              f"min median dB {w['min_median_delta_B_dex']:.3f} "
+              f"(margin {w['margin_dex']:+.3f} dex)")
     print(f"  B2: budget binds: {v['B2_budget_binds']} "
           f"(min ratio {v['B2_min_budget_ratio']:.2e}) -- the naive "
           f"'no rotation => no budget' killer does NOT bind"

@@ -225,8 +225,144 @@ def _ssv_vii_b() -> list[Claim]:
     ]
 
 
+# --------------------------------------------------------------------------
+# SSV-VI
+# --------------------------------------------------------------------------
+
+def _ssv_vi() -> list[Claim]:
+    """#203.  The B1 falsbox is the worked example this module exists for: its
+    shortfall was true when written, the instrument was later corrected, and
+    the printed 2.7 dex silently became false in three places at once."""
+    import dsph_ledger as D
+
+    # Deliberately NOT cached.  summary() costs 2.3 ms, and a cache shared
+    # across the claim list would make every predicate after the first blind to
+    # a perturbed input — which is exactly what test_claims_are_not_tautologies
+    # exists to detect.  A guard that cannot see its inputs move guards nothing.
+    S = D.summary
+
+    return [
+        Claim(
+            "SSV-VI", "modelB-shortfall-falsifies-B1",
+            "papers/SSV-VI/main.tex:634",
+            "the model-B median shortfall clears the pre-registered 1.5 dex "
+            "B1 threshold, and the mass-law offset stays inside +/-0.5 dex",
+            ("ssvDsphMedianDeltaB", "ssvDsphShortfallFactor",
+             "ssvDsphMedianDeltaA"),
+            lambda: (S()["median_delta_B_dex"] >= 1.5
+                     and abs(S()["median_delta_A_dex"]) <= 0.5),
+            tolerance="the pre-registered B1 rule verbatim: dB >= 1.5 dex, "
+                      "|dA| <= 0.5 dex",
+            note="this is the conclusion, not a restatement of the numbers: if "
+                 "a recomputation lifts model B past 1.5 dex of the data the "
+                 "paper stops compiling rather than keeping a false falsbox.",
+            source_anchor=(
+                r"limits} miss by a median of \textbf{$\ssvDsphMedianDeltaB$ "
+                r"dex} --- a factor $\sim\ssvDsphShortfallFactor$."
+            ),
+        ),
+        # Deliberately NOT registered: "the printed factor equals 10^(printed
+        # dex)".  Both macros come from one number in summary(), so the
+        # predicate cannot fail under any perturbation — it is an identity of
+        # the code, not a claim about the paper, and a guard that cannot fail
+        # guards nothing.  ssvDsphShortfallFactor is covered by the B1 claim
+        # above.
+        Claim(
+            "SSV-VI", "every-dwarf-inside-the-window",
+            "papers/SSV-VI/main.tex:632",
+            "no dwarf lies outside the pre-registered +/-0.5 dex window",
+            ("ssvDsphMedianDeltaA", "ssvDsphDeltaAMax"),
+            lambda: (abs(S()["delta_A_min_dex"]) <= 0.5
+                     and abs(S()["delta_A_max_dex"]) <= 0.5),
+            tolerance="+/-0.5 dex, the #147 pre-registration",
+            note="the per-dwarf minimum is deliberately not printed (it renders "
+                 "as 8e-3 and reads badly in a range), so this predicate is the "
+                 "only thing keeping it honest.",
+            source_anchor=(
+                r"(no dwarf outside the pre-registered $\pm 0.5$ window; the "
+                r"largest offset is $+\ssvDsphDeltaAMax$)"
+            ),
+        ),
+        Claim(
+            "SSV-VI", "fragility-lies-outside-the-observational-limit",
+            "papers/SSV-VI/main.tex:641",
+            "B1 is fragile, and every disagreeing sweep point sits above the "
+            "<=3 km/s observational v_rot limit",
+            ("ssvDsphSweepPoints", "ssvDsphSweepDisagreeing",
+             "ssvDsphMarginDex"),
+            lambda: _b1_fragility_is_as_printed(D),
+            tolerance="exact: the disagreeing set must be non-empty, must lie "
+                      "entirely above v_rot = 3 km/s, and the margin inside "
+                      "the limit must be positive",
+            note="guards a NEGATIVE result against being quietly upgraded. If a "
+                 "later change made B1 sweep-stable, or moved the fragility "
+                 "inside the observational limit, the paper's careful wording "
+                 "would be wrong in opposite directions and the build stops.",
+            source_anchor=(
+                r"All $\ssvDsphSweepDisagreeing$ sit at $v_{\rm rot} = 10$ "
+                r"km/s --- more than three times the $\leq 3$ km/s "
+                r"observational upper limit the sweep exists to stress"
+            ),
+        ),
+        Claim(
+            "SSV-VI", "matching-model-B-needs-impossible-rotation",
+            "papers/SSV-VI/main.tex:697",
+            "no dwarf could reach its observed v_h under a law linear in "
+            "Gamma without rotating faster than the Milky Way itself",
+            ("ssvDsphVrotNeededMin", "ssvDsphVrotNeededMax"),
+            lambda: (S()["vrot_needed_min_kms"] > D.V_MW
+                     and S()["vrot_needed_min_kms"]
+                     > 10 * max(d[2] for d in D.DSPH)),
+            tolerance="two bounds: above the MW's own BTFR velocity (read from "
+                      "the H9 receipt), and above 10x the largest observed "
+                      "sigma_los",
+            note="this is the answer to 'the triangles look 100x too low': "
+                 "they are low because classical dSphs do not rotate. The "
+                 "MW comparison alone is thin after the #203 correction "
+                 "(224 vs 189 km/s), so the sigma bound carries the argument: "
+                 "the required rotation is ~19x the largest dispersion in the "
+                 "sample. Falsifiable -- a rotation measurement above this "
+                 "bound would break it.",
+            source_anchor=(
+                r"would require rotation speeds of "
+                r"$\ssvDsphVrotNeededMin$--$\ssvDsphVrotNeededMax$ km/s in "
+                r"systems whose \emph{entire} velocity dispersion is"
+            ),
+        ),
+        Claim(
+            "SSV-VI", "budget-does-not-bind",
+            "papers/SSV-VI/main.tex:648",
+            "the dwarfs' circulation budget exceeds the H9 requirement by at "
+            "least 10^15, so the budget is not what discriminates",
+            ("ssvDsphBudgetRatio",),
+            lambda: S()["min_budget_ratio"] >= 1e15,
+            tolerance="the printed '>= 10^15' read as one order of magnitude",
+            source_anchor=(
+                r"the dwarfs carry $\gtrsim \ssvDsphBudgetRatio$ times the "
+                r"H9-inverted circulation requirement"
+            ),
+        ),
+    ]
+
+
+def _b1_fragility_is_as_printed(D) -> bool:
+    """B1's fragility, stated as the paper states it.
+
+    Separate from the lambda so the three conditions are legible: the
+    fragility is real, it lies wholly outside the observational v_rot limit,
+    and inside that limit the verdict holds with margin.
+    """
+    v = D.verdicts(D.ledger())
+    f = D.b1_fragility_report(v["B1"], D.sweep())
+    return (f["n_disagreeing"] > 0
+            and f["all_disagreement_above_vrot_limit"]
+            and f["within_vrot_limit"]["stable"]
+            and f["within_vrot_limit"]["margin_dex"] > 0)
+
+
 REGISTRY: dict[str, Callable[[], list[Claim]]] = {
     "SSV-I": _ssv_i,
+    "SSV-VI": _ssv_vi,
     "SSV-VII-b": _ssv_vii_b,
 }
 

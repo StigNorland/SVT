@@ -1,0 +1,99 @@
+{
+  "issue": 198,
+  "paper": "SSV-VI",
+  "hypothesis": "every load-bearing number this paper prints is computed by a named instrument, not typed by hand (#198 Part A)",
+  "generator": "instruments/tools/gen_values.py",
+  "computed_utc": "2026-07-29T09:17:31Z",
+  "values": {
+    "ssvDsphMedianDeltaB": {
+      "value": 2.320153588495086,
+      "sig": 3,
+      "rendered": "2.32",
+      "describes": "median $\\log_{10}(v_h^{\\rm obs}/v_h^{\\rm B})$ over the 8 dSphs",
+      "source": "instruments/paper_vi/dsph_ledger.py::summary",
+      "source_sha256_16": "8a63691810190618",
+      "was": "2.7"
+    },
+    "ssvDsphShortfallFactor": {
+      "value": 209.00351423091325,
+      "sig": 2,
+      "rendered": "209",
+      "describes": "model-B shortfall as a factor, $10^{\\rm median\\ dB}$",
+      "source": "instruments/paper_vi/dsph_ledger.py::summary",
+      "source_sha256_16": "8a63691810190618",
+      "was": "\\sim 500"
+    },
+    "ssvDsphMedianDeltaA": {
+      "value": 0.20178974778409953,
+      "sig": 2,
+      "rendered": "0.20",
+      "describes": "median offset of the dwarfs from the mass law, dex",
+      "source": "instruments/paper_vi/dsph_ledger.py::summary",
+      "source_sha256_16": "8a63691810190618",
+      "was": ""
+    },
+    "ssvDsphDeltaAMax": {
+      "value": 0.427314031712644,
+      "sig": 2,
+      "rendered": "0.43",
+      "describes": "largest per-dwarf offset from the mass law, dex",
+      "source": "instruments/paper_vi/dsph_ledger.py::summary",
+      "source_sha256_16": "8a63691810190618",
+      "was": ""
+    },
+    "ssvDsphSweepPoints": {
+      "value": 81.0,
+      "sig": 2,
+      "rendered": "81",
+      "describes": "pre-registered robustness sweep grid size",
+      "source": "instruments/paper_vi/dsph_ledger.py::summary",
+      "source_sha256_16": "8a63691810190618",
+      "was": "27 combinations"
+    },
+    "ssvDsphSweepDisagreeing": {
+      "value": 6.0,
+      "sig": 1,
+      "rendered": "6",
+      "describes": "sweep points where B1 is not falsified (fragility, \\#203)",
+      "source": "instruments/paper_vi/dsph_ledger.py::summary",
+      "source_sha256_16": "8a63691810190618",
+      "was": ""
+    },
+    "ssvDsphMarginDex": {
+      "value": 0.17393623453452167,
+      "sig": 2,
+      "rendered": "0.17",
+      "describes": "margin above the 1.5 dex B1 threshold within $v_{\\rm rot} \\leq 3$ km/s",
+      "source": "instruments/paper_vi/dsph_ledger.py::summary",
+      "source_sha256_16": "8a63691810190618",
+      "was": ""
+    },
+    "ssvDsphBudgetRatio": {
+      "value": 1364192589101097.0,
+      "sig": 2,
+      "rendered": "1.4\\times10^{15}",
+      "describes": "smallest $\\Gamma_{\\rm bar}/\\Gamma_{\\rm req}$ over the dwarfs",
+      "source": "instruments/paper_vi/dsph_ledger.py::summary",
+      "source_sha256_16": "8a63691810190618",
+      "was": ""
+    },
+    "ssvDsphVrotNeededMin": {
+      "value": 223.70089015881126,
+      "sig": 2,
+      "rendered": "224",
+      "describes": "least rotation any dwarf would need for model B to reach its observed $v_h$, km/s",
+      "source": "instruments/paper_vi/dsph_ledger.py::summary",
+      "source_sha256_16": "8a63691810190618",
+      "was": ""
+    },
+    "ssvDsphVrotNeededMax": {
+      "value": 1029.5132757004544,
+      "sig": 2,
+      "rendered": "1030",
+      "describes": "most rotation any dwarf would need, km/s",
+      "source": "instruments/paper_vi/dsph_ledger.py::summary",
+      "source_sha256_16": "8a63691810190618",
+      "was": ""
+    }
+  }
+}
