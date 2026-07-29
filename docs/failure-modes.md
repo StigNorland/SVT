@@ -565,6 +565,35 @@ therefore cannot silently restore the stronger label.
 **Not covered:** the general necessary-versus-sufficient distinction remains
 semantic.  A mode-conversion calculation is still required.
 
+## FM21 — a table row and the prose it supports come from different runs
+
+**Observed:** SSV-I's Table `tab:Fstraight` printed \(F\) at three grid
+resolutions.  Its \(n{=}24\) and \(n{=}72\) rows came from the current relaxed
+states; its \(n{=}48\) row was still the superseded state
+(\(F(1.18)=4.15\) against the current \(4.528\)).  The prose band
+\(m_p\approx930\text{--}954\) MeV was computed from the *current* \(n{=}48\)
+value, so the table silently contradicted the number it existed to support —
+and the paper simultaneously carried a second figure, \(927\) MeV, that lay
+*outside* its own band.  Nine literal sites, no guard on any of them.  Found by
+the owner reading the paper, three audits after the numbers were written.
+
+**Guard — none.** Rule 14 protects a number only once it is registered in
+`gen_values.py`; an unregistered literal in a `tabular` is invisible to every
+gate.  Rule 16's claim guards anchor to a *sentence*, so a number that appears
+only as a table cell has nothing to anchor.  The re-run
+(`instruments/paper_i/proton_geometric_r_probe.py`, 23 s) reproduces the
+correct values, so the check is available — it simply was never wired in.
+
+**Not covered:** the general case.  A row of numbers is a claim, and this
+repository has no mechanism that treats it as one.  The specific opportunity is
+that \(F(1.18)\) per grid is exactly the kind of quantity rule 14 exists for;
+the cost is 23 s added to every gated SSV-I build, since `gate_values`
+re-runs the instruments.
+
+**The tell to watch for:** the same quantity printed with two different
+precisions in the same paper (`4.4` in prose, `4.15`/`4.42` in a table).  A
+rounded restatement is where a superseded run survives.
+
 ## What runs when
 
 `python instruments/tools/build_paper.py <PAPER>` runs FM1, FM2, FM5's evidence
@@ -595,6 +624,7 @@ ones most likely to lapse.
 | FM18 observation inverted into prediction | explicit input/status receipts | review (partial) |
 | FM19 correction misses dependent papers | series-wide dependency search | review |
 | FM20 necessary diagnostic promoted to sufficient | status-bearing receipt | suite (this result) + review |
+| FM21 table row and prose from different runs | **none** — literals in a `tabular` are unguarded | never |
 
 Adding a failure mode to this register is cheap. Leaving one out because its
 guard is embarrassing is how #182 happened.

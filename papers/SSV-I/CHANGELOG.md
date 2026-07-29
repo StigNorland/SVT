@@ -8,6 +8,80 @@ by the move. Git history and the linked issues carry the rest.
 
 ---
 
+## 2026-07-29 — [#207](https://github.com/StigNorland/SVT/issues/207) · the proton band reconciled with its own table
+
+Two different proton masses were in print at once. Owner's observation: the
+paper carries both `930–954 MeV` and `927 MeV`, and `927` lies *outside* the
+band it appears beside.
+
+**Cause: `Table tab:Fstraight` mixed two n=48 relaxation states.** Its `n=24`
+and `n=72` rows come from the current states; the `n=48` row was still the
+superseded one (`F(1.18) = 4.15`, `F(1.0) = 4.90`, …). The band in the prose
+was computed from the *current* n=48 state (`F = 4.528`), so the table
+silently contradicted the number it was supporting. Re-running
+`instruments/paper_i/proton_geometric_r_probe.py` on the three named states
+(2026-07-29) reproduces the current values directly:
+
+| state | n | F(R = 1.18 ξ) |
+| --- | --- | --- |
+| `penalty-mu400-rho0p01-n24-hw6-1600steps` | 24 | 5.606 |
+| `penalty-best-n48-hw6-800steps` | 48 | **4.528** |
+| `penalty-n72-mu2000-rho0p05` | 72 | **4.417** |
+
+**Corrections, all in the direction of the reproducible run:**
+
+- The band is `930–953 MeV`, not `930–954`. With `N_Y = 3.007` and
+  `μ₀ = m_e/α = 70.025 MeV`: `F = 4.417 → 930.1 MeV`, `F = 4.528 → 953.4 MeV`.
+- The deviation is `−0.9%` to `+1.6%` of CODATA `938.272 MeV`, not `~1.5%`.
+  The band is asymmetric and a single figure misstated the upper edge.
+- The two fine grids agree to `2.5%`, not `~6%`. The `6%` came from the same
+  superseded n=48 row. The spread is exactly R-independent, because only the
+  denominator `μ₀_straight(R)` carries the cutoff.
+- `927 MeV (1.2% below observed)` is **removed** (3 sites). It came from a
+  rounded `F ≈ 4.4` obtained by averaging against the superseded n=48 value;
+  the direct scan at `R = 1.18 ξ` gives `4.417` on that grid, not `4.4`.
+- Paper II's `G` gapbox now quantifies what it already flagged: `N_p = 13.44`
+  is the midpoint of `13.28–13.62`, so the inherited spread on `G_pred` is
+  `−3.2%` to `+1.8%` — five times the quoted `0.6%` residual.
+
+Removed as history rather than status (the §Proton gapbox), verbatim:
+
+> The reduced-ansatz $Q_p$ family of scripts that attempted to calibrate this
+> cutoff away (the \texttt{q\_p\_two\_factor\_*} probes and the \texttt{eta}
+> calibration trio) is quarantined in
+> \texttt{instruments/\_fitted\_quarantine/}, because calibrated inputs flatter
+> derived results; their own docstrings already labelled them ``provisional
+> consistency-based calibration rather than a derived physical constant.''
+
+and, from the $F$-integral discussion and the extraction appendix:
+
+> \emph{Numerical update (2026-05-19, see Appendix~\ref{app:minimisation}):}
+> … The product $N_Y\cdot F$ then gives $m_p\approx 927\,\text{MeV}$
+> ($1.2\%$ below the observed value), rather than the original $0.3\%$ figure;
+> the $0.3\%$ match was tight to a coarse-grid evaluation of $F$ at a different
+> cutoff.
+
+and from the `Matching the analytic estimate` paragraph:
+
+> The product $N_Y\cdot F=3.007\times4.4\approx 13.2$ gives
+> $m_pc^2\approx 927\,\text{MeV}$, within $1.2\%$ of the observed proton mass.
+> The original $0.3\%$ figure quoted in the main text required the analytic
+> $F=4.47$ at the same cutoff exactly; the numerical $F$ at this cutoff sits
+> $\sim 1.5\%$ below, hence the $\sim 1\%$ residual discrepancy.
+
+The negative residue is kept in the paper in present tense: the quarantine
+finding survives as *"$F$ … is not yet a derivation"* plus the measured
+`dlnF/dlnR ≈ −0.94`, and the `0.3%` figure is stated as a property of the
+bracket midpoint rather than a determination.
+
+**The dates went too.** `\subsection*{… (2026-05-19)}` and
+`estimated numerically (2026-05-19)` are the same shape as the
+`Status (YYYY-MM)` headers removed under this issue: a dated assertion goes
+stale silently, because it still reads as a plausible log entry after it stops
+being true.
+
+---
+
 ## 2026-07-29 — [#210](https://github.com/StigNorland/SVT/issues/210) · SSV verification repair
 
 The read-only series audit found that the paper still mixed derived factors,
