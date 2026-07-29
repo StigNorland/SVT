@@ -275,3 +275,66 @@ def test_every_collision_symbol_is_asserted_complete():
 def test_sampled_symbols_are_not_silently_treated_as_complete():
     sampled = {u.symbol for u in C.USES} - C.COMPLETE
     assert sampled, "COMPLETE has swallowed every symbol; the split is doing nothing"
+
+
+def test_no_placeholder_dimensions_in_the_reference():
+    """``Dimension(1)`` must mean *dimensionless*, never "not encoded yet".
+
+    An earlier STANDARD used it as a stand-in for temperature, charge and
+    current, which made the table assert that entropy is an energy, that
+    temperature is a pure number, and that electric potential is unitless.
+    A placeholder that renders as a real value is the worst kind: it does not
+    look like a gap.
+    """
+    dimensionless_ok = {"specific heat capacity", "conductance", "entropy",
+                        "temperature", "electric potential",
+                        "boltzmann constant"}
+    for symbol, entries in C.STANDARD.items():
+        for quantity, dim in entries:
+            if quantity in dimensionless_ok:
+                assert C._dim_key(dim), (
+                    f"{symbol} ({quantity}) is recorded as dimensionless; that "
+                    f"is a placeholder, not a dimension")
+
+
+def test_entropy_is_energy_per_temperature():
+    """S = k_B ln(Omega), Omega a dimensionless microstate count, so [S] = [k_B]."""
+    entropy = dict(C.STANDARD["S"])["entropy"]
+    boltzmann = dict(C.STANDARD["k_B"])["boltzmann constant"]
+    assert C._dim_key(entropy) == C._dim_key(boltzmann)
+    assert C._dim_key(entropy) != C._dim_key(C.ENERGY), (
+        "entropy is an energy PER TEMPERATURE, not an energy")
+
+
+def test_ssv_phase_action_still_departs_from_entropy():
+    """The S departure survives the correction — and for a sharper reason:
+    an action (J s) and an entropy (J/K) differ in two base dimensions."""
+    reported = " ".join(C.departures_from_standard())
+    assert "S in SSV-VII-a" in reported
+
+
+def test_s_is_an_action_and_an_entropy():
+    """Prompted by S = k_B ln(Omega). An action is J s, an entropy is J/K —
+    they differ in two base dimensions, so this is not a near miss."""
+    s = next(c for c in C.collisions() if c.symbol == "S")
+    assert len(s.dims) == 2
+    assert any("temperature" in d for d in s.dims), (
+        "the entropy branch must carry a temperature dimension")
+
+
+def test_notational_uses_carry_a_reason_and_no_dimension():
+    """``S`` in SSV-I is the sphere in pi_3(S^1). Inventing a dimension for it
+    to satisfy the completeness rule would be worse than naming the category."""
+    notational = [u for u in C.USES if u.dim is None]
+    assert notational
+    for u in notational:
+        assert u.notational, f"{u.paper} {u.symbol}: no reason given"
+        assert len(u.notational) > 20
+
+
+def test_notational_uses_never_create_a_collision():
+    for c in C.collisions():
+        for uses in c.dims.values():
+            for paper, _, _ in uses:
+                u = next(x for x in C.uses_of(c.symbol) if x.paper == paper)
+                assert u.dim is not None

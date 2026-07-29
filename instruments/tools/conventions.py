@@ -180,7 +180,7 @@ def shared_symbols(min_papers: int = 2) -> dict[str, set[str]]:
 
 from sympy.physics.units import Dimension                       # noqa: E402
 from sympy.physics.units.definitions.dimension_definitions import (  # noqa: E402
-    length, mass, time)
+    charge, current, length, mass, temperature, time)
 from sympy.physics.units.systems.si import dimsys_SI            # noqa: E402
 
 ONE = Dimension(1)
@@ -194,6 +194,19 @@ FREQUENCY = 1 / time
 WAVENUMBER = 1 / length
 CURVATURE = 1 / length**2
 NEWTON_G = length**3 / (mass * time**2)
+#: Entropy is an energy PER TEMPERATURE, not an energy.  Boltzmann fixes it:
+#: S = k_B ln(Omega) with Omega a dimensionless microstate count, so [S] = [k_B]
+#: exactly.  Writing this out because an earlier version of STANDARD below used
+#: ``Dimension(1)`` as a placeholder for "a dimension I did not encode", which
+#: renders as *dimensionless* and made this table assert that entropy is an
+#: energy — a dimensional error inside the tool built to catch dimensional
+#: errors.  ``test_no_placeholder_dimensions`` now forbids the shortcut.
+BOLTZMANN = ENERGY / temperature
+ENTROPY = BOLTZMANN
+TEMPERATURE = temperature
+SPECIFIC_HEAT = ENERGY / (mass * temperature)
+ELECTRIC_POTENTIAL = ENERGY / charge
+CONDUCTANCE = current**2 * time**3 / (mass * length**2)
 
 
 @dataclass(frozen=True)
@@ -209,9 +222,10 @@ class Use:
     paper: str
     symbol: str
     means: str
-    dim: Dimension
+    dim: Dimension | None      # None = notational, not a dimensioned quantity
     site: str
     local: str = ""
+    notational: str = ""       # why this occurrence carries no dimension
 
 
 #: The canonical programme-wide meaning, where one exists.
@@ -288,8 +302,33 @@ USES: list[Use] = [
     # so the departure is on the record, not so it is forbidden.
     Use("SSV-I", "F", "form factor of the trefoil breather, a pure number", ONE,
         "papers/SSV-I/main.tex:738"),
+    # ---- S: an action in Goldstone/VII-a, an entropy in III/V ----
+    # Prompted by the owner noting S = k_B ln(Omega): entropy is an energy per
+    # temperature, so the two uses differ in two base dimensions.
     Use("SSV-VII-a", "S", "phase action of the polar decomposition", ACTION,
         "papers/SSV-VII-a/main.tex:119"),
+    Use("SSV-Goldstone", "S", r"action functional S[\Psi] = \int dt\,d^3x\,\mathcal{L}",
+        ACTION, "papers/SSV-Goldstone/main.tex:312"),
+    Use("SSV-III", "S", r"entropy, S = k_B\ln\Omega", ENTROPY,
+        "papers/SSV-III/main.tex:308"),
+    Use("SSV-V", "S", r"wake/horizon entropy, S_H = k_B\ln\Omega_H", ENTROPY,
+        "papers/SSV-V/main.tex:430"),
+    # Not dimensioned quantities: a manifold label, an integration surface, a
+    # propagator.  Typing these would be inventing a dimension to satisfy a
+    # completeness rule, which is worse than admitting the category.
+    Use("SSV-I", "S", r"the spheres S^1, S^2 in homotopy statements", None,
+        "papers/SSV-I/main.tex:672",
+        notational="a manifold label in \\pi_3(S^1), \\hat n \\in S^2 — topology, "
+                   "not a physical quantity"),
+    Use("SSV-II", "S", "fermion propagator S(p); also the integration surface "
+        r"in \Phi_B = \int_S B\cdot dA", None,
+        "papers/SSV-II/main.tex:595",
+        notational="a propagator and a surface of integration; neither is a "
+                   "quantity this registry types"),
+    Use("SSV-VII-b", "S", "subscript of the Schwarzschild radius r_S", None,
+        "papers/SSV-VII-b/main.tex:263",
+        notational="occurs only as the subscript in r_S = 2GM/c^2, never as a "
+                   "standalone symbol"),
     Use("SSV-VII-b", "G", "Newton's constant", NEWTON_G,
         "papers/SSV-VII-b/main.tex:526"),
     Use("SSV-I", "a_p", r"proton Compton radius \hbar/(m_p c)", length,
@@ -311,7 +350,7 @@ USES: list[Use] = [
 #: complete) and "SSV-I uses F for a form factor" (a fact about one site).
 #: Reporting the first from a partial table is how the first pass of this file
 #: said "three dimensions" about a symbol carrying four.
-COMPLETE: frozenset = frozenset({"b", "Lambda", "a_0"})
+COMPLETE: frozenset = frozenset({"b", "Lambda", "a_0", "S"})
 
 
 def uses_of(symbol: str) -> list[Use]:
@@ -347,7 +386,8 @@ def collisions() -> list[Collision]:
     out = []
     for symbol in sorted({u.symbol for u in USES}):
         uses = uses_of(symbol)
-        globals_only = [u for u in uses if not u.local]
+        globals_only = [u for u in uses
+                        if not u.local and u.dim is not None]
         buckets: dict[str, list] = defaultdict(list)
         for u in globals_only:
             buckets[str(u.dim)].append((u.paper, u.site, u.means))
@@ -395,7 +435,7 @@ def coverage() -> dict:
 #: What the gate does guarantee is that **no fourth collision arrives quietly**.
 #: This is the same shape as ``claims.py``: known state is pinned, and drift
 #: from it stops the build.
-KNOWN_COLLISIONS: frozenset = frozenset({"Lambda", "a_0", "b"})
+KNOWN_COLLISIONS: frozenset = frozenset({"Lambda", "a_0", "b", "S"})
 
 
 def new_collisions() -> list[Collision]:
@@ -434,11 +474,11 @@ def gate_report(paper: str) -> tuple[list[Collision], str]:
 #: those under rule 12, not this.
 STANDARD: dict[str, tuple[tuple[str, Dimension], ...]] = {
     "a":     (("acceleration", ACCELERATION),),
-    "c":     (("wave speed", VELOCITY), ("specific heat capacity", Dimension(1))),
+    "c":     (("wave speed", VELOCITY), ("specific heat capacity", SPECIFIC_HEAT)),
     "E":     (("energy", ENERGY),),
     "F":     (("force", mass * length / time**2),),
     "f":     (("frequency", FREQUENCY),),
-    "G":     (("shear modulus", PRESSURE), ("conductance", Dimension(1))),
+    "G":     (("shear modulus", PRESSURE), ("conductance", CONDUCTANCE)),
     "g":     (("gravitational field", ACCELERATION),),
     "k":     (("spring constant", mass / time**2),),
     "L":     (("length", length), ("angular momentum", ACTION)),
@@ -446,11 +486,11 @@ STANDARD: dict[str, tuple[tuple[str, Dimension], ...]] = {
     "P":     (("power", ENERGY / time), ("pressure", PRESSURE)),
     "p":     (("momentum", mass * length / time),),
     "r":     (("position, separation, radius", length),),
-    "S":     (("entropy", ENERGY / Dimension(1)),),
+    "S":     (("entropy", ENTROPY),),
     "s":     (("displacement, distance", length),),
-    "T":     (("period", time), ("temperature", Dimension(1))),
+    "T":     (("period", time), ("temperature", TEMPERATURE)),
     "t":     (("time, duration", time),),
-    "V":     (("volume", length**3), ("electric potential", Dimension(1))),
+    "V":     (("volume", length**3), ("electric potential", ELECTRIC_POTENTIAL)),
     "v":     (("velocity, speed", VELOCITY),),
     "lambda": (("wavelength", length), ("linear mass density", mass / length)),
     "rho":   (("density, volume mass density", MASS_DENSITY),),
@@ -458,6 +498,7 @@ STANDARD: dict[str, tuple[tuple[str, Dimension], ...]] = {
     "tau":   (("time constant", time), ("torque", ENERGY),
               ("shear stress", PRESSURE)),
     "sigma": (("normal stress", PRESSURE), ("area mass density", mass / length**2)),
+    "k_B":   (("boltzmann constant", BOLTZMANN),),
     "xi":    (),      # no entry — see NOT_IN_STANDARD
 }
 
@@ -476,6 +517,8 @@ def departures_from_standard() -> list[str]:
     """
     out = []
     for u in USES:
+        if u.dim is None:
+            continue
         entries = _standard_for(u.symbol)
         if not entries:
             continue
