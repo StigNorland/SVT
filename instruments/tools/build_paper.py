@@ -147,6 +147,7 @@ CHANGE_RECORD_PHRASES = (
     "previously credited",
     "previously stated",
     "previously derived",
+    "previously headlined",
     "this replaces the result",
     "the superseded",
     "originally claimed",
