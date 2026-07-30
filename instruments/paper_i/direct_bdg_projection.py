@@ -9,7 +9,7 @@ from typing import Callable
 from restricted_bdg_three_mode import complex_inner, gram_schmidt
 from toroidal_background import ToroidalBackground
 from toroidal_projection_integrals import ProjectionConfig, integrate_pair, projection_window_weight
-from vortex_profile import VortexProfile
+from corrected_vortex_profile import CorrectedVortexProfile
 
 
 ComplexField = Callable[[float, float], complex]
@@ -57,13 +57,10 @@ def l_operator(
         v_amp = 2.0 * (1.0 - amp_sq)
         return -0.5 * lap + v_amp * field(r, z)
 
-    # Profile-matched LogSE model. The numerical f0 profile solves
-    #   f'' + r^-1 f' - r^-2 f - 2 f log(f^2) = 0,
-    # equivalent to the stationary equation
-    #   -1/2 ∇²ψ + log(|ψ|²)ψ = 0.
-    # For iψ_t = -1/2∇²ψ + g(n)ψ with g(n)=log(n), the BdG diagonal
-    # coefficient is g(n)+n g'(n)=log(n)+1.
-    return -0.5 * lap + (math.log(amp_sq) + 1.0) * field(r, z)
+    # Corrected Paper I operator in x=r/xi and omega_c=m0*c^2/hbar units:
+    #   -lap_x psi + log(|psi|^2) psi = 0,
+    #   L = -lap_x + log(f0^2)+1.
+    return -lap + (math.log(amp_sq) + 1.0) * field(r, z)
 
 
 def m_operator(
@@ -128,7 +125,9 @@ def normalized_modes(bg: ToroidalBackground, modes: list[ComplexField], cfg: Pro
 
 def build_background(cfg: ProjectionConfig) -> ToroidalBackground:
     if cfg.profile == "numerical":
-        profile = VortexProfile.solve(n=cfg.profile_n, x_max=cfg.profile_x_max)
+        profile = CorrectedVortexProfile.solve(
+            n=cfg.profile_n, x_max=cfg.profile_x_max
+        )
         return ToroidalBackground(f0=profile.value, f0_prime=profile.derivative)
     return ToroidalBackground()
 

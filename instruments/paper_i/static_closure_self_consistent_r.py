@@ -35,7 +35,7 @@ if str(SRC_ROOT) not in sys.path:
     sys.path.append(str(SRC_ROOT))
 
 from shared_numerics import OutputStatus, ScriptMetadata
-from paper_i.vortex_profile import VortexProfile
+from paper_i.corrected_vortex_profile import CorrectedVortexProfile
 
 
 SCRIPT_METADATA = ScriptMetadata(
@@ -49,7 +49,7 @@ SCRIPT_METADATA = ScriptMetadata(
         "n_y_times_f_straight",
     ),
     diagnostics=("min_density", "n", "half_width"),
-    issue_refs=("#13",),
+    issue_refs=("#13", "#218"),
     limitations=(
         "R_sc is derived from the straight-vortex ODE profile (log_pressure=0.5), "
         "not from the 3D relaxed geometry.  It is therefore the same for all states, "
@@ -123,7 +123,9 @@ def compute_r_sc(log_pressure: float = 0.5) -> float:
     contributes less than half the local condensate density, so the straight-vortex
     calibration integral should not extend further without double-counting.
     """
-    prof = VortexProfile.solve(x_min=1e-4, x_max=20.0, n=4000)
+    prof = CorrectedVortexProfile.solve(
+        x_min=1e-4, x_max=20.0, n=4000
+    )
     rs = np.linspace(0.01, 5.0, 10000)
     f2 = np.array([prof.value(r) ** 2 for r in rs])
     idx = int(np.searchsorted(f2, 0.5))

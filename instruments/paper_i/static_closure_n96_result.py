@@ -2,7 +2,7 @@
 
 Status: candidate
 Problem type: static (post-processing of n=96 and n=72 NPZ states)
-Primary observables: N_Y, F, N_Y*F at R = 1.18 xi and at R_sc = 0.923 xi
+Primary observables: N_Y, F, N_Y*F at R = 1.18 xi and at R_sc = 1.306 xi
 Primary role: Issue #13 Run 1 -- check if the cross-grid spread drops to <5%
               when n is refined from 72 to 96 at fixed penalty config
               (mu=2000, rho=0.05).
@@ -35,10 +35,10 @@ SCRIPT_METADATA = ScriptMetadata(
     nondimensionalisation="xi = 1, rho0 = 1, c = 1",
     observables=("n_y_straight", "f_factor_straight_int", "n_y_times_f_straight"),
     diagnostics=("cross_grid_spread_pct", "min_density"),
-    issue_refs=("#13",),
+    issue_refs=("#13", "#218"),
     limitations=(
         "Comparison is at fixed (mu=2000, rho=0.05) only; other penalty configs not tested.",
-        "R = 1.18 xi is empirical; R_sc = 0.923 xi is first-principles.",
+        "R = 1.18 xi is empirical; corrected R_sc = 1.305516 xi is first-principles.",
     ),
 )
 
@@ -50,7 +50,7 @@ DATA_ROOT = (
 PYTHON = sys.executable
 EXTRACTOR = Path(__file__).resolve().parent / "trefoil_breather_observables.py"
 
-R_VALUES = (1.18, 0.92314)  # empirical canonical + first-principles R_sc
+R_VALUES = (1.18, 1.305515880896411)  # empirical canonical + corrected R_sc
 
 
 def run_extractor(state: Path, r_max: float) -> dict:

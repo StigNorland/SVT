@@ -6,9 +6,9 @@ The Lamb thin-ring formula (SSV units: xi=1, rho0=1, c=1):
     E_ring = pi * R * [ln(8R/xi) - C]
 
 For a hollow core at r=xi: C = 2.0 (standard default).
-For the actual LogSE vortex profile, C is smaller because the density
-profile is smooth (not a step function), adding extra kinetic energy
-inside the core region.
+For the corrected coefficient-one LogSE profile, the numerical result is
+C = 2.226289.  The historical coefficient-two profile gave C = 1.879670;
+the exact coordinate rescaling shifts C upward by ln(sqrt(2)).
 
 Derivation
 ----------
@@ -46,6 +46,7 @@ SRC_ROOT = Path(__file__).resolve().parents[1]
 if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
+from paper_i.corrected_vortex_profile import CorrectedVortexProfile
 from paper_i.vortex_profile import VortexProfile
 
 
@@ -55,21 +56,18 @@ from paper_i.vortex_profile import VortexProfile
 
 def compute_core_constant(
     n_profile: int = 4000,
-    x_max: float = 14.0,   # stay well inside stability limit (~16)
+    x_max: float = 20.0,
     n_quad: int = 200_000,
+    profile_cls: type[VortexProfile] = CorrectedVortexProfile,
 ) -> dict:
     """Compute C for the LogSE vortex ring.
 
     Returns a dict with C, A, and the two sub-integrals.
 
-    The LogSE profile becomes numerically unstable for r > ~16 xi
-    (oscillatory shooting solution near x_max).  We use x_max=14 and
-    estimate the tail analytically.  The LogSE linearises near f=1 as
-    epsilon ~ exp(-2r), so the tail  integral_{x_max}^inf (1-f^2)/r dr
-    is approximately  (1-f^2(x_max)) * exp(-2*(r-x_max)) integrated,
-    giving (1-f^2(x_max)) / (2 * x_max).
+    The tail decay is derived from the selected profile coefficient rather
+    than assuming the coefficient-two legacy rate.
     """
-    prof = VortexProfile.solve(x_min=1e-4, x_max=x_max, n=n_profile)
+    prof = profile_cls.solve(x_min=1e-4, x_max=x_max, n=n_profile)
 
     # Fine quadrature grid (dense near origin, coarser farther out)
     r = np.concatenate([
@@ -89,11 +87,13 @@ def compute_core_constant(
     r2, f2_2 = r[mask2], f2[mask2]
     A_part2_numerical = float(np.trapezoid((1.0 - f2_2) / r2, r2))
 
-    # Analytic tail beyond x_max:  epsilon ~ A*exp(-2r), so
-    # integral_{x_max}^inf (1-f^2)/r dr ~ (1-f^2(x_max)) * [exp(-2(r-x_max))/(2r)] integrated
-    # Leading term: (1-f^2(x_max)) / (2 * x_max)
+    # Linearisation gives epsilon ~ exp(-sqrt(2*q) r), where q is the
+    # coefficient multiplying f log(f^2) in the profile equation.
+    tail_decay = math.sqrt(2.0 * profile_cls.LOG_COEFFICIENT)
     f_at_xmax = prof.value(x_max * 0.9999)  # last valid point
-    tail_est = float((1.0 - f_at_xmax**2) / (2.0 * x_max))
+    tail_est = float(
+        (1.0 - f_at_xmax**2) / (tail_decay * x_max)
+    )
     A_part2 = A_part2_numerical + tail_est
 
     A = A_part1 - A_part2
@@ -117,10 +117,30 @@ def compute_core_constant(
         "crosscheck_A_at_R": crosscheck,
         "slope_at_origin": prof.slope,
         "f_sq_half_radius": _half_density_radius(prof),
+        "profile_log_coefficient": profile_cls.LOG_COEFFICIENT,
         "n_profile": n_profile,
         "x_max": x_max,
         "n_quad": len(r),
     }
+
+
+def corrected_core_constant_from_legacy(legacy_c: float) -> float:
+    """Transform C from coefficient-two coordinates to conventional xi."""
+    return legacy_c + math.log(math.sqrt(2.0))
+
+
+def compute_legacy_core_constant(
+    n_profile: int = 4000,
+    x_max: float = 14.0,
+    n_quad: int = 200_000,
+) -> dict:
+    """Retained coefficient-two control for comparison with earlier results."""
+    return compute_core_constant(
+        n_profile=n_profile,
+        x_max=x_max,
+        n_quad=n_quad,
+        profile_cls=VortexProfile,
+    )
 
 
 def _half_density_radius(prof: VortexProfile) -> float:
@@ -179,8 +199,13 @@ def h7_result(C: float) -> dict:
         err_tau = (e_tau / e_e - mtau) / mtau
         return err_mu**2 + err_tau**2
 
-    res = minimize(err, x0=[0.0, math.log(8.0)], method="Nelder-Mead",
-                   options={"xatol": 1e-12, "fatol": 1e-16, "maxiter": 50000})
+    initial_re = max(1.0, 1.1 * r_floor)
+    res = minimize(
+        err,
+        x0=[math.log(initial_re), math.log(8.0)],
+        method="Nelder-Mead",
+        options={"xatol": 1e-12, "fatol": 1e-16, "maxiter": 50000},
+    )
 
     r_e = math.exp(res.x[0])
     q   = math.exp(res.x[1])

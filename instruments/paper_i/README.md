@@ -18,6 +18,7 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 | Script group | Current status | Role in #12 / #13 |
 |------|------|------|
 | `vortex_profile.py` | `validation` | reduced single-vortex baseline |
+| `corrected_vortex_profile.py` | `validation` | coefficient-one conventional-healing-length baseline; issue #218 |
 | `toroidal_background.py` | `prototype` | background geometry and analytic helper layer |
 | `curved_torus_relaxation.py` | `validation` | reduced static-branch relaxation check |
 | `toroidal_projection_integrals.py` | `validation` | projected observable/integral baseline |
@@ -54,7 +55,9 @@ Use the shared labels from [docs/numerical-conventions.md](../../docs/numerical-
 
 ## Core Background
 
-- `vortex_profile.py` solves the planar LogSE vortex core profile.
+- `vortex_profile.py` retains the historical coefficient-two planar profile
+  for reproducibility; `corrected_vortex_profile.py` is the current Paper I
+  coefficient-one baseline in conventional healing-length units.
 - `toroidal_background.py` defines the leading toroidal vortex-ring background and curvature-corrected variants.
 - `curved_torus_relaxation.py` performs a small-basis relaxation of curvature corrections.
 - `toroidal_projection_integrals.py` computes projected stiffness, norm, and chiral-shear integrals.

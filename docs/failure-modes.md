@@ -100,8 +100,9 @@ habit, not a mechanism.
 
 ## FM4 — a symbol carries two dimensions
 
-**Observed:** three times in one audit — SSV-I `b` (eq:pot needs L²T⁻², eq:cs and
-eq:xi need L⁵T⁻²), SSV-II `e` (mass in the Berry phase, charge in `Φ₀=h/e`),
+**Observed:** three times in one audit — SSV-I `b` (the action used a
+mass-specific coefficient while `eq:cs` and `eq:xi` treated it as
+volume-weighted), SSV-II `e` (mass in the Berry phase, charge in `Φ₀=h/e`),
 SSV-V `b` (a frequency, undeclared against Paper I's). Two of the three surfaced
 during the *rewrite*, not the audit, so a clean gate report would have shipped
 with them intact (#182 E6/E3b, #187 E2).
@@ -111,7 +112,9 @@ but never asked whether a symbol means one thing throughout.
 
 **Guard — partial.** Rule 15, `instruments/tools/dimensions.py`. Symbols are
 anchored or free; the check asks whether *any* assignment to the free symbols
-makes the printed relations simultaneously homogeneous.
+makes the printed relations simultaneously homogeneous. Issue #216 repaired
+SSV-I's printed action and equations; the retired \(\rho_0\)-dependent forms
+remain as negative controls. The other papers retain their own scoped status.
 
 **Not covered:** it does not parse LaTeX. It checks relations *as transcribed*,
 for three papers only. A relation nobody typed in is invisible to it.
@@ -659,20 +662,78 @@ question “which input changes this number?” during review.
 `m approximately 1/xi` “SSV-like” and inferred Yukawa stress, induced
 `1/G proportional to 1/xi^2`, and massive-screen modular behavior.  Corrected
 SSV is gapless:
-\(\omega^2=c_s^2k^2(1+\xi^2k^2)\).  Its healing length controls the
-\(k^2\)-to-\(k^4\) crossover; it is not a mass gap.  The surrogate changed the
-infrared theory rather than approximating it.
+\(\omega^2=c_s^2k^2(1+\xi^2k^2/2)\), where \(\xi\) is the conventional
+healing length. Equivalently,
+\(\omega^2=c_s^2k^2(1+\ell_{\rm disp}^2k^2)\) with the shorter crossover
+length \(\ell_{\rm disp}=\xi/\sqrt2\). Neither length is a mass gap. The
+surrogate changed the infrared theory rather than approximating it.
 
 **Guard — closed for these batteries.** The old scripts and receipts now label
 their surviving massive-scalar mathematics as controls.  The replacement
-`ssv_disk_modular.py` encodes the gapless corrected dispersion directly in two
-screen dimensions, and
+`ssv_disk_modular.py` encodes the gapless dispersion directly in two screen
+dimensions. Its variable named `xi` is, under #216's conventional
+healing-length normalization, \(\ell_{\rm disp}\); the receipt remains a
+scoped #166 candidate and requires a separate label migration. The test
 `test_dispersion_is_gapless_ssv_crossover_not_massive_yukawa` prevents the same
 substitution there.
 
 **Not covered:** the 2+1D Gaussian screen is itself a candidate, not a derived
 restriction of the full 3+1D SSV state.  Matching a dispersion does not provide
 the still-missing horizon algebra or bulk–screen encoding map.
+
+## FM25 — healing length and dispersive crossover length share one symbol
+
+**Observed:** Paper I called \(\xi=\hbar/(\sqrt2\,m_0c_s)\) the conventional
+healing length but printed the dispersion with unit coefficient,
+\(1+\xi^2k^2\). The exact linearization gives \(1+\xi^2k^2/2\). Recent #166
+screen code independently used the unit-coefficient convention, so its
+variable `xi` denotes \(\ell_{\rm disp}=\xi/\sqrt2\), not Paper I's \(\xi\).
+
+**Guard — partial.** `corrected_bogoliubov_coefficients` and its focused tests
+freeze both forms and include a negative control rejecting the retired
+unit-coefficient formula when the input is the conventional healing length.
+Paper I now states both names explicitly.
+
+**Not covered:** symbol meaning is not propagated automatically across result
+receipts. The #166 disk artifacts still need a separate migration so historical
+numbers and current labels cannot be confused.
+
+## FM26 — a corrected coordinate convention reaches the equation but not its consumers
+
+**Observed:** Paper I's printed conventional healing length requires the
+coefficient-one vortex equation, but the numerical profile and its consumers
+still solved the coefficient-two equation. The profile shape looked regular
+and several relative convergence checks survived, while the absolute proton
+calibration moved enough to erase the near-CODATA mass band.
+
+**Guard — closed for Paper I's active chain.** `corrected_vortex_profile.py`
+keeps the coefficient explicit and independently verifies the exact
+\(\sqrt2\) coordinate transformation against the historical solver. Direct
+consumers use the corrected class. Saved-state form factors, the candidate
+mass band and the combined \(N_YF\) anchor are generated through
+`issue_218_values.py`, recorded in the value receipt and frozen by claim
+guards.
+
+**Not covered:** five Paper II instruments still import the historical profile
+and require their own issue-scoped dependency audit. Generated values protect
+registered outputs only; an unregistered downstream literal can still retain
+the old convention.
+
+## FM27 — an axial quantum number is mistaken for a protected ±m degeneracy
+
+**Observed:** the straight-core spectrum report treated axial \(U(1)\) as if it
+enforced a degenerate \(+m/-m\) doublet. The singly wound vortex is chiral and
+does not preserve the reflection that would exchange those sectors. Complex
+irreducible representations of \(U(1)\) are one-dimensional.
+
+**Guard — partial.** `vortex_core_mode_spectrum.py` now reports signed sectors
+separately and retains the translation Goldstone partner; a focused test checks
+the \(m=\mp1\) signed pair. The result note states the group-theory conclusion
+without using an invented doublet count.
+
+**Not covered:** this is not a representation-theory checker. Other reduced
+models can still infer degeneracies from labels without auditing the full
+background symmetry, antiunitary symmetries and boundary conditions.
 
 ## What runs when
 
@@ -708,6 +769,9 @@ ones most likely to lapse.
 | FM22 project quantity occupies standard symbol | `conventions.py` reserved-symbol gate | **build** (reserved spellings) + suite |
 | FM23 control kernel reported as measured response | reconstruction dependency + blind-null audit | suite (this path) + review |
 | FM24 crossover length replaced by a mass | corrected-dispersion test + scoped receipts | suite (these batteries) + review |
+| FM25 healing length confused with crossover length | exact-dispersion negative control | suite (focused) + review |
+| FM26 coordinate correction misses numerical consumers | corrected profile + generated saved-state values | **build** (registered outputs) + suite |
+| FM27 axial label mistaken for ±m degeneracy | signed-sector Goldstone control | suite (focused) + review |
 
 Adding a failure mode to this register is cheap. Leaving one out because its
 guard is embarrassing is how #182 happened.

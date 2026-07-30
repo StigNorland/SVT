@@ -1,5 +1,11 @@
 # #77 follow-up: trefoil geometry (R, a) scan + landscape diagnosis (2026-06-03)
 
+> **Issue #218 correction (2026-07-30).** Numerical \(N_YF\) values below
+> used the historical coefficient-two straight-vortex calibration. At the
+> fixed \(R=1.18\,\xi\) extraction cutoff, current values are larger by the
+> common factor \(1.368801\). Thus the converged value described as \(54\)
+> becomes approximately \(74\); rankings and relative spreads are unchanged.
+
 **Goal:** N_Y×F was grid-converged at the fixed reference geometry (R=2.8 ξ,
 a=0.85 ξ). Find the energy-minimising (R, a) — the physical proton geometry.
 

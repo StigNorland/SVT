@@ -1,5 +1,14 @@
 # Issue #13 Run 3: Self-Consistent R — Results (2026-06-02)
 
+> **Issue #218 correction (2026-07-30).** The original coefficient-two
+> profile result below is retained as the historical pre-registered run. The
+> corrected profile has \(R_{\rm sc}=1.305516\,\xi\). Reprocessing the saved
+> states gives \(N_YF=(294.4,846.3,633.7,783.9,1151.5,2506.7)\) for the
+> available \(n=24,48,48,48,72,96\) states. The \(n\ge48\) spread is
+> \(158.1\%\), so the closure gate remains **FAIL**, more strongly than before.
+> Current recalculation record:
+> `../issue-218-vortex-bdg-recalculation.md`.
+
 **Status:** result note for
 [issue #13](https://github.com/StigNorland/SVT/issues/13), Run 3 (self-consistent R).
 Reproducer: `python instruments/paper_i/static_closure_self_consistent_r.py`

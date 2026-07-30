@@ -5,9 +5,9 @@ and solves the radial Bogoliubov-de Gennes problem per azimuthal perturbation
 index m. Goal: enumerate the low-lying normal modes and their degeneracies, to
 test the "closed-shell, magic-number-8" hypothesis for lepton generations.
 
-Convention (matches instruments/paper_i/vortex_profile.py):
-  EOM  i dt Psi = -1/2 lap Psi + ln(|Psi|^2) Psi      (mu = 0)
-  profile: f'' + f'/r - f/r^2 - 2 f ln(f^2) = 0   (solved by VortexProfile)
+Convention (issue #218, conventional healing length and omega_c units):
+  EOM  i dt Psi = -lap Psi + ln(|Psi|^2) Psi      (mu = 0)
+  profile: f'' + f'/r - f/r^2 - f ln(f^2) = 0
 
 Linearising g(rho)Psi with g(rho)=ln(rho):
   delta(g Psi) = (ln f^2 + 1) deltaPsi + e^{2i theta} deltaPsi*
@@ -18,9 +18,10 @@ Per perturbation index m, the u-component carries angular momentum (1+m), the
 v-component (1-m). Radial BdG eigenproblem:
   [ A_{1+m}    I       ] [u]        [u]
   [ -I        -A_{1-m} ] [v]  = omega[v] ,   A_l = T_l + ln f^2 + 1
-  T_l = -1/2 ( d^2/dr^2 + (1/r) d/dr - l^2/r^2 ).
+  T_l = -( d^2/dr^2 + (1/r) d/dr - l^2/r^2 ).
 
-Validation: |m|=1 must contain a near-zero (Goldstone translation) mode.
+Validation: the m=-1 sector must contain a near-zero (Goldstone translation)
+mode which approaches zero as the outer boundary is moved away.
 
 Usage:
     python vortex_core_mode_spectrum.py [--m-max 4] [--L 16] [--n 800] [--output OUT.json]
@@ -40,7 +41,7 @@ SRC_ROOT = Path(__file__).resolve().parents[1]
 if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
-from vortex_profile import VortexProfile
+from corrected_vortex_profile import CorrectedVortexProfile
 
 
 def build_radial_grid(L: float, n: int):
@@ -50,7 +51,7 @@ def build_radial_grid(L: float, n: int):
 
 
 def kinetic_operator(r: np.ndarray, dr: float, ell: int) -> np.ndarray:
-    """T_ell = -1/2 ( d^2/dr^2 + (1/r) d/dr - ell^2/r^2 ), finite-difference."""
+    """T_ell = -(d²/dr² + r^-1 d/dr - ell²/r²), finite-difference."""
     n = len(r)
     T = np.zeros((n, n))
     inv_dr2 = 1.0 / (dr * dr)
@@ -68,10 +69,16 @@ def kinetic_operator(r: np.ndarray, dr: float, ell: int) -> np.ndarray:
             T[i, i - 1] += -1.0 / (r[i]) / (2 * dr)
         # centrifugal
         T[i, i] += -(ell * ell) / (r[i] * r[i])
-    return -0.5 * T
+    return -T
 
 
-def bdg_spectrum(m: int, prof: VortexProfile, r: np.ndarray, dr: float, n_modes: int = 6):
+def bdg_spectrum(
+    m: int,
+    prof: CorrectedVortexProfile,
+    r: np.ndarray,
+    dr: float,
+    n_modes: int = 6,
+):
     f = np.array([prof.value(ri) for ri in r])
     f2 = f * f
     lnf2p1 = np.log(np.maximum(f2, 1e-300)) + 1.0  # diagonal potential
@@ -83,9 +90,11 @@ def bdg_spectrum(m: int, prof: VortexProfile, r: np.ndarray, dr: float, n_modes:
     # [[A+, I], [-I, -A-]]
     M = np.block([[A_plus, I], [-I, -A_minus]])
     w = eig(M, right=False)
-    w = w[np.abs(w.imag) < 1e-6].real   # physical (real) frequencies
-    w = np.sort(w[w > -1e-9])           # non-negative branch
-    return w[:n_modes]
+    w = w[np.abs(w.imag) < 1e-6].real
+    # Keep the signed BdG partners and order by |omega|.  A chiral vortex is
+    # not reflection invariant, so +m and -m are distinct sectors rather than
+    # an assumed degenerate doublet.
+    return np.asarray(sorted(w, key=lambda value: (abs(value), value)))[:n_modes]
 
 
 def main() -> None:
@@ -97,37 +106,34 @@ def main() -> None:
     args = p.parse_args()
 
     print("Solving LogSE vortex profile...")
-    prof = VortexProfile.solve(x_min=1e-4, x_max=args.L + 2.0, n=4000)
+    prof = CorrectedVortexProfile.solve(
+        x_min=1e-4, x_max=args.L + 2.0, n=4000
+    )
     r, dr = build_radial_grid(args.L, args.n)
 
     print(f"\nStraight-vortex Bogoliubov core modes  L={args.L}  n={args.n}")
-    print(f"(symmetry: U(1)_azimuthal; |m|>0 levels are doublets +/-m)\n")
-    print(f"{'m':>4s}  {'degeneracy':>10s}  lowest non-negative omega (sim units)")
+    print("(symmetry: axial U(1); a chiral vortex does not enforce +/-m degeneracy)\n")
+    print(f"{'m':>4s}  lowest signed omega by |omega| (sim units)")
     print("-" * 70)
     rows = []
-    for m in range(0, args.m_max + 1):
+    for m in range(-args.m_max, args.m_max + 1):
         w = bdg_spectrum(m, prof, r, dr)
-        deg = 1 if m == 0 else 2
-        rows.append({"m": m, "degeneracy": deg, "omega": [float(x) for x in w]})
+        rows.append({"m": m, "omega": [float(x) for x in w]})
         wstr = "  ".join(f"{x:.4f}" for x in w[:5])
-        print(f"{m:>4d}  {deg:>10d}  {wstr}")
+        print(f"{m:>4d}  {wstr}")
 
     print("\n" + "=" * 70)
-    print("Degeneracy structure of the low-lying spectrum:")
-    print("  m=0 : singlet ; |m|=1,2,3,... : doublets (+/-m)")
-    print("  This is a U(1) tower (1,2,2,2,...), NOT an SO(3) shell (1,3,5,...).")
+    print("Representation structure of the low-lying spectrum:")
+    print("  axial U(1) labels one-dimensional complex m sectors")
+    print("  the wound background breaks the reflection that could pair +/-m")
+    print("  therefore no SO(3) shell multiplicities (1,3,5,...) are enforced")
     print("  The atomic magic number 8 = (1s + 3p) x 2 requires SO(3) p-orbitals,")
     print("  which a vortex ring (axial U(1) symmetry only) does not possess.")
 
     # closed-shell-of-8 test
     print("\nClosed-shell-of-8 check:")
-    print("  cumulative state count by |m| (x2 for chirality if applicable):")
-    cum = 0
-    for m in range(0, args.m_max + 1):
-        deg = 1 if m == 0 else 2
-        cum += deg
-        print(f"    up to |m|={m}: {cum} states")
-    print("  -> no natural closure at 8 from the U(1) ladder; 8 is not a magic number here.")
+    print("  U(1) supplies labels, not the 1+3 orbital degeneracy of SO(3).")
+    print("  -> no symmetry-protected closure at 8; 8 is not a magic number here.")
 
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)

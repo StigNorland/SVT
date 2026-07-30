@@ -90,6 +90,7 @@ def _rel(a, b) -> float:
 # --------------------------------------------------------------------------
 
 def _ssv_i() -> list[Claim]:
+    import issue_218_values as I218
     import mpmath as mp
     import ssv_i_audit_2026 as A
 
@@ -172,6 +173,130 @@ def _ssv_i() -> list[Claim]:
             lambda: _rel(A.stationary_radius(A.lambda_param() + 1), 1 / A.ALPHA) < 1e-3,
             tolerance="relative 1e-3; the neglected 2C/r*^2 term is O(alpha^2)",
             source_anchor=r"an equilibrium radius $1/\alpha$ healing lengths across",
+        ),
+        Claim(
+            "SSV-I", "corrected-proton-form-factor-band",
+            "papers/SSV-I/main.tex",
+            "the corrected saved-state F table is monotone in cutoff and the "
+            "two fine-grid R=1.18 values form the printed 2.5% bracket",
+            (
+                "ssvProtonFormFactorLow",
+                "ssvProtonFormFactorHigh",
+                "ssvProtonFormFactorMean",
+                "ssvProtonCutoffLogSlope",
+                "ssvProtonCutoffDropPct",
+                "ssvFTableCoarseROne",
+                "ssvFTableCoarseRPaper",
+                "ssvFTableCoarseROneHalf",
+                "ssvFTableCoarseRTwo",
+                "ssvFTableCoarseRThree",
+                "ssvFTableMidROne",
+                "ssvFTableMidRPaper",
+                "ssvFTableMidROneHalf",
+                "ssvFTableMidRTwo",
+                "ssvFTableMidRThree",
+                "ssvFTableFineROne",
+                "ssvFTableFineRPaper",
+                "ssvFTableFineROneHalf",
+                "ssvFTableFineRTwo",
+                "ssvFTableFineRThree",
+            ),
+            lambda: (
+                all(
+                    all(left > right for left, right in zip(row, row[1:]))
+                    for row in (
+                        tuple(I218.form_factor_table()[(24, r)] for r in I218.RADII),
+                        tuple(I218.form_factor_table()[(48, r)] for r in I218.RADII),
+                        tuple(I218.form_factor_table()[(72, r)] for r in I218.RADII),
+                    )
+                )
+                and 0.02
+                < (
+                    I218.fine_grid_form_factor_high()
+                    - I218.fine_grid_form_factor_low()
+                )
+                / I218.fine_grid_form_factor_mean()
+                < 0.03
+                and abs(
+                    I218.fine_grid_form_factor_mean()
+                    - 0.5
+                    * (
+                        I218.fine_grid_form_factor_low()
+                        + I218.fine_grid_form_factor_high()
+                    )
+                )
+                < 1.0e-12
+                and -1.06 < I218.cutoff_log_slope() < -1.02
+                and 21.0 < I218.cutoff_drop_pct() < 23.0
+            ),
+            tolerance=(
+                "strict cutoff monotonicity; fine-grid spread 2%--3%; "
+                "mean absolute 1e-12; slope [-1.06,-1.02]; drop 21%--23%"
+            ),
+            source_anchor=(
+                r"fine grids give $F=\ssvProtonFormFactorLow$ ($n=72$) and "
+                r"$F=\ssvProtonFormFactorHigh$ ($n=48$), whose mean is "
+                r"$\ssvProtonFormFactorMean$."
+            ),
+        ),
+        Claim(
+            "SSV-I", "corrected-proton-band-is-not-a-mass-match",
+            "papers/SSV-I/main.tex",
+            "the corrected N_Y F E_star band is 16%--19% above the observed "
+            "proton mass",
+            (
+                "ssvCandidateNY",
+                "ssvEnergyStarMeV",
+                "ssvProtonFormFactorLow",
+                "ssvProtonFormFactorHigh",
+                "ssvProtonCandidateProductLow",
+                "ssvProtonCandidateProductHigh",
+                "ssvProtonCandidateMassLowMeV",
+                "ssvProtonCandidateMassHighMeV",
+                "ssvProtonCandidateDeviationLowPct",
+                "ssvProtonCandidateDeviationHighPct",
+            ),
+            lambda: (
+                15.0 < I218.candidate_mass_low_deviation_pct() < 17.0
+                and 18.0 < I218.candidate_mass_high_deviation_pct() < 20.0
+                and I218.candidate_mass_low_mev()
+                < I218.candidate_mass_high_mev()
+                and abs(
+                    I218.candidate_product_low()
+                    - I218.candidate_n_y()
+                    * I218.fine_grid_form_factor_low()
+                )
+                < 1.0e-12
+                and abs(
+                    I218.candidate_product_high()
+                    - I218.candidate_n_y()
+                    * I218.fine_grid_form_factor_high()
+                )
+                < 1.0e-12
+            ),
+            tolerance=(
+                "low deviation 15%--17%; high deviation 18%--20%; ordered "
+                "band; N_Y F products absolute 1e-12"
+            ),
+            source_anchor=(
+                r"The proton calculation is candidate-grade but no longer "
+                r"matches experiment: the corrected vortex calibration gives "
+                r"$\ssvProtonCandidateMassLowMeV$--"
+                r"$\ssvProtonCandidateMassHighMeV\,\mathrm{MeV}$"
+            ),
+        ),
+        Claim(
+            "SSV-I", "corrected-combined-nyf-anchor",
+            "papers/SSV-I/main.tex",
+            "the issue-77 combined saved-state observable recalibrates to "
+            "approximately 74",
+            ("ssvProtonCombinedNYF",),
+            lambda: 73.0 < I218.corrected_combined_n_y_f() < 75.0,
+            tolerance="absolute interval 73--75",
+            source_anchor=(
+                r"candidate combined observable, "
+                r"$N_Y\!\cdot\!F\simeq\ssvProtonCombinedNYF$"
+            ),
         ),
     ]
 

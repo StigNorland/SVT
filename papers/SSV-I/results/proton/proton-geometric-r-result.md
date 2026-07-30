@@ -1,5 +1,16 @@
 # Proton geometric-R diagnostic result: FAIL
 
+> **Issue #218 correction (2026-07-30).** The original values below used the
+> coefficient-two vortex profile and are retained as the historical
+> pre-registered result. Reprocessing the same saved states with the corrected
+> conventional-healing-length profile gives, at the imposed
+> \(R=1.18\,\xi\), \(F=(6.559,5.298,5.168)\) for \(n=(24,48,72)\).
+> The two fine grids still agree to \(2.5\%\), but
+> \(3.007F E_\star=1088\)--\(1116\) MeV, \(16.0\%\)--\(18.9\%\) above the
+> observed proton mass. The geometric-cutoff verdict remains **FAIL**.
+> Current recalculation record:
+> `../issue-218-vortex-bdg-recalculation.md`.
+
 **Date:** 2026-05-30. Outcome of the pre-registered test in
 `papers/SSV-I/proton-geometric-r-prereg.md`. Reproducer:
 `python instruments/paper_i/proton_geometric_r_probe.py`.

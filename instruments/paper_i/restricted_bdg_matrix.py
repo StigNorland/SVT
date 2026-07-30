@@ -42,7 +42,7 @@ from typing import Callable
 # for the basis-non-robustness null that drove the quarantine).
 from toroidal_background import CurvedToroidalBackground, ToroidalBackground
 from toroidal_projection_integrals import ProjectionConfig, integrate_pair
-from vortex_profile import VortexProfile
+from corrected_vortex_profile import CorrectedVortexProfile
 
 
 ComplexField = Callable[[float, float], complex]
@@ -145,7 +145,9 @@ def build_background(
     phase_coeffs: tuple[float, ...],
 ) -> ToroidalBackground:
     if profile == "numerical":
-        vortex = VortexProfile.solve(n=profile_n, x_max=profile_x_max)
+        vortex = CorrectedVortexProfile.solve(
+            n=profile_n, x_max=profile_x_max
+        )
         if curvature_coeffs or phase_coeffs:
             return CurvedToroidalBackground(
                 f0=vortex.value,

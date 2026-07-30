@@ -6,7 +6,7 @@ Pre-registered decision rule (2026-06-02):
 
 Also checks:
   - n_y_per_curve_length (arc-length normalised, Track 1)
-  - N_Y_phys from ring formula with C_LogSE = 1.880 (Track 0b)
+  - N_Y_phys from ring formula with corrected C_LogSE = 2.226289 (Track 0b)
 
 Root cause context:
   At R = 1.18 xi the straight-vortex profile integral is 71% above its asymptotic
@@ -64,7 +64,7 @@ CAL_ARC_HALF_WIDTH = 0.5
 ANCHOR_THICKNESS_XI = 1.0
 
 # Physics-based calibration from ring formula (Track 0b)
-C_LOGSE = 1.880            # computed in vortex_ring_core_constant.py
+C_LOGSE = 2.226288850109074  # issue #218 corrected profile
 
 
 def n_y_physics(e_line: float, e_cavity: float, major_radius: float) -> float:

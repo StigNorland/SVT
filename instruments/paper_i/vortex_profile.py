@@ -1,11 +1,18 @@
-"""Planar LogSE vortex profile by shooting.
+"""Legacy planar LogSE vortex profile by shooting.
 
-Status: validation (cheap building block)
+Status: CONTROL after issue #216; not the corrected SSV profile
 Problem type: static, 1D
 Nondimensionalisation: xi = 1, density rho0 = 1
 Primary observables: vortex amplitude f(x) and derivative on [x_min, x_max]
 Primary role: builds the background profile consumed by every Paper I
 reduced-BdG / curved-torus / chiral-bridge calculation
+
+Issue #216 re-derived the dimensionally complete stable LogSE and found that
+its conventional-xi profile has coefficient 1 multiplying ``f log(f^2)``.
+This retained implementation has coefficient 2.  Its dependent numerical
+results therefore describe the implemented legacy operator, not the corrected
+Paper-I action.  Do not promote them to corrected-SSV evidence without a new
+preregistered recomputation.
 
 Validation status (see papers/SSV-I/validation-refinement-sweeps-2026-05-27.md
 for the full sensitivity table):
@@ -25,9 +32,15 @@ from __future__ import annotations
 from dataclasses import dataclass
 import argparse
 import math
+from typing import ClassVar
 
 
-def vortex_rhs(x: float, f: float, fp: float) -> tuple[float, float]:
+def vortex_rhs(
+    x: float,
+    f: float,
+    fp: float,
+    log_coefficient: float = 2.0,
+) -> tuple[float, float]:
     """Planar LogSE vortex profile equation from Appendix C.
 
     The dimensionless equation is
@@ -38,15 +51,40 @@ def vortex_rhs(x: float, f: float, fp: float) -> tuple[float, float]:
     """
     safe_x = max(x, 1.0e-12)
     safe_f = max(abs(f), 1.0e-300)
-    fpp = -(fp / safe_x) + (f / (safe_x * safe_x)) + 2.0 * f * math.log(safe_f * safe_f)
+    fpp = (
+        -(fp / safe_x)
+        + (f / (safe_x * safe_x))
+        + log_coefficient * f * math.log(safe_f * safe_f)
+    )
     return fp, fpp
 
 
-def rk4_step(x: float, f: float, fp: float, h: float) -> tuple[float, float]:
-    k1_f, k1_fp = vortex_rhs(x, f, fp)
-    k2_f, k2_fp = vortex_rhs(x + 0.5 * h, f + 0.5 * h * k1_f, fp + 0.5 * h * k1_fp)
-    k3_f, k3_fp = vortex_rhs(x + 0.5 * h, f + 0.5 * h * k2_f, fp + 0.5 * h * k2_fp)
-    k4_f, k4_fp = vortex_rhs(x + h, f + h * k3_f, fp + h * k3_fp)
+def rk4_step(
+    x: float,
+    f: float,
+    fp: float,
+    h: float,
+    log_coefficient: float = 2.0,
+) -> tuple[float, float]:
+    k1_f, k1_fp = vortex_rhs(x, f, fp, log_coefficient)
+    k2_f, k2_fp = vortex_rhs(
+        x + 0.5 * h,
+        f + 0.5 * h * k1_f,
+        fp + 0.5 * h * k1_fp,
+        log_coefficient,
+    )
+    k3_f, k3_fp = vortex_rhs(
+        x + 0.5 * h,
+        f + 0.5 * h * k2_f,
+        fp + 0.5 * h * k2_fp,
+        log_coefficient,
+    )
+    k4_f, k4_fp = vortex_rhs(
+        x + h,
+        f + h * k3_f,
+        fp + h * k3_fp,
+        log_coefficient,
+    )
     next_f = f + (h / 6.0) * (k1_f + 2.0 * k2_f + 2.0 * k3_f + k4_f)
     next_fp = fp + (h / 6.0) * (k1_fp + 2.0 * k2_fp + 2.0 * k3_fp + k4_fp)
     return next_f, next_fp
@@ -57,6 +95,7 @@ def integrate_profile(
     x_min: float,
     x_max: float,
     n: int,
+    log_coefficient: float = 2.0,
 ) -> tuple[list[float], list[float], list[float]]:
     h = (x_max - x_min) / (n - 1)
     xs = [x_min + i * h for i in range(n)]
@@ -70,7 +109,9 @@ def integrate_profile(
     fps[0] = fp
 
     for i in range(1, n):
-        f, fp = rk4_step(xs[i - 1], f, fp, h)
+        f, fp = rk4_step(
+            xs[i - 1], f, fp, h, log_coefficient=log_coefficient
+        )
         if not math.isfinite(f) or not math.isfinite(fp):
             f = float("nan")
             fp = float("nan")
@@ -79,21 +120,38 @@ def integrate_profile(
     return xs, fs, fps
 
 
-def endpoint_residual(slope: float, x_min: float, x_max: float, n: int) -> float:
-    _, fs, _ = integrate_profile(slope, x_min, x_max, n)
+def endpoint_residual(
+    slope: float,
+    x_min: float,
+    x_max: float,
+    n: int,
+    log_coefficient: float = 2.0,
+) -> float:
+    _, fs, _ = integrate_profile(
+        slope, x_min, x_max, n, log_coefficient=log_coefficient
+    )
     f_end = fs[-1]
     if not math.isfinite(f_end):
         return float("inf")
     return f_end - 1.0
 
 
-def find_bracket(x_min: float, x_max: float, n: int) -> tuple[float, float]:
+def find_bracket(
+    x_min: float,
+    x_max: float,
+    n: int,
+    log_coefficient: float = 2.0,
+) -> tuple[float, float]:
     prev_slope = 0.01
-    prev_res = endpoint_residual(prev_slope, x_min, x_max, n)
+    prev_res = endpoint_residual(
+        prev_slope, x_min, x_max, n, log_coefficient
+    )
     slope = prev_slope
     for _ in range(80):
         slope *= 1.25
-        res = endpoint_residual(slope, x_min, x_max, n)
+        res = endpoint_residual(
+            slope, x_min, x_max, n, log_coefficient
+        )
         if math.isfinite(prev_res) and math.isfinite(res) and prev_res * res <= 0.0:
             return prev_slope, slope
         prev_slope = slope
@@ -106,12 +164,15 @@ def solve_shooting_slope(
     x_max: float = 20.0,
     n: int = 2000,
     iterations: int = 80,
+    log_coefficient: float = 2.0,
 ) -> float:
-    lo, hi = find_bracket(x_min, x_max, n)
-    r_lo = endpoint_residual(lo, x_min, x_max, n)
+    lo, hi = find_bracket(x_min, x_max, n, log_coefficient)
+    r_lo = endpoint_residual(lo, x_min, x_max, n, log_coefficient)
     for _ in range(iterations):
         mid = 0.5 * (lo + hi)
-        r_mid = endpoint_residual(mid, x_min, x_max, n)
+        r_mid = endpoint_residual(
+            mid, x_min, x_max, n, log_coefficient
+        )
         if abs(r_mid) < 1.0e-12:
             return mid
         if r_lo * r_mid <= 0.0:
@@ -124,6 +185,10 @@ def solve_shooting_slope(
 
 @dataclass(frozen=True)
 class VortexProfile:
+    """Coefficient-two legacy profile retained as the issue #218 control."""
+
+    LOG_COEFFICIENT: ClassVar[float] = 2.0
+
     xs: tuple[float, ...]
     fs: tuple[float, ...]
     fps: tuple[float, ...]
@@ -136,8 +201,19 @@ class VortexProfile:
         x_max: float = 20.0,
         n: int = 2000,
     ) -> "VortexProfile":
-        slope = solve_shooting_slope(x_min=x_min, x_max=x_max, n=n)
-        xs, fs, fps = integrate_profile(slope, x_min, x_max, n)
+        slope = solve_shooting_slope(
+            x_min=x_min,
+            x_max=x_max,
+            n=n,
+            log_coefficient=cls.LOG_COEFFICIENT,
+        )
+        xs, fs, fps = integrate_profile(
+            slope,
+            x_min,
+            x_max,
+            n,
+            log_coefficient=cls.LOG_COEFFICIENT,
+        )
         return cls(xs=tuple(xs), fs=tuple(fs), fps=tuple(fps), slope=slope)
 
     def value(self, x: float) -> float:

@@ -32,16 +32,18 @@ if str(SRC_ROOT) not in sys.path:
 from shared_numerics import OutputStatus, ScriptMetadata
 from trefoil_observables import energy_density
 from trefoil_breather_static import trefoil_curve
-from vortex_profile import VortexProfile
+from corrected_vortex_profile import CorrectedVortexProfile
 
 
-_VORTEX_PROFILE_CACHE: VortexProfile | None = None
+_VORTEX_PROFILE_CACHE: CorrectedVortexProfile | None = None
 
 
-def _get_vortex_profile() -> VortexProfile:
+def _get_vortex_profile() -> CorrectedVortexProfile:
     global _VORTEX_PROFILE_CACHE
     if _VORTEX_PROFILE_CACHE is None:
-        _VORTEX_PROFILE_CACHE = VortexProfile.solve(x_min=1e-4, x_max=20.0, n=4000)
+        _VORTEX_PROFILE_CACHE = CorrectedVortexProfile.solve(
+            x_min=1e-4, x_max=20.0, n=4000
+        )
     return _VORTEX_PROFILE_CACHE
 
 
@@ -74,7 +76,7 @@ SCRIPT_METADATA = ScriptMetadata(
     nondimensionalisation="xi = 1, rho0 = 1, c = 1",
     observables=("N_Y", "F", "mu_0_grid", "E_line", "E_cavity", "E_total"),
     diagnostics=("anchor_shell_energy_fraction", "min_density_position"),
-    issue_refs=("#13",),
+    issue_refs=("#13", "#218"),
     limitations=(
         "Tube radius, cavity radius and calibration half-width are free parameters.",
         "mu_0_grid is the energy per unit arc-length along a continuously curved knot, so it bakes in curvature effects.",

@@ -15,7 +15,7 @@ import cmath
 import math
 
 from toroidal_background import ALPHA, ToroidalBackground
-from vortex_profile import VortexProfile
+from corrected_vortex_profile import CorrectedVortexProfile
 
 
 @dataclass(frozen=True)
@@ -149,7 +149,7 @@ def torus_energy(bg: ToroidalBackground, coeffs: list[float], cfg: RelaxationCon
             z = z_min + (j + 0.5) * cfg.dz
             psi = field(r, z)
             grad = central_gradient(field, r, z, cfg.dr)
-            grad_energy = 0.5 * (abs(grad[0]) ** 2 + abs(grad[1]) ** 2)
+            grad_energy = abs(grad[0]) ** 2 + abs(grad[1]) ** 2
             pot_energy = potential_u(abs(psi) ** 2)
             curl = curl_current(field, r, z, cfg.dr)
             chiral_energy = 0.5 * lam * curl * curl
@@ -246,7 +246,9 @@ def main() -> None:
         profile_x_max=args.profile_x_max,
         finite_diff_step=args.finite_diff_step,
     )
-    vortex = VortexProfile.solve(n=cfg.profile_n, x_max=cfg.profile_x_max)
+    vortex = CorrectedVortexProfile.solve(
+        n=cfg.profile_n, x_max=cfg.profile_x_max
+    )
     bg = ToroidalBackground(f0=vortex.value, f0_prime=vortex.derivative)
     coeffs, stats = quadratic_relaxation(bg, cfg)
     print("Curved torus relaxation")

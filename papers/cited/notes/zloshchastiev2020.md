@@ -1,51 +1,122 @@
-# zloshchastiev2020 — extracted equations
+# zloshchastiev2020 — paragraph-level citation evidence
 
-**K. G. Zloshchastiev**, *Superfluid vacuum theory and deformed dispersion
-relations*, Int. J. Mod. Phys. A **35**, 2040032 (2020), arXiv:2011.11897.
+K. G. Zloshchastiev, *Superfluid vacuum theory and deformed dispersion
+relations*, International Journal of Modern Physics A **35**, 2040032 (2020),
+DOI `10.1142/S0217751X20400321`, arXiv:2011.11897.
 
-This is the **actual source** of the logarithmic nonlinearity that SSV-I
-attributes to Volovik.
+Primary source: <https://arxiv.org/abs/2011.11897> · local PDF
+`papers/cited/pdf/zloshchastiev2020.pdf` · SHA-256
+`8aff20eb75784f6db483cb3a4ec03d715441f77d2ac544cd6aeecab362818e92`.
+The repository retrieval pin is the matching prefix `8aff20eb75784f6d`.
 
-**Use verdict: `OK` for SSV-I C6's logarithmic-wave-equation lineage.** The
-source supports the logarithmic nonlinearity and its natural scale. It does not
-support SSV-I's separate pressure interpretation, sign choice, or factor of two;
-those misuses are assessed below.
+## SSV-I sites checked
 
-## Eq. (1) — the logarithmic wave equation, p.1
+Paper I uses this source at four load-bearing sites:
 
-> i∂_tΨ = [ −ħ/(2m)∇² + V_ext(x,t) − b ln(|Ψ|²/ρ̄) ] Ψ
+- the lineage statement preceding `eq:Lag`, where the logarithmic
+  nonlinearity is described as the form used in superfluid-vacuum theory;
+- `eq:LogSE`, with the explicit convention map
+  \(B=-\hbar b_{\rm src}=m_0b>0\);
+- `eq:cs-routes-agree` through `eq:xi`, where Paper I derives
+  \(b=c_s^2=c^2\) and
+  \(\xi=\hbar/(\sqrt2\,m_0c)\);
+- the claim-status table, which classifies the stable LogSE branch as an
+  adopted postulate rather than a result proved by the citation.
 
-The minus sign in front of `b ln` **matches SSV-I**. The sign was inherited
-correctly; it is not a transcription error.
+The source is not cited for Paper I's pressure law, exact Bogoliubov
+dispersion, healing-length normalization, or stability choice. Those are
+derived from Paper I's dimensionally complete action.
 
-## The defining constraint, p.1
+## Relied-on source paragraph — logarithmic constraint and Eq. (1), p. 1
 
-> ρ|F′(ρ)| = mc₀²/ħ ≈ const(ρ) … The solution of this differential equation is
-> a logarithmic function: F(ρ) = b ln(ρ/ρ̄), where b and ρ̄ are real parameters.
+The complete paragraph containing the relied-on result reads:
 
-Three consequences, all load-bearing:
+> SVT assumes that physical vacuum is described by a similar equation, while
+> photon-like excitations are analogous to acoustic waves in superfluid which
+> propagate with the velocity \(c_s\propto\sqrt{p'(\rho)}\), where prime
+> denotes a derivative. The correspondence principle requires that in
+> low-momenta limit, SVT must recover Einstein's theory of relativity. One of
+> postulates of the latter implies that the speed of photon-like excitations
+> of vacuum should not depend on density, at least in a leading order with
+> respect to \(\hbar\). At low momenta, \(c_s\) tends to \(c_0\approx c\).
+> As shown in Ref. 5, this results in the following equation
+> \(\rho|F'(\rho)|=mc_s^2/\hbar\approx\operatorname{const}(\rho)\).
+> The solution of this differential equation is a logarithmic function:
+> \(F(\rho)=b\ln(\rho/\bar\rho)\), where \(b\) and \(\bar\rho\) are real
+> parameters. The wave equation thus becomes
+> \(i\partial_t\Psi=[-\hbar\nabla^2/(2m)+V_{\rm ext}
+> -b\ln(|\Psi|^2/\bar\rho)]\Psi\). (1)
 
-1. `F(ρ)` is the **nonlinear chemical-potential term, not a pressure**. SSV-I
-   `main.tex:205` reads it as a pressure. Since c_s² = ρμ′(ρ)/m for a chemical
-   potential but P′(ρ)/m for a pressure, this single misreading generates the
-   whole error chain of #180.
-2. It is an **absolute value** — it fixes |b|ρ₀ = m₀c² and is **silent on
-   stability**. SSV-I converts it into a signed, positive c_s².
-3. **No factor of 2.** SSV-I's c_s = √(2bρ₀/m₀) and b = m₀c²/(2ρ₀) are wrong by
-   √2 and 2 respectively, independently of any sign question.
+This paragraph establishes the lineage of the logarithmic wave equation. In
+the source equation the coefficient \(b_{\rm src}\) has dimensions of
+frequency because the equation is divided by \(\hbar\). Applying the same
+paragraph's constraint to
+\(F=b_{\rm src}\ln(\rho/\bar\rho)\) gives
+\[
+  |b_{\rm src}|=\frac{m c_s^2}{\hbar},
+\]
+with no factor of \(\rho_0\). Paper I's stable-branch map
+\(-\hbar b_{\rm src}=m_0b\), where \(b\) is mass-specific energy, therefore
+gives \(b=c_s^2\).
 
-## The Gausson branch, p.1
+**Verdict for lineage and coefficient map: `OK`.** The source supports the
+logarithmic nonlinearity and the magnitude relation after dimensions and sign
+conventions are made explicit. It does not choose Paper I's stable sign: the
+absolute value leaves that choice open.
 
-> the ground state solution for positive values of b was known … since the
-> works of Rosen and Bialynicki-Birula and Mycielski
+## Governing-equation and normalization context, p. 1
 
-So **b > 0 is the Gausson branch** — the sign under which the uniform vacuum is
-modulationally unstable. Light-as-sound needs b < 0; the Gausson needs b > 0.
-The pure logarithmic theory cannot supply both.
+The immediately preceding paragraph defines a condensate wavefunction obeying
+\[
+ i\partial_t\Psi
+ =[-\hbar\nabla^2/(2m)+V_{\rm ext}-F(|\Psi|^2)]\Psi
+\]
+and normalizes \(\int_V|\Psi|^2\,dV=M>0\). This is consistent with treating
+the nonlinear term in Eq. (1) as a wave-equation frequency. It does not
+identify \(F\) as a pressure or supply Paper I's energy-density action.
 
-## Natural length scale, p.2 (below Eq. 2)
+**Verdict for a pressure attribution: `NOT SUPPORTED`.** Paper I must obtain
+\(P=\rho\mu-V=b\rho\) from its own energy density; the citation cannot be used
+as a pressure equation of state.
 
-> a = ħ/√(2m|b|)
+## Positive-source-\(b\) solution, p. 1
 
-SSV-I's ξ = ħ/√(2m₀bρ₀) is the **same formula** — correct. Only its evaluation
-is wrong: with the corrected |b|ρ₀ = m₀c², ξ = ħ/(√2 m₀c), not ħ/(m₀c).
+The paragraph following Eq. (1) says the known ground state for positive
+source \(b\) is a Gaussian wave packet (a radial Gaussian in the rotationally
+symmetric three-dimensional case), citing Rosen and
+Bialynicki-Birula–Mycielski. Because Eq. (1) contains \(-b_{\rm src}\ln\),
+that source-positive branch is the attractive Gausson branch. Under Paper I's
+map it corresponds to negative mass-specific \(b\), not to the stable
+homogeneous branch adopted in Paper I.
+
+**Verdict for simultaneous Gausson and stable vacuum: `CONTRADICTED`.** The
+pure one-component logarithmic model cannot provide both signs at once.
+
+## Printed natural scale below Eq. (2), p. 2
+
+The source defines the de Broglie momentum using
+
+> \(p_a=2\hbar/a\), corresponding to the length scale
+> \(a=\hbar/\sqrt{2m|b|}\).
+
+As printed, this is dimensionally inconsistent with the frequency dimension
+of \(b_{\rm src}\) in Eq. (1): \(\hbar/\sqrt{m b_{\rm src}}\) is not a length.
+The dimensionally homogeneous source-convention expression would contain
+\(\sqrt{\hbar}\) in the numerator. Paper I therefore does not use this line
+to normalize its core scale. From its own action it obtains
+\[
+  \xi=\frac{\hbar}{\sqrt{2m_0(m_0b)}}
+     =\frac{\hbar}{\sqrt2\,m_0c_s}.
+\]
+
+**Verdict for the printed natural-length formula: `MISDERIVED`.** It cannot
+support Paper I's healing length as written; the corrected Paper I expression
+is an independent derivation.
+
+## Overall use verdict
+
+**`OK` with explicit scope.** Zloshchastiev 2020 is the correct primary source
+for the superfluid-vacuum use of a logarithmic wave equation. It supports
+neither the retired \(\rho_0\)-dependent coefficient nor a factor of two, and
+its printed natural-length formula is not dimensionally usable under its own
+Eq. (1) convention.

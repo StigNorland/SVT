@@ -239,7 +239,7 @@ def run_current_curl_scan(
     from kelvin_augmented_bdg import build_modes
     from toroidal_background import CurvedToroidalBackground, ToroidalBackground
     from toroidal_projection_integrals import ProjectionConfig
-    from vortex_profile import VortexProfile
+    from corrected_vortex_profile import CorrectedVortexProfile
 
     cfg = ProjectionConfig(
         n=n,
@@ -249,7 +249,13 @@ def run_current_curl_scan(
         profile_x_max=profile_x_max,
         chi_parity="sin",
     )
-    vortex = VortexProfile.solve(n=profile_n, x_max=profile_x_max) if profile == "numerical" else None
+    vortex = (
+        CorrectedVortexProfile.solve(
+            n=profile_n, x_max=profile_x_max
+        )
+        if profile == "numerical"
+        else None
+    )
     rows: list[FiniteAlphaScanRow] = []
     first_chi = None
     first_r = None

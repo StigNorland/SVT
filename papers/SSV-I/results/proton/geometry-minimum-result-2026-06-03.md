@@ -1,5 +1,12 @@
 # #77 final: trefoil geometry minimum via continuation (2026-06-03)
 
+> **Issue #218 correction (2026-07-30).** The energy ranking and selected
+> geometry below are unchanged because no state was regenerated. The historical
+> \(N_YF\) column used the coefficient-two straight-vortex calibration.
+> The corrected \(R=1.18\,\xi\) calibration multiplies it by \(1.368801\),
+> giving \(N_YF=(73.96,91.42,86.54,110.02)\) in table order. The selected
+> \((R,a)=(2.5,0.85)\xi\) value is therefore approximately \(74\), not \(54\).
+
 **The completed (R, a) test.** After the PN + regrid diagnostics showed the
 landscape is smooth (not rugged/foam) and that fresh fine-grid starts
 false-trip the resolution-dependent topology guard, the robust protocol is:
