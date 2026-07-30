@@ -714,10 +714,15 @@ mass band and the combined \(N_YF\) anchor are generated through
 `issue_218_values.py`, recorded in the value receipt and frozen by claim
 guards.
 
-**Not covered:** five Paper II instruments still import the historical profile
-and require their own issue-scoped dependency audit. Generated values protect
-registered outputs only; an unregistered downstream literal can still retain
-the old convention.
+**Guard extended through Paper II (#220).** The five direct Paper II
+consumers now use the corrected class, except for one explicitly named
+`LegacyVortexProfile` negative control. A focused source guard rejects an
+unlabelled legacy import, and the corrected core, line-tension and downstream
+cap values are receipt-generated.
+
+**Not covered:** generated values protect registered outputs only; an
+unregistered downstream literal or a copied ODE can still retain the old
+convention.
 
 ## FM27 — an axial quantum number is mistaken for a protected ±m degeneracy
 
@@ -734,6 +739,28 @@ without using an invented doublet count.
 **Not covered:** this is not a representation-theory checker. Other reduced
 models can still infer degeneracies from labels without auditing the full
 background symmetry, antiunitary symmetries and boundary conditions.
+
+## FM28 — the profile is corrected but its energy and asymptotic tail are not
+
+**Observed:** Paper II's line-tension script used the coefficient-two profile
+with the unshifted term \(-\rho\ln\rho\), then assigned logarithmic tails to
+both that term and the phase gradient. The corrected coefficient-one action
+has shifted potential
+\(\frac12(\rho\ln\rho-\rho+1)\), which falls as \(r^{-4}\); only the phase
+gradient supplies the logarithm. A class swap alone would therefore still
+have produced an inconsistent line tension.
+
+**Guard — closed for this path.** `vortex_cap_mass.line_tension` and
+`chiral_cap_equilibrium.compute_tau_phys` use the shifted energy and the
+single tail \(\pi\ln(R_{\rm cap}/r_{\max})\).
+`test_corrected_line_tension_uses_shifted_energy_and_single_log_tail` pins the
+tail formula and corrected \(\tau=18.624\). Paper II's receipt generates the
+printed value.
+
+**Not covered:** the guard checks this radial functional, not every copied
+energy density in the repository. A solver can still use the right profile
+with a mismatched action unless profile, Euler–Lagrange equation and energy
+are reviewed as one normalization unit.
 
 ## What runs when
 
@@ -772,6 +799,7 @@ ones most likely to lapse.
 | FM25 healing length confused with crossover length | exact-dispersion negative control | suite (focused) + review |
 | FM26 coordinate correction misses numerical consumers | corrected profile + generated saved-state values | **build** (registered outputs) + suite |
 | FM27 axial label mistaken for ±m degeneracy | signed-sector Goldstone control | suite (focused) + review |
+| FM28 corrected profile paired with stale energy/tail | shifted-energy + single-tail guard | **build** (registered value) + suite |
 
 Adding a failure mode to this register is cheap. Leaving one out because its
 guard is embarrassing is how #182 happened.

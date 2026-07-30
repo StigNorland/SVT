@@ -3,10 +3,10 @@
 Pins the four findings:
   E  m_W = pi phi^2 (m_e/alpha^2); m_e/alpha^2 ~ 9.6 GeV; true R_cap ~ 1.633 xi/alpha
      (so the text's 1.70 is stale and phi matches to <1%);
-  A  local stiffness is O(1)*alpha^-2; the equilibrium cubic then puts the cap at
-     ~alpha^(-2/3) ~ 31 xi -> m_W ~ 1.6 GeV (the 232x gap = one power of 1/alpha);
+  A  local stiffness is O(1)*alpha^-2; the equilibrium cubic remains far below
+     the ring scale (the corrected gap is about 380x);
   B  the ring-scale resolution m_W ~ m_e/alpha^2 (scale derived; pi phi^2 is O(1));
-  A' linear lambda_perp running lands lambda_bend within ~5% of phi^3/alpha^3.
+  A' the former ~5% linear-running coincidence is invalidated.
 """
 
 import math
@@ -35,7 +35,7 @@ def test_E_true_Rcap_makes_1p70_stale():
 
 
 def test_A_gap_is_one_power_of_inverse_alpha():
-    assert abs(w.gap_factor() - 232) < 3
+    assert abs(w.gap_factor() - 380) < 3
     # the gap is structurally (phi^3 / ((J+K)/4)) * (1/alpha)
     structural = (w.PHI**3 / w.JK_OVER_4) * (1.0 / w.ALPHA)
     assert abs(w.gap_factor() - structural) / structural < 1e-6
@@ -46,7 +46,7 @@ def test_A_local_bending_gives_wrong_scale():
     # local equilibrium sits near the alpha^(-2/3) scale, far below the ring scale xi/alpha
     assert 25 < R_loc < 40
     assert R_loc * w.ALPHA < 0.3                       # << 1, i.e. << xi/alpha
-    assert w.m_W_from_Rcap(R_loc) < 2.5                # GeV, ~50x too small
+    assert w.m_W_from_Rcap(R_loc) < 2.5                # GeV, about 77x too small
 
 
 def test_A_required_stiffness_recovers_phi_over_alpha():
@@ -62,7 +62,8 @@ def test_B_resolution_scale_is_derived():
     assert 5 < math.pi * w.PHI**2 < 12
 
 
-def test_Aprime_linear_running_closes_to_few_percent():
+def test_Aprime_legacy_few_percent_match_is_invalidated():
     lam_run = w.lambda_bend_running()
     lam_req = w.lambda_bend_required()
-    assert abs(lam_run - lam_req) / lam_req < 0.06     # within ~5%
+    shortfall = 1.0 - lam_run / lam_req
+    assert 0.40 < shortfall < 0.44

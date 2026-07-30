@@ -86,41 +86,40 @@ The photon must be a longitudinal Goldstone phase mode, not a chiral-shear mode.
 ## 3. Vortex Cap Mass: W/Z Masses and Weinberg Angle
 
 **Script:** `instruments/paper_ii/vortex_cap_mass.py`
-**Method:** Imports Paper I `VortexProfile` solver; numerical line tension
+**Method:** Imports the corrected Paper I coefficient-one profile; numerical line tension
 integral + analytic Paper II golden-ratio cap formula.
 
-### Vortex core profile (Paper I, b=1 convention)
+### Corrected vortex core profile
 
 | Quantity | Value |
 |---|---|
-| Core slope `a` (f ~ a·r) | 1.140682 |
-| `r(f = 0.5)` | 0.532 ξ_b1 = 0.753 ξ_phys |
-| `r(f = 0.9)` | 1.782 ξ_b1 = 2.520 ξ_phys |
+| Core slope `a` (f ~ a·r) | 0.806588 |
+| `r(f = 0.5)` | 0.753 ξ |
+| `r(f = 0.9)` | 2.520 ξ |
 
-**Algebraic tail:** The 2D LogSE vortex (n=1 winding) has `1 − f ~ 1/(4r²)` at
+**Algebraic tail:** The corrected 2D LogSE vortex has `1 − f ~ 1/(2r²)` at
 large r — an algebraic, not exponential, approach to the background. This
 arises from the `−f/r²` winding term acting as a source. Verified numerically:
 
 | r | 1 − f | 1/(4r²) | ratio |
 |---|---|---|---|
-| 5 | 0.010445 | 0.010000 | 1.044 |
-| 8 | 0.003964 | 0.003906 | 1.015 |
-| 10 | 0.002523 | 0.002500 | 1.009 |
-| 12 | 0.001744 | 0.001736 | 1.005 |
+| 5 | 0.022142 | 0.020000 | 1.107 |
+| 8 | 0.008068 | 0.007812 | 1.033 |
+| 10 | 0.005094 | 0.005000 | 1.019 |
+| 12 | 0.003481 | 0.003472 | 1.003 |
 
 ### Vortex line tension
 
-Both the phase kinetic term (`0.5(f/r)²`) and the LogSE potential
-(`−f² ln f²`) decay as `~1/(2r²)` at large r due to the algebraic tail.
-Each contributes `π ln(R_cap/r_max)` to the integral; total tail correction
-is `2π ln(R_cap/r_max)`.
+The corrected shifted energy is
+`0.5[f′²+(f/r)²] + 0.5[ρ ln ρ−ρ+1]`. Only the phase kinetic term has a
+logarithmic tail; the shifted potential falls as `r⁻⁴`. The leading tail is
+therefore `π ln(R_cap/r_max)`, not the old doubled expression.
 
-| Component | Value (b=1) |
+| Component | Corrected value |
 |---|---|
-| τ_core (numerical, r < 15 ξ_b1) | 19.26 |
-| τ_tail (analytic, 2π ln(157/15)) | 14.75 |
-| **τ_total (b=1)** | **34.00** |
-| **τ_total (b=1/2, physical)** | **17.00** |
+| τ_core (numerical, r < 15 ξ) | 10.1625 |
+| τ_tail (analytic, π ln(221.7/15)) | 8.4616 |
+| **τ_total** | **18.6241** |
 
 ### Force-balance vs golden-ratio conjecture
 
@@ -128,9 +127,9 @@ Simple surface-tension estimate: `R_cap ~ τ_phys`:
 
 | Estimate | `R_cap` |
 |---|---|
-| Pure LogSE line tension | 17.0 ξ |
+| Pure LogSE line tension | 18.6 ξ |
 | Paper II golden ratio (`φ/α`) | 221.7 ξ |
-| **Enhancement factor** | **~13×** |
+| **Enhancement factor** | **~11.9×** |
 
 The pure LogSE cannot stabilise a cap at `R_cap = φ/α`. The chiral-shear
 coupling `λ_⊥ ~ α⁻²  ≈ 18800` must supply the additional stiffness.
@@ -155,18 +154,19 @@ Implied `R_cap_Z` from the observed `m_Z` and the SSV `m_W`:
 ### Open gapboxes (Paper II §4)
 
 1. **Derive `R_cap = φ/α` from chiral-shear equilibrium** — pure LogSE gives
-   `R_cap ~ 17 ξ`; a factor ~13 enhancement from `λ_⊥ ~ α⁻²` is needed.
+   `R_cap ~ 18.6 ξ`; the actual cap-setting dynamics remains open.
 2. **Derive `sin²(θ_W) = 0.231` from amplitude/phase cap mixing** — requires the
    full `λ_⊥` calculation at the Z-channel saddle (see `reconnection-barrier-results.md`).
 
 ---
 
-## 4. Chiral-Cap Equilibrium: Deriving R_cap = φ/α
+## 4. Chiral-Cap Equilibrium: Candidate-model inversion
 
 **Script:** `instruments/paper_ii/chiral_cap_equilibrium.py`
-**Method:** Variational energy model for a closed vortex ring with line tension τ and
-chiral-shear bending stiffness λ_bend. Solves equilibrium cubic analytically; confirms
-golden-ratio fixed point.
+**Method:** Variational energy model for a closed vortex ring with corrected
+line tension τ and chiral-shear bending stiffness λ_bend. It solves the
+equilibrium cubic after imposing a target radius; it does not derive that
+radius or stiffness from the SSV Lagrangian.
 
 ### Energy model
 
@@ -189,13 +189,13 @@ R³ + τ R² = λ_bend   (equilibrium cubic)
 | Quantity | Value |
 |---|---|
 | Target `R_cap = φ/α` | 221.73 ξ |
-| `λ*_bend = R_cap³ + τ R_cap²` | 1.1737 × 10⁷ ξ³ |
-| `λ*_bend / (φ/α)³` | 1.077 (= φ + τ/R_cap ≈ φ) |
-| τ-correction `τ R_cap²/R_cap³` | 7.7% |
+| `λ*_bend = R_cap³ + τ R_cap²` | 1.1817 × 10⁷ ξ³ |
+| `λ*_bend / (φ/α)³` | 1.084 |
+| τ-correction `τ R_cap²/R_cap³` | 8.4% |
 | **τ→0 limit: `λ*_0 = (φ/α)³`** | **exact (0.000% error)** |
 | `λ*_0 × α³` | 4.2361 = **φ³** ✓ |
 
-### Golden-ratio fixed point (τ→0)
+### Algebraic golden-ratio restatement (τ→0)
 
 Define `x = α R/ξ`. At equilibrium: `x³ = α³ λ*_0`. With `λ*_0 = φ³/α³`:
 
@@ -203,9 +203,10 @@ Define `x = α R/ξ`. At equilibrium: `x³ = α³ λ*_0`. With `λ*_0 = φ³/α�
 x³ = φ³  ⟹  x = φ = 1.618034
 ```
 
-The golden ratio satisfies `φ² = φ + 1` (defining property). The cap radius
-`R_cap = φ/α` is the unique fixed point where the chiral-shear bending exactly
-balances the pressure.
+The golden ratio satisfies `φ² = φ + 1` by definition. Since
+`R_cap = φ/α` was imposed, the inversion necessarily returns
+`λ_bend,0 = φ³/α³`. This is a tautological consistency check, not an
+independent fixed point or a physical origin for φ.
 
 | Check | LHS | RHS | Match |
 |---|---|---|---|
@@ -214,7 +215,7 @@ balances the pressure.
 | `d²E/dR²` at R_eq | 18.85 | > 0 | ✓ (minimum) |
 | `E_cs/E_P` at equil. | 2.153 | ~2 (virial) | ✓ |
 
-### SSV identification
+### Dimensional candidate, not an identification
 
 In SSV the chiral-shear mode has speed `c_⊥ = α c`, so:
 
@@ -222,8 +223,8 @@ In SSV the chiral-shear mode has speed `c_⊥ = α c`, so:
 λ_bend* = φ³ × (c/c_⊥)³ × ξ³ = φ³/α³ × ξ³
 ```
 
-Three powers of the inverse chiral speed (one per spatial dimension of the
-bending energy) with golden-ratio pre-factor φ³.
+The speed ratio permits this dimensional scaling, but does not derive the
+power, coefficient, or physical running/non-local mechanism.
 
 | Component | Value |
 |---|---|
@@ -237,36 +238,32 @@ bending energy) with golden-ratio pre-factor φ³.
 | Component | Fraction of E_total |
 |---|---|
 | `E_pressure = π R²` | 30.2% |
-| `E_line = 2π τ R` | 4.6% |
-| `E_chiral = 2π λ/R` | 65.1% |
+| `E_line = 2π τ R` | 5.0% |
+| `E_chiral = 2π λ/R` | 65.0% |
 
 The chiral-shear bending term dominates; pressure and line tension are subdominant.
 
 ### Status
 
-**Open gapbox PARTIALLY CLOSED.** R_cap = φ/α follows directly from λ_bend = φ³/α³.
-
-Remaining step: derive `λ_bend = φ³/α³` from the SSV chiral-shear Lagrangian
-by integrating the k⁴ dispersion over the vortex core profile:
-
-```
-∫₀^∞ [chiral-shear energy density(r)] 2π r dr  =?  φ³/α³
-```
+**Genuinely open.** The cubic maps an assumed cap radius to a required
+stiffness. The corrected local-core calculation is 380× too small, and the
+former linear-running near-match does not survive. A cap-setting mechanism
+must be derived without inserting `R_cap`, `λ_bend`, or the observed W mass.
 
 ---
 
 ## 5. L_⊥ Core Integral: Bending Stiffness Check
 
 **Script:** `instruments/paper_ii/lperp_core_integral.py`
-**Method:** Numerically integrates I_curl, J_bend, K_bend from the planar vortex
-profile (Paper I, b=1 convention, reliable up to r < 15 ξ).
+**Method:** Numerically integrates I_curl, J_bend, K_bend from the corrected
+coefficient-one planar vortex profile (reliable up to r < 15 ξ).
 
 ### Core integrals
 
-| Integral | Definition | Value (b=1) |
+| Integral | Definition | Corrected value |
 |---|---|---|
-| `I_curl` | `∫ (2ff′/r)² 2πr dr` | 5.02 |
-| `J_bend` | `∫ r² [∂_r(2ff′/r)]² 2πr dr` | 7.81 |
+| `I_curl` | `∫ (2ff′/r)² 2πr dr` | 2.5098 |
+| `J_bend` | `∫ r² [∂_r(2ff′/r)]² 2πr dr` | 3.9065 |
 | `K_bend` | `∫ (2ff′/r)² r² 2πr dr` | 2.20 |
 
 **Tail convergence:** All integrands fall as `~1/r⁷` for large r. The analytic tail from r > 15 ξ contributes < 10⁻⁶ of the total.
@@ -284,13 +281,13 @@ With `λ_⊥ = α⁻²` (natural SSV scale):
 | Quantity | Value |
 |---|---|
 | `λ_⊥ = α⁻²` | 1.878 × 10⁴ |
-| `λ_bend(local) = λ_⊥ (J+K)/4` | 4.70 × 10⁴ |
+| `λ_bend(local) = λ_⊥ (J+K)/4` | 2.868 × 10⁴ |
 | `λ_bend(required) = φ³/α³` | 1.09 × 10⁷ |
-| **Gap factor** | **232×** |
+| **Gap factor** | **380×** |
 
 ### Conclusion
 
-The local curvature-of-core correction to L_⊥ is **232× too small** to reproduce
+The local curvature-of-core correction to L_⊥ is **380× too small** to reproduce
 λ_bend = φ³/α³. The 2πλ_bend/R energy term therefore does NOT arise from local
 vortex core bending. The physical mechanism must be non-local:
 
@@ -300,9 +297,9 @@ vortex core bending. The physical mechanism must be non-local:
 - **Candidate**: The chiral-mode vacuum energy of the reconnection region (analog of
   the Casimir effect between parallel plates, here applied to the ring boundary).
 
-**Status: Open gapbox confirmed.** The variational identification λ_bend = φ³/α³
-(from `chiral_cap_equilibrium.py`) is correct; the derivation from the SSV Lagrangian
-requires non-local physics not captured by the vortex core profile.
+**Status: local mechanism excluded; cap mechanism open.** The candidate cubic
+can state what stiffness an imposed radius would require, but neither that
+stiffness nor the cap radius is derived from the SSV Lagrangian.
 
 ---
 
@@ -376,17 +373,19 @@ vs tan²(θ_W) = 0.301. Factor ~1.5 off — correct order of magnitude.
 
 ---
 
-## 7. 232× Gap Investigation — Three Steps
+## 7. Corrected 380× Gap Investigation — Three Steps
 
-Three targeted checks to identify the origin of the 232× gap between
-`λ_bend(local) = 4.70 × 10⁴` and the required `λ_bend* = φ³/α³ = 1.09 × 10⁷`.
+Three targeted checks probe the corrected gap between
+`λ_bend(local) = 2.868 × 10⁴` and the candidate required
+`λ_bend* = φ³/α³ = 1.09 × 10⁷`.
 
 ### Step 1: b=1/2 physical vortex profile
 
 **Script:** `instruments/paper_ii/lperp_bphys_check.py`
 
-The Paper I solver uses the b=1 LogSE convention. The physical convention is b=1/2
-(f'' + f'/r − f/r² = f ln f²). Under the rescaling f_phys(r) = f_b1(r/√2):
+The coefficient-two solver is now a legacy control. The active
+coefficient-one conventional-xi profile obeys the exact rescaling
+`f_corrected(r) = f_legacy(r/√2)`:
 J_bend_phys = J_bend_b1/2, K_bend_phys = K_bend_b1.
 
 | Quantity | b=1 | b=1/2 | Target |
@@ -396,8 +395,9 @@ J_bend_phys = J_bend_b1/2, K_bend_phys = K_bend_b1.
 | (J+K)/4 | 2.503 | 1.527 | φ² = 2.618 |
 | Gap factor | 232× | 380× | 1× |
 
-**Analytic rescaling confirmed to 0.04%.** The physical b=1/2 convention makes
-the gap **larger** (380× vs 232×). The gap is not a convention artifact.
+**Analytic rescaling confirmed below 0.06%.** The corrected baseline makes
+the gap **larger** (380× vs the legacy-control 232×). The gap is not removed
+by the convention correction.
 
 ### Step 2: J_bend(r_max) convergence sweep
 
@@ -405,16 +405,16 @@ the gap **larger** (380× vs 232×). The gap is not a convention artifact.
 
 Sweeps the integral upper limit r_max from 1 to 15 ξ to check for an IR tail.
 
-| r_max/ξ | J_bend | K_bend | (J+K)/4 |
+| r_max/ξ | corrected J_bend | corrected K_bend | (J+K)/4 |
 |---|---|---|---|
-| 1 | 4.113 | 1.172 | 1.321 |
-| 3 | 7.771 | 2.174 | 2.486 |
-| 5 | 7.808 | 2.199 | 2.502 |
-| 8 | 7.809 | 2.201 | 2.502 |
-| 12 | 7.809 | 2.201 | 2.503 |
-| 15 | 7.811 | 2.202 | 2.503 |
+| 1 | 0.996 | 0.627 | 0.406 |
+| 3 | 3.760 | 2.079 | 1.460 |
+| 5 | 3.898 | 2.188 | 1.522 |
+| 8 | 3.904 | 2.200 | 1.526 |
+| 12 | 3.905 | 2.201 | 1.526 |
+| 15 | 3.907 | 2.203 | 1.527 |
 
-**Change from r_max = 5 to r_max = 15: +0.07%.** The integrals saturate within
+**Change from r_max = 5 to r_max = 15: +0.38%.** The integrals saturate within
 the vortex core (~5 ξ). There is no IR tail from extending the integration to
 larger radii. The gap is UV-local, not IR.
 
@@ -451,15 +451,16 @@ Fit: I_dlnk = 1.750 × ln(R/ξ) − 2.63. The one-loop correction scales as
 
 **(C) Power-law running λ_⊥(R) = λ_⊥(ξ) × (R/ξ)^p:**
 
-| p | λ_bend at R_cap | gap |
+| p | corrected λ_bend at R_cap | gap |
 |---|---|---|
-| 0 (constant) | 4.70 × 10⁴ | 232× |
-| 1/2 | 7.00 × 10⁵ | 15.6× |
-| **1 (linear)** | **1.04 × 10⁷** | **1.046×** |
-| 3/2 | 1.55 × 10⁸ | 0.070× |
+| 0 (constant) | 2.87 × 10⁴ | 380× |
+| 1/2 | 4.27 × 10⁵ | 25.5× |
+| **1 (linear)** | **6.36 × 10⁶** | **1.714×** |
+| 3/2 | 9.47 × 10⁷ | 0.115× |
 
-For **p = 1 (linear running)**: λ_bend = 1.04 × 10⁷, within **4.4% of target**
-(consistent with the earlier scale-dependent hypothesis from §5).
+For **p = 1 (linear running)** the corrected result is still **41.7% below
+target**. The former 4.4% match was a legacy-profile normalization
+coincidence.
 
 ### Gap anatomy
 
@@ -468,9 +469,9 @@ The gap decomposes as:
 Gap = φ²/(J+K)/4 × (φ/α)/(1) = φ³/(α × (J+K)/4)
 ```
 
-The factor R_cap/ξ = φ/α ≈ 222 is an IR scale (the cap radius), while (J+K)/4 ≈ 2.50
-is a UV core integral. The gap is the product of an IR factor (222) and a small
-UV shortfall (φ²/2.503 ≈ 1.046).
+The factor R_cap/ξ = φ/α ≈ 222 is an IR scale, while the corrected
+`(J+K)/4 ≈ 1.527` is a UV core integral. A single factor of
+`R_cap/xi` is insufficient because `φ²/1.527 ≈ 1.714`.
 
 ### Conclusions
 
@@ -480,14 +481,11 @@ UV shortfall (φ²/2.503 ≈ 1.046).
 | Extended core integral (tail) | <0.1% | No |
 | Classical LIA | R ln(R/ξ) ≈ 1.2 × 10³ | No (0.03% of target) |
 | Kelvin wave one-loop | O(ln R/ξ) ≈ 5.4× | No (insufficient by 41×) |
-| **Linear running (p=1)** | **R/ξ ≈ 222×** | **Yes (4.4% residual)** |
+| Linear running (p=1) | R/ξ ≈ 222× | **No (41.7% short)** |
 
-The 232× gap requires either:
-1. **Linear anomalous running** of λ_⊥ with R — λ_⊥(R) ∝ R, requiring anomalous
-   dimension 1 for the chiral-shear coupling (non-perturbative). The 4.4% residual
-   is then (J+K)/4 vs φ².
-2. **Non-local topological contribution** — e.g., Seifert disk flux or knot invariant
-   quantization at λ_bend = φ³/α³ (non-perturbative, topological).
+The corrected 380× gap is not closed by the tested local, LIA, one-loop, or
+simple p=1 running mechanisms. A stronger anomalous/non-local contribution
+would be a new hypothesis, not an inference from this calculation.
 
 All local perturbative mechanisms (core integrals, LIA, Kelvin waves) are
 insufficient by 1–2 orders of magnitude.
@@ -504,4 +502,4 @@ insufficient by 1–2 orders of magnitude.
 | Electroweak | `m_Z` (tree) | 90.02 GeV | 91.19 GeV | −1.29% |
 | Electroweak | `sin²(θ_W)` tree (SSV) | 0.23122 | 0.23122 | = PDG by SM input; tree deficit 0.008 same as SM |
 | Electroweak | `sin²(θ_W)` open lead | φ/7 = 0.23115 | 0.23122 | 0.031% — no derivation yet |
-| Electroweak | `R_cap = φ/α` | λ_bend = φ³/α³ ✓ | identification only | Core integral: 232× gap → non-local origin |
+| Electroweak | `R_cap = φ/α` | imposed cap radius | post-hoc conditional formula | Corrected local stiffness is 380× too small; mechanism open |

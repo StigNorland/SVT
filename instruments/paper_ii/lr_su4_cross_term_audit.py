@@ -30,7 +30,7 @@ no residual azimuthal phase survives, the φ-integral is ∫dφ = 2π ≠ 0.  So
 selection rule can kill it; only the radial integral could, and it is positive.
 
 This script computes that radial integral for co-located straight windings using the
-Paper I LogSE vortex profile (the same f(r) and r_max=15ξ reliability bound as
+corrected Paper I LogSE vortex profile (the same f(r) and r_max=15ξ reliability bound as
 lperp_core_integral.py), and shows it equals the diagonal L_perp self-energy density
 I_curl exactly (when the colour and weak cores coincide) — i.e. the locking term is
 the SAME order as the diagonal terms, not a small correction.
@@ -64,7 +64,7 @@ SRC_ROOT = Path(__file__).resolve().parents[1]
 if str(SRC_ROOT / "paper_i") not in sys.path:
     sys.path.insert(0, str(SRC_ROOT / "paper_i"))
 
-from vortex_profile import VortexProfile  # noqa: E402
+from corrected_vortex_profile import CorrectedVortexProfile  # noqa: E402
 
 ALPHA = 1.0 / 137.035999084
 R_MAX_RELIABLE = 15.0   # growing-mode contamination beyond this (lperp_core_integral)
@@ -90,9 +90,11 @@ def compute_cross_integral(
 
 
 def analytic_tail(r0: float) -> float:
-    """Tail r>r0 with f ~ 1 − 1/(4r²): 2ff'/r ~ 1/r⁴ ⇒ integrand ~ 2π/r⁷,
-    ∫_{r0}^∞ = 2π/(6 r0⁶). Negligible (same as lperp_core_integral's I_curl tail)."""
-    return 2.0 * math.pi / (6.0 * r0**6)
+    """Corrected tail: f ~ 1−1/(2r²), so 2ff'/r ~ 2/r⁴.
+
+    The resulting integral is 8π/(6 r0⁶), still negligible.
+    """
+    return 8.0 * math.pi / (6.0 * r0**6)
 
 
 def sector_cross_energy(m_c: int, m_w: int, i_cross: float) -> float:
@@ -116,10 +118,10 @@ def main() -> None:
     print("=" * 78)
     print("#81 cheap route — chirality-locking cross term ∫ω_c·ω_w: forced zero?")
     print("=" * 78)
-    print(f"  LogSE vortex profile, n={n_pts}, reliable r < {R_MAX_RELIABLE} ξ")
+    print(f"  Corrected coefficient-one LogSE profile, n={n_pts}, reliable r < {R_MAX_RELIABLE} ξ")
     print()
 
-    vp = VortexProfile.solve(n=n_pts, x_max=R_MAX_RELIABLE)
+    vp = CorrectedVortexProfile.solve(n=n_pts, x_max=R_MAX_RELIABLE)
     r = np.array(vp.xs)
     f = np.array(vp.fs)
     fp = np.array(vp.fps)

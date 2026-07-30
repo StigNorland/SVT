@@ -1,6 +1,7 @@
 """Step 2: J_bend(r_max) vs r_max sweep — does the bending stiffness grow with ring radius?
 
-If the 232x gap is explained by long-range flow (r_max → R_cap = phi/alpha ~ 222 xi),
+If the corrected 380x gap is explained by long-range flow
+(r_max → R_cap = phi/alpha ~ 222 xi),
 the integral J_bend + K_bend must grow with r_max. Two candidate scalings:
   - Linear:     J+K ~ r_max          -> gap explained at R_cap = phi/alpha
   - Logarithmic: J+K ~ ln(r_max/xi)  -> LIA prediction, insufficient (ln(222) ~ 5.4)
@@ -15,6 +16,9 @@ import math
 import sys
 
 import numpy as np
+
+sys.path.insert(0, "instruments/paper_i")
+from corrected_vortex_profile import CorrectedVortexProfile  # noqa: E402
 
 ALPHA = 1.0 / 137.035999084
 PHI   = (1.0 + math.sqrt(5.0)) / 2.0
@@ -109,17 +113,24 @@ def find_slope(x_min, x_max, n, rhs):
 
 def main():
     n_pts    = 12000
-    r_max_solve = 15.0   # b=1 LogSE has e^(2r) growing mode — numerically unstable beyond ~15 xi
+    r_max_solve = 15.0
     x_min    = 1e-4
 
     print("=" * 68)
-    print("Step 2: J_bend(r_max) convergence sweep — b=1 profile")
+    print("Step 2: J_bend(r_max) convergence sweep — corrected profile")
     print("=" * 68)
     print()
 
-    slope = find_slope(x_min, r_max_solve, n_pts, vortex_rhs_b1)
-    r, f, fp = integrate_profile(slope, x_min, r_max_solve, n_pts, vortex_rhs_b1)
-    print(f"  Solved b=1 profile: slope = {slope:.8f}, r_max = {r_max_solve}")
+    profile = CorrectedVortexProfile.solve(
+        x_min=x_min,
+        x_max=r_max_solve,
+        n=n_pts,
+    )
+    slope = profile.slope
+    r = np.asarray(profile.xs)
+    f = np.asarray(profile.fs)
+    fp = np.asarray(profile.fps)
+    print(f"  Solved coefficient-one profile: slope = {slope:.8f}, r_max = {r_max_solve}")
     print()
 
     r_max_vals = [1.0, 2.0, 3.0, 5.0, 8.0, 12.0, 15.0]
@@ -164,7 +175,7 @@ def main():
     res_log = jk_fit - jk_log
     r2_log = 1 - np.var(res_log)/np.var(jk_fit)
 
-    print(f"  Scaling fit over r_max = 5..50 xi:")
+    print(f"  Scaling fit over r_max = 3..15 xi:")
     print(f"    Linear fit:  (J+K) = {c_lin[0]:.6f} * r + {c_lin[1]:.4f}   R² = {r2_lin:.6f}")
     print(f"    Log    fit:  (J+K) = {c_log[0]:.6f} * ln(r) + {c_log[1]:.4f}   R² = {r2_log:.6f}")
     print()
@@ -207,11 +218,11 @@ def main():
         print(f"  Dominant scaling: LOG (R^2 = {r2_log:.4f} > linear R^2 = {r2_lin:.4f})")
 
     frac_change = (jk_at_r15 - (results[3][2]+results[3][3])) / (results[3][2]+results[3][3])
-    print(f"  (J+K) change from r_max=5 to r_max=50: {frac_change*100:+.2f}%")
+    print(f"  (J+K) change from r_max=5 to r_max=15: {frac_change*100:+.2f}%")
     if abs(frac_change) < 0.02:
-        print("  ** (J+K) converged to <2% over factor 10 in r_max: gap is LOCAL/UV, not IR **")
+        print("  ** (J+K) converged to <2% from 5 to 15 xi: gap is LOCAL/UV, not IR **")
     else:
-        print(f"  ** (J+K) shows non-trivial tail: {frac_change*100:.1f}% change over r=5..50 xi **")
+        print(f"  ** (J+K) shows non-trivial tail: {frac_change*100:.1f}% change over r=5..15 xi **")
 
 
 if __name__ == "__main__":

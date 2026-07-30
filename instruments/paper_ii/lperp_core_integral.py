@@ -5,7 +5,8 @@ from the SSV chiral-shear Lagrangian term:
 
     L_perp = (lambda_perp / 2) int |curl j|^2 d^3r
 
-Three integrals are computed from the Paper I planar vortex profile f(r):
+Three integrals are computed from the corrected Paper I planar vortex profile
+f(r), in conventional-healing-length units:
 
   I_curl = int (2ff'/r)^2 2pi r dr            (straight-vortex L_perp density)
   J_bend = int r^2 [d/dr(2ff'/r)]^2 2pi r dr  (core curvature-correction)
@@ -36,7 +37,8 @@ The SSV natural coupling from c_perp = alpha c at scale xi:
     lambda_perp_natural = alpha^-2   (k^4 dispersion, omega = c_perp k at k=1/xi)
 
 IMPORTANT NOTE ON DOMAIN:
-The planar vortex profile has an algebraic tail 1-f ~ 1/(4r^2) which does NOT
+The corrected planar vortex profile has an algebraic tail
+1-f ~ 1/(2r^2), which does NOT
 cause problems for I_curl and K_bend (they converge). However, the forward
 shooting integration becomes contaminated by growing modes beyond r~15 xi.
 All integrals must be evaluated only up to r_max=15 xi. The tail contributions
@@ -59,7 +61,7 @@ import sys
 import numpy as np
 
 sys.path.insert(0, "instruments/paper_i")
-from vortex_profile import VortexProfile  # noqa: E402 (path insert above)
+from corrected_vortex_profile import CorrectedVortexProfile  # noqa: E402
 
 
 ALPHA = 1.0 / 137.035999084
@@ -94,18 +96,18 @@ def compute_core_integrals(
 
 
 def analytic_tail(r0: float) -> tuple[float, float, float]:
-    """Estimate the tail contributions from r0 to inf using f ~ 1 - 1/(4r^2).
+    """Estimate the tail contributions from r0 to inf using f ~ 1 - 1/(2r^2).
 
-    curl_j = 2ff'/r ~ 1/r^4  (from f'~1/(2r^3), f~1)
-    d/dr(curl_j) ~ -4/r^5
+    curl_j = 2ff'/r ~ 2/r^4  (from f'~1/r^3, f~1)
+    d/dr(curl_j) ~ -8/r^5
 
-    I_curl_tail = int (1/r^4)^2 * 2pi*r dr = 2pi int 1/r^7 dr = 2pi/(6 r0^6)
-    J_bend_tail = int r^2 * (4/r^5)^2 * 2pi*r dr = 32pi int 1/r^7 dr = 32pi/(6 r0^6)
-    K_bend_tail = int (1/r^4)^2 * r^2 * 2pi*r dr = 2pi int 1/r^5 dr = 2pi/(4 r0^4)
+    I_curl_tail = 8pi/(6 r0^6)
+    J_bend_tail = 128pi/(6 r0^6)
+    K_bend_tail = 8pi/(4 r0^4)
     """
-    i_curl_tail = 2.0 * math.pi / (6.0 * r0**6)
-    j_bend_tail = 32.0 * math.pi / (6.0 * r0**6)
-    k_bend_tail = 2.0 * math.pi / (4.0 * r0**4)
+    i_curl_tail = 8.0 * math.pi / (6.0 * r0**6)
+    j_bend_tail = 128.0 * math.pi / (6.0 * r0**6)
+    k_bend_tail = 8.0 * math.pi / (4.0 * r0**4)
     return i_curl_tail, j_bend_tail, k_bend_tail
 
 
@@ -115,12 +117,12 @@ def main() -> None:
     print("=" * 68)
     print("SSV L_perp core integral — Paper II §4 bending stiffness check")
     print("=" * 68)
-    print(f"  Profile: b=1 convention, n={n_pts}, x_max={x_max_solve} xi")
+    print(f"  Profile: corrected coefficient-one, n={n_pts}, x_max={x_max_solve} xi")
     print(f"  Reliable integration up to r_max = {R_MAX_RELIABLE} xi")
     print(f"  (Growing mode contamination beyond this radius)")
     print()
 
-    vp = VortexProfile.solve(n=n_pts, x_max=x_max_solve)
+    vp = CorrectedVortexProfile.solve(n=n_pts, x_max=x_max_solve)
     r = np.array(vp.xs)
     f = np.array(vp.fs)
     fp = np.array(vp.fps)
@@ -133,15 +135,15 @@ def main() -> None:
     i_curl, j_bend, k_bend = compute_core_integrals(r, f, fp, R_MAX_RELIABLE)
     i_tail, j_tail, k_tail = analytic_tail(R_MAX_RELIABLE)
 
-    print("── 1. CORE INTEGRALS (b=1 convention, r < 15 xi) ───────────────")
+    print("── 1. CORE INTEGRALS (corrected conventional-xi, r < 15 xi) ───")
     print(f"  I_curl = int (2ff'/r)^2 * 2pi r dr        = {i_curl:.6f}")
     print(f"  J_bend = int r^2 [d/dr(2ff'/r)]^2 * 2pi r dr = {j_bend:.6f}")
     print(f"  K_bend = int (2ff'/r)^2 r^2 * 2pi r dr    = {k_bend:.6f}")
     print()
-    print(f"  Analytic tail r > {R_MAX_RELIABLE:.0f} xi (f ~ 1 - 1/(4r^2)):")
-    print(f"    I_curl_tail = 2pi/(6*r0^6) = {i_tail:.3e}  (negligible)")
-    print(f"    J_bend_tail = 32pi/(6*r0^6) = {j_tail:.3e}  (negligible)")
-    print(f"    K_bend_tail = 2pi/(4*r0^4) = {k_tail:.3e}  (small for K)")
+    print(f"  Analytic tail r > {R_MAX_RELIABLE:.0f} xi (f ~ 1 - 1/(2r^2)):")
+    print(f"    I_curl_tail = 8pi/(6*r0^6) = {i_tail:.3e}  (negligible)")
+    print(f"    J_bend_tail = 128pi/(6*r0^6) = {j_tail:.3e}  (negligible)")
+    print(f"    K_bend_tail = 8pi/(4*r0^4) = {k_tail:.3e}  (small for K)")
     print(f"  Fractional J_bend tail: {j_tail/j_bend:.2e}")
     print()
 
@@ -228,7 +230,7 @@ def main() -> None:
     print("SUMMARY")
     print("=" * 68)
     print()
-    print(f"  Core integrals (b=1, reliable r < 15 xi):")
+    print(f"  Core integrals (corrected coefficient-one, reliable r < 15 xi):")
     print(f"    I_curl = {i_curl:.4f}  (L_perp density per unit ring length)")
     print(f"    J_bend = {j_bend:.4f}  (curvature correction to L_perp)")
     print(f"    K_bend = {k_bend:.4f}  (metric Jacobian correction)")

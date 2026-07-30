@@ -69,11 +69,12 @@ at $c$ is the remaining carrier \emph{candidate}, and deriving two transverse
 polarizations with Maxwell source matching is open.  Speed agreement alone does
 not identify the observed photon.
 
-For the weak interaction the reconnection cap inherits the electron ring scale
-$R^*=\xi/\alpha$ (Paper~I), so the $W$ mass \emph{scale}
-$m_W\sim m_e/\alpha^2$ is derived.  The cap radius $R_{\rm cap}=\phi R^*$ then
-recovers $m_W\approx78.9\,\mathrm{GeV}$ ($1.8\%$ of measured), with $\phi$ an
-$\mathcal{O}(1)$ cap-aspect factor selected post hoc rather than derived.
+For the weak interaction, inheriting the electron ring scale
+$R^*=\xi/\alpha$ would motivate the conditional scale
+$m_W\sim m_e/\alpha^2$.  The actual cap dynamics has not established that
+inheritance.  Inserting $R_{\rm cap}=\phi R^*$ recovers
+$m_W\approx78.9\,\mathrm{GeV}$ ($1.8\%$ from measured), with $\phi$ selected
+post hoc rather than derived.
 
 The strong sector is open: a trefoil is one closed curve, and no $SU(3)$ colour
 dynamics or quantitative confinement mechanism is derived.  The gravity
@@ -166,24 +167,27 @@ is as follows:
         short range, confinement and asymptotic freedom is retired: the
         trefoil is one closed curve and supplies no $SU(3)$ colour dynamics
         (\S\ref{sec:strong}).
-  \item \textbf{Derived scale, $\mathcal{O}(1)$ prefactor open.}  The
-        reconnection cap inherits the electron ring scale $R^*=\xi/\alpha$, so
-        the $W$ mass scale $m_W\sim m_e/\alpha^2$ is derived; the Rayleigh-jet
+  \item \textbf{Conditional scale, cap dynamics open.}  If the
+        reconnection cap inherits the electron ring scale $R^*=\xi/\alpha$,
+        then $m_W\sim m_e/\alpha^2$; the Rayleigh-jet
         cap radius $R_{\rm cap}=\phi R^*$ then recovers $m_W$ to $1.8\%$
         (\S\ref{sec:weak}, \S\ref{sec:W_rayleigh}), with $\phi$ an
         $\mathcal{O}(1)$ coincidence.  The earlier local-bending-equilibrium
-        route to $R_{\rm cap}$ is retired (it is structurally $\alpha^{-2}$,
-        short of the ring scale by one power of $1/\alpha$).
+        route to $R_{\rm cap}$ is retired.  With the corrected vortex profile,
+        its local stiffness is short by a factor
+        \(\ssvIILambdaBendGap\), and the actual cap-setting dynamics remains
+        open.
   \item \textbf{Falsified as written; retained as record.}  The
         mutual-radiation Bjerknes mechanism of \S\ref{sec:gravity} is
         falsified by pre-registered computation (issue \#119:
         radiation-zone sign oscillation; unequal-frequency null; static
         screening), and the sub-grain $(m_e/m_p)^3$ route to $\alpha_G$
         is retired (\#98: $Q_p$ divergent).  The relation $G = \alpha_G
-        \hbar c \alpha^2/(N_p^2 m_e^2)$ remains a numerical consistency
-        check between CODATA $\alpha_G$ and the Paper~I proton mass
-        ($0.6\%$); it is not a derivation, and $G$ is at present an
-        empirical input.  The surviving gravity-sector content --- the
+        \hbar c \alpha^2/(N_p^2 m_e^2)$ is an algebraic identity once
+        $\alpha_G$ is supplied.  Its former $0.6\%$ numerical check used the
+        invalidated Paper~I proton calibration and does not survive the
+        corrected profile; $G$ is an empirical input.  The surviving
+        gravity-sector content --- the
         time-dilation field and the intrinsic defect source --- is
         developed in Paper~IV.
   \item \textbf{Candidate geometry only.}  The neutrino as torsional
@@ -1296,13 +1300,9 @@ The defect spectrum hierarchy of the previous paragraph is the SSV
 counterpart of the Standard Model Yukawa hierarchy: the ratio
 $m_p/m_e \approx \ssvProtonElectronMassRatio$ is determined by the relative scaling of two
 topology classes (the toroidal vortex ring and the knotted breather)
-under the same $\mathcal{L}+\mathcal{L}_\perp$ functional.  Although the
-\emph{individual} masses are at mixed status (Paper~I tags $m_e$ and
-$m_{\pi^\pm}$ as derived and $m_p$ as candidate; the proton-mass status
-is tracked under issue~\ssvissue{30}), the
-framework already supplies one composite \emph{mass-ratio} prediction
-whose structural form is fixed without further computation: the
-proton-to-pion mass ratio.
+under the same $\mathcal{L}+\mathcal{L}_\perp$ functional.  The algebraic
+form of the proton-to-pion ratio is fixed once those identifications are
+assumed, but its numerical value depends on the computed proton form factor.
 
 From the Paper~I identifications
 \begin{equation}
@@ -1312,7 +1312,7 @@ From the Paper~I identifications
 \end{equation}
 where $m_\star \equiv m_e/\alpha$ is the electron-derived flux-tube mass
 scale (so $E_\star=m_\star c^2\approx70\,\text{MeV}$), $N_Y$ is the topological crossing
-factor of the trefoil Y-junction, and $F$ is the 3D breather form
+factor associated with the trefoil crossing number, and $F$ is the 3D breather form
 factor, the ratio
 \begin{equation}
   \boxed{\;
@@ -1321,15 +1321,19 @@ factor, the ratio
   \label{eq:mp-over-mpi}
 \end{equation}
 follows immediately, with the empirical input $m_\star$ cancelling.  With the
-derived $N_Y = 3$ (the trefoil crossing number, issue~\ssvissue{92}) and the
-candidate-grade $F \approx 4.47$,
+corrected Paper~I coefficient-one vortex calibration, the two fine-grid
+states give
 \begin{equation}
-  \frac{m_p}{m_{\pi^\pm}} \;\approx\; 6.72,
+  \frac{m_p}{m_{\pi^\pm}}
+  \;=\;\frac{N_YF}{2}
+  \;\in\;
+  [\ssvIIProtonPionRatioLow,\ssvIIProtonPionRatioHigh],
   \label{eq:mp-over-mpi-numeric}
 \end{equation}
-within $0.1\%$ of the observed ratio
-$m_p/m_{\pi^\pm} =
-\ssvProtonMassMeV/\ssvChargedPionMassMeV \approx 6.722$.
+which is \(\ssvIIProtonPionDeviationLowPct\%\)--%
+\(\ssvIIProtonPionDeviationHighPct\%\) above the observed ratio
+\(\ssvProtonMassMeV/\ssvChargedPionMassMeV\).  The former
+near-match does not survive the corrected normalization.
 
 \paragraph{Cross-link to $m_p/m_e$.}
 The same product $N_Y\,F$ also controls the proton--electron ratio
@@ -1340,63 +1344,36 @@ Eq.~\eqref{eq:proton-pion-individual} gives the identity
                               \;=\; N_Y\,F.
   \label{eq:hierarchy-identity}
 \end{equation}
-This is a sharper statement than ``the spectrum has a hierarchy''.
-Three experimentally distinct dimensionless ratios ($m_p/m_{\pi^\pm}$,
-$m_p/m_e$, and $\alpha^{-1}$) reduce to one structural quantity $N_Y\,F$
-in the framework.  Numerically, $2\times 6.722 = 13.444$ and
-$(1/\ssvAlphaInverse)\times \ssvProtonElectronMassRatio = 13.398$ ---
-agreement at the $0.3\%$ level,
-matching the present candidate-grade precision of $F$ (the node factor
-$N_Y=3$ is now derived, issue~\ssvissue{92}).
-Eq.~\eqref{eq:hierarchy-identity} is therefore an internal consistency
-\emph{prediction}: any future first-principles computation of $N_Y$ and
-$F$ must reproduce both the $\ssvProtonElectronMassRatio$ and $6.72$ ratios with the same
-single number.
+The identity is structural, but the corrected computed product is
+\(N_YF\in[\ssvIICandidateProductLow,\ssvIICandidateProductHigh]\), rather than
+the observed-ratio value near \(13.4\).  It therefore currently records a
+failed numerical mass relation, not an internal-consistency prediction.
 
-\begin{resultbox}[Structural composite mass ratio]
+\begin{resultbox}[Composite mass ratio: structural form, failed value]
 \begin{itemize}\setlength\itemsep{2pt}
   \item \textbf{Structural form:}
         $m_p/m_{\pi^\pm} = N_Y F/2$ (Eq.~\eqref{eq:mp-over-mpi}).
-  \item \textbf{Numerical value:}
-        $6.72$ ($N_Y=3$ derived, $F\approx4.47$ candidate-grade), $0.1\%$
-        below the observed $6.722$.
-  \item \textbf{Consistency identity:}
-        $2(m_p/m_{\pi^\pm}) = \alpha(m_p/m_e) = N_Y F$
-        (Eq.~\eqref{eq:hierarchy-identity}), reducing three observed
-        dimensionless ratios to a single framework quantity at the
-        $0.3\%$ level.
-  \item \textbf{Status:} structural --- the form is fixed by the
+  \item \textbf{Corrected numerical value:}
+        \(\ssvIIProtonPionRatioLow\)--\(\ssvIIProtonPionRatioHigh\), above
+        observation by \(\ssvIIProtonPionDeviationLowPct\%\)--%
+        \(\ssvIIProtonPionDeviationHighPct\%\).
+  \item \textbf{Status:} the form is fixed by the
         Paper~I topology assignments (electron $=$ toroidal vortex of
         radius $\xi/\alpha$; pion $=$ two-winding link; proton $=$
-        trefoil Y-junction breather).  $N_Y=3$ is derived (the trefoil crossing
-        number, issue~\ssvissue{92}); the value of $F$ inherits the candidate-grade
-        status of the proton derivation (Paper~I).  Promotion of the ratio from
-        structural to derived requires only closing $F$ ---
-        geometric derivation of the cutoff $R\approx 1.18\,\xi$, and
-        recovery of the converged value from at least one
-        non-trefoil initial condition; the concrete runs are
-        itemised in
-        \ssvfile{static-3d-closure-status-2026-05-28}
-        and tracked under issue~\ssvissue{30}.
+        trefoil breather).  The crossing number survives, but topology does
+        not fix \(F\).  The corrected saved-state calculation misses the
+        observed mass ratio, while the self-consistent-cutoff closure test
+        also fails.
 \end{itemize}
 \end{resultbox}
 
-\begin{gapbox}[$6.72$ and the $N_Y F$ identity inherit the $F$ calibration]
-The structural form $m_p/m_{\pi^\pm} = N_Y F/2$
-(Eq.~\eqref{eq:mp-over-mpi}) is unchanged.  Its numerical value $6.72$
-and the consistency identity $2(m_p/m_{\pi^\pm}) = \alpha(m_p/m_e) =
-N_Y F \approx 13.44$ both inherit the Paper~I §Proton gapbox: $F$ is
-a cutoff-dependent calibration ($\mathrm{d}\ln F/\mathrm{d}\ln R
-\approx -0.94$, $19\%$ variation between $R=1.18\,\xi$ and $R=1.5\,\xi$),
-not yet a cutoff-independent first-principles derivation.  The
-\texttt{q\_p\_two\_factor\_*} scripts that attempted to calibrate the
-cutoff away are now in \texttt{instruments/\_fitted\_quarantine/} after the
-Path~B null exposed how readily fitted inputs flatter derived
-results.  The $0.1\%$--$0.3\%$ agreements quoted above are therefore
-consistency at the published cutoff, not a finished derivation;
-promotion paths are the same as for the proton mass (derive $R$
-geometrically, or show $N_Y\!\cdot\!F$ is cutoff-invariant).
-Tracking: issues~\ssvissue{30} (closure) and~\ssvissue{66} (cleanup record).
+\begin{gapbox}[Corrected proton calibration fails]
+The structural identity in Eq.~\eqref{eq:hierarchy-identity} is unchanged,
+but its old numerical agreement was a normalization artifact.  The corrected
+fine-grid form factors imply a proton mass 16.0\%--18.9\% above observation,
+and the corrected self-consistent-cutoff \(N_YF\) spread is 158.1\%, far
+outside the preregistered 5\% closure gate.  No corrected proton-mass
+prediction currently survives.  Tracking: issue~\ssvissue{218}.
 \end{gapbox}
 
 \begin{gapbox}[Residual gap: the broader composite spectrum]
@@ -1520,7 +1497,8 @@ Treating the cap as a closed vortex ring of radius $R$, in SSV natural units
   \label{eq:Ecap_equilibrium}
 \end{equation}
 (surface-pressure area cost, vortex line-tension perimeter, and a chiral-shear
-bending resistance), with line tension $\tau = 17.0\,\xi$ computed from the
+bending resistance), with corrected line tension
+$\tau = \ssvIIVortexTau\,\xi$ computed from the
 planar $\mathrm{LogSE}$ profile (\ssvfile{vortex_cap_mass}).  Minimising gives
 the cubic
 \begin{equation}
@@ -1537,37 +1515,41 @@ This route does \emph{not} work, and the way it fails is informative.  The
 chiral-shear Lagrangian $\mathcal{L}_\perp = (\lambda_\perp/2)\int|\nabla\times
 \mathbf{j}|^2\,d^3r$ has coupling $\lambda_\perp = \alpha^{-2}$ (from
 the core-scale stiffness ratio $c_\perp/c = \alpha$ at $k = 1/\xi$;
-\ssvissue{138}), and its curvature correction is
+\ssvissue{138}).  The corrected profile has origin slope
+\(\ssvIIVortexSlope\) and core integrals
+\(I_{\rm curl}=\ssvIIIcurl\), \(J=\ssvIIJBend\), and
+\(K=\ssvIIKBend\).  Its curvature diagnostic is
 $\lambda_{\rm bend}^{\rm local} = \lambda_\perp (J{+}K)/4$ with
-$(J{+}K)/4 = 2.50$ an $\mathcal{O}(1)$ core integral
+$(J{+}K)/4 = \ssvIIJKOverFour$ an $\mathcal{O}(1)$ core integral
 (\ssvfile{lperp_core_integral}).  A local curvature correction is therefore
 \emph{structurally} $\alpha^{-2}$, never $\alpha^{-3}$:
-$\lambda_{\rm bend}^{\rm local} \approx 4.7\times 10^4\,\xi^3$, short of
+$\lambda_{\rm bend}^{\rm local} \approx
+\ssvIILambdaBendLocal\,\xi^3$, short of
 \eqref{eq:lambda_bend_required} by exactly one power of $1/\alpha = R^*/\xi$ (the
-ring/core ratio), $232 = (\phi^3/2.50)\,\alpha^{-1}$.  Fed back into
+ring/core ratio) times an order-one coefficient: the corrected gap is
+\(\ssvIILambdaBendGap\).  Fed back into
 \eqref{eq:cap_cubic}, this honest stiffness places the equilibrium at
-$R_{\rm eq} \approx 31\,\xi \sim \alpha^{-2/3}$ --- not the ring scale
-$\xi/\alpha \approx 137\,\xi$ --- i.e.\ $m_W \approx 1.6\,\mathrm{GeV}$.  A local
+$R_{\rm eq} \approx \ssvIILocalCapRadius\,\xi$ --- not the ring scale
+$\xi/\alpha \approx 137\,\xi$ --- i.e.\
+$m_W \approx \ssvIILocalCapMassGeV\,\mathrm{GeV}$.  A local
 bending equilibrium simply does not set the cap at the ring scale.
 
-The resolution is that it need not.  $R_{\rm cap}$ is the \emph{inherited} scale
-of the reconnecting defects: those defects are electron-scale rings of radius
-$R^* = \xi/\alpha$ (derived in Paper~I from the Lamb energy), and a reconnection
-cap cannot be smaller than the ring throats it joins, so $R_{\rm cap} \sim R^*$.
-Then $m_W \sim P_0\,R_{\rm cap}^2\,\xi \sim m_e\,(R^*/\xi)^2 = m_e/\alpha^2$:
-\textbf{the $1/\alpha^2$ scale of the $W$ mass is derived}, being the same
-ring/core ratio that fixes the electron in Paper~I, and the $232\times$
-``shortfall'' was an artefact of the equilibrium sub-model, not a missing
-physical energy.  What remains is the $\mathcal{O}(1)$ prefactor
+The conditional alternative is scale inheritance.  The reconnecting defects
+are electron-scale rings of radius $R^* = \xi/\alpha$, so a cap of the same
+order would give
+$m_W \sim P_0\,R_{\rm cap}^2\,\xi \sim m_e\,(R^*/\xi)^2 = m_e/\alpha^2$.
+This motivates the scale but does not derive the cap geometry; the nonlinear
+reconnection calculation remains open.  The local-equilibrium shortfall is a
+diagnosis of the retired sub-model, not evidence that inheritance occurs.
+The remaining numerical agreement uses the $\mathcal{O}(1)$ prefactor
 $\pi\phi^2 \approx 8.2$ (two caps, $\times\pi$, $\times$ the cap aspect
 $\phi^2$); only $\phi$ is coincidence-grade, matching the back-solved cap radius
 $1.633\,\xi/\alpha$ to $0.9\%$ (\ssvfile{wmass_cap_scale_resolution},
 issue~\ssvissue{105}).  As a recorded aside, retaining the equilibrium picture
-would require $\lambda_\perp$ evaluated at the \emph{cap} scale with a linear
-running $\lambda_\perp(k) \sim 1/k$, giving
-$\lambda_{\rm bend} = (J{+}K)/4\cdot\phi/\alpha^3$ within $4.4\%$ of
-\eqref{eq:lambda_bend_required} --- the same statement that the relevant scale is
-the ring, not the core.
+would require an enhancement beyond simple linear running.  With the corrected
+profile, $\lambda_{\rm bend}=(J{+}K)\phi/(4\alpha^3)$ is
+\(\ssvIILinearRunningShortfallPct\%\) below
+\eqref{eq:lambda_bend_required}; the former near-match does not survive.
 
 \paragraph{Why the cap geometry is not directly accessible.}
 The cap geometry is determined by the \emph{dynamics} of the reconnection, not
@@ -2529,37 +2511,27 @@ $\langle F_{12}\rangle = Gm_p^2/r^2$:
     G = \frac{\rho_0\,\omega_p^2\,Q_p^2}{8\pi\,m_p^2}.
     \label{eq:G_from_medium}
 \end{equation}
-A full evaluation of $Q_p$ requires the 3D proton breather profile
-and is deferred to a companion paper.  A structural consistency check
-uses the gravitational coupling constant $\alpha_G \equiv
-Gm_p^2/(\hbar c)$ and the Paper~I proton mass,
-$m_p = N_p\,m_e/\alpha$ with $N_p = N_Y F \approx 13.44$:
+A structural rewrite uses the gravitational coupling constant
+$\alpha_G \equiv Gm_p^2/(\hbar c)$ and
+$m_p = N_p\,m_e/\alpha$:
 \begin{equation}
     G = \frac{\alpha_G\,\hbar c\,\alpha^2}{N_p^2\,m_e^2}.
     \label{eq:G_ladder}
 \end{equation}
-This is a structural consistency check: $\alpha_G$ is taken from CODATA rather
-than derived from first principles, confirming that the Paper~I proton mass is
-internally coherent with the gravitational sector.  Inserting
-$\alpha_G = 5.906\times10^{-39}$ (CODATA) and $N_p = 13.44$:
-\begin{equation}
-    G_{\rm pred}
-      = \frac{5.906\times10^{-39}\;\hbar c\,\alpha^2}{(13.44)^2\,m_e^2}
-      = 6.634\times10^{-11}\,\mathrm{m^3\,kg^{-1}\,s^{-2}},
-    \label{eq:G_numerical}
-\end{equation}
-within $0.6\%$ of $G_{\rm obs} = 6.674\times10^{-11}
-\,\mathrm{m^3\,kg^{-1}\,s^{-2}}$.  The residual is consistent with
-the imprecision in $N_p$ (form factor $F \approx 4.47$ is
-numerically determined; see Paper~I).
+This is an identity once $\alpha_G$ and the observed proton mass are supplied,
+not a prediction of \(G\).  The old numerical near-match substituted the
+legacy Paper~I value \(N_p\approx13.4\).  The corrected saved-state calibration
+instead gives
+\(N_p=N_YF\in[\ssvIICandidateProductLow,\ssvIICandidateProductHigh]\), so that
+near-match does not survive.
 
 \begin{gapbox}[Open problem: $G$ has no live derivation route
 (status after \#119/\#98)]
 $\alpha_G = 5.9\times10^{-39}$ is at present an \emph{empirical input}.
 Equation~\eqref{eq:G_ladder} expresses $G$ in terms of $\{\hbar, c,
-\alpha, m_e, \alpha_G\}$ and matches CODATA to $0.6\%$ when $\alpha_G$ is
-supplied; that is a numerical consistency check of the Paper~I mass
-ladder, not a derivation.  Every route that was to supply $\alpha_G$ from
+\alpha, m_e, \alpha_G\}$.  Supplying $\alpha_G$ already supplies \(G\)
+through its definition, so no agreement obtained by this substitution is an
+independent check.  Every route that was to supply $\alpha_G$ from
 the medium is now closed: (i) the sub-grain suppression factor
 $(\bar{\lambda}_p/\xi)^n$ belonged to the mutual-radiation mechanism falsified above,
 and its monopole charge $Q_p$ is formally divergent --- the LogSE healing
@@ -2571,12 +2543,9 @@ relation on the natural baryon-locked chain, misses $\alpha_G$ by
 $\sim$35 orders of magnitude and predicts BTFR slope $3/2$ instead of
 $4$ (\#119 H9, falsified on both pre-registered rules); (iii) naive
 Sakharov scaling at the SSV grain overshoots by $\sim$39 orders in the
-opposite direction.  The $0.6\%$ figure also inherits the SSV-I
-F-cutoff calibration of $N_p$ (issue~\ssvissue{66}): $N_p=13.44$ is the
-midpoint of the two-fine-grid bracket $13.28$--$13.62$, and since
-$G\propto N_p^{-2}$ the inherited spread on $G_{\rm pred}$ is
-$-3.2\%$ to $+1.8\%$, five times the quoted residual.  The weakness of
-gravity is the sector's hierarchy problem, fully exposed.
+opposite direction.  The corrected proton calibration independently removes
+the old numerical near-match.  The weakness of gravity is the sector's
+hierarchy problem, fully exposed.
 \end{gapbox}
 
 \paragraph{Candidate common carrier at the sound speed.}
@@ -2795,10 +2764,11 @@ clear which experiments would test which structural claims.
   detection of the fluctuation spectrum around the memory mean, which is
   beyond current sensitivity.
 
-\item \textbf{$W$-mass scale derived; $\mathcal{O}(1)$ prefactor open.}  The
+\item \textbf{$W$-mass scale conditional; cap dynamics open.}  If the
   reconnection cap inherits the electron ring scale $R^* = \xi/\alpha$
-  (Paper~I), so the cap energy $m_W \sim P_0 R_{\rm cap}^2 \xi \sim m_e/\alpha^2$
-  has a \emph{derived} $1/\alpha^2$ scale ($\approx 9.6\,\mathrm{GeV}$).  The
+  (Paper~I), then the cap energy
+  $m_W \sim P_0 R_{\rm cap}^2 \xi \sim m_e/\alpha^2$
+  has the motivated scale $\approx 9.6\,\mathrm{GeV}$.  The
   Rayleigh-jet cap radius $R_{\rm cap} = \phi R^*$ (\S\ref{sec:W_rayleigh},
   equation~\eqref{eq:Rcap_phi}) then gives $m_W \approx 78.9\,\mathrm{GeV}$ ---
   within $1.8\%$ --- with the prefactor $\pi\phi^2$ an $\mathcal{O}(1)$
@@ -2806,9 +2776,10 @@ clear which experiments would test which structural claims.
   derive $R_{\rm cap}$ from a local chiral-shear bending equilibrium
   (\S\ref{sec:W_rayleigh}, equation~\eqref{eq:cap_cubic}) is retired: a local
   $\mathcal{L}_\perp$ curvature correction is structurally $\alpha^{-2}$ and
-  undershoots the ring scale by exactly one power of $1/\alpha$ (the ``factor
-  $232$''), confirming that the cap scale is set by ring inheritance, not
-  bending (issue~\ssvissue{105}).
+  misses the required stiffness by the corrected factor
+  \(\ssvIILambdaBendGap\).  This retires local bending as the cap-setting
+  sub-model; it does not by itself establish ring inheritance
+  (issues~\ssvissue{105} and~\ssvissue{220}).
 
 \item \textbf{Running of $\alpha$ at high energy.} The chiral-shear coupling
   $\alpha$ is a medium property, not a bare constant. At momentum scales
@@ -3005,8 +2976,9 @@ from the others:
   $\mathcal{O}(1)$ prefactor is not predicted: $\phi$ was selected after
   back-solving the observed $W$ mass and is a $0.9\%$ numerical coincidence.
   The local $\mathcal{L}_\perp$ bending equilibrium that
-  would have set $R_{\rm cap}$ is retired (structurally $\alpha^{-2}$, the
-  ``$232\times$'' undershoot is one power of $1/\alpha$).
+  would have set $R_{\rm cap}$ is retired: it is structurally
+  $\alpha^{-2}$ and misses the required stiffness by the corrected factor
+  \(\ssvIILambdaBendGap\).
 
 \item \textbf{The neutrino sector (P1--P5 of \S\ref{sec:neutrino}).}  Mass,
   three-flavour structure, oscillation phenomenology, Dirac/Majorana
@@ -3050,28 +3022,23 @@ principle without empirical input.  This is a sharp, falsifiable claim ---
 the geometry will produce specific numbers that either match observation or
 do not.
 
-\subsection*{Structurally separate open problems}
+\subsection*{Structurally separate statuses}
 
-Three further open problems stand outside the core computation, in the sense
-that their resolution requires different tools.
+Three questions outside the reconnection calculation no longer share one
+status and must be separated.
 
 \begin{enumerate}\setcounter{enumi}{5}
-\item \textbf{Newton's constant: $\alpha_G$ from the proton breather.}  The
-  structural formula~\eqref{eq:G_ladder} reproduces $G_{\rm obs}$ to $0.6\%$
-  using the Paper~I proton mass.  The remaining task is computing the
-  sub-grain acoustic monopole suppression factor $(\bar{\lambda}_p/\xi)^n$ from the 3D
-  \emph{static} proton breather profile, which would yield
-  $\alpha_G=Gm_p^2/(\hbar c)\approx 5.906\times 10^{-39}$ without empirical
-  input.  This is a different computation from the reconnection one (a
-  static eigenmode rather than a dynamical event), but uses the same
-  $\mathcal{L}+\mathcal{L}_\perp$ functional.
+\item \textbf{Newton's constant: closed negative / conceded input.}  The
+  acoustic-monopole route is divergent and box-dependent, the circulation
+  route fails its magnitude and slope gates, and literal screen mode counting
+  misses the required coefficient by about 38 orders.  No live derivation of
+  \(G\) remains in the adopted effective theory.
 
-\item \textbf{Spin-2 polarisation from linearised Madelung.}  A systematic
-  post-Newtonian expansion of the Madelung equations around a pulsating
-  source is needed to confirm the spin-2 angular pattern of gravitational
-  radiation from the longitudinal acoustic carrier.  This is a perturbative
-  calculation around the static gravity picture of \S\ref{sec:gravity},
-  independent of the reconnection geometry.
+\item \textbf{Spin-2 polarisation: structurally falsified.}  The scalar acoustic
+  metric has no transverse-traceless sector, and the spinor completion
+  \(\bar{\mathbf 2}\otimes\mathbf 2=\mathbf1\oplus\mathbf3\) contains no
+  spin-2 representation.  The adopted SSV sectors cannot supply the observed
+  tensor gravitational-wave polarisations.
 
 \item \textbf{The canvas-grain hierarchy
   (\S\ref{sec:higgs}).}  The Higgs mass corresponds to a canvas grain length
@@ -3095,12 +3062,10 @@ of the present paper.
 
 \begin{enumerate}\setcounter{enumi}{8}
 \item \textbf{Time-averaging in a recording medium
-  (Paper~IV).}  The Bjerknes time-averaging that produces
-  Newton's law is a classical operation; in a medium that accumulates a
-  record of every reconnection event, the corrections to the leading-order
-  static result carry information about pulsation history, and reproduce
-  the gravitational-wave memory effect (Christodoulou) as a natural
-  consequence.
+  (Paper~IV).}  Bjerknes time-averaging is a classical operation, but the
+  SSV mutual-radiation implementation does not produce viable Newtonian
+  gravity.  Any recording interpretation therefore belongs to the surviving
+  conceptual ontology, not to that falsified force mechanism.
 
 \item \textbf{Discrete symmetries at the level of physical processes
   (\S\ref{sec:CP}).}  The distinction between formal symmetries of the
@@ -3110,31 +3075,16 @@ of the present paper.
   the foundation of its treatment of time and entropy.
 \end{enumerate}
 
-\subsection*{What is closed}
+\subsection*{What is closed, invalidated, and open}
 
-It is worth stating explicitly what the present paper closes, since the
-length of the open-problems list could otherwise mislead.  The mean-field
-mechanical content of all four forces is fixed: each is a calculable pressure
-response of the saturated medium, with coupling constants determined by
-$\{c, \alpha, m_\star\}$ from Paper~I.  The Higgs is identified with the
-amplitude mode of the same order parameter $\Psi$, with no separately
-postulated field.  Magnetic monopoles are topologically forbidden, not merely
-absent.  The ultraviolet divergence of perturbative quantum gravity does not
-arise.  The strong CP problem and the cosmological constant fine-tuning
-problem do not arise.  Parity violation, the $(V-A)$ structure of the weak
-current, the equivalence principle, the universality of gravitational
-coupling, and the impossibility of magnetic monopoles all follow from the
-single hydrodynamic substrate without additional assumption.
-
-The remaining open problems are computational, not foundational.  Each has a
-definite formulation within the framework already established here and in
-Paper~I, and a clear path to numerical resolution.  The framework's most
-distinctive structural feature is the unification of what the Standard Model
-treats as independent puzzles --- the $W$ mass, the neutrino sector, the
-charged-lepton generations, and the CP-violation observables --- into facets
-of a single 3D minimisation.  Whether that minimisation, when finally
-performed, produces the right numbers is the empirical test the framework
-sets for itself.
+The adopted scalar/spinor framework is closed as a derivation of the four
+observed force sectors.  Its durable results are narrower: several
+hydrodynamic/analogue forms, and sharp negatives for the Bjerknes gravity
+route, \(SU(3)\) colour from a three-strand picture, spin-2 gravity, the
+mass-ladder modes, and local cap bending.  The full reconnection calculation,
+chirality-coupling sign, and a corrected defect stability spectrum remain
+genuinely open mathematical questions.  They are not surviving predictions
+and do not reverse the programme-level closure.
 
 % ═══════════════════════════════════════════════════════════════════════
 \section{Conclusion}
@@ -3160,24 +3110,25 @@ because the trefoil is one closed curve and does not furnish $SU(3)$ colour.
 A quantitative strong-force and confinement mechanism remains open.
 
 \paragraph{What the paper derives, and what stays coincidence.}
-For the weak force, the reconnection cap inherits the electron ring scale
-$R^* = \xi/\alpha$ (Paper~I), so the $W$ mass scale $m_W \sim m_e/\alpha^2$ is
-\emph{derived}; the Rayleigh-jet cap radius $R_{\rm cap} = \phi R^*$ then
+For the weak force, inheriting the electron ring scale
+$R^* = \xi/\alpha$ (Paper~I) would motivate
+$m_W \sim m_e/\alpha^2$; the Rayleigh-jet cap radius
+$R_{\rm cap} = \phi R^*$ then
 recovers $m_W$ to $1.8\%$, with $\phi$ an $\mathcal{O}(1)$ cap-aspect
 coincidence ($0.9\%$).  The earlier local-chiral-shear bending-equilibrium route
 to $R_{\rm cap}$ is retired: a local $\mathcal{L}_\perp$ curvature correction is
-structurally $\alpha^{-2}$ and undershoots the ring scale by one power of
-$1/\alpha$ (the ``factor $232$''), which confirms that the cap scale is set by
-ring inheritance rather than bending.
+structurally $\alpha^{-2}$ and misses the required stiffness by the corrected
+factor \(\ssvIILambdaBendGap\).  The actual cap-setting mechanism remains open.
 
 \paragraph{What the gravity falsification leaves.}
 The mutual-radiation Bjerknes route does not give viable gravity: its
 far-zone force changes sign, unequal-frequency sources decouple, and
 composite-body extensivity fails (\ssvissue{119}).  The relation
 $G = \alpha_G \hbar c \alpha^2/(N_p^2 m_e^2)$ uses
-$\alpha_G$ from CODATA and matches the Paper~I proton mass to $0.6\%$.
-This is an algebraic consistency check, not a derivation of $G$; no live
-first-principles route to $G$ remains in this paper.
+$\alpha_G$ from CODATA and is therefore an algebraic rewrite, not a
+derivation or independent check.  Its old proton near-match is invalidated by
+the corrected Paper~I profile; no live first-principles route to $G$ remains
+in this paper.
 Gravitational and electromagnetic radiation share the
 Goldstone (phase) channel of the medium and therefore propagate at the
 medium's sound speed $c$, consistent with GW170817; the chiral-shear

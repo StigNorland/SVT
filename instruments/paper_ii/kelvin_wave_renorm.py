@@ -1,6 +1,7 @@
 """Step 3: Kelvin wave renormalization — one-loop correction to lambda_perp.
 
-Question: can δλ_perp from quantum/thermal Kelvin waves close the 232x gap?
+Question: can δλ_perp from quantum/thermal Kelvin waves close the corrected
+380x gap?
 
 Two mechanisms to check:
   (A) Classical LIA (Local Induction Approximation):
@@ -33,6 +34,7 @@ PHI   = (1.0 + math.sqrt(5.0)) / 2.0
 R_CAP = PHI / ALPHA          # ~ 221.5 xi
 XI    = 1.0                  # healing length (natural unit)
 KAPPA = 2.0 * math.pi        # circulation quantum (in units where hbar/m = 1)
+JK_OVER_4 = 1.527391         # corrected coefficient-one core integral
 
 
 def lia_bending_stiffness(R: float, xi: float = 1.0) -> float:
@@ -94,7 +96,7 @@ def main():
 
     lam_perp   = 1.0 / ALPHA**2
     lam_target = PHI**3 / ALPHA**3
-    lam_local  = lam_perp * 2.503   # (J+K)/4 from Step 1
+    lam_local  = lam_perp * JK_OVER_4
 
     print(f"  phi = {PHI:.8f}, alpha = {ALPHA:.8f}")
     print(f"  R_cap = phi/alpha = {R_CAP:.2f} xi")
@@ -148,7 +150,7 @@ def main():
     print(f"  {'p':>6}  {'lambda_perp(R_cap)':>22}  {'lambda_bend':>16}  {'gap':>8}")
     for p in [0.0, 0.5, 1.0, 1.5, 2.0]:
         lam_eff = lam_perp * (R_CAP / XI)**p
-        lam_bend_p = lam_eff * 2.503   # (J+K)/4 ~ 2.503 from core integrals
+        lam_bend_p = lam_eff * JK_OVER_4
         gap_p = lam_target / lam_bend_p
         print(f"  {p:6.1f}  {lam_eff:22.4e}  {lam_bend_p:16.4e}  {gap_p:8.4f}")
     print()
@@ -159,7 +161,7 @@ def main():
     print(f"  ln(R_cap/xi) = {ln_ratio:.4f}")
     # What c is needed to close the gap?
     c_needed = (lam_target / lam_local - 1) / ln_ratio
-    print(f"  c needed to close gap: c = (232 - 1) / ln(222) = {c_needed:.4f}")
+    print(f"  c needed to close gap: c = (gap - 1) / ln(222) = {c_needed:.4f}")
     print(f"  LIA gives c ~ kappa^2/(4pi * lambda_perp) = {KAPPA**2 / (4*math.pi*lam_perp):.6f}")
     print(f"  -> LIA coefficient is {KAPPA**2/(4*math.pi*lam_perp)/c_needed:.4e} of what's needed")
     print()
@@ -172,11 +174,11 @@ def main():
     print(f"  LIA enhancement:      {lia_at_cap/lam_local:.4f}x  (ln scaling, R*ln(R/xi))")
     print(f"  Combined / target:    {(lam_local + lia_at_cap)/lam_target:.6f}")
     print(f"  ln(R_cap/xi):         {math.log(R_CAP):.4f}")
-    print(f"  Linear (p=1) at R_cap: {(R_CAP)**1:.1f}x enhancement — sufficient")
+    print(f"  Linear (p=1) at R_cap: {(R_CAP)**1:.1f}x enhancement — still insufficient")
     print(f"  Log enhancement:       {math.log(R_CAP):.1f}x — insufficient by {R_CAP/math.log(R_CAP):.0f}x")
     print()
     print("  Conclusion: Kelvin wave one-loop correction is O(ln(R/xi)) = O(5.4),")
-    print(f"  not O(R/xi) = O({R_CAP:.0f}). The 232x gap is NOT closed by KW renormalization.")
+    print(f"  not O(R/xi) = O({R_CAP:.0f}). The corrected 380x gap is NOT closed by KW renormalization.")
     print(f"  A linear running lambda_perp(R) ~ R requires anomalous dimension [lambda_perp] = 1.")
     print()
 

@@ -48,10 +48,12 @@ For one defect carrying both a colour winding `m_c` and a weak winding `m_w` on 
 ε_cw / λ_cw = m_c m_w · I_cross ,   I_cross = ∫ (2ff'/r)² · 2πr dr = 5.0195  (tail 9e-8)
 ```
 
-- **(A) `I_cross = 5.02 > 0`, nonzero.** The term is allowed; NOT-FORCED-by-vanishing
+- **(A) `I_cross = 2.5098 > 0`, nonzero.** The corrected coefficient-one
+  profile halves the legacy magnitude; the term remains allowed and
+  NOT-FORCED-by-vanishing
   is ruled out at leading order.
 - **(B) `I_cross` *equals* the diagonal straight-vortex `L_perp` self-energy density
-  `I_curl`** of `lperp_core_integral.py` (when the colour and weak cores coincide,
+  corrected `I_curl`** of `lperp_core_integral.py` (when the colour and weak cores coincide,
   `|m|=1`). The locking term is the **same order** as the diagonal self-terms —
   `|λ_cw ∫ω_c·ω_w| ~ (λ/2)∫|ω|²` for `λ_cw ~ λ⊥` — **not a small correction.**
 
