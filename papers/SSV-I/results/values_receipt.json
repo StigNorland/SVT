@@ -3,7 +3,7 @@
   "paper": "SSV-I",
   "hypothesis": "every load-bearing number this paper prints is computed by a named instrument, not typed by hand (#198 Part A)",
   "generator": "instruments/tools/gen_values.py",
-  "computed_utc": "2026-07-29T23:36:27Z",
+  "computed_utc": "2026-07-30T00:31:21Z",
   "values": {
     "ssvLambda": {
       "value": 5.249685200705899,
@@ -31,6 +31,267 @@
       "source": "instruments/paper_i/ssv_i_audit_2026.py::xi_over_alpha",
       "source_sha256_16": "748c9080562824ae",
       "was": ""
+    },
+    "ssvCandidateNY": {
+      "value": 3.007,
+      "sig": 4,
+      "rendered": "3.007",
+      "describes": "candidate finite-thickness trefoil factor N_Y",
+      "source": "instruments/paper_i/issue_218_values.py::candidate_n_y",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "3.007"
+    },
+    "ssvEnergyStarMeV": {
+      "value": 70.02525110968456,
+      "sig": 6,
+      "rendered": "70.0253",
+      "describes": "E_\\star=(m_e/\\alpha)c^2 in MeV",
+      "source": "instruments/paper_i/issue_218_values.py::energy_star_mev",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "70.025"
+    },
+    "ssvProtonFormFactorLow": {
+      "value": 5.167661829526305,
+      "sig": 4,
+      "rendered": "5.168",
+      "describes": "corrected n=72 proton form factor at R=1.18 xi",
+      "source": "instruments/paper_i/issue_218_values.py::fine_grid_form_factor_low",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "5.168"
+    },
+    "ssvProtonFormFactorHigh": {
+      "value": 5.298115436331215,
+      "sig": 4,
+      "rendered": "5.298",
+      "describes": "corrected n=48 proton form factor at R=1.18 xi",
+      "source": "instruments/paper_i/issue_218_values.py::fine_grid_form_factor_high",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "5.298"
+    },
+    "ssvProtonFormFactorMean": {
+      "value": 5.23288863292876,
+      "sig": 3,
+      "rendered": "5.23",
+      "describes": "mean corrected fine-grid proton form factor at R=1.18 xi",
+      "source": "instruments/paper_i/issue_218_values.py::fine_grid_form_factor_mean",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "5.23"
+    },
+    "ssvProtonCandidateProductLow": {
+      "value": 15.5391591213856,
+      "sig": 4,
+      "rendered": "15.54",
+      "describes": "low endpoint of candidate N_Y F product",
+      "source": "instruments/paper_i/issue_218_values.py::candidate_product_low",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "15.54"
+    },
+    "ssvProtonCandidateProductHigh": {
+      "value": 15.931433117047964,
+      "sig": 4,
+      "rendered": "15.93",
+      "describes": "high endpoint of candidate N_Y F product",
+      "source": "instruments/paper_i/issue_218_values.py::candidate_product_high",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "15.93"
+    },
+    "ssvProtonCandidateMassLowMeV": {
+      "value": 1088.133519508372,
+      "sig": 4,
+      "rendered": "1088",
+      "describes": "low endpoint of corrected candidate proton band in MeV",
+      "source": "instruments/paper_i/issue_218_values.py::candidate_mass_low_mev",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "1088"
+    },
+    "ssvProtonCandidateMassHighMeV": {
+      "value": 1115.6026045584283,
+      "sig": 4,
+      "rendered": "1116",
+      "describes": "high endpoint of corrected candidate proton band in MeV",
+      "source": "instruments/paper_i/issue_218_values.py::candidate_mass_high_mev",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "1116"
+    },
+    "ssvProtonCandidateDeviationLowPct": {
+      "value": 15.972065378418975,
+      "sig": 3,
+      "rendered": "16.0",
+      "describes": "low endpoint deviation of candidate proton band, percent",
+      "source": "instruments/paper_i/issue_218_values.py::candidate_mass_low_deviation_pct",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "16.0"
+    },
+    "ssvProtonCandidateDeviationHighPct": {
+      "value": 18.899690040463923,
+      "sig": 3,
+      "rendered": "18.9",
+      "describes": "high endpoint deviation of candidate proton band, percent",
+      "source": "instruments/paper_i/issue_218_values.py::candidate_mass_high_deviation_pct",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "18.9"
+    },
+    "ssvProtonCutoffLogSlope": {
+      "value": -1.0409855026829775,
+      "sig": 3,
+      "rendered": "-1.04",
+      "describes": "d ln F / d ln R from R=1.18 to 1.5 xi on the n=72 state",
+      "source": "instruments/paper_i/issue_218_values.py::cutoff_log_slope",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "-1.04"
+    },
+    "ssvProtonCutoffDropPct": {
+      "value": 22.103188797183083,
+      "sig": 2,
+      "rendered": "22",
+      "describes": "drop in F from R=1.18 to 1.5 xi on the n=72 state, percent",
+      "source": "instruments/paper_i/issue_218_values.py::cutoff_drop_pct",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": ""
+    },
+    "ssvProtonCombinedNYF": {
+      "value": 73.9570211251103,
+      "sig": 2,
+      "rendered": "74",
+      "describes": "issue-77 combined N_Y F anchor after corrected calibration",
+      "source": "instruments/paper_i/issue_218_values.py::corrected_combined_n_y_f",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": ""
+    },
+    "ssvFTableCoarseROne": {
+      "value": 7.981704153985974,
+      "sig": 3,
+      "rendered": "7.98",
+      "describes": "corrected saved-state form factor in Table Fstraight",
+      "source": "instruments/paper_i/issue_218_values.py::form_factor_n24_r100",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "7.98"
+    },
+    "ssvFTableCoarseRPaper": {
+      "value": 6.558734474252055,
+      "sig": 3,
+      "rendered": "6.56",
+      "describes": "corrected saved-state form factor in Table Fstraight",
+      "source": "instruments/paper_i/issue_218_values.py::form_factor_n24_r118",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "6.56"
+    },
+    "ssvFTableCoarseROneHalf": {
+      "value": 5.10904501070219,
+      "sig": 3,
+      "rendered": "5.11",
+      "describes": "corrected saved-state form factor in Table Fstraight",
+      "source": "instruments/paper_i/issue_218_values.py::form_factor_n24_r150",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "5.11"
+    },
+    "ssvFTableCoarseRTwo": {
+      "value": 3.986243693887125,
+      "sig": 3,
+      "rendered": "3.99",
+      "describes": "corrected saved-state form factor in Table Fstraight",
+      "source": "instruments/paper_i/issue_218_values.py::form_factor_n24_r200",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "3.99"
+    },
+    "ssvFTableCoarseRThree": {
+      "value": 3.0308291481275336,
+      "sig": 3,
+      "rendered": "3.03",
+      "describes": "corrected saved-state form factor in Table Fstraight",
+      "source": "instruments/paper_i/issue_218_values.py::form_factor_n24_r300",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "3.03"
+    },
+    "ssvFTableMidROne": {
+      "value": 6.447583775875377,
+      "sig": 3,
+      "rendered": "6.45",
+      "describes": "corrected saved-state form factor in Table Fstraight",
+      "source": "instruments/paper_i/issue_218_values.py::form_factor_n48_r100",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "6.45"
+    },
+    "ssvFTableMidRPaper": {
+      "value": 5.298115436331215,
+      "sig": 3,
+      "rendered": "5.30",
+      "describes": "corrected saved-state form factor in Table Fstraight",
+      "source": "instruments/paper_i/issue_218_values.py::form_factor_n48_r118",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "5.30"
+    },
+    "ssvFTableMidROneHalf": {
+      "value": 4.127062978746227,
+      "sig": 3,
+      "rendered": "4.13",
+      "describes": "corrected saved-state form factor in Table Fstraight",
+      "source": "instruments/paper_i/issue_218_values.py::form_factor_n48_r150",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "4.13"
+    },
+    "ssvFTableMidRTwo": {
+      "value": 3.2200692573348575,
+      "sig": 3,
+      "rendered": "3.22",
+      "describes": "corrected saved-state form factor in Table Fstraight",
+      "source": "instruments/paper_i/issue_218_values.py::form_factor_n48_r200",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "3.22"
+    },
+    "ssvFTableMidRThree": {
+      "value": 2.448289797005124,
+      "sig": 3,
+      "rendered": "2.45",
+      "describes": "corrected saved-state form factor in Table Fstraight",
+      "source": "instruments/paper_i/issue_218_values.py::form_factor_n48_r300",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "2.45"
+    },
+    "ssvFTableFineROne": {
+      "value": 6.288827220106142,
+      "sig": 3,
+      "rendered": "6.29",
+      "describes": "corrected saved-state form factor in Table Fstraight",
+      "source": "instruments/paper_i/issue_218_values.py::form_factor_n72_r100",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "6.29"
+    },
+    "ssvFTableFineRPaper": {
+      "value": 5.167661829526305,
+      "sig": 3,
+      "rendered": "5.17",
+      "describes": "corrected saved-state form factor in Table Fstraight",
+      "source": "instruments/paper_i/issue_218_values.py::form_factor_n72_r118",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "5.17"
+    },
+    "ssvFTableFineROneHalf": {
+      "value": 4.025443778946141,
+      "sig": 3,
+      "rendered": "4.03",
+      "describes": "corrected saved-state form factor in Table Fstraight",
+      "source": "instruments/paper_i/issue_218_values.py::form_factor_n72_r150",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "4.03"
+    },
+    "ssvFTableFineRTwo": {
+      "value": 3.1407826404558894,
+      "sig": 3,
+      "rendered": "3.14",
+      "describes": "corrected saved-state form factor in Table Fstraight",
+      "source": "instruments/paper_i/issue_218_values.py::form_factor_n72_r200",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "3.14"
+    },
+    "ssvFTableFineRThree": {
+      "value": 2.3880064305211075,
+      "sig": 3,
+      "rendered": "2.39",
+      "describes": "corrected saved-state form factor in Table Fstraight",
+      "source": "instruments/paper_i/issue_218_values.py::form_factor_n72_r300",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "2.39"
     }
   }
 }

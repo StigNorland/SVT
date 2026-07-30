@@ -16,7 +16,7 @@ from multiprocessing import Pool
 from typing import Callable
 
 from toroidal_background import CurvedToroidalBackground, ToroidalBackground
-from vortex_profile import VortexProfile
+from corrected_vortex_profile import CorrectedVortexProfile
 
 
 ComplexField = Callable[[float, float], complex]
@@ -144,13 +144,25 @@ def logse_stiffness_integrand(
     grad_dot = (grad_a[0].conjugate() * grad_b[0] + grad_a[1].conjugate() * grad_b[1]).real
 
     psi_abs_sq = abs(bg.psi0(r, z)) ** 2
-    rho = max(cfg.rho0 * psi_abs_sq, cfg.density_floor)
-    v_second = -cfg.b / rho
-    delta_rho_a = cfg.rho0 * density_variation(bg, mode_a, r, z)
-    delta_rho_b = cfg.rho0 * density_variation(bg, mode_b, r, z)
+    rho_fraction = max(
+        psi_abs_sq, cfg.density_floor / max(cfg.rho0, 1.0e-300)
+    )
+    delta_fraction_a = density_variation(bg, mode_a, r, z)
+    delta_fraction_b = density_variation(bg, mode_b, r, z)
 
-    gradient_piece = (cfg.hbar**2 / (2.0 * cfg.m0)) * grad_dot
-    density_piece = 0.5 * v_second * delta_rho_a * delta_rho_b
+    # Divide the longitudinal Hessian density by b*rho0 and measure distance
+    # in conventional healing lengths. The corrected action then has gradient
+    # coefficient hbar^2/(2 m0^2 b xi^2)=1 and V'' contribution +1/rho.
+    gradient_coefficient = cfg.hbar**2 / (
+        2.0 * cfg.m0**2 * cfg.b * bg.xi**2
+    )
+    gradient_piece = gradient_coefficient * grad_dot
+    density_piece = (
+        0.5
+        * delta_fraction_a
+        * delta_fraction_b
+        / rho_fraction
+    )
     return gradient_piece + density_piece
 
 
@@ -338,11 +350,25 @@ def logse_stiffness_integrand_mode(
     grad_b = central_gradient_mode(bg, mode_b, projection_b, r, z, cfg.dr)
     grad_dot = (grad_a[0].conjugate() * grad_b[0] + grad_a[1].conjugate() * grad_b[1]).real
     psi_abs_sq = abs(bg.psi0(r, z)) ** 2
-    rho = max(cfg.rho0 * psi_abs_sq, cfg.density_floor)
-    v_second = -cfg.b / rho
-    delta_rho_a = cfg.rho0 * density_variation_mode(bg, mode_a, projection_a, r, z)
-    delta_rho_b = cfg.rho0 * density_variation_mode(bg, mode_b, projection_b, r, z)
-    return (cfg.hbar**2 / (2.0 * cfg.m0)) * grad_dot + 0.5 * v_second * delta_rho_a * delta_rho_b
+    rho_fraction = max(
+        psi_abs_sq, cfg.density_floor / max(cfg.rho0, 1.0e-300)
+    )
+    delta_fraction_a = density_variation_mode(
+        bg, mode_a, projection_a, r, z
+    )
+    delta_fraction_b = density_variation_mode(
+        bg, mode_b, projection_b, r, z
+    )
+    gradient_coefficient = cfg.hbar**2 / (
+        2.0 * cfg.m0**2 * cfg.b * bg.xi**2
+    )
+    return (
+        gradient_coefficient * grad_dot
+        + 0.5
+        * delta_fraction_a
+        * delta_fraction_b
+        / rho_fraction
+    )
 
 
 def current_variation_mode(
@@ -473,7 +499,9 @@ def integrate_pair_parallel(
 
 def compute_projection_integrals(cfg: ProjectionConfig) -> ProjectionResult:
     if cfg.profile == "numerical":
-        profile = VortexProfile.solve(x_max=cfg.profile_x_max, n=cfg.profile_n)
+        profile = CorrectedVortexProfile.solve(
+            x_max=cfg.profile_x_max, n=cfg.profile_n
+        )
         bg_cls = CurvedToroidalBackground if (cfg.curvature_coeffs or cfg.phase_coeffs) else ToroidalBackground
         bg = bg_cls(
             f0=profile.value,

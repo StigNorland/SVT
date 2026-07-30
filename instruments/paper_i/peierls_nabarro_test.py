@@ -33,7 +33,7 @@ SRC_ROOT = Path(__file__).resolve().parents[1]
 if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
-from vortex_profile import VortexProfile
+from corrected_vortex_profile import CorrectedVortexProfile
 
 LOG_PRESSURE = 0.5
 DENSITY_FLOOR = 1e-12
@@ -51,7 +51,7 @@ def energy_2d(psi: np.ndarray, dx: float, log_pressure: float) -> float:
 
 
 def imprint_vortex(n: int, box: float, x0: float, y0: float,
-                   prof: VortexProfile) -> tuple[np.ndarray, float]:
+                   prof: CorrectedVortexProfile) -> tuple[np.ndarray, float]:
     """Single straight vortex (winding +1) with core at (x0, y0)."""
     dx = box / n
     ax = (np.arange(n) + 0.5) * dx - box / 2.0
@@ -65,7 +65,12 @@ def imprint_vortex(n: int, box: float, x0: float, y0: float,
     return psi.astype(np.complex128), dx
 
 
-def pn_barrier(n: int, box: float, prof: VortexProfile, n_shift: int = 11) -> dict:
+def pn_barrier(
+    n: int,
+    box: float,
+    prof: CorrectedVortexProfile,
+    n_shift: int = 11,
+) -> dict:
     """Translate the core from 0 to dx along x; return energy oscillation amplitude."""
     dx = box / n
     shifts = np.linspace(0.0, dx, n_shift)
@@ -94,7 +99,9 @@ def main() -> None:
     args = p.parse_args()
 
     print("Solving LogSE vortex profile...")
-    prof = VortexProfile.solve(x_min=1e-4, x_max=14.0, n=4000)
+    prof = CorrectedVortexProfile.solve(
+        x_min=1e-4, x_max=14.0, n=4000
+    )
 
     n_values = [int(x) for x in args.n_values.split(",")]
     print(f"\nPeierls-Nabarro translation-barrier test  box={args.box}  log_pressure={LOG_PRESSURE}")

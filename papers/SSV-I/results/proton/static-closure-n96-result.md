@@ -1,5 +1,10 @@
 # Issue #13: n=96 cross-grid result — FAIL-A (2026-06-02)
 
+> **Issue #218 correction (2026-07-30).** The \(R_{\rm sc}=0.923\,\xi\)
+> rows below are historical coefficient-two-profile outputs. The corrected
+> half-density cutoff is \(R_{\rm sc}=1.305516\,\xi\); the current \(n=72,96\)
+> values are \(N_YF=1151.5,2506.7\). Closure still fails.
+
 **Status:** FAIL-A (pre-registered decision rule triggered).
 **Script:** `instruments/paper_i/static_closure_n96_result.py`
 **Data:** `papers/SSV-I/data/static-closure-n96-result-2026-06-02.json`

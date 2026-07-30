@@ -3,7 +3,7 @@
   "scope": "SSV series",
   "hypothesis": "every declared load-bearing value printed in two or more papers has one computed source (#213 Part B)",
   "generator": "instruments/tools/gen_values.py",
-  "computed_utc": "2026-07-29T19:37:13Z",
+  "computed_utc": "2026-07-30T00:30:52Z",
   "values": {
     "ssvAlphaInverse": {
       "value": 137.035999084,
@@ -37,14 +37,10 @@
       "source": "instruments/series_values.py::proton_electron_mass_ratio",
       "source_sha256_16": "ed78dc762df39e91",
       "papers": [
-        "SSV-I",
         "SSV-II",
         "SSV-IV"
       ],
       "was": {
-        "SSV-I": [
-          "1836"
-        ],
         "SSV-II": [
           "1836",
           "1836.15"

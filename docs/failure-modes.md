@@ -698,6 +698,43 @@ Paper I now states both names explicitly.
 receipts. The #166 disk artifacts still need a separate migration so historical
 numbers and current labels cannot be confused.
 
+## FM26 — a corrected coordinate convention reaches the equation but not its consumers
+
+**Observed:** Paper I's printed conventional healing length requires the
+coefficient-one vortex equation, but the numerical profile and its consumers
+still solved the coefficient-two equation. The profile shape looked regular
+and several relative convergence checks survived, while the absolute proton
+calibration moved enough to erase the near-CODATA mass band.
+
+**Guard — closed for Paper I's active chain.** `corrected_vortex_profile.py`
+keeps the coefficient explicit and independently verifies the exact
+\(\sqrt2\) coordinate transformation against the historical solver. Direct
+consumers use the corrected class. Saved-state form factors, the candidate
+mass band and the combined \(N_YF\) anchor are generated through
+`issue_218_values.py`, recorded in the value receipt and frozen by claim
+guards.
+
+**Not covered:** five Paper II instruments still import the historical profile
+and require their own issue-scoped dependency audit. Generated values protect
+registered outputs only; an unregistered downstream literal can still retain
+the old convention.
+
+## FM27 — an axial quantum number is mistaken for a protected ±m degeneracy
+
+**Observed:** the straight-core spectrum report treated axial \(U(1)\) as if it
+enforced a degenerate \(+m/-m\) doublet. The singly wound vortex is chiral and
+does not preserve the reflection that would exchange those sectors. Complex
+irreducible representations of \(U(1)\) are one-dimensional.
+
+**Guard — partial.** `vortex_core_mode_spectrum.py` now reports signed sectors
+separately and retains the translation Goldstone partner; a focused test checks
+the \(m=\mp1\) signed pair. The result note states the group-theory conclusion
+without using an invented doublet count.
+
+**Not covered:** this is not a representation-theory checker. Other reduced
+models can still infer degeneracies from labels without auditing the full
+background symmetry, antiunitary symmetries and boundary conditions.
+
 ## What runs when
 
 `python instruments/tools/build_paper.py <PAPER>` runs FM1, FM2, FM5's evidence
@@ -733,6 +770,8 @@ ones most likely to lapse.
 | FM23 control kernel reported as measured response | reconstruction dependency + blind-null audit | suite (this path) + review |
 | FM24 crossover length replaced by a mass | corrected-dispersion test + scoped receipts | suite (these batteries) + review |
 | FM25 healing length confused with crossover length | exact-dispersion negative control | suite (focused) + review |
+| FM26 coordinate correction misses numerical consumers | corrected profile + generated saved-state values | **build** (registered outputs) + suite |
+| FM27 axial label mistaken for ±m degeneracy | signed-sector Goldstone control | suite (focused) + review |
 
 Adding a failure mode to this register is cheap. Leaving one out because its
 guard is embarrassing is how #182 happened.

@@ -4,18 +4,26 @@
 **Verdict: the 8ⁿ closed-shell rule is REFUTED as a first-principles degeneracy.**
 Both sub-tests come back negative.
 
+> **Issue #218 correction (2026-07-30).** The coefficient-one profile gives
+> \(C_{\rm LogSE}=2.226289\), not \(1.880\), and the corrected BdG kinetic
+> block is \(-\nabla^2\), not \(-\nabla^2/2\). Recalculation leaves the
+> refutation intact. It also corrects the group-theory wording below:
+> axial \(U(1)\) labels one-dimensional complex \(m\) sectors; a chiral vortex
+> does not have a reflection symmetry that enforces a degenerate \(+m/-m\)
+> doublet.
+
 ## Part (b): does the generation ratio collapse 8.59 → 8 with the real C?
 
 **No.** Script: `instruments/paper_i/vortex_ring_core_constant.py`.
 
 The Lamb ring-energy formula `E(R) = πR[ln(8R/ξ) − C]` was inverted against the
-lepton masses with the core constant `C` taken from the *real* LogSE vortex
-profile (`C_LogSE = 1.880`, vs the thin-ring `C ≈ 2`):
+lepton masses with the core constant `C` taken from the corrected LogSE vortex
+profile (`C_LogSE = 2.226289`):
 
 | C | best-fit R_e/ξ | best-fit q | q/8 |
 |---|---|---|---|
 | 2.000 (thin-ring) | 1.014 | 8.587 | 1.073 |
-| **1.880 (real LogSE)** | **0.899** | **8.587** | **1.073** |
+| **2.226289 (corrected LogSE)** | **1.271** | **8.587** | **1.073** |
 | 1.000 | 0.373 | 8.587 | 1.073 |
 | 0.000 | 0.137 | 8.587 | 1.073 |
 
@@ -23,8 +31,9 @@ The best-fit generation ratio `q = 8.587` is **independent of C** — it is fixe
 by the lepton mass ratios alone (the geometric-series fit `m_n ∝ E(R_e qⁿ)`),
 while `C` only sets the absolute `R_e`. So using the physically-correct core
 constant does **not** bring `q` to 8; the `8ⁿ` rule stays a ~7.3% approximation,
-not an exact relation. The fixed-`R={1,8,64}ξ` rule with the real C=1.880 gives
-the muon mass to only −56% (because the implied `R_e` shifts to 0.90 ξ).
+not an exact relation. With corrected \(C=2.226289\), the fixed
+`R={1,8,64}ξ` control is not admissible because its \(R=\xi\) reference has
+\(\ln 8-C<0\); the fitted-radius control instead gives \(R_e/\xi=1.271\).
 
 ## Part (a): does the first closed shell have degeneracy 8 = (1s+3p)×2?
 
@@ -33,35 +42,26 @@ the muon mass to only −56% (because the implied `R_e` shifts to 0.90 ξ).
 Linearising the LogSE about the straight singly-wound vortex `Ψ₀ = f(r)e^{iθ}`
 and solving the radial Bogoliubov-de Gennes problem per azimuthal index `m`:
 
-| m | degeneracy | lowest ω (sim units) |
-|---|---|---|
-| 0 | 1 | 0.153, 0.359, 0.578, … |
-| ±1 | 2 | 0.252, 0.471, 0.701, … |
-| ±2 | 2 | 0.348, 0.583, 0.826, … |
-| ±3 | 2 | 0.435, 0.684, 0.940, … |
-| ±4 | 2 | 0.521, 0.784, 1.054, … |
-
-**Cumulative state count by |m|: 1, 3, 5, 7, 9, …** — the *odd* numbers.
+At \(L=12\,\xi,\ n=300\), the corrected signed spectrum contains the
+translation partners \(\omega=\pm0.0133\) in the \(m=\mp1\) sectors. Moving
+the boundary to \(L=16\,\xi\) reduces this finite-box lift to
+\(\lvert\omega\rvert=0.0071\). Other absolute frequencies are
+discretisation- and box-dependent and are not used as predictions.
 
 ### The group-theory reason (robust, independent of the numerics)
 
 A vortex ring has **axial U(1) symmetry** (rotation about the ring axis) and
-nothing more. Its normal modes are labelled by a single azimuthal integer `m`,
-with degeneracy 1 for `m=0` and 2 for `|m|≥1` (the `±m` doublet). The mode tower
-is therefore `(1, 2, 2, 2, …)`, cumulative `(1, 3, 5, 7, …)`.
+nothing more. Its normal modes are labelled by a single azimuthal integer `m`.
+The complex irreducible representations of \(U(1)\) are one-dimensional, and
+the wound background breaks the reflection that could pair \(+m\) and \(-m\).
+There is therefore no symmetry-protected `(1, 2, 2, 2, …)` tower.
 
 The atomic magic number **8 = (1s + 3p) × 2** comes from **SO(3)**: the 3-fold
 degeneracy of the `l=1` p-orbitals (`m_l = −1, 0, +1`) plus the `l=0` s-orbital,
 times 2 for spin. A vortex ring has no SO(3) — there is no 3-fold-degenerate
-"p-shell." Even adding a ×2 core-chirality factor only rescales the U(1) tower to
-`(2, 6, 10, …)`; **no combination of the ring's actual symmetry produces a
-closure at 8.** The "8" in the empirical `q ≈ 8.59` is therefore *not* a
+"p-shell." **The ring's actual symmetry does not produce a closure at 8.**
+The "8" in the empirical `q ≈ 8.59` is therefore *not* a
 Kelvin-mode shell-closure degeneracy.
-
-(Caveat: the `m=±1` branch did not collapse to an exact translation zero-mode —
-a finite-box lift in this bounded radial solve — so the absolute frequencies are
-illustrative. The *degeneracy structure* `(1,2,2,…)` is exact from the U(1)
-symmetry and is the load-bearing result.)
 
 ## Combined conclusion
 

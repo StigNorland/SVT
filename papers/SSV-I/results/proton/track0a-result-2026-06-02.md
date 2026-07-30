@@ -1,5 +1,10 @@
 # #77 Track 0a result: cutoff sweep — FAIL (2026-06-02)
 
+> **Issue #218 correction (2026-07-30).** The historical Track 0b constant
+> \(C_{\rm LogSE}=1.880\) below is superseded by \(2.226289\). This changes
+> absolute ring-formula normalizations but not the stated cutoff-invariance
+> property, because that branch is independent of the extraction cutoff.
+
 **Pre-registered gate:** spread < 5% on `n_y_straight` (n=72 vs n=96) at any R_cutoff.
 **Verdict:** FAIL at all R_cutoff values tested.
 

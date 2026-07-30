@@ -166,9 +166,8 @@ SHARED: tuple[SharedValue, ...] = (
     _shared(
         "ssvProtonElectronMassRatio", "proton_electron_mass_ratio", 6,
         r"m_p/m_e, CODATA observed input",
-        ("SSV-I", "SSV-II", "SSV-IV"),
+        ("SSV-II", "SSV-IV"),
         {
-            "SSV-I": ("1836",),
             "SSV-II": ("1836", "1836.15"),
             "SSV-IV": ("1836",),
         },
@@ -243,7 +242,9 @@ SHARED: tuple[SharedValue, ...] = (
 
 def _ssv_i() -> list[Value]:
     import ssv_i_audit_2026 as A
-    return [
+    import issue_218_values as I218
+
+    values = [
         Value("ssvLambda", lambda: A.lambda_param(), 3,
               r"\Lambda = \ln(8/\alpha) - 7/4",
               "instruments/paper_i/ssv_i_audit_2026.py::lambda_param",
@@ -256,7 +257,93 @@ def _ssv_i() -> list[Value]:
               r"R_e^* = \xi/\alpha = a_0/\sqrt2, in metres",
               "instruments/paper_i/ssv_i_audit_2026.py::xi_over_alpha",
               ""),   # newly printed by this pass; replaced no literal
+        Value("ssvCandidateNY", I218.candidate_n_y, 4,
+              r"candidate finite-thickness trefoil factor N_Y",
+              "instruments/paper_i/issue_218_values.py::candidate_n_y",
+              "3.007"),
+        Value("ssvEnergyStarMeV", I218.energy_star_mev, 6,
+              r"E_\star=(m_e/\alpha)c^2 in MeV",
+              "instruments/paper_i/issue_218_values.py::energy_star_mev",
+              "70.025"),
+        Value("ssvProtonFormFactorLow", I218.fine_grid_form_factor_low, 4,
+              r"corrected n=72 proton form factor at R=1.18 xi",
+              "instruments/paper_i/issue_218_values.py::fine_grid_form_factor_low",
+              "5.168"),
+        Value("ssvProtonFormFactorHigh", I218.fine_grid_form_factor_high, 4,
+              r"corrected n=48 proton form factor at R=1.18 xi",
+              "instruments/paper_i/issue_218_values.py::fine_grid_form_factor_high",
+              "5.298"),
+        Value("ssvProtonFormFactorMean", I218.fine_grid_form_factor_mean, 3,
+              r"mean corrected fine-grid proton form factor at R=1.18 xi",
+              "instruments/paper_i/issue_218_values.py::fine_grid_form_factor_mean",
+              "5.23"),
+        Value("ssvProtonCandidateProductLow", I218.candidate_product_low, 4,
+              r"low endpoint of candidate N_Y F product",
+              "instruments/paper_i/issue_218_values.py::candidate_product_low",
+              "15.54"),
+        Value("ssvProtonCandidateProductHigh", I218.candidate_product_high, 4,
+              r"high endpoint of candidate N_Y F product",
+              "instruments/paper_i/issue_218_values.py::candidate_product_high",
+              "15.93"),
+        Value("ssvProtonCandidateMassLowMeV", I218.candidate_mass_low_mev, 4,
+              r"low endpoint of corrected candidate proton band in MeV",
+              "instruments/paper_i/issue_218_values.py::candidate_mass_low_mev",
+              "1088"),
+        Value("ssvProtonCandidateMassHighMeV", I218.candidate_mass_high_mev, 4,
+              r"high endpoint of corrected candidate proton band in MeV",
+              "instruments/paper_i/issue_218_values.py::candidate_mass_high_mev",
+              "1116"),
+        Value("ssvProtonCandidateDeviationLowPct",
+              I218.candidate_mass_low_deviation_pct, 3,
+              r"low endpoint deviation of candidate proton band, percent",
+              "instruments/paper_i/issue_218_values.py::candidate_mass_low_deviation_pct",
+              "16.0"),
+        Value("ssvProtonCandidateDeviationHighPct",
+              I218.candidate_mass_high_deviation_pct, 3,
+              r"high endpoint deviation of candidate proton band, percent",
+              "instruments/paper_i/issue_218_values.py::candidate_mass_high_deviation_pct",
+              "18.9"),
+        Value("ssvProtonCutoffLogSlope", I218.cutoff_log_slope, 3,
+              r"d ln F / d ln R from R=1.18 to 1.5 xi on the n=72 state",
+              "instruments/paper_i/issue_218_values.py::cutoff_log_slope",
+              "-1.04"),
+        Value("ssvProtonCutoffDropPct", I218.cutoff_drop_pct, 2,
+              r"drop in F from R=1.18 to 1.5 xi on the n=72 state, percent",
+              "instruments/paper_i/issue_218_values.py::cutoff_drop_pct",
+              ""),
+        Value("ssvProtonCombinedNYF", I218.corrected_combined_n_y_f, 2,
+              r"issue-77 combined N_Y F anchor after corrected calibration",
+              "instruments/paper_i/issue_218_values.py::corrected_combined_n_y_f",
+              ""),
     ]
+
+    table_specs = (
+        ("ssvFTableCoarseROne", I218.form_factor_n24_r100, "7.98"),
+        ("ssvFTableCoarseRPaper", I218.form_factor_n24_r118, "6.56"),
+        ("ssvFTableCoarseROneHalf", I218.form_factor_n24_r150, "5.11"),
+        ("ssvFTableCoarseRTwo", I218.form_factor_n24_r200, "3.99"),
+        ("ssvFTableCoarseRThree", I218.form_factor_n24_r300, "3.03"),
+        ("ssvFTableMidROne", I218.form_factor_n48_r100, "6.45"),
+        ("ssvFTableMidRPaper", I218.form_factor_n48_r118, "5.30"),
+        ("ssvFTableMidROneHalf", I218.form_factor_n48_r150, "4.13"),
+        ("ssvFTableMidRTwo", I218.form_factor_n48_r200, "3.22"),
+        ("ssvFTableMidRThree", I218.form_factor_n48_r300, "2.45"),
+        ("ssvFTableFineROne", I218.form_factor_n72_r100, "6.29"),
+        ("ssvFTableFineRPaper", I218.form_factor_n72_r118, "5.17"),
+        ("ssvFTableFineROneHalf", I218.form_factor_n72_r150, "4.03"),
+        ("ssvFTableFineRTwo", I218.form_factor_n72_r200, "3.14"),
+        ("ssvFTableFineRThree", I218.form_factor_n72_r300, "2.39"),
+    )
+    for macro, compute, was in table_specs:
+        values.append(Value(
+            macro,
+            compute,
+            3,
+            r"corrected saved-state form factor in Table Fstraight",
+            f"instruments/paper_i/issue_218_values.py::{compute.__name__}",
+            was,
+        ))
+    return values
 
 
 def _ssv_vii_b() -> list[Value]:

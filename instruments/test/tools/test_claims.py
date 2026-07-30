@@ -173,6 +173,7 @@ def test_claims_are_not_tautologies(paper):
         return
 
     import dsph_ledger as D
+    import issue_218_values as I218
     import ssv_i_audit_2026 as A
     import planck_scale_values as P
 
@@ -180,7 +181,10 @@ def test_claims_are_not_tautologies(paper):
     targets = {
         "SSV-I": [(A, "lambda_param"), (A, "xi_over_alpha"),
                   (A, "rho0_natural_units"), (A, "rho0_as_printed"),
-                  (A, "stationary_radius"), (A, "A_BOHR"), (A, "R_E_CLASSICAL")],
+                  (A, "stationary_radius"), (A, "A_BOHR"), (A, "R_E_CLASSICAL"),
+                  (I218, "form_factor_table"), (I218, "candidate_n_y"),
+                  (I218, "energy_star_mev"),
+                  (I218, "corrected_combined_n_y_f")],
         "SSV-VI": [(D, "model_a_vh"), (D, "model_b_vh"), (D, "gamma_req"),
                    (D, "V_MW"), (D, "GAMMA_REQ_MW")],
         "SSV-VII-b": [(P, "planck_length"), (P, "planck_mass"),

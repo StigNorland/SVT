@@ -8,6 +8,29 @@ by the move. Git history and the linked issues carry the rest.
 
 ---
 
+## 2026-07-30 — [#218](https://github.com/StigNorland/SVT/issues/218) · coefficient-one vortex and BdG recalculation
+
+The conventional-healing-length vortex equation now carries coefficient one:
+\(f''+f'/x-f/x^2-f\ln f^2=0\). The historical coefficient-two solver remains
+available as a reproducibility control. The corrected profile has
+\(R_{\rm sc}=1.305516\,\xi\) and \(C_{\rm LogSE}=2.226289\).
+
+Saved-state recalibration changes the fine-grid form factors at
+\(R=1.18\,\xi\) to \(F=5.168\)--\(5.298\). With \(N_Y=3.007\) this gives
+\(1088\)--\(1116\) MeV, \(16.0\%\)--\(18.9\%\) above the observed proton mass;
+the old near-CODATA band does not survive. The grid-converged issue-77 combined
+observable correspondingly moves from approximately \(54\) to approximately
+\(74\). The self-consistent-cutoff closure gate remains negative, with the
+\(n\ge48\) spread increasing to \(158.1\%\).
+
+The corrected profile-matched BdG blocks are
+\(L=-\nabla^2+\ln(f^2)+1\) and \(M=e^{2i\theta}\). The straight-core
+translation mode approaches zero with box size. The old assertion that axial
+\(U(1)\) guarantees a \(+m/-m\) doublet on a chiral vortex is removed;
+\(U(1)\) supplies one-dimensional complex \(m\) sectors and no SO(3)-like
+threefold shell. The no-magic-8 conclusion therefore remains negative for a
+stronger reason.
+
 ## 2026-07-30 — [#216](https://github.com/StigNorland/SVT/issues/216) · E6 dimensional normalization propagated
 
 The logarithmic sector now uses one mass-specific stiffness throughout:

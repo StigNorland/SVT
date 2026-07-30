@@ -1,5 +1,13 @@
 # #77 Track 2: resolution convergence ladder n=96–192 (2026-06-03)
 
+> **Issue #218 correction (2026-07-30).** The table below is the historical
+> coefficient-two-profile extraction. At the same \(R=1.18\,\xi\), the
+> corrected straight-vortex tension multiplies every \(F\) by
+> \(1.169958\) and every \(N_YF\) by \(1.368801\). The corrected ladder is
+> \(F=(1.6808,1.6915,1.7126,1.7348)\) and
+> \(N_YF=(71.920,73.659,73.225,74.956)\). Consecutive convergence is unchanged,
+> but the converged value is approximately \(74\), not \(54\).
+
 **Script:** `instruments/paper_i/trefoil_gradient_flow_static.py` (numba-accelerated)
 **Method:** Gradient flow at n=96, 128 from fresh start; n=160, 192 via spectral
 regrid from the next-coarser converged state (`--regrid-from`).

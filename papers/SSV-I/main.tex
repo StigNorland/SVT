@@ -67,8 +67,9 @@ compressed onto the breather skin, from which charge, spin, spin-statistics
 composition and baryon/lepton number follow without fitting.
 
 Two empirical inputs are used, $m_e$ and $\alpha$.  The charged-pion result
-matches CODATA to $0.34\%$.  The proton mass is candidate-grade, spanning
-$930$--$953\,\mathrm{MeV}$ across the two fine grids, with explicit dependence
+matches CODATA to $0.34\%$.  The proton calculation is candidate-grade but no
+longer matches experiment: the corrected vortex calibration gives
+$\ssvProtonCandidateMassLowMeV$--$\ssvProtonCandidateMassHighMeV\,\mathrm{MeV}$ across the two fine grids, with explicit dependence
 on the regularisation cutoff documented in the body.  The muon and higher
 light-hadron alignments are numerical coincidences rather than predictions,
 and the proton's charge-to-gravitational-coupling map is open.
@@ -626,25 +627,26 @@ superfluid vacuum, prevented from collapse by an internal trefoil vortex skeleto
 
 \begin{gapbox}[Form factor $F$ is a cutoff-dependent calibration, not a derivation]
 The proton mass below is written as $m_p c^2 = N_Y\,F\,E_\star$.  $N_Y=3$ is the
-topological crossing number; $3.007$ includes a candidate finite-thickness
+topological crossing number; $\ssvCandidateNY$ includes a candidate finite-thickness
 correction from independent grid sweeps (Appendix~\ref{app:minimisation}).
 $F$, however, is not yet a
 derivation: it is extracted from the relaxed-breather energy integral against
 a straight-vortex calibration at cutoff $R$, and varies as
-$\mathrm{d}\ln F/\mathrm{d}\ln R\approx -0.94$ near the canonical
+$\mathrm{d}\ln F/\mathrm{d}\ln R\approx\ssvProtonCutoffLogSlope$ near the canonical
 $R\approx 1.18\,\xi$ (\S\ref{app:F-extraction}).  The two fine grids agree at
-the $2.5\%$ level at this cutoff; the same observable falls by $19\%$ at
+the $2.5\%$ level at this cutoff; the same observable falls by
+$\ssvProtonCutoffDropPct\%$ at
 $R=1.5\,\xi$.  The candidate range at the canonical cutoff is therefore
-$m_p\approx 930$--$953\,\text{MeV}$ --- $-0.9\%$ to $+1.6\%$ of the CODATA
+$m_p\approx\ssvProtonCandidateMassLowMeV$--$\ssvProtonCandidateMassHighMeV\,\text{MeV}$ --- $+\ssvProtonCandidateDeviationLowPct\%$ to $+\ssvProtonCandidateDeviationHighPct\%$ above the CODATA
 value $\ssvProtonMassMeV\,\text{MeV}$ --- a range with a documented cutoff systematic,
 not a single number.  The topological trefoil factor $N_Y=3$ is
 (issues~\ssvissue{92} and \ssvissue{77})
 derived as the trefoil crossing number (equivalently the thin-core writhe, or
-the braid-word exponent $\sigma_1^3$); the $3.007$ is this $3$ plus a small
+the braid-word exponent $\sigma_1^3$); the $\ssvCandidateNY$ is this $3$ plus a small
 finite-thickness writhe correction, and the alternative $l_{\rm curve}/(4\pi)$
 proxy is rejected as non-invariant.  The later \ssvissue{77} continuation scan upgrades
 the combined proton-geometry observable to a \emph{candidate} static result:
-$(R,a)=(2.5,0.85)\xi$ and $N_Y\!\cdot\!F\simeq54$, grid-converged over the
+$(R,a)=(2.5,0.85)\xi$ and $N_Y\!\cdot\!F\simeq\ssvProtonCombinedNYF$, grid-converged over the
 tested ladder and route-independent.  This does not by itself make the separate
 $F$ extraction or the static-gravity map closure-grade; $m_\star=m_e/\alpha$
 stays empirical and the $Q_p/\alpha_G$ map is tracked separately.  Full records:
@@ -758,7 +760,7 @@ untouched.
         where $m_\star\equiv m_e/\alpha$ is the flux-tube mass scale and
         $E_\star=m_\star c^2\approx70\,\text{MeV}$ its rest-energy scale.
         The trefoil factor has topological value $N_Y=3$ from the
-        crossing number; $N_Y\approx3.007$ includes a candidate
+        crossing number; $N_Y\approx\ssvCandidateNY$ includes a candidate
         finite-thickness writhe correction (Appendix~\ref{app:minimisation}).
 
         The form factor $F$ encodes the ratio of the total 3D breather energy to
@@ -770,10 +772,9 @@ untouched.
                          + V(|\Psi|^2)\right]d^3x,
           \label{eq:F-integral}
         \end{equation}
-        where the integral is over the full 3D breather profile.  The
-        analytic estimate is $F\approx4.47$, giving
-        $N_Y\times F = 3.007\times4.47\approx13.44$ and
-        $m_pc^2\approx13.44\times70\,\text{MeV}\approx941\,\text{MeV}$.
+        where the integral is over the full 3D breather profile.  In
+        conventional-healing-length units the coefficient-one vortex
+        calibration gives the numerical values below.
 
         A topology-preserving relaxation of Eq.~\eqref{eq:F-integral} on the
         $(2,3)$-trefoil knot (Appendix~\ref{app:minimisation}) evaluates $F$
@@ -783,12 +784,14 @@ untouched.
         physical cutoff $R$ at which the calibration tube terminates.  At
         $R\!=\!1.18\,\xi$ --- the natural inter-strand half-spacing of the
         trefoil with minor radius $0.85\,\xi$ --- the two fine grids give
-        $F=4.528$ ($n=48$) and $F=4.417$ ($n=72$), a $2.5\%$ bracket whose
-        mean reproduces the analytic estimate.  The product $N_Y\cdot F$ then
-        gives $m_p\approx 930$--$953\,\text{MeV}$, $-0.9\%$ to $+1.6\%$ of the
-        observed value.  That $941\,\text{MeV}$ falls $0.3\%$ from CODATA is
-        a property of the midpoint of this bracket, not a separate
-        determination, and the cutoff systematic below dominates both.
+        $F=\ssvProtonFormFactorHigh$ ($n=48$) and
+        $F=\ssvProtonFormFactorLow$ ($n=72$), a $2.5\%$ bracket.  The
+        product $N_Y\cdot F=\ssvProtonCandidateProductLow$--$\ssvProtonCandidateProductHigh$ then gives
+        $m_p\approx\ssvProtonCandidateMassLowMeV$--$\ssvProtonCandidateMassHighMeV\,\text{MeV}$,
+        $+\ssvProtonCandidateDeviationLowPct\%$ to
+        $+\ssvProtonCandidateDeviationHighPct\%$ above the
+        observed value.  The result is not a proton-mass match, and the cutoff
+        systematic remains.
 \end{itemize}
 
 The single trefoil curve carries non-trivial knot topology: changing its knot
@@ -954,7 +957,7 @@ dynamical model.  Define the single mass scale
 \begin{equation}
   m_\star \equiv \frac{m_e}{\alpha},
   \qquad E_\star\equiv m_\star c^2
-  \approx 70.025\,\text{MeV}.
+  \approx \ssvEnergyStarMeV\,\text{MeV}.
   \label{eq:star-scale}
 \end{equation}
 This is not a free parameter: $m_e$ and $\alpha$ are both measured constants,
@@ -1032,7 +1035,7 @@ derivation; $m_{\pi^\pm}=2m_\star$ stands (electron integer-winding).
          coincidence, not a derived spectrum --- see text).
          $n$ is the nearest half-integer, $\Delta$ is the fractional deviation
          $|m - nm_\star|/(nm_\star)$.  $m_\star=m_e/\alpha$, with
-         $m_\star c^2\approx70.025\,\text{MeV}$.}
+         $m_\star c^2\approx\ssvEnergyStarMeV\,\text{MeV}$.}
 \label{tab:full-ladder}
 \begin{tabular}{lrrrl}
 \toprule
@@ -1287,11 +1290,15 @@ with the trefoil factor $N_Y=3$ \emph{derived} as the crossing number
 writhe, issue~\ssvissue{92}; Appendix~\ref{app:minimisation}) and $F$ the form factor
 extracted from a
 3D topology-preserving relaxation of the trefoil-knot breather
-(Appendix~\ref{app:F-extraction}).  $F\approx 4.47$ at the canonical cutoff
-$R\approx 1.18\,\xi$ gives $m_p \approx 930$--$953\,\text{MeV}$
-($-0.9\%$ to $+1.6\%$ of the CODATA value
+(Appendix~\ref{app:F-extraction}).  The corrected calibration gives
+$F\approx\ssvProtonFormFactorMean$ at the canonical cutoff
+$R\approx1.18\,\xi$ and hence
+$m_p\approx\ssvProtonCandidateMassLowMeV$--$\ssvProtonCandidateMassHighMeV\,\text{MeV}$
+($+\ssvProtonCandidateDeviationLowPct\%$ to
+$+\ssvProtonCandidateDeviationHighPct\%$ above the CODATA value
 $\ssvProtonMassMeV$ MeV).  $F$ is cutoff-dependent
-($\mathrm{d}\ln F/\mathrm{d}\ln R\approx -0.94$, $19\%$ variation between
+($\mathrm{d}\ln F/\mathrm{d}\ln R\approx\ssvProtonCutoffLogSlope$,
+$\ssvProtonCutoffDropPct\%$ variation between
 $R=1.18\,\xi$ and $R=1.5\,\xi$) and is not yet a cutoff-independent
 first-principles prediction; the §Proton gapbox above lays out the full
 calibration caveat and what closure would require.  Closure tracked under
@@ -1320,13 +1327,15 @@ $\pi^\pm$ & $2m_\star$                        & $140.051$ & $\ssvChargedPionMass
 $\mu^\pm$ & $\frac{3}{2}m_\star$              & $105.038$ & $\ssvMuonMassMeV$ & $0.59\%$ \\
 $K^\pm$   & $7m_\star$                        & $490.177$ & $493.677$ & $0.71\%$ \\
 $\rho$    & $11m_\star$                       & $770.278$ & $775.260$ & $0.64\%$ \\
-$p$       & $N_Y\!\cdot\!F\!\cdot\!m_\star$   & $930$--$953$ & $\ssvProtonMassMeV$ & $-0.9$ to $+1.6\%$\footnotemark[1] \\
+$p$       & $N_Y\!\cdot\!F\!\cdot\!m_\star$   & $\ssvProtonCandidateMassLowMeV$--$\ssvProtonCandidateMassHighMeV$ & $\ssvProtonMassMeV$ & $+\ssvProtonCandidateDeviationLowPct$ to $+\ssvProtonCandidateDeviationHighPct\%$\footnotemark[1] \\
 \bottomrule
 \end{tabular}
-\footnotetext[1]{$F\approx 4.47$ at the inter-strand half-spacing cutoff
+\footnotetext[1]{$F\approx\ssvProtonFormFactorMean$ at the inter-strand half-spacing cutoff
 $R=1.18\,\xi$ (mean of $n^3{=}48^3$ and $72^3$ straight-vortex
-extractions, agreeing at $2.5\%$).  The $930$--$953\,\text{MeV}$ range
-spans the two fine grids: $F(n{=}72)=4.417$ and $F(n{=}48)=4.528$.  See the §Proton gapbox for the full
+extractions, agreeing at $2.5\%$).  The
+$\ssvProtonCandidateMassLowMeV$--$\ssvProtonCandidateMassHighMeV\,\text{MeV}$ range
+spans the two fine grids: $F(n{=}72)=\ssvProtonFormFactorLow$ and
+$F(n{=}48)=\ssvProtonFormFactorHigh$.  See the §Proton gapbox for the full
 calibration caveat and the cutoff dependence.  Status: candidate
 (\S\ref{sec:claim-status}, issues~\ssvissue{30} and~\ssvissue{66}).}
 \end{table}
@@ -1482,9 +1491,11 @@ diagnostics.
 \end{gapbox}
 
 \begin{gapbox}[Open Problem 3 — Proton: form factor $F$ partially closed]
-The proton mass uses $m_pc^2=N_Y\cdot F\cdot E_\star$ with $N_Y\approx3.007$
-(Appendix~\ref{app:minimisation}) and $F\approx4.47$.  The topological value
-$N_Y=3$ is the crossing number; its $3.007$ finite-thickness correction and
+The proton mass uses $m_pc^2=N_Y\cdot F\cdot E_\star$ with
+$N_Y\approx\ssvCandidateNY$
+(Appendix~\ref{app:minimisation}) and
+$F\approx\ssvProtonFormFactorMean$.  The topological value
+$N_Y=3$ is the crossing number; its $\ssvCandidateNY$ finite-thickness correction and
 the form factor $F$ are estimated
 numerically from a topology-preserving relaxation of the
 $(2,3)$-trefoil knot under the full SSV functional
@@ -1494,17 +1505,20 @@ Appendix~\ref{app:minimisation}).  $F$ is grid-converged within $2.5\%$
 between the two finer grids and depends on the calibration cutoff $R$ used
 to define the per-length vortex tension $\varepsilon_{\rm line}(R)$.  At the natural physical
 cutoff $R\approx1.18\,\xi$ (the inter-strand half-spacing of the trefoil
-with minor radius $0.85\,\xi$), the fine grids give $F=4.417$--$4.528$,
-whose mean reproduces the analytic estimate, and
-$m_p\approx 930$--$953\,\text{MeV}$ ($-0.9\%$ to $+1.6\%$ of the observed
-value).
+with minor radius $0.85\,\xi$), the fine grids give
+$F=\ssvProtonFormFactorLow$--$\ssvProtonFormFactorHigh$ and
+$m_p\approx\ssvProtonCandidateMassLowMeV$--$\ssvProtonCandidateMassHighMeV\,\text{MeV}$
+($+\ssvProtonCandidateDeviationLowPct\%$ to
+$+\ssvProtonCandidateDeviationHighPct\%$ above the
+observed value).  These values use the coefficient-one vortex equation in
+conventional-healing-length units.
 
 \textbf{Update (issues~\ssvissue{92} and \ssvissue{77}, 2026-06):}  $N_Y$ is the
 trefoil \emph{crossing number} $=3$ --- the defining topological invariant of
 the $(2,3)$ torus knot (braid word $\sigma_1^3$, three positive crossings).
 Equivalently it is the self-linking number (writhe), which converges to exactly
 $3.000$ as the core radius $a\to0$ ($a=0.05\,\xi$ gives $3.0009$); finite
-thickness adds $\mathrm{Wr}=3+O(a^2)$, so the $3.007$ is this small correction,
+thickness adds $\mathrm{Wr}=3+O(a^2)$, so the $\ssvCandidateNY$ is this small correction,
 not a separate digit.  The alternative $L_{\rm curve}/(4\pi\xi)$ proxy is
 \emph{rejected}: it is not an invariant (it floats $2.0$--$3.1$ across geometries;
 the value $3.086$ was a coincidence of the $R=2.8\,\xi$ embedding).  Verified in
@@ -1515,14 +1529,14 @@ the value $3.086$ was a coincidence of the $R=2.8\,\xi$ embedding).  Verified in
         $m_e,\alpha$ as empirical inputs; deriving it from SSV vacuum parameters
         is the precision-bearing test (the remaining $\sim 1\%$).
   \item The \ssvissue{77} geometry scan gives a candidate combined observable
-        $N_Y\!\cdot\!F\simeq54$ at $(R,a)=(2.5,0.85)\xi$, but the separate
+        $N_Y\!\cdot\!F\simeq\ssvProtonCombinedNYF$ at $(R,a)=(2.5,0.85)\xi$, but the separate
         $F$ extraction and its propagation into $Q_p/\alpha_G$ remain
         lower-status bookkeeping for issue~\ssvissue{98}.
 \end{itemize}
 \end{gapbox}
 
 Following the \ssvissue{77} continuation scan, the proton assignment has a candidate
-static-geometry anchor, $N_Y\!\cdot\!F\simeq54$, but remains short of a closed
+static-geometry anchor, $N_Y\!\cdot\!F\simeq\ssvProtonCombinedNYF$, but remains short of a closed
 first-principles derivation because $m_\star=m_e/\alpha$ and the
 $Q_p/\alpha_G$ map are still external to the candidate geometry result.  The
 pion is on stronger footing: its two-winding topology is topologically forced,
@@ -1560,7 +1574,8 @@ Berry-phase rescue for the implemented $\mathcal{L}_\perp$ block.  The
 assignment $m_{\mu^\pm}=(3/2)m_\star$ remains an empirical coincidence with no
 deriving mechanism in the present framework.  Agreement with CODATA at the
 $0.34\%$ level is demonstrated for the charged pion.  The proton mass formula
-$m_p c^2 = N_Y\!\cdot\!F\!\cdot\!E_\star$ with $N_Y\approx3.007$ and form
+$m_p c^2 = N_Y\!\cdot\!F\!\cdot\!E_\star$ with
+$N_Y\approx\ssvCandidateNY$ and form
 factor $F$ at the inter-strand cutoff remains candidate-grade: issue~\ssvissue{30}
 records that cutoff-invariance, simple geometric-$R$ extraction, and
 same-topology recovery all failed under the current static pipeline.
@@ -1718,10 +1733,13 @@ deriving mechanism.  Path~A/B and the issue~\ssvissue{76}/\ssvissue{91} BdG null
 spectrum is not an even ladder and does not produce these as
 eigenfrequencies; unlike the muon they have no half-winding/HQV route.
 Recorded as a numerical coincidence, not a candidate rung. \\
-Proton mass $m_p \approx N_Y \cdot F \cdot m_\star \approx 930$--$953$
-MeV ($-0.9$ to $+1.6\%$ from CODATA) &
+Proton mass $m_p \approx N_Y \cdot F \cdot m_\star
+\approx\ssvProtonCandidateMassLowMeV$--$\ssvProtonCandidateMassHighMeV$
+MeV ($+\ssvProtonCandidateDeviationLowPct$ to
+$+\ssvProtonCandidateDeviationHighPct\%$ above CODATA) &
 candidate & \textbf{Update (\ssvissue{77}):} the static geometry now has a
-candidate combined observable, $N_Y\!\cdot\!F\simeq54$, at
+candidate combined observable,
+$N_Y\!\cdot\!F\simeq\ssvProtonCombinedNYF$, at
 $(R,a)=(2.5,0.85)\xi$, grid-converged over the tested continuation ladder
 and route-independent.  The trefoil factor $N_Y=3$ is separately derived as
 the trefoil crossing number (\ssvissue{92}; see row below), but the separate $F$
@@ -1733,14 +1751,15 @@ test).  Records:
 $N_Y = 3$ topological crossing factor & derived &
 \textbf{Derived (issue~\ssvissue{92}, 2026-06):} $N_Y$ is the trefoil crossing
 number $=3$ (braid word $\sigma_1^3$; equivalently the thin-core writhe,
-$\to3.000$ as $a\to0$).  The $3.007$ is a finite-thickness writhe
+$\to3.000$ as $a\to0$).  The $\ssvCandidateNY$ is a finite-thickness writhe
 correction; the $L_{\rm curve}/(4\pi)$ proxy is rejected as non-invariant.
 Zero-parameter topological constant.
 \ssvfile{ny-trefoil-derivation-result}. \\
 Form factor $F$ and product $N_Y\!\cdot\!F$ & candidate &
 The separately reported $F$ value remains bookkeeping-sensitive to the
 chosen decomposition and calibration convention.  The promoted \ssvissue{77} output is
-the combined candidate observable $N_Y\!\cdot\!F\simeq54$ at the energy-minimum
+the combined candidate observable
+$N_Y\!\cdot\!F\simeq\ssvProtonCombinedNYF$ at the energy-minimum
 geometry, not a closure-grade standalone $F$.  The next upgrade is the
 documented $Q_p/\alpha_G$ map. \\
 Restricted 2-mode BdG diagnostic
@@ -1796,7 +1815,9 @@ Record: \ssvfile{mu0-parameter-count-result}.
 \paragraph{What this paper claims.}  With $m_e$ and $\alpha$ as empirical
 inputs, the SSV postulate plus the LogSE + chiral-shear Lagrangian yields the
 charged-pion mass to $0.34\%$.  It gives a candidate proton range of
-$930$--$953\,\mathrm{MeV}$ whose form factor remains cutoff-dependent.  The
+$\ssvProtonCandidateMassLowMeV$--$\ssvProtonCandidateMassHighMeV\,\mathrm{MeV}$
+whose form factor remains cutoff-dependent and
+does not match the observed mass.  The
 muon and higher light-hadron alignments are recorded only as numerical
 coincidences.  The claim-status table states which quantities are derived,
 structural, candidate-grade, or coincidental.
@@ -1832,7 +1853,7 @@ minimised on a 3D grid using topology-preserving gradient descent
 documented in the repository at
 \ssvfile{topology_penalty}).  Vortex lines are tracked where
 $|\Psi|=0$ or the phase jumps by $2\pi$.  The dimensionless trefoil factor
-reported in this paper is $N_Y\approx3.007$
+reported in this paper is $N_Y\approx\ssvCandidateNY$
 (\textit{candidate}, see \S\ref{sec:claim-status}), based on the
 topology-preserving 3D relaxation runs documented in the repository at grid
 sizes $n^3 = 24^3, 48^3, 72^3$ with $\xi$-normalised box half-width $6\xi$;
@@ -1860,7 +1881,7 @@ integral.
 %------------------------------------------------------------------
 
 The dimensionless trefoil factor has topological value $N_Y=3$, the crossing
-number of $T_{2,3}$.  The value $N_Y\approx3.007$ used below adds a candidate
+number of $T_{2,3}$.  The value $N_Y\approx\ssvCandidateNY$ used below adds a candidate
 finite-thickness writhe correction obtained from the relaxed 3D trefoil.  A
 schematic filament energy includes kinetic, curvature/core, and breather
 contributions:
@@ -1875,7 +1896,7 @@ element along the trefoil curve, $r_\perp$ is the local distance to the vortex
 axis (logarithmic divergence regularised by core size), and
 $E_\text{curvature}$ captures geometry beyond the straight-filament term.
 
-The factor $N_Y\approx3.007$ emerges as the effective multiplier to the base
+The factor $N_Y\approx\ssvCandidateNY$ emerges as the effective multiplier to the base
 flux-tube energy per unit length after relaxation.  Reproducibility runs in
 the repository test grids $n^3=24^3,\,48^3,\,72^3$ at $\xi$-normalised
 box half-width $6\xi$; topology preservation requires the penalty mechanism
@@ -1893,12 +1914,12 @@ tubular neighbourhood around the relaxed vortex curve plus a central cavity
 ball, normalised by a self-calibrated per-arc-length energy.  The two pictures
 agree only in the dilute-filament limit.  The \emph{topological} value of the
 trefoil factor, $N_Y = 3$ (the $(2,3)$-trefoil crossing number), is derived in
-issue~\ssvissue{92}; the $3.007$ used as the dilute-limit estimate is that $3$ plus a
+issue~\ssvissue{92}; the $\ssvCandidateNY$ used as the dilute-limit estimate is that $3$ plus a
 small finite-thickness writhe correction.
 
 Relaxation under the topology-preserving penalty
 (\ssvfile{topology_penalty}) converges to
-$N_Y\approx3.007$ at the tested grids, with the proton mass scaling
+$N_Y\approx\ssvCandidateNY$ at the tested grids, with the proton mass scaling
 $m_p\approx N_Y\cdot m_\star\cdot F(\text{geometry})$.  $F$ is the form factor
 discussed in \S\ref{app:F-extraction} below; it is grid-converged at the
 canonical cutoff $R=1.18\,\xi$ between $n=48$ and $n=72$ at the $2.5\%$
@@ -2010,27 +2031,29 @@ $\rho_t=0.01$, $800$ relaxation steps.}
 \toprule
 grid & $R=1.0\,\xi$ & $R=1.18\,\xi$ & $R=1.5\,\xi$ & $R=2.0\,\xi$ & $R=3.0\,\xi$ \\
 \midrule
-$n=24$ & $6.61$ & $5.61$ & $4.54$ & $3.67$ & $2.86$ \\
-$n=48$ & $5.34$ & $4.53$ & $3.67$ & $2.96$ & $2.31$ \\
-$n=72$ & $5.21$ & $4.42$ & $3.58$ & $2.89$ & $2.26$ \\
+$n=24$ & $\ssvFTableCoarseROne$ & $\ssvFTableCoarseRPaper$ & $\ssvFTableCoarseROneHalf$ & $\ssvFTableCoarseRTwo$ & $\ssvFTableCoarseRThree$ \\
+$n=48$ & $\ssvFTableMidROne$ & $\ssvFTableMidRPaper$ & $\ssvFTableMidROneHalf$ & $\ssvFTableMidRTwo$ & $\ssvFTableMidRThree$ \\
+$n=72$ & $\ssvFTableFineROne$ & $\ssvFTableFineRPaper$ & $\ssvFTableFineROneHalf$ & $\ssvFTableFineRTwo$ & $\ssvFTableFineRThree$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\paragraph{Matching the analytic estimate.}  The analytic prediction
-$F\approx4.47$ is bracketed at $R\approx1.18\,\xi$ by the two fine grids,
-$F=4.417$ ($n=72$) and $F=4.528$ ($n=48$), whose mean is $4.47$.  This
+\paragraph{Corrected vortex calibration.}  At $R\approx1.18\,\xi$ the two
+fine grids give $F=\ssvProtonFormFactorLow$ ($n=72$) and
+$F=\ssvProtonFormFactorHigh$ ($n=48$), whose mean is
+$\ssvProtonFormFactorMean$.  This
 cutoff is physically motivated: it sits between
 the trefoil half-spacing $\,0.85\,\xi\,$ and full spacing $\,1.70\,\xi\,$
 at minor radius $0.85\,\xi$, i.e.\ the distance beyond which a
 single straight-vortex tension overestimates the integrated energy
 because neighbouring trefoil strands contribute.  The product
-$N_Y\cdot F = 3.007\times F$ then spans $13.28$--$13.62$, giving
-$m_pc^2\approx 930$--$953\,\text{MeV}$, i.e.\ $-0.9\%$ to $+1.6\%$ of the
-observed proton mass.  A single-number agreement at the $0.3\%$ level is
-not available: it requires the mean of the two grids to be read as a
-determination, and the mean is not a converged value but the midpoint of a
-$2.5\%$ bracket sitting on top of a much larger cutoff systematic.
+$N_Y\cdot F = \ssvCandidateNY\times F$ then spans
+$\ssvProtonCandidateProductLow$--$\ssvProtonCandidateProductHigh$, giving
+$m_pc^2\approx\ssvProtonCandidateMassLowMeV$--$\ssvProtonCandidateMassHighMeV\,\text{MeV}$,
+i.e.\ $+\ssvProtonCandidateDeviationLowPct\%$ to
+$+\ssvProtonCandidateDeviationHighPct\%$ above
+the observed proton mass.  The corrected result therefore fails the
+near-CODATA mass match, in addition to retaining the larger cutoff systematic.
 
 \paragraph{Topological status of $N_Y$ (settled, issue~\ssvissue{92}).}  $N_Y$ is the
 \emph{crossing number of the $(2,3)$-trefoil}, $N_Y=3$: the minimal number of
@@ -2038,7 +2061,7 @@ self-crossings of the simplest nontrivial knot (braid word $\sigma_1^3$, three
 positive crossings).  Equivalently it is the self-linking number (writhe) of the
 canonical embedding, which converges to exactly $3.000$ as the core radius
 $a\to0$ (numerically $3.0009$ at $a=0.05\,\xi$); finite core thickness adds
-$\mathrm{Wr}=3+O(a^2)$, so the empirical $3.007$ is this small geometric
+$\mathrm{Wr}=3+O(a^2)$, so the empirical $\ssvCandidateNY$ is this small geometric
 correction rather than a separately-derived digit.  The normalised-length
 reading $N_Y=L_{\rm curve}/(4\pi\xi)$ is \emph{rejected}: $L_{\rm curve}/(4\pi\xi)$
 is not a topological invariant --- it floats from $2.0$ to $3.1$ across the

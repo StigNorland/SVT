@@ -1,5 +1,12 @@
 # F-vs-R Cutoff Scan: No Plateau, Honest Systematic (2026-05-19)
 
+> **Issue #218 correction (2026-07-30).** The original table below is retained
+> as the historical coefficient-two-profile scan. With the corrected profile,
+> the \(n=(24,48,72)\) values at \(R=1.18\,\xi\) are
+> \(F=(6.559,5.298,5.168)\). The fine-grid mean is \(5.23\), implying
+> \(1088\)--\(1116\) MeV for \(3.007FE_\star\), not a near-CODATA proton
+> band. The cutoff-dependence verdict remains unchanged.
+
 Script: `instruments/paper_i/f_vs_r_cutoff_scan.py`
 States: n=24 (hw=6), n=48 (hw=6), n=72 (hw=6)
 Calibration: straight-vortex tension, `anchor_thickness_xi = 1.0`
