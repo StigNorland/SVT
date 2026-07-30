@@ -1,0 +1,162 @@
+{
+  "issue": 198,
+  "paper": "SSV-II",
+  "hypothesis": "every load-bearing number this paper prints is computed by a named instrument, not typed by hand (#198 Part A)",
+  "generator": "instruments/tools/gen_values.py",
+  "computed_utc": "2026-07-30T01:20:51Z",
+  "values": {
+    "ssvIIVortexSlope": {
+      "value": 0.8065899445300526,
+      "sig": 6,
+      "rendered": "0.806590",
+      "describes": "corrected coefficient-one vortex origin slope",
+      "source": "instruments/paper_ii/issue_220_values.py::profile_slope",
+      "source_sha256_16": "51bbd8d745869fd7",
+      "was": ""
+    },
+    "ssvIIIcurl": {
+      "value": 2.50977129745884,
+      "sig": 5,
+      "rendered": "2.5098",
+      "describes": "corrected straight-core curl integral",
+      "source": "instruments/paper_ii/issue_220_values.py::i_curl",
+      "source_sha256_16": "51bbd8d745869fd7",
+      "was": "5.02"
+    },
+    "ssvIIJBend": {
+      "value": 3.906530617348352,
+      "sig": 5,
+      "rendered": "3.9065",
+      "describes": "corrected local curvature integral",
+      "source": "instruments/paper_ii/issue_220_values.py::j_bend",
+      "source_sha256_16": "51bbd8d745869fd7",
+      "was": "7.81"
+    },
+    "ssvIIKBend": {
+      "value": 2.203033188864426,
+      "sig": 5,
+      "rendered": "2.2030",
+      "describes": "corrected metric-Jacobian integral",
+      "source": "instruments/paper_ii/issue_220_values.py::k_bend",
+      "source_sha256_16": "51bbd8d745869fd7",
+      "was": ""
+    },
+    "ssvIIJKOverFour": {
+      "value": 1.5273909515531945,
+      "sig": 5,
+      "rendered": "1.5274",
+      "describes": "corrected local bending coefficient (J+K)/4",
+      "source": "instruments/paper_ii/issue_220_values.py::jk_over_four",
+      "source_sha256_16": "51bbd8d745869fd7",
+      "was": "2.50"
+    },
+    "ssvIIVortexTau": {
+      "value": 18.62410437581005,
+      "sig": 5,
+      "rendered": "18.624",
+      "describes": "corrected vortex line tension at Rcap=phi/alpha",
+      "source": "instruments/paper_ii/issue_220_values.py::tau",
+      "source_sha256_16": "51bbd8d745869fd7",
+      "was": "17.0"
+    },
+    "ssvIILambdaBendLocal": {
+      "value": 28682.668550095274,
+      "sig": 4,
+      "rendered": "2.868\\times10^{4}",
+      "describes": "corrected local bending stiffness for lambda_perp=alpha^-2",
+      "source": "instruments/paper_ii/issue_220_values.py::lambda_bend_local",
+      "source_sha256_16": "51bbd8d745869fd7",
+      "was": ""
+    },
+    "ssvIILambdaBendGap": {
+      "value": 380.05581144377106,
+      "sig": 4,
+      "rendered": "380.1",
+      "describes": "corrected required/local bending-stiffness ratio",
+      "source": "instruments/paper_ii/issue_220_values.py::lambda_bend_gap",
+      "source_sha256_16": "51bbd8d745869fd7",
+      "was": "232"
+    },
+    "ssvIILinearRunningShortfallPct": {
+      "value": 41.65885706157238,
+      "sig": 3,
+      "rendered": "41.7",
+      "describes": "shortfall of the p=1 running candidate, percent",
+      "source": "instruments/paper_ii/issue_220_values.py::linear_running_shortfall_pct",
+      "source_sha256_16": "51bbd8d745869fd7",
+      "was": ""
+    },
+    "ssvIILocalCapRadius": {
+      "value": 25.496886400467062,
+      "sig": 3,
+      "rendered": "25.5",
+      "describes": "cap radius from the corrected local-equilibrium sub-model",
+      "source": "instruments/paper_ii/issue_220_values.py::local_equilibrium_radius",
+      "source_sha256_16": "51bbd8d745869fd7",
+      "was": ""
+    },
+    "ssvIILocalCapMassGeV": {
+      "value": 1.0436242895983359,
+      "sig": 3,
+      "rendered": "1.04",
+      "describes": "cap-formula mass at the corrected local-equilibrium radius",
+      "source": "instruments/paper_ii/issue_220_values.py::local_equilibrium_mass_gev",
+      "source_sha256_16": "51bbd8d745869fd7",
+      "was": ""
+    },
+    "ssvIICandidateProductLow": {
+      "value": 15.5391591213856,
+      "sig": 4,
+      "rendered": "15.54",
+      "describes": "corrected low endpoint of the Paper I candidate N_Y F product",
+      "source": "instruments/paper_i/issue_218_values.py::candidate_product_low",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "13.28"
+    },
+    "ssvIICandidateProductHigh": {
+      "value": 15.931433117047964,
+      "sig": 4,
+      "rendered": "15.93",
+      "describes": "corrected high endpoint of the Paper I candidate N_Y F product",
+      "source": "instruments/paper_i/issue_218_values.py::candidate_product_high",
+      "source_sha256_16": "f02043194acea3d2",
+      "was": "13.62"
+    },
+    "ssvIIProtonPionRatioLow": {
+      "value": 7.7695795606928,
+      "sig": 4,
+      "rendered": "7.770",
+      "describes": "corrected low endpoint of candidate m_p/m_pi",
+      "source": "instruments/paper_ii/issue_220_values.py::candidate_proton_pion_ratio_low",
+      "source_sha256_16": "51bbd8d745869fd7",
+      "was": ""
+    },
+    "ssvIIProtonPionRatioHigh": {
+      "value": 7.965716558523982,
+      "sig": 4,
+      "rendered": "7.966",
+      "describes": "corrected high endpoint of candidate m_p/m_pi",
+      "source": "instruments/paper_ii/issue_220_values.py::candidate_proton_pion_ratio_high",
+      "source_sha256_16": "51bbd8d745869fd7",
+      "was": ""
+    },
+    "ssvIIProtonPionDeviationLowPct": {
+      "value": 15.574497323957859,
+      "sig": 3,
+      "rendered": "15.6",
+      "describes": "low corrected candidate m_p/m_pi deviation, percent",
+      "source": "instruments/paper_ii/issue_220_values.py::candidate_proton_pion_deviation_low_pct",
+      "source_sha256_16": "51bbd8d745869fd7",
+      "was": ""
+    },
+    "ssvIIProtonPionDeviationHighPct": {
+      "value": 18.49208568944052,
+      "sig": 3,
+      "rendered": "18.5",
+      "describes": "high corrected candidate m_p/m_pi deviation, percent",
+      "source": "instruments/paper_ii/issue_220_values.py::candidate_proton_pion_deviation_high_pct",
+      "source_sha256_16": "51bbd8d745869fd7",
+      "was": ""
+    }
+  }
+}

@@ -346,6 +346,79 @@ def _ssv_i() -> list[Value]:
     return values
 
 
+def _ssv_ii() -> list[Value]:
+    import issue_218_values as I218
+    import issue_220_values as I220
+
+    return [
+        Value("ssvIIVortexSlope", I220.profile_slope, 6,
+              r"corrected coefficient-one vortex origin slope",
+              "instruments/paper_ii/issue_220_values.py::profile_slope", ""),
+        Value("ssvIIIcurl", I220.i_curl, 5,
+              r"corrected straight-core curl integral",
+              "instruments/paper_ii/issue_220_values.py::i_curl", "5.02"),
+        Value("ssvIIJBend", I220.j_bend, 5,
+              r"corrected local curvature integral",
+              "instruments/paper_ii/issue_220_values.py::j_bend", "7.81"),
+        Value("ssvIIKBend", I220.k_bend, 5,
+              r"corrected metric-Jacobian integral",
+              "instruments/paper_ii/issue_220_values.py::k_bend", ""),
+        Value("ssvIIJKOverFour", I220.jk_over_four, 5,
+              r"corrected local bending coefficient (J+K)/4",
+              "instruments/paper_ii/issue_220_values.py::jk_over_four", "2.50"),
+        Value("ssvIIVortexTau", I220.tau, 5,
+              r"corrected vortex line tension at Rcap=phi/alpha",
+              "instruments/paper_ii/issue_220_values.py::tau", "17.0"),
+        Value("ssvIILambdaBendLocal", I220.lambda_bend_local, 4,
+              r"corrected local bending stiffness for lambda_perp=alpha^-2",
+              "instruments/paper_ii/issue_220_values.py::lambda_bend_local", ""),
+        Value("ssvIILambdaBendGap", I220.lambda_bend_gap, 4,
+              r"corrected required/local bending-stiffness ratio",
+              "instruments/paper_ii/issue_220_values.py::lambda_bend_gap", "232"),
+        Value("ssvIILinearRunningShortfallPct",
+              I220.linear_running_shortfall_pct, 3,
+              r"shortfall of the p=1 running candidate, percent",
+              "instruments/paper_ii/issue_220_values.py::linear_running_shortfall_pct",
+              ""),
+        Value("ssvIILocalCapRadius", I220.local_equilibrium_radius, 3,
+              r"cap radius from the corrected local-equilibrium sub-model",
+              "instruments/paper_ii/issue_220_values.py::local_equilibrium_radius",
+              ""),
+        Value("ssvIILocalCapMassGeV", I220.local_equilibrium_mass_gev, 3,
+              r"cap-formula mass at the corrected local-equilibrium radius",
+              "instruments/paper_ii/issue_220_values.py::local_equilibrium_mass_gev",
+              ""),
+        Value("ssvIICandidateProductLow", I218.candidate_product_low, 4,
+              r"corrected low endpoint of the Paper I candidate N_Y F product",
+              "instruments/paper_i/issue_218_values.py::candidate_product_low",
+              "13.28"),
+        Value("ssvIICandidateProductHigh", I218.candidate_product_high, 4,
+              r"corrected high endpoint of the Paper I candidate N_Y F product",
+              "instruments/paper_i/issue_218_values.py::candidate_product_high",
+              "13.62"),
+        Value("ssvIIProtonPionRatioLow",
+              I220.candidate_proton_pion_ratio_low, 4,
+              r"corrected low endpoint of candidate m_p/m_pi",
+              "instruments/paper_ii/issue_220_values.py::candidate_proton_pion_ratio_low",
+              ""),
+        Value("ssvIIProtonPionRatioHigh",
+              I220.candidate_proton_pion_ratio_high, 4,
+              r"corrected high endpoint of candidate m_p/m_pi",
+              "instruments/paper_ii/issue_220_values.py::candidate_proton_pion_ratio_high",
+              ""),
+        Value("ssvIIProtonPionDeviationLowPct",
+              I220.candidate_proton_pion_deviation_low_pct, 3,
+              r"low corrected candidate m_p/m_pi deviation, percent",
+              "instruments/paper_ii/issue_220_values.py::candidate_proton_pion_deviation_low_pct",
+              ""),
+        Value("ssvIIProtonPionDeviationHighPct",
+              I220.candidate_proton_pion_deviation_high_pct, 3,
+              r"high corrected candidate m_p/m_pi deviation, percent",
+              "instruments/paper_ii/issue_220_values.py::candidate_proton_pion_deviation_high_pct",
+              ""),
+    ]
+
+
 def _ssv_vii_b() -> list[Value]:
     import planck_scale_values as P
     return [
@@ -424,6 +497,7 @@ def _ssv_vi() -> list[Value]:
 # paper is actually computed or checked.  Rendering never triggers them.
 REGISTRY: dict[str, Callable[[], list[Value]]] = {
     "SSV-I": _ssv_i,
+    "SSV-II": _ssv_ii,
     "SSV-VI": _ssv_vi,
     "SSV-VII-b": _ssv_vii_b,
 }

@@ -174,6 +174,7 @@ def test_claims_are_not_tautologies(paper):
 
     import dsph_ledger as D
     import issue_218_values as I218
+    import issue_220_values as I220
     import ssv_i_audit_2026 as A
     import planck_scale_values as P
 
@@ -185,6 +186,19 @@ def test_claims_are_not_tautologies(paper):
                   (I218, "form_factor_table"), (I218, "candidate_n_y"),
                   (I218, "energy_star_mev"),
                   (I218, "corrected_combined_n_y_f")],
+        "SSV-II": [
+            (I220, "profile_slope"), (I220, "i_curl"),
+            (I220, "j_bend"), (I220, "k_bend"),
+            (I220, "jk_over_four"), (I220, "tau"),
+            (I220, "lambda_bend_local"), (I220, "lambda_bend_gap"),
+            (I220, "linear_running_shortfall_pct"),
+            (I220, "local_equilibrium_radius"),
+            (I220, "local_equilibrium_mass_gev"),
+            (I220, "candidate_proton_pion_ratio_low"),
+            (I220, "candidate_proton_pion_ratio_high"),
+            (I220, "candidate_proton_pion_deviation_low_pct"),
+            (I220, "candidate_proton_pion_deviation_high_pct"),
+        ],
         "SSV-VI": [(D, "model_a_vh"), (D, "model_b_vh"), (D, "gamma_req"),
                    (D, "V_MW"), (D, "GAMMA_REQ_MW")],
         "SSV-VII-b": [(P, "planck_length"), (P, "planck_mass"),

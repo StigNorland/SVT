@@ -15,7 +15,7 @@ for sub in ("paper_i", "paper_ii"):
     if p not in sys.path:
         sys.path.insert(0, p)
 
-from vortex_profile import VortexProfile  # noqa: E402
+from corrected_vortex_profile import CorrectedVortexProfile  # noqa: E402
 from lr_su4_cross_term_audit import (  # noqa: E402
     R_MAX_RELIABLE,
     analytic_tail,
@@ -27,7 +27,7 @@ from lr_su4_cross_term_audit import (  # noqa: E402
 
 @pytest.fixture(scope="module")
 def profile():
-    vp = VortexProfile.solve(n=2000, x_max=R_MAX_RELIABLE)
+    vp = CorrectedVortexProfile.solve(n=2000, x_max=R_MAX_RELIABLE)
     return np.array(vp.xs), np.array(vp.fs), np.array(vp.fps)
 
 

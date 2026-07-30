@@ -12,9 +12,11 @@ minimisation gives the cubic `R^3 + tau R^2 = lambda_bend`, and placing the
 equilibrium at the observed cap radius `R_cap = phi/alpha` requires a bending
 stiffness `lambda_bend = phi^3/alpha^3 ~ 1.09e7 xi^3`.  The chiral-shear
 Lagrangian's *local* curvature correction (lperp_core_integral) supplies only
-`lambda_bend_local = lambda_perp (J+K)/4 ~ 4.7e4 xi^3` — a factor ~232 short.
+`lambda_bend_local = lambda_perp (J+K)/4 ~ 2.87e4 xi^3` — a factor ~380 short
+with the corrected coefficient-one profile.  The historical coefficient-two
+control gave the superseded factor ~232.
 
-This script settles where the 232 comes from and resolves it, testing the
+This script settles where the local shortfall comes from and tests the
 pre-registered routes of issue #105.
 
 Findings (all reproduced below)
@@ -26,31 +28,30 @@ E  AUDIT. `m_W = pi phi^2 (m_e/alpha^2)` with `m_e/alpha^2 = 9.60 GeV` and two
 
 A  LOCAL CURVATURE IS FALSIFIED — structurally.  `lambda_bend_local = O(1) * alpha^-2`
    because `lambda_perp = alpha^-2` and `(J+K)/4` is an O(1) core integral.  The
-   equilibrium cubic with this stiffness puts the cap at `R_eq ~ alpha^(-2/3) ~ 31 xi`,
-   giving `m_W ~ 1.6 GeV` (51x too small).  No local curvature correction can ever
-   reach the ring scale `xi/alpha`: the shortfall is exactly one power of
-   `1/alpha = R*/xi` (the ring/core ratio), 232 = (phi^3/((J+K)/4)) * (1/alpha).
+   equilibrium cubic with this stiffness puts the cap at `R_eq ~ 25.5 xi`,
+   giving `m_W ~ 1.04 GeV` (about 77x too small).  No local curvature correction can ever
+   reach the ring scale `xi/alpha`: the shortfall is one power of
+   `1/alpha = R*/xi` (the ring/core ratio) times an O(1) coefficient,
+   380 = (phi^3/((J+K)/4)) * (1/alpha).
 
-B  RESOLUTION — the cap scale is the inherited electron ring scale, not a bending
-   equilibrium.  The reconnecting defects ARE electron-scale rings of radius
-   `R* = xi/alpha` (derived in Paper I from the Lamb energy).  The cap cannot be
-   smaller than the throats it joins, so `R_cap = O(1) * R*`, hence
-   `m_W ~ P0 R_cap^2 xi ~ m_e (R*/xi)^2 = m_e/alpha^2`.  The `1/alpha^2` scale is
-   framework-derived; the 232x "shortfall" was an artefact of setting R_cap by a
-   local bending equilibrium, which is not the mechanism.  The residual prefactor
-   `pi phi^2 ~ 8.2` (two caps * pi * the cap aspect phi^2) is O(1); only `phi`
-   remains coincidence-grade.
+B  CONDITIONAL SCALE — if the cap inherits the electron ring scale
+   `R* = xi/alpha`, then
+   `m_W ~ P0 R_cap^2 xi ~ m_e (R*/xi)^2 = m_e/alpha^2`.  The calculation
+   motivates a scale conditional on inheritance; it does not derive the
+   inheritance, cap geometry, or coefficient.  The local-equilibrium
+   shortfall retires that cap-setting sub-model.  The residual prefactor
+   `pi phi^2 ~ 8.2` remains coincidence-grade.
 
 A' SHARPEST OPEN FORM (kept for the record, not a closure).  If one retains the
    bending-equilibrium picture, the required stiffness is exactly `lambda_perp`
    *evaluated at the cap scale* with a linear running `lambda_perp(k) ~ 1/k`:
-   `lambda_bend = (J+K)/4 * alpha^-2 * (R_cap/xi) = (J+K)/4 * phi/alpha^3`, which
-   lands within ~5% of `phi^3/alpha^3`.  Whether the chiral-shear dispersion
-   actually runs linearly is an undelivered derivation; route B closes #105
-   without needing it.
+   `lambda_bend = (J+K)/4 * alpha^-2 * (R_cap/xi) = (J+K)/4 * phi/alpha^3`.
+   With the corrected profile this is 41.7% below `phi^3/alpha^3`, so the
+   former 4.4% coincidence is invalidated.  Whether the chiral-shear dispersion
+   runs at all remains an undelivered derivation; route B does not depend on it.
 
-Verdict: #105 resolved by route B (scale derived, 232 dissolved); m_W scale is
-derived, the O(1) `phi` prefactor remains a coincidence (rule 1 / rule 5).
+Verdict: local equilibrium is retired.  Route B is a conditional scale
+argument, not an independent W-mass prediction (rule 1 / rule 5).
 """
 
 from __future__ import annotations
@@ -65,12 +66,13 @@ PHI = (1.0 + math.sqrt(5.0)) / 2.0
 M_E_MEV = 0.510998950        # electron mass, MeV
 M_W_OBS_GEV = 80.3692        # PDG 2024 W mass, GeV
 
-# core integrals from lperp_core_integral.py (b=1 LogSE profile, r<15 xi)
-J_BEND = 7.8093
-K_BEND = 2.2014
-JK_OVER_4 = (J_BEND + K_BEND) / 4.0     # ~2.50, the O(1) local coefficient
+# Corrected coefficient-one core integrals from lperp_core_integral.py,
+# r < 15 conventional healing lengths.
+J_BEND = 3.906531
+K_BEND = 2.203033
+JK_OVER_4 = (J_BEND + K_BEND) / 4.0
 
-TAU_XI = 17.0                # computed vortex line tension (xi), vortex_cap_mass.py
+TAU_XI = 18.6241             # corrected line tension, vortex_cap_mass.py
 
 # --- basic scales ---------------------------------------------------------
 def m_e_over_alpha2_gev() -> float:
@@ -144,20 +146,21 @@ def _report() -> None:
     print(f"    lambda_bend_reqd  = phi^3/alpha^3      = {lam_req:.3e} xi^3")
     print(f"    gap               = {gap_factor():.1f}x  = (phi^3/((J+K)/4)) * (1/alpha) = {PHI**3/JK_OVER_4:.3f} * {1/ALPHA:.1f}")
     print(f"    equilibrium cubic, LOCAL : R_eq = {R_loc:.1f} xi = {R_loc*ALPHA:.3f} (xi/alpha) ~ alpha^(-2/3)={ALPHA**(-2/3):.1f} xi")
-    print(f"                               -> m_W = {m_W_from_Rcap(R_loc):.2f} GeV  (51x too small)")
+    print(f"                               -> m_W = {m_W_from_Rcap(R_loc):.2f} GeV"
+          f"  ({M_W_OBS_GEV/m_W_from_Rcap(R_loc):.0f}x too small)")
     print(f"    equilibrium cubic, REQD  : R_eq = {R_req:.1f} xi = {R_req*ALPHA:.3f} (xi/alpha) ~ phi")
 
-    print(f"\n[B] RESOLUTION: cap scale = inherited electron ring scale R* = xi/alpha")
-    print(f"    R* (Paper I, derived)       = {1/ALPHA:.1f} xi")
-    print(f"    m_W ~ m_e (R*/xi)^2 = m_e/alpha^2 = {me_a2:.2f} GeV  (the 1/alpha^2 is DERIVED)")
-    print(f"    residual prefactor pi phi^2 = {math.pi*PHI**2:.2f}  (O(1); only phi is coincidence-grade)")
-    print(f"    => 232x shortfall DISSOLVED: it was an artefact of a local bending equilibrium.")
+    print(f"\n[B] CONDITIONAL SCALE: if the cap inherits R* = xi/alpha")
+    print(f"    R* (Paper I candidate)     = {1/ALPHA:.1f} xi")
+    print(f"    m_W ~ m_e (R*/xi)^2 = m_e/alpha^2 = {me_a2:.2f} GeV")
+    print(f"    inheritance and pi phi^2 = {math.pi*PHI**2:.2f} are not dynamically derived")
+    print(f"    => local-equilibrium shortfall RETIRED: that sub-model does not set the cap scale.")
 
     print(f"\n[A'] sharpest open form (not a closure): linear running lambda_perp(k) ~ 1/k")
     print(f"    lambda_bend = (J+K)/4 * alpha^-2 * (R_cap/xi) = {lam_run:.3e} xi^3")
-    print(f"    vs required phi^3/alpha^3 = {lam_req:.3e}  -> within {abs(lam_run-lam_req)/lam_req*100:.1f}%")
-    print(f"    (depends on an undelivered chiral-shear dispersion-running derivation)")
-    print("\nVERDICT: #105 resolved by route B. m_W scale derived; phi remains O(1) coincidence.")
+    print(f"    vs required phi^3/alpha^3 = {lam_req:.3e}  -> short by {abs(lam_run-lam_req)/lam_req*100:.1f}%")
+    print(f"    (the former 4.4% match was a legacy-profile normalization artefact)")
+    print("\nVERDICT: local equilibrium retired; route B remains a conditional scale argument.")
 
 
 if __name__ == "__main__":

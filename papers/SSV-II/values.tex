@@ -5,9 +5,77 @@
 % number printed in this paper cannot drift from the code that derives it,
 % because there is only one of it.  (#198 Part A)
 %
-% Rendered from ../shared_values_receipt.json — the recorded result of the
+% Rendered from results/values_receipt.json and ../shared_values_receipt.json — the recorded result of the
 % last instrument run.  Re-run the physics with --compute; verify the
 % recorded result against the instruments with --check.
+
+% corrected coefficient-one vortex origin slope
+%   instruments/paper_ii/issue_220_values.py::profile_slope
+\newcommand{\ssvIIVortexSlope}{0.806590}
+
+% corrected straight-core curl integral
+%   instruments/paper_ii/issue_220_values.py::i_curl
+\newcommand{\ssvIIIcurl}{2.5098}
+
+% corrected local curvature integral
+%   instruments/paper_ii/issue_220_values.py::j_bend
+\newcommand{\ssvIIJBend}{3.9065}
+
+% corrected metric-Jacobian integral
+%   instruments/paper_ii/issue_220_values.py::k_bend
+\newcommand{\ssvIIKBend}{2.2030}
+
+% corrected local bending coefficient (J+K)/4
+%   instruments/paper_ii/issue_220_values.py::jk_over_four
+\newcommand{\ssvIIJKOverFour}{1.5274}
+
+% corrected vortex line tension at Rcap=phi/alpha
+%   instruments/paper_ii/issue_220_values.py::tau
+\newcommand{\ssvIIVortexTau}{18.624}
+
+% corrected local bending stiffness for lambda_perp=alpha^-2
+%   instruments/paper_ii/issue_220_values.py::lambda_bend_local
+\newcommand{\ssvIILambdaBendLocal}{2.868\times10^{4}}
+
+% corrected required/local bending-stiffness ratio
+%   instruments/paper_ii/issue_220_values.py::lambda_bend_gap
+\newcommand{\ssvIILambdaBendGap}{380.1}
+
+% shortfall of the p=1 running candidate, percent
+%   instruments/paper_ii/issue_220_values.py::linear_running_shortfall_pct
+\newcommand{\ssvIILinearRunningShortfallPct}{41.7}
+
+% cap radius from the corrected local-equilibrium sub-model
+%   instruments/paper_ii/issue_220_values.py::local_equilibrium_radius
+\newcommand{\ssvIILocalCapRadius}{25.5}
+
+% cap-formula mass at the corrected local-equilibrium radius
+%   instruments/paper_ii/issue_220_values.py::local_equilibrium_mass_gev
+\newcommand{\ssvIILocalCapMassGeV}{1.04}
+
+% corrected low endpoint of the Paper I candidate N_Y F product
+%   instruments/paper_i/issue_218_values.py::candidate_product_low
+\newcommand{\ssvIICandidateProductLow}{15.54}
+
+% corrected high endpoint of the Paper I candidate N_Y F product
+%   instruments/paper_i/issue_218_values.py::candidate_product_high
+\newcommand{\ssvIICandidateProductHigh}{15.93}
+
+% corrected low endpoint of candidate m_p/m_pi
+%   instruments/paper_ii/issue_220_values.py::candidate_proton_pion_ratio_low
+\newcommand{\ssvIIProtonPionRatioLow}{7.770}
+
+% corrected high endpoint of candidate m_p/m_pi
+%   instruments/paper_ii/issue_220_values.py::candidate_proton_pion_ratio_high
+\newcommand{\ssvIIProtonPionRatioHigh}{7.966}
+
+% low corrected candidate m_p/m_pi deviation, percent
+%   instruments/paper_ii/issue_220_values.py::candidate_proton_pion_deviation_low_pct
+\newcommand{\ssvIIProtonPionDeviationLowPct}{15.6}
+
+% high corrected candidate m_p/m_pi deviation, percent
+%   instruments/paper_ii/issue_220_values.py::candidate_proton_pion_deviation_high_pct
+\newcommand{\ssvIIProtonPionDeviationHighPct}{18.5}
 
 % \alpha^{-1}, CODATA observed input
 %   instruments/series_values.py::inverse_fine_structure

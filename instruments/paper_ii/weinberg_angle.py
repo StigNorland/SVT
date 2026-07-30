@@ -28,7 +28,7 @@ M_W_OBS      = 80.377    # GeV  (PDG 2023)
 M_Z_OBS      = 91.188    # GeV  (PDG 2023)
 SIN2_THW_PDG = 0.23122   # PDG 2023 (MS-bar)
 
-TAU_PHYS     = 17.000    # vortex line tension in physical (b=1/2) units [ξ]
+TAU_PHYS     = 18.6241   # corrected coefficient-one vortex line tension [xi]
 
 
 def cap_radius_from_mass(m_gev: float) -> float:
@@ -209,7 +209,7 @@ def main() -> None:
     print(f"    cos²(θ_W) = 1 − φ/7 = (7 − φ)/7")
     print(f"    cos(θ_W)  = √((7 − φ)/7) = {math.sqrt((7-PHI)/7):.6f}  vs PDG {cos_w:.6f}")
     print()
-    print(f"  Open gapbox: derive tan(θ_W) ≈ φ/7 from the SSV chiral-shear")
+    print(f"  Open gapbox: derive sin²(θ_W) ≈ φ/7 from the SSV chiral-shear")
     print(f"  amplitude-phase mixing at the reconnection saddle.")
     print()
 

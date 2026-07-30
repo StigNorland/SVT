@@ -1,5 +1,16 @@
 # Resolving the W-mass cap bending-stiffness shortfall (#105)
 
+> **Current status after
+> [#220](https://github.com/StigNorland/SVT/issues/220):** this note preserves
+> the historical #105 calculation. Its coefficient-two core values are a
+> legacy control, not the active baseline. The corrected coefficient-one
+> profile gives `(J+K)/4 = 1.5274`, local gap `380.1×`, and
+> `tau = 18.624`. The former p=1 linear-running 4.4% match is invalidated
+> (41.7% short). Route B survives only as a **conditional scale argument**:
+> if the cap inherits `R*=xi/alpha`, then `m_W~m_e/alpha²`; the nonlinear
+> dynamics has not established that inheritance, and `phi` remains post hoc.
+> See [`issue-220-vortex-profile-propagation.md`](../issue-220-vortex-profile-propagation.md).
+
 **Issue:** #105 · **Date:** 2026-06-07 · **Branch:** `issue-105-wmass-lambda-bend`
 **Script:** `instruments/paper_ii/wmass_cap_scale_resolution.py`
 **Test:** `instruments/test/paper_ii/test_wmass_cap_scale_resolution.py`

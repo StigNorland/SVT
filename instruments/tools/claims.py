@@ -302,6 +302,89 @@ def _ssv_i() -> list[Claim]:
 
 
 # --------------------------------------------------------------------------
+# SSV-II
+# --------------------------------------------------------------------------
+
+def _ssv_ii() -> list[Claim]:
+    import issue_220_values as I220
+
+    return [
+        Claim(
+            "SSV-II", "corrected-local-bending-remains-negative",
+            "papers/SSV-II/main.tex",
+            "the corrected local profile gives a roughly 380-fold stiffness "
+            "gap, a 25.5 xi local cap and a 1.04 GeV cap-formula mass; simple "
+            "linear running remains about 42% short",
+            (
+                "ssvIIVortexSlope",
+                "ssvIIIcurl",
+                "ssvIIJBend",
+                "ssvIIKBend",
+                "ssvIIJKOverFour",
+                "ssvIIVortexTau",
+                "ssvIILambdaBendLocal",
+                "ssvIILambdaBendGap",
+                "ssvIILinearRunningShortfallPct",
+                "ssvIILocalCapRadius",
+                "ssvIILocalCapMassGeV",
+            ),
+            lambda: (
+                0.80 < I220.profile_slope() < 0.82
+                and 2.50 < I220.i_curl() < 2.52
+                and 3.89 < I220.j_bend() < 3.92
+                and 2.19 < I220.k_bend() < 2.21
+                and 1.52 < I220.jk_over_four() < 1.54
+                and 18.5 < I220.tau() < 18.8
+                and 2.8e4 < I220.lambda_bend_local() < 2.95e4
+                and 375.0 < I220.lambda_bend_gap() < 385.0
+                and 40.0 < I220.linear_running_shortfall_pct() < 44.0
+                and 24.0 < I220.local_equilibrium_radius() < 27.0
+                and 0.9 < I220.local_equilibrium_mass_gev() < 1.2
+            ),
+            tolerance=(
+                "slope [0.80,0.82]; I [2.50,2.52]; J [3.89,3.92]; "
+                "K [2.19,2.21]; (J+K)/4 [1.52,1.54]; tau [18.5,18.8]; "
+                "local stiffness [2.8e4,2.95e4]; gap [375,385]; "
+                "p=1 shortfall [40%,44%]; R [24,27] xi; mass [0.9,1.2] GeV"
+            ),
+            source_anchor=(
+                r"its local stiffness is short by a factor "
+                r"\(\ssvIILambdaBendGap\), and the actual cap-setting dynamics "
+                r"remains open."
+            ),
+        ),
+        Claim(
+            "SSV-II", "corrected-proton-pion-ratio-fails",
+            "papers/SSV-II/main.tex",
+            "the corrected candidate proton-to-pion ratio is 15%--19% high, "
+            "so the former near-match does not survive",
+            (
+                "ssvIICandidateProductLow",
+                "ssvIICandidateProductHigh",
+                "ssvIIProtonPionRatioLow",
+                "ssvIIProtonPionRatioHigh",
+                "ssvIIProtonPionDeviationLowPct",
+                "ssvIIProtonPionDeviationHighPct",
+            ),
+            lambda: (
+                15.0 < I220.candidate_proton_pion_deviation_low_pct() < 17.0
+                and 18.0 < I220.candidate_proton_pion_deviation_high_pct() < 20.0
+                and 7.7 < I220.candidate_proton_pion_ratio_low() < 7.9
+                and 7.9 < I220.candidate_proton_pion_ratio_high() < 8.1
+            ),
+            tolerance=(
+                "low deviation [15%,17%], high deviation [18%,20%], "
+                "low ratio [7.7,7.9], high ratio [7.9,8.1]"
+            ),
+            source_anchor=(
+                r"The former near-match does not survive the corrected "
+                r"normalization."
+            ),
+        ),
+    ]
+
+
+# --------------------------------------------------------------------------
 # SSV-VII-b
 # --------------------------------------------------------------------------
 
@@ -555,6 +638,7 @@ def _ssv_vii_a() -> list[Claim]:
 
 REGISTRY: dict[str, Callable[[], list[Claim]]] = {
     "SSV-I": _ssv_i,
+    "SSV-II": _ssv_ii,
     "SSV-VI": _ssv_vi,
     "SSV-VII-a": _ssv_vii_a,
     "SSV-VII-b": _ssv_vii_b,

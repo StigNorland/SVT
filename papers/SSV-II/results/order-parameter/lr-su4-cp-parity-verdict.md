@@ -78,7 +78,8 @@ This **corrects the cheap-route toy** (`lr-su4-cross-term-audit.md`): its single
 colour winding (1 bit) made CP flip `P_c` and `P_w` together, so it mis-saw a
 CPT-violating "split." With colour properly SU(4) (3 bits), CP flips only `P_c`, the
 would-be-split sectors are CP partners, and the split is forbidden. The cross
-*integral* (`I_cross = 5.02`) is still nonzero — it simply cannot produce a net
+*integral* (`I_cross = 2.5098` with the corrected profile) is still nonzero —
+it simply cannot produce a net
 chirality selection once CP is implemented correctly.
 
 ## Where #81 lands

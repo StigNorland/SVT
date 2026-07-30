@@ -4,6 +4,26 @@ The paper states **current status only**. Its history lives here.
 
 ---
 
+## 2026-07-30 — [#220](https://github.com/StigNorland/SVT/issues/220) · corrected vortex-profile propagation
+
+All five direct Paper II consumers of Paper I's legacy coefficient-two vortex
+were migrated to the corrected coefficient-one conventional-healing-length
+baseline.  The legacy solver remains only as an explicitly named rescaling
+control.
+
+The corrected values are \(I_{\rm curl}=2.5098\),
+\((J+K)/4=1.5274\), and \(\tau=18.624\).  Local bending is now 380x too
+small, not 232x.  The old p=1 linear-running candidate no longer lands within
+4.4% of the required stiffness; it is 41.7% short.  The coincident-core
+chirality overlap remains nonzero and same-order, while the cap-setting
+mechanism, coupling sign, nonlinear relaxation and Weinberg-angle derivation
+remain open.
+
+The same pass removed two downstream promotions: the cap cubic is an inversion
+of an imposed radius rather than a derivation of \(R_{\rm cap}=\phi/\alpha\),
+and the Paper I proton near-match no longer supports Paper II's composite-mass
+or \(G\) consistency prose after #218.
+
 ## 2026-07-29 — [#213](https://github.com/StigNorland/SVT/issues/213) · standard symbol meanings
 
 The Maxwell \(\mu_0\) remains vacuum permeability.  The unrelated SSV scale
