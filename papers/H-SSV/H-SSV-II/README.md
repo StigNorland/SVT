@@ -1,8 +1,12 @@
 # H-SSV-II — Screen-Update Gravity
 
-**Status:** planned; depends on H-SSV-I.
+**Status:** planned; unblocked by H-SSV-I's C4 issue-226 foundation pass.
 
 ## Scope
+
+This paper must inherit C4's causal-network state space, bilateral particle/site
+update budgets and `A=1-q` response without reinstating C3's preferred membrane
+frame or choosing a law from galaxy residuals.
 
 Derive gravity from the frozen screen foundation:
 

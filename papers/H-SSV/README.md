@@ -59,8 +59,11 @@ research track. It investigates whether a physical information screen can
 supply the source of the gravitational potential that is missing upstream of
 SSV Paper IV's surviving update-capacity response.
 
-**Status:** exploratory programme; no H-SSV paper currently carries an
-established positive result.
+**Status:** foundation gate passed. Issue #226 completed H-SSV-I with a
+**PROCEED** decision for a finite-capacity quantum causal screen: one global
+state, local no-signaling gates, and bilateral update budgets for topological
+screen sites and moving particles. H-SSV-II is unblocked. No gravitational law
+or observational H-SSV result has yet been established.
 
 The shared conceptual and mathematical record is
 [`working-hypothesis.md`](working-hypothesis.md). It preserves inherited SSV
@@ -71,8 +74,8 @@ hard physical requirements, and the ordered resumption checklist.
 
 | Paper | Working title | Primary gate |
 |---|---|---|
-| [H-SSV-I](H-SSV-I/) | Screen Foundations | Define a causal, covariant and conserved screen-write theory. |
-| [H-SSV-II](H-SSV-II/) | Screen-Update Gravity | Derive the gravitational potential, Newtonian limit, cored-logarithmic limit and baryonic scaling. |
+| [H-SSV-I](H-SSV-I/) | Screen Foundations | **PROCEED (#226):** C4 passes all six foundation gates. |
+| [H-SSV-II](H-SSV-II/) | Screen-Update Gravity | Unblocked: derive the response from C4 without galaxy-selected laws. |
 | [H-SSV-III](H-SSV-III/) | Emergent Geometry and Lensing | Derive both metric sectors and pass local gravity and lensing constraints. |
 | [H-SSV-IV](H-SSV-IV/) | Galaxy Tests | Test a frozen model against preregistered rotation-curve and lensing samples. |
 | [H-SSV-V](H-SSV-V/) | Screen Cosmology | Derive and test global screen evolution, redshift, age and distance relations. |
@@ -99,3 +102,13 @@ Each paper begins as a scoped directory and may advance only after the previous
 paper's explicit exit gate is met. Later directories are a roadmap, not evidence
 that their premises have survived. Computations follow the repository's
 issue-driven, preregistered instrument/receipt/test workflow.
+
+### H-SSV-I closure record — issue #226
+
+- [preregistration](results/issue-226/00-preregistration.md)
+- [C4 preregistration addendum](results/issue-226/03-c4-preregistration-addendum.md)
+- [mathematical specification](H-SSV-I/screen-theory.md)
+- [dimensional and limiting checks](results/issue-226/01-checks.md)
+- [failure ledger](results/issue-226/02-failure-ledger.md)
+- [decision and status report](results/issue-226/decision.md)
+- [machine receipt](results/issue-226/receipt.json)
