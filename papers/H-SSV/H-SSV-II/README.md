@@ -1,6 +1,8 @@
 # H-SSV-II — Screen-Update Gravity
 
-**Status:** planned; unblocked by H-SSV-I's C4 issue-226 foundation pass.
+**Status:** issue #227 complete — **PHENOMENOLOGY ONLY**. The conditional
+screen-capacity construction derives the baryonic exponent, but the regulator,
+acceleration magnitude, multi-screen composition, and dynamics remain open.
 
 ## Scope
 
@@ -25,6 +27,22 @@ Derive gravity from the frozen screen foundation:
 The theory must derive its potential shape, amplitude and transition/core scale
 from H-SSV-I quantities without galaxy-by-galaxy fitting. It must recover the
 known local weak-field limit and make preregisterable galaxy-scale predictions.
+
+**Gate result:** not met. H-SSV-III and H-SSV-IV remain blocked.
+
+## Issue #227 record
+
+- [response theory](response-theory.md)
+- [preregistration](../results/issue-227/00-preregistration.md)
+- [derivation and dimensional checks](../results/issue-227/01-derivation-and-dimensions.md)
+- [input/derived ledger](../results/issue-227/02-input-derived-table.md)
+- [conditional population preregistration](../results/issue-227/03-population-preregistration.md)
+- [local and dynamic constraints](../results/issue-227/04-local-stability-constraints.md)
+- [negative ledger](../results/issue-227/05-negative-ledger.md)
+- [hierarchical coherence-screen addendum](../results/issue-227/06-hierarchical-screen-addendum.md)
+- [decision and status report](../results/issue-227/decision.md)
+- [machine receipt](../results/issue-227/receipt.json)
+- [completion audit](../results/issue-227/completion-audit.json)
 
 ## Excluded from this paper
 

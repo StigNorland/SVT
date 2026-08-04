@@ -31,6 +31,14 @@ gravity, time, and black-hole ontology from that single medium and two inputs (m
 > law or observational success follows yet. See
 > [H-SSV-I](papers/H-SSV/H-SSV-I/).
 
+> **H-SSV response audit (2026-08).** Issue
+> [#227](https://github.com/StigNorland/SVT/issues/227) derives a conditional
+> compact-screen min-cut with `r_c proportional sqrt(M)` and
+> `V_inf^4=G M a_*`. The decision is **PHENOMENOLOGY ONLY**: C4 does not fix the
+> numerical scale, unique core regulator, hierarchical-screen composition, or
+> dynamical/radiative response. H-SSV-III/IV remain blocked. See
+> [H-SSV-II](papers/H-SSV/H-SSV-II/).
+
 ## Table of contents
 
 - [Conclusions / post-mortem](#conclusions--post-mortem) — start here
@@ -86,7 +94,7 @@ The drafts and their compiled PDFs remain in `papers/`; the human-readable PDFs 
 | Path | Contents |
 |------|----------|
 | [papers/conclusions/](papers/conclusions/) | **The post-mortem and the two conclusion notes** (`.tex` + `.pdf`) |
-| [papers/H-SSV/](papers/H-SSV/) | Post-closure audits: covariant LogSE K3 result (#180) and quantum-causal screen foundation pass (#226) |
+| [papers/H-SSV/](papers/H-SSV/) | Post-closure audits: LogSE K3 (#180), quantum-causal foundation (#226), and conditional screen-response result (#227) |
 | [papers/](papers/) | Manuscript drafts, supplemental notes, result notes, checkpoint files |
 | [papers/pdf/](papers/pdf/) | Compiled, human-readable PDFs of the series |
 | [instruments/](instruments/) | Computational scripts grouped by paper, plus `tools/` (provenance) and the `test/` suite — see [instruments/README.md](instruments/README.md) |

@@ -1,0 +1,167 @@
+{
+  "checks": {
+    "conditional_solar": {
+      "comparison_only_a_star_m_s2": 1.2e-10,
+      "external_field_Q2_prediction": null,
+      "external_field_reason": "C4/T3 does not define how the Galactic shared patch changes the Solar-System remote marginal or tidal field",
+      "rows": {
+        "Earth": {
+          "g_newton_m_s2": 0.005930262843244523,
+          "g_screen_m_s2": 1.7070053761444026e-14,
+          "radius_AU": 1.0,
+          "screen_fraction": 2.8784649538577247e-12
+        },
+        "Saturn": {
+          "g_newton_m_s2": 6.461642473712766e-05,
+          "g_screen_m_s2": 1.6353081464852134e-13,
+          "radius_AU": 9.58,
+          "screen_fraction": 2.5307932977381043e-09
+        }
+      },
+      "solar_core_radius_AU": 7029.854694589191
+    },
+    "dimensions": {
+      "accelerations_match": true,
+      "capacity_acceleration": [
+        0,
+        1,
+        -2
+      ],
+      "core_radius": [
+        0,
+        1,
+        0
+      ],
+      "service_acceleration": [
+        0,
+        1,
+        -2
+      ],
+      "velocity_squared": [
+        0,
+        2,
+        -2
+      ],
+      "velocity_squared_matches": true
+    },
+    "dynamic_constraints": {
+      "C4_speed_statement": "c_screen <= c",
+      "G6_pass": false,
+      "GW170817_required_fractional_interval": [
+        -3e-15,
+        7e-16
+      ],
+      "binary_orbital_decay_prediction_supplied": false,
+      "binary_radiation_action_supplied": false,
+      "polarization_prediction_supplied": false,
+      "preferred_frame": "none in C4 causal partial order",
+      "speed_equality_derived": false
+    },
+    "exact_availability": {
+      "acceleration": 9230769230.76923,
+      "availability": 0.9999985211131623,
+      "availability_valid": true,
+      "exact_C4_identity": true,
+      "load": 1.4788868376580666e-06,
+      "load_valid": true,
+      "potential": -132915818690.71945,
+      "potential_nonpositive": true
+    },
+    "local_3d_flux": {
+      "G_status": "INPUT unless kappa_3 and eta are independently known",
+      "conserved": true,
+      "demand": 21.0,
+      "flux": 0.4177817256162253,
+      "gauss_reconstruction": 21.0,
+      "radial_power": -2
+    },
+    "mass_scaling": {
+      "linear_2d_M_vs_V_slope": 2.0000000000000004,
+      "linear_2d_fails_btfr": true,
+      "linear_2d_velocity_mass_exponent": 0.4999999999999999,
+      "mincut_M_vs_V_slope": 4.000000000000001,
+      "mincut_passes_btfr_exponent": true,
+      "mincut_velocity_mass_exponent": 0.24999999999999994,
+      "observational_acceptance_interval": [
+        3.5,
+        4.0
+      ]
+    },
+    "regulator_nonuniqueness": {
+      "C4_does_not_select_regulator": true,
+      "both_flat_curve_asymptote": true,
+      "both_linear_at_origin": true,
+      "cored_log_acceleration_at_core": 0.75,
+      "cored_log_kernel_norm": 0.9999999926730669,
+      "gaussian_acceleration_at_core": 0.9481808382428365,
+      "gaussian_kernel_norm": 1.000000002673067,
+      "relative_difference_at_core": 0.26424111765711533
+    }
+  },
+  "decision": "PHENOMENOLOGY ONLY",
+  "evidential_boundary": "No issue-225 galaxy outcome, residual, fitted amplitude or core radius was loaded; only the externally fixed BTFR exponent target was used.",
+  "gates": {
+    "T0_local_3d_flux": {
+      "G1": "PASS CONDITIONALLY -- inverse square from 3D Gauss flux; G imported",
+      "G2": "FAIL -- no transition or galactic core",
+      "G3": "FAIL -- no flat-curve asymptote",
+      "G4": "PASS STATIC ONLY -- conservative central field",
+      "G5": "FAIL -- no galactic population law",
+      "G6": "FAIL -- no complete dynamic/local response"
+    },
+    "T1_linear_2d_flux": {
+      "G1": "FAIL -- 1/r acceleration at local scales",
+      "G2": "FAIL -- logarithmic at every scale and no derived core",
+      "G3": "FAIL -- V^4 proportional to M^2",
+      "G4": "PASS STATIC ONLY -- conservative potential",
+      "G5": "FAIL -- wrong population exponent",
+      "G6": "FAIL -- local limit already wrong"
+    },
+    "T2_linear_dimensional_crossover": {
+      "G1": "PASS CONDITIONALLY -- T0 local branch with imported G",
+      "G2": "PARTIAL -- dimension crossover supplies shapes but not its scale",
+      "G3": "FAIL -- linear 2D charge still gives V^4 proportional to M^2",
+      "G4": "PASS STATIC ONLY -- no dynamic radiation closure",
+      "G5": "FAIL -- transition and amplitude remain free",
+      "G6": "FAIL -- dynamic/local constraints not closed"
+    },
+    "T3_saturated_patch_mincut": {
+      "G1": "PASS CONDITIONALLY -- 3D Gauss branch, universal mass-energy charge, G input",
+      "G2": "FAIL DERIVATION -- r_c proportional sqrt(M) follows, exact positive regulator does not",
+      "G3": "PASS FORMALLY -- saturated 2D min-cut gives V^4 = G M a_* after closure",
+      "G4": "FAIL DYNAMIC -- static field is conservative, radiation/orbital transfer unspecified",
+      "G5": "FAIL -- a_* and regulator lack independent pre-galaxy determination",
+      "G6": "FAIL -- external-field, binary radiation and c_g equality are not derived"
+    }
+  },
+  "input_vs_derived": {
+    "T3_added_global_constants": [
+      "ell_*",
+      "m_*",
+      "nu_*",
+      "tau_R"
+    ],
+    "derived_if_T3_closure_is_imposed": [
+      "r_c = sqrt(G M/a_*)",
+      "V_inf^4 = G M a_*",
+      "positive sqrt(M) cut throughput"
+    ],
+    "inputs": [
+      "measured G",
+      "C4 local causal gates and positive capacities",
+      "two-dimensional spatial antichain connectivity"
+    ],
+    "not_derived": [
+      "a_s = a_c closure",
+      "cored-log rather than Gaussian positive regulator",
+      "numerical a_* independent of galaxies",
+      "dynamic radiation and orbital-loss law",
+      "external-field mapping",
+      "c_screen = c to GW170817 precision"
+    ]
+  },
+  "issue": 227,
+  "preregistration_sha256": "926df99ef158318a1921c97eac3cf9b6e18a71192fb134817d1e17342c3af07b",
+  "status": "closure-grade",
+  "survivors": []
+}

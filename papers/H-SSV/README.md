@@ -59,11 +59,12 @@ research track. It investigates whether a physical information screen can
 supply the source of the gravitational potential that is missing upstream of
 SSV Paper IV's surviving update-capacity response.
 
-**Status:** foundation gate passed. Issue #226 completed H-SSV-I with a
-**PROCEED** decision for a finite-capacity quantum causal screen: one global
-state, local no-signaling gates, and bilateral update budgets for topological
-screen sites and moving particles. H-SSV-II is unblocked. No gravitational law
-or observational H-SSV result has yet been established.
+**Status:** H-SSV-II gate not passed. Issue #226 established the finite-capacity
+quantum-causal C4 foundation. Issue #227 then found a conditional compact-patch
+min-cut that yields `r_c proportional sqrt(M)` and the baryonic exponent four,
+but not a unique regulator, acceleration magnitude, hierarchical-screen
+composition law, or dynamics. Its decision is **PHENOMENOLOGY ONLY**; later
+papers remain blocked and no observational H-SSV success is claimed.
 
 The shared conceptual and mathematical record is
 [`working-hypothesis.md`](working-hypothesis.md). It preserves inherited SSV
@@ -75,9 +76,9 @@ hard physical requirements, and the ordered resumption checklist.
 | Paper | Working title | Primary gate |
 |---|---|---|
 | [H-SSV-I](H-SSV-I/) | Screen Foundations | **PROCEED (#226):** C4 passes all six foundation gates. |
-| [H-SSV-II](H-SSV-II/) | Screen-Update Gravity | Unblocked: derive the response from C4 without galaxy-selected laws. |
-| [H-SSV-III](H-SSV-III/) | Emergent Geometry and Lensing | Derive both metric sectors and pass local gravity and lensing constraints. |
-| [H-SSV-IV](H-SSV-IV/) | Galaxy Tests | Test a frozen model against preregistered rotation-curve and lensing samples. |
+| [H-SSV-II](H-SSV-II/) | Screen-Update Gravity | **PHENOMENOLOGY ONLY (#227):** conditional BTFR exponent, unresolved kernel/scale/dynamics. |
+| [H-SSV-III](H-SSV-III/) | Emergent Geometry and Lensing | Blocked by the H-SSV-II exit gate. |
+| [H-SSV-IV](H-SSV-IV/) | Galaxy Tests | Blocked: no independently frozen response law. |
 | [H-SSV-V](H-SSV-V/) | Screen Cosmology | Derive and test global screen evolution, redshift, age and distance relations. |
 | [H-SSV-VI](H-SSV-VI/) | Cross-Scale Integration | Test shared cluster modes and decide whether H-SSV can connect to or replace any SSV gravity sector. |
 
@@ -112,3 +113,17 @@ issue-driven, preregistered instrument/receipt/test workflow.
 - [failure ledger](results/issue-226/02-failure-ledger.md)
 - [decision and status report](results/issue-226/decision.md)
 - [machine receipt](results/issue-226/receipt.json)
+
+### H-SSV-II closure record — issue #227
+
+- [preregistration](results/issue-227/00-preregistration.md)
+- [conditional response theory](H-SSV-II/response-theory.md)
+- [derivation and dimensional checks](results/issue-227/01-derivation-and-dimensions.md)
+- [input and derived ledger](results/issue-227/02-input-derived-table.md)
+- [conditional population preregistration](results/issue-227/03-population-preregistration.md)
+- [local, stability, and propagation constraints](results/issue-227/04-local-stability-constraints.md)
+- [negative ledger](results/issue-227/05-negative-ledger.md)
+- [hierarchical coherence-screen addendum](results/issue-227/06-hierarchical-screen-addendum.md)
+- [decision and status report](results/issue-227/decision.md)
+- [machine receipt](results/issue-227/receipt.json)
+- [completion audit](results/issue-227/completion-audit.json)

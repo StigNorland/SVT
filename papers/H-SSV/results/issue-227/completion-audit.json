@@ -1,0 +1,50 @@
+{
+  "decision": "PHENOMENOLOGY ONLY",
+  "document_markers": {
+    "papers/H-SSV/H-SSV-II/README.md": true,
+    "papers/H-SSV/H-SSV-II/response-theory.md": true,
+    "papers/H-SSV/results/issue-227/00-preregistration.md": true,
+    "papers/H-SSV/results/issue-227/01-derivation-and-dimensions.md": true,
+    "papers/H-SSV/results/issue-227/02-input-derived-table.md": true,
+    "papers/H-SSV/results/issue-227/03-population-preregistration.md": true,
+    "papers/H-SSV/results/issue-227/04-local-stability-constraints.md": true,
+    "papers/H-SSV/results/issue-227/05-negative-ledger.md": true,
+    "papers/H-SSV/results/issue-227/06-hierarchical-screen-addendum.md": true,
+    "papers/H-SSV/results/issue-227/decision.md": true
+  },
+  "issue": 227,
+  "receipt_checks": {
+    "T3_fails_G2_G4_G5_G6": true,
+    "T3_formally_passes_G3": true,
+    "decision_is_phenomenology_only": true,
+    "galaxy_outcomes_excluded": true,
+    "issue_is_227": true,
+    "no_surviving_candidate": true,
+    "preregistration_is_hashed": true
+  },
+  "required_artifacts": {
+    "constraints": true,
+    "decision": true,
+    "derivation": true,
+    "hierarchy_addendum": true,
+    "hssv_ii_index": true,
+    "hssv_index": true,
+    "input_ledger": true,
+    "instrument": true,
+    "instrument_tests": true,
+    "negative_ledger": true,
+    "population_preregistration": true,
+    "preregistration": true,
+    "receipt": true,
+    "response_theory": true,
+    "root_index": true,
+    "runner": true,
+    "runner_tests": true
+  },
+  "status": "PASS",
+  "verified_test_runs": {
+    "command": "pytest -q instruments/test/model_hssv",
+    "hssv_model_suite": "64 passed",
+    "legacy_series_suite": "not run; archived SSV batteries remain on hold"
+  }
+}
