@@ -1,0 +1,354 @@
+{
+  "blocking_result": null,
+  "c4_preregistration_sha256": "0697c3aad8b0c989a9717dbdcc6947b468c584ac5f7f68e784165f8108c39b5b",
+  "candidate_audits": {
+    "C0_to_C3_classical_ladder": {
+      "blocking_result": {
+        "candidate": "C3_carrier_screen_reservoir",
+        "gate": "F3",
+        "reason": "the physical screen flow u_S and the normalized retarded bulk-to-screen map K are postulates with no operational definition or bounded preferred-frame phenomenology"
+      },
+      "checks": {
+        "characteristics": {
+          "hyperbolic": true,
+          "light_speed": 1.0,
+          "screen_speed": 0.5,
+          "subluminal": true
+        },
+        "conservation": {
+          "closes": true,
+          "damping_without_reservoir_closes": false,
+          "matter_rate": 0.27999999999999997,
+          "reservoir_rate": 0.048999999999999995,
+          "screen_energy_rate": -0.69125,
+          "screen_flux_divergence": 0.36224999999999996,
+          "total_rate": -1.1102230246251565e-16
+        },
+        "damped_response": {
+          "bounded_periodic": true,
+          "bounded_static": true,
+          "denominator_sq": 1.9599999999999997,
+          "periodic_amplitude": 2.142857142857143,
+          "static_amplitude": 0.375
+        },
+        "dimensions": {
+          "capacity_is_not_rate": true,
+          "equation_consistent": true,
+          "equation_terms": {
+            "damping": [
+              1,
+              0,
+              -2
+            ],
+            "inertia": [
+              1,
+              0,
+              -2
+            ],
+            "potential": [
+              1,
+              0,
+              -2
+            ],
+            "source": [
+              1,
+              0,
+              -2
+            ],
+            "tension": [
+              1,
+              0,
+              -2
+            ]
+          },
+          "information_dimensions": {
+            "capacity_density": [
+              0,
+              -2,
+              0
+            ],
+            "content_density": [
+              0,
+              -2,
+              0
+            ],
+            "memory_density": [
+              0,
+              -2,
+              0
+            ],
+            "write_rate_density": [
+              0,
+              -2,
+              -1
+            ]
+          },
+          "memory_law_consistent": true
+        },
+        "memory": {
+          "analytic_equilibrium": 2.142857142857143,
+          "bounded": true,
+          "converged": true,
+          "equilibrium": 2.1428571428571432,
+          "maximum_sample": 2.1428571428571432,
+          "minimum_sample": 0.3999999999999999
+        },
+        "observer": {
+          "boosted_coordinate_source": 0.058139534883720985,
+          "boosted_relative_gamma": 1.1658014699880939,
+          "coordinate_source": 0.35,
+          "coordinate_source_invariant": false,
+          "preferred_structure_reason": "gamma_US is coordinate invariant only after a physical screen four-velocity u_S is supplied; H-SSV does not define or bound it",
+          "preferred_structure_remains": true,
+          "relative_gamma": 1.1658014699880943,
+          "relative_gamma_invariant": true
+        },
+        "sign_and_prediction": {
+          "all_positive": true,
+          "contributions": [
+            2.0,
+            3.557738033247041,
+            1.3175210253672476
+          ],
+          "independent_prediction": "at fixed rest content, relocation relative to u_S increases the load source by +(g_r/2) v_rel^2/c^2 at small speed",
+          "leading_quadratic_coefficient_per_g_r": 0.5,
+          "null_result_falsifies_relocation_loading_if_g_r_positive": true,
+          "phase_cancellation_possible": false,
+          "relocation_coupling_g_r": 0.8,
+          "sum": 6.875259058614288,
+          "universal_clock_map": "A(q) = exp(-alpha q), alpha > 0"
+        },
+        "undamped_resonance": {
+          "amplitude_at_t10": 3.75,
+          "amplitude_at_t20": 7.5,
+          "envelope_slope": 0.375,
+          "omega_0": 2.0,
+          "secular": true
+        }
+      },
+      "decision": "REVISE",
+      "gates": {
+        "C0_coordinate_speed": {
+          "F1": "PASS -- dimensioned hyperbolic response can be supplied",
+          "F2": "PASS -- conservative coupling can be supplied",
+          "F3": "FAIL -- |coordinate velocity| changes under a passive boost",
+          "F4": "FAIL -- the undamped control has resonant secular growth",
+          "F5": "PASS -- absolute-speed contributions are sign definite",
+          "F6": "PASS -- it predicts a coordinate-dependent effect, which is a falsifier"
+        },
+        "C1_conservative_undamped": {
+          "F1": "PASS -- positive inertia/tension give a causal hyperbolic cone",
+          "F2": "PASS -- the local action has a conserved stress-energy ledger",
+          "F3": "FAIL -- u_S and K remain undefined preferred structure",
+          "F4": "FAIL -- periodic forcing at an eigenfrequency grows secularly",
+          "F5": "PASS -- positive scalar sources add and one clock map is fixed",
+          "F6": "PASS -- positive quadratic screen-relative boost response"
+        },
+        "C2_damped_no_reservoir": {
+          "F1": "PASS -- damping does not change the principal cone",
+          "F2": "FAIL -- Gamma q_t removes energy with no receiving sector",
+          "F3": "FAIL -- u_S and K remain undefined preferred structure",
+          "F4": "PASS -- positive damping/stiffness bound stationary and periodic response",
+          "F5": "PASS -- positive scalar sources add and one clock map is fixed",
+          "F6": "PASS -- positive quadratic screen-relative boost response"
+        },
+        "C3_carrier_screen_reservoir": {
+          "F1": "PASS -- local carrier and screen characteristics are <= c",
+          "F2": "PASS -- matter, carrier, screen and reservoir ledger closes",
+          "F3": "FAIL -- covariance conditional on postulated u_S and K is not an operational definition or preferred-frame bound",
+          "F4": "PASS -- relaxation and saturation bound q and m",
+          "F5": "PASS -- source is positive and A=exp(-alpha q) is universal",
+          "F6": "PASS -- fixed-sign O(v_rel^2/c^2) preferred-frame prediction"
+        }
+      },
+      "issue": 226,
+      "status": "closure-grade",
+      "survivors": []
+    },
+    "C4_quantum_causal_global_screen": {
+      "candidate": "C4_quantum_causal_global_screen",
+      "checks": {
+        "bilateral_update_capacity": {
+          "above_capacity_saturates": true,
+          "allocations": {
+            "p1": 2.4000000000000004,
+            "p2": 1.6
+          },
+          "availability_bounded": true,
+          "below_capacity_is_additive": true,
+          "bilateral_counts_match": true,
+          "particle_caps_respected": true,
+          "particle_ledger_total": 4.0,
+          "particle_state_capacities_nats": {
+            "p1": 0.6931471805599453,
+            "p2": 0.6931471805599453
+          },
+          "particle_update_capacities": {
+            "p1": 3.0,
+            "p2": 2.0
+          },
+          "requests": {
+            "p1": 3.0,
+            "p2": 2.0
+          },
+          "screen_ledger_total": 4.0,
+          "screen_site_state_capacity_nats": 0.6931471805599453,
+          "screen_site_update_capacity": 4.0,
+          "shared_budget_prediction": "particles addressed to one topological site share one bounded update service and acquire correlated availability",
+          "site_availability": 0.0,
+          "site_cap_respected": true
+        },
+        "causal_edges": {
+          "all_edges_causal": true,
+          "edge_speeds_in_units_of_c": [
+            0.5,
+            0.9,
+            0.0
+          ],
+          "global_state_is_not_a_signal": true,
+          "global_state_on_antichain_allowed": true,
+          "maximum_speed": 0.9
+        },
+        "foliation_independence": {
+          "commutator_norm": 0.0,
+          "orders_match": true,
+          "preferred_linear_extension_required": false,
+          "spacelike_gates_commute": true
+        },
+        "four_momentum_ledger": {
+          "bilateral_transfer_closes": true,
+          "four_momentum_commutator_norms": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "four_momentum_conserved": true,
+          "occupation_after": {
+            "matter": 0.0,
+            "screen": 1.0
+          },
+          "occupation_before": {
+            "matter": 1.0,
+            "screen": 0.0
+          },
+          "swap_is_unitary": true
+        },
+        "no_signaling": {
+          "global_correlation_changed": true,
+          "remote_after": [
+            [
+              0.4999999999999999,
+              0.0
+            ],
+            [
+              0.0,
+              0.4999999999999999
+            ]
+          ],
+          "remote_before": [
+            [
+              0.4999999999999999,
+              0.0
+            ],
+            [
+              0.0,
+              0.4999999999999999
+            ]
+          ],
+          "remote_unchanged": true,
+          "zz_after": -0.9999999999999998,
+          "zz_before": 0.9999999999999998
+        },
+        "phase_positive_load": {
+          "minus_phase_load": 0.9999999999999998,
+          "phase_independent": true,
+          "plus_phase_load": 0.9999999999999998,
+          "positive": true,
+          "universal_response": "A = 1 - q, q = served update demand / nu_max"
+        },
+        "reduced_state_memory": {
+          "gate_commutes_with_energy": true,
+          "gate_is_unitary": true,
+          "global_entropy_after": 4.440892098500625e-16,
+          "global_entropy_before": 4.440892098500625e-16,
+          "global_information_conserved": true,
+          "one_cell_capacity_nats": 0.6931471805599453,
+          "reduced_entropy_after": 0.6931471805599454,
+          "reduced_entropy_bounded": true
+        },
+        "repeated_drive_bound": {
+          "cycles": 101,
+          "entropy_bounded_by_one_cell": true,
+          "load_bounded_by_one_cell": true,
+          "maximum_load": 1.0,
+          "maximum_local_entropy": -0.0,
+          "minimum_load": 0.0,
+          "secular_growth": false
+        }
+      },
+      "gates": {
+        "F1": "PASS -- causal edges, commuting spacelike gates and no signaling",
+        "F2": "PASS -- unitary gates close four-momentum and information ledgers",
+        "F3": "PASS -- global correlations coexist with foliation independence and no signaling",
+        "F4": "PASS -- particle/site update rates and finite-state memory are bounded",
+        "F5": "PASS -- positive record load is phase independent and A=1-q is universal",
+        "F6": "PASS -- shared-state no-signaling and common-capacity saturation are falsifiers"
+      },
+      "scope": "minimal foundation only; no gravitational Green function, coupling magnitude, spatial metric, galaxy law, or cosmology is derived",
+      "status": "PASS",
+      "survives_all_six_gates": true
+    }
+  },
+  "decision": "PROCEED",
+  "evidential_boundary": "No galaxy, lensing, cluster or cosmology data used; issue-225 results did not select a functional form.",
+  "gates": {
+    "C0_coordinate_speed": {
+      "F1": "PASS -- dimensioned hyperbolic response can be supplied",
+      "F2": "PASS -- conservative coupling can be supplied",
+      "F3": "FAIL -- |coordinate velocity| changes under a passive boost",
+      "F4": "FAIL -- the undamped control has resonant secular growth",
+      "F5": "PASS -- absolute-speed contributions are sign definite",
+      "F6": "PASS -- it predicts a coordinate-dependent effect, which is a falsifier"
+    },
+    "C1_conservative_undamped": {
+      "F1": "PASS -- positive inertia/tension give a causal hyperbolic cone",
+      "F2": "PASS -- the local action has a conserved stress-energy ledger",
+      "F3": "FAIL -- u_S and K remain undefined preferred structure",
+      "F4": "FAIL -- periodic forcing at an eigenfrequency grows secularly",
+      "F5": "PASS -- positive scalar sources add and one clock map is fixed",
+      "F6": "PASS -- positive quadratic screen-relative boost response"
+    },
+    "C2_damped_no_reservoir": {
+      "F1": "PASS -- damping does not change the principal cone",
+      "F2": "FAIL -- Gamma q_t removes energy with no receiving sector",
+      "F3": "FAIL -- u_S and K remain undefined preferred structure",
+      "F4": "PASS -- positive damping/stiffness bound stationary and periodic response",
+      "F5": "PASS -- positive scalar sources add and one clock map is fixed",
+      "F6": "PASS -- positive quadratic screen-relative boost response"
+    },
+    "C3_carrier_screen_reservoir": {
+      "F1": "PASS -- local carrier and screen characteristics are <= c",
+      "F2": "PASS -- matter, carrier, screen and reservoir ledger closes",
+      "F3": "FAIL -- covariance conditional on postulated u_S and K is not an operational definition or preferred-frame bound",
+      "F4": "PASS -- relaxation and saturation bound q and m",
+      "F5": "PASS -- source is positive and A=exp(-alpha q) is universal",
+      "F6": "PASS -- fixed-sign O(v_rel^2/c^2) preferred-frame prediction"
+    },
+    "C4_quantum_causal_global_screen": {
+      "F1": "PASS -- causal edges, commuting spacelike gates and no signaling",
+      "F2": "PASS -- unitary gates close four-momentum and information ledgers",
+      "F3": "PASS -- global correlations coexist with foliation independence and no signaling",
+      "F4": "PASS -- particle/site update rates and finite-state memory are bounded",
+      "F5": "PASS -- positive record load is phase independent and A=1-q is universal",
+      "F6": "PASS -- shared-state no-signaling and common-capacity saturation are falsifiers"
+    }
+  },
+  "issue": 226,
+  "preregistration_sha256": "5b57d69c183af0e47484b1257b498137084d5716afd4d774ac63f342835b392c",
+  "revision_record": "C3's preliminary F3 failure assumed a classical membrane rest frame. Owner input separated local causality from global state; C4 was preregistered before implementation and passes via microcausality, no signaling and foliation independence.",
+  "status": "closure-grade",
+  "survivors": [
+    "C4_quantum_causal_global_screen"
+  ]
+}

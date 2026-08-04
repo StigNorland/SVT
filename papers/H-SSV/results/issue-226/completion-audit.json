@@ -1,0 +1,52 @@
+{
+  "decision": "PROCEED",
+  "document_markers": {
+    "papers/H-SSV/H-SSV-I/README.md": true,
+    "papers/H-SSV/H-SSV-I/screen-theory.md": true,
+    "papers/H-SSV/results/issue-226/00-preregistration.md": true,
+    "papers/H-SSV/results/issue-226/01-checks.md": true,
+    "papers/H-SSV/results/issue-226/02-failure-ledger.md": true,
+    "papers/H-SSV/results/issue-226/03-c4-preregistration-addendum.md": true,
+    "papers/H-SSV/results/issue-226/decision.md": true
+  },
+  "issue": 226,
+  "receipt_checks": {
+    "C3_fails_F3": true,
+    "C3_passes_five_gates": true,
+    "C4_is_only_survivor": true,
+    "C4_passes_all_six_gates": true,
+    "C4_preregistration_is_hashed": true,
+    "decision_is_proceed": true,
+    "issue_is_226": true,
+    "no_blocking_result": true,
+    "preregistration_is_hashed": true
+  },
+  "required_artifacts": {
+    "c4_instrument": true,
+    "c4_instrument_tests": true,
+    "c4_preregistration": true,
+    "checks": true,
+    "decision": true,
+    "failure_ledger": true,
+    "hssv_i_index": true,
+    "hssv_index": true,
+    "instrument": true,
+    "instrument_tests": true,
+    "mathematical_specification": true,
+    "preregistration": true,
+    "receipt": true,
+    "root_index": true,
+    "runner": true,
+    "runner_tests": true
+  },
+  "status": "PASS",
+  "verified_test_runs": {
+    "commands": [
+      "pytest -q instruments/test/model_hssv/test_screen_foundations_audit.py instruments/test/model_hssv/test_quantum_causal_screen_audit.py instruments/test/model_hssv/test_run_issue226.py instruments/test/model_hssv/test_issue226_completion_audit.py",
+      "pytest -q instruments/test/model_hssv"
+    ],
+    "focused": "30 passed",
+    "hssv_model_suite": "48 passed",
+    "legacy_series_suite": "not required; archived SSV numerical batteries are on hold and outside issue #226"
+  }
+}

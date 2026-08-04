@@ -1,32 +1,45 @@
 # H-SSV-I — Screen Foundations
 
-**Status:** planned; no derivation yet.
+**Status:** foundation audit complete; **PROCEED**, C4 passes all six issue-226
+gates.
 
-## Scope
+## Result
 
-Define the physical screen and the minimum mathematical theory required before
-any gravitational or cosmological fit:
+The surviving foundation is a finite-capacity quantum causal screen. It has
+one global, potentially entangled state and strictly local causal write gates.
+Spacelike gates commute, their order is foliation-independent, and a local
+operation cannot change a remote reduced state. Global correlation is not a
+superluminal signal.
 
-- global screen versus effective galaxy/cluster modes;
-- mapping between bulk states and screen degrees of freedom;
-- capacity, content, write rate and retained memory as distinct quantities;
-- the claim that every physical relocation rewrites the screen;
-- a covariant or explicitly screen-relative source functional
-  $\mathcal J_{\rm write}$;
-- a causal screen evolution equation, saturation/relaxation law and boundary
-  conditions;
-- conservation of energy and momentum during information transfer;
-- the reduced-state entropy relation to Paper III's wake account;
-- dimensions, constants, symmetries and any preferred-frame consequences.
+Every topological screen site and every moving particle has both finite state
+capacity (`ln d`) and finite update capacity (`nu_max`). A relocation is one
+bilateral local gate consuming one update slot from the particle and its
+addressed screen site. Active screen load is
 
-## Exit gate
+\[
+q=j/\nu_{\max},\qquad A=1-q,
+\]
 
-A dimensionally consistent, causal and conserved screen theory must be written
-without using galaxy rotation curves to choose its functional form. It must
-state which quantities are postulates, which are derived, and at least one
-condition that would falsify the foundation.
+while retained memory is bounded reduced-state correlation. The gates are
+unitary/isometric and conserve the additive local four-momentum ledger.
 
-## Excluded from this paper
+The earlier classical membrane C3 remains a useful negative control: it passes
+five gates but fails F3 because it needs an undefined preferred rest flow.
 
-No galaxy fitting, cosmological parameter fitting, cluster tuning or assumption
-of the required lensing metric.
+## Artifacts
+
+- [Mathematical specification](screen-theory.md)
+- [Original classical preregistration](../results/issue-226/00-preregistration.md)
+- [C4 preregistration addendum](../results/issue-226/03-c4-preregistration-addendum.md)
+- [Dimensional and limiting checks](../results/issue-226/01-checks.md)
+- [Candidate and failure ledger](../results/issue-226/02-failure-ledger.md)
+- [Decision and status report](../results/issue-226/decision.md)
+- executable audits: `instruments/model_hssv/screen_foundations_audit.py` and
+  `instruments/model_hssv/quantum_causal_screen_audit.py`
+- receipt runner: `instruments/model_hssv/run_issue226.py`
+
+## Exit-gate consequence
+
+H-SSV-I's foundation gate is passed, so H-SSV-II may open. This is not yet a
+gravity result: no Green function, magnitude, spatial metric, galaxy law,
+lensing law or cosmology has been derived.
