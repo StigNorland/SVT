@@ -1,0 +1,53 @@
+{
+  "decision": "UNDERDETERMINED",
+  "document_markers": {
+    "papers/H-SSV/H-SSV-V/README.md": true,
+    "papers/H-SSV/H-SSV-V/screen-cosmology.md": true,
+    "papers/H-SSV/results/issue-228/00-preregistration.md": true,
+    "papers/H-SSV/results/issue-228/01-literature-observational-map.md": true,
+    "papers/H-SSV/results/issue-228/02-datasets-and-likelihoods.md": true,
+    "papers/H-SSV/results/issue-228/03-information-area-expansion-addendum.md": true,
+    "papers/H-SSV/results/issue-228/04-derivation-and-controls.md": true,
+    "papers/H-SSV/results/issue-228/05-input-derived-ledger.md": true,
+    "papers/H-SSV/results/issue-228/06-negative-underdetermination-ledger.md": true,
+    "papers/H-SSV/results/issue-228/decision.md": true
+  },
+  "issue": 228,
+  "receipt_checks": {
+    "R4_fails_derivation_and_mechanism": true,
+    "R4_passes_invariant_and_stretch_form": true,
+    "age_size_not_activated": true,
+    "decision_is_underdetermined": true,
+    "decomposition_rank_is_one": true,
+    "issue_is_228": true,
+    "likelihood_not_activated": true,
+    "no_surviving_candidate": true,
+    "outcomes_excluded": true,
+    "three_inputs_are_hashed": true
+  },
+  "required_artifacts": {
+    "dataset_registry": true,
+    "decision": true,
+    "derivation": true,
+    "hssv_index": true,
+    "hssv_v_index": true,
+    "input_ledger": true,
+    "instrument": true,
+    "instrument_tests": true,
+    "literature_map": true,
+    "negative_ledger": true,
+    "preregistration": true,
+    "r4_addendum": true,
+    "receipt": true,
+    "root_index": true,
+    "runner": true,
+    "runner_tests": true,
+    "screen_cosmology": true
+  },
+  "status": "PASS",
+  "verified_test_runs": {
+    "command": "pytest -q instruments/test/model_hssv",
+    "hssv_model_suite": "83 passed",
+    "legacy_series_suite": "not run; archived SSV batteries remain on hold"
+  }
+}
