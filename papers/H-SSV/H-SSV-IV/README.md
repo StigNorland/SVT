@@ -1,6 +1,10 @@
 # H-SSV-IV — Galaxy Tests
 
-**Status:** planned; begins only after the H-SSV-I/II model is frozen.
+**Status:** blocked. Issue #230 completed a retrospective matched-dwarf source
+audit, but the decision is **UNSUPPORTED**: the frozen internal proxies fail the
+UDG-versus-SPARC class-holdout requirement, the publications do not supply a
+common machine-readable radial likelihood, and the isolated UDG sample cannot
+activate a host/shared-screen test. This does not promote H-SSV-IV.
 
 ## Scope
 
@@ -28,3 +32,12 @@ at least one parameter-reducing population prediction must survive.
 
 No post-outcome change to the source or response law. Failed predictions remain
 recorded as negative results.
+
+## Exploratory boundary audit — issue #230
+
+The non-promoting audit record is in
+[`../results/issue-230/`](../results/issue-230/): protocol, provenance and data
+eligibility, matched tables, proxy and model comparisons, machine receipt,
+negative ledger, and final status report. A future reopening requires
+author-supplied radial UDG decompositions and, for a host test, independently
+established membership metadata plus an untouched prediction class.

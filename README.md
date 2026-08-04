@@ -48,6 +48,14 @@ gravity, time, and black-hole ontology from that single medium and two inputs (m
 > is rank-degenerate with geometric expansion. No cosmic age or size revision
 > follows. See [H-SSV-V](papers/H-SSV/H-SSV-V/).
 
+> **H-SSV matched-dwarf audit (2026-08).** Issue
+> [#230](https://github.com/StigNorland/SVT/issues/230) compares the viewed
+> gas-rich UDG and SPARC slow-dwarf contrast without outcome-defined matching.
+> The decision is **UNSUPPORTED**: the frozen internal proxies fail excluded-class
+> prediction, the publications lack a common reusable radial likelihood, and the
+> isolated UDG sample cannot test a host/shared-screen latent. H-SSV-IV remains
+> blocked. See [H-SSV-IV](papers/H-SSV/H-SSV-IV/).
+
 ## Table of contents
 
 - [Conclusions / post-mortem](#conclusions--post-mortem) — start here
@@ -103,7 +111,7 @@ The drafts and their compiled PDFs remain in `papers/`; the human-readable PDFs 
 | Path | Contents |
 |------|----------|
 | [papers/conclusions/](papers/conclusions/) | **The post-mortem and the two conclusion notes** (`.tex` + `.pdf`) |
-| [papers/H-SSV/](papers/H-SSV/) | Post-closure audits: LogSE K3 (#180), quantum-causal foundation (#226), screen response (#227), and screen cosmology (#228) |
+| [papers/H-SSV/](papers/H-SSV/) | Post-closure audits: LogSE K3 (#180), quantum-causal foundation (#226), screen response (#227), screen cosmology (#228), and matched dwarfs (#230) |
 | [papers/](papers/) | Manuscript drafts, supplemental notes, result notes, checkpoint files |
 | [papers/pdf/](papers/pdf/) | Compiled, human-readable PDFs of the series |
 | [instruments/](instruments/) | Computational scripts grouped by paper, plus `tools/` (provenance) and the `test/` suite — see [instruments/README.md](instruments/README.md) |

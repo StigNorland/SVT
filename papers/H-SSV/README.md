@@ -70,6 +70,13 @@ and a conditional deceleration prediction, but record/area dynamics are not
 derived and mixed wake/geometry optical responses have rank one. No
 observational H-SSV success or revised cosmic age/size is claimed.
 
+Issue #230 then tested the viewed gas-rich UDG versus SPARC dwarf contrast as a
+non-promoting H-SSV-IV source audit. Its decision is **UNSUPPORTED**: independent
+baryonic proxies do not predict across the UDG/SPARC class holdout, no common
+machine-readable radial likelihood exists in the inspected publications, and
+the isolated UDG sample cannot test a host/shared-screen latent. H-SSV-IV remains
+blocked.
+
 The shared conceptual and mathematical record is
 [`working-hypothesis.md`](working-hypothesis.md). It preserves inherited SSV
 results, falsified mechanisms, new postulates, the corrected halo terminology,
@@ -82,7 +89,7 @@ hard physical requirements, and the ordered resumption checklist.
 | [H-SSV-I](H-SSV-I/) | Screen Foundations | **PROCEED (#226):** C4 passes all six foundation gates. |
 | [H-SSV-II](H-SSV-II/) | Screen-Update Gravity | **PHENOMENOLOGY ONLY (#227):** conditional BTFR exponent, unresolved kernel/scale/dynamics. |
 | [H-SSV-III](H-SSV-III/) | Emergent Geometry and Lensing | Blocked by the H-SSV-II exit gate. |
-| [H-SSV-IV](H-SSV-IV/) | Galaxy Tests | Blocked: no independently frozen response law. |
+| [H-SSV-IV](H-SSV-IV/) | Galaxy Tests | **UNSUPPORTED boundary audit (#230):** no predictive internal proxy, common radial data contract, or eligible host test; still blocked. |
 | [H-SSV-V](H-SSV-V/) | Screen Cosmology | **UNDERDETERMINED (#228):** metric form/conditional deceleration, but no derived record dynamics or identifiable wake split. |
 | [H-SSV-VI](H-SSV-VI/) | Cross-Scale Integration | Test shared cluster modes and decide whether H-SSV can connect to or replace any SSV gravity sector. |
 
@@ -145,3 +152,14 @@ issue-driven, preregistered instrument/receipt/test workflow.
 - [decision and status report](results/issue-228/decision.md)
 - [machine receipt](results/issue-228/receipt.json)
 - [completion audit](results/issue-228/completion-audit.json)
+
+### H-SSV-IV boundary-audit record — issue #230
+
+- [frozen exploratory protocol](results/issue-230/00-exploratory-protocol.md)
+- [data provenance and eligibility](results/issue-230/01-data-provenance-and-eligibility.md)
+- [input/consequence ledger](results/issue-230/02-input-consequence-ledger.md)
+- [negative and future-data ledger](results/issue-230/03-negative-and-future-ledger.md)
+- [decision](results/issue-230/decision.md)
+- [result and status report](results/issue-230/result-note.md)
+- [machine receipt](results/issue-230/receipt.json)
+- [completion audit](results/issue-230/completion-audit.json)

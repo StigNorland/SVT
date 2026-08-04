@@ -1,0 +1,62 @@
+{
+  "decision": "UNSUPPORTED",
+  "document_markers": {
+    "README.md": true,
+    "papers/H-SSV/H-SSV-IV/README.md": true,
+    "papers/H-SSV/README.md": true,
+    "papers/H-SSV/results/issue-230/00-exploratory-protocol.md": true,
+    "papers/H-SSV/results/issue-230/01-data-provenance-and-eligibility.md": true,
+    "papers/H-SSV/results/issue-230/02-input-consequence-ledger.md": true,
+    "papers/H-SSV/results/issue-230/03-negative-and-future-ledger.md": true,
+    "papers/H-SSV/results/issue-230/decision.md": true,
+    "papers/H-SSV/results/issue-230/result-note.md": true
+  },
+  "issue": 230,
+  "receipt_checks": {
+    "common_radial_contract_fails": true,
+    "ddo154_anchor_present": true,
+    "decision_is_unsupported": true,
+    "frozen_inputs_hashed": true,
+    "host_gate_not_activated": true,
+    "internal_proxy_unsupported": true,
+    "issue_is_230": true,
+    "no_primary_proxy_passes": true,
+    "radial_controls_fitted": true,
+    "retrospective_boundary_recorded": true,
+    "shared_screen_unsupported": true,
+    "udg_radial_contract_fails": true
+  },
+  "required_artifacts": {
+    "decision": true,
+    "hssv_index": true,
+    "hssv_iv_index": true,
+    "input_ledger": true,
+    "instrument": true,
+    "instrument_tests": true,
+    "matched_pairs": true,
+    "matched_sample": true,
+    "model_comparison": true,
+    "negative_ledger": true,
+    "protocol": true,
+    "provenance": true,
+    "proxy_comparison": true,
+    "proxy_predictions": true,
+    "receipt": true,
+    "root_index": true,
+    "runner": true,
+    "status_report": true
+  },
+  "status": "PASS",
+  "table_checks": {
+    "matched_pair_rows": true,
+    "matched_sample_rows": true,
+    "proxy_rows_present": true,
+    "radial_rows_present": true
+  },
+  "verified_test_runs": {
+    "command": "pytest -q instruments/test/model_hssv",
+    "focused_issue230": "7 passed (instrument plus completion audit)",
+    "hssv_model_suite": "90 passed",
+    "legacy_series_suite": "not run; archived SSV batteries remain on hold"
+  }
+}
