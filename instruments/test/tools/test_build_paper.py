@@ -221,6 +221,47 @@ def test_the_deny_list_is_matched_case_insensitively(tmp_path, monkeypatch):
         B.gate_change_records("SSV-Test")
 
 
+# --------------------------------------------------------------------------
+# FM29 / #222 — prephysical absence is not an empty field state
+# --------------------------------------------------------------------------
+
+def status_guard_paper(tmp_path, monkeypatch, tex):
+    d = tmp_path / "SSV-Test"
+    d.mkdir()
+    (d / "main.tex").write_text(tex, encoding="utf-8")
+    monkeypatch.setattr(B, "PAPERS", tmp_path)
+    monkeypatch.setattr(
+        B, "STATUS_TEXT_GUARDS", {
+            "SSV-Test": {
+                "required": ("one continuously changing process",),
+                "forbidden": ("the void is an empty field state",),
+            },
+        })
+
+
+def test_status_boundary_passes_when_required_distinction_is_present(
+        tmp_path, monkeypatch):
+    status_guard_paper(
+        tmp_path, monkeypatch,
+        "Reality is one continuously changing process.")
+    assert "1 required and 1 forbidden" in B.gate_status_text("SSV-Test")
+
+
+def test_missing_status_distinction_fails_the_build_gate(tmp_path, monkeypatch):
+    status_guard_paper(tmp_path, monkeypatch, "Reality changes.")
+    with pytest.raises(B.GateFailure, match="missing.*continuously changing"):
+        B.gate_status_text("SSV-Test")
+
+
+def test_retired_status_claim_fails_the_build_gate(tmp_path, monkeypatch):
+    status_guard_paper(
+        tmp_path, monkeypatch,
+        "Reality is one continuously changing process. "
+        "The Void is an empty field state.")
+    with pytest.raises(B.GateFailure, match="forbidden.*empty field state"):
+        B.gate_status_text("SSV-Test")
+
+
 def test_reserved_symbol_violation_fails_the_build_gate(monkeypatch):
     monkeypatch.setattr(
         B.conventions, "reserved_symbol_violations",

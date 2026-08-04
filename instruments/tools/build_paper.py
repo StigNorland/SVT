@@ -17,9 +17,10 @@ from its inputs does not produce a PDF that looks finished.
     3. provenance regenerated + no unresolved refs         rule 11
     4. values receipt matches its instruments              rule 14
     5. every registered relationship still holds           #198 Part D
-    6. values.tex rendered from the receipt                rule 14
-    7. pdflatex -> BibTeX -> pdflatex x2, clean             rule 8
-    8. PDF copied to papers/pdf/<Human Name>.pdf           rule 3
+    6. paper-specific status boundaries have not regressed failure register
+    7. values.tex rendered from the receipt                rule 14
+    8. pdflatex -> BibTeX -> pdflatex x2, clean             rule 8
+    9. PDF copied to papers/pdf/<Human Name>.pdf           rule 3
 
 Gate 4 closes the failure mode Part A left open: an intentional instrument and
 receipt update can move a generated number after a result was reviewed. It
@@ -197,6 +198,47 @@ def gate_change_records(paper: str) -> str:
     return f"current-status only; CHANGELOG.md present"
 
 
+#: Literal, paper-specific drift controls for status boundaries whose failure
+#: has already been observed. These are intentionally small and auditable:
+#: they protect exact distinctions, not the semantic truth of the paper.
+STATUS_TEXT_GUARDS = {
+    "SSV-VIII": {
+        "required": (
+            "primordial temporal permissibility",
+            "one continuously changing process",
+            "causal/informational screen",
+            "screen-to-field map",
+        ),
+        "forbidden": (
+            "a state of absolute zero density",
+            "the origin of time",
+            "irreversible propagation of a density wave",
+            "mathematical space in which the logse/gpe equation of motion",
+        ),
+    },
+}
+
+
+def gate_status_text(paper: str) -> str:
+    """Keep an observed paper-specific status error from returning unnoticed."""
+    guard = STATUS_TEXT_GUARDS.get(paper)
+    if guard is None:
+        return "no paper-specific status guard registered"
+    text = (PAPERS / paper / "main.tex").read_text(
+        encoding="utf-8", errors="replace").lower()
+    missing = sorted(
+        phrase for phrase in guard["required"] if phrase not in text)
+    forbidden = sorted(phrase for phrase in guard["forbidden"] if phrase in text)
+    if missing or forbidden:
+        raise GateFailure(
+            "paper-specific status boundary drifted: "
+            f"missing {missing}, forbidden {forbidden}")
+    return (
+        f"{len(guard['required'])} required and "
+        f"{len(guard['forbidden'])} forbidden phrases checked"
+    )
+
+
 def gate_conventions(paper: str) -> str:
     """#213 Part A: one meaning, one dimension per symbol across the programme.
 
@@ -296,6 +338,7 @@ def build(paper: str, gate_only: bool) -> bool:
              ("values      (rule 14)", gate_values),
              ("claims      (Part D) ", gate_claims),
              ("changelog   (rule 17)", gate_change_records),
+             ("status text (FM29)   ", gate_status_text),
              ("symbols     (#213 A) ", gate_conventions)]
     if not gate_only:
         steps += [("render values       ", render_values),
