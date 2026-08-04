@@ -762,6 +762,28 @@ energy density in the repository. A solver can still use the right profile
 with a mismatched action unless profile, Euler–Lagrange equation and energy
 are reviewed as one normalization unit.
 
+## FM29 — prephysical absence is represented as an empty field state
+
+**Observed:** Paper VIII defined the Permissive Void as both absolute
+zero-density \(\rho=0\) and the mathematical domain of a LogSE/GPE equation,
+then called the first perturbation the origin of time. Those statements import
+a field, domain, equation and external evolution parameter into what the same
+paper calls structureless. The resulting first two stages appeared continuous
+but crossed an unacknowledged ontological boundary.
+
+**Guard — partial.** Paper VIII now distinguishes primordial temporal
+permissibility from causal order, proper time and clock readings; treats the
+first seed and causality as irreducible inputs; and leaves the causal-screen
+geometry and screen-to-field map open. `build_paper.py` requires the core
+status phrases and rejects the exact retired formulations on every Paper VIII
+build. Focused tests include missing-required and forbidden-phrase negative
+controls.
+
+**Not covered:** this literal drift guard is not a metaphysics checker and does
+not derive the causal screen, energy conservation, metric, clock rates or
+continuum order parameter. Equivalent bad claims written in fresh words still
+require review.
+
 ## What runs when
 
 `python instruments/tools/build_paper.py <PAPER>` runs FM1, FM2, FM5's evidence
@@ -800,6 +822,7 @@ ones most likely to lapse.
 | FM26 coordinate correction misses numerical consumers | corrected profile + generated saved-state values | **build** (registered outputs) + suite |
 | FM27 axial label mistaken for ±m degeneracy | signed-sector Goldstone control | suite (focused) + review |
 | FM28 corrected profile paired with stale energy/tail | shifted-energy + single-tail guard | **build** (registered value) + suite |
+| FM29 prephysical absence treated as empty field | paper-specific status-text guard | **build** (literal boundary) + review |
 
 Adding a failure mode to this register is cheap. Leaving one out because its
 guard is embarrassing is how #182 happened.

@@ -6,6 +6,40 @@ Entries link the issue that drove each change. Git history carries the rest.
 
 ---
 
+## 2026-07-30 — [#222](https://github.com/StigNorland/SVT/issues/222) · Void, causal time, and screen distinction
+
+The Permissive Void is separated from the later zero-density field state.
+Primordial temporal permissibility follows from the Void's inability to
+prohibit change, while causality and the first actualisation remain
+irreducible inputs.  The first seed instantiates causal order rather than
+creating time from absolute non-time.
+
+A candidate causal/informational screen now sits explicitly between the first
+actualisation and any continuum field.  Metric space, proper time, screen
+geometry, conserved energy and the screen-to-LogSE map remain open.  The paper
+uses continuous-process presentism and separates causal orientation from the
+thermodynamic and experienced arrows.
+
+The old five-stage sequence is now six stages.  Its TDGL calculation is
+identified as a continuum saturation proxy, not a simulation of the Void.
+The synthesis table no longer labels particles, four forces or irreversible
+time as established consequences.
+
+Load-bearing wording removed or replaced (verbatim):
+
+> “Before the superfluid existed, there was neither matter, nor energy, nor
+> time. We posit a permissive void: a state of absolute zero density
+> (\(\rho=0\)), zero temperature, zero entropy, and zero curvature.”
+
+> “a mathematical space in which the LogSE/GPE equation of motion for
+> \(\Psi\) is defined but with \(\rho=0\) everywhere.”
+
+> “It is a classical perturbation in the nascent field \(\Psi\), and it is
+> the first event: the origin of time.”
+
+> “Time begins not with a singularity but with a gradient — the irreversible
+> propagation of a density wave”
+
 ## 2026-07-29 — [#210](https://github.com/StigNorland/SVT/issues/210) · cosmogony and Kibble--Zurek repair
 
 Stages 1--5 are now explicitly postulated or candidate-grade: the deterministic

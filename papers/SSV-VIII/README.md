@@ -2,18 +2,27 @@
 
 Working title: `Cosmogony from the Permissive Void`
 
-Scope: staged emergence of the saturated vacuum from the permissive void.
+Scope: interpretive path from the structureless Permissive Void through
+primordial temporal permissibility, first actualisation and a candidate causal
+screen to physical spacetime and a saturated continuum.
 
 Issue `#2` split role: receives the cosmogony material from the legacy unified `SSV V` draft and keeps it separate from QM (VII-a) and emergent geometry (VII-b).
 
 ## Draft status
 
-Section structure (matches outline, with the five stages grouped under one Cosmogony section as a unified narrative rather than five top-level sections):
+Section structure:
 
 1. **Introduction** — scope, separation from VII-a / VII-b / Papers I–IV.
-2. **Cosmogony: From the Permissive Void to the Resonant Cosmos** — five stages (Permissive Void → Primordial Perturbation → Interference → Saturation → Defect Nucleation), each tagged interpretive in §6.2.
-3. **Synthesis and interpretive context** — synthesis table with explicit per-row status column; self-consistency reading flagged interpretive (no fine-tuning-resolved claim); cosmological-constant content deferred to VII-b §5.2.
-4. **Focused Predictions** — C1 (Kibble–Zurek baryon-to-photon ratio, candidate) and C2 (late-time acceleration as background relaxation, structural with identified observable), each with explicit falsification condition.
+2. **Cosmogony: From the Permissive Void to the Resonant Cosmos** — six
+   stages (Permissive Void → First Actualisation → Causal Screen → Continuum
+   Interference → Saturation → Candidate Defects). The Void is not
+   \(\Psi=0\); the screen-to-field bridge remains open.
+3. **Synthesis and interpretive context** — synthesis table separating
+   primitive, interpretive, open, candidate and closed-programme statuses;
+   self-consistency reading flagged interpretive.
+4. **Focused Candidate Programmes** — C1 (continuum TDGL defect-density
+   proxy) and C2 (late-time acceleration as background relaxation), each with
+   explicit scope and falsification conditions.
 5. **Discussion: scope, status, and what would count as support** (NEW) — claim taxonomy (derived/structural/candidate/interpretive); per-section status of this paper's content; four explicit support criteria; a "what this paper is not" subsection to prevent re-introducing the catch-all manifesto problem.
 6. **Conclusion** — one-paragraph summary.
 
@@ -32,8 +41,16 @@ Section structure (matches outline, with the five stages grouped under one Cosmo
 
 ## Open work (deliberately not in this paper)
 
-- A GPE simulation of the void-to-saturation transition producing a Kibble–Zurek defect density.
+- A causal-screen construction deriving dimension, metric, physical clocks,
+  conserved energy and the continuum order parameter.
+- A continuum instability or seed law derived without inserting the desired
+  perturbation.
+- A wider-dynamic-range continuum Kibble–Zurek calculation; the present TDGL
+  scan is not a simulation of the Void.
 - A quantitative value of Λ from the saturation equation of state (belongs to VII-b/IV closure work).
 - A derivation of the absolute saturation pressure `P_0(rho_0)`, which would turn the C2 beta-slope discriminator into a numerical Λ prediction.
-- An α self-consistency derivation (belongs to Paper I open problems).
-- A no-go or partial-go theorem for spontaneous transverse perturbation in the permissive void (theoretical-support item).
+- A derivation of any dimensionless coupling from the screen and continuum,
+  rather than a fitted or imported identification.
+- A no-go or partial-go theorem for instability or seed formation in the
+  first physical continuum; the structureless Void itself has no field
+  perturbations.
