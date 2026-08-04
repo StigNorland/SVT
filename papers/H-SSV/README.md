@@ -1,15 +1,21 @@
-# H-SSV compatibility audit
+# H-SSV
 
-This directory contains the post-closure audit tracked by
-[issue #180](https://github.com/StigNorland/SVT/issues/180).
+This directory contains two connected but distinct records:
 
-The question was deliberately narrower than constructing a holographic theory:
+1. the completed issue #180 compatibility audit of literal Paper-I SSV; and
+2. a new, independent screen-update research programme.
+
+The new programme does **not** reopen or soften the issue #180 negative result.
+
+## Existing compatibility audit — issue #180
+
+The post-closure audit asked the deliberately narrower question:
 
 > Can one stable, causal, anomaly-free covariant 3+1-dimensional EFT retain the
 > literal Paper-I SSV equation as its controlled condensate limit while also
 > accommodating Einstein gravity and chiral matter?
 
-## Decision
+### Decision
 
 **K3 — incompatible as stated.**
 
@@ -27,11 +33,11 @@ Goldstone branch.
 
 This does **not** prove that holography is impossible. A sign-corrected or
 otherwise revised scalar plus independently supplied Einstein, Maxwell, and
-anomaly-free chiral sectors is a neighboring K2 candidate. It is not literal
+anomaly-free chiral sectors is a neighbouring K2 candidate. It is not literal
 SSV, does not derive those sectors, and its scalar Goldstone is not a pair of
 transverse photon helicities.
 
-## Start here
+Audit records:
 
 - [Pre-registration and frozen target](results/issue-180/00-prereg-and-target.md)
 - [Literal SSV audit](results/issue-180/01-ssv-target-audit.md)
@@ -43,5 +49,53 @@ transverse photon helicities.
 - [Machine receipt](results/issue-180/receipt.json)
 - [Completion audit](results/issue-180/completion-audit.json)
 
-The executable instruments are in `instruments/model_hssv/`; their tests are
-in `instruments/test/model_hssv/`.
+The executable audit instruments are in `instruments/model_hssv/`; their tests
+are in `instruments/test/model_hssv/`.
+
+## Screen-update working programme
+
+H-SSV is the provisional **Holographic Screen--Saturated Superfluid Vacuum**
+research track. It investigates whether a physical information screen can
+supply the source of the gravitational potential that is missing upstream of
+SSV Paper IV's surviving update-capacity response.
+
+**Status:** exploratory programme; no H-SSV paper currently carries an
+established positive result.
+
+The shared conceptual and mathematical record is
+[`working-hypothesis.md`](working-hypothesis.md). It preserves inherited SSV
+results, falsified mechanisms, new postulates, the corrected halo terminology,
+hard physical requirements, and the ordered resumption checklist.
+
+### Paper sequence
+
+| Paper | Working title | Primary gate |
+|---|---|---|
+| [H-SSV-I](H-SSV-I/) | Screen Foundations | Define a causal, covariant and conserved screen-write theory. |
+| [H-SSV-II](H-SSV-II/) | Screen-Update Gravity | Derive the gravitational potential, Newtonian limit, cored-logarithmic limit and baryonic scaling. |
+| [H-SSV-III](H-SSV-III/) | Emergent Geometry and Lensing | Derive both metric sectors and pass local gravity and lensing constraints. |
+| [H-SSV-IV](H-SSV-IV/) | Galaxy Tests | Test a frozen model against preregistered rotation-curve and lensing samples. |
+| [H-SSV-V](H-SSV-V/) | Screen Cosmology | Derive and test global screen evolution, redshift, age and distance relations. |
+| [H-SSV-VI](H-SSV-VI/) | Cross-Scale Integration | Test shared cluster modes and decide whether H-SSV can connect to or replace any SSV gravity sector. |
+
+### Boundary from the SSV series
+
+H-SSV is developed independently while remaining in the same repository.
+
+- The issue #180 K3 verdict remains the boundary: this track is not literal
+  Paper-I SSV embedded in a relativistic EFT.
+- Papers I and II of the existing SSV series are not foundations for H-SSV.
+- Paper III's update/wake account and Paper IV's downstream update-capacity
+  response are inputs to examine and, where needed, rederive—not inherited
+  proofs.
+- Paper IV's coherent mutual-radiation source remains falsified.
+- The bare-medium spatial/lensing failure remains in force.
+- A successful curve fit is suggestive only. Correct negative results are the
+  decisive evidence.
+
+### Promotion rule
+
+Each paper begins as a scoped directory and may advance only after the previous
+paper's explicit exit gate is met. Later directories are a roadmap, not evidence
+that their premises have survived. Computations follow the repository's
+issue-driven, preregistered instrument/receipt/test workflow.
