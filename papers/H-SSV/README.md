@@ -64,7 +64,11 @@ quantum-causal C4 foundation. Issue #227 then found a conditional compact-patch
 min-cut that yields `r_c proportional sqrt(M)` and the baryonic exponent four,
 but not a unique regulator, acceleration magnitude, hierarchical-screen
 composition law, or dynamics. Its decision is **PHENOMENOLOGY ONLY**; later
-papers remain blocked and no observational H-SSV success is claimed.
+gravity papers remain blocked. The separate H-SSV-V issue #228 screen-redshift
+branch is **UNDERDETERMINED**: information-area expansion supplies a metric form
+and a conditional deceleration prediction, but record/area dynamics are not
+derived and mixed wake/geometry optical responses have rank one. No
+observational H-SSV success or revised cosmic age/size is claimed.
 
 The shared conceptual and mathematical record is
 [`working-hypothesis.md`](working-hypothesis.md). It preserves inherited SSV
@@ -79,7 +83,7 @@ hard physical requirements, and the ordered resumption checklist.
 | [H-SSV-II](H-SSV-II/) | Screen-Update Gravity | **PHENOMENOLOGY ONLY (#227):** conditional BTFR exponent, unresolved kernel/scale/dynamics. |
 | [H-SSV-III](H-SSV-III/) | Emergent Geometry and Lensing | Blocked by the H-SSV-II exit gate. |
 | [H-SSV-IV](H-SSV-IV/) | Galaxy Tests | Blocked: no independently frozen response law. |
-| [H-SSV-V](H-SSV-V/) | Screen Cosmology | Derive and test global screen evolution, redshift, age and distance relations. |
+| [H-SSV-V](H-SSV-V/) | Screen Cosmology | **UNDERDETERMINED (#228):** metric form/conditional deceleration, but no derived record dynamics or identifiable wake split. |
 | [H-SSV-VI](H-SSV-VI/) | Cross-Scale Integration | Test shared cluster modes and decide whether H-SSV can connect to or replace any SSV gravity sector. |
 
 ### Boundary from the SSV series
@@ -127,3 +131,17 @@ issue-driven, preregistered instrument/receipt/test workflow.
 - [decision and status report](results/issue-227/decision.md)
 - [machine receipt](results/issue-227/receipt.json)
 - [completion audit](results/issue-227/completion-audit.json)
+
+### H-SSV-V closure record — issue #228
+
+- [preregistration](results/issue-228/00-preregistration.md)
+- [invariant screen-redshift theory](H-SSV-V/screen-cosmology.md)
+- [primary-literature and systematics map](results/issue-228/01-literature-observational-map.md)
+- [dataset and likelihood registry](results/issue-228/02-datasets-and-likelihoods.md)
+- [information-area expansion addendum](results/issue-228/03-information-area-expansion-addendum.md)
+- [derivation and executable controls](results/issue-228/04-derivation-and-controls.md)
+- [input/derived ledger](results/issue-228/05-input-derived-ledger.md)
+- [negative and underdetermination ledger](results/issue-228/06-negative-underdetermination-ledger.md)
+- [decision and status report](results/issue-228/decision.md)
+- [machine receipt](results/issue-228/receipt.json)
+- [completion audit](results/issue-228/completion-audit.json)

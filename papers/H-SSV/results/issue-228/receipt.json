@@ -1,0 +1,271 @@
+{
+  "age_size_calculation_activated": false,
+  "checks": {
+    "blackbody_at_y2": {
+      "blackbody_shape_preserved_conditionally": true,
+      "condition": "coherent universal frequency dilation with phase-space occupation preserved",
+      "frequency_ratio": 0.5,
+      "planck_dimensionless_frequency_invariant": true,
+      "temperature_emitted": 5.45,
+      "temperature_observed": 2.725
+    },
+    "coherent_dilation_at_y2": {
+      "C3_pass": true,
+      "D_A": 1.0,
+      "D_L": 2.0,
+      "distance_duality_eta": 0.5,
+      "duration_ratio_observed_over_emitted": 2.0,
+      "frequency_ratio_observed_over_emitted": 0.5,
+      "one_plus_z": 2.0,
+      "photon_number_conserved": true,
+      "ray_blur_in_ideal_limit": 0.0,
+      "spatial_completion_required": true,
+      "surface_brightness_exponent": -2,
+      "wavepacket_norm_ratio": 1.0
+    },
+    "constant_record_rate_kinematics": {
+      "B_ddot_over_B": -0.010000000000000002,
+      "H_screen": 0.1,
+      "constant_record_rate": true,
+      "decelerating": true,
+      "deceleration_condition": "2 N N_ddot < N_dot^2",
+      "q_screen": 1.0
+    },
+    "dimensions": {
+      "G_u_over_c2": [
+        0,
+        0,
+        -2
+      ],
+      "energy_flux": [
+        1,
+        0,
+        -3
+      ],
+      "energy_flux_is_not_write_rate": true,
+      "path_coefficient": [
+        0,
+        -1,
+        0
+      ],
+      "sqrt_G_u_over_c2_is_rate": true,
+      "wake_rate": [
+        0,
+        0,
+        -1
+      ],
+      "write_conversion_requires_energy_per_write_and_cell_area": true
+    },
+    "energy_ledger_at_y2": {
+      "C2_pass": false,
+      "frequency_record_decoherence_control_derived": false,
+      "photon_energy_final": 0.5,
+      "photon_energy_initial": 1.0,
+      "scalar_energy_closes": true,
+      "screen_energy_gain": 0.5,
+      "screen_hamiltonian_derived": false,
+      "total_energy_final": 1.0,
+      "total_energy_initial": 1.0
+    },
+    "energy_only_at_y2": {
+      "C3_pass": false,
+      "D_A": 1.0,
+      "D_L": 1.4142135623730951,
+      "achromatic_fractional_shift": true,
+      "distance_duality_eta": 0.3535533905932738,
+      "duration_ratio_observed_over_emitted": 1.0,
+      "frequency_ratio_observed_over_emitted": 0.5,
+      "kappa_status": "phenomenological input",
+      "one_plus_z": 2.0,
+      "ray_blur_in_ideal_limit": 0.0,
+      "surface_brightness_exponent": -1
+    },
+    "identifiability": {
+      "BW_gauge_invariance": true,
+      "C6_pass": false,
+      "full_rank": false,
+      "jacobian": [
+        [
+          1.0,
+          1.0
+        ],
+        [
+          0.7,
+          0.7
+        ],
+        [
+          1.4,
+          1.4
+        ],
+        [
+          0.3,
+          0.3
+        ],
+        [
+          2.0,
+          2.0
+        ]
+      ],
+      "null_direction": [
+        1.0,
+        -1.0
+      ],
+      "parameters": 2,
+      "rank": 1,
+      "redshift_drift_breaks_degeneracy_without_new_coupling": false,
+      "singular_values": [
+        3.88329756778952,
+        2.387624894196368e-16
+      ]
+    },
+    "information_area_at_y2": {
+      "B_ratio": 2.0,
+      "area_per_record_status": "new constitutive input",
+      "duration_ratio": 2.0,
+      "global_entropy_interpretation_allowed": false,
+      "one_plus_z": 2.0,
+      "record_growth_law_derived": false,
+      "record_interpretation": "reduced-state persistent occupancy or latent-site activation",
+      "records_emitted": 1.0,
+      "records_observed": 4.0
+    },
+    "lapse_only": {
+      "C1_pass": false,
+      "a_emission": 0.7,
+      "a_observation": 1.3,
+      "coordinate_removable": true,
+      "endpoint_redshift": 0.0,
+      "one_plus_z": 1.0,
+      "proper_time_redefinition": "d_tau = A(t) d_t"
+    },
+    "power_law_record_kinematics": {
+      "p1": {
+        "accelerating": false,
+        "coasting": false,
+        "decelerating": true,
+        "q_screen": 1.0,
+        "record_exponent_p": 1.0,
+        "screen_scale_exponent": 0.5
+      },
+      "p2": {
+        "accelerating": false,
+        "coasting": true,
+        "decelerating": false,
+        "q_screen": 0.0,
+        "record_exponent_p": 2.0,
+        "screen_scale_exponent": 1.0
+      },
+      "p3": {
+        "accelerating": true,
+        "coasting": false,
+        "decelerating": false,
+        "q_screen": -0.33333333333333337,
+        "record_exponent_p": 3.0,
+        "screen_scale_exponent": 1.5
+      }
+    },
+    "redshift_drift_sum_control": {
+      "first_decomposition": 0.5,
+      "second_decomposition": 0.5
+    },
+    "spatial_metric_at_y2": {
+      "C1_pass": true,
+      "C3_pass": true,
+      "distance_duality_eta": 1.0,
+      "duration_ratio": 2.0,
+      "lapse_endpoint_ratio": 1.8571428571428574,
+      "one_plus_z": 2.0,
+      "redshift_independent_of_lapse": true,
+      "status": "ordinary optical/FLRW form unless B dynamics are independently screen-derived",
+      "surface_brightness_exponent": -4
+    }
+  },
+  "dataset_registry_sha256": "bf187f6c2803e39ef8a337bfb243df02f32bafe41f56490fc059bf3009318013",
+  "decision": "UNDERDETERMINED",
+  "evidential_boundary": "No cosmological outcome vector or H-SSV galaxy result was loaded; the preregistered analytic stopping rule prevented parameter fitting. The owner-supplied R4 hypothesis is separately hash-pinned.",
+  "gates": {
+    "R0_lapse_only": {
+      "C1": "FAIL -- homogeneous lapse is removable and gives z=0",
+      "C2": "PASS VACUOUSLY -- no interaction",
+      "C3": "FAIL -- no redshift or stretching",
+      "C4": "FAIL -- no distance law",
+      "C5": "FAIL -- no cosmological observables",
+      "C6": "FAIL -- no nonzero component",
+      "C7": "BLOCKED"
+    },
+    "R1_energy_only_path_loss": {
+      "C1": "PASS CONDITIONALLY -- physical path/congruence must be added",
+      "C2": "FAIL -- scalar energy ledger is not a photon-screen Hamiltonian",
+      "C3": "FAIL -- duration factor is 1 rather than 1+z",
+      "C4": "FAIL -- reciprocity eta=(1+z)^(-3/2)",
+      "C5": "FAIL -- surface-brightness exponent is -1",
+      "C6": "FAIL -- kappa is phenomenological and not C4-derived",
+      "C7": "BLOCKED"
+    },
+    "R2_coherent_temporal_dilation": {
+      "C1": "PASS CONDITIONALLY -- ideal dilation channel is physical input",
+      "C2": "FAIL DERIVATION -- reservoir Hamiltonian/coherence control absent",
+      "C3": "PASS FORMALLY -- duration and frequency share 1+z",
+      "C4": "FAIL -- reciprocity eta=(1+z)^(-1) without spatial response",
+      "C5": "FAIL -- surface-brightness exponent is -2",
+      "C6": "FAIL -- dilation magnitude and dynamics are not C4-derived",
+      "C7": "BLOCKED"
+    },
+    "R3_optical_spatial_completion": {
+      "C1": "PASS FORMALLY -- invariant optical scale S=BW",
+      "C2": "FAIL DERIVATION -- no C4 metric/interaction Hamiltonian",
+      "C3": "PASS FORMALLY -- duration factor equals 1+z",
+      "C4": "PASS FORMALLY -- metric reciprocity and independent likelihoods definable",
+      "C5": "PARTIAL FORM -- standard propagation identities recovered; dynamics absent",
+      "C6": "FAIL UNDERDETERMINED -- all ideal observables depend only on H_geom+Gamma_wake",
+      "C7": "BLOCKED -- no age or size inference"
+    },
+    "R4_information_area_expansion": {
+      "C1": "PASS FORMALLY -- B=sqrt(N/N0) gives invariant metric redshift",
+      "C2": "FAIL DERIVATION -- record persistence, cell area and area-growth energy are absent",
+      "C3": "PASS FORMALLY -- wavepacket duration scales with B_o/B_e",
+      "C4": "PASS FORMALLY -- metric candle/ruler likelihoods are definable",
+      "C5": "FAIL CURRENT PURE DECELERATION -- late-time SN acceleration sign conflicts under registered assumptions",
+      "C6": "FAIL MECHANISM -- optical data measure B, not whether screen records caused it",
+      "C7": "BLOCKED -- N(t) and a viable joint cosmology are not derived"
+    }
+  },
+  "input_vs_derived": {
+    "candidate_inputs_not_derived": [
+      "kappa",
+      "wavepacket dilation channel",
+      "B(t)",
+      "W(t)",
+      "screen reservoir Hamiltonian",
+      "record-area law",
+      "N(t)"
+    ],
+    "derived_controls": [
+      "lapse-only z=0",
+      "R1 duration factor 1",
+      "R2 reciprocity eta=1/(1+z)",
+      "R3 BW gauge degeneracy",
+      "R4 constant-write q=1"
+    ],
+    "inherited": [
+      "C4 global state",
+      "local causal gates",
+      "closed global ledger"
+    ],
+    "prohibited_outputs": [
+      "cosmic age",
+      "lookback time",
+      "horizon",
+      "universe size",
+      "wake redshift fraction"
+    ]
+  },
+  "issue": 228,
+  "likelihood_activated": false,
+  "likelihood_stop_reason": "No candidate passes C1-C3 and C6: R1 lacks stretching, R2 lacks spatial reciprocity, and R3 is rank-deficient between geometry and wake.",
+  "preregistration_sha256": "a4288d8284083e990d1067461df8ac50515c825f9c04e493a3ff06ef86409818",
+  "r4_addendum_sha256": "1410d7a8f71eb8a6955cfd79343af16c7f07d6b4f4880f248f55be82bcbe316f",
+  "status": "closure-grade",
+  "strongest_candidate": "R3_optical_spatial_completion",
+  "survivors": []
+}
